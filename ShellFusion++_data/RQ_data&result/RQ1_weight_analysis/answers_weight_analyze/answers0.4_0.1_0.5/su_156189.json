@@ -1,0 +1,95 @@
+{
+  "Query": "How to convert Word (doc) to PDF in linux?",
+  "Answers": [
+    {
+      "Command": "enscript",
+      "MP Summary": "convert text files to PostScript, HTML, RTF, ANSI, and overstrikes",
+      "Most Similar TLDR Task": "Generate a PostScript file with a landscape layout, splitting the page into columns (maximum 9)",
+      "Most Similar TLDR Script": "enscript {{path/to/input_file}} --columns={{num}} --landscape --output={{path/to/output_file}}",
+      "Top-3 Similar Questions": [
+        "so_20129029: a light solution to convert text to pdf in Linux",
+        "ul_287744: Convert output of script(1) to pdf",
+        "au_942727: Convert Website to PDF (recursively)"
+      ],
+      "Top-3 Scripts": [
+        "so_20129029: enscript -p file.ps file.txt\nps2pdf file.ps file.pdf",
+        "ul_287744: ",
+        "au_942727: sudo apt update && sudo apt install enscript\n\nfind /path/to/folder/ -type f -name '*.php' -exec printf \"\\n\\n{}\\n\\n\" \\; -exec cat \"{}\" \\; | enscript -o - | ps2pdf - output.pdf\n\nfind /var/www/wordpress/ -type f -name '*.php' -exec printf \"\\n\\n{}\\n\\n\" \\; -exec cat \"{}\" \\; | enscript -o - | ps2pdf - output.pdf"
+      ],
+      "Explanations about Options": {
+        "-p": "Leave the output to file file. If the file is `-', enscript sends the output to\n the standard output stdout.",
+        "-o": "An alias for the option -p, --output."
+      }
+    },
+    {
+      "Command": "pdftotext",
+      "MP Summary": "Portable Document Format (PDF) to text converter (version 3.03)",
+      "Most Similar TLDR Task": "Convert input.pdf to plain text and save it as output.txt",
+      "Most Similar TLDR Script": "pdftotext {{input.pdf}} {{output.txt}}",
+      "Top-3 Similar Questions": [
+        "so_21209212: Convert PDF files to Text in PHP using pdftotext does not produce clean output",
+        "au_211870: How to convert all pdf files to text (within a folder) with one command?"
+      ],
+      "Top-3 Scripts": [
+        "so_21209212: $command = \"/<my location>/pdftotext -layout  $file_pdf $file_text\";\nexec($command);",
+        "au_211870: for file in *.pdf; do pdftotext \"$file\" \"$file.txt\"; done"
+      ],
+      "Explanations about Options": {
+        "-layout": "Maintain (as best as possible) the original physical layout of the text. The\n default is to \u00b4undo' physical layout (columns, hyphenation, etc.) and output the\n text in reading order."
+      }
+    },
+    {
+      "Command": "pandoc",
+      "MP Summary": "general markup converter",
+      "Most Similar TLDR Task": "Convert file to pdf (the output format is determined by file extension)",
+      "Most Similar TLDR Script": "pandoc {{input.md}} -o {{output.pdf}}",
+      "Top-3 Similar Questions": [
+        "so_8382366: Converting HTML to odt, doc, docx",
+        "su_326710: How do I convert an HTML email saved as a text file to a PDF file from the Linux command line?"
+      ],
+      "Top-3 Scripts": [
+        "so_8382366: ",
+        "su_326710: pandoc -f html -o outputfile.pdf inputfile.eml"
+      ],
+      "Explanations about Options": {
+        "-o": "Write output to FILE instead of stdout. If FILE is -, output will go to stdout,\n even if a non-textual format (docx, odt, epub2, epub3) is specified."
+      }
+    },
+    {
+      "Command": "gs",
+      "MP Summary": "Ghostscript (PostScript and PDF language interpreter and previewer)",
+      "Most Similar TLDR Task": "Convert from PostScript file to PDF file",
+      "Most Similar TLDR Script": "gs -dQUIET -dBATCH -dNOPAUSE -sDEVICE=pdfwrite -sOutputFile={{output.pdf}} {{input.ps}}",
+      "Top-3 Similar Questions": [
+        "so_12388348: Convert PDF to image in PHP without ImageMagick",
+        "au_942727: Convert Website to PDF (recursively)",
+        "su_318586: How to convert PDF to Grayscale"
+      ],
+      "Top-3 Scripts": [
+        "so_12388348: gs              \\\n  -o out.jpg    \\\n  -sDEVICE=jpeg \\\n  -r144         \\\n   in.pdf",
+        "au_942727: gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -dPDFSETTINGS=/prepress -sOutputFile=merged-output.pdf $(ls -1 *.pdf)\n\n#!/bin/sh\nTARGET_SITE=\"$1\"\nwget --spider --force-html -r -l2 \"$TARGET_SITE\" 2>&1 | grep '^--' | awk '{ print $3 }' | grep -v '\\.\\(css\\|js\\|png\\|gif\\|jpg\\|txt\\)$' > url-list.txt\nwhile read i; do wkhtmltopdf \"$i\" \"$(echo \"$i\" | sed -e 's/https\\?:\\/\\///' -e 's/\\//-/g' ).pdf\"; done < url-list.txt\ngs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -dPDFSETTINGS=/prepress -sOutputFile=merged-output.pdf $(ls -1 *.pdf)",
+        "su_318586: gs \\\n  -o grayscale.pdf \\\n  -sDEVICE=pdfwrite \\\n  -sColorConversionStrategy=Gray \\\n  -dProcessColorModel=/DeviceGray \\\n  -dCompatibilityLevel=1.4 \\\n   source.pdf"
+      ],
+      "Explanations about Options": {
+        "-sDEVICE": "Selects an alternate initial output device, as described above.",
+        "-q": "Quiet startup: suppress normal startup messages, and also do the equivalent of\n -dQUIET.",
+        "-dNOPAUSE": "Disables the prompt and pause at the end of each page. This may be desirable for\n applications where another program is driving Ghostscript.",
+        "-P": "Makes Ghostscript to look first in the current directory for library files. By\n default, Ghostscript no longer looks in the current directory, unless, of course,\n the first explicitly supplied directory is \".\" in -I. See also the INITIALIZATION\n FILES section below, and bundled Use.htm for detailed discussion on search paths\n and how Ghostcript finds files.",
+        "-sOutputFile": "Selects an alternate output file (or pipe) for the initial output device, as\n described above."
+      }
+    },
+    {
+      "Command": "pdfinfo",
+      "MP Summary": "Portable Document Format (PDF) document information extractor (version 3.03)",
+      "Most Similar TLDR Task": "Print PDF file information",
+      "Most Similar TLDR Script": "pdfinfo {{path/to/file.pdf}}",
+      "Top-3 Similar Questions": [
+        "so_11467369: ImageMagick converting pdf to images, converted page count"
+      ],
+      "Top-3 Scripts": [
+        "so_11467369: pdfinfo file.pdf\npdfinfo file.pdf | grep Pages:\npdfinfo file.pdf | grep Pages: | awk '{print $2}'"
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

@@ -1,0 +1,99 @@
+{
+  "Query": "Copy files from one directory into an existing directory",
+  "Answers": [
+    {
+      "Command": "cp",
+      "MP Summary": "copy files and directories",
+      "Most Similar TLDR Task": "Recursively copy a directory's contents to another location (if the destination exists, the directory is copied inside it)",
+      "Most Similar TLDR Script": "cp -r {{path/to/source_directory}} {{path/to/target_directory}}",
+      "Top-3 Similar Questions": [
+        "so_35138936: bash - copy existing file to existing directory : no such file or directory",
+        "so_32802997: How to copy all the files that do not exist in a directory in Linux?",
+        "so_36818653: How to write a linux script that copies all the files and directories under one directory to another directory?"
+      ],
+      "Top-3 Scripts": [
+        "so_35138936: if $verbose; then\n    echo -e \"cp $p ${src} ${backupdir}\"\nfi\ncp $p \"${src}\" \"${backupdir}\"",
+        "so_32802997: cp -nr /some/directory /some/backup directory",
+        "so_36818653: cp -r $1/* $2/"
+      ],
+      "Explanations about Options": {
+        "-r": "copy directories recursively",
+        "-n": "do not overwrite an existing file (overrides a previous -i option)"
+      }
+    },
+    {
+      "Command": "find",
+      "MP Summary": "search for files in a directory hierarchy",
+      "Most Similar TLDR Task": "Find files by extension",
+      "Most Similar TLDR Script": "find {{root_path}} -name '{{*.ext}}'",
+      "Top-3 Similar Questions": [
+        "nl2bash_14364: List all files that have not been read in thirty days or more",
+        "so_34555420: Linux command that Create and Copy Files and Folder in Multiple directories",
+        "so_60016712: find and copy files and directories"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_14364: find . -type f -atime +30 -print",
+        "so_34555420: find /home -type d -name public_html -exec cp /root/robots.txt /root/favicon.ico {} \\;",
+        "so_60016712: find test -type f -mtime -1 -exec bash -c '\n    src=(\"$@\")\n    dst=(\"${@/#test/backup}\")\n    mkdir -p \"${dst[@]%/*}\"\n    for i in \"${!src[@]}\"; do\n        cp \"${src[i]}\" \"${dst[i]}\"\n    done\n' _ {} +"
+      ],
+      "Explanations about Options": {
+        "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+        "-atime": "File was last accessed n*24 hours ago. When find figures out how many 24-hour\n periods ago the file was last accessed, any fractional part is ignored, so to match\n -atime +1, a file has to have been accessed at least two days ago.",
+        "-print": "Quoting is handled in the same way as for -printf and -fprintf. If you are using\n find in a script or in a situation where the matched files might have arbitrary\n names, you should consider using -print0 instead of -print.",
+        "-type": "File is of type c:"
+      }
+    },
+    {
+      "Command": "mkdir",
+      "MP Summary": "make directories",
+      "Most Similar TLDR Task": "Create a directory in current directory or given path",
+      "Most Similar TLDR Script": "mkdir {{directory}}",
+      "Top-3 Similar Questions": [
+        "so_36818653: How to write a linux script that copies all the files and directories under one directory to another directory?",
+        "so_63393883: Copy files and one directory up",
+        "ul_674474: Copy directory recursively only if on target the file exists and only if newer than target"
+      ],
+      "Top-3 Scripts": [
+        "so_36818653: mkdir -p $2",
+        "so_63393883: while read ;\ndo \nrep=s( echo $REPLY | sed 's/.\\/dir3//' ) #bad method but more readable\nmkdir -p new/$rep && cp $REPLY new/$rep/\ndone < filesource",
+        "ul_674474: mkdir src\ntouch src/file{1..3}\ntouch src/thefile\n# Destination:\nmkdir dst\ntouch dst/file{1..3}\ntouch -d 20201023 dst/thefile\n# List all\nfree -D src dst"
+      ],
+      "Explanations about Options": {
+        "-p": "no error if existing, make parent directories as needed"
+      }
+    },
+    {
+      "Command": "rm",
+      "MP Summary": "remove files or directories",
+      "Most Similar TLDR Task": "Recursively remove a directory and all its subdirectories",
+      "Most Similar TLDR Script": "rm -r {{path/to/directory}}",
+      "Top-3 Similar Questions": [
+        "su_727021: Linux: delete all directories with only one file and no subdirectories",
+        "au_623577: \"No such file or directory\" when trying to remove a file, but the file exists?",
+        "ul_618356: Remove or copy a file all at once"
+      ],
+      "Top-3 Scripts": [
+        "su_727021: shopt -s globstar; for d in **/; do f=(\"$d\"/*); [[ ${#f[@]} -eq 1 && -f \"$f\" && \"${f##*/}\" =~ ^[0-9]{10}\\.jpg$ ]] && echo rm -r -- \"$d\"; done",
+        "au_623577: rm -i -- *",
+        "ul_618356: rm Directory_*/file"
+      ],
+      "Explanations about Options": {
+        "-i": "prompt before every removal",
+        "-r": "remove directories and their contents recursively"
+      }
+    },
+    {
+      "Command": "mv",
+      "MP Summary": "move (rename) files",
+      "Most Similar TLDR Task": "Do not overwrite existing files at the target",
+      "Most Similar TLDR Script": "mv -n {{source}} {{target}}",
+      "Top-3 Similar Questions": [
+        "ul_199727: Shell Scripting: Deleting or moving files from one directory that match filenames from another directory"
+      ],
+      "Top-3 Scripts": [
+        "ul_199727: for f in /path/to/PDFs/*.pdf; do\n    base=$( basename \"$f\" .pdf )\n    if [ ! -f /path/to/PNGs/\"$base\".png ]; then\n        mv \"$f\" /path/to/garbage/\n    fi  \ndone"
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

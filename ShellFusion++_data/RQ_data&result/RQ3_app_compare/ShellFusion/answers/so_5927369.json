@@ -1,0 +1,102 @@
+{
+    "Answers": [
+        {
+            "Command": "find",
+            "Explanations about Options": {
+                "-n(M)": "for less than n ,",
+                "-name(M)": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+                "-print(M)": "Quoting is handled in the same way as for -printf and -fprintf. If you are using\n find in a script or in a situation where the matched files might have arbitrary\n names, you should consider using -print0 instead of -print.",
+                "-type(M)": "File is of type c:"
+            },
+            "MP Summary": "search for files in a directory hierarchy",
+            "Most Similar TLDR Script": "find {{root_path}} -name '{{*.ext}}'",
+            "Most Similar TLDR Task": "Find files by extension",
+            "Top-3 Scripts": [
+                "so_25693638: find . -name '*.jpg' -o -name '*.png' -print | grep Robert",
+                "so_44088046: find . -name '*.blend' -exec blender {} --background --python myScript.py \\;",
+                "so_3837438: find . -name '*.bx' -type f | while read NAME ; do mv \"${NAME}\" \"${NAME%.bx}\" ; done"
+            ],
+            "Top-3 Similar Questions": [
+                "so_25693638: Recursively find files with a specific extension",
+                "so_44088046: How to run a command recursively for files with specific extensions in bash?",
+                "so_3837438: How do I remove a specific extension from files recursively using a bash script"
+            ]
+        },
+        {
+            "Command": "cp",
+            "Explanations about Options": {
+                "-r(M)": "copy directories recursively",
+                "-t(M)": "copy all SOURCE arguments into DIRECTORY"
+            },
+            "MP Summary": "copy files and directories",
+            "Most Similar TLDR Script": "cp -r {{path/to/source_directory}} {{path/to/target_directory}}",
+            "Most Similar TLDR Task": "Recursively copy a directory's contents to another location (if the destination exists, the directory is copied inside it)",
+            "Top-3 Scripts": [
+                "so_56331802: find src/ -regex '.*\\.\\(tsv\\|xlsx\\|gz\\|html\\)$' -exec cp {} dest/ \\;\n\n-exec cp {} dest/ \\;",
+                "au_776647: find . -type f ! -name '*.data' | xargs cp -t ../destination_dir/\n\nfor file in `find . ! -name '*.txt' | sed 's/^.\\///'`; do if [ -d \"./$file\" ]; then mkdir -p \"../destination_dir/$file\"; else cp \"./$file\" \"../destination_dir/$file\"; fi; done",
+                "so_48422931: find . \\( -name '*.sh' -o -name '*.py' -o -name '*.zsh' -o -name '*.js' \\) -exec cp {} \"$1\" \\;\n\nfind . \\( -name '*.sh' -o -name '*.py' -o -name '*.zsh' -o -name '*.js' \\) -exec cp -t \"$1\" {} +\n\nextensions=(sh py zsh js)\npredicate=(-false)\nfor e in \"${extensions[@]}\"; do predicate+=(-o -name \"*.$e\") done\nfind . \\( \"${predicate[@]}\" \\) -exec cp -t \"$1\" {} +"
+            ],
+            "Top-3 Similar Questions": [
+                "so_56331802: How to copy recursively files with multiple specific extensions in bash",
+                "au_776647: How do I exclude a specific extension from recursive file copying?",
+                "so_48422931: Copying specific file extensions recursively using arrays with different extensions/arguments"
+            ]
+        },
+        {
+            "Command": "mkdir",
+            "Explanations about Options": {
+                "-p(M)": "no error if existing, make parent directories as needed"
+            },
+            "MP Summary": "make directories",
+            "Most Similar TLDR Script": "mkdir -p {{path/to/directory}}",
+            "Most Similar TLDR Task": "Create directories recursively (useful for creating nested dirs)",
+            "Top-3 Scripts": [
+                "au_776647: for file in `find . ! -name '*.txt' | sed 's/^.\\///'`; do if [ -d \"./$file\" ]; then mkdir -p \"../destination_dir/$file\"; else cp \"./$file\" \"../destination_dir/$file\"; fi; done",
+                "ul_507274: for x in $i\n        do mkdir -p $DIR/$x\n        done\n\nDIR=/home/vvek/MyLearning/Linux/bam/   ## define data directory path\ncd \"$DIR\" || exit 1  # check directory exists or exit\nfor RDIR in R_2019* ; do  ## start processing matching \"R_2019*\" to operate on desired directory and expand\n cd \"$RDIR\"/BAM   ## change directory to subfolder inside $RDIR\ni=$(find . -type f -name \"*.bam\" -print | while read f;do echo \"$f\" | cut -d_ -f2-;done| cut -f 1 -d '.')  # extract .bam\n\nfor x in $i\n        do mkdir -p $DIR/$x\n        done\ndone  ## close loop"
+            ],
+            "Top-3 Similar Questions": [
+                "au_776647: How do I exclude a specific extension from recursive file copying?",
+                "ul_507274: bash to create sub directories in folder from specific file extension"
+            ]
+        },
+        {
+            "Command": "cd",
+            "Explanations about Options": {},
+            "MP Summary": "change the working directory",
+            "Most Similar TLDR Script": "cd {{path/to/directory}}",
+            "Most Similar TLDR Task": "Go to the given directory",
+            "Top-3 Scripts": [
+                "ul_418988: COMMAND='echo'\nfind `pwd` -iname \"*.pdf\" -printf \"%h\\n\" | sort -u | while read i; do                                              \n    cd \"$i\" && pwd && $COMMAND\ndone",
+                "ul_507274: DIR=/home/vvek/MyLearning/Linux/bam/   ## define data directory path\ncd \"$DIR\" || exit 1  # check directory exists or exit\nfor RDIR in R_2019* ; do  ## start processing matching \"R_2019*\" to operate on desired directory and expand\n cd \"$RDIR\"/BAM   ## change directory to subfolder inside $RDIR\ni=$(find . -type f -name \"*.bam\" -print | while read f;do echo \"$f\" | cut -d_ -f2-;done| cut -f 1 -d '.')  # extract .bam\n\nfor x in $i\n        do mkdir -p $DIR/$x\n        done\ndone  ## close loop",
+                "so_35806287: cd /home/cmccabe/Desktop/NGS/\n\nfor file in API/*/*.bam; do\n   f=\"${file##*/}\"\n   path=\"${file%/*}\"\n   dt=\"${path##*/}\"\n   mv \"$file\" \"$path/$(awk -v dt=\"$dt\" -v f=\"$f\" 'NF==1 {\n               p=$0==dt ? 1 : 0; next} p && $1==f{print $2}' names.txt)\"\ndone"
+            ],
+            "Top-3 Similar Questions": [
+                "ul_418988: Recursively iterate through all subdirectories, If a file with a specific extension exists then run a command in that folder once",
+                "ul_507274: bash to create sub directories in folder from specific file extension",
+                "so_35806287: rename specific file extension in directory with match to another file in bash"
+            ]
+        },
+        {
+            "Command": "file",
+            "Explanations about Options": {
+                "-e(M)": "Exclude the test named in testname from the list of tests made to determine the file\n type. Valid test names are:",
+                "-m(M)": "Specify an alternate list of files and directories containing magic. This can be a\n single item, or a colon-separated list. If a compiled magic file is found alongside\n a file or directory, it will be used instead.",
+                "-n(M)": "Force stdout to be flushed after checking each file. This is only useful if\n checking a list of files. It is intended to be used by programs that want filetype\n output from a pipe."
+            },
+            "MP Summary": "determine file type",
+            "Most Similar TLDR Script": "file {{filename}}",
+            "Most Similar TLDR Task": "Give a description of the type of the specified file. Works fine for files with no file extension",
+            "Top-3 Scripts": [
+                "au_776647: for file in `find . ! -name '*.txt' | sed 's/^.\\///'`; do if [ -d \"./$file\" ]; then mkdir -p \"../destination_dir/$file\"; else cp \"./$file\" \"../destination_dir/$file\"; fi; done",
+                "so_59253913: find \"${path}\" \\\n    -type f \\\n    -name '*.pppd' \\\n    -exec bash -c 'test \"$(file \"${1}\"|awk -F: \"{print \\$NF}\")\" = \"data\"' -- {} \\; \\\n    -print",
+                "ul_180271: for file in *.old; do\n    mv -- \"$file\" \"${file%%.old}\"\ndone"
+            ],
+            "Top-3 Similar Questions": [
+                "au_776647: How do I exclude a specific extension from recursive file copying?",
+                "so_5507639: Rename file extension using case and recursion",
+                "so_59253913: search recursive files with type of data that ended with specific extension in order to delete the files"
+            ]
+        }
+    ],
+    "Query": "Recursively look for files with a specific extension"
+}

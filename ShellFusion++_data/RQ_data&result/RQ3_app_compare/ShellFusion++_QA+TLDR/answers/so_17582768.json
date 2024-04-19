@@ -1,0 +1,79 @@
+{
+  "Query": "How to ignore conflicts in rpm installs",
+  "Answers": [
+    {
+      "Command": "apt-get",
+      "MP Summary": "APT package handling utility - command-line interface",
+      "Most Similar TLDR Task": "Upgrade installed packages (like `upgrade`), but remove obsolete packages and install additional packages to meet new dependencies",
+      "Most Similar TLDR Script": "apt-get dist-upgrade",
+      "Top-3 Similar Questions": [
+        "au_57892: How do I ignore a conflicting package on a regex match in apt-get?",
+        "au_1035104: Laptop ignores GRUB after installing Ubuntu, boots Windows anyway"
+      ],
+      "Top-3 Scripts": [
+        "au_57892: apt-get install $(apt-cache r-cran- | grep -Fvx r-cran-vr)",
+        "au_1035104: sudo apt-add-repository ppa:yannubuntu/boot-repair \nsudo apt-get update \nsudo apt-get install -y boot-repair \nboot-repair"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "yum",
+      "MP Summary": "Yellowdog Updater Modified",
+      "Most Similar TLDR Task": "Install a new package",
+      "Most Similar TLDR Script": "yum install {{package}}",
+      "Top-3 Similar Questions": [
+        "so_18211773: Ignoring an error message from yum command [when package is already installed] - bash",
+        "ul_194672: Kickstart file - installer is ignoring some of the \"do not install\" packages from the packages section"
+      ],
+      "Top-3 Scripts": [
+        "so_18211773: yum -y -q install something 2>&1 | grep -v \"already installed and latest version\"\n\nyum -y -q install something >/dev/null 2>&1",
+        "ul_194672: yum remove\n\n%post\nyum remove -y acl authconfig dracut* linux-firmware newt* plymouth-scripts\n%end"
+      ],
+      "Explanations about Options": {
+        "-y": "Assume yes; assume that the answer to any question which would be asked is yes.\n Configuration Option: assumeyes",
+        "-q": "Run without output. Note that you likely also want to use -y."
+      }
+    },
+    {
+      "Command": "aptitude",
+      "MP Summary": "high-level interface to the package manager",
+      "Most Similar TLDR Task": "Remove a package and all packages depending on it",
+      "Most Similar TLDR Script": "aptitude remove {{package}}",
+      "Top-3 Similar Questions": [
+        "au_57892: How do I ignore a conflicting package on a regex match in apt-get?"
+      ],
+      "Top-3 Scripts": [
+        "au_57892: aptitude '~n^r-cran-.*'"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "rpm",
+      "MP Summary": "RPM Package Manager",
+      "Most Similar TLDR Task": "Show changed, missing and/or incorrectly installed files of matching packages",
+      "Most Similar TLDR Script": "rpm -Va '{{php-*}}'",
+      "Top-3 Similar Questions": [
+        "so_61001020: How to ignore reboot prompt in a ShellScript"
+      ],
+      "Top-3 Scripts": [
+        "so_61001020: #!/bin/bash    \nif rpm -q ip-client-install\nthen\necho no | ipa-client-install --uninstall\nelse \necho \"Package not found\"\nfi\n/usr/local/sbin/new-clone.sh -i aws -s aws-dev"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "dpkg",
+      "MP Summary": "package manager for Debian",
+      "Most Similar TLDR Task": "Install a package",
+      "Most Similar TLDR Script": "dpkg -i {{path/to/file.deb}}",
+      "Top-3 Similar Questions": [
+        "su_518859: Ignore packages that are not currently installed when using \"apt-get remove\""
+      ],
+      "Top-3 Scripts": [
+        "su_518859: dpkg --remove foo bar libperl-dev\ndpkg: warning: ignoring request to remove foo which isn't installed\ndpkg: warning: ignoring request to remove bar which isn't installed\n(Reading database ... 169132 files and directories currently installed.)\nRemoving libperl-dev ...\n\ndpkg --purge foo bar libperl-dev"
+      ],
+      "Explanations about Options": {
+        "--purge": "Purge an installed or already removed package. This removes everything, including\n conffiles, and anything else cleaned up from postrm. If -a or --pending is given\n instead of a package name, then all packages unpacked or removed, but marked to be\n purged in file /var/lib/dpkg/status, are purged."
+      }
+    }
+  ]
+}

@@ -1,0 +1,86 @@
+{
+  "Query": "How to use SSH to run a shell script on a remote machine?",
+  "Answers": [
+    {
+      "Command": "ssh",
+      "MP Summary": "OpenSSH SSH client (remote login program)",
+      "Most Similar TLDR Task": "Run a command on a remote server",
+      "Most Similar TLDR Script": "ssh {{remote_host}} {{command -with -flags}}",
+      "Top-3 Similar Questions": [
+        "so_68063160: shell script to run commands over SSH on multiple remote servers",
+        "ul_365146: Running Commands on a Remote Linux",
+        "so_31218577: Running part of bash script on a remote machine"
+      ],
+      "Top-3 Scripts": [
+        "so_68063160: ",
+        "ul_365146: ssh root@192.168.137.137 -t uptime 2>/dev/null | awk '{ print $8 }'",
+        "so_31218577: "
+      ],
+      "Explanations about Options": {
+        "-t": "Force pseudo-terminal allocation. This can be used to execute arbitrary screen-\n based programs on a remote machine, which can be very useful, e.g. when implementing\n menu services. Multiple -t options force tty allocation, even if ssh has no local\n tty."
+      }
+    },
+    {
+      "Command": "sshpass",
+      "MP Summary": "noninteractive ssh password provider",
+      "Most Similar TLDR Task": "Connect to a remote server using the first line of a file as the password, automatically accept unknown ssh keys, and launch a command",
+      "Most Similar TLDR Script": "sshpass -f {{file}} ssh -o StrictHostKeyChecking=no {{user}}@{{hostname}} \"{{command}}\"",
+      "Top-3 Similar Questions": [
+        "su_485667: Running script on multiple ubuntu computers automatically",
+        "so_65993341: how to run complex awk command on remote machine",
+        "so_63888808: Bash: Running a function as sudo on remote host?"
+      ],
+      "Top-3 Scripts": [
+        "su_485667: #!/bin/bash\nmyscript=`cat /dev/stdin`\necho \"$myscript; exit;\" | sshpass -p $3 ssh -o StrictHostKeyChecking=no $2@$1",
+        "so_65993341: sshpass -p pasa123 ssh root@server01 \"/usr/bin/free | awk '/Mem/{printf(\\\"RAM Usage: %.2f%\\n\\\"), \\$3/\\$2*100}' \"",
+        "so_63888808: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "scp",
+      "MP Summary": "secure copy (remote file copy program)",
+      "Most Similar TLDR Task": "Use a specific ssh private key for authentication with the remote host",
+      "Most Similar TLDR Script": "scp -i {{~/.ssh/private_key}} {{local_file}} {{remote_host}}:{{/path/remote_file}}",
+      "Top-3 Similar Questions": [
+        "so_19039776: Triggering a shell script on remote machine",
+        "so_34415266: Execute shell script in remote machine using ssh command with config file"
+      ],
+      "Top-3 Scripts": [
+        "so_19039776: $ scp some_files remote_host:some_directory/\n$ ssh remote_host my_script",
+        "so_34415266: scp property.config user@remote_machine:/usr/property.config\nssh user@remote_machine \"bash -s\" < /usr/test.sh"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "sudo",
+      "MP Summary": "execute a command as another user",
+      "Most Similar TLDR Task": "Run a command as another user and/or group",
+      "Most Similar TLDR Script": "sudo -u {{user}} -g {{group}} {{id -a}}",
+      "Top-3 Similar Questions": [
+        "ul_274876: How to run a command on remote host from a service?",
+        "so_63888808: Bash: Running a function as sudo on remote host?"
+      ],
+      "Top-3 Scripts": [
+        "ul_274876: sudo -iu user ssh user@172.21.6.70 \"nohup bash -c 'source ~/.envrc ; (cd /catalog; ./bin/catalog start &)'\"",
+        "so_63888808: sudo bash -c\n\nsudo bash -c \"$(declare -f runOnRemoteHostAsRoot); runOnRemoteHostAsRoot\"\n\necho '${SSHPASS}' | sudo --stdin bash -c '$(declare -f runOnRemoteHostAsRoot); runOnRemoteHostAsRoot'`"
+      ],
+      "Explanations about Options": {
+        "--stdin": "Write the prompt to the standard error and read the password from the standard\n input instead of using the terminal device."
+      }
+    },
+    {
+      "Command": "sh",
+      "MP Summary": "MirBSD Korn shell",
+      "Most Similar TLDR Task": "Execute a command",
+      "Most Similar TLDR Script": "sh -c {{command}}",
+      "Top-3 Similar Questions": [
+        "su_1491934: Run shell script on remote machine with SSH using local environment variable"
+      ],
+      "Top-3 Scripts": [
+        "su_1491934: "
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

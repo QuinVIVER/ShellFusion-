@@ -1,0 +1,89 @@
+{
+  "Query": "Bash How to find the largest file in a directory and its subdirectories?",
+  "Answers": [
+    {
+      "Command": "rm",
+      "MP Summary": "remove files or directories",
+      "Most Similar TLDR Task": "Recursively remove a directory and all its subdirectories",
+      "Most Similar TLDR Script": "rm -r {{path/to/directory}}",
+      "Top-3 Similar Questions": [
+        "so_27031814: Find a file in directory by date...then rename it",
+        "nl2bash_5827: Search all of /usr for any directory named 'My Files', for each directory found, copy it to /iscsi preserving full paths and attributes, then remove it.",
+        "so_23562236: find in list of directories saved to a file"
+      ],
+      "Top-3 Scripts": [
+        "so_27031814: ",
+        "nl2bash_5827: find /usr -type d -name 'My Files' -exec rsync -avR '{}' /iscsi \\;  -exec rm -rf '{}'\\;",
+        "so_23562236: FILE_LIST=`mktemp --suffix=.list`\nfind ~/udit65_backup/ -maxdepth 1 -iname \"$PREFIX-*\" -type d -mtime +$NDAYS -print0 > $FILE_LIST\n# Make unwritable files... writable\nxargs -I {} -0r -a $FILE_LIST find {} ! -perm -u+w -print0 | xargs -0r chmod -R 700 -v\nxargs -0r -a $FILE_LIST rm -rf -v\nrm -f $FILE_LIST"
+      ],
+      "Explanations about Options": {
+        "-v": "explain what is being done",
+        "-r": "remove directories and their contents recursively",
+        "-f": "ignore nonexistent files and arguments, never prompt"
+      }
+    },
+    {
+      "Command": "find",
+      "MP Summary": "search for files in a directory hierarchy",
+      "Most Similar TLDR Task": "Find files by extension",
+      "Most Similar TLDR Script": "find {{root_path}} -name '{{*.ext}}'",
+      "Top-3 Similar Questions": [
+        "ul_467283: Find largest files in a directory in a specific date range",
+        "su_699135: Find the largest file in directory without size in output",
+        "so_33832044: Find replace text in multiple files in subdirectories. Exclude some subdirectories"
+      ],
+      "Top-3 Scripts": [
+        "ul_467283: find . -newer /tmp/point.start ! -newer /tmp/point.end  ! -path . | xargs ls -ltr | sort -nk5 | tail -20",
+        "su_699135: find \"$PARAM\" -type f -printf \"%s\\t%p\\n\" | sort -n | tail -n 1 | cut -f 2-",
+        "so_33832044: man find\n\nfind . -type f -not -path './workspace*' ..."
+      ],
+      "Explanations about Options": {
+        "-printf": "True; print format on the standard output, interpreting `\\' escapes and `%'\n directives. Field widths and precisions can be specified as with the `printf' C\n function. Please note that many of the fields are printed as %s rather than %d,\n and this may mean that flags don't work as you might expect. This also means that\n the `-' flag does work (it forces fields to be left-aligned). Unlike -print,\n -printf does not add a newline at the end of the string. The escapes and\n directives are:",
+        "-newer": "Time of the last data modification of the current file is more recent than that of\n the last data modification of the reference file. If reference is a symbolic link\n and the -H option or the -L option is in effect, then the time of the last data\n modification of the file it points to is always used.",
+        "-not": "Same as ! expr, but not POSIX compliant.",
+        "-type": "File is of type c:"
+      }
+    },
+    {
+      "Command": "diff",
+      "MP Summary": "compare two files",
+      "Most Similar TLDR Task": "Compare directories, only showing the names of files that differ",
+      "Most Similar TLDR Script": "diff -rq {{old_directory}} {{new_directory}}",
+      "Top-3 Similar Questions": [
+        "so_16787916: Find the files existing in one directory but not in the other",
+        "so_21112200: Bash how to find files with the same content in directories"
+      ],
+      "Top-3 Scripts": [
+        "so_16787916: diff -r dir1 dir2 | grep dir1 | awk '{print $4}' > difference1.txt",
+        "so_21112200: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "dirname",
+      "MP Summary": "strip last component from file name",
+      "Most Similar TLDR Task": "Calculate the parent directory of multiple paths",
+      "Most Similar TLDR Script": "dirname {{path/to/file_a}} {{path/to/directory_b}}",
+      "Top-3 Similar Questions": [
+        "so_48412838: Find directory of a command in bash"
+      ],
+      "Top-3 Scripts": [
+        "so_48412838: dirname /bin/cat"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "pwd",
+      "MP Summary": "print name of current/working directory",
+      "Most Similar TLDR Task": "Print the current directory",
+      "Most Similar TLDR Script": "pwd",
+      "Top-3 Similar Questions": [
+        "ul_6463: find searching in parent directories instead of subdirectories"
+      ],
+      "Top-3 Scripts": [
+        "ul_6463: find_up.sh some_dir -iname \"foo*bar\" -execdir pwd \\;"
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

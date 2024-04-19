@@ -1,0 +1,100 @@
+{
+  "Query": "Unix/Linux find and sort by date modified",
+  "Answers": [
+    {
+      "Command": "date",
+      "MP Summary": "print or set the system date and time",
+      "Most Similar TLDR Task": "Convert a specific date to the Unix timestamp format",
+      "Most Similar TLDR Script": "date -d \"{{2018-09-01 00:00}}\" +%s --utc",
+      "Top-3 Similar Questions": [
+        "so_18339307: Find files in created between a date range",
+        "so_41015725: find a date in a powershell variable",
+        "so_21778284: Find out when the date was changed"
+      ],
+      "Top-3 Scripts": [
+        "so_18339307: find ~/ -mtime $(echo $(date +%s) - $(date +%s -d\"Dec 31, 2009 23:59:59\") | bc -l | awk '{print $1 / 86400}' | bc -l)\n\nfind . -mtime $(date +%s -d\"Aug 10, 2013 23:59:59\") -mtime $(date +%s -d\"Aug 1, 2013 23:59:59\")",
+        "so_41015725: $sel -match $regex\n$date = $matches[0]",
+        "so_21778284: #!/bin/sh\ntouch /tmp/date.changed\n/bin/date \"$@\""
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "sort",
+      "MP Summary": "sort lines of text files",
+      "Most Similar TLDR Task": "Sort a file preserving only unique lines",
+      "Most Similar TLDR Script": "sort -u {{path/to/file}}",
+      "Top-3 Similar Questions": [
+        "so_34474016: Find and sort files by date modified",
+        "au_61179: Find the latest file by modified date",
+        "so_29526886: unix find oldest file in directory by date in filename"
+      ],
+      "Top-3 Scripts": [
+        "so_34474016: find . -type f -print0 | xargs -0 stat -f\"%m %Sm %N\" | sort -rn",
+        "au_61179: find /path -printf '%T+ %p\\n' | sort -r | head",
+        "so_29526886: ls -1 | sed 's/^\\([^0-9]*\\)\\([0-9]\\+\\.txt\\)/\\2\\1/g' | sort -n | head -1 | sed 's/^\\([0-9]\\+\\.txt\\)\\(.*\\)/\\2\\1/g'"
+      ],
+      "Explanations about Options": {
+        "-r": "reverse the result of comparisons",
+        "-n": "compare according to string numerical value"
+      }
+    },
+    {
+      "Command": "touch",
+      "MP Summary": "change file timestamps",
+      "Most Similar TLDR Task": "Set the times on a file to a specific date and time",
+      "Most Similar TLDR Script": "touch -t {{YYYYMMDDHHMM.SS}} {{filename}}",
+      "Top-3 Similar Questions": [
+        "so_29526886: unix find oldest file in directory by date in filename",
+        "so_16757326: Linux Find: How to find .PDF files created after a specific year?",
+        "so_21778284: Find out when the date was changed"
+      ],
+      "Top-3 Scripts": [
+        "so_29526886: ",
+        "so_16757326: tmp=$(mktemp /tmp/time-XXXXXXXX)\ntouch -t 200801010000 \"$tmp\"\nfind . -type f -iname '*.pdf' -newer \"$tmp\"\nrm \"$tmp\"",
+        "so_21778284: #!/bin/sh\ntouch /tmp/date.changed\n/bin/date \"$@\""
+      ],
+      "Explanations about Options": {
+        "-t": "STAMP\n use [[CC]YY]MMDDhhmm[.ss] instead of current time"
+      }
+    },
+    {
+      "Command": "find",
+      "MP Summary": "search for files in a directory hierarchy",
+      "Most Similar TLDR Task": "Find files modified in the last 7 days, and delete them",
+      "Most Similar TLDR Script": "find {{root_path}} -mtime {{-7}} -delete",
+      "Top-3 Similar Questions": [
+        "so_9705579: Find files modified between two dates on Linux machine",
+        "so_34474016: Find and sort files by date modified",
+        "so_36453322: find all file modify after specific date (Centos)"
+      ],
+      "Top-3 Scripts": [
+        "so_9705579: find /home -iname \".c\" -mtime 2 -mtime -4",
+        "so_34474016: find . -type f -print0 | xargs -0 stat -f\"%m %Sm %N\" | sort -rn",
+        "so_36453322: find /folder -type f -printf '%TY-%Tm-%Td %TT %p\\n' |grep <date to find>"
+      ],
+      "Explanations about Options": {
+        "-mtime": "File's data was last modified n*24 hours ago. See the comments for -atime to\n understand how rounding affects the interpretation of file modification times.",
+        "-iname": "Like -name, but the match is case insensitive. For example, the patterns `fo*' and\n `F??' match the file names `Foo', `FOO', `foo', `fOo', etc. The pattern `*foo*`\n will also match a file called '.foobar'.",
+        "-type": "File is of type c:",
+        "-print0": "Always print the exact filename, unchanged, even if the output is going to a\n terminal."
+      }
+    },
+    {
+      "Command": "printf",
+      "MP Summary": "format and print data",
+      "Most Similar TLDR Task": "Print a text message composed with environment variables",
+      "Most Similar TLDR Script": "printf \"{{var1: %s\\tvar2: %s\\n}}\" \"{{$VAR1}}\" \"{{$VAR2}}\"",
+      "Top-3 Similar Questions": [
+        "ul_545179: Finding files based on the date contained in their filenames",
+        "su_1598430: Date, find out the number of days in a month",
+        "so_16858013: sort files found by command 'find'"
+      ],
+      "Top-3 Scripts": [
+        "ul_545179: ",
+        "su_1598430: month=$(date +%m)\nmaxDayThisMonth=$(( for d in {00..31}; do date -d \"+$d days\" +%m-%d ; done ; ) | grep -Po \"(?<=$month-)\\d+\" | sort -rn | head -1)\n\nnextMonth=$(printf \"%02d\" $(( ($month+1) % 12 )) )\nmaxDayNextMonth=$(( for d in {01..62}; do date -d \"+$d days\" +%m-%d ; done ; ) | grep -Po \"(?<=$nextMonth-)\\d+\" | sort -rn | head -1)",
+        "so_16858013: "
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

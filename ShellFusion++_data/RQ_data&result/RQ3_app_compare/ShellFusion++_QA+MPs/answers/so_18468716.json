@@ -1,0 +1,77 @@
+{
+  "Query": "How to grep, excluding some patterns?",
+  "Answers": [
+    {
+      "Command": "grep",
+      "MP Summary": "print lines that match patterns",
+      "Top-3 Similar Questions": [
+        "so_24837635: grep excluding file name pattern",
+        "so_25781642: How to search for a pattern using grep and exclude another pattern",
+        "so_49521913: Exclude subdirectories"
+      ],
+      "Top-3 Scripts": [
+        "so_24837635: grep -r --exclude=\"*.cmd\"  \"ckim\" ./",
+        "so_25781642: grep -P 'http://\\S*tt(?!p:)' file\n\ngrep -cP 'http://\\S*tt(?!p:)' file\n\ngrep -P '(<=http://)?\\S*tt(?!p:)' file\n\ngrep -oP '.*?\\K(http:/)?/\\S*tt(?!p:)\\S*' file\n\ngrep -oP '.*?\\Khttp://\\S*tt(?!p:)\\S*' file\n\nhttp://example.com/redirect?http://some/anyttany.html\nhttp://example.com/http.html\nhttp://example.com/tt.html\nhttp://example.com/somett.html\nhttp://example.com/somettsome.html",
+        "so_49521913: grep \"^${myPath}/[^/]*$\""
+      ],
+      "Explanations about Options": {
+        "-P": "Interpret PATTERNS as Perl-compatible regular expressions (PCREs). This option is\n experimental when combined with the -z (--null-data) option, and grep -P may warn\n of unimplemented features.",
+        "-r": "Read all files under each directory, recursively, following symbolic links only if\n they are on the command line. Note that if no file operand is given, grep searches\n the working directory. This is equivalent to the -d recurse option.",
+        "-o": "Print only the matched (non-empty) parts of a matching line, with each such part on\n a separate output line.",
+        "--exclude": "Skip any command-line file with a name suffix that matches the pattern GLOB, using\n wildcard matching; a name suffix is either the whole name, or a trailing part that\n starts with a non-slash character immediately after a slash (/) in the name. When\n searching recursively, skip any subfile whose base name matches GLOB; the base name\n is the part after the last slash. A pattern can use *, ?, and [...] as wildcards,\n and \\ to quote a wildcard or backslash character literally."
+      }
+    },
+    {
+      "Command": "awk",
+      "MP Summary": "pattern scanning and processing language",
+      "Top-3 Similar Questions": [
+        "so_39463714: Need grep statement to exclude lines",
+        "so_63968526: AWK / Grep - Exclude lines containing file paths",
+        "so_30528416: awk to exclude range patterns but include the start pattern"
+      ],
+      "Top-3 Scripts": [
+        "so_39463714: awk '/IN=eth0/ && !/SRC=0\\.0\\.0\\.0/ && !/SRC=10\\.0\\.1\\.15/' uwf.log",
+        "so_63968526: awk '!/[cC]:\\\\[wW][iI][nN][dD][[oO][wW][sS]\\\\[sS][yY][sS][tT][eE][mM]32/' Input_file\n\nawk 'tolower($0) !~ /c:\\\\windows\\\\system32/' Input_file",
+        "so_30528416: $ awk '!flag; /ss/ {flag=1} /gg/ {flag=0}' file\n11\n12\nss\n32\nss"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "gawk",
+      "MP Summary": "pattern scanning and processing language",
+      "Top-3 Similar Questions": [
+        "ul_261263: Print some lines before and after pattern match excluding lines matching another patterns"
+      ],
+      "Top-3 Scripts": [
+        "ul_261263: gawk 'NF > 0' fileName  |ggrep -C5 pattern"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "wc",
+      "MP Summary": "print newline, word, and byte counts for each file",
+      "Top-3 Similar Questions": [
+        "so_20871845: grep a keyword in all .h and .c files under current directory but exclude two directories"
+      ],
+      "Top-3 Scripts": [
+        "so_20871845: find . -name '*.[ch]' | wc -l\n\nfind . -type d \\( -path \"./a/*\" -o -path \"./b/*\" \\) -prune -o -name '*.[ch]' -print | wc -l"
+      ],
+      "Explanations about Options": {
+        "-l": "print the newline counts"
+      }
+    },
+    {
+      "Command": "echo",
+      "MP Summary": "display a line of text",
+      "Top-3 Similar Questions": [
+        "su_168130: Unix - delete files and folders excluding PATTERN",
+        "so_9153170: Grep for a single line comment but exclude stuff like http://example.com"
+      ],
+      "Top-3 Scripts": [
+        "su_168130: # ksh\necho rm -rf !(*foo*)\n\n# bash\nshopt -s extglob\necho rm -rf !(*foo*)\n\n# zsh\nsetopt extended_glob\necho rm -rf ^*foo*\n\n# zsh: ksh-style glob syntax\nsetopt ksh_glob no_bare_glob_qual\necho rm -rf !(*foo*)\n\n# zsh: ksh-style glob syntax, adapted for the default bare_glob_qual option\nsetopt ksh_glob bare_glob_qual\necho rm -rf (!(*foo*))",
+        "so_9153170: $ echo $'http://www.example.com\\n   // single line comment' | grep \"^ *//.*\"\n   // single line comment"
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

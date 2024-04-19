@@ -1,0 +1,94 @@
+{
+  "Query": "Is there an easy command line command to check disk space?",
+  "Answers": [
+    {
+      "Command": "df",
+      "MP Summary": "report file system disk space usage",
+      "Most Similar TLDR Task": "Display all filesystems and their disk usage",
+      "Most Similar TLDR Script": "df",
+      "Top-3 Similar Questions": [
+        "so_61035374: Bash command to check available drive space (was \"to check value of a decimal number\")",
+        "su_71087: How to check the current disk space used by my linux?",
+        "so_8110530: Check free disk space for current partition in bash"
+      ],
+      "Top-3 Scripts": [
+        "so_61035374: declare -- drive='/'\ndeclare -i minsize=$((2*10**11)) # 200 GB\nif (($(df -B1 --output=avail \"$drive\" | tail -1)>=minsize))\nthen\n   printf 'There is more than 200 GB left on %s\\n' \"$drive\"\nelse\n   printf 'There is less than 200 GB left on %s\\n' \"$drive\"\nfi",
+        "su_71087: df -a\n\ndf -h",
+        "so_8110530: df -k .\n\ndf -k /some/dir"
+      ],
+      "Explanations about Options": {
+        "-h": "print sizes in powers of 1024 (e.g., 1023M)",
+        "--output": "use the output format defined by FIELD_LIST, or print all fields if FIELD_LIST is\n omitted."
+      }
+    },
+    {
+      "Command": "xargs",
+      "MP Summary": "build and execute command lines from standard input",
+      "Most Similar TLDR Task": "Run multiple chained commands on the input data",
+      "Most Similar TLDR Script": "{{arguments_source}} | xargs sh -c \"{{command1}} && {{command2}} | {{command3}}\"",
+      "Top-3 Similar Questions": [
+        "ul_83213: How can I stress test a command line tool?",
+        "ul_110131: How does one determine the amount of space allocated to their command line?"
+      ],
+      "Top-3 Scripts": [
+        "ul_83213: maxruns=2000\ninstances=50\nprintf '%s\\0' {1..$maxruns} | xargs -0 -I, -n 1 -P $instances <program>",
+        "ul_110131: $ xargs --show-limits --no-run-if-empty < /dev/null \nYour environment variables take up 4791 bytes\nPOSIX upper limit on argument length (this system): 2090313\nPOSIX smallest allowable upper limit on argument length (all systems): 4096\nMaximum length of command we could actually use: 2085522\nSize of command buffer we are actually using: 131072"
+      ],
+      "Explanations about Options": {
+        "--no-run-if-empty": "If the standard input does not contain any nonblanks, do not run the command.\n Normally, the command is run once even if there is no input. This option is a GNU\n extension.",
+        "-n": "Use at most max-args arguments per command line. Fewer than max-args arguments\n will be used if the size (see the -s option) is exceeded, unless the -x option is\n given, in which case xargs will exit.",
+        "--show-limits": "Display the limits on the command-line length which are imposed by the operating\n system, xargs' choice of buffer size and the -s option. Pipe the input from\n /dev/null (and perhaps specify --no-run-if-empty) if you don't want xargs to do\n anything.",
+        "-0": "Input items are terminated by a null character instead of by whitespace, and the\n quotes and backslash are not special (every character is taken literally).\n Disables the end of file string, which is treated like any other argument. Useful\n when input items might contain white space, quote marks, or backslashes. The GNU\n find -print0 option produces input suitable for this mode."
+      }
+    },
+    {
+      "Command": "du",
+      "MP Summary": "estimate file space usage",
+      "Most Similar TLDR Task": "List the human-readable size of all .jpg files in subdirectories of the current directory, and show a cumulative total at the end",
+      "Most Similar TLDR Script": "du -ch */*.jpg",
+      "Top-3 Similar Questions": [
+        "su_1472429: Check disk usage of files returned with spaces",
+        "so_25482174: How to check free space on Unix using script",
+        "ul_414506: Check the disk space in Ubuntu (with ls)"
+      ],
+      "Top-3 Scripts": [
+        "su_1472429: find . -maxdepth 1 -iname '*syed*' -exec du -ch {} +",
+        "so_25482174: du -a <path> | sort -n -r | head -n 10",
+        "ul_414506: du / | sort -n\n\ndu / | sort -n | tail -n 20"
+      ],
+      "Explanations about Options": {
+        "-h": "print sizes in human readable format (e.g., 1K 234M 2G)",
+        "-a": "write counts for all files, not just directories",
+        "-c": "produce a grand total"
+      }
+    },
+    {
+      "Command": "fdisk",
+      "MP Summary": "manipulate disk partition table",
+      "Most Similar TLDR Task": "Start the partition manipulator",
+      "Most Similar TLDR Script": "fdisk {{/dev/sda}}",
+      "Top-3 Similar Questions": [
+        "ul_18586: CentOS - Check partition information from command line"
+      ],
+      "Top-3 Scripts": [
+        "ul_18586: fdisk -l"
+      ],
+      "Explanations about Options": {
+        "-l": "List the partition tables for the specified devices and then exit. If no devices\n are given, those mentioned in /proc/partitions (if that file exists) are used."
+      }
+    },
+    {
+      "Command": "badblocks",
+      "MP Summary": "search a device for bad blocks",
+      "Most Similar TLDR Task": "Search an unmounted disk for bad blocks with a destructive write test and show verbose status",
+      "Most Similar TLDR Script": "sudo badblocks -svw {{/dev/sda}}",
+      "Top-3 Similar Questions": [
+        "au_515223: Graphical disk surface check tool?"
+      ],
+      "Top-3 Scripts": [
+        "au_515223: "
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

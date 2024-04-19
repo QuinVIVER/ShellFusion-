@@ -1,0 +1,85 @@
+{
+  "Query": "Need to downsample video to a lower resolution",
+  "Answers": [
+    {
+      "Command": "ffmpeg",
+      "MP Summary": "ffmpeg video converter",
+      "Most Similar TLDR Task": "Quickly extract a single frame from a video at time mm:ss and save it as a 128x128 resolution image",
+      "Most Similar TLDR Script": "ffmpeg -ss {{mm:ss}} -i {{video.mp4}} -frames 1 -s {{128x128}} -f image2 {{image.png}}",
+      "Top-3 Similar Questions": [
+        "au_1276243: Stream a recoreded Video to youtube",
+        "ul_174503: Convert Multiple Videos to Multiple GIFs",
+        "so_14782077: Expand (extend) a video to an specific duration"
+      ],
+      "Top-3 Scripts": [
+        "au_1276243: ",
+        "ul_174503: for f in ./*.flv; do\n    ffmpeg -i \"$f\" -vf scale=320:-1 \"${f%.*}.gif\"\ndone\n\nfind . -maxdepth 1 -name \"*.flv\" -print0 |\n  sed 's/\\.flv\\x00/\\x00/g' |\n  xargs -r0 -I FILENAME ffmpeg -i FILENAME.flv -vf scale=320:-1 FILENAME.gif\n\nffmpeg -i FILENAME.flv -vf scale=320:-1 FILENAME.gif",
+        "so_14782077: ffmpeg -i input.mp4 -filter_complex \"setpts=PTS/10\" output.mp4\n\nffmpeg -i input.mp4 -filter_complex \"[0:v]setpts=PTS/10[v];[0:a]atempo=10[a]\" -map \"[v]\" -map \"[a]\" output.mp4\n\nffmpeg -i video.mp4 -i audio.wav -filter_complex \"[0:v]setpts=PTS*30/90[v]\" -map \"[v]\" -map 1:a -shortest output.mp4\n\nffmpeg -i input.mp4 -filter_complex \"setpts=PTS/(120/30);atempo=120/30\" output.mp4"
+      ],
+      "Explanations about Options": {
+        "-i": "input file url",
+        "-vf": "Create the filtergraph specified by filtergraph and use it to filter the stream.",
+        "-filter_complex": "Define a complex filtergraph, i.e. one with arbitrary number of inputs and/or outputs.\n For simple graphs - those with one input and one output of the same type - see the\n -filter options. filtergraph is a description of the filtergraph, as described in the\n ``Filtergraph syntax'' section of the ffmpeg-filters manual."
+      }
+    },
+    {
+      "Command": "ffprobe",
+      "MP Summary": "ffprobe media prober",
+      "Most Similar TLDR Task": "Display the average bit rate of a video",
+      "Most Similar TLDR Script": "ffprobe -v error -select_streams v:0 -show_entries stream=bit_rate -of default=noprint_wrappers=1:nokey=1 {{input.mp4}}",
+      "Top-3 Similar Questions": [
+        "so_14782077: Expand (extend) a video to an specific duration",
+        "so_44488636: OpenCV: reading frames from VideoCapture advances the video to bizarrely wrong location"
+      ],
+      "Top-3 Scripts": [
+        "so_14782077: ffprobe -v error -show_entries format=duration -of default=noprint_wrappers=1:nokey=1 audio.wav\n ffprobe -v error -show_entries format=duration -of default=noprint_wrappers=1:nokey=1 video.mp4\n\nffprobe -v error -show_entries format=duration -of default=noprint_wrappers=1:nokey=1 input.mp4",
+        "so_44488636: $ ffprobe -i demo.avi -loglevel fatal -show_streams -count_frames|grep frame\nhas_b_frames=0\nr_frame_rate=100/1\navg_frame_rate=100/1\nnb_frames=18000\nnb_read_frames=1313        # !!!"
+      ],
+      "Explanations about Options": {
+        "-loglevel": "Set logging level and flags used by the library.",
+        "-i": "Read input_url.",
+        "-count_frames": "Count the number of frames per stream and report it in the corresponding stream\n section.",
+        "-show_streams": "Show information about each media stream contained in the input multimedia stream."
+      }
+    },
+    {
+      "Command": "vlc",
+      "MP Summary": "the VLC media player",
+      "Most Similar TLDR Task": "Play video from a URL",
+      "Most Similar TLDR Script": "vlc {{https://www.youtube.com/watch?v=oHg5SJYRHA0}}",
+      "Top-3 Similar Questions": [
+        "au_680436: Unable to play videos after converting from Netbook 10.04 to Lubuntu 14.04"
+      ],
+      "Top-3 Scripts": [
+        "au_680436: sudo apt-get install --reinstall vlc\nsudo apt-get remove ubuntu-restricted-extras\nsudo apt-get install ubuntu-restricted-extras"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "convert",
+      "MP Summary": "convert between image formats as well as resize an image, blur, crop, despeckle, dither, draw on, flip, join, re-sample, and much more.",
+      "Most Similar TLDR Task": "Create a gif from a series of images with 100ms delay between them",
+      "Most Similar TLDR Script": "convert {{image1.png}} {{image2.png}} {{image3.png}} -delay {{10}} {{animation.gif}}",
+      "Top-3 Similar Questions": [
+        "au_293444: How can I quickly convert a GIF file to a video?"
+      ],
+      "Top-3 Scripts": [
+        "au_293444: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "import",
+      "MP Summary": "saves any visible window on an X server and outputs it as an image file. You can capture a single window, the entire screen, or any rectangular portion of the screen.",
+      "Most Similar TLDR Task": "Capture contents of a remote X server screen in the PNG image format",
+      "Most Similar TLDR Script": "import -window root -display {{remote_host}}:{screen}.{display} {{output.png}}",
+      "Top-3 Similar Questions": [
+        "so_33448759: python converting video to audio"
+      ],
+      "Top-3 Scripts": [
+        "so_33448759: import moviepy.editor as mp\nclip = mp.VideoFileClip(\"myvideo.mp4\").subclip(0,20)\nclip.audio.write_audiofile(\"theaudio.mp3\")"
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

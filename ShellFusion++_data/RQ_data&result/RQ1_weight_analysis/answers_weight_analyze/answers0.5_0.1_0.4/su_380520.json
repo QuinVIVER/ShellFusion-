@@ -1,0 +1,84 @@
+{
+  "Query": "How to find uptime of a linux process",
+  "Answers": [
+    {
+      "Command": "kill",
+      "MP Summary": "send a signal to a process",
+      "Most Similar TLDR Task": "Signal the operating system to immediately terminate a program (which gets no chance to capture the signal)",
+      "Most Similar TLDR Script": "kill -{{9|KILL}} {{process_id}}",
+      "Top-3 Similar Questions": [
+        "au_180336: How to find the Process ID (PID) of a running terminal program?",
+        "so_42118992: Find process by port"
+      ],
+      "Top-3 Scripts": [
+        "au_180336: kill pid\n\nkill -HUP pid\n\nkill -KILL pid\n\nkill -9 pid",
+        "so_42118992: for i in $(pgrep -f \"server.php\"); do\n    pidtime=$(stat -c '%Y' /proc/$i)\n    now=$(date +%s)\n    ((now - pidtime >= 6)) && {\n      kill $i;\n      sleep 1;\n      kill &>/dev/null -9 $i;\n    }\ndone"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "pgrep",
+      "MP Summary": "look up or signal processes based on name and other attributes",
+      "Most Similar TLDR Task": "Search for process run by a specific user",
+      "Most Similar TLDR Script": "pgrep -u root {{process_name}}",
+      "Top-3 Similar Questions": [
+        "so_42118992: Find process by port",
+        "so_38368927: finding the process numbers of a multithread application",
+        "ul_14565: Finding out with which parameters a program was started"
+      ],
+      "Top-3 Scripts": [
+        "so_42118992: for i in $(pgrep -f \"server.php\"); do\n    pidtime=$(stat -c '%Y' /proc/$i)\n    now=$(date +%s)\n    ((now - pidtime >= 6)) && {\n      kill $i;\n      sleep 1;\n      kill &>/dev/null -9 $i;\n    }\ndone",
+        "so_38368927: pgrep -P $$",
+        "ul_14565: [~]> pgrep -l pdnsd\n1373 pdnsd\n[~]> cat /proc/1373/cmdline \n/usr/sbin/pdnsd--daemon-p/var/run/pdnsd.pid[~]>"
+      ],
+      "Explanations about Options": {
+        "-l": "List the process name as well as the process ID. (pgrep only.)",
+        "-f": "The pattern is normally only matched against the process name. When -f is set, the\n full command line is used.",
+        "-P": "Only match processes whose parent process ID is listed."
+      }
+    },
+    {
+      "Command": "top",
+      "MP Summary": "display Linux processes",
+      "Most Similar TLDR Task": "Do not show any idle or zombie processes",
+      "Most Similar TLDR Script": "top -i",
+      "Top-3 Similar Questions": [
+        "au_180336: How to find the Process ID (PID) of a running terminal program?"
+      ],
+      "Top-3 Scripts": [
+        "au_180336: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "pidof",
+      "MP Summary": "find the process ID of a running program.",
+      "Most Similar TLDR Task": "List a single process ID with given name",
+      "Most Similar TLDR Script": "pidof -s {{bash}}",
+      "Top-3 Similar Questions": [
+        "au_7203: What's the terminal command for finding out a process's id"
+      ],
+      "Top-3 Scripts": [
+        "au_7203: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "pstree",
+      "MP Summary": "display a tree of processes",
+      "Most Similar TLDR Task": "Display all process trees rooted at processes owned by specified user",
+      "Most Similar TLDR Script": "pstree {{user}}",
+      "Top-3 Similar Questions": [
+        "su_137462: How do you find the parent process of a zombie process?",
+        "so_34499251: How to find out where the process comes from in Linux?"
+      ],
+      "Top-3 Scripts": [
+        "su_137462: $ pstree -p dharris\nscreen(17796)\u2500\u252c\u2500bash(4467)\u2500\u2500\u2500emacs(4498)\u2500\u2500\u2500sh(3344)\u2500\u2500\u2500sh(3345)\n              \u251c\u2500bash(4532)\u2500\u2500\u2500su(31037)\u2500\u2500\u2500bash(31041)\n              \u251c\u2500bash(4916)\u2500\u2500\u2500pstree(26456)\n              \u251c\u2500bash(13547)\u2500\u2500\u2500su(20442)\u2500\u2500\u2500bash(20443)\n              \u2514\u2500bash(17797)\n\nsshd(25813)\u2500\u2500\u2500bash(25817)\u2500\u2500\u2500screen(25870)",
+        "so_34499251: $ pstree\n\n$ pstree | grep <proc_name> -B 10"
+      ],
+      "Explanations about Options": {
+        "-p": "Show PIDs. PIDs are shown as decimal numbers in parentheses after each process\n name. -p implicitly disables compaction."
+      }
+    }
+  ]
+}

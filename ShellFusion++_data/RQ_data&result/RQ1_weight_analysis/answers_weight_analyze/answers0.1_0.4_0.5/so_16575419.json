@@ -1,0 +1,93 @@
+{
+  "Query": "PowerShell   retrieve JSON object by field value",
+  "Answers": [
+    {
+      "Command": "jq",
+      "MP Summary": "Command-line JSON processor",
+      "Most Similar TLDR Task": "Output all elements from arrays (or all the values from objects) in a JSON file",
+      "Most Similar TLDR Script": "jq '.[]' {{file.json}}",
+      "Top-3 Similar Questions": [
+        "so_64149031: Looping through a json file and retrieving the values into bash variables",
+        "so_67404726: Retrieving required set-off json objects using through \"Jq\" method",
+        "so_62467225: Find value in JSON string"
+      ],
+      "Top-3 Scripts": [
+        "so_64149031: $ ID=$(cat data.json | jq .Item.ID.S -r)\n$ no=$(cat data.json | jq .Item.no.N -r)\n$ echo $ID $no\n4869949 2",
+        "so_67404726: cat input | jq --slurp -c .[] | head -5 | jq . > FirstTopObject.json\ncat input | jq --slurp -c .[] | sed '6,10!d' | jq . > SecondTopObject.json\ncat input | jq --slurp -c .[] | tail -5 | jq . > ThirdTopObject.json",
+        "so_62467225: $ jq '.[].ItemsQueued' file\n0\n0"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "echo",
+      "MP Summary": "display a line of text",
+      "Most Similar TLDR Task": "Print a message with environment variables",
+      "Most Similar TLDR Script": "echo \"{{My path is $PATH}}\"",
+      "Top-3 Similar Questions": [
+        "so_64149031: Looping through a json file and retrieving the values into bash variables",
+        "so_32172066: retrieve multiple values from json array using bash",
+        "so_56242621: Finding highest value in a specific JSON field in bash"
+      ],
+      "Top-3 Scripts": [
+        "so_64149031: $ ID=$(cat data.json | jq .Item.ID.S -r)\n$ no=$(cat data.json | jq .Item.no.N -r)\n$ echo $ID $no\n4869949 2",
+        "so_32172066: ",
+        "so_56242621: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "awk",
+      "MP Summary": "pattern scanning and processing language",
+      "Most Similar TLDR Task": "Print the last column of each line in a file, using a comma (instead of space) as a field separator",
+      "Most Similar TLDR Script": "awk -F ',' '{print $NF}' {{filename}}",
+      "Top-3 Similar Questions": [
+        "so_48205247: JQ - parsing field by hierarchy",
+        "ul_582248: Retrieve first two fields from the first column"
+      ],
+      "Top-3 Scripts": [
+        "so_48205247: | awk '{n+=$1}END{print n}'",
+        "ul_582248: awk -F':[^a-z]+' '{print $1, $2}' file1"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "sed",
+      "MP Summary": "stream editor for filtering and transforming text",
+      "Most Similar TLDR Task": "Replace only on lines matching the line pattern",
+      "Most Similar TLDR Script": "sed '/{{line_pattern}}/s/{{find}}/{{replace}}/' {{filename}}",
+      "Top-3 Similar Questions": [
+        "so_67836241: Retrieve JSON Object Key Values using SED command",
+        "so_67404726: Retrieving required set-off json objects using through \"Jq\" method",
+        "so_55678289: How to retrieve the metadata associated with the highest numbered JSON timestamp?"
+      ],
+      "Top-3 Scripts": [
+        "so_67836241: sed -n 's/^[[:space:]]*\"name\": \"\\(.*\\)\",/\\1/p' output.txt\n# With GNU sed:\nsed -n 's/^\\s*\"name\":\\s*\"\\(.*\\)\",/\\1/p' output.txt\n\nsed -z 's/.*\"fields\":\\s*{\\s*\"status\": {.*\\s*name\": \"\\([^\"]*\\)\".*/\\1/' output.txt",
+        "so_67404726: cat input | jq --slurp -c .[] | head -5 | jq . > FirstTopObject.json\ncat input | jq --slurp -c .[] | sed '6,10!d' | jq . > SecondTopObject.json\ncat input | jq --slurp -c .[] | tail -5 | jq . > ThirdTopObject.json",
+        "so_55678289: curl -v --silent http://player.listenlive.co/41851/en/songhistory |\nsed -nr 's/^.*\\s*var songs\\s*=\\s*(\\[[^]]+\\]).*$/\\1/p' |\njq -r '.[length-1]'"
+      ],
+      "Explanations about Options": {
+        "-r": "use extended regular expressions in the script (for portability use POSIX -E)."
+      }
+    },
+    {
+      "Command": "sort",
+      "MP Summary": "sort lines of text files",
+      "Most Similar TLDR Task": "Sort a file preserving only unique lines",
+      "Most Similar TLDR Script": "sort -u {{path/to/file}}",
+      "Top-3 Similar Questions": [
+        "so_32499924: Retrieve latest value of each month"
+      ],
+      "Top-3 Scripts": [
+        "so_32499924: gc $filePath |\n sort { [datetime]$_ } -Descending |\n  group {([datetime]$_).Month } |\n   % {$_.Group | select -first 1}\n\n| sort { [datetime]$_ }\n\n$array3 = gc $filePath |\n ? { $tmp = [datetime]$_; $tmp.Month -ne \"8\" -and $tmp.Month -ne \"9\" } |\n sort { [datetime]$_ } -Descending|\n  group {([datetime]$_).Month } |\n   % {$_.Group | select -first 1}\n   sort { [datetime]$_ } -Descending"
+      ],
+      "Explanations about Options": {
+        "-g": "compare according to general numerical value",
+        "-d": "consider only blanks and alphanumeric characters",
+        "-c": "check for sorted input; do not sort",
+        "-i": "consider only printable characters",
+        "-s": "stabilize sort by disabling last-resort comparison",
+        "-n": "compare according to string numerical value"
+      }
+    }
+  ]
+}

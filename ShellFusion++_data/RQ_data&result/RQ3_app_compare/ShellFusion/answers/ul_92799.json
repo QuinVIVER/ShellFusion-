@@ -1,0 +1,97 @@
+{
+    "Answers": [
+        {
+            "Command": "iwconfig",
+            "Explanations about Options": {},
+            "MP Summary": "configure a wireless network interface",
+            "Most Similar TLDR Script": "iwconfig {{interface}} {{new_network_name}}",
+            "Most Similar TLDR Task": "Set the ESSID (network name) of the specified interface (e.g., eth0 or wlp2s0)",
+            "Top-3 Scripts": [
+                "au_358521: #!/bin/sh\n/sbin/iwconfig wlan0 power off",
+                "au_703514: sudo ifconfig wlan0 down\nsudo iwconfig wlan0 mode monitor\nsudo ifconfig wlan0 up",
+                "au_9938: sudo iwconfig <interface> essid \"my network\""
+            ],
+            "Top-3 Similar Questions": [
+                "au_358521: Why can't I connect to wireless?",
+                "au_703514: Wireless down and can't connect",
+                "au_9938: configuring wireless on command line interface"
+            ]
+        },
+        {
+            "Command": "wpa_cli",
+            "Explanations about Options": {
+                "-i(M)": "Specify the interface that is being configured. By default, choose the first\n interface found with a control socket in the socket path."
+            },
+            "MP Summary": "WPA command line client",
+            "Most Similar TLDR Script": "wpa_cli add_network {{number}}",
+            "Most Similar TLDR Task": "Add a network",
+            "Top-3 Scripts": [
+                "au_1222738: sudo wpa_cli -i wlan0 list_networks",
+                "ul_250562: sudo ifconfig wlan0 down && sudo ifconfig wlan0 up && sudo wpa_cli -i wlan0 status"
+            ],
+            "Top-3 Similar Questions": [
+                "au_1222738: What Wi-Fi network am I connected to?",
+                "ul_250562: Auto Connect to any Open WiFi network via CLI Command Line",
+                "au_668493: Block connections to open WiFi networks"
+            ]
+        },
+        {
+            "Command": "iw",
+            "Explanations about Options": {},
+            "MP Summary": "show / manipulate wireless devices and their configuration",
+            "Most Similar TLDR Script": "iw dev {{wlp}} connect {{SSID}}",
+            "Most Similar TLDR Task": "Join an open wireless network",
+            "Top-3 Scripts": [
+                "au_698824: sudo iw reg set EG\nsudo sed -i 's/^REG.*=$/&EG/' /etc/default/crda"
+            ],
+            "Top-3 Similar Questions": [
+                "au_138472: How do I connect to a WPA wifi network using the command line?",
+                "ul_283722: How to connect to wifi from command line?",
+                "au_698824: Wifi connected no internet"
+            ]
+        },
+        {
+            "Command": "wpa_supplicant",
+            "Explanations about Options": {
+                "-B(M)": "Run daemon in the background.",
+                "-D(C)": "To manually connect via config for debugging use this: .  -d = debug/verbose -dd == super verbose .  -D = driver.",
+                "-D(M)": "Driver to use (can be multiple drivers: nl80211,wext). (Per interface, see the\n available options below.)",
+                "-c(M)": "Path to configuration file. (Per interface)",
+                "-d(M)": "Increase debugging verbosity (-dd even more).",
+                "-h(M)": "Help. Show a usage message.",
+                "-i(M)": "Interface to listen on. Multiple instances of this option can be present, one per\n interface, separated by -N option (see below)."
+            },
+            "MP Summary": "Wi-Fi Protected Access client and IEEE 802.1X supplicant",
+            "Most Similar TLDR Script": "wpa_supplicant -i {{interface}} -c {{path/to/wpa_supplicant_conf.conf}}",
+            "Most Similar TLDR Task": "Join a protected wireless network",
+            "Top-3 Scripts": [
+                "au_138472: sudo wpa_supplicant -B -i wlan0 -c /etc/wpa_supplicant.conf -D wext\nsudo dhclient wlan0\n\nwpa_supplicant -h",
+                "ul_250562: ##Wireless NIC\nallow-hotplug wlan0\niface wlan0 inet manual\nwpa-roam /etc/wpa_supplicant/wpa_supplicant.conf\niface open_wifi inet dhcp\n\nctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev\nupdate_config=1\n\n##Open_Wifi\nnetwork={\n    ssid=\"\"\n    key_mgmt=NONE\n    id_str=\"open_wifi\"\n}\n\nwpa_supplicant -d -i wlan0 -c /etc/wpa_supplicant/wpa_supplicant.conf -D wext",
+                "ul_283722: sudo ip link set wlan0 down\nsudo ip link set wlan0 up\nsudo wpa_supplicant -B -iwlan0 -c /etc/wpa_supplicant.conf -Dnl80211,wext\nsudo dhclient wlan0\n\nwpa_supplicant -B -i wlan0 -c <(wpa_passphrase \"Your_SSID\" Your_passphrase) && dhclient wlan0"
+            ],
+            "Top-3 Similar Questions": [
+                "au_1222738: What Wi-Fi network am I connected to?",
+                "au_138472: How do I connect to a WPA wifi network using the command line?",
+                "ul_250562: Auto Connect to any Open WiFi network via CLI Command Line"
+            ]
+        },
+        {
+            "Command": "ifconfig",
+            "Explanations about Options": {},
+            "MP Summary": "configure network interfaces",
+            "Most Similar TLDR Script": "ifconfig eth0",
+            "Most Similar TLDR Task": "View network settings of an ethernet adapter",
+            "Top-3 Scripts": [
+                "au_703514: sudo ifconfig wlan0 down\nsudo iwconfig wlan0 mode monitor\nsudo ifconfig wlan0 up",
+                "ul_250562: sudo ifconfig wlan0 down && sudo ifconfig wlan0 up && sudo wpa_cli -i wlan0 status",
+                "au_276822: ifconfig -a\n\nsudo ifconfig wlan0 down\n\nsudo ifconfig wlan0 up"
+            ],
+            "Top-3 Similar Questions": [
+                "au_703514: Wireless down and can't connect",
+                "ul_250562: Auto Connect to any Open WiFi network via CLI Command Line",
+                "au_276822: How to disconnect from wireless connection manually using the command line without using network manager?"
+            ]
+        }
+    ],
+    "Query": "Connecting to wifi network through command line"
+}

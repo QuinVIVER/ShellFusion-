@@ -1,0 +1,87 @@
+{
+  "Query": "How do I set read/write permissions my hard drives?",
+  "Answers": [
+    {
+      "Command": "tee",
+      "MP Summary": "read from standard input and write to standard output and files",
+      "Most Similar TLDR Task": "Create a directory called \"example\", count the number of characters in \"example\" and write \"example\" to the terminal",
+      "Most Similar TLDR Script": "echo \"example\" | tee >(xargs mkdir) >(wc -c)",
+      "Top-3 Similar Questions": [
+        "ul_68897: How to set permissions in /sys/ permanent?"
+      ],
+      "Top-3 Scripts": [
+        "ul_68897: ALL ALL = (ALL) NOPASSWD: /usr/bin/tee /sys/class/leds/asus\\:\\:kbd_backlight/brightness\n\necho 1 | sudo /usr/bin/tee \"/sys/class/leds/asus::kbd_backlight/brightness\""
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "setfacl",
+      "MP Summary": "set file access control lists",
+      "Most Similar TLDR Task": "Modify ACL of a file for user with read and write access",
+      "Most Similar TLDR Script": "setfacl -m u:{{username}}:rw {{file}}",
+      "Top-3 Similar Questions": [
+        "au_340543: Set up permissions for a secondary user",
+        "ul_486795: Setting up special permission for a directory",
+        "ul_128905: setting default permissions with setfacl"
+      ],
+      "Top-3 Scripts": [
+        "au_340543: sudo setfacl -R -m u:username:rwx /root/test\n\nman setfacl",
+        "ul_486795: setfacl(1)",
+        "ul_128905: setfacl -d -m group:mygroup:X"
+      ],
+      "Explanations about Options": {
+        "-d": "All operations apply to the Default ACL. Regular ACL entries in the input set are\n promoted to Default ACL entries. Default ACL entries in the input set are discarded.\n (A warning is issued if that happens)."
+      }
+    },
+    {
+      "Command": "mount",
+      "MP Summary": "mount a filesystem",
+      "Most Similar TLDR Task": "Mount a directory to another directory",
+      "Most Similar TLDR Script": "mount --bind {{path/to/old_dir}} {{path/to/new_dir}}",
+      "Top-3 Similar Questions": [
+        "au_1057646: Setting NTFS partition permissions for external hard drive",
+        "so_31628909: Set up writing access to external drive",
+        "su_752380: How to control permissions on external USB hard disk"
+      ],
+      "Top-3 Scripts": [
+        "au_1057646: sudo mount -a",
+        "so_31628909: mount -o rw,remount /dev/sdc",
+        "su_752380: $ mount -o uid=1000,gid=1000,dmask=027,fmask=137 /dev/sdXY /mnt"
+      ],
+      "Explanations about Options": {
+        "-a": "Mount all filesystems (of the given types) mentioned in fstab (except for those\n whose line contains the noauto keyword). The filesystems are mounted following\n their order in fstab. The mount command compares filesystem source, target (and fs\n root for bind mount or btrfs) to detect already mounted filesystems. The kernel\n table with already mounted filesystems is cached during mount --all. It means that\n all duplicated fstab entries will be mounted.",
+        "-o": "Use the specified mount options. The opts argument is a comma-separated list. For\n example:"
+      }
+    },
+    {
+      "Command": "umask",
+      "MP Summary": "get or set the file mode creation mask",
+      "Most Similar TLDR Task": "Set the mask (using octal) to restrict no permissions for the file's owner, and restrict all permissions for everyone else",
+      "Most Similar TLDR Script": "umask {{077}}",
+      "Top-3 Similar Questions": [
+        "su_752380: How to control permissions on external USB hard disk",
+        "au_654477: How to control the permissions of a mounted usb drive?",
+        "ul_486795: Setting up special permission for a directory"
+      ],
+      "Top-3 Scripts": [
+        "su_752380: ",
+        "au_654477: umask=022",
+        "ul_486795: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "hdparm",
+      "MP Summary": "get/set SATA/IDE device parameters",
+      "Most Similar TLDR Task": "Force a drive to immediately enter standby mode (usually causes a drive to spin down)",
+      "Most Similar TLDR Script": "sudo hdparm -y /dev/{{device}}",
+      "Top-3 Similar Questions": [
+        "ul_522440: Is it possible to (7 day) schedule sleep time of a hard drive?"
+      ],
+      "Top-3 Scripts": [
+        "ul_522440: # At 11pm every day, enable sleep after 30s\n0 23 * * * /sbin/hdparm -S6 /dev/disk/by-id/...\n\n# At 5pm on weekdays, disable sleeping\n0 17 * * 1-5 /sbin/hdparm -S0 /dev/disk/by-id/...\n\n# At 3pm on the weekend, disable sleeping\n0 15 * * 0,6 /sbin/hdparm -S0 /dev/disk/by-id/..."
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

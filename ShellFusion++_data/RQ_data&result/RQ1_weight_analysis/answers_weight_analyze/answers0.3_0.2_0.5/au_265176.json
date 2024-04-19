@@ -1,0 +1,86 @@
+{
+  "Query": "How to convert a video from mp4/flv to mpeg/mpg",
+  "Answers": [
+    {
+      "Command": "ffmpeg",
+      "MP Summary": "ffmpeg video converter",
+      "Most Similar TLDR Task": "Convert AVI video to MP4. AAC Audio @ 128kbit, h264 Video @ CRF 23",
+      "Most Similar TLDR Script": "ffmpeg -i {{input_video}}.avi -codec:audio aac -b:audio 128k -codec:video libx264 -crf 23 {{output_video}}.mp4",
+      "Top-3 Similar Questions": [
+        "au_1250991: How to easily convert an MKV video to an MP4",
+        "au_1183076: convert all the png files in a folder to video",
+        "su_352850: \"theora_encode_init failed\"  when converting\u00a0FLV to\u00a0OGG Theora video using FFmpeg"
+      ],
+      "Top-3 Scripts": [
+        "au_1250991: sudo apt install ffmpeg\n\nffmpeg -i <inputfile> <outputfile>\n\nffmpeg -i input.mkv output.mp4",
+        "au_1183076: ffmpeg -framerate 25 -i %03d.png output.avi\n\nffmpeg -framerate 25 -pattern_type glob -i \"*.png\" output.avi\n\ncat $(find . -maxdepth 1 -name \"*.png\" | sort -V) | ffmpeg -framerate 25 -i - output.avi",
+        "su_352850: ffmpeg -i input.flv -vcodec theora -acodec vorbis output.ogv"
+      ],
+      "Explanations about Options": {
+        "-": "Use a completely zeroed out quantization matrix. This increases PSNR but\n might reduce perception. Use in bogus benchmarks.",
+        "-acodec": "Set the audio codec. This is an alias for \"-codec:a\".",
+        "-framerate": "Set the grabbing frame rate. Default is \"ntsc\", corresponding to a frame rate of\n \"30000/1001\".",
+        "-i": "input file url",
+        "-vcodec": "Set the video codec. This is an alias for \"-codec:v\"."
+      }
+    },
+    {
+      "Command": "convert",
+      "MP Summary": "convert between image formats as well as resize an image, blur, crop, despeckle, dither, draw on, flip, join, re-sample, and much more.",
+      "Most Similar TLDR Task": "Convert an image from JPG to PNG",
+      "Most Similar TLDR Script": "convert {{image.jpg}} {{image.png}}",
+      "Top-3 Similar Questions": [
+        "au_293444: How can I quickly convert a GIF file to a video?",
+        "au_380199: Converting images into video"
+      ],
+      "Top-3 Scripts": [
+        "au_293444: ",
+        "au_380199: convert temp/*.JPG -delay 10 -morph 10 temp/%05d.jpg\nffmpeg -r 25 -qscale 2  -i temp/%05d.jpg output.mp4"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "ffprobe",
+      "MP Summary": "ffprobe media prober",
+      "Most Similar TLDR Task": "Display the frame rate of a video",
+      "Most Similar TLDR Script": "ffprobe -v error -select_streams v:0 -show_entries stream=avg_frame_rate -of default=noprint_wrappers=1:nokey=1 {{input.mp4}}",
+      "Top-3 Similar Questions": [
+        "au_1214782: Ffmpeg: can TS video be converted directly to MP4 video without re-coding?",
+        "so_59256447: Converting mkv to mp4 with ffmpeg sometimes loses video"
+      ],
+      "Top-3 Scripts": [
+        "au_1214782: ",
+        "so_59256447: $ ffprobe -loglevel error -select_streams a:0 -show_entries stream=codec_name -of default=nw=1 input.mp4\ncodec_name=aac"
+      ],
+      "Explanations about Options": {
+        "-loglevel": "Set logging level and flags used by the library."
+      }
+    },
+    {
+      "Command": "vlc",
+      "MP Summary": "the VLC media player",
+      "Most Similar TLDR Task": "Play video from a URL",
+      "Most Similar TLDR Script": "vlc {{https://www.youtube.com/watch?v=oHg5SJYRHA0}}",
+      "Top-3 Similar Questions": [
+        "ul_278365: FFMpeg : Converting a video file to a gif with multiple images from video"
+      ],
+      "Top-3 Scripts": [
+        "ul_278365: apt-get install vlc"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "mogrify",
+      "MP Summary": "resize an image, blur, crop, despeckle, dither, draw on, flip, join, re-sample, and much more. Mogrify overwrites the original image file, whereas, convert-im6.q16hdri(1) writes to a different image file.",
+      "Most Similar TLDR Task": "Convert all PNG images in the directory to JPEG",
+      "Most Similar TLDR Script": "mogrify -format {{jpg}} {{*.png}}",
+      "Top-3 Similar Questions": [
+        "au_380199: Converting images into video"
+      ],
+      "Top-3 Scripts": [
+        "au_380199: mogrify -resize 800x800  temp/*.JPG"
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

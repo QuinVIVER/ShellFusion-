@@ -1,0 +1,98 @@
+{
+    "Answers": [
+        {
+            "Command": "find",
+            "Explanations about Options": {
+                "-n(M)": "for less than n ,",
+                "-name(M)": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+                "-print(M)": "Quoting is handled in the same way as for -printf and -fprintf. If you are using\n find in a script or in a situation where the matched files might have arbitrary\n names, you should consider using -print0 instead of -print.",
+                "-printf(M)": "True; print format on the standard output, interpreting `\\' escapes and `%'\n directives. Field widths and precisions can be specified as with the `printf' C\n function. Please note that many of the fields are printed as %s rather than %d,\n and this may mean that flags don't work as you might expect. This also means that\n the `-' flag does work (it forces fields to be left-aligned). Unlike -print,\n -printf does not add a newline at the end of the string. The escapes and\n directives are:",
+                "-type(M)": "File is of type c:"
+            },
+            "MP Summary": "search for files in a directory hierarchy",
+            "Most Similar TLDR Script": "find {{root_path}} -name '{{*.ext}}'",
+            "Most Similar TLDR Task": "Find files by extension",
+            "Top-3 Scripts": [
+                "so_22165228: find . -name '*.gz' -print | xargs gzip -l | awk '{ print $2, $4 ;}'  | grep -v '(totals)$' | sort -n | tail -1",
+                "su_821959: find -type f -printf '%h\\n'|uniq -c|sort -rn|head -1",
+                "so_31232491: find /some/dir -type d -exec du -hS {} + | sort -rh"
+            ],
+            "Top-3 Similar Questions": [
+                "so_36694139: finding largest file for each directory",
+                "so_22165228: Finding largest file size recursively from a directory",
+                "su_821959: How to find largest folder?"
+            ]
+        },
+        {
+            "Command": "mkdir",
+            "Explanations about Options": {
+                "-p(M)": "no error if existing, make parent directories as needed"
+            },
+            "MP Summary": "make directories",
+            "Most Similar TLDR Script": "mkdir -p {{path/to/directory}}",
+            "Most Similar TLDR Task": "Create directories recursively (useful for creating nested dirs)",
+            "Top-3 Scripts": [
+                "so_18649302: #!/bin/bash\nfind Dir1 -mindepth 1 -type f -name '*.RAW' | while read -r FILE; do\n    DIRNAME=${FILE%/*}\n    mkdir -p \"$DIRNAME/RAW\" && mv \"$FILE\" \"$DIRNAME/RAW/\"\ndone",
+                "so_17290844: for dir in $(ls); do\n  mkdir \"$dir/new-dir\"\ndone"
+            ],
+            "Top-3 Similar Questions": [
+                "so_18649302: Bash finding files in subdirectories and move them into a new folder",
+                "so_17290844: Create a subdirectory for all directories in folder"
+            ]
+        },
+        {
+            "Command": "ls",
+            "Explanations about Options": {
+                "-F(M)": "append indicator (one of */=>@|) to entries",
+                "-a(M)": "do not ignore entries starting with .",
+                "-l(M)": "use a long listing format",
+                "-r(M)": "reverse order while sorting",
+                "-t(M)": "sort by modification time , newest first",
+                "-v(M)": "natural sort of (version) numbers within text"
+            },
+            "MP Summary": "list directory contents",
+            "Most Similar TLDR Script": "ls -F",
+            "Most Similar TLDR Task": "List all files, with trailing `/` added to directory names",
+            "Top-3 Scripts": [
+                "so_47248500: ls -lav | tail -5",
+                "so_65306535: ls path/",
+                "ul_467283: find . -newer /tmp/point.start ! -newer /tmp/point.end  ! -path . | xargs ls -ltr | sort -nk5 | tail -20"
+            ],
+            "Top-3 Similar Questions": [
+                "so_22165228: Finding largest file size recursively from a directory",
+                "so_47248500: Find Filename with the Largest Number",
+                "so_65306535: Identifying folder with name as largest number in the directory"
+            ]
+        },
+        {
+            "Command": "cd",
+            "Explanations about Options": {},
+            "MP Summary": "change the working directory",
+            "Most Similar TLDR Script": "cd {{path/to/directory}}",
+            "Most Similar TLDR Task": "Go to the given directory",
+            "Top-3 Scripts": [
+                "so_8296585: find <directory_name> -type d -exec sh -c \"cd {} && [ -d live ] && [ -d test ] && cd ../ && echo \\\"Deleting {}\\\" && rm -rvi {} \" {} \\;"
+            ],
+            "Top-3 Similar Questions": [
+                "so_8296585: Find subdirectories with find command"
+            ]
+        },
+        {
+            "Command": "tree",
+            "Explanations about Options": {
+                "-L(M)": "Max display depth of the directory tree.",
+                "-d(M)": "List directories only."
+            },
+            "MP Summary": "list contents of directories in a tree-like format.",
+            "Most Similar TLDR Script": "tree -d",
+            "Most Similar TLDR Task": "Print directories only",
+            "Top-3 Scripts": [
+                "ul_120726: % tree -L 2\n.\n├── top-1\n└── top-2\n    ├── sub-1\n    ├── sub-2\n    └── sub-3\n\n% tree -L 2\n.\n├── top-1\n│   ├── sub-1 -> /tmp/sf-582772/top-2/sub-1\n│   ├── sub-2 -> /tmp/sf-582772/top-2/sub-2\n│   └── sub-3 -> /tmp/sf-582772/top-2/sub-3\n└── top-2\n    ├── sub-1\n    ├── sub-2\n    └── sub-3\n\n% tree -L 2\n.\n├── top-1\n│   ├── sub-1 -> ../top-2/sub-1\n│   ├── sub-2 -> ../top-2/sub-2\n│   └── sub-3 -> ../top-2/sub-3\n└── top-2\n    ├── sub-1\n    ├── sub-2\n    └── sub-3"
+            ],
+            "Top-3 Similar Questions": [
+                "ul_120726: Symlink all subdirectories in a directory to another directory"
+            ]
+        }
+    ],
+    "Query": "Bash How to find the largest file in a directory and its subdirectories?"
+}

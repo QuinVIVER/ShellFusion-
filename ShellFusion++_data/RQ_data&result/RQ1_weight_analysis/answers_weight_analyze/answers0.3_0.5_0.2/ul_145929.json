@@ -1,0 +1,82 @@
+{
+  "Query": "How to ensure SSH port is only open to a specific IP address?",
+  "Answers": [
+    {
+      "Command": "ssh",
+      "MP Summary": "OpenSSH SSH client (remote login program)",
+      "Most Similar TLDR Task": "Connect to a remote server using a specific port",
+      "Most Similar TLDR Script": "ssh {{username}}@{{remote_host}} -p {{2222}}",
+      "Top-3 Similar Questions": [
+        "au_1112237: Ensure SSH-2.0 working rather than SSH-1.5",
+        "au_403936: ssh: connect to host localhost port 22: Connection refused",
+        "so_6320794: How to allow only tunneled connections to port?"
+      ],
+      "Top-3 Scripts": [
+        "au_1112237: /etc/ssh/sshd_config\n\n$ ssh -Q protocol-version localhost\n2",
+        "au_403936: sudo iptables -A INPUT -p tcp --dport ssh -j ACCEPT",
+        "so_6320794: ssh -N -i <key> -L 127.0.0.1:9418:127.0.0.1:9418 tunnel@192.168.1.69"
+      ],
+      "Explanations about Options": {
+        "-N": "Do not execute a remote command. This is useful for just forwarding ports.",
+        "-Q": "Queries ssh for the algorithms supported for the specified version 2. The available\n features are: cipher (supported symmetric ciphers), cipher-auth (supported symmetric\n ciphers that support authenticated encryption), mac (supported message integrity\n codes), kex (key exchange algorithms), key (key types), key-cert (certificate key\n types), key-plain (non-certificate key types), and protocol-version (supported SSH\n protocol versions)."
+      }
+    },
+    {
+      "Command": "netstat",
+      "MP Summary": "Print  network  connections,  routing tables, interface statistics, masquerade connections, and multicast memberships",
+      "Most Similar TLDR Task": "List routes and do not resolve IP to hostname",
+      "Most Similar TLDR Script": "netstat -rn",
+      "Top-3 Similar Questions": [
+        "au_1153719: How to check and ensure SSH is accepting connections?",
+        "ul_89167: IP address on Linux keeps forwarding to a different one"
+      ],
+      "Top-3 Scripts": [
+        "au_1153719: ",
+        "ul_89167: $ netstat -rn\n\n$ netstat -rn\nKernel IP routing table\nDestination     Gateway         Genmask         Flags   MSS Window  irtt Iface\n192.168.1.0     0.0.0.0         255.255.255.0   U         0 0          0 wlan0\n0.0.0.0         192.168.1.254   0.0.0.0         UG        0 0          0 wlan0"
+      ],
+      "Explanations about Options": {
+        "-r": "Display the kernel routing tables. See the description in route(8) for details. netstat\n -r and route -e produce the same output.",
+        "-n": "Show numerical addresses instead of trying to determine symbolic host, port or user names."
+      }
+    },
+    {
+      "Command": "named",
+      "MP Summary": "Internet domain name server",
+      "Most Similar TLDR Task": "Listen for queries on a specific port instead of the default port `53`",
+      "Most Similar TLDR Script": "named -p {{port}}",
+      "Top-3 Similar Questions": [
+        "au_1153719: How to check and ensure SSH is accepting connections?"
+      ],
+      "Top-3 Scripts": [
+        "au_1153719: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "ifconfig",
+      "MP Summary": "configure network interfaces",
+      "Most Similar TLDR Task": "Assign IP address to eth0 interface",
+      "Most Similar TLDR Script": "ifconfig eth0 {{ip_address}}",
+      "Top-3 Similar Questions": [
+        "ul_270800: How can I grant permission to a user to change the IP address?"
+      ],
+      "Top-3 Scripts": [
+        "ul_270800: # ifconfig   <interface>   <ipaddress>   netmask  <netmask>\n\n  sudo /sbin/ifconfig  192.168.0.1 netmask 255.255.255.0\n\n# for changing gateway if desired\n\n  sudo /sbin/route add default gw 192.168.0.253 eth0\n\nsudo /sbin/ifconfig\n\n%ipchangers ALL = NOPASSWD: /sbin/ifconfig\n%ipchangers ALL = NOPASSWD: /sbin/route       {if desired}\n\njohn   ALL=NOPASSWD:  /sbin/ifconfig\njack   ALL=NOPASSWD:  /sbin/ifconfig"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "traceroute",
+      "MP Summary": "print the route packets trace to network host",
+      "Most Similar TLDR Task": "Disable IP address and host name mapping",
+      "Most Similar TLDR Script": "traceroute -n {{host}}",
+      "Top-3 Similar Questions": [
+        "ul_89167: IP address on Linux keeps forwarding to a different one"
+      ],
+      "Top-3 Scripts": [
+        "ul_89167: $ traceroute 192.168.1.254\ntraceroute to 192.168.1.254 (192.168.1.254), 30 hops max, 60 byte packets\n 1  router1.bubba.net (192.168.1.254)  1.399 ms  1.586 ms  1.904 ms"
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

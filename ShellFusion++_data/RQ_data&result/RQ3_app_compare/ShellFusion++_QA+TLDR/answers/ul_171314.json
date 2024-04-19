@@ -1,0 +1,93 @@
+{
+  "Query": "How to grep for same string but multiple files at the same time?",
+  "Answers": [
+    {
+      "Command": "sed",
+      "MP Summary": "stream editor for filtering and transforming text",
+      "Most Similar TLDR Task": "Replace all occurrences of a string in a file, overwriting the file (i.e. in-place)",
+      "Most Similar TLDR Script": "sed -i 's/{{find}}/{{replace}}/g' {{filename}}",
+      "Top-3 Similar Questions": [
+        "ul_168813: How do I grep for multiple patterns on multiple lines?",
+        "so_69731339: How to grep for multiple strings in the same line inside a file with similar pattern?",
+        "so_44456396: grep for multiple patterns with end of line as a string"
+      ],
+      "Top-3 Scripts": [
+        "ul_168813: sed '/^begin$/,/^end$/!d'",
+        "so_69731339: sed -r '/^\\s*#/d' my.txt | grep \"$f_name\" | grep \"$p_name\"",
+        "so_44456396: cat input_file.txt | tr '\\n' ':' | sed 's/---:/---;/' | tr ';' '\\n'"
+      ],
+      "Explanations about Options": {
+        "-r": "use extended regular expressions in the script (for portability use POSIX -E)."
+      }
+    },
+    {
+      "Command": "xargs",
+      "MP Summary": "build and execute command lines from standard input",
+      "Most Similar TLDR Task": "Parallel runs of up to `max-procs` processes at a time; the default is 1. If `max-procs` is 0, xargs will run as many processes as possible at a time",
+      "Most Similar TLDR Script": "{{arguments_source}} | xargs -P {{max-procs}} {{command}}",
+      "Top-3 Similar Questions": [
+        "so_31842610: grep for multiple filenames in a directory",
+        "so_36443934: grep Command for Files with \"String1\" AND NOT \"String2\""
+      ],
+      "Top-3 Scripts": [
+        "so_31842610: xargs -I % grep -ilR '%' /app/ --include={*.html,*.css,*.js} < images.txt",
+        "so_36443934: $ grep -L \"String2\" * | xargs grep -nH \"String1\""
+      ],
+      "Explanations about Options": {
+        "-I": "Replace occurrences of replace-str in the initial-arguments with names read from\n standard input. Also, unquoted blanks do not terminate input items; instead the\n separator is the newline character. Implies -x and -L 1."
+      }
+    },
+    {
+      "Command": "find",
+      "MP Summary": "search for files in a directory hierarchy",
+      "Most Similar TLDR Task": "Find files by matching multiple patterns",
+      "Most Similar TLDR Script": "find {{root_path}} -name '{{*pattern_1*}}' -or -name '{{*pattern_2*}}'",
+      "Top-3 Similar Questions": [
+        "au_1026259: How to grep for two patterns in multiple files",
+        "so_54199162: Recursive grep for gz files search string from an output string",
+        "so_39455261: How to grep for \"string\\tstring\"?"
+      ],
+      "Top-3 Scripts": [
+        "au_1026259: find . -type f -exec awk 'FNR == 1 {a=0; r=0} /AccessToken/{a=1} /Registrationrequest/{r=1} a && r {print FILENAME; nextfile}' {} +",
+        "so_54199162: find . -name \"*.gz\" -exec zgrep -H \"PATTERN1\" {} \\; | grep \"PATTERN2\"",
+        "so_39455261: find . -name \"foo*dat\" -exec grep -E 'foo\\\\tbar' {} \\;\n                                     ^   ^     ^"
+      ],
+      "Explanations about Options": {
+        "-type": "File is of type c:",
+        "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+      }
+    },
+    {
+      "Command": "tr",
+      "MP Summary": "translate or delete characters",
+      "Most Similar TLDR Task": "Replace all occurrences of a character in a file, and print the result",
+      "Most Similar TLDR Script": "tr {{find_character}} {{replace_character}} < {{filename}}",
+      "Top-3 Similar Questions": [
+        "so_44456396: grep for multiple patterns with end of line as a string",
+        "so_70072390: grep for a string from URLs of different lengths"
+      ],
+      "Top-3 Scripts": [
+        "so_44456396: cat input_file.txt | tr '\\n' ':' | sed 's/---:/---;/' | tr ';' '\\n'\n\n| tr ':' '\\n'",
+        "so_70072390: grep -oE '/[[:xdigit:]_-]{15,}/' foo.txt  | tr -d /"
+      ],
+      "Explanations about Options": {
+        "-d": "delete characters in SET1, do not translate"
+      }
+    },
+    {
+      "Command": "zgrep",
+      "MP Summary": "search compressed files for a regular expression",
+      "Most Similar TLDR Task": "Grep a compressed file for multiple patterns",
+      "Most Similar TLDR Script": "zgrep -e \"{{pattern_1}}\" -e \"{{pattern_2}}\" {{path/to/compressed/file}}",
+      "Top-3 Similar Questions": [
+        "so_54199162: Recursive grep for gz files search string from an output string"
+      ],
+      "Top-3 Scripts": [
+        "so_54199162: find . -name \"*.gz\" -exec zgrep -H \"PATTERN1\" {} \\; | grep \"PATTERN2\""
+      ],
+      "Explanations about Options": {
+        "-H": "print the filename for each match"
+      }
+    }
+  ]
+}

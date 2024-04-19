@@ -1,0 +1,70 @@
+{
+  "Query": "View pdf file in terminal",
+  "Answers": [
+    {
+      "Command": "echo",
+      "MP Summary": "display a line of text",
+      "Top-3 Similar Questions": [
+        "au_1163711: Opening a PDF File by script, printing it, and closing it",
+        "ul_138933: Concatenate in a PDF the first page of several odt files alphabetically",
+        "so_51168569: Removing last page of PDF using Python or Bash"
+      ],
+      "Top-3 Scripts": [
+        "au_1163711: find . -maxdepth 1 -type f -exec echo {} \\;",
+        "ul_138933: ",
+        "so_51168569: #!/bin/bash\n\nfor file in *.pdf\ndo\n    page_nb=$(pdfinfo $file | awk '/^Pages/ { print $2 }')\n\n    file_name=$(echo $file | cut -d'.' -f 1)\n\n    gs -sDEVICE=pdfwrite -dNOPAUSE -dQUIET -dBATCH -dFirstPage=1 -dLastPage=$(expr $page_nb - 1) -sOutputFile=$file_name\"_without_last_page.pdf\" $file\ndone"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "file",
+      "MP Summary": "determine file type",
+      "Top-3 Similar Questions": [
+        "au_624120: Is it possible to view Google Chrome bookmarks and history from the terminal",
+        "au_1163711: Opening a PDF File by script, printing it, and closing it",
+        "so_30345709: Unable to extract text and images from specific PDF"
+      ],
+      "Top-3 Scripts": [
+        "au_624120: $ file ~/.config/google-chrome-beta/Default/Bookmarks\n.config/google-chrome-beta/Default/Bookmarks: UTF-8 Unicode text\n\n$ file ~/.config/google-chrome-beta/Default/History           \n.config/google-chrome-beta/Default/History: SQLite 3.x database",
+        "au_1163711: lpr: No such file or directory",
+        "so_30345709: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "vi",
+      "MP Summary": "screen-oriented (visual) display editor",
+      "Top-3 Similar Questions": [
+        "ul_383552: Adding tags to files (PDFs) and process from the command-line or script"
+      ],
+      "Top-3 Scripts": [
+        "ul_383552: vi $(search-tagged-files --date \"last sunday\" --keywords thesis)"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "sort",
+      "MP Summary": "sort lines of text files",
+      "Top-3 Similar Questions": [
+        "so_23643274: Merge pdf files with numerical sort"
+      ],
+      "Top-3 Scripts": [
+        "so_23643274: $ pdfunite $(ls *.pdf | sort -n) output.pdf"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "unzip",
+      "MP Summary": "list, test and extract compressed files in a ZIP archive",
+      "Top-3 Similar Questions": [
+        "so_48346354: Unzip to pipe and then run PDF info on the files in the stream"
+      ],
+      "Top-3 Scripts": [
+        "so_48346354: $ unzip -l aaa.zip \nArchive:  aaa.zip\n  Length      Date    Time    Name\n---------  ---------- -----   ----\n    19318  2018-02-19 22:49   zlib 3.pdf\n   442780  2018-02-28 15:32   file2.pdf\n      757  2018-02-28 15:22   try.sh\n---------                     -------\n   462855                     3 files\n\n$ unzip -p aaa.zip file2.pdf | pdfinfo - | grep Pages\nPages:          94\n\n$ unzip -p aaa.zip \"zlib 3.pdf\" | pdfinfo - | grep Pages\nPages:          2\n\nfor zip in *.zip ; do \n    zipinfo -1 \"$zip\" | grep 'pdf$'| while read pdf\n    do\n        unzip  -p \"$zip\" \"$pdf\" | pdfinfo - | grep Pages | sed -e \"s/Pages:\\s*//g\"\n    done  \ndone | awk '{ sum += $1;} END { print sum; }'"
+      ],
+      "Explanations about Options": {
+        "-p": "extract files to pipe (stdout). Nothing but the file data is sent to stdout , and\n the files are always extracted in binary format, just as they are stored (no\n conversions)."
+      }
+    }
+  ]
+}

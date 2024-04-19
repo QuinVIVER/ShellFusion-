@@ -1,0 +1,95 @@
+{
+  "Query": "How do I zip/unzip on the unix command line?",
+  "Answers": [
+    {
+      "Command": "unzip",
+      "MP Summary": "list, test and extract compressed files in a ZIP archive",
+      "Most Similar TLDR Task": "Extract zip file(s) (for multiple files, separate file paths by spaces)",
+      "Most Similar TLDR Script": "unzip {{file(s)}}",
+      "Top-3 Similar Questions": [
+        "ul_676052: Unzip & Rename a File in One Command",
+        "ul_198492: Unzip specific files from multiple zip files",
+        "ul_586576: Unzip files into a new directory"
+      ],
+      "Top-3 Scripts": [
+        "ul_676052: $ unzip -p datasets/youtube_videos.csv.zip videos_data.csv > target/youtube_videos.csv\n\n$ unzip -p datasets/youtube_videos.csv.zip > target/youtube_videos.csv",
+        "ul_198492: find . -type f -name '*.zip' -exec unzip {}  '*CTL*' -d \"$target_dir\" \\;",
+        "ul_586576: for file in *.zip; do\n    [ -f \"$file\" ] || continue\n    unzip \"$file\" -d \"${file%%.zip}\"\ndone"
+      ],
+      "Explanations about Options": {
+        "-p": "extract files to pipe (stdout). Nothing but the file data is sent to stdout , and\n the files are always extracted in binary format, just as they are stored (no\n conversions)."
+      }
+    },
+    {
+      "Command": "zip",
+      "MP Summary": "package and compress (archive) files",
+      "Most Similar TLDR Task": "Delete files from an existing zip file",
+      "Most Similar TLDR Script": "zip -d {{compressed.zip}} \"{{foo/*.tmp}}\"",
+      "Top-3 Similar Questions": [
+        "ul_586576: Unzip files into a new directory",
+        "ul_321683: Unzip all files into directories with the same name",
+        "so_60930401: Unzip archive zip file into folder with same name as archive zip file"
+      ],
+      "Top-3 Scripts": [
+        "ul_586576: ",
+        "ul_321683: for d in *.zip\ndo\n  dir=/home/usrname/anotherdir/zip${d%%.zip}\n  unzip -d \"$dir\" \"$d\"\ndone",
+        "so_60930401: $filePath = \"s:\\Download Data Feed\\\"\n$zip = Get-ChildItem -File -Recurse -Path $filePath | Where-Object { $_.Extension -eq \".zip\" }\n\nforeach ($file in $zip) { \n    $target = Join-Path $filePath $file.BaseName\n    if (!(Test-Path $target -PathType Container)) {\n        $null = New-Item -ItemType Directory -Path $target\n    }\n    Expand-7Zip -ArchiveFileName $file -Password \"Password\" -TargetPath $target\n}\n\n$zip"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "zcat",
+      "MP Summary": "decompress and concatenate files to standard output",
+      "Most Similar TLDR Task": "Print the uncompressed contents of a gzipped file to the standard output",
+      "Most Similar TLDR Script": "zcat {{file.txt.gz}}",
+      "Top-3 Similar Questions": [
+        "au_500249: Unzip 5GB zip file",
+        "so_42552694: Unzip then process in linux",
+        "nl2bash_14660: Unzip \"file.gz\", list the unique lines matching regex pattern '\"searchstring\":\"[^\"]*\"' prefixed by the number of occurrences, sort from least frequent to most frequent"
+      ],
+      "Top-3 Scripts": [
+        "au_500249: zcat file.zip > file.unzipped",
+        "so_42552694: fastqc <(zcat path/to/file.gz)\n\nfastqc <(zcat path/to/file.gz | tee file)",
+        "nl2bash_14660: zcat file.gz | grep -o '\"searchstring\":\"[^\"]*\"'| sort | uniq -c | sort -n"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "unar",
+      "MP Summary": "extract archive file contents",
+      "Most Similar TLDR Task": "Force rename if files to be unpacked already exist",
+      "Most Similar TLDR Script": "unar -r {{archive}}",
+      "Top-3 Similar Questions": [
+        "ul_489445: Unzip to a folder with the same name as the file (without the .zip extension)"
+      ],
+      "Top-3 Scripts": [
+        "ul_489445: unar foo.zip\n\nunar -d foo.zip"
+      ],
+      "Explanations about Options": {
+        "-d": "Always create a containing directory for the contents of the unpacked archive. By\n default, a directory is created if there is more than one top-level file or folder."
+      }
+    },
+    {
+      "Command": "tar",
+      "MP Summary": "an archiving utility",
+      "Most Similar TLDR Task": "List the contents of a tar file",
+      "Most Similar TLDR Script": "tar tvf {{source.tar}}",
+      "Top-3 Similar Questions": [
+        "so_24355289: Unzip a single file in a tbz archive",
+        "au_25347: What command do I need to unzip/extract a .tar.gz file?",
+        "su_561089: unzip script unix"
+      ],
+      "Top-3 Scripts": [
+        "so_24355289: tar xjf archive.tbz filename\n\nbzip2 -dc archive.tbz | tar xvf - filename\n\ntar tjf archive.tbz",
+        "au_25347: man tar\n\ntar -xvzf community_images.tar.gz\n\ntar -xvzf community_images.tar.gz -C some_custom_folder_name",
+        "su_561089: #!/bin/bash\n\nread dirloc\n\ncd $dirloc\n\nfor file in *.tar.7z\n        do\n                7za x -so $file | tar -xf -\n        done"
+      ],
+      "Explanations about Options": {
+        "-x": "Extract files from an archive. Arguments are optional. When given, they specify\n names of the archive members to be extracted.",
+        "-v": "Verbosely list files processed.",
+        "-z": "Filter the archive through gzip(1).",
+        "-C": "Change to DIR before performing any operations. This option is order-sensitive,\n i.e. it affects all options that follow."
+      }
+    }
+  ]
+}

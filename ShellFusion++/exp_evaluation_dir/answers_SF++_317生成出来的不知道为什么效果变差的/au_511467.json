@@ -1,0 +1,1635 @@
+{
+  "Query": "How can I completely erase all data on a (micro) SD card?",
+  "Answers": [
+    {
+      "Command": "mount",
+      "MP Summary": "mount a filesystem",
+      "Most Similar TLDR Task": "Mount a directory to another directory",
+      "Most Similar TLDR Script": "mount --bind {{path/to/old_dir}} {{path/to/new_dir}}",
+      "Most Similar NL2Bash Task": "Archive and compress all files in \"data\" directory into \"data.tar.gz\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "tar -cvf - data/* | gzip > data.tar.gz\n",
+          "command-options": {
+            "tar": {
+              "mpsum": "an archiving utility",
+              "-v": "Verbosely list files processed.",
+              "-c": "Create a new archive. Arguments supply the names of the files to be archived.\n Directories are archived recursively, unless the --no-recursion option is given."
+            }
+          },
+          "TLDR_inform": {
+            "tar": {
+              "man1_tar_33340": "archiv util\noften combin compress method gzip bzip creat compress archiv use archiv suffix determin compress program creat gzip archiv creat gzip archiv directori use rel path creat archiv file extract compress archiv current directori extract compress archiv target directori extract specif file without preserv folder structur extract file match pattern list content tar file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_65730: cannot mount SD card on ubuntu server",
+        "ul_486921: How do I install a live ISO on an SD card so it boots anywhere?",
+        "au_679435: Trouble automounting an SD card on Trusty"
+      ],
+      "Top-3 Scripts": [
+        "au_65730: ",
+        "ul_486921: sudo lsblk -f             # identify the drive and check the UUID\nsudo mount /dev/sdX /mnt  # mount the drive that contains grub.cfg\nsudo nano /mnt/boot/grub/grub.cfg  # edit grub.cfg",
+        "au_679435: #!/bin/sh\nexport mount_point=\"/mnt/$1\"\nexisting_device=$(awk '$2 == ENVIRON[\"mount_point\"] {print $1; exit}' < /proc/mounts)\nif [ -n \"$existing_device\" ]; then\n  exit 1\nfi\nmkdir -p \"$mount_point\"\nsleep 1 # Perhaps not necessary, but in the test with the OP it was necessary\nmount \"/dev/disk/by-uuid/$2\" \"$mount_point\"\nexit 0"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "fdisk",
+      "MP Summary": "manipulate disk partition table",
+      "Most Similar TLDR Task": "Start the partition manipulator",
+      "Most Similar TLDR Script": "fdisk {{/dev/sda}}",
+      "Most Similar NL2Bash Task": "Archive and compress all files in \"data\" directory into \"data.tar.gz\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "tar -cvf - data/* | gzip > data.tar.gz\n",
+          "command-options": {
+            "tar": {
+              "mpsum": "an archiving utility",
+              "-v": "Verbosely list files processed.",
+              "-c": "Create a new archive. Arguments supply the names of the files to be archived.\n Directories are archived recursively, unless the --no-recursion option is given."
+            }
+          },
+          "TLDR_inform": {
+            "tar": {
+              "man1_tar_33340": "archiv util\noften combin compress method gzip bzip creat compress archiv use archiv suffix determin compress program creat gzip archiv creat gzip archiv directori use rel path creat archiv file extract compress archiv current directori extract compress archiv target directori extract specif file without preserv folder structur extract file match pattern list content tar file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_213889: MicroSD card is set to Read-only state. How can I write data on it?",
+        "au_679782: Unable to make new partition in SD card"
+      ],
+      "Top-3 Scripts": [
+        "au_213889: sudo fdisk -l\n\nsudo mount --options remount,rw <the SDHC drive, /dev/sdb for example, find it using fdisk -l>",
+        "au_679782: sudo fdisk /dev/sdb"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "free",
+      "MP Summary": "Display amount of free and used memory in the system",
+      "Most Similar TLDR Task": "Display system memory",
+      "Most Similar TLDR Script": "free",
+      "Most Similar NL2Bash Task": "Archive and compress all files in \"data\" directory into \"data.tar.gz\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "tar -cvf - data/* | gzip > data.tar.gz\n",
+          "command-options": {
+            "tar": {
+              "mpsum": "an archiving utility",
+              "-v": "Verbosely list files processed.",
+              "-c": "Create a new archive. Arguments supply the names of the files to be archived.\n Directories are archived recursively, unless the --no-recursion option is given."
+            }
+          },
+          "TLDR_inform": {
+            "tar": {
+              "man1_tar_33340": "archiv util\noften combin compress method gzip bzip creat compress archiv use archiv suffix determin compress program creat gzip archiv creat gzip archiv directori use rel path creat archiv file extract compress archiv current directori extract compress archiv target directori extract specif file without preserv folder structur extract file match pattern list content tar file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_65730: cannot mount SD card on ubuntu server",
+        "ul_486921: How do I install a live ISO on an SD card so it boots anywhere?",
+        "ul_231643: Increasing partition of a SD card"
+      ],
+      "Top-3 Scripts": [
+        "au_65730: swapon -s\nFilename                Type        Size    Used    Priority\n/dev/sda8                               partition   2056280 11080   -1\n\nfree\n             total       used       free     shared    buffers     cached\nMem:       1025756     995180      30576          0      76648     238908\n-/+ buffers/cache:     679624     346132\nSwap:      2056280      11080    2045200",
+        "ul_486921: ",
+        "ul_231643: sudo parted /dev/sdd unit s print free"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "sync",
+      "MP Summary": "Synchronize cached writes to persistent storage",
+      "Most Similar TLDR Task": "Flush all pending write operations on a single file to disk",
+      "Most Similar TLDR Script": "sync {{path/to/file}}",
+      "Most Similar NL2Bash Task": "Archive and compress all files in \"data\" directory into \"data.tar.gz\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "tar -cvf - data/* | gzip > data.tar.gz\n",
+          "command-options": {
+            "tar": {
+              "mpsum": "an archiving utility",
+              "-v": "Verbosely list files processed.",
+              "-c": "Create a new archive. Arguments supply the names of the files to be archived.\n Directories are archived recursively, unless the --no-recursion option is given."
+            }
+          },
+          "TLDR_inform": {
+            "tar": {
+              "man1_tar_33340": "archiv util\noften combin compress method gzip bzip creat compress archiv use archiv suffix determin compress program creat gzip archiv creat gzip archiv directori use rel path creat archiv file extract compress archiv current directori extract compress archiv target directori extract specif file without preserv folder structur extract file match pattern list content tar file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_41994365: dd an image to SD card finished, SD card still busy",
+        "ul_169862: Disk image copied to my SD card doesn't boot"
+      ],
+      "Top-3 Scripts": [
+        "so_41994365: oflag=sync",
+        "ul_169862: sudo dd if=Cubian-desktop-x1-a10-hdmi.img of=/dev/mmcblk0 bs=4096; sync"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "dmesg",
+      "MP Summary": "print or control the kernel ring buffer",
+      "Most Similar TLDR Task": "Show how much physical memory is available on this system",
+      "Most Similar TLDR Script": "dmesg | grep -i memory",
+      "Most Similar NL2Bash Task": "Archive and compress all files in \"data\" directory into \"data.tar.gz\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "tar -cvf - data/* | gzip > data.tar.gz\n",
+          "command-options": {
+            "tar": {
+              "mpsum": "an archiving utility",
+              "-v": "Verbosely list files processed.",
+              "-c": "Create a new archive. Arguments supply the names of the files to be archived.\n Directories are archived recursively, unless the --no-recursion option is given."
+            }
+          },
+          "TLDR_inform": {
+            "tar": {
+              "man1_tar_33340": "archiv util\noften combin compress method gzip bzip creat compress archiv use archiv suffix determin compress program creat gzip archiv creat gzip archiv directori use rel path creat archiv file extract compress archiv current directori extract compress archiv target directori extract specif file without preserv folder structur extract file match pattern list content tar file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_139129: Locating the /dev entry to make partitions on an SD card",
+        "ul_62055: How to put isolinux on an sd card",
+        "au_425027: How to recover password from ubuntu installed on sd card?"
+      ],
+      "Top-3 Scripts": [
+        "ul_139129: ",
+        "ul_62055: dmesg | grep sd | less",
+        "au_425027: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "apt-get",
+      "MP Summary": "APT package handling utility - command-line interface",
+      "Most Similar TLDR Task": "Remove a package and its configuration files",
+      "Most Similar TLDR Script": "apt-get purge {{package}}",
+      "Most Similar NL2Bash Task": "Archive and compress all files in \"data\" directory into \"data.tar.gz\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "tar -cvf - data/* | gzip > data.tar.gz\n",
+          "command-options": {
+            "tar": {
+              "mpsum": "an archiving utility",
+              "-v": "Verbosely list files processed.",
+              "-c": "Create a new archive. Arguments supply the names of the files to be archived.\n Directories are archived recursively, unless the --no-recursion option is given."
+            }
+          },
+          "TLDR_inform": {
+            "tar": {
+              "man1_tar_33340": "archiv util\noften combin compress method gzip bzip creat compress archiv use archiv suffix determin compress program creat gzip archiv creat gzip archiv directori use rel path creat archiv file extract compress archiv current directori extract compress archiv target directori extract specif file without preserv folder structur extract file match pattern list content tar file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_719015: Error when reading SD formatted on Camera",
+        "au_647930: Recover data from repartitioned SD card?"
+      ],
+      "Top-3 Scripts": [
+        "au_719015: sudo apt-get install exfat-fuse exfat-utils",
+        "au_647930: sudo apt-get install testdisk"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "resize2fs",
+      "MP Summary": "ext2/ext3/ext4 file system resizer",
+      "Most Similar TLDR Task": "Automatically resize a filesystem",
+      "Most Similar TLDR Script": "resize2fs {{/dev/sdXN}}",
+      "Most Similar NL2Bash Task": "Archive and compress all files in \"data\" directory into \"data.tar.gz\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "tar -cvf - data/* | gzip > data.tar.gz\n",
+          "command-options": {
+            "tar": {
+              "mpsum": "an archiving utility",
+              "-v": "Verbosely list files processed.",
+              "-c": "Create a new archive. Arguments supply the names of the files to be archived.\n Directories are archived recursively, unless the --no-recursion option is given."
+            }
+          },
+          "TLDR_inform": {
+            "tar": {
+              "man1_tar_33340": "archiv util\noften combin compress method gzip bzip creat compress archiv use archiv suffix determin compress program creat gzip archiv creat gzip archiv directori use rel path creat archiv file extract compress archiv current directori extract compress archiv target directori extract specif file without preserv folder structur extract file match pattern list content tar file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "su_477642: Enlarge partition on SD card",
+        "ul_231643: Increasing partition of a SD card"
+      ],
+      "Top-3 Scripts": [
+        "su_477642: ",
+        "ul_231643: umount /dev/sdd2\nsudo parted /dev/sdd resizepart 2 -- -1\nsudo e2fsck -f /dev/sdd2\nsudo resize2fs /dev/sdd2\n\numount /dev/sdd2\nsudo parted /dev/sdd resizepart 2 10120000s\nsudo e2fsck -f /dev/sdd2\nsudo resize2fs /dev/sdd2"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "dd",
+      "MP Summary": "convert and copy a file",
+      "Most Similar TLDR Task": "Generate a file of 100 random bytes by using kernel random driver",
+      "Most Similar TLDR Script": "dd if=/dev/urandom of={{random_file}} bs=100 count=1",
+      "Most Similar NL2Bash Task": "Archive and compress all files in \"data\" directory into \"data.tar.gz\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "tar -cvf - data/* | gzip > data.tar.gz\n",
+          "command-options": {
+            "tar": {
+              "mpsum": "an archiving utility",
+              "-v": "Verbosely list files processed.",
+              "-c": "Create a new archive. Arguments supply the names of the files to be archived.\n Directories are archived recursively, unless the --no-recursion option is given."
+            }
+          },
+          "TLDR_inform": {
+            "tar": {
+              "man1_tar_33340": "archiv util\noften combin compress method gzip bzip creat compress archiv use archiv suffix determin compress program creat gzip archiv creat gzip archiv directori use rel path creat archiv file extract compress archiv current directori extract compress archiv target directori extract specif file without preserv folder structur extract file match pattern list content tar file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_228589: restore dd cloned sd card (No space left on device)",
+        "ul_486921: How do I install a live ISO on an SD card so it boots anywhere?",
+        "au_633277: Can't erase everything (partition/data) on sdcard, even with dd"
+      ],
+      "Top-3 Scripts": [
+        "ul_228589: sudo dd bs=4M if=/dev/sdb | gzip > /home/username/image`date +%d%m%y`.gz\n\ngzip -dc /home/username/image*.gz | sudo dd bs=4M of=/dev/sdb",
+        "ul_486921: sudo lsblk -fm\nsudo dd if=/dev/zero of=/dev/sdX bs=1M count=1\nsudo -H gparted /dev/sdX",
+        "au_633277: sudo dd if=/dev/urandom of=/dev/sdX bs=8192"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "install",
+      "MP Summary": "copy files and set attributes",
+      "Most Similar TLDR Task": "Copy files to destination",
+      "Most Similar TLDR Script": "install {{path/to/source}} {{path/to/destination}}",
+      "Most Similar NL2Bash Task": "Archive and compress all files in \"data\" directory into \"data.tar.gz\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "tar -cvf - data/* | gzip > data.tar.gz\n",
+          "command-options": {
+            "tar": {
+              "mpsum": "an archiving utility",
+              "-v": "Verbosely list files processed.",
+              "-c": "Create a new archive. Arguments supply the names of the files to be archived.\n Directories are archived recursively, unless the --no-recursion option is given."
+            }
+          },
+          "TLDR_inform": {
+            "tar": {
+              "man1_tar_33340": "archiv util\noften combin compress method gzip bzip creat compress archiv use archiv suffix determin compress program creat gzip archiv creat gzip archiv directori use rel path creat archiv file extract compress archiv current directori extract compress archiv target directori extract specif file without preserv folder structur extract file match pattern list content tar file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_870329: Can't enable wireless connection; no blocks on wifi card",
+        "au_719015: Error when reading SD formatted on Camera",
+        "au_647930: Recover data from repartitioned SD card?"
+      ],
+      "Top-3 Scripts": [
+        "au_870329: sudo apt purge bcmwl-kernel-source\nsudo apt install firmware-b43-installer",
+        "au_719015: sudo apt-get install exfat-fuse exfat-utils",
+        "au_647930: sudo apt-get install testdisk"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "ddrescue",
+      "MP Summary": "data recovery tool",
+      "Most Similar TLDR Task": "Take an image of a device, creating a log file",
+      "Most Similar TLDR Script": "sudo ddrescue {{/dev/sdb}} {{path/to/image.dd}} {{path/to/log.txt}}",
+      "Most Similar NL2Bash Task": "Archive and compress all files in \"data\" directory into \"data.tar.gz\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "tar -cvf - data/* | gzip > data.tar.gz\n",
+          "command-options": {
+            "tar": {
+              "mpsum": "an archiving utility",
+              "-v": "Verbosely list files processed.",
+              "-c": "Create a new archive. Arguments supply the names of the files to be archived.\n Directories are archived recursively, unless the --no-recursion option is given."
+            }
+          },
+          "TLDR_inform": {
+            "tar": {
+              "man1_tar_33340": "archiv util\noften combin compress method gzip bzip creat compress archiv use archiv suffix determin compress program creat gzip archiv creat gzip archiv directori use rel path creat archiv file extract compress archiv current directori extract compress archiv target directori extract specif file without preserv folder structur extract file match pattern list content tar file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_14560: How to recover data from a bad SD card?"
+      ],
+      "Top-3 Scripts": [
+        "ul_14560: ddrescue -dr3 /dev/sdc card.image logfile"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "cp",
+      "MP Summary": "copy files and directories",
+      "Most Similar TLDR Task": "Copy a file to another location",
+      "Most Similar TLDR Script": "cp {{path/to/source_file.ext}} {{path/to/target_file.ext}}",
+      "Most Similar NL2Bash Task": "Archive and compress all files in \"data\" directory into \"data.tar.gz\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "tar -cvf - data/* | gzip > data.tar.gz\n",
+          "command-options": {
+            "tar": {
+              "mpsum": "an archiving utility",
+              "-v": "Verbosely list files processed.",
+              "-c": "Create a new archive. Arguments supply the names of the files to be archived.\n Directories are archived recursively, unless the --no-recursion option is given."
+            }
+          },
+          "TLDR_inform": {
+            "tar": {
+              "man1_tar_33340": "archiv util\noften combin compress method gzip bzip creat compress archiv use archiv suffix determin compress program creat gzip archiv creat gzip archiv directori use rel path creat archiv file extract compress archiv current directori extract compress archiv target directori extract specif file without preserv folder structur extract file match pattern list content tar file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_414265: Creating dual-partition SD card image by a script",
+        "so_19355036: How to create an .IMG image of a disc (sd card) without including free space?"
+      ],
+      "Top-3 Scripts": [
+        "ul_414265: cp empty.image new.image",
+        "so_19355036: sudo cp -rf --preserve=all /media/mount_point_partition1/* myimage/partition1/\n\nsudo cp -rf --preserve=all /media/mount_point_partition2/* myimage/partition2/\n\nsudo cp -rf --preserve=all myimage/partition1/* /media/mount_point_partition1/\n\nsudo cp -rf --preserve=all myimage/partition2/* /media/mount_point_partition2/"
+      ],
+      "Explanations about Options": {
+        "--preserve": "preserve the specified attributes (default: mode,ownership,timestamps), if possible\n additional attributes: context, links, xattr, all",
+        "-r": "copy directories recursively",
+        "-f": "if an existing destination file cannot be opened, remove it and try again (this\n option is ignored when the -n option is also used)"
+      }
+    },
+    {
+      "Command": "rm",
+      "MP Summary": "remove files or directories",
+      "Most Similar TLDR Task": "Remove files from arbitrary locations",
+      "Most Similar TLDR Script": "rm {{path/to/file}} {{path/to/another/file}}",
+      "Most Similar NL2Bash Task": "Archive and compress all files in \"data\" directory into \"data.tar.gz\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "tar -cvf - data/* | gzip > data.tar.gz\n",
+          "command-options": {
+            "tar": {
+              "mpsum": "an archiving utility",
+              "-v": "Verbosely list files processed.",
+              "-c": "Create a new archive. Arguments supply the names of the files to be archived.\n Directories are archived recursively, unless the --no-recursion option is given."
+            }
+          },
+          "TLDR_inform": {
+            "tar": {
+              "man1_tar_33340": "archiv util\noften combin compress method gzip bzip creat compress archiv use archiv suffix determin compress program creat gzip archiv creat gzip archiv directori use rel path creat archiv file extract compress archiv current directori extract compress archiv target directori extract specif file without preserv folder structur extract file match pattern list content tar file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_45369672: shell script to erase backups on ubuntu",
+        "ul_479140: How to erase vanished files on linux system?",
+        "ul_426627: Completely Uninstall IntelliJ on Debian"
+      ],
+      "Top-3 Scripts": [
+        "so_45369672: NOW=$(date --date '1 month ago' +'*%Y-%m*.sql.gz')\nrm -rf /home/path/CUSTOMER_$NOW",
+        "ul_479140: rm /BACKUP/*",
+        "ul_426627: rm -rf ~/.IdeaIC* ~/.IntelliJIdea* ~/.ideaLibSources"
+      ],
+      "Explanations about Options": {
+        "-r": "remove directories and their contents recursively",
+        "-f": "ignore nonexistent files and arguments, never prompt"
+      }
+    },
+    {
+      "Command": "df",
+      "MP Summary": "report file system disk space usage",
+      "Most Similar TLDR Task": "Display all filesystems and their disk usage",
+      "Most Similar TLDR Script": "df",
+      "Most Similar NL2Bash Task": "Archive and compress all files in \"data\" directory into \"data.tar.gz\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "tar -cvf - data/* | gzip > data.tar.gz\n",
+          "command-options": {
+            "tar": {
+              "mpsum": "an archiving utility",
+              "-v": "Verbosely list files processed.",
+              "-c": "Create a new archive. Arguments supply the names of the files to be archived.\n Directories are archived recursively, unless the --no-recursion option is given."
+            }
+          },
+          "TLDR_inform": {
+            "tar": {
+              "man1_tar_33340": "archiv util\noften combin compress method gzip bzip creat compress archiv use archiv suffix determin compress program creat gzip archiv creat gzip archiv directori use rel path creat archiv file extract compress archiv current directori extract compress archiv target directori extract specif file without preserv folder structur extract file match pattern list content tar file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_486921: How do I install a live ISO on an SD card so it boots anywhere?"
+      ],
+      "Top-3 Scripts": [
+        "ul_486921: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "swapon",
+      "MP Summary": "enable/disable devices and files for paging and swapping",
+      "Most Similar TLDR Task": "Enable swap by label of a device or file",
+      "Most Similar TLDR Script": "swapon -L {{swap1}}",
+      "Most Similar NL2Bash Task": "Archive and compress all files in \"data\" directory into \"data.tar.gz\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "tar -cvf - data/* | gzip > data.tar.gz\n",
+          "command-options": {
+            "tar": {
+              "mpsum": "an archiving utility",
+              "-v": "Verbosely list files processed.",
+              "-c": "Create a new archive. Arguments supply the names of the files to be archived.\n Directories are archived recursively, unless the --no-recursion option is given."
+            }
+          },
+          "TLDR_inform": {
+            "tar": {
+              "man1_tar_33340": "archiv util\noften combin compress method gzip bzip creat compress archiv use archiv suffix determin compress program creat gzip archiv creat gzip archiv directori use rel path creat archiv file extract compress archiv current directori extract compress archiv target directori extract specif file without preserv folder structur extract file match pattern list content tar file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_65730: cannot mount SD card on ubuntu server"
+      ],
+      "Top-3 Scripts": [
+        "au_65730: swapon -s\n\nswapon -s\nFilename                Type        Size    Used    Priority\n/dev/sda8                               partition   2056280 11080   -1\n\nfree\n             total       used       free     shared    buffers     cached\nMem:       1025756     995180      30576          0      76648     238908\n-/+ buffers/cache:     679624     346132\nSwap:      2056280      11080    2045200"
+      ],
+      "Explanations about Options": {
+        "-s": "Display swap usage summary by device. Equivalent to \"cat /proc/swaps\". This\n output format is DEPRECATED in favour of --show that provides better control on\n output data."
+      }
+    },
+    {
+      "Command": "shred",
+      "MP Summary": "overwrite a file to hide its contents, and optionally delete it",
+      "Most Similar TLDR Task": "Overwrite a file and remove it",
+      "Most Similar TLDR Script": "shred --remove {{file}}",
+      "Most Similar NL2Bash Task": "Archive and compress all files in \"data\" directory into \"data.tar.gz\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "tar -cvf - data/* | gzip > data.tar.gz\n",
+          "command-options": {
+            "tar": {
+              "mpsum": "an archiving utility",
+              "-v": "Verbosely list files processed.",
+              "-c": "Create a new archive. Arguments supply the names of the files to be archived.\n Directories are archived recursively, unless the --no-recursion option is given."
+            }
+          },
+          "TLDR_inform": {
+            "tar": {
+              "man1_tar_33340": "archiv util\noften combin compress method gzip bzip creat compress archiv use archiv suffix determin compress program creat gzip archiv creat gzip archiv directori use rel path creat archiv file extract compress archiv current directori extract compress archiv target directori extract specif file without preserv folder structur extract file match pattern list content tar file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_26521957: How to wipe out data on SD card permanently"
+      ],
+      "Top-3 Scripts": [
+        "so_26521957: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "lsblk",
+      "MP Summary": "list block devices",
+      "Most Similar TLDR Task": "Exclude the devices specified by the comma-separated list of major device numbers",
+      "Most Similar TLDR Script": "lsblk -e {{1,7}}",
+      "Most Similar NL2Bash Task": "Archive and compress all files in \"data\" directory into \"data.tar.gz\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "tar -cvf - data/* | gzip > data.tar.gz\n",
+          "command-options": {
+            "tar": {
+              "mpsum": "an archiving utility",
+              "-v": "Verbosely list files processed.",
+              "-c": "Create a new archive. Arguments supply the names of the files to be archived.\n Directories are archived recursively, unless the --no-recursion option is given."
+            }
+          },
+          "TLDR_inform": {
+            "tar": {
+              "man1_tar_33340": "archiv util\noften combin compress method gzip bzip creat compress archiv use archiv suffix determin compress program creat gzip archiv creat gzip archiv directori use rel path creat archiv file extract compress archiv current directori extract compress archiv target directori extract specif file without preserv folder structur extract file match pattern list content tar file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_486921: How do I install a live ISO on an SD card so it boots anywhere?"
+      ],
+      "Top-3 Scripts": [
+        "ul_486921: sudo lsblk -fm\nsudo dd if=/dev/zero of=/dev/sdX bs=1M count=1\nsudo -H gparted /dev/sdX\n\nsudo lsblk -f             # identify the drive and check the UUID\nsudo mount /dev/sdX /mnt  # mount the drive that contains grub.cfg\nsudo nano /mnt/boot/grub/grub.cfg  # edit grub.cfg"
+      ],
+      "Explanations about Options": {
+        "-f": "Output info about filesystems. This option is equivalent to\n -o NAME,FSTYPE,LABEL,UUID,MOUNTPOINT. The authoritative information about\n filesystems and raids is provided by the blkid(8) command."
+      }
+    },
+    {
+      "Command": "nano",
+      "MP Summary": "Nano's ANOther editor, inspired by Pico",
+      "Most Similar TLDR Task": "Before modification, backup separately as `{{current_file_name}}~`",
+      "Most Similar TLDR Script": "nano -B {{filename}}",
+      "Most Similar NL2Bash Task": "Archive and compress all files in \"data\" directory into \"data.tar.gz\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "tar -cvf - data/* | gzip > data.tar.gz\n",
+          "command-options": {
+            "tar": {
+              "mpsum": "an archiving utility",
+              "-v": "Verbosely list files processed.",
+              "-c": "Create a new archive. Arguments supply the names of the files to be archived.\n Directories are archived recursively, unless the --no-recursion option is given."
+            }
+          },
+          "TLDR_inform": {
+            "tar": {
+              "man1_tar_33340": "archiv util\noften combin compress method gzip bzip creat compress archiv use archiv suffix determin compress program creat gzip archiv creat gzip archiv directori use rel path creat archiv file extract compress archiv current directori extract compress archiv target directori extract specif file without preserv folder structur extract file match pattern list content tar file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_486921: How do I install a live ISO on an SD card so it boots anywhere?",
+        "au_679435: Trouble automounting an SD card on Trusty"
+      ],
+      "Top-3 Scripts": [
+        "ul_486921: sudo lsblk -f             # identify the drive and check the UUID\nsudo mount /dev/sdX /mnt  # mount the drive that contains grub.cfg\nsudo nano /mnt/boot/grub/grub.cfg  # edit grub.cfg",
+        "au_679435: sudo nano /usr/local/bin/mount_by\n\nsudo nano /etc/udev/rules.d/99-myrules.rules"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "chmod",
+      "MP Summary": "change file mode bits",
+      "Most Similar TLDR Task": "Change permissions recursively giving [g]roup and [o]thers the ability to [w]rite",
+      "Most Similar TLDR Script": "chmod -R g+w,o+w {{directory}}",
+      "Most Similar NL2Bash Task": "Archive and compress all files in \"data\" directory into \"data.tar.gz\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "tar -cvf - data/* | gzip > data.tar.gz\n",
+          "command-options": {
+            "tar": {
+              "mpsum": "an archiving utility",
+              "-v": "Verbosely list files processed.",
+              "-c": "Create a new archive. Arguments supply the names of the files to be archived.\n Directories are archived recursively, unless the --no-recursion option is given."
+            }
+          },
+          "TLDR_inform": {
+            "tar": {
+              "man1_tar_33340": "archiv util\noften combin compress method gzip bzip creat compress archiv use archiv suffix determin compress program creat gzip archiv creat gzip archiv directori use rel path creat archiv file extract compress archiv current directori extract compress archiv target directori extract specif file without preserv folder structur extract file match pattern list content tar file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_679435: Trouble automounting an SD card on Trusty",
+        "au_213889: MicroSD card is set to Read-only state. How can I write data on it?"
+      ],
+      "Top-3 Scripts": [
+        "au_679435: sudo chmod +x /usr/local/bin/mount_by",
+        "au_213889: sudo chmod -R 777 <the SDHC drive, /dev/sdb for example>"
+      ],
+      "Explanations about Options": {
+        "-R": "change files and directories recursively"
+      }
+    },
+    {
+      "Command": "sudo",
+      "MP Summary": "execute a command as another user",
+      "Most Similar TLDR Task": "Run a command as another user and/or group",
+      "Most Similar TLDR Script": "sudo -u {{user}} -g {{group}} {{id -a}}",
+      "Most Similar NL2Bash Task": "Archive and compress all files in \"data\" directory into \"data.tar.gz\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "tar -cvf - data/* | gzip > data.tar.gz\n",
+          "command-options": {
+            "tar": {
+              "mpsum": "an archiving utility",
+              "-v": "Verbosely list files processed.",
+              "-c": "Create a new archive. Arguments supply the names of the files to be archived.\n Directories are archived recursively, unless the --no-recursion option is given."
+            }
+          },
+          "TLDR_inform": {
+            "tar": {
+              "man1_tar_33340": "archiv util\noften combin compress method gzip bzip creat compress archiv use archiv suffix determin compress program creat gzip archiv creat gzip archiv directori use rel path creat archiv file extract compress archiv current directori extract compress archiv target directori extract specif file without preserv folder structur extract file match pattern list content tar file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_228589: restore dd cloned sd card (No space left on device)",
+        "ul_486921: How do I install a live ISO on an SD card so it boots anywhere?",
+        "au_679435: Trouble automounting an SD card on Trusty"
+      ],
+      "Top-3 Scripts": [
+        "ul_228589: sudo dd bs=4M if=/dev/sdb | gzip > /home/username/image`date +%d%m%y`.gz\n\ngzip -dc /home/username/image*.gz | sudo dd bs=4M of=/dev/sdb",
+        "ul_486921: sudo lsblk -fm\nsudo dd if=/dev/zero of=/dev/sdX bs=1M count=1\nsudo -H gparted /dev/sdX\n\nsudo lsblk -f             # identify the drive and check the UUID\nsudo mount /dev/sdX /mnt  # mount the drive that contains grub.cfg\nsudo nano /mnt/boot/grub/grub.cfg  # edit grub.cfg",
+        "au_679435: sudo nano /usr/local/bin/mount_by\n\nsudo chmod +x /usr/local/bin/mount_by\n\nsudo nano /etc/udev/rules.d/99-myrules.rules\n\nsudo service udev restart"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "uname",
+      "MP Summary": "print system information",
+      "Most Similar TLDR Task": "Print all available system information (hardware, software, nodename)",
+      "Most Similar TLDR Script": "uname -a",
+      "Most Similar NL2Bash Task": "Archive and compress all files in \"data\" directory into \"data.tar.gz\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "tar -cvf - data/* | gzip > data.tar.gz\n",
+          "command-options": {
+            "tar": {
+              "mpsum": "an archiving utility",
+              "-v": "Verbosely list files processed.",
+              "-c": "Create a new archive. Arguments supply the names of the files to be archived.\n Directories are archived recursively, unless the --no-recursion option is given."
+            }
+          },
+          "TLDR_inform": {
+            "tar": {
+              "man1_tar_33340": "archiv util\noften combin compress method gzip bzip creat compress archiv use archiv suffix determin compress program creat gzip archiv creat gzip archiv directori use rel path creat archiv file extract compress archiv current directori extract compress archiv target directori extract specif file without preserv folder structur extract file match pattern list content tar file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_486921: How do I install a live ISO on an SD card so it boots anywhere?"
+      ],
+      "Top-3 Scripts": [
+        "ul_486921: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "import",
+      "MP Summary": "saves any visible window on an X server and outputs it as an image file. You can capture a single window, the entire screen, or any rectangular portion of the screen.",
+      "Most Similar TLDR Task": "Capture contents of a remote X server screen in the PNG image format",
+      "Most Similar TLDR Script": "import -window root -display {{remote_host}}:{screen}.{display} {{output.png}}",
+      "Most Similar NL2Bash Task": "Archive and compress all files in \"data\" directory into \"data.tar.gz\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "tar -cvf - data/* | gzip > data.tar.gz\n",
+          "command-options": {
+            "tar": {
+              "mpsum": "an archiving utility",
+              "-v": "Verbosely list files processed.",
+              "-c": "Create a new archive. Arguments supply the names of the files to be archived.\n Directories are archived recursively, unless the --no-recursion option is given."
+            }
+          },
+          "TLDR_inform": {
+            "tar": {
+              "man1_tar_33340": "archiv util\noften combin compress method gzip bzip creat compress archiv use archiv suffix determin compress program creat gzip archiv creat gzip archiv directori use rel path creat archiv file extract compress archiv current directori extract compress archiv target directori extract specif file without preserv folder structur extract file match pattern list content tar file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_547451: Use RFID card on Ubuntu"
+      ],
+      "Top-3 Scripts": [
+        "au_547451: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "btrfs",
+      "MP Summary": "a toolbox to manage btrfs filesystems",
+      "Most Similar TLDR Task": "Create subvolume",
+      "Most Similar TLDR Script": "sudo btrfs subvolume create {{path/to/subvolume}}",
+      "Most Similar NL2Bash Task": "Archive and compress all files in \"data\" directory into \"data.tar.gz\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "tar -cvf - data/* | gzip > data.tar.gz\n",
+          "command-options": {
+            "tar": {
+              "mpsum": "an archiving utility",
+              "-v": "Verbosely list files processed.",
+              "-c": "Create a new archive. Arguments supply the names of the files to be archived.\n Directories are archived recursively, unless the --no-recursion option is given."
+            }
+          },
+          "TLDR_inform": {
+            "tar": {
+              "man1_tar_33340": "archiv util\noften combin compress method gzip bzip creat compress archiv use archiv suffix determin compress program creat gzip archiv creat gzip archiv directori use rel path creat archiv file extract compress archiv current directori extract compress archiv target directori extract specif file without preserv folder structur extract file match pattern list content tar file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_486921: How do I install a live ISO on an SD card so it boots anywhere?"
+      ],
+      "Top-3 Scripts": [
+        "ul_486921: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "identify",
+      "MP Summary": "describes the format and characteristics of one or more image files.",
+      "Most Similar TLDR Task": "Collect dimensions of all jpeg files under current directory",
+      "Most Similar TLDR Script": "identify -format \"%f,%w,%h\\n\" *.{{jpg}} > {{filelist.csv}}",
+      "Most Similar NL2Bash Task": "Archive and compress all files in \"data\" directory into \"data.tar.gz\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "tar -cvf - data/* | gzip > data.tar.gz\n",
+          "command-options": {
+            "tar": {
+              "mpsum": "an archiving utility",
+              "-v": "Verbosely list files processed.",
+              "-c": "Create a new archive. Arguments supply the names of the files to be archived.\n Directories are archived recursively, unless the --no-recursion option is given."
+            }
+          },
+          "TLDR_inform": {
+            "tar": {
+              "man1_tar_33340": "archiv util\noften combin compress method gzip bzip creat compress archiv use archiv suffix determin compress program creat gzip archiv creat gzip archiv directori use rel path creat archiv file extract compress archiv current directori extract compress archiv target directori extract specif file without preserv folder structur extract file match pattern list content tar file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_486921: How do I install a live ISO on an SD card so it boots anywhere?"
+      ],
+      "Top-3 Scripts": [
+        "ul_486921: sudo lsblk -f             # identify the drive and check the UUID\nsudo mount /dev/sdX /mnt  # mount the drive that contains grub.cfg\nsudo nano /mnt/boot/grub/grub.cfg  # edit grub.cfg"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "umount",
+      "MP Summary": "unmount file systems",
+      "Most Similar TLDR Task": "Unmount a filesystem, by passing the path to the source it is mounted from",
+      "Most Similar TLDR Script": "umount {{path/to/device_file}}",
+      "Most Similar NL2Bash Task": "Archive and compress all files in \"data\" directory into \"data.tar.gz\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "tar -cvf - data/* | gzip > data.tar.gz\n",
+          "command-options": {
+            "tar": {
+              "mpsum": "an archiving utility",
+              "-v": "Verbosely list files processed.",
+              "-c": "Create a new archive. Arguments supply the names of the files to be archived.\n Directories are archived recursively, unless the --no-recursion option is given."
+            }
+          },
+          "TLDR_inform": {
+            "tar": {
+              "man1_tar_33340": "archiv util\noften combin compress method gzip bzip creat compress archiv use archiv suffix determin compress program creat gzip archiv creat gzip archiv directori use rel path creat archiv file extract compress archiv current directori extract compress archiv target directori extract specif file without preserv folder structur extract file match pattern list content tar file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "su_1195247: Mounting (or linking to) an NTFS SD card in \u201cBash on Ubuntu on Windows\u201d",
+        "ul_231643: Increasing partition of a SD card",
+        "au_299081: How do I create a backup image of an SD card?"
+      ],
+      "Top-3 Scripts": [
+        "su_1195247: $ sudo umount /mnt/d",
+        "ul_231643: umount /dev/sdd2\nsudo parted /dev/sdd resizepart 2 -- -1\nsudo e2fsck -f /dev/sdd2\nsudo resize2fs /dev/sdd2\n\numount /dev/sdd2\nsudo parted /dev/sdd resizepart 2 10120000s\nsudo e2fsck -f /dev/sdd2\nsudo resize2fs /dev/sdd2",
+        "au_299081: sudo umount /media/oneiric\nsudo dd if=/dev/sdXX of=~/sd-card-copy.img"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "progress",
+      "MP Summary": "Coreutils Progress Viewer",
+      "Most Similar TLDR Task": "Launch and monitor a single long-running command",
+      "Most Similar TLDR Script": "{{command}} & progress -mp $!",
+      "Most Similar NL2Bash Task": "Archive and compress all files in \"data\" directory into \"data.tar.gz\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "tar -cvf - data/* | gzip > data.tar.gz\n",
+          "command-options": {
+            "tar": {
+              "mpsum": "an archiving utility",
+              "-v": "Verbosely list files processed.",
+              "-c": "Create a new archive. Arguments supply the names of the files to be archived.\n Directories are archived recursively, unless the --no-recursion option is given."
+            }
+          },
+          "TLDR_inform": {
+            "tar": {
+              "man1_tar_33340": "archiv util\noften combin compress method gzip bzip creat compress archiv use archiv suffix determin compress program creat gzip archiv creat gzip archiv directori use rel path creat archiv file extract compress archiv current directori extract compress archiv target directori extract specif file without preserv folder structur extract file match pattern list content tar file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_878402: Move sd image to another sd card"
+      ],
+      "Top-3 Scripts": [
+        "au_878402: $ dd if=[source drive or image] of=[destination drive or image] bs=4M status=progress\n\n$ dd if=/dev/sdb of=/dev/sdc bs=4M status=progress\n\n$ dd if=/home/user/disk.img of=/dev/sdc bs=4M status=progress"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "print",
+      "MP Summary": "execute programs via entries in the mailcap file",
+      "Most Similar TLDR Task": "Print action can be used to print any file on default run-mailcap tool",
+      "Most Similar TLDR Script": "print {{filename}}",
+      "Most Similar NL2Bash Task": "Archive and compress all files in \"data\" directory into \"data.tar.gz\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "tar -cvf - data/* | gzip > data.tar.gz\n",
+          "command-options": {
+            "tar": {
+              "mpsum": "an archiving utility",
+              "-v": "Verbosely list files processed.",
+              "-c": "Create a new archive. Arguments supply the names of the files to be archived.\n Directories are archived recursively, unless the --no-recursion option is given."
+            }
+          },
+          "TLDR_inform": {
+            "tar": {
+              "man1_tar_33340": "archiv util\noften combin compress method gzip bzip creat compress archiv use archiv suffix determin compress program creat gzip archiv creat gzip archiv directori use rel path creat archiv file extract compress archiv current directori extract compress archiv target directori extract specif file without preserv folder structur extract file match pattern list content tar file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_679435: Trouble automounting an SD card on Trusty",
+        "au_547451: Use RFID card on Ubuntu",
+        "ul_231643: Increasing partition of a SD card"
+      ],
+      "Top-3 Scripts": [
+        "au_679435: #!/bin/sh\nexport mount_point=\"/mnt/$1\"\nexisting_device=$(awk '$2 == ENVIRON[\"mount_point\"] {print $1; exit}' < /proc/mounts)\nif [ -n \"$existing_device\" ]; then\n  exit 1\nfi\nmkdir -p \"$mount_point\"\nsleep 1 # Perhaps not necessary, but in the test with the OP it was necessary\nmount \"/dev/disk/by-uuid/$2\" \"$mount_point\"\nexit 0\n\nudevadm info <b>/dev/sdc1</b> | awk -F= '/ID_FS_UUID=/ {print $2}'",
+        "au_547451: ",
+        "ul_231643: sudo parted /dev/sdd unit s print free"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "losetup",
+      "MP Summary": "set up and control loop devices",
+      "Most Similar TLDR Task": "Attach a file to a read-only loop device",
+      "Most Similar TLDR Script": "sudo losetup --read-only /dev/{{loop}} /{{path/to/file}}",
+      "Most Similar NL2Bash Task": "Archive and compress all files in \"data\" directory into \"data.tar.gz\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "tar -cvf - data/* | gzip > data.tar.gz\n",
+          "command-options": {
+            "tar": {
+              "mpsum": "an archiving utility",
+              "-v": "Verbosely list files processed.",
+              "-c": "Create a new archive. Arguments supply the names of the files to be archived.\n Directories are archived recursively, unless the --no-recursion option is given."
+            }
+          },
+          "TLDR_inform": {
+            "tar": {
+              "man1_tar_33340": "archiv util\noften combin compress method gzip bzip creat compress archiv use archiv suffix determin compress program creat gzip archiv creat gzip archiv directori use rel path creat archiv file extract compress archiv current directori extract compress archiv target directori extract specif file without preserv folder structur extract file match pattern list content tar file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_414265: Creating dual-partition SD card image by a script"
+      ],
+      "Top-3 Scripts": [
+        "ul_414265: losetup -f -P new.image\n\nlosetup -d /dev/loop0\n\nlosetup -f -P empty.file"
+      ],
+      "Explanations about Options": {
+        "-f": "Find the first unused loop device. If a file argument is present, use the found\n device as loop device. Otherwise, just print its name.",
+        "-P": "Force the kernel to scan the partition table on a newly created loop device. Note\n that the partition table parsing depends on sector sizes. The default is sector\n size is 512 bytes, otherwise you need to use the option --sector-size together with\n --partscan."
+      }
+    },
+    {
+      "Command": "tee",
+      "MP Summary": "read from standard input and write to standard output and files",
+      "Most Similar TLDR Task": "Create a directory called \"example\", count the number of characters in \"example\" and write \"example\" to the terminal",
+      "Most Similar TLDR Script": "echo \"example\" | tee >(xargs mkdir) >(wc -c)",
+      "Most Similar NL2Bash Task": "Archive and compress all files in \"data\" directory into \"data.tar.gz\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "tar -cvf - data/* | gzip > data.tar.gz\n",
+          "command-options": {
+            "tar": {
+              "mpsum": "an archiving utility",
+              "-v": "Verbosely list files processed.",
+              "-c": "Create a new archive. Arguments supply the names of the files to be archived.\n Directories are archived recursively, unless the --no-recursion option is given."
+            }
+          },
+          "TLDR_inform": {
+            "tar": {
+              "man1_tar_33340": "archiv util\noften combin compress method gzip bzip creat compress archiv use archiv suffix determin compress program creat gzip archiv creat gzip archiv directori use rel path creat archiv file extract compress archiv current directori extract compress archiv target directori extract specif file without preserv folder structur extract file match pattern list content tar file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_870329: Can't enable wireless connection; no blocks on wifi card"
+      ],
+      "Top-3 Scripts": [
+        "au_870329: sudo tee /etc/modprobe.d/blacklist-hp.conf <<< \"blacklist hp_wmi\""
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "printf",
+      "MP Summary": "format and print data",
+      "Most Similar TLDR Task": "Print a text message composed with environment variables",
+      "Most Similar TLDR Script": "printf \"{{var1: %s\\tvar2: %s\\n}}\" \"{{$VAR1}}\" \"{{$VAR2}}\"",
+      "Most Similar NL2Bash Task": "Archive and compress all files in \"data\" directory into \"data.tar.gz\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "tar -cvf - data/* | gzip > data.tar.gz\n",
+          "command-options": {
+            "tar": {
+              "mpsum": "an archiving utility",
+              "-v": "Verbosely list files processed.",
+              "-c": "Create a new archive. Arguments supply the names of the files to be archived.\n Directories are archived recursively, unless the --no-recursion option is given."
+            }
+          },
+          "TLDR_inform": {
+            "tar": {
+              "man1_tar_33340": "archiv util\noften combin compress method gzip bzip creat compress archiv use archiv suffix determin compress program creat gzip archiv creat gzip archiv directori use rel path creat archiv file extract compress archiv current directori extract compress archiv target directori extract specif file without preserv folder structur extract file match pattern list content tar file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_10979123: How to get notifications for SD card events?"
+      ],
+      "Top-3 Scripts": [
+        "so_10979123: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "e2fsck",
+      "MP Summary": "check a Linux ext2/ext3/ext4 file system",
+      "Most Similar TLDR Task": "Check filesystem and automatically repair any damaged blocks",
+      "Most Similar TLDR Script": "e2fsck -p {{/dev/sdXN}}",
+      "Most Similar NL2Bash Task": "Archive and compress all files in \"data\" directory into \"data.tar.gz\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "tar -cvf - data/* | gzip > data.tar.gz\n",
+          "command-options": {
+            "tar": {
+              "mpsum": "an archiving utility",
+              "-v": "Verbosely list files processed.",
+              "-c": "Create a new archive. Arguments supply the names of the files to be archived.\n Directories are archived recursively, unless the --no-recursion option is given."
+            }
+          },
+          "TLDR_inform": {
+            "tar": {
+              "man1_tar_33340": "archiv util\noften combin compress method gzip bzip creat compress archiv use archiv suffix determin compress program creat gzip archiv creat gzip archiv directori use rel path creat archiv file extract compress archiv current directori extract compress archiv target directori extract specif file without preserv folder structur extract file match pattern list content tar file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_231643: Increasing partition of a SD card"
+      ],
+      "Top-3 Scripts": [
+        "ul_231643: umount /dev/sdd2\nsudo parted /dev/sdd resizepart 2 -- -1\nsudo e2fsck -f /dev/sdd2\nsudo resize2fs /dev/sdd2\n\numount /dev/sdd2\nsudo parted /dev/sdd resizepart 2 10120000s\nsudo e2fsck -f /dev/sdd2\nsudo resize2fs /dev/sdd2"
+      ],
+      "Explanations about Options": {
+        "-f": "Force checking even if the file system seems clean."
+      }
+    },
+    {
+      "Command": "man",
+      "MP Summary": "an interface to the system reference manuals",
+      "Most Similar TLDR Task": "Display the location of a manpage rather than the manpage itself",
+      "Most Similar TLDR Script": "man -w {{command}}",
+      "Most Similar NL2Bash Task": "Archive and compress all files in \"data\" directory into \"data.tar.gz\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "tar -cvf - data/* | gzip > data.tar.gz\n",
+          "command-options": {
+            "tar": {
+              "mpsum": "an archiving utility",
+              "-v": "Verbosely list files processed.",
+              "-c": "Create a new archive. Arguments supply the names of the files to be archived.\n Directories are archived recursively, unless the --no-recursion option is given."
+            }
+          },
+          "TLDR_inform": {
+            "tar": {
+              "man1_tar_33340": "archiv util\noften combin compress method gzip bzip creat compress archiv use archiv suffix determin compress program creat gzip archiv creat gzip archiv directori use rel path creat archiv file extract compress archiv current directori extract compress archiv target directori extract specif file without preserv folder structur extract file match pattern list content tar file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_647930: Recover data from repartitioned SD card?",
+        "ul_414265: Creating dual-partition SD card image by a script"
+      ],
+      "Top-3 Scripts": [
+        "au_647930: man testdisk",
+        "ul_414265: man sfdisk"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "truncate",
+      "MP Summary": "shrink or extend the size of a file to the specified size",
+      "Most Similar TLDR Task": "Empty the file's content",
+      "Most Similar TLDR Script": "truncate -s 0 {{filename}}",
+      "Most Similar NL2Bash Task": "Archive and compress all files in \"data\" directory into \"data.tar.gz\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "tar -cvf - data/* | gzip > data.tar.gz\n",
+          "command-options": {
+            "tar": {
+              "mpsum": "an archiving utility",
+              "-v": "Verbosely list files processed.",
+              "-c": "Create a new archive. Arguments supply the names of the files to be archived.\n Directories are archived recursively, unless the --no-recursion option is given."
+            }
+          },
+          "TLDR_inform": {
+            "tar": {
+              "man1_tar_33340": "archiv util\noften combin compress method gzip bzip creat compress archiv use archiv suffix determin compress program creat gzip archiv creat gzip archiv directori use rel path creat archiv file extract compress archiv current directori extract compress archiv target directori extract specif file without preserv folder structur extract file match pattern list content tar file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_414265: Creating dual-partition SD card image by a script"
+      ],
+      "Top-3 Scripts": [
+        "ul_414265: truncate -s 1G empty.file"
+      ],
+      "Explanations about Options": {
+        "-s": "set or adjust the file size by SIZE bytes"
+      }
+    },
+    {
+      "Command": "apt",
+      "MP Summary": "command-line interface",
+      "Most Similar TLDR Task": "Remove a package (using `purge` instead also removes its configuration files)",
+      "Most Similar TLDR Script": "sudo apt remove {{package}}",
+      "Most Similar NL2Bash Task": "Archive and compress all files in \"data\" directory into \"data.tar.gz\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "tar -cvf - data/* | gzip > data.tar.gz\n",
+          "command-options": {
+            "tar": {
+              "mpsum": "an archiving utility",
+              "-v": "Verbosely list files processed.",
+              "-c": "Create a new archive. Arguments supply the names of the files to be archived.\n Directories are archived recursively, unless the --no-recursion option is given."
+            }
+          },
+          "TLDR_inform": {
+            "tar": {
+              "man1_tar_33340": "archiv util\noften combin compress method gzip bzip creat compress archiv use archiv suffix determin compress program creat gzip archiv creat gzip archiv directori use rel path creat archiv file extract compress archiv current directori extract compress archiv target directori extract specif file without preserv folder structur extract file match pattern list content tar file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_870329: Can't enable wireless connection; no blocks on wifi card"
+      ],
+      "Top-3 Scripts": [
+        "au_870329: sudo apt purge bcmwl-kernel-source\nsudo apt install firmware-b43-installer"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "fd",
+      "MP Summary": "find entries in the filesystem",
+      "Most Similar TLDR Task": "Find files with a specific extension",
+      "Most Similar TLDR Script": "fd --extension {{txt}}",
+      "Most Similar NL2Bash Task": "Archive and compress all files in \"data\" directory into \"data.tar.gz\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "tar -cvf - data/* | gzip > data.tar.gz\n",
+          "command-options": {
+            "tar": {
+              "mpsum": "an archiving utility",
+              "-v": "Verbosely list files processed.",
+              "-c": "Create a new archive. Arguments supply the names of the files to be archived.\n Directories are archived recursively, unless the --no-recursion option is given."
+            }
+          },
+          "TLDR_inform": {
+            "tar": {
+              "man1_tar_33340": "archiv util\noften combin compress method gzip bzip creat compress archiv use archiv suffix determin compress program creat gzip archiv creat gzip archiv directori use rel path creat archiv file extract compress archiv current directori extract compress archiv target directori extract specif file without preserv folder structur extract file match pattern list content tar file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_7829300: Getting the size of a micro SD card via C++"
+      ],
+      "Top-3 Scripts": [
+        "so_7829300: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "read",
+      "MP Summary": "read a line from standard input",
+      "Most Similar TLDR Task": "Enable backspace and GNU readline hotkeys when entering input with read",
+      "Most Similar TLDR Script": "read -e {{variable}}",
+      "Most Similar NL2Bash Task": "Archive and compress all files in \"data\" directory into \"data.tar.gz\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "tar -cvf - data/* | gzip > data.tar.gz\n",
+          "command-options": {
+            "tar": {
+              "mpsum": "an archiving utility",
+              "-v": "Verbosely list files processed.",
+              "-c": "Create a new archive. Arguments supply the names of the files to be archived.\n Directories are archived recursively, unless the --no-recursion option is given."
+            }
+          },
+          "TLDR_inform": {
+            "tar": {
+              "man1_tar_33340": "archiv util\noften combin compress method gzip bzip creat compress archiv use archiv suffix determin compress program creat gzip archiv creat gzip archiv directori use rel path creat archiv file extract compress archiv current directori extract compress archiv target directori extract specif file without preserv folder structur extract file match pattern list content tar file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_547451: Use RFID card on Ubuntu"
+      ],
+      "Top-3 Scripts": [
+        "au_547451: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "as",
+      "MP Summary": "or  any situation  where  you want to make sure you're doing a clean install of your dependencies. It  can  be  significantly  faster  than  a  regular  npm  install  by  skipping   certain user-oriented  features.  It  is  also  more strict than a regular install, which can help catch errors or inconsistencies caused by the incrementally-installed  local  environments of most npm users. In short, the main differences between using npm install and npm ci are: \u00b7 The project must have an existing package-lock.json or npm-shrinkwrap.json. \u00b7 If dependencies in the package lock do not match those in package.json, npm ci will exit with an error, instead of updating the package lock. \u00b7 npm ci can only install entire projects at a time:  individual  dependencies  cannot  be added with this command. \u00b7 If  a  node_modules  is  already present, it will be automatically removed before npm ci begins its install. \u00b7 It will  never  write  to  package.json  or  any  of  the  package-locks:  installs  are essentially frozen. See Also \u00b7 npm help install \u00b7 npm help package-locks April 2020                                  NPM-CI(1)",
+      "Most Similar TLDR Task": "Include a given path to the list of directories to search for files specified in .include directives",
+      "Most Similar TLDR Script": "as -I {{path/to/directory}} {{file.s}}",
+      "Most Similar NL2Bash Task": "Archive and compress all files in \"data\" directory into \"data.tar.gz\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "tar -cvf - data/* | gzip > data.tar.gz\n",
+          "command-options": {
+            "tar": {
+              "mpsum": "an archiving utility",
+              "-v": "Verbosely list files processed.",
+              "-c": "Create a new archive. Arguments supply the names of the files to be archived.\n Directories are archived recursively, unless the --no-recursion option is given."
+            }
+          },
+          "TLDR_inform": {
+            "tar": {
+              "man1_tar_33340": "archiv util\noften combin compress method gzip bzip creat compress archiv use archiv suffix determin compress program creat gzip archiv creat gzip archiv directori use rel path creat archiv file extract compress archiv current directori extract compress archiv target directori extract specif file without preserv folder structur extract file match pattern list content tar file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "su_1121750: Format Old Linux SD card on windows"
+      ],
+      "Top-3 Scripts": [
+        "su_1121750: Diskpart\nlist disk\nselect Disk 1  (or whatever number showed as your SD disk)\nclean\ncreate partition primary\nselect partition 1\nformat fs=fat32 quick\nassign letter=R\nexit"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "date",
+      "MP Summary": "print or set the system date and time",
+      "Most Similar TLDR Task": "Display a specific date (represented as a Unix timestamp) using the default format",
+      "Most Similar TLDR Script": "date -d @1473305798",
+      "Most Similar NL2Bash Task": "Archive and compress all files in \"data\" directory into \"data.tar.gz\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "tar -cvf - data/* | gzip > data.tar.gz\n",
+          "command-options": {
+            "tar": {
+              "mpsum": "an archiving utility",
+              "-v": "Verbosely list files processed.",
+              "-c": "Create a new archive. Arguments supply the names of the files to be archived.\n Directories are archived recursively, unless the --no-recursion option is given."
+            }
+          },
+          "TLDR_inform": {
+            "tar": {
+              "man1_tar_33340": "archiv util\noften combin compress method gzip bzip creat compress archiv use archiv suffix determin compress program creat gzip archiv creat gzip archiv directori use rel path creat archiv file extract compress archiv current directori extract compress archiv target directori extract specif file without preserv folder structur extract file match pattern list content tar file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_45369672: shell script to erase backups on ubuntu"
+      ],
+      "Top-3 Scripts": [
+        "so_45369672: NOW=$(date --date '1 month ago' +'*%Y-%m*.sql.gz')\nrm -rf /home/path/CUSTOMER_$NOW"
+      ],
+      "Explanations about Options": {
+        "--date": "display time described by STRING, not 'now'"
+      }
+    },
+    {
+      "Command": "awk",
+      "MP Summary": "pattern scanning and processing language",
+      "Most Similar TLDR Task": "Print the second column of the lines containing \"something\" in a space-separated file",
+      "Most Similar TLDR Script": "awk '/{{something}}/ {print $2}' {{filename}}",
+      "Most Similar NL2Bash Task": "Archive and compress all files in \"data\" directory into \"data.tar.gz\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "tar -cvf - data/* | gzip > data.tar.gz\n",
+          "command-options": {
+            "tar": {
+              "mpsum": "an archiving utility",
+              "-v": "Verbosely list files processed.",
+              "-c": "Create a new archive. Arguments supply the names of the files to be archived.\n Directories are archived recursively, unless the --no-recursion option is given."
+            }
+          },
+          "TLDR_inform": {
+            "tar": {
+              "man1_tar_33340": "archiv util\noften combin compress method gzip bzip creat compress archiv use archiv suffix determin compress program creat gzip archiv creat gzip archiv directori use rel path creat archiv file extract compress archiv current directori extract compress archiv target directori extract specif file without preserv folder structur extract file match pattern list content tar file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_679435: Trouble automounting an SD card on Trusty"
+      ],
+      "Top-3 Scripts": [
+        "au_679435: #!/bin/sh\nexport mount_point=\"/mnt/$1\"\nexisting_device=$(awk '$2 == ENVIRON[\"mount_point\"] {print $1; exit}' < /proc/mounts)\nif [ -n \"$existing_device\" ]; then\n  exit 1\nfi\nmkdir -p \"$mount_point\"\nsleep 1 # Perhaps not necessary, but in the test with the OP it was necessary\nmount \"/dev/disk/by-uuid/$2\" \"$mount_point\"\nexit 0\n\nudevadm info <b>/dev/sdc1</b> | awk -F= '/ID_FS_UUID=/ {print $2}'"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "sleep",
+      "MP Summary": "delay for a specified amount of time",
+      "Most Similar TLDR Task": "Delay in minutes",
+      "Most Similar TLDR Script": "sleep {{minutes}}m",
+      "Most Similar NL2Bash Task": "Archive and compress all files in \"data\" directory into \"data.tar.gz\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "tar -cvf - data/* | gzip > data.tar.gz\n",
+          "command-options": {
+            "tar": {
+              "mpsum": "an archiving utility",
+              "-v": "Verbosely list files processed.",
+              "-c": "Create a new archive. Arguments supply the names of the files to be archived.\n Directories are archived recursively, unless the --no-recursion option is given."
+            }
+          },
+          "TLDR_inform": {
+            "tar": {
+              "man1_tar_33340": "archiv util\noften combin compress method gzip bzip creat compress archiv use archiv suffix determin compress program creat gzip archiv creat gzip archiv directori use rel path creat archiv file extract compress archiv current directori extract compress archiv target directori extract specif file without preserv folder structur extract file match pattern list content tar file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_679435: Trouble automounting an SD card on Trusty"
+      ],
+      "Top-3 Scripts": [
+        "au_679435: #!/bin/sh\nexport mount_point=\"/mnt/$1\"\nexisting_device=$(awk '$2 == ENVIRON[\"mount_point\"] {print $1; exit}' < /proc/mounts)\nif [ -n \"$existing_device\" ]; then\n  exit 1\nfi\nmkdir -p \"$mount_point\"\nsleep 1 # Perhaps not necessary, but in the test with the OP it was necessary\nmount \"/dev/disk/by-uuid/$2\" \"$mount_point\"\nexit 0"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "line",
+      "MP Summary": "cache line size",
+      "Most Similar TLDR Task": "Read input",
+      "Most Similar TLDR Script": "line",
+      "Most Similar NL2Bash Task": "Archive and compress all files in \"data\" directory into \"data.tar.gz\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "tar -cvf - data/* | gzip > data.tar.gz\n",
+          "command-options": {
+            "tar": {
+              "mpsum": "an archiving utility",
+              "-v": "Verbosely list files processed.",
+              "-c": "Create a new archive. Arguments supply the names of the files to be archived.\n Directories are archived recursively, unless the --no-recursion option is given."
+            }
+          },
+          "TLDR_inform": {
+            "tar": {
+              "man1_tar_33340": "archiv util\noften combin compress method gzip bzip creat compress archiv use archiv suffix determin compress program creat gzip archiv creat gzip archiv directori use rel path creat archiv file extract compress archiv current directori extract compress archiv target directori extract specif file without preserv folder structur extract file match pattern list content tar file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_31110239: mysqld stops unexpectedly on t2.micro Amazon Linux instance"
+      ],
+      "Top-3 Scripts": [
+        "so_31110239: /usr/bin/mysqld_safe: line 165: /usr/bin/nohup: Cannot allocate memory"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "chown",
+      "MP Summary": "change file owner and group",
+      "Most Similar TLDR Task": "Recursively change the owner of a directory and its contents",
+      "Most Similar TLDR Script": "chown -R {{user}} {{path/to/directory}}",
+      "Most Similar NL2Bash Task": "Archive and compress all files in \"data\" directory into \"data.tar.gz\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "tar -cvf - data/* | gzip > data.tar.gz\n",
+          "command-options": {
+            "tar": {
+              "mpsum": "an archiving utility",
+              "-v": "Verbosely list files processed.",
+              "-c": "Create a new archive. Arguments supply the names of the files to be archived.\n Directories are archived recursively, unless the --no-recursion option is given."
+            }
+          },
+          "TLDR_inform": {
+            "tar": {
+              "man1_tar_33340": "archiv util\noften combin compress method gzip bzip creat compress archiv use archiv suffix determin compress program creat gzip archiv creat gzip archiv directori use rel path creat archiv file extract compress archiv current directori extract compress archiv target directori extract specif file without preserv folder structur extract file match pattern list content tar file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_213889: MicroSD card is set to Read-only state. How can I write data on it?"
+      ],
+      "Top-3 Scripts": [
+        "au_213889: sudo chown -hR <your username> <the SDHC drive, /dev/sdb for example>"
+      ],
+      "Explanations about Options": {
+        "-h": "affect symbolic links instead of any referenced file (useful only on systems that\n can change the ownership of a symlink)",
+        "-R": "operate on files and directories recursively"
+      }
+    },
+    {
+      "Command": "lsb_release",
+      "MP Summary": "print distribution-specific information",
+      "Most Similar TLDR Task": "Print a description (usually the full name) of the operating system",
+      "Most Similar TLDR Script": "lsb_release -d",
+      "Most Similar NL2Bash Task": "Archive and compress all files in \"data\" directory into \"data.tar.gz\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "tar -cvf - data/* | gzip > data.tar.gz\n",
+          "command-options": {
+            "tar": {
+              "mpsum": "an archiving utility",
+              "-v": "Verbosely list files processed.",
+              "-c": "Create a new archive. Arguments supply the names of the files to be archived.\n Directories are archived recursively, unless the --no-recursion option is given."
+            }
+          },
+          "TLDR_inform": {
+            "tar": {
+              "man1_tar_33340": "archiv util\noften combin compress method gzip bzip creat compress archiv use archiv suffix determin compress program creat gzip archiv creat gzip archiv directori use rel path creat archiv file extract compress archiv current directori extract compress archiv target directori extract specif file without preserv folder structur extract file match pattern list content tar file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_486921: How do I install a live ISO on an SD card so it boots anywhere?"
+      ],
+      "Top-3 Scripts": [
+        "ul_486921: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "rsync",
+      "MP Summary": "a fast, versatile, remote (and local) file-copying tool",
+      "Most Similar TLDR Task": "Transfer directory contents (but not the directory itself) from a remote to local",
+      "Most Similar TLDR Script": "rsync -r {{remote_host}}:{{path/to/remote_directory}}/ {{path/to/local_directory}}",
+      "Most Similar NL2Bash Task": "Archive and compress all files in \"data\" directory into \"data.tar.gz\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "tar -cvf - data/* | gzip > data.tar.gz\n",
+          "command-options": {
+            "tar": {
+              "mpsum": "an archiving utility",
+              "-v": "Verbosely list files processed.",
+              "-c": "Create a new archive. Arguments supply the names of the files to be archived.\n Directories are archived recursively, unless the --no-recursion option is given."
+            }
+          },
+          "TLDR_inform": {
+            "tar": {
+              "man1_tar_33340": "archiv util\noften combin compress method gzip bzip creat compress archiv use archiv suffix determin compress program creat gzip archiv creat gzip archiv directori use rel path creat archiv file extract compress archiv current directori extract compress archiv target directori extract specif file without preserv folder structur extract file match pattern list content tar file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_381144: Read data from damaged SD card"
+      ],
+      "Top-3 Scripts": [
+        "ul_381144: rsync -avP <yoursdcardmount> <dest>\n\nrsync -avc <yoursdcardmount> <dest>"
+      ],
+      "Explanations about Options": {
+        "-a": "This is equivalent to -rlptgoD. It is a quick way of saying you want recursion and\n want to preserve almost everything (with -H being a notable omission). The only\n exception to the above equivalence is when --files-from is specified, in which case\n -r is not implied.",
+        "-v": "This option increases the amount of information you are given during the transfer.\n By default, rsync works silently. A single -v will give you information about what\n files are being transferred and a brief summary at the end. Two -v options will\n give you information on what files are being skipped and slightly more information\n at the end. More than two -v options should only be used if you are debugging\n rsync."
+      }
+    },
+    {
+      "Command": "find",
+      "MP Summary": "search for files in a directory hierarchy",
+      "Most Similar TLDR Task": "Find files modified in the last 7 days, and delete them",
+      "Most Similar TLDR Script": "find {{root_path}} -mtime {{-7}} -delete",
+      "Most Similar NL2Bash Task": "Archive and compress all files in \"data\" directory into \"data.tar.gz\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "tar -cvf - data/* | gzip > data.tar.gz\n",
+          "command-options": {
+            "tar": {
+              "mpsum": "an archiving utility",
+              "-v": "Verbosely list files processed.",
+              "-c": "Create a new archive. Arguments supply the names of the files to be archived.\n Directories are archived recursively, unless the --no-recursion option is given."
+            }
+          },
+          "TLDR_inform": {
+            "tar": {
+              "man1_tar_33340": "archiv util\noften combin compress method gzip bzip creat compress archiv use archiv suffix determin compress program creat gzip archiv creat gzip archiv directori use rel path creat archiv file extract compress archiv current directori extract compress archiv target directori extract specif file without preserv folder structur extract file match pattern list content tar file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_213889: MicroSD card is set to Read-only state. How can I write data on it?"
+      ],
+      "Top-3 Scripts": [
+        "au_213889: sudo mount --options remount,rw <the SDHC drive, /dev/sdb for example, find it using fdisk -l>"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "test",
+      "MP Summary": "check file types and compare values",
+      "Most Similar TLDR Task": "Test if given variable is empty",
+      "Most Similar TLDR Script": "test -z $GIT_BRANCH",
+      "Most Similar NL2Bash Task": "Archive and compress all files in \"data\" directory into \"data.tar.gz\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "tar -cvf - data/* | gzip > data.tar.gz\n",
+          "command-options": {
+            "tar": {
+              "mpsum": "an archiving utility",
+              "-v": "Verbosely list files processed.",
+              "-c": "Create a new archive. Arguments supply the names of the files to be archived.\n Directories are archived recursively, unless the --no-recursion option is given."
+            }
+          },
+          "TLDR_inform": {
+            "tar": {
+              "man1_tar_33340": "archiv util\noften combin compress method gzip bzip creat compress archiv use archiv suffix determin compress program creat gzip archiv creat gzip archiv directori use rel path creat archiv file extract compress archiv current directori extract compress archiv target directori extract specif file without preserv folder structur extract file match pattern list content tar file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_679435: Trouble automounting an SD card on Trusty"
+      ],
+      "Top-3 Scripts": [
+        "au_679435: #!/bin/sh\nexport mount_point=\"/mnt/$1\"\nexisting_device=$(awk '$2 == ENVIRON[\"mount_point\"] {print $1; exit}' < /proc/mounts)\nif [ -n \"$existing_device\" ]; then\n  exit 1\nfi\nmkdir -p \"$mount_point\"\nsleep 1 # Perhaps not necessary, but in the test with the OP it was necessary\nmount \"/dev/disk/by-uuid/$2\" \"$mount_point\"\nexit 0"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "cat",
+      "MP Summary": "concatenate files and print on the standard output",
+      "Most Similar TLDR Task": "Concatenate several files into the target file",
+      "Most Similar TLDR Script": "cat {{file1}} {{file2}} > {{target_file}}",
+      "Most Similar NL2Bash Task": "Archive and compress all files in \"data\" directory into \"data.tar.gz\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "tar -cvf - data/* | gzip > data.tar.gz\n",
+          "command-options": {
+            "tar": {
+              "mpsum": "an archiving utility",
+              "-v": "Verbosely list files processed.",
+              "-c": "Create a new archive. Arguments supply the names of the files to be archived.\n Directories are archived recursively, unless the --no-recursion option is given."
+            }
+          },
+          "TLDR_inform": {
+            "tar": {
+              "man1_tar_33340": "archiv util\noften combin compress method gzip bzip creat compress archiv use archiv suffix determin compress program creat gzip archiv creat gzip archiv directori use rel path creat archiv file extract compress archiv current directori extract compress archiv target directori extract specif file without preserv folder structur extract file match pattern list content tar file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_14560: How to recover data from a bad SD card?"
+      ],
+      "Top-3 Scripts": [
+        "ul_14560: cat /proc/partitions"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "export",
+      "MP Summary": "set the export attribute for variables",
+      "Most Similar TLDR Task": "Remove an environment variable",
+      "Most Similar TLDR Script": "export -n {{VARIABLE}}",
+      "Most Similar NL2Bash Task": "Archive and compress all files in \"data\" directory into \"data.tar.gz\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "tar -cvf - data/* | gzip > data.tar.gz\n",
+          "command-options": {
+            "tar": {
+              "mpsum": "an archiving utility",
+              "-v": "Verbosely list files processed.",
+              "-c": "Create a new archive. Arguments supply the names of the files to be archived.\n Directories are archived recursively, unless the --no-recursion option is given."
+            }
+          },
+          "TLDR_inform": {
+            "tar": {
+              "man1_tar_33340": "archiv util\noften combin compress method gzip bzip creat compress archiv use archiv suffix determin compress program creat gzip archiv creat gzip archiv directori use rel path creat archiv file extract compress archiv current directori extract compress archiv target directori extract specif file without preserv folder structur extract file match pattern list content tar file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_679435: Trouble automounting an SD card on Trusty"
+      ],
+      "Top-3 Scripts": [
+        "au_679435: #!/bin/sh\nexport mount_point=\"/mnt/$1\"\nexisting_device=$(awk '$2 == ENVIRON[\"mount_point\"] {print $1; exit}' < /proc/mounts)\nif [ -n \"$existing_device\" ]; then\n  exit 1\nfi\nmkdir -p \"$mount_point\"\nsleep 1 # Perhaps not necessary, but in the test with the OP it was necessary\nmount \"/dev/disk/by-uuid/$2\" \"$mount_point\"\nexit 0"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "edit",
+      "MP Summary": "execute programs via entries in the mailcap file",
+      "Most Similar TLDR Task": "Edit action can be used to view any file on default mailcap explorer",
+      "Most Similar TLDR Script": "edit {{filename}}",
+      "Most Similar NL2Bash Task": "Archive and compress all files in \"data\" directory into \"data.tar.gz\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "tar -cvf - data/* | gzip > data.tar.gz\n",
+          "command-options": {
+            "tar": {
+              "mpsum": "an archiving utility",
+              "-v": "Verbosely list files processed.",
+              "-c": "Create a new archive. Arguments supply the names of the files to be archived.\n Directories are archived recursively, unless the --no-recursion option is given."
+            }
+          },
+          "TLDR_inform": {
+            "tar": {
+              "man1_tar_33340": "archiv util\noften combin compress method gzip bzip creat compress archiv use archiv suffix determin compress program creat gzip archiv creat gzip archiv directori use rel path creat archiv file extract compress archiv current directori extract compress archiv target directori extract specif file without preserv folder structur extract file match pattern list content tar file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_486921: How do I install a live ISO on an SD card so it boots anywhere?"
+      ],
+      "Top-3 Scripts": [
+        "ul_486921: sudo lsblk -f             # identify the drive and check the UUID\nsudo mount /dev/sdX /mnt  # mount the drive that contains grub.cfg\nsudo nano /mnt/boot/grub/grub.cfg  # edit grub.cfg"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "passwd",
+      "MP Summary": "change user password",
+      "Most Similar TLDR Task": "Change the password of the specified user",
+      "Most Similar TLDR Script": "passwd {{username}} {{new_password}}",
+      "Most Similar NL2Bash Task": "Archive and compress all files in \"data\" directory into \"data.tar.gz\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "tar -cvf - data/* | gzip > data.tar.gz\n",
+          "command-options": {
+            "tar": {
+              "mpsum": "an archiving utility",
+              "-v": "Verbosely list files processed.",
+              "-c": "Create a new archive. Arguments supply the names of the files to be archived.\n Directories are archived recursively, unless the --no-recursion option is given."
+            }
+          },
+          "TLDR_inform": {
+            "tar": {
+              "man1_tar_33340": "archiv util\noften combin compress method gzip bzip creat compress archiv use archiv suffix determin compress program creat gzip archiv creat gzip archiv directori use rel path creat archiv file extract compress archiv current directori extract compress archiv target directori extract specif file without preserv folder structur extract file match pattern list content tar file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_425027: How to recover password from ubuntu installed on sd card?"
+      ],
+      "Top-3 Scripts": [
+        "au_425027: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "id",
+      "MP Summary": "print real and effective user and group IDs",
+      "Most Similar TLDR Task": "Display the current user identity as a number",
+      "Most Similar TLDR Script": "id -u",
+      "Most Similar NL2Bash Task": "Archive and compress all files in \"data\" directory into \"data.tar.gz\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "tar -cvf - data/* | gzip > data.tar.gz\n",
+          "command-options": {
+            "tar": {
+              "mpsum": "an archiving utility",
+              "-v": "Verbosely list files processed.",
+              "-c": "Create a new archive. Arguments supply the names of the files to be archived.\n Directories are archived recursively, unless the --no-recursion option is given."
+            }
+          },
+          "TLDR_inform": {
+            "tar": {
+              "man1_tar_33340": "archiv util\noften combin compress method gzip bzip creat compress archiv use archiv suffix determin compress program creat gzip archiv creat gzip archiv directori use rel path creat archiv file extract compress archiv current directori extract compress archiv target directori extract specif file without preserv folder structur extract file match pattern list content tar file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_547451: Use RFID card on Ubuntu"
+      ],
+      "Top-3 Scripts": [
+        "au_547451: "
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

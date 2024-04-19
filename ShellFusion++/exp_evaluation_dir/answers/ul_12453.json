@@ -1,0 +1,1052 @@
+{
+  "Query": "How to determine Linux kernel architecture?",
+  "Answers": [
+    {
+      "Command": "find",
+      "MP Summary": "search for files in a directory hierarchy",
+      "Most Similar TLDR Task": "Find files modified in the last 7 days, and delete them",
+      "Most Similar TLDR Script": "find {{root_path}} -mtime {{-7}} -delete",
+      "Most Similar NL2Bash Task": "Get the disk space used by all *.txt (case insensitive) files/directories under current directory",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -iname \"*.txt\" -exec du -b {} + | awk '{total += $1} END {print total}'\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-iname": "Like -name, but the match is case insensitive. For example, the patterns `fo*' and\n `F??' match the file names `Foo', `FOO', `foo', `fOo', etc. The pattern `*foo*`\n will also match a file called '.foobar'."
+            },
+            "du": {
+              "mpsum": "estimate file space usage",
+              "-b": "equivalent to '--apparent-size --block-size=1'"
+            },
+            "awk": {
+              "mpsum": "pattern scanning and processing language"
+            },
+            "print": {
+              "mpsum": "execute programs via entries in the mailcap file"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "du": {
+              "man1_du_7710": "disk usag : estim summar file directori space usag list human-read size jpg file subdirectori current directori show cumul total end list human-read size directori subdirectori n level deep list human-read size directori file directori within list size directori subdirectori human-read form e\nauto-select appropri unit size list size directori subdirectori given unit b kb mb show size singl directori human readabl unit"
+            },
+            "awk": {
+              "man1_awk_1998": "versatil program languag work file print valu start third column print differ valu base condit print everi third line start first line print fifth column k\nfield space-separ file print last column line file use comma instead space field separ print second column line contain someth space-separ file sum valu first column pretty-print valu total sum valu first column file print total"
+            },
+            "print": {
+              "man1_print_27217": "alia run-mailcap action print\norigin run-mailcap use process mime-typ file print action use print file default run-mailcap tool run-mailcap"
+            }
+          }
+        },
+        "1": {
+          "script": "find . -name \"*.txt\" -print0 |xargs -0 du -ch | tail -n1\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-print0": "Always print the exact filename, unchanged, even if the output is going to a\n terminal."
+            },
+            "xargs": {
+              "mpsum": "build and execute command lines from standard input",
+              "-0": "Input items are terminated by a null character instead of by whitespace, and the\n quotes and backslash are not special (every character is taken literally).\n Disables the end of file string, which is treated like any other argument. Useful\n when input items might contain white space, quote marks, or backslashes. The GNU\n find -print0 option produces input suitable for this mode."
+            },
+            "du": {
+              "mpsum": "estimate file space usage",
+              "-c": "produce a grand total",
+              "-h": "print sizes in human readable format (e.g., 1K 234M 2G)"
+            },
+            "tail": {
+              "mpsum": "output the last part of files"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "xargs": {
+              "man1_xargs_37433": "execut command pipe argument come anoth command file etc\ninput treat singl block text split separ piec space tab newlin end-of-fil delet file backup extens -print0 use null charact split file name -0 use delimit execut command input line replac occurr placehold mark _ input line parallel run max-proc process time default 1 max-proc 0 xarg run mani process possibl time run command use input data argument run multipl chain command input data"
+            },
+            "du": {
+              "man1_du_7710": "disk usag : estim summar file directori space usag list human-read size jpg file subdirectori current directori show cumul total end list human-read size directori subdirectori n level deep list human-read size directori file directori within list size directori subdirectori human-read form e\nauto-select appropri unit size list size directori subdirectori given unit b kb mb show size singl directori human readabl unit"
+            },
+            "tail": {
+              "man1_tail_33304": "display last part file keep read file ctrl + c keep read file ctrl + c even file rotat show file sinc line num show last num byte file show last num line file refresh everi n second show last num line file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_6832: find all files and directories under the current directory and display the inode of each one, using printf",
+        "nl2bash_14238: List all *jsp and *java regular files found in the current directory tree",
+        "nl2bash_14237: List all *fink* files/directories under current directory"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_6832: find . -printf \"%i \\n\"",
+        "nl2bash_14238: find . \\( -name '*jsp' -o -name '*java' \\) -type f -ls",
+        "nl2bash_14237: find . -name \"*fink*\" |xargs ls -l"
+      ],
+      "Explanations about Options": {
+        "-ls": "Unusual characters are always escaped. White space, backslash, and double quote\n characters are printed using C-style escaping (for example `\\f', `\\\"'). Other\n unusual characters are printed using an octal escape. Other printable characters\n (for -ls and -fls these are the characters between octal 041 and 0176) are printed\n as-is.",
+        "-type": "File is of type c:",
+        "-printf": "True; print format on the standard output, interpreting `\\' escapes and `%'\n directives. Field widths and precisions can be specified as with the `printf' C\n function. Please note that many of the fields are printed as %s rather than %d,\n and this may mean that flags don't work as you might expect. This also means that\n the `-' flag does work (it forces fields to be left-aligned). Unlike -print,\n -printf does not add a newline at the end of the string. The escapes and\n directives are:",
+        "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+      }
+    },
+    {
+      "Command": "xargs",
+      "MP Summary": "build and execute command lines from standard input",
+      "Most Similar TLDR Task": "Parallel runs of up to `max-procs` processes at a time; the default is 1. If `max-procs` is 0, xargs will run as many processes as possible at a time",
+      "Most Similar TLDR Script": "{{arguments_source}} | xargs -P {{max-procs}} {{command}}",
+      "Most Similar NL2Bash Task": "Get the disk space used by all *.txt (case insensitive) files/directories under current directory",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -iname \"*.txt\" -exec du -b {} + | awk '{total += $1} END {print total}'\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-iname": "Like -name, but the match is case insensitive. For example, the patterns `fo*' and\n `F??' match the file names `Foo', `FOO', `foo', `fOo', etc. The pattern `*foo*`\n will also match a file called '.foobar'."
+            },
+            "du": {
+              "mpsum": "estimate file space usage",
+              "-b": "equivalent to '--apparent-size --block-size=1'"
+            },
+            "awk": {
+              "mpsum": "pattern scanning and processing language"
+            },
+            "print": {
+              "mpsum": "execute programs via entries in the mailcap file"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "du": {
+              "man1_du_7710": "disk usag : estim summar file directori space usag list human-read size jpg file subdirectori current directori show cumul total end list human-read size directori subdirectori n level deep list human-read size directori file directori within list size directori subdirectori human-read form e\nauto-select appropri unit size list size directori subdirectori given unit b kb mb show size singl directori human readabl unit"
+            },
+            "awk": {
+              "man1_awk_1998": "versatil program languag work file print valu start third column print differ valu base condit print everi third line start first line print fifth column k\nfield space-separ file print last column line file use comma instead space field separ print second column line contain someth space-separ file sum valu first column pretty-print valu total sum valu first column file print total"
+            },
+            "print": {
+              "man1_print_27217": "alia run-mailcap action print\norigin run-mailcap use process mime-typ file print action use print file default run-mailcap tool run-mailcap"
+            }
+          }
+        },
+        "1": {
+          "script": "find . -name \"*.txt\" -print0 |xargs -0 du -ch | tail -n1\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-print0": "Always print the exact filename, unchanged, even if the output is going to a\n terminal."
+            },
+            "xargs": {
+              "mpsum": "build and execute command lines from standard input",
+              "-0": "Input items are terminated by a null character instead of by whitespace, and the\n quotes and backslash are not special (every character is taken literally).\n Disables the end of file string, which is treated like any other argument. Useful\n when input items might contain white space, quote marks, or backslashes. The GNU\n find -print0 option produces input suitable for this mode."
+            },
+            "du": {
+              "mpsum": "estimate file space usage",
+              "-c": "produce a grand total",
+              "-h": "print sizes in human readable format (e.g., 1K 234M 2G)"
+            },
+            "tail": {
+              "mpsum": "output the last part of files"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "xargs": {
+              "man1_xargs_37433": "execut command pipe argument come anoth command file etc\ninput treat singl block text split separ piec space tab newlin end-of-fil delet file backup extens -print0 use null charact split file name -0 use delimit execut command input line replac occurr placehold mark _ input line parallel run max-proc process time default 1 max-proc 0 xarg run mani process possibl time run command use input data argument run multipl chain command input data"
+            },
+            "du": {
+              "man1_du_7710": "disk usag : estim summar file directori space usag list human-read size jpg file subdirectori current directori show cumul total end list human-read size directori subdirectori n level deep list human-read size directori file directori within list size directori subdirectori human-read form e\nauto-select appropri unit size list size directori subdirectori given unit b kb mb show size singl directori human readabl unit"
+            },
+            "tail": {
+              "man1_tail_33304": "display last part file keep read file ctrl + c keep read file ctrl + c even file rotat show file sinc line num show last num byte file show last num line file refresh everi n second show last num line file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_14237: List all *fink* files/directories under current directory",
+        "nl2bash_14235: List all *.txt files/directories under current directory ensuring white space safety",
+        "nl2bash_4295: Find all regular files residing in the current directory tree and search them for string \"/bin/ksh\""
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_14237: find . -name \"*fink*\" |xargs ls -l",
+        "nl2bash_14235: find . -name '*.txt' -print0|xargs -0 -n 1 echo",
+        "nl2bash_4295: find . -type f -print | xargs grep -i 'bin/ksh'"
+      ],
+      "Explanations about Options": {
+        "-0": "Input items are terminated by a null character instead of by whitespace, and the\n quotes and backslash are not special (every character is taken literally).\n Disables the end of file string, which is treated like any other argument. Useful\n when input items might contain white space, quote marks, or backslashes. The GNU\n find -print0 option produces input suitable for this mode.",
+        "-n": "Use at most max-args arguments per command line. Fewer than max-args arguments\n will be used if the size (see the -s option) is exceeded, unless the -x option is\n given, in which case xargs will exit."
+      }
+    },
+    {
+      "Command": "du",
+      "MP Summary": "estimate file space usage",
+      "Most Similar TLDR Task": "Show the size of a single directory, in human readable units",
+      "Most Similar TLDR Script": "du -sh {{path/to/directory}}",
+      "Most Similar NL2Bash Task": "Get the disk space used by all *.txt (case insensitive) files/directories under current directory",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -iname \"*.txt\" -exec du -b {} + | awk '{total += $1} END {print total}'\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-iname": "Like -name, but the match is case insensitive. For example, the patterns `fo*' and\n `F??' match the file names `Foo', `FOO', `foo', `fOo', etc. The pattern `*foo*`\n will also match a file called '.foobar'."
+            },
+            "du": {
+              "mpsum": "estimate file space usage",
+              "-b": "equivalent to '--apparent-size --block-size=1'"
+            },
+            "awk": {
+              "mpsum": "pattern scanning and processing language"
+            },
+            "print": {
+              "mpsum": "execute programs via entries in the mailcap file"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "du": {
+              "man1_du_7710": "disk usag : estim summar file directori space usag list human-read size jpg file subdirectori current directori show cumul total end list human-read size directori subdirectori n level deep list human-read size directori file directori within list size directori subdirectori human-read form e\nauto-select appropri unit size list size directori subdirectori given unit b kb mb show size singl directori human readabl unit"
+            },
+            "awk": {
+              "man1_awk_1998": "versatil program languag work file print valu start third column print differ valu base condit print everi third line start first line print fifth column k\nfield space-separ file print last column line file use comma instead space field separ print second column line contain someth space-separ file sum valu first column pretty-print valu total sum valu first column file print total"
+            },
+            "print": {
+              "man1_print_27217": "alia run-mailcap action print\norigin run-mailcap use process mime-typ file print action use print file default run-mailcap tool run-mailcap"
+            }
+          }
+        },
+        "1": {
+          "script": "find . -name \"*.txt\" -print0 |xargs -0 du -ch | tail -n1\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-print0": "Always print the exact filename, unchanged, even if the output is going to a\n terminal."
+            },
+            "xargs": {
+              "mpsum": "build and execute command lines from standard input",
+              "-0": "Input items are terminated by a null character instead of by whitespace, and the\n quotes and backslash are not special (every character is taken literally).\n Disables the end of file string, which is treated like any other argument. Useful\n when input items might contain white space, quote marks, or backslashes. The GNU\n find -print0 option produces input suitable for this mode."
+            },
+            "du": {
+              "mpsum": "estimate file space usage",
+              "-c": "produce a grand total",
+              "-h": "print sizes in human readable format (e.g., 1K 234M 2G)"
+            },
+            "tail": {
+              "mpsum": "output the last part of files"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "xargs": {
+              "man1_xargs_37433": "execut command pipe argument come anoth command file etc\ninput treat singl block text split separ piec space tab newlin end-of-fil delet file backup extens -print0 use null charact split file name -0 use delimit execut command input line replac occurr placehold mark _ input line parallel run max-proc process time default 1 max-proc 0 xarg run mani process possibl time run command use input data argument run multipl chain command input data"
+            },
+            "du": {
+              "man1_du_7710": "disk usag : estim summar file directori space usag list human-read size jpg file subdirectori current directori show cumul total end list human-read size directori subdirectori n level deep list human-read size directori file directori within list size directori subdirectori human-read form e\nauto-select appropri unit size list size directori subdirectori given unit b kb mb show size singl directori human readabl unit"
+            },
+            "tail": {
+              "man1_tail_33304": "display last part file keep read file ctrl + c keep read file ctrl + c even file rotat show file sinc line num show last num byte file show last num line file refresh everi n second show last num line file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_113: Get the disk space used by all *.txt (case insensitive) files/directories under current directory"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_113: find . -iname \"*.txt\" -exec du -b {} + | awk '{total += $1} END {print total}'\n\n\nfind . -name \"*.txt\" -print0 |xargs -0 du -ch | tail -n1"
+      ],
+      "Explanations about Options": {
+        "-h": "print sizes in human readable format (e.g., 1K 234M 2G)",
+        "-c": "produce a grand total"
+      }
+    },
+    {
+      "Command": "echo",
+      "MP Summary": "display a line of text",
+      "Most Similar TLDR Task": "Print a message with environment variables",
+      "Most Similar TLDR Script": "echo \"{{My path is $PATH}}\"",
+      "Most Similar NL2Bash Task": "Get the disk space used by all *.txt (case insensitive) files/directories under current directory",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -iname \"*.txt\" -exec du -b {} + | awk '{total += $1} END {print total}'\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-iname": "Like -name, but the match is case insensitive. For example, the patterns `fo*' and\n `F??' match the file names `Foo', `FOO', `foo', `fOo', etc. The pattern `*foo*`\n will also match a file called '.foobar'."
+            },
+            "du": {
+              "mpsum": "estimate file space usage",
+              "-b": "equivalent to '--apparent-size --block-size=1'"
+            },
+            "awk": {
+              "mpsum": "pattern scanning and processing language"
+            },
+            "print": {
+              "mpsum": "execute programs via entries in the mailcap file"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "du": {
+              "man1_du_7710": "disk usag : estim summar file directori space usag list human-read size jpg file subdirectori current directori show cumul total end list human-read size directori subdirectori n level deep list human-read size directori file directori within list size directori subdirectori human-read form e\nauto-select appropri unit size list size directori subdirectori given unit b kb mb show size singl directori human readabl unit"
+            },
+            "awk": {
+              "man1_awk_1998": "versatil program languag work file print valu start third column print differ valu base condit print everi third line start first line print fifth column k\nfield space-separ file print last column line file use comma instead space field separ print second column line contain someth space-separ file sum valu first column pretty-print valu total sum valu first column file print total"
+            },
+            "print": {
+              "man1_print_27217": "alia run-mailcap action print\norigin run-mailcap use process mime-typ file print action use print file default run-mailcap tool run-mailcap"
+            }
+          }
+        },
+        "1": {
+          "script": "find . -name \"*.txt\" -print0 |xargs -0 du -ch | tail -n1\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-print0": "Always print the exact filename, unchanged, even if the output is going to a\n terminal."
+            },
+            "xargs": {
+              "mpsum": "build and execute command lines from standard input",
+              "-0": "Input items are terminated by a null character instead of by whitespace, and the\n quotes and backslash are not special (every character is taken literally).\n Disables the end of file string, which is treated like any other argument. Useful\n when input items might contain white space, quote marks, or backslashes. The GNU\n find -print0 option produces input suitable for this mode."
+            },
+            "du": {
+              "mpsum": "estimate file space usage",
+              "-c": "produce a grand total",
+              "-h": "print sizes in human readable format (e.g., 1K 234M 2G)"
+            },
+            "tail": {
+              "mpsum": "output the last part of files"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "xargs": {
+              "man1_xargs_37433": "execut command pipe argument come anoth command file etc\ninput treat singl block text split separ piec space tab newlin end-of-fil delet file backup extens -print0 use null charact split file name -0 use delimit execut command input line replac occurr placehold mark _ input line parallel run max-proc process time default 1 max-proc 0 xarg run mani process possibl time run command use input data argument run multipl chain command input data"
+            },
+            "du": {
+              "man1_du_7710": "disk usag : estim summar file directori space usag list human-read size jpg file subdirectori current directori show cumul total end list human-read size directori subdirectori n level deep list human-read size directori file directori within list size directori subdirectori human-read form e\nauto-select appropri unit size list size directori subdirectori given unit b kb mb show size singl directori human readabl unit"
+            },
+            "tail": {
+              "man1_tail_33304": "display last part file keep read file ctrl + c keep read file ctrl + c even file rotat show file sinc line num show last num byte file show last num line file refresh everi n second show last num line file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_14235: List all *.txt files/directories under current directory ensuring white space safety",
+        "nl2bash_14234: List all *.txt files/directories under current directory"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_14235: find . -name '*.txt' -print0|xargs -0 -n 1 echo",
+        "nl2bash_14234: find . -name '*.txt' -exec echo \"{}\" \\;"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "dig",
+      "MP Summary": "DNS lookup utility",
+      "Most Similar TLDR Task": "Specify an alternate DNS server to query",
+      "Most Similar TLDR Script": "dig @{{8.8.8.8}} {{example.com}}",
+      "Most Similar NL2Bash Task": "Get the disk space used by all *.txt (case insensitive) files/directories under current directory",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -iname \"*.txt\" -exec du -b {} + | awk '{total += $1} END {print total}'\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-iname": "Like -name, but the match is case insensitive. For example, the patterns `fo*' and\n `F??' match the file names `Foo', `FOO', `foo', `fOo', etc. The pattern `*foo*`\n will also match a file called '.foobar'."
+            },
+            "du": {
+              "mpsum": "estimate file space usage",
+              "-b": "equivalent to '--apparent-size --block-size=1'"
+            },
+            "awk": {
+              "mpsum": "pattern scanning and processing language"
+            },
+            "print": {
+              "mpsum": "execute programs via entries in the mailcap file"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "du": {
+              "man1_du_7710": "disk usag : estim summar file directori space usag list human-read size jpg file subdirectori current directori show cumul total end list human-read size directori subdirectori n level deep list human-read size directori file directori within list size directori subdirectori human-read form e\nauto-select appropri unit size list size directori subdirectori given unit b kb mb show size singl directori human readabl unit"
+            },
+            "awk": {
+              "man1_awk_1998": "versatil program languag work file print valu start third column print differ valu base condit print everi third line start first line print fifth column k\nfield space-separ file print last column line file use comma instead space field separ print second column line contain someth space-separ file sum valu first column pretty-print valu total sum valu first column file print total"
+            },
+            "print": {
+              "man1_print_27217": "alia run-mailcap action print\norigin run-mailcap use process mime-typ file print action use print file default run-mailcap tool run-mailcap"
+            }
+          }
+        },
+        "1": {
+          "script": "find . -name \"*.txt\" -print0 |xargs -0 du -ch | tail -n1\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-print0": "Always print the exact filename, unchanged, even if the output is going to a\n terminal."
+            },
+            "xargs": {
+              "mpsum": "build and execute command lines from standard input",
+              "-0": "Input items are terminated by a null character instead of by whitespace, and the\n quotes and backslash are not special (every character is taken literally).\n Disables the end of file string, which is treated like any other argument. Useful\n when input items might contain white space, quote marks, or backslashes. The GNU\n find -print0 option produces input suitable for this mode."
+            },
+            "du": {
+              "mpsum": "estimate file space usage",
+              "-c": "produce a grand total",
+              "-h": "print sizes in human readable format (e.g., 1K 234M 2G)"
+            },
+            "tail": {
+              "mpsum": "output the last part of files"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "xargs": {
+              "man1_xargs_37433": "execut command pipe argument come anoth command file etc\ninput treat singl block text split separ piec space tab newlin end-of-fil delet file backup extens -print0 use null charact split file name -0 use delimit execut command input line replac occurr placehold mark _ input line parallel run max-proc process time default 1 max-proc 0 xarg run mani process possibl time run command use input data argument run multipl chain command input data"
+            },
+            "du": {
+              "man1_du_7710": "disk usag : estim summar file directori space usag list human-read size jpg file subdirectori current directori show cumul total end list human-read size directori subdirectori n level deep list human-read size directori file directori within list size directori subdirectori human-read form e\nauto-select appropri unit size list size directori subdirectori given unit b kb mb show size singl directori human readabl unit"
+            },
+            "tail": {
+              "man1_tail_33304": "display last part file keep read file ctrl + c keep read file ctrl + c even file rotat show file sinc line num show last num byte file show last num line file refresh everi n second show last num line file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_90: Get domain \"$domain\" IP address"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_90: dig +short \"$domain\""
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "print",
+      "MP Summary": "execute programs via entries in the mailcap file",
+      "Most Similar TLDR Task": "With `run-mailcap`",
+      "Most Similar TLDR Script": "run-mailcap --action=print {{filename}}",
+      "Most Similar NL2Bash Task": "Get the disk space used by all *.txt (case insensitive) files/directories under current directory",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -iname \"*.txt\" -exec du -b {} + | awk '{total += $1} END {print total}'\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-iname": "Like -name, but the match is case insensitive. For example, the patterns `fo*' and\n `F??' match the file names `Foo', `FOO', `foo', `fOo', etc. The pattern `*foo*`\n will also match a file called '.foobar'."
+            },
+            "du": {
+              "mpsum": "estimate file space usage",
+              "-b": "equivalent to '--apparent-size --block-size=1'"
+            },
+            "awk": {
+              "mpsum": "pattern scanning and processing language"
+            },
+            "print": {
+              "mpsum": "execute programs via entries in the mailcap file"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "du": {
+              "man1_du_7710": "disk usag : estim summar file directori space usag list human-read size jpg file subdirectori current directori show cumul total end list human-read size directori subdirectori n level deep list human-read size directori file directori within list size directori subdirectori human-read form e\nauto-select appropri unit size list size directori subdirectori given unit b kb mb show size singl directori human readabl unit"
+            },
+            "awk": {
+              "man1_awk_1998": "versatil program languag work file print valu start third column print differ valu base condit print everi third line start first line print fifth column k\nfield space-separ file print last column line file use comma instead space field separ print second column line contain someth space-separ file sum valu first column pretty-print valu total sum valu first column file print total"
+            },
+            "print": {
+              "man1_print_27217": "alia run-mailcap action print\norigin run-mailcap use process mime-typ file print action use print file default run-mailcap tool run-mailcap"
+            }
+          }
+        },
+        "1": {
+          "script": "find . -name \"*.txt\" -print0 |xargs -0 du -ch | tail -n1\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-print0": "Always print the exact filename, unchanged, even if the output is going to a\n terminal."
+            },
+            "xargs": {
+              "mpsum": "build and execute command lines from standard input",
+              "-0": "Input items are terminated by a null character instead of by whitespace, and the\n quotes and backslash are not special (every character is taken literally).\n Disables the end of file string, which is treated like any other argument. Useful\n when input items might contain white space, quote marks, or backslashes. The GNU\n find -print0 option produces input suitable for this mode."
+            },
+            "du": {
+              "mpsum": "estimate file space usage",
+              "-c": "produce a grand total",
+              "-h": "print sizes in human readable format (e.g., 1K 234M 2G)"
+            },
+            "tail": {
+              "mpsum": "output the last part of files"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "xargs": {
+              "man1_xargs_37433": "execut command pipe argument come anoth command file etc\ninput treat singl block text split separ piec space tab newlin end-of-fil delet file backup extens -print0 use null charact split file name -0 use delimit execut command input line replac occurr placehold mark _ input line parallel run max-proc process time default 1 max-proc 0 xarg run mani process possibl time run command use input data argument run multipl chain command input data"
+            },
+            "du": {
+              "man1_du_7710": "disk usag : estim summar file directori space usag list human-read size jpg file subdirectori current directori show cumul total end list human-read size directori subdirectori n level deep list human-read size directori file directori within list size directori subdirectori human-read form e\nauto-select appropri unit size list size directori subdirectori given unit b kb mb show size singl directori human readabl unit"
+            },
+            "tail": {
+              "man1_tail_33304": "display last part file keep read file ctrl + c keep read file ctrl + c even file rotat show file sinc line num show last num byte file show last num line file refresh everi n second show last num line file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_113: Get the disk space used by all *.txt (case insensitive) files/directories under current directory"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_113: find . -iname \"*.txt\" -exec du -b {} + | awk '{total += $1} END {print total}'"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "awk",
+      "MP Summary": "pattern scanning and processing language",
+      "Most Similar TLDR Task": "Print different values based on conditions",
+      "Most Similar TLDR Script": "awk '{if ($1 == \"foo\") print \"Exact match foo\"; else if ($1 ~ \"bar\") print \"Partial match bar\"; else print \"Baz\"}' {{filename}}",
+      "Most Similar NL2Bash Task": "Get the disk space used by all *.txt (case insensitive) files/directories under current directory",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -iname \"*.txt\" -exec du -b {} + | awk '{total += $1} END {print total}'\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-iname": "Like -name, but the match is case insensitive. For example, the patterns `fo*' and\n `F??' match the file names `Foo', `FOO', `foo', `fOo', etc. The pattern `*foo*`\n will also match a file called '.foobar'."
+            },
+            "du": {
+              "mpsum": "estimate file space usage",
+              "-b": "equivalent to '--apparent-size --block-size=1'"
+            },
+            "awk": {
+              "mpsum": "pattern scanning and processing language"
+            },
+            "print": {
+              "mpsum": "execute programs via entries in the mailcap file"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "du": {
+              "man1_du_7710": "disk usag : estim summar file directori space usag list human-read size jpg file subdirectori current directori show cumul total end list human-read size directori subdirectori n level deep list human-read size directori file directori within list size directori subdirectori human-read form e\nauto-select appropri unit size list size directori subdirectori given unit b kb mb show size singl directori human readabl unit"
+            },
+            "awk": {
+              "man1_awk_1998": "versatil program languag work file print valu start third column print differ valu base condit print everi third line start first line print fifth column k\nfield space-separ file print last column line file use comma instead space field separ print second column line contain someth space-separ file sum valu first column pretty-print valu total sum valu first column file print total"
+            },
+            "print": {
+              "man1_print_27217": "alia run-mailcap action print\norigin run-mailcap use process mime-typ file print action use print file default run-mailcap tool run-mailcap"
+            }
+          }
+        },
+        "1": {
+          "script": "find . -name \"*.txt\" -print0 |xargs -0 du -ch | tail -n1\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-print0": "Always print the exact filename, unchanged, even if the output is going to a\n terminal."
+            },
+            "xargs": {
+              "mpsum": "build and execute command lines from standard input",
+              "-0": "Input items are terminated by a null character instead of by whitespace, and the\n quotes and backslash are not special (every character is taken literally).\n Disables the end of file string, which is treated like any other argument. Useful\n when input items might contain white space, quote marks, or backslashes. The GNU\n find -print0 option produces input suitable for this mode."
+            },
+            "du": {
+              "mpsum": "estimate file space usage",
+              "-c": "produce a grand total",
+              "-h": "print sizes in human readable format (e.g., 1K 234M 2G)"
+            },
+            "tail": {
+              "mpsum": "output the last part of files"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "xargs": {
+              "man1_xargs_37433": "execut command pipe argument come anoth command file etc\ninput treat singl block text split separ piec space tab newlin end-of-fil delet file backup extens -print0 use null charact split file name -0 use delimit execut command input line replac occurr placehold mark _ input line parallel run max-proc process time default 1 max-proc 0 xarg run mani process possibl time run command use input data argument run multipl chain command input data"
+            },
+            "du": {
+              "man1_du_7710": "disk usag : estim summar file directori space usag list human-read size jpg file subdirectori current directori show cumul total end list human-read size directori subdirectori n level deep list human-read size directori file directori within list size directori subdirectori human-read form e\nauto-select appropri unit size list size directori subdirectori given unit b kb mb show size singl directori human readabl unit"
+            },
+            "tail": {
+              "man1_tail_33304": "display last part file keep read file ctrl + c keep read file ctrl + c even file rotat show file sinc line num show last num byte file show last num line file refresh everi n second show last num line file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_113: Get the disk space used by all *.txt (case insensitive) files/directories under current directory"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_113: find . -iname \"*.txt\" -exec du -b {} + | awk '{total += $1} END {print total}'"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "rm",
+      "MP Summary": "remove files or directories",
+      "Most Similar TLDR Task": "Remove files from arbitrary locations",
+      "Most Similar TLDR Script": "rm {{path/to/file}} {{path/to/another/file}}",
+      "Most Similar NL2Bash Task": "Get the disk space used by all *.txt (case insensitive) files/directories under current directory",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -iname \"*.txt\" -exec du -b {} + | awk '{total += $1} END {print total}'\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-iname": "Like -name, but the match is case insensitive. For example, the patterns `fo*' and\n `F??' match the file names `Foo', `FOO', `foo', `fOo', etc. The pattern `*foo*`\n will also match a file called '.foobar'."
+            },
+            "du": {
+              "mpsum": "estimate file space usage",
+              "-b": "equivalent to '--apparent-size --block-size=1'"
+            },
+            "awk": {
+              "mpsum": "pattern scanning and processing language"
+            },
+            "print": {
+              "mpsum": "execute programs via entries in the mailcap file"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "du": {
+              "man1_du_7710": "disk usag : estim summar file directori space usag list human-read size jpg file subdirectori current directori show cumul total end list human-read size directori subdirectori n level deep list human-read size directori file directori within list size directori subdirectori human-read form e\nauto-select appropri unit size list size directori subdirectori given unit b kb mb show size singl directori human readabl unit"
+            },
+            "awk": {
+              "man1_awk_1998": "versatil program languag work file print valu start third column print differ valu base condit print everi third line start first line print fifth column k\nfield space-separ file print last column line file use comma instead space field separ print second column line contain someth space-separ file sum valu first column pretty-print valu total sum valu first column file print total"
+            },
+            "print": {
+              "man1_print_27217": "alia run-mailcap action print\norigin run-mailcap use process mime-typ file print action use print file default run-mailcap tool run-mailcap"
+            }
+          }
+        },
+        "1": {
+          "script": "find . -name \"*.txt\" -print0 |xargs -0 du -ch | tail -n1\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-print0": "Always print the exact filename, unchanged, even if the output is going to a\n terminal."
+            },
+            "xargs": {
+              "mpsum": "build and execute command lines from standard input",
+              "-0": "Input items are terminated by a null character instead of by whitespace, and the\n quotes and backslash are not special (every character is taken literally).\n Disables the end of file string, which is treated like any other argument. Useful\n when input items might contain white space, quote marks, or backslashes. The GNU\n find -print0 option produces input suitable for this mode."
+            },
+            "du": {
+              "mpsum": "estimate file space usage",
+              "-c": "produce a grand total",
+              "-h": "print sizes in human readable format (e.g., 1K 234M 2G)"
+            },
+            "tail": {
+              "mpsum": "output the last part of files"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "xargs": {
+              "man1_xargs_37433": "execut command pipe argument come anoth command file etc\ninput treat singl block text split separ piec space tab newlin end-of-fil delet file backup extens -print0 use null charact split file name -0 use delimit execut command input line replac occurr placehold mark _ input line parallel run max-proc process time default 1 max-proc 0 xarg run mani process possibl time run command use input data argument run multipl chain command input data"
+            },
+            "du": {
+              "man1_du_7710": "disk usag : estim summar file directori space usag list human-read size jpg file subdirectori current directori show cumul total end list human-read size directori subdirectori n level deep list human-read size directori file directori within list size directori subdirectori human-read form e\nauto-select appropri unit size list size directori subdirectori given unit b kb mb show size singl directori human readabl unit"
+            },
+            "tail": {
+              "man1_tail_33304": "display last part file keep read file ctrl + c keep read file ctrl + c even file rotat show file sinc line num show last num byte file show last num line file refresh everi n second show last num line file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_8510: search for swap files (.swp files) in temp folder and remove them"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_8510: find /tmp -name '*.swp' -exec rm {} \\;"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "tail",
+      "MP Summary": "output the last part of files",
+      "Most Similar TLDR Task": "Show all file since line 'num'",
+      "Most Similar TLDR Script": "tail -n +{{num}} {{file}}",
+      "Most Similar NL2Bash Task": "Get the disk space used by all *.txt (case insensitive) files/directories under current directory",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -iname \"*.txt\" -exec du -b {} + | awk '{total += $1} END {print total}'\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-iname": "Like -name, but the match is case insensitive. For example, the patterns `fo*' and\n `F??' match the file names `Foo', `FOO', `foo', `fOo', etc. The pattern `*foo*`\n will also match a file called '.foobar'."
+            },
+            "du": {
+              "mpsum": "estimate file space usage",
+              "-b": "equivalent to '--apparent-size --block-size=1'"
+            },
+            "awk": {
+              "mpsum": "pattern scanning and processing language"
+            },
+            "print": {
+              "mpsum": "execute programs via entries in the mailcap file"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "du": {
+              "man1_du_7710": "disk usag : estim summar file directori space usag list human-read size jpg file subdirectori current directori show cumul total end list human-read size directori subdirectori n level deep list human-read size directori file directori within list size directori subdirectori human-read form e\nauto-select appropri unit size list size directori subdirectori given unit b kb mb show size singl directori human readabl unit"
+            },
+            "awk": {
+              "man1_awk_1998": "versatil program languag work file print valu start third column print differ valu base condit print everi third line start first line print fifth column k\nfield space-separ file print last column line file use comma instead space field separ print second column line contain someth space-separ file sum valu first column pretty-print valu total sum valu first column file print total"
+            },
+            "print": {
+              "man1_print_27217": "alia run-mailcap action print\norigin run-mailcap use process mime-typ file print action use print file default run-mailcap tool run-mailcap"
+            }
+          }
+        },
+        "1": {
+          "script": "find . -name \"*.txt\" -print0 |xargs -0 du -ch | tail -n1\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-print0": "Always print the exact filename, unchanged, even if the output is going to a\n terminal."
+            },
+            "xargs": {
+              "mpsum": "build and execute command lines from standard input",
+              "-0": "Input items are terminated by a null character instead of by whitespace, and the\n quotes and backslash are not special (every character is taken literally).\n Disables the end of file string, which is treated like any other argument. Useful\n when input items might contain white space, quote marks, or backslashes. The GNU\n find -print0 option produces input suitable for this mode."
+            },
+            "du": {
+              "mpsum": "estimate file space usage",
+              "-c": "produce a grand total",
+              "-h": "print sizes in human readable format (e.g., 1K 234M 2G)"
+            },
+            "tail": {
+              "mpsum": "output the last part of files"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "xargs": {
+              "man1_xargs_37433": "execut command pipe argument come anoth command file etc\ninput treat singl block text split separ piec space tab newlin end-of-fil delet file backup extens -print0 use null charact split file name -0 use delimit execut command input line replac occurr placehold mark _ input line parallel run max-proc process time default 1 max-proc 0 xarg run mani process possibl time run command use input data argument run multipl chain command input data"
+            },
+            "du": {
+              "man1_du_7710": "disk usag : estim summar file directori space usag list human-read size jpg file subdirectori current directori show cumul total end list human-read size directori subdirectori n level deep list human-read size directori file directori within list size directori subdirectori human-read form e\nauto-select appropri unit size list size directori subdirectori given unit b kb mb show size singl directori human readabl unit"
+            },
+            "tail": {
+              "man1_tail_33304": "display last part file keep read file ctrl + c keep read file ctrl + c even file rotat show file sinc line num show last num byte file show last num line file refresh everi n second show last num line file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_113: Get the disk space used by all *.txt (case insensitive) files/directories under current directory"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_113: find . -name \"*.txt\" -print0 |xargs -0 du -ch | tail -n1"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "ls",
+      "MP Summary": "list directory contents",
+      "Most Similar TLDR Task": "List all files, with trailing `/` added to directory names",
+      "Most Similar TLDR Script": "ls -F",
+      "Most Similar NL2Bash Task": "Get the disk space used by all *.txt (case insensitive) files/directories under current directory",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -iname \"*.txt\" -exec du -b {} + | awk '{total += $1} END {print total}'\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-iname": "Like -name, but the match is case insensitive. For example, the patterns `fo*' and\n `F??' match the file names `Foo', `FOO', `foo', `fOo', etc. The pattern `*foo*`\n will also match a file called '.foobar'."
+            },
+            "du": {
+              "mpsum": "estimate file space usage",
+              "-b": "equivalent to '--apparent-size --block-size=1'"
+            },
+            "awk": {
+              "mpsum": "pattern scanning and processing language"
+            },
+            "print": {
+              "mpsum": "execute programs via entries in the mailcap file"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "du": {
+              "man1_du_7710": "disk usag : estim summar file directori space usag list human-read size jpg file subdirectori current directori show cumul total end list human-read size directori subdirectori n level deep list human-read size directori file directori within list size directori subdirectori human-read form e\nauto-select appropri unit size list size directori subdirectori given unit b kb mb show size singl directori human readabl unit"
+            },
+            "awk": {
+              "man1_awk_1998": "versatil program languag work file print valu start third column print differ valu base condit print everi third line start first line print fifth column k\nfield space-separ file print last column line file use comma instead space field separ print second column line contain someth space-separ file sum valu first column pretty-print valu total sum valu first column file print total"
+            },
+            "print": {
+              "man1_print_27217": "alia run-mailcap action print\norigin run-mailcap use process mime-typ file print action use print file default run-mailcap tool run-mailcap"
+            }
+          }
+        },
+        "1": {
+          "script": "find . -name \"*.txt\" -print0 |xargs -0 du -ch | tail -n1\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-print0": "Always print the exact filename, unchanged, even if the output is going to a\n terminal."
+            },
+            "xargs": {
+              "mpsum": "build and execute command lines from standard input",
+              "-0": "Input items are terminated by a null character instead of by whitespace, and the\n quotes and backslash are not special (every character is taken literally).\n Disables the end of file string, which is treated like any other argument. Useful\n when input items might contain white space, quote marks, or backslashes. The GNU\n find -print0 option produces input suitable for this mode."
+            },
+            "du": {
+              "mpsum": "estimate file space usage",
+              "-c": "produce a grand total",
+              "-h": "print sizes in human readable format (e.g., 1K 234M 2G)"
+            },
+            "tail": {
+              "mpsum": "output the last part of files"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "xargs": {
+              "man1_xargs_37433": "execut command pipe argument come anoth command file etc\ninput treat singl block text split separ piec space tab newlin end-of-fil delet file backup extens -print0 use null charact split file name -0 use delimit execut command input line replac occurr placehold mark _ input line parallel run max-proc process time default 1 max-proc 0 xarg run mani process possibl time run command use input data argument run multipl chain command input data"
+            },
+            "du": {
+              "man1_du_7710": "disk usag : estim summar file directori space usag list human-read size jpg file subdirectori current directori show cumul total end list human-read size directori subdirectori n level deep list human-read size directori file directori within list size directori subdirectori human-read form e\nauto-select appropri unit size list size directori subdirectori given unit b kb mb show size singl directori human readabl unit"
+            },
+            "tail": {
+              "man1_tail_33304": "display last part file keep read file ctrl + c keep read file ctrl + c even file rotat show file sinc line num show last num byte file show last num line file refresh everi n second show last num line file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_14237: List all *fink* files/directories under current directory",
+        "nl2bash_14234: List all *.txt files/directories under current directory"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_14237: find . -name \"*fink*\" |xargs ls -l",
+        "nl2bash_14234: find . -name *.txt -exec ls {} \\;"
+      ],
+      "Explanations about Options": {
+        "-l": "use a long listing format"
+      }
+    },
+    {
+      "Command": "grep",
+      "MP Summary": "print lines that match patterns",
+      "Most Similar TLDR Task": "Invert match for excluding specific strings",
+      "Most Similar TLDR Script": "grep -v {{search_pattern}}",
+      "Most Similar NL2Bash Task": "Get the disk space used by all *.txt (case insensitive) files/directories under current directory",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -iname \"*.txt\" -exec du -b {} + | awk '{total += $1} END {print total}'\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-iname": "Like -name, but the match is case insensitive. For example, the patterns `fo*' and\n `F??' match the file names `Foo', `FOO', `foo', `fOo', etc. The pattern `*foo*`\n will also match a file called '.foobar'."
+            },
+            "du": {
+              "mpsum": "estimate file space usage",
+              "-b": "equivalent to '--apparent-size --block-size=1'"
+            },
+            "awk": {
+              "mpsum": "pattern scanning and processing language"
+            },
+            "print": {
+              "mpsum": "execute programs via entries in the mailcap file"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "du": {
+              "man1_du_7710": "disk usag : estim summar file directori space usag list human-read size jpg file subdirectori current directori show cumul total end list human-read size directori subdirectori n level deep list human-read size directori file directori within list size directori subdirectori human-read form e\nauto-select appropri unit size list size directori subdirectori given unit b kb mb show size singl directori human readabl unit"
+            },
+            "awk": {
+              "man1_awk_1998": "versatil program languag work file print valu start third column print differ valu base condit print everi third line start first line print fifth column k\nfield space-separ file print last column line file use comma instead space field separ print second column line contain someth space-separ file sum valu first column pretty-print valu total sum valu first column file print total"
+            },
+            "print": {
+              "man1_print_27217": "alia run-mailcap action print\norigin run-mailcap use process mime-typ file print action use print file default run-mailcap tool run-mailcap"
+            }
+          }
+        },
+        "1": {
+          "script": "find . -name \"*.txt\" -print0 |xargs -0 du -ch | tail -n1\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-print0": "Always print the exact filename, unchanged, even if the output is going to a\n terminal."
+            },
+            "xargs": {
+              "mpsum": "build and execute command lines from standard input",
+              "-0": "Input items are terminated by a null character instead of by whitespace, and the\n quotes and backslash are not special (every character is taken literally).\n Disables the end of file string, which is treated like any other argument. Useful\n when input items might contain white space, quote marks, or backslashes. The GNU\n find -print0 option produces input suitable for this mode."
+            },
+            "du": {
+              "mpsum": "estimate file space usage",
+              "-c": "produce a grand total",
+              "-h": "print sizes in human readable format (e.g., 1K 234M 2G)"
+            },
+            "tail": {
+              "mpsum": "output the last part of files"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "xargs": {
+              "man1_xargs_37433": "execut command pipe argument come anoth command file etc\ninput treat singl block text split separ piec space tab newlin end-of-fil delet file backup extens -print0 use null charact split file name -0 use delimit execut command input line replac occurr placehold mark _ input line parallel run max-proc process time default 1 max-proc 0 xarg run mani process possibl time run command use input data argument run multipl chain command input data"
+            },
+            "du": {
+              "man1_du_7710": "disk usag : estim summar file directori space usag list human-read size jpg file subdirectori current directori show cumul total end list human-read size directori subdirectori n level deep list human-read size directori file directori within list size directori subdirectori human-read form e\nauto-select appropri unit size list size directori subdirectori given unit b kb mb show size singl directori human readabl unit"
+            },
+            "tail": {
+              "man1_tail_33304": "display last part file keep read file ctrl + c keep read file ctrl + c even file rotat show file sinc line num show last num byte file show last num line file refresh everi n second show last num line file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_4295: Find all regular files residing in the current directory tree and search them for string \"/bin/ksh\""
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_4295: find . -type f -print | xargs grep -i 'bin/ksh'"
+      ],
+      "Explanations about Options": {
+        "-i": "Ignore case distinctions in patterns and input data, so that characters that differ\n only in case match each other."
+      }
+    },
+    {
+      "Command": "dev",
+      "MP Summary": "release candidate LaTeX testing",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "Get the disk space used by all *.txt (case insensitive) files/directories under current directory",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -iname \"*.txt\" -exec du -b {} + | awk '{total += $1} END {print total}'\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-iname": "Like -name, but the match is case insensitive. For example, the patterns `fo*' and\n `F??' match the file names `Foo', `FOO', `foo', `fOo', etc. The pattern `*foo*`\n will also match a file called '.foobar'."
+            },
+            "du": {
+              "mpsum": "estimate file space usage",
+              "-b": "equivalent to '--apparent-size --block-size=1'"
+            },
+            "awk": {
+              "mpsum": "pattern scanning and processing language"
+            },
+            "print": {
+              "mpsum": "execute programs via entries in the mailcap file"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "du": {
+              "man1_du_7710": "disk usag : estim summar file directori space usag list human-read size jpg file subdirectori current directori show cumul total end list human-read size directori subdirectori n level deep list human-read size directori file directori within list size directori subdirectori human-read form e\nauto-select appropri unit size list size directori subdirectori given unit b kb mb show size singl directori human readabl unit"
+            },
+            "awk": {
+              "man1_awk_1998": "versatil program languag work file print valu start third column print differ valu base condit print everi third line start first line print fifth column k\nfield space-separ file print last column line file use comma instead space field separ print second column line contain someth space-separ file sum valu first column pretty-print valu total sum valu first column file print total"
+            },
+            "print": {
+              "man1_print_27217": "alia run-mailcap action print\norigin run-mailcap use process mime-typ file print action use print file default run-mailcap tool run-mailcap"
+            }
+          }
+        },
+        "1": {
+          "script": "find . -name \"*.txt\" -print0 |xargs -0 du -ch | tail -n1\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-print0": "Always print the exact filename, unchanged, even if the output is going to a\n terminal."
+            },
+            "xargs": {
+              "mpsum": "build and execute command lines from standard input",
+              "-0": "Input items are terminated by a null character instead of by whitespace, and the\n quotes and backslash are not special (every character is taken literally).\n Disables the end of file string, which is treated like any other argument. Useful\n when input items might contain white space, quote marks, or backslashes. The GNU\n find -print0 option produces input suitable for this mode."
+            },
+            "du": {
+              "mpsum": "estimate file space usage",
+              "-c": "produce a grand total",
+              "-h": "print sizes in human readable format (e.g., 1K 234M 2G)"
+            },
+            "tail": {
+              "mpsum": "output the last part of files"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "xargs": {
+              "man1_xargs_37433": "execut command pipe argument come anoth command file etc\ninput treat singl block text split separ piec space tab newlin end-of-fil delet file backup extens -print0 use null charact split file name -0 use delimit execut command input line replac occurr placehold mark _ input line parallel run max-proc process time default 1 max-proc 0 xarg run mani process possibl time run command use input data argument run multipl chain command input data"
+            },
+            "du": {
+              "man1_du_7710": "disk usag : estim summar file directori space usag list human-read size jpg file subdirectori current directori show cumul total end list human-read size directori subdirectori n level deep list human-read size directori file directori within list size directori subdirectori human-read form e\nauto-select appropri unit size list size directori subdirectori given unit b kb mb show size singl directori human readabl unit"
+            },
+            "tail": {
+              "man1_tail_33304": "display last part file keep read file ctrl + c keep read file ctrl + c even file rotat show file sinc line num show last num byte file show last num line file refresh everi n second show last num line file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_270453: How could Linux use 'sda' device file when it hasn't been installed?"
+      ],
+      "Top-3 Scripts": [
+        "ul_270453: /dev/sda\n\ndev/sda1\n\n/dev/sda1"
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

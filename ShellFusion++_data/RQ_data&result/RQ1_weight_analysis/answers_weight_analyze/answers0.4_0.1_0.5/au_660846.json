@@ -1,0 +1,88 @@
+{
+  "Query": "How to Zip and Unzip a directory and its files in Linux",
+  "Answers": [
+    {
+      "Command": "unar",
+      "MP Summary": "extract archive file contents",
+      "Most Similar TLDR Task": "Force rename if files to be unpacked already exist",
+      "Most Similar TLDR Script": "unar -r {{archive}}",
+      "Top-3 Similar Questions": [
+        "ul_489445: Unzip to a folder with the same name as the file (without the .zip extension)",
+        "so_67459734: change unzipped folder name"
+      ],
+      "Top-3 Scripts": [
+        "ul_489445: unar foo.zip\n\nunar -d foo.zip",
+        "so_67459734: "
+      ],
+      "Explanations about Options": {
+        "-d": "Always create a containing directory for the contents of the unpacked archive. By\n default, a directory is created if there is more than one top-level file or folder."
+      }
+    },
+    {
+      "Command": "unzip",
+      "MP Summary": "list, test and extract compressed files in a ZIP archive",
+      "Most Similar TLDR Task": "Extract zip file(s) (for multiple files, separate file paths by spaces)",
+      "Most Similar TLDR Script": "unzip {{file(s)}}",
+      "Top-3 Similar Questions": [
+        "ul_321683: Unzip all files into directories with the same name",
+        "ul_586576: Unzip files into a new directory",
+        "ul_489445: Unzip to a folder with the same name as the file (without the .zip extension)"
+      ],
+      "Top-3 Scripts": [
+        "ul_321683: for d in *.zip\ndo\n  dir=/home/usrname/anotherdir/zip${d%%.zip}\n  unzip -d \"$dir\" \"$d\"\ndone",
+        "ul_586576: for file in *.zip; do\n    [ -f \"$file\" ] || continue\n    unzip \"$file\" -d \"${file%%.zip}\"\ndone",
+        "ul_489445: unzd() {\n    if [[ $# != 1 ]]; then echo I need a single argument, the name of the archive to extract; return 1; fi\n    target=\"${1%.zip}\"\n    unzip \"$1\" -d \"${target##*/}\"\n}\n\nunzip $1 -d \"${target}\""
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "zip",
+      "MP Summary": "package and compress (archive) files",
+      "Most Similar TLDR Task": "Delete files from an existing zip file",
+      "Most Similar TLDR Script": "zip -d {{compressed.zip}} \"{{foo/*.tmp}}\"",
+      "Top-3 Similar Questions": [
+        "ul_321683: Unzip all files into directories with the same name",
+        "ul_586576: Unzip files into a new directory",
+        "so_60930401: Unzip archive zip file into folder with same name as archive zip file"
+      ],
+      "Top-3 Scripts": [
+        "ul_321683: for d in *.zip\ndo\n  dir=/home/usrname/anotherdir/zip${d%%.zip}\n  unzip -d \"$dir\" \"$d\"\ndone",
+        "ul_586576: ",
+        "so_60930401: $filePath = \"s:\\Download Data Feed\\\"\n$zip = Get-ChildItem -File -Recurse -Path $filePath | Where-Object { $_.Extension -eq \".zip\" }\n\nforeach ($file in $zip) { \n    $target = Join-Path $filePath $file.BaseName\n    if (!(Test-Path $target -PathType Container)) {\n        $null = New-Item -ItemType Directory -Path $target\n    }\n    Expand-7Zip -ArchiveFileName $file -Password \"Password\" -TargetPath $target\n}\n\n$zip"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "zcat",
+      "MP Summary": "decompress and concatenate files to standard output",
+      "Most Similar TLDR Task": "Print the uncompressed contents of a gzipped file to the standard output",
+      "Most Similar TLDR Script": "zcat {{file.txt.gz}}",
+      "Top-3 Similar Questions": [
+        "au_500249: Unzip 5GB zip file",
+        "so_42552694: Unzip then process in linux"
+      ],
+      "Top-3 Scripts": [
+        "au_500249: zcat file.zip > file.unzipped",
+        "so_42552694: fastqc <(zcat path/to/file.gz)\n\nfastqc <(zcat path/to/file.gz | tee file)"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "cp",
+      "MP Summary": "copy files and directories",
+      "Most Similar TLDR Task": "Copy a file into another directory, keeping the filename",
+      "Most Similar TLDR Script": "cp {{path/to/source_file.ext}} {{path/to/target_parent_directory}}",
+      "Top-3 Similar Questions": [
+        "so_908679: unzip specific extension only",
+        "au_1188156: Unzip a .zip file to all directories that contain a .php file that contains the text \u201chouse\u201d inside?",
+        "ul_174085: Unzip source arguments"
+      ],
+      "Top-3 Scripts": [
+        "so_908679: ",
+        "au_1188156: ",
+        "ul_174085: $ cp *.zip destination/\n\n$ cp a.zip b.zip destination/\n\n$ cp \\*.zip destination/\n\n$ cp '*.zip' destination/"
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

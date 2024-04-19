@@ -1,0 +1,90 @@
+{
+  "Query": "How to append output to the end of a text file",
+  "Answers": [
+    {
+      "Command": "cat",
+      "MP Summary": "concatenate files and print on the standard output",
+      "Most Similar TLDR Task": "Print the contents of a file to the standard output",
+      "Most Similar TLDR Script": "cat {{file}}",
+      "Top-3 Similar Questions": [
+        "so_15032734: Append to the top of a large file: bash",
+        "so_27584729: Sed append to end of line directory",
+        "so_51820942: Append text to output of shell script"
+      ],
+      "Top-3 Scripts": [
+        "so_15032734: cat file_with_new_lines file > newfile",
+        "so_27584729: newdir=\"$(cat olddir)\"",
+        "so_51820942: for ip in $(cat $filename)\ndo\n  servername=$(dig $nameserver -x $ip +short | sed 's/\\.$//')\n  echo \"set address $servername ip-netmask $ip\"\ndone"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "echo",
+      "MP Summary": "display a line of text",
+      "Most Similar TLDR Task": "Append a message to the file",
+      "Most Similar TLDR Script": "echo \"{{Hello World}}\" >> {{file.txt}}",
+      "Top-3 Similar Questions": [
+        "so_58210971: Append \"/\" to end of directory",
+        "so_46826107: Bash append to end of array element",
+        "so_16011853: Append to the end of a specific line"
+      ],
+      "Top-3 Scripts": [
+        "so_58210971: find /animals -type d -or -type f \\\n| grep '/[A-Z]*$' \\\n| xargs -I + bash -c 'echo -n $(basename +)$( test -d + && echo -n /),\\\\ ' \\\n| sed -e 's/, *$//'; echo\n\n'echo -n $(basename +)$( test -d + && echo -n /),\\\\ '\n\necho -n\n\ntest -d + && echo -n /\n\necho -n /\n\n| sed -e 's/, *$//'; echo\n\nFROM debian\nRUN mkdir -p /animals\nWORKDIR /animals\nRUN mkdir -p DOGDIR lowerdir && touch DOGDIR/DOG DOGDIR/lowerDOG2 lowerdir/BIRD\nENTRYPOINT [ \"/bin/bash\" ]\nCMD [ \"-c\" , \"find /animals -type d -or -type f | grep '/[A-Z]*$'| xargs -I + bash -c 'echo -n $(basename +)$( test -d + && echo -n /),\\\\ ' | sed -e 's/, *$//'; echo\"]",
+        "so_46826107: ",
+        "so_16011853: kent$  echo \"line1|example|sample|name|flag|blah\nline2|example|sample|name|flag|blah\nline3|example|sample|name|flag|blah\"|awk -v OFS=\"|\" -v l=\"$line\" 'NR==l{print $0,\"123abc\";next}1'                                                                           \nline1|example|sample|name|flag|blah\nline2|example|sample|name|flag|blah|123abc\nline3|example|sample|name|flag|blah"
+      ],
+      "Explanations about Options": {
+        "-n": "do not output the trailing newline"
+      }
+    },
+    {
+      "Command": "grep",
+      "MP Summary": "print lines that match patterns",
+      "Most Similar TLDR Task": "Use the standard input instead of a file",
+      "Most Similar TLDR Script": "cat {{path/to/file}} | grep {{search_pattern}}",
+      "Top-3 Similar Questions": [
+        "so_58210971: Append \"/\" to end of directory",
+        "so_25078297: Is there any way to append the result of a command after the end of other?",
+        "ul_83280: add .pdf to the end of text in a text file - bash"
+      ],
+      "Top-3 Scripts": [
+        "so_58210971: find /animals -type d -or -type f \\\n| grep '/[A-Z]*$' \\\n| xargs -I + bash -c 'echo -n $(basename +)$( test -d + && echo -n /),\\\\ ' \\\n| sed -e 's/, *$//'; echo\n\ngrep '/[A-Z]*$'\n\nFROM debian\nRUN mkdir -p /animals\nWORKDIR /animals\nRUN mkdir -p DOGDIR lowerdir && touch DOGDIR/DOG DOGDIR/lowerDOG2 lowerdir/BIRD\nENTRYPOINT [ \"/bin/bash\" ]\nCMD [ \"-c\" , \"find /animals -type d -or -type f | grep '/[A-Z]*$'| xargs -I + bash -c 'echo -n $(basename +)$( test -d + && echo -n /),\\\\ ' | sed -e 's/, *$//'; echo\"]",
+        "so_25078297: find /home/whoever/ /mnt/hd -name \"*.cpp\" -exec grep \"name\" '{}' \\; -print\n\n{ find /mnt/hd -name \"*.cpp\"; find /mnt/hd -name \"*.cpp\"; } | grep \"name\"",
+        "ul_83280: while read line \ndo\n    if grep -q \"^$line$\" /infanass/dev/admin/test/parsed.txt\n    then\n        echo \"${line}.pdf\" >>matches.txt\n    fi\ndone < /infanass/dev/admin/test/file1.txt"
+      ],
+      "Explanations about Options": {
+        "-q": "Quiet; do not write anything to standard output. Exit immediately with zero status\n if any match is found, even if an error was detected. Also see the -s or\n --no-messages option."
+      }
+    },
+    {
+      "Command": "printf",
+      "MP Summary": "format and print data",
+      "Most Similar TLDR Task": "Print a text message",
+      "Most Similar TLDR Script": "printf \"{{%s\\n}}\" \"{{Hello world}}\"",
+      "Top-3 Similar Questions": [
+        "so_23942862: Shell: How to append characters at the end of a string?",
+        "ul_573972: Append text to flagged output of awk",
+        "su_423338: Append line length at end of each line"
+      ],
+      "Top-3 Scripts": [
+        "so_23942862: while read -r; do                                 # Read from the file one line at a time\n    printf \"%s\" \"$REPLY\"                          # Print the line without the newline\n    for (( i=1; i<=((58 - ${#REPLY})); i++ )); do # Find the difference in length to iterate\n        printf \"%s\" \"0\"                           # Pad 0s\n    done\n    printf \"\\n\"                                   # Add the newline\ndone < file",
+        "ul_573972: awk -v line=\"$line\" '. . . flag {printf \"%s,%s\\n\", line, $0}'",
+        "su_423338: #!/bin/sh\nwhile read line; do\n    printf -- '%s %d\\n' \"${line}\" \"${#line}\";\ndone < \"${1}\""
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "nl",
+      "MP Summary": "number lines of files",
+      "Most Similar TLDR Task": "Read from standard output",
+      "Most Similar TLDR Script": "cat {{file}} | nl {{options}} -",
+      "Top-3 Similar Questions": [
+        "au_564617: Append line numbers at end of each line in the file"
+      ],
+      "Top-3 Scripts": [
+        "au_564617: nl yourfile.txt"
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

@@ -1,0 +1,83 @@
+{
+  "Query": "compare two columns of different files and print if it matches",
+  "Answers": [
+    {
+      "Command": "join",
+      "MP Summary": "join lines of two files on a common field",
+      "Top-3 Similar Questions": [
+        "ul_454678: compare first column of 2 file : while second have 2 column but first have one column",
+        "so_54485639: How to compare parts of lines of two txt files?",
+        "so_49958479: compare two columns in two different files in shell script"
+      ],
+      "Top-3 Scripts": [
+        "ul_454678: ",
+        "so_54485639: $ cat a\naaaa   bbbb\ncccc   dddd\n$ cat b\naaaa   eeee\nffff   gggg\n$ join a b\naaaa bbbb eeee\n\njoin <(sort a) <(sort b)",
+        "so_49958479: join -t',' -a 1 -a 2 -j 2 file1 file2\n2018042100,21,45\n2018042101,22\n2018042102,87,86\n2018042103,98,87\n\njoin -t',' -a 1 -a 2 -e \"0\" -j 2 file1 file2  | sed -r 's/^[^,]+,[^,]+$/&,0/'\n2018042100,21,45\n2018042101,22,0\n2018042102,87,86\n2018042103,98,87"
+      ],
+      "Explanations about Options": {
+        "-j": "FIELD\n equivalent to '-1 FIELD -2 FIELD'",
+        "-e": "EMPTY\n replace missing input fields with EMPTY",
+        "-a": "FILENUM\n also print unpairable lines from file FILENUM, where FILENUM is 1 or 2,\n corresponding to FILE1 or FILE2"
+      }
+    },
+    {
+      "Command": "grep",
+      "MP Summary": "print lines that match patterns",
+      "Top-3 Similar Questions": [
+        "so_24587197: How to compare a list of variables in bash?",
+        "ul_330369: Comparing single column of a file with another",
+        "ul_421837: How can i compare strings of two files in shell script?"
+      ],
+      "Top-3 Scripts": [
+        "so_24587197: saveVars=\"`grep -vxFe \"$initialVars\" <<<\"$(set -o posix ; set)\"| grep -v ^initialVars=`\"\n\ngrep -vxFe \"$initialVars\" <<<\"$(set -o posix ; set)\"| grep -v ^initialVars= > snapshot.sav",
+        "ul_330369: grep -wf file2 file1",
+        "ul_421837: if grep -qwf <(cut -d, -f1 user_input) database; then \n    echo \"This username is already in use, try again!\"\nelse\n    echo \"Successfully registered!\"\nfi"
+      ],
+      "Explanations about Options": {
+        "-v": "Invert the sense of matching, to select non-matching lines.",
+        "-q": "Quiet; do not write anything to standard output. Exit immediately with zero status\n if any match is found, even if an error was detected. Also see the -s or\n --no-messages option.",
+        "-w": "Select only those lines containing matches that form whole words. The test is that\n the matching substring must either be at the beginning of the line, or preceded by\n a non-word constituent character. Similarly, it must be either at the end of the\n line or followed by a non-word constituent character. Word-constituent characters\n are letters, digits, and the underscore. This option has no effect if -x is also\n specified.",
+        "-x": "Select only those matches that exactly match the whole line. For a regular\n expression pattern, this is like parenthesizing the pattern and then surrounding it\n with ^ and $.",
+        "-f": "Obtain patterns from FILE, one per line. If this option is used multiple times or\n is combined with the -e (--regexp) option, search for all patterns given. The\n empty file contains zero patterns, and therefore matches nothing.",
+        "-F": "Interpret PATTERNS as fixed strings, not regular expressions."
+      }
+    },
+    {
+      "Command": "diff",
+      "MP Summary": "compare two files",
+      "Top-3 Similar Questions": [
+        "au_1067061: How to compare the output of the \"head\" command applied to two different files?",
+        "au_1259031: How do I compare equality of two files in Ubuntu?",
+        "su_1329584: How to compare two columns of two different files"
+      ],
+      "Top-3 Scripts": [
+        "au_1067061: # lines different, have output\n$ diff <(head -n 1 /etc/passwd) <(head -n1 input.txt)\n1c1\n< root:x:0:0:root:/root:/bin/bash\n---\n> hello world\n# same file, first lines aren't different, no output\n$ diff <(head -n 1 /etc/passwd) <(head -n1 passwd.copy)\n$\n\n$ diff <(head -n 1 /etc/passwd) <(head -n1 passwd.copy)\n1c1\n< root:x:0:0:root:/root:/bin/bash\n---\n> root:x:0:0:root:/root:/bin/bash",
+        "au_1259031: $ diff -q a b\nFiles a and b differ\n\n$ diff -qs a b\nFiles a and b are identical",
+        "su_1329584: diff <(sort file1 | cut -d , -f 1-2) <(sort file2 | cut -d , -f 1-2)"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "NF",
+      "MP Summary": "awk and print a column (based on the name of the program, 1-9)",
+      "Top-3 Similar Questions": [
+        "so_18216458: How can i compare the numeric values of the last two fields in a file?"
+      ],
+      "Top-3 Scripts": [
+        "so_18216458: awk 'BEGIN{FS=OFS=\"_\"}$NF==$(NF-1){--NF;$1=$1}1' test.in"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "wc",
+      "MP Summary": "print newline, word, and byte counts for each file",
+      "Top-3 Similar Questions": [
+        "au_899774: Recursively compare counts of specific files between two directories"
+      ],
+      "Top-3 Scripts": [
+        "au_899774: for dir in DIRECTORY01/*/ ; do fcount=$(find \"$dir\" -maxdepth 1 -type f \\( -name '*.flac' -o -name '*.m4a' -o -name '*.mp3' \\) -printf . | wc -c) ; ocount=$(find \"${dir/DIRECTORY01/DIRECTORY02}\" -maxdepth 1 -type f -name '*.ogg' -printf . | wc -c); if [[ \"$fcount\" -ne \"$ocount\" ]]; then echo \"$dir has $fcount .flac .m4a and .mp3 files but ${dir/DIRECTORY01/DIRECTORY02} has $ocount .ogg files\" ; fi ; done\n\nfor dir in DIRECTORY01/*/ ; do\n  fcount=$(find \"$dir\" -maxdepth 1 -type f \\( -name '*.flac' -o -name '*.m4a' -o -name '*.mp3' \\) -printf . | wc -c)\n  ocount=$(find \"${dir/DIRECTORY01/DIRECTORY02}\" -maxdepth 1 -type f -name '*.ogg' -printf . | wc -c)\n  if [[ \"$fcount\" -ne \"$ocount\" ]]; then\n    echo \"$dir has $fcount .flac .m4a and .mp3 files but ${dir/DIRECTORY01/DIRECTORY02} has $ocount .ogg files\"\n  fi\ndone"
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

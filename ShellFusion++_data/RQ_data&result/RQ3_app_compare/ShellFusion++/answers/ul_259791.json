@@ -1,0 +1,93 @@
+{
+  "Query": "How to change the Home directory of the currently logged In user",
+  "Answers": [
+    {
+      "Command": "usermod",
+      "MP Summary": "modify a user account",
+      "Most Similar TLDR Task": "Change a user's name",
+      "Most Similar TLDR Script": "usermod -l {{newname}} {{user}}",
+      "Top-3 Similar Questions": [
+        "ul_267904: What is a good way to change a group of users UIDs without usermod executing a time consuming chown on the user home directory?",
+        "au_18103: How can I change the default location of content directories (eg Pictures, Templates, Music)  in my home folder?",
+        "su_40450: How does one change user's home directory in Ubuntu 9.04?"
+      ],
+      "Top-3 Scripts": [
+        "ul_267904: # mkdir -p /tmp/home/jsmith  ## uncomment if required.\nusermod -d /tmp/home/jsmith jsmith\nusermod -u fixedUID jsmith -o\nusermod -d /home/jsmith jsmith\n\n# mkdir -p /tmp/home/jsmith  ## uncomment if required.\nhomedir=$(getent passwd jsmith | awk -F: '{print $6}')\nusermod -d /tmp/home/jsmith jsmith\nusermod -u fixedUID jsmith -o\nusermod -d \"$homedir\" jsmith",
+        "au_18103: chown nobody:users /home/common\nchmod 2775 /home/common\nusermod -a -G users user1",
+        "su_40450: sudo usermod\u00a0 -d <i>new_home_dir</i>\u00a0 <i>username</i>\n\nsudo usermod  -d <i>new_home_dir</i>  -m\u00a0 <i>username</i>"
+      ],
+      "Explanations about Options": {
+        "-a": "Add the user to the supplementary group(s). Use only with the -G option.",
+        "-G": "GROUP1[,GROUP2,...[,GROUPN]]]\n A list of supplementary groups which the user is also a member of. Each group is\n separated from the next by a comma, with no intervening whitespace. The groups are\n subject to the same restrictions as the group given with the -g option.",
+        "-u": "The new numerical value of the user's ID.",
+        "-d": "The user's new login directory.",
+        "-m": "Move the content of the user's home directory to the new location.",
+        "-o": "When used with the -u option, this option allows to change the user ID to a non-unique\n value."
+      }
+    },
+    {
+      "Command": "passwd",
+      "MP Summary": "change user password",
+      "Most Similar TLDR Task": "Change the password of the current user",
+      "Most Similar TLDR Script": "passwd {{new_password}}",
+      "Top-3 Similar Questions": [
+        "su_1132626: Changing home directory of user on Windows Subsystem for Linux",
+        "ul_267904: What is a good way to change a group of users UIDs without usermod executing a time consuming chown on the user home directory?",
+        "ul_598794: How to dynamically change owner of directory using awk output?"
+      ],
+      "Top-3 Scripts": [
+        "su_1132626: sudo vim /etc/passwd",
+        "ul_267904: # mkdir -p /tmp/home/jsmith  ## uncomment if required.\nhomedir=$(getent passwd jsmith | awk -F: '{print $6}')\nusermod -d /tmp/home/jsmith jsmith\nusermod -u fixedUID jsmith -o\nusermod -d \"$homedir\" jsmith",
+        "ul_598794: awk -F\\: '/^#/{next}''{system(\"chown \" $1\" \" $6)}' /etc/passwd"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "cd",
+      "MP Summary": "change the working directory",
+      "Most Similar TLDR Task": "Go to home directory of current user",
+      "Most Similar TLDR Script": "cd",
+      "Top-3 Similar Questions": [
+        "su_1132626: Changing home directory of user on Windows Subsystem for Linux",
+        "au_493268: Change current working directory only by typing the name of the new one",
+        "ul_293648: Why change the current directory to the parent directory of a relative symlink before creating it"
+      ],
+      "Top-3 Scripts": [
+        "su_1132626: cd ~",
+        "au_493268: ",
+        "ul_293648: cd d1\nln -s ../../file ."
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "users",
+      "MP Summary": "print the user names of users currently logged in to the current host",
+      "Most Similar TLDR Task": "Display a list of logged in users according to a specific file",
+      "Most Similar TLDR Script": "users {{/var/log/wmtp}}",
+      "Top-3 Similar Questions": [
+        "au_18103: How can I change the default location of content directories (eg Pictures, Templates, Music)  in my home folder?"
+      ],
+      "Top-3 Scripts": [
+        "au_18103: chown nobody:users /home/common\nchmod 2775 /home/common\nusermod -a -G users user1"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "chown",
+      "MP Summary": "change file owner and group",
+      "Most Similar TLDR Task": "Change the owner user of a file/directory",
+      "Most Similar TLDR Script": "chown {{user}} {{path/to/file_or_directory}}",
+      "Top-3 Similar Questions": [
+        "au_829537: How to change owner of folder to current user recursively?",
+        "nl2bash_12187: Change the owner of \"$JBOSS_CONSOLE_LOG\" to \"$JBOSS_USER\"",
+        "au_18103: How can I change the default location of content directories (eg Pictures, Templates, Music)  in my home folder?"
+      ],
+      "Top-3 Scripts": [
+        "au_829537: sudo find ~ -type d -user root -exec sudo chown -R $USER: {} +\n\nsudo chown -R\n\nsudo find ~ -user root -exec sudo chown $USER: {} +",
+        "nl2bash_12187: chown $JBOSS_USER $JBOSS_CONSOLE_LOG",
+        "au_18103: chown nobody:users /home/common\nchmod 2775 /home/common\nusermod -a -G users user1"
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

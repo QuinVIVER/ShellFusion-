@@ -1,0 +1,88 @@
+{
+  "Query": "How to get ip address of a server on Centos 7 in bash",
+  "Answers": [
+    {
+      "Command": "ifconfig",
+      "MP Summary": "configure network interfaces",
+      "Most Similar TLDR Task": "Assign IP address to eth0 interface",
+      "Most Similar TLDR Script": "ifconfig eth0 {{ip_address}}",
+      "Top-3 Similar Questions": [
+        "so_12788607: How to get the IP address of a server using bash",
+        "nl2bash_136: Gets IP address of first listed active network interface in system.",
+        "nl2bash_134: Gets IP address of a primary network interface."
+      ],
+      "Top-3 Scripts": [
+        "so_12788607: ",
+        "nl2bash_136: ifconfig  | grep 'inet addr:' | grep -v '127.0.0.1' | awk -F: '{print $2}' | awk '{print $1}' | head -1",
+        "nl2bash_134: /sbin/ifconfig $(netstat -nr | tail -1 | awk '{print $NF}') | awk -F: '/inet /{print $2}' | cut -f1 -d ' '"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "nslookup",
+      "MP Summary": "query Internet name servers interactively",
+      "Most Similar TLDR Task": "Query your system's default name server for an IP address (A record) of the domain",
+      "Most Similar TLDR Script": "nslookup {{example.com}}",
+      "Top-3 Similar Questions": [
+        "so_5063343: How to get the ip address of the server in linux?",
+        "su_347408: How to get the IP address of a Unix machine?",
+        "su_407345: How do I get the computer name from an IP Address in Unix"
+      ],
+      "Top-3 Scripts": [
+        "so_5063343: [michaelsafyan@codemage ~]$ nslookup redmine.org\nServer:     8.8.8.8\nAddress:    8.8.8.8#53\n\nNon-authoritative answer:\nName:   redmine.org\nAddress: 46.4.36.71",
+        "su_347408: nslookup mach_name",
+        "su_407345: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "ip",
+      "MP Summary": "show / manipulate routing, network devices, interfaces and tunnels",
+      "Most Similar TLDR Task": "Add/Delete an ip address to an interface",
+      "Most Similar TLDR Script": "ip addr add/del {{ip}}/{{mask}} dev {{interface}}",
+      "Top-3 Similar Questions": [
+        "so_12788607: How to get the IP address of a server using bash",
+        "ul_579263: How in Linux can I get traffic of every ip address on a single interface, with multiple IP addresses?",
+        "so_61678066: Shell - Get interface name of IP address"
+      ],
+      "Top-3 Scripts": [
+        "so_12788607: ",
+        "ul_579263: % ip -s link show br1000\n10: br1000: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP mode DEFAULT group default qlen 1000\nlink/ether 00:10:18:aa:a8:20 brd ff:ff:ff:ff:ff:ff\nRX: bytes  packets  errors  dropped overrun mcast\n15661372003 108647365 0       0       0       0\nTX: bytes  packets  errors  dropped carrier collsns\n278081828962 149463091 0       0       0       0\n\n# iptables example - probably incorrect, I don't have a dev machine to test this.\niptables -A INPUT -i br1000 -d 10.100.0.1/24 -j LOG\niptables -A OUTPUT -i br1000 -s 10.100.0.1/24 -j LOG\n\n# nftables example - probably incorrect, I don't have a dev machine to test this.\nnft add rule ip filter INPUT iifname \"br1000\" ip daddr 10.100.0.1 counter log\nnft add rule ip filter OUTPUT iiname \"br1000\" ip saddr 10.100.0.1 counter log",
+        "so_61678066: ip addr\n\n$ ip addr show vlan100\n5: vlan100: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UNKNOWN group default qlen 1000\n    link/ether 56:ba:dc:0f:73:69 brd ff:ff:ff:ff:ff:ff\n    inet 192.168.1.200/32 brd 192.168.1.200 scope global noprefixroute vlan100\n       valid_lft forever preferred_lft forever\n    inet 192.168.1.169/24 brd 192.168.1.255 scope global dynamic noprefixroute vlan100\n       valid_lft 47960sec preferred_lft 47960sec\n    inet6 fe80::acb6:be79:224e:3062/64 scope link noprefixroute \n       valid_lft forever preferred_lft forever"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "hostname",
+      "MP Summary": "show or set the system's host name",
+      "Most Similar TLDR Task": "Show all network addresses of the host",
+      "Most Similar TLDR Script": "hostname -I",
+      "Top-3 Similar Questions": [
+        "so_23271599: how to get ip address of localhost"
+      ],
+      "Top-3 Scripts": [
+        "so_23271599: hostname -i"
+      ],
+      "Explanations about Options": {
+        "-i": "Display the network address(es) of the host name. Note that this works only if the\n host name can be resolved. Avoid using this option; use hostname --all-ip-addresses\n instead."
+      }
+    },
+    {
+      "Command": "ping",
+      "MP Summary": "send ICMP ECHO_REQUEST to network hosts",
+      "Most Similar TLDR Task": "Ping host without trying to lookup symbolic names for addresses",
+      "Most Similar TLDR Script": "ping -n {{host}}",
+      "Top-3 Similar Questions": [
+        "au_954074: now unable to get IP address from DHCP on modem - what changed?"
+      ],
+      "Top-3 Scripts": [
+        "au_954074: ping [-c count] [-M do] [-s packet_size] [host]\n\nping -c 4 -M do -s 1472 8.8.8.8 # this will probably show fragmentation\n\nping -c 4 -M do -s 1462 8.8.8.8 # may show fragmentation\n\nping -c 4 -M do -s 1452 8.8.8.8 # no fragmentation?\n\nping -c 4 -M do -s 1453 8.8.8.8 # still no fragmentation?"
+      ],
+      "Explanations about Options": {
+        "-M": "Select Path MTU Discovery strategy. pmtudisc_option may be either do (prohibit\n fragmentation, even local one), want (do PMTU discovery, fragment locally when packet\n size is large), or dont (do not set DF flag).",
+        "-s": "Specifies the number of data bytes to be sent. The default is 56, which translates\n into 64 ICMP data bytes when combined with the 8 bytes of ICMP header data.",
+        "-c": "Stop after sending count ECHO_REQUEST packets. With deadline option, ping waits for\n count ECHO_REPLY packets, until the timeout expires."
+      }
+    }
+  ]
+}

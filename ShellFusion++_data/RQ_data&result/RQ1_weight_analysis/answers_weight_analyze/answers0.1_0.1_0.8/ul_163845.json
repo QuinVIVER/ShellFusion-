@@ -1,0 +1,88 @@
+{
+  "Query": "Using jq to extract values and format in CSV",
+  "Answers": [
+    {
+      "Command": "printf",
+      "MP Summary": "format and print data",
+      "Most Similar TLDR Task": "Store a formatted message in a variable (does not work on zsh)",
+      "Most Similar TLDR Script": "printf -v {{myvar}} {{\"This is %s = %d\\n\" \"a year\" 2016}}",
+      "Top-3 Similar Questions": [
+        "so_14492590: using bash (sed/awk) to extract rows AND columns in CSV files?",
+        "so_69407077: jq format when running from a bash script with variable expansion",
+        "ul_404699: Using multiple wildcards in jq to select objects in a JSON file"
+      ],
+      "Top-3 Scripts": [
+        "so_14492590: #!/bin/bash\ndeclare -a arr\nwhile read -r line; do\n    arr=(${line//,/ })\n    printf \"Rank\\t: %s\\nName\\t: %s\\nSchool\\t: %s\\nMajor\\t: %s\\nYear\\t: %s\\n\" ${arr[@]}\ndone < file.csv",
+        "so_69407077: ",
+        "ul_404699: jq -c 'select ...' file.json > out.json\nprintf '{\"nt\":%i}\\n' `wc -l < out.json` >> out.json"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "echo",
+      "MP Summary": "display a line of text",
+      "Most Similar TLDR Task": "Print a message with environment variables",
+      "Most Similar TLDR Script": "echo \"{{My path is $PATH}}\"",
+      "Top-3 Similar Questions": [
+        "so_14492590: using bash (sed/awk) to extract rows AND columns in CSV files?",
+        "so_59127004: Use variable in jq read query",
+        "so_65408895: using jq how do you query from variable which has json"
+      ],
+      "Top-3 Scripts": [
+        "so_14492590: #!/bin/bash\nwhile IFS=',' read -r rank name school major year; do\n    echo -e \"Rank\\t: $rank\\nName\\t: $name\\nSchool\\t: $school\\nMajor\\t: $major\\nYear\\t: $year\\n\"\ndone < file.csv\nIFS=$' \\t\\n'",
+        "so_59127004: for user in $(jq -r 'keys[]' permissions.json)\ndo\n  echo ${user}\n  for role in $(jq --arg u \"$user\" -r '.[$u][]' permissions.json)\n  do\n    echo \"User ${user} has role ${role}\"\n  done\ndone\n\nwhile IFS= read -r user; do\n  echo \"$user\"\n  while IFS= read -r role; do\n    echo \"User $user has role $role\"\n  done < <(jq --arg u \"$user\" -r '.[$u][]' permissions.json\ndone < <(jq -r 'keys[]' permissions.json)",
+        "so_65408895: activityCause=$(echo \"$activity\" | jq -r '.Activities[].Cause')"
+      ],
+      "Explanations about Options": {
+        "-e": "enable interpretation of backslash escapes"
+      }
+    },
+    {
+      "Command": "jq",
+      "MP Summary": "Command-line JSON processor",
+      "Most Similar TLDR Task": "Read JSON objects from a file into an array, and output it (inverse of `jq .[]`)",
+      "Most Similar TLDR Script": "jq --slurp . {{file.json}}",
+      "Top-3 Similar Questions": [
+        "so_45579569: Using $ variables in jq from PowerShell",
+        "so_45486380: Using jq to store part of JSON in variable",
+        "so_47382724: jq: using type in the format file"
+      ],
+      "Top-3 Scripts": [
+        "so_45579569: jq -r '(map(keys) | add | unique) as $cols | \n       map(. as $row | $cols | map($row[.])) as $rows | \n         $cols, $rows[] | @csv' output2.json > output3.csv",
+        "so_45486380: variable=\"$file\" | jq -j \".rows[].example\"\n\nvariable=$(cat \"$file\" | jq -j \".rows[].example\")",
+        "so_47382724: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "cat",
+      "MP Summary": "concatenate files and print on the standard output",
+      "Most Similar TLDR Task": "Append several files into the target file",
+      "Most Similar TLDR Script": "cat {{file1}} {{file2}} >> {{target_file}}",
+      "Top-3 Similar Questions": [
+        "so_45486380: Using jq to store part of JSON in variable",
+        "so_53369090: How to use jq to fetch attribute from json",
+        "so_39204158: Loop through json using jq to get multiple value"
+      ],
+      "Top-3 Scripts": [
+        "so_45486380: variable=$(cat \"$file\" | jq -j \".rows[].example\")",
+        "so_53369090: ",
+        "so_39204158: $ cat my_script\njq -r '.Volumes[] | .VolumeId + \" \" + .Tags[].Value' volumes.json \\\n| while IFS= read -r volumeId tagValue; do\n  other_command \"$volumeId\" \"$tagValue\"\ndone"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "test",
+      "MP Summary": "check file types and compare values",
+      "Most Similar TLDR Task": "Test if given variable is empty",
+      "Most Similar TLDR Script": "test -z $GIT_BRANCH",
+      "Top-3 Similar Questions": [
+        "so_25378013: How to convert a JSON object to key=value format in jq?"
+      ],
+      "Top-3 Scripts": [
+        "so_25378013: $ cat test.json\n{\n    \"var\": 1,\n    \"foo\": \"bar\",\n    \"x\": \"test\"\n}\n$ jq -r 'to_entries|map(\"\\(.key)=\\(.value|tostring)\")|.[]' test.json\nfoo=bar\nvar=1\nx=test"
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

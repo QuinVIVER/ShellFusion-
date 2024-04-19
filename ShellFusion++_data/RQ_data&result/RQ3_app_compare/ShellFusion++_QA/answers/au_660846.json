@@ -1,0 +1,70 @@
+{
+  "Query": "How to Zip and Unzip a directory and its files in Linux",
+  "Answers": [
+    {
+      "Command": "unzip",
+      "Top-3 Similar Questions": [
+        "ul_321683: Unzip all files into directories with the same name",
+        "ul_586576: Unzip files into a new directory",
+        "ul_489445: Unzip to a folder with the same name as the file (without the .zip extension)"
+      ],
+      "Top-3 Scripts": [
+        "ul_321683: for d in *.zip\ndo\n  dir=/home/usrname/anotherdir/zip${d%%.zip}\n  unzip -d \"$dir\" \"$d\"\ndone",
+        "ul_586576: for file in *.zip; do\n    [ -f \"$file\" ] || continue\n    unzip \"$file\" -d \"${file%%.zip}\"\ndone",
+        "ul_489445: unzd() {\n    if [[ $# != 1 ]]; then echo I need a single argument, the name of the archive to extract; return 1; fi\n    target=\"${1%.zip}\"\n    unzip \"$1\" -d \"${target##*/}\"\n}\n\nunzip $1 -d \"${target}\""
+      ]
+    },
+    {
+      "Command": "find",
+      "Top-3 Similar Questions": [
+        "so_44846638: Unzip all gz files in all subdirectories in the terminal",
+        "ul_198492: Unzip specific files from multiple zip files",
+        "su_907094: Unzip many files to a given directory"
+      ],
+      "Top-3 Scripts": [
+        "so_44846638: cd theparentdir && gzip -d $(find ./ -type f -name '*.gz')\n\ncd theparentdir && gzip $(find ./ -type f -name '*.csv')\n\ncd theparentdir && find ./ -type f -name '*.gz' -exec gzip -d '{}' '+'\n\ncd theparentdir && find ./ -type f -name '*.csv' -exec gzip '{}' '+'",
+        "ul_198492: find -exec\n\nfind . -type f -name '*.zip' -exec unzip {}  '*CTL*' -d \"$target_dir\" \\;",
+        "su_907094: find . -name \"*.zip\" -exec bash -c ' unzip \"$0\" -d \"${0%*.zip}\"  '  {} \\;"
+      ]
+    },
+    {
+      "Command": "zip",
+      "Top-3 Similar Questions": [
+        "ul_321683: Unzip all files into directories with the same name",
+        "ul_586576: Unzip files into a new directory",
+        "so_60930401: Unzip archive zip file into folder with same name as archive zip file"
+      ],
+      "Top-3 Scripts": [
+        "ul_321683: for d in *.zip\ndo\n  dir=/home/usrname/anotherdir/zip${d%%.zip}\n  unzip -d \"$dir\" \"$d\"\ndone",
+        "so_60930401: $filePath = \"s:\\Download Data Feed\\\"\n$zip = Get-ChildItem -File -Recurse -Path $filePath | Where-Object { $_.Extension -eq \".zip\" }\n\nforeach ($file in $zip) { \n    $target = Join-Path $filePath $file.BaseName\n    if (!(Test-Path $target -PathType Container)) {\n        $null = New-Item -ItemType Directory -Path $target\n    }\n    Expand-7Zip -ArchiveFileName $file -Password \"Password\" -TargetPath $target\n}\n\n$zip",
+        "so_58272392: Foreach($zip in $zipfile){ ... }"
+      ]
+    },
+    {
+      "Command": "file",
+      "Top-3 Similar Questions": [
+        "ul_586576: Unzip files into a new directory",
+        "so_60930401: Unzip archive zip file into folder with same name as archive zip file",
+        "so_48777193: Unzip ZIP files in separate folders using Powershell"
+      ],
+      "Top-3 Scripts": [
+        "ul_586576: for file in *.zip; do\n    [ -f \"$file\" ] || continue\n    unzip \"$file\" -d \"${file%%.zip}\"\ndone",
+        "so_60930401: $filePath = \"s:\\Download Data Feed\\\"\n$zip = Get-ChildItem -File -Recurse -Path $filePath | Where-Object { $_.Extension -eq \".zip\" }\n\nforeach ($file in $zip) { \n    $target = Join-Path $filePath $file.BaseName\n    if (!(Test-Path $target -PathType Container)) {\n        $null = New-Item -ItemType Directory -Path $target\n    }\n    Expand-7Zip -ArchiveFileName $file -Password \"Password\" -TargetPath $target\n}",
+        "ul_443932: file\nfile.zip\nfile2.zip\nfile3\nfile3.zip\n\n./file\n./file3"
+      ]
+    },
+    {
+      "Command": "to",
+      "Top-3 Similar Questions": [
+        "ul_489445: Unzip to a folder with the same name as the file (without the .zip extension)",
+        "au_627683: Unzip a file to its current directory",
+        "so_56279162: Unzip multiple zip folders with the original name"
+      ],
+      "Top-3 Scripts": [
+        "ul_489445: unzd() {\n    if [[ $# != 1 ]]; then echo I need a single argument, the name of the archive to extract; return 1; fi\n    target=\"${1%.zip}\"\n    unzip \"$1\" -d \"${target##*/}\"\n}",
+        "so_42552694: fastqc <(zcat path/to/file.gz)\n\nfastqc <(zcat path/to/file.gz | tee file)",
+        "so_22688543: dir=\"/path/to/zip-dir\"\ncd \"$dir\"\n\nfor zf in *.zip\ndo\n  unzip \"$zf\"\ndone"
+      ]
+    }
+  ]
+}

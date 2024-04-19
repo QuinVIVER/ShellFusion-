@@ -1,0 +1,91 @@
+{
+    "Answers": [
+        {
+            "Command": "mount",
+            "Explanations about Options": {
+                "-t(C)": "The -t option is the filesystem type; it can be NTFS, FAT, EXT.",
+                "-t(M)": "The argument following the -t is used to indicate the filesystem type. The\n filesystem types which are currently supported depend on the running kernel. See\n /proc/filesystems and /lib/modules/$(uname -r)/kernel/fs for a complete list of the\n filesystems. The most common are ext2, ext3, ext4, xfs, btrfs, vfat, sysfs, proc,\n nfs and cifs."
+            },
+            "MP Summary": "mount a filesystem",
+            "Most Similar TLDR Script": "mount -t {{filesystem_type}} {{path/to/device_file}} {{path/to/target_directory}}",
+            "Most Similar TLDR Task": "Mount a device to a directory",
+            "Top-3 Scripts": [
+                "au_583909: $ mount\n/dev/sda3 on / type ext4 (rw,errors=remount-ro)\nproc on /proc type proc (rw,noexec,nosuid,nodev)\nsysfs on /sys type sysfs (rw,noexec,nosuid,nodev)\n...\n/dev/mapper/lvmg-homelvm on /home type btrfs (rw,relatime,compress=lzo,space_cache)\n/dev/sda5 on /home/muru/arch type btrfs (rw,relatime,compress=lzo,space_cache)\nbinfmt_misc on /proc/sys/fs/binfmt_misc type binfmt_misc (rw,noexec,nosuid,nodev)\nsystemd on /sys/fs/cgroup/systemd type cgroup (rw,noexec,nosuid,nodev,none,name=systemd)",
+                "ul_18925: mount -t ntfs /dev/sda1  /mnt/",
+                "ul_13539: if [ ! -f /your/mounted/fs/mount-check.txt ];\nthen\n    echo \"Here you have to put your mount command.\"\nfi"
+            ],
+            "Top-3 Similar Questions": [
+                "au_583909: How do I check where devices are mounted?",
+                "ul_18925: How to mount a device in Linux?",
+                "ul_13539: Detect if a (NTFS) drive is mounted or not. If not then mount it"
+            ]
+        },
+        {
+            "Command": "umount",
+            "Explanations about Options": {
+                "-a(M)": "All of the filesystems described in /proc/self/mountinfo (or in deprecated\n /etc/mtab) are unmounted, except the proc, devfs, devpts, sysfs, rpc_pipefs and\n nfsd filesystems. This list of the filesystems may be replaced by --types umount\n option.",
+                "-l(C)": "IMO this feels similar to how \"umount -l\" works. \"umount -l /path\" disassembles and detaches a mount tree, and each independent filesystem is shut down as soon as it has no open files.",
+                "-l(M)": "Lazy unmount. Detach the filesystem from the file hierarchy now, and clean up all\n references to this filesystem as soon as it is not busy anymore."
+            },
+            "MP Summary": "unmount file systems",
+            "Most Similar TLDR Script": "umount -a",
+            "Most Similar TLDR Task": "Unmount all mounted filesystems (except the `proc` filesystem)",
+            "Top-3 Scripts": [
+                "au_488524: sudo umount /mnt\nsudo kpartx -d /data/OldDisk.iso",
+                "ul_3192: umount /dev/cdrom\n\numount /media/cdrom",
+                "ul_531468: mkdir /root.orig\nmount --rbind / /root.orig\nmount --make-rprivate /root.orig/mnt\n\nmount newdevice /mnt\n...\numount -R /root.orig/mnt    # instead of umount olddevice\n\nmount --make-rprivate /root.orig\numount -l /root.orig\nrmdir /root.orig\n\numount -l\n\numount -l /path"
+            ],
+            "Top-3 Similar Questions": [
+                "ul_466533: Why can I (or cannot) mount a mounted device again? What is happening?",
+                "au_488524: How to mount iso as a device",
+                "ul_3192: What is meant by mounting a device in Linux?"
+            ]
+        },
+        {
+            "Command": "findmnt",
+            "Explanations about Options": {
+                "-n(M)": "Do not print a header line.",
+                "-o(M)": "Define output columns. See the --help output to get a list of the currently\n supported columns. The TARGET column contains tree formatting if the --list or\n --raw options are not specified."
+            },
+            "MP Summary": "find a filesystem",
+            "Most Similar TLDR Script": "findmnt",
+            "Most Similar TLDR Task": "List all mounted filesystems",
+            "Top-3 Scripts": [
+                "su_1114911: $ findmnt -n -o TARGET /dev/sdb1\n/run/media/grawity/A0D8-7268\n\ndevs=$(udevadm trigger -v -n -s block -p ID_VENDOR_ID=… -p ID_MODEL_ID=…)\n\nfor dev in $devs; do\n    findmnt -n -o TARGET /dev/${dev##*/}\ndone\n\n# alternative, based on the device's major:minor\nfor dev in $devs; do\n    findmnt -n -o TARGET $(<\"$dev/dev\")\ndone"
+            ],
+            "Top-3 Similar Questions": [
+                "au_583909: How do I check where devices are mounted?",
+                "su_1114911: Mount location by VidPid of a device"
+            ]
+        },
+        {
+            "Command": "kpartx",
+            "Explanations about Options": {
+                "-d(M)": "Delete partition mappings."
+            },
+            "MP Summary": "Create device maps from partition tables.",
+            "Most Similar TLDR Script": "kpartx -d {{whole_disk.img}}",
+            "Most Similar TLDR Task": "Delete partition mappings",
+            "Top-3 Scripts": [
+                "au_488524: sudo kpartx -a /data/OldDisk.iso\nsudo mount /dev/mapper/loop0pX /mnt/ -o loop,ro\n# point your file browser to /mnt\n\nsudo umount /mnt\nsudo kpartx -d /data/OldDisk.iso"
+            ],
+            "Top-3 Similar Questions": [
+                "au_488524: How to mount iso as a device"
+            ]
+        },
+        {
+            "Command": "mountpoint",
+            "Explanations about Options": {},
+            "MP Summary": "see if a directory or file is a mountpoint",
+            "Most Similar TLDR Script": "mountpoint {{path/to/directory}}",
+            "Most Similar TLDR Task": "Check if a directory is a mountpoint",
+            "Top-3 Scripts": [
+                "su_320415: mount -t deviceFileFormat -o umask=filePermissions,gid=ownerGroupID,uid=ownerID /device /mountpoint\n\n/device /mountpoint deviceFileFormat umask=filePermissions,gid=ownerGroupID,uid=ownerUserID\n\nchown username /mountpoint"
+            ],
+            "Top-3 Similar Questions": [
+                "su_320415: Mount device with specific user rights"
+            ]
+        }
+    ],
+    "Query": "Detect and mount devices"
+}

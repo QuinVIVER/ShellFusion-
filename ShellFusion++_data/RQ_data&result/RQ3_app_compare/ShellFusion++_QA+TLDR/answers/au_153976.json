@@ -1,0 +1,86 @@
+{
+  "Query": "How do I get the parent process ID of a given child process?",
+  "Answers": [
+    {
+      "Command": "wait",
+      "MP Summary": "await process completion",
+      "Most Similar TLDR Task": "Wait for a process to finish given its process ID (PID) and return its exit status",
+      "Most Similar TLDR Script": "wait {{pid}}",
+      "Top-3 Similar Questions": [
+        "so_27755420: Get child list of parent process in C",
+        "so_20573621: Bash get process ID of a process started in subshell",
+        "ul_302762: Get the exit code of processes forked from the master process"
+      ],
+      "Top-3 Scripts": [
+        "so_27755420: ",
+        "so_20573621: (sleep & wait)\n(sleep & pid=$!; wait $pid)",
+        "ul_302762: wait()"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "ps",
+      "MP Summary": "report a snapshot of the current processes.",
+      "Most Similar TLDR Task": "Get the parent pid of a process",
+      "Most Similar TLDR Script": "ps -o ppid= -p {{pid}}",
+      "Top-3 Similar Questions": [
+        "su_150117: How to get parent PID of a given process in GNU/Linux from command line?",
+        "so_27755420: Get child list of parent process in C",
+        "so_17922300: Getting the list of child process, called by a parent process in Linux"
+      ],
+      "Top-3 Scripts": [
+        "su_150117: ps -o ppid= -p 1111\n\nppid () { ps -p ${1:-$$} -o ppid=; }\n\n#!/bin/sh\npid=$1\nif [ -z $pid ]\nthen\n    read -p \"PID: \" pid\nfi\nps -p ${pid:-$$} -o ppid=",
+        "so_27755420: ",
+        "so_17922300: ps afx"
+      ],
+      "Explanations about Options": {
+        "-p": "Select by PID. This selects the processes whose process ID numbers appear in\n pidlist. Identical to p and --pid."
+      }
+    },
+    {
+      "Command": "pgrep",
+      "MP Summary": "look up or signal processes based on name and other attributes",
+      "Most Similar TLDR Task": "Return PIDs of any running processes with a matching command string",
+      "Most Similar TLDR Script": "pgrep {{process_name}}",
+      "Top-3 Similar Questions": [
+        "so_52508561: Get pids of all child/grandchild processes created from parent process",
+        "au_1259111: Get process ids of all spawned processes from xargs",
+        "ul_189989: Get PID of process started by time"
+      ],
+      "Top-3 Scripts": [
+        "so_52508561: #!/usr/bin/env bash\n\nnode foo.js &\npid=$!\n\nsleep 5;\n\npgrep -P $pid | xargs kill -INT",
+        "au_1259111: pgrep -P {parent}",
+        "ul_189989: $ time sleep 50 & timepid=$!\n$ aoutpid=$(pgrep -P $timepid)\n$ ps -o ppid,pid,start,cmd w -p $$,$timepid,$aoutpid\n\nPPID   PID  STARTED CMD\n2065  2068 21:34:57 -bash\n2068  3297 22:16:05 -bash\n3297  3298 22:16:05 sleep 50"
+      ],
+      "Explanations about Options": {
+        "-P": "Only match processes whose parent process ID is listed."
+      }
+    },
+    {
+      "Command": "fuser",
+      "MP Summary": "identify processes using files or sockets",
+      "Most Similar TLDR Task": "Find which processes are accessing a file or directory",
+      "Most Similar TLDR Script": "fuser {{path/to/file_or_directory}}",
+      "Top-3 Similar Questions": [
+        "so_23154547: Get history command of a process"
+      ],
+      "Top-3 Scripts": [
+        "so_23154547: fuser - identify processes using files or sockets\n\nfuser filename"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "pwdx",
+      "MP Summary": "report current working directory of a process",
+      "Most Similar TLDR Task": "Print current working directory of a process",
+      "Most Similar TLDR Script": "pwdx {{process_id}}",
+      "Top-3 Similar Questions": [
+        "so_54418376: Get source file path of a running python script from process id"
+      ],
+      "Top-3 Scripts": [
+        "so_54418376: ps -ef | grep 'your process' | awk '{print $2}' | xargs pwdx\n\npgrep 'your process' | awk '{print $1}' | xargs pwdx"
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

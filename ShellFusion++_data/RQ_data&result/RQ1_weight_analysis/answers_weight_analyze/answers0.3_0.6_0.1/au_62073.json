@@ -1,0 +1,93 @@
+{
+  "Query": "How to decide on Swap size",
+  "Answers": [
+    {
+      "Command": "mkswap",
+      "MP Summary": "set up a Linux swap area",
+      "Most Similar TLDR Task": "Setup a given partition as swap area",
+      "Most Similar TLDR Script": "sudo mkswap {{/dev/sdb7}}",
+      "Top-3 Similar Questions": [
+        "ul_502258: bash how to check size of the swap",
+        "su_941268: Permanently increase swap size?",
+        "au_358908: Can't reduce swap size"
+      ],
+      "Top-3 Scripts": [
+        "ul_502258: ",
+        "su_941268: dd if=/dev/zero of=/.swapfile bs=1M count=1024\nmkswap -v1 /.swapfile\nswapon /.swapfile",
+        "au_358908: sudo -s\ncat /etc/fstab\nswapoff -a\nlvresize vg0/SWAP_1 -L 4G\nmkswap -U long-uuid-here /dev/vg0/SWAP_1\nswapon -a"
+      ],
+      "Explanations about Options": {
+        "-U": "Specify the UUID to use. The default is to generate a UUID."
+      }
+    },
+    {
+      "Command": "swapoff",
+      "MP Summary": "enable/disable devices and files for paging and swapping",
+      "Most Similar TLDR Task": "Disable all swap areas",
+      "Most Similar TLDR Script": "swapoff -a",
+      "Top-3 Similar Questions": [
+        "ul_502258: bash how to check size of the swap",
+        "au_358908: Can't reduce swap size",
+        "au_214805: How do I disable swap?"
+      ],
+      "Top-3 Scripts": [
+        "ul_502258: ",
+        "au_358908: sudo -s\ncat /etc/fstab\nswapoff -a\nlvresize vg0/SWAP_1 -L 4G\nmkswap -U long-uuid-here /dev/vg0/SWAP_1\nswapon -a\n\nswapoff -a",
+        "au_214805: sudo swapoff -a\n\nman swapoff"
+      ],
+      "Explanations about Options": {
+        "-a": "All devices marked as ``swap'' in /etc/fstab are made available, except for those\n with the ``noauto'' option. Devices that are already being used as swap are\n silently skipped."
+      }
+    },
+    {
+      "Command": "swapon",
+      "MP Summary": "enable/disable devices and files for paging and swapping",
+      "Most Similar TLDR Task": "Enable all swap areas",
+      "Most Similar TLDR Script": "swapon -a",
+      "Top-3 Similar Questions": [
+        "ul_502258: bash how to check size of the swap",
+        "so_61870502: How to check the swap partion in Ubuntu",
+        "au_890150: Ubuntu blkid check encryption of swap partition"
+      ],
+      "Top-3 Scripts": [
+        "ul_502258: ",
+        "so_61870502: $ swapon\nNAME      TYPE SIZE USED PRIO\n/swap.img file   2G   0B   -2",
+        "au_890150: swapon -s\n\nswapon --show"
+      ],
+      "Explanations about Options": {
+        "--show": "Display a definable table of swap areas. See the --help output for a list of\n available columns."
+      }
+    },
+    {
+      "Command": "du",
+      "MP Summary": "estimate file space usage",
+      "Most Similar TLDR Task": "List the sizes of a directory and any subdirectories, in human-readable form (i.e. auto-selecting the appropriate unit for each size)",
+      "Most Similar TLDR Script": "du -h {{path/to/directory}}",
+      "Top-3 Similar Questions": [
+        "so_31871883: How do I check the size of a directory?"
+      ],
+      "Top-3 Scripts": [
+        "so_31871883: du -sh file_path"
+      ],
+      "Explanations about Options": {
+        "-h": "print sizes in human readable format (e.g., 1K 234M 2G)",
+        "-s": "display only a total for each argument"
+      }
+    },
+    {
+      "Command": "lvresize",
+      "MP Summary": "Resize a logical volume",
+      "Most Similar TLDR Task": "Change a volume's size to 120GB",
+      "Most Similar TLDR Script": "lvresize -L {{120G}} {{logical_volume}}",
+      "Top-3 Similar Questions": [
+        "au_358908: Can't reduce swap size"
+      ],
+      "Top-3 Scripts": [
+        "au_358908: sudo -s\ncat /etc/fstab\nswapoff -a\nlvresize vg0/SWAP_1 -L 4G\nmkswap -U long-uuid-here /dev/vg0/SWAP_1\nswapon -a"
+      ],
+      "Explanations about Options": {
+        "-L": "Specifies the new size of the LV. The --size and --extents options are alternate\n methods of specifying size. The total number of physical extents used will be\n greater when redundant data is needed for RAID levels. When the plus + or minus -\n prefix is used, the value is not an absolute size, but is relative and added or\n subtracted from the current size."
+      }
+    }
+  ]
+}

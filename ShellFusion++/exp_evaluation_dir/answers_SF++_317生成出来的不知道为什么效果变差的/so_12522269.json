@@ -1,0 +1,1642 @@
+{
+  "Query": "Bash How to find the largest file in a directory and its subdirectories?",
+  "Answers": [
+    {
+      "Command": "rm",
+      "MP Summary": "remove files or directories",
+      "Most Similar TLDR Task": "Recursively remove a directory and all its subdirectories",
+      "Most Similar TLDR Script": "rm -r {{path/to/directory}}",
+      "Most Similar NL2Bash Task": "Find all files in and below all subdirectories of the current directory",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -mindepth 2\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-mindepth": "Do not apply any tests or actions at levels less than levels (a non-negative\n integer). -mindepth 1 means process all files except the starting-points."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_147731: Delete all but largest file in multiple directories",
+        "su_112078: Delete matching files in all subdirectories",
+        "so_41056673: Bash find and remove files in directory, but do not remove directory"
+      ],
+      "Top-3 Scripts": [
+        "ul_147731: for dir (/home/usr/ProjZ/programs/*(/)) rm -f $dir/*.js(.NOL[2,-1])\n\nfor dir in /home/usr/ProjZ/programs/*; do\n  [ -d \"$dir\" && ! -L \"$dir\" ] || continue\n  find \"$dir\" -type f -printf '%s:%p\\0' | sort -rzn |\n    sed -z '1d;s/[^:]*://' | xargs -r0 rm -f\ndone",
+        "su_112078: find . -name \\*.swp -type f -exec rm -f {} \\;\n\nfind . -name \\*.swp -type f -exec rm -f {} +\n\nfind . -name \\*.swp -type f -print0  | xargs -0 rm -f",
+        "so_41056673: find Test -type f -mtime -1 -exec rm -rf {} \\;"
+      ],
+      "Explanations about Options": {
+        "-r": "remove directories and their contents recursively",
+        "-f": "ignore nonexistent files and arguments, never prompt"
+      }
+    },
+    {
+      "Command": "find",
+      "MP Summary": "search for files in a directory hierarchy",
+      "Most Similar TLDR Task": "Find files by extension",
+      "Most Similar TLDR Script": "find {{root_path}} -name '{{*.ext}}'",
+      "Most Similar NL2Bash Task": "Find all files in and below all subdirectories of the current directory",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -mindepth 2\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-mindepth": "Do not apply any tests or actions at levels less than levels (a non-negative\n integer). -mindepth 1 means process all files except the starting-points."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_147731: Delete all but largest file in multiple directories",
+        "ul_359611: I would like to find the largest file in each directory recursively",
+        "so_8696292: How do I find the largest 10 files in a given directory?"
+      ],
+      "Top-3 Scripts": [
+        "ul_147731: for dir in /home/usr/ProjZ/programs/*; do\n  [ -d \"$dir\" && ! -L \"$dir\" ] || continue\n  find \"$dir\" -type f -printf '%s:%p\\0' | sort -rzn |\n    sed -z '1d;s/[^:]*://' | xargs -r0 rm -f\ndone",
+        "ul_359611: find . -type f -printf '%s %h/%f\\0'|awk 'BEGIN { RS=\"\\0\" } { SIZE=$1; for (i = 1; i <= NF - 1; i++) $i = $(i + 1); NF = NF - 1; DIR=$0; gsub(\"/[^/]+$\", \"\", DIR); FILE=substr($0, length(DIR) + 2); SUMSIZES[DIR] += SIZE; NBFILES[DIR]++; if (SIZE > MAXSIZE[DIR] || !BIGGESTFILE[DIR]) { MAXSIZE[DIR] = SIZE; BIGGESTFILE[DIR] = FILE } }; END { for (DIR in SUMSIZES) { printf \"%s: average %f, biggest file %s %d\\n\", DIR, SUMSIZES[DIR] / NBFILES[DIR], BIGGESTFILE[DIR], MAXSIZE[DIR] } }'",
+        "so_8696292: find . -type f -printf \"%s %p\\n\" | sort -nr | awk '{print $2}' | head -10"
+      ],
+      "Explanations about Options": {
+        "-type": "File is of type c:",
+        "-printf": "True; print format on the standard output, interpreting `\\' escapes and `%'\n directives. Field widths and precisions can be specified as with the `printf' C\n function. Please note that many of the fields are printed as %s rather than %d,\n and this may mean that flags don't work as you might expect. This also means that\n the `-' flag does work (it forces fields to be left-aligned). Unlike -print,\n -printf does not add a newline at the end of the string. The escapes and\n directives are:"
+      }
+    },
+    {
+      "Command": "du",
+      "MP Summary": "estimate file space usage",
+      "Most Similar TLDR Task": "List the human-readable size of all .jpg files in subdirectories of the current directory, and show a cumulative total at the end",
+      "Most Similar TLDR Script": "du -ch */*.jpg",
+      "Most Similar NL2Bash Task": "Find all files in and below all subdirectories of the current directory",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -mindepth 2\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-mindepth": "Do not apply any tests or actions at levels less than levels (a non-negative\n integer). -mindepth 1 means process all files except the starting-points."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_2013: Find 10 largest files in the current directory and its subdirectories",
+        "so_70150536: Command to find N Largest files in macOS directory excluding specific directories",
+        "nl2bash_5344: Find the largest files in a particular location"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_2013: du -hsx * | sort -rh | head -10",
+        "so_70150536: find . -path ./.target -prune -o -type f -exec du -h {} + | sort -hr | head -n 10",
+        "nl2bash_5344: find /home/tecmint/Downloads/ -type f -exec du -Sh {} + | sort -rh | head -n 5"
+      ],
+      "Explanations about Options": {
+        "-s": "display only a total for each argument",
+        "-h": "print sizes in human readable format (e.g., 1K 234M 2G)",
+        "-S": "for directories do not include size of subdirectories",
+        "-x": "skip directories on different file systems"
+      }
+    },
+    {
+      "Command": "file",
+      "MP Summary": "determine file type",
+      "Most Similar TLDR Task": "Look inside a zipped file and determine the file type(s) inside",
+      "Most Similar TLDR Script": "file -z {{foo.zip}}",
+      "Most Similar NL2Bash Task": "Find all files in and below all subdirectories of the current directory",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -mindepth 2\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-mindepth": "Do not apply any tests or actions at levels less than levels (a non-negative\n integer). -mindepth 1 means process all files except the starting-points."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_359611: I would like to find the largest file in each directory recursively",
+        "so_38895490: bash finding files in directories recursively",
+        "nl2bash_5221: Find recursively the files named \"file\" in the current directory ignoring the .git subdirectory"
+      ],
+      "Top-3 Scripts": [
+        "ul_359611: find . -type f -printf '%s %h/%f\\0'|awk 'BEGIN { RS=\"\\0\" } { SIZE=$1; for (i = 1; i <= NF - 1; i++) $i = $(i + 1); NF = NF - 1; DIR=$0; gsub(\"/[^/]+$\", \"\", DIR); FILE=substr($0, length(DIR) + 2); SUMSIZES[DIR] += SIZE; NBFILES[DIR]++; if (SIZE > MAXSIZE[DIR] || !BIGGESTFILE[DIR]) { MAXSIZE[DIR] = SIZE; BIGGESTFILE[DIR] = FILE } }; END { for (DIR in SUMSIZES) { printf \"%s: average %f, biggest file %s %d\\n\", DIR, SUMSIZES[DIR] / NBFILES[DIR], BIGGESTFILE[DIR], MAXSIZE[DIR] } }'",
+        "so_38895490: for file in `ls $1`",
+        "nl2bash_5221: find . -path ./.git  -prune -o -name file  -print"
+      ],
+      "Explanations about Options": {
+        "-r": "Don't translate unprintable characters to \\ooo. Normally file translates\n unprintable characters to their octal representation.",
+        "-i": "Causes the file command to output mime type strings rather than the more traditional\n human readable ones. Thus it may say \u2018text/plain; charset=us-ascii\u2019 rather than\n \u201cASCII text\u201d.",
+        "-p": "On systems that support utime(3) or utimes(2), attempt to preserve the access time\n of files analyzed, to pretend that file never read them.",
+        "-n": "Force stdout to be flushed after checking each file. This is only useful if\n checking a list of files. It is intended to be used by programs that want filetype\n output from a pipe."
+      }
+    },
+    {
+      "Command": "ls",
+      "MP Summary": "list directory contents",
+      "Most Similar TLDR Task": "List all files, with trailing `/` added to directory names",
+      "Most Similar TLDR Script": "ls -F",
+      "Most Similar NL2Bash Task": "Find all files in and below all subdirectories of the current directory",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -mindepth 2\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-mindepth": "Do not apply any tests or actions at levels less than levels (a non-negative\n integer). -mindepth 1 means process all files except the starting-points."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_69863412: How to get largest file in directory in bash?",
+        "so_38895490: bash finding files in directories recursively",
+        "so_36293162: Find last added file in directory"
+      ],
+      "Top-3 Scripts": [
+        "so_69863412: ls -larS | awk -F' {1,}' 'END{print $NF,\" \",$5}'\n\nls -larS | awk -F' {1,}' 'END{for (i=9; i<=NF; i++) printf $i\" \"; print \" \",$5}'",
+        "so_38895490: ",
+        "so_36293162: ls -tU | head -n1"
+      ],
+      "Explanations about Options": {
+        "-t": "sort by modification time , newest first",
+        "-a": "do not ignore entries starting with .",
+        "-U": "do not sort; list entries in directory order",
+        "-l": "use a long listing format",
+        "-S": "sort by file size , largest first",
+        "-r": "reverse order while sorting"
+      }
+    },
+    {
+      "Command": "head",
+      "MP Summary": "output the first part of files",
+      "Most Similar TLDR Task": "Output everything but the last few lines of a file",
+      "Most Similar TLDR Script": "head -n -{{count_of_lines}} {{filename}}",
+      "Most Similar NL2Bash Task": "Find all files in and below all subdirectories of the current directory",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -mindepth 2\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-mindepth": "Do not apply any tests or actions at levels less than levels (a non-negative\n integer). -mindepth 1 means process all files except the starting-points."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_2013: Find 10 largest files in the current directory and its subdirectories",
+        "so_8696292: How do I find the largest 10 files in a given directory?",
+        "so_70150536: Command to find N Largest files in macOS directory excluding specific directories"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_2013: du -hsx * | sort -rh | head -10",
+        "so_8696292: find . -type f -printf \"%s %p\\n\" | sort -nr | awk '{print $2}' | head -10",
+        "so_70150536: find . -path ./.target -prune -o -type f -exec du -h {} + | sort -hr | head -n 10"
+      ],
+      "Explanations about Options": {
+        "-n": "print the first NUM lines instead of the first 10; with the leading '-', print all\n but the last NUM lines of each file"
+      }
+    },
+    {
+      "Command": "tail",
+      "MP Summary": "output the last part of files",
+      "Most Similar TLDR Task": "Show last 'num' lines in 'file' and refresh every 'n' seconds",
+      "Most Similar TLDR Script": "tail -n {{num}} -s {{n}} -f {{file}}",
+      "Most Similar NL2Bash Task": "Find all files in and below all subdirectories of the current directory",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -mindepth 2\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-mindepth": "Do not apply any tests or actions at levels less than levels (a non-negative\n integer). -mindepth 1 means process all files except the starting-points."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_5345: Find the largest original \".gz\" file in the current directory tree",
+        "so_25646755: How to find the latest executable file in a directory",
+        "so_4561895: How to recursively find the latest modified file in a directory?"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_5345: find . -name '*.gz' -print | xargs gzip -l | awk '{ print $2, $4 ;}'  | grep -v '(totals)$' | sort -n | tail -1\n\n\nfind . -name '*.gz' | xargs gzip -l | tail -n +2 | head -n -1 | sort -k 2 | tail -n 1 | awk '{print $NF}'",
+        "so_25646755: find . -type f -printf '%T@ %p\\n' | sort -n | tail -1 | cut -f2- -d\" \"\n\nfind . -maxdepth 1 -type f -executable -printf '%T@ %p\\n' | sort -n | tail -1 | cut -f2- -d\" \"",
+        "so_4561895: find . -type f -printf '%T@ %p\\n' \\\n| sort -n | tail -1 | cut -f2- -d\" \"\n\ntail -1"
+      ],
+      "Explanations about Options": {
+        "-n": "output the last NUM lines, instead of the last 10; or use -n +NUM to output\n starting with line NUM"
+      }
+    },
+    {
+      "Command": "sort",
+      "MP Summary": "sort lines of text files",
+      "Most Similar TLDR Task": "Sort a file preserving only unique lines",
+      "Most Similar TLDR Script": "sort -u {{path/to/file}}",
+      "Most Similar NL2Bash Task": "Find all files in and below all subdirectories of the current directory",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -mindepth 2\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-mindepth": "Do not apply any tests or actions at levels less than levels (a non-negative\n integer). -mindepth 1 means process all files except the starting-points."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_2013: Find 10 largest files in the current directory and its subdirectories",
+        "ul_147731: Delete all but largest file in multiple directories",
+        "ul_359611: I would like to find the largest file in each directory recursively"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_2013: du -hsx * | sort -rh | head -10",
+        "ul_147731: for dir in /home/usr/ProjZ/programs/*; do\n  [ -d \"$dir\" && ! -L \"$dir\" ] || continue\n  find \"$dir\" -type f -printf '%s:%p\\0' | sort -rzn |\n    sed -z '1d;s/[^:]*://' | xargs -r0 rm -f\ndone",
+        "ul_359611: sort -k3"
+      ],
+      "Explanations about Options": {
+        "-z": "line delimiter is NUL, not newline",
+        "-h": "compare human readable numbers (e.g., 2K 1G)",
+        "-r": "reverse the result of comparisons",
+        "-n": "compare according to string numerical value"
+      }
+    },
+    {
+      "Command": "cut",
+      "MP Summary": "remove sections from each line of files",
+      "Most Similar TLDR Task": "Cut out everything from the 3rd character to the end of each line",
+      "Most Similar TLDR Script": "cut -c {{3-}}",
+      "Most Similar NL2Bash Task": "Find all files in and below all subdirectories of the current directory",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -mindepth 2\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-mindepth": "Do not apply any tests or actions at levels less than levels (a non-negative\n integer). -mindepth 1 means process all files except the starting-points."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_155544: Find Largest Image Dimensions in Folder",
+        "so_25646755: How to find the latest executable file in a directory",
+        "so_4561895: How to recursively find the latest modified file in a directory?"
+      ],
+      "Top-3 Scripts": [
+        "ul_155544: identify -format \"%w %h %f\\n\" *.png | sort -n -r -k 2 | head -n 3 | cut -d ' ' -f 3-",
+        "so_25646755: find . -type f -printf '%T@ %p\\n' | sort -n | tail -1 | cut -f2- -d\" \"\n\nfind . -maxdepth 1 -type f -executable -printf '%T@ %p\\n' | sort -n | tail -1 | cut -f2- -d\" \"",
+        "so_4561895: find . -type f -printf '%T@ %p\\n' \\\n| sort -n | tail -1 | cut -f2- -d\" \"\n\ncut -f2 -d\" \""
+      ],
+      "Explanations about Options": {
+        "-d": "use DELIM instead of TAB for field delimiter",
+        "-f": "select only these fields; also print any line that contains no delimiter\n character, unless the -s option is specified"
+      }
+    },
+    {
+      "Command": "sed",
+      "MP Summary": "stream editor for filtering and transforming text",
+      "Most Similar TLDR Task": "Replace separator / by any other character not used in the find or replace patterns, e.g., #",
+      "Most Similar TLDR Script": "sed 's#{{find}}#{{replace}}#' {{filename}}",
+      "Most Similar NL2Bash Task": "Find all files in and below all subdirectories of the current directory",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -mindepth 2\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-mindepth": "Do not apply any tests or actions at levels less than levels (a non-negative\n integer). -mindepth 1 means process all files except the starting-points."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_147731: Delete all but largest file in multiple directories",
+        "so_53953361: How to get the largest value in line",
+        "so_24458340: Keep only largest/smallest sized versioned file each in a directory?"
+      ],
+      "Top-3 Scripts": [
+        "ul_147731: for dir in /home/usr/ProjZ/programs/*; do\n  [ -d \"$dir\" && ! -L \"$dir\" ] || continue\n  find \"$dir\" -type f -printf '%s:%p\\0' | sort -rzn |\n    sed -z '1d;s/[^:]*://' | xargs -r0 rm -f\ndone",
+        "so_53953361: ",
+        "so_24458340: ls -1p | grep -v / | sed 's/ *([0-9]*)//' | sed 's/\\.ext//' | uniq | \\\nawk '{system(\"ls -l \\\"\"$0\"\\\"\\* | sort -r | head -n 1\")}' | \\\nsed 's/.*[0-9][0-9]:[0-9][0-9] //' > largest.txt"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "awk",
+      "MP Summary": "pattern scanning and processing language",
+      "Most Similar TLDR Task": "Sum the values in the first column of a file and print the total",
+      "Most Similar TLDR Script": "awk '{s+=$1} END {print s}' {{filename}}",
+      "Most Similar NL2Bash Task": "Find all files in and below all subdirectories of the current directory",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -mindepth 2\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-mindepth": "Do not apply any tests or actions at levels less than levels (a non-negative\n integer). -mindepth 1 means process all files except the starting-points."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_359611: I would like to find the largest file in each directory recursively",
+        "so_8696292: How do I find the largest 10 files in a given directory?",
+        "so_53953361: How to get the largest value in line"
+      ],
+      "Top-3 Scripts": [
+        "ul_359611: find . -type f -printf '%s %h/%f\\0'|awk 'BEGIN { RS=\"\\0\" } { SIZE=$1; for (i = 1; i <= NF - 1; i++) $i = $(i + 1); NF = NF - 1; DIR=$0; gsub(\"/[^/]+$\", \"\", DIR); FILE=substr($0, length(DIR) + 2); SUMSIZES[DIR] += SIZE; NBFILES[DIR]++; if (SIZE > MAXSIZE[DIR] || !BIGGESTFILE[DIR]) { MAXSIZE[DIR] = SIZE; BIGGESTFILE[DIR] = FILE } }; END { for (DIR in SUMSIZES) { printf \"%s: average %f, biggest file %s %d\\n\", DIR, SUMSIZES[DIR] / NBFILES[DIR], BIGGESTFILE[DIR], MAXSIZE[DIR] } }'",
+        "so_8696292: find . -type f -printf \"%s %p\\n\" | sort -nr | awk '{print $2}' | head -10",
+        "so_53953361: awk '$NF > max {max=$NF; r=$0} END{print r > \"maxscalejobinfo.txt\"}' jobinfo.txt"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "xargs",
+      "MP Summary": "build and execute command lines from standard input",
+      "Most Similar TLDR Task": "Delete all files with a `.backup` extension (`-print0` uses a null character to split file names, and `-0` uses it as delimiter)",
+      "Most Similar TLDR Script": "find . -name {{'*.backup'}} -print0 | xargs -0 rm -v",
+      "Most Similar NL2Bash Task": "Find all files in and below all subdirectories of the current directory",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -mindepth 2\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-mindepth": "Do not apply any tests or actions at levels less than levels (a non-negative\n integer). -mindepth 1 means process all files except the starting-points."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_147731: Delete all but largest file in multiple directories",
+        "nl2bash_5345: Find the largest original \".gz\" file in the current directory tree",
+        "su_112078: Delete matching files in all subdirectories"
+      ],
+      "Top-3 Scripts": [
+        "ul_147731: for dir in /home/usr/ProjZ/programs/*; do\n  [ -d \"$dir\" && ! -L \"$dir\" ] || continue\n  find \"$dir\" -type f -printf '%s:%p\\0' | sort -rzn |\n    sed -z '1d;s/[^:]*://' | xargs -r0 rm -f\ndone",
+        "nl2bash_5345: find . -name '*.gz' -print | xargs gzip -l | awk '{ print $2, $4 ;}'  | grep -v '(totals)$' | sort -n | tail -1\n\n\nfind . -name '*.gz' | xargs gzip -l | tail -n +2 | head -n -1 | sort -k 2 | tail -n 1 | awk '{print $NF}'",
+        "su_112078: find . -name \\*.swp -type f -print0  | xargs -0 rm -f"
+      ],
+      "Explanations about Options": {
+        "-l": "Synonym for the -L option. Unlike -L, the max-lines argument is optional. If max-\n lines is not specified, it defaults to one. The -l option is deprecated since the\n POSIX standard specifies -L instead.",
+        "-0": "Input items are terminated by a null character instead of by whitespace, and the\n quotes and backslash are not special (every character is taken literally).\n Disables the end of file string, which is treated like any other argument. Useful\n when input items might contain white space, quote marks, or backslashes. The GNU\n find -print0 option produces input suitable for this mode."
+      }
+    },
+    {
+      "Command": "fd",
+      "MP Summary": "find entries in the filesystem",
+      "Most Similar TLDR Task": "Find files in a specific directory",
+      "Most Similar TLDR Script": "fd {{pattern}} {{path/to/dir}}",
+      "Most Similar NL2Bash Task": "Find all files in and below all subdirectories of the current directory",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -mindepth 2\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-mindepth": "Do not apply any tests or actions at levels less than levels (a non-negative\n integer). -mindepth 1 means process all files except the starting-points."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "tldr_5819: Find files in a specific directory"
+      ],
+      "Top-3 Scripts": [
+        "tldr_5819: fd {{pattern}} {{path/to/dir}}"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "bash",
+      "MP Summary": "GNU Bourne-Again SHell",
+      "Most Similar TLDR Task": "Run commands from a file, logging all commands executed to the terminal",
+      "Most Similar TLDR Script": "bash -x {{file.sh}}",
+      "Most Similar NL2Bash Task": "Find all files in and below all subdirectories of the current directory",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -mindepth 2\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-mindepth": "Do not apply any tests or actions at levels less than levels (a non-negative\n integer). -mindepth 1 means process all files except the starting-points."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_48336650: How do I print all the parent directories in Bash"
+      ],
+      "Top-3 Scripts": [
+        "so_48336650: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "echo",
+      "MP Summary": "display a line of text",
+      "Most Similar TLDR Task": "Print a message with environment variables",
+      "Most Similar TLDR Script": "echo \"{{My path is $PATH}}\"",
+      "Most Similar NL2Bash Task": "Find all files in and below all subdirectories of the current directory",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -mindepth 2\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-mindepth": "Do not apply any tests or actions at levels less than levels (a non-negative\n integer). -mindepth 1 means process all files except the starting-points."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_38895490: bash finding files in directories recursively",
+        "so_48336650: How do I print all the parent directories in Bash"
+      ],
+      "Top-3 Scripts": [
+        "so_38895490: rec() {\n    for path; do\n        echo \"$path\"\n        if [[ -d \"$path\" ]]; then\n            rec \"$path\"/*\n        fi\n    done\n}",
+        "so_48336650: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "read",
+      "MP Summary": "read a line from standard input",
+      "Most Similar TLDR Task": "Specify the number of maximum characters to be read",
+      "Most Similar TLDR Script": "read -n {{character_count}} {{variable}}",
+      "Most Similar NL2Bash Task": "Find all files in and below all subdirectories of the current directory",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -mindepth 2\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-mindepth": "Do not apply any tests or actions at levels less than levels (a non-negative\n integer). -mindepth 1 means process all files except the starting-points."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_39467192: Get files in directory but not subdirectory",
+        "so_48336650: How do I print all the parent directories in Bash"
+      ],
+      "Top-3 Scripts": [
+        "so_39467192: #!/bin/bash\n\nwhile IFS= read -r -d '' file; do\n\n    # Your script/command(s) goes here\n\ndone < <(find . -maxdepth 1 -mindepth 1 -type f -print0)",
+        "so_48336650: read -a"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "print",
+      "MP Summary": "execute programs via entries in the mailcap file",
+      "Most Similar TLDR Task": "Print action can be used to print any file on default run-mailcap tool",
+      "Most Similar TLDR Script": "print {{filename}}",
+      "Most Similar NL2Bash Task": "Find all files in and below all subdirectories of the current directory",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -mindepth 2\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-mindepth": "Do not apply any tests or actions at levels less than levels (a non-negative\n integer). -mindepth 1 means process all files except the starting-points."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_8696292: How do I find the largest 10 files in a given directory?",
+        "so_53953361: How to get the largest value in line",
+        "so_69863412: How to get largest file in directory in bash?"
+      ],
+      "Top-3 Scripts": [
+        "so_8696292: find . -type f -printf \"%s %p\\n\" | sort -nr | awk '{print $2}' | head -10",
+        "so_53953361: awk '$NF > max {max=$NF; r=$0} END{print r > \"maxscalejobinfo.txt\"}' jobinfo.txt",
+        "so_69863412: ls -larS | awk -F' {1,}' 'END{print $NF,\" \",$5}'\n\nls -larS | awk -F' {1,}' 'END{for (i=9; i<=NF; i++) printf $i\" \"; print \" \",$5}'"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "grep",
+      "MP Summary": "print lines that match patterns",
+      "Most Similar TLDR Task": "Invert match for excluding specific strings",
+      "Most Similar TLDR Script": "grep -v {{search_pattern}}",
+      "Most Similar NL2Bash Task": "Find all files in and below all subdirectories of the current directory",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -mindepth 2\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-mindepth": "Do not apply any tests or actions at levels less than levels (a non-negative\n integer). -mindepth 1 means process all files except the starting-points."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_5345: Find the largest original \".gz\" file in the current directory tree",
+        "so_24458340: Keep only largest/smallest sized versioned file each in a directory?"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_5345: find . -name '*.gz' -print | xargs gzip -l | awk '{ print $2, $4 ;}'  | grep -v '(totals)$' | sort -n | tail -1",
+        "so_24458340: ls -1p | grep -v / | sed 's/ *([0-9]*)//' | sed 's/\\.ext//' | uniq | \\\nawk '{system(\"ls -l \\\"\"$0\"\\\"\\* | sort -r | head -n 1\")}' | \\\nsed 's/.*[0-9][0-9]:[0-9][0-9] //' > largest.txt"
+      ],
+      "Explanations about Options": {
+        "-v": "Invert the sense of matching, to select non-matching lines."
+      }
+    },
+    {
+      "Command": "printf",
+      "MP Summary": "format and print data",
+      "Most Similar TLDR Task": "Store a formatted message in a variable (does not work on zsh)",
+      "Most Similar TLDR Script": "printf -v {{myvar}} {{\"This is %s = %d\\n\" \"a year\" 2016}}",
+      "Most Similar NL2Bash Task": "Find all files in and below all subdirectories of the current directory",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -mindepth 2\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-mindepth": "Do not apply any tests or actions at levels less than levels (a non-negative\n integer). -mindepth 1 means process all files except the starting-points."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_359611: I would like to find the largest file in each directory recursively",
+        "so_69863412: How to get largest file in directory in bash?"
+      ],
+      "Top-3 Scripts": [
+        "ul_359611: find . -type f -printf '%s %h/%f\\0'|awk 'BEGIN { RS=\"\\0\" } { SIZE=$1; for (i = 1; i <= NF - 1; i++) $i = $(i + 1); NF = NF - 1; DIR=$0; gsub(\"/[^/]+$\", \"\", DIR); FILE=substr($0, length(DIR) + 2); SUMSIZES[DIR] += SIZE; NBFILES[DIR]++; if (SIZE > MAXSIZE[DIR] || !BIGGESTFILE[DIR]) { MAXSIZE[DIR] = SIZE; BIGGESTFILE[DIR] = FILE } }; END { for (DIR in SUMSIZES) { printf \"%s: average %f, biggest file %s %d\\n\", DIR, SUMSIZES[DIR] / NBFILES[DIR], BIGGESTFILE[DIR], MAXSIZE[DIR] } }'\n\nprintf \"%.2f %d %s: %s\\n\", SUMSIZES[DIR] / NBFILES[DIR], MAXSIZE[DIR], DIR, BIGGESTFILE[DIR]",
+        "so_69863412: ls -larS | awk -F' {1,}' 'END{for (i=9; i<=NF; i++) printf $i\" \"; print \" \",$5}'"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "type",
+      "MP Summary": "write a description of command type",
+      "Most Similar TLDR Task": "Display all locations containing the specified executable",
+      "Most Similar TLDR Script": "type -a {{command}}",
+      "Most Similar NL2Bash Task": "Find all files in and below all subdirectories of the current directory",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -mindepth 2\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-mindepth": "Do not apply any tests or actions at levels less than levels (a non-negative\n integer). -mindepth 1 means process all files except the starting-points."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_41056673: Bash find and remove files in directory, but do not remove directory",
+        "ul_101279: How can I for example list five largest files in /usr/lib -directory?"
+      ],
+      "Top-3 Scripts": [
+        "so_41056673: type -f",
+        "ul_101279: -type c\n          File is of type c:\n          [ ... ]\n          f      regular file\n   -ls    True;  list  current file in ls -dils format on standard output.\n          The block counts are of 1K blocks, unless the environment  vari\u2010\n          able  POSIXLY_CORRECT  is set, in which case 512-byte blocks are\n          used.  See the UNUSUAL FILENAMES section for  information  about\n          how unusual characters in filenames are handled.\n\n-g, --general-numeric-sort\n          compare according to general numerical value\n   -k, --key=KEYDEF\n          sort via a key; KEYDEF gives location and type"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "tr",
+      "MP Summary": "translate or delete characters",
+      "Most Similar TLDR Task": "Replace all occurrences of a character in a file, and print the result",
+      "Most Similar TLDR Script": "tr {{find_character}} {{replace_character}} < {{filename}}",
+      "Most Similar NL2Bash Task": "Find all files in and below all subdirectories of the current directory",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -mindepth 2\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-mindepth": "Do not apply any tests or actions at levels less than levels (a non-negative\n integer). -mindepth 1 means process all files except the starting-points."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_53953361: How to get the largest value in line"
+      ],
+      "Top-3 Scripts": [
+        "so_53953361: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "cd",
+      "MP Summary": "change the working directory",
+      "Most Similar TLDR Task": "Go up to the parent of the current directory",
+      "Most Similar TLDR Script": "cd ..",
+      "Most Similar NL2Bash Task": "Find all files in and below all subdirectories of the current directory",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -mindepth 2\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-mindepth": "Do not apply any tests or actions at levels less than levels (a non-negative\n integer). -mindepth 1 means process all files except the starting-points."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_68489147: bash script to select .c files in subdirectories"
+      ],
+      "Top-3 Scripts": [
+        "so_68489147: for d in folder[123]; do ( cd $d && sea *.c ); done\n\nshopt -s globstar\nfor d in folder[123]/**/; do ( cd $d && sea *.c ); done\n\nfor d in \"${dirs[@]}\"/**/; do ( cd $d && sea *.c ); done"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "most",
+      "MP Summary": "browse or page through a text file",
+      "Most Similar TLDR Task": "Open a file at the first occurrence of \"string\"",
+      "Most Similar TLDR Script": "most {{file}} +/{{string}}",
+      "Most Similar NL2Bash Task": "Find all files in and below all subdirectories of the current directory",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -mindepth 2\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-mindepth": "Do not apply any tests or actions at levels less than levels (a non-negative\n integer). -mindepth 1 means process all files except the starting-points."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_39467192: Get files in directory but not subdirectory"
+      ],
+      "Top-3 Scripts": [
+        "so_39467192: -maxdepth levels\n          Descend at most levels (a non-negative integer) levels of directories below the command line arguments.  -maxdepth 0\n           means only apply the tests and actions to the command line arguments.\n\n-mindepth levels\n          Do not apply any tests or actions at levels less than levels (a non-negative integer).  -mindepth 1 means process all files except the command line arguments."
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "cat",
+      "MP Summary": "concatenate files and print on the standard output",
+      "Most Similar TLDR Task": "Concatenate several files into the target file",
+      "Most Similar TLDR Script": "cat {{file1}} {{file2}} > {{target_file}}",
+      "Most Similar NL2Bash Task": "Find all files in and below all subdirectories of the current directory",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -mindepth 2\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-mindepth": "Do not apply any tests or actions at levels less than levels (a non-negative\n integer). -mindepth 1 means process all files except the starting-points."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_53953361: How to get the largest value in line"
+      ],
+      "Top-3 Scripts": [
+        "so_53953361: cat -A jobinfo.txt"
+      ],
+      "Explanations about Options": {
+        "-A": "equivalent to -vET"
+      }
+    },
+    {
+      "Command": "zsh",
+      "MP Summary": "the Z shell",
+      "Most Similar TLDR Task": "Run commands from file and print them as they are executed",
+      "Most Similar TLDR Script": "zsh -x {{file}}",
+      "Most Similar NL2Bash Task": "Find all files in and below all subdirectories of the current directory",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -mindepth 2\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-mindepth": "Do not apply any tests or actions at levels less than levels (a non-negative\n integer). -mindepth 1 means process all files except the starting-points."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_147731: Delete all but largest file in multiple directories"
+      ],
+      "Top-3 Scripts": [
+        "ul_147731: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "identify",
+      "MP Summary": "describes the format and characteristics of one or more image files.",
+      "Most Similar TLDR Task": "Collect dimensions of all jpeg files under current directory",
+      "Most Similar TLDR Script": "identify -format \"%f,%w,%h\\n\" *.{{jpg}} > {{filelist.csv}}",
+      "Most Similar NL2Bash Task": "Find all files in and below all subdirectories of the current directory",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -mindepth 2\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-mindepth": "Do not apply any tests or actions at levels less than levels (a non-negative\n integer). -mindepth 1 means process all files except the starting-points."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_155544: Find Largest Image Dimensions in Folder"
+      ],
+      "Top-3 Scripts": [
+        "ul_155544: identify -format \"%w %h %f\\n\" *.png | sort -n -r -k 1\n\nidentify -format \"%w %h %f\\n\" *.png | sort -n -r -k 2\n\nidentify -format \"%w %h %f\\n\" *.png | sort -n -r -k 2 | head -n 3\n\nidentify -format \"%w %h %f\\n\" *.png | sort -n -r -k 2 | head -n 3 | cut -d ' ' -f 3-"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "stat",
+      "MP Summary": "display file or file system status",
+      "Most Similar TLDR Task": "Show only octal file permissions",
+      "Most Similar TLDR Script": "stat -c \"%a %n\" {{file}}",
+      "Most Similar NL2Bash Task": "Find all files in and below all subdirectories of the current directory",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -mindepth 2\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-mindepth": "Do not apply any tests or actions at levels less than levels (a non-negative\n integer). -mindepth 1 means process all files except the starting-points."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_4561895: How to recursively find the latest modified file in a directory?"
+      ],
+      "Top-3 Scripts": [
+        "so_4561895: stat -c"
+      ],
+      "Explanations about Options": {
+        "-c": "use the specified FORMAT instead of the default; output a newline after each use of\n FORMAT"
+      }
+    },
+    {
+      "Command": "line",
+      "MP Summary": "cache line size",
+      "Most Similar TLDR Task": "Read input",
+      "Most Similar TLDR Script": "line",
+      "Most Similar NL2Bash Task": "Find all files in and below all subdirectories of the current directory",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -mindepth 2\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-mindepth": "Do not apply any tests or actions at levels less than levels (a non-negative\n integer). -mindepth 1 means process all files except the starting-points."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_39467192: Get files in directory but not subdirectory"
+      ],
+      "Top-3 Scripts": [
+        "so_39467192: -maxdepth levels\n          Descend at most levels (a non-negative integer) levels of directories below the command line arguments.  -maxdepth 0\n           means only apply the tests and actions to the command line arguments.\n\n-mindepth levels\n          Do not apply any tests or actions at levels less than levels (a non-negative integer).  -mindepth 1 means process all files except the command line arguments."
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "which",
+      "MP Summary": "locate a command",
+      "Most Similar TLDR Task": "Search the PATH environment variable and display the location of any matching executables",
+      "Most Similar TLDR Script": "which {{executable}}",
+      "Most Similar NL2Bash Task": "Find all files in and below all subdirectories of the current directory",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -mindepth 2\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-mindepth": "Do not apply any tests or actions at levels less than levels (a non-negative\n integer). -mindepth 1 means process all files except the starting-points."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_101279: How can I for example list five largest files in /usr/lib -directory?"
+      ],
+      "Top-3 Scripts": [
+        "ul_101279: -type c\n          File is of type c:\n          [ ... ]\n          f      regular file\n   -ls    True;  list  current file in ls -dils format on standard output.\n          The block counts are of 1K blocks, unless the environment  vari\u2010\n          able  POSIXLY_CORRECT  is set, in which case 512-byte blocks are\n          used.  See the UNUSUAL FILENAMES section for  information  about\n          how unusual characters in filenames are handled."
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "man",
+      "MP Summary": "an interface to the system reference manuals",
+      "Most Similar TLDR Task": "Display the location of a manpage rather than the manpage itself",
+      "Most Similar TLDR Script": "man -w {{command}}",
+      "Most Similar NL2Bash Task": "Find all files in and below all subdirectories of the current directory",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -mindepth 2\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-mindepth": "Do not apply any tests or actions at levels less than levels (a non-negative\n integer). -mindepth 1 means process all files except the starting-points."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_39467192: Get files in directory but not subdirectory",
+        "su_112078: Delete matching files in all subdirectories",
+        "so_61634353: bash script: find recent file in subdirectories"
+      ],
+      "Top-3 Scripts": [
+        "so_39467192: man find",
+        "su_112078: man find",
+        "so_61634353: man find"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "uniq",
+      "MP Summary": "report or omit repeated lines",
+      "Most Similar TLDR Task": "Display only unique lines",
+      "Most Similar TLDR Script": "sort {{file}} | uniq -u",
+      "Most Similar NL2Bash Task": "Find all files in and below all subdirectories of the current directory",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -mindepth 2\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-mindepth": "Do not apply any tests or actions at levels less than levels (a non-negative\n integer). -mindepth 1 means process all files except the starting-points."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_24458340: Keep only largest/smallest sized versioned file each in a directory?"
+      ],
+      "Top-3 Scripts": [
+        "so_24458340: ls -1p | grep -v / | sed 's/ *([0-9]*)//' | sed 's/\\.ext//' | uniq | \\\nawk '{system(\"ls -l \\\"\"$0\"\\\"\\* | sort -r | head -n 1\")}' | \\\nsed 's/.*[0-9][0-9]:[0-9][0-9] //' > largest.txt"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "last",
+      "MP Summary": "show a listing of last logged in users",
+      "Most Similar TLDR Task": "Specify how many of the last logins to show",
+      "Most Similar TLDR Script": "last -n {{login_count}}",
+      "Most Similar NL2Bash Task": "Find all files in and below all subdirectories of the current directory",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -mindepth 2\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-mindepth": "Do not apply any tests or actions at levels less than levels (a non-negative\n integer). -mindepth 1 means process all files except the starting-points."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_101279: How can I for example list five largest files in /usr/lib -directory?"
+      ],
+      "Top-3 Scripts": [
+        "ul_101279: -n, --lines=K\n          output the last K lines, instead of the last 10; or use -n +K to\n          output lines starting with the Kth"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "dos2unix",
+      "MP Summary": "DOS/Mac to Unix and vice versa text file format converter",
+      "Most Similar TLDR Task": "Change the line endings of a file",
+      "Most Similar TLDR Script": "dos2unix {{filename}}",
+      "Most Similar NL2Bash Task": "Find all files in and below all subdirectories of the current directory",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -mindepth 2\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-mindepth": "Do not apply any tests or actions at levels less than levels (a non-negative\n integer). -mindepth 1 means process all files except the starting-points."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_53953361: How to get the largest value in line"
+      ],
+      "Top-3 Scripts": [
+        "so_53953361: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "command",
+      "MP Summary": "execute a simple command",
+      "Most Similar TLDR Task": "Display the path to the executable or the alias definition of a specific command",
+      "Most Similar TLDR Script": "command -v {{command_name}}",
+      "Most Similar NL2Bash Task": "Find all files in and below all subdirectories of the current directory",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -mindepth 2\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-mindepth": "Do not apply any tests or actions at levels less than levels (a non-negative\n integer). -mindepth 1 means process all files except the starting-points."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_39467192: Get files in directory but not subdirectory"
+      ],
+      "Top-3 Scripts": [
+        "so_39467192: -maxdepth levels\n          Descend at most levels (a non-negative integer) levels of directories below the command line arguments.  -maxdepth 0\n           means only apply the tests and actions to the command line arguments.\n\n-mindepth levels\n          Do not apply any tests or actions at levels less than levels (a non-negative integer).  -mindepth 1 means process all files except the command line arguments."
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "compare",
+      "MP Summary": "mathematically  and  visually annotate the difference between an image and its reconstruction.",
+      "Most Similar TLDR Task": "Compare 2 images",
+      "Most Similar TLDR Script": "compare {{image1.png}} {{image2.png}} {{diff.png}}",
+      "Most Similar NL2Bash Task": "Find all files in and below all subdirectories of the current directory",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -mindepth 2\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-mindepth": "Do not apply any tests or actions at levels less than levels (a non-negative\n integer). -mindepth 1 means process all files except the starting-points."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_101279: How can I for example list five largest files in /usr/lib -directory?"
+      ],
+      "Top-3 Scripts": [
+        "ul_101279: -g, --general-numeric-sort\n          compare according to general numerical value\n   -k, --key=KEYDEF\n          sort via a key; KEYDEF gives location and type"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "at",
+      "MP Summary": "queue, examine, or delete jobs for later execution",
+      "Most Similar TLDR Task": "Execute a script at the given time",
+      "Most Similar TLDR Script": "at {{hh:mm}} -f {{path/to/file}}",
+      "Most Similar NL2Bash Task": "Find all files in and below all subdirectories of the current directory",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -mindepth 2\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-mindepth": "Do not apply any tests or actions at levels less than levels (a non-negative\n integer). -mindepth 1 means process all files except the starting-points."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_39467192: Get files in directory but not subdirectory"
+      ],
+      "Top-3 Scripts": [
+        "so_39467192: -maxdepth levels\n          Descend at most levels (a non-negative integer) levels of directories below the command line arguments.  -maxdepth 0\n           means only apply the tests and actions to the command line arguments.\n\n-mindepth levels\n          Do not apply any tests or actions at levels less than levels (a non-negative integer).  -mindepth 1 means process all files except the command line arguments."
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "numfmt",
+      "MP Summary": "Convert numbers from/to human-readable strings",
+      "Most Similar TLDR Task": "Convert to IEC units, pad with 5 characters, left aligned",
+      "Most Similar TLDR Script": "du -s * | numfmt --to={{iec}} --format=\"{{%-5f}}\"",
+      "Most Similar NL2Bash Task": "Find all files in and below all subdirectories of the current directory",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -mindepth 2\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-mindepth": "Do not apply any tests or actions at levels less than levels (a non-negative\n integer). -mindepth 1 means process all files except the starting-points."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_359611: I would like to find the largest file in each directory recursively"
+      ],
+      "Top-3 Scripts": [
+        "ul_359611: numfmt --field=1,2 --to=iec"
+      ],
+      "Explanations about Options": {
+        "--to": "auto-scale output numbers to UNITs; see UNIT below",
+        "--field": "replace the numbers in these input fields (default=1) see FIELDS below"
+      }
+    },
+    {
+      "Command": "less",
+      "MP Summary": "opposite of more",
+      "Most Similar TLDR Task": "Forward search for a string (press `n`/`N` to go to next/previous match)",
+      "Most Similar TLDR Script": "/{{something}}",
+      "Most Similar NL2Bash Task": "Find all files in and below all subdirectories of the current directory",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -mindepth 2\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-mindepth": "Do not apply any tests or actions at levels less than levels (a non-negative\n integer). -mindepth 1 means process all files except the starting-points."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_39467192: Get files in directory but not subdirectory"
+      ],
+      "Top-3 Scripts": [
+        "so_39467192: -maxdepth levels\n          Descend at most levels (a non-negative integer) levels of directories below the command line arguments.  -maxdepth 0\n           means only apply the tests and actions to the command line arguments.\n\n-mindepth levels\n          Do not apply any tests or actions at levels less than levels (a non-negative integer).  -mindepth 1 means process all files except the command line arguments."
+      ],
+      "Explanations about Options": {
+        "-d": "The -d option suppresses the error message normally displayed if the terminal is\n dumb; that is, lacks some important capability, such as the ability to clear the\n screen or scroll backward. The -d option does not otherwise change the behavior of\n less on a dumb terminal.",
+        "-t": "use of tags files",
+        "-e": "Causes less to automatically exit the second time it reaches end-of-file. By\n default, the only way to exit less is via the \"q\" command.",
+        "-m": "Causes less to prompt verbosely (like more), with the percent into the file. By\n default, less prompts with a colon.",
+        "-i": "Causes searches to ignore case; that is, uppercase and lowercase are considered\n identical. This option is ignored if any uppercase letters appear in the search\n pattern; in other words, if a pattern contains uppercase letters, then that search\n does not ignore case.",
+        "-n": "Suppresses line numbers. The default (to use line numbers) may cause less to run\n more slowly in some cases, especially with a very large input file. Suppressing\n line numbers with the -n option will avoid this problem. Using line numbers means:\n the line number will be displayed in the verbose prompt and in the = command, and\n the v command will pass the current line number to the editor (see also the\n discussion of LESSEDIT in PROMPTS below)."
+      }
+    },
+    {
+      "Command": "dir",
+      "MP Summary": "list directory contents",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "Find all files in and below all subdirectories of the current directory",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -mindepth 2\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-mindepth": "Do not apply any tests or actions at levels less than levels (a non-negative\n integer). -mindepth 1 means process all files except the starting-points."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_147731: Delete all but largest file in multiple directories",
+        "ul_553051: List Top 20 Largest Files in a Specific Directory"
+      ],
+      "Top-3 Scripts": [
+        "ul_147731: for dir (/home/usr/ProjZ/programs/*(/)) rm -f $dir/*.js(.NOL[2,-1])\n\nfor dir in /home/usr/ProjZ/programs/*; do\n  [ -d \"$dir\" && ! -L \"$dir\" ] || continue\n  find \"$dir\" -type f -printf '%s:%p\\0' | sort -rzn |\n    sed -z '1d;s/[^:]*://' | xargs -r0 rm -f\ndone",
+        "ul_553051: find dir/ -type f -exec du -a {} + | sort -nr | head -n 20"
+      ],
+      "Explanations about Options": {
+        "-t": "sort by modification time , newest first",
+        "-p": "append / indicator to directories",
+        "-x": "list entries by lines instead of by columns",
+        "-c": "with -lt: sort by , and show , ctime (time of last modification of file status\n information); with -l: show ctime and sort by name; otherwise: sort by ctime,\n newest first"
+      }
+    },
+    {
+      "Command": "continue",
+      "MP Summary": "continue for, while, or until loop",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "Find all files in and below all subdirectories of the current directory",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -mindepth 2\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-mindepth": "Do not apply any tests or actions at levels less than levels (a non-negative\n integer). -mindepth 1 means process all files except the starting-points."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_147731: Delete all but largest file in multiple directories"
+      ],
+      "Top-3 Scripts": [
+        "ul_147731: for dir in /home/usr/ProjZ/programs/*; do\n  [ -d \"$dir\" && ! -L \"$dir\" ] || continue\n  find \"$dir\" -type f -printf '%s:%p\\0' | sort -rzn |\n    sed -z '1d;s/[^:]*://' | xargs -r0 rm -f\ndone"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "NF",
+      "MP Summary": "awk and print a column (based on the name of the program, 1-9)",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "Find all files in and below all subdirectories of the current directory",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -mindepth 2\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-mindepth": "Do not apply any tests or actions at levels less than levels (a non-negative\n integer). -mindepth 1 means process all files except the starting-points."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_359611: I would like to find the largest file in each directory recursively",
+        "so_53953361: How to get the largest value in line"
+      ],
+      "Top-3 Scripts": [
+        "ul_359611: find . -type f -printf '%s %h/%f\\0'|awk 'BEGIN { RS=\"\\0\" } { SIZE=$1; for (i = 1; i <= NF - 1; i++) $i = $(i + 1); NF = NF - 1; DIR=$0; gsub(\"/[^/]+$\", \"\", DIR); FILE=substr($0, length(DIR) + 2); SUMSIZES[DIR] += SIZE; NBFILES[DIR]++; if (SIZE > MAXSIZE[DIR] || !BIGGESTFILE[DIR]) { MAXSIZE[DIR] = SIZE; BIGGESTFILE[DIR] = FILE } }; END { for (DIR in SUMSIZES) { printf \"%s: average %f, biggest file %s %d\\n\", DIR, SUMSIZES[DIR] / NBFILES[DIR], BIGGESTFILE[DIR], MAXSIZE[DIR] } }'",
+        "so_53953361: awk '$NF > max {max=$NF; r=$0} END{print r > \"maxscalejobinfo.txt\"}' jobinfo.txt"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "and",
+      "MP Summary": "auto nice daemon",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "Find all files in and below all subdirectories of the current directory",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -mindepth 2\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-mindepth": "Do not apply any tests or actions at levels less than levels (a non-negative\n integer). -mindepth 1 means process all files except the starting-points."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_39467192: Get files in directory but not subdirectory",
+        "ul_101279: How can I for example list five largest files in /usr/lib -directory?"
+      ],
+      "Top-3 Scripts": [
+        "so_39467192: -maxdepth levels\n          Descend at most levels (a non-negative integer) levels of directories below the command line arguments.  -maxdepth 0\n           means only apply the tests and actions to the command line arguments.\n\n-mindepth levels\n          Do not apply any tests or actions at levels less than levels (a non-negative integer).  -mindepth 1 means process all files except the command line arguments.",
+        "ul_101279: -g, --general-numeric-sort\n          compare according to general numerical value\n   -k, --key=KEYDEF\n          sort via a key; KEYDEF gives location and type"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "actions",
+      "MP Summary": "independently defined actions in tc",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "Find all files in and below all subdirectories of the current directory",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -mindepth 2\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-mindepth": "Do not apply any tests or actions at levels less than levels (a non-negative\n integer). -mindepth 1 means process all files except the starting-points."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_39467192: Get files in directory but not subdirectory"
+      ],
+      "Top-3 Scripts": [
+        "so_39467192: -maxdepth levels\n          Descend at most levels (a non-negative integer) levels of directories below the command line arguments.  -maxdepth 0\n           means only apply the tests and actions to the command line arguments.\n\n-mindepth levels\n          Do not apply any tests or actions at levels less than levels (a non-negative integer).  -mindepth 1 means process all files except the command line arguments."
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "to",
+      "MP Summary": "as the filename. --logdir <name> Writes each synchronization log output in a new file in the specified directory. --logexpire <hours> Removes logs older than the value specified (in hours). This command is  used  with --logdir. --logflush Clears (flushes) the log file after each write action. --logdebug Also  output  debug-level  messages  in  the log (equivalent to setting the env var QT_LOGGING_RULES=\"qt.*=true;*.debug=true\"). ) --confdir <dirname> Uses the specified configuration directory. The ownCloud Client reads a configuration file.  You can locate this configuration file as follows: On Linux distributions: $HOME/.config/ownCloud/owncloud.cfg On Microsoft Windows systems: %APPDATA%\\ownCloud\\owncloud.cfg On MAC OS X systems: $HOME/Library/Preferences/ownCloud/owncloud.cfg The configuration file contains settings using the Microsoft Windows .ini file format. You can overwrite changes using the ownCloud configuration dialog. NOTE: Use caution when making changes to the ownCloud Client configuration  file.   Incorrect settings can produce unintended results. Some interesting values that can be set on the configuration file are: \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510 \u2502[ownCloud] section          \u2502         \u2502                          \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502Variable                    \u2502 Default \u2502 Meaning                  \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502remotePollInterval          \u2502 30000   \u2502 Specifies  the poll time \u2502 \u2502                            \u2502         \u2502 for      the      remote \u2502 \u2502                            \u2502         \u2502 repository            in \u2502 \u2502                            \u2502         \u2502 milliseconds.            \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502forceSyncInterval           \u2502 7200000 \u2502 The   duration   of   no \u2502 \u2502                            \u2502         \u2502 activity  after  which a \u2502 \u2502                            \u2502         \u2502 synchronization      run \u2502 \u2502                            \u2502         \u2502 shall    be    triggered \u2502 \u2502                            \u2502         \u2502 automatically.           \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502fullLocalDiscoveryInterval  \u2502 3600000 \u2502 The interval after which \u2502 \u2502                            \u2502         \u2502 the next synchronization \u2502 \u2502                            \u2502         \u2502 will   perform   a  full \u2502 \u2502                            \u2502         \u2502 local discovery.         \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502notificationRefreshInterval \u2502 300000  \u2502 Specifies   the  default \u2502 \u2502                            \u2502         \u2502 interval of checking for \u2502 \u2502                            \u2502         \u2502 new server notifications \u2502 \u2502                            \u2502         \u2502 in milliseconds.         \u2502 \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518 \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510 \u2502[General] section       \u2502         \u2502                          \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502Variable                \u2502 Default \u2502 Meaning                  \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502chunkSize               \u2502 5242880 \u2502 Specifies the chunk size \u2502 \u2502                        \u2502         \u2502 of   uploaded  files  in \u2502 \u2502                        \u2502         \u2502 bytes.                   \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502promptDeleteAllFiles    \u2502 true    \u2502 If a  UI  prompt  should \u2502 \u2502                        \u2502         \u2502 ask  for confirmation if \u2502 \u2502                        \u2502         \u2502 it was detected that all \u2502 \u2502                        \u2502         \u2502 files  and  folders were \u2502 \u2502                        \u2502         \u2502 deleted.                 \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502maxLogLines             \u2502 20000   \u2502 Specifies  the   maximum \u2502 \u2502                        \u2502         \u2502 number   of   log  lines \u2502 \u2502                        \u2502         \u2502 displayed  in  the   log \u2502 \u2502                        \u2502         \u2502 window.                  \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502timeout                 \u2502 300     \u2502 The  timeout for network \u2502 \u2502                        \u2502         \u2502 connections in seconds.  \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502moveToTrash             \u2502 false   \u2502 If  non-locally  deleted \u2502 \u2502                        \u2502         \u2502 files should be moved to \u2502 \u2502                        \u2502         \u2502 trash     instead     of \u2502 \u2502                        \u2502         \u2502 deleting            them \u2502 \u2502                        \u2502         \u2502 completely.  This option \u2502 \u2502                        \u2502         \u2502 only works on linux      \u2502 \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518 \u2502showExperimentalOptions \u2502 false   \u2502 Whether      to     show \u2502 \u2502                        \u2502         \u2502 experimental     options \u2502 \u2502                        \u2502         \u2502 that      are      still \u2502 \u2502                        \u2502         \u2502 undergoing  testing   in \u2502 \u2502                        \u2502         \u2502 the    user   interface. \u2502 \u2502                        \u2502         \u2502 Turning this on does not \u2502 \u2502                        \u2502         \u2502 enable      experimental \u2502 \u2502                        \u2502         \u2502 behavior on its own.  It \u2502 \u2502                        \u2502         \u2502 does     enable     user \u2502 \u2502                        \u2502         \u2502 inferface  options  that \u2502 \u2502                        \u2502         \u2502 can be used to opt in to \u2502 \u2502                        \u2502         \u2502 experimental features.   \u2502 \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518 \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510 \u2502[Proxy] section      \u2502           \u2502                          \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502Variable             \u2502 Default   \u2502 Meaning                  \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502host                 \u2502 127.0.0.1 \u2502 The address of the proxy \u2502 \u2502                     \u2502           \u2502 server.                  \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502port                 \u2502 8080      \u2502 The  port were the proxy \u2502 \u2502                     \u2502           \u2502 is listening.            \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502type                 \u2502 2         \u2502 0 for System Proxy.      \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u25021 for SOCKS5 Proxy.  \u2502           \u2502                          \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u25022 for No Proxy.      \u2502           \u2502                          \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u25023 for HTTP(S) Proxy. \u2502           \u2502                          \u2502 \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518 Please report bugs at https://github.com/owncloud/client/issues. owncloudcmd(1)",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "Find all files in and below all subdirectories of the current directory",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -mindepth 2\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-mindepth": "Do not apply any tests or actions at levels less than levels (a non-negative\n integer). -mindepth 1 means process all files except the starting-points."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_39467192: Get files in directory but not subdirectory",
+        "tldr_5819: Find files in a specific directory",
+        "so_23345042: BASH: excluding a directory in \"find\" command"
+      ],
+      "Top-3 Scripts": [
+        "so_39467192: -maxdepth levels\n          Descend at most levels (a non-negative integer) levels of directories below the command line arguments.  -maxdepth 0\n           means only apply the tests and actions to the command line arguments.\n\n-mindepth levels\n          Do not apply any tests or actions at levels less than levels (a non-negative integer).  -mindepth 1 means process all files except the command line arguments.",
+        "tldr_5819: fd {{pattern}} {{path/to/dir}}",
+        "so_23345042: find ./ -iname ! -iname <dirname of file name to be not part of search results>\n\nfind ./ -iname <file name> ! -path \"./dirt o be Excluded/*\""
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "or",
+      "MP Summary": "A user friendly system monitoring program.",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "Find all files in and below all subdirectories of the current directory",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -mindepth 2\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-mindepth": "Do not apply any tests or actions at levels less than levels (a non-negative\n integer). -mindepth 1 means process all files except the starting-points."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_39467192: Get files in directory but not subdirectory",
+        "ul_101279: How can I for example list five largest files in /usr/lib -directory?"
+      ],
+      "Top-3 Scripts": [
+        "so_39467192: -maxdepth levels\n          Descend at most levels (a non-negative integer) levels of directories below the command line arguments.  -maxdepth 0\n           means only apply the tests and actions to the command line arguments.\n\n-mindepth levels\n          Do not apply any tests or actions at levels less than levels (a non-negative integer).  -mindepth 1 means process all files except the command line arguments.",
+        "ul_101279: -n, --lines=K\n          output the last K lines, instead of the last 10; or use -n +K to\n          output lines starting with the Kth"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "except",
+      "MP Summary": "reverse the exit code of a program",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "Find all files in and below all subdirectories of the current directory",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -mindepth 2\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-mindepth": "Do not apply any tests or actions at levels less than levels (a non-negative\n integer). -mindepth 1 means process all files except the starting-points."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_39467192: Get files in directory but not subdirectory"
+      ],
+      "Top-3 Scripts": [
+        "so_39467192: -maxdepth levels\n          Descend at most levels (a non-negative integer) levels of directories below the command line arguments.  -maxdepth 0\n           means only apply the tests and actions to the command line arguments.\n\n-mindepth levels\n          Do not apply any tests or actions at levels less than levels (a non-negative integer).  -mindepth 1 means process all files except the command line arguments."
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "then",
+      "MP Summary": "presumably creating or updating package.json and running any other initialization-related operations. The init command is transformed to a corresponding npx operation as follows: \u00b7 npm init foo -> npx create-foo \u00b7 npm init @usr/foo -> npx @usr/create-foo \u00b7 npm init @usr -> npx @usr/create Any  additional  options  will  be passed directly to the command, so npm init foo --hello will map to npx create-foo --hello. If the initializer is omitted (by just calling npm init), init will fall  back  to  legacy init  behavior.  It  will  ask you a bunch of questions, and then write a package.json for you. It will attempt to make reasonable guesses based on  existing  fields,  dependencies, and  options selected. It is strictly additive, so it will keep any fields and values that were already set. You can also use -y/--yes to skip the questionnaire altogether.  If  you pass --scope, it will create a scoped package. See Also \u00b7 https://github.com/isaacs/init-package-json \u00b7 npm help package.json \u00b7 npm help version \u00b7 npm help scope April 2020                                NPM-INIT(1)",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "Find all files in and below all subdirectories of the current directory",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -mindepth 2\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-mindepth": "Do not apply any tests or actions at levels less than levels (a non-negative\n integer). -mindepth 1 means process all files except the starting-points."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_38895490: bash finding files in directories recursively"
+      ],
+      "Top-3 Scripts": [
+        "so_38895490: rec() {\n    for path; do\n        echo \"$path\"\n        if [[ -d \"$path\" ]]; then\n            rec \"$path\"/*\n        fi\n    done\n}"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "dev",
+      "MP Summary": "release candidate LaTeX testing",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "Find all files in and below all subdirectories of the current directory",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -mindepth 2\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-mindepth": "Do not apply any tests or actions at levels less than levels (a non-negative\n integer). -mindepth 1 means process all files except the starting-points."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_7715485: How to only find files in a given directory, and ignore subdirectories using bash"
+      ],
+      "Top-3 Scripts": [
+        "so_7715485: find /dev -maxdepth 1 -name 'abc-*'\n\nfind /dev -name '.udev' -prune -o -name 'abc-*' -print"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "Test",
+      "MP Summary": "Test display patch window, Set Video LUTs, Install profiles.",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "Find all files in and below all subdirectories of the current directory",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -mindepth 2\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-mindepth": "Do not apply any tests or actions at levels less than levels (a non-negative\n integer). -mindepth 1 means process all files except the starting-points."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_41056673: Bash find and remove files in directory, but do not remove directory"
+      ],
+      "Top-3 Scripts": [
+        "so_41056673: find Test -type f -mtime -1 -exec rm -rf {} \\;"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "be",
+      "MP Summary": "distributed bug tracking from the command line",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "Find all files in and below all subdirectories of the current directory",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -mindepth 2\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-mindepth": "Do not apply any tests or actions at levels less than levels (a non-negative\n integer). -mindepth 1 means process all files except the starting-points."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_23345042: BASH: excluding a directory in \"find\" command"
+      ],
+      "Top-3 Scripts": [
+        "so_23345042: find ./ -iname ! -iname <dirname of file name to be not part of search results>\n\nfind ./ -iname <file name> ! -path \"./dirt o be Excluded/*\""
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

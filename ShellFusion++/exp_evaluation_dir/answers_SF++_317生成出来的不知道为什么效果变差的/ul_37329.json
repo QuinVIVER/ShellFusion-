@@ -1,0 +1,1917 @@
+{
+  "Query": "Efficiently delete large directory containing thousands of files",
+  "Answers": [
+    {
+      "Command": "mv",
+      "MP Summary": "move (rename) files",
+      "Most Similar TLDR Task": "Move files in arbitrary locations",
+      "Most Similar TLDR Script": "mv {{source}} {{target}}",
+      "Most Similar NL2Bash Task": "find a.out, *.o and core files under the current directory and sub-directories and delete them.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . \\( -name a.out -o -name '*.o' -o -name 'core' \\) -exec rm {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "rm": {
+              "mpsum": "remove files or directories"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "rm": {
+              "man1_rm_29530": "remov file directori forcibl remov directori without prompt confirm show error messag interact remov multipl file prompt everi remov recurs remov directori subdirectori remov file arbitrari locat remov file verbos mode print messag remov file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_169640: How to rename and move thousands of files at once?",
+        "so_67978411: Most efficient way to replace thousands of strings in a giant file",
+        "so_42759566: bash script for putting thousands of files, into separate folders"
+      ],
+      "Top-3 Scripts": [
+        "au_169640: #!/bin/bash\n# a script to recursively find all jpgs in a specified directory, rename with a random label and transfer to pwd\n\nfind ~/Downloads -type f -iname '*.jpg' -print0 | \nwhile IFS= read -r -d '' f; \ndo mv -- \"$f\" \"$RANDOM-$RANDOM.jpg\"; \n\ndone",
+        "so_67978411: tmp=$(mktemp)\nawk '\n  NR == FNR {map[$1] = $2; next}\n  $1 == \"=001\" && $2 in map {$2 = map[$2]}\n  {print}\n' mappingFile bigFile > \"$tmp\" && mv \"$tmp\" bigFile",
+        "so_42759566: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "rm",
+      "MP Summary": "remove files or directories",
+      "Most Similar TLDR Task": "Recursively remove a directory and all its subdirectories",
+      "Most Similar TLDR Script": "rm -r {{path/to/directory}}",
+      "Most Similar NL2Bash Task": "find a.out, *.o and core files under the current directory and sub-directories and delete them.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . \\( -name a.out -o -name '*.o' -o -name 'core' \\) -exec rm {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "rm": {
+              "mpsum": "remove files or directories"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "rm": {
+              "man1_rm_29530": "remov file directori forcibl remov directori without prompt confirm show error messag interact remov multipl file prompt everi remov recurs remov directori subdirectori remov file arbitrari locat remov file verbos mode print messag remov file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_249862: Storing thousands of files in one directory",
+        "so_37710667: How to delete one set of files in a directory containing similarly named files?",
+        "so_35615581: How to delete X number of files in a directory"
+      ],
+      "Top-3 Scripts": [
+        "au_249862: ",
+        "so_37710667: ls text_*.txt | { read first; rm *\"${first:4:4}\"*; };\n\nrm *\"\"*\n\nrm *_xx.*\n\nls text_??.txt | { read first; rm *_\"${first:5:2}\".*; };",
+        "so_35615581: ls -U | head -40000 | xargs rm -rf\n\nfind . -maxdepth 1 -print0 | xargs -0 rm -rf"
+      ],
+      "Explanations about Options": {
+        "-r": "remove directories and their contents recursively",
+        "-f": "ignore nonexistent files and arguments, never prompt"
+      }
+    },
+    {
+      "Command": "find",
+      "MP Summary": "search for files in a directory hierarchy",
+      "Most Similar TLDR Task": "Find files matching a given pattern, excluding specific paths",
+      "Most Similar TLDR Script": "find {{root_path}} -name '{{*.py}}' -not -path '{{*/site-packages/*}}'",
+      "Most Similar NL2Bash Task": "find a.out, *.o and core files under the current directory and sub-directories and delete them.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . \\( -name a.out -o -name '*.o' -o -name 'core' \\) -exec rm {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "rm": {
+              "mpsum": "remove files or directories"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "rm": {
+              "man1_rm_29530": "remov file directori forcibl remov directori without prompt confirm show error messag interact remov multipl file prompt everi remov recurs remov directori subdirectori remov file arbitrari locat remov file verbos mode print messag remov file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_169640: How to rename and move thousands of files at once?",
+        "so_8144022: Concatenating Thousands of Text Files Across Hundreds of Directories (while keeping some structure)",
+        "so_35615581: How to delete X number of files in a directory"
+      ],
+      "Top-3 Scripts": [
+        "au_169640: #!/bin/bash\n# a script to recursively find all jpgs in a specified directory, rename with a random label and transfer to pwd\n\nfind ~/Downloads -type f -iname '*.jpg' -print0 | \nwhile IFS= read -r -d '' f; \ndo mv -- \"$f\" \"$RANDOM-$RANDOM.jpg\"; \n\ndone",
+        "so_8144022: #!/bin/sh\n# Usage: cat-txt dirname\nfind \"$1\" -name \\*.txt -print0 | xargs -0 cat >> \"$1.txt\"\n\n$ find -mindepth 1 -maxdepth 1 -type d -exec cat-txt '{}' \\;",
+        "so_35615581: find . -maxdepth 1 -print0 | xargs -0 rm -rf"
+      ],
+      "Explanations about Options": {
+        "-maxdepth": "Descend at most levels (a non-negative integer) levels of directories below the\n starting-points. -maxdepth 0 means only apply the tests and actions to the\n starting-points themselves.",
+        "-type": "File is of type c:",
+        "-mindepth": "Do not apply any tests or actions at levels less than levels (a non-negative\n integer). -mindepth 1 means process all files except the starting-points.",
+        "-iname": "Like -name, but the match is case insensitive. For example, the patterns `fo*' and\n `F??' match the file names `Foo', `FOO', `foo', `fOo', etc. The pattern `*foo*`\n will also match a file called '.foobar'.",
+        "-print0": "Always print the exact filename, unchanged, even if the output is going to a\n terminal."
+      }
+    },
+    {
+      "Command": "echo",
+      "MP Summary": "display a line of text",
+      "Most Similar TLDR Task": "Append a message to the file",
+      "Most Similar TLDR Script": "echo \"{{Hello World}}\" >> {{file.txt}}",
+      "Most Similar NL2Bash Task": "find a.out, *.o and core files under the current directory and sub-directories and delete them.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . \\( -name a.out -o -name '*.o' -o -name 'core' \\) -exec rm {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "rm": {
+              "mpsum": "remove files or directories"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "rm": {
+              "man1_rm_29530": "remov file directori forcibl remov directori without prompt confirm show error messag interact remov multipl file prompt everi remov recurs remov directori subdirectori remov file arbitrari locat remov file verbos mode print messag remov file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_42759566: bash script for putting thousands of files, into separate folders",
+        "so_12368701: Efficient way to add two lines at the beginning of a very large file",
+        "so_35615581: How to delete X number of files in a directory"
+      ],
+      "Top-3 Scripts": [
+        "so_42759566: bash-4.4$ d=1001\nbash-4.4$ dir_name=$(printf \"/path/to/%06d\" $d)\nbash-4.4$ echo $dir_name \n/path/to/001001",
+        "so_12368701: echo \"1iFirstLine\" > newfile.txt\necho \"2iSecondLine\" >> newfile.txt\ncat oldfile.txt >> newfile.txt\nmv newfile.txt oldfile.txt",
+        "so_35615581: xargs echo"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "cat",
+      "MP Summary": "concatenate files and print on the standard output",
+      "Most Similar TLDR Task": "Concatenate several files into the target file",
+      "Most Similar TLDR Script": "cat {{file1}} {{file2}} > {{target_file}}",
+      "Most Similar NL2Bash Task": "find a.out, *.o and core files under the current directory and sub-directories and delete them.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . \\( -name a.out -o -name '*.o' -o -name 'core' \\) -exec rm {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "rm": {
+              "mpsum": "remove files or directories"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "rm": {
+              "man1_rm_29530": "remov file directori forcibl remov directori without prompt confirm show error messag interact remov multipl file prompt everi remov recurs remov directori subdirectori remov file arbitrari locat remov file verbos mode print messag remov file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_8144022: Concatenating Thousands of Text Files Across Hundreds of Directories (while keeping some structure)",
+        "so_12368701: Efficient way to add two lines at the beginning of a very large file",
+        "ul_499538: Combine large amounts of files inside a directory"
+      ],
+      "Top-3 Scripts": [
+        "so_8144022: #!/bin/sh\n# Usage: cat-txt dirname\nfind \"$1\" -name \\*.txt -print0 | xargs -0 cat >> \"$1.txt\"",
+        "so_12368701: echo \"1iFirstLine\" > newfile.txt\necho \"2iSecondLine\" >> newfile.txt\ncat oldfile.txt >> newfile.txt\nmv newfile.txt oldfile.txt",
+        "ul_499538: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "sed",
+      "MP Summary": "stream editor for filtering and transforming text",
+      "Most Similar TLDR Task": "Delete lines matching the line pattern",
+      "Most Similar TLDR Script": "sed '/{{line_pattern}}/d' {{filename}}",
+      "Most Similar NL2Bash Task": "find a.out, *.o and core files under the current directory and sub-directories and delete them.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . \\( -name a.out -o -name '*.o' -o -name 'core' \\) -exec rm {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "rm": {
+              "mpsum": "remove files or directories"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "rm": {
+              "man1_rm_29530": "remov file directori forcibl remov directori without prompt confirm show error messag interact remov multipl file prompt everi remov recurs remov directori subdirectori remov file arbitrari locat remov file verbos mode print messag remov file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_38777554: Deleting hundreds of thousands of lines in a CSV file",
+        "so_26726565: how to delete a large number of lines from a file",
+        "so_40668533: Extract large list of lines from large text file"
+      ],
+      "Top-3 Scripts": [
+        "so_38777554: sed -i '2,809600 d' extract.csv\n\nsed -i.bak '2,809600 d' extract.csv",
+        "so_26726565: sed <(sed 's/$/d/' lines_file) data_file",
+        "so_40668533: $ sed -n \"$(printf '%sp;' {1..432})\" <<<'line 1'\nsed: 1: \"1p;2p;3p;4p;5p;6p;7p;8p ...\": command expected # !! ERROR\n\n$ sed -n \"$(printf '%sp\\n' {1..432})\" <<<'line 1'\nline 1 # OK\n\n$ sed -n \"$(sed 's/$/p/' line_file)\" file > output\n\n$ printf '%sp\\n' {1..432} > script.sed # Create script file with \\n-separated commands.\n$ sed -n -f \"script.sed\" <<<'line 1' # Pass script file via -f\nline 1 # OK\n\nsed -n -f <(printf ...) ..."
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "awk",
+      "MP Summary": "pattern scanning and processing language",
+      "Most Similar TLDR Task": "Print the second column of the lines containing \"something\" in a space-separated file",
+      "Most Similar TLDR Script": "awk '/{{something}}/ {print $2}' {{filename}}",
+      "Most Similar NL2Bash Task": "find a.out, *.o and core files under the current directory and sub-directories and delete them.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . \\( -name a.out -o -name '*.o' -o -name 'core' \\) -exec rm {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "rm": {
+              "mpsum": "remove files or directories"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "rm": {
+              "man1_rm_29530": "remov file directori forcibl remov directori without prompt confirm show error messag interact remov multipl file prompt everi remov recurs remov directori subdirectori remov file arbitrari locat remov file verbos mode print messag remov file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_67978411: Most efficient way to replace thousands of strings in a giant file",
+        "so_26726565: how to delete a large number of lines from a file",
+        "so_21754569: How to efficiently get 10% of random lines out of the large file in Linux?"
+      ],
+      "Top-3 Scripts": [
+        "so_67978411: tmp=$(mktemp)\nawk '\n  NR == FNR {map[$1] = $2; next}\n  $1 == \"=001\" && $2 in map {$2 = map[$2]}\n  {print}\n' mappingFile bigFile > \"$tmp\" && mv \"$tmp\" bigFile",
+        "so_26726565: awk 'NR==FNR {del[$1]; next} !(FNR in del)' lines_file data_file",
+        "so_21754569: file=your file here\nlines_in_file=`wc -l $file | awk {'print $1'}`\nlines_wanted=$(($lines_in_file/10))\nfor i in `seq 1 $lines_wanted`\n do line_chosen=$(($RANDOM*${lines_in_file}/32767+1))\nsed \"${line_chosen}q;d\" $file\ndone"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "wc",
+      "MP Summary": "print newline, word, and byte counts for each file",
+      "Most Similar TLDR Task": "Count characters (bytes) in file",
+      "Most Similar TLDR Script": "wc -c {{file}}",
+      "Most Similar NL2Bash Task": "find a.out, *.o and core files under the current directory and sub-directories and delete them.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . \\( -name a.out -o -name '*.o' -o -name 'core' \\) -exec rm {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "rm": {
+              "mpsum": "remove files or directories"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "rm": {
+              "man1_rm_29530": "remov file directori forcibl remov directori without prompt confirm show error messag interact remov multipl file prompt everi remov recurs remov directori subdirectori remov file arbitrari locat remov file verbos mode print messag remov file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_499538: Combine large amounts of files inside a directory",
+        "so_26702230: How do I get the number of lines for specific files in a large directory?",
+        "so_56122171: Effective way to delete first N lines of a large 100M-line file in linux shell"
+      ],
+      "Top-3 Scripts": [
+        "ul_499538: ",
+        "so_26702230: seq 50 678 | xargs -I'{}' cat dump{} | wc -l",
+        "so_56122171: bytes=$(head -50000000 file |wc -c)\ndd if=file bs=\"$bytes\" skip=1 conv=notrunc of=file\ntruncate -s \"-$bytes\" file"
+      ],
+      "Explanations about Options": {
+        "-l": "print the newline counts"
+      }
+    },
+    {
+      "Command": "perl",
+      "MP Summary": "The Perl 5 language interpreter",
+      "Most Similar TLDR Task": "Run a multi-line find/replace expression on a file, and save the result in another file",
+      "Most Similar TLDR Script": "perl -p0e 's/{{foo\\nbar}}/{{foobar}}/g' {{input_file}} > {{output_file}}",
+      "Most Similar NL2Bash Task": "find a.out, *.o and core files under the current directory and sub-directories and delete them.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . \\( -name a.out -o -name '*.o' -o -name 'core' \\) -exec rm {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "rm": {
+              "mpsum": "remove files or directories"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "rm": {
+              "man1_rm_29530": "remov file directori forcibl remov directori without prompt confirm show error messag interact remov multipl file prompt everi remov recurs remov directori subdirectori remov file arbitrari locat remov file verbos mode print messag remov file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_26726565: how to delete a large number of lines from a file",
+        "so_24538909: Efficiently computing floating-point arithmetic hundreds of thousands of times in Bash",
+        "so_6614085: finding many thousands of files in a directory pattern in Perl"
+      ],
+      "Top-3 Scripts": [
+        "so_26726565: perl -MPath::Class -e '\n  %del = map {$_ => 1} file(\"lines_file\")->slurp(chomp => 1);\n  $f = file(\"data_file\")->openr();\n  while (<$f>) {\n    print unless $del{$.};\n  }\n'",
+        "so_24538909: ",
+        "so_6614085: perl -lE 'print join(\"\\n\", map {s/srf\\/(.+).srf/$1/;$_} glob(\"srf/198*.srf\"))' | xargs -n 1....."
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "rmdir",
+      "MP Summary": "remove empty directories",
+      "Most Similar TLDR Task": "Remove directory, provided it is empty. Use `rm -r` to remove non-empty directories",
+      "Most Similar TLDR Script": "rmdir {{path/to/directory}}",
+      "Most Similar NL2Bash Task": "find a.out, *.o and core files under the current directory and sub-directories and delete them.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . \\( -name a.out -o -name '*.o' -o -name 'core' \\) -exec rm {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "rm": {
+              "mpsum": "remove files or directories"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "rm": {
+              "man1_rm_29530": "remov file directori forcibl remov directori without prompt confirm show error messag interact remov multipl file prompt everi remov recurs remov directori subdirectori remov file arbitrari locat remov file verbos mode print messag remov file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_574667: How can I delete all folders of a specific name without deleting Contents in it?",
+        "au_663389: Delete a list of directories stored in a file",
+        "au_696412: How to prevent the deletion (but not the creation) of items in a folder?"
+      ],
+      "Top-3 Scripts": [
+        "au_574667: #!/bin/bash\n\nwhile IFS= read -r -d '' n; \ndo   \n   dir=$(dirname \"$n\") ; \n   mv \"${n}\"/* \"${dir}\"\n   rmdir \"${n}\"\ndone < <(find -type d -name \"128Kbps_Songs\" -print0)",
+        "au_663389: while IFS= read -r directory\ndo\n   #rmdir /home/directory/\"$directory\"\n   echo rmdir /home/directory/\"$directory\"\ndone < /home/list/list.txt",
+        "au_696412: while sleep 0.5; do if mkdir foo/bar; then echo foo; rmdir foo/bar; fi; done"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "file",
+      "MP Summary": "determine file type",
+      "Most Similar TLDR Task": "Look inside a zipped file and determine the file type(s) inside",
+      "Most Similar TLDR Script": "file -z {{foo.zip}}",
+      "Most Similar NL2Bash Task": "find a.out, *.o and core files under the current directory and sub-directories and delete them.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . \\( -name a.out -o -name '*.o' -o -name 'core' \\) -exec rm {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "rm": {
+              "mpsum": "remove files or directories"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "rm": {
+              "man1_rm_29530": "remov file directori forcibl remov directori without prompt confirm show error messag interact remov multipl file prompt everi remov recurs remov directori subdirectori remov file arbitrari locat remov file verbos mode print messag remov file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_42759566: bash script for putting thousands of files, into separate folders",
+        "so_26726565: how to delete a large number of lines from a file",
+        "so_40668533: Extract large list of lines from large text file"
+      ],
+      "Top-3 Scripts": [
+        "so_42759566: ",
+        "so_26726565: perl -MPath::Class -e '\n  %del = map {$_ => 1} file(\"lines_file\")->slurp(chomp => 1);\n  $f = file(\"data_file\")->openr();\n  while (<$f>) {\n    print unless $del{$.};\n  }\n'",
+        "so_40668533: $ sed -n \"$(sed 's/$/p/' line_file)\" file > output\n\n$ printf '%sp\\n' {1..432} > script.sed # Create script file with \\n-separated commands.\n$ sed -n -f \"script.sed\" <<<'line 1' # Pass script file via -f\nline 1 # OK"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "mkdir",
+      "MP Summary": "make directories",
+      "Most Similar TLDR Task": "Create a directory in current directory or given path",
+      "Most Similar TLDR Script": "mkdir {{directory}}",
+      "Most Similar NL2Bash Task": "find a.out, *.o and core files under the current directory and sub-directories and delete them.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . \\( -name a.out -o -name '*.o' -o -name 'core' \\) -exec rm {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "rm": {
+              "mpsum": "remove files or directories"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "rm": {
+              "man1_rm_29530": "remov file directori forcibl remov directori without prompt confirm show error messag interact remov multipl file prompt everi remov recurs remov directori subdirectori remov file arbitrari locat remov file verbos mode print messag remov file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_42759566: bash script for putting thousands of files, into separate folders",
+        "ul_63265: Distributing thousands of files over subfolders",
+        "au_696412: How to prevent the deletion (but not the creation) of items in a folder?"
+      ],
+      "Top-3 Scripts": [
+        "so_42759566: ",
+        "ul_63265: mkdir S_$n",
+        "au_696412: while sleep 0.5; do if mkdir foo/bar; then echo foo; rmdir foo/bar; fi; done"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "printf",
+      "MP Summary": "format and print data",
+      "Most Similar TLDR Task": "Print a text message composed with environment variables",
+      "Most Similar TLDR Script": "printf \"{{var1: %s\\tvar2: %s\\n}}\" \"{{$VAR1}}\" \"{{$VAR2}}\"",
+      "Most Similar NL2Bash Task": "find a.out, *.o and core files under the current directory and sub-directories and delete them.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . \\( -name a.out -o -name '*.o' -o -name 'core' \\) -exec rm {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "rm": {
+              "mpsum": "remove files or directories"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "rm": {
+              "man1_rm_29530": "remov file directori forcibl remov directori without prompt confirm show error messag interact remov multipl file prompt everi remov recurs remov directori subdirectori remov file arbitrari locat remov file verbos mode print messag remov file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_42759566: bash script for putting thousands of files, into separate folders",
+        "so_40668533: Extract large list of lines from large text file",
+        "so_46344416: Linux: How to delete all of the files (not directories) inside a directory itself (not childs)"
+      ],
+      "Top-3 Scripts": [
+        "so_42759566: bash-4.4$ d=1001\nbash-4.4$ dir_name=$(printf \"/path/to/%06d\" $d)\nbash-4.4$ echo $dir_name \n/path/to/001001",
+        "so_40668533: $ sed -n \"$(printf '%sp;' {1..432})\" <<<'line 1'\nsed: 1: \"1p;2p;3p;4p;5p;6p;7p;8p ...\": command expected # !! ERROR\n\n$ sed -n \"$(printf '%sp\\n' {1..432})\" <<<'line 1'\nline 1 # OK\n\n$ printf '%sp\\n' {1..432} > script.sed # Create script file with \\n-separated commands.\n$ sed -n -f \"script.sed\" <<<'line 1' # Pass script file via -f\nline 1 # OK\n\nsed -n -f <(printf ...) ...",
+        "so_46344416: find ./ -maxdepth 1 -type f  | awk -F '/' '{printf \"'\\''%s'\\''\\n\",$2}' | xargs rm -rf"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "truncate",
+      "MP Summary": "shrink or extend the size of a file to the specified size",
+      "Most Similar TLDR Task": "Empty the file's content",
+      "Most Similar TLDR Script": "truncate -s 0 {{filename}}",
+      "Most Similar NL2Bash Task": "find a.out, *.o and core files under the current directory and sub-directories and delete them.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . \\( -name a.out -o -name '*.o' -o -name 'core' \\) -exec rm {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "rm": {
+              "mpsum": "remove files or directories"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "rm": {
+              "man1_rm_29530": "remov file directori forcibl remov directori without prompt confirm show error messag interact remov multipl file prompt everi remov recurs remov directori subdirectori remov file arbitrari locat remov file verbos mode print messag remov file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_29238694: How to delete the contents of all the files in a directory",
+        "so_56122171: Effective way to delete first N lines of a large 100M-line file in linux shell"
+      ],
+      "Top-3 Scripts": [
+        "so_29238694: truncate --size 0 /tmp/REPORTS/*",
+        "so_56122171: bytes=$(head -50000000 file |wc -c)\ndd if=file bs=\"$bytes\" skip=1 conv=notrunc of=file\ntruncate -s \"-$bytes\" file"
+      ],
+      "Explanations about Options": {
+        "--size": "set or adjust the file size by SIZE bytes",
+        "-s": "set or adjust the file size by SIZE bytes"
+      }
+    },
+    {
+      "Command": "head",
+      "MP Summary": "output the first part of files",
+      "Most Similar TLDR Task": "Output everything but the last few lines of a file",
+      "Most Similar TLDR Script": "head -n -{{count_of_lines}} {{filename}}",
+      "Most Similar NL2Bash Task": "find a.out, *.o and core files under the current directory and sub-directories and delete them.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . \\( -name a.out -o -name '*.o' -o -name 'core' \\) -exec rm {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "rm": {
+              "mpsum": "remove files or directories"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "rm": {
+              "man1_rm_29530": "remov file directori forcibl remov directori without prompt confirm show error messag interact remov multipl file prompt everi remov recurs remov directori subdirectori remov file arbitrari locat remov file verbos mode print messag remov file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_35615581: How to delete X number of files in a directory",
+        "ul_499538: Combine large amounts of files inside a directory",
+        "so_56122171: Effective way to delete first N lines of a large 100M-line file in linux shell"
+      ],
+      "Top-3 Scripts": [
+        "so_35615581: ls -U | head -40000 | xargs rm -rf",
+        "ul_499538: ",
+        "so_56122171: bytes=$(head -50000000 file |wc -c)\ndd if=file bs=\"$bytes\" skip=1 conv=notrunc of=file\ntruncate -s \"-$bytes\" file"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "xargs",
+      "MP Summary": "build and execute command lines from standard input",
+      "Most Similar TLDR Task": "Delete all files with a `.backup` extension (`-print0` uses a null character to split file names, and `-0` uses it as delimiter)",
+      "Most Similar TLDR Script": "find . -name {{'*.backup'}} -print0 | xargs -0 rm -v",
+      "Most Similar NL2Bash Task": "find a.out, *.o and core files under the current directory and sub-directories and delete them.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . \\( -name a.out -o -name '*.o' -o -name 'core' \\) -exec rm {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "rm": {
+              "mpsum": "remove files or directories"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "rm": {
+              "man1_rm_29530": "remov file directori forcibl remov directori without prompt confirm show error messag interact remov multipl file prompt everi remov recurs remov directori subdirectori remov file arbitrari locat remov file verbos mode print messag remov file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_12072: Change directory to the directory containing the executable file of command \"oracle\"",
+        "so_8144022: Concatenating Thousands of Text Files Across Hundreds of Directories (while keeping some structure)",
+        "so_35615581: How to delete X number of files in a directory"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_12072: cd $(which oracle | xargs dirname)",
+        "so_8144022: #!/bin/sh\n# Usage: cat-txt dirname\nfind \"$1\" -name \\*.txt -print0 | xargs -0 cat >> \"$1.txt\"",
+        "so_35615581: ls -U | head -40000 | xargs rm -rf\n\nxargs echo\n\nfind . -maxdepth 1 -print0 | xargs -0 rm -rf"
+      ],
+      "Explanations about Options": {
+        "-0": "Input items are terminated by a null character instead of by whitespace, and the\n quotes and backslash are not special (every character is taken literally).\n Disables the end of file string, which is treated like any other argument. Useful\n when input items might contain white space, quote marks, or backslashes. The GNU\n find -print0 option produces input suitable for this mode."
+      }
+    },
+    {
+      "Command": "seq",
+      "MP Summary": "print a sequence of numbers",
+      "Most Similar TLDR Task": "Separate the output with a space instead of a newline",
+      "Most Similar TLDR Script": "seq -s \" \" 5 3 20",
+      "Most Similar NL2Bash Task": "find a.out, *.o and core files under the current directory and sub-directories and delete them.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . \\( -name a.out -o -name '*.o' -o -name 'core' \\) -exec rm {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "rm": {
+              "mpsum": "remove files or directories"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "rm": {
+              "man1_rm_29530": "remov file directori forcibl remov directori without prompt confirm show error messag interact remov multipl file prompt everi remov recurs remov directori subdirectori remov file arbitrari locat remov file verbos mode print messag remov file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_499538: Combine large amounts of files inside a directory",
+        "so_26702230: How do I get the number of lines for specific files in a large directory?"
+      ],
+      "Top-3 Scripts": [
+        "ul_499538: ",
+        "so_26702230: seq 50 678 | xargs -I'{}' cat dump{} | wc -l"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "read",
+      "MP Summary": "read a line from standard input",
+      "Most Similar TLDR Task": "Specify the number of maximum characters to be read",
+      "Most Similar TLDR Script": "read -n {{character_count}} {{variable}}",
+      "Most Similar NL2Bash Task": "find a.out, *.o and core files under the current directory and sub-directories and delete them.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . \\( -name a.out -o -name '*.o' -o -name 'core' \\) -exec rm {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "rm": {
+              "mpsum": "remove files or directories"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "rm": {
+              "man1_rm_29530": "remov file directori forcibl remov directori without prompt confirm show error messag interact remov multipl file prompt everi remov recurs remov directori subdirectori remov file arbitrari locat remov file verbos mode print messag remov file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_169640: How to rename and move thousands of files at once?",
+        "so_37710667: How to delete one set of files in a directory containing similarly named files?",
+        "au_574667: How can I delete all folders of a specific name without deleting Contents in it?"
+      ],
+      "Top-3 Scripts": [
+        "au_169640: #!/bin/bash\n# a script to recursively find all jpgs in a specified directory, rename with a random label and transfer to pwd\n\nfind ~/Downloads -type f -iname '*.jpg' -print0 | \nwhile IFS= read -r -d '' f; \ndo mv -- \"$f\" \"$RANDOM-$RANDOM.jpg\"; \n\ndone",
+        "so_37710667: ls text_*.txt | { read first; rm *\"${first:4:4}\"*; };\n\nls text_??.txt | { read first; rm *_\"${first:5:2}\".*; };",
+        "au_574667: #!/bin/bash\n\nwhile IFS= read -r -d '' n; \ndo   \n   dir=$(dirname \"$n\") ; \n   mv \"${n}\"/* \"${dir}\"\n   rmdir \"${n}\"\ndone < <(find -type d -name \"128Kbps_Songs\" -print0)"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "chmod",
+      "MP Summary": "change file mode bits",
+      "Most Similar TLDR Task": "Change permissions recursively giving [g]roup and [o]thers the ability to [w]rite",
+      "Most Similar TLDR Script": "chmod -R g+w,o+w {{directory}}",
+      "Most Similar NL2Bash Task": "find a.out, *.o and core files under the current directory and sub-directories and delete them.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . \\( -name a.out -o -name '*.o' -o -name 'core' \\) -exec rm {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "rm": {
+              "mpsum": "remove files or directories"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "rm": {
+              "man1_rm_29530": "remov file directori forcibl remov directori without prompt confirm show error messag interact remov multipl file prompt everi remov recurs remov directori subdirectori remov file arbitrari locat remov file verbos mode print messag remov file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_574667: How can I delete all folders of a specific name without deleting Contents in it?",
+        "au_696412: How to prevent the deletion (but not the creation) of items in a folder?",
+        "ul_20104: Is there any way to prevent deletion of certain files from user owned directory?"
+      ],
+      "Top-3 Scripts": [
+        "au_574667: chmod +x your_script",
+        "au_696412: if dir=$(inotifywait -e create --format '%f' foo)\nthen\n    chmod -w foo\n    if [[ -d foo/$dir ]]",
+        "ul_20104: chown root:user Directory1\nchmod 1775 Directory1"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "ls",
+      "MP Summary": "list directory contents",
+      "Most Similar TLDR Task": "List all files, including hidden files",
+      "Most Similar TLDR Script": "ls -a",
+      "Most Similar NL2Bash Task": "find a.out, *.o and core files under the current directory and sub-directories and delete them.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . \\( -name a.out -o -name '*.o' -o -name 'core' \\) -exec rm {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "rm": {
+              "mpsum": "remove files or directories"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "rm": {
+              "man1_rm_29530": "remov file directori forcibl remov directori without prompt confirm show error messag interact remov multipl file prompt everi remov recurs remov directori subdirectori remov file arbitrari locat remov file verbos mode print messag remov file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_249862: Storing thousands of files in one directory",
+        "so_37710667: How to delete one set of files in a directory containing similarly named files?",
+        "so_35615581: How to delete X number of files in a directory"
+      ],
+      "Top-3 Scripts": [
+        "au_249862: ls -l *\n\nls -l file1 file2 file3 file4 etc etc",
+        "so_37710667: ls text_*.txt | { read first; rm *\"${first:4:4}\"*; };\n\nls text_??.txt | { read first; rm *_\"${first:5:2}\".*; };",
+        "so_35615581: ls -U | head -40000 | xargs rm -rf"
+      ],
+      "Explanations about Options": {
+        "-l": "use a long listing format",
+        "-U": "do not sort; list entries in directory order"
+      }
+    },
+    {
+      "Command": "bash",
+      "MP Summary": "GNU Bourne-Again SHell",
+      "Most Similar TLDR Task": "Execute a command",
+      "Most Similar TLDR Script": "bash -c \"{{command}}\"",
+      "Most Similar NL2Bash Task": "find a.out, *.o and core files under the current directory and sub-directories and delete them.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . \\( -name a.out -o -name '*.o' -o -name 'core' \\) -exec rm {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "rm": {
+              "mpsum": "remove files or directories"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "rm": {
+              "man1_rm_29530": "remov file directori forcibl remov directori without prompt confirm show error messag interact remov multipl file prompt everi remov recurs remov directori subdirectori remov file arbitrari locat remov file verbos mode print messag remov file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_24538909: Efficiently computing floating-point arithmetic hundreds of thousands of times in Bash"
+      ],
+      "Top-3 Scripts": [
+        "so_24538909: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "diff",
+      "MP Summary": "compare two files",
+      "Most Similar TLDR Task": "Compare directories, only showing the names of files that differ",
+      "Most Similar TLDR Script": "diff -rq {{old_directory}} {{new_directory}}",
+      "Most Similar NL2Bash Task": "find a.out, *.o and core files under the current directory and sub-directories and delete them.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . \\( -name a.out -o -name '*.o' -o -name 'core' \\) -exec rm {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "rm": {
+              "mpsum": "remove files or directories"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "rm": {
+              "man1_rm_29530": "remov file directori forcibl remov directori without prompt confirm show error messag interact remov multipl file prompt everi remov recurs remov directori subdirectori remov file arbitrari locat remov file verbos mode print messag remov file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_495506: Check data integrity after copying thousands of files"
+      ],
+      "Top-3 Scripts": [
+        "ul_495506: diff -r source destination"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "dirname",
+      "MP Summary": "strip last component from file name",
+      "Most Similar TLDR Task": "Calculate the parent directory of multiple paths",
+      "Most Similar TLDR Script": "dirname {{path/to/file_a}} {{path/to/directory_b}}",
+      "Most Similar NL2Bash Task": "find a.out, *.o and core files under the current directory and sub-directories and delete them.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . \\( -name a.out -o -name '*.o' -o -name 'core' \\) -exec rm {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "rm": {
+              "mpsum": "remove files or directories"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "rm": {
+              "man1_rm_29530": "remov file directori forcibl remov directori without prompt confirm show error messag interact remov multipl file prompt everi remov recurs remov directori subdirectori remov file arbitrari locat remov file verbos mode print messag remov file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_574667: How can I delete all folders of a specific name without deleting Contents in it?"
+      ],
+      "Top-3 Scripts": [
+        "au_574667: #!/bin/bash\n\nwhile IFS= read -r -d '' n; \ndo   \n   dir=$(dirname \"$n\") ; \n   mv \"${n}\"/* \"${dir}\"\n   rmdir \"${n}\"\ndone < <(find -type d -name \"128Kbps_Songs\" -print0)"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "shuf",
+      "MP Summary": "generate random permutations",
+      "Most Similar TLDR Task": "Generate random numbers in range",
+      "Most Similar TLDR Script": "shuf -i {{1-10}}",
+      "Most Similar NL2Bash Task": "find a.out, *.o and core files under the current directory and sub-directories and delete them.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . \\( -name a.out -o -name '*.o' -o -name 'core' \\) -exec rm {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "rm": {
+              "mpsum": "remove files or directories"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "rm": {
+              "man1_rm_29530": "remov file directori forcibl remov directori without prompt confirm show error messag interact remov multipl file prompt everi remov recurs remov directori subdirectori remov file arbitrari locat remov file verbos mode print messag remov file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_21754569: How to efficiently get 10% of random lines out of the large file in Linux?"
+      ],
+      "Top-3 Scripts": [
+        "so_21754569: file=your file here\nlines_in_file=`wc -l < $file`\nlines_wanted=$(($lines_in_file/10))\n\nshuf -n $lines_wanted $file"
+      ],
+      "Explanations about Options": {
+        "-n": "output at most COUNT lines"
+      }
+    },
+    {
+      "Command": "ln",
+      "MP Summary": "make links between files",
+      "Most Similar TLDR Task": "Create a symbolic link to a file or directory",
+      "Most Similar TLDR Script": "ln -s {{path/to/file_or_directory}} {{path/to/symlink}}",
+      "Most Similar NL2Bash Task": "find a.out, *.o and core files under the current directory and sub-directories and delete them.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . \\( -name a.out -o -name '*.o' -o -name 'core' \\) -exec rm {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "rm": {
+              "mpsum": "remove files or directories"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "rm": {
+              "man1_rm_29530": "remov file directori forcibl remov directori without prompt confirm show error messag interact remov multipl file prompt everi remov recurs remov directori subdirectori remov file arbitrari locat remov file verbos mode print messag remov file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_43790721: consolidate thousands of files with ln"
+      ],
+      "Top-3 Scripts": [
+        "so_43790721: find ./* -iname \"*fast.5\" -exec ln -t ./Consolidatedfiles/ {} +\n\nfind ./* -iname \"*fast.5\" -print0 | xargs -0 -J {} ln {} ./Consolidatedfiles/\n\nln {} ./Consolidatedfiles/\n\nfind ./* -iname \"*fast.5\" -exec ln {} ./Consolidatedfiles/ \\;\n\nln <original> <link>\n\nln -s"
+      ],
+      "Explanations about Options": {
+        "-s": "make symbolic links instead of hard links"
+      }
+    },
+    {
+      "Command": "line",
+      "MP Summary": "cache line size",
+      "Most Similar TLDR Task": "Read input",
+      "Most Similar TLDR Script": "line",
+      "Most Similar NL2Bash Task": "find a.out, *.o and core files under the current directory and sub-directories and delete them.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . \\( -name a.out -o -name '*.o' -o -name 'core' \\) -exec rm {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "rm": {
+              "mpsum": "remove files or directories"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "rm": {
+              "man1_rm_29530": "remov file directori forcibl remov directori without prompt confirm show error messag interact remov multipl file prompt everi remov recurs remov directori subdirectori remov file arbitrari locat remov file verbos mode print messag remov file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_20082369: Fastest way to parse thousands of small files in PowerShell",
+        "so_40668533: Extract large list of lines from large text file"
+      ],
+      "Top-3 Scripts": [
+        "so_20082369: Foreach ($invlog in $invlogs) {\n@(gc $invlog.FullName -ReadCount 0) -notmatch '^#|^\\s*$' |\n foreach {\n          $invitem,$value=$line -split ':=:'\n          [PSCustomObject]@{Name=$invitem;Value=$value}\n         }\n}",
+        "so_40668533: $ sed -n \"$(printf '%sp\\n' {1..432})\" <<<'line 1'\nline 1 # OK\n\n$ printf '%sp\\n' {1..432} > script.sed # Create script file with \\n-separated commands.\n$ sed -n -f \"script.sed\" <<<'line 1' # Pass script file via -f\nline 1 # OK"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "which",
+      "MP Summary": "locate a command",
+      "Most Similar TLDR Task": "If there are multiple executables which match, display all",
+      "Most Similar TLDR Script": "which -a {{executable}}",
+      "Most Similar NL2Bash Task": "find a.out, *.o and core files under the current directory and sub-directories and delete them.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . \\( -name a.out -o -name '*.o' -o -name 'core' \\) -exec rm {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "rm": {
+              "mpsum": "remove files or directories"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "rm": {
+              "man1_rm_29530": "remov file directori forcibl remov directori without prompt confirm show error messag interact remov multipl file prompt everi remov recurs remov directori subdirectori remov file arbitrari locat remov file verbos mode print messag remov file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_12072: Change directory to the directory containing the executable file of command \"oracle\""
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_12072: cd $(which oracle | xargs dirname)"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "join",
+      "MP Summary": "join lines of two files on a common field",
+      "Most Similar TLDR Task": "Join two files using a comma (instead of a space) as the field separator",
+      "Most Similar TLDR Script": "join -t {{','}} {{file1}} {{file2}}",
+      "Most Similar NL2Bash Task": "find a.out, *.o and core files under the current directory and sub-directories and delete them.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . \\( -name a.out -o -name '*.o' -o -name 'core' \\) -exec rm {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "rm": {
+              "mpsum": "remove files or directories"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "rm": {
+              "man1_rm_29530": "remov file directori forcibl remov directori without prompt confirm show error messag interact remov multipl file prompt everi remov recurs remov directori subdirectori remov file arbitrari locat remov file verbos mode print messag remov file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_6614085: finding many thousands of files in a directory pattern in Perl"
+      ],
+      "Top-3 Scripts": [
+        "so_6614085: perl -lE 'print join(\"\\n\", map {s/srf\\/(.+).srf/$1/;$_} glob(\"srf/198*.srf\"))' | xargs -n 1....."
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "chown",
+      "MP Summary": "change file owner and group",
+      "Most Similar TLDR Task": "Change the owner of a file/directory to match a reference file",
+      "Most Similar TLDR Script": "chown --reference={{path/to/reference_file}} {{path/to/file_or_directory}}",
+      "Most Similar NL2Bash Task": "find a.out, *.o and core files under the current directory and sub-directories and delete them.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . \\( -name a.out -o -name '*.o' -o -name 'core' \\) -exec rm {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "rm": {
+              "mpsum": "remove files or directories"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "rm": {
+              "man1_rm_29530": "remov file directori forcibl remov directori without prompt confirm show error messag interact remov multipl file prompt everi remov recurs remov directori subdirectori remov file arbitrari locat remov file verbos mode print messag remov file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_20104: Is there any way to prevent deletion of certain files from user owned directory?"
+      ],
+      "Top-3 Scripts": [
+        "ul_20104: chown root:user Directory1\nchmod 1775 Directory1\n\nchown root Directory1/CantBeDeletedFile"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "convert",
+      "MP Summary": "convert between image formats as well as resize an image, blur, crop, despeckle, dither, draw on, flip, join, re-sample, and much more.",
+      "Most Similar TLDR Task": "Horizontally append images",
+      "Most Similar TLDR Script": "convert {{image1.png}} {{image2.png}} {{image3.png}} +append {{image123.png}}",
+      "Most Similar NL2Bash Task": "find a.out, *.o and core files under the current directory and sub-directories and delete them.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . \\( -name a.out -o -name '*.o' -o -name 'core' \\) -exec rm {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "rm": {
+              "mpsum": "remove files or directories"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "rm": {
+              "man1_rm_29530": "remov file directori forcibl remov directori without prompt confirm show error messag interact remov multipl file prompt everi remov recurs remov directori subdirectori remov file arbitrari locat remov file verbos mode print messag remov file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_171243: Error converting thousands of documents with LibreOffice"
+      ],
+      "Top-3 Scripts": [
+        "au_171243: ./convert inmuno/vph/2007-2009/2007  vph/2007"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "stat",
+      "MP Summary": "display file or file system status",
+      "Most Similar TLDR Task": "Show only octal file permissions",
+      "Most Similar TLDR Script": "stat -c \"%a %n\" {{file}}",
+      "Most Similar NL2Bash Task": "find a.out, *.o and core files under the current directory and sub-directories and delete them.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . \\( -name a.out -o -name '*.o' -o -name 'core' \\) -exec rm {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "rm": {
+              "mpsum": "remove files or directories"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "rm": {
+              "man1_rm_29530": "remov file directori forcibl remov directori without prompt confirm show error messag interact remov multipl file prompt everi remov recurs remov directori subdirectori remov file arbitrari locat remov file verbos mode print messag remov file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_17732799: quickest way to count the number of files in a directory containing hundreds of thousands of files"
+      ],
+      "Top-3 Scripts": [
+        "so_17732799: stat()"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "ulimit",
+      "MP Summary": "set or report file size limit",
+      "Most Similar TLDR Task": "Get the properties of all the user limits",
+      "Most Similar TLDR Script": "ulimit -a",
+      "Most Similar NL2Bash Task": "find a.out, *.o and core files under the current directory and sub-directories and delete them.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . \\( -name a.out -o -name '*.o' -o -name 'core' \\) -exec rm {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "rm": {
+              "mpsum": "remove files or directories"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "rm": {
+              "man1_rm_29530": "remov file directori forcibl remov directori without prompt confirm show error messag interact remov multipl file prompt everi remov recurs remov directori subdirectori remov file arbitrari locat remov file verbos mode print messag remov file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_640873: Run thousands of simple scripts in parallel"
+      ],
+      "Top-3 Scripts": [
+        "ul_640873: ulimit -u"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "grep",
+      "MP Summary": "print lines that match patterns",
+      "Most Similar TLDR Task": "Invert match for excluding specific strings",
+      "Most Similar TLDR Script": "grep -v {{search_pattern}}",
+      "Most Similar NL2Bash Task": "find a.out, *.o and core files under the current directory and sub-directories and delete them.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . \\( -name a.out -o -name '*.o' -o -name 'core' \\) -exec rm {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "rm": {
+              "mpsum": "remove files or directories"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "rm": {
+              "man1_rm_29530": "remov file directori forcibl remov directori without prompt confirm show error messag interact remov multipl file prompt everi remov recurs remov directori subdirectori remov file arbitrari locat remov file verbos mode print messag remov file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_15119885: Extract lines containing one of large number of strings from file"
+      ],
+      "Top-3 Scripts": [
+        "so_15119885: grep -F -f IDS DATA"
+      ],
+      "Explanations about Options": {
+        "-F": "Interpret PATTERNS as fixed strings, not regular expressions.",
+        "-f": "Obtain patterns from FILE, one per line. If this option is used multiple times or\n is combined with the -e (--regexp) option, search for all patterns given. The\n empty file contains zero patterns, and therefore matches nothing."
+      }
+    },
+    {
+      "Command": "type",
+      "MP Summary": "write a description of command type",
+      "Most Similar TLDR Task": "Display all locations containing the specified executable",
+      "Most Similar TLDR Script": "type -a {{command}}",
+      "Most Similar NL2Bash Task": "find a.out, *.o and core files under the current directory and sub-directories and delete them.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . \\( -name a.out -o -name '*.o' -o -name 'core' \\) -exec rm {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "rm": {
+              "mpsum": "remove files or directories"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "rm": {
+              "man1_rm_29530": "remov file directori forcibl remov directori without prompt confirm show error messag interact remov multipl file prompt everi remov recurs remov directori subdirectori remov file arbitrari locat remov file verbos mode print messag remov file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_34926470: How to delete content of file present in multiple directories in linux"
+      ],
+      "Top-3 Scripts": [
+        "so_34926470: -name \"file\" : file name.\n-exec rm -f {} \\; : delete the files that match.\n-type f : specify the type of file, directory are excluded."
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "parallel",
+      "MP Summary": "run programs in parallel",
+      "Most Similar TLDR Task": "Convert JPG images to PNG using replacement strings",
+      "Most Similar TLDR Script": "parallel convert {} {.}.png ::: *.jpg",
+      "Most Similar NL2Bash Task": "find a.out, *.o and core files under the current directory and sub-directories and delete them.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . \\( -name a.out -o -name '*.o' -o -name 'core' \\) -exec rm {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "rm": {
+              "mpsum": "remove files or directories"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "rm": {
+              "man1_rm_29530": "remov file directori forcibl remov directori without prompt confirm show error messag interact remov multipl file prompt everi remov recurs remov directori subdirectori remov file arbitrari locat remov file verbos mode print messag remov file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_63974351: How do I parallelize archiving of large number of directories?"
+      ],
+      "Top-3 Scripts": [
+        "so_63974351: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "rsync",
+      "MP Summary": "a fast, versatile, remote (and local) file-copying tool",
+      "Most Similar TLDR Task": "Transfer file over SSH and delete local files that do not exist on remote host",
+      "Most Similar TLDR Script": "rsync -e ssh --delete {{remote_host}}:{{path/to/remote_file}} {{path/to/local_file}}",
+      "Most Similar NL2Bash Task": "find a.out, *.o and core files under the current directory and sub-directories and delete them.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . \\( -name a.out -o -name '*.o' -o -name 'core' \\) -exec rm {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "rm": {
+              "mpsum": "remove files or directories"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "rm": {
+              "man1_rm_29530": "remov file directori forcibl remov directori without prompt confirm show error messag interact remov multipl file prompt everi remov recurs remov directori subdirectori remov file arbitrari locat remov file verbos mode print messag remov file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_495506: Check data integrity after copying thousands of files"
+      ],
+      "Top-3 Scripts": [
+        "ul_495506: rsync -n -c"
+      ],
+      "Explanations about Options": {
+        "-n": "This makes rsync perform a trial run that doesn\u2019t make any changes (and produces\n mostly the same output as a real run). It is most commonly used in combination\n with the -v, --verbose and/or -i, --itemize-changes options to see what an rsync\n command is going to do before one actually runs it."
+      }
+    },
+    {
+      "Command": "dd",
+      "MP Summary": "convert and copy a file",
+      "Most Similar TLDR Task": "Generate a file of 100 random bytes by using kernel random driver",
+      "Most Similar TLDR Script": "dd if=/dev/urandom of={{random_file}} bs=100 count=1",
+      "Most Similar NL2Bash Task": "find a.out, *.o and core files under the current directory and sub-directories and delete them.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . \\( -name a.out -o -name '*.o' -o -name 'core' \\) -exec rm {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "rm": {
+              "mpsum": "remove files or directories"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "rm": {
+              "man1_rm_29530": "remov file directori forcibl remov directori without prompt confirm show error messag interact remov multipl file prompt everi remov recurs remov directori subdirectori remov file arbitrari locat remov file verbos mode print messag remov file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_56122171: Effective way to delete first N lines of a large 100M-line file in linux shell"
+      ],
+      "Top-3 Scripts": [
+        "so_56122171: bytes=$(head -50000000 file |wc -c)\ndd if=file bs=\"$bytes\" skip=1 conv=notrunc of=file\ntruncate -s \"-$bytes\" file"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "inotifywait",
+      "MP Summary": "wait for changes to files using inotify",
+      "Most Similar TLDR Task": "Exclude files matching a regular expression",
+      "Most Similar TLDR Script": "while inotifywait --recursive {{path/to/directory}} --exlude '{{regex}}'; do {{command}}; done",
+      "Most Similar NL2Bash Task": "find a.out, *.o and core files under the current directory and sub-directories and delete them.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . \\( -name a.out -o -name '*.o' -o -name 'core' \\) -exec rm {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "rm": {
+              "mpsum": "remove files or directories"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "rm": {
+              "man1_rm_29530": "remov file directori forcibl remov directori without prompt confirm show error messag interact remov multipl file prompt everi remov recurs remov directori subdirectori remov file arbitrari locat remov file verbos mode print messag remov file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_696412: How to prevent the deletion (but not the creation) of items in a folder?"
+      ],
+      "Top-3 Scripts": [
+        "au_696412: if dir=$(inotifywait -e create --format '%f' foo)\nthen\n    chmod -w foo\n    if [[ -d foo/$dir ]]"
+      ],
+      "Explanations about Options": {
+        "-e": "Listen for specific event(s) only. The events which can be listened for are listed\n in the EVENTS section. This option can be specified more than once. If omitted,\n all events are listened for."
+      }
+    },
+    {
+      "Command": "test",
+      "MP Summary": "check file types and compare values",
+      "Most Similar TLDR Task": "Test if directory not exists",
+      "Most Similar TLDR Script": "test ! -d {{path/to/directory}}",
+      "Most Similar NL2Bash Task": "find a.out, *.o and core files under the current directory and sub-directories and delete them.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . \\( -name a.out -o -name '*.o' -o -name 'core' \\) -exec rm {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "rm": {
+              "mpsum": "remove files or directories"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "rm": {
+              "man1_rm_29530": "remov file directori forcibl remov directori without prompt confirm show error messag interact remov multipl file prompt everi remov recurs remov directori subdirectori remov file arbitrari locat remov file verbos mode print messag remov file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_27176357: Deleting a large number of tests from a test suite"
+      ],
+      "Top-3 Scripts": [
+        "so_27176357: while read pattern\ndo \nsed -i \"/$pattern/, +1 d\" inputFile\ndone < test"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "readlink",
+      "MP Summary": "print resolved symbolic links or canonical file names",
+      "Most Similar TLDR Task": "Get the absolute path to a file",
+      "Most Similar TLDR Script": "readlink -f {{filename}}",
+      "Most Similar NL2Bash Task": "find a.out, *.o and core files under the current directory and sub-directories and delete them.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . \\( -name a.out -o -name '*.o' -o -name 'core' \\) -exec rm {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "rm": {
+              "mpsum": "remove files or directories"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "rm": {
+              "man1_rm_29530": "remov file directori forcibl remov directori without prompt confirm show error messag interact remov multipl file prompt everi remov recurs remov directori subdirectori remov file arbitrari locat remov file verbos mode print messag remov file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_499538: Combine large amounts of files inside a directory"
+      ],
+      "Top-3 Scripts": [
+        "ul_499538: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "script",
+      "MP Summary": "make typescript of terminal session",
+      "Most Similar TLDR Task": "Record a new session to a file named `typescript` in the current directory",
+      "Most Similar TLDR Script": "script",
+      "Most Similar NL2Bash Task": "find a.out, *.o and core files under the current directory and sub-directories and delete them.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . \\( -name a.out -o -name '*.o' -o -name 'core' \\) -exec rm {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "rm": {
+              "mpsum": "remove files or directories"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "rm": {
+              "man1_rm_29530": "remov file directori forcibl remov directori without prompt confirm show error messag interact remov multipl file prompt everi remov recurs remov directori subdirectori remov file arbitrari locat remov file verbos mode print messag remov file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_40668533: Extract large list of lines from large text file"
+      ],
+      "Top-3 Scripts": [
+        "so_40668533: $ printf '%sp\\n' {1..432} > script.sed # Create script file with \\n-separated commands.\n$ sed -n -f \"script.sed\" <<<'line 1' # Pass script file via -f\nline 1 # OK"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "qr",
+      "MP Summary": "script to create QR codes at the command line",
+      "Most Similar TLDR Task": "Generate a QR code",
+      "Most Similar TLDR Script": "echo \"{{data}}\" | qr",
+      "Most Similar NL2Bash Task": "find a.out, *.o and core files under the current directory and sub-directories and delete them.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . \\( -name a.out -o -name '*.o' -o -name 'core' \\) -exec rm {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "rm": {
+              "mpsum": "remove files or directories"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "rm": {
+              "man1_rm_29530": "remov file directori forcibl remov directori without prompt confirm show error messag interact remov multipl file prompt everi remov recurs remov directori subdirectori remov file arbitrari locat remov file verbos mode print messag remov file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_61843060: Find thousands of files efficiently with exact match from a directory containing millions of files (bash/python/perl)"
+      ],
+      "Top-3 Scripts": [
+        "so_61843060: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "tail",
+      "MP Summary": "output the last part of files",
+      "Most Similar TLDR Task": "Show all file since line 'num'",
+      "Most Similar TLDR Script": "tail -n +{{num}} {{file}}",
+      "Most Similar NL2Bash Task": "find a.out, *.o and core files under the current directory and sub-directories and delete them.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . \\( -name a.out -o -name '*.o' -o -name 'core' \\) -exec rm {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "rm": {
+              "mpsum": "remove files or directories"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "rm": {
+              "man1_rm_29530": "remov file directori forcibl remov directori without prompt confirm show error messag interact remov multipl file prompt everi remov recurs remov directori subdirectori remov file arbitrari locat remov file verbos mode print messag remov file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_56122171: Effective way to delete first N lines of a large 100M-line file in linux shell"
+      ],
+      "Top-3 Scripts": [
+        "so_56122171: tail -n +50000000 file > tmp && mv tmp file"
+      ],
+      "Explanations about Options": {
+        "-n": "output the last NUM lines, instead of the last 10; or use -n +NUM to output\n starting with line NUM"
+      }
+    },
+    {
+      "Command": "ed",
+      "MP Summary": "line-oriented text editor",
+      "Most Similar TLDR Task": "Write the current document to a new file (the filename can be omitted if `ed` was called with an existing file)",
+      "Most Similar TLDR Script": "w {{filename}}",
+      "Most Similar NL2Bash Task": "find a.out, *.o and core files under the current directory and sub-directories and delete them.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . \\( -name a.out -o -name '*.o' -o -name 'core' \\) -exec rm {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "rm": {
+              "mpsum": "remove files or directories"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "rm": {
+              "man1_rm_29530": "remov file directori forcibl remov directori without prompt confirm show error messag interact remov multipl file prompt everi remov recurs remov directori subdirectori remov file arbitrari locat remov file verbos mode print messag remov file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_56122171: Effective way to delete first N lines of a large 100M-line file in linux shell"
+      ],
+      "Top-3 Scripts": [
+        "so_56122171: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "bc",
+      "MP Summary": "An arbitrary precision calculator language",
+      "Most Similar TLDR Task": "Calculate expression and force number of decimal places to 10",
+      "Most Similar TLDR Script": "bc <<< \"scale=10; 5 / 3\"",
+      "Most Similar NL2Bash Task": "find a.out, *.o and core files under the current directory and sub-directories and delete them.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . \\( -name a.out -o -name '*.o' -o -name 'core' \\) -exec rm {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "rm": {
+              "mpsum": "remove files or directories"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "rm": {
+              "man1_rm_29530": "remov file directori forcibl remov directori without prompt confirm show error messag interact remov multipl file prompt everi remov recurs remov directori subdirectori remov file arbitrari locat remov file verbos mode print messag remov file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_24538909: Efficiently computing floating-point arithmetic hundreds of thousands of times in Bash"
+      ],
+      "Top-3 Scripts": [
+        "so_24538909: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "print",
+      "MP Summary": "execute programs via entries in the mailcap file",
+      "Most Similar TLDR Task": "Print action can be used to print any file on default run-mailcap tool",
+      "Most Similar TLDR Script": "print {{filename}}",
+      "Most Similar NL2Bash Task": "find a.out, *.o and core files under the current directory and sub-directories and delete them.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . \\( -name a.out -o -name '*.o' -o -name 'core' \\) -exec rm {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "rm": {
+              "mpsum": "remove files or directories"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "rm": {
+              "man1_rm_29530": "remov file directori forcibl remov directori without prompt confirm show error messag interact remov multipl file prompt everi remov recurs remov directori subdirectori remov file arbitrari locat remov file verbos mode print messag remov file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_26726565: how to delete a large number of lines from a file"
+      ],
+      "Top-3 Scripts": [
+        "so_26726565: perl -MPath::Class -e '\n  %del = map {$_ => 1} file(\"lines_file\")->slurp(chomp => 1);\n  $f = file(\"data_file\")->openr();\n  while (<$f>) {\n    print unless $del{$.};\n  }\n'"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "command",
+      "MP Summary": "execute a simple command",
+      "Most Similar TLDR Task": "Display the path to the executable or the alias definition of a specific command",
+      "Most Similar TLDR Script": "command -v {{command_name}}",
+      "Most Similar NL2Bash Task": "find a.out, *.o and core files under the current directory and sub-directories and delete them.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . \\( -name a.out -o -name '*.o' -o -name 'core' \\) -exec rm {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "rm": {
+              "mpsum": "remove files or directories"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "rm": {
+              "man1_rm_29530": "remov file directori forcibl remov directori without prompt confirm show error messag interact remov multipl file prompt everi remov recurs remov directori subdirectori remov file arbitrari locat remov file verbos mode print messag remov file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_40668533: Extract large list of lines from large text file"
+      ],
+      "Top-3 Scripts": [
+        "so_40668533: $ sed -n \"$(printf '%sp;' {1..432})\" <<<'line 1'\nsed: 1: \"1p;2p;3p;4p;5p;6p;7p;8p ...\": command expected # !! ERROR\n\ncommand expected"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "sleep",
+      "MP Summary": "delay for a specified amount of time",
+      "Most Similar TLDR Task": "Delay in minutes",
+      "Most Similar TLDR Script": "sleep {{minutes}}m",
+      "Most Similar NL2Bash Task": "find a.out, *.o and core files under the current directory and sub-directories and delete them.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . \\( -name a.out -o -name '*.o' -o -name 'core' \\) -exec rm {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "rm": {
+              "mpsum": "remove files or directories"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "rm": {
+              "man1_rm_29530": "remov file directori forcibl remov directori without prompt confirm show error messag interact remov multipl file prompt everi remov recurs remov directori subdirectori remov file arbitrari locat remov file verbos mode print messag remov file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_696412: How to prevent the deletion (but not the creation) of items in a folder?"
+      ],
+      "Top-3 Scripts": [
+        "au_696412: while sleep 0.5; do if mkdir foo/bar; then echo foo; rmdir foo/bar; fi; done"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "at",
+      "MP Summary": "queue, examine, or delete jobs for later execution",
+      "Most Similar TLDR Task": "Execute a script at the given time",
+      "Most Similar TLDR Script": "at {{hh:mm}} -f {{path/to/file}}",
+      "Most Similar NL2Bash Task": "find a.out, *.o and core files under the current directory and sub-directories and delete them.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . \\( -name a.out -o -name '*.o' -o -name 'core' \\) -exec rm {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "rm": {
+              "mpsum": "remove files or directories"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "rm": {
+              "man1_rm_29530": "remov file directori forcibl remov directori without prompt confirm show error messag interact remov multipl file prompt everi remov recurs remov directori subdirectori remov file arbitrari locat remov file verbos mode print messag remov file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_61843060: Find thousands of files efficiently with exact match from a directory containing millions of files (bash/python/perl)"
+      ],
+      "Top-3 Scripts": [
+        "so_61843060: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "opt",
+      "MP Summary": "LLVM optimizer",
+      "Most Similar TLDR Task": "Optimize the program at level 2 and output the result to another file",
+      "Most Similar TLDR Script": "opt -O2 {{path/to/file.bc}} -S -o {{path/to/output_file.bc}}",
+      "Most Similar NL2Bash Task": "find a.out, *.o and core files under the current directory and sub-directories and delete them.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . \\( -name a.out -o -name '*.o' -o -name 'core' \\) -exec rm {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "rm": {
+              "mpsum": "remove files or directories"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "rm": {
+              "man1_rm_29530": "remov file directori forcibl remov directori without prompt confirm show error messag interact remov multipl file prompt everi remov recurs remov directori subdirectori remov file arbitrari locat remov file verbos mode print messag remov file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_61204265: Delete all files of certain name in nested directories"
+      ],
+      "Top-3 Scripts": [
+        "so_61204265: find /opt/Data -type f -path '*/travel/2020-03-17-*' -exec echo rm {} +"
+      ],
+      "Explanations about Options": {
+        "-p": "Print module after each transformation."
+      }
+    }
+  ]
+}

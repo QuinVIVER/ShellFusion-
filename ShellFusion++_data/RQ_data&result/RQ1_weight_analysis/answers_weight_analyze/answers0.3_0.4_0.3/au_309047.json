@@ -1,0 +1,86 @@
+{
+  "Query": "How do I find out what filesystem my partitions are using?",
+  "Answers": [
+    {
+      "Command": "findmnt",
+      "MP Summary": "find a filesystem",
+      "Most Similar TLDR Task": "Find filesystems in specific type",
+      "Most Similar TLDR Script": "findmnt -t {{ext4}}",
+      "Top-3 Similar Questions": [
+        "ul_510046: How do I find which disk/partition current directory is on?"
+      ],
+      "Top-3 Scripts": [
+        "ul_510046: findmnt --target .\n\nfindmnt --output target --noheadings --target ."
+      ],
+      "Explanations about Options": {
+        "--target": "Define the mount target. If path is not a mountpoint file or directory, then\n findmnt checks the path elements in reverse order to get the mountpoint (this\n feature is supported only when searching in kernel files and unsupported for\n --fstab). It's recommended to use the option --mountpoint when checks of path\n elements are unwanted and path is a strictly specified mountpoint.",
+        "--output": "Define output columns. See the --help output to get a list of the currently\n supported columns. The TARGET column contains tree formatting if the --list or\n --raw options are not specified.",
+        "--noheadings": "Do not print a header line."
+      }
+    },
+    {
+      "Command": "fdisk",
+      "MP Summary": "manipulate disk partition table",
+      "Most Similar TLDR Task": "List partitions",
+      "Most Similar TLDR Script": "fdisk -l",
+      "Top-3 Similar Questions": [
+        "ul_74977: Finding which filesystem",
+        "ul_342744: How to find where Grub is installed?",
+        "su_301944: \"Couldn't find valid filesystem superblock\" while adjusting ext4 filesystem with tune2fs"
+      ],
+      "Top-3 Scripts": [
+        "ul_74977: fdisk -l /dev/sdx",
+        "ul_342744: sudo fdisk -l 2>/dev/null | egrep \"Disk /|/dev/\" | sed \"s#^/dev/#Part /dev/#\" | awk '{print $2}' | sed 's/://' | xargs -n1 -IX sudo sh -c \"hexdump -v -s 0x80 -n  2 -e '2/1 \\\"%x\\\" \\\"\\\\n\\\"' X | xargs -n1 -IY sh -c \\\"case  \\\"Y\\\" in '48b4') echo X: GRUB 2 v1.96 ;; 'aa75' | '5272') echo X: GRUB Legacy ;; '7c3c') echo X: GRUB 2 v1.97 oder v1.98 ;; '020') echo X: GRUB 2 v1.99 ;; *) echo X: Kein GRUB Y ;; esac\\\"\"",
+        "su_301944: "
+      ],
+      "Explanations about Options": {
+        "-l": "List the partition tables for the specified devices and then exit. If no devices\n are given, those mentioned in /proc/partitions (if that file exists) are used."
+      }
+    },
+    {
+      "Command": "mount",
+      "MP Summary": "mount a filesystem",
+      "Most Similar TLDR Task": "Show all mounted filesystems",
+      "Most Similar TLDR Script": "mount",
+      "Top-3 Similar Questions": [
+        "ul_191821: Find what process implements a FUSE filesystem",
+        "ul_146080: How do I find out what filesystem drivers are compiled-in into the linux kernel?",
+        "ul_157788: How to find out how the filesystem was created?"
+      ],
+      "Top-3 Scripts": [
+        "ul_191821: ",
+        "ul_146080: mount -t foo \u2026",
+        "ul_157788: "
+      ],
+      "Explanations about Options": {
+        "-t": "The argument following the -t is used to indicate the filesystem type. The\n filesystem types which are currently supported depend on the running kernel. See\n /proc/filesystems and /lib/modules/$(uname -r)/kernel/fs for a complete list of the\n filesystems. The most common are ext2, ext3, ext4, xfs, btrfs, vfat, sysfs, proc,\n nfs and cifs."
+      }
+    },
+    {
+      "Command": "fd",
+      "MP Summary": "find entries in the filesystem",
+      "Most Similar TLDR Task": "Find files in a specific directory",
+      "Most Similar TLDR Script": "fd {{pattern}} {{path/to/dir}}",
+      "Top-3 Similar Questions": [
+        "so_69353388: How do you find where the end of a partition ends on a Linux drive?"
+      ],
+      "Top-3 Scripts": [
+        "so_69353388: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "fsck",
+      "MP Summary": "check and repair a Linux filesystem",
+      "Most Similar TLDR Task": "Check filesystem /dev/sda, reporting any damaged blocks and automatically repairing them",
+      "Most Similar TLDR Script": "fsck -a {{/dev/sda}}",
+      "Top-3 Similar Questions": [
+        "au_1028014: How to find out if I have two Ubuntu installed on my PC?"
+      ],
+      "Top-3 Scripts": [
+        "au_1028014: "
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

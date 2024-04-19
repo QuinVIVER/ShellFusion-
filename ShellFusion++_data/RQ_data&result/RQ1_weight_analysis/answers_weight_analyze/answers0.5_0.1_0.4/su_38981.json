@@ -1,0 +1,88 @@
+{
+  "Query": "How can I find only the executable files under a certain directory in Linux?",
+  "Answers": [
+    {
+      "Command": "find",
+      "MP Summary": "search for files in a directory hierarchy",
+      "Most Similar TLDR Task": "Find files by extension",
+      "Most Similar TLDR Script": "find {{root_path}} -name '{{*.ext}}'",
+      "Top-3 Similar Questions": [
+        "nl2bash_2719: Find all directories matching the regex '.texturedata' in their names under '/path/to/look/in/' directory tree",
+        "so_59844504: `find` only in certain subdirectories",
+        "so_8607888: Finding all files with certain extension in Unix?"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_2719: find /path/to/look/in/ -type d | grep .texturedata",
+        "so_59844504: find test/test1 test/test3 -name file.txt",
+        "so_8607888: find .\n\nfind / -type f -name \"*.jdk\"\n\nfind / -type f -name \"*.jdk\" 2> /dev/null"
+      ],
+      "Explanations about Options": {
+        "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+        "-type": "File is of type c:"
+      }
+    },
+    {
+      "Command": "file",
+      "MP Summary": "determine file type",
+      "Most Similar TLDR Task": "Look inside a zipped file and determine the file type(s) inside",
+      "Most Similar TLDR Script": "file -z {{foo.zip}}",
+      "Top-3 Similar Questions": [
+        "ul_636204: Find all executable files excluding certain directories",
+        "so_54876020: find all files with certain extensions then execute",
+        "so_53675224: Find files over certain size under my home directory"
+      ],
+      "Top-3 Scripts": [
+        "ul_636204: find / \\( \"${args[@]}\" \\) -prune -o \\\n    -type f -executable -exec file {} +",
+        "so_54876020: bash: .//home/youruser/desktop/foo.py: No such file or directory\n\n$ .//home/youruser/desktop/foo.py\nbash: .//home/youruser/desktop/foo.py: No such file or directory\n\n$ ls -l .//home/youruser/desktop/foo.py\nls: cannot access './/home/youruser/desktop/foo.py': No such file or directory",
+        "so_53675224: ls file\n\necho file | ls"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "rm",
+      "MP Summary": "remove files or directories",
+      "Most Similar TLDR Task": "Recursively remove a directory and all its subdirectories",
+      "Most Similar TLDR Script": "rm -r {{path/to/directory}}",
+      "Top-3 Similar Questions": [
+        "so_4093882: How can I find all files with a certain line in the source?",
+        "so_9090901: Finding files in subdirectories created after a certain date"
+      ],
+      "Top-3 Scripts": [
+        "so_4093882: grep --recursive --files-with-matches Hello $HOME | xargs -d '\\n' rm -f",
+        "so_9090901: DATE=<<date>>\nSEARCH_PATH=/images/\nDATE=`echo $DATE|sed 's/-//g'`\nDATE=$DATE\"0000\"\nFILE=~/timecheck_${RANDOM}_$(date +\"%Y%m%d%H%M\")\ntouch -t $DATE $FILE\nfind $SEARCH_PATH -newer $FILE 2>/dev/null|awk 'BEGIN{f=0}{if(f==1)printf(\"\\\"%s\\\", \",l);l=$0;f=1}END{printf(\"\\\"%s\\\"\",l)}'\nrm -f $FILE"
+      ],
+      "Explanations about Options": {
+        "-f": "ignore nonexistent files and arguments, never prompt"
+      }
+    },
+    {
+      "Command": "test",
+      "MP Summary": "check file types and compare values",
+      "Most Similar TLDR Task": "Test if given variable is empty",
+      "Most Similar TLDR Script": "test -z $GIT_BRANCH",
+      "Top-3 Similar Questions": [
+        "so_59844504: `find` only in certain subdirectories"
+      ],
+      "Top-3 Scripts": [
+        "so_59844504: find test/test1 test/test3 -name file.txt"
+      ],
+      "Explanations about Options": {
+        "-n": "STRING\n the length of STRING is nonzero",
+        "-e": "FILE\n FILE exists"
+      }
+    },
+    {
+      "Command": "mkdir",
+      "MP Summary": "make directories",
+      "Most Similar TLDR Task": "Create a directory in current directory or given path",
+      "Most Similar TLDR Script": "mkdir {{directory}}",
+      "Top-3 Similar Questions": [
+        "so_14132210: Use find command but exclude files in two directories"
+      ],
+      "Top-3 Scripts": [
+        "so_14132210: $ mkdir a b c d e\n$ touch a/1 b/2 c/3 d/4 e/5 e/a e/b\n$ find . -type f ! -path \"./a/*\" ! -path \"./b/*\"\n\n./d/4\n./c/3\n./e/a\n./e/b\n./e/5"
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

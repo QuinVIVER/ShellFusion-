@@ -1,0 +1,84 @@
+{
+  "Query": "how do you copy a directory and its contents to a new location under a new directory name?",
+  "Answers": [
+    {
+      "Command": "cp",
+      "MP Summary": "copy files and directories",
+      "Most Similar TLDR Task": "Recursively copy a directory's contents to another location (if the destination exists, the directory is copied inside it)",
+      "Most Similar TLDR Script": "cp -r {{path/to/source_directory}} {{path/to/target_directory}}",
+      "Top-3 Similar Questions": [
+        "au_124540: How can I copy a file to a new location, creating the directory as well",
+        "so_13019839: Unix - copy contents of one directory to another",
+        "so_26928416: Recursively copy contents of directory to all target directories"
+      ],
+      "Top-3 Scripts": [
+        "au_124540: cp --parents ~/Downloads/test.txt ~/Desktop/\n\ncp --parents Downloads/test.txt ~/Desktop/",
+        "so_13019839: cp Folder1/* Folder2/",
+        "so_26928416: # $TARGET is the directory containing subdirectories where you want to STORE the copies\n# $SOURCE is the directory containing the subdirectories you want to COPY\n\nfor dir in $(ls $TARGET); do\n   cp -r $SOURCE/* $TARGET/$dir\ndone"
+      ],
+      "Explanations about Options": {
+        "--parents": "use full source file name under DIRECTORY",
+        "-r": "copy directories recursively"
+      }
+    },
+    {
+      "Command": "pax",
+      "MP Summary": "read and write file archives and copy directory hierarchies",
+      "Most Similar TLDR Task": "List the contents of an archive",
+      "Most Similar TLDR Script": "pax -f {{archive.tar}}",
+      "Top-3 Similar Questions": [
+        "ul_301896: How to copy multiple files with a same name from children directory to another directory without losing the parent directory?",
+        "ul_204843: Copy files with parent folder to a new directory"
+      ],
+      "Top-3 Scripts": [
+        "ul_301896: pax -rw -pe drawable-*/nice_little_icon.png ../../Project2/res/\n\npax -rw -pe -'s!^drawable-[^/]*/nice_little_icon\\.png$!&!' -'s!.*/.*!!' drawable-* ../../Project2/res/",
+        "ul_204843: find . -type 'f' -path '*downloads*' -print0 |\n  pax -rw0s'|.*downloads/||' /mydir"
+      ],
+      "Explanations about Options": {
+        "-w": "Write files to the standard output in the specified archive format. When no file\n operands are specified, standard input is read for a list of pathnames with one per\n line without any leading or trailing <blanks>.",
+        "-p": "Specify one or more file characteristic options (privileges). The string option-\n argument is a string specifying file characteristics to be retained or discarded on\n extraction. The string consists of the specification characters a, e, m, o, and p.\n Multiple characteristics can be concatenated within the same string and multiple -p\n options can be specified. The meanings of the specification characters are as\n follows:"
+      }
+    },
+    {
+      "Command": "scp",
+      "MP Summary": "secure copy (remote file copy program)",
+      "Most Similar TLDR Task": "Recursively copy the contents of a directory from a remote host to a local directory",
+      "Most Similar TLDR Script": "scp -r {{remote_host}}:{{path/to/remote_directory}} {{path/to/local_directory}}",
+      "Top-3 Similar Questions": [
+        "so_47389152: How to copy file contents from remote server to local machine location?",
+        "so_30381667: How to copy using scp on shell script to folders space named?"
+      ],
+      "Top-3 Scripts": [
+        "so_47389152: scp ru@9.122.145.169:/<pathtofile>/index.php /home/remo/remo/php",
+        "so_30381667: /usr/bin/scp /home/pi/\"${1}\" \"home@192.X.X.X:/Users/home/Documents/New\\\\ Files/\"\n\n/usr/bin/ssh pi@192.168.25.144 \\\n    /usr/bin/scp /home/pi/\"${1}\"  \\\n      '\"home@192.X.X.X:/Users/home/Documents/New\\\\ Files/\"'\n\n/usr/bin/ssh pi@192.168.25.144 \\\n    /usr/bin/scp /home/pi/\"$(printf \"%q\" \"$1\")\"  \\\n      '\"home@192.X.X.X:/Users/home/Documents/New\\\\ Files/\"'\n\n#!/bin/bash\ncd ~\nmkdir \"New Files\"\ntouch \"my file\"\nset -- \"my file\"  # Assign $1=\"my file\"\n/usr/bin/ssh localhost \\\n      /usr/bin/scp \"$(printf \"%q\" \"$1\")\"  \\\n        '\"localhost:New\\\\ Files/\"'\n\nfind \"New Files\" -type f"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "mktemp",
+      "MP Summary": "create a temporary file or directory",
+      "Most Similar TLDR Task": "Create a temporary directory and return the absolute path to it",
+      "Most Similar TLDR Script": "mktemp -d",
+      "Top-3 Similar Questions": [
+        "so_64082838: copy the content of the file to other location"
+      ],
+      "Top-3 Scripts": [
+        "so_64082838: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "dirname",
+      "MP Summary": "strip last component from file name",
+      "Most Similar TLDR Task": "Calculate the parent directory of multiple paths",
+      "Most Similar TLDR Script": "dirname {{path/to/file_a}} {{path/to/directory_b}}",
+      "Top-3 Similar Questions": [
+        "so_37418740: UNIX: How to search and copy all files with the same name to a different directory"
+      ],
+      "Top-3 Scripts": [
+        "so_37418740: COUNTER=\"0\"\nfileName=\"spreadsheet.csv\"\nfor file in $(find folder/ -name \"$fileName\" -type f -printf '%P\\n'); \ndo\n  sourcePath=$(dirname $(readlink -f \"$file\")) \n  cp -v $sourcePath/$fileName /new/location/\"$fileName$COUNTER\" \n  COUNTER=$((COUNTER+1)) \ndone"
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

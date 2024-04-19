@@ -1,0 +1,86 @@
+{
+  "Query": "Display transfer speed when performing \"cp\" from the command line?",
+  "Answers": [
+    {
+      "Command": "stat",
+      "MP Summary": "display file or file system status",
+      "Most Similar TLDR Task": "Show the size of the file in bytes",
+      "Most Similar TLDR Script": "stat -c \"%s %n\" {{file}}",
+      "Top-3 Similar Questions": [
+        "so_30714970: Using perf command for an application which reads input file",
+        "ul_106439: When do I use cp --attributes-only"
+      ],
+      "Top-3 Scripts": [
+        "so_30714970: $ > echo 'Test my perf' > input.txt\n$ > perf stat -e instructions cat < input.txt\nTest my perf\n\nPerformance counter stats for 'cat':\n\n       580,283 instructions              #    0.00  insns per cycle\n\n   0.003284129 seconds time elapsed",
+        "ul_106439: $ cp --attributes-only --preserve file2 file1\n$ stat file1\n  File: 'file1'\n  Size: 0           Blocks: 0          IO Block: 4096   regular empty file\nDevice: 1fh/31d Inode: 2326956     Links: 1\nAccess: (0644/-rw-r--r--)  Uid: ( 1000/   chris)   Gid: ( 1000/   chris)\nAccess: 2013-12-24 09:53:21.045382001 +0800\nModify: 2013-12-24 09:53:21.045382001 +0800\nChange: 2013-12-24 09:57:06.320604649 +0800\n Birth: -"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "echo",
+      "MP Summary": "display a line of text",
+      "Most Similar TLDR Task": "Print a text message. Note: quotes are optional",
+      "Most Similar TLDR Script": "echo \"{{Hello World}}\"",
+      "Top-3 Similar Questions": [
+        "so_13157947: Speed up bash filter function to run commands consecutively instead of per line",
+        "so_67732255: How to perform multiple commands for each file I find",
+        "ul_191930: Can brace expansion be performed within the `at` command?"
+      ],
+      "Top-3 Scripts": [
+        "so_13157947: while read line\n do\n  echo $line | egrep \"$1\" | sed \"s/$REGEX_SED/\\x1b[7m&\\x1b[0m/g\"\n done\n\nhilite() { \n    REGEX_SED=$(echo $1 | sed \"s/[|()]/\\\\\\&/g\");\n    sed -n \"s/$REGEX_SED/\\x1b[7m&\\x1b[0m/gp\"\n}",
+        "so_67732255: find . -maxdepth 1 -type f -name \"file*\" | while read file; do\n   echo $file;\n   # perform other operations on $file here\ndone\n\n$ ls -1 file*\nfile.txt\nfile1.txt\n\n$ find . -maxdepth 1 -type f -name \"file*\" | xargs -n1 -I_val -- sh -c 'echo command1_val; echo command2_val'\ncommand1./file.txt\ncommand2./file.txt\ncommand1./file1.txt\ncommand2./file1.txt",
+        "ul_191930: $ at now\nwarning: commands will be executed using /bin/sh\nat> bash <<'EOF'\nat> echo {1..5} >/tmp/output\nat> EOF\nat> <EOT>\njob 24 at Mon Mar 23 20:41:20 2015\n$ cat /tmp/output\n1 2 3 4 5\n\n$ at now\nwarning: commands will be executed using /bin/sh\nat> bash\nat> echo {1..10} >/tmp/output\nat> <EOT>\njob 22 at Mon Mar 23 20:40:00 2015\n$ cat /tmp/output\n1 2 3 4 5 6 7 8 9 10"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "read",
+      "MP Summary": "read a line from standard input",
+      "Most Similar TLDR Task": "Display a prompt before the input",
+      "Most Similar TLDR Script": "read -p \"{{Enter your input here: }}\" {{variable}}",
+      "Top-3 Similar Questions": [
+        "so_13157947: Speed up bash filter function to run commands consecutively instead of per line",
+        "so_67732255: How to perform multiple commands for each file I find",
+        "ul_443671: How to let Netcat execute command after file transfer is complete?"
+      ],
+      "Top-3 Scripts": [
+        "so_13157947: while read line\n do\n  echo $line | egrep \"$1\" | sed \"s/$REGEX_SED/\\x1b[7m&\\x1b[0m/g\"\n done",
+        "so_67732255: find . -maxdepth 1 -type f -name \"file*\" | while read file; do\n   echo $file;\n   # perform other operations on $file here\ndone",
+        "ul_443671: #!/bin/bash\nread -r filename\n[[ $filename = */* ]] && exit 1       # exit if the filename contains slashes\ncat > \"$filename\"\necho \"received $filename\""
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "xargs",
+      "MP Summary": "build and execute command lines from standard input",
+      "Most Similar TLDR Task": "Run a command using the input data as arguments",
+      "Most Similar TLDR Script": "{{arguments_source}} | xargs {{command}}",
+      "Top-3 Similar Questions": [
+        "so_18153878: How to avoid 'are the same file' warning message when using cp in Linux?",
+        "so_67732255: How to perform multiple commands for each file I find",
+        "so_13317386: Speed up bash script that uses several find commands"
+      ],
+      "Top-3 Scripts": [
+        "so_18153878: find \"$HOME\" -name '*.txt' -type f -not -path \"$HOME/newdir/*\" -print0 | xargs -0 cp -t \"$HOME/newdir\"",
+        "so_67732255: $ ls -1 file*\nfile.txt\nfile1.txt\n\n$ find . -maxdepth 1 -type f -name \"file*\" | xargs -n1 -I_val -- sh -c 'echo command1_val; echo command2_val'\ncommand1./file.txt\ncommand2./file.txt\ncommand1./file1.txt\ncommand2./file1.txt",
+        "so_13317386: xargs -0"
+      ],
+      "Explanations about Options": {
+        "-0": "Input items are terminated by a null character instead of by whitespace, and the\n quotes and backslash are not special (every character is taken literally).\n Disables the end of file string, which is treated like any other argument. Useful\n when input items might contain white space, quote marks, or backslashes. The GNU\n find -print0 option produces input suitable for this mode."
+      }
+    },
+    {
+      "Command": "dd",
+      "MP Summary": "convert and copy a file",
+      "Most Similar TLDR Task": "Benchmark the write performance of a disk",
+      "Most Similar TLDR Script": "dd if=/dev/zero of={{file_1GB}} bs=1024 count=1000000",
+      "Top-3 Similar Questions": [
+        "ul_558262: Why use dd instead of cp to create bootable disk?"
+      ],
+      "Top-3 Scripts": [
+        "ul_558262: "
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

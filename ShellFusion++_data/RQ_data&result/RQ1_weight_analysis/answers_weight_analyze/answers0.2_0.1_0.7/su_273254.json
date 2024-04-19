@@ -1,0 +1,114 @@
+{
+  "Query": "Move files and folders recursively on Linux",
+  "Answers": [
+    {
+      "Command": "mv",
+      "MP Summary": "move (rename) files",
+      "Most Similar TLDR Task": "Move files in arbitrary locations",
+      "Most Similar TLDR Script": "mv {{source}} {{target}}",
+      "Top-3 Similar Questions": [
+        "so_30307214: Move files from multiple folders to multiple folders in Linux",
+        "su_1627854: move folders recursively using find",
+        "so_37278705: how to move only files to subdirectory in linux"
+      ],
+      "Top-3 Scripts": [
+        "so_30307214: cd test\nfor dir in folder*; do\n    mv \"$dir/*\" \"/temp/$dir\"\ndone",
+        "su_1627854: find /tmp/source -mindepth 1 -maxdepth 1 -mtime -1 -exec mv -t /tmp/destination/ {} \\;\n\nfind /tmp/source -mindepth 1 -mtime -1 -exec mv -t /tmp/destination/ {} \\; -prune",
+        "so_37278705: $ mkdir dir/subdir\n$ find dir -maxdepth 1 -type f -exec mv {} dir/subdir \\;"
+      ],
+      "Explanations about Options": {
+        "-u": "move only when the SOURCE file is newer than the destination file or when the\n destination file is missing",
+        "-t": "move all SOURCE arguments into DIRECTORY",
+        "-n": "do not overwrite an existing file"
+      }
+    },
+    {
+      "Command": "cp",
+      "MP Summary": "copy files and directories",
+      "Most Similar TLDR Task": "Copy a file into another directory, keeping the filename",
+      "Most Similar TLDR Script": "cp {{path/to/source_file.ext}} {{path/to/target_parent_directory}}",
+      "Top-3 Similar Questions": [
+        "ul_504389: Recursively moving contents of directory",
+        "so_9279706: Powershell: Move Files recursively",
+        "so_64935230: Recursively move folders within subfolders to its parent"
+      ],
+      "Top-3 Scripts": [
+        "ul_504389: ",
+        "so_9279706: $a = ls | ? {$_.Name -notlike \"ProjectXXX.*\" -and $_.Name -ne \"config.log4net\" -and $_.Name -ne $binFolderName }\n$a | cp -Recurse -Destination bin -Force\nrm $a -r -force -Confirm:$false",
+        "so_64935230: "
+      ],
+      "Explanations about Options": {
+        "-a": "same as -dR --preserve=all",
+        "-t": "copy all SOURCE arguments into DIRECTORY",
+        "-R": "copy directories recursively",
+        "-s": "make symbolic links instead of copying",
+        "-u": "copy only when the SOURCE file is newer than the destination file or when the\n destination file is missing",
+        "-i": "prompt before overwrite (overrides a previous -n option)",
+        "-r": "copy directories recursively",
+        "-n": "do not overwrite an existing file (overrides a previous -i option)"
+      }
+    },
+    {
+      "Command": "rm",
+      "MP Summary": "remove files or directories",
+      "Most Similar TLDR Task": "Recursively remove a directory and all its subdirectories",
+      "Most Similar TLDR Script": "rm -r {{path/to/directory}}",
+      "Top-3 Similar Questions": [
+        "ul_629165: Move files up one directory",
+        "so_9279706: Powershell: Move Files recursively",
+        "so_64935230: Recursively move folders within subfolders to its parent"
+      ],
+      "Top-3 Scripts": [
+        "ul_629165: mv /var/www/html/wordpress/* /var/www/html/ && rm -r /var/www/html/wordpress",
+        "so_9279706: $a = ls | ? {$_.Name -notlike \"ProjectXXX.*\" -and $_.Name -ne \"config.log4net\" -and $_.Name -ne $binFolderName }\n$a | cp -Recurse -Destination bin -Force\nrm $a -r -force -Confirm:$false",
+        "so_64935230: "
+      ],
+      "Explanations about Options": {
+        "-r": "remove directories and their contents recursively",
+        "-f": "ignore nonexistent files and arguments, never prompt"
+      }
+    },
+    {
+      "Command": "mkdir",
+      "MP Summary": "make directories",
+      "Most Similar TLDR Task": "Create directories recursively (useful for creating nested dirs)",
+      "Most Similar TLDR Script": "mkdir -p {{path/to/directory}}",
+      "Top-3 Similar Questions": [
+        "so_37278705: how to move only files to subdirectory in linux",
+        "so_52229335: Move txt file from multiple folders and rename",
+        "so_65114884: Create folders automatically and move files"
+      ],
+      "Top-3 Scripts": [
+        "so_37278705: $ mkdir dir/subdir\n$ find dir -maxdepth 1 -type f -exec mv {} dir/subdir \\;",
+        "so_52229335: ",
+        "so_65114884: files=\"$(date +%Y-%m-%d)*EHE\"\nfoldername=$(date +%Y%m%d)\nmkdir -p \"$foldername\"\nfor filename in $files; do  \n    mv \"$filename\" \"$foldername\"\n    echo \"$filename $foldername\" \ndone\n\nfoldername=$1\nfiles=$(echo $1 | sed 's/\\(....\\)\\(..\\)\\(..\\)/\\1-\\2-\\3/')\nfilepattern=\"$files*EHE\"\nmkdir -p \"$foldername\"\nfor filename in $filepattern; do\n  mv \"$filename\" \"$foldername\"\n  echo \"$filename $foldername\"\ndone"
+      ],
+      "Explanations about Options": {
+        "-p": "no error if existing, make parent directories as needed"
+      }
+    },
+    {
+      "Command": "find",
+      "MP Summary": "search for files in a directory hierarchy",
+      "Most Similar TLDR Task": "Find files by extension",
+      "Most Similar TLDR Script": "find {{root_path}} -name '{{*.ext}}'",
+      "Top-3 Similar Questions": [
+        "su_1627854: move folders recursively using find",
+        "so_37278705: how to move only files to subdirectory in linux",
+        "so_60910306: Linux Move txt files not start with String to Another folder"
+      ],
+      "Top-3 Scripts": [
+        "su_1627854: find -maxdepth 1\n\nfind /tmp/source -mindepth 1 -maxdepth 1 -mtime -1 -exec mv -t /tmp/destination/ {} \\;\n\nfind /tmp/source -mindepth 1 -mtime -1 -exec mv -t /tmp/destination/ {} \\; -prune",
+        "so_37278705: find(1)\n\n$ mkdir dir/subdir\n$ find dir -maxdepth 1 -type f -exec mv {} dir/subdir \\;",
+        "so_60910306: find . -type f -name '*.txt' \\! -name '*tmp*' -exec mv -i -t /home {} +"
+      ],
+      "Explanations about Options": {
+        "-mindepth": "Do not apply any tests or actions at levels less than levels (a non-negative\n integer). -mindepth 1 means process all files except the starting-points.",
+        "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+        "-mtime": "File's data was last modified n*24 hours ago. See the comments for -atime to\n understand how rounding affects the interpretation of file modification times.",
+        "-type": "File is of type c:",
+        "-maxdepth": "Descend at most levels (a non-negative integer) levels of directories below the\n starting-points. -maxdepth 0 means only apply the tests and actions to the\n starting-points themselves."
+      }
+    }
+  ]
+}

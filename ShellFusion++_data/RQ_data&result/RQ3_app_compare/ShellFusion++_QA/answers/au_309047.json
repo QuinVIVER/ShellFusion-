@@ -1,0 +1,70 @@
+{
+  "Query": "How do I find out what filesystem my partitions are using?",
+  "Answers": [
+    {
+      "Command": "dev",
+      "Top-3 Similar Questions": [
+        "su_1112585: How do I find what filesystem is on a logical volume?",
+        "ul_191821: Find what process implements a FUSE filesystem",
+        "ul_16886: Set up GRUB 2 to boot FreeBSD using either Ubuntu tools or LiveUSB to find what partitions?"
+      ],
+      "Top-3 Scripts": [
+        "su_1112585: /dev/mapper/mint--vg-root: UUID=\"blah\" TYPE=\"ext4\"",
+        "ul_191821: /dev/fuse",
+        "ul_16886: /dev/sda2\n\n/dev/wd0s2"
+      ]
+    },
+    {
+      "Command": "find",
+      "Top-3 Similar Questions": [
+        "ul_117093: Find where inodes are being used",
+        "au_49698: How can I find out which user deleted a directory?",
+        "ul_209751: How to find directories whose size is greater than 4K?"
+      ],
+      "Top-3 Scripts": [
+        "ul_117093: { find / -xdev -printf '%h\\n' | sort | uniq -c | sort -k 1 -n; } 2>/dev/null\n\n{ find / -xdev -printf '%h\\0' |sort -z |uniq -zc |sort -zk1rn; } 2>/dev/null\n\nfind . -xdev -type d",
+        "au_49698: find /home -type f -iname .*history -exec grep \"rm\\|mv\" {} \\;\n\nchown -R yourusername:coolproject /path/to/projectdir\nfind /path/to/projectdir -type d -exec chmod 2775 {} \\;\n\nfind /path/to/projectdir -type f -exec chmod 664 {} \\;",
+        "ul_209751: find . -type d -size +4096c"
+      ]
+    },
+    {
+      "Command": "sudo",
+      "Top-3 Similar Questions": [
+        "au_527863: How can I find out which partition Ubuntu is installed on?",
+        "ul_157788: How to find out how the filesystem was created?",
+        "ul_342744: How to find where Grub is installed?"
+      ],
+      "Top-3 Scripts": [
+        "au_527863: sudo apt-get install efibootmgr\nsudo modprobe efivars\nsudo efibootmgr\n\nsudo efibootmgr -b X -B",
+        "ul_157788: $ sudo tune2fs -l <dev>",
+        "ul_342744: sudo fdisk -l 2>/dev/null | egrep \"Disk /|/dev/\" | sed \"s#^/dev/#Part /dev/#\" | awk '{print $2}' | sed 's/://' | xargs -n1 -IX sudo sh -c \"hexdump -v -s 0x80 -n  2 -e '2/1 \\\"%x\\\" \\\"\\\\n\\\"' X | xargs -n1 -IY sh -c \\\"case  \\\"Y\\\" in '48b4') echo X: GRUB 2 v1.96 ;; 'aa75' | '5272') echo X: GRUB Legacy ;; '7c3c') echo X: GRUB 2 v1.97 oder v1.98 ;; '020') echo X: GRUB 2 v1.99 ;; *) echo X: Kein GRUB Y ;; esac\\\"\""
+      ]
+    },
+    {
+      "Command": "lsblk",
+      "Top-3 Similar Questions": [
+        "ul_332712: How do I find out what filesystem FUSE is using?",
+        "ul_157788: How to find out how the filesystem was created?",
+        "ul_328987: Find UUID of SSD which is already partitioned"
+      ],
+      "Top-3 Scripts": [
+        "ul_332712: lsblk -no name,fstype",
+        "ul_157788: $ lsblk | head -8 | column -t\nNAME           MAJ:MIN  RM  SIZE    RO  TYPE  MOUNTPOINT\nsda            8:0      0   238.5G  0   disk\n\u251c\u2500sda1         8:1      0   200M    0   part  /boot/efi\n\u251c\u2500sda2         8:2      0   500M    0   part  /boot\n\u2514\u2500sda3         8:3      0   237.8G  0   part\n\u251c\u2500fedora-root  253:0    0   50G     0   lvm   /\n\u251c\u2500fedora-swap  253:1    0   2G      0   lvm   [SWAP]\n\u2514\u2500fedora-home  253:2    0   185.9G  0   lvm",
+        "ul_328987: sudo lsblk -o name,mountpoint,size,type,ro,label,uuid"
+      ]
+    },
+    {
+      "Command": "echo",
+      "Top-3 Similar Questions": [
+        "ul_146080: How do I find out what filesystem drivers are compiled-in into the linux kernel?",
+        "ul_117093: Find where inodes are being used",
+        "ul_574591: How to find out what function is runnng when reading /proc"
+      ],
+      "Top-3 Scripts": [
+        "ul_146080: for fs in $(</proc/filesystems awk '{print \"fs-\" $NF}' |sort); do\n  /sbin/modprobe -n $fs 2>/dev/null || echo \"$fs is built in\"\ndone",
+        "ul_117093: for i in `find . -type d `; do echo `ls -a $i | wc -l` $i; done | sort -n\n\nfor i in `find . -xdev -type d `; do echo `ls -a $i | wc -l` $i; done | sort -n",
+        "ul_574591: sysctl kernel.ftrace_enabled=1\necho function_graph > /sys/kernel/debug/tracing/current_tracer\necho 1 > /sys/kernel/debug/tracing/tracing_on\ncat /proc/net/tcp\necho 0 > /sys/kernel/debug/tracing/tracing_on\nless /sys/kernel/debug/tracing/trace"
+      ]
+    }
+  ]
+}

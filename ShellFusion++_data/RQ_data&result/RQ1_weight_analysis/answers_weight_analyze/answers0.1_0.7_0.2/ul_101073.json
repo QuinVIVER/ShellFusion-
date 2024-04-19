@@ -1,0 +1,98 @@
+{
+  "Query": "How to change permissions from root user to all users?",
+  "Answers": [
+    {
+      "Command": "passwd",
+      "MP Summary": "change user password",
+      "Most Similar TLDR Task": "Change the password of the specified user",
+      "Most Similar TLDR Script": "passwd {{username}} {{new_password}}",
+      "Top-3 Similar Questions": [
+        "au_695223: How do I change one username to another?",
+        "ul_411788: change root password back to user password",
+        "su_73407: Ubuntu: Accidentally changed root user to nonexistent shell"
+      ],
+      "Top-3 Scripts": [
+        "au_695223: sudo passwd root\n\n/etc/passwd",
+        "ul_411788: sudo passwd -dl root",
+        "su_73407: sudo gedit /etc/passwd"
+      ],
+      "Explanations about Options": {
+        "-l": "Lock the password of the named account. This option disables a password by changing it\n to a value which matches no possible encrypted value (it adds a \u00b4!\u00b4 at the beginning\n of the password).",
+        "-d": "Delete a user's password (make it empty). This is a quick way to disable a password\n for an account. It will set the named account passwordless."
+      }
+    },
+    {
+      "Command": "usermod",
+      "MP Summary": "modify a user account",
+      "Most Similar TLDR Task": "Change a user's name",
+      "Most Similar TLDR Script": "usermod -l {{newname}} {{user}}",
+      "Top-3 Similar Questions": [
+        "so_7092261: How to change user affilations to group in Linux",
+        "ul_405618: How to change autologin from root to non-root user?",
+        "au_45035: Disable sudo permission to user from command line"
+      ],
+      "Top-3 Scripts": [
+        "so_7092261: ",
+        "ul_405618: sudo usermod -a -G audio m\nsudo usermod -a -G video m",
+        "au_45035: root@toki:~# id username\nuid=1000(username) gid=1000(username) groups=1000(username),4(adm),20(dialout),24(cdrom),46(plugdev),111(lpadmin),119(admin),122(sambashare)\n\nroot@toki:~# usermod -G 4,20,24,46,111,122 username\n\nroot@toki:~# id username\nuid=1000(username) gid=1000(username) groups=1000(username),4(adm),20(dialout),24(cdrom),46(plugdev),111(lpadmin),122(sambashare)"
+      ],
+      "Explanations about Options": {
+        "-a": "Add the user to the supplementary group(s). Use only with the -G option.",
+        "-G": "GROUP1[,GROUP2,...[,GROUPN]]]\n A list of supplementary groups which the user is also a member of. Each group is\n separated from the next by a comma, with no intervening whitespace. The groups are\n subject to the same restrictions as the group given with the -g option."
+      }
+    },
+    {
+      "Command": "chown",
+      "MP Summary": "change file owner and group",
+      "Most Similar TLDR Task": "Change the owner user of a file/directory",
+      "Most Similar TLDR Script": "chown {{user}} {{path/to/file_or_directory}}",
+      "Top-3 Similar Questions": [
+        "au_829537: How to change owner of folder to current user recursively?",
+        "so_31647454: Here how to change root to vagrant for linux file permission?",
+        "su_312616: How can I change all files belonging to one user to another user?"
+      ],
+      "Top-3 Scripts": [
+        "au_829537: sudo find ~ -type d -user root -exec sudo chown -R $USER: {} +\n\nsudo chown -R\n\nsudo find ~ -user root -exec sudo chown $USER: {} +",
+        "so_31647454: $ chown vagrant file1\n\nman chown",
+        "su_312616: find /decompressed-backup-dir -uid 1050 -exec chown newuser:newgroup {} +"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "useradd",
+      "MP Summary": "create a new user or update default new user information",
+      "Most Similar TLDR Task": "Create new user",
+      "Most Similar TLDR Script": "useradd {{name}}",
+      "Top-3 Similar Questions": [
+        "ul_291337: Read only permission to sftp user in specific directory",
+        "su_1158811: Granting root privileges to another user on my Cent OS install?"
+      ],
+      "Top-3 Scripts": [
+        "ul_291337: sudo useradd foo\nsudo passwd foo",
+        "su_1158811: useradd -G groupname1,groupname2 username"
+      ],
+      "Explanations about Options": {
+        "-G": "GROUP1[,GROUP2,...[,GROUPN]]]\n A list of supplementary groups which the user is also a member of. Each group is\n separated from the next by a comma, with no intervening whitespace. The groups are\n subject to the same restrictions as the group given with the -g option. The default is\n for the user to belong only to the initial group."
+      }
+    },
+    {
+      "Command": "su",
+      "MP Summary": "run a command with substitute user and group ID",
+      "Most Similar TLDR Task": "Execute a command as another user",
+      "Most Similar TLDR Script": "su - {{username}} -c \"{{command}}\"",
+      "Top-3 Similar Questions": [
+        "su_1160171: In \"Windows Subsystem for Linux\" how can I change from being a root user to a just plain user?",
+        "au_889413: How to switch to root user but stay in the same directory",
+        "ul_512130: Not able to switch to root user via command line"
+      ],
+      "Top-3 Scripts": [
+        "su_1160171: su - wojowhiskey",
+        "au_889413: sudo su\n\nsudo su -",
+        "ul_512130: -rwsr-xr-x. 1 root root 32208 Mar 14 10:37 /usr/bin/su"
+      ],
+      "Explanations about Options": {
+        "-": "Start the shell as a login shell with an environment similar to a real login:"
+      }
+    }
+  ]
+}

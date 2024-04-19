@@ -1,0 +1,70 @@
+{
+  "Query": "How do I find all the files that were created today in Unix/Linux?",
+  "Answers": [
+    {
+      "Command": "find",
+      "Top-3 Similar Questions": [
+        "su_187138: Find files that have been accessed after they were created",
+        "so_56148429: finding files that were modified before a certain file",
+        "so_22582760: How do we find a file that is located some where in directory tree"
+      ],
+      "Top-3 Scripts": [
+        "su_187138: find -type f -print0 | xargs -0 -I % find -path % -anewer %",
+        "so_56148429: find [directory] -type f \\! -newer [certain_file]",
+        "so_22582760: find /osting -iname \"*.txt\" -mtime -60 -print\n\n-mtime +60 means you are looking for a file modified 60 days ago.\n-mtime -60 means less than 60 days.\n-mtime 60 If you skip + or - it means exactly 60 days."
+      ]
+    },
+    {
+      "Command": "grep",
+      "Top-3 Similar Questions": [
+        "so_42334388: How to find file owners that have one file in a directory but don't have another",
+        "so_62174710: Is there a way to find all the files that got created a specific time?",
+        "so_40598981: Find a regular expression that searches for a specific pattern in a file (Unix-Solaris)"
+      ],
+      "Top-3 Scripts": [
+        "so_42334388: # Get all files with extensions foo and bar\nfoos=(*.foo)\nbars=(*.bar)\n# Strip the extensions to get the usernames\nusers_with_foo=(\"${foos[@]%.foo}\")\nusers_with_bar=(\"${bars[@]%.bar}\")\n# Filter the usernames.\ngrep -vxf <(printf \"%s\\n\" \"${users_with_bar[@]}\") <(printf \"%s\\n\" \"${users_with_foo[@]}\")",
+        "so_62174710: grep -q\n\n#! /usr/bin/env bash\nhour=\"$1\"\nfor f in ./*; do\n    debugfs -R \"stat <$(stat -c %i \"$f\")>\" /dev/sda2 2> /dev/null |\n    grep -Eq \"^crtime: .* 0?$hour:\" &&\n    echo \"$f\"\ndone",
+        "so_40598981: grep -E -i '^[0-9]{5}( [a-z]+){2,4}$' filename"
+      ]
+    },
+    {
+      "Command": "date",
+      "Top-3 Similar Questions": [
+        "so_66579490: how to find the file which is created today?",
+        "so_20570808: Find command find directories that were created after a certain date under Linux/Cygwin",
+        "so_32486497: Command to find how much is the space in that directory leaving the files created in last 7 days. Without using `find`"
+      ],
+      "Top-3 Scripts": [
+        "so_66579490: minutes_since_midnight=$(( ($(date +%s) - $(date -d '00:00' +%s))/60 ))\nfind /var/options -type f -mmin -\"$minutes_since_midnight\"",
+        "so_20570808: find . -type d -exec bash -c '(( $(stat -c %W \"{}\") > $(date +%s -d '2013-12-03') )) && du -h \"{}\"' \\;",
+        "so_32486497: ls -lR --time-style=+%s | awk -v now=$(date +%s) '/^-/ && now - $6 > 7*24*3600 {s += $5} END {print s}'\n\n-v now=$(date +%s)"
+      ]
+    },
+    {
+      "Command": "print",
+      "Top-3 Similar Questions": [
+        "su_68224: Finding files that do not have a particular line",
+        "so_59311413: Find the lines that are most deep (right intended) for a group of lines in a file Unix/Linux",
+        "so_32486497: Command to find how much is the space in that directory leaving the files created in last 7 days. Without using `find`"
+      ],
+      "Top-3 Scripts": [
+        "su_68224: -L, --files-without-match\n       Suppress  normal  output;  instead  print the name of each input\n       file from which no output would normally have been printed.  The\n       scanning will stop on the first match.",
+        "so_59311413: awk '!/^ / && deepest {print deepest;last_offset=0}\n                {offset=match($0, \"[^ ]\")}\n     offset==last_offset {deepest=deepest RS  substr($0,offset)}\n     offset>last_offset  {last_offset=offset; deepest=substr($0,offset)}\n     END {print deepest}' inputfile\n\n{print deepest;last_offset=0}\n\nEND {print deepest}",
+        "so_32486497: ls -lR --time-style=+%s | awk -v now=$(date +%s) '/^-/ && now - $6 > 7*24*3600 {s += $5} END {print s}'"
+      ]
+    },
+    {
+      "Command": "file",
+      "Top-3 Similar Questions": [
+        "so_22582760: How do we find a file that is located some where in directory tree",
+        "so_62174710: Is there a way to find all the files that got created a specific time?",
+        "su_68224: Finding files that do not have a particular line"
+      ],
+      "Top-3 Scripts": [
+        "so_22582760: find /osting -iname \"*.txt\" -mtime -60 -print\n\n-mtime +60 means you are looking for a file modified 60 days ago.\n-mtime -60 means less than 60 days.\n-mtime 60 If you skip + or - it means exactly 60 days.",
+        "so_62174710: $ ./scriptFromAbove 8\n./some file\n./another file\n./directories are matched too",
+        "su_68224: -L, --files-without-match\n       Suppress  normal  output;  instead  print the name of each input\n       file from which no output would normally have been printed.  The\n       scanning will stop on the first match."
+      ]
+    }
+  ]
+}

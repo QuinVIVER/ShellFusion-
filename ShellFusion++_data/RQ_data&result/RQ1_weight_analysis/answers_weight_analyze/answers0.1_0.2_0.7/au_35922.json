@@ -1,0 +1,88 @@
+{
+  "Query": "How do I change extension of multiple files recursively from the command line?",
+  "Answers": [
+    {
+      "Command": "echo",
+      "MP Summary": "display a line of text",
+      "Most Similar TLDR Task": "Print a message with environment variables",
+      "Most Similar TLDR Script": "echo \"{{My path is $PATH}}\"",
+      "Top-3 Similar Questions": [
+        "so_774481: Changing lines in a file",
+        "so_15510716: Changing a line in a file on UNIX",
+        "ul_658347: How to change two alternative file extension with a specific extension?"
+      ],
+      "Top-3 Scripts": [
+        "so_774481: echo '6,15wq foo-part' | ed foo\nfor i in bar baz bam; do\n    echo -e '5,15d\\n4r foo-part\\nwq' | ed $i\ndone\nrm -f foo-part",
+        "so_15510716: echo \"Here is my new first line\" && sed '1d' asd.txt",
+        "ul_658347: $ for i in ${!forward[@]}; do echo \"${forward[i]/_1.@(fq|fastq).gz/.sam}\"; done\nfoo.sam\nbar.sam"
+      ],
+      "Explanations about Options": {
+        "-e": "enable interpretation of backslash escapes"
+      }
+    },
+    {
+      "Command": "sed",
+      "MP Summary": "stream editor for filtering and transforming text",
+      "Most Similar TLDR Task": "Delete lines matching the line pattern",
+      "Most Similar TLDR Script": "sed '/{{line_pattern}}/d' {{filename}}",
+      "Top-3 Similar Questions": [
+        "so_11392478: How to replace a string in multiple files in linux command line",
+        "so_774481: Changing lines in a file",
+        "so_15510716: Changing a line in a file on UNIX"
+      ],
+      "Top-3 Scripts": [
+        "so_11392478: cd /path/to/your/folder\nsed -i 's/foo/bar/g' *\n\ncd /path/to/your/folder\nsed -i '.bak' 's/foo/bar/g' *",
+        "so_774481: for file in bar baz bam; do\n    newfile=$(mktemp)\n    (sed '5q' $file; sed -n '6,15p' foo; sed '1,15d' $file) > $newfile\n    mv -f $newfile $file\ndone",
+        "so_15510716: sed '1 s/search/replace/' asd.txt\n\necho \"Here is my new first line\" && sed '1d' asd.txt"
+      ],
+      "Explanations about Options": {
+        "-i": "edit files in place (makes backup if SUFFIX supplied)"
+      }
+    },
+    {
+      "Command": "cp",
+      "MP Summary": "copy files and directories",
+      "Most Similar TLDR Task": "Copy a file to another location",
+      "Most Similar TLDR Script": "cp {{path/to/source_file.ext}} {{path/to/target_file.ext}}",
+      "Top-3 Similar Questions": [
+        "so_54112128: Bash script to change file names of different extension",
+        "so_30254548: Copy and replace file recursively",
+        "so_29955443: Copying multiple files into same directory while changing filename"
+      ],
+      "Top-3 Scripts": [
+        "so_54112128: find ./src -type f \\( -name \\*.js -o -name \\*.css -o -name \\*.woff \\) -print0 | \nwhile IFS= read -r -d $'\\0' line; do\n    dest=\"./dst/$(echo $(basename $line) | sed -E 's/(\\..{20}\\.)(js|css|woff)/\\.\\2/g')\"\n    echo Copying $line to $dest \n    cp $line $dest\ndone",
+        "so_30254548: find /where -name test.jpg -type f -exec cp -i /home/test.jpg {} \\;",
+        "so_29955443: ls 'foo*' | % {$newName = $_.name -replace 'foo','moo'; cp $_ $newName ; }"
+      ],
+      "Explanations about Options": {
+        "-i": "prompt before overwrite (overrides a previous -n option)"
+      }
+    },
+    {
+      "Command": "xargs",
+      "MP Summary": "build and execute command lines from standard input",
+      "Most Similar TLDR Task": "Execute the command once for each input line, replacing any occurrences of the placeholder (here marked as `_`) with the input line",
+      "Most Similar TLDR Script": "{{arguments_source}} | xargs -I _ {{command}} _ {{optional_extra_arguments}}",
+      "Top-3 Similar Questions": [
+        "so_29102717: How to Recursively Change all FILE Permissions without Changing DIRECTORY (and subdirectoruy) Permissions?"
+      ],
+      "Top-3 Scripts": [
+        "so_29102717: find /path/to/dir/ -type f | xargs chmod 755"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "line",
+      "MP Summary": "cache line size",
+      "Most Similar TLDR Task": "Read input",
+      "Most Similar TLDR Script": "line",
+      "Top-3 Similar Questions": [
+        "so_54112128: Bash script to change file names of different extension"
+      ],
+      "Top-3 Scripts": [
+        "so_54112128: find ./src -type f \\( -name \\*.js -o -name \\*.css -o -name \\*.woff \\) -print0 | \nwhile IFS= read -r -d $'\\0' line; do\n    dest=\"./dst/$(echo $(basename $line) | sed -E 's/(\\..{20}\\.)(js|css|woff)/\\.\\2/g')\"\n    echo Copying $line to $dest \n    cp $line $dest\ndone"
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

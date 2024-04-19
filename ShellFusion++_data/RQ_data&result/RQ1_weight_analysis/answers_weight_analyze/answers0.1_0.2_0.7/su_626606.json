@@ -1,0 +1,82 @@
+{
+  "Query": "How to make Alsa pick a preferred sound device automatically?",
+  "Answers": [
+    {
+      "Command": "pactl",
+      "MP Summary": "Control a running PulseAudio sound server",
+      "Most Similar TLDR Task": "List all sinks (or other types - sinks are outputs and sink-inputs are active audio streams)",
+      "Most Similar TLDR Script": "pactl list {{sinks}} short",
+      "Top-3 Similar Questions": [
+        "au_247586: How to make terminal bell play an alert sound without PC speaker?",
+        "au_1290582: How to analyze the source of \"Dummy output\" device showing up?",
+        "au_470839: How can I choose the audio output device using the terminal?"
+      ],
+      "Top-3 Scripts": [
+        "au_247586: pactl upload-sample /usr/share/sounds/gnome/default/alerts/glass.ogg bell.ogg",
+        "au_1290582: pactl load-module module-detect",
+        "au_470839: $ pactl list sinks short | awk -F '\\t' '{print $1,$2,$5}' # Print available outputs\n0 alsa_output.pci-0000_00_1b.0.analog-stereo RUNNING\n1 alsa_output.usb-Logitech_Logitech_Z-5_Speakers-00-Speakers.analog-stereo SUSPENDED\n\n$ pactl stat | grep Sink  # Show the current output device (it's the internal speaker)\nDefault Sink: alsa_output.pci-0000_00_1b.0.analog-stereo\n$ pacmd set-default-sink 1 # Make the external USB speaker as desired output device.\n\n$ pactl list sink-inputs | grep 'Input' # Get the stream ID\nSink Input #23\n$ pacmd move-sink-input 23 1 # Move it to the USB speaker"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "aplay",
+      "MP Summary": "command-line sound recorder and player for ALSA soundcard driver",
+      "Most Similar TLDR Task": "Play a specific file (sampling rate, bit depth, etc. will be automatically determined for the file format)",
+      "Most Similar TLDR Script": "aplay {{path/to/file}}",
+      "Top-3 Similar Questions": [
+        "au_277215: How to make a sound once a process is complete?",
+        "ul_444953: Make arecord ignore aplay",
+        "au_844437: Error in playing a sound using ALSA inside LXC container"
+      ],
+      "Top-3 Scripts": [
+        "au_277215: aplay /usr/share/sounds/alsa/Side_Right.wav",
+        "ul_444953: ",
+        "au_844437: aplay /usr/share/sounds/alsa/Rear_Right.wav"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "amixer",
+      "MP Summary": "command-line mixer for ALSA soundcard driver",
+      "Most Similar TLDR Task": "Turn down the master volume by 10%",
+      "Most Similar TLDR Script": "amixer -D pulse sset Master {{10%-}}",
+      "Top-3 Similar Questions": [
+        "so_8376159: How to change the alsa specific device audio volume using shell?",
+        "au_10525: How can I make the volume change in smaller increments?",
+        "so_10535918: Recording sound using ALSA from Line IN"
+      ],
+      "Top-3 Scripts": [
+        "so_8376159: man amixer",
+        "au_10525: ",
+        "so_10535918: amixer -c 0 cset numid=7 1\n\namixer info"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "arecord",
+      "MP Summary": "command-line sound recorder and player for ALSA soundcard driver",
+      "Most Similar TLDR Task": "List all sound cards and digital audio devices",
+      "Most Similar TLDR Script": "arecord --list-devices",
+      "Top-3 Similar Questions": [
+        "ul_444953: Make arecord ignore aplay"
+      ],
+      "Top-3 Scripts": [
+        "ul_444953: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "notify-send",
+      "MP Summary": "a program to send desktop notifications",
+      "Most Similar TLDR Task": "Show a notification with an app's icon",
+      "Most Similar TLDR Script": "notify-send \"{{Test}}\" --icon={{google-chrome}}",
+      "Top-3 Similar Questions": [
+        "au_10525: How can I make the volume change in smaller increments?"
+      ],
+      "Top-3 Scripts": [
+        "au_10525: "
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

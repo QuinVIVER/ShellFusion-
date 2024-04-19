@@ -1,0 +1,82 @@
+{
+  "Query": "How to simply convert video files (i.e.  MKV to MP4)?",
+  "Answers": [
+    {
+      "Command": "ffmpeg",
+      "MP Summary": "ffmpeg video converter",
+      "Most Similar TLDR Task": "Remux MKV video to MP4 without re-encoding audio or video streams",
+      "Most Similar TLDR Script": "ffmpeg -i {{input_video}}.mkv -codec copy {{output_video}}.mp4",
+      "Top-3 Similar Questions": [
+        "au_1250991: How to easily convert an MKV video to an MP4",
+        "au_1183076: convert all the png files in a folder to video",
+        "au_1255958: Converting a .VOB file into .mp4 or other format to decrease the video memory size"
+      ],
+      "Top-3 Scripts": [
+        "au_1250991: sudo apt install ffmpeg\n\nffmpeg -i <inputfile> <outputfile>\n\nffmpeg -i input.mkv output.mp4",
+        "au_1183076: ffmpeg -framerate 25 -i %03d.png output.avi\n\nffmpeg -framerate 25 -pattern_type glob -i \"*.png\" output.avi\n\ncat $(find . -maxdepth 1 -name \"*.png\" | sort -V) | ffmpeg -framerate 25 -i - output.avi",
+        "au_1255958: ffmpeg -i input.vob output.mp4"
+      ],
+      "Explanations about Options": {
+        "-framerate": "Set the grabbing frame rate. Default is \"ntsc\", corresponding to a frame rate of\n \"30000/1001\".",
+        "-i": "input file url",
+        "-": "Use a completely zeroed out quantization matrix. This increases PSNR but\n might reduce perception. Use in bogus benchmarks."
+      }
+    },
+    {
+      "Command": "mogrify",
+      "MP Summary": "resize an image, blur, crop, despeckle, dither, draw on, flip, join, re-sample, and much more. Mogrify overwrites the original image file, whereas, convert-im6.q16hdri(1) writes to a different image file.",
+      "Most Similar TLDR Task": "Convert all PNG images in the directory to JPEG",
+      "Most Similar TLDR Script": "mogrify -format {{jpg}} {{*.png}}",
+      "Top-3 Similar Questions": [
+        "au_380199: Converting images into video",
+        "su_559973: FFMpeg convert jpeg images to video"
+      ],
+      "Top-3 Scripts": [
+        "au_380199: mogrify -resize 800x800  temp/*.JPG",
+        "su_559973: for f in *.JPG; do mogrify \"$f\"; done"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "convert",
+      "MP Summary": "convert between image formats as well as resize an image, blur, crop, despeckle, dither, draw on, flip, join, re-sample, and much more.",
+      "Most Similar TLDR Task": "Convert an image from JPG to PNG",
+      "Most Similar TLDR Script": "convert {{image.jpg}} {{image.png}}",
+      "Top-3 Similar Questions": [
+        "au_293444: How can I quickly convert a GIF file to a video?",
+        "au_380199: Converting images into video"
+      ],
+      "Top-3 Scripts": [
+        "au_293444: ",
+        "au_380199: convert temp/*.JPG -delay 10 -morph 10 temp/%05d.jpg\nffmpeg -r 25 -qscale 2  -i temp/%05d.jpg output.mp4"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "import",
+      "MP Summary": "saves any visible window on an X server and outputs it as an image file. You can capture a single window, the entire screen, or any rectangular portion of the screen.",
+      "Most Similar TLDR Task": "Capture contents of a remote X server screen in the PNG image format",
+      "Most Similar TLDR Script": "import -window root -display {{remote_host}}:{screen}.{display} {{output.png}}",
+      "Top-3 Similar Questions": [
+        "so_33448759: python converting video to audio"
+      ],
+      "Top-3 Scripts": [
+        "so_33448759: import moviepy.editor as mp\nclip = mp.VideoFileClip(\"myvideo.mp4\").subclip(0,20)\nclip.audio.write_audiofile(\"theaudio.mp3\")"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "ffprobe",
+      "MP Summary": "ffprobe media prober",
+      "Most Similar TLDR Task": "Display the average bit rate of a video",
+      "Most Similar TLDR Script": "ffprobe -v error -select_streams v:0 -show_entries stream=bit_rate -of default=noprint_wrappers=1:nokey=1 {{input.mp4}}",
+      "Top-3 Similar Questions": [
+        "so_14782077: Expand (extend) a video to an specific duration"
+      ],
+      "Top-3 Scripts": [
+        "so_14782077: ffprobe -v error -show_entries format=duration -of default=noprint_wrappers=1:nokey=1 audio.wav\n ffprobe -v error -show_entries format=duration -of default=noprint_wrappers=1:nokey=1 video.mp4\n\nffprobe -v error -show_entries format=duration -of default=noprint_wrappers=1:nokey=1 input.mp4"
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

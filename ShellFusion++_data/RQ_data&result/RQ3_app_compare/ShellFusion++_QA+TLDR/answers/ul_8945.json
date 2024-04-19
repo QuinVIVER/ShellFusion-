@@ -1,0 +1,78 @@
+{
+  "Query": "How can I increase open files limit for all processes?",
+  "Answers": [
+    {
+      "Command": "ulimit",
+      "MP Summary": "set or report file size limit",
+      "Most Similar TLDR Task": "Get hard limit for the number of simultaneously opened files",
+      "Most Similar TLDR Script": "ulimit -H -n",
+      "Top-3 Similar Questions": [
+        "au_162229: How do I increase the open files limit for a non-root user?",
+        "so_17755433: How can I increase OpenFabrics memory limit for Torque jobs?",
+        "so_41272726: Really solve \"Too many open files\" at a process level not on global ubuntu level"
+      ],
+      "Top-3 Scripts": [
+        "au_162229: ulimit -S\n\nalias ulimit='ulimit -S'",
+        "so_17755433: ulimit -l\n\nulimit -c unlimited",
+        "so_41272726: ulimit -Hn 10000\nulimit -Sn 10000"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "nproc",
+      "MP Summary": "print the number of processing units available",
+      "Most Similar TLDR Task": "Display the number of available processing units",
+      "Most Similar TLDR Script": "nproc",
+      "Top-3 Similar Questions": [
+        "ul_574715: Not able to increase ulimit -Hn, only shows up for a sudo su session"
+      ],
+      "Top-3 Scripts": [
+        "ul_574715: joe soft     nproc          65535    \njoe hard     nproc          65535   \njoe soft     nofile         65535   \njoe hard     nofile         65535"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "pgrep",
+      "MP Summary": "look up or signal processes based on name and other attributes",
+      "Most Similar TLDR Task": "Search for process run by a specific user",
+      "Most Similar TLDR Script": "pgrep -u root {{process_name}}",
+      "Top-3 Similar Questions": [
+        "ul_325084: Count the number of processes and send a email to multiple people if it exceeds certain limit"
+      ],
+      "Top-3 Scripts": [
+        "ul_325084: [ \"$(pgrep -c nagios.cfg)\" -gt 2 ] && echo \"More parent processes are running on the server\" | mail -s \"subject\" user@example.org user2@example.org"
+      ],
+      "Explanations about Options": {
+        "-g": "Only match processes in the process group IDs listed. Process group 0 is\n translated into pgrep's or pkill's own process group.",
+        "-t": "Only match processes whose controlling terminal is listed. The terminal name\n should be specified without the \"/dev/\" prefix.",
+        "-c": "Suppress normal output; instead print a count of matching processes. When count\n does not match anything, e.g. returns zero, the command will return non-zero value."
+      }
+    },
+    {
+      "Command": "nano",
+      "MP Summary": "Nano's ANOther editor, inspired by Pico",
+      "Most Similar TLDR Task": "Open a specific file",
+      "Most Similar TLDR Script": "nano {{path/to/file}}",
+      "Top-3 Similar Questions": [
+        "so_23903793: How can I increase erlang process for rabbitmq?"
+      ],
+      "Top-3 Scripts": [
+        "so_23903793: sudo nano /etc/default/rabbitmq-server"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "export",
+      "MP Summary": "set the export attribute for variables",
+      "Most Similar TLDR Task": "Set a new environment variable",
+      "Most Similar TLDR Script": "export {{VARIABLE}}={{value}}",
+      "Top-3 Similar Questions": [
+        "ul_473020: how to increase the file extension numerically by one"
+      ],
+      "Top-3 Scripts": [
+        "ul_473020: shopt -s failglob\nshopt -s extglob\nexport LC_ALL=C\neval \"files=($(\n  ls --quoting-style=shell-always -rvd -- *.log.+([[:digit:]])))\"\nfor f in \"${files[@]}\"; do\n   echo mv -nT -- \"$f\" \"${f%.*}.$((10#${f##*.} + 1))\"\ndone\n\nexport LC_ALL=C\nwhile IFS= read -rd '' -u3 file; do\n  echo mv -nT \"$file\" \"${file%.*}.$((10#${file##*.} + 1))\"\ndone 3< <(\n  find . -name '.?*' -prune -o -regex '.*\\.log\\.[0-9]+' -type f -print0 |\n    sort -rzV)"
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

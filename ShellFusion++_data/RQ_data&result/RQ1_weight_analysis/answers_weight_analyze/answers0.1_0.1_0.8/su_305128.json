@@ -1,0 +1,90 @@
+{
+  "Query": "How to specify level of compression when using tar -zcvf?",
+  "Answers": [
+    {
+      "Command": "pigz",
+      "MP Summary": "compress or expand files",
+      "Most Similar TLDR Task": "Compress a directory using tar",
+      "Most Similar TLDR Script": "tar cf - {{path/to/directory}} | pigz > {{filename}}.tar.gz",
+      "Top-3 Similar Questions": [
+        "ul_444263: Is it possible to change the zlib-flate compression level?",
+        "ul_284353: Compressing a folder but do not compress specific file types but include them in the gz file"
+      ],
+      "Top-3 Scripts": [
+        "ul_444263: pigz -z# < FileToCompress > CompressedFile",
+        "ul_284353: tar | pigz > <file>"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "xz",
+      "MP Summary": "Compress or decompress .xz and .lzma files",
+      "Most Similar TLDR Task": "Compress a file, but don't delete the original",
+      "Most Similar TLDR Script": "xz -k {{file}}",
+      "Top-3 Similar Questions": [
+        "su_775773: Compressing with BarCat?",
+        "ul_28976: How to XZ a directory with TAR using maximum compression?",
+        "ul_265391: Unable to use tar to run an archive through bzip2 compression"
+      ],
+      "Top-3 Scripts": [
+        "su_775773: tar cf - apache24/ | bar -s $(du -sb apache24 | cut -f1) | xz > apache24.tar.xz",
+        "ul_28976: tar -cf - foo/ | xz -9 -c - > foo.tar.xz",
+        "ul_265391: "
+      ],
+      "Explanations about Options": {
+        "-c": "Write the compressed or decompressed data to standard output instead of a file.\n This implies --keep."
+      }
+    },
+    {
+      "Command": "tar",
+      "MP Summary": "an archiving utility",
+      "Most Similar TLDR Task": "Create a compressed archive, using archive suffix to determine the compression program",
+      "Most Similar TLDR Script": "tar caf {{target.tar.xz}} {{file1}} {{file2}} {{file3}}",
+      "Top-3 Similar Questions": [
+        "so_15818433: Do we need to specify compression level when extracting a compressed tar file?",
+        "so_66653122: Tar ignores compression level, what to do?",
+        "ul_465735: compress specific folder(directory) from folder with tar"
+      ],
+      "Top-3 Scripts": [
+        "so_15818433: tar -xf",
+        "so_66653122: tar cf - directory | gzip -9 > test9\n\ntar cf test9 -I 'gzip -9' directory\n``",
+        "ul_465735: "
+      ],
+      "Explanations about Options": {
+        "-I": "Filter data through COMMAND. It must accept the -d option, for decompression. The\n argument can contain command line options.",
+        "-x": "Extract files from an archive. Arguments are optional. When given, they specify\n names of the archive members to be extracted."
+      }
+    },
+    {
+      "Command": "zip",
+      "MP Summary": "package and compress (archive) files",
+      "Most Similar TLDR Task": "Package and compress multiple directories and files",
+      "Most Similar TLDR Script": "zip -r {{compressed.zip}} {{/path/to/dir1 /path/to/dir2 /path/to/file}}",
+      "Top-3 Similar Questions": [
+        "so_48836836: How to compress separately with password hundreds of files in tar.gz?"
+      ],
+      "Top-3 Scripts": [
+        "so_48836836: for i in *.mkv; do \n  zip --password \"thepassword\" \"$i.zip\" \"$i\" \ndone"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "cpio",
+      "MP Summary": "copy files to and from archives",
+      "Most Similar TLDR Task": "Take a list of file names from standard input and add them [o]nto an archive in cpio's binary format",
+      "Most Similar TLDR Script": "echo \"{{file1}} {{file2}} {{file3}}\" | cpio -o > {{archive.cpio}}",
+      "Top-3 Similar Questions": [
+        "nl2bash_13126: create a backup of all the files which have been modified in the last 48 hours"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_13126: find source/directory -ctime -2 | cpio -pvdm /my/dest/directory"
+      ],
+      "Explanations about Options": {
+        "-v": "Print the name of each file to stderr as it is processed. With -t, provide a\n detailed listing of each file.",
+        "-m": "(i and p modes) Set file modification time on created files to match those in the\n source.",
+        "-d": "(i and p modes) Create directories as necessary.",
+        "-p": "Pass-through mode. See above for description."
+      }
+    }
+  ]
+}

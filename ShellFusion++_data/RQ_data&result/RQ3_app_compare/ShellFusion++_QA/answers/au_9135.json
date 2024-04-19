@@ -1,0 +1,70 @@
+{
+  "Query": "How to backup settings and list of installed packages",
+  "Answers": [
+    {
+      "Command": "sudo",
+      "Top-3 Similar Questions": [
+        "ul_654369: Where does Debian store the list of installed packages?",
+        "au_9882: What directories do I need to save to backup my user settings?",
+        "au_143642: How to backup programs without using apt cache?"
+      ],
+      "Top-3 Scripts": [
+        "ul_654369: awk '/^Package:/ { p = $2 }\n     /^Architecture/ { a = $2 }\n     /^Auto-Installed: 1/ { printf \"%s:%s\\n\", p, a }' /path/to/extended_states |\nxargs sudo apt-mark auto",
+        "au_9882: sudo dpkg --set-selections < ~/my-packages.txt\n\nsudo apt-get -u dselect-upgrade",
+        "au_143642: sudo dpkg -i *.deb\n\nsudo apt-get install -f"
+      ]
+    },
+    {
+      "Command": "apt",
+      "Top-3 Similar Questions": [
+        "ul_654369: Where does Debian store the list of installed packages?",
+        "au_9882: What directories do I need to save to backup my user settings?",
+        "au_757420: How can I keep track of all the packages / dependencies that are installed when I run apt-get for a specific package?"
+      ],
+      "Top-3 Scripts": [
+        "ul_654369: /var/lib/apt/extended_states",
+        "au_9882: /etc/apt/",
+        "au_757420: /var/log/apt/history.log"
+      ]
+    },
+    {
+      "Command": "apt-get",
+      "Top-3 Similar Questions": [
+        "au_9882: What directories do I need to save to backup my user settings?",
+        "au_143642: How to backup programs without using apt cache?",
+        "au_37700: dump dpkg package list for fresh installation"
+      ],
+      "Top-3 Scripts": [
+        "au_9882: sudo apt-get -u dselect-upgrade",
+        "au_143642: sudo apt-get install -f",
+        "au_37700: sudo dpkg --set-selections <output-file \nsudo apt-get dselect-upgrade"
+      ]
+    },
+    {
+      "Command": "install",
+      "Top-3 Similar Questions": [
+        "ul_654369: Where does Debian store the list of installed packages?",
+        "au_143642: How to backup programs without using apt cache?",
+        "au_576306: Backup of Flashdrive"
+      ],
+      "Top-3 Scripts": [
+        "ul_654369: Status: install ok installed\n\nawk '/^Package:/ { package = $2 }\n     /^Status: install ok installed/ { print package }' /path/to/status\n\nawk '/^Package:/ { p = $2; i = 0 }\n     /^Status: install ok installed/ { i = 1 }\n     i && /^Architecture: all/ { print p; next }\n     i && /^Architecture/ { printf \"%s:%s\\n\", p, $2 }' /path/to/status\n\nawk 'FNR == NR && /^Package:/ { p = $2 }\n     /^Status: install ok installed/ { i = 1 }\n     FNR == NR && i && /^Architecture: all/ { ps[p] = 1; next }\n     FNR == NR && i && /^Architecture/ { ps[p \":\" $2] = 1}\n     FNR != NR && /^Package:/ { p = $2 }\n     FNR != NR && /^Architecture:/ { a = $2 }\n     /^Auto-Installed: 1/ { delete ps[p \":\" a] }\n     END { for (p in ps) print p }' /path/to/status /path/to/extended_states",
+        "au_143642: dpkg --get-selections | grep install | cut -f1\n\nsudo apt-get install -f",
+        "au_576306: sudo apt-get install gnome-disks"
+      ]
+    },
+    {
+      "Command": "dpkg",
+      "Top-3 Similar Questions": [
+        "ul_654369: Where does Debian store the list of installed packages?",
+        "ul_838: Weekly cron job to save list of installed packages",
+        "au_9882: What directories do I need to save to backup my user settings?"
+      ],
+      "Top-3 Scripts": [
+        "ul_654369: /var/lib/dpkg/status\n\nman dpkg",
+        "ul_838: #!/bin/bash\n\ndpkg -l > ~/Dropbox/installed_packages",
+        "au_9882: dpkg --get-selections > ~/my-packages.txt\n\nsudo dpkg --set-selections < ~/my-packages.txt"
+      ]
+    }
+  ]
+}

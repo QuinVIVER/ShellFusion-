@@ -1,0 +1,92 @@
+{
+  "Query": "Bash How to find the largest file in a directory and its subdirectories?",
+  "Answers": [
+    {
+      "Command": "rm",
+      "MP Summary": "remove files or directories",
+      "Most Similar TLDR Task": "Recursively remove a directory and all its subdirectories",
+      "Most Similar TLDR Script": "rm -r {{path/to/directory}}",
+      "Top-3 Similar Questions": [
+        "nl2bash_5827: Search all of /usr for any directory named 'My Files', for each directory found, copy it to /iscsi preserving full paths and attributes, then remove it.",
+        "so_27031814: Find a file in directory by date...then rename it"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_5827: find /usr -type d -name 'My Files' -exec rsync -avR '{}' /iscsi \\;  -exec rm -rf '{}'\\;",
+        "so_27031814: "
+      ],
+      "Explanations about Options": {
+        "-r": "remove directories and their contents recursively",
+        "-f": "ignore nonexistent files and arguments, never prompt"
+      }
+    },
+    {
+      "Command": "find",
+      "MP Summary": "search for files in a directory hierarchy",
+      "Most Similar TLDR Task": "Find files by extension",
+      "Most Similar TLDR Script": "find {{root_path}} -name '{{*.ext}}'",
+      "Top-3 Similar Questions": [
+        "so_36694139: finding largest file for each directory",
+        "ul_467283: Find largest files in a directory in a specific date range",
+        "so_22165228: Finding largest file size recursively from a directory"
+      ],
+      "Top-3 Scripts": [
+        "so_36694139: ",
+        "ul_467283: find . -newer /tmp/point.start ! -newer /tmp/point.end  ! -path . | xargs ls -ltr | sort -nk5 | tail -20",
+        "so_22165228: find . -name '*.gz' -print | xargs gzip -l | awk '{ print $2, $4 ;}'  | grep -v '(totals)$' | sort -n | tail -1"
+      ],
+      "Explanations about Options": {
+        "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+        "-newer": "Time of the last data modification of the current file is more recent than that of\n the last data modification of the reference file. If reference is a symbolic link\n and the -H option or the -L option is in effect, then the time of the last data\n modification of the file it points to is always used.",
+        "-print": "Quoting is handled in the same way as for -printf and -fprintf. If you are using\n find in a script or in a situation where the matched files might have arbitrary\n names, you should consider using -print0 instead of -print."
+      }
+    },
+    {
+      "Command": "du",
+      "MP Summary": "estimate file space usage",
+      "Most Similar TLDR Task": "List the human-readable size of all .jpg files in subdirectories of the current directory, and show a cumulative total at the end",
+      "Most Similar TLDR Script": "du -ch */*.jpg",
+      "Top-3 Similar Questions": [
+        "so_70150536: Command to find N Largest files in macOS directory excluding specific directories",
+        "so_31232491: How to locate largest directories"
+      ],
+      "Top-3 Scripts": [
+        "so_70150536: find . -path ./.target -prune -o -type f -exec du -h {} + | sort -hr | head -n 10",
+        "so_31232491: find /some/dir -type d -exec du -hS {} + | sort -rh\n\ndu -S"
+      ],
+      "Explanations about Options": {
+        "-h": "print sizes in human readable format (e.g., 1K 234M 2G)",
+        "-S": "for directories do not include size of subdirectories"
+      }
+    },
+    {
+      "Command": "file",
+      "MP Summary": "determine file type",
+      "Most Similar TLDR Task": "Look inside a zipped file and determine the file type(s) inside",
+      "Most Similar TLDR Script": "file -z {{foo.zip}}",
+      "Top-3 Similar Questions": [
+        "so_52437199: Find file with largest number of lines in single directory",
+        "so_22165228: Finding largest file size recursively from a directory",
+        "ul_359611: I would like to find the largest file in each directory recursively"
+      ],
+      "Top-3 Scripts": [
+        "so_52437199: [[ -L $file ]] && continue",
+        "so_22165228: gzip -l file(s)",
+        "ul_359611: find . -type f -printf '%s %h/%f\\0'|awk 'BEGIN { RS=\"\\0\" } { SIZE=$1; for (i = 1; i <= NF - 1; i++) $i = $(i + 1); NF = NF - 1; DIR=$0; gsub(\"/[^/]+$\", \"\", DIR); FILE=substr($0, length(DIR) + 2); SUMSIZES[DIR] += SIZE; NBFILES[DIR]++; if (SIZE > MAXSIZE[DIR] || !BIGGESTFILE[DIR]) { MAXSIZE[DIR] = SIZE; BIGGESTFILE[DIR] = FILE } }; END { for (DIR in SUMSIZES) { printf \"%s: average %f, biggest file %s %d\\n\", DIR, SUMSIZES[DIR] / NBFILES[DIR], BIGGESTFILE[DIR], MAXSIZE[DIR] } }'"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "dirname",
+      "MP Summary": "strip last component from file name",
+      "Most Similar TLDR Task": "Calculate the parent directory of multiple paths",
+      "Most Similar TLDR Script": "dirname {{path/to/file_a}} {{path/to/directory_b}}",
+      "Top-3 Similar Questions": [
+        "so_48412838: Find directory of a command in bash"
+      ],
+      "Top-3 Scripts": [
+        "so_48412838: dirname /bin/cat"
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

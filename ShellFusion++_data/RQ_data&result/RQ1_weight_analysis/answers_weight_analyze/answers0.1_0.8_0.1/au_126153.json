@@ -1,0 +1,84 @@
+{
+  "Query": "How to resize partitions?",
+  "Answers": [
+    {
+      "Command": "lvextend",
+      "MP Summary": "Add space to a logical volume",
+      "Most Similar TLDR Task": "Increase a volume's size to 120GB",
+      "Most Similar TLDR Script": "lvextend --size {{120G}} {{logical_volume}}",
+      "Top-3 Similar Questions": [
+        "au_401503: Resized partition with gparted size with df -h",
+        "su_917988: Gparted cannot resize extended or LVM partition"
+      ],
+      "Top-3 Scripts": [
+        "au_401503: lvextend -L +1G /dev/mapper/kvg-root",
+        "su_917988: lvextend \u2013l +100%FREE [MOUNTPOINT]"
+      ],
+      "Explanations about Options": {
+        "-L": "Specifies the new size of the LV. The --size and --extents options are alternate\n methods of specifying size. The total number of physical extents used will be\n greater when redundant data is needed for RAID levels. When the plus + or minus -\n prefix is used, the value is not an absolute size, but is relative and added or\n subtracted from the current size."
+      }
+    },
+    {
+      "Command": "mogrify",
+      "MP Summary": "resize an image, blur, crop, despeckle, dither, draw on, flip, join, re-sample, and much more. Mogrify overwrites the original image file, whereas, convert-im6.q16hdri(1) writes to a different image file.",
+      "Most Similar TLDR Task": "Resize all JPEG images in the directory to 50% of their initial size",
+      "Most Similar TLDR Script": "mogrify -resize {{50%}} {{*.jpg}}",
+      "Top-3 Similar Questions": [
+        "ul_386164: Bulk Resize images in sub directories with Imagemagick",
+        "so_30959254: gimp: resize and \"unsharp mask\" via script"
+      ],
+      "Top-3 Scripts": [
+        "ul_386164: find . -type f -iname \"*.jpg\" -exec identify -format '%w %h %i\\n' {} \\; |\nawk '$1 > 1200 || $2 > 1200 {sub(/^[^ ]* [^ ]* /, \"\"); print}' |\ntr '\\n' '\\0' |\nxargs -0 mogrify -resize '1200x1200'",
+        "so_30959254: mogrify -resize 640x480 -unsharp 6x3+1+0 *.jpg\n\nmogrify -resize 1024x768 -sharpen 0x1.0 *.tif"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "resize2fs",
+      "MP Summary": "ext2/ext3/ext4 file system resizer",
+      "Most Similar TLDR Task": "Automatically resize a filesystem",
+      "Most Similar TLDR Script": "resize2fs {{/dev/sdXN}}",
+      "Top-3 Similar Questions": [
+        "ul_260133: Why hasn't my CentOS partition resized?",
+        "au_401503: Resized partition with gparted size with df -h",
+        "au_751293: Resized Primary Partition, Filesystem Size Not Updating"
+      ],
+      "Top-3 Scripts": [
+        "ul_260133: resize2fs /dev/mapper/vg_condor-lv_root",
+        "au_401503: sudo resize2fs /dev/mapper/kvg-root",
+        "au_751293: sudo resize2fs /dev/sda1\n\nsudo resize2fs /dev/sda3"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "blkid",
+      "MP Summary": "locate/print block device attributes",
+      "Most Similar TLDR Task": "List all partitions",
+      "Most Similar TLDR Script": "sudo blkid",
+      "Top-3 Similar Questions": [
+        "au_207767: No swap after moving/resizing partitions"
+      ],
+      "Top-3 Scripts": [
+        "au_207767: sudo blkid"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "mount",
+      "MP Summary": "mount a filesystem",
+      "Most Similar TLDR Task": "Mount a device to a directory",
+      "Most Similar TLDR Script": "mount -t {{filesystem_type}} {{path/to/device_file}} {{path/to/target_directory}}",
+      "Top-3 Similar Questions": [
+        "ul_297588: Resized partition to too small value after shrinking filesystem",
+        "su_630411: Why is it not possible to resize/move mounted (non logical) partitions at runtime?"
+      ],
+      "Top-3 Scripts": [
+        "ul_297588: mount -o loop,ro /dev/sdn1 /mnt/somewhere",
+        "su_630411: "
+      ],
+      "Explanations about Options": {
+        "-o": "Use the specified mount options. The opts argument is a comma-separated list. For\n example:"
+      }
+    }
+  ]
+}

@@ -1,0 +1,97 @@
+{
+  "Query": "How do I find all the files that were created today in Unix/Linux?",
+  "Answers": [
+    {
+      "Command": "find",
+      "MP Summary": "search for files in a directory hierarchy",
+      "Most Similar TLDR Task": "Find files modified in the last 7 days, and delete them",
+      "Most Similar TLDR Script": "find {{root_path}} -mtime {{-7}} -delete",
+      "Top-3 Similar Questions": [
+        "su_187138: Find files that have been accessed after they were created",
+        "so_56148429: finding files that were modified before a certain file",
+        "so_22582760: How do we find a file that is located some where in directory tree"
+      ],
+      "Top-3 Scripts": [
+        "su_187138: find -type f -print0 | xargs -0 -I % find -path % -anewer %",
+        "so_56148429: find [directory] -type f \\! -newer [certain_file]",
+        "so_22582760: find /osting -iname \"*.txt\" -mtime -60 -print\n\n-mtime +60 means you are looking for a file modified 60 days ago.\n-mtime -60 means less than 60 days.\n-mtime 60 If you skip + or - it means exactly 60 days."
+      ],
+      "Explanations about Options": {
+        "-anewer": "Time of the last access of the current file is more recent than that of the last\n data modification of the reference file. If reference is a symbolic link and the\n -H option or the -L option is in effect, then the time of the last data\n modification of the file it points to is always used.",
+        "-iname": "Like -name, but the match is case insensitive. For example, the patterns `fo*' and\n `F??' match the file names `Foo', `FOO', `foo', `fOo', etc. The pattern `*foo*`\n will also match a file called '.foobar'.",
+        "-newer": "Time of the last data modification of the current file is more recent than that of\n the last data modification of the reference file. If reference is a symbolic link\n and the -H option or the -L option is in effect, then the time of the last data\n modification of the file it points to is always used.",
+        "-print0": "Always print the exact filename, unchanged, even if the output is going to a\n terminal.",
+        "-mtime": "File's data was last modified n*24 hours ago. See the comments for -atime to\n understand how rounding affects the interpretation of file modification times.",
+        "-type": "File is of type c:",
+        "-print": "Quoting is handled in the same way as for -printf and -fprintf. If you are using\n find in a script or in a situation where the matched files might have arbitrary\n names, you should consider using -print0 instead of -print."
+      }
+    },
+    {
+      "Command": "touch",
+      "MP Summary": "change file timestamps",
+      "Most Similar TLDR Task": "Create a new empty file(s) or change the times for existing file(s) to current time",
+      "Most Similar TLDR Script": "touch {{filename}}",
+      "Top-3 Similar Questions": [
+        "au_708403: Delete files that were created before today",
+        "su_139046: Linux: can I create directories that don't exist while creating a new file?",
+        "so_48886675: can you create and delete files that begin with \"-\"?"
+      ],
+      "Top-3 Scripts": [
+        "au_708403: touch -d 'today + 2 days ago' ref.txt",
+        "su_139046: mktouch() {\n  mkdir -p \"$(dirname \"$1\")\"\n  touch \"$1\"\n}",
+        "so_48886675: touch -- -hello\nrm -- -hello"
+      ],
+      "Explanations about Options": {
+        "-h": "affect each symbolic link instead of any referenced file (useful only on systems\n that can change the timestamps of a symlink)",
+        "-d": "parse STRING and use it instead of current time"
+      }
+    },
+    {
+      "Command": "file",
+      "MP Summary": "determine file type",
+      "Most Similar TLDR Task": "Look inside a zipped file and determine the file type(s) inside",
+      "Most Similar TLDR Script": "file -z {{foo.zip}}",
+      "Top-3 Similar Questions": [
+        "so_22582760: How do we find a file that is located some where in directory tree",
+        "so_62174710: Is there a way to find all the files that got created a specific time?",
+        "su_68224: Finding files that do not have a particular line"
+      ],
+      "Top-3 Scripts": [
+        "so_22582760: find /osting -iname \"*.txt\" -mtime -60 -print\n\n-mtime +60 means you are looking for a file modified 60 days ago.\n-mtime -60 means less than 60 days.\n-mtime 60 If you skip + or - it means exactly 60 days.",
+        "so_62174710: $ ./scriptFromAbove 8\n./some file\n./another file\n./directories are matched too",
+        "su_68224: -L, --files-without-match\n       Suppress  normal  output;  instead  print the name of each input\n       file from which no output would normally have been printed.  The\n       scanning will stop on the first match."
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "mktemp",
+      "MP Summary": "create a temporary file or directory",
+      "Most Similar TLDR Task": "Create an empty temporary file and return the absolute path to it",
+      "Most Similar TLDR Script": "mktemp",
+      "Top-3 Similar Questions": [
+        "so_16757326: Linux Find: How to find .PDF files created after a specific year?"
+      ],
+      "Top-3 Scripts": [
+        "so_16757326: tmp=$(mktemp /tmp/time-XXXXXXXX)\ntouch -t 200801010000 \"$tmp\"\nfind . -type f -iname '*.pdf' -newer \"$tmp\"\nrm \"$tmp\""
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "stat",
+      "MP Summary": "display file or file system status",
+      "Most Similar TLDR Task": "Show file properties such as size, permissions, creation and access dates among others",
+      "Most Similar TLDR Script": "stat {{file}}",
+      "Top-3 Similar Questions": [
+        "so_62174710: Is there a way to find all the files that got created a specific time?",
+        "so_20570808: Find command find directories that were created after a certain date under Linux/Cygwin"
+      ],
+      "Top-3 Scripts": [
+        "so_62174710: #! /usr/bin/env bash\nhour=\"$1\"\nfor f in ./*; do\n    debugfs -R \"stat <$(stat -c %i \"$f\")>\" /dev/sda2 2> /dev/null |\n    grep -Eq \"^crtime: .* 0?$hour:\" &&\n    echo \"$f\"\ndone",
+        "so_20570808: find . -type d -exec bash -c '(( $(stat -c %W \"{}\") > $(date +%s -d '2013-12-03') )) && du -h \"{}\"' \\;"
+      ],
+      "Explanations about Options": {
+        "-c": "use the specified FORMAT instead of the default; output a newline after each use of\n FORMAT"
+      }
+    }
+  ]
+}

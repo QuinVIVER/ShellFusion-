@@ -1,0 +1,92 @@
+{
+  "Query": "How to change the Home directory of the currently logged In user",
+  "Answers": [
+    {
+      "Command": "usermod",
+      "MP Summary": "modify a user account",
+      "Most Similar TLDR Task": "Create a new home directory for a user and move their files to it",
+      "Most Similar TLDR Script": "usermod -m -d {{/path/to/home}} {{user}}",
+      "Top-3 Similar Questions": [
+        "ul_267904: What is a good way to change a group of users UIDs without usermod executing a time consuming chown on the user home directory?",
+        "au_18103: How can I change the default location of content directories (eg Pictures, Templates, Music)  in my home folder?"
+      ],
+      "Top-3 Scripts": [
+        "ul_267904: # mkdir -p /tmp/home/jsmith  ## uncomment if required.\nusermod -d /tmp/home/jsmith jsmith\nusermod -u fixedUID jsmith -o\nusermod -d /home/jsmith jsmith\n\n# mkdir -p /tmp/home/jsmith  ## uncomment if required.\nhomedir=$(getent passwd jsmith | awk -F: '{print $6}')\nusermod -d /tmp/home/jsmith jsmith\nusermod -u fixedUID jsmith -o\nusermod -d \"$homedir\" jsmith",
+        "au_18103: chown nobody:users /home/common\nchmod 2775 /home/common\nusermod -a -G users user1"
+      ],
+      "Explanations about Options": {
+        "-a": "Add the user to the supplementary group(s). Use only with the -G option.",
+        "-d": "The user's new login directory.",
+        "-o": "When used with the -u option, this option allows to change the user ID to a non-unique\n value.",
+        "-u": "The new numerical value of the user's ID.",
+        "-G": "GROUP1[,GROUP2,...[,GROUPN]]]\n A list of supplementary groups which the user is also a member of. Each group is\n separated from the next by a comma, with no intervening whitespace. The groups are\n subject to the same restrictions as the group given with the -g option."
+      }
+    },
+    {
+      "Command": "useradd",
+      "MP Summary": "create a new user or update default new user information",
+      "Most Similar TLDR Task": "Create new user with a default home directory",
+      "Most Similar TLDR Script": "useradd --create-home {{name}}",
+      "Top-3 Similar Questions": [
+        "ul_235868: How can I create an account with a copy of the same home folder?",
+        "so_18251538: Creating a private folder in home directory of each user"
+      ],
+      "Top-3 Scripts": [
+        "ul_235868: sudo useradd -m -k /home/user1/ user2",
+        "so_18251538: for i in {1..100}\n do\n    useradd -m -g student $i\n    mkdir /home/$i/private               //Creating a private folder\n    chmod -R 700 /home/$i/private        //\n    chown $i:student /home/$i/private            <------------------ new line\n\n    echo \"$i:123\" | sudo chpasswd\n    setquota -u $i 9 18 0 0  /\n done"
+      ],
+      "Explanations about Options": {
+        "-m": "Create the user's home directory if it does not exist. The files and directories\n contained in the skeleton directory (which can be defined with the -k option) will be\n copied to the home directory.",
+        "-g": "The group name or ID for a new user's initial group (when the -N/--no-user-group is\n used or when the USERGROUPS_ENAB variable is set to no in /etc/login.defs). The named\n group must exist, and a numerical group ID must have an existing entry.",
+        "-k": "The skeleton directory, which contains files and directories to be copied in the\n user's home directory, when the home directory is created by useradd."
+      }
+    },
+    {
+      "Command": "passwd",
+      "MP Summary": "change user password",
+      "Most Similar TLDR Task": "Change the password of the current user",
+      "Most Similar TLDR Script": "passwd {{new_password}}",
+      "Top-3 Similar Questions": [
+        "su_1132626: Changing home directory of user on Windows Subsystem for Linux",
+        "ul_267904: What is a good way to change a group of users UIDs without usermod executing a time consuming chown on the user home directory?",
+        "ul_598794: How to dynamically change owner of directory using awk output?"
+      ],
+      "Top-3 Scripts": [
+        "su_1132626: sudo vim /etc/passwd",
+        "ul_267904: # mkdir -p /tmp/home/jsmith  ## uncomment if required.\nhomedir=$(getent passwd jsmith | awk -F: '{print $6}')\nusermod -d /tmp/home/jsmith jsmith\nusermod -u fixedUID jsmith -o\nusermod -d \"$homedir\" jsmith",
+        "ul_598794: awk -F\\: '/^#/{next}''{system(\"chown \" $1\" \" $6)}' /etc/passwd"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "cd",
+      "MP Summary": "change the working directory",
+      "Most Similar TLDR Task": "Go to home directory of current user",
+      "Most Similar TLDR Script": "cd",
+      "Top-3 Similar Questions": [
+        "su_1132626: Changing home directory of user on Windows Subsystem for Linux",
+        "au_493268: Change current working directory only by typing the name of the new one",
+        "ul_293648: Why change the current directory to the parent directory of a relative symlink before creating it"
+      ],
+      "Top-3 Scripts": [
+        "su_1132626: cd ~",
+        "au_493268: ",
+        "ul_293648: cd d1\nln -s ../../file ."
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "users",
+      "MP Summary": "print the user names of users currently logged in to the current host",
+      "Most Similar TLDR Task": "Display a list of logged in users according to a specific file",
+      "Most Similar TLDR Script": "users {{/var/log/wmtp}}",
+      "Top-3 Similar Questions": [
+        "au_18103: How can I change the default location of content directories (eg Pictures, Templates, Music)  in my home folder?"
+      ],
+      "Top-3 Scripts": [
+        "au_18103: chown nobody:users /home/common\nchmod 2775 /home/common\nusermod -a -G users user1"
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

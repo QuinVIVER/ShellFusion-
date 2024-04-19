@@ -1,0 +1,97 @@
+{
+  "Query": "How to check opened/closed ports on my computer?",
+  "Answers": [
+    {
+      "Command": "nc",
+      "MP Summary": "arbitrary TCP and UDP connections and listens",
+      "Most Similar TLDR Task": "Scan the open ports of a specified host",
+      "Most Similar TLDR Script": "nc -v -z {{ip_address}} {{port}}",
+      "Top-3 Similar Questions": [
+        "ul_413321: Simple bashscript for checking open port",
+        "ul_479710: What are the alternatives for checking open ports, besides telnet?",
+        "ul_75846: Checking if I can reach some ports from my computer"
+      ],
+      "Top-3 Scripts": [
+        "ul_413321: if ( nc -zv localhost 19997 2>&1 >/dev/null ); then\n    echo 'Online'\nelse\n    echo 'Offline'\nfi",
+        "ul_479710: nc -zv kafka02 6667",
+        "ul_75846: nc HOSTNAME PORT"
+      ],
+      "Explanations about Options": {
+        "-v": "Produce more verbose output.",
+        "-z": "Only scan for listening daemons, without sending any data to them. Cannot be used\n together with -l."
+      }
+    },
+    {
+      "Command": "telnet",
+      "MP Summary": "user interface to the TELNET protocol",
+      "Most Similar TLDR Task": "Telnet to a specific port of a host",
+      "Most Similar TLDR Script": "telnet {{ip_address}} {{port}}",
+      "Top-3 Similar Questions": [
+        "ul_75846: Checking if I can reach some ports from my computer",
+        "so_25004021: telnet to determine open ports (shell script)",
+        "so_30635285: Is there a way to check if a certain port is open on server?"
+      ],
+      "Top-3 Scripts": [
+        "ul_75846: telnet HOSTNAME PORT",
+        "so_25004021: name=$(echo exit | telnet $1 $2 2>/dev/null | grep \"Connected\")",
+        "so_30635285: telnet host port\n\ntelnet host:port"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "netstat",
+      "MP Summary": "Print  network  connections,  routing tables, interface statistics, masquerade connections, and multicast memberships",
+      "Most Similar TLDR Task": "List listening TCP ports",
+      "Most Similar TLDR Script": "netstat -t",
+      "Top-3 Similar Questions": [
+        "so_1756107: How to check if port is available",
+        "su_781543: How can I check which ports are in use from the Linux command line?",
+        "su_142408: How do I determine which application is using port 8080?"
+      ],
+      "Top-3 Scripts": [
+        "so_1756107: strace -o trace.out netstat -at",
+        "su_781543: netstat | grep port_number\n\nsudo lsof -i\nsudo netstat -lptu\nsudo netstat -tulpn",
+        "su_142408: netstat -tulpn | grep :8080"
+      ],
+      "Explanations about Options": {
+        "-a": "Show both listening and non-listening sockets. With the --interfaces option, show\n interfaces that are not up",
+        "-p": "Show the PID and name of the program to which each socket belongs.",
+        "-l": "Show only listening sockets. (These are omitted by default.)",
+        "-n": "Show numerical addresses instead of trying to determine symbolic host, port or user names."
+      }
+    },
+    {
+      "Command": "ss",
+      "MP Summary": "another utility to investigate sockets",
+      "Most Similar TLDR Task": "Show all UDP sockets connected on specific source and destination ports",
+      "Most Similar TLDR Script": "ss -u 'sport == :{{source_port}} and dport == :{{destination_port}}'",
+      "Top-3 Similar Questions": [
+        "so_59993231: Checking open ports using ss",
+        "so_28606876: Ansible: Check if service is listening on a specific port"
+      ],
+      "Top-3 Scripts": [
+        "so_59993231: #!/bin/bash\n\nfor i in {0..255}\ndo\n  echo \"$i\"\n  ss -ant \"( src 192.168.1.$i or dst 192.168.1.$i ) and ( ( dport = :80 or dport = :443 ) or ( sport = :443 or sport = :80 ) )\"\ndone",
+        "so_28606876: - name: check if httpd has port 80 open\n      shell: ss -tp state listening sport = :80 | grep httpd"
+      ],
+      "Explanations about Options": {
+        "-a": "Display both listening and non-listening (for TCP this means established\n connections) sockets.",
+        "-p": "Show process using socket.",
+        "-t": "Display TCP sockets.",
+        "-n": "Do not try to resolve service names. Show exact bandwidth values, instead of human-\n readable."
+      }
+    },
+    {
+      "Command": "ssh",
+      "MP Summary": "OpenSSH SSH client (remote login program)",
+      "Most Similar TLDR Task": "Connect to a remote server using a specific port",
+      "Most Similar TLDR Script": "ssh {{username}}@{{remote_host}} -p {{2222}}",
+      "Top-3 Similar Questions": [
+        "so_50335620: checking information of different computers in a network using bash script"
+      ],
+      "Top-3 Scripts": [
+        "so_50335620: ssh $a \"$@\" &"
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

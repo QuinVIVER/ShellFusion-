@@ -1,0 +1,93 @@
+{
+  "Query": "Recovering data from a damaged hard-drive  the \"freezer trick\"",
+  "Answers": [
+    {
+      "Command": "ddrescue",
+      "MP Summary": "data recovery tool",
+      "Most Similar TLDR Task": "Take an image of a device, creating a log file",
+      "Most Similar TLDR Script": "sudo ddrescue {{/dev/sdb}} {{path/to/image.dd}} {{path/to/log.txt}}",
+      "Top-3 Similar Questions": [
+        "ul_539796: Recover data from truncated partition image",
+        "au_53902: How can I recover data from a 2TB hard drive?",
+        "su_898172: Recover specific files from a damaged hard drive"
+      ],
+      "Top-3 Scripts": [
+        "ul_539796: ",
+        "au_53902: ddrescue --no-split </dev/hda1> <imagefile> <logfile>",
+        "su_898172: mkdir ~/rescue\nmkdir ~/rescue-log\nfind /badhdd/path/to/directory -type f -name \"*.NEF\" -exec ddrescue -vvvv -P1 -n --no-trim /badhdd/path/to/directory/{} ~/rescue/{} ~/rescue-log/{} \\;\n\nddrescue -vvvv -P1 --reverse /badhdd/path/to/directory/{} ~/rescue/{} ~/rescue-log/{}"
+      ],
+      "Explanations about Options": {
+        "--reverse": "reverse the direction of all passes",
+        "-v": "be verbose (a 2nd -v gives more)"
+      }
+    },
+    {
+      "Command": "photorec",
+      "MP Summary": "Recover lost files from harddisk, digital camera and cdrom",
+      "Most Similar TLDR Task": "Run PhotoRec on a disk image (image.dd)",
+      "Most Similar TLDR Script": "sudo photorec {{path/to/image.dd}}",
+      "Top-3 Similar Questions": [
+        "au_146507: Is it possible to recover unflushed data from the disk/page cache?",
+        "au_697615: Recovering data from a corrupted HFS+ partition",
+        "au_31450: Tool for recovering deleted data from a flash drive"
+      ],
+      "Top-3 Scripts": [
+        "au_146507: ",
+        "au_697615: ",
+        "au_31450: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "fdisk",
+      "MP Summary": "manipulate disk partition table",
+      "Most Similar TLDR Task": "Start the partition manipulator",
+      "Most Similar TLDR Script": "fdisk {{/dev/sda}}",
+      "Top-3 Similar Questions": [
+        "ul_166329: Recover data from HDD",
+        "au_446834: How to recover Ubuntu grub loader from Windows",
+        "au_420574: Recover grub from grub-rescue"
+      ],
+      "Top-3 Scripts": [
+        "ul_166329: fdisk -l",
+        "au_446834: sudo fdisk -l",
+        "au_420574: sudo fdisk -l\nsudo mount /dev/sdXY /mnt (where X is a/b and Y is 5,6,or 7)\nsudo grub-install --root-directory=/mnt /dev/sdX\nsudo reboot\nsudo update-grub(while connecting with internet)"
+      ],
+      "Explanations about Options": {
+        "-l": "List the partition tables for the specified devices and then exit. If no devices\n are given, those mentioned in /proc/partitions (if that file exists) are used."
+      }
+    },
+    {
+      "Command": "cp",
+      "MP Summary": "copy files and directories",
+      "Most Similar TLDR Task": "Copy a file to another location",
+      "Most Similar TLDR Script": "cp {{path/to/source_file.ext}} {{path/to/target_file.ext}}",
+      "Top-3 Similar Questions": [
+        "so_47857402: How to recover deleted file from FAT image?",
+        "so_46163507: MySQL how to recover data from an old disk?"
+      ],
+      "Top-3 Scripts": [
+        "so_47857402: $ echo \"hello world\" > NAME\n$ sudo cp -a NAME /mnt/fd\n$ ls -l /mnt/fd\ntotal 1\n-rwxr-xr-x  1 root root   12 Dec 17 13:55 NAME\n$ cat /mnt/fd/NAME\nhello world",
+        "so_46163507: sudo cp -R -p /var/lib/mysql /var/lib/mysql.back\n\nsudo cp -R -p /var/lib/mysql.bask /var/lib/mysql"
+      ],
+      "Explanations about Options": {
+        "-R": "copy directories recursively",
+        "-a": "same as -dR --preserve=all",
+        "-p": "same as --preserve=mode , ownership , timestamps"
+      }
+    },
+    {
+      "Command": "cryptsetup",
+      "MP Summary": "manage plain dm-crypt and LUKS encrypted volumes",
+      "Most Similar TLDR Task": "Initialize a LUKS volume (overwrites all data on the partition)",
+      "Most Similar TLDR Script": "cryptsetup luksFormat {{/dev/sda1}}",
+      "Top-3 Similar Questions": [
+        "su_681699: Recovering a LUKS encrypted partition from dump"
+      ],
+      "Top-3 Scripts": [
+        "su_681699: losetup /dev/loop0 /path/to/sda5.bin\ncryptsetup luksOpen /dev/loop0 foo\nmount /dev/mapper/foo /mnt"
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

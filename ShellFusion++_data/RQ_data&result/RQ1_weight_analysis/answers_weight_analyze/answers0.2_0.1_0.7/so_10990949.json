@@ -1,0 +1,85 @@
+{
+  "Query": "Convert date time string to epoch in Bash",
+  "Answers": [
+    {
+      "Command": "date",
+      "MP Summary": "print or set the system date and time",
+      "Most Similar TLDR Task": "Convert a specific date to the Unix timestamp format",
+      "Most Similar TLDR Script": "date -d \"{{2018-09-01 00:00}}\" +%s --utc",
+      "Top-3 Similar Questions": [
+        "so_58568635: Bash - Convert date to timestamp",
+        "ul_323645: Convert string date",
+        "so_16311688: Bash convert epoch to date, showing wrong time"
+      ],
+      "Top-3 Scripts": [
+        "so_58568635: prev=$(date --date='Mon Aug 30 14:46:39 2019' +\"%s\")\ntoday=$(date +%s)\nnumber_of_seconds=$(( ($today - $prev ) ))\nprintf '%dd:%dh:%dm:%ds\\n' $(($number_of_seconds/86400)) $(($number_of_seconds%86400/3600)) $(($number_of_seconds%3600/60)) $(($number_of_seconds%60))\n\n56d:17h:29m:14s\n##### Where my system's date is: #####\ndate\nSat Oct 26 08:16:14 UTC 2019\n\nprev=$(date --date='Mon Sep 30 17:37:39 2019' +\"%s\")\ntoday=$(date +%s)\necho $(( ($today - $prev )/(60*60*24) ))\n\ndate --date...\n\nprev=$(date --date='Mon Aug 30 17:37:39 2019' +\"%s\")\ntoday=$(date +%s)\necho $(( ($today - $prev )/(60*60*24) ))\n56",
+        "ul_323645: $ date -d\"Mon Jan 20 17:03:25 CST 2014\" +%Y%m%d\n20140121",
+        "so_16311688: $ date -d @1361234760.790\nMon Feb 18 17:46:00 MST 2013"
+      ],
+      "Explanations about Options": {
+        "-d": "display time described by STRING, not 'now'",
+        "--date": "display time described by STRING, not 'now'"
+      }
+    },
+    {
+      "Command": "printf",
+      "MP Summary": "format and print data",
+      "Most Similar TLDR Task": "Store a formatted message in a variable (does not work on zsh)",
+      "Most Similar TLDR Script": "printf -v {{myvar}} {{\"This is %s = %d\\n\" \"a year\" 2016}}",
+      "Top-3 Similar Questions": [
+        "so_58568635: Bash - Convert date to timestamp",
+        "so_49874291: Convert time to epoch time and find the diifference between 2 timestamps",
+        "so_38692276: Bash convert two Epoch times to remaining time"
+      ],
+      "Top-3 Scripts": [
+        "so_58568635: prev=$(date --date='Mon Aug 30 14:46:39 2019' +\"%s\")\ntoday=$(date +%s)\nnumber_of_seconds=$(( ($today - $prev ) ))\nprintf '%dd:%dh:%dm:%ds\\n' $(($number_of_seconds/86400)) $(($number_of_seconds%86400/3600)) $(($number_of_seconds%3600/60)) $(($number_of_seconds%60))",
+        "so_49874291: awk -F\"[.: ]\" '\n/start/ {start = mktime($3\" \"$2\" \"$1\" \"$4\" \"$5\" \"$6);\n    printf(\"%s:%s:%s,\", $4, $5, $6);\n}\n/end/ {end = mktime($3\" \"$2\" \"$1\" \"$4\" \"$5\" \"$6);\n    print end - start;\n}' log.txt",
+        "so_38692276: printf \"%dd %dh %dm %ds\\n\" $(( DIFF / (3600 * 24) ))  $(( (DIFF / 3600 ) % 24)) $(( (DIFF / 60) % 60)) $((DIFF % 60))"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "read",
+      "MP Summary": "read a line from standard input",
+      "Most Similar TLDR Task": "Store each of the next lines you enter as values of an array",
+      "Most Similar TLDR Script": "read -a {{array}}",
+      "Top-3 Similar Questions": [
+        "so_68810833: Bash: date returns \"invalid date\" when I try to convert this date format to epoch",
+        "so_6508819: Convert date formats in bash"
+      ],
+      "Top-3 Scripts": [
+        "so_68810833: IFS='/' read -r -a array <<< \"17/08/2021 21:45\"\ndate -d \"${array[1]}/${array[0]}/${array[2]}\" '+%s'",
+        "so_6508819: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "fold",
+      "MP Summary": "wrap each input line to fit in specified width",
+      "Most Similar TLDR Task": "Wrap each line to width \"30\"",
+      "Most Similar TLDR Script": "fold -w30 {{file}}",
+      "Top-3 Similar Questions": [
+        "ul_549148: How do I convert a datetime into a epoch?"
+      ],
+      "Top-3 Scripts": [
+        "ul_549148: t=20191027163020\nprintf '%s%s-%s-%sT%s:%s:%s\\n' $(printf '%s\\n' \"$t\" | fold -w2) |\n  date -f - +%s"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "tr",
+      "MP Summary": "translate or delete characters",
+      "Most Similar TLDR Task": "Replace all occurrences of a character in a file, and print the result",
+      "Most Similar TLDR Script": "tr {{find_character}} {{replace_character}} < {{filename}}",
+      "Top-3 Similar Questions": [
+        "so_24907609: Bash - extract date from string and reformat"
+      ],
+      "Top-3 Scripts": [
+        "so_24907609: user=bob lastb $user -t $(date -d \"$(last $user | head -n 1 | tr -s '[:space:]' '\\t' | cut -f 4-7)\" +%Y%m%d%H%M%S)\n\nuser=bob\nlast_login=$(last $user | head -n 1 | tr -s '[:space:]' '\\t' | cut -f 4-7)\ndatetime=$(date -d \"$last_login\" +%Y%m%d%H%M%S)\nlastb $user -t $datetime"
+      ],
+      "Explanations about Options": {
+        "-s": "replace each sequence of a repeated character that is listed in the last specified\n SET, with a single occurrence of that character"
+      }
+    }
+  ]
+}

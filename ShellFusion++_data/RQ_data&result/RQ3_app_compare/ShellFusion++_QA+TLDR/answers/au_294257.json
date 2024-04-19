@@ -1,0 +1,90 @@
+{
+  "Query": "Connect to WiFi network through Ubuntu terminal",
+  "Answers": [
+    {
+      "Command": "iw",
+      "MP Summary": "show / manipulate wireless devices and their configuration",
+      "Most Similar TLDR Task": "Scan for available wireless networks",
+      "Most Similar TLDR Script": "iw dev {{wlp}} scan",
+      "Top-3 Similar Questions": [
+        "su_1624487: WiFi: Possible to simultaneouslty broadcast a WLAN network and connect to one on the same device?",
+        "ul_283722: How to connect to wifi from command line?"
+      ],
+      "Top-3 Scripts": [
+        "su_1624487: iw list",
+        "ul_283722: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "wpa_supplicant",
+      "MP Summary": "Wi-Fi Protected Access client and IEEE 802.1X supplicant",
+      "Most Similar TLDR Task": "Join a protected wireless network and run it in a daemon",
+      "Most Similar TLDR Script": "wpa_supplicant -B -i {{interface}} -c {{path/to/wpa_supplicant_conf.conf}}",
+      "Top-3 Similar Questions": [
+        "ul_263826: Is that possible for debian users to connect to network through systemd-networkd?",
+        "ul_250562: Auto Connect to any Open WiFi network via CLI Command Line",
+        "ul_283722: How to connect to wifi from command line?"
+      ],
+      "Top-3 Scripts": [
+        "ul_263826: sudo -i\necho \"ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=sudo\" > /etc/wpa_supplicant/wpa_supplicant-wlan0.conf\nwpa_passphrase SSID password >> /etc/wpa_supplicant/wpa_supplicant-wlan0.conf",
+        "ul_250562: ##Wireless NIC\nallow-hotplug wlan0\niface wlan0 inet manual\nwpa-roam /etc/wpa_supplicant/wpa_supplicant.conf\niface open_wifi inet dhcp\n\nctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev\nupdate_config=1\n\n##Open_Wifi\nnetwork={\n    ssid=\"\"\n    key_mgmt=NONE\n    id_str=\"open_wifi\"\n}\n\nwpa_supplicant -d -i wlan0 -c /etc/wpa_supplicant/wpa_supplicant.conf -D wext",
+        "ul_283722: sudo ip link set wlan0 down\nsudo ip link set wlan0 up\nsudo wpa_supplicant -B -iwlan0 -c /etc/wpa_supplicant.conf -Dnl80211,wext\nsudo dhclient wlan0\n\nwpa_supplicant -B -i wlan0 -c <(wpa_passphrase \"Your_SSID\" Your_passphrase) && dhclient wlan0"
+      ],
+      "Explanations about Options": {
+        "-d": "Increase debugging verbosity (-dd even more).",
+        "-D": "Driver to use (can be multiple drivers: nl80211,wext). (Per interface, see the\n available options below.)",
+        "-B": "Run daemon in the background.",
+        "-i": "Interface to listen on. Multiple instances of this option can be present, one per\n interface, separated by -N option (see below).",
+        "-c": "Path to configuration file. (Per interface)"
+      }
+    },
+    {
+      "Command": "ifconfig",
+      "MP Summary": "configure network interfaces",
+      "Most Similar TLDR Task": "Disable eth0 interface",
+      "Most Similar TLDR Script": "ifconfig eth0 down",
+      "Top-3 Similar Questions": [
+        "au_321187: How do I connect to Ubuntu from Android?",
+        "ul_49004: Easily connecting to the internet with FreeBSD",
+        "au_142336: How do I connect to available networks from the command-line?"
+      ],
+      "Top-3 Scripts": [
+        "au_321187: ",
+        "ul_49004: ifconfig -a",
+        "au_142336: ifconfig -a\n\nifconfig -a | grep --only-matching -i \"^\\w\\+\" | xargs -l1 sudo dhclient"
+      ],
+      "Explanations about Options": {
+        "-a": "Display all available interfaces."
+      }
+    },
+    {
+      "Command": "iwctl",
+      "MP Summary": "Internet wireless control utility",
+      "Most Similar TLDR Task": "Connect to a network with a station, if credentials are needed they will be asked",
+      "Most Similar TLDR Script": "iwctl station {{station}} connect {{network_name}}",
+      "Top-3 Similar Questions": [
+        "ul_283722: How to connect to wifi from command line?",
+        "ul_477488: Connect to wifi from command line on linux systems through the iwd (wireless daemon for linux)"
+      ],
+      "Top-3 Scripts": [
+        "ul_283722: ",
+        "ul_477488: iwctl station wlp8s0 scan\niwctl station wlp8s0 get-networks\n\niwctl station <INTERFACE> connect \"SSID\"\n\niwctl station wlp8s0 connect \"My SSID\"\ndhclient\n\n$ cat /usr/local/enable-wifi.sh\n\n#!/bin/bash\niwctl station wlan0 connect \"My SSID\" \ndhclient"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "iwconfig",
+      "MP Summary": "configure a wireless network interface",
+      "Most Similar TLDR Task": "Set the ESSID (network name) of the specified interface (e.g., eth0 or wlp2s0)",
+      "Most Similar TLDR Script": "iwconfig {{interface}} {{new_network_name}}",
+      "Top-3 Similar Questions": [
+        "au_1032804: Connecting to Wifi on terminal of Kubuntu 17.10"
+      ],
+      "Top-3 Scripts": [
+        "au_1032804: sudo iwconfig wlp7s0 essid \"ABCD1234\" key s:abcd1"
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

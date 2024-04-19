@@ -1,0 +1,70 @@
+{
+  "Query": "How to download portion of video with youtube-dl command?",
+  "Answers": [
+    {
+      "Command": "youtube-dl",
+      "Top-3 Similar Questions": [
+        "au_1074697: How can I download part of a playlist from YouTube with 'youtube-dl'?",
+        "au_948516: How do I download with youtube-dl to get video title as filename?",
+        "su_1661048: How to download a portion of a YouTube video"
+      ],
+      "Top-3 Scripts": [
+        "au_1074697: youtube-dl -c -f '...' --playlist-start 2 --playlist-end 8 https://youtube.com/watch/foo\n\nyoutube-dl -c -f '...' --playlist-end 5 https://youtube.com/watch/foo\n\nyoutube-dl -c -f '...' --playlist-start 7 https://youtube.com/watch/foo\n\nyoutube-dl -c -f '...' --playlist-items 2,4,6 https://youtube.com/watch/bar\n\nyoutube-dl -c --playlist-items 2-3,5,8-10,18 https://youtube.com/watch/bar\n\nyoutube-dl -c -f '...' --playlist-end 6 --playlist-reverse",
+        "au_948516: man youtube-dl\n\nyoutube-dl -o '%(title)s.%(ext)s' <URL-of-video>",
+        "su_1661048: # As scary as it looks, perfectly safe to run in a terminal \n{   \n   read -r video_url  \n   read -r audio_url\n} < <(\n   youtube-dl --get-url --youtube-skip-dash-manifest https://www.youtube.com/watch?v=MfnzBYV5fxs\n)\n\nyoutube-dl --get-url --youtube-skip-dash-manifest \"https://www.youtube.com/watch?v=MfnzBYV5fxs\""
+      ]
+    },
+    {
+      "Command": "to",
+      "Top-3 Similar Questions": [
+        "au_948516: How do I download with youtube-dl to get video title as filename?",
+        "ul_462646: A file on AkamaiGlobalHost downloads with a browser but not with curl",
+        "so_3518968: is it possbile to download one part of a file from web ?"
+      ],
+      "Top-3 Scripts": [
+        "so_3518968: curl -o filename -r 0-1048575 <a href=\"http://url/to/file\" rel=\"nofollow noreferrer\">http://url/to/file</a>",
+        "ul_626432: -) link='https://server123456.eu.somedomain.com/789/storage/uniqueID/uniqueID_db.dat'\n-) #.. Remove averything up to last /\n-) uid=\"${link##*/}\"\n-) echo \"${uid}\"\nuniqueID_db.dat\n-) #.. Remove the suffix.\n-) uid=\"${uid%_db.dat}\"\n-) echo \"${uid}\"\nuniqueID\n-)",
+        "au_857265: --playlist-items ITEM_SPEC       Playlist video items to download. Specify\n                                     indices of the videos in the playlist\n                                     separated by commas like: \"--playlist-items\n                                     1,2,5,8\" if you want to download videos\n                                     indexed 1, 2, 5, 8 in the playlist. You can\n                                     specify range: \"--playlist-items\n                                     1-3,7,10-13\", it will download the videos\n                                     at index 1, 2, 3, 7, 10, 11, 12 and 13."
+      ]
+    },
+    {
+      "Command": "ffmpeg",
+      "Top-3 Similar Questions": [
+        "au_59383: Extract part of a video with a one-line command",
+        "su_1661048: How to download a portion of a YouTube video",
+        "so_51121333: ffmpeg extract subclips from video at 10s; 30%; 60%; last 30s of a video"
+      ],
+      "Top-3 Scripts": [
+        "au_59383: ffmpeg -formats -E\n\nffmpeg -ss 00:00:30 -i orginalfile -t 00:00:05 -vcodec copy -acodec copy newfile",
+        "su_1661048: # Download 2 minutes of the video between 5 mins in to 7 mins, using timestamps:\nffmpeg -ss 00:05:00.00 -to 00:07:00.00 -i \"$video_url\" -ss 00:05:00.00 -to 00:07:00.00 -i \"$audio_url\" output.mkv\n\n# Download 2 minutes of the video between 5 mins in to 7 mins, using duration:  \nffmpeg -ss 00:05:00.00 -i \"$video_url\" -ss 00:05:00.00 -i \"$audio_url\" -t 2:00 output.mkv\n\n# Download 2 minutes of the video between 5 mins in to 7 mins, using timestamps:\nffmpeg -ss 00:05:00.00 -to 00:07:00.00 -i <video_url> -ss 00:05:00.00 -to 00:07:00.00 -i <audio_url> output.mkv\n\n# Download 2 minutes of the video between 5 mins in to 7 mins, using duration:  \nffmpeg -ss 00:05:00.00 -i <video_url> -ss 00:05:00.00 -i <audio_url> -t 2:00 output.mkv",
+        "so_51121333: DURATION=$(ffmpeg -i $file 2>&1 | grep \"Duration\" | awk '{print $2}' | sed 's/\\..*//g' | awk '{split($1, a, \":\"); print 3600*a[1] + 60*a[2] + a[3]}')"
+      ]
+    },
+    {
+      "Command": "grep",
+      "Top-3 Similar Questions": [
+        "ul_338949: Extract only version portion of a package name with bash",
+        "au_627133: How to download facebook videos by using 'youtube-dl' in linux?",
+        "so_51121333: ffmpeg extract subclips from video at 10s; 30%; 60%; last 30s of a video"
+      ],
+      "Top-3 Scripts": [
+        "au_627133: sudo apt-get remove youtube-dl\nsudo apt-get install $(apt-cache depends youtube-dl | grep Depends | sed \"s/.*ends:\\ //\" | tr '\\n' ' ')\nsudo pip install youtube-dl",
+        "so_51121333: DURATION=$(ffmpeg -i $file 2>&1 | grep \"Duration\" | awk '{print $2}' | sed 's/\\..*//g' | awk '{split($1, a, \":\"); print 3600*a[1] + 60*a[2] + a[3]}')",
+        "ul_170961: exiftool -S -n Inception.mp4 | grep ^Duration\nDuration: 275.69\nexiftool -q -p '$Duration#' Inception.mp4\n275.69"
+      ]
+    },
+    {
+      "Command": "echo",
+      "Top-3 Similar Questions": [
+        "ul_338949: Extract only version portion of a package name with bash",
+        "au_673442: Downloading youtube playlist with youtube-dl, skipping existing files",
+        "so_20669033: How to get wildcard portion of filename in Bash"
+      ],
+      "Top-3 Scripts": [
+        "ul_338949: echo $var | egrep -o '[0-9].*-[0-9]'\n1.2.6-6",
+        "au_673442: for n in *.mp3\ndo if [[ \"$n\" =~ -[-_0-9a-zA-Z]{11}.mp3$ ]]\n   then echo \"youtube ${n: -15: 11}\" >> downloaded.txt\n   fi\ndone",
+        "so_20669033: echo $foobar   # oops, looks for variable called \"foobar\"\necho ${foo}bar # the value of variable \"foo\" then literal \"bar\""
+      ]
+    }
+  ]
+}

@@ -1,0 +1,95 @@
+{
+  "Query": "How to restart the networking service?",
+  "Answers": [
+    {
+      "Command": "systemctl",
+      "MP Summary": "Control the systemd system and service manager",
+      "Most Similar TLDR Task": "Start/Stop/Restart/Reload a service",
+      "Most Similar TLDR Script": "systemctl start/stop/restart/reload {{unit}}",
+      "Top-3 Similar Questions": [
+        "su_1423959: Ubuntu Server: Fail to restart networking.service: Unit network.service not found",
+        "au_528000: How to restart the network manager applet",
+        "ul_388083: Grouping services so that failure in one restarts them all"
+      ],
+      "Top-3 Scripts": [
+        "su_1423959: systemctl list-unit-files | grep -i network\n\nsystemctl restart NetworkManager",
+        "au_528000: sudo systemctl restart network-manager",
+        "ul_388083: systemctl start all-services.target\n\nsystemctl stop all-services.target"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "ping",
+      "MP Summary": "send ICMP ECHO_REQUEST to network hosts",
+      "Most Similar TLDR Task": "Ping a host only a specific number of times",
+      "Most Similar TLDR Script": "ping -c {{count}} {{host}}",
+      "Top-3 Similar Questions": [
+        "ul_133931: Automatically restarting network connection"
+      ],
+      "Top-3 Scripts": [
+        "ul_133931: if ! ping -Q 1 -c 1 -t 1 google.com; then\n    ifdown eth0\n    sleep 3\n    ifup eth0\nfi"
+      ],
+      "Explanations about Options": {
+        "-t": "ping only. Set the IP Time to Live.",
+        "-c": "Stop after sending count ECHO_REQUEST packets. With deadline option, ping waits for\n count ECHO_REPLY packets, until the timeout expires.",
+        "-Q": "Set Quality of Service -related bits in ICMP datagrams. tos can be decimal (ping\n only) or hex number."
+      }
+    },
+    {
+      "Command": "service",
+      "MP Summary": "run a System V init script",
+      "Most Similar TLDR Task": "Start/Stop/Restart/Reload service (start/stop should always be available)",
+      "Most Similar TLDR Script": "service {{service_name}} {{start|stop|restart|reload}}",
+      "Top-3 Similar Questions": [
+        "so_21695246: Cannot restart network service",
+        "au_129436: Restarted computer during update; \"the system network service is not compatible with this version\"",
+        "au_6358: How do you restart Apache?"
+      ],
+      "Top-3 Scripts": [
+        "so_21695246: service networking restart\n\nservice networking stop\n\nservice networking start",
+        "au_129436: sudo service network-manager start\n\nyour-username-here ALL=NOPASSWD: service network-manager start",
+        "au_6358: sudo service apache2 restart"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "ip",
+      "MP Summary": "show / manipulate routing, network devices, interfaces and tunnels",
+      "Most Similar TLDR Task": "Add/Delete an ip address to an interface",
+      "Most Similar TLDR Script": "ip addr add/del {{ip}}/{{mask}} dev {{interface}}",
+      "Top-3 Similar Questions": [
+        "su_1014707: In Ubuntu: \"service networking restart\" and \"resolvconf restart\" does not take effect until reboot",
+        "au_76742: Restarting the IPv6 network stack without restarting the IPv4 network stack?",
+        "ul_483427: Unable to restart networking on Debian with Systemd"
+      ],
+      "Top-3 Scripts": [
+        "su_1014707: sudo ip route del default \nsudo ip route add default via 192.168.1.121 dev eth0\n\n#!/bin/bash\nsudo ip route del default \nsudo ip route add default via 192.168.1.121 dev eth0\nsed -i --follow-symlinks 's/First.Old.DNS.IP./First.New.DNS.IP/' /etc/resolv.conf\nsed -i --follow-symlinks 's/Second.Old.DNS.IP./Second.New.DNS.IP/' /etc/resolv.conf",
+        "au_76742: ip -6",
+        "ul_483427: ip address delete theoldip/mask dev enp0s3 \nifdown enp0s3 \nifup enp0s3"
+      ],
+      "Explanations about Options": {
+        "-6": "shortcut for -family inet6."
+      }
+    },
+    {
+      "Command": "wpa_supplicant",
+      "MP Summary": "Wi-Fi Protected Access client and IEEE 802.1X supplicant",
+      "Most Similar TLDR Task": "Join a protected wireless network and run it in a daemon",
+      "Most Similar TLDR Script": "wpa_supplicant -B -i {{interface}} -c {{path/to/wpa_supplicant_conf.conf}}",
+      "Top-3 Similar Questions": [
+        "au_209596: Need to restart network interfaces and kill wpa_supplicant, how to fix?"
+      ],
+      "Top-3 Scripts": [
+        "au_209596: auto lo\niface lo inet loopback\n\nauto wlan0\niface wlan0 inet dhcp\n    pre-up wpa_supplicant -B -Dwext -i wlan0 -c/etc/wpa_supplicant.conf\n    post-down killall -q wpa_supplicant"
+      ],
+      "Explanations about Options": {
+        "-t": "Include timestamp in debug messages.",
+        "-c": "Path to configuration file. (Per interface)",
+        "-e": "entropy file\n File for wpa_supplicant to use to maintain its internal entropy store in over\n restarts.",
+        "-D": "Driver to use (can be multiple drivers: nl80211,wext). (Per interface, see the\n available options below.)",
+        "-i": "Interface to listen on. Multiple instances of this option can be present, one per\n interface, separated by -N option (see below).",
+        "-B": "Run daemon in the background."
+      }
+    }
+  ]
+}

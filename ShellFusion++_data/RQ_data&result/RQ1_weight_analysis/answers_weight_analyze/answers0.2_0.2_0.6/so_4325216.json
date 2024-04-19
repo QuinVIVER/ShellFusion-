@@ -1,0 +1,94 @@
+{
+  "Query": "Remove all files except some from a directory",
+  "Answers": [
+    {
+      "Command": "rm",
+      "MP Summary": "remove files or directories",
+      "Most Similar TLDR Task": "Recursively remove a directory and all its subdirectories",
+      "Most Similar TLDR Script": "rm -r {{path/to/directory}}",
+      "Top-3 Similar Questions": [
+        "au_624441: How to delete all files except one named file from a specific folder",
+        "so_56009193: How to delete all files in a directory except one subdirectory?",
+        "au_256521: Removing files with a certain extension except one file from terminal"
+      ],
+      "Top-3 Scripts": [
+        "au_624441: rm !(a.txt)\n\nrm -r !(a.txt)\n\nrm -r !(a_dir)",
+        "so_56009193: find . -maxdepth 1 ! -name directorytokeep -exec echo rm -rf {} \\;",
+        "au_256521: mv filename.gif filename.gif.keep\nrm *.gif\nmv filename.gif.keep filename.gif\n\nfor X in *.gif; do\n    if [ \"$X\" != \"filename.gif\" ]; then\n        rm \"$X\"\n    fi\ndone\n\nfor X in *.gif; do [ \"$X\" != \"filename.gif\" ] && rm \"$X\"; done"
+      ],
+      "Explanations about Options": {
+        "-r": "remove directories and their contents recursively",
+        "-f": "ignore nonexistent files and arguments, never prompt"
+      }
+    },
+    {
+      "Command": "find",
+      "MP Summary": "search for files in a directory hierarchy",
+      "Most Similar TLDR Task": "Find files matching a given pattern, excluding specific paths",
+      "Most Similar TLDR Script": "find {{root_path}} -name '{{*.py}}' -not -path '{{*/site-packages/*}}'",
+      "Top-3 Similar Questions": [
+        "so_56009193: How to delete all files in a directory except one subdirectory?",
+        "au_256521: Removing files with a certain extension except one file from terminal",
+        "so_17345111: linux remove files in a directory except symlinks?"
+      ],
+      "Top-3 Scripts": [
+        "so_56009193: find . -maxdepth 1 ! -name directorytokeep -exec echo rm -rf {} \\;",
+        "au_256521: find . -maxdepth 1 -not -name 'filename.gif' -name '*.gif' -delete\n\nfind . -maxdepth 1 ! -name 'filename.gif' -name '*.gif' -delete\n\nfind . -maxdepth 1 -not -name 'filename.gif' -iname '*.gif' -delete\n\nfind . -not -name 'filename.gif' -name '*.gif' -delete\n\nfind . -maxdepth 3 -not -name 'filename.gif' -name '*.gif' -delete",
+        "so_17345111: find /path/to/dir -type f -delete"
+      ],
+      "Explanations about Options": {
+        "-d": "A synonym for -depth, for compatibility with FreeBSD, NetBSD, MacOS X and OpenBSD.",
+        "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+        "-not": "Same as ! expr, but not POSIX compliant.",
+        "-maxdepth": "Descend at most levels (a non-negative integer) levels of directories below the\n starting-points. -maxdepth 0 means only apply the tests and actions to the\n starting-points themselves."
+      }
+    },
+    {
+      "Command": "cp",
+      "MP Summary": "copy files and directories",
+      "Most Similar TLDR Task": "Copy a file into another directory, keeping the filename",
+      "Most Similar TLDR Script": "cp {{path/to/source_file.ext}} {{path/to/target_parent_directory}}",
+      "Top-3 Similar Questions": [
+        "so_51538552: Linux: how to remove all the files in a folder except ones with specific names?"
+      ],
+      "Top-3 Scripts": [
+        "so_51538552: $ cp /path/to/dir/*15.0_10.0_T0_* /other/dir"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "sed",
+      "MP Summary": "stream editor for filtering and transforming text",
+      "Most Similar TLDR Task": "Replace all occurrences of a string in a file, overwriting the file (i.e. in-place)",
+      "Most Similar TLDR Script": "sed -i 's/{{find}}/{{replace}}/g' {{filename}}",
+      "Top-3 Similar Questions": [
+        "so_45082275: How to remove duplicate headers from a file except first occurrence in linux",
+        "ul_384397: Remove a specific suffix from all the files in a directory",
+        "so_13227452: Remove multiple extensions from all files in a directory (Bash)"
+      ],
+      "Top-3 Scripts": [
+        "so_45082275: sed -i",
+        "ul_384397: for file in table_subset_*; do\n    new_name=$(echo \"$file\" | sed -E -e 's/_0+/_/')\n    mv \"$file\" \"$new_name\"\ndone",
+        "so_13227452: #!/bin/bash\nfor filename in *\ndo\n    x=`echo $filename | sed 's/\\..*\\./\\./g'`\n    mv $filename $x\ndone"
+      ],
+      "Explanations about Options": {
+        "-E": "use extended regular expressions in the script (for portability use POSIX -E).",
+        "-i": "edit files in place (makes backup if SUFFIX supplied)",
+        "-e": "add the script to the commands to be executed"
+      }
+    },
+    {
+      "Command": "rmdir",
+      "MP Summary": "remove empty directories",
+      "Most Similar TLDR Task": "Remove directory, provided it is empty. Use `rm -r` to remove non-empty directories",
+      "Most Similar TLDR Script": "rmdir {{path/to/directory}}",
+      "Top-3 Similar Questions": [
+        "ul_569361: Remove all files/directories except specified ones in multiple levels"
+      ],
+      "Top-3 Scripts": [
+        "ul_569361: find . -depth \\\n     ! -path  . \\\n     ! -path  ./folder1 \\\n     ! -path './folder1/*' \\\n     ! -path  ./file1 \\\n     ! -path  ./folder2 \\\n     ! -path  ./folder2/subfolder \\\n     ! -path  ./folder2/subfolder/onefile \\\n       \\( \\( ! -type d -exec rm {} + \\) -o \\( -type d -exec rmdir {} + \\) \\)"
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

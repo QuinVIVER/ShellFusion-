@@ -1,0 +1,87 @@
+{
+  "Query": "How do you run a SQL Server query from PowerShell?",
+  "Answers": [
+    {
+      "Command": "mysql",
+      "MP Summary": "the MySQL command-line client",
+      "Most Similar TLDR Task": "Connect to a database on another host",
+      "Most Similar TLDR Script": "mysql -h {{database_host}} {{database_name}}",
+      "Top-3 Similar Questions": [
+        "so_55682304: How to run multiple SQL query \"load local infile\" in PowerShell?",
+        "so_1602904: How do you run a single query through mysql from the command line?",
+        "su_136494: Running multiple SQL files at once"
+      ],
+      "Top-3 Scripts": [
+        "so_55682304: mysql -h $dbhost -u $dbusername -p $dbpassword -D $dbname  -e \" ` \nLOAD DATA LOCAL INFILE 'C:/Users/My_PC/Downloads/file_1.csv' `\nIGNORE INTO TABLE my_table FIELDS TERMINATED BY ',' IGNORE 1 LINES; `\nLOAD DATA LOCAL INFILE 'C:/Users/My_PC/Downloads/file_2.csv' `\nIGNORE INTO TABLE my_table FIELDS TERMINATED BY ',' IGNORE 1 LINES; `\nLOAD DATA LOCAL INFILE 'C:/Users/My_PC/Downloads/file_3.csv' `\nIGNORE INTO TABLE my_table FIELDS TERMINATED BY ',' IGNORE 1 LINES; \"",
+        "so_1602904: mysql -u <user> -p -e 'select * from schema.table'",
+        "su_136494: cat *.sql | mysql -u root -p db_name"
+      ],
+      "Explanations about Options": {
+        "-u": "The user name of the MySQL account to use for connecting to the server.",
+        "-e": "Execute the statement and quit. The default output format is like that produced with\n --batch. See Section 4.2.2.1, \u201cUsing Options on the Command Line\u201d, for some examples.\n With this option, mysql does not use the history file.",
+        "-h": "Connect to the MySQL server on the given host.",
+        "-D": "The database to use. This is useful primarily in an option file."
+      }
+    },
+    {
+      "Command": "psql",
+      "MP Summary": "PostgreSQL interactive terminal",
+      "Most Similar TLDR Task": "Execute a single SQL query or PostgreSQL command on the given database (useful in shell scripts)",
+      "Most Similar TLDR Script": "psql -c '{{query}}' {{database}}",
+      "Top-3 Similar Questions": [
+        "so_65419090: Using mulitple sql query through psql connecting from a remote client",
+        "so_43801858: Run postgres query from another server, in bash",
+        "so_60648446: Execute sql queries from shell script"
+      ],
+      "Top-3 Scripts": [
+        "so_65419090: psql <<EOF\nBEGIN;\n...\nCOMMIT;\nEOF",
+        "so_43801858: PGPASSWORD=yourpass psql -U postgres -W -h 1.2.3.4 -d testdb -p 5432",
+        "so_60648446: psql $dbopts < \"$path_to_sql_script\"\n\nquery=\"\nSELECT 1;\n...\n\"\npsql $dbopts <<< \"$query\""
+      ],
+      "Explanations about Options": {
+        "-U": " Connect to the database as the user username instead of the default. (You must have\n permission to do so, of course.)"
+      }
+    },
+    {
+      "Command": "ssh",
+      "MP Summary": "OpenSSH SSH client (remote login program)",
+      "Most Similar TLDR Task": "Run a command on a remote server",
+      "Most Similar TLDR Script": "ssh {{remote_host}} {{command -with -flags}}",
+      "Top-3 Similar Questions": [
+        "ul_548201: Running a timesten query on a remote server inside a shell script"
+      ],
+      "Top-3 Scripts": [
+        "ul_548201: #!/bin/bash\ncmd=$1\nssh dba@rhost << EOF\nttIsql \"dsn=rhostdsn\";\nselect * from table1 where id='${cmd}';\nEOF"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "ping",
+      "MP Summary": "send ICMP ECHO_REQUEST to network hosts",
+      "Most Similar TLDR Task": "Ping a host only a specific number of times",
+      "Most Similar TLDR Script": "ping -c {{count}} {{host}}",
+      "Top-3 Similar Questions": [
+        "so_36570507: Run sql query in if statement shell script"
+      ],
+      "Top-3 Scripts": [
+        "so_36570507: var=\"select col1, col2 from table_name where condition;\"\n\ncount=$(ping -c 4 192.168.7.204 | awk -F',' '{ print $2 }' | awk '{ print $1 }')\n\nif [ $count -eq 0 ]; then    \n    mysql -h 192.168.7.204 -u username -ppassword db_name <<EOFMYSQL\n$var\nEOFMYSQL    \nfi"
+      ],
+      "Explanations about Options": {
+        "-c": "Stop after sending count ECHO_REQUEST packets. With deadline option, ping waits for\n count ECHO_REPLY packets, until the timeout expires."
+      }
+    },
+    {
+      "Command": "mailx",
+      "MP Summary": "send and receive mail",
+      "Most Similar TLDR Task": "Send mail specifying the sender address",
+      "Most Similar TLDR Script": "mailx -s \"{{subject}}\" -r {{from_addr}} {{to_addr}}",
+      "Top-3 Similar Questions": [
+        "so_60529929: Execute command from query"
+      ],
+      "Top-3 Scripts": [
+        "so_60529929: "
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

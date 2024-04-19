@@ -1,0 +1,85 @@
+{
+  "Query": "How to get a response from any URL?",
+  "Answers": [
+    {
+      "Command": "curl",
+      "MP Summary": "transfer a URL",
+      "Most Similar TLDR Task": "Download a file, saving the output under the filename indicated by the URL",
+      "Most Similar TLDR Script": "curl -O {{http://example.com/filename}}",
+      "Top-3 Similar Questions": [
+        "ul_178719: Getting the redirection URL of a phishing",
+        "so_21888831: Get JSON value from URL in BASH",
+        "so_7678675: Get cURL response in bash"
+      ],
+      "Top-3 Scripts": [
+        "ul_178719: ",
+        "so_21888831: value=$(\n  curl -s \"$url\" |\n  ruby -rjson -e 'data = JSON.parse(STDIN.read); puts data[\"latest\"][\"snapshot\"]'\n)",
+        "so_7678675: curl -T \"$xmlFolder/$xmlFile\" \"$mediaFTP\" || \n  printf '%s\\n' $?\n\ncurl -T \"$xmlFolder/$xmlFile\" \"$mediaFTP\" >/dev/null || \n  printf '%s\\n' $?"
+      ],
+      "Explanations about Options": {
+        "-T": "This transfers the specified local file to the remote URL. If there is no file part\n in the specified URL, curl will append the local file name. NOTE that you must use\n a trailing / on the last directory to really prove to Curl that there is no file\n name or curl will think that your last directory name is the remote file name to\n use. That will most likely cause the upload operation to fail. If this is used on\n an HTTP(S) server, the PUT command will be used.",
+        "-s": "Silent or quiet mode. Don't show progress meter or error messages. Makes Curl\n mute. It will still output the data you ask for, potentially even to the\n terminal/stdout unless you redirect it."
+      }
+    },
+    {
+      "Command": "echo",
+      "MP Summary": "display a line of text",
+      "Most Similar TLDR Task": "Print a message with environment variables",
+      "Most Similar TLDR Script": "echo \"{{My path is $PATH}}\"",
+      "Top-3 Similar Questions": [
+        "ul_133904: How to get list of urls from a URL recursively with filtering",
+        "so_46853407: How to get correct response from curl in executable bash script?",
+        "ul_347732: Extracting substring from environment variable"
+      ],
+      "Top-3 Scripts": [
+        "ul_133904: urls=$(wget -q -O - -i urllist.txt | grep -oi \"http://vimeo.com/[0-9]\\+\")\nfor url in $urls; do\n  echo \"Downloading [$url]\"\n  vimeo_downloader.sh \"$url\"\ndone",
+        "so_46853407: #!/bin/bash\nresult=\"$(curl -i -H \"Accept: application/json\" -H \"Content-Type: application/json\" https://jsonplaceholder.typicode.com/posts/1)\"\necho the result is: \"${result}\"",
+        "ul_347732: $ export FOO=http://unix.stackexchange.com/questions/ask\n$ tmp=\"${FOO#*//}\" # remove http://\n$ echo \"${tmp%%/*}\" # remove everything after the first /\nunix.stackexchange.com\n\n$ echo \"$FOO\" | python -c 'import urlparse; import sys;  print urlparse.urlparse(sys.stdin.read()).netloc' \nunix.stackexchange.com"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "file",
+      "MP Summary": "determine file type",
+      "Most Similar TLDR Task": "Give a description of the type of the specified file. Works fine for files with no file extension",
+      "Most Similar TLDR Script": "file {{filename}}",
+      "Top-3 Similar Questions": [
+        "so_32796453: Extract URLs (multiple lines) from texttable",
+        "so_37351647: Get path from OS X file reference URL alias (file:///.file/id=...)",
+        "ul_606937: Extract URLs from a large file"
+      ],
+      "Top-3 Scripts": [
+        "so_32796453: awk -F '[[:blank:]]*\\\\|[[:blank:]]*' 'NR<3 || NF<5{next}\n   $2{if (url) print url; url=$5; next}\n   {url=url $5}\n   END{print url}' file",
+        "so_37351647: osascript -e 'get posix path of posix file \"file:///.file/id=123.456\" -- kthxbai'",
+        "ul_606937: grep -o -E \"https?://[][[:alnum:]._~:/?#@!$&'()*+,;%-]+\" file"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "firefox",
+      "MP Summary": "a free and open source web browser from Mozilla",
+      "Most Similar TLDR Task": "Use a specific profile to allow multiple separate instances of Firefox to run at once",
+      "Most Similar TLDR Script": "firefox --profile {{path/to/directory}} {{https://example.com/}}",
+      "Top-3 Similar Questions": [
+        "au_887234: How to get the URL from a firefox tab from the terminal?"
+      ],
+      "Top-3 Scripts": [
+        "au_887234: ~/.mozilla/firefox/*.default/sessionstore-backups/recovery.js\n\n~/.mozilla/firefox/*.default/sessionstore.js\n\n~/.mozilla/firefox/*.default/sessionstore-backups/previous.js\n\ncat $HOME/.mozilla/firefox/*.default/sessionstore-backups/recovery.js | \\\nsed \"s/\\\\_closedTabs.*//\" | \\\nsed \"s/{/\\n{/g\" | \\\negrep -o 'url.*attributes' | \\\ncut -d\\\" -f3\n\nprintf \"\\n# CurrentSession:\\n\"; \\\ncat $HOME/.mozilla/firefox/*.default/sessionstore-backups/recovery.js | \\\nsed \"s/\\\\_closedTabs/\\{\\\"url\\\":\\\"# ClosedTabs:\\\"attributes/g\" | \\\nsed \"s/\\\\lastSessionState/\\{\\\"url\\\":\\\"# LastSession:\\\"attributes/\" | \\\nsed \"s/{/\\n{/g\" | \\\negrep -o 'url\":\"*.*attributes*' | \\\ncut -d\\\" -f3 | \\\nsed \"s/#/\\n#/\" \\\n; echo\n\ncat $HOME/.mozilla/firefox/*.default/sessionstore-backups/recovery.js | sed \"s/\\\\_closedTabs.*//\" | sed \"s/{/\\n{/g\" | egrep 'url\":\"http*' | cut -d\\\" -f4\n\nhttps://askubuntu.com/\nhttps://www.google.bg/search?client=ubuntu&channel=fs&q=firefox&ie=utf-8&oe=utf-8&gfe_rd=cr&ei=pTKyWIitGqTs8wewj4KgDQ\nhttps://www.mozilla.org/bg/firefox/new/\nhttps://www.mozilla.org/en-US/\n\ncat $HOME/.mozilla/firefox/*.default/sessionstore-backups/recovery.js | \\\nsed \"s/\\\\_closedTabs.*//\" | \\\nsed \"s/{/\\n{/g\" | \\\nsed \"s/entries/url\\\":\\\"# TAB:/g\" | \\\negrep 'url\":\"*' | \\\ncut -d\\\" -f4 | \\\nsed \"s/#/\\n#/\"\n\n# TAB:\nabout:startpage\nhttps://askubuntu.com/\n\n# TAB:\nhttps://www.google.bg/search?client=ubuntu&channel=fs&q=firefox&ie=utf-8&oe=utf-8&gfe_rd=cr&ei=pTKyWIitGqTs8wewj4KgDQ\nhttps://www.mozilla.org/bg/firefox/new/\nhttps://www.mozilla.org/en-US/\n\nprintf \"\\n# CurrentSession:\\n\"; \\\ncat $HOME/.mozilla/firefox/*.default/sessionstore-backups/recovery.js | \\\nsed \"s/\\\\_closedTabs/\\{\\\"url\\\":\\\"# ClosedTabs:/g\" | \\\nsed \"s/\\\\lastSessionState/\\{\\\"url\\\":\\\"# LastSession:/\" | \\\nsed \"s/entries/url\\\":\\\"# TAB:/g\" | \\\nsed \"s/{/\\n{/g\" | \\\negrep 'url\":\"*' | \\\ncut -d\\\" -f4 | \\\nsed \"s/#/\\n#/\" \\\n; echo\n\ncat $HOME/.mozilla/firefox/*.default/sessionstore.js \\\n..."
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "nginx",
+      "MP Summary": "HTTP and reverse proxy server, mail proxy server",
+      "Most Similar TLDR Task": "Reload the configuration by sending a signal with no downtime",
+      "Most Similar TLDR Script": "nginx -s reload",
+      "Top-3 Similar Questions": [
+        "so_47287018: How to get a response number of a HTTPS request"
+      ],
+      "Top-3 Scripts": [
+        "so_47287018: "
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

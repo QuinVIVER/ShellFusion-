@@ -1,0 +1,93 @@
+{
+    "Answers": [
+        {
+            "Command": "pgrep",
+            "Explanations about Options": {
+                "-P(C)": "You used \"pgrep -P 6330\" and the output was empty because there were no child processes. The solution to this exact problem is \"pgrep -P 6330\", but the rest of the question suggests maybe \"child process IDs\" are not what you really want.",
+                "-P(M)": "Only match processes whose parent process ID is listed."
+            },
+            "MP Summary": "look up or signal processes based on name and other attributes",
+            "Most Similar TLDR Script": "pgrep {{process_name}}",
+            "Most Similar TLDR Task": "Return PIDs of any running processes with a matching command string",
+            "Top-3 Scripts": [
+                "su_1590161: pgrep -P 6330",
+                "so_17743879: pgrep -P $your_process1_pid",
+                "ul_74874: # pgrep solution\n$ pgrep \"run_tcp\" | pkill -SIGKILL\n\n# killall\nkillall -SIGKILL -r run_tcp"
+            ],
+            "Top-3 Similar Questions": [
+                "su_1590161: List child process IDs",
+                "so_17743879: How to get child process from parent process",
+                "ul_74874: pkill can't kill processes with parent process id 1"
+            ]
+        },
+        {
+            "Command": "ps",
+            "Explanations about Options": {
+                "-L(M)": "Show threads, possibly with LWP and NLWP columns.",
+                "-e(M)": "Select all processes. Identical to -A.",
+                "-p(M)": "Select by PID. This selects the processes whose process ID numbers appear in\n pidlist. Identical to p and --pid."
+            },
+            "MP Summary": "report a snapshot of the current processes.",
+            "Most Similar TLDR Script": "ps -o ppid= -p {{pid}}",
+            "Most Similar TLDR Task": "Get the parent pid of a process",
+            "Top-3 Scripts": [
+                "so_24786705: ps -o ppid= \"$ID\"\n\nread NEXT_PPID < <(exec ps -o ppid= \"$ID\")",
+                "su_1590161: ps -AL\n\nps -o lwp= -Lp 6330\n\nps -o lwp= -Lp 6330 | grep -v '^ *6330$'",
+                "au_977762: ps -eo pid,comm"
+            ],
+            "Top-3 Similar Questions": [
+                "so_24786705: how to find a parent id if child id is given in shell script",
+                "su_1590161: List child process IDs",
+                "au_977762: Get process ID and id name"
+            ]
+        },
+        {
+            "Command": "pkill",
+            "Explanations about Options": {
+                "-G(M)": "Only match processes whose real group ID is listed. Either the numerical or\n symbolical value may be used.",
+                "-L(M)": "Fail if pidfile (see -F) not locked.",
+                "-P(M)": "Only match processes whose parent process ID is listed."
+            },
+            "MP Summary": "look up or signal processes based on name and other attributes",
+            "Most Similar TLDR Script": "pkill -9 {{process_name}}",
+            "Most Similar TLDR Task": "Kill all processes which match",
+            "Top-3 Scripts": [
+                "ul_76832: $ pkill -P 1 process.pl",
+                "ul_74874: pkill -SIGKILL\n\nDefines the signal to send to each matched process.  Either the\n  numeric  or  the symbolic signal name can be used.  (pkill only.)\n\npkill -SIGKILL \"run_tcp\"\n\n$ pkill -SIGTERM sleepy.bash\n\npkill -SIGTERM \"sleepy.bash\"\n\n$ pkill -SIGTERM -f \"sleepy.bash\"\n[1]   Terminated              bash sleepy.bash\n[2]   Terminated              bash sleepy.bash\n[3]   Terminated              bash sleepy.bash\n[4]-  Terminated              bash sleepy.bash\n[5]+  Terminated              bash sleepy.bash\n\n# pgrep solution\n$ pgrep \"run_tcp\" | pkill -SIGKILL\n\n# killall\nkillall -SIGKILL -r run_tcp"
+            ],
+            "Top-3 Similar Questions": [
+                "ul_76832: How to kill all processes that don't have specific parent process?",
+                "ul_74874: pkill can't kill processes with parent process id 1"
+            ]
+        },
+        {
+            "Command": "wait",
+            "Explanations about Options": {},
+            "MP Summary": "await process completion",
+            "Most Similar TLDR Script": "wait {{pid}}",
+            "Most Similar TLDR Task": "Wait for a process to finish given its process ID (PID) and return its exit status",
+            "Top-3 Scripts": [
+                "so_21793755: wait()"
+            ],
+            "Top-3 Similar Questions": [
+                "so_41658406: When a child process is created with fork, the parent ID is not as the same as the parent ID",
+                "so_27755420: Get child list of parent process in C",
+                "so_21793755: Child process cannot read after the exiting of parent process"
+            ]
+        },
+        {
+            "Command": "top",
+            "Explanations about Options": {
+                "-u(M)": "| -U :User-filter-mode as: -u | -U number or name\n Display only processes with a user id or user name matching that given. The `-u'\n option matches on effective user whereas the `-U' option matches on any user (real,\n effective, saved, or filesystem)."
+            },
+            "MP Summary": "display Linux processes",
+            "Most Similar TLDR Script": "top -u {{username}}",
+            "Most Similar TLDR Task": "Show only processes owned by given user",
+            "Top-3 Scripts": [],
+            "Top-3 Similar Questions": [
+                "su_1590161: List child process IDs"
+            ]
+        }
+    ],
+    "Query": "How do I get the parent process ID of a given child process?"
+}

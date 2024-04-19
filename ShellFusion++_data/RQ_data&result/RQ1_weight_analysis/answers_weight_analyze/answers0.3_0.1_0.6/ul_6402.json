@@ -1,0 +1,94 @@
+{
+  "Query": "How to remove an audio track from an mp4 video file?",
+  "Answers": [
+    {
+      "Command": "ffmpeg",
+      "MP Summary": "ffmpeg video converter",
+      "Most Similar TLDR Task": "Remux MKV video to MP4 without re-encoding audio or video streams",
+      "Most Similar TLDR Script": "ffmpeg -i {{input_video}}.mkv -codec copy {{output_video}}.mp4",
+      "Top-3 Similar Questions": [
+        "au_977162: How to remove a few seconds from .mp4 file using ffmpeg?",
+        "au_706933: Remove dead pixel from video material (not screen)",
+        "su_56093: Remove Audio stream from XVID files"
+      ],
+      "Top-3 Scripts": [
+        "au_977162: ffmpeg  -t 00:11:00 -i input.mp4 -map 0 -c copy segment1.mp4\nffmpeg -ss 00:11:10 -i input.mp4 -map 0 -c copy segment2.mp4\n\nffmpeg -f concat -i input.txt -map 0 -c copy output.mp4\n\nffmpeg -i input.mp4 -filter_complex \\\n  \"[0:v]trim=end=660,setpts=N/FRAME_RATE/TB[v0]; \\\n   [0:a]atrim=end=660,asetpts=N/SR/TB[a0]; \\\n   [0:v]trim=start=670,setpts=N/FRAME_RATE/TB[v1]; \\\n   [0:a]atrim=start=670,asetpts=N/SR/TB[a1]; \\\n   [v0][a0][v1][a1]concat=n=2:v=1:a=1[v][a]\" \\\n  -map \"[v]\" -map \"[a]\" output.mp4",
+        "au_706933: ffmpeg -i input.mp4 -vf \\\n\"delogo=x=10:y=120:w=1:h=1, \\\n delogo=x=862:y=438:w=1:h=1, \\\n delogo=x=56:y=207:w=1:h=1, \\\n delogo=x=1259:y=943:w=1:h=1\" \\\n-c:a copy cleaned-output.mp4\n\nffmpeg -i input -ss 5 -vframes 1 output.png",
+        "su_56093: "
+      ],
+      "Explanations about Options": {
+        "-i": "input file url",
+        "-filter_complex": "Define a complex filtergraph, i.e. one with arbitrary number of inputs and/or outputs.\n For simple graphs - those with one input and one output of the same type - see the\n -filter options. filtergraph is a description of the filtergraph, as described in the\n ``Filtergraph syntax'' section of the ffmpeg-filters manual."
+      }
+    },
+    {
+      "Command": "pactl",
+      "MP Summary": "Control a running PulseAudio sound server",
+      "Most Similar TLDR Task": "List all sinks (or other types - sinks are outputs and sink-inputs are active audio streams)",
+      "Most Similar TLDR Script": "pactl list {{sinks}} short",
+      "Top-3 Similar Questions": [
+        "ul_263263: Remove PulseAudio device"
+      ],
+      "Top-3 Scripts": [
+        "ul_263263: pactl unload-module\n\npactl list\n\npactl unload-module 24"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "cp",
+      "MP Summary": "copy files and directories",
+      "Most Similar TLDR Task": "Copy a file into another directory, keeping the filename",
+      "Most Similar TLDR Script": "cp {{path/to/source_file.ext}} {{path/to/target_parent_directory}}",
+      "Top-3 Similar Questions": [
+        "ul_89242: Remove nth frames of a gif (remove a frame every n frames)",
+        "au_24904: Any way to remove Totem but still have video thumbnails in Nautilus?"
+      ],
+      "Top-3 Scripts": [
+        "ul_89242: j=0; for i in $(ls temp_*gif); do if [ $(( $j%2 )) -eq 0 ]; then cp $i sel_`printf %02d $j`.gif; fi; j=$(echo \"$j+1\" | bc); done",
+        "au_24904: sudo cp /usr/share/applications/totem.desktop ~/.local/share/applications/totem.desktop"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "file",
+      "MP Summary": "determine file type",
+      "Most Similar TLDR Task": "Look inside a zipped file and determine the file type(s) inside",
+      "Most Similar TLDR Script": "file -z {{foo.zip}}",
+      "Top-3 Similar Questions": [
+        "au_685174: Remove audio Tracks from a video file",
+        "ul_82439: How to delete a video after it has been watched completely?",
+        "au_977162: How to remove a few seconds from .mp4 file using ffmpeg?"
+      ],
+      "Top-3 Scripts": [
+        "au_685174: avconv -i $file -map 0:0 -map 0:2 -acodec copy -vcodec copy $outfile\n\ndir=\"*.avi\"\nfor file in $dir\ndo \n avconv -i $file -map 0:0 -map 0:2 -acodec copy -vcodec copy $outfile\ndone",
+        "ul_82439: $ mplayer-resumer options path/to/file",
+        "au_977162: file 'segment1.mp4'\nfile 'segment2.mp4'"
+      ],
+      "Explanations about Options": {
+        "-p": "On systems that support utime(3) or utimes(2), attempt to preserve the access time\n of files analyzed, to pretend that file never read them.",
+        "-v": "Print the version of the program and exit.",
+        "-d": "Prints internal debugging information to stderr.",
+        "-e": "Exclude the test named in testname from the list of tests made to determine the file\n type. Valid test names are:",
+        "-c": "Cause a checking printout of the parsed form of the magic file. This is usually\n used in conjunction with the -m flag to debug a new magic file before installing it.",
+        "-m": "Specify an alternate list of files and directories containing magic. This can be a\n single item, or a colon-separated list. If a compiled magic file is found alongside\n a file or directory, it will be used instead."
+      }
+    },
+    {
+      "Command": "rm",
+      "MP Summary": "remove files or directories",
+      "Most Similar TLDR Task": "Remove files in verbose mode, printing a message for each removed file",
+      "Most Similar TLDR Script": "rm -v {{path/to/directory/*}}",
+      "Top-3 Similar Questions": [
+        "so_27215741: Removing renamed/deleted folders from git tracking",
+        "ul_89242: Remove nth frames of a gif (remove a frame every n frames)",
+        "so_38624417: FFmpeg concat - remove source files"
+      ],
+      "Top-3 Scripts": [
+        "so_27215741: git rm --cached xmlparser/*",
+        "ul_89242: ",
+        "so_38624417: find tsfolder -name '*.ts' | while read filename; do cat \"$filename\" >> tsfolder/out.tmp; rm \"$filename\"; done\n\nrm \"$filename\"\n\n$ ls tsfolder\n20170125.ts   20170126.ts   20170127.ts\n$ find tsfolder -name '*.ts' | while read filename; do cat \"$filename\" >> tsfolder/out.tmp; rm \"$filename\"; done\n$ ls tsfolder\nout.tmp"
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

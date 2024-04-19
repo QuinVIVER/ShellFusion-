@@ -1,0 +1,101 @@
+{
+  "Query": "Unix/Linux find and sort by date modified",
+  "Answers": [
+    {
+      "Command": "date",
+      "MP Summary": "print or set the system date and time",
+      "Most Similar TLDR Task": "Convert a specific date to the Unix timestamp format",
+      "Most Similar TLDR Script": "date -d \"{{2018-09-01 00:00}}\" +%s --utc",
+      "Top-3 Similar Questions": [
+        "so_3302900: How to Sort Output from several Log Files by date",
+        "so_61893412: It is possible to sort the proccesses by a given date in bash?",
+        "so_46005111: Construct a new date by adding X number of hours (Unix Shell)"
+      ],
+      "Top-3 Scripts": [
+        "so_3302900: ",
+        "so_61893412: ",
+        "so_46005111: # your date variable\ndt=$(date -d '2016-08-15 11:10:15')\n\n# add 1 hour to $dt now\ndate -d \"$dt +1 hour\"\nMon Aug 15 12:10:15 EDT 2016"
+      ],
+      "Explanations about Options": {
+        "-d": "display time described by STRING, not 'now'"
+      }
+    },
+    {
+      "Command": "sort",
+      "MP Summary": "sort lines of text files",
+      "Most Similar TLDR Task": "Sort a file preserving only unique lines",
+      "Most Similar TLDR Script": "sort -u {{path/to/file}}",
+      "Top-3 Similar Questions": [
+        "so_27189663: How to sort 'find' results in bash by size",
+        "au_61179: Find the latest file by modified date",
+        "so_16858013: sort files found by command 'find'"
+      ],
+      "Top-3 Scripts": [
+        "so_27189663: find . -type f -size +2G -printf \"%kKB %p\\n\" | sort -n\n\nsort -n\n\n$ find . -type f -size +1M -printf \"%p %kKB\\n\" | sort -n -k2\n./arrr.txt.gz 1664KB\n./brrr.gz 32388KB",
+        "au_61179: find /path -printf '%T+ %p\\n' | sort -r | head",
+        "so_16858013: find ... -print0 |\nsort -z -t_ -k6n -k3n |\nxargs -r0 ./myScript.py --takeFiles"
+      ],
+      "Explanations about Options": {
+        "-z": "line delimiter is NUL, not newline",
+        "-r": "reverse the result of comparisons",
+        "-n": "compare according to string numerical value"
+      }
+    },
+    {
+      "Command": "touch",
+      "MP Summary": "change file timestamps",
+      "Most Similar TLDR Task": "Set the times on a file to a specific date and time",
+      "Most Similar TLDR Script": "touch -t {{YYYYMMDDHHMM.SS}} {{filename}}",
+      "Top-3 Similar Questions": [
+        "so_29526886: unix find oldest file in directory by date in filename",
+        "su_560598: How list file by range of date?",
+        "so_63422740: Bash shell script to modify the images' date created by reading the creation date from XMP file"
+      ],
+      "Top-3 Scripts": [
+        "so_29526886: ",
+        "su_560598: touch -t 201302200815 freds_accident\n  find . -type f ! -newer freds_accident\n  rm freds_accident\n\nman touch\n\ninfo touch",
+        "so_63422740: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "find",
+      "MP Summary": "search for files in a directory hierarchy",
+      "Most Similar TLDR Task": "Find files modified in the last 7 days, and delete them",
+      "Most Similar TLDR Script": "find {{root_path}} -mtime {{-7}} -delete",
+      "Top-3 Similar Questions": [
+        "so_27189663: How to sort 'find' results in bash by size",
+        "au_61179: Find the latest file by modified date",
+        "so_12586584: Find file by -m not finding files modified within date"
+      ],
+      "Top-3 Scripts": [
+        "so_27189663: find . -type f -size +2G -printf \"%kKB %p\\n\" | sort -n\n\n$ find . -type f -size +1M -printf \"%p %kKB\\n\" | sort -n -k2\n./arrr.txt.gz 1664KB\n./brrr.gz 32388KB",
+        "au_61179: find /path -printf '%T+ %p\\n' | sort -r | head",
+        "so_12586584: find \"/path-to-file/pdfs/\" -mtime -56 -mtime +27"
+      ],
+      "Explanations about Options": {
+        "-printf": "True; print format on the standard output, interpreting `\\' escapes and `%'\n directives. Field widths and precisions can be specified as with the `printf' C\n function. Please note that many of the fields are printed as %s rather than %d,\n and this may mean that flags don't work as you might expect. This also means that\n the `-' flag does work (it forces fields to be left-aligned). Unlike -print,\n -printf does not add a newline at the end of the string. The escapes and\n directives are:",
+        "-mtime": "File's data was last modified n*24 hours ago. See the comments for -atime to\n understand how rounding affects the interpretation of file modification times.",
+        "-size": "File uses n units of space, rounding up. The following suffixes can be used:",
+        "-type": "File is of type c:"
+      }
+    },
+    {
+      "Command": "printf",
+      "MP Summary": "format and print data",
+      "Most Similar TLDR Task": "Print a text message composed with environment variables",
+      "Most Similar TLDR Script": "printf \"{{var1: %s\\tvar2: %s\\n}}\" \"{{$VAR1}}\" \"{{$VAR2}}\"",
+      "Top-3 Similar Questions": [
+        "so_16858013: sort files found by command 'find'",
+        "so_52104338: Sort by length of column",
+        "au_443571: Sort files in directory by creation date (Birth)"
+      ],
+      "Top-3 Scripts": [
+        "so_16858013: ",
+        "so_52104338: awk -F: '{printf(\"%d %s\\n\", length($4), $0)}' input.txt | sort -nr | cut -d' ' -f2- > output.txt",
+        "au_443571: get_crtime() {\n\n    for target in \"${@}\"; do\n        inode=$(ls -di \"${target}\" | cut -d ' ' -f 1)\n        fs=$(df  --output=source \"${target}\"  | tail -1)\n        crtime=$(sudo debugfs -R 'stat <'\"${inode}\"'>' \"${fs}\" 2>/dev/null | \n        grep -oP 'crtime.*--\\s*\\K.*')\n        printf \"%s\\t%s\\n\" \"${target}\" \"${crtime}\"\n    done\n}"
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

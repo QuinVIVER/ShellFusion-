@@ -1,0 +1,93 @@
+{
+  "Query": "How do I get the MD5 sum of a directory's contents as one sum?",
+  "Answers": [
+    {
+      "Command": "md5sum",
+      "MP Summary": "compute and check MD5 message digest",
+      "Most Similar TLDR Task": "Calculate MD5 checksums for multiple files",
+      "Most Similar TLDR Script": "md5sum {{filename1}} {{filename2}}",
+      "Top-3 Similar Questions": [
+        "au_53846: How to get the MD5 hash of a string directly in the terminal?",
+        "ul_231951: BASH: Getting the md5 hash of file on remote server",
+        "au_685775: Bash get MD5 of online file"
+      ],
+      "Top-3 Scripts": [
+        "au_53846: ~$ echo -n Welcome | md5sum\n83218ac34c1834c26781fe4bde918ee4  -",
+        "ul_231951: ssh hlin117@server md5sum /path/to/file.txt\n\nscp hlin117@server:/path/to/file.txt .\nmd5sum file.txt\nrm file.txt\n\nssh hlin117@server cat /path/to/file.txt | md5sum",
+        "au_685775: curl -sL http://www.your.fi/le | md5sum | cut -d ' ' -f 1\n\nonline_md5=\"$(curl -sL http://www.your.fi/le | md5sum | cut -d ' ' -f 1)\"\nlocal_md5=\"$(md5sum \"$file\" | cut -d ' ' -f 1)\"\n\nif [ \"$online_md5\" = \"$local_md5\" ]; then\n    echo \"hurray, they are equal!\"\nfi"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "awk",
+      "MP Summary": "pattern scanning and processing language",
+      "Most Similar TLDR Task": "Sum the values in the first column of a file and print the total",
+      "Most Similar TLDR Script": "awk '{s+=$1} END {print s}' {{filename}}",
+      "Top-3 Similar Questions": [
+        "so_61638371: How to get total sum of all values of a data frame using awk",
+        "ul_655386: How to return the sum of returned values in Linux?",
+        "so_70219812: Getting sum of values in a particular column with some conditions"
+      ],
+      "Top-3 Scripts": [
+        "so_61638371: awk 'BEGIN{FS=\",\"} FNR>1{for(i=1;i<=NF;i++){sum+=$i}} END{print sum}'  Input_file",
+        "ul_655386: <command> | awk -F: '$1 == \"Gups\"{sum+=$2}END{print sum}'",
+        "so_70219812: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "cp",
+      "MP Summary": "copy files and directories",
+      "Most Similar TLDR Task": "Recursively copy a directory's contents to another location (if the destination exists, the directory is copied inside it)",
+      "Most Similar TLDR Script": "cp -r {{path/to/source_directory}} {{path/to/target_directory}}",
+      "Top-3 Similar Questions": [
+        "so_43168955: Get all content from a folder with subfolder copied to another directory with bash",
+        "au_568395: Is there any method to download all the content of etc directory"
+      ],
+      "Top-3 Scripts": [
+        "so_43168955: find . -type f -exec cp {} /some/new/location \\;",
+        "au_568395: sudo mkdir /media/os\nsudo mount /dev/sdaX /media/os   # Mounting the root partition on /media/os directory.\nsudo cp -Ri /etc/default /media/os/etc\nsudo umount /dev/sdaX"
+      ],
+      "Explanations about Options": {
+        "-R": "copy directories recursively",
+        "-i": "prompt before overwrite (overrides a previous -n option)"
+      }
+    },
+    {
+      "Command": "find",
+      "MP Summary": "search for files in a directory hierarchy",
+      "Most Similar TLDR Task": "Find files matching a given pattern, excluding specific paths",
+      "Most Similar TLDR Script": "find {{root_path}} -name '{{*.py}}' -not -path '{{*/site-packages/*}}'",
+      "Top-3 Similar Questions": [
+        "so_70143216: Getting the contents of a directory excluding everything inside .git in bash",
+        "ul_538430: Get size of directory (including all its content) irrespective of disk usage",
+        "so_64858566: How to get the length of the sum of audio files using sox?"
+      ],
+      "Top-3 Scripts": [
+        "so_70143216: find . ! -path './.git/*' ! -path ./.git -type f -name '*.txt'\n\n# task 1\nfind . -path './.git' -prune -o -type f -name '*.txt' -print\n\n# task 2\nfind . -path './.git' -prune -o -type f ! -name '*.txt' -print\n\n# task 3\nfind . -path './.git' -prune -o -type d -print",
+        "ul_538430: find . -type f,l -printf '%s\\n' | awk '{s+=$0}; END{print s}'\n\nfind . | wc -c",
+        "so_64858566: #!/bin/bash\ntotal=0\ndir=/some/dir\nwhile read -r f; do\n    d=$(soxi -D \"$f\")\n    echo \"$d s. in $f\"\n    total=$(echo \"$total + $d\" | bc)\ndone < <(find \"$dir\" -iname \"*.wav\" | sort -R | head -3)\n\necho \"Total : $total seconds\"\n\n#!/bin/bash\ntotal=0\ndir=/some/dir\nwhile read -r f; do\n    d=$(mediainfo --Output='General;%Duration%' \"$f\")\n    ((total += d))\ndone < <(find \"$dir\" -iname \"*.wav\")\n\necho \"Total : $total ms. or $((total/1000)) seconds\""
+      ],
+      "Explanations about Options": {
+        "-prune": "True; if the file is a directory, do not descend into it. If -depth is given, then\n -prune has no effect. Because -delete implies -depth, you cannot usefully use\n -prune and -delete together.\n For example, to skip the directory `src/emacs' and all files and directories\n under it, and print the names of the other files found, do something like this:\n find . -path ./src/emacs -prune -o -print",
+        "-print": "Quoting is handled in the same way as for -printf and -fprintf. If you are using\n find in a script or in a situation where the matched files might have arbitrary\n names, you should consider using -print0 instead of -print.",
+        "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+        "-type": "File is of type c:",
+        "-iname": "Like -name, but the match is case insensitive. For example, the patterns `fo*' and\n `F??' match the file names `Foo', `FOO', `foo', `fOo', etc. The pattern `*foo*`\n will also match a file called '.foobar'."
+      }
+    },
+    {
+      "Command": "rm",
+      "MP Summary": "remove files or directories",
+      "Most Similar TLDR Task": "Remove files in verbose mode, printing a message for each removed file",
+      "Most Similar TLDR Script": "rm -v {{path/to/directory/*}}",
+      "Top-3 Similar Questions": [
+        "ul_231951: BASH: Getting the md5 hash of file on remote server"
+      ],
+      "Top-3 Scripts": [
+        "ul_231951: scp hlin117@server:/path/to/file.txt .\nmd5sum file.txt\nrm file.txt"
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

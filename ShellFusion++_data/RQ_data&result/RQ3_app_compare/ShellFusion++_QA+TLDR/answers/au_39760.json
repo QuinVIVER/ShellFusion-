@@ -1,0 +1,84 @@
+{
+  "Query": "How can I control HDD spin down time?",
+  "Answers": [
+    {
+      "Command": "sleep",
+      "MP Summary": "delay for a specified amount of time",
+      "Most Similar TLDR Task": "Delay in hours",
+      "Most Similar TLDR Script": "sleep {{hours}}h",
+      "Top-3 Similar Questions": [
+        "so_35852060: How can I control the number of running processes?",
+        "su_789653: init.d control script for virtualbox VM",
+        "ul_97224: Setting time through GPS dongle"
+      ],
+      "Top-3 Scripts": [
+        "so_35852060: ",
+        "su_789653: ",
+        "ul_97224: sleep 2"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "hdparm",
+      "MP Summary": "get/set SATA/IDE device parameters",
+      "Most Similar TLDR Task": "Force a drive to immediately enter standby mode (usually causes a drive to spin down)",
+      "Most Similar TLDR Script": "sudo hdparm -y /dev/{{device}}",
+      "Top-3 Similar Questions": [
+        "au_196473: Setting SATA HDD spindown time for Western Digital Green drives"
+      ],
+      "Top-3 Scripts": [
+        "au_196473: sudo hdparm -C /dev/sd[a-z]"
+      ],
+      "Explanations about Options": {
+        "-C": "Check the current IDE power mode status , which will always be one of unknown (drive\n does not support this command), active/idle (normal operation), standby (low power\n mode, drive has spun down), or sleeping (lowest power mode, drive is completely\n shut down). The -S, -y, -Y, and -Z options can be used to manipulate the IDE power\n modes."
+      }
+    },
+    {
+      "Command": "install",
+      "MP Summary": "copy files and set attributes",
+      "Most Similar TLDR Task": "Copy files and apply access/modification times of source to destination",
+      "Most Similar TLDR Script": "install -p {{path/to/source}} {{path/to/destination}}",
+      "Top-3 Similar Questions": [
+        "au_196473: Setting SATA HDD spindown time for Western Digital Green drives",
+        "au_1234650: How do I control the icon set for 20.04?",
+        "au_663400: control brightness on pc"
+      ],
+      "Top-3 Scripts": [
+        "au_196473: wget https://downloads.sourceforge.net/project/hd-idle/hd-idle-1.04.tgz\ntar xvfz hd-idle*.tgz\ncd hd-idle\nsudo apt-get install debhelper\nsudo dpkg-buildpackage -uc -us -rfakeroot\ncd ..\nsudo dpkg -i hd-idle_*.deb\n# To run at startup:\nsudo update-rc.d hd-idle defaults\nnano /etc/default/hd-idle",
+        "au_1234650: sudo apt-get update && sudo apt install gnome-tweaks",
+        "au_663400: sudo apt-get install redshift"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "VBoxManage",
+      "MP Summary": "x86 virtualization solution",
+      "Most Similar TLDR Task": "Shutdown the virtual machine and save its current state",
+      "Most Similar TLDR Script": "VBoxManage controlvm {{name|uuid}} savestate",
+      "Top-3 Similar Questions": [
+        "ul_505650: Manually set time overwritten without a time sync active (in a VM)",
+        "au_35566: How do I manually set the system time in VirtualBox?",
+        "su_789653: init.d control script for virtualbox VM"
+      ],
+      "Top-3 Scripts": [
+        "ul_505650: VBoxManage setextradata \"<i>VM name</i>\" \"VBoxInternal/Devices/VMMDev/0/Config/GetHostTimeDisabled\" 1",
+        "au_35566: VBoxManage setextradata \"Ubuntu 12.04 32bit\"\n\"VBoxInternal/Devices/VMMDev/0/Config/GetHostTimeDisabled\" 1",
+        "su_789653: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "systemctl",
+      "MP Summary": "Control the systemd system and service manager",
+      "Most Similar TLDR Task": "Enable/Disable a unit to be started on bootup",
+      "Most Similar TLDR Script": "systemctl enable/disable {{unit}}",
+      "Top-3 Similar Questions": [
+        "ul_329162: Setting Samba Share HDD Space available to Win10"
+      ],
+      "Top-3 Scripts": [
+        "ul_329162: systemctl stop smb\numount /dev/mapper/lvm_pool-Storage\nmount /mnt/hdd/Plex-Storage\nsystemctl stop smb"
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

@@ -1,0 +1,93 @@
+{
+  "Query": "How to grep, excluding some patterns?",
+  "Answers": [
+    {
+      "Command": "grep",
+      "MP Summary": "print lines that match patterns",
+      "Most Similar TLDR Task": "Invert match for excluding specific strings",
+      "Most Similar TLDR Script": "grep -v {{search_pattern}}",
+      "Top-3 Similar Questions": [
+        "so_24837635: grep excluding file name pattern",
+        "so_25781642: How to search for a pattern using grep and exclude another pattern",
+        "so_49521913: Exclude subdirectories"
+      ],
+      "Top-3 Scripts": [
+        "so_24837635: grep -r --exclude=\"*.cmd\"  \"ckim\" ./",
+        "so_25781642: grep -P 'http://\\S*tt(?!p:)' file\n\ngrep -cP 'http://\\S*tt(?!p:)' file\n\ngrep -P '(<=http://)?\\S*tt(?!p:)' file\n\ngrep -oP '.*?\\K(http:/)?/\\S*tt(?!p:)\\S*' file\n\ngrep -oP '.*?\\Khttp://\\S*tt(?!p:)\\S*' file\n\nhttp://example.com/redirect?http://some/anyttany.html\nhttp://example.com/http.html\nhttp://example.com/tt.html\nhttp://example.com/somett.html\nhttp://example.com/somettsome.html",
+        "so_49521913: grep \"^${myPath}/[^/]*$\""
+      ],
+      "Explanations about Options": {
+        "-P": "Interpret PATTERNS as Perl-compatible regular expressions (PCREs). This option is\n experimental when combined with the -z (--null-data) option, and grep -P may warn\n of unimplemented features.",
+        "--exclude": "Skip any command-line file with a name suffix that matches the pattern GLOB, using\n wildcard matching; a name suffix is either the whole name, or a trailing part that\n starts with a non-slash character immediately after a slash (/) in the name. When\n searching recursively, skip any subfile whose base name matches GLOB; the base name\n is the part after the last slash. A pattern can use *, ?, and [...] as wildcards,\n and \\ to quote a wildcard or backslash character literally.",
+        "-r": "Read all files under each directory, recursively, following symbolic links only if\n they are on the command line. Note that if no file operand is given, grep searches\n the working directory. This is equivalent to the -d recurse option.",
+        "-o": "Print only the matched (non-empty) parts of a matching line, with each such part on\n a separate output line."
+      }
+    },
+    {
+      "Command": "find",
+      "MP Summary": "search for files in a directory hierarchy",
+      "Most Similar TLDR Task": "Find files matching a given pattern, excluding specific paths",
+      "Most Similar TLDR Script": "find {{root_path}} -name '{{*.py}}' -not -path '{{*/site-packages/*}}'",
+      "Top-3 Similar Questions": [
+        "so_31309531: Exclude a pattern from grep result",
+        "so_37561162: Shell globbing exclude directory patterns",
+        "so_62627416: Globbing pattern: exclude a directory"
+      ],
+      "Top-3 Scripts": [
+        "so_31309531: find . -exec grep -i -n -w 'search text' /dev/null {} \\; | grep -v '/\\*'",
+        "so_37561162: ",
+        "so_62627416: find /vol ! -path '*/form/*' -type f -name '*.txt'\n\nfind -regex*"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "awk",
+      "MP Summary": "pattern scanning and processing language",
+      "Most Similar TLDR Task": "Print the last column of each line in a file, using a comma (instead of space) as a field separator",
+      "Most Similar TLDR Script": "awk -F ',' '{print $NF}' {{filename}}",
+      "Top-3 Similar Questions": [
+        "so_39463714: Need grep statement to exclude lines",
+        "so_63968526: AWK / Grep - Exclude lines containing file paths",
+        "so_30528416: awk to exclude range patterns but include the start pattern"
+      ],
+      "Top-3 Scripts": [
+        "so_39463714: awk '/IN=eth0/ && !/SRC=0\\.0\\.0\\.0/ && !/SRC=10\\.0\\.1\\.15/' uwf.log",
+        "so_63968526: awk '!/[cC]:\\\\[wW][iI][nN][dD][[oO][wW][sS]\\\\[sS][yY][sS][tT][eE][mM]32/' Input_file\n\nawk 'tolower($0) !~ /c:\\\\windows\\\\system32/' Input_file",
+        "so_30528416: $ awk '!flag; /ss/ {flag=1} /gg/ {flag=0}' file\n11\n12\nss\n32\nss"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "sed",
+      "MP Summary": "stream editor for filtering and transforming text",
+      "Most Similar TLDR Task": "Delete lines matching the line pattern",
+      "Most Similar TLDR Script": "sed '/{{line_pattern}}/d' {{filename}}",
+      "Top-3 Similar Questions": [
+        "so_51743995: grep to exclude pattern and exclude 2 preceding lines",
+        "so_28021351: Sed. remove multiline patterns. RegExp",
+        "ul_205478: How to grep whitespace exclude new-line character?"
+      ],
+      "Top-3 Scripts": [
+        "so_51743995: GNU sed\n\nsed -E 'N;N; /[acgt]{3}cc[acgt][acgt]{3}/d' ip.txt",
+        "so_28021351: sed '/^@H/ { N; /\\n+$/ { N; d } }' filename",
+        "ul_205478: sed -n '/[\\t ]$/p' file \n    perl -ne 'print if /[\\t ]$/' file"
+      ],
+      "Explanations about Options": {
+        "-E": "use extended regular expressions in the script (for portability use POSIX -E)."
+      }
+    },
+    {
+      "Command": "echo",
+      "MP Summary": "display a line of text",
+      "Most Similar TLDR Task": "Print a message with environment variables",
+      "Most Similar TLDR Script": "echo \"{{My path is $PATH}}\"",
+      "Top-3 Similar Questions": [
+        "su_168130: Unix - delete files and folders excluding PATTERN"
+      ],
+      "Top-3 Scripts": [
+        "su_168130: # ksh\necho rm -rf !(*foo*)\n\n# bash\nshopt -s extglob\necho rm -rf !(*foo*)\n\n# zsh\nsetopt extended_glob\necho rm -rf ^*foo*\n\n# zsh: ksh-style glob syntax\nsetopt ksh_glob no_bare_glob_qual\necho rm -rf !(*foo*)\n\n# zsh: ksh-style glob syntax, adapted for the default bare_glob_qual option\nsetopt ksh_glob bare_glob_qual\necho rm -rf (!(*foo*))"
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

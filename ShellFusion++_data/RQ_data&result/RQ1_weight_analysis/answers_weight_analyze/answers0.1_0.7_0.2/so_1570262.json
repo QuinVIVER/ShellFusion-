@@ -1,0 +1,80 @@
+{
+  "Query": "Get exit code of a background process",
+  "Answers": [
+    {
+      "Command": "exit",
+      "MP Summary": "cause the shell to exit",
+      "Most Similar TLDR Task": "Exit the shell with the exit code of the last command executed",
+      "Most Similar TLDR Script": "exit",
+      "Top-3 Similar Questions": [
+        "ul_116098: reliable return code of background process",
+        "so_60589788: Capturing exit code of n child processes",
+        "ul_486902: Capture exit code of exit command"
+      ],
+      "Top-3 Scripts": [
+        "ul_116098: bash -c '(exit 12; foo) & pid=$!\n         while : bar & [ \"$pid\" != \"$!\" ]; do :;done\n         wait \"$pid\"; echo \"$?\"'",
+        "so_60589788: for (int i = 0; i < 10; i++)\n{\n    p[i] = fork();\n    if (p[i] == 0) {\n        p_child = getpid();\n        exit(p_child % 10);\n    } else if (p[i] == -1) {\n            perror(\"fork\");\n    }        \n}",
+        "ul_486902: (exit 3)"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "false",
+      "MP Summary": "return false value",
+      "Most Similar TLDR Task": "Return an exit code of 1",
+      "Most Similar TLDR Script": "false",
+      "Top-3 Similar Questions": [
+        "so_55157581: bash - how to process exit code when using set -e and get output of command",
+        "ul_14270: Get exit status of process that's piped to another"
+      ],
+      "Top-3 Scripts": [
+        "so_55157581: if true; then\n    false\nfi",
+        "ul_14270: $ false | true\n$ echo \"${PIPESTATUS[0]} ${PIPESTATUS[1]}\"\n1 0\n\n$ false | true\n$ echo \"${pipestatus[1]} ${pipestatus[2]}\"\n1 0\n\n$ false | true\n$ retval_bash=\"${PIPESTATUS[0]}\" retval_zsh=\"${pipestatus[1]}\" retval_final=$?\n$ echo $retval_bash $retval_zsh $retval_final\n1 0"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "kill",
+      "MP Summary": "send a signal to a process",
+      "Most Similar TLDR Task": "Terminate a background job",
+      "Most Similar TLDR Script": "kill %{{job_id}}",
+      "Top-3 Similar Questions": [
+        "so_1908610: How to get process ID of background process?",
+        "so_45006761: How to get pid of last background process in SSH"
+      ],
+      "Top-3 Scripts": [
+        "so_1908610: foo &\nFOO_PID=$!\n# do other stuff\nkill $FOO_PID",
+        "so_45006761: pid=$!\nsleep 3\nkill $pid\n\npid=\"\\$!\"\nsleep 3\nkill \"\\$pid\"\n\nssh -i mycert.pem testuser@myserver.com <<'SSHBLOCK'\npm2 logs --lines 100&\npid=$!\nsleep 3\nkill $pid\nSSHBLOCK"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "fg",
+      "MP Summary": "run jobs in the foreground",
+      "Most Similar TLDR Task": "Bring most recently suspended background job to foreground",
+      "Most Similar TLDR Script": "fg",
+      "Top-3 Similar Questions": [
+        "au_662817: Why can I see the output of background processes?"
+      ],
+      "Top-3 Scripts": [
+        "au_662817: fg <job-number>"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "jobs",
+      "MP Summary": "display status of jobs in the current session",
+      "Most Similar TLDR Task": "Display running processes",
+      "Most Similar TLDR Script": "jobs -r",
+      "Top-3 Similar Questions": [
+        "ul_679783: Reliable way to get PID of piped background process",
+        "au_662817: Why can I see the output of background processes?"
+      ],
+      "Top-3 Scripts": [
+        "ul_679783: cmd & jobs\n\nbash -c '{ sleep 123 | sleep 456; } & jobs -p; sleep 789'\n\njobs -p\n\nPID PPID CMD\n 392  389  |   \\_ bash -c sleep 123 | sleep 456 & jobs -p; sleep 789\n 393  392  |       \\_ sleep 123\n 394  392  |       \\_ sleep 456\n 395  392  |       \\_ sleep 789\n\njobs -p %cmd1\n\njobs -p %?cmd2",
+        "au_662817: "
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

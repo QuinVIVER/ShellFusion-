@@ -1,0 +1,104 @@
+{
+    "Answers": [
+        {
+            "Command": "ssh-copy-id",
+            "Explanations about Options": {
+                "-i(C)": "The specific differences are: .   \"ssh-copy-id user@ip\" will copy all local keys which aren’t yet authorised on \"user@ip\" to the target system, whereas your \"cat\" command only copies the key you’ve just created; \"ssh user@ip\" will try all available authentication keys, whereas \"ssh -i ...\" will only use the specified key.",
+                "-i(M)": "Use only the key(s) contained in identity_file (rather than looking for identities\n via ssh-add(1) or in the default_ID_file). If the filename does not end in .pub\n this is added. If the filename is omitted, the default_ID_file is used."
+            },
+            "MP Summary": "use locally available keys to authorise logins on a remote machine",
+            "Most Similar TLDR Script": "ssh-copy-id -i {{path/to/certificate}} {{username}}@{{remote_host}}",
+            "Most Similar TLDR Task": "Copy the given public key to the remote",
+            "Top-3 Scripts": [
+                "au_337757: $ ssh-copy-id fedora_box",
+                "ul_379537: ssh-copy-id user@ip",
+                "ul_547684: ssh-copy-id remoteuser@remoteserver"
+            ],
+            "Top-3 Similar Questions": [
+                "ul_147301: ssh public key copying",
+                "au_337757: How to fix Permission Denied (Public key) error?",
+                "ul_379537: Difference between login with public/private keys and certificates in ssh"
+            ]
+        },
+        {
+            "Command": "scp",
+            "Explanations about Options": {
+                "-i(M)": "Selects the file from which the identity (private key) for public key authentication\n is read. This option is directly passed to ssh(1).",
+                "-p(M)": "Preserves modification times, access times, and modes from the original file."
+            },
+            "MP Summary": "secure copy (remote file copy program)",
+            "Most Similar TLDR Script": "scp -i {{~/.ssh/private_key}} {{local_file}} {{remote_host}}:{{/path/remote_file}}",
+            "Most Similar TLDR Task": "Use a specific ssh private key for authentication with the remote host",
+            "Top-3 Scripts": [
+                "ul_23291: scp -p your_pub_key.pub user@host:\nssh user@host\nhost$ cat id_dsa.pub >> ~/.ssh/authorized_keys",
+                "so_35717436: scp admin@xx.xx.xxx.xx:~/scraper/summary.csv /home/barns/Desktop"
+            ],
+            "Top-3 Similar Questions": [
+                "ul_23291: How to ssh to remote server using a private key?",
+                "so_35717436: (Scp - Permission Denied (Public Key)"
+            ]
+        },
+        {
+            "Command": "ssh-keygen",
+            "Explanations about Options": {
+                "-F(M)": "Search for the specified hostname in a known_hosts file, listing any occurrences\n found. This option is useful to find hashed host names or addresses and may also be\n used in conjunction with the -H option to print found keys in a hashed format.",
+                "-f(M)": "Specifies the filename of the key file.",
+                "-l(M)": "Show fingerprint of specified public key file. Private RSA1 keys are also\n supported. For RSA and DSA keys ssh-keygen tries to find the matching public key\n file and prints its fingerprint. If combined with -v, a visual ASCII art\n representation of the key is supplied with the fingerprint.",
+                "-y(M)": "This option will read a private OpenSSH format file and print an OpenSSH public key\n to stdout."
+            },
+            "MP Summary": "authentication key generation, management and conversion",
+            "Most Similar TLDR Script": "ssh-keygen -l -F {{remote_host}}",
+            "Most Similar TLDR Task": "Retrieve the key fingerprint from a host (useful for confirming the authenticity of the host when first connecting to it via SSH)",
+            "Top-3 Scripts": [
+                "so_38290929: ssh-keygen -y -f ~/.ssh/id_rsa > ~/.ssh/id_rsa.pub\n\nssh-keygen -y -f ~/.ssh/id_rsa    | \\\n    sed 's/$/ comment-goes-here/' | \\\n    tee ~/.ssh/id_rsa.pub         | \\\n    tee -a authorized_keys",
+                "au_53553: ssh-keygen -y -f ~/.ssh/id_rsa > ~/.ssh/id_rsa.pub",
+                "ul_524088: $ cd ~/.ssh\n$ ssh-keygen -y -f id_rsa > id_rsa.pub"
+            ],
+            "Top-3 Similar Questions": [
+                "so_38290929: Generate public ssh key from private key",
+                "ul_23291: How to ssh to remote server using a private key?",
+                "au_53553: How do I retrieve the public key from a SSH private key?"
+            ]
+        },
+        {
+            "Command": "ssh-add",
+            "Explanations about Options": {
+                "-l(M)": "Lists fingerprints of all identities currently represented by the agent."
+            },
+            "MP Summary": "adds private key identities to the OpenSSH authentication agent",
+            "Most Similar TLDR Script": "ssh-add",
+            "Most Similar TLDR Task": "Add the default ssh keys in \"~/.ssh\" to the ssh-agent",
+            "Top-3 Scripts": [
+                "au_1176514: keychain\nssh-add my_private_key_file",
+                "au_53553: ssh-add -L\n\nssh-add -l",
+                "so_12041688: <whatever command you use to fetch it form the database> | ssh-add -"
+            ],
+            "Top-3 Similar Questions": [
+                "au_1176514: How to install ssh private key?",
+                "au_53553: How do I retrieve the public key from a SSH private key?",
+                "au_1962: How can multiple private keys be used with ssh?"
+            ]
+        },
+        {
+            "Command": "ssh",
+            "Explanations about Options": {
+                "-p(M)": "Port to connect to on the remote host. This can be specified on a per-host basis in\n the configuration file.",
+                "-t(M)": "Force pseudo-terminal allocation. This can be used to execute arbitrary screen-\n based programs on a remote machine, which can be very useful, e.g. when implementing\n menu services. Multiple -t options force tty allocation, even if ssh has no local\n tty."
+            },
+            "MP Summary": "OpenSSH SSH client (remote login program)",
+            "Most Similar TLDR Script": "ssh -i {{path/to/key_file}} {{username}}@{{remote_host}}",
+            "Most Similar TLDR Task": "Connect to a remote server with a specific identity (private key)",
+            "Top-3 Scripts": [
+                "au_1176514: ssh -i ~/my_private_key_file my_user_name@my_server_name\n\nssh -i ~/my_private_key_file my_server_name\n\nssh any_name\n\nssh my_user_name@my_server_name",
+                "su_853330: ssh -p 1022 user@A",
+                "ul_244469: ssh host1\n\nssh -tti /path/to/key.pem user@000.000.000.000"
+            ],
+            "Top-3 Similar Questions": [
+                "au_1176514: How to install ssh private key?",
+                "su_853330: Can't ssh in with public key",
+                "ul_244469: Unable to SSH Using a Private Key Through Bash Script"
+            ]
+        }
+    ],
+    "Query": "Permissions on private key in .ssh folder?"
+}

@@ -1,0 +1,77 @@
+{
+  "Query": "How to ignore conflicts in rpm installs",
+  "Answers": [
+    {
+      "Command": "dpkg",
+      "MP Summary": "package manager for Debian",
+      "Most Similar TLDR Task": "Install a package",
+      "Most Similar TLDR Script": "dpkg -i {{path/to/file.deb}}",
+      "Top-3 Similar Questions": [
+        "su_518859: Ignore packages that are not currently installed when using \"apt-get remove\"",
+        "au_1040532: How can I ignore a package dependency?"
+      ],
+      "Top-3 Scripts": [
+        "su_518859: dpkg --remove foo bar libperl-dev\ndpkg: warning: ignoring request to remove foo which isn't installed\ndpkg: warning: ignoring request to remove bar which isn't installed\n(Reading database ... 169132 files and directories currently installed.)\nRemoving libperl-dev ...\n\ndpkg --purge foo bar libperl-dev",
+        "au_1040532: dpkg --ignore-depends=openssl -i mssql-server.deb"
+      ],
+      "Explanations about Options": {
+        "--ignore-depends": "Ignore dependency-checking for specified packages (actually, checking is performed,\n but only warnings about conflicts are given, nothing else). This affects the\n Pre-Depends, Depends and Breaks fields.",
+        "--purge": "Purge an installed or already removed package. This removes everything, including\n conffiles, and anything else cleaned up from postrm. If -a or --pending is given\n instead of a package name, then all packages unpacked or removed, but marked to be\n purged in file /var/lib/dpkg/status, are purged."
+      }
+    },
+    {
+      "Command": "apt-get",
+      "MP Summary": "APT package handling utility - command-line interface",
+      "Most Similar TLDR Task": "Upgrade installed packages (like `upgrade`), but remove obsolete packages and install additional packages to meet new dependencies",
+      "Most Similar TLDR Script": "apt-get dist-upgrade",
+      "Top-3 Similar Questions": [
+        "au_57892: How do I ignore a conflicting package on a regex match in apt-get?",
+        "so_28229024: How to install .rpm on Ubuntu?"
+      ],
+      "Top-3 Scripts": [
+        "au_57892: apt-get install $(apt-cache r-cran- | grep -Fvx r-cran-vr)",
+        "so_28229024: sudo apt-get install alien\nsudo alien -i package_file.rpm"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "aptitude",
+      "MP Summary": "high-level interface to the package manager",
+      "Most Similar TLDR Task": "Remove a package and all packages depending on it",
+      "Most Similar TLDR Script": "aptitude remove {{package}}",
+      "Top-3 Similar Questions": [
+        "au_57892: How do I ignore a conflicting package on a regex match in apt-get?"
+      ],
+      "Top-3 Scripts": [
+        "au_57892: aptitude '~n^r-cran-.*'"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "apt-cache",
+      "MP Summary": "query the APT cache",
+      "Most Similar TLDR Task": "Show packages that depend on a particular package",
+      "Most Similar TLDR Script": "apt-cache rdepends {{package}}",
+      "Top-3 Similar Questions": [
+        "au_57892: How do I ignore a conflicting package on a regex match in apt-get?"
+      ],
+      "Top-3 Scripts": [
+        "au_57892: apt-cache r-cran-\n\napt-get install $(apt-cache r-cran- | grep -Fvx r-cran-vr)"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "ldd",
+      "MP Summary": "print shared object dependencies",
+      "Most Similar TLDR Task": "Display shared library dependencies of a binary",
+      "Most Similar TLDR Script": "ldd {{path/to/binary}}",
+      "Top-3 Similar Questions": [
+        "ul_64887: Ignoring dependencies when installing with yum (Scientific Linux)"
+      ],
+      "Top-3 Scripts": [
+        "ul_64887: ldd lsb_release"
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

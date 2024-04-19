@@ -1,0 +1,100 @@
+{
+  "Query": "scp between two remote hosts from my (third) pc",
+  "Answers": [
+    {
+      "Command": "scp",
+      "MP Summary": "secure copy (remote file copy program)",
+      "Most Similar TLDR Task": "Copy a file between two remote hosts transferring through the local host",
+      "Most Similar TLDR Script": "scp -3 {{host1}}:{{path/to/remote_file}} {{host2}}:{{path/to/remote_directory}}",
+      "Top-3 Similar Questions": [
+        "au_1118827: is it possible to scp any file type in all subdirectories starting from root?",
+        "so_19757808: scp from remote host onto desktop, bash shell",
+        "ul_678412: scp when both hosts are remote and use different ports"
+      ],
+      "Top-3 Scripts": [
+        "au_1118827: ",
+        "so_19757808: man scp | grep port\n\nscp [-12346BCpqrv] [-c cipher] [-F ssh_config] [-i identity_file] [-l limit] [-o ssh_option] [-P port] [-S program] [[user@]host1:]file1 ... [[user@]host2:]file2\n     -P port\n             Specifies the port to connect to on the remote host.\n\nscp -P 1337 user@remote:foo.txt .",
+        "ul_678412: scp -3 scp://host1:port1//path/to/file  scp://host2:port2//path/to/file"
+      ],
+      "Explanations about Options": {
+        "-3": "Copies between two remote hosts are transferred through the local host. Without\n this option the data is copied directly between the two remote hosts. Note that\n this option disables the progress meter.",
+        "-P": "Specifies the port to connect to on the remote host. Note that this option is\n written with a capital \u2018P\u2019, because -p is already reserved for preserving the times\n and modes of the file."
+      }
+    },
+    {
+      "Command": "ssh",
+      "MP Summary": "OpenSSH SSH client (remote login program)",
+      "Most Similar TLDR Task": "Run a command on a remote server",
+      "Most Similar TLDR Script": "ssh {{remote_host}} {{command -with -flags}}",
+      "Top-3 Similar Questions": [
+        "ul_47427: How to login from remote server to my own PC?",
+        "su_1379500: How can I start a graphical browser on my remote PC and use it on the local one using SSH?",
+        "ul_33336: How to enable autocompletion for remote paths when using scp?"
+      ],
+      "Top-3 Scripts": [
+        "ul_47427: ssh nawshad@ipaddress\n\nssh -f -N -R 10000:localhost:22 me@machine_b.cs.x.ca\n\nssh -p 10000 nawshad@localhost",
+        "su_1379500: ssh <debianuser>@<debianserverIP> -L 81:<routerIP>:<routerPort>",
+        "ul_33336: ssh -N -M target-host"
+      ],
+      "Explanations about Options": {
+        "-p": "Port to connect to on the remote host. This can be specified on a per-host basis in\n the configuration file.",
+        "-M": "Places the ssh client into \u201cmaster\u201d mode for connection sharing. Multiple -M\n options places ssh into \u201cmaster\u201d mode with confirmation required before slave\n connections are accepted. Refer to the description of ControlMaster in\n ssh_config(5) for details.",
+        "-N": "Do not execute a remote command. This is useful for just forwarding ports."
+      }
+    },
+    {
+      "Command": "rsync",
+      "MP Summary": "a fast, versatile, remote (and local) file-copying tool",
+      "Most Similar TLDR Task": "Transfer file from remote host to local",
+      "Most Similar TLDR Script": "rsync {{remote_host}}:{{path/to/remote_file}} {{path/to/local_directory}}",
+      "Top-3 Similar Questions": [
+        "au_1118827: is it possible to scp any file type in all subdirectories starting from root?",
+        "ul_184965: Open file from remote computer on host computer",
+        "su_792338: Source host doesn't have access to Internet, but can SSH to host that has; how can I rsync to a third, Internet host?"
+      ],
+      "Top-3 Scripts": [
+        "au_1118827: rsync -avm --include=\"*/\" --include=\"*.pf\" --exclude=\"*\" / user@10.10.10.10:CP/\n\nrsync -avm -n --include \u2026 \n           ^^",
+        "ul_184965: scp/rsync",
+        "su_792338: rsync -Rrlt /src/ target:/dest/"
+      ],
+      "Explanations about Options": {
+        "-n": "This makes rsync perform a trial run that doesn\u2019t make any changes (and produces\n mostly the same output as a real run). It is most commonly used in combination\n with the -v, --verbose and/or -i, --itemize-changes options to see what an rsync\n command is going to do before one actually runs it.",
+        "-R": "Use relative paths. This means that the full path names specified on the command\n line are sent to the server rather than just the last parts of the filenames. This\n is particularly useful when you want to send several different directories at the\n same time. For example, if you used this command:",
+        "-a": "This is equivalent to -rlptgoD. It is a quick way of saying you want recursion and\n want to preserve almost everything (with -H being a notable omission). The only\n exception to the above equivalence is when --files-from is specified, in which case\n -r is not implied.",
+        "-r": "This tells rsync to copy directories recursively. See also --dirs (-d).",
+        "-m": "This option tells the receiving rsync to get rid of empty directories from the\n file-list, including nested directories that have no non-directory children. This\n is useful for avoiding the creation of a bunch of useless directories when the\n sending rsync is recursively scanning a hierarchy of files using\n include/exclude/filter rules.",
+        "-v": "This option increases the amount of information you are given during the transfer.\n By default, rsync works silently. A single -v will give you information about what\n files are being transferred and a brief summary at the end. Two -v options will\n give you information on what files are being skipped and slightly more information\n at the end. More than two -v options should only be used if you are debugging\n rsync.",
+        "-l": "When symlinks are encountered, recreate the symlink on the destination.",
+        "--include": "This option is a simplified form of the --filter option that defaults to an include\n rule and does not allow the full rule-parsing syntax of normal filter rules."
+      }
+    },
+    {
+      "Command": "nc",
+      "MP Summary": "arbitrary TCP and UDP connections and listens",
+      "Most Similar TLDR Task": "Act as proxy and forward data from a local TCP port to the given remote host",
+      "Most Similar TLDR Script": "nc -l {{local_port}} | nc {{hostname}} {{remote_port}}",
+      "Top-3 Similar Questions": [
+        "su_792338: Source host doesn't have access to Internet, but can SSH to host that has; how can I rsync to a third, Internet host?",
+        "su_1115715: Rsync files via intermediate host"
+      ],
+      "Top-3 Scripts": [
+        "su_792338: Host target\n   ProxyCommand nohup ssh middle nc -w1 %h %p\n   User target_user",
+        "su_1115715: rsync -azv -e 'ssh -o \"ProxyCommand ssh -A PROXYHOST nc %h %p\"' foo/ dest:./foo/"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "ping",
+      "MP Summary": "send ICMP ECHO_REQUEST to network hosts",
+      "Most Similar TLDR Task": "Ping host, specifying the interval in seconds between requests (default is 1 second)",
+      "Most Similar TLDR Script": "ping -i {{seconds}} {{host}}",
+      "Top-3 Similar Questions": [
+        "ul_522766: Ssh No route to host"
+      ],
+      "Top-3 Scripts": [
+        "ul_522766: ping 192.168.0.10"
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

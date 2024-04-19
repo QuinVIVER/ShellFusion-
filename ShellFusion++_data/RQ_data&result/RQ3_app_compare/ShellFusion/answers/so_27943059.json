@@ -1,0 +1,91 @@
+{
+    "Answers": [
+        {
+            "Command": "hostname",
+            "Explanations about Options": {
+                "-I(M)": "Display all network addresses of the host. This option enumerates all configured\n addresses on all network interfaces. The loopback interface and IPv6 link-local\n addresses are omitted. Contrary to option -i, this option does not depend on name\n resolution. Do not make any assumptions about the order of the output.",
+                "-i(M)": "Display the network address(es) of the host name. Note that this works only if the\n host name can be resolved. Avoid using this option; use hostname --all-ip-addresses\n instead."
+            },
+            "MP Summary": "show or set the system's host name",
+            "Most Similar TLDR Script": "hostname -I",
+            "Most Similar TLDR Task": "Show all network addresses of the host",
+            "Top-3 Scripts": [
+                "so_23271599: hostname -i",
+                "ul_169067: /etc/hostname"
+            ],
+            "Top-3 Similar Questions": [
+                "so_23271599: how to get ip address of localhost",
+                "ul_169067: CentOS 7 hostname will not change"
+            ]
+        },
+        {
+            "Command": "ifconfig",
+            "Explanations about Options": {},
+            "MP Summary": "configure network interfaces",
+            "Most Similar TLDR Script": "ifconfig eth0 {{ip_address}}",
+            "Most Similar TLDR Task": "Assign IP address to eth0 interface",
+            "Top-3 Scripts": [
+                "so_12523872: ifconfig | awk -F \"[: ]+\" '/inet addr:/ { if ($4 != \"127.0.0.1\") print $4 }'\n\nifconfig | awk -v RS=\"\\n\\n\" '{ for (i=1; i<=NF; i++) if ($i == \"inet\" && $(i+1) ~ /^addr:/) address = substr($(i+1), 6); if (address != \"127.0.0.1\") printf \"%s\\t%s\\n\", $1, address }'",
+                "au_826849: ifconfig -a\n\nifconfig eth0                 # or type ifconfig -a\n\nifconfig eth0\neth0      Link encap:Ethernet  HWaddr 00:15:c5:4a:16:5a  \n          inet addr:10.0.0.100  Bcast:10.0.0.255  Mask:255.255.255.0\n          inet6 addr: fe80::215:c5ff:fe4a:165a/64 Scope:Link\n          UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1\n          RX packets:466475604 errors:0 dropped:0 overruns:0 frame:0\n          TX packets:403172654 errors:0 dropped:0 overruns:0 carrier:0\n          collisions:0 txqueuelen:1000 \n          RX bytes:2574778386 (2.5 GB)  TX bytes:1618367329 (1.6 GB)\n          Interrupt:16",
+                "ul_119269: ifconfig | perl -nle 's/dr:(\\S+)/print $1/e'\n\nifconfig | awk '/inet addr/{print substr($2,6)}'\n\nifconfig eth0 | perl -nle 's/dr:(\\S+)/print $1/e'\n\nifconfig eth0 | awk '/inet addr/{print substr($2,6)}'"
+            ],
+            "Top-3 Similar Questions": [
+                "so_12523872: Bash script to get all IP addresses",
+                "so_12788607: How to get the IP address of a server using bash",
+                "so_30916393: get a DHCP server's IP"
+            ]
+        },
+        {
+            "Command": "dig",
+            "Explanations about Options": {
+                "-x(M)": "Simplified reverse lookups, for mapping addresses to names. The addr is an IPv4\n address in dotted-decimal notation, or a colon-delimited IPv6 address. When the -x is\n used, there is no need to provide the name, class and type arguments. dig\n automatically performs a lookup for a name like 94.2.0.192.in-addr.arpa and sets the\n query type and class to PTR and IN respectively. IPv6 addresses are looked up using\n nibble format under the IP6.ARPA domain."
+            },
+            "MP Summary": "DNS lookup utility",
+            "Most Similar TLDR Script": "dig -x {{8.8.8.8}}",
+            "Most Similar TLDR Task": "Perform a reverse DNS lookup on an IP address (PTR record)",
+            "Top-3 Scripts": [
+                "au_205063: dig -x <ip>\nhost <ip>",
+                "ul_22615: $ dig @resolver4.opendns.com myip.opendns.com +short"
+            ],
+            "Top-3 Similar Questions": [
+                "au_205063: Command to get the hostname of remote server using IP address",
+                "ul_22615: How can I get my external IP address in a shell script?"
+            ]
+        },
+        {
+            "Command": "nslookup",
+            "Explanations about Options": {},
+            "MP Summary": "query Internet name servers interactively",
+            "Most Similar TLDR Script": "nslookup {{example.com}}",
+            "Most Similar TLDR Task": "Query your system's default name server for an IP address (A record) of the domain",
+            "Top-3 Scripts": [
+                "su_347408: nslookup mach_name",
+                "so_5063343: [michaelsafyan@codemage ~]$ nslookup redmine.org\nServer:     8.8.8.8\nAddress:    8.8.8.8#53\n\nNon-authoritative answer:\nName:   redmine.org\nAddress: 46.4.36.71"
+            ],
+            "Top-3 Similar Questions": [
+                "su_347408: How to get the IP address of a Unix machine?",
+                "so_5063343: How to get the ip address of the server in linux?"
+            ]
+        },
+        {
+            "Command": "route",
+            "Explanations about Options": {
+                "-e(M)": "use netstat(8)-format for displaying the routing table. -ee will generate a very\n long line with all parameters from the routing table.",
+                "-n(M)": "show numerical addresses instead of trying to determine symbolic host names. This\n is useful if you are trying to determine why the route to your nameserver has\n vanished.",
+                "-net(M)": "the target is a network."
+            },
+            "MP Summary": "show / manipulate the IP routing table",
+            "Most Similar TLDR Script": "sudo route add -net {{ip_address}} netmask {{netmask_address}} gw {{gw_address}}",
+            "Most Similar TLDR Task": "Add route rule",
+            "Top-3 Scripts": [
+                "so_31551782: SUBNET=$(ip route | grep \"src $MAINIP\" | awk '{print $1}')\n\nGATEWAYIP=$(ip route show | grep default | awk '{print $3}')",
+                "so_20912497: ifconfig eth0 192.168.2.123 netmask 255.255.255.0\nroute add default gw 192.168.2.1"
+            ],
+            "Top-3 Similar Questions": [
+                "so_31551782: Get IP address info (gateway and subnet too) on Ubuntu or Debian using bash",
+                "so_20912497: Configure eth0 ip address,subnetmask, gateway using bash script"
+            ]
+        }
+    ],
+    "Query": "How to get ip address of a server on Centos 7 in bash"
+}

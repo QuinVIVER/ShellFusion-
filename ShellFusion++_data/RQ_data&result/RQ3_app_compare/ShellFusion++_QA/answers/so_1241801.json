@@ -1,0 +1,70 @@
+{
+  "Query": "Total size of the contents of all the files in a directory",
+  "Answers": [
+    {
+      "Command": "find",
+      "Top-3 Similar Questions": [
+        "nl2bash_115: Get the disk space used by all *.txt (case insensitive) files/directories under folder 1 and folder2",
+        "nl2bash_2161: Find all *.html files under current directory and for each file replace the first occurrence of STRING and previous lines with the content of common_header file",
+        "so_67073319: Unix command to find the size of a file in a directory and subdirectories"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_115: find folder1 folder2 -iname '*.txt' -print0 | du --files0-from - -c -s | tail -1",
+        "nl2bash_2161: find . -type f -name '*.html' -exec sed -i -e '1r common_header' -e '1,/STRING/d' {} \\;",
+        "so_67073319: find ./ -name \"sample.txt\" -size +1c"
+      ]
+    },
+    {
+      "Command": "du",
+      "Top-3 Similar Questions": [
+        "nl2bash_115: Get the disk space used by all *.txt (case insensitive) files/directories under folder 1 and folder2",
+        "ul_636540: How to recursively list subdirectories and their sizes?",
+        "so_1019116: Using ls to list directories and their total sizes"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_115: find folder1 folder2 -iname '*.txt' -print0 | du --files0-from - -c -s | tail -1",
+        "ul_636540: $ du -h root\n2.1M    root/bar\n1.1M    root/foo\n4.1M    root",
+        "so_1019116: du -sh *\n\ndu --summarize --human-readable *"
+      ]
+    },
+    {
+      "Command": "awk",
+      "Top-3 Similar Questions": [
+        "so_60269359: List files recursively with folder and file size",
+        "nl2bash_9211: Print \"y\" for each line in \"file2.txt\" found in \"file1.txt\" and a blank newline otherwise",
+        "so_23585775: Bash script to print file names and their sizes in the current directory"
+      ],
+      "Top-3 Scripts": [
+        "so_60269359: find . -print0 | \n  xargs -0 -I% du -h \"%\" | \n  awk ' { \n      size = $1 \n      $1 = \"\" \n      print $0, \"(\" size \")\" }\n  ' | \n  sed -e 's;[^/]*/;|____;g;s;____|; |;g'\n\nfind . -print0 | xargs -0 -I% du -h \"%\" | awk ' { size = $1 ; $1 = \"\"; print $0, size }' | sed -e 's;[^/]*/;|____;g;s;____|; |;g' | awk ' {size=$NF ; $NF=\"\"; printf(\"(%5s) %s\\n\", size, $0) }'",
+        "nl2bash_9211: comm -2 file1.txt file2.txt | awk -F'\\t' '{print (NF==2?\"y\":\"\")}'",
+        "so_23585775: du -h * | awk -v FS='\\t' '{ print $2, $1 }'"
+      ]
+    },
+    {
+      "Command": "print",
+      "Top-3 Similar Questions": [
+        "so_60269359: List files recursively with folder and file size",
+        "nl2bash_9211: Print \"y\" for each line in \"file2.txt\" found in \"file1.txt\" and a blank newline otherwise",
+        "so_23585775: Bash script to print file names and their sizes in the current directory"
+      ],
+      "Top-3 Scripts": [
+        "so_60269359: find . -print0 | \n  xargs -0 -I% du -h \"%\" | \n  awk ' { \n      size = $1 \n      $1 = \"\" \n      print $0, \"(\" size \")\" }\n  ' | \n  sed -e 's;[^/]*/;|____;g;s;____|; |;g'\n\nfind . -print0 | xargs -0 -I% du -h \"%\" | awk ' { size = $1 ; $1 = \"\"; print $0, size }' | sed -e 's;[^/]*/;|____;g;s;____|; |;g' | awk ' {size=$NF ; $NF=\"\"; printf(\"(%5s) %s\\n\", size, $0) }'",
+        "nl2bash_9211: comm -2 file1.txt file2.txt | awk -F'\\t' '{print (NF==2?\"y\":\"\")}'",
+        "so_23585775: du -h * | awk -v FS='\\t' '{ print $2, $1 }'"
+      ]
+    },
+    {
+      "Command": "xargs",
+      "Top-3 Similar Questions": [
+        "so_60269359: List files recursively with folder and file size",
+        "nl2bash_4929: Find files named core in or below the directory /tmp and delete them. Note that this will work incorrectly if there are any filenames containing newlines, single or double quotes, or spaces.",
+        "so_16883054: Bash: Sort parameter by size"
+      ],
+      "Top-3 Scripts": [
+        "so_60269359: find . -print0 | \n  xargs -0 -I% du -h \"%\" | \n  awk ' { \n      size = $1 \n      $1 = \"\" \n      print $0, \"(\" size \")\" }\n  ' | \n  sed -e 's;[^/]*/;|____;g;s;____|; |;g'\n\nfind . -print0 | xargs -0 -I% du -h \"%\" | awk ' { size = $1 ; $1 = \"\"; print $0, size }' | sed -e 's;[^/]*/;|____;g;s;____|; |;g' | awk ' {size=$NF ; $NF=\"\"; printf(\"(%5s) %s\\n\", size, $0) }'",
+        "nl2bash_4929: find /tmp -name core -type f -print | xargs /bin/rm -f",
+        "so_16883054: $ find . -size +20 | xargs du -sh | sort -n   ## put this in your for - list part"
+      ]
+    }
+  ]
+}

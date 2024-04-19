@@ -1,0 +1,91 @@
+{
+  "Query": "How to adjust the screen resolution in Debian?",
+  "Answers": [
+    {
+      "Command": "xbacklight",
+      "MP Summary": "adjust backlight brightness using RandR extension",
+      "Most Similar TLDR Task": "Get the current screen brightness as a percentage",
+      "Most Similar TLDR Script": "xbacklight",
+      "Top-3 Similar Questions": [
+        "au_1060147: How can I adjust the screen brightness in i3wm on Ubuntu 16.04?"
+      ],
+      "Top-3 Scripts": [
+        "au_1060147: bindsym XF86MonBrightnessUp exec xbacklight -inc 10\nbindsym XF86MonBrightnessDown exec xbacklight -dec 10"
+      ],
+      "Explanations about Options": {
+        "-dec": "Decreases brightness by the specified amount.",
+        "-inc": "Increases brightness by the specified amount."
+      }
+    },
+    {
+      "Command": "redshift",
+      "MP Summary": "set color temperature of display according to time of day",
+      "Most Similar TLDR Task": "Turn on Redshift with 70% screen brightness during day and 40% brightness at night",
+      "Most Similar TLDR Script": "redshift -b {{0.7}}:{{0.4}}",
+      "Top-3 Similar Questions": [
+        "ul_17859: How can I simply adjust monitor color temperture in X?",
+        "so_45371269: What's best linux App to adjust the screen's color temperature"
+      ],
+      "Top-3 Scripts": [
+        "ul_17859: redshift -o -l 0:0 -m randr -t 6000:6000",
+        "so_45371269: redshift -O <desired color temperature in K>"
+      ],
+      "Explanations about Options": {
+        "-O": "One-shot manual mode (set color temperature). Use this with the -P option to clear\n the existing gamma ramps before applying the new color temperature.",
+        "-t": "DAY:NIGHT\n Color temperature to set at daytime/night.",
+        "-o": "One-shot mode (do not continuously adjust color temperature). Use this with the -P\n option to clear the existing gamma ramps before applying the new color temperature.",
+        "-l": "PROVIDER[:OPTIONS]\n Select provider for automatic location updates (Use \"-l list\" to see available\n providers).",
+        "-m": "METHOD[:OPTIONS]\n Method to use to set color temperature (Use \"-m list\" to see available methods)."
+      }
+    },
+    {
+      "Command": "import",
+      "MP Summary": "saves any visible window on an X server and outputs it as an image file. You can capture a single window, the entire screen, or any rectangular portion of the screen.",
+      "Most Similar TLDR Task": "Capture contents of a remote X server screen in the PNG image format",
+      "Most Similar TLDR Script": "import -window root -display {{remote_host}}:{screen}.{display} {{output.png}}",
+      "Top-3 Similar Questions": [
+        "au_932144: Adjust brightness from Terminal"
+      ],
+      "Top-3 Scripts": [
+        "au_932144: import sys\nimport os\nb = int(open('/sys/class/backlight/intel_backlight/brightness').read()[:-1])\nprint(b)\nb += int(sys.argv[1])\nprint(b)\nos.system('echo \"' + str(b) + '\" > /sys/class/backlight/intel_backlight/brightness')"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "xrandr",
+      "MP Summary": "primitive command line interface to RandR extension",
+      "Most Similar TLDR Task": "Display the current state of the system (known screens, resolutions, ...)",
+      "Most Similar TLDR Script": "xrandr --query",
+      "Top-3 Similar Questions": [
+        "au_1259937: Garbled Screen After Adjusting Screen Resolution",
+        "au_763642: App to adjust gamma in ubuntu 16.04",
+        "au_108406: How can I have xfce automatically adjust to changing available outputs?"
+      ],
+      "Top-3 Scripts": [
+        "au_1259937: cvt 1920 1200 60\nxrandr --newmode \"1920x1200_60.00\"  193.25  1920 2056 2256 2592  1200 1203 1209 1245 -hsync +vsync\nxrandr --addmode VGA-1 1920x1200_60.00\n\nxrandr -q\n\n#!/bin/sh\nxrandr --newmode \"1920x1200_60.00\"  193.25  1920 2056 2256 2592  1200 1203 1209 \n1245 -hsync +vsync\nxrandr --addmode VGA-1 1920x1200_60.00",
+        "au_763642: xrandr -q | grep \" connected\"\n\nxrandr --output DVI-I-0 --gamma 0.5:0.5:0.5\n\nxrandr --output your_value --gamma 0.5:0.5:0.5",
+        "au_108406: $ xrandr --auto"
+      ],
+      "Explanations about Options": {
+        "--newmode": "New modelines can be added to the server and then associated with outputs. This\n option does the former. The mode is specified using the ModeLine syntax for\n xorg.conf: clock hdisp hsyncstart hsyncend htotal vdisp vsyncstart vsyncend vtotal\n flags. flags can be zero or more of +HSync, -HSync, +VSync, -VSync, Interlace,\n DoubleScan, CSync, +CSync, -CSync. Several tools permit to compute the usual\n modeline from a height, width, and refresh rate, for instance you can use cvt.",
+        "--auto": "For connected but disabled outputs, this will enable them using their first\n preferred mode (or, something close to 96dpi if they have no preferred mode). For\n disconnected but enabled outputs, this will disable them.",
+        "--output": "Selects an output to reconfigure. Use either the name of the output or the XID.",
+        "--gamma": "Set the specified floating point values as gamma correction on the crtc currently\n attached to this output. Note that you cannot get two different values for cloned\n outputs (i.e.: which share the same crtc) and that switching an output to another\n crtc doesn't change the crtc gamma corrections at all.",
+        "--addmode": "output name\n Add a mode to the set of valid modes for an output."
+      }
+    },
+    {
+      "Command": "xinput",
+      "MP Summary": "utility to configure and test X input devices",
+      "Most Similar TLDR Task": "Enable an input",
+      "Most Similar TLDR Script": "xinput enable {{id}}",
+      "Top-3 Similar Questions": [
+        "au_22101: How to adjust TouchPad edge scroll area in Ubuntu?"
+      ],
+      "Top-3 Scripts": [
+        "au_22101: #!/bin/sh\n\nsleep 5\nxinput set-int-prop \"SynPS/2 Synaptics TouchPad\" \"Synaptics Two-Finger Pressure\" 32 10\nxinput set-int-prop \"SynPS/2 Synaptics TouchPad\" \"Synaptics Two-Finger Width\" 32 8\nxinput set-int-prop \"SynPS/2 Synaptics TouchPad\" \"Two-Finger Scrolling\" 8 1\nxinput set-int-prop \"SynPS/2 Synaptics TouchPad\" \"Synaptics Two-Finger Scrolling\" 8 1 1\nxinput set-prop \"SynPS/2 Synaptics TouchPad\" \"Synaptics Edge Scrolling\" 0 0 0"
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

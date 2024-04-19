@@ -1,0 +1,82 @@
+{
+  "Query": "scp and compress at the same time, no intermediate save",
+  "Answers": [
+    {
+      "Command": "xz",
+      "MP Summary": "Compress or decompress .xz and .lzma files",
+      "Most Similar TLDR Task": "Compress a file, but don't delete the original",
+      "Most Similar TLDR Script": "xz -k {{file}}",
+      "Top-3 Similar Questions": [
+        "au_214494: Directly compress stdout",
+        "ul_597695: Why won't tar/gzip compress two similar large directories?",
+        "su_921140: How to compress serveral, large, high entropy, but very similar files?"
+      ],
+      "Top-3 Scripts": [
+        "au_214494: ",
+        "ul_597695: ",
+        "su_921140: $ xz -1 < f1 > f1.xz\n$ xz -1 < f2 > f2.xz\n$ xz -1 < f3 > f3.xz\n$ ls -lh f{1..3}{,.xz}\n-rw-rw-r-- 1 myuser mygroup 10M may 29 09:31 f1\n-rw-rw-r-- 1 myuser mygroup 11M may 29 10:07 f1.xz\n-rw-rw-r-- 1 myuser mygroup 10M may 29 10:00 f2\n-rw-rw-r-- 1 myuser mygroup 11M may 29 10:07 f2.xz\n-rw-rw-r-- 1 myuser mygroup 10M may 29 10:05 f3\n-rw-rw-r-- 1 myuser mygroup 11M may 29 10:07 f3.xz\n\n$ xxd f1 | tee f1.hex | xz -1 > f1.hex.xz\n$ xxd f2 | tee f2.hex | xz -1 > f2.hex.xz\n$ xxd f3 | tee f3.hex | xz -1 > f3.hex.xz\n$ ls -lh f{1..3}.hex*\n-rw-rw-r-- 1 myuser mygroup 42M may 29 10:03 f1.hex\n-rw-rw-r-- 1 myuser mygroup 22M may 29 10:04 f1.hex.xz\n-rw-rw-r-- 1 myuser mygroup 42M may 29 10:04 f2.hex\n-rw-rw-r-- 1 myuser mygroup 22M may 29 10:07 f2.hex.xz\n-rw-rw-r-- 1 myuser mygroup 42M may 29 10:05 f3.hex\n-rw-rw-r-- 1 myuser mygroup 22M may 29 10:07 f3.hex.xz\n\n$ diff f{1,2}.hex | tee f1-f2.diff | xz -1 > f1-f2.diff.xz\n$ diff f{1,3}.hex | tee f1-f3.diff | xz -1 > f1-f3.diff.xz\n$ ls -lh f1-*\n-rw-rw-r-- 1 myuser mygroup 7,8K may 29 10:04 f1-f2.diff\n-rw-rw-r-- 1 myuser mygroup 4,3K may 29 10:06 f1-f2.diff.xz\n-rw-rw-r-- 1 myuser mygroup 2,6K may 29 10:06 f1-f3.diff\n-rw-rw-r-- 1 myuser mygroup 1,7K may 29 10:06 f1-f3.diff.xz\n\n$ xz -d < f1-f2.diff.xz > f1-f2.diff.restored\n$   # Assuming you haven't deleted \"f1.diff\":\n$ patch -o f2.hex.restored f1.hex f1-f2.diff.restored\npatching file f1.hex\n$ diff f2.hex.restored f2.hex # No diffs will be found unless corrupted\n$ xxd -r f2.hex.restored f2.restored # We get the completely restored file\n$ diff -q f2 f2.restored # No diffs will be found unless corrupted"
+      ],
+      "Explanations about Options": {
+        "-d": "Decompress."
+      }
+    },
+    {
+      "Command": "pigz",
+      "MP Summary": "compress or expand files",
+      "Most Similar TLDR Task": "Decompress a file",
+      "Most Similar TLDR Script": "pigz -d {{archive.gz}}",
+      "Top-3 Similar Questions": [
+        "ul_284353: Compressing a folder but do not compress specific file types but include them in the gz file"
+      ],
+      "Top-3 Scripts": [
+        "ul_284353: tar | pigz > <file>"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "lzop",
+      "MP Summary": "compress or expand files",
+      "Most Similar TLDR Task": "Decompress a file",
+      "Most Similar TLDR Script": "lzop -d {{file}}.lzo",
+      "Top-3 Similar Questions": [
+        "ul_275501: GNU sort --compress-program compressing only first temporary"
+      ],
+      "Top-3 Scripts": [
+        "ul_275501: $ shuf -i1-10000000 > t.in\n$ sort -S50M -T. t.in --compress-program=lzop  # ^z\n$ file sort* | tee >(wc -l) > >(grep -v lzop)\n7\n$ fg   # ^c\n$ sort --version | head -n1\nsort (GNU coreutils) 8.25"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "upx",
+      "MP Summary": "compress or expand executable files",
+      "Most Similar TLDR Task": "Detailed help",
+      "Most Similar TLDR Script": "upx --help",
+      "Top-3 Similar Questions": [
+        "tldr_73: Compress executable"
+      ],
+      "Top-3 Scripts": [
+        "tldr_73: upx {{file}}"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "zip",
+      "MP Summary": "package and compress (archive) files",
+      "Most Similar TLDR Task": "Package and compress multiple directories and files",
+      "Most Similar TLDR Script": "zip -r {{compressed.zip}} {{/path/to/dir1 /path/to/dir2 /path/to/file}}",
+      "Top-3 Similar Questions": [
+        "au_27349: How do I compress a directory?",
+        "so_51352565: unzip and process compressed data",
+        "tldr_83: Package and compress multiple directories and files"
+      ],
+      "Top-3 Scripts": [
+        "au_27349: sudo apt-get install zip\n\nzip -r compressed_filename.zip foldername",
+        "so_51352565: zip 1.zip marks.txt",
+        "tldr_83: zip -r {{compressed.zip}} {{/path/to/dir1 /path/to/dir2 /path/to/file}}"
+      ],
+      "Explanations about Options": {
+        "-r": "Travel the directory structure recursively; for example:"
+      }
+    }
+  ]
+}

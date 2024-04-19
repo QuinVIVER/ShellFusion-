@@ -1,0 +1,92 @@
+{
+  "Query": "How to search strings inside files like in Windows without search monkey?",
+  "Answers": [
+    {
+      "Command": "find",
+      "MP Summary": "search for files in a directory hierarchy",
+      "Most Similar TLDR Task": "Find files by matching multiple patterns",
+      "Most Similar TLDR Script": "find {{root_path}} -name '{{*pattern_1*}}' -or -name '{{*pattern_2*}}'",
+      "Top-3 Similar Questions": [
+        "su_360733: How can I find a particular file without extension in Linux?",
+        "ul_609012: Searching multiple files for a string, without regular expressions?",
+        "so_34153172: Finding all usages of a filename string in other files"
+      ],
+      "Top-3 Scripts": [
+        "su_360733: find -exec file {} \\; | grep ASCII",
+        "ul_609012: string='any /text\\ *string* without newline (\\n).'\nfind . -type f -exec grep -F -l -e \"$string\" {} +\n\nfind . -type f -exec grep -aFlze \"$string\" {} +",
+        "so_34153172: cd /base/dir/to/check/presence/of/image/files\n\nwhile IFS= read -d '' -r f; do\n   img=\"${f##*/}\" # get the filename\n   grep -qFr \"$img\" --include=*.html --include=*.php --include=*.css . ||\n      echo \"$img not found\"\ndone < <(find /img-dir -type f -print0) > imgNotFound.txt"
+      ],
+      "Explanations about Options": {
+        "-type": "File is of type c:"
+      }
+    },
+    {
+      "Command": "echo",
+      "MP Summary": "display a line of text",
+      "Most Similar TLDR Task": "Print a message without the trailing newline",
+      "Most Similar TLDR Script": "echo -n \"{{Hello World}}\"",
+      "Top-3 Similar Questions": [
+        "so_34153172: Finding all usages of a filename string in other files",
+        "ul_156232: Linux: Locating text file from a string input",
+        "nl2bash_5511: Finds strings with dot-separated sequence of numbers, and prints part of that sequence between the first and second dot."
+      ],
+      "Top-3 Scripts": [
+        "so_34153172: cd /base/dir/to/check/presence/of/image/files\n\nwhile IFS= read -d '' -r f; do\n   img=\"${f##*/}\" # get the filename\n   grep -qFr \"$img\" --include=*.html --include=*.php --include=*.css . ||\n      echo \"$img not found\"\ndone < <(find /img-dir -type f -print0) > imgNotFound.txt",
+        "ul_156232: ",
+        "nl2bash_5511: echo \"$f\" | grep -Eo '[0-9]+[.]+[0-9]+[.]?[0-9]?' | cut -d. -f2"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "sed",
+      "MP Summary": "stream editor for filtering and transforming text",
+      "Most Similar TLDR Task": "Replace separator / by any other character not used in the find or replace patterns, e.g., #",
+      "Most Similar TLDR Script": "sed 's#{{find}}#{{replace}}#' {{filename}}",
+      "Top-3 Similar Questions": [
+        "so_37612886: Searching a string using grep in a range of multiple files",
+        "so_19863094: Searching text string in file & replacing it",
+        "ul_38340: Searching a file & excluding lines with a specified string"
+      ],
+      "Top-3 Scripts": [
+        "so_37612886: ls * | sed \"/2015-06-01/,/2016-06-03/p\" -n | xargs grep \"Live message\"\n\nsed \"/<BEGIN_REGEX>/,/<END_REGEX>/p\" -n",
+        "so_19863094: #!/bin/bash\nif  eth=$(zenity --entry --text=\"Enter the access point\") &&\n    [[ $eth =~ ^eth[0-9]$ ]]\nthen\n     sed -i \"s/\\<eth[0-9]\\>/$eth/\" ~/conkyrc\nfi",
+        "ul_38340: sed '/repeat-info/d' file.log\nsed -n '/repeat-info/!p' file.log\n\nawk '!/repeat-info/' file.log"
+      ],
+      "Explanations about Options": {
+        "-i": "edit files in place (makes backup if SUFFIX supplied)"
+      }
+    },
+    {
+      "Command": "unzip",
+      "MP Summary": "list, test and extract compressed files in a ZIP archive",
+      "Most Similar TLDR Task": "Extract a zip file created in windows, containing files with non-ascii (chinese) filenames",
+      "Most Similar TLDR Script": "unzip -O {{gbk}} {{file.zip}}",
+      "Top-3 Similar Questions": [
+        "so_9831880: Search inside a file inside a JAR"
+      ],
+      "Top-3 Scripts": [
+        "so_9831880: $ echo hello > a\n$ echo world > b\n$ jar cf qq.jar a b\n$ jar tf qq.jar\nMETA-INF/\nMETA-INF/MANIFEST.MF\na\nb\n$ unzip -p qq.jar|grep hello\nhello"
+      ],
+      "Explanations about Options": {
+        "-p": "extract files to pipe (stdout). Nothing but the file data is sent to stdout , and\n the files are always extracted in binary format, just as they are stored (no\n conversions)."
+      }
+    },
+    {
+      "Command": "fgrep",
+      "MP Summary": "print lines that match patterns",
+      "Most Similar TLDR Task": "Search only lines that match entirely in files",
+      "Most Similar TLDR Script": "fgrep -x {{path/to/file1}} {{path/to/file2}}",
+      "Top-3 Similar Questions": [
+        "so_18787830: Search multiple strings in multiple files"
+      ],
+      "Top-3 Scripts": [
+        "so_18787830: fgrep -rlf messages.txt dir"
+      ],
+      "Explanations about Options": {
+        "-l": "Suppress normal output; instead print the name of each input file from which output\n would normally have been printed. The scanning will stop on the first match.",
+        "-r": "Read all files under each directory, recursively, following symbolic links only if\n they are on the command line. Note that if no file operand is given, grep searches\n the working directory. This is equivalent to the -d recurse option.",
+        "-f": "Obtain patterns from FILE, one per line. If this option is used multiple times or\n is combined with the -e (--regexp) option, search for all patterns given. The\n empty file contains zero patterns, and therefore matches nothing."
+      }
+    }
+  ]
+}

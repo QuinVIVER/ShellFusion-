@@ -1,0 +1,83 @@
+{
+  "Query": "How to convert a video from mp4/flv to mpeg/mpg",
+  "Answers": [
+    {
+      "Command": "ffmpeg",
+      "MP Summary": "ffmpeg video converter",
+      "Most Similar TLDR Task": "Convert AVI video to MP4. AAC Audio @ 128kbit, h264 Video @ CRF 23",
+      "Most Similar TLDR Script": "ffmpeg -i {{input_video}}.avi -codec:audio aac -b:audio 128k -codec:video libx264 -crf 23 {{output_video}}.mp4",
+      "Top-3 Similar Questions": [
+        "so_15672101: How to convert multiple files from mp4 to flv using a shell script",
+        "au_620793: Convert entire playlist from m4a to mp3",
+        "ul_278365: FFMpeg : Converting a video file to a gif with multiple images from video"
+      ],
+      "Top-3 Scripts": [
+        "so_15672101: ",
+        "au_620793: for f in *.flac , *.m4a , *.ogg ; do ffmpeg -i \"$f\" -ab 320k \"${f%.m4a}.mp3\"; done\n\ndo ffmpeg -i \"$f\" -ab 320k \"${f%.flac}.mp3\";",
+        "ul_278365: ffmpeg -i ${vidfile} 2>&1 | grep Duration | cut -d ' ' -f 4 | sed s/,//\n\nl=$(ffmpeg -i ${vidfile} 2>&1 | grep Duration | cut -d ' ' -f 4 | sed s/,//)\nh=$(echo $l|cut -d: -f1)\nm=$(echo $l|cut -d: -f2)\ns=$(echo $l|cut -d: -f3|cut -d\".\" -f1)\n(( hh=$h*3600 ))\n(( mm=$m*60 ))\n(( LengthSeconds=$hh+$mm+$s ))"
+      ],
+      "Explanations about Options": {
+        "-i": "input file url"
+      }
+    },
+    {
+      "Command": "convert",
+      "MP Summary": "convert between image formats as well as resize an image, blur, crop, despeckle, dither, draw on, flip, join, re-sample, and much more.",
+      "Most Similar TLDR Task": "Convert an image from JPG to PNG",
+      "Most Similar TLDR Script": "convert {{image.jpg}} {{image.png}}",
+      "Top-3 Similar Questions": [
+        "au_1161473: Convert every file from JPEG to GIF in terminal",
+        "so_24061948: Convert sequential images from bmp to png in ubuntu terminal"
+      ],
+      "Top-3 Scripts": [
+        "au_1161473: for f in /path/to/dir/*jpg /path/to/dir/*JPG; do\n    convert \"$f\" \"${f%.*}.gif\"\ndone\n\nshopt -s globstar\nfor f in /path/to/dir/**/*jpg /path/to/dir/**/*JPG; do\n    convert \"$f\" \"${f%.*}.gif\"\ndone",
+        "so_24061948: for file in *.bmp; do convert \"$file\" \"${file%.bmp}\".png; done"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "ffprobe",
+      "MP Summary": "ffprobe media prober",
+      "Most Similar TLDR Task": "Display the frame rate of a video",
+      "Most Similar TLDR Script": "ffprobe -v error -select_streams v:0 -show_entries stream=avg_frame_rate -of default=noprint_wrappers=1:nokey=1 {{input.mp4}}",
+      "Top-3 Similar Questions": [
+        "au_221026: how can I batch extract audio from mp4 files with ffmpeg without decompression (automatic audio codec detection)?",
+        "au_1163088: How to list all mp4 files with HDp60 (to separate them from p30)?"
+      ],
+      "Top-3 Scripts": [
+        "au_221026: ffprobe -v error -select_streams a:0 -show_entries stream=codec_name -print_format csv=p=0 \"videofile.mp4\"",
+        "au_1163088: ffprobe -v error -select_streams \\\nv -of default=noprint_wrappers=1:nokey=1 \\\n-show_entries stream=r_frame_rate <your-filename>.mp4\n\nfor videofile in *.mp4; do\n echo -n \"$videofile\\t\"\n ffprobe -v error -select_streams v \\\n -of default=noprint_wrappers=1:nokey=1 \\\n -show_entries stream=r_frame_rate $videofile\n\nfind -name '*.mp4' -printf '%p\\t' \\\n-exec ffprobe -v error -select_streams \\\nv -of default=noprint_wrappers=1:nokey=1  \\\n-show_entries stream=r_frame_rate {} \\;"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "vlc",
+      "MP Summary": "the VLC media player",
+      "Most Similar TLDR Task": "Play video from a URL",
+      "Most Similar TLDR Script": "vlc {{https://www.youtube.com/watch?v=oHg5SJYRHA0}}",
+      "Top-3 Similar Questions": [
+        "ul_278365: FFMpeg : Converting a video file to a gif with multiple images from video"
+      ],
+      "Top-3 Scripts": [
+        "ul_278365: apt-get install vlc"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "mpgtx",
+      "MP Summary": "manipulate mpeg files",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Top-3 Similar Questions": [
+        "su_21736: How to trim or delete parts of an mpeg video from the linux command line?"
+      ],
+      "Top-3 Scripts": [
+        "su_21736: mpgtx -j input.mpg [0:10-0:20] [0:42-0:52] [1:23-1:33] -o output.mpg\n\nmpgtx -j input.mpg [-0:20] [0:42-0:52] [1:23-] -o output.mpg\n\nmpgtx -s input.mpg [1:00-2:00] [3:00-4:00] -b out\n\nmpgtx -5 input.mpg -b out\n\nmpgtx -j file1.mpg file2.mpg file3.mpg -o output.mpg"
+      ],
+      "Explanations about Options": {
+        "-j": "joins files (ranges may be specified , see the RANGES section).",
+        "-o": "FILE\n FILE will be used as the output file (used with the join command). if FILE is -,\n standard output will be used."
+      }
+    }
+  ]
+}

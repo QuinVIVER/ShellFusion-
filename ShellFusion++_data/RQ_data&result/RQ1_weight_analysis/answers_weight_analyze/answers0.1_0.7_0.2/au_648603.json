@@ -1,0 +1,86 @@
+{
+  "Query": "How to create an animated GIF from MP4 video via command line?",
+  "Answers": [
+    {
+      "Command": "ffmpeg",
+      "MP Summary": "ffmpeg video converter",
+      "Most Similar TLDR Task": "Combine numbered images (frame_1.jpg, frame_2.jpg, etc) into a video or GIF",
+      "Most Similar TLDR Script": "ffmpeg -i {{frame_%d.jpg}} -f image2 {{video.mpg|video.gif}}",
+      "Top-3 Similar Questions": [
+        "au_648603: How to create an animated GIF from MP4 video via command line?",
+        "au_53182: how to create an audio clip from a video file using command line?",
+        "au_35457: converting aac to mp3 via command line"
+      ],
+      "Top-3 Scripts": [
+        "au_648603: sudo apt install ffmpeg\nwget -O opengl-rotating-triangle.mp4 https://github.com/cirosantilli/media/blob/master/opengl-rotating-triangle.mp4?raw=true\nffmpeg \\\n  -i opengl-rotating-triangle.mp4 \\\n  -r 15 \\\n  -vf scale=512:-1 \\\n  -ss 00:00:03 -to 00:00:06 \\\n  opengl-rotating-triangle.gif\n\nffmpeg \\\n  -i opengl-rotating-triangle.mp4 \\\n  -r 15 \\\n  -vf \"scale=512:-1,split[s0][s1];[s0]palettegen[p];[s1][p]paletteuse\" \\\n  -ss 00:00:03 -to 00:00:06 \\\n  opengl-rotating-triangle-palettegen.gif\n\nwget https://upload.wikimedia.org/wikipedia/commons/f/f9/STS-132_Liftoff_Space_Shuttle_Atlantis.ogv\nffmpeg -i STS-132_Liftoff_Space_Shuttle_Atlantis.ogv -r 15 -vf scale=512:-1 \\\n  -ss 00:00:17 -to 00:00:22 STS-132_Liftoff_Space_Shuttle_Atlantis.gif\n\nsudo apt-get install ffmpeg\nffmpeg -i in.mp4 out.gif\n\nsudo apt-get install ffmpeg imagemagick\nffmpeg -i opengl-rotating-triangle.mp4 -r 15 -vf scale=512:-1 \\\n  -ss 00:00:03 -to 00:00:06 -f image2pipe -vcodec ppm - |\n  convert -deconstruct -delay 5 -loop 0 - opengl-rotating-triangle-image-magick.gif\n\nffmpeg -i STS-132_Liftoff_Space_Shuttle_Atlantis.ogv -r 15 -vf scale=512:-1 \\\n  -ss 00:00:17 -to 00:00:22 -f image2pipe -vcodec ppm - |\n  convert -deconstruct -delay 5 -loop 0 - STS-132_Liftoff_Space_Shuttle_Atlantis_512x.gif\n\nsudo snap install gifski\nmkdir -p frames\nffmpeg \\\n  -i opengl-rotating-triangle.mp4 \\\n  -r 15 \\\n  -vf scale=512:-1 \\\n  -ss 00:00:03 -to 00:00:06 \\\n  frames/%04d.png\ngifski -o opengl-rotating-triangle-gifski.gif frames/*.png",
+        "au_53182: $ ffmpeg -i youtubemusicvideo.flv -vn -acodec libvorbis result.ogg",
+        "au_35457: ffmpeg -i inputfile.m4a -c:a libmp3lame -ac 2 -b:a 190k outputfile.mp3\n\nffmpeg -i inputfile.m4a -c:a libmp3lame -ac 2 -q:a 2 outputfile.mp3"
+      ],
+      "Explanations about Options": {
+        "-acodec": "Set the audio codec. This is an alias for \"-codec:a\".",
+        "-i": "input file url",
+        "-vn": "As an input option, blocks all video streams of a file from being filtered or being\n automatically selected or mapped for any output. See \"-discard\" option to disable\n streams individually."
+      }
+    },
+    {
+      "Command": "convert",
+      "MP Summary": "convert between image formats as well as resize an image, blur, crop, despeckle, dither, draw on, flip, join, re-sample, and much more.",
+      "Most Similar TLDR Task": "Create a gif from a series of images with 100ms delay between them",
+      "Most Similar TLDR Script": "convert {{image1.png}} {{image2.png}} {{image3.png}} -delay {{10}} {{animation.gif}}",
+      "Top-3 Similar Questions": [
+        "au_648603: How to create an animated GIF from MP4 video via command line?",
+        "au_648244: How do I create an animated gif from still images (preferably with the command line)?",
+        "so_56450486: How to create an animated gif image from a number of png images?"
+      ],
+      "Top-3 Scripts": [
+        "au_648603: sudo apt-get install ffmpeg imagemagick\nffmpeg -i opengl-rotating-triangle.mp4 -r 15 -vf scale=512:-1 \\\n  -ss 00:00:03 -to 00:00:06 -f image2pipe -vcodec ppm - |\n  convert -deconstruct -delay 5 -loop 0 - opengl-rotating-triangle-image-magick.gif\n\nffmpeg -i STS-132_Liftoff_Space_Shuttle_Atlantis.ogv -r 15 -vf scale=512:-1 \\\n  -ss 00:00:17 -to 00:00:22 -f image2pipe -vcodec ppm - |\n  convert -deconstruct -delay 5 -loop 0 - STS-132_Liftoff_Space_Shuttle_Atlantis_512x.gif\n\nconvert input.mp4 rpi2-bare-metal-blink.gif",
+        "au_648244: convert -delay 20 -loop 0 *.jpg myimage.gif",
+        "so_56450486: for ((i=0;i<100;i++)) ; do\n   convert lena.png -resize $i% -background none -gravity center -extent 512x512 miff:-\ndone | convert miff:- -delay 80 anim.gif"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "import",
+      "MP Summary": "saves any visible window on an X server and outputs it as an image file. You can capture a single window, the entire screen, or any rectangular portion of the screen.",
+      "Most Similar TLDR Task": "Capture contents of a remote X server screen in the PNG image format",
+      "Most Similar TLDR Script": "import -window root -display {{remote_host}}:{screen}.{display} {{output.png}}",
+      "Top-3 Similar Questions": [
+        "so_34675269: Creating an access point with wpa_supplicant via dbus interface",
+        "so_35511074: Create animated gif from multiple HTML pages using command line",
+        "so_32294988: Get Video-Duration with avconv via Python"
+      ],
+      "Top-3 Scripts": [
+        "so_34675269: ",
+        "so_35511074: ",
+        "so_32294988: import subprocess\ntask = subprocess.Popen(\"avconv -i video.mp4 2>&1 | grep Duration | cut -d ' ' -f 4 | sed -r 's/([^\\.]*)\\..*/\\1/'\", shell=True, stdout=subprocess.PIPE)\ntime = task.communicate()[0]\nprint time"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "scrot",
+      "MP Summary": "command line screen capture utility",
+      "Most Similar TLDR Task": "Capture a screenshot and save it as \"capture.png\"",
+      "Most Similar TLDR Script": "scrot {{capture.png}}",
+      "Top-3 Similar Questions": [
+        "so_35511074: Create animated gif from multiple HTML pages using command line"
+      ],
+      "Top-3 Scripts": [
+        "so_35511074: apt-get install scrot"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "mogrify",
+      "MP Summary": "resize an image, blur, crop, despeckle, dither, draw on, flip, join, re-sample, and much more. Mogrify overwrites the original image file, whereas, convert-im6.q16hdri(1) writes to a different image file.",
+      "Most Similar TLDR Task": "Convert all PNG images in the directory to JPEG",
+      "Most Similar TLDR Script": "mogrify -format {{jpg}} {{*.png}}",
+      "Top-3 Similar Questions": [
+        "so_7708368: How can I convert an image to grayscale via the command line?"
+      ],
+      "Top-3 Scripts": [
+        "so_7708368: mogrify -colorspace Gray file"
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

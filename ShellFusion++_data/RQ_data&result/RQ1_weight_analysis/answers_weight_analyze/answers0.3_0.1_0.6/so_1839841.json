@@ -1,0 +1,87 @@
+{
+  "Query": "Convert a video to MP4 (H.264/AAC) with ffmpeg",
+  "Answers": [
+    {
+      "Command": "ffmpeg",
+      "MP Summary": "ffmpeg video converter",
+      "Most Similar TLDR Task": "Convert AVI video to MP4. AAC Audio @ 128kbit, h264 Video @ CRF 23",
+      "Most Similar TLDR Script": "ffmpeg -i {{input_video}}.avi -codec:audio aac -b:audio 128k -codec:video libx264 -crf 23 {{output_video}}.mp4",
+      "Top-3 Similar Questions": [
+        "su_906866: Convert all files in directory using FFMPEG",
+        "so_59256447: Converting mkv to mp4 with ffmpeg sometimes loses video",
+        "su_556463: Converting video to WebM with ffmpeg/avconv"
+      ],
+      "Top-3 Scripts": [
+        "su_906866: #!/bin/bash\n#Convert files using ffmpeg\nOrDir=\"/Volumes/Misc/To Convert 2/\"\n\nfind \"$OrDir\" -type f -exec /bin/bash -c \\\n    'f2=$(basename \"$1\"); \\\n     ffmpeg -i \"$1\" -c:v libx264 -crf 19 -preset slow -c:a aac -strict experimental -b:a 192k -ac 2 \"/Volumes/Misc/Converted/${f2%.*}.m4v\" ' _ {}  \\;",
+        "so_59256447: ",
+        "su_556463: ffmpeg -i input.mp4 -c:v libvpx-vp9 -crf 30 -b:v 0 output.webm\n\nffmpeg -i input.mp4 -c:v libvpx-vp9 -b:v 5M -pass 1 -f webm /dev/null && \\\nffmpeg -i input.mp4 -c:v libvpx-vp9 -b:v 5M -pass 2 output.webm\n\nffmpeg -i input.mp4 -c:v libvpx-vp9 -minrate 5M -maxrate 5M -b:v 5M output.webm"
+      ],
+      "Explanations about Options": {
+        "-preset": "Configuration preset. This does some automatic settings based on the general type of\n the image.",
+        "-t": "When used as an input option (before \"-i\"), limit the duration of data read from the\n input file.",
+        "-i": "input file url",
+        "-n": "Do not overwrite output files, and exit immediately if a specified output file already\n exists."
+      }
+    },
+    {
+      "Command": "vlc",
+      "MP Summary": "the VLC media player",
+      "Most Similar TLDR Task": "Play video from a URL",
+      "Most Similar TLDR Script": "vlc {{https://www.youtube.com/watch?v=oHg5SJYRHA0}}",
+      "Top-3 Similar Questions": [
+        "ul_278365: FFMpeg : Converting a video file to a gif with multiple images from video"
+      ],
+      "Top-3 Scripts": [
+        "ul_278365: apt-get install vlc"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "ffprobe",
+      "MP Summary": "ffprobe media prober",
+      "Most Similar TLDR Task": "Display the frame rate of a video",
+      "Most Similar TLDR Script": "ffprobe -v error -select_streams v:0 -show_entries stream=avg_frame_rate -of default=noprint_wrappers=1:nokey=1 {{input.mp4}}",
+      "Top-3 Similar Questions": [
+        "au_1214782: Ffmpeg: can TS video be converted directly to MP4 video without re-coding?",
+        "so_59256447: Converting mkv to mp4 with ffmpeg sometimes loses video",
+        "au_707397: Batch convert H.265 mkv to H.264 with ffmpeg to make files compatible for re-encoding"
+      ],
+      "Top-3 Scripts": [
+        "au_1214782: ",
+        "so_59256447: $ ffprobe -loglevel error -select_streams a:0 -show_entries stream=codec_name -of default=nw=1 input.mp4\ncodec_name=aac",
+        "au_707397: "
+      ],
+      "Explanations about Options": {
+        "-loglevel": "Set logging level and flags used by the library."
+      }
+    },
+    {
+      "Command": "import",
+      "MP Summary": "saves any visible window on an X server and outputs it as an image file. You can capture a single window, the entire screen, or any rectangular portion of the screen.",
+      "Most Similar TLDR Task": "Capture contents of a remote X server screen in the PNG image format",
+      "Most Similar TLDR Script": "import -window root -display {{remote_host}}:{screen}.{display} {{output.png}}",
+      "Top-3 Similar Questions": [
+        "so_33448759: python converting video to audio",
+        "au_971119: Convert a sequence of ppm images to avi video"
+      ],
+      "Top-3 Scripts": [
+        "so_33448759: import moviepy.editor as mp\nclip = mp.VideoFileClip(\"myvideo.mp4\").subclip(0,20)\nclip.audio.write_audiofile(\"theaudio.mp3\")",
+        "au_971119: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "mogrify",
+      "MP Summary": "resize an image, blur, crop, despeckle, dither, draw on, flip, join, re-sample, and much more. Mogrify overwrites the original image file, whereas, convert-im6.q16hdri(1) writes to a different image file.",
+      "Most Similar TLDR Task": "Convert all PNG images in the directory to JPEG",
+      "Most Similar TLDR Script": "mogrify -format {{jpg}} {{*.png}}",
+      "Top-3 Similar Questions": [
+        "su_559973: FFMpeg convert jpeg images to video"
+      ],
+      "Top-3 Scripts": [
+        "su_559973: for f in *.JPG; do mogrify \"$f\"; done"
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

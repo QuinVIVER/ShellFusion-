@@ -1,0 +1,86 @@
+{
+  "Query": "How to convert a video from mp4/flv to mpeg/mpg",
+  "Answers": [
+    {
+      "Command": "ffmpeg",
+      "MP Summary": "ffmpeg video converter",
+      "Most Similar TLDR Task": "Convert AVI video to MP4. AAC Audio @ 128kbit, h264 Video @ CRF 23",
+      "Most Similar TLDR Script": "ffmpeg -i {{input_video}}.avi -codec:audio aac -b:audio 128k -codec:video libx264 -crf 23 {{output_video}}.mp4",
+      "Top-3 Similar Questions": [
+        "au_1183076: convert all the png files in a folder to video",
+        "so_15672101: How to convert multiple files from mp4 to flv using a shell script",
+        "au_620793: Convert entire playlist from m4a to mp3"
+      ],
+      "Top-3 Scripts": [
+        "au_1183076: ffmpeg -framerate 25 -i %03d.png output.avi\n\nffmpeg -framerate 25 -pattern_type glob -i \"*.png\" output.avi\n\ncat $(find . -maxdepth 1 -name \"*.png\" | sort -V) | ffmpeg -framerate 25 -i - output.avi",
+        "so_15672101: ",
+        "au_620793: for f in *.flac , *.m4a , *.ogg ; do ffmpeg -i \"$f\" -ab 320k \"${f%.m4a}.mp3\"; done\n\ndo ffmpeg -i \"$f\" -ab 320k \"${f%.flac}.mp3\";"
+      ],
+      "Explanations about Options": {
+        "-framerate": "Set the grabbing frame rate. Default is \"ntsc\", corresponding to a frame rate of\n \"30000/1001\".",
+        "-": "Use a completely zeroed out quantization matrix. This increases PSNR but\n might reduce perception. Use in bogus benchmarks.",
+        "-i": "input file url"
+      }
+    },
+    {
+      "Command": "ffprobe",
+      "MP Summary": "ffprobe media prober",
+      "Most Similar TLDR Task": "Display the frame rate of a video",
+      "Most Similar TLDR Script": "ffprobe -v error -select_streams v:0 -show_entries stream=avg_frame_rate -of default=noprint_wrappers=1:nokey=1 {{input.mp4}}",
+      "Top-3 Similar Questions": [
+        "so_59256447: Converting mkv to mp4 with ffmpeg sometimes loses video",
+        "au_1214782: Ffmpeg: can TS video be converted directly to MP4 video without re-coding?"
+      ],
+      "Top-3 Scripts": [
+        "so_59256447: $ ffprobe -loglevel error -select_streams a:0 -show_entries stream=codec_name -of default=nw=1 input.mp4\ncodec_name=aac",
+        "au_1214782: "
+      ],
+      "Explanations about Options": {
+        "-loglevel": "Set logging level and flags used by the library."
+      }
+    },
+    {
+      "Command": "convert",
+      "MP Summary": "convert between image formats as well as resize an image, blur, crop, despeckle, dither, draw on, flip, join, re-sample, and much more.",
+      "Most Similar TLDR Task": "Convert an image from JPG to PNG",
+      "Most Similar TLDR Script": "convert {{image.jpg}} {{image.png}}",
+      "Top-3 Similar Questions": [
+        "au_1161473: Convert every file from JPEG to GIF in terminal",
+        "so_24061948: Convert sequential images from bmp to png in ubuntu terminal",
+        "au_293444: How can I quickly convert a GIF file to a video?"
+      ],
+      "Top-3 Scripts": [
+        "au_1161473: for f in /path/to/dir/*jpg /path/to/dir/*JPG; do\n    convert \"$f\" \"${f%.*}.gif\"\ndone\n\nshopt -s globstar\nfor f in /path/to/dir/**/*jpg /path/to/dir/**/*JPG; do\n    convert \"$f\" \"${f%.*}.gif\"\ndone",
+        "so_24061948: for file in *.bmp; do convert \"$file\" \"${file%.bmp}\".png; done",
+        "au_293444: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "vlc",
+      "MP Summary": "the VLC media player",
+      "Most Similar TLDR Task": "Play video from a URL",
+      "Most Similar TLDR Script": "vlc {{https://www.youtube.com/watch?v=oHg5SJYRHA0}}",
+      "Top-3 Similar Questions": [
+        "ul_278365: FFMpeg : Converting a video file to a gif with multiple images from video"
+      ],
+      "Top-3 Scripts": [
+        "ul_278365: apt-get install vlc"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "import",
+      "MP Summary": "saves any visible window on an X server and outputs it as an image file. You can capture a single window, the entire screen, or any rectangular portion of the screen.",
+      "Most Similar TLDR Task": "Capture contents of a remote X server screen in the PNG image format",
+      "Most Similar TLDR Script": "import -window root -display {{remote_host}}:{screen}.{display} {{output.png}}",
+      "Top-3 Similar Questions": [
+        "au_971119: Convert a sequence of ppm images to avi video"
+      ],
+      "Top-3 Scripts": [
+        "au_971119: "
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

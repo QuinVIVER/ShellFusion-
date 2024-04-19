@@ -1,0 +1,70 @@
+{
+  "Query": "Samba share read only for guests, read write for authenticated users",
+  "Answers": [
+    {
+      "Command": "mount",
+      "Top-3 Similar Questions": [
+        "ul_322360: Linux mount Windows samba share for all users",
+        "au_1014148: Can't mount a samba share",
+        "su_1082450: Mount a Samba share using Kerberos ticket"
+      ],
+      "Top-3 Scripts": [
+        "ul_322360: mount -t cifs -o username=myname,password=12345,dir_mode=0777,file_mode=0777 //10.10.0.78/smb /share/smb",
+        "au_1014148: mount -t cifs //172.16.0.10/ventas /mnt/importar -o user=externo,password=asd",
+        "su_1082450: sudo mount -t cifs -o user=$USER,cruid=$USER,sec=krb5 //domain/path /home/path\n\nsudo mount -t cifs -o user=$USER,cruid=$USER,sec=krb5,gid=$GID,uid=$UID //domain/path /home/path"
+      ]
+    },
+    {
+      "Command": "read",
+      "Top-3 Similar Questions": [
+        "so_20090235: Partial reads for reads in nonblocking mode",
+        "ul_453541: Create samba share with only write and no read permissions",
+        "so_8886683: Read stdin for user input when a file is already redirected to stdin"
+      ],
+      "Top-3 Scripts": [
+        "ul_453541: [read-only]\n  comment = Read-only access\n  path = /smbshare\n  read only = yes\n  hosts allow = 172.17.10.20\n  hosts deny = 0.0.0.0/0\n  read list = @smbread\n\n//172.17.10.1/read-only /mnt/read cifs user=smbread,pass=s3kr1t,uid=bar,vers=3.0 0 0",
+        "so_8886683: read -u 3\n\nexec 3<file.txt\nwhile read -u 3 line; do\n    echo $line\n    read userInput\n    echo \"$line $userInput\"\ndone\n\nwhile read line <&3; do\n    echo $line\n    read userInput\n    echo \"$line $userInput\"\ndone 3<file.txt",
+        "so_13754746: #!/bin/bash\nCONFIG='/etc/samba/smb.conf'\nfor i in homes music; do\n    echo \"$i\"\n    sed -n '/\\['$i'\\]/,/\\[/{/^\\[.*$/!p}' $CONFIG | while read -r line; do\n        printf \"%-15s : %s\\n\" \"${line%?=*}\" \"${line#*=?}\"\n    done\ndone\n\nhomes\nbrowsable  : no\nmap archive : yes\nmusic\nbrowsable  : yes\nread only  : yes\npath       : /usr/local/samba/tmp"
+      ]
+    },
+    {
+      "Command": "sudo",
+      "Top-3 Similar Questions": [
+        "au_388155: The USB drive is read only even write protection is off",
+        "su_1082450: Mount a Samba share using Kerberos ticket",
+        "au_195579: Mount my own samba share?"
+      ],
+      "Top-3 Scripts": [
+        "au_388155: sudo chmod 777 /media/usbpartition-name",
+        "su_1082450: sudo mount -t cifs -o user=$USER,cruid=$USER,sec=krb5 //domain/path /home/path\n\nsudo mount -t cifs -o user=$USER,cruid=$USER,sec=krb5,gid=$GID,uid=$UID //domain/path /home/path",
+        "au_195579: sudo mount -t cifs -o guest //LOCALHOST/SHARE_NAME //DIRECTORY/MOUNT_POINT"
+      ]
+    },
+    {
+      "Command": "echo",
+      "Top-3 Similar Questions": [
+        "so_8886683: Read stdin for user input when a file is already redirected to stdin",
+        "so_13754746: Linux Bash script to read samba config",
+        "ul_491481: Is there a character as `delim` of `read`, so that `read` reads the entire of a file at once?"
+      ],
+      "Top-3 Scripts": [
+        "so_8886683: exec 3<file.txt\nwhile read -u 3 line; do\n    echo $line\n    read userInput\n    echo \"$line $userInput\"\ndone\n\nwhile read line <&3; do\n    echo $line\n    read userInput\n    echo \"$line $userInput\"\ndone 3<file.txt",
+        "so_13754746: #!/bin/bash\nCONFIG='/etc/samba/smb.conf'\nfor i in homes music; do\n    echo \"$i\"\n    sed -n '/\\['$i'\\]/,/\\[/{/^\\[.*$/!p}' $CONFIG | while read -r line; do\n        printf \"%-15s : %s\\n\" \"${line%?=*}\" \"${line#*=?}\"\n    done\ndone",
+        "ul_491481: var=$(cat < file; echo .); var=${var%.}"
+      ]
+    },
+    {
+      "Command": "chmod",
+      "Top-3 Similar Questions": [
+        "au_388155: The USB drive is read only even write protection is off",
+        "ul_453541: Create samba share with only write and no read permissions",
+        "so_24434304: Samba - mount - user permission"
+      ],
+      "Top-3 Scripts": [
+        "au_388155: sudo chmod 777 /media/usbpartition-name",
+        "ul_453541: chmod -R 350 /smbshare\nchown -R smbwrite:smbread /smbshare",
+        "so_24434304: chmod 0775 /path/to/Documents"
+      ]
+    }
+  ]
+}

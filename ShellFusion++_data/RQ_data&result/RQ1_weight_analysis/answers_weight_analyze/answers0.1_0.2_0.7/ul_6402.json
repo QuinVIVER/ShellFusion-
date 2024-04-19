@@ -1,0 +1,79 @@
+{
+  "Query": "How to remove an audio track from an mp4 video file?",
+  "Answers": [
+    {
+      "Command": "ffmpeg",
+      "MP Summary": "ffmpeg video converter",
+      "Most Similar TLDR Task": "Remux MKV video to MP4 without re-encoding audio or video streams",
+      "Most Similar TLDR Script": "ffmpeg -i {{input_video}}.mkv -codec copy {{output_video}}.mp4",
+      "Top-3 Similar Questions": [
+        "au_1139812: How to extract specific audio track (track 2) from mp4 file using ffmpeg?",
+        "au_977162: How to remove a few seconds from .mp4 file using ffmpeg?",
+        "au_706933: Remove dead pixel from video material (not screen)"
+      ],
+      "Top-3 Scripts": [
+        "au_1139812: ffmpeg -i INPUT_FILE.EXT\n\nffmpeg -i INPUT_FILE.EXT -map 0:2 OUTPUT_FILE.EXT\n\nman ffmpeg",
+        "au_977162: ffmpeg  -t 00:11:00 -i input.mp4 -map 0 -c copy segment1.mp4\nffmpeg -ss 00:11:10 -i input.mp4 -map 0 -c copy segment2.mp4\n\nffmpeg -f concat -i input.txt -map 0 -c copy output.mp4\n\nffmpeg -i input.mp4 -filter_complex \\\n  \"[0:v]trim=end=660,setpts=N/FRAME_RATE/TB[v0]; \\\n   [0:a]atrim=end=660,asetpts=N/SR/TB[a0]; \\\n   [0:v]trim=start=670,setpts=N/FRAME_RATE/TB[v1]; \\\n   [0:a]atrim=start=670,asetpts=N/SR/TB[a1]; \\\n   [v0][a0][v1][a1]concat=n=2:v=1:a=1[v][a]\" \\\n  -map \"[v]\" -map \"[a]\" output.mp4",
+        "au_706933: ffmpeg -i input.mp4 -vf \\\n\"delogo=x=10:y=120:w=1:h=1, \\\n delogo=x=862:y=438:w=1:h=1, \\\n delogo=x=56:y=207:w=1:h=1, \\\n delogo=x=1259:y=943:w=1:h=1\" \\\n-c:a copy cleaned-output.mp4\n\nffmpeg -i input -ss 5 -vframes 1 output.png"
+      ],
+      "Explanations about Options": {
+        "-i": "input file url",
+        "-filter_complex": "Define a complex filtergraph, i.e. one with arbitrary number of inputs and/or outputs.\n For simple graphs - those with one input and one output of the same type - see the\n -filter options. filtergraph is a description of the filtergraph, as described in the\n ``Filtergraph syntax'' section of the ffmpeg-filters manual."
+      }
+    },
+    {
+      "Command": "youtube-dl",
+      "MP Summary": "download videos from youtube.com or other video platforms",
+      "Most Similar TLDR Task": "Download video(s) as MP4 files with custom filenames",
+      "Most Similar TLDR Script": "youtube-dl --format {{mp4}} -o \"{{%(title)s by %(uploader)s on %(upload_date)s in %(playlist)s.%(ext)s}}\" '{{url}}'",
+      "Top-3 Similar Questions": [
+        "so_51222752: Download all mp4 videos from a website"
+      ],
+      "Top-3 Scripts": [
+        "so_51222752: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "ffprobe",
+      "MP Summary": "ffprobe media prober",
+      "Most Similar TLDR Task": "Display the frame rate of a video",
+      "Most Similar TLDR Script": "ffprobe -v error -select_streams v:0 -show_entries stream=avg_frame_rate -of default=noprint_wrappers=1:nokey=1 {{input.mp4}}",
+      "Top-3 Similar Questions": [
+        "au_648603: How to create an animated GIF from MP4 video via command line?",
+        "au_1163088: How to list all mp4 files with HDp60 (to separate them from p30)?"
+      ],
+      "Top-3 Scripts": [
+        "au_648603: ",
+        "au_1163088: ffprobe -v error -select_streams \\\nv -of default=noprint_wrappers=1:nokey=1 \\\n-show_entries stream=r_frame_rate <your-filename>.mp4\n\nfor videofile in *.mp4; do\n echo -n \"$videofile\\t\"\n ffprobe -v error -select_streams v \\\n -of default=noprint_wrappers=1:nokey=1 \\\n -show_entries stream=r_frame_rate $videofile\n\nfind -name '*.mp4' -printf '%p\\t' \\\n-exec ffprobe -v error -select_streams \\\nv -of default=noprint_wrappers=1:nokey=1  \\\n-show_entries stream=r_frame_rate {} \\;"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "pactl",
+      "MP Summary": "Control a running PulseAudio sound server",
+      "Most Similar TLDR Task": "List all sinks (or other types - sinks are outputs and sink-inputs are active audio streams)",
+      "Most Similar TLDR Script": "pactl list {{sinks}} short",
+      "Top-3 Similar Questions": [
+        "ul_263263: Remove PulseAudio device"
+      ],
+      "Top-3 Scripts": [
+        "ul_263263: pactl unload-module\n\npactl list\n\npactl unload-module 24"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "mpg321",
+      "MP Summary": "Simple and lightweight command line MP3 player",
+      "Most Similar TLDR Task": "Play an audio source exactly N times (N=0 means forever)",
+      "Most Similar TLDR Script": "mpg321 -l {{N}} {{path/to/file_a|URL}} {{path/to/file_b|URL}} {{...}}",
+      "Top-3 Similar Questions": [
+        "su_908896: Insert sound into an mp3 track"
+      ],
+      "Top-3 Scripts": [
+        "su_908896: "
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

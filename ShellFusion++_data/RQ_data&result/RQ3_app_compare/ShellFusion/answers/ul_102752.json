@@ -1,0 +1,105 @@
+{
+    "Answers": [
+        {
+            "Command": "touch",
+            "Explanations about Options": {
+                "-r(M)": "use this file's times instead of current time",
+                "-t(C)": "The last method is optimal, but may result in deleting files you want if filenames collide. .  \"find\" supports a \"-newer\" \"file\" flag, specifying it should find files newer than file. \"touch\" has a -t argument to modify the access/modify time on a file.",
+                "-t(M)": "STAMP\n use [[CC]YY]MMDDhhmm[.ss] instead of current time"
+            },
+            "MP Summary": "change file timestamps",
+            "Most Similar TLDR Script": "touch -t {{YYYYMMDDHHMM.SS}} {{filename}}",
+            "Most Similar TLDR Task": "Set the times on a file to a specific date and time",
+            "Top-3 Scripts": [
+                "su_47356: $ tar xzf whoops.tar.gz\n$ touch -t 200909261925.30 whoops-timestamp\n$ find . -newer whoops-timestamp",
+                "so_9090901: DATE=<<date>>\nSEARCH_PATH=/images/\nDATE=`echo $DATE|sed 's/-//g'`\nDATE=$DATE\"0000\"\nFILE=~/timecheck_${RANDOM}_$(date +\"%Y%m%d%H%M\")\ntouch -t $DATE $FILE\nfind $SEARCH_PATH -newer $FILE 2>/dev/null|awk 'BEGIN{f=0}{if(f==1)printf(\"\\\"%s\\\", \",l);l=$0;f=1}END{printf(\"\\\"%s\\\"\",l)}'\nrm -f $FILE",
+                "ul_530690: #find the eldest file in dir\neldest=$(ls -t dir | tail -1)\n\n#duplicate the time\ntouch -r \"dir/$eldest\" myfile\n\n#make the file one second older\ntouch -A -000001 myfile"
+            ],
+            "Top-3 Similar Questions": [
+                "su_47356: How do I delete files greater than a certain date on linux",
+                "so_9090901: Finding files in subdirectories created after a certain date",
+                "ul_530690: Modify date of a file to be older that any other file in a certain folder"
+            ]
+        },
+        {
+            "Command": "rm",
+            "Explanations about Options": {
+                "-f(M)": "ignore nonexistent files and arguments, never prompt",
+                "-i(M)": "prompt before every removal"
+            },
+            "MP Summary": "remove files or directories",
+            "Most Similar TLDR Script": "rm {{path/to/file}} {{path/to/another/file}}",
+            "Most Similar TLDR Task": "Remove files from arbitrary locations",
+            "Top-3 Scripts": [
+                "au_1029799: find . -type f ! -newermt '04/29/2018 16:00:00' -exec rm -f {} \\;\n\nfind . -type f ! -newerat '04/29/2018 16:00:00' -exec rm -f {} \\;\n\nfind . -type f ! -newerct '04/29/2018 16:00:00' -exec rm -f {} \\;",
+                "so_4254618: rm --\n\nrm -i",
+                "su_482435: find  . -name 'name*' -exec rm {} \\;"
+            ],
+            "Top-3 Similar Questions": [
+                "au_1029799: How to remove only files created before a specific date and time",
+                "so_4254618: delete file - specific date",
+                "su_482435: How to remove all files starting with a certain string in Linux"
+            ]
+        },
+        {
+            "Command": "date",
+            "Explanations about Options": {
+                "--utc(M)": "print or set Coordinated Universal Time (UTC)",
+                "-d(M)": "display time described by STRING, not 'now'",
+                "-r(M)": "display the last modification time of FILE"
+            },
+            "MP Summary": "print or set the system date and time",
+            "Most Similar TLDR Script": "date -d \"{{2018-09-01 00:00}}\" +%s --utc",
+            "Most Similar TLDR Task": "Convert a specific date to the Unix timestamp format",
+            "Top-3 Scripts": [
+                "ul_50108: $ find -type f -newermt \"$(date -r $file) -1 hour\" -a \\\n            \\! -newermt \"$(date -r $file) +1 hour\"",
+                "ul_208683: date=${f#*}\n    date=${date%.gz}\n    date=`echo $date| rev `\n    date=${date:0:8}\n    date=`echo $date| rev `",
+                "so_8399493: #!/bin/bash\n\n# requirements for script script\n\nCOUNTER=$((7+1))\nDATE=$(date -d \"-${COUNTER} days\" +%s)\nDATE=$(date -d -@${DATE} \"+%Y-%m-%d\")\n\nsed -i \"1,/$DATE/d\" test.txt"
+            ],
+            "Top-3 Similar Questions": [
+                "ul_50108: Find files which are created a certain time after or before a particular file was created",
+                "ul_208683: Removing files based on date given in filename",
+                "so_8399493: Is there a way to delete all log entries in a file older than a certain date? (BASH)"
+            ]
+        },
+        {
+            "Command": "find",
+            "Explanations about Options": {
+                "-d(M)": "A synonym for -depth, for compatibility with FreeBSD, NetBSD, MacOS X and OpenBSD.",
+                "-maxdepth(M)": "Descend at most levels (a non-negative integer) levels of directories below the\n starting-points. -maxdepth 0 means only apply the tests and actions to the\n starting-points themselves.",
+                "-n(M)": "for less than n ,",
+                "-name(M)": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+                "-not(M)": "Same as ! expr, but not POSIX compliant.",
+                "-type(C)": "get \"test.txt\"'s modification time (\"mtime\") calculate \"\"before delta\" = now + hour - mtime\" (assuming \"mtime\" is in the past) calculate \"\"after delta\" = now - hour - mtime if now - mtime > hour else 0\" run \"find -type f -mmin -\"before delta\" -mmin +\"after delta\"\"  It finds all files that are modified less than \"before delta\" minutes ago and greater than \"after delta\" minutes ago i.e., +/- hour around \"test.txt\"'s modification time.",
+                "-type(M)": "File is of type c:"
+            },
+            "MP Summary": "search for files in a directory hierarchy",
+            "Most Similar TLDR Script": "find {{root_path}} -name '{{*.py}}' -not -path '{{*/site-packages/*}}'",
+            "Most Similar TLDR Task": "Find files matching a given pattern, excluding specific paths",
+            "Top-3 Scripts": [
+                "au_1029799: find . -type f ! -newermt '04/29/2018 16:00:00' -exec rm -f {} \\;\n\nfind . -type f ! -newerat '04/29/2018 16:00:00' -exec rm -f {} \\;\n\nfind . -type f ! -newerct '04/29/2018 16:00:00' -exec rm -f {} \\;",
+                "so_4254618: find . -type f -mtime -2 -exec echo {} +\n\nfind . -maxdepth 1 -type f -newermt \"Nov 22\" \\! -newermt \"Nov 23\" -exec echo {} +\n\nfind -maxdepth 1 -type f -newermt \"Nov 22\" \\! -newermt \"Nov 23\" -delete",
+                "ul_50108: find -type f -mmin -\"before delta\" -mmin +\"after delta\"\n\n$ find -type f -newermt \"$(date -r $file) -1 hour\" -a \\\n            \\! -newermt \"$(date -r $file) +1 hour\""
+            ],
+            "Top-3 Similar Questions": [
+                "au_1029799: How to remove only files created before a specific date and time",
+                "so_4254618: delete file - specific date",
+                "ul_50108: Find files which are created a certain time after or before a particular file was created"
+            ]
+        },
+        {
+            "Command": "tar",
+            "Explanations about Options": {},
+            "MP Summary": "an archiving utility",
+            "Most Similar TLDR Script": "tar xf {{source.tar}} {{source.tar/path/to/extract}} --strip-components={{depth_to_strip}}",
+            "Most Similar TLDR Task": "Extract a specific file without preserving the folder structure",
+            "Top-3 Scripts": [
+                "su_47356: $ tar xzf whoops.tar.gz\n$ touch -t 200909261925.30 whoops-timestamp\n$ find . -newer whoops-timestamp\n\n$ tar tfz whoops.tar.gz | xargs rm -v"
+            ],
+            "Top-3 Similar Questions": [
+                "su_47356: How do I delete files greater than a certain date on linux"
+            ]
+        }
+    ],
+    "Query": "Remove all files created before a certain date"
+}

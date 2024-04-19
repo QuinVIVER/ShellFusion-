@@ -1,0 +1,87 @@
+{
+  "Query": "How to encrypt individual folders?",
+  "Answers": [
+    {
+      "Command": "cryptsetup",
+      "MP Summary": "manage plain dm-crypt and LUKS encrypted volumes",
+      "Most Similar TLDR Task": "Open a LUKS volume and create a decrypted mapping at /dev/mapper/{{target}}",
+      "Most Similar TLDR Script": "cryptsetup luksOpen {{/dev/sda1}} {{target}}",
+      "Top-3 Similar Questions": [
+        "au_928813: encrypt external disk does not work",
+        "su_182099: What is the easiest way to encrypt a dir? (on Ubuntu)",
+        "ul_445652: How to mount and de-encrypt a LUKS encrypted partition to recover files"
+      ],
+      "Top-3 Scripts": [
+        "au_928813: cryptsetup luksFormat /dev/sdc1",
+        "su_182099: ",
+        "ul_445652: sudo cryptsetup open /dev/sda3 luksrecoverytarget --type luks\n\nsudo umount /mnt/recoverytarget\nsudo cryptsetup close luksrecoverytarget"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "mkdir",
+      "MP Summary": "make directories",
+      "Most Similar TLDR Task": "Create directories recursively (useful for creating nested dirs)",
+      "Most Similar TLDR Script": "mkdir -p {{path/to/directory}}",
+      "Top-3 Similar Questions": [
+        "au_1281476: I want to encrypt folder",
+        "ul_445652: How to mount and de-encrypt a LUKS encrypted partition to recover files"
+      ],
+      "Top-3 Scripts": [
+        "au_1281476: $ mkdir ~/Documents/private",
+        "ul_445652: sudo mkdir /mnt/recoverytarget\nsudo mount LV_PATH_GOES_HERE /mnt/recoverytarget"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "7z",
+      "MP Summary": "A file archiver with high compression ratio format",
+      "Most Similar TLDR Task": "Encrypt an existing archive (including headers)",
+      "Most Similar TLDR Script": "7z a {{encrypted.7z}} -p{{password}} -mhe=on {{archived.7z}}",
+      "Top-3 Similar Questions": [
+        "tldr_0: Encrypt an existing archive (including headers)"
+      ],
+      "Top-3 Scripts": [
+        "tldr_0: 7z a {{encrypted.7z}} -p{{password}} -mhe=on {{archived.7z}}"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "rm",
+      "MP Summary": "remove files or directories",
+      "Most Similar TLDR Task": "Remove files from arbitrary locations",
+      "Most Similar TLDR Script": "rm {{path/to/file}} {{path/to/another/file}}",
+      "Top-3 Similar Questions": [
+        "ul_186237: Encrypt a single file and read/edit on-the-fly",
+        "au_755689: Do I need unencrypted files underneath encrypted overmount?"
+      ],
+      "Top-3 Scripts": [
+        "ul_186237: edit-gpg() {\ngpg -v --no-use-agent --passphrase-file=/path/to/keyfile --output \"/tmp/gpg-edit.out\" \"$1\" &&\ngedit \"/tmp/gpg-edit.out\" &&\ngpg -v --no-use-agent --cipher-algo AES256 --passphrase-file=/path/to/keyfile --output \"$1\" -c \"/tmp/gpg-edit.out\" &&\nrm \"/tmp/gpg-edit.out\"\n}\n\ncrypt-gpg() { \ngpg -v --no-use-agent --cipher-algo AES256 --passphrase-file=/path/to/keyfile -c \"$1\" &&\nrm \"$1\"\n}",
+        "au_755689: find /home/user -maxdepth 1 \\( \\! -type l -a -type d \\) -exec echo rm {} \\;"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "gpg",
+      "MP Summary": "OpenPGP encryption and signing tool",
+      "Most Similar TLDR Task": "Encrypt a specified file for a specified recipient, writing the output to a new file with `.gpg` appended",
+      "Most Similar TLDR Script": "gpg2 --encrypt --recipient {{alice@example.com}} {{path/to/doc.txt}}",
+      "Top-3 Similar Questions": [
+        "ul_186237: Encrypt a single file and read/edit on-the-fly",
+        "su_145143: Compress, encrypt and upload a directory to an FTP server in Linux"
+      ],
+      "Top-3 Scripts": [
+        "ul_186237: edit-gpg() {\ngpg -v --no-use-agent --passphrase-file=/path/to/keyfile --output \"/tmp/gpg-edit.out\" \"$1\" &&\ngedit \"/tmp/gpg-edit.out\" &&\ngpg -v --no-use-agent --cipher-algo AES256 --passphrase-file=/path/to/keyfile --output \"$1\" -c \"/tmp/gpg-edit.out\" &&\nrm \"/tmp/gpg-edit.out\"\n}\n\ncrypt-gpg() { \ngpg -v --no-use-agent --cipher-algo AES256 --passphrase-file=/path/to/keyfile -c \"$1\" &&\nrm \"$1\"\n}",
+        "su_145143: gpg -r RECIP --output OUTPUT_FILE_NAME --encrypt INPUT_FILE_NAME"
+      ],
+      "Explanations about Options": {
+        "-v": "Give more information during processing. If used twice, the input data is listed in\n detail.",
+        "--output": " Write output to file.",
+        "--cipher-algo": "Use name as cipher algorithm. Running the program with the command --version yields\n a list of supported algorithms. If this is not used the cipher algorithm is\n selected from the preferences stored with the key. In general, you do not want to\n use this option as it allows you to violate the OpenPGP standard. --personal-\n cipher-preferences is the safe way to accomplish the same thing.",
+        "--passphrase-file": "Read the passphrase from file file. Only the first line will be read from file\n file. This can only be used if only one passphrase is supplied. Obviously, a\n passphrase stored in a file is of questionable security if other users can read\n this file. Don't use this option if you can avoid it.",
+        "--no-use-agent": "Try to use the GnuPG-Agent. With this option, GnuPG first tries to connect to the\n agent before it asks for a passphrase. --no-use-agent disables this option. Note,\n that the tool gpg-preset-passphrase, which comes with GnuPG-2, cannot be used to\n preset a passphrase for this version of GnuPG.",
+        "--encrypt": "Encrypt data. This option may be combined with --sign (for a signed and encrypted\n message), --symmetric (for a message that may be decrypted via a secret key or a\n passphrase), or --sign and --symmetric together (for a signed message that may be\n decrypted via a secret key or a passphrase)."
+      }
+    }
+  ]
+}

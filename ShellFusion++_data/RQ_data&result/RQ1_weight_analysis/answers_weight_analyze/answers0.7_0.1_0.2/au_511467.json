@@ -1,0 +1,87 @@
+{
+  "Query": "How can I completely erase all data on a (micro) SD card?",
+  "Answers": [
+    {
+      "Command": "fdisk",
+      "MP Summary": "manipulate disk partition table",
+      "Most Similar TLDR Task": "Start the partition manipulator",
+      "Most Similar TLDR Script": "fdisk {{/dev/sda}}",
+      "Top-3 Similar Questions": [
+        "au_818843: First time installing (erasing Windows) from usb, did everything just so, Boot Device Not Found",
+        "au_17640: How can I securely erase a hard drive?"
+      ],
+      "Top-3 Scripts": [
+        "au_818843: fdisk -l",
+        "au_17640: sudo fdisk -l"
+      ],
+      "Explanations about Options": {
+        "-l": "List the partition tables for the specified devices and then exit. If no devices\n are given, those mentioned in /proc/partitions (if that file exists) are used."
+      }
+    },
+    {
+      "Command": "badblocks",
+      "MP Summary": "search a device for bad blocks",
+      "Most Similar TLDR Task": "Search a disk for bad blocks by using a non-destructive read-only test",
+      "Most Similar TLDR Script": "sudo badblocks {{/dev/sda}}",
+      "Top-3 Similar Questions": [
+        "ul_308009: Can't delete from SD card, 'Read-only file system'"
+      ],
+      "Top-3 Scripts": [
+        "ul_308009: badblocks -w -o ~/badblocksList /dev/sda\nmkfs.vfat -l ~/badblocksList /dev/sda"
+      ],
+      "Explanations about Options": {
+        "-w": "Use write-mode test. With this option, badblocks scans for bad blocks by writing\n some patterns (0xaa, 0x55, 0xff, 0x00) on every block of the device, reading every\n block and comparing the contents. This option may not be combined with the -n\n option, as they are mutually exclusive.",
+        "-o": "Write the list of bad blocks to the specified file. Without this option, badblocks\n displays the list on its standard output. The format of this file is suitable for\n use by the -l option in e2fsck(8) or mke2fs(8)."
+      }
+    },
+    {
+      "Command": "sync",
+      "MP Summary": "Synchronize cached writes to persistent storage",
+      "Most Similar TLDR Task": "Flush all pending write operations on a single file to disk",
+      "Most Similar TLDR Script": "sync {{path/to/file}}",
+      "Top-3 Similar Questions": [
+        "au_722859: Is there a faster way to erase a pen (USB) drive using dd command?"
+      ],
+      "Top-3 Scripts": [
+        "au_722859: sudo dd if=/dev/zero of=/dev/sdd bs=1M && sync"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "mount",
+      "MP Summary": "mount a filesystem",
+      "Most Similar TLDR Task": "Mount a directory to another directory",
+      "Most Similar TLDR Script": "mount --bind {{path/to/old_dir}} {{path/to/new_dir}}",
+      "Top-3 Similar Questions": [
+        "au_818843: First time installing (erasing Windows) from usb, did everything just so, Boot Device Not Found",
+        "au_1162907: Erase /home/<user> from casper-rw overlay on shutdown (systemd service)"
+      ],
+      "Top-3 Scripts": [
+        "au_818843: 1) sudo mount /dev/sda1 /mnt # (If your Linux were on a different partition substitute /sda1 for the partition of your Linux install.)\n2) for i in /sys /proc /run /dev; do sudo mount --bind \"$i\" \"/mnt/$i\"; done\n3) sudo chroot /mnt\n4) update-grub\n5) grub-install /dev/sda # (/dev/sda is the hard drive that has linux installed (i.e. /dev/sda or /dev/sdb ... etc.)\n    update-grub",
+        "au_1162907: mount /media/overlay"
+      ],
+      "Explanations about Options": {
+        "--bind": "Remount a subtree somewhere else (so that its contents are available in both\n places). See above, under Bind mounts."
+      }
+    },
+    {
+      "Command": "apt-get",
+      "MP Summary": "APT package handling utility - command-line interface",
+      "Most Similar TLDR Task": "Remove a package and its configuration files",
+      "Most Similar TLDR Script": "apt-get purge {{package}}",
+      "Top-3 Similar Questions": [
+        "so_32517340: How to remove ruby completely from my linux system",
+        "so_38604715: How can I remove jenkins completely from linux",
+        "su_319262: What are the techniques for securely erasing data in Linux?"
+      ],
+      "Top-3 Scripts": [
+        "so_32517340: $ sudo apt-get install aptitude # install aptitude for easy searching\n$ aptitude search ruby | grep ^i # find all installed packages, containing ruby in their titles",
+        "so_38604715: sudo apt-get remove --purge jenkins",
+        "su_319262: sudo apt-get install secure-delete"
+      ],
+      "Explanations about Options": {
+        "--purge": "Use purge instead of remove for anything that would be removed. An asterisk (\"*\") will\n be displayed next to packages which are scheduled to be purged. remove --purge is\n equivalent to the purge command. Configuration Item: APT::Get::Purge."
+      }
+    }
+  ]
+}

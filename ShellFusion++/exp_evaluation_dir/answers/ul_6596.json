@@ -1,0 +1,838 @@
+{
+  "Query": "How do I zip/unzip on the unix command line?",
+  "Answers": [
+    {
+      "Command": "find",
+      "MP Summary": "search for files in a directory hierarchy",
+      "Most Similar TLDR Task": "Run a command for each file (use `{}` within the command to access the filename)",
+      "Most Similar TLDR Script": "find {{root_path}} -name '{{*.ext}}' -exec {{wc -l {} }}\\;",
+      "Most Similar NL2Bash Task": "Run \"./configure\" with a new environment variable CC set to the full path of the command 'gcc'",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "CC=$(which gcc) ./configure\n",
+          "command-options": {
+            "which": {
+              "mpsum": "locate a command"
+            }
+          },
+          "TLDR_inform": {
+            "which": {
+              "man1_which_36536": "locat program user path multipl execut match display search path environ variabl display locat match execut"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_14397: List all files/directories under /data1/Marcel which are greater than 524288 bytes and were modified or accessed more than 1 year ago",
+        "nl2bash_14249: List all SGID and SUID files in entire file system",
+        "nl2bash_11751: delete all the \".bak\" or swap files in kat folder"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_14397: find /data1/Marcel -size +1024 \\( -mtime +365 -o -atime +365 \\) -ls",
+        "nl2bash_14249: find / -type f \\( -perm -4000 -o -perm -2000 \\) -ls",
+        "nl2bash_11751: find kat -type f \\( -name \"*~\" -p -name \"*.bak\" \\) -delete"
+      ],
+      "Explanations about Options": {
+        "-type": "File is of type c:",
+        "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+        "-atime": "File was last accessed n*24 hours ago. When find figures out how many 24-hour\n periods ago the file was last accessed, any fractional part is ignored, so to match\n -atime +1, a file has to have been accessed at least two days ago.",
+        "-d": "A synonym for -depth, for compatibility with FreeBSD, NetBSD, MacOS X and OpenBSD.",
+        "-ls": "Unusual characters are always escaped. White space, backslash, and double quote\n characters are printed using C-style escaping (for example `\\f', `\\\"'). Other\n unusual characters are printed using an octal escape. Other printable characters\n (for -ls and -fls these are the characters between octal 041 and 0176) are printed\n as-is.",
+        "-mtime": "File's data was last modified n*24 hours ago. See the comments for -atime to\n understand how rounding affects the interpretation of file modification times.",
+        "-size": "File uses n units of space, rounding up. The following suffixes can be used:",
+        "-perm": "Any of the permission bits mode are set for the file. Symbolic modes are accepted\n in this form. You must specify `u', `g' or `o' if you use a symbolic mode. See\n the EXAMPLES section for some illustrative examples. If no permission bits in mode\n are set, this test matches any file (the idea here is to be consistent with the\n behaviour of -perm -000)."
+      }
+    },
+    {
+      "Command": "xargs",
+      "MP Summary": "build and execute command lines from standard input",
+      "Most Similar TLDR Task": "Run multiple chained commands on the input data",
+      "Most Similar TLDR Script": "{{arguments_source}} | xargs sh -c \"{{command1}} && {{command2}} | {{command3}}\"",
+      "Most Similar NL2Bash Task": "Run \"./configure\" with a new environment variable CC set to the full path of the command 'gcc'",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "CC=$(which gcc) ./configure\n",
+          "command-options": {
+            "which": {
+              "mpsum": "locate a command"
+            }
+          },
+          "TLDR_inform": {
+            "which": {
+              "man1_which_36536": "locat program user path multipl execut match display search path environ variabl display locat match execut"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_13738: Calculate the sum of all the numbers from 1 to 10",
+        "nl2bash_13737: Calculate the sum of all the numbers from -5 to 10",
+        "nl2bash_11749: delete all text files in the entire file system"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_13738: seq 10 | tr '[\\n]' '+' | sed -e 's/+/ + /g' -e's/ + $/\\n/' | xargs expr",
+        "nl2bash_13737: seq -5 10 | xargs printf \"- - %s\" | xargs  | bc",
+        "nl2bash_11749: find / -type f -name \"*.txt\" -print | xargs rm"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "seq",
+      "MP Summary": "print a sequence of numbers",
+      "Most Similar TLDR Task": "Separate the output with a space instead of a newline",
+      "Most Similar TLDR Script": "seq -s \" \" 5 3 20",
+      "Most Similar NL2Bash Task": "Run \"./configure\" with a new environment variable CC set to the full path of the command 'gcc'",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "CC=$(which gcc) ./configure\n",
+          "command-options": {
+            "which": {
+              "mpsum": "locate a command"
+            }
+          },
+          "TLDR_inform": {
+            "which": {
+              "man1_which_36536": "locat program user path multipl execut match display search path environ variabl display locat match execut"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_13738: Calculate the sum of all the numbers from 1 to 10",
+        "nl2bash_13737: Calculate the sum of all the numbers from -5 to 10",
+        "nl2bash_13739: Calculate the sum of all the numbers from 1 to 100000"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_13738: seq 10 | jq -s 'add'\n\n\nseq 10 | tr '[\\n]' '+' | sed -e 's/+/ + /g' -e's/ + $/\\n/' | xargs expr\n\n\nseq 10|jq -s add",
+        "nl2bash_13737: seq -5 10 | xargs printf \"- - %s\" | xargs  | bc\n\n\nseq -s+ -5 10 | bc",
+        "nl2bash_13739: seq 100000 | paste -sd+ | bc -l"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "rm",
+      "MP Summary": "remove files or directories",
+      "Most Similar TLDR Task": "Remove files from arbitrary locations",
+      "Most Similar TLDR Script": "rm {{path/to/file}} {{path/to/another/file}}",
+      "Most Similar NL2Bash Task": "Run \"./configure\" with a new environment variable CC set to the full path of the command 'gcc'",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "CC=$(which gcc) ./configure\n",
+          "command-options": {
+            "which": {
+              "mpsum": "locate a command"
+            }
+          },
+          "TLDR_inform": {
+            "which": {
+              "man1_which_36536": "locat program user path multipl execut match display search path environ variabl display locat match execut"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_11749: delete all text files in the entire file system",
+        "nl2bash_11750: delete all text files in the home folder after user confirmation"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_11749: find / -type f -name \"*.txt\" -print | xargs rm",
+        "nl2bash_11750: find $HOME/. -name \"*.txt\" -ok rm {} \\;"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "rsync",
+      "MP Summary": "a fast, versatile, remote (and local) file-copying tool",
+      "Most Similar TLDR Task": "Transfer directory contents (but not the directory itself) from a remote to local",
+      "Most Similar TLDR Script": "rsync -r {{remote_host}}:{{path/to/remote_directory}}/ {{path/to/local_directory}}",
+      "Most Similar NL2Bash Task": "Run \"./configure\" with a new environment variable CC set to the full path of the command 'gcc'",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "CC=$(which gcc) ./configure\n",
+          "command-options": {
+            "which": {
+              "mpsum": "locate a command"
+            }
+          },
+          "TLDR_inform": {
+            "which": {
+              "man1_which_36536": "locat program user path multipl execut match display search path environ variabl display locat match execut"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_8460: search for bash and rsync files in the entire file system excluding search in the path /usr/share folder and discard all the errors",
+        "nl2bash_10696: Recursively copy \"dir_a\" to \"dir_b\" and delete any new files in \"dir_b\"",
+        "nl2bash_10695: Recursively copy \"/path/to/data/myappdata/*.txt\" to \"user@host:/remote/path/to/data/myappdata/\""
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_8460: find / -path /usr/share -prune -o \\( -name rsync -o -name bash \\) -print 2>/dev/nul",
+        "nl2bash_10696: rsync -u -r --delete dir_a dir_b",
+        "nl2bash_10695: rsync -rvv /path/to/data/myappdata/*.txt user@host:/remote/path/to/data/myappdata/"
+      ],
+      "Explanations about Options": {
+        "-o": "This option causes rsync to set the owner of the destination file to be the same as\n the source file, but only if the receiving rsync is being run as the super-user\n (see also the --super and --fake-super options). Without this option, the owner of\n new and/or transferred files are set to the invoking user on the receiving side.",
+        "-a": "This is equivalent to -rlptgoD. It is a quick way of saying you want recursion and\n want to preserve almost everything (with -H being a notable omission). The only\n exception to the above equivalence is when --files-from is specified, in which case\n -r is not implied.",
+        "-n": "This makes rsync perform a trial run that doesn\u2019t make any changes (and produces\n mostly the same output as a real run). It is most commonly used in combination\n with the -v, --verbose and/or -i, --itemize-changes options to see what an rsync\n command is going to do before one actually runs it.",
+        "-e": "This option allows you to choose an alternative remote shell program to use for\n communication between the local and remote copies of rsync. Typically, rsync is\n configured to use ssh by default, but you may prefer to use rsh on a local network.",
+        "-v": "This option increases the amount of information you are given during the transfer.\n By default, rsync works silently. A single -v will give you information about what\n files are being transferred and a brief summary at the end. Two -v options will\n give you information on what files are being skipped and slightly more information\n at the end. More than two -v options should only be used if you are debugging\n rsync.",
+        "-u": "This forces rsync to skip any files which exist on the destination and have a\n modified time that is newer than the source file. (If an existing destination file\n has a modification time equal to the source file\u2019s, it will be updated if the sizes\n are different.)",
+        "-r": "This tells rsync to copy directories recursively. See also --dirs (-d).",
+        "-m": "This option tells the receiving rsync to get rid of empty directories from the\n file-list, including nested directories that have no non-directory children. This\n is useful for avoiding the creation of a bunch of useless directories when the\n sending rsync is recursively scanning a hierarchy of files using\n include/exclude/filter rules."
+      }
+    },
+    {
+      "Command": "bash",
+      "MP Summary": "GNU Bourne-Again SHell",
+      "Most Similar TLDR Task": "Run commands from a file, logging all commands executed to the terminal",
+      "Most Similar TLDR Script": "bash -x {{file.sh}}",
+      "Most Similar NL2Bash Task": "Run \"./configure\" with a new environment variable CC set to the full path of the command 'gcc'",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "CC=$(which gcc) ./configure\n",
+          "command-options": {
+            "which": {
+              "mpsum": "locate a command"
+            }
+          },
+          "TLDR_inform": {
+            "which": {
+              "man1_which_36536": "locat program user path multipl execut match display search path environ variabl display locat match execut"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_8460: search for bash and rsync files in the entire file system excluding search in the path /usr/share folder and discard all the errors"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_8460: find / -path /usr/share -prune -o \\( -name rsync -o -name bash \\) -print 2>/dev/nul"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "paste",
+      "MP Summary": "merge lines of files",
+      "Most Similar TLDR Task": "Merge two files, with lines added alternatively",
+      "Most Similar TLDR Script": "paste -d '\\n' {{file1}} {{file2}}",
+      "Most Similar NL2Bash Task": "Run \"./configure\" with a new environment variable CC set to the full path of the command 'gcc'",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "CC=$(which gcc) ./configure\n",
+          "command-options": {
+            "which": {
+              "mpsum": "locate a command"
+            }
+          },
+          "TLDR_inform": {
+            "which": {
+              "man1_which_36536": "locat program user path multipl execut match display search path environ variabl display locat match execut"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_13739: Calculate the sum of all the numbers from 1 to 100000"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_13739: seq 100000 | paste -sd+ | bc -l"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "ls",
+      "MP Summary": "list directory contents",
+      "Most Similar TLDR Task": "List files one per line",
+      "Most Similar TLDR Script": "ls -1",
+      "Most Similar NL2Bash Task": "Run \"./configure\" with a new environment variable CC set to the full path of the command 'gcc'",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "CC=$(which gcc) ./configure\n",
+          "command-options": {
+            "which": {
+              "mpsum": "locate a command"
+            }
+          },
+          "TLDR_inform": {
+            "which": {
+              "man1_which_36536": "locat program user path multipl execut match display search path environ variabl display locat match execut"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_1427: Execute \"ls -l\" every 2 seconds and highlight the differences in runs"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_1427: watch -d ls -l"
+      ],
+      "Explanations about Options": {
+        "-l": "use a long listing format"
+      }
+    },
+    {
+      "Command": "tr",
+      "MP Summary": "translate or delete characters",
+      "Most Similar TLDR Task": "Compress a series of identical characters to a single character",
+      "Most Similar TLDR Script": "tr -s '{{input_characters}}' < {{filename}}",
+      "Most Similar NL2Bash Task": "Run \"./configure\" with a new environment variable CC set to the full path of the command 'gcc'",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "CC=$(which gcc) ./configure\n",
+          "command-options": {
+            "which": {
+              "mpsum": "locate a command"
+            }
+          },
+          "TLDR_inform": {
+            "which": {
+              "man1_which_36536": "locat program user path multipl execut match display search path environ variabl display locat match execut"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_13738: Calculate the sum of all the numbers from 1 to 10"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_13738: seq 10 | tr '[\\n]' '+' | sed -e 's/+/ + /g' -e's/ + $/\\n/' | xargs expr"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "more",
+      "MP Summary": "file perusal filter for crt viewing",
+      "Most Similar TLDR Task": "Open a file",
+      "Most Similar TLDR Script": "more {{source_file}}",
+      "Most Similar NL2Bash Task": "Run \"./configure\" with a new environment variable CC set to the full path of the command 'gcc'",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "CC=$(which gcc) ./configure\n",
+          "command-options": {
+            "which": {
+              "mpsum": "locate a command"
+            }
+          },
+          "TLDR_inform": {
+            "which": {
+              "man1_which_36536": "locat program user path multipl execut match display search path environ variabl display locat match execut"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_1555: Run \"myprogram\", pausing for user input at each page.",
+        "nl2bash_1554: Run \"myprogram\" in the current directory, pausing for user input at each page."
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_1555: myprogram|more",
+        "nl2bash_1554: ./myprogram | more"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "echo",
+      "MP Summary": "display a line of text",
+      "Most Similar TLDR Task": "Append a message to the file",
+      "Most Similar TLDR Script": "echo \"{{Hello World}}\" >> {{file.txt}}",
+      "Most Similar NL2Bash Task": "Run \"./configure\" with a new environment variable CC set to the full path of the command 'gcc'",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "CC=$(which gcc) ./configure\n",
+          "command-options": {
+            "which": {
+              "mpsum": "locate a command"
+            }
+          },
+          "TLDR_inform": {
+            "which": {
+              "man1_which_36536": "locat program user path multipl execut match display search path environ variabl display locat match execut"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_1553: Run \"command\" on server \"host\" as user \"user\""
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_1553: echo \"command\" | ssh user@host"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "which",
+      "MP Summary": "locate a command",
+      "Most Similar TLDR Task": "Search the PATH environment variable and display the location of any matching executables",
+      "Most Similar TLDR Script": "which {{executable}}",
+      "Most Similar NL2Bash Task": "Run \"./configure\" with a new environment variable CC set to the full path of the command 'gcc'",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "CC=$(which gcc) ./configure\n",
+          "command-options": {
+            "which": {
+              "mpsum": "locate a command"
+            }
+          },
+          "TLDR_inform": {
+            "which": {
+              "man1_which_36536": "locat program user path multipl execut match display search path environ variabl display locat match execut"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_1552: Run \"./configure\" with a new environment variable CC set to the full path of the command 'gcc'"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_1552: CC=$(which gcc) ./configure"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "sed",
+      "MP Summary": "stream editor for filtering and transforming text",
+      "Most Similar TLDR Task": "Delete lines matching the line pattern",
+      "Most Similar TLDR Script": "sed '/{{line_pattern}}/d' {{filename}}",
+      "Most Similar NL2Bash Task": "Run \"./configure\" with a new environment variable CC set to the full path of the command 'gcc'",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "CC=$(which gcc) ./configure\n",
+          "command-options": {
+            "which": {
+              "mpsum": "locate a command"
+            }
+          },
+          "TLDR_inform": {
+            "which": {
+              "man1_which_36536": "locat program user path multipl execut match display search path environ variabl display locat match execut"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_13738: Calculate the sum of all the numbers from 1 to 10"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_13738: seq 10 | tr '[\\n]' '+' | sed -e 's/+/ + /g' -e's/ + $/\\n/' | xargs expr"
+      ],
+      "Explanations about Options": {
+        "-e": "add the script to the commands to be executed"
+      }
+    },
+    {
+      "Command": "nl",
+      "MP Summary": "number lines of files",
+      "Most Similar TLDR Task": "Number all lines including blank lines",
+      "Most Similar TLDR Script": "nl -b a {{file}}",
+      "Most Similar NL2Bash Task": "Run \"./configure\" with a new environment variable CC set to the full path of the command 'gcc'",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "CC=$(which gcc) ./configure\n",
+          "command-options": {
+            "which": {
+              "mpsum": "locate a command"
+            }
+          },
+          "TLDR_inform": {
+            "which": {
+              "man1_which_36536": "locat program user path multipl execut match display search path environ variabl display locat match execut"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_13735: Calculate the sin values of the interval from 0 to pi/2 with a step of 1, add a line number, and write the output to standard output and \"y.txt\""
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_13735: octave -q --eval 'printf (\"%f\\n\", sin([0:0.1:pi/2]))'|nl|tee y.txt"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "tee",
+      "MP Summary": "read from standard input and write to standard output and files",
+      "Most Similar TLDR Task": "Print standard input to the terminal, and also pipe it into another program for further processing",
+      "Most Similar TLDR Script": "echo \"example\" | tee {{/dev/tty}} | {{xargs printf \"[%s]\"}}",
+      "Most Similar NL2Bash Task": "Run \"./configure\" with a new environment variable CC set to the full path of the command 'gcc'",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "CC=$(which gcc) ./configure\n",
+          "command-options": {
+            "which": {
+              "mpsum": "locate a command"
+            }
+          },
+          "TLDR_inform": {
+            "which": {
+              "man1_which_36536": "locat program user path multipl execut match display search path environ variabl display locat match execut"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_13735: Calculate the sin values of the interval from 0 to pi/2 with a step of 1, add a line number, and write the output to standard output and \"y.txt\""
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_13735: octave -q --eval 'printf (\"%f\\n\", sin([0:0.1:pi/2]))'|nl|tee y.txt"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "expr",
+      "MP Summary": "evaluate arguments as an expression",
+      "Most Similar TLDR Task": "Extract part of the string",
+      "Most Similar TLDR Script": "echo $(expr substr {{string}} {{position_to_start}} {{number_of_characters}}",
+      "Most Similar NL2Bash Task": "Run \"./configure\" with a new environment variable CC set to the full path of the command 'gcc'",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "CC=$(which gcc) ./configure\n",
+          "command-options": {
+            "which": {
+              "mpsum": "locate a command"
+            }
+          },
+          "TLDR_inform": {
+            "which": {
+              "man1_which_36536": "locat program user path multipl execut match display search path environ variabl display locat match execut"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_13738: Calculate the sum of all the numbers from 1 to 10"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_13738: seq 10 | tr '[\\n]' '+' | sed -e 's/+/ + /g' -e's/ + $/\\n/' | xargs expr"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "watch",
+      "MP Summary": "execute a program periodically, showing output fullscreen",
+      "Most Similar TLDR Task": "Monitor files in the current directory",
+      "Most Similar TLDR Script": "watch {{ls}}",
+      "Most Similar NL2Bash Task": "Run \"./configure\" with a new environment variable CC set to the full path of the command 'gcc'",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "CC=$(which gcc) ./configure\n",
+          "command-options": {
+            "which": {
+              "mpsum": "locate a command"
+            }
+          },
+          "TLDR_inform": {
+            "which": {
+              "man1_which_36536": "locat program user path multipl execut match display search path environ variabl display locat match execut"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_1427: Execute \"ls -l\" every 2 seconds and highlight the differences in runs"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_1427: watch -d ls -l"
+      ],
+      "Explanations about Options": {
+        "-d": "Highlight the differences between successive updates. Option will read optional\n argument that changes highlight to be permanent, allowing to see what has changed\n at least once since first iteration."
+      }
+    },
+    {
+      "Command": "bc",
+      "MP Summary": "An arbitrary precision calculator language",
+      "Most Similar TLDR Task": "Calculate the result of an expression",
+      "Most Similar TLDR Script": "bc <<< \"(1 + 2) * 2 ^ 2\"",
+      "Most Similar NL2Bash Task": "Run \"./configure\" with a new environment variable CC set to the full path of the command 'gcc'",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "CC=$(which gcc) ./configure\n",
+          "command-options": {
+            "which": {
+              "mpsum": "locate a command"
+            }
+          },
+          "TLDR_inform": {
+            "which": {
+              "man1_which_36536": "locat program user path multipl execut match display search path environ variabl display locat match execut"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_13737: Calculate the sum of all the numbers from -5 to 10",
+        "nl2bash_13739: Calculate the sum of all the numbers from 1 to 100000"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_13737: seq -5 10 | xargs printf \"- - %s\" | xargs  | bc\n\n\nseq -s+ -5 10 | bc",
+        "nl2bash_13739: seq 100000 | paste -sd+ | bc -l"
+      ],
+      "Explanations about Options": {
+        "-l": "Define the standard math library."
+      }
+    },
+    {
+      "Command": "printf",
+      "MP Summary": "format and print data",
+      "Most Similar TLDR Task": "Print a text message",
+      "Most Similar TLDR Script": "printf \"{{%s\\n}}\" \"{{Hello world}}\"",
+      "Most Similar NL2Bash Task": "Run \"./configure\" with a new environment variable CC set to the full path of the command 'gcc'",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "CC=$(which gcc) ./configure\n",
+          "command-options": {
+            "which": {
+              "mpsum": "locate a command"
+            }
+          },
+          "TLDR_inform": {
+            "which": {
+              "man1_which_36536": "locat program user path multipl execut match display search path environ variabl display locat match execut"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_13737: Calculate the sum of all the numbers from -5 to 10"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_13737: seq -5 10 | xargs printf \"- - %s\" | xargs  | bc"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "cd",
+      "MP Summary": "change the working directory",
+      "Most Similar TLDR Task": "Go up to the parent of the current directory",
+      "Most Similar TLDR Script": "cd ..",
+      "Most Similar NL2Bash Task": "Run \"./configure\" with a new environment variable CC set to the full path of the command 'gcc'",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "CC=$(which gcc) ./configure\n",
+          "command-options": {
+            "which": {
+              "mpsum": "locate a command"
+            }
+          },
+          "TLDR_inform": {
+            "which": {
+              "man1_which_36536": "locat program user path multipl execut match display search path environ variabl display locat match execut"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_655208: Game came in a .zip file. How to install it?"
+      ],
+      "Top-3 Scripts": [
+        "au_655208: cd ~/Downloads/linux64\n\ncd ~/Downloads/linux32"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "chmod",
+      "MP Summary": "change file mode bits",
+      "Most Similar TLDR Task": "Give the [u]ser rights to [r]ead and [w]rite to a file/directory",
+      "Most Similar TLDR Script": "chmod u+rw {{file_or_directory}}",
+      "Most Similar NL2Bash Task": "Run \"./configure\" with a new environment variable CC set to the full path of the command 'gcc'",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "CC=$(which gcc) ./configure\n",
+          "command-options": {
+            "which": {
+              "mpsum": "locate a command"
+            }
+          },
+          "TLDR_inform": {
+            "which": {
+              "man1_which_36536": "locat program user path multipl execut match display search path environ variabl display locat match execut"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_655208: Game came in a .zip file. How to install it?"
+      ],
+      "Top-3 Scripts": [
+        "au_655208: chmod +x campfire\n./campfire"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "jq",
+      "MP Summary": "Command-line JSON processor",
+      "Most Similar TLDR Task": "Output all elements from arrays (or all the values from objects) in a JSON file",
+      "Most Similar TLDR Script": "jq '.[]' {{file.json}}",
+      "Most Similar NL2Bash Task": "Run \"./configure\" with a new environment variable CC set to the full path of the command 'gcc'",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "CC=$(which gcc) ./configure\n",
+          "command-options": {
+            "which": {
+              "mpsum": "locate a command"
+            }
+          },
+          "TLDR_inform": {
+            "which": {
+              "man1_which_36536": "locat program user path multipl execut match display search path environ variabl display locat match execut"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_13738: Calculate the sum of all the numbers from 1 to 10"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_13738: seq 10 | jq -s 'add'\n\n\nseq 10|jq -s add"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "ssh",
+      "MP Summary": "OpenSSH SSH client (remote login program)",
+      "Most Similar TLDR Task": "Run a command on a remote server",
+      "Most Similar TLDR Script": "ssh {{remote_host}} {{command -with -flags}}",
+      "Most Similar NL2Bash Task": "Run \"./configure\" with a new environment variable CC set to the full path of the command 'gcc'",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "CC=$(which gcc) ./configure\n",
+          "command-options": {
+            "which": {
+              "mpsum": "locate a command"
+            }
+          },
+          "TLDR_inform": {
+            "which": {
+              "man1_which_36536": "locat program user path multipl execut match display search path environ variabl display locat match execut"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_1553: Run \"command\" on server \"host\" as user \"user\""
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_1553: echo \"command\" | ssh user@host"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "ln",
+      "MP Summary": "make links between files",
+      "Most Similar TLDR Task": "Create a symbolic link to a file or directory",
+      "Most Similar TLDR Script": "ln -s {{path/to/file_or_directory}} {{path/to/symlink}}",
+      "Most Similar NL2Bash Task": "Run \"./configure\" with a new environment variable CC set to the full path of the command 'gcc'",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "CC=$(which gcc) ./configure\n",
+          "command-options": {
+            "which": {
+              "mpsum": "locate a command"
+            }
+          },
+          "TLDR_inform": {
+            "which": {
+              "man1_which_36536": "locat program user path multipl execut match display search path environ variabl display locat match execut"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_13152: create a symbolic link named \"-pdf-kundendienst\" to \"local--pdf-kundendienst\" file"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_13152: ln -s -- ./local--pdf-kundendienst -pdf-kundendienst"
+      ],
+      "Explanations about Options": {
+        "-s": "make symbolic links instead of hard links"
+      }
+    },
+    {
+      "Command": "dev",
+      "MP Summary": "release candidate LaTeX testing",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "Run \"./configure\" with a new environment variable CC set to the full path of the command 'gcc'",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "CC=$(which gcc) ./configure\n",
+          "command-options": {
+            "which": {
+              "mpsum": "locate a command"
+            }
+          },
+          "TLDR_inform": {
+            "which": {
+              "man1_which_36536": "locat program user path multipl execut match display search path environ variabl display locat match execut"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_8460: search for bash and rsync files in the entire file system excluding search in the path /usr/share folder and discard all the errors"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_8460: find / -path /usr/share -prune -o \\( -name rsync -o -name bash \\) -print 2>/dev/nul"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "to",
+      "MP Summary": "as the filename. --logdir <name> Writes each synchronization log output in a new file in the specified directory. --logexpire <hours> Removes logs older than the value specified (in hours). This command is  used  with --logdir. --logflush Clears (flushes) the log file after each write action. --logdebug Also  output  debug-level  messages  in  the log (equivalent to setting the env var QT_LOGGING_RULES=\"qt.*=true;*.debug=true\"). ) --confdir <dirname> Uses the specified configuration directory. The ownCloud Client reads a configuration file.  You can locate this configuration file as follows: On Linux distributions: $HOME/.config/ownCloud/owncloud.cfg On Microsoft Windows systems: %APPDATA%\\ownCloud\\owncloud.cfg On MAC OS X systems: $HOME/Library/Preferences/ownCloud/owncloud.cfg The configuration file contains settings using the Microsoft Windows .ini file format. You can overwrite changes using the ownCloud configuration dialog. NOTE: Use caution when making changes to the ownCloud Client configuration  file.   Incorrect settings can produce unintended results. Some interesting values that can be set on the configuration file are: \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510 \u2502[ownCloud] section          \u2502         \u2502                          \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502Variable                    \u2502 Default \u2502 Meaning                  \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502remotePollInterval          \u2502 30000   \u2502 Specifies  the poll time \u2502 \u2502                            \u2502         \u2502 for      the      remote \u2502 \u2502                            \u2502         \u2502 repository            in \u2502 \u2502                            \u2502         \u2502 milliseconds.            \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502forceSyncInterval           \u2502 7200000 \u2502 The   duration   of   no \u2502 \u2502                            \u2502         \u2502 activity  after  which a \u2502 \u2502                            \u2502         \u2502 synchronization      run \u2502 \u2502                            \u2502         \u2502 shall    be    triggered \u2502 \u2502                            \u2502         \u2502 automatically.           \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502fullLocalDiscoveryInterval  \u2502 3600000 \u2502 The interval after which \u2502 \u2502                            \u2502         \u2502 the next synchronization \u2502 \u2502                            \u2502         \u2502 will   perform   a  full \u2502 \u2502                            \u2502         \u2502 local discovery.         \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502notificationRefreshInterval \u2502 300000  \u2502 Specifies   the  default \u2502 \u2502                            \u2502         \u2502 interval of checking for \u2502 \u2502                            \u2502         \u2502 new server notifications \u2502 \u2502                            \u2502         \u2502 in milliseconds.         \u2502 \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518 \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510 \u2502[General] section       \u2502         \u2502                          \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502Variable                \u2502 Default \u2502 Meaning                  \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502chunkSize               \u2502 5242880 \u2502 Specifies the chunk size \u2502 \u2502                        \u2502         \u2502 of   uploaded  files  in \u2502 \u2502                        \u2502         \u2502 bytes.                   \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502promptDeleteAllFiles    \u2502 true    \u2502 If a  UI  prompt  should \u2502 \u2502                        \u2502         \u2502 ask  for confirmation if \u2502 \u2502                        \u2502         \u2502 it was detected that all \u2502 \u2502                        \u2502         \u2502 files  and  folders were \u2502 \u2502                        \u2502         \u2502 deleted.                 \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502maxLogLines             \u2502 20000   \u2502 Specifies  the   maximum \u2502 \u2502                        \u2502         \u2502 number   of   log  lines \u2502 \u2502                        \u2502         \u2502 displayed  in  the   log \u2502 \u2502                        \u2502         \u2502 window.                  \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502timeout                 \u2502 300     \u2502 The  timeout for network \u2502 \u2502                        \u2502         \u2502 connections in seconds.  \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502moveToTrash             \u2502 false   \u2502 If  non-locally  deleted \u2502 \u2502                        \u2502         \u2502 files should be moved to \u2502 \u2502                        \u2502         \u2502 trash     instead     of \u2502 \u2502                        \u2502         \u2502 deleting            them \u2502 \u2502                        \u2502         \u2502 completely.  This option \u2502 \u2502                        \u2502         \u2502 only works on linux      \u2502 \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518 \u2502showExperimentalOptions \u2502 false   \u2502 Whether      to     show \u2502 \u2502                        \u2502         \u2502 experimental     options \u2502 \u2502                        \u2502         \u2502 that      are      still \u2502 \u2502                        \u2502         \u2502 undergoing  testing   in \u2502 \u2502                        \u2502         \u2502 the    user   interface. \u2502 \u2502                        \u2502         \u2502 Turning this on does not \u2502 \u2502                        \u2502         \u2502 enable      experimental \u2502 \u2502                        \u2502         \u2502 behavior on its own.  It \u2502 \u2502                        \u2502         \u2502 does     enable     user \u2502 \u2502                        \u2502         \u2502 inferface  options  that \u2502 \u2502                        \u2502         \u2502 can be used to opt in to \u2502 \u2502                        \u2502         \u2502 experimental features.   \u2502 \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518 \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510 \u2502[Proxy] section      \u2502           \u2502                          \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502Variable             \u2502 Default   \u2502 Meaning                  \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502host                 \u2502 127.0.0.1 \u2502 The address of the proxy \u2502 \u2502                     \u2502           \u2502 server.                  \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502port                 \u2502 8080      \u2502 The  port were the proxy \u2502 \u2502                     \u2502           \u2502 is listening.            \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502type                 \u2502 2         \u2502 0 for System Proxy.      \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u25021 for SOCKS5 Proxy.  \u2502           \u2502                          \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u25022 for No Proxy.      \u2502           \u2502                          \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u25023 for HTTP(S) Proxy. \u2502           \u2502                          \u2502 \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518 Please report bugs at https://github.com/owncloud/client/issues. owncloudcmd(1)",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "Run \"./configure\" with a new environment variable CC set to the full path of the command 'gcc'",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "CC=$(which gcc) ./configure\n",
+          "command-options": {
+            "which": {
+              "mpsum": "locate a command"
+            }
+          },
+          "TLDR_inform": {
+            "which": {
+              "man1_which_36536": "locat program user path multipl execut match display search path environ variabl display locat match execut"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_10695: Recursively copy \"/path/to/data/myappdata/*.txt\" to \"user@host:/remote/path/to/data/myappdata/\""
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_10695: rsync -rvv /path/to/data/myappdata/*.txt user@host:/remote/path/to/data/myappdata/"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "octave",
+      "MP Summary": "A high-level interactive language for numerical computations.",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "Run \"./configure\" with a new environment variable CC set to the full path of the command 'gcc'",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "CC=$(which gcc) ./configure\n",
+          "command-options": {
+            "which": {
+              "mpsum": "locate a command"
+            }
+          },
+          "TLDR_inform": {
+            "which": {
+              "man1_which_36536": "locat program user path multipl execut match display search path environ variabl display locat match execut"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_13735: Calculate the sin values of the interval from 0 to pi/2 with a step of 1, add a line number, and write the output to standard output and \"y.txt\""
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_13735: octave -q --eval 'printf (\"%f\\n\", sin([0:0.1:pi/2]))'|nl|tee y.txt"
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

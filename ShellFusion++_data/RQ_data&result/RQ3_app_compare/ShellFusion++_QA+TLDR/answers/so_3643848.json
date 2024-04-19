@@ -1,0 +1,96 @@
+{
+  "Query": "Copy files from one directory into an existing directory",
+  "Answers": [
+    {
+      "Command": "cp",
+      "MP Summary": "copy files and directories",
+      "Most Similar TLDR Task": "Recursively copy a directory's contents to another location (if the destination exists, the directory is copied inside it)",
+      "Most Similar TLDR Script": "cp -r {{path/to/source_directory}} {{path/to/target_directory}}",
+      "Top-3 Similar Questions": [
+        "so_30382268: If a file exists, copy another file, but don't overwrite",
+        "so_29955443: Copying multiple files into same directory while changing filename",
+        "au_1159468: Copying directories in linux only if it contains the specified file"
+      ],
+      "Top-3 Scripts": [
+        "so_30382268: for d in ./Event_*/; do\nset -- \"$d/\"*.mcp\nif [ -e \"$1\" ]; then\n    cp -rp -v -- \"$d/KNYN.BHZ\" \"./newdir/KNYN.`echo $d | sed 's/[\\.\\/]//g;s/Event_//:'`.BHZ\"\nfi\ndone\n\ni=0;\nfor d in ./Event_*/; do\nset -- \"$d/\"*.mcp\nif [ -e \"$1\" ]; then\n    cp -rp -v -- \"$d/KNYN.BHZ\" \"./newdir/KNYN-$((++i)).BHZ\"\nfi\ndone\n\nfor d in ./Event_*/; do\nset -- \"$d/\"*.mcp\nif [ -e \"$1\" ]; then\n    cp -rp -v -- \"$d/KNYN.BHZ\" \"./newdir/KNYN.`echo $d | sed 's/[\\.\\/]//g;s/Event_//:'`_`date '+%Y-%m-%d'`.BHZ\"\nfi\ndone",
+        "so_29955443: ls 'foo*' | % {$newName = $_.name -replace 'foo','moo'; cp $_ $newName ; }",
+        "au_1159468: $ (cd src && cp -v --parents */123.dat ../dest)\n\n$ (cd src && find . -maxdepth 2  -type f -name '123.dat' -exec cp -v -t \"../dest\" --parents {} +)"
+      ],
+      "Explanations about Options": {
+        "-p": "same as --preserve=mode , ownership , timestamps",
+        "-r": "copy directories recursively",
+        "-t": "copy all SOURCE arguments into DIRECTORY",
+        "-v": "explain what is being done",
+        "--parents": "use full source file name under DIRECTORY"
+      }
+    },
+    {
+      "Command": "mkdir",
+      "MP Summary": "make directories",
+      "Most Similar TLDR Task": "Create a directory in current directory or given path",
+      "Most Similar TLDR Script": "mkdir {{directory}}",
+      "Top-3 Similar Questions": [
+        "so_2937577: Shell script to test whether a directory exists and if not create it?",
+        "so_36142838: Copy files from list while keeping subdirectory structure",
+        "au_517329: Overwrite an existing directory?"
+      ],
+      "Top-3 Scripts": [
+        "so_2937577: mkdir -p $directory\n\ntest ... || mkdir ...",
+        "so_36142838: mkdir -p\n\nwhile read -r file; do\n    new_dir=\"new_directory/$(dirname \"$file\")\"\n    #        ^ this is the new directory root\n    mkdir -p \"$new_dir\"\n    cp \"$file\" \"$new_dir/$file\"\ndone < <(cat /path/to/files.txt)",
+        "au_517329: rm -r ~/Desktop/foo; mkdir ~/Desktop/foo"
+      ],
+      "Explanations about Options": {
+        "-p": "no error if existing, make parent directories as needed"
+      }
+    },
+    {
+      "Command": "mv",
+      "MP Summary": "move (rename) files",
+      "Most Similar TLDR Task": "Do not overwrite existing files at the target",
+      "Most Similar TLDR Script": "mv -n {{source}} {{target}}",
+      "Top-3 Similar Questions": [
+        "ul_507442: Compare two directories: if files don't exist or are the same, move; else, do nothing",
+        "ul_134034: copy mp3 to a target directory maintaining directory structure and deleting files when copy complete",
+        "au_599783: Copy and overwrite directory recursively"
+      ],
+      "Top-3 Scripts": [
+        "ul_507442: mv -n \"$source\"/* $target",
+        "ul_134034: ",
+        "au_599783: mv orig_folder foo && mv temp orig_folder && rm -rf foo\n\nmv /path/to/temp . && mv orig_folder foo && mv temp orig_folder && rm -rf foo"
+      ],
+      "Explanations about Options": {
+        "-n": "do not overwrite an existing file"
+      }
+    },
+    {
+      "Command": "scp",
+      "MP Summary": "secure copy (remote file copy program)",
+      "Most Similar TLDR Task": "Copy a file from a remote host to a local directory",
+      "Most Similar TLDR Script": "scp {{remote_host}}:{{path/to/remote_file}} {{path/to/local_directory}}",
+      "Top-3 Similar Questions": [
+        "ul_385013: copying files from many directories to one using rsync"
+      ],
+      "Top-3 Scripts": [
+        "ul_385013: scp -r /path/in/source/dir*/*.ext /path/to/destination"
+      ],
+      "Explanations about Options": {
+        "-r": "Recursively copy entire directories. Note that scp follows symbolic links\n encountered in the tree traversal."
+      }
+    },
+    {
+      "Command": "chown",
+      "MP Summary": "change file owner and group",
+      "Most Similar TLDR Task": "Change the owner user of a file/directory",
+      "Most Similar TLDR Script": "chown {{user}} {{path/to/file_or_directory}}",
+      "Top-3 Similar Questions": [
+        "so_67038100: To copy Linux directory structures/tree **only** without files and preserve attributes"
+      ],
+      "Top-3 Scripts": [
+        "so_67038100: find foo -type d -exec bash -c \"d=\\\"{}\\\"; dnew=\\$(echo \\$d | sed 's/^foo/tmp/') ; mkdir -p \\$dnew ; chmod --reference=\\$d \\$dnew ; chown --reference=\\$d \\$dnew ; touch --reference=\\$d \\$dnew \" \\;\n\n> chmod --reference=olddir newdir # we copy modes rwx,\n> chown --reference=olddir newdir # we copy owner,\n> touch --reference=olddir newdir # we copy dates."
+      ],
+      "Explanations about Options": {
+        "--reference": "use RFILE's owner and group rather than specifying OWNER:GROUP values"
+      }
+    }
+  ]
+}

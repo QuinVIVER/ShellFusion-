@@ -1,0 +1,2350 @@
+{
+  "Query": "How to persistently control maximum system resource consumption on Mac?",
+  "Answers": [
+    {
+      "Command": "stat",
+      "MP Summary": "display file or file system status",
+      "Most Similar TLDR Task": "Show file properties such as size, permissions, creation and access dates among others",
+      "Most Similar TLDR Script": "stat {{file}}",
+      "Most Similar NL2Bash Task": "Find all files/directories under $1 which have at least read permission for their owner and set read permission for group for these files/directories",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find \"$1\" -perm -u+r -print0 | xargs chmod g+r\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-print0": "Always print the exact filename, unchanged, even if the output is going to a\n terminal.",
+              "-perm": "Any of the permission bits mode are set for the file. Symbolic modes are accepted\n in this form. You must specify `u', `g' or `o' if you use a symbolic mode. See\n the EXAMPLES section for some illustrative examples. If no permission bits in mode\n are set, this test matches any file (the idea here is to be consistent with the\n behaviour of -perm -000)."
+            },
+            "xargs": {
+              "mpsum": "build and execute command lines from standard input"
+            },
+            "chmod": {
+              "mpsum": "change file mode bits"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "xargs": {
+              "man1_xargs_37433": "execut command pipe argument come anoth command file etc\ninput treat singl block text split separ piec space tab newlin end-of-fil delet file backup extens -print0 use null charact split file name -0 use delimit execut command input line replac occurr placehold mark _ input line parallel run max-proc process time default 1 max-proc 0 xarg run mani process possibl time run command use input data argument run multipl chain command input data"
+            },
+            "chmod": {
+              "man1_chmod_3989": "chang access permiss file directori chang permiss recurs give g roup ther abil w rite give user right r ead e x ecut give ther file owner group right g roup give u ser right r ead w rite file directori give u ser own file right e x ecut remov right ther remov e x ecut right g roup"
+            }
+          }
+        },
+        "1": {
+          "script": "find $1 -perm -u+r -exec chmod g+r {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-perm": "Any of the permission bits mode are set for the file. Symbolic modes are accepted\n in this form. You must specify `u', `g' or `o' if you use a symbolic mode. See\n the EXAMPLES section for some illustrative examples. If no permission bits in mode\n are set, this test matches any file (the idea here is to be consistent with the\n behaviour of -perm -000)."
+            },
+            "chmod": {
+              "mpsum": "change file mode bits"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "chmod": {
+              "man1_chmod_3989": "chang access permiss file directori chang permiss recurs give g roup ther abil w rite give user right r ead e x ecut give ther file owner group right g roup give u ser right r ead w rite file directori give u ser own file right e x ecut remov right ther remov e x ecut right g roup"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_360: Display file status for all regular files in the current directory tree",
+        "nl2bash_3933: Find all files/directories under /path/to/dir/* paths and print the timestamp along with their paths and stat them"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_360: find . -type f -exec stat {} + > /dev/null",
+        "nl2bash_3933: find /path/to/dir/* -printf \"%T@|%p|%l\" -exec stat -Lc \"|%Y.0000000000\" {} \\;"
+      ],
+      "Explanations about Options": {
+        "-c": "use the specified FORMAT instead of the default; output a newline after each use of\n FORMAT",
+        "-L": "follow links"
+      }
+    },
+    {
+      "Command": "find",
+      "MP Summary": "search for files in a directory hierarchy",
+      "Most Similar TLDR Task": "Find files matching a given size range",
+      "Most Similar TLDR Script": "find {{root_path}} -size {{+500k}} -size {{-10M}}",
+      "Most Similar NL2Bash Task": "Find all files/directories under $1 which have at least read permission for their owner and set read permission for group for these files/directories",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find \"$1\" -perm -u+r -print0 | xargs chmod g+r\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-print0": "Always print the exact filename, unchanged, even if the output is going to a\n terminal.",
+              "-perm": "Any of the permission bits mode are set for the file. Symbolic modes are accepted\n in this form. You must specify `u', `g' or `o' if you use a symbolic mode. See\n the EXAMPLES section for some illustrative examples. If no permission bits in mode\n are set, this test matches any file (the idea here is to be consistent with the\n behaviour of -perm -000)."
+            },
+            "xargs": {
+              "mpsum": "build and execute command lines from standard input"
+            },
+            "chmod": {
+              "mpsum": "change file mode bits"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "xargs": {
+              "man1_xargs_37433": "execut command pipe argument come anoth command file etc\ninput treat singl block text split separ piec space tab newlin end-of-fil delet file backup extens -print0 use null charact split file name -0 use delimit execut command input line replac occurr placehold mark _ input line parallel run max-proc process time default 1 max-proc 0 xarg run mani process possibl time run command use input data argument run multipl chain command input data"
+            },
+            "chmod": {
+              "man1_chmod_3989": "chang access permiss file directori chang permiss recurs give g roup ther abil w rite give user right r ead e x ecut give ther file owner group right g roup give u ser right r ead w rite file directori give u ser own file right e x ecut remov right ther remov e x ecut right g roup"
+            }
+          }
+        },
+        "1": {
+          "script": "find $1 -perm -u+r -exec chmod g+r {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-perm": "Any of the permission bits mode are set for the file. Symbolic modes are accepted\n in this form. You must specify `u', `g' or `o' if you use a symbolic mode. See\n the EXAMPLES section for some illustrative examples. If no permission bits in mode\n are set, this test matches any file (the idea here is to be consistent with the\n behaviour of -perm -000)."
+            },
+            "chmod": {
+              "mpsum": "change file mode bits"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "chmod": {
+              "man1_chmod_3989": "chang access permiss file directori chang permiss recurs give g roup ther abil w rite give user right r ead e x ecut give ther file owner group right g roup give u ser right r ead w rite file directori give u ser own file right e x ecut remov right ther remov e x ecut right g roup"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_1708: run ls command on *.pl files",
+        "nl2bash_1709: run ls command on files found",
+        "nl2bash_360: Display file status for all regular files in the current directory tree"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_1708: find . -name \"*.pl\" -exec ls -ld {} \\;",
+        "nl2bash_1709: find . -name \"*.pl\" -exec ls -ld {} \\;",
+        "nl2bash_360: find . -type f -exec stat {} + > /dev/null"
+      ],
+      "Explanations about Options": {
+        "-type": "File is of type c:",
+        "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+      }
+    },
+    {
+      "Command": "su",
+      "MP Summary": "run a command with substitute user and group ID",
+      "Most Similar TLDR Task": "Execute a command as another user",
+      "Most Similar TLDR Script": "su - {{username}} -c \"{{command}}\"",
+      "Most Similar NL2Bash Task": "Find all files/directories under $1 which have at least read permission for their owner and set read permission for group for these files/directories",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find \"$1\" -perm -u+r -print0 | xargs chmod g+r\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-print0": "Always print the exact filename, unchanged, even if the output is going to a\n terminal.",
+              "-perm": "Any of the permission bits mode are set for the file. Symbolic modes are accepted\n in this form. You must specify `u', `g' or `o' if you use a symbolic mode. See\n the EXAMPLES section for some illustrative examples. If no permission bits in mode\n are set, this test matches any file (the idea here is to be consistent with the\n behaviour of -perm -000)."
+            },
+            "xargs": {
+              "mpsum": "build and execute command lines from standard input"
+            },
+            "chmod": {
+              "mpsum": "change file mode bits"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "xargs": {
+              "man1_xargs_37433": "execut command pipe argument come anoth command file etc\ninput treat singl block text split separ piec space tab newlin end-of-fil delet file backup extens -print0 use null charact split file name -0 use delimit execut command input line replac occurr placehold mark _ input line parallel run max-proc process time default 1 max-proc 0 xarg run mani process possibl time run command use input data argument run multipl chain command input data"
+            },
+            "chmod": {
+              "man1_chmod_3989": "chang access permiss file directori chang permiss recurs give g roup ther abil w rite give user right r ead e x ecut give ther file owner group right g roup give u ser right r ead w rite file directori give u ser own file right e x ecut remov right ther remov e x ecut right g roup"
+            }
+          }
+        },
+        "1": {
+          "script": "find $1 -perm -u+r -exec chmod g+r {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-perm": "Any of the permission bits mode are set for the file. Symbolic modes are accepted\n in this form. You must specify `u', `g' or `o' if you use a symbolic mode. See\n the EXAMPLES section for some illustrative examples. If no permission bits in mode\n are set, this test matches any file (the idea here is to be consistent with the\n behaviour of -perm -000)."
+            },
+            "chmod": {
+              "mpsum": "change file mode bits"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "chmod": {
+              "man1_chmod_3989": "chang access permiss file directori chang permiss recurs give g roup ther abil w rite give user right r ead e x ecut give ther file owner group right g roup give u ser right r ead w rite file directori give u ser own file right e x ecut remov right ther remov e x ecut right g roup"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_1706: run command 'source myfile; bash' as user root",
+        "nl2bash_1705: run command 'ls -hal /root/ > /root/test.out' as user root"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_1706: su -c 'source myfile; bash'",
+        "nl2bash_1705: sudo su -c 'ls -hal /root/ > /root/test.out'"
+      ],
+      "Explanations about Options": {
+        "-h": "Display help text and exit.",
+        "-c": "Pass command to the shell with the -c option.",
+        "-l": "Start the shell as a login shell with an environment similar to a real login:"
+      }
+    },
+    {
+      "Command": "sudo",
+      "MP Summary": "execute a command as another user",
+      "Most Similar TLDR Task": "Launch the default shell with superuser privileges",
+      "Most Similar TLDR Script": "sudo -i",
+      "Most Similar NL2Bash Task": "Find all files/directories under $1 which have at least read permission for their owner and set read permission for group for these files/directories",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find \"$1\" -perm -u+r -print0 | xargs chmod g+r\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-print0": "Always print the exact filename, unchanged, even if the output is going to a\n terminal.",
+              "-perm": "Any of the permission bits mode are set for the file. Symbolic modes are accepted\n in this form. You must specify `u', `g' or `o' if you use a symbolic mode. See\n the EXAMPLES section for some illustrative examples. If no permission bits in mode\n are set, this test matches any file (the idea here is to be consistent with the\n behaviour of -perm -000)."
+            },
+            "xargs": {
+              "mpsum": "build and execute command lines from standard input"
+            },
+            "chmod": {
+              "mpsum": "change file mode bits"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "xargs": {
+              "man1_xargs_37433": "execut command pipe argument come anoth command file etc\ninput treat singl block text split separ piec space tab newlin end-of-fil delet file backup extens -print0 use null charact split file name -0 use delimit execut command input line replac occurr placehold mark _ input line parallel run max-proc process time default 1 max-proc 0 xarg run mani process possibl time run command use input data argument run multipl chain command input data"
+            },
+            "chmod": {
+              "man1_chmod_3989": "chang access permiss file directori chang permiss recurs give g roup ther abil w rite give user right r ead e x ecut give ther file owner group right g roup give u ser right r ead w rite file directori give u ser own file right e x ecut remov right ther remov e x ecut right g roup"
+            }
+          }
+        },
+        "1": {
+          "script": "find $1 -perm -u+r -exec chmod g+r {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-perm": "Any of the permission bits mode are set for the file. Symbolic modes are accepted\n in this form. You must specify `u', `g' or `o' if you use a symbolic mode. See\n the EXAMPLES section for some illustrative examples. If no permission bits in mode\n are set, this test matches any file (the idea here is to be consistent with the\n behaviour of -perm -000)."
+            },
+            "chmod": {
+              "mpsum": "change file mode bits"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "chmod": {
+              "man1_chmod_3989": "chang access permiss file directori chang permiss recurs give g roup ther abil w rite give user right r ead e x ecut give ther file owner group right g roup give u ser right r ead w rite file directori give u ser own file right e x ecut remov right ther remov e x ecut right g roup"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_1705: run command 'ls -hal /root/ > /root/test.out' as user root",
+        "nl2bash_1893: Write \"deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen\" to standard output and append to \"/etc/apt/sources.list.d/10gen.list\" as root"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_1705: sudo su -c 'ls -hal /root/ > /root/test.out'",
+        "nl2bash_1893: sudo echo \"deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen\" | sudo tee -a /etc/apt/sources.list.d/10gen.list"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "echo",
+      "MP Summary": "display a line of text",
+      "Most Similar TLDR Task": "Print a message with environment variables",
+      "Most Similar TLDR Script": "echo \"{{My path is $PATH}}\"",
+      "Most Similar NL2Bash Task": "Find all files/directories under $1 which have at least read permission for their owner and set read permission for group for these files/directories",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find \"$1\" -perm -u+r -print0 | xargs chmod g+r\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-print0": "Always print the exact filename, unchanged, even if the output is going to a\n terminal.",
+              "-perm": "Any of the permission bits mode are set for the file. Symbolic modes are accepted\n in this form. You must specify `u', `g' or `o' if you use a symbolic mode. See\n the EXAMPLES section for some illustrative examples. If no permission bits in mode\n are set, this test matches any file (the idea here is to be consistent with the\n behaviour of -perm -000)."
+            },
+            "xargs": {
+              "mpsum": "build and execute command lines from standard input"
+            },
+            "chmod": {
+              "mpsum": "change file mode bits"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "xargs": {
+              "man1_xargs_37433": "execut command pipe argument come anoth command file etc\ninput treat singl block text split separ piec space tab newlin end-of-fil delet file backup extens -print0 use null charact split file name -0 use delimit execut command input line replac occurr placehold mark _ input line parallel run max-proc process time default 1 max-proc 0 xarg run mani process possibl time run command use input data argument run multipl chain command input data"
+            },
+            "chmod": {
+              "man1_chmod_3989": "chang access permiss file directori chang permiss recurs give g roup ther abil w rite give user right r ead e x ecut give ther file owner group right g roup give u ser right r ead w rite file directori give u ser own file right e x ecut remov right ther remov e x ecut right g roup"
+            }
+          }
+        },
+        "1": {
+          "script": "find $1 -perm -u+r -exec chmod g+r {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-perm": "Any of the permission bits mode are set for the file. Symbolic modes are accepted\n in this form. You must specify `u', `g' or `o' if you use a symbolic mode. See\n the EXAMPLES section for some illustrative examples. If no permission bits in mode\n are set, this test matches any file (the idea here is to be consistent with the\n behaviour of -perm -000)."
+            },
+            "chmod": {
+              "mpsum": "change file mode bits"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "chmod": {
+              "man1_chmod_3989": "chang access permiss file directori chang permiss recurs give g roup ther abil w rite give user right r ead e x ecut give ther file owner group right g roup give u ser right r ead w rite file directori give u ser own file right e x ecut remov right ther remov e x ecut right g roup"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_9722: Print the current date in '%H:%M:%S' format followed by the string ': done waiting. both jobs terminated on their own or via timeout; resuming script'",
+        "nl2bash_1893: Write \"deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen\" to standard output and append to \"/etc/apt/sources.list.d/10gen.list\" as root"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_9722: echo \"$(date +%H:%M:%S): done waiting. both jobs terminated on their own or via timeout; resuming script\"",
+        "nl2bash_1893: sudo echo \"deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen\" | sudo tee -a /etc/apt/sources.list.d/10gen.list"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "chown",
+      "MP Summary": "change file owner and group",
+      "Most Similar TLDR Task": "Change the owner user of a file/directory",
+      "Most Similar TLDR Script": "chown {{user}} {{path/to/file_or_directory}}",
+      "Most Similar NL2Bash Task": "Find all files/directories under $1 which have at least read permission for their owner and set read permission for group for these files/directories",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find \"$1\" -perm -u+r -print0 | xargs chmod g+r\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-print0": "Always print the exact filename, unchanged, even if the output is going to a\n terminal.",
+              "-perm": "Any of the permission bits mode are set for the file. Symbolic modes are accepted\n in this form. You must specify `u', `g' or `o' if you use a symbolic mode. See\n the EXAMPLES section for some illustrative examples. If no permission bits in mode\n are set, this test matches any file (the idea here is to be consistent with the\n behaviour of -perm -000)."
+            },
+            "xargs": {
+              "mpsum": "build and execute command lines from standard input"
+            },
+            "chmod": {
+              "mpsum": "change file mode bits"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "xargs": {
+              "man1_xargs_37433": "execut command pipe argument come anoth command file etc\ninput treat singl block text split separ piec space tab newlin end-of-fil delet file backup extens -print0 use null charact split file name -0 use delimit execut command input line replac occurr placehold mark _ input line parallel run max-proc process time default 1 max-proc 0 xarg run mani process possibl time run command use input data argument run multipl chain command input data"
+            },
+            "chmod": {
+              "man1_chmod_3989": "chang access permiss file directori chang permiss recurs give g roup ther abil w rite give user right r ead e x ecut give ther file owner group right g roup give u ser right r ead w rite file directori give u ser own file right e x ecut remov right ther remov e x ecut right g roup"
+            }
+          }
+        },
+        "1": {
+          "script": "find $1 -perm -u+r -exec chmod g+r {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-perm": "Any of the permission bits mode are set for the file. Symbolic modes are accepted\n in this form. You must specify `u', `g' or `o' if you use a symbolic mode. See\n the EXAMPLES section for some illustrative examples. If no permission bits in mode\n are set, this test matches any file (the idea here is to be consistent with the\n behaviour of -perm -000)."
+            },
+            "chmod": {
+              "mpsum": "change file mode bits"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "chmod": {
+              "man1_chmod_3989": "chang access permiss file directori chang permiss recurs give g roup ther abil w rite give user right r ead e x ecut give ther file owner group right g roup give u ser right r ead w rite file directori give u ser own file right e x ecut remov right ther remov e x ecut right g roup"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_12466: Recursively change the owner and group of all files in the current directory to \"andrewr\"",
+        "nl2bash_12467: Recursively change the owner and group of all files in the current directory to \"apache\""
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_12466: chown -R andrewr:andrewr *",
+        "nl2bash_12467: find . -maxdepth 1 -not -name \".\" -print0 | xargs --null chown -R apache:apache\n\n\nls | xargs chown -R apache:apache"
+      ],
+      "Explanations about Options": {
+        "-R": "operate on files and directories recursively"
+      }
+    },
+    {
+      "Command": "ls",
+      "MP Summary": "list directory contents",
+      "Most Similar TLDR Task": "Long format list with size displayed using human readable units (KB, MB, GB)",
+      "Most Similar TLDR Script": "ls -lh",
+      "Most Similar NL2Bash Task": "Find all files/directories under $1 which have at least read permission for their owner and set read permission for group for these files/directories",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find \"$1\" -perm -u+r -print0 | xargs chmod g+r\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-print0": "Always print the exact filename, unchanged, even if the output is going to a\n terminal.",
+              "-perm": "Any of the permission bits mode are set for the file. Symbolic modes are accepted\n in this form. You must specify `u', `g' or `o' if you use a symbolic mode. See\n the EXAMPLES section for some illustrative examples. If no permission bits in mode\n are set, this test matches any file (the idea here is to be consistent with the\n behaviour of -perm -000)."
+            },
+            "xargs": {
+              "mpsum": "build and execute command lines from standard input"
+            },
+            "chmod": {
+              "mpsum": "change file mode bits"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "xargs": {
+              "man1_xargs_37433": "execut command pipe argument come anoth command file etc\ninput treat singl block text split separ piec space tab newlin end-of-fil delet file backup extens -print0 use null charact split file name -0 use delimit execut command input line replac occurr placehold mark _ input line parallel run max-proc process time default 1 max-proc 0 xarg run mani process possibl time run command use input data argument run multipl chain command input data"
+            },
+            "chmod": {
+              "man1_chmod_3989": "chang access permiss file directori chang permiss recurs give g roup ther abil w rite give user right r ead e x ecut give ther file owner group right g roup give u ser right r ead w rite file directori give u ser own file right e x ecut remov right ther remov e x ecut right g roup"
+            }
+          }
+        },
+        "1": {
+          "script": "find $1 -perm -u+r -exec chmod g+r {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-perm": "Any of the permission bits mode are set for the file. Symbolic modes are accepted\n in this form. You must specify `u', `g' or `o' if you use a symbolic mode. See\n the EXAMPLES section for some illustrative examples. If no permission bits in mode\n are set, this test matches any file (the idea here is to be consistent with the\n behaviour of -perm -000)."
+            },
+            "chmod": {
+              "mpsum": "change file mode bits"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "chmod": {
+              "man1_chmod_3989": "chang access permiss file directori chang permiss recurs give g roup ther abil w rite give user right r ead e x ecut give ther file owner group right g roup give u ser right r ead w rite file directori give u ser own file right e x ecut remov right ther remov e x ecut right g roup"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_1708: run ls command on *.pl files",
+        "nl2bash_1709: run ls command on files found",
+        "nl2bash_4430: Find all regular files with the group read permission set in your home directory and below and output detailed information about each file."
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_1708: find . -name \"*.pl\" -exec ls -ld {} \\;",
+        "nl2bash_1709: find . -name \"*.pl\" -exec ls -ld {} \\;",
+        "nl2bash_4430: find . -perm -g=r -type f -exec ls -l {} \\;"
+      ],
+      "Explanations about Options": {
+        "-d": "list directories themselves, not their contents",
+        "-l": "use a long listing format"
+      }
+    },
+    {
+      "Command": "date",
+      "MP Summary": "print or set the system date and time",
+      "Most Similar TLDR Task": "Display a specific date (represented as a Unix timestamp) using the default format",
+      "Most Similar TLDR Script": "date -d @1473305798",
+      "Most Similar NL2Bash Task": "Find all files/directories under $1 which have at least read permission for their owner and set read permission for group for these files/directories",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find \"$1\" -perm -u+r -print0 | xargs chmod g+r\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-print0": "Always print the exact filename, unchanged, even if the output is going to a\n terminal.",
+              "-perm": "Any of the permission bits mode are set for the file. Symbolic modes are accepted\n in this form. You must specify `u', `g' or `o' if you use a symbolic mode. See\n the EXAMPLES section for some illustrative examples. If no permission bits in mode\n are set, this test matches any file (the idea here is to be consistent with the\n behaviour of -perm -000)."
+            },
+            "xargs": {
+              "mpsum": "build and execute command lines from standard input"
+            },
+            "chmod": {
+              "mpsum": "change file mode bits"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "xargs": {
+              "man1_xargs_37433": "execut command pipe argument come anoth command file etc\ninput treat singl block text split separ piec space tab newlin end-of-fil delet file backup extens -print0 use null charact split file name -0 use delimit execut command input line replac occurr placehold mark _ input line parallel run max-proc process time default 1 max-proc 0 xarg run mani process possibl time run command use input data argument run multipl chain command input data"
+            },
+            "chmod": {
+              "man1_chmod_3989": "chang access permiss file directori chang permiss recurs give g roup ther abil w rite give user right r ead e x ecut give ther file owner group right g roup give u ser right r ead w rite file directori give u ser own file right e x ecut remov right ther remov e x ecut right g roup"
+            }
+          }
+        },
+        "1": {
+          "script": "find $1 -perm -u+r -exec chmod g+r {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-perm": "Any of the permission bits mode are set for the file. Symbolic modes are accepted\n in this form. You must specify `u', `g' or `o' if you use a symbolic mode. See\n the EXAMPLES section for some illustrative examples. If no permission bits in mode\n are set, this test matches any file (the idea here is to be consistent with the\n behaviour of -perm -000)."
+            },
+            "chmod": {
+              "mpsum": "change file mode bits"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "chmod": {
+              "man1_chmod_3989": "chang access permiss file directori chang permiss recurs give g roup ther abil w rite give user right r ead e x ecut give ther file owner group right g roup give u ser right r ead w rite file directori give u ser own file right e x ecut remov right ther remov e x ecut right g roup"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_9722: Print the current date in '%H:%M:%S' format followed by the string ': done waiting. both jobs terminated on their own or via timeout; resuming script'"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_9722: echo \"$(date +%H:%M:%S): done waiting. both jobs terminated on their own or via timeout; resuming script\""
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "xargs",
+      "MP Summary": "build and execute command lines from standard input",
+      "Most Similar TLDR Task": "Parallel runs of up to `max-procs` processes at a time; the default is 1. If `max-procs` is 0, xargs will run as many processes as possible at a time",
+      "Most Similar TLDR Script": "{{arguments_source}} | xargs -P {{max-procs}} {{command}}",
+      "Most Similar NL2Bash Task": "Find all files/directories under $1 which have at least read permission for their owner and set read permission for group for these files/directories",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find \"$1\" -perm -u+r -print0 | xargs chmod g+r\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-print0": "Always print the exact filename, unchanged, even if the output is going to a\n terminal.",
+              "-perm": "Any of the permission bits mode are set for the file. Symbolic modes are accepted\n in this form. You must specify `u', `g' or `o' if you use a symbolic mode. See\n the EXAMPLES section for some illustrative examples. If no permission bits in mode\n are set, this test matches any file (the idea here is to be consistent with the\n behaviour of -perm -000)."
+            },
+            "xargs": {
+              "mpsum": "build and execute command lines from standard input"
+            },
+            "chmod": {
+              "mpsum": "change file mode bits"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "xargs": {
+              "man1_xargs_37433": "execut command pipe argument come anoth command file etc\ninput treat singl block text split separ piec space tab newlin end-of-fil delet file backup extens -print0 use null charact split file name -0 use delimit execut command input line replac occurr placehold mark _ input line parallel run max-proc process time default 1 max-proc 0 xarg run mani process possibl time run command use input data argument run multipl chain command input data"
+            },
+            "chmod": {
+              "man1_chmod_3989": "chang access permiss file directori chang permiss recurs give g roup ther abil w rite give user right r ead e x ecut give ther file owner group right g roup give u ser right r ead w rite file directori give u ser own file right e x ecut remov right ther remov e x ecut right g roup"
+            }
+          }
+        },
+        "1": {
+          "script": "find $1 -perm -u+r -exec chmod g+r {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-perm": "Any of the permission bits mode are set for the file. Symbolic modes are accepted\n in this form. You must specify `u', `g' or `o' if you use a symbolic mode. See\n the EXAMPLES section for some illustrative examples. If no permission bits in mode\n are set, this test matches any file (the idea here is to be consistent with the\n behaviour of -perm -000)."
+            },
+            "chmod": {
+              "mpsum": "change file mode bits"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "chmod": {
+              "man1_chmod_3989": "chang access permiss file directori chang permiss recurs give g roup ther abil w rite give user right r ead e x ecut give ther file owner group right g roup give u ser right r ead w rite file directori give u ser own file right e x ecut remov right ther remov e x ecut right g roup"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_12467: Recursively change the owner and group of all files in the current directory to \"apache\"",
+        "nl2bash_4224: Find all regular files in .git and replace every occurrences of 'subdomainB.example.com'  with 'subdomainA.example.com' in those files"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_12467: find . -maxdepth 1 -not -name \".\" -print0 | xargs --null chown -R apache:apache\n\n\nls | xargs chown -R apache:apache",
+        "nl2bash_4224: find .git -type f -print0 | xargs -0 sed -i 's/subdomainB\\.example\\.com/subdomainA.example.com/g'"
+      ],
+      "Explanations about Options": {
+        "-0": "Input items are terminated by a null character instead of by whitespace, and the\n quotes and backslash are not special (every character is taken literally).\n Disables the end of file string, which is treated like any other argument. Useful\n when input items might contain white space, quote marks, or backslashes. The GNU\n find -print0 option produces input suitable for this mode."
+      }
+    },
+    {
+      "Command": "apt",
+      "MP Summary": "command-line interface",
+      "Most Similar TLDR Task": "Update the list of available packages and versions (it's recommended to run this before other `apt` commands)",
+      "Most Similar TLDR Script": "sudo apt update",
+      "Most Similar NL2Bash Task": "Find all files/directories under $1 which have at least read permission for their owner and set read permission for group for these files/directories",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find \"$1\" -perm -u+r -print0 | xargs chmod g+r\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-print0": "Always print the exact filename, unchanged, even if the output is going to a\n terminal.",
+              "-perm": "Any of the permission bits mode are set for the file. Symbolic modes are accepted\n in this form. You must specify `u', `g' or `o' if you use a symbolic mode. See\n the EXAMPLES section for some illustrative examples. If no permission bits in mode\n are set, this test matches any file (the idea here is to be consistent with the\n behaviour of -perm -000)."
+            },
+            "xargs": {
+              "mpsum": "build and execute command lines from standard input"
+            },
+            "chmod": {
+              "mpsum": "change file mode bits"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "xargs": {
+              "man1_xargs_37433": "execut command pipe argument come anoth command file etc\ninput treat singl block text split separ piec space tab newlin end-of-fil delet file backup extens -print0 use null charact split file name -0 use delimit execut command input line replac occurr placehold mark _ input line parallel run max-proc process time default 1 max-proc 0 xarg run mani process possibl time run command use input data argument run multipl chain command input data"
+            },
+            "chmod": {
+              "man1_chmod_3989": "chang access permiss file directori chang permiss recurs give g roup ther abil w rite give user right r ead e x ecut give ther file owner group right g roup give u ser right r ead w rite file directori give u ser own file right e x ecut remov right ther remov e x ecut right g roup"
+            }
+          }
+        },
+        "1": {
+          "script": "find $1 -perm -u+r -exec chmod g+r {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-perm": "Any of the permission bits mode are set for the file. Symbolic modes are accepted\n in this form. You must specify `u', `g' or `o' if you use a symbolic mode. See\n the EXAMPLES section for some illustrative examples. If no permission bits in mode\n are set, this test matches any file (the idea here is to be consistent with the\n behaviour of -perm -000)."
+            },
+            "chmod": {
+              "mpsum": "change file mode bits"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "chmod": {
+              "man1_chmod_3989": "chang access permiss file directori chang permiss recurs give g roup ther abil w rite give user right r ead e x ecut give ther file owner group right g roup give u ser right r ead w rite file directori give u ser own file right e x ecut remov right ther remov e x ecut right g roup"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_1893: Write \"deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen\" to standard output and append to \"/etc/apt/sources.list.d/10gen.list\" as root"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_1893: sudo echo \"deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen\" | sudo tee -a /etc/apt/sources.list.d/10gen.list"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "jobs",
+      "MP Summary": "display status of jobs in the current session",
+      "Most Similar TLDR Task": "Display information about jobs with changed status",
+      "Most Similar TLDR Script": "jobs -n",
+      "Most Similar NL2Bash Task": "Find all files/directories under $1 which have at least read permission for their owner and set read permission for group for these files/directories",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find \"$1\" -perm -u+r -print0 | xargs chmod g+r\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-print0": "Always print the exact filename, unchanged, even if the output is going to a\n terminal.",
+              "-perm": "Any of the permission bits mode are set for the file. Symbolic modes are accepted\n in this form. You must specify `u', `g' or `o' if you use a symbolic mode. See\n the EXAMPLES section for some illustrative examples. If no permission bits in mode\n are set, this test matches any file (the idea here is to be consistent with the\n behaviour of -perm -000)."
+            },
+            "xargs": {
+              "mpsum": "build and execute command lines from standard input"
+            },
+            "chmod": {
+              "mpsum": "change file mode bits"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "xargs": {
+              "man1_xargs_37433": "execut command pipe argument come anoth command file etc\ninput treat singl block text split separ piec space tab newlin end-of-fil delet file backup extens -print0 use null charact split file name -0 use delimit execut command input line replac occurr placehold mark _ input line parallel run max-proc process time default 1 max-proc 0 xarg run mani process possibl time run command use input data argument run multipl chain command input data"
+            },
+            "chmod": {
+              "man1_chmod_3989": "chang access permiss file directori chang permiss recurs give g roup ther abil w rite give user right r ead e x ecut give ther file owner group right g roup give u ser right r ead w rite file directori give u ser own file right e x ecut remov right ther remov e x ecut right g roup"
+            }
+          }
+        },
+        "1": {
+          "script": "find $1 -perm -u+r -exec chmod g+r {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-perm": "Any of the permission bits mode are set for the file. Symbolic modes are accepted\n in this form. You must specify `u', `g' or `o' if you use a symbolic mode. See\n the EXAMPLES section for some illustrative examples. If no permission bits in mode\n are set, this test matches any file (the idea here is to be consistent with the\n behaviour of -perm -000)."
+            },
+            "chmod": {
+              "mpsum": "change file mode bits"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "chmod": {
+              "man1_chmod_3989": "chang access permiss file directori chang permiss recurs give g roup ther abil w rite give user right r ead e x ecut give ther file owner group right g roup give u ser right r ead w rite file directori give u ser own file right e x ecut remov right ther remov e x ecut right g roup"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_9722: Print the current date in '%H:%M:%S' format followed by the string ': done waiting. both jobs terminated on their own or via timeout; resuming script'"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_9722: echo \"$(date +%H:%M:%S): done waiting. both jobs terminated on their own or via timeout; resuming script\""
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "tee",
+      "MP Summary": "read from standard input and write to standard output and files",
+      "Most Similar TLDR Task": "Create a directory called \"example\", count the number of characters in \"example\" and write \"example\" to the terminal",
+      "Most Similar TLDR Script": "echo \"example\" | tee >(xargs mkdir) >(wc -c)",
+      "Most Similar NL2Bash Task": "Find all files/directories under $1 which have at least read permission for their owner and set read permission for group for these files/directories",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find \"$1\" -perm -u+r -print0 | xargs chmod g+r\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-print0": "Always print the exact filename, unchanged, even if the output is going to a\n terminal.",
+              "-perm": "Any of the permission bits mode are set for the file. Symbolic modes are accepted\n in this form. You must specify `u', `g' or `o' if you use a symbolic mode. See\n the EXAMPLES section for some illustrative examples. If no permission bits in mode\n are set, this test matches any file (the idea here is to be consistent with the\n behaviour of -perm -000)."
+            },
+            "xargs": {
+              "mpsum": "build and execute command lines from standard input"
+            },
+            "chmod": {
+              "mpsum": "change file mode bits"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "xargs": {
+              "man1_xargs_37433": "execut command pipe argument come anoth command file etc\ninput treat singl block text split separ piec space tab newlin end-of-fil delet file backup extens -print0 use null charact split file name -0 use delimit execut command input line replac occurr placehold mark _ input line parallel run max-proc process time default 1 max-proc 0 xarg run mani process possibl time run command use input data argument run multipl chain command input data"
+            },
+            "chmod": {
+              "man1_chmod_3989": "chang access permiss file directori chang permiss recurs give g roup ther abil w rite give user right r ead e x ecut give ther file owner group right g roup give u ser right r ead w rite file directori give u ser own file right e x ecut remov right ther remov e x ecut right g roup"
+            }
+          }
+        },
+        "1": {
+          "script": "find $1 -perm -u+r -exec chmod g+r {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-perm": "Any of the permission bits mode are set for the file. Symbolic modes are accepted\n in this form. You must specify `u', `g' or `o' if you use a symbolic mode. See\n the EXAMPLES section for some illustrative examples. If no permission bits in mode\n are set, this test matches any file (the idea here is to be consistent with the\n behaviour of -perm -000)."
+            },
+            "chmod": {
+              "mpsum": "change file mode bits"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "chmod": {
+              "man1_chmod_3989": "chang access permiss file directori chang permiss recurs give g roup ther abil w rite give user right r ead e x ecut give ther file owner group right g roup give u ser right r ead w rite file directori give u ser own file right e x ecut remov right ther remov e x ecut right g roup"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_1893: Write \"deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen\" to standard output and append to \"/etc/apt/sources.list.d/10gen.list\" as root"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_1893: sudo echo \"deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen\" | sudo tee -a /etc/apt/sources.list.d/10gen.list"
+      ],
+      "Explanations about Options": {
+        "-a": "append to the given FILEs, do not overwrite"
+      }
+    },
+    {
+      "Command": "wc",
+      "MP Summary": "print newline, word, and byte counts for each file",
+      "Most Similar TLDR Task": "Count characters in file (taking multi-byte character sets into account)",
+      "Most Similar TLDR Script": "wc -m {{file}}",
+      "Most Similar NL2Bash Task": "Find all files/directories under $1 which have at least read permission for their owner and set read permission for group for these files/directories",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find \"$1\" -perm -u+r -print0 | xargs chmod g+r\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-print0": "Always print the exact filename, unchanged, even if the output is going to a\n terminal.",
+              "-perm": "Any of the permission bits mode are set for the file. Symbolic modes are accepted\n in this form. You must specify `u', `g' or `o' if you use a symbolic mode. See\n the EXAMPLES section for some illustrative examples. If no permission bits in mode\n are set, this test matches any file (the idea here is to be consistent with the\n behaviour of -perm -000)."
+            },
+            "xargs": {
+              "mpsum": "build and execute command lines from standard input"
+            },
+            "chmod": {
+              "mpsum": "change file mode bits"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "xargs": {
+              "man1_xargs_37433": "execut command pipe argument come anoth command file etc\ninput treat singl block text split separ piec space tab newlin end-of-fil delet file backup extens -print0 use null charact split file name -0 use delimit execut command input line replac occurr placehold mark _ input line parallel run max-proc process time default 1 max-proc 0 xarg run mani process possibl time run command use input data argument run multipl chain command input data"
+            },
+            "chmod": {
+              "man1_chmod_3989": "chang access permiss file directori chang permiss recurs give g roup ther abil w rite give user right r ead e x ecut give ther file owner group right g roup give u ser right r ead w rite file directori give u ser own file right e x ecut remov right ther remov e x ecut right g roup"
+            }
+          }
+        },
+        "1": {
+          "script": "find $1 -perm -u+r -exec chmod g+r {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-perm": "Any of the permission bits mode are set for the file. Symbolic modes are accepted\n in this form. You must specify `u', `g' or `o' if you use a symbolic mode. See\n the EXAMPLES section for some illustrative examples. If no permission bits in mode\n are set, this test matches any file (the idea here is to be consistent with the\n behaviour of -perm -000)."
+            },
+            "chmod": {
+              "mpsum": "change file mode bits"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "chmod": {
+              "man1_chmod_3989": "chang access permiss file directori chang permiss recurs give g roup ther abil w rite give user right r ead e x ecut give ther file owner group right g roup give u ser right r ead w rite file directori give u ser own file right e x ecut remov right ther remov e x ecut right g roup"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_7726: find all the normal/regular files in current folder excluding sub directories and hidden folders and display the count"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_7726: find . -type f -maxdepth 1 ! -name '.*' -exec printf '%.0s.\\n' {} + | wc -l"
+      ],
+      "Explanations about Options": {
+        "-l": "print the newline counts"
+      }
+    },
+    {
+      "Command": "pstree",
+      "MP Summary": "display a tree of processes",
+      "Most Similar TLDR Task": "Display all process trees rooted at processes owned by specified user",
+      "Most Similar TLDR Script": "pstree {{user}}",
+      "Most Similar NL2Bash Task": "Find all files/directories under $1 which have at least read permission for their owner and set read permission for group for these files/directories",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find \"$1\" -perm -u+r -print0 | xargs chmod g+r\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-print0": "Always print the exact filename, unchanged, even if the output is going to a\n terminal.",
+              "-perm": "Any of the permission bits mode are set for the file. Symbolic modes are accepted\n in this form. You must specify `u', `g' or `o' if you use a symbolic mode. See\n the EXAMPLES section for some illustrative examples. If no permission bits in mode\n are set, this test matches any file (the idea here is to be consistent with the\n behaviour of -perm -000)."
+            },
+            "xargs": {
+              "mpsum": "build and execute command lines from standard input"
+            },
+            "chmod": {
+              "mpsum": "change file mode bits"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "xargs": {
+              "man1_xargs_37433": "execut command pipe argument come anoth command file etc\ninput treat singl block text split separ piec space tab newlin end-of-fil delet file backup extens -print0 use null charact split file name -0 use delimit execut command input line replac occurr placehold mark _ input line parallel run max-proc process time default 1 max-proc 0 xarg run mani process possibl time run command use input data argument run multipl chain command input data"
+            },
+            "chmod": {
+              "man1_chmod_3989": "chang access permiss file directori chang permiss recurs give g roup ther abil w rite give user right r ead e x ecut give ther file owner group right g roup give u ser right r ead w rite file directori give u ser own file right e x ecut remov right ther remov e x ecut right g roup"
+            }
+          }
+        },
+        "1": {
+          "script": "find $1 -perm -u+r -exec chmod g+r {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-perm": "Any of the permission bits mode are set for the file. Symbolic modes are accepted\n in this form. You must specify `u', `g' or `o' if you use a symbolic mode. See\n the EXAMPLES section for some illustrative examples. If no permission bits in mode\n are set, this test matches any file (the idea here is to be consistent with the\n behaviour of -perm -000)."
+            },
+            "chmod": {
+              "mpsum": "change file mode bits"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "chmod": {
+              "man1_chmod_3989": "chang access permiss file directori chang permiss recurs give g roup ther abil w rite give user right r ead e x ecut give ther file owner group right g roup give u ser right r ead w rite file directori give u ser own file right e x ecut remov right ther remov e x ecut right g roup"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_1357: Prints process tree of a current process with id numbers and parent processes."
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_1357: pstree -sp $$"
+      ],
+      "Explanations about Options": {
+        "-s": "Show parent processes of the specified process.",
+        "-p": "Show PIDs. PIDs are shown as decimal numbers in parentheses after each process\n name. -p implicitly disables compaction."
+      }
+    },
+    {
+      "Command": "printf",
+      "MP Summary": "format and print data",
+      "Most Similar TLDR Task": "Print a text message composed with environment variables",
+      "Most Similar TLDR Script": "printf \"{{var1: %s\\tvar2: %s\\n}}\" \"{{$VAR1}}\" \"{{$VAR2}}\"",
+      "Most Similar NL2Bash Task": "Find all files/directories under $1 which have at least read permission for their owner and set read permission for group for these files/directories",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find \"$1\" -perm -u+r -print0 | xargs chmod g+r\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-print0": "Always print the exact filename, unchanged, even if the output is going to a\n terminal.",
+              "-perm": "Any of the permission bits mode are set for the file. Symbolic modes are accepted\n in this form. You must specify `u', `g' or `o' if you use a symbolic mode. See\n the EXAMPLES section for some illustrative examples. If no permission bits in mode\n are set, this test matches any file (the idea here is to be consistent with the\n behaviour of -perm -000)."
+            },
+            "xargs": {
+              "mpsum": "build and execute command lines from standard input"
+            },
+            "chmod": {
+              "mpsum": "change file mode bits"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "xargs": {
+              "man1_xargs_37433": "execut command pipe argument come anoth command file etc\ninput treat singl block text split separ piec space tab newlin end-of-fil delet file backup extens -print0 use null charact split file name -0 use delimit execut command input line replac occurr placehold mark _ input line parallel run max-proc process time default 1 max-proc 0 xarg run mani process possibl time run command use input data argument run multipl chain command input data"
+            },
+            "chmod": {
+              "man1_chmod_3989": "chang access permiss file directori chang permiss recurs give g roup ther abil w rite give user right r ead e x ecut give ther file owner group right g roup give u ser right r ead w rite file directori give u ser own file right e x ecut remov right ther remov e x ecut right g roup"
+            }
+          }
+        },
+        "1": {
+          "script": "find $1 -perm -u+r -exec chmod g+r {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-perm": "Any of the permission bits mode are set for the file. Symbolic modes are accepted\n in this form. You must specify `u', `g' or `o' if you use a symbolic mode. See\n the EXAMPLES section for some illustrative examples. If no permission bits in mode\n are set, this test matches any file (the idea here is to be consistent with the\n behaviour of -perm -000)."
+            },
+            "chmod": {
+              "mpsum": "change file mode bits"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "chmod": {
+              "man1_chmod_3989": "chang access permiss file directori chang permiss recurs give g roup ther abil w rite give user right r ead e x ecut give ther file owner group right g roup give u ser right r ead w rite file directori give u ser own file right e x ecut remov right ther remov e x ecut right g roup"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_7726: find all the normal/regular files in current folder excluding sub directories and hidden folders and display the count"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_7726: find . -type f -maxdepth 1 ! -name '.*' -exec printf '%.0s.\\n' {} + | wc -l"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "chmod",
+      "MP Summary": "change file mode bits",
+      "Most Similar TLDR Task": "Change permissions recursively giving [g]roup and [o]thers the ability to [w]rite",
+      "Most Similar TLDR Script": "chmod -R g+w,o+w {{directory}}",
+      "Most Similar NL2Bash Task": "Find all files/directories under $1 which have at least read permission for their owner and set read permission for group for these files/directories",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find \"$1\" -perm -u+r -print0 | xargs chmod g+r\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-print0": "Always print the exact filename, unchanged, even if the output is going to a\n terminal.",
+              "-perm": "Any of the permission bits mode are set for the file. Symbolic modes are accepted\n in this form. You must specify `u', `g' or `o' if you use a symbolic mode. See\n the EXAMPLES section for some illustrative examples. If no permission bits in mode\n are set, this test matches any file (the idea here is to be consistent with the\n behaviour of -perm -000)."
+            },
+            "xargs": {
+              "mpsum": "build and execute command lines from standard input"
+            },
+            "chmod": {
+              "mpsum": "change file mode bits"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "xargs": {
+              "man1_xargs_37433": "execut command pipe argument come anoth command file etc\ninput treat singl block text split separ piec space tab newlin end-of-fil delet file backup extens -print0 use null charact split file name -0 use delimit execut command input line replac occurr placehold mark _ input line parallel run max-proc process time default 1 max-proc 0 xarg run mani process possibl time run command use input data argument run multipl chain command input data"
+            },
+            "chmod": {
+              "man1_chmod_3989": "chang access permiss file directori chang permiss recurs give g roup ther abil w rite give user right r ead e x ecut give ther file owner group right g roup give u ser right r ead w rite file directori give u ser own file right e x ecut remov right ther remov e x ecut right g roup"
+            }
+          }
+        },
+        "1": {
+          "script": "find $1 -perm -u+r -exec chmod g+r {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-perm": "Any of the permission bits mode are set for the file. Symbolic modes are accepted\n in this form. You must specify `u', `g' or `o' if you use a symbolic mode. See\n the EXAMPLES section for some illustrative examples. If no permission bits in mode\n are set, this test matches any file (the idea here is to be consistent with the\n behaviour of -perm -000)."
+            },
+            "chmod": {
+              "mpsum": "change file mode bits"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "chmod": {
+              "man1_chmod_3989": "chang access permiss file directori chang permiss recurs give g roup ther abil w rite give user right r ead e x ecut give ther file owner group right g roup give u ser right r ead w rite file directori give u ser own file right e x ecut remov right ther remov e x ecut right g roup"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_2891: Find all directories under current directory with 755 permission and change their permission to 644"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_2891: find . -perm 755 -exec chmod 644 {} \\;"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "md5sum",
+      "MP Summary": "compute and check MD5 message digest",
+      "Most Similar TLDR Task": "Calculate MD5 checksums for multiple files",
+      "Most Similar TLDR Script": "md5sum {{filename1}} {{filename2}}",
+      "Most Similar NL2Bash Task": "Find all files/directories under $1 which have at least read permission for their owner and set read permission for group for these files/directories",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find \"$1\" -perm -u+r -print0 | xargs chmod g+r\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-print0": "Always print the exact filename, unchanged, even if the output is going to a\n terminal.",
+              "-perm": "Any of the permission bits mode are set for the file. Symbolic modes are accepted\n in this form. You must specify `u', `g' or `o' if you use a symbolic mode. See\n the EXAMPLES section for some illustrative examples. If no permission bits in mode\n are set, this test matches any file (the idea here is to be consistent with the\n behaviour of -perm -000)."
+            },
+            "xargs": {
+              "mpsum": "build and execute command lines from standard input"
+            },
+            "chmod": {
+              "mpsum": "change file mode bits"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "xargs": {
+              "man1_xargs_37433": "execut command pipe argument come anoth command file etc\ninput treat singl block text split separ piec space tab newlin end-of-fil delet file backup extens -print0 use null charact split file name -0 use delimit execut command input line replac occurr placehold mark _ input line parallel run max-proc process time default 1 max-proc 0 xarg run mani process possibl time run command use input data argument run multipl chain command input data"
+            },
+            "chmod": {
+              "man1_chmod_3989": "chang access permiss file directori chang permiss recurs give g roup ther abil w rite give user right r ead e x ecut give ther file owner group right g roup give u ser right r ead w rite file directori give u ser own file right e x ecut remov right ther remov e x ecut right g roup"
+            }
+          }
+        },
+        "1": {
+          "script": "find $1 -perm -u+r -exec chmod g+r {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-perm": "Any of the permission bits mode are set for the file. Symbolic modes are accepted\n in this form. You must specify `u', `g' or `o' if you use a symbolic mode. See\n the EXAMPLES section for some illustrative examples. If no permission bits in mode\n are set, this test matches any file (the idea here is to be consistent with the\n behaviour of -perm -000)."
+            },
+            "chmod": {
+              "mpsum": "change file mode bits"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "chmod": {
+              "man1_chmod_3989": "chang access permiss file directori chang permiss recurs give g roup ther abil w rite give user right r ead e x ecut give ther file owner group right g roup give u ser right r ead w rite file directori give u ser own file right e x ecut remov right ther remov e x ecut right g roup"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_13717: Calculate the md5 sum of the file \"filename\" and print only the hash"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_13717: md5sum filename |cut -f 1 -d \" \""
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "file",
+      "MP Summary": "determine file type",
+      "Most Similar TLDR Task": "Allow file to work with special or device files",
+      "Most Similar TLDR Script": "file -s {{filename}}",
+      "Most Similar NL2Bash Task": "Find all files/directories under $1 which have at least read permission for their owner and set read permission for group for these files/directories",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find \"$1\" -perm -u+r -print0 | xargs chmod g+r\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-print0": "Always print the exact filename, unchanged, even if the output is going to a\n terminal.",
+              "-perm": "Any of the permission bits mode are set for the file. Symbolic modes are accepted\n in this form. You must specify `u', `g' or `o' if you use a symbolic mode. See\n the EXAMPLES section for some illustrative examples. If no permission bits in mode\n are set, this test matches any file (the idea here is to be consistent with the\n behaviour of -perm -000)."
+            },
+            "xargs": {
+              "mpsum": "build and execute command lines from standard input"
+            },
+            "chmod": {
+              "mpsum": "change file mode bits"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "xargs": {
+              "man1_xargs_37433": "execut command pipe argument come anoth command file etc\ninput treat singl block text split separ piec space tab newlin end-of-fil delet file backup extens -print0 use null charact split file name -0 use delimit execut command input line replac occurr placehold mark _ input line parallel run max-proc process time default 1 max-proc 0 xarg run mani process possibl time run command use input data argument run multipl chain command input data"
+            },
+            "chmod": {
+              "man1_chmod_3989": "chang access permiss file directori chang permiss recurs give g roup ther abil w rite give user right r ead e x ecut give ther file owner group right g roup give u ser right r ead w rite file directori give u ser own file right e x ecut remov right ther remov e x ecut right g roup"
+            }
+          }
+        },
+        "1": {
+          "script": "find $1 -perm -u+r -exec chmod g+r {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-perm": "Any of the permission bits mode are set for the file. Symbolic modes are accepted\n in this form. You must specify `u', `g' or `o' if you use a symbolic mode. See\n the EXAMPLES section for some illustrative examples. If no permission bits in mode\n are set, this test matches any file (the idea here is to be consistent with the\n behaviour of -perm -000)."
+            },
+            "chmod": {
+              "mpsum": "change file mode bits"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "chmod": {
+              "man1_chmod_3989": "chang access permiss file directori chang permiss recurs give g roup ther abil w rite give user right r ead e x ecut give ther file owner group right g roup give u ser right r ead w rite file directori give u ser own file right e x ecut remov right ther remov e x ecut right g roup"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_374: Display mimetype of myfile.txt."
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_374: file --mime myfile.txt"
+      ],
+      "Explanations about Options": {
+        "--mime": "Causes the file command to output mime type strings rather than the more traditional\n human readable ones. Thus it may say \u2018text/plain; charset=us-ascii\u2019 rather than\n \u201cASCII text\u201d."
+      }
+    },
+    {
+      "Command": "cat",
+      "MP Summary": "concatenate files and print on the standard output",
+      "Most Similar TLDR Task": "Concatenate several files into the target file",
+      "Most Similar TLDR Script": "cat {{file1}} {{file2}} > {{target_file}}",
+      "Most Similar NL2Bash Task": "Find all files/directories under $1 which have at least read permission for their owner and set read permission for group for these files/directories",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find \"$1\" -perm -u+r -print0 | xargs chmod g+r\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-print0": "Always print the exact filename, unchanged, even if the output is going to a\n terminal.",
+              "-perm": "Any of the permission bits mode are set for the file. Symbolic modes are accepted\n in this form. You must specify `u', `g' or `o' if you use a symbolic mode. See\n the EXAMPLES section for some illustrative examples. If no permission bits in mode\n are set, this test matches any file (the idea here is to be consistent with the\n behaviour of -perm -000)."
+            },
+            "xargs": {
+              "mpsum": "build and execute command lines from standard input"
+            },
+            "chmod": {
+              "mpsum": "change file mode bits"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "xargs": {
+              "man1_xargs_37433": "execut command pipe argument come anoth command file etc\ninput treat singl block text split separ piec space tab newlin end-of-fil delet file backup extens -print0 use null charact split file name -0 use delimit execut command input line replac occurr placehold mark _ input line parallel run max-proc process time default 1 max-proc 0 xarg run mani process possibl time run command use input data argument run multipl chain command input data"
+            },
+            "chmod": {
+              "man1_chmod_3989": "chang access permiss file directori chang permiss recurs give g roup ther abil w rite give user right r ead e x ecut give ther file owner group right g roup give u ser right r ead w rite file directori give u ser own file right e x ecut remov right ther remov e x ecut right g roup"
+            }
+          }
+        },
+        "1": {
+          "script": "find $1 -perm -u+r -exec chmod g+r {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-perm": "Any of the permission bits mode are set for the file. Symbolic modes are accepted\n in this form. You must specify `u', `g' or `o' if you use a symbolic mode. See\n the EXAMPLES section for some illustrative examples. If no permission bits in mode\n are set, this test matches any file (the idea here is to be consistent with the\n behaviour of -perm -000)."
+            },
+            "chmod": {
+              "mpsum": "change file mode bits"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "chmod": {
+              "man1_chmod_3989": "chang access permiss file directori chang permiss recurs give g roup ther abil w rite give user right r ead e x ecut give ther file owner group right g roup give u ser right r ead w rite file directori give u ser own file right e x ecut remov right ther remov e x ecut right g roup"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_13366: Save the contents of \"~/.bashrc\" to the clipboard on OSX"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_13366: cat ~/.bashrc | pbcopy"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "rm",
+      "MP Summary": "remove files or directories",
+      "Most Similar TLDR Task": "Interactively remove multiple files, with a prompt before every removal",
+      "Most Similar TLDR Script": "rm -i {{file(s)}}",
+      "Most Similar NL2Bash Task": "Find all files/directories under $1 which have at least read permission for their owner and set read permission for group for these files/directories",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find \"$1\" -perm -u+r -print0 | xargs chmod g+r\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-print0": "Always print the exact filename, unchanged, even if the output is going to a\n terminal.",
+              "-perm": "Any of the permission bits mode are set for the file. Symbolic modes are accepted\n in this form. You must specify `u', `g' or `o' if you use a symbolic mode. See\n the EXAMPLES section for some illustrative examples. If no permission bits in mode\n are set, this test matches any file (the idea here is to be consistent with the\n behaviour of -perm -000)."
+            },
+            "xargs": {
+              "mpsum": "build and execute command lines from standard input"
+            },
+            "chmod": {
+              "mpsum": "change file mode bits"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "xargs": {
+              "man1_xargs_37433": "execut command pipe argument come anoth command file etc\ninput treat singl block text split separ piec space tab newlin end-of-fil delet file backup extens -print0 use null charact split file name -0 use delimit execut command input line replac occurr placehold mark _ input line parallel run max-proc process time default 1 max-proc 0 xarg run mani process possibl time run command use input data argument run multipl chain command input data"
+            },
+            "chmod": {
+              "man1_chmod_3989": "chang access permiss file directori chang permiss recurs give g roup ther abil w rite give user right r ead e x ecut give ther file owner group right g roup give u ser right r ead w rite file directori give u ser own file right e x ecut remov right ther remov e x ecut right g roup"
+            }
+          }
+        },
+        "1": {
+          "script": "find $1 -perm -u+r -exec chmod g+r {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-perm": "Any of the permission bits mode are set for the file. Symbolic modes are accepted\n in this form. You must specify `u', `g' or `o' if you use a symbolic mode. See\n the EXAMPLES section for some illustrative examples. If no permission bits in mode\n are set, this test matches any file (the idea here is to be consistent with the\n behaviour of -perm -000)."
+            },
+            "chmod": {
+              "mpsum": "change file mode bits"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "chmod": {
+              "man1_chmod_3989": "chang access permiss file directori chang permiss recurs give g roup ther abil w rite give user right r ead e x ecut give ther file owner group right g roup give u ser right r ead w rite file directori give u ser own file right e x ecut remov right ther remov e x ecut right g roup"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_11658: Removes 'folderName', and removes all content within if 'folderName' is folder."
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_11658: rm -rf folderName"
+      ],
+      "Explanations about Options": {
+        "-r": "remove directories and their contents recursively",
+        "-f": "ignore nonexistent files and arguments, never prompt"
+      }
+    },
+    {
+      "Command": "awk",
+      "MP Summary": "pattern scanning and processing language",
+      "Most Similar TLDR Task": "Sum the values in the first column of a file and print the total",
+      "Most Similar TLDR Script": "awk '{s+=$1} END {print s}' {{filename}}",
+      "Most Similar NL2Bash Task": "Find all files/directories under $1 which have at least read permission for their owner and set read permission for group for these files/directories",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find \"$1\" -perm -u+r -print0 | xargs chmod g+r\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-print0": "Always print the exact filename, unchanged, even if the output is going to a\n terminal.",
+              "-perm": "Any of the permission bits mode are set for the file. Symbolic modes are accepted\n in this form. You must specify `u', `g' or `o' if you use a symbolic mode. See\n the EXAMPLES section for some illustrative examples. If no permission bits in mode\n are set, this test matches any file (the idea here is to be consistent with the\n behaviour of -perm -000)."
+            },
+            "xargs": {
+              "mpsum": "build and execute command lines from standard input"
+            },
+            "chmod": {
+              "mpsum": "change file mode bits"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "xargs": {
+              "man1_xargs_37433": "execut command pipe argument come anoth command file etc\ninput treat singl block text split separ piec space tab newlin end-of-fil delet file backup extens -print0 use null charact split file name -0 use delimit execut command input line replac occurr placehold mark _ input line parallel run max-proc process time default 1 max-proc 0 xarg run mani process possibl time run command use input data argument run multipl chain command input data"
+            },
+            "chmod": {
+              "man1_chmod_3989": "chang access permiss file directori chang permiss recurs give g roup ther abil w rite give user right r ead e x ecut give ther file owner group right g roup give u ser right r ead w rite file directori give u ser own file right e x ecut remov right ther remov e x ecut right g roup"
+            }
+          }
+        },
+        "1": {
+          "script": "find $1 -perm -u+r -exec chmod g+r {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-perm": "Any of the permission bits mode are set for the file. Symbolic modes are accepted\n in this form. You must specify `u', `g' or `o' if you use a symbolic mode. See\n the EXAMPLES section for some illustrative examples. If no permission bits in mode\n are set, this test matches any file (the idea here is to be consistent with the\n behaviour of -perm -000)."
+            },
+            "chmod": {
+              "mpsum": "change file mode bits"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "chmod": {
+              "man1_chmod_3989": "chang access permiss file directori chang permiss recurs give g roup ther abil w rite give user right r ead e x ecut give ther file owner group right g roup give u ser right r ead w rite file directori give u ser own file right e x ecut remov right ther remov e x ecut right g roup"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_13386: Save the first 3 lines output by 'yes' to 'file', and log the rest through 'more' which simply waits for user interaction at each page."
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_13386: yes | awk 'FNR<4 {print >>\"file\"; close(\"file\")}  1' | more"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "tail",
+      "MP Summary": "output the last part of files",
+      "Most Similar TLDR Task": "Keep reading file until `Ctrl + C`, even if the file is rotated",
+      "Most Similar TLDR Script": "tail -F {{file}}",
+      "Most Similar NL2Bash Task": "Find all files/directories under $1 which have at least read permission for their owner and set read permission for group for these files/directories",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find \"$1\" -perm -u+r -print0 | xargs chmod g+r\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-print0": "Always print the exact filename, unchanged, even if the output is going to a\n terminal.",
+              "-perm": "Any of the permission bits mode are set for the file. Symbolic modes are accepted\n in this form. You must specify `u', `g' or `o' if you use a symbolic mode. See\n the EXAMPLES section for some illustrative examples. If no permission bits in mode\n are set, this test matches any file (the idea here is to be consistent with the\n behaviour of -perm -000)."
+            },
+            "xargs": {
+              "mpsum": "build and execute command lines from standard input"
+            },
+            "chmod": {
+              "mpsum": "change file mode bits"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "xargs": {
+              "man1_xargs_37433": "execut command pipe argument come anoth command file etc\ninput treat singl block text split separ piec space tab newlin end-of-fil delet file backup extens -print0 use null charact split file name -0 use delimit execut command input line replac occurr placehold mark _ input line parallel run max-proc process time default 1 max-proc 0 xarg run mani process possibl time run command use input data argument run multipl chain command input data"
+            },
+            "chmod": {
+              "man1_chmod_3989": "chang access permiss file directori chang permiss recurs give g roup ther abil w rite give user right r ead e x ecut give ther file owner group right g roup give u ser right r ead w rite file directori give u ser own file right e x ecut remov right ther remov e x ecut right g roup"
+            }
+          }
+        },
+        "1": {
+          "script": "find $1 -perm -u+r -exec chmod g+r {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-perm": "Any of the permission bits mode are set for the file. Symbolic modes are accepted\n in this form. You must specify `u', `g' or `o' if you use a symbolic mode. See\n the EXAMPLES section for some illustrative examples. If no permission bits in mode\n are set, this test matches any file (the idea here is to be consistent with the\n behaviour of -perm -000)."
+            },
+            "chmod": {
+              "mpsum": "change file mode bits"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "chmod": {
+              "man1_chmod_3989": "chang access permiss file directori chang permiss recurs give g roup ther abil w rite give user right r ead e x ecut give ther file owner group right g roup give u ser right r ead w rite file directori give u ser own file right e x ecut remov right ther remov e x ecut right g roup"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_3656: Find all files with '.conf' extension under '/etc' directory going into at most 2 level deep and show the last 10 of them"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_3656: find /etc -maxdepth 2 -name \"*.conf\" | tail"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "yes",
+      "MP Summary": "output a string repeatedly until killed",
+      "Most Similar TLDR Task": "Repeatedly output \"message\"",
+      "Most Similar TLDR Script": "yes {{message}}",
+      "Most Similar NL2Bash Task": "Find all files/directories under $1 which have at least read permission for their owner and set read permission for group for these files/directories",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find \"$1\" -perm -u+r -print0 | xargs chmod g+r\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-print0": "Always print the exact filename, unchanged, even if the output is going to a\n terminal.",
+              "-perm": "Any of the permission bits mode are set for the file. Symbolic modes are accepted\n in this form. You must specify `u', `g' or `o' if you use a symbolic mode. See\n the EXAMPLES section for some illustrative examples. If no permission bits in mode\n are set, this test matches any file (the idea here is to be consistent with the\n behaviour of -perm -000)."
+            },
+            "xargs": {
+              "mpsum": "build and execute command lines from standard input"
+            },
+            "chmod": {
+              "mpsum": "change file mode bits"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "xargs": {
+              "man1_xargs_37433": "execut command pipe argument come anoth command file etc\ninput treat singl block text split separ piec space tab newlin end-of-fil delet file backup extens -print0 use null charact split file name -0 use delimit execut command input line replac occurr placehold mark _ input line parallel run max-proc process time default 1 max-proc 0 xarg run mani process possibl time run command use input data argument run multipl chain command input data"
+            },
+            "chmod": {
+              "man1_chmod_3989": "chang access permiss file directori chang permiss recurs give g roup ther abil w rite give user right r ead e x ecut give ther file owner group right g roup give u ser right r ead w rite file directori give u ser own file right e x ecut remov right ther remov e x ecut right g roup"
+            }
+          }
+        },
+        "1": {
+          "script": "find $1 -perm -u+r -exec chmod g+r {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-perm": "Any of the permission bits mode are set for the file. Symbolic modes are accepted\n in this form. You must specify `u', `g' or `o' if you use a symbolic mode. See\n the EXAMPLES section for some illustrative examples. If no permission bits in mode\n are set, this test matches any file (the idea here is to be consistent with the\n behaviour of -perm -000)."
+            },
+            "chmod": {
+              "mpsum": "change file mode bits"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "chmod": {
+              "man1_chmod_3989": "chang access permiss file directori chang permiss recurs give g roup ther abil w rite give user right r ead e x ecut give ther file owner group right g roup give u ser right r ead w rite file directori give u ser own file right e x ecut remov right ther remov e x ecut right g roup"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_13386: Save the first 3 lines output by 'yes' to 'file', and log the rest through 'more' which simply waits for user interaction at each page."
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_13386: yes | awk 'FNR<4 {print >>\"file\"; close(\"file\")}  1' | more"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "print",
+      "MP Summary": "execute programs via entries in the mailcap file",
+      "Most Similar TLDR Task": "Print action can be used to print any file on default run-mailcap tool",
+      "Most Similar TLDR Script": "print {{filename}}",
+      "Most Similar NL2Bash Task": "Find all files/directories under $1 which have at least read permission for their owner and set read permission for group for these files/directories",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find \"$1\" -perm -u+r -print0 | xargs chmod g+r\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-print0": "Always print the exact filename, unchanged, even if the output is going to a\n terminal.",
+              "-perm": "Any of the permission bits mode are set for the file. Symbolic modes are accepted\n in this form. You must specify `u', `g' or `o' if you use a symbolic mode. See\n the EXAMPLES section for some illustrative examples. If no permission bits in mode\n are set, this test matches any file (the idea here is to be consistent with the\n behaviour of -perm -000)."
+            },
+            "xargs": {
+              "mpsum": "build and execute command lines from standard input"
+            },
+            "chmod": {
+              "mpsum": "change file mode bits"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "xargs": {
+              "man1_xargs_37433": "execut command pipe argument come anoth command file etc\ninput treat singl block text split separ piec space tab newlin end-of-fil delet file backup extens -print0 use null charact split file name -0 use delimit execut command input line replac occurr placehold mark _ input line parallel run max-proc process time default 1 max-proc 0 xarg run mani process possibl time run command use input data argument run multipl chain command input data"
+            },
+            "chmod": {
+              "man1_chmod_3989": "chang access permiss file directori chang permiss recurs give g roup ther abil w rite give user right r ead e x ecut give ther file owner group right g roup give u ser right r ead w rite file directori give u ser own file right e x ecut remov right ther remov e x ecut right g roup"
+            }
+          }
+        },
+        "1": {
+          "script": "find $1 -perm -u+r -exec chmod g+r {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-perm": "Any of the permission bits mode are set for the file. Symbolic modes are accepted\n in this form. You must specify `u', `g' or `o' if you use a symbolic mode. See\n the EXAMPLES section for some illustrative examples. If no permission bits in mode\n are set, this test matches any file (the idea here is to be consistent with the\n behaviour of -perm -000)."
+            },
+            "chmod": {
+              "mpsum": "change file mode bits"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "chmod": {
+              "man1_chmod_3989": "chang access permiss file directori chang permiss recurs give g roup ther abil w rite give user right r ead e x ecut give ther file owner group right g roup give u ser right r ead w rite file directori give u ser own file right e x ecut remov right ther remov e x ecut right g roup"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_13386: Save the first 3 lines output by 'yes' to 'file', and log the rest through 'more' which simply waits for user interaction at each page."
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_13386: yes | awk 'FNR<4 {print >>\"file\"; close(\"file\")}  1' | more"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "sed",
+      "MP Summary": "stream editor for filtering and transforming text",
+      "Most Similar TLDR Task": "Apply multiple find-replace expressions to a file",
+      "Most Similar TLDR Script": "sed -e 's/{{find}}/{{replace}}/' -e 's/{{find}}/{{replace}}/' {{filename}}",
+      "Most Similar NL2Bash Task": "Find all files/directories under $1 which have at least read permission for their owner and set read permission for group for these files/directories",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find \"$1\" -perm -u+r -print0 | xargs chmod g+r\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-print0": "Always print the exact filename, unchanged, even if the output is going to a\n terminal.",
+              "-perm": "Any of the permission bits mode are set for the file. Symbolic modes are accepted\n in this form. You must specify `u', `g' or `o' if you use a symbolic mode. See\n the EXAMPLES section for some illustrative examples. If no permission bits in mode\n are set, this test matches any file (the idea here is to be consistent with the\n behaviour of -perm -000)."
+            },
+            "xargs": {
+              "mpsum": "build and execute command lines from standard input"
+            },
+            "chmod": {
+              "mpsum": "change file mode bits"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "xargs": {
+              "man1_xargs_37433": "execut command pipe argument come anoth command file etc\ninput treat singl block text split separ piec space tab newlin end-of-fil delet file backup extens -print0 use null charact split file name -0 use delimit execut command input line replac occurr placehold mark _ input line parallel run max-proc process time default 1 max-proc 0 xarg run mani process possibl time run command use input data argument run multipl chain command input data"
+            },
+            "chmod": {
+              "man1_chmod_3989": "chang access permiss file directori chang permiss recurs give g roup ther abil w rite give user right r ead e x ecut give ther file owner group right g roup give u ser right r ead w rite file directori give u ser own file right e x ecut remov right ther remov e x ecut right g roup"
+            }
+          }
+        },
+        "1": {
+          "script": "find $1 -perm -u+r -exec chmod g+r {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-perm": "Any of the permission bits mode are set for the file. Symbolic modes are accepted\n in this form. You must specify `u', `g' or `o' if you use a symbolic mode. See\n the EXAMPLES section for some illustrative examples. If no permission bits in mode\n are set, this test matches any file (the idea here is to be consistent with the\n behaviour of -perm -000)."
+            },
+            "chmod": {
+              "mpsum": "change file mode bits"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "chmod": {
+              "man1_chmod_3989": "chang access permiss file directori chang permiss recurs give g roup ther abil w rite give user right r ead e x ecut give ther file owner group right g roup give u ser right r ead w rite file directori give u ser own file right e x ecut remov right ther remov e x ecut right g roup"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_4224: Find all regular files in .git and replace every occurrences of 'subdomainB.example.com'  with 'subdomainA.example.com' in those files"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_4224: find .git -type f -print0 | xargs -0 sed -i 's/subdomainB\\.example\\.com/subdomainA.example.com/g'"
+      ],
+      "Explanations about Options": {
+        "-i": "edit files in place (makes backup if SUFFIX supplied)"
+      }
+    },
+    {
+      "Command": "cut",
+      "MP Summary": "remove sections from each line of files",
+      "Most Similar TLDR Task": "Cut out the first sixteen characters of each line of the given files",
+      "Most Similar TLDR Script": "cut -c {{1-16}} {{file}}",
+      "Most Similar NL2Bash Task": "Find all files/directories under $1 which have at least read permission for their owner and set read permission for group for these files/directories",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find \"$1\" -perm -u+r -print0 | xargs chmod g+r\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-print0": "Always print the exact filename, unchanged, even if the output is going to a\n terminal.",
+              "-perm": "Any of the permission bits mode are set for the file. Symbolic modes are accepted\n in this form. You must specify `u', `g' or `o' if you use a symbolic mode. See\n the EXAMPLES section for some illustrative examples. If no permission bits in mode\n are set, this test matches any file (the idea here is to be consistent with the\n behaviour of -perm -000)."
+            },
+            "xargs": {
+              "mpsum": "build and execute command lines from standard input"
+            },
+            "chmod": {
+              "mpsum": "change file mode bits"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "xargs": {
+              "man1_xargs_37433": "execut command pipe argument come anoth command file etc\ninput treat singl block text split separ piec space tab newlin end-of-fil delet file backup extens -print0 use null charact split file name -0 use delimit execut command input line replac occurr placehold mark _ input line parallel run max-proc process time default 1 max-proc 0 xarg run mani process possibl time run command use input data argument run multipl chain command input data"
+            },
+            "chmod": {
+              "man1_chmod_3989": "chang access permiss file directori chang permiss recurs give g roup ther abil w rite give user right r ead e x ecut give ther file owner group right g roup give u ser right r ead w rite file directori give u ser own file right e x ecut remov right ther remov e x ecut right g roup"
+            }
+          }
+        },
+        "1": {
+          "script": "find $1 -perm -u+r -exec chmod g+r {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-perm": "Any of the permission bits mode are set for the file. Symbolic modes are accepted\n in this form. You must specify `u', `g' or `o' if you use a symbolic mode. See\n the EXAMPLES section for some illustrative examples. If no permission bits in mode\n are set, this test matches any file (the idea here is to be consistent with the\n behaviour of -perm -000)."
+            },
+            "chmod": {
+              "mpsum": "change file mode bits"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "chmod": {
+              "man1_chmod_3989": "chang access permiss file directori chang permiss recurs give g roup ther abil w rite give user right r ead e x ecut give ther file owner group right g roup give u ser right r ead w rite file directori give u ser own file right e x ecut remov right ther remov e x ecut right g roup"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_13717: Calculate the md5 sum of the file \"filename\" and print only the hash"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_13717: md5sum filename |cut -f 1 -d \" \""
+      ],
+      "Explanations about Options": {
+        "-d": "use DELIM instead of TAB for field delimiter",
+        "-f": "select only these fields; also print any line that contains no delimiter\n character, unless the -s option is specified"
+      }
+    },
+    {
+      "Command": "more",
+      "MP Summary": "file perusal filter for crt viewing",
+      "Most Similar TLDR Task": "Search for a string (press `n` to go to the next match)",
+      "Most Similar TLDR Script": "/{{something}}",
+      "Most Similar NL2Bash Task": "Find all files/directories under $1 which have at least read permission for their owner and set read permission for group for these files/directories",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find \"$1\" -perm -u+r -print0 | xargs chmod g+r\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-print0": "Always print the exact filename, unchanged, even if the output is going to a\n terminal.",
+              "-perm": "Any of the permission bits mode are set for the file. Symbolic modes are accepted\n in this form. You must specify `u', `g' or `o' if you use a symbolic mode. See\n the EXAMPLES section for some illustrative examples. If no permission bits in mode\n are set, this test matches any file (the idea here is to be consistent with the\n behaviour of -perm -000)."
+            },
+            "xargs": {
+              "mpsum": "build and execute command lines from standard input"
+            },
+            "chmod": {
+              "mpsum": "change file mode bits"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "xargs": {
+              "man1_xargs_37433": "execut command pipe argument come anoth command file etc\ninput treat singl block text split separ piec space tab newlin end-of-fil delet file backup extens -print0 use null charact split file name -0 use delimit execut command input line replac occurr placehold mark _ input line parallel run max-proc process time default 1 max-proc 0 xarg run mani process possibl time run command use input data argument run multipl chain command input data"
+            },
+            "chmod": {
+              "man1_chmod_3989": "chang access permiss file directori chang permiss recurs give g roup ther abil w rite give user right r ead e x ecut give ther file owner group right g roup give u ser right r ead w rite file directori give u ser own file right e x ecut remov right ther remov e x ecut right g roup"
+            }
+          }
+        },
+        "1": {
+          "script": "find $1 -perm -u+r -exec chmod g+r {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-perm": "Any of the permission bits mode are set for the file. Symbolic modes are accepted\n in this form. You must specify `u', `g' or `o' if you use a symbolic mode. See\n the EXAMPLES section for some illustrative examples. If no permission bits in mode\n are set, this test matches any file (the idea here is to be consistent with the\n behaviour of -perm -000)."
+            },
+            "chmod": {
+              "mpsum": "change file mode bits"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "chmod": {
+              "man1_chmod_3989": "chang access permiss file directori chang permiss recurs give g roup ther abil w rite give user right r ead e x ecut give ther file owner group right g roup give u ser right r ead w rite file directori give u ser own file right e x ecut remov right ther remov e x ecut right g roup"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_13386: Save the first 3 lines output by 'yes' to 'file', and log the rest through 'more' which simply waits for user interaction at each page."
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_13386: yes | awk 'FNR<4 {print >>\"file\"; close(\"file\")}  1' | more"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "time",
+      "MP Summary": "time a simple command",
+      "Most Similar TLDR Task": "Time \"ls\"",
+      "Most Similar TLDR Script": "time ls",
+      "Most Similar NL2Bash Task": "Find all files/directories under $1 which have at least read permission for their owner and set read permission for group for these files/directories",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find \"$1\" -perm -u+r -print0 | xargs chmod g+r\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-print0": "Always print the exact filename, unchanged, even if the output is going to a\n terminal.",
+              "-perm": "Any of the permission bits mode are set for the file. Symbolic modes are accepted\n in this form. You must specify `u', `g' or `o' if you use a symbolic mode. See\n the EXAMPLES section for some illustrative examples. If no permission bits in mode\n are set, this test matches any file (the idea here is to be consistent with the\n behaviour of -perm -000)."
+            },
+            "xargs": {
+              "mpsum": "build and execute command lines from standard input"
+            },
+            "chmod": {
+              "mpsum": "change file mode bits"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "xargs": {
+              "man1_xargs_37433": "execut command pipe argument come anoth command file etc\ninput treat singl block text split separ piec space tab newlin end-of-fil delet file backup extens -print0 use null charact split file name -0 use delimit execut command input line replac occurr placehold mark _ input line parallel run max-proc process time default 1 max-proc 0 xarg run mani process possibl time run command use input data argument run multipl chain command input data"
+            },
+            "chmod": {
+              "man1_chmod_3989": "chang access permiss file directori chang permiss recurs give g roup ther abil w rite give user right r ead e x ecut give ther file owner group right g roup give u ser right r ead w rite file directori give u ser own file right e x ecut remov right ther remov e x ecut right g roup"
+            }
+          }
+        },
+        "1": {
+          "script": "find $1 -perm -u+r -exec chmod g+r {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-perm": "Any of the permission bits mode are set for the file. Symbolic modes are accepted\n in this form. You must specify `u', `g' or `o' if you use a symbolic mode. See\n the EXAMPLES section for some illustrative examples. If no permission bits in mode\n are set, this test matches any file (the idea here is to be consistent with the\n behaviour of -perm -000)."
+            },
+            "chmod": {
+              "mpsum": "change file mode bits"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "chmod": {
+              "man1_chmod_3989": "chang access permiss file directori chang permiss recurs give g roup ther abil w rite give user right r ead e x ecut give ther file owner group right g roup give u ser right r ead w rite file directori give u ser own file right e x ecut remov right ther remov e x ecut right g roup"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_12039: Redirects time output to file."
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_12039: { time find / 2>/dev/null; } 2>time.txt"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "dev",
+      "MP Summary": "release candidate LaTeX testing",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "Find all files/directories under $1 which have at least read permission for their owner and set read permission for group for these files/directories",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find \"$1\" -perm -u+r -print0 | xargs chmod g+r\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-print0": "Always print the exact filename, unchanged, even if the output is going to a\n terminal.",
+              "-perm": "Any of the permission bits mode are set for the file. Symbolic modes are accepted\n in this form. You must specify `u', `g' or `o' if you use a symbolic mode. See\n the EXAMPLES section for some illustrative examples. If no permission bits in mode\n are set, this test matches any file (the idea here is to be consistent with the\n behaviour of -perm -000)."
+            },
+            "xargs": {
+              "mpsum": "build and execute command lines from standard input"
+            },
+            "chmod": {
+              "mpsum": "change file mode bits"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "xargs": {
+              "man1_xargs_37433": "execut command pipe argument come anoth command file etc\ninput treat singl block text split separ piec space tab newlin end-of-fil delet file backup extens -print0 use null charact split file name -0 use delimit execut command input line replac occurr placehold mark _ input line parallel run max-proc process time default 1 max-proc 0 xarg run mani process possibl time run command use input data argument run multipl chain command input data"
+            },
+            "chmod": {
+              "man1_chmod_3989": "chang access permiss file directori chang permiss recurs give g roup ther abil w rite give user right r ead e x ecut give ther file owner group right g roup give u ser right r ead w rite file directori give u ser own file right e x ecut remov right ther remov e x ecut right g roup"
+            }
+          }
+        },
+        "1": {
+          "script": "find $1 -perm -u+r -exec chmod g+r {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-perm": "Any of the permission bits mode are set for the file. Symbolic modes are accepted\n in this form. You must specify `u', `g' or `o' if you use a symbolic mode. See\n the EXAMPLES section for some illustrative examples. If no permission bits in mode\n are set, this test matches any file (the idea here is to be consistent with the\n behaviour of -perm -000)."
+            },
+            "chmod": {
+              "mpsum": "change file mode bits"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "chmod": {
+              "man1_chmod_3989": "chang access permiss file directori chang permiss recurs give g roup ther abil w rite give user right r ead e x ecut give ther file owner group right g roup give u ser right r ead w rite file directori give u ser own file right e x ecut remov right ther remov e x ecut right g roup"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_360: Display file status for all regular files in the current directory tree",
+        "nl2bash_12039: Redirects time output to file."
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_360: find . -type f -exec stat {} + > /dev/null",
+        "nl2bash_12039: { time find / 2>/dev/null; } 2>time.txt"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "to",
+      "MP Summary": "as the filename. --logdir <name> Writes each synchronization log output in a new file in the specified directory. --logexpire <hours> Removes logs older than the value specified (in hours). This command is  used  with --logdir. --logflush Clears (flushes) the log file after each write action. --logdebug Also  output  debug-level  messages  in  the log (equivalent to setting the env var QT_LOGGING_RULES=\"qt.*=true;*.debug=true\"). ) --confdir <dirname> Uses the specified configuration directory. The ownCloud Client reads a configuration file.  You can locate this configuration file as follows: On Linux distributions: $HOME/.config/ownCloud/owncloud.cfg On Microsoft Windows systems: %APPDATA%\\ownCloud\\owncloud.cfg On MAC OS X systems: $HOME/Library/Preferences/ownCloud/owncloud.cfg The configuration file contains settings using the Microsoft Windows .ini file format. You can overwrite changes using the ownCloud configuration dialog. NOTE: Use caution when making changes to the ownCloud Client configuration  file.   Incorrect settings can produce unintended results. Some interesting values that can be set on the configuration file are: \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510 \u2502[ownCloud] section          \u2502         \u2502                          \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502Variable                    \u2502 Default \u2502 Meaning                  \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502remotePollInterval          \u2502 30000   \u2502 Specifies  the poll time \u2502 \u2502                            \u2502         \u2502 for      the      remote \u2502 \u2502                            \u2502         \u2502 repository            in \u2502 \u2502                            \u2502         \u2502 milliseconds.            \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502forceSyncInterval           \u2502 7200000 \u2502 The   duration   of   no \u2502 \u2502                            \u2502         \u2502 activity  after  which a \u2502 \u2502                            \u2502         \u2502 synchronization      run \u2502 \u2502                            \u2502         \u2502 shall    be    triggered \u2502 \u2502                            \u2502         \u2502 automatically.           \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502fullLocalDiscoveryInterval  \u2502 3600000 \u2502 The interval after which \u2502 \u2502                            \u2502         \u2502 the next synchronization \u2502 \u2502                            \u2502         \u2502 will   perform   a  full \u2502 \u2502                            \u2502         \u2502 local discovery.         \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502notificationRefreshInterval \u2502 300000  \u2502 Specifies   the  default \u2502 \u2502                            \u2502         \u2502 interval of checking for \u2502 \u2502                            \u2502         \u2502 new server notifications \u2502 \u2502                            \u2502         \u2502 in milliseconds.         \u2502 \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518 \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510 \u2502[General] section       \u2502         \u2502                          \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502Variable                \u2502 Default \u2502 Meaning                  \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502chunkSize               \u2502 5242880 \u2502 Specifies the chunk size \u2502 \u2502                        \u2502         \u2502 of   uploaded  files  in \u2502 \u2502                        \u2502         \u2502 bytes.                   \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502promptDeleteAllFiles    \u2502 true    \u2502 If a  UI  prompt  should \u2502 \u2502                        \u2502         \u2502 ask  for confirmation if \u2502 \u2502                        \u2502         \u2502 it was detected that all \u2502 \u2502                        \u2502         \u2502 files  and  folders were \u2502 \u2502                        \u2502         \u2502 deleted.                 \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502maxLogLines             \u2502 20000   \u2502 Specifies  the   maximum \u2502 \u2502                        \u2502         \u2502 number   of   log  lines \u2502 \u2502                        \u2502         \u2502 displayed  in  the   log \u2502 \u2502                        \u2502         \u2502 window.                  \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502timeout                 \u2502 300     \u2502 The  timeout for network \u2502 \u2502                        \u2502         \u2502 connections in seconds.  \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502moveToTrash             \u2502 false   \u2502 If  non-locally  deleted \u2502 \u2502                        \u2502         \u2502 files should be moved to \u2502 \u2502                        \u2502         \u2502 trash     instead     of \u2502 \u2502                        \u2502         \u2502 deleting            them \u2502 \u2502                        \u2502         \u2502 completely.  This option \u2502 \u2502                        \u2502         \u2502 only works on linux      \u2502 \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518 \u2502showExperimentalOptions \u2502 false   \u2502 Whether      to     show \u2502 \u2502                        \u2502         \u2502 experimental     options \u2502 \u2502                        \u2502         \u2502 that      are      still \u2502 \u2502                        \u2502         \u2502 undergoing  testing   in \u2502 \u2502                        \u2502         \u2502 the    user   interface. \u2502 \u2502                        \u2502         \u2502 Turning this on does not \u2502 \u2502                        \u2502         \u2502 enable      experimental \u2502 \u2502                        \u2502         \u2502 behavior on its own.  It \u2502 \u2502                        \u2502         \u2502 does     enable     user \u2502 \u2502                        \u2502         \u2502 inferface  options  that \u2502 \u2502                        \u2502         \u2502 can be used to opt in to \u2502 \u2502                        \u2502         \u2502 experimental features.   \u2502 \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518 \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510 \u2502[Proxy] section      \u2502           \u2502                          \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502Variable             \u2502 Default   \u2502 Meaning                  \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502host                 \u2502 127.0.0.1 \u2502 The address of the proxy \u2502 \u2502                     \u2502           \u2502 server.                  \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502port                 \u2502 8080      \u2502 The  port were the proxy \u2502 \u2502                     \u2502           \u2502 is listening.            \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502type                 \u2502 2         \u2502 0 for System Proxy.      \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u25021 for SOCKS5 Proxy.  \u2502           \u2502                          \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u25022 for No Proxy.      \u2502           \u2502                          \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u25023 for HTTP(S) Proxy. \u2502           \u2502                          \u2502 \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518 Please report bugs at https://github.com/owncloud/client/issues. owncloudcmd(1)",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "Find all files/directories under $1 which have at least read permission for their owner and set read permission for group for these files/directories",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find \"$1\" -perm -u+r -print0 | xargs chmod g+r\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-print0": "Always print the exact filename, unchanged, even if the output is going to a\n terminal.",
+              "-perm": "Any of the permission bits mode are set for the file. Symbolic modes are accepted\n in this form. You must specify `u', `g' or `o' if you use a symbolic mode. See\n the EXAMPLES section for some illustrative examples. If no permission bits in mode\n are set, this test matches any file (the idea here is to be consistent with the\n behaviour of -perm -000)."
+            },
+            "xargs": {
+              "mpsum": "build and execute command lines from standard input"
+            },
+            "chmod": {
+              "mpsum": "change file mode bits"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "xargs": {
+              "man1_xargs_37433": "execut command pipe argument come anoth command file etc\ninput treat singl block text split separ piec space tab newlin end-of-fil delet file backup extens -print0 use null charact split file name -0 use delimit execut command input line replac occurr placehold mark _ input line parallel run max-proc process time default 1 max-proc 0 xarg run mani process possibl time run command use input data argument run multipl chain command input data"
+            },
+            "chmod": {
+              "man1_chmod_3989": "chang access permiss file directori chang permiss recurs give g roup ther abil w rite give user right r ead e x ecut give ther file owner group right g roup give u ser right r ead w rite file directori give u ser own file right e x ecut remov right ther remov e x ecut right g roup"
+            }
+          }
+        },
+        "1": {
+          "script": "find $1 -perm -u+r -exec chmod g+r {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-perm": "Any of the permission bits mode are set for the file. Symbolic modes are accepted\n in this form. You must specify `u', `g' or `o' if you use a symbolic mode. See\n the EXAMPLES section for some illustrative examples. If no permission bits in mode\n are set, this test matches any file (the idea here is to be consistent with the\n behaviour of -perm -000)."
+            },
+            "chmod": {
+              "mpsum": "change file mode bits"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "chmod": {
+              "man1_chmod_3989": "chang access permiss file directori chang permiss recurs give g roup ther abil w rite give user right r ead e x ecut give ther file owner group right g roup give u ser right r ead w rite file directori give u ser own file right e x ecut remov right ther remov e x ecut right g roup"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_3933: Find all files/directories under /path/to/dir/* paths and print the timestamp along with their paths and stat them",
+        "nl2bash_2672: Find all catalina* files/directories under /path/to/search/in",
+        "nl2bash_1054: display all the hidden directories in the directory \"/dir/to/search/\""
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_3933: find /path/to/dir/* -printf \"%T@|%p|%l\" -exec stat -Lc \"|%Y.0000000000\" {} \\;",
+        "nl2bash_2672: find /path/to/search/in -name 'catalina*'",
+        "nl2bash_1054: find /dir/to/search -path '*/.*' -print"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "dir",
+      "MP Summary": "list directory contents",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "Find all files/directories under $1 which have at least read permission for their owner and set read permission for group for these files/directories",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find \"$1\" -perm -u+r -print0 | xargs chmod g+r\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-print0": "Always print the exact filename, unchanged, even if the output is going to a\n terminal.",
+              "-perm": "Any of the permission bits mode are set for the file. Symbolic modes are accepted\n in this form. You must specify `u', `g' or `o' if you use a symbolic mode. See\n the EXAMPLES section for some illustrative examples. If no permission bits in mode\n are set, this test matches any file (the idea here is to be consistent with the\n behaviour of -perm -000)."
+            },
+            "xargs": {
+              "mpsum": "build and execute command lines from standard input"
+            },
+            "chmod": {
+              "mpsum": "change file mode bits"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "xargs": {
+              "man1_xargs_37433": "execut command pipe argument come anoth command file etc\ninput treat singl block text split separ piec space tab newlin end-of-fil delet file backup extens -print0 use null charact split file name -0 use delimit execut command input line replac occurr placehold mark _ input line parallel run max-proc process time default 1 max-proc 0 xarg run mani process possibl time run command use input data argument run multipl chain command input data"
+            },
+            "chmod": {
+              "man1_chmod_3989": "chang access permiss file directori chang permiss recurs give g roup ther abil w rite give user right r ead e x ecut give ther file owner group right g roup give u ser right r ead w rite file directori give u ser own file right e x ecut remov right ther remov e x ecut right g roup"
+            }
+          }
+        },
+        "1": {
+          "script": "find $1 -perm -u+r -exec chmod g+r {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-perm": "Any of the permission bits mode are set for the file. Symbolic modes are accepted\n in this form. You must specify `u', `g' or `o' if you use a symbolic mode. See\n the EXAMPLES section for some illustrative examples. If no permission bits in mode\n are set, this test matches any file (the idea here is to be consistent with the\n behaviour of -perm -000)."
+            },
+            "chmod": {
+              "mpsum": "change file mode bits"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "chmod": {
+              "man1_chmod_3989": "chang access permiss file directori chang permiss recurs give g roup ther abil w rite give user right r ead e x ecut give ther file owner group right g roup give u ser right r ead w rite file directori give u ser own file right e x ecut remov right ther remov e x ecut right g roup"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_3933: Find all files/directories under /path/to/dir/* paths and print the timestamp along with their paths and stat them",
+        "nl2bash_1054: display all the hidden directories in the directory \"/dir/to/search/\"",
+        "nl2bash_4193: Find all pdf files under /dir/containing/unsigned with null character as the delimiter"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_3933: find /path/to/dir/* -printf \"%T@|%p|%l\" -exec stat -Lc \"|%Y.0000000000\" {} \\;",
+        "nl2bash_1054: find /dir/to/search -path '*/.*' -print",
+        "nl2bash_4193: find /dir/containing/unsigned -name '*.pdf' -print0"
+      ],
+      "Explanations about Options": {
+        "-i": "print the index number of each file",
+        "-f": "do not sort , enable -aU , disable -ls --color",
+        "-t": "sort by modification time , newest first",
+        "-a": "do not ignore entries starting with .",
+        "-c": "with -lt: sort by , and show , ctime (time of last modification of file status\n information); with -l: show ctime and sort by name; otherwise: sort by ctime,\n newest first",
+        "-n": "like -l, but list numeric user and group IDs",
+        "-x": "list entries by lines instead of by columns",
+        "-r": "reverse order while sorting",
+        "-p": "append / indicator to directories",
+        "-m": "fill width with a comma separated list of entries"
+      }
+    },
+    {
+      "Command": "or",
+      "MP Summary": "A user friendly system monitoring program.",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "Find all files/directories under $1 which have at least read permission for their owner and set read permission for group for these files/directories",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find \"$1\" -perm -u+r -print0 | xargs chmod g+r\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-print0": "Always print the exact filename, unchanged, even if the output is going to a\n terminal.",
+              "-perm": "Any of the permission bits mode are set for the file. Symbolic modes are accepted\n in this form. You must specify `u', `g' or `o' if you use a symbolic mode. See\n the EXAMPLES section for some illustrative examples. If no permission bits in mode\n are set, this test matches any file (the idea here is to be consistent with the\n behaviour of -perm -000)."
+            },
+            "xargs": {
+              "mpsum": "build and execute command lines from standard input"
+            },
+            "chmod": {
+              "mpsum": "change file mode bits"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "xargs": {
+              "man1_xargs_37433": "execut command pipe argument come anoth command file etc\ninput treat singl block text split separ piec space tab newlin end-of-fil delet file backup extens -print0 use null charact split file name -0 use delimit execut command input line replac occurr placehold mark _ input line parallel run max-proc process time default 1 max-proc 0 xarg run mani process possibl time run command use input data argument run multipl chain command input data"
+            },
+            "chmod": {
+              "man1_chmod_3989": "chang access permiss file directori chang permiss recurs give g roup ther abil w rite give user right r ead e x ecut give ther file owner group right g roup give u ser right r ead w rite file directori give u ser own file right e x ecut remov right ther remov e x ecut right g roup"
+            }
+          }
+        },
+        "1": {
+          "script": "find $1 -perm -u+r -exec chmod g+r {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-perm": "Any of the permission bits mode are set for the file. Symbolic modes are accepted\n in this form. You must specify `u', `g' or `o' if you use a symbolic mode. See\n the EXAMPLES section for some illustrative examples. If no permission bits in mode\n are set, this test matches any file (the idea here is to be consistent with the\n behaviour of -perm -000)."
+            },
+            "chmod": {
+              "mpsum": "change file mode bits"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "chmod": {
+              "man1_chmod_3989": "chang access permiss file directori chang permiss recurs give g roup ther abil w rite give user right r ead e x ecut give ther file owner group right g roup give u ser right r ead w rite file directori give u ser own file right e x ecut remov right ther remov e x ecut right g roup"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_9722: Print the current date in '%H:%M:%S' format followed by the string ': done waiting. both jobs terminated on their own or via timeout; resuming script'"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_9722: echo \"$(date +%H:%M:%S): done waiting. both jobs terminated on their own or via timeout; resuming script\""
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "repo",
+      "MP Summary": "tool for getting Android source",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "Find all files/directories under $1 which have at least read permission for their owner and set read permission for group for these files/directories",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find \"$1\" -perm -u+r -print0 | xargs chmod g+r\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-print0": "Always print the exact filename, unchanged, even if the output is going to a\n terminal.",
+              "-perm": "Any of the permission bits mode are set for the file. Symbolic modes are accepted\n in this form. You must specify `u', `g' or `o' if you use a symbolic mode. See\n the EXAMPLES section for some illustrative examples. If no permission bits in mode\n are set, this test matches any file (the idea here is to be consistent with the\n behaviour of -perm -000)."
+            },
+            "xargs": {
+              "mpsum": "build and execute command lines from standard input"
+            },
+            "chmod": {
+              "mpsum": "change file mode bits"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "xargs": {
+              "man1_xargs_37433": "execut command pipe argument come anoth command file etc\ninput treat singl block text split separ piec space tab newlin end-of-fil delet file backup extens -print0 use null charact split file name -0 use delimit execut command input line replac occurr placehold mark _ input line parallel run max-proc process time default 1 max-proc 0 xarg run mani process possibl time run command use input data argument run multipl chain command input data"
+            },
+            "chmod": {
+              "man1_chmod_3989": "chang access permiss file directori chang permiss recurs give g roup ther abil w rite give user right r ead e x ecut give ther file owner group right g roup give u ser right r ead w rite file directori give u ser own file right e x ecut remov right ther remov e x ecut right g roup"
+            }
+          }
+        },
+        "1": {
+          "script": "find $1 -perm -u+r -exec chmod g+r {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-perm": "Any of the permission bits mode are set for the file. Symbolic modes are accepted\n in this form. You must specify `u', `g' or `o' if you use a symbolic mode. See\n the EXAMPLES section for some illustrative examples. If no permission bits in mode\n are set, this test matches any file (the idea here is to be consistent with the\n behaviour of -perm -000)."
+            },
+            "chmod": {
+              "mpsum": "change file mode bits"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "chmod": {
+              "man1_chmod_3989": "chang access permiss file directori chang permiss recurs give g roup ther abil w rite give user right r ead e x ecut give ther file owner group right g roup give u ser right r ead w rite file directori give u ser own file right e x ecut remov right ther remov e x ecut right g roup"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_1893: Write \"deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen\" to standard output and append to \"/etc/apt/sources.list.d/10gen.list\" as root"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_1893: sudo echo \"deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen\" | sudo tee -a /etc/apt/sources.list.d/10gen.list"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "dist",
+      "MP Summary": "redistribute a message to additional addresses",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "Find all files/directories under $1 which have at least read permission for their owner and set read permission for group for these files/directories",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find \"$1\" -perm -u+r -print0 | xargs chmod g+r\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-print0": "Always print the exact filename, unchanged, even if the output is going to a\n terminal.",
+              "-perm": "Any of the permission bits mode are set for the file. Symbolic modes are accepted\n in this form. You must specify `u', `g' or `o' if you use a symbolic mode. See\n the EXAMPLES section for some illustrative examples. If no permission bits in mode\n are set, this test matches any file (the idea here is to be consistent with the\n behaviour of -perm -000)."
+            },
+            "xargs": {
+              "mpsum": "build and execute command lines from standard input"
+            },
+            "chmod": {
+              "mpsum": "change file mode bits"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "xargs": {
+              "man1_xargs_37433": "execut command pipe argument come anoth command file etc\ninput treat singl block text split separ piec space tab newlin end-of-fil delet file backup extens -print0 use null charact split file name -0 use delimit execut command input line replac occurr placehold mark _ input line parallel run max-proc process time default 1 max-proc 0 xarg run mani process possibl time run command use input data argument run multipl chain command input data"
+            },
+            "chmod": {
+              "man1_chmod_3989": "chang access permiss file directori chang permiss recurs give g roup ther abil w rite give user right r ead e x ecut give ther file owner group right g roup give u ser right r ead w rite file directori give u ser own file right e x ecut remov right ther remov e x ecut right g roup"
+            }
+          }
+        },
+        "1": {
+          "script": "find $1 -perm -u+r -exec chmod g+r {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-perm": "Any of the permission bits mode are set for the file. Symbolic modes are accepted\n in this form. You must specify `u', `g' or `o' if you use a symbolic mode. See\n the EXAMPLES section for some illustrative examples. If no permission bits in mode\n are set, this test matches any file (the idea here is to be consistent with the\n behaviour of -perm -000)."
+            },
+            "chmod": {
+              "mpsum": "change file mode bits"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "chmod": {
+              "man1_chmod_3989": "chang access permiss file directori chang permiss recurs give g roup ther abil w rite give user right r ead e x ecut give ther file owner group right g roup give u ser right r ead w rite file directori give u ser own file right e x ecut remov right ther remov e x ecut right g roup"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_1893: Write \"deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen\" to standard output and append to \"/etc/apt/sources.list.d/10gen.list\" as root"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_1893: sudo echo \"deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen\" | sudo tee -a /etc/apt/sources.list.d/10gen.list"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "src",
+      "MP Summary": "simple revision control",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "Find all files/directories under $1 which have at least read permission for their owner and set read permission for group for these files/directories",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find \"$1\" -perm -u+r -print0 | xargs chmod g+r\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-print0": "Always print the exact filename, unchanged, even if the output is going to a\n terminal.",
+              "-perm": "Any of the permission bits mode are set for the file. Symbolic modes are accepted\n in this form. You must specify `u', `g' or `o' if you use a symbolic mode. See\n the EXAMPLES section for some illustrative examples. If no permission bits in mode\n are set, this test matches any file (the idea here is to be consistent with the\n behaviour of -perm -000)."
+            },
+            "xargs": {
+              "mpsum": "build and execute command lines from standard input"
+            },
+            "chmod": {
+              "mpsum": "change file mode bits"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "xargs": {
+              "man1_xargs_37433": "execut command pipe argument come anoth command file etc\ninput treat singl block text split separ piec space tab newlin end-of-fil delet file backup extens -print0 use null charact split file name -0 use delimit execut command input line replac occurr placehold mark _ input line parallel run max-proc process time default 1 max-proc 0 xarg run mani process possibl time run command use input data argument run multipl chain command input data"
+            },
+            "chmod": {
+              "man1_chmod_3989": "chang access permiss file directori chang permiss recurs give g roup ther abil w rite give user right r ead e x ecut give ther file owner group right g roup give u ser right r ead w rite file directori give u ser own file right e x ecut remov right ther remov e x ecut right g roup"
+            }
+          }
+        },
+        "1": {
+          "script": "find $1 -perm -u+r -exec chmod g+r {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-perm": "Any of the permission bits mode are set for the file. Symbolic modes are accepted\n in this form. You must specify `u', `g' or `o' if you use a symbolic mode. See\n the EXAMPLES section for some illustrative examples. If no permission bits in mode\n are set, this test matches any file (the idea here is to be consistent with the\n behaviour of -perm -000)."
+            },
+            "chmod": {
+              "mpsum": "change file mode bits"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "chmod": {
+              "man1_chmod_3989": "chang access permiss file directori chang permiss recurs give g roup ther abil w rite give user right r ead e x ecut give ther file owner group right g roup give u ser right r ead w rite file directori give u ser own file right e x ecut remov right ther remov e x ecut right g roup"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_7673: find all the java script files in a folder and save the list to a file",
+        "nl2bash_7672: find all the java script files in a folder and save the list to a file"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_7673: find src/js -type f -name \"*.js\" > list.txt",
+        "nl2bash_7672: find src/js -type f -name \"*.js\" > list.txt"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "tftp",
+      "MP Summary": "trivial file transfer program",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "Find all files/directories under $1 which have at least read permission for their owner and set read permission for group for these files/directories",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find \"$1\" -perm -u+r -print0 | xargs chmod g+r\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-print0": "Always print the exact filename, unchanged, even if the output is going to a\n terminal.",
+              "-perm": "Any of the permission bits mode are set for the file. Symbolic modes are accepted\n in this form. You must specify `u', `g' or `o' if you use a symbolic mode. See\n the EXAMPLES section for some illustrative examples. If no permission bits in mode\n are set, this test matches any file (the idea here is to be consistent with the\n behaviour of -perm -000)."
+            },
+            "xargs": {
+              "mpsum": "build and execute command lines from standard input"
+            },
+            "chmod": {
+              "mpsum": "change file mode bits"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "xargs": {
+              "man1_xargs_37433": "execut command pipe argument come anoth command file etc\ninput treat singl block text split separ piec space tab newlin end-of-fil delet file backup extens -print0 use null charact split file name -0 use delimit execut command input line replac occurr placehold mark _ input line parallel run max-proc process time default 1 max-proc 0 xarg run mani process possibl time run command use input data argument run multipl chain command input data"
+            },
+            "chmod": {
+              "man1_chmod_3989": "chang access permiss file directori chang permiss recurs give g roup ther abil w rite give user right r ead e x ecut give ther file owner group right g roup give u ser right r ead w rite file directori give u ser own file right e x ecut remov right ther remov e x ecut right g roup"
+            }
+          }
+        },
+        "1": {
+          "script": "find $1 -perm -u+r -exec chmod g+r {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-perm": "Any of the permission bits mode are set for the file. Symbolic modes are accepted\n in this form. You must specify `u', `g' or `o' if you use a symbolic mode. See\n the EXAMPLES section for some illustrative examples. If no permission bits in mode\n are set, this test matches any file (the idea here is to be consistent with the\n behaviour of -perm -000)."
+            },
+            "chmod": {
+              "mpsum": "change file mode bits"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "chmod": {
+              "man1_chmod_3989": "chang access permiss file directori chang permiss recurs give g roup ther abil w rite give user right r ead e x ecut give ther file owner group right g roup give u ser right r ead w rite file directori give u ser own file right e x ecut remov right ther remov e x ecut right g roup"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_1023: display all the files in the folders /etc /srv excluding the paths /etc/mtab and  /srv/tftp/pxelinux.cfg"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_1023: find /etc /srv \\( -path /srv/tftp/pxelinux.cfg -o -path /etc/mtab \\)  -prune -o -print"
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

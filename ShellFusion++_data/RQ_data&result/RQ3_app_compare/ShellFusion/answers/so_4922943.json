@@ -1,0 +1,102 @@
+{
+    "Answers": [
+        {
+            "Command": "ss",
+            "Explanations about Options": {
+                "-a(M)": "Display both listening and non-listening (for TCP this means established\n connections) sockets.",
+                "-l(M)": "Display only listening sockets (these are omitted by default).",
+                "-n(M)": "Do not try to resolve service names. Show exact bandwidth values, instead of human-\n readable.",
+                "-p(M)": "Show process using socket.",
+                "-t(M)": "Display TCP sockets."
+            },
+            "MP Summary": "another utility to investigate sockets",
+            "Most Similar TLDR Script": "ss -pt dst :{{ssh}}",
+            "Most Similar TLDR Task": "Show all TCP sockets along with processes connected to a remote ssh port",
+            "Top-3 Scripts": [
+                "au_1265361: ss -ltn | grep 2794",
+                "so_59993231: #!/bin/bash\n\nfor i in {0..255}\ndo\n  echo \"$i\"\n  ss -ant \"( src 192.168.1.$i or dst 192.168.1.$i ) and ( ( dport = :80 or dport = :443 ) or ( sport = :443 or sport = :80 ) )\"\ndone"
+            ],
+            "Top-3 Similar Questions": [
+                "su_384298: Viewing the tcp/udp ports which are opened by a process on Linux",
+                "au_1265361: How to open ports not only locally?",
+                "so_59993231: Checking open ports using ss"
+            ]
+        },
+        {
+            "Command": "nc",
+            "Explanations about Options": {
+                "-l(M)": "Listen for an incoming connection rather than initiating a connection to a remote\n host. The destination and port to listen on can be specified either as non-optional\n arguments, or with options -s and -p respectively. Cannot be used together with -x\n or -z. Additionally, any timeouts specified with the -w option are ignored.",
+                "-p(M)": "Specify the source port nc should use, subject to privilege restrictions and\n availability."
+            },
+            "MP Summary": "arbitrary TCP and UDP connections and listens",
+            "Most Similar TLDR Script": "nc -l {{local_port}} | nc {{hostname}} {{remote_port}}",
+            "Most Similar TLDR Task": "Act as proxy and forward data from a local TCP port to the given remote host",
+            "Top-3 Scripts": [
+                "ul_214471: nc -l",
+                "ul_241897: nc -l -p 8080"
+            ],
+            "Top-3 Similar Questions": [
+                "su_384298: Viewing the tcp/udp ports which are opened by a process on Linux",
+                "ul_214471: How to create a TCP listener?",
+                "ul_241897: open port 8080 for listening"
+            ]
+        },
+        {
+            "Command": "netstat",
+            "Explanations about Options": {
+                "-a(M)": "Show both listening and non-listening sockets. With the --interfaces option, show\n interfaces that are not up",
+                "-n(M)": "Show numerical addresses instead of trying to determine symbolic host, port or user names.",
+                "-o(M)": "Include information related to networking timers.",
+                "-p(M)": "Show the PID and name of the program to which each socket belongs."
+            },
+            "MP Summary": "Print  network  connections,  routing tables, interface statistics, masquerade connections, and multicast memberships",
+            "Most Similar TLDR Script": "netstat -t",
+            "Most Similar TLDR Task": "List listening TCP ports",
+            "Top-3 Scripts": [
+                "so_59571862: netstat -ano | awk '$1 == \"TCP\" && $2 ~ /:8080/ { print $5 }'",
+                "so_12816741: netstat -ntp | fgrep '192.168.3.200:9090'",
+                "so_23461139: man netstat"
+            ],
+            "Top-3 Similar Questions": [
+                "so_59571862: Bash script to close open TCP connections on a specific port",
+                "so_12816741: linux how to find out which program connect to remote port",
+                "ul_574797: Get all the open ports for a remote host in linux"
+            ]
+        },
+        {
+            "Command": "ssh",
+            "Explanations about Options": {
+                "-o(M)": "Can be used to give options in the format used in the configuration file. This is\n useful for specifying options for which there is no separate command-line flag. For\n full details of the options listed below, and their possible values, see\n ssh_config(5).",
+                "-p(M)": "Port to connect to on the remote host. This can be specified on a per-host basis in\n the configuration file."
+            },
+            "MP Summary": "OpenSSH SSH client (remote login program)",
+            "Most Similar TLDR Script": "ssh {{username}}@{{remote_host}} -p {{2222}}",
+            "Most Similar TLDR Task": "Connect to a remote server using a specific port",
+            "Top-3 Scripts": [
+                "so_11949394: remote_account=$REMOTE_HOST_USER@$REMOTE_HOST_IP \n\nssh -o PasswordAuthentication=no $remote_account : 2> /dev/null\n\nssh -o PasswordAuthentication=no $remote_account echo ok | grep ok",
+                "au_15716: ssh -R 48724:localhost:22 your_username@your_ip\n\nssh -p 48724 their_username@localhost"
+            ],
+            "Top-3 Similar Questions": [
+                "so_11949394: Testing remote access with ssh",
+                "au_15716: ssh without opening the ports",
+                "ul_574797: Get all the open ports for a remote host in linux"
+            ]
+        },
+        {
+            "Command": "telnet",
+            "Explanations about Options": {},
+            "MP Summary": "user interface to the TELNET protocol",
+            "Most Similar TLDR Script": "telnet {{ip_address}} {{port}}",
+            "Most Similar TLDR Task": "Telnet to a specific port of a host",
+            "Top-3 Scripts": [
+                "ul_86556: echo 'exit' | telnet {site} {port}",
+                "so_29392568: telnet $host $port > ~/test_con/telnet_test.txt\n\ntelnet $host $port </dev/null > ~/test_con/telnet_test.txt"
+            ],
+            "Top-3 Similar Questions": [
+                "ul_86556: Testing remote TCP port using telnet by running a one-line command",
+                "so_29392568: Shell Script - telnet multiple hosts:ports"
+            ]
+        }
+    ],
+    "Query": "Test if remote TCP port is open from a shell script"
+}

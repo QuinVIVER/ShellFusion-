@@ -1,0 +1,92 @@
+{
+  "Query": "Check if file exists and whether it contains a specific string",
+  "Answers": [
+    {
+      "Command": "test",
+      "MP Summary": "check file types and compare values",
+      "Most Similar TLDR Task": "Test if directory not exists",
+      "Most Similar TLDR Script": "test ! -d {{path/to/directory}}",
+      "Top-3 Similar Questions": [
+        "ul_231622: Identify sub-directories that do not contain a specific string in a specific file",
+        "so_57971302: Globbing to check whether files with different file extension exist"
+      ],
+      "Top-3 Scripts": [
+        "ul_231622: find . -type d \\( ! -exec test -f '{}/stdout' \\; -o ! -exec grep -q str1 '{}/stdout' \\; \\) -print",
+        "so_57971302: test -f"
+      ],
+      "Explanations about Options": {
+        "-x": "FILE\n FILE exists and execute (or search) permission is granted",
+        "-c": "FILE\n FILE exists and is character special",
+        "-e": "FILE\n FILE exists",
+        "-f": "FILE\n FILE exists and is a regular file"
+      }
+    },
+    {
+      "Command": "grep",
+      "MP Summary": "print lines that match patterns",
+      "Most Similar TLDR Task": "Invert match for excluding specific strings",
+      "Most Similar TLDR Script": "grep -v {{search_pattern}}",
+      "Top-3 Similar Questions": [
+        "ul_231622: Identify sub-directories that do not contain a specific string in a specific file",
+        "so_65517750: How to check word is exist in current directory",
+        "ul_528364: Iptables command to check whether rule exists at specific line number"
+      ],
+      "Top-3 Scripts": [
+        "ul_231622: find . -type d \\( ! -exec test -f '{}/stdout' \\; -o ! -exec grep -q str1 '{}/stdout' \\; \\) -print\n\nfind . -type d \\! -exec grep -q 'str1' {}/stdout 2>/dev/null \\; -print\n\nfor d in **/\ndo\n  if [[ ! -f \"$d\"stdout ]] then\n    printf '%s\\n' \"$d\"\n  else\n    grep -q str1 \"$d\"stdout || printf '%s\\n' \"$d\"\n  fi\ndone\n\nprint -rl **/*(/e_'[[ ! -f $REPLY/stdout ]] || ! grep -q str1 $REPLY/stdout'_)",
+        "so_65517750: ",
+        "ul_528364: iptables -S INPUT 1 | grep -ce '-j ACCEPT'\n\ngrep -c"
+      ],
+      "Explanations about Options": {
+        "-q": "Quiet; do not write anything to standard output. Exit immediately with zero status\n if any match is found, even if an error was detected. Also see the -s or\n --no-messages option."
+      }
+    },
+    {
+      "Command": "find",
+      "MP Summary": "search for files in a directory hierarchy",
+      "Most Similar TLDR Task": "Find files by matching multiple patterns",
+      "Most Similar TLDR Script": "find {{root_path}} -name '{{*pattern_1*}}' -or -name '{{*pattern_2*}}'",
+      "Top-3 Similar Questions": [
+        "ul_231622: Identify sub-directories that do not contain a specific string in a specific file",
+        "ul_594980: Check file exists with dynamic name"
+      ],
+      "Top-3 Scripts": [
+        "ul_231622: find . -type d \\( ! -exec test -f '{}/stdout' \\; -o ! -exec grep -q str1 '{}/stdout' \\; \\) -print\n\nfind . -type d \\! -exec grep -q 'str1' {}/stdout 2>/dev/null \\; -print",
+        "ul_594980: find . -regex \".*Abc.[0-9]+.[0-9]+.zip\"\n\n$ find . -regex \".*Abc.[0-9]+.[0-9]+.zip\" -exec file {} \\;\n./Abc.1.0.zip: Zip archive data, at least v2.0 to extract\n./Abc.2.0.zip: Zip archive data, at least v2.0 to extract"
+      ],
+      "Explanations about Options": {
+        "-regex": "File name matches regular expression pattern. This is a match on the whole path,\n not a search. For example, to match a file named `./fubar3', you can use the\n regular expression `.*bar.' or `.*b.*3', but not `f.*r3'. The regular expressions\n understood by find are by default Emacs Regular Expressions (except that `.'\n matches newline), but this can be changed with the -regextype option.",
+        "-type": "File is of type c:"
+      }
+    },
+    {
+      "Command": "file",
+      "MP Summary": "determine file type",
+      "Most Similar TLDR Task": "Give a description of the type of the specified file. Works fine for files with no file extension",
+      "Most Similar TLDR Script": "file {{filename}}",
+      "Top-3 Similar Questions": [
+        "so_48350769: Check file exists in source before copying",
+        "ul_520744: Test if any files that do not match a specific pattern exist in a directory",
+        "so_65517750: How to check word is exist in current directory"
+      ],
+      "Top-3 Scripts": [
+        "so_48350769: $files = @(\"abc.ps1\", \"def.ps1\")\n$files | Where { Test-Path $_ } | ForEach { $file = Get-Item $_; Copy-Item \"destinationlocation\\$_\" -Force; }\n\n$files = @(\"abc.ps1\", \"def.ps1\")\n$files | ?{ Test-Path $_ } | %{ $file = gi $_; cp $file.FullName \"destinationlocation\\$_\" -Force; }",
+        "ul_520744: names=( \"$dir\"/[!_]* )\n\nwhile [ \"${#names[@]}\" -gt 0 ] && [ ! -f \"${names[0]}\" ]; do\n    names=( \"${names[@]:1}\" )\ndone\n\nif [ -f \"${names[0]}\" ]; then\n    echo 'there are at least one regular file here (or a symlink to one)'\n    echo 'whose filename does not start with underscore'\nfi\n\nset -- \"$dir\"/[!_]*\n\nwhile [ \"$#\" -gt 0 ] && [ ! -f \"$1\" ]; do\n    shift\ndone\n\nif [ -f \"$1\" ]; then\n    echo 'there are at least one regular file here (or a symlink to one)'\n    echo 'whose filename does not start with underscore'\nfi",
+        "so_65517750: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "cp",
+      "MP Summary": "copy files and directories",
+      "Most Similar TLDR Task": "Recursively copy a directory's contents to another location (if the destination exists, the directory is copied inside it)",
+      "Most Similar TLDR Script": "cp -r {{path/to/source_directory}} {{path/to/target_directory}}",
+      "Top-3 Similar Questions": [
+        "so_48350769: Check file exists in source before copying"
+      ],
+      "Top-3 Scripts": [
+        "so_48350769: $files = @(\"abc.ps1\", \"def.ps1\")\n$files | ?{ Test-Path $_ } | %{ $file = gi $_; cp $file.FullName \"destinationlocation\\$_\" -Force; }"
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

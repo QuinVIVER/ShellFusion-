@@ -1,0 +1,80 @@
+{
+  "Query": "How can I extract a page range / a part of a PDF?",
+  "Answers": [
+    {
+      "Command": "gs",
+      "MP Summary": "Ghostscript (PostScript and PDF language interpreter and previewer)",
+      "Most Similar TLDR Task": "Extract pages from a PDF file",
+      "Most Similar TLDR Script": "gs -dQUIET -dBATCH -dNOPAUSE -sDEVICE=pdfwrite -sOutputFile={{output.pdf}} {{input.pdf}}",
+      "Top-3 Similar Questions": [
+        "ul_182485: Combine parts of pages of a PDF document"
+      ],
+      "Top-3 Scripts": [
+        "ul_182485: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "unzip",
+      "MP Summary": "list, test and extract compressed files in a ZIP archive",
+      "Most Similar TLDR Task": "Extract zip file(s) (for multiple files, separate file paths by spaces)",
+      "Most Similar TLDR Script": "unzip {{file(s)}}",
+      "Top-3 Similar Questions": [
+        "so_51449715: Extract range of lines using sed"
+      ],
+      "Top-3 Scripts": [
+        "so_51449715: unzip -c ./*.zip | sed -n \"$var1,$var2 p\""
+      ],
+      "Explanations about Options": {
+        "-c": "extract files to stdout/screen (``CRT''). This option is similar to the -p option\n except that the name of each file is printed as it is extracted, the -a option is\n allowed, and ASCII-EBCDIC conversion is automatically performed if appropriate.\n This option is not listed in the unzip usage screen."
+      }
+    },
+    {
+      "Command": "echo",
+      "MP Summary": "display a line of text",
+      "Most Similar TLDR Task": "Append a message to the file",
+      "Most Similar TLDR Script": "echo \"{{Hello World}}\" >> {{file.txt}}",
+      "Top-3 Similar Questions": [
+        "ul_29859: Extract part of the first line of a file",
+        "ul_182485: Combine parts of pages of a PDF document",
+        "so_12588884: Extract part of file name with multiple sections"
+      ],
+      "Top-3 Scripts": [
+        "ul_29859: #!/bin/bash\n\nfor file in *.tex; do\n  read _ _ mainfile < \"$file\"\n  echo \"$file : $mainfile\"\ndone",
+        "ul_182485: ",
+        "so_12588884: file=EMDEON.270.60054.1234567890123456789.70949996.20120925.014606403\ntransitId=$(echo $file | cut -d. -f4)\n\nfile=EMDEON.270.60054.1234567890123456789.70949996.20120925.014606403\ntransitId=$(echo $file | awk -F. '{print $4}')"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "pdftk",
+      "MP Summary": "A handy tool for manipulating PDF",
+      "Most Similar TLDR Task": "Split each page of a PDF file into a separate file, with a given filename output pattern",
+      "Most Similar TLDR Script": "pdftk {{input.pdf}} burst output {{out_%d.pdf}}",
+      "Top-3 Similar Questions": [
+        "su_625565: How to extract and/or remove the last page of a bunch of PDFs?",
+        "ul_182485: Combine parts of pages of a PDF document",
+        "ul_493799: How to print table of contents of a pdf?"
+      ],
+      "Top-3 Scripts": [
+        "su_625565: pdftk input.pdf cat end-1 output temp.pdf\npdftk temp.pdf  cat end-2 output output.pdf\nrm temp.pdf\n\npdftk input.pdf cat 1-$((last-1)) output output.pdf",
+        "ul_182485: ",
+        "ul_493799: pdftk file.pdf dump_data_utf8\n\n$ pdftk whatever.pdf dump_data_utf8 | grep ^Bookmark\nBookmarkBegin\nBookmarkTitle: Cover\nBookmarkLevel: 1\nBookmarkPageNumber: 1\nBookmarkBegin\nBookmarkTitle: Agenda\nBookmarkLevel: 1\nBookmarkPageNumber: 2"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "pdftotext",
+      "MP Summary": "Portable Document Format (PDF) to text converter (version 3.03)",
+      "Most Similar TLDR Task": "Convert filename.pdf to plain text and save it as filename.txt",
+      "Most Similar TLDR Script": "pdftotext {{filename.pdf}}",
+      "Top-3 Similar Questions": [
+        "so_34625953: Is there any way to get the page numbers in a PDF of a search pattern?"
+      ],
+      "Top-3 Scripts": [
+        "so_34625953: pdftotext test.pdf - |\nawk -vRS=$'\\f' -vNAME=\"My name\" \\\n    'index($0,NAME){printf \"%d: %s\\n\", NR, NAME;}'\n\npdftotext test.pdf - |\ngrep -F -o -e $'\\f' -e 'My name' |\nawk 'BEGIN{page=1} /\\f/{++page;next} 1{printf \"%d: %s\\n\", page, $0;}'\n\npdftotext test.pdf - |\nawk -vRS=$'\\f' \\\n    '/My[[:space:]]+Name/{printf \"%d: %s\\n\", NR, \"My Name\";}'"
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

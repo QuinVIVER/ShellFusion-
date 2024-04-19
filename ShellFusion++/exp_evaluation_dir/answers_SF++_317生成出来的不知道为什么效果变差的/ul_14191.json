@@ -1,0 +1,1965 @@
+{
+  "Query": "scp without replacing existing files in the destination",
+  "Answers": [
+    {
+      "Command": "cp",
+      "MP Summary": "copy files and directories",
+      "Most Similar TLDR Task": "Recursively copy a directory's contents to another location (if the destination exists, the directory is copied inside it)",
+      "Most Similar TLDR Script": "cp -r {{path/to/source_directory}} {{path/to/target_directory}}",
+      "Most Similar NL2Bash Task": "Display differences between /destination/dir/1 and /destination/dir/2 excluding files that match any pattern in file \"exclude.pats\".",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "diff /destination/dir/1 /destination/dir/2 -r -X exclude.pats\n",
+          "command-options": {
+            "diff": {
+              "mpsum": "compare two files"
+            },
+            "dir": {
+              "mpsum": "list directory contents",
+              "-r": "reverse order while sorting",
+              "-X": "sort alphabetically by entry extension"
+            }
+          },
+          "TLDR_inform": {
+            "diff": {
+              "man1_diff_6775": "compar file directori compar directori recurs show name differ file directori well chang made file compar directori show name file differ compar file list chang turn old_fil new_fil compar file ignor white space compar file show differ unifi format use git diff compar file show differ side side"
+            },
+            "dir": {
+              "man1_dir_6819": ""
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_744074: How does one properly copy a file into multiple folders and subfolders without overwriting the file contents in the destination folders?",
+        "su_1347233: SCP off the most recently modified file in a remote directory",
+        "ul_617808: How to copy a file and change destination file permission in one step?"
+      ],
+      "Top-3 Scripts": [
+        "au_744074: find folder -type d -exec cp file.txt {} \\;\n\nfind folder -type d -exec cp -t {} file.txt \\;\n\nman cp",
+        "su_1347233: \u2026 | xargs -0r cp -t \"/target/dir/\" --\n\n\u2026 | xargs -0r -I {} cp -- {} \"/target/dir/\"\n\nsshfs usr@remote:\"/source/dir/\" \"/local/path/\"\nfind \"/local/path/\" -maxdepth 1 -type f -printf '%T@ %p\\0' |\n   sort -zrn |\n   head -zn 1 |\n   cut -z -d \" \" -f 2- |\n   xargs -0r cp -t \"/target/dir/\" --\nfusermount -u \"/local/path/\"",
+        "ul_617808: ...|  xargs sh -c 'for file; do \n                      cp -- \"$file\" /my/destination/path/ && \n                        chmod 700 /my/destination/path/\"$file\"; \n                    done' sh\n\n...|  xargs sh -c 'for file; do \n                  cp -- \"$file\" /my/destination/path/ && \n                    chmod 700 /my/destination/path/\"${file##*/}\"; \n                done' sh"
+      ],
+      "Explanations about Options": {
+        "-t": "copy all SOURCE arguments into DIRECTORY"
+      }
+    },
+    {
+      "Command": "scp",
+      "MP Summary": "secure copy (remote file copy program)",
+      "Most Similar TLDR Task": "Copy a file from a remote host to a local directory",
+      "Most Similar TLDR Script": "scp {{remote_host}}:{{path/to/remote_file}} {{path/to/local_directory}}",
+      "Most Similar NL2Bash Task": "Display differences between /destination/dir/1 and /destination/dir/2 excluding files that match any pattern in file \"exclude.pats\".",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "diff /destination/dir/1 /destination/dir/2 -r -X exclude.pats\n",
+          "command-options": {
+            "diff": {
+              "mpsum": "compare two files"
+            },
+            "dir": {
+              "mpsum": "list directory contents",
+              "-r": "reverse order while sorting",
+              "-X": "sort alphabetically by entry extension"
+            }
+          },
+          "TLDR_inform": {
+            "diff": {
+              "man1_diff_6775": "compar file directori compar directori recurs show name differ file directori well chang made file compar directori show name file differ compar file list chang turn old_fil new_fil compar file ignor white space compar file show differ unifi format use git diff compar file show differ side side"
+            },
+            "dir": {
+              "man1_dir_6819": ""
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_624023: scp - files getting different sizes in destination folder",
+        "su_1347233: SCP off the most recently modified file in a remote directory",
+        "so_26541422: bash scp in script will not see file in variable interpolation"
+      ],
+      "Top-3 Scripts": [
+        "au_624023: ",
+        "su_1347233: ssh usr@remote\n# now on the remote system\ncd \"/source/dir/\" &&\nfind . ! -name . -prune -type f -exec sh -c '\n   [ \"$(find . ! -name . -prune -type f -newer \"$1\" -exec printf a \\; |\n   wc -c)\" -eq 0 ]' sh {} \\; -exec scp {} usr@local:\"/target/dir/\" \\;\n\nssh -R 12322:127.0.0.1:22 usr@remote\n# now on the remote system the same cd + find as above\n# only the scp part is different \n\u2026 -exec scp -P 12322 {} usr@127.0.0.1:\"/target/dir/\" \\;\n\nssh usr@remote '\n   cd \"/source/dir/\" &&\n   find . ! -name . -prune -type f -exec sh -c '\"'\"'\n      [ \"$(find . ! -name . -prune -type f -newer \"$1\" -exec printf a \\; |\n      wc -c)\" -eq 0 ]'\"'\"' sh {} \\; -exec scp {} usr@local:\"/target/dir/\" \\;\n   '",
+        "so_26541422: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "mv",
+      "MP Summary": "move (rename) files",
+      "Most Similar TLDR Task": "Do not overwrite existing files at the target",
+      "Most Similar TLDR Script": "mv -n {{source}} {{target}}",
+      "Most Similar NL2Bash Task": "Display differences between /destination/dir/1 and /destination/dir/2 excluding files that match any pattern in file \"exclude.pats\".",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "diff /destination/dir/1 /destination/dir/2 -r -X exclude.pats\n",
+          "command-options": {
+            "diff": {
+              "mpsum": "compare two files"
+            },
+            "dir": {
+              "mpsum": "list directory contents",
+              "-r": "reverse order while sorting",
+              "-X": "sort alphabetically by entry extension"
+            }
+          },
+          "TLDR_inform": {
+            "diff": {
+              "man1_diff_6775": "compar file directori compar directori recurs show name differ file directori well chang made file compar directori show name file differ compar file list chang turn old_fil new_fil compar file ignor white space compar file show differ unifi format use git diff compar file show differ side side"
+            },
+            "dir": {
+              "man1_dir_6819": ""
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_36074541: Replace existing file in bash scripting",
+        "so_8656525: Way to move files in bash and rename copied file automatically without overwriting an existing file",
+        "ul_410608: backup original in scp"
+      ],
+      "Top-3 Scripts": [
+        "so_36074541: ... inputfile > /tmp/tmp$$ && mv /tmp/tmp$$ inputfile\n\ngrep \"ERROR\" error | grep -v \"Login errors\" > /tmp/tmp$$ && mv /tmp/tmp$$ error",
+        "so_8656525: # strip path, if any\nfname=\"${JPEGFILE##*/}\"\n[ -f \"$DIRNAME/$fname\" ] && {\n    n=1\n    while [ -f \"$DIRNAME/${fname%.*}_COPY${n}.${fname##*.}\" ] ; do\n        let n+=1\n    done\n    mv \"$JPEGFILE\" \"$DIRNAME/${fname%.*}_COPY${n}.${fname##*.}\"\n} || mv \"$JPEGFILE\" \"$DIRNAME\"",
+        "ul_410608: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "bash",
+      "MP Summary": "GNU Bourne-Again SHell",
+      "Most Similar TLDR Task": "Run commands from a file, logging all commands executed to the terminal",
+      "Most Similar TLDR Script": "bash -x {{file.sh}}",
+      "Most Similar NL2Bash Task": "Display differences between /destination/dir/1 and /destination/dir/2 excluding files that match any pattern in file \"exclude.pats\".",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "diff /destination/dir/1 /destination/dir/2 -r -X exclude.pats\n",
+          "command-options": {
+            "diff": {
+              "mpsum": "compare two files"
+            },
+            "dir": {
+              "mpsum": "list directory contents",
+              "-r": "reverse order while sorting",
+              "-X": "sort alphabetically by entry extension"
+            }
+          },
+          "TLDR_inform": {
+            "diff": {
+              "man1_diff_6775": "compar file directori compar directori recurs show name differ file directori well chang made file compar directori show name file differ compar file list chang turn old_fil new_fil compar file ignor white space compar file show differ unifi format use git diff compar file show differ side side"
+            },
+            "dir": {
+              "man1_dir_6819": ""
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_580277: rsync only existing subdirectories in destination",
+        "so_40015807: How do I copy with scp with a wildcard(*) in the destination path?"
+      ],
+      "Top-3 Scripts": [
+        "ul_580277: ",
+        "so_40015807: man bash"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "rm",
+      "MP Summary": "remove files or directories",
+      "Most Similar TLDR Task": "Remove files from arbitrary locations",
+      "Most Similar TLDR Script": "rm {{path/to/file}} {{path/to/another/file}}",
+      "Most Similar NL2Bash Task": "Display differences between /destination/dir/1 and /destination/dir/2 excluding files that match any pattern in file \"exclude.pats\".",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "diff /destination/dir/1 /destination/dir/2 -r -X exclude.pats\n",
+          "command-options": {
+            "diff": {
+              "mpsum": "compare two files"
+            },
+            "dir": {
+              "mpsum": "list directory contents",
+              "-r": "reverse order while sorting",
+              "-X": "sort alphabetically by entry extension"
+            }
+          },
+          "TLDR_inform": {
+            "diff": {
+              "man1_diff_6775": "compar file directori compar directori recurs show name differ file directori well chang made file compar directori show name file differ compar file list chang turn old_fil new_fil compar file ignor white space compar file show differ unifi format use git diff compar file show differ side side"
+            },
+            "dir": {
+              "man1_dir_6819": ""
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_28125089: Easy replace with/without regex in multiple files",
+        "so_53522286: Is it possible to create an empty file using scp?",
+        "so_37037419: Copy all files from subfolders, ZIP's and RAR's, without overwriting files with same name in destination folders"
+      ],
+      "Top-3 Scripts": [
+        "so_28125089: find -type f . -exec sh -c 'perl -pi.bak -e \"s/foo/bar/\" \"$0\" && rm -f \"$0\".bak' {} \\;",
+        "so_53522286: filename=$(mktemp) && scp $filename remoteserver:~/emptyfile; rm $filename",
+        "so_37037419: "
+      ],
+      "Explanations about Options": {
+        "-f": "ignore nonexistent files and arguments, never prompt"
+      }
+    },
+    {
+      "Command": "find",
+      "MP Summary": "search for files in a directory hierarchy",
+      "Most Similar TLDR Task": "Find files matching a given pattern, excluding specific paths",
+      "Most Similar TLDR Script": "find {{root_path}} -name '{{*.py}}' -not -path '{{*/site-packages/*}}'",
+      "Most Similar NL2Bash Task": "Display differences between /destination/dir/1 and /destination/dir/2 excluding files that match any pattern in file \"exclude.pats\".",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "diff /destination/dir/1 /destination/dir/2 -r -X exclude.pats\n",
+          "command-options": {
+            "diff": {
+              "mpsum": "compare two files"
+            },
+            "dir": {
+              "mpsum": "list directory contents",
+              "-r": "reverse order while sorting",
+              "-X": "sort alphabetically by entry extension"
+            }
+          },
+          "TLDR_inform": {
+            "diff": {
+              "man1_diff_6775": "compar file directori compar directori recurs show name differ file directori well chang made file compar directori show name file differ compar file list chang turn old_fil new_fil compar file ignor white space compar file show differ unifi format use git diff compar file show differ side side"
+            },
+            "dir": {
+              "man1_dir_6819": ""
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_744074: How does one properly copy a file into multiple folders and subfolders without overwriting the file contents in the destination folders?",
+        "su_1347233: SCP off the most recently modified file in a remote directory",
+        "so_28125089: Easy replace with/without regex in multiple files"
+      ],
+      "Top-3 Scripts": [
+        "au_744074: find folder -type d -exec cp file.txt {} \\;\n\nfind folder -type d -exec cp -t {} file.txt \\;",
+        "su_1347233: find . -maxdepth 1 -type f -printf '%T@ %p\\0' |\n   sort -zrn |\n   head -zn 1 |\n   cut -z -d \" \" -f 2-\n\nfind . \u2026\n\nfind . ! -name . -prune -type f -exec sh -c '\n   [ \"$(find . ! -name . -prune -type f -newer \"$1\" -exec printf a \\; |\n   wc -c)\" -eq 0 ]' sh {} \\; -print\n\nfind \u2026 -exec \u2026\n\nfind \u2026 | sort -z \u2026 | head -z \u2026 | cut -z \u2026 | xargs -0 \u2026\n\nssh usr@remote\n# now on the remote system\ncd \"/source/dir/\" &&\nfind . ! -name . -prune -type f -exec sh -c '\n   [ \"$(find . ! -name . -prune -type f -newer \"$1\" -exec printf a \\; |\n   wc -c)\" -eq 0 ]' sh {} \\; -exec scp {} usr@local:\"/target/dir/\" \\;\n\nfind /source/dir \u2026\n\nssh usr@remote '\n   cd \"/source/dir/\" &&\n   find . ! -name . -prune -type f -exec sh -c '\"'\"'\n      [ \"$(find . ! -name . -prune -type f -newer \"$1\" -exec printf a \\; |\n      wc -c)\" -eq 0 ]'\"'\"' sh {} \\; -exec scp {} usr@local:\"/target/dir/\" \\;\n   '\n\nssh usr@remote '\n   cd \"/source/dir/\" &&\n   find . ! -name . -prune -type f -exec sh -c '\"'\"'\n      [ \"$(find . ! -name . -prune -type f -newer \"$1\" -exec printf a \\; |\n      wc -c)\" -eq 0 ]'\"'\"' sh {} \\; -print\n   '\n\nsshfs usr@remote:\"/source/dir/\" \"/local/path/\"\nfind \"/local/path/\" -maxdepth 1 -type f -printf '%T@ %p\\0' |\n   sort -zrn |\n   head -zn 1 |\n   cut -z -d \" \" -f 2- |\n   xargs -0r cp -t \"/target/dir/\" --\nfusermount -u \"/local/path/\"",
+        "so_28125089: find -type f . -exec sh -c 'perl -pi.bak -e \"s/foo/bar/\" \"$0\" && rm -f \"$0\".bak' {} \\;"
+      ],
+      "Explanations about Options": {
+        "-type": "File is of type c:"
+      }
+    },
+    {
+      "Command": "rsync",
+      "MP Summary": "a fast, versatile, remote (and local) file-copying tool",
+      "Most Similar TLDR Task": "Transfer file over SSH and delete local files that do not exist on remote host",
+      "Most Similar TLDR Script": "rsync -e ssh --delete {{remote_host}}:{{path/to/remote_file}} {{path/to/local_file}}",
+      "Most Similar NL2Bash Task": "Display differences between /destination/dir/1 and /destination/dir/2 excluding files that match any pattern in file \"exclude.pats\".",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "diff /destination/dir/1 /destination/dir/2 -r -X exclude.pats\n",
+          "command-options": {
+            "diff": {
+              "mpsum": "compare two files"
+            },
+            "dir": {
+              "mpsum": "list directory contents",
+              "-r": "reverse order while sorting",
+              "-X": "sort alphabetically by entry extension"
+            }
+          },
+          "TLDR_inform": {
+            "diff": {
+              "man1_diff_6775": "compar file directori compar directori recurs show name differ file directori well chang made file compar directori show name file differ compar file list chang turn old_fil new_fil compar file ignor white space compar file show differ unifi format use git diff compar file show differ side side"
+            },
+            "dir": {
+              "man1_dir_6819": ""
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_580277: rsync only existing subdirectories in destination",
+        "ul_138520: rsync --delete deleted most files in the destination directory, why?",
+        "nl2bash_15902: Archive \"src\" to \"dst\" without overwriting existing files in \"dst\""
+      ],
+      "Top-3 Scripts": [
+        "ul_580277: ",
+        "ul_138520: rsync --delete --recursive /etc/logrotate.d/{httpd,mariadb,php-fpm,ppp,wpa_supplicant,yum} root@my.ipaddress:/etc\n\nrsync --delete --recursive /etc/logrotate.d/httpd /etc/logrotate.d/mariadb /etc/logrotate.d/php-fpm /etc/logrotate.d/ppp /etc/logrotate.d/wpa_supplicant /etc/logrotate.d/yum root@my.ipaddress:/etc\n\nrsync --delete --recursive /etc/logrotate.d/httpd root@my.ipaddress:/etc\n\nrsync --progress --delete -avhHe ssh /etc/{httpd,mariadb,php-fpm,ppp,wpa_supplicant,yum} root@my.ipaddress:/etc",
+        "nl2bash_15902: rsync -a -v --ignore-existing src dst"
+      ],
+      "Explanations about Options": {
+        "-a": "This is equivalent to -rlptgoD. It is a quick way of saying you want recursion and\n want to preserve almost everything (with -H being a notable omission). The only\n exception to the above equivalence is when --files-from is specified, in which case\n -r is not implied.",
+        "-h": "Output numbers in a more human-readable format. There are 3 possible levels: (1)\n output numbers with a separator between each set of 3 digits (either a comma or a\n period, depending on if the decimal point is represented by a period or a comma);\n (2) output numbers in units of 1000 (with a character suffix for larger units --\n see below); (3) output numbers in units of 1024.",
+        "-v": "This option increases the amount of information you are given during the transfer.\n By default, rsync works silently. A single -v will give you information about what\n files are being transferred and a brief summary at the end. Two -v options will\n give you information on what files are being skipped and slightly more information\n at the end. More than two -v options should only be used if you are debugging\n rsync.",
+        "-H": "This tells rsync to look for hard-linked files in the source and link together the\n corresponding files on the destination. Without this option, hard-linked files in\n the source are treated as though they were separate files.",
+        "-e": "This option allows you to choose an alternative remote shell program to use for\n communication between the local and remote copies of rsync. Typically, rsync is\n configured to use ssh by default, but you may prefer to use rsh on a local network.",
+        "--ignore-existing": "This tells rsync to skip updating files that already exist on the destination (this\n does not ignore existing directories, or nothing would get done). See also\n --existing.",
+        "--progress": "This option tells rsync to print information showing the progress of the transfer.\n This gives a bored user something to watch. With a modern rsync this is the same\n as specifying --info=flist2,name,progress, but any user-supplied settings for those\n info flags takes precedence (e.g. \"--info=flist0 --progress\")."
+      }
+    },
+    {
+      "Command": "ssh",
+      "MP Summary": "OpenSSH SSH client (remote login program)",
+      "Most Similar TLDR Task": "Connect to a remote server with a specific identity (private key)",
+      "Most Similar TLDR Script": "ssh -i {{path/to/key_file}} {{username}}@{{remote_host}}",
+      "Most Similar NL2Bash Task": "Display differences between /destination/dir/1 and /destination/dir/2 excluding files that match any pattern in file \"exclude.pats\".",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "diff /destination/dir/1 /destination/dir/2 -r -X exclude.pats\n",
+          "command-options": {
+            "diff": {
+              "mpsum": "compare two files"
+            },
+            "dir": {
+              "mpsum": "list directory contents",
+              "-r": "reverse order while sorting",
+              "-X": "sort alphabetically by entry extension"
+            }
+          },
+          "TLDR_inform": {
+            "diff": {
+              "man1_diff_6775": "compar file directori compar directori recurs show name differ file directori well chang made file compar directori show name file differ compar file list chang turn old_fil new_fil compar file ignor white space compar file show differ unifi format use git diff compar file show differ side side"
+            },
+            "dir": {
+              "man1_dir_6819": ""
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_138520: rsync --delete deleted most files in the destination directory, why?",
+        "su_115997: How can I copy multiple files over scp in one command?",
+        "su_1347233: SCP off the most recently modified file in a remote directory"
+      ],
+      "Top-3 Scripts": [
+        "ul_138520: rsync --progress --delete -avhHe ssh /etc/{httpd,mariadb,php-fpm,ppp,wpa_supplicant,yum} root@my.ipaddress:/etc",
+        "su_115997: tar cvzf - -T list_of_filenames | ssh hostname tar xzf -",
+        "su_1347233: ssh usr@remote\n# now on the remote system\ncd \"/source/dir/\" &&\nfind . ! -name . -prune -type f -exec sh -c '\n   [ \"$(find . ! -name . -prune -type f -newer \"$1\" -exec printf a \\; |\n   wc -c)\" -eq 0 ]' sh {} \\; -exec scp {} usr@local:\"/target/dir/\" \\;\n\nssh -R 12322:127.0.0.1:22 usr@remote\n# now on the remote system the same cd + find as above\n# only the scp part is different \n\u2026 -exec scp -P 12322 {} usr@127.0.0.1:\"/target/dir/\" \\;\n\nssh usr@remote '\n   cd \"/source/dir/\" &&\n   find . ! -name . -prune -type f -exec sh -c '\"'\"'\n      [ \"$(find . ! -name . -prune -type f -newer \"$1\" -exec printf a \\; |\n      wc -c)\" -eq 0 ]'\"'\"' sh {} \\; -exec scp {} usr@local:\"/target/dir/\" \\;\n   '\n\nssh usr@remote '\n   cd \"/source/dir/\" &&\n   find . ! -name . -prune -type f -exec sh -c '\"'\"'\n      [ \"$(find . ! -name . -prune -type f -newer \"$1\" -exec printf a \\; |\n      wc -c)\" -eq 0 ]'\"'\"' sh {} \\; -print\n   '"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "yum",
+      "MP Summary": "Yellowdog Updater Modified",
+      "Most Similar TLDR Task": "Remove a package",
+      "Most Similar TLDR Script": "yum remove {{package}}",
+      "Most Similar NL2Bash Task": "Display differences between /destination/dir/1 and /destination/dir/2 excluding files that match any pattern in file \"exclude.pats\".",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "diff /destination/dir/1 /destination/dir/2 -r -X exclude.pats\n",
+          "command-options": {
+            "diff": {
+              "mpsum": "compare two files"
+            },
+            "dir": {
+              "mpsum": "list directory contents",
+              "-r": "reverse order while sorting",
+              "-X": "sort alphabetically by entry extension"
+            }
+          },
+          "TLDR_inform": {
+            "diff": {
+              "man1_diff_6775": "compar file directori compar directori recurs show name differ file directori well chang made file compar directori show name file differ compar file list chang turn old_fil new_fil compar file ignor white space compar file show differ unifi format use git diff compar file show differ side side"
+            },
+            "dir": {
+              "man1_dir_6819": ""
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_138520: rsync --delete deleted most files in the destination directory, why?"
+      ],
+      "Top-3 Scripts": [
+        "ul_138520: rsync --delete --recursive /etc/logrotate.d/httpd /etc/logrotate.d/mariadb /etc/logrotate.d/php-fpm /etc/logrotate.d/ppp /etc/logrotate.d/wpa_supplicant /etc/logrotate.d/yum root@my.ipaddress:/etc"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "tar",
+      "MP Summary": "an archiving utility",
+      "Most Similar TLDR Task": "Extract a specific file without preserving the folder structure",
+      "Most Similar TLDR Script": "tar xf {{source.tar}} {{source.tar/path/to/extract}} --strip-components={{depth_to_strip}}",
+      "Most Similar NL2Bash Task": "Display differences between /destination/dir/1 and /destination/dir/2 excluding files that match any pattern in file \"exclude.pats\".",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "diff /destination/dir/1 /destination/dir/2 -r -X exclude.pats\n",
+          "command-options": {
+            "diff": {
+              "mpsum": "compare two files"
+            },
+            "dir": {
+              "mpsum": "list directory contents",
+              "-r": "reverse order while sorting",
+              "-X": "sort alphabetically by entry extension"
+            }
+          },
+          "TLDR_inform": {
+            "diff": {
+              "man1_diff_6775": "compar file directori compar directori recurs show name differ file directori well chang made file compar directori show name file differ compar file list chang turn old_fil new_fil compar file ignor white space compar file show differ unifi format use git diff compar file show differ side side"
+            },
+            "dir": {
+              "man1_dir_6819": ""
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "su_115997: How can I copy multiple files over scp in one command?",
+        "au_774919: Escape username spaces in SCP"
+      ],
+      "Top-3 Scripts": [
+        "su_115997: tar cvzf - -T list_of_filenames | ssh hostname tar xzf -",
+        "au_774919: tar c myfile.txt | ssh \"User Name Spaces\"@192.168.0.42 tar x\n\ntar x\n\nssh \u2026 'cd foo; tar x\n\ntar zc myfile.txt | ssh \"User Name Spaces\"@192.168.0.42 tar zx"
+      ],
+      "Explanations about Options": {
+        "-T": "Get names to extract or create from FILE."
+      }
+    },
+    {
+      "Command": "file",
+      "MP Summary": "determine file type",
+      "Most Similar TLDR Task": "Look inside a zipped file and determine the file type(s) inside",
+      "Most Similar TLDR Script": "file -z {{foo.zip}}",
+      "Most Similar NL2Bash Task": "Display differences between /destination/dir/1 and /destination/dir/2 excluding files that match any pattern in file \"exclude.pats\".",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "diff /destination/dir/1 /destination/dir/2 -r -X exclude.pats\n",
+          "command-options": {
+            "diff": {
+              "mpsum": "compare two files"
+            },
+            "dir": {
+              "mpsum": "list directory contents",
+              "-r": "reverse order while sorting",
+              "-X": "sort alphabetically by entry extension"
+            }
+          },
+          "TLDR_inform": {
+            "diff": {
+              "man1_diff_6775": "compar file directori compar directori recurs show name differ file directori well chang made file compar directori show name file differ compar file list chang turn old_fil new_fil compar file ignor white space compar file show differ unifi format use git diff compar file show differ side side"
+            },
+            "dir": {
+              "man1_dir_6819": ""
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_774919: Escape username spaces in SCP",
+        "so_52695200: Find string in each file. If it exists don't append. If it doesn't exist, append",
+        "so_40015807: How do I copy with scp with a wildcard(*) in the destination path?"
+      ],
+      "Top-3 Scripts": [
+        "au_774919: ssh foo\nscp file foo:",
+        "so_52695200: ",
+        "so_40015807: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "dirname",
+      "MP Summary": "strip last component from file name",
+      "Most Similar TLDR Task": "Calculate the parent directory of multiple paths",
+      "Most Similar TLDR Script": "dirname {{path/to/file_a}} {{path/to/directory_b}}",
+      "Most Similar NL2Bash Task": "Display differences between /destination/dir/1 and /destination/dir/2 excluding files that match any pattern in file \"exclude.pats\".",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "diff /destination/dir/1 /destination/dir/2 -r -X exclude.pats\n",
+          "command-options": {
+            "diff": {
+              "mpsum": "compare two files"
+            },
+            "dir": {
+              "mpsum": "list directory contents",
+              "-r": "reverse order while sorting",
+              "-X": "sort alphabetically by entry extension"
+            }
+          },
+          "TLDR_inform": {
+            "diff": {
+              "man1_diff_6775": "compar file directori compar directori recurs show name differ file directori well chang made file compar directori show name file differ compar file list chang turn old_fil new_fil compar file ignor white space compar file show differ unifi format use git diff compar file show differ side side"
+            },
+            "dir": {
+              "man1_dir_6819": ""
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_580277: rsync only existing subdirectories in destination",
+        "ul_539423: What is the protocol for sending files over SSH, in code?"
+      ],
+      "Top-3 Scripts": [
+        "ul_580277: ",
+        "ul_539423: \"D%04o 0 %.1024s\\n\", mode, dirname"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "sftp",
+      "MP Summary": "OpenSSH secure file transfer",
+      "Most Similar TLDR Task": "Transfer remote directory to the local system recursively (works with `put` too)",
+      "Most Similar TLDR Script": "get -R {{/path/remote_directory}}",
+      "Most Similar NL2Bash Task": "Display differences between /destination/dir/1 and /destination/dir/2 excluding files that match any pattern in file \"exclude.pats\".",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "diff /destination/dir/1 /destination/dir/2 -r -X exclude.pats\n",
+          "command-options": {
+            "diff": {
+              "mpsum": "compare two files"
+            },
+            "dir": {
+              "mpsum": "list directory contents",
+              "-r": "reverse order while sorting",
+              "-X": "sort alphabetically by entry extension"
+            }
+          },
+          "TLDR_inform": {
+            "diff": {
+              "man1_diff_6775": "compar file directori compar directori recurs show name differ file directori well chang made file compar directori show name file differ compar file list chang turn old_fil new_fil compar file ignor white space compar file show differ unifi format use git diff compar file show differ side side"
+            },
+            "dir": {
+              "man1_dir_6819": ""
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_774919: Escape username spaces in SCP"
+      ],
+      "Top-3 Scripts": [
+        "au_774919: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "as",
+      "MP Summary": "or  any situation  where  you want to make sure you're doing a clean install of your dependencies. It  can  be  significantly  faster  than  a  regular  npm  install  by  skipping   certain user-oriented  features.  It  is  also  more strict than a regular install, which can help catch errors or inconsistencies caused by the incrementally-installed  local  environments of most npm users. In short, the main differences between using npm install and npm ci are: \u00b7 The project must have an existing package-lock.json or npm-shrinkwrap.json. \u00b7 If dependencies in the package lock do not match those in package.json, npm ci will exit with an error, instead of updating the package lock. \u00b7 npm ci can only install entire projects at a time:  individual  dependencies  cannot  be added with this command. \u00b7 If  a  node_modules  is  already present, it will be automatically removed before npm ci begins its install. \u00b7 It will  never  write  to  package.json  or  any  of  the  package-locks:  installs  are essentially frozen. See Also \u00b7 npm help install \u00b7 npm help package-locks April 2020                                  NPM-CI(1)",
+      "Most Similar TLDR Task": "Include a given path to the list of directories to search for files specified in .include directives",
+      "Most Similar TLDR Script": "as -I {{path/to/directory}} {{file.s}}",
+      "Most Similar NL2Bash Task": "Display differences between /destination/dir/1 and /destination/dir/2 excluding files that match any pattern in file \"exclude.pats\".",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "diff /destination/dir/1 /destination/dir/2 -r -X exclude.pats\n",
+          "command-options": {
+            "diff": {
+              "mpsum": "compare two files"
+            },
+            "dir": {
+              "mpsum": "list directory contents",
+              "-r": "reverse order while sorting",
+              "-X": "sort alphabetically by entry extension"
+            }
+          },
+          "TLDR_inform": {
+            "diff": {
+              "man1_diff_6775": "compar file directori compar directori recurs show name differ file directori well chang made file compar directori show name file differ compar file list chang turn old_fil new_fil compar file ignor white space compar file show differ unifi format use git diff compar file show differ side side"
+            },
+            "dir": {
+              "man1_dir_6819": ""
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_28974338: replacing some commands in an existing BASH script",
+        "so_40015807: How do I copy with scp with a wildcard(*) in the destination path?"
+      ],
+      "Top-3 Scripts": [
+        "so_28974338: ",
+        "so_40015807: glob-expand-word (C-x *)\n          The word before point is treated as a pattern for\n          pathname expansion, and the list of matching filenames\n          is inserted, replacing the word.  If a numeric argument\n          is sup- plied, an asterisk is appended before pathname\n          expansion.\n\n   insert-completions (M-*)\n          Insert all completions of the text before point that\n          would have been generated by possible-completions."
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "xargs",
+      "MP Summary": "build and execute command lines from standard input",
+      "Most Similar TLDR Task": "Delete all files with a `.backup` extension (`-print0` uses a null character to split file names, and `-0` uses it as delimiter)",
+      "Most Similar TLDR Script": "find . -name {{'*.backup'}} -print0 | xargs -0 rm -v",
+      "Most Similar NL2Bash Task": "Display differences between /destination/dir/1 and /destination/dir/2 excluding files that match any pattern in file \"exclude.pats\".",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "diff /destination/dir/1 /destination/dir/2 -r -X exclude.pats\n",
+          "command-options": {
+            "diff": {
+              "mpsum": "compare two files"
+            },
+            "dir": {
+              "mpsum": "list directory contents",
+              "-r": "reverse order while sorting",
+              "-X": "sort alphabetically by entry extension"
+            }
+          },
+          "TLDR_inform": {
+            "diff": {
+              "man1_diff_6775": "compar file directori compar directori recurs show name differ file directori well chang made file compar directori show name file differ compar file list chang turn old_fil new_fil compar file ignor white space compar file show differ unifi format use git diff compar file show differ side side"
+            },
+            "dir": {
+              "man1_dir_6819": ""
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "su_1347233: SCP off the most recently modified file in a remote directory",
+        "ul_617808: How to copy a file and change destination file permission in one step?"
+      ],
+      "Top-3 Scripts": [
+        "su_1347233: xargs -0 \u2026\n\n\u2026 | xargs -0r cp -t \"/target/dir/\" --\n\n\u2026 | xargs -0r -I {} cp -- {} \"/target/dir/\"\n\nfind \u2026 | sort -z \u2026 | head -z \u2026 | cut -z \u2026 | xargs -0 \u2026\n\nsshfs usr@remote:\"/source/dir/\" \"/local/path/\"\nfind \"/local/path/\" -maxdepth 1 -type f -printf '%T@ %p\\0' |\n   sort -zrn |\n   head -zn 1 |\n   cut -z -d \" \" -f 2- |\n   xargs -0r cp -t \"/target/dir/\" --\nfusermount -u \"/local/path/\"",
+        "ul_617808: ...|  xargs sh -c 'for file; do \n                      cp -- \"$file\" /my/destination/path/ && \n                        chmod 700 /my/destination/path/\"$file\"; \n                    done' sh\n\n...|  xargs sh -c 'for file; do \n                  cp -- \"$file\" /my/destination/path/ && \n                    chmod 700 /my/destination/path/\"${file##*/}\"; \n                done' sh"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "mkdir",
+      "MP Summary": "make directories",
+      "Most Similar TLDR Task": "Create directories recursively (useful for creating nested dirs)",
+      "Most Similar TLDR Script": "mkdir -p {{path/to/directory}}",
+      "Most Similar NL2Bash Task": "Display differences between /destination/dir/1 and /destination/dir/2 excluding files that match any pattern in file \"exclude.pats\".",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "diff /destination/dir/1 /destination/dir/2 -r -X exclude.pats\n",
+          "command-options": {
+            "diff": {
+              "mpsum": "compare two files"
+            },
+            "dir": {
+              "mpsum": "list directory contents",
+              "-r": "reverse order while sorting",
+              "-X": "sort alphabetically by entry extension"
+            }
+          },
+          "TLDR_inform": {
+            "diff": {
+              "man1_diff_6775": "compar file directori compar directori recurs show name differ file directori well chang made file compar directori show name file differ compar file list chang turn old_fil new_fil compar file ignor white space compar file show differ unifi format use git diff compar file show differ side side"
+            },
+            "dir": {
+              "man1_dir_6819": ""
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_1080590: how to use find in scp command",
+        "so_37037419: Copy all files from subfolders, ZIP's and RAR's, without overwriting files with same name in destination folders"
+      ],
+      "Top-3 Scripts": [
+        "au_1080590: mkdir /path/to/targetdir",
+        "so_37037419: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "install",
+      "MP Summary": "copy files and set attributes",
+      "Most Similar TLDR Task": "Copy files to destination",
+      "Most Similar TLDR Script": "install {{path/to/source}} {{path/to/destination}}",
+      "Most Similar NL2Bash Task": "Display differences between /destination/dir/1 and /destination/dir/2 excluding files that match any pattern in file \"exclude.pats\".",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "diff /destination/dir/1 /destination/dir/2 -r -X exclude.pats\n",
+          "command-options": {
+            "diff": {
+              "mpsum": "compare two files"
+            },
+            "dir": {
+              "mpsum": "list directory contents",
+              "-r": "reverse order while sorting",
+              "-X": "sort alphabetically by entry extension"
+            }
+          },
+          "TLDR_inform": {
+            "diff": {
+              "man1_diff_6775": "compar file directori compar directori recurs show name differ file directori well chang made file compar directori show name file differ compar file list chang turn old_fil new_fil compar file ignor white space compar file show differ unifi format use git diff compar file show differ side side"
+            },
+            "dir": {
+              "man1_dir_6819": ""
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_52695200: Find string in each file. If it exists don't append. If it doesn't exist, append"
+      ],
+      "Top-3 Scripts": [
+        "so_52695200: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "sh",
+      "MP Summary": "MirBSD Korn shell",
+      "Most Similar TLDR Task": "Execute a command",
+      "Most Similar TLDR Script": "sh -c {{command}}",
+      "Most Similar NL2Bash Task": "Display differences between /destination/dir/1 and /destination/dir/2 excluding files that match any pattern in file \"exclude.pats\".",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "diff /destination/dir/1 /destination/dir/2 -r -X exclude.pats\n",
+          "command-options": {
+            "diff": {
+              "mpsum": "compare two files"
+            },
+            "dir": {
+              "mpsum": "list directory contents",
+              "-r": "reverse order while sorting",
+              "-X": "sort alphabetically by entry extension"
+            }
+          },
+          "TLDR_inform": {
+            "diff": {
+              "man1_diff_6775": "compar file directori compar directori recurs show name differ file directori well chang made file compar directori show name file differ compar file list chang turn old_fil new_fil compar file ignor white space compar file show differ unifi format use git diff compar file show differ side side"
+            },
+            "dir": {
+              "man1_dir_6819": ""
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "su_1347233: SCP off the most recently modified file in a remote directory",
+        "ul_617808: How to copy a file and change destination file permission in one step?",
+        "so_28125089: Easy replace with/without regex in multiple files"
+      ],
+      "Top-3 Scripts": [
+        "su_1347233: find . ! -name . -prune -type f -exec sh -c '\n   [ \"$(find . ! -name . -prune -type f -newer \"$1\" -exec printf a \\; |\n   wc -c)\" -eq 0 ]' sh {} \\; -print\n\nssh usr@remote\n# now on the remote system\ncd \"/source/dir/\" &&\nfind . ! -name . -prune -type f -exec sh -c '\n   [ \"$(find . ! -name . -prune -type f -newer \"$1\" -exec printf a \\; |\n   wc -c)\" -eq 0 ]' sh {} \\; -exec scp {} usr@local:\"/target/dir/\" \\;\n\nssh usr@remote '\n   cd \"/source/dir/\" &&\n   find . ! -name . -prune -type f -exec sh -c '\"'\"'\n      [ \"$(find . ! -name . -prune -type f -newer \"$1\" -exec printf a \\; |\n      wc -c)\" -eq 0 ]'\"'\"' sh {} \\; -exec scp {} usr@local:\"/target/dir/\" \\;\n   '\n\nssh usr@remote '\n   cd \"/source/dir/\" &&\n   find . ! -name . -prune -type f -exec sh -c '\"'\"'\n      [ \"$(find . ! -name . -prune -type f -newer \"$1\" -exec printf a \\; |\n      wc -c)\" -eq 0 ]'\"'\"' sh {} \\; -print\n   '",
+        "ul_617808: ...|  xargs sh -c 'for file; do \n                      cp -- \"$file\" /my/destination/path/ && \n                        chmod 700 /my/destination/path/\"$file\"; \n                    done' sh\n\n...|  xargs sh -c 'for file; do \n                  cp -- \"$file\" /my/destination/path/ && \n                    chmod 700 /my/destination/path/\"${file##*/}\"; \n                done' sh",
+        "so_28125089: find -type f . -exec sh -c 'perl -pi.bak -e \"s/foo/bar/\" \"$0\" && rm -f \"$0\".bak' {} \\;"
+      ],
+      "Explanations about Options": {
+        "-t": "Impose a time limit of n CPU seconds spent in user mode to be used by each\n process.",
+        "-p": "The shell is a privileged shell. It is set automatically if, when the shell\n starts, the real UID or GID does not match the effective UID (EUID) or GID\n (EGID), respectively. See above for a description of what this means.",
+        "-c": "Impose a size limit of n blocks on the size of core dumps.",
+        "-i": "Integer attribute. n specifies the base to use when displaying the integer\n (if not specified, the base given in the first assignment is used).\n Parameters with this attribute may be assigned values containing arithmetic\n expressions.",
+        "-e": "Exit (after executing the ERR trap) as soon as an error occurs or a command\n fails (i.e. exits with a non-zero status). This does not apply to commands\n whose exit status is explicitly tested by a shell construct such as if, until,\n while or ! statements. For && or ||, only the status of the last command is\n tested.",
+        "-r": "The shell is a restricted shell. This option can only be used when the shell is\n invoked. See above for a description of what this means.",
+        "-n": "Do not execute any commands. Useful for checking the syntax of scripts (ignored\n if interactive)."
+      }
+    },
+    {
+      "Command": "printf",
+      "MP Summary": "format and print data",
+      "Most Similar TLDR Task": "Print a text message composed with environment variables",
+      "Most Similar TLDR Script": "printf \"{{var1: %s\\tvar2: %s\\n}}\" \"{{$VAR1}}\" \"{{$VAR2}}\"",
+      "Most Similar NL2Bash Task": "Display differences between /destination/dir/1 and /destination/dir/2 excluding files that match any pattern in file \"exclude.pats\".",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "diff /destination/dir/1 /destination/dir/2 -r -X exclude.pats\n",
+          "command-options": {
+            "diff": {
+              "mpsum": "compare two files"
+            },
+            "dir": {
+              "mpsum": "list directory contents",
+              "-r": "reverse order while sorting",
+              "-X": "sort alphabetically by entry extension"
+            }
+          },
+          "TLDR_inform": {
+            "diff": {
+              "man1_diff_6775": "compar file directori compar directori recurs show name differ file directori well chang made file compar directori show name file differ compar file list chang turn old_fil new_fil compar file ignor white space compar file show differ unifi format use git diff compar file show differ side side"
+            },
+            "dir": {
+              "man1_dir_6819": ""
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_580277: rsync only existing subdirectories in destination",
+        "su_1347233: SCP off the most recently modified file in a remote directory"
+      ],
+      "Top-3 Scripts": [
+        "ul_580277: ",
+        "su_1347233: find . ! -name . -prune -type f -exec sh -c '\n   [ \"$(find . ! -name . -prune -type f -newer \"$1\" -exec printf a \\; |\n   wc -c)\" -eq 0 ]' sh {} \\; -print\n\nssh usr@remote\n# now on the remote system\ncd \"/source/dir/\" &&\nfind . ! -name . -prune -type f -exec sh -c '\n   [ \"$(find . ! -name . -prune -type f -newer \"$1\" -exec printf a \\; |\n   wc -c)\" -eq 0 ]' sh {} \\; -exec scp {} usr@local:\"/target/dir/\" \\;\n\nssh usr@remote '\n   cd \"/source/dir/\" &&\n   find . ! -name . -prune -type f -exec sh -c '\"'\"'\n      [ \"$(find . ! -name . -prune -type f -newer \"$1\" -exec printf a \\; |\n      wc -c)\" -eq 0 ]'\"'\"' sh {} \\; -exec scp {} usr@local:\"/target/dir/\" \\;\n   '\n\nssh usr@remote '\n   cd \"/source/dir/\" &&\n   find . ! -name . -prune -type f -exec sh -c '\"'\"'\n      [ \"$(find . ! -name . -prune -type f -newer \"$1\" -exec printf a \\; |\n      wc -c)\" -eq 0 ]'\"'\"' sh {} \\; -print\n   '\n\n-exec printf \"%s\\0\" {} \\;"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "unrar",
+      "MP Summary": "extract files from rar archives",
+      "Most Similar TLDR Task": "List files inside the archive file without decompressing it",
+      "Most Similar TLDR Script": "unrar l {{compressed.rar}}",
+      "Most Similar NL2Bash Task": "Display differences between /destination/dir/1 and /destination/dir/2 excluding files that match any pattern in file \"exclude.pats\".",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "diff /destination/dir/1 /destination/dir/2 -r -X exclude.pats\n",
+          "command-options": {
+            "diff": {
+              "mpsum": "compare two files"
+            },
+            "dir": {
+              "mpsum": "list directory contents",
+              "-r": "reverse order while sorting",
+              "-X": "sort alphabetically by entry extension"
+            }
+          },
+          "TLDR_inform": {
+            "diff": {
+              "man1_diff_6775": "compar file directori compar directori recurs show name differ file directori well chang made file compar directori show name file differ compar file list chang turn old_fil new_fil compar file ignor white space compar file show differ unifi format use git diff compar file show differ side side"
+            },
+            "dir": {
+              "man1_dir_6819": ""
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_37037419: Copy all files from subfolders, ZIP's and RAR's, without overwriting files with same name in destination folders"
+      ],
+      "Top-3 Scripts": [
+        "so_37037419: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "ssh-agent",
+      "MP Summary": "OpenSSH authentication agent",
+      "Most Similar TLDR Task": "Start an SSH Agent for the current shell",
+      "Most Similar TLDR Script": "eval $(ssh-agent)",
+      "Most Similar NL2Bash Task": "Display differences between /destination/dir/1 and /destination/dir/2 excluding files that match any pattern in file \"exclude.pats\".",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "diff /destination/dir/1 /destination/dir/2 -r -X exclude.pats\n",
+          "command-options": {
+            "diff": {
+              "mpsum": "compare two files"
+            },
+            "dir": {
+              "mpsum": "list directory contents",
+              "-r": "reverse order while sorting",
+              "-X": "sort alphabetically by entry extension"
+            }
+          },
+          "TLDR_inform": {
+            "diff": {
+              "man1_diff_6775": "compar file directori compar directori recurs show name differ file directori well chang made file compar directori show name file differ compar file list chang turn old_fil new_fil compar file ignor white space compar file show differ unifi format use git diff compar file show differ side side"
+            },
+            "dir": {
+              "man1_dir_6819": ""
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_184651: Seeing file names in SCP",
+        "so_15037202: Executing SCP in GNU Parallel",
+        "ul_12649: how to scp in mc (and remember)?"
+      ],
+      "Top-3 Scripts": [
+        "ul_184651: ",
+        "so_15037202: ",
+        "ul_12649: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "cd",
+      "MP Summary": "change the working directory",
+      "Most Similar TLDR Task": "Go to home directory of current user",
+      "Most Similar TLDR Script": "cd",
+      "Most Similar NL2Bash Task": "Display differences between /destination/dir/1 and /destination/dir/2 excluding files that match any pattern in file \"exclude.pats\".",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "diff /destination/dir/1 /destination/dir/2 -r -X exclude.pats\n",
+          "command-options": {
+            "diff": {
+              "mpsum": "compare two files"
+            },
+            "dir": {
+              "mpsum": "list directory contents",
+              "-r": "reverse order while sorting",
+              "-X": "sort alphabetically by entry extension"
+            }
+          },
+          "TLDR_inform": {
+            "diff": {
+              "man1_diff_6775": "compar file directori compar directori recurs show name differ file directori well chang made file compar directori show name file differ compar file list chang turn old_fil new_fil compar file ignor white space compar file show differ unifi format use git diff compar file show differ side side"
+            },
+            "dir": {
+              "man1_dir_6819": ""
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "su_1347233: SCP off the most recently modified file in a remote directory",
+        "au_1080590: how to use find in scp command",
+        "so_37037419: Copy all files from subfolders, ZIP's and RAR's, without overwriting files with same name in destination folders"
+      ],
+      "Top-3 Scripts": [
+        "su_1347233: ssh usr@remote\n# now on the remote system\ncd \"/source/dir/\" &&\nfind . ! -name . -prune -type f -exec sh -c '\n   [ \"$(find . ! -name . -prune -type f -newer \"$1\" -exec printf a \\; |\n   wc -c)\" -eq 0 ]' sh {} \\; -exec scp {} usr@local:\"/target/dir/\" \\;\n\nssh usr@remote '\n   cd \"/source/dir/\" &&\n   find . ! -name . -prune -type f -exec sh -c '\"'\"'\n      [ \"$(find . ! -name . -prune -type f -newer \"$1\" -exec printf a \\; |\n      wc -c)\" -eq 0 ]'\"'\"' sh {} \\; -exec scp {} usr@local:\"/target/dir/\" \\;\n   '\n\nssh usr@remote '\n   cd \"/source/dir/\" &&\n   find . ! -name . -prune -type f -exec sh -c '\"'\"'\n      [ \"$(find . ! -name . -prune -type f -newer \"$1\" -exec printf a \\; |\n      wc -c)\" -eq 0 ]'\"'\"' sh {} \\; -print\n   '",
+        "au_1080590: ssh username@ip-adress '(cd /path/to/sourcedir; find . -print | cpio -oBav -Hcrc)' | ( cd /path/to/targetdir && cpio -ivumd )",
+        "so_37037419: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "basename",
+      "MP Summary": "strip directory and suffix from filenames",
+      "Most Similar TLDR Task": "Show only the file name from a path, with a suffix removed",
+      "Most Similar TLDR Script": "basename {{path/to/file}} {{suffix}}",
+      "Most Similar NL2Bash Task": "Display differences between /destination/dir/1 and /destination/dir/2 excluding files that match any pattern in file \"exclude.pats\".",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "diff /destination/dir/1 /destination/dir/2 -r -X exclude.pats\n",
+          "command-options": {
+            "diff": {
+              "mpsum": "compare two files"
+            },
+            "dir": {
+              "mpsum": "list directory contents",
+              "-r": "reverse order while sorting",
+              "-X": "sort alphabetically by entry extension"
+            }
+          },
+          "TLDR_inform": {
+            "diff": {
+              "man1_diff_6775": "compar file directori compar directori recurs show name differ file directori well chang made file compar directori show name file differ compar file list chang turn old_fil new_fil compar file ignor white space compar file show differ unifi format use git diff compar file show differ side side"
+            },
+            "dir": {
+              "man1_dir_6819": ""
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_580277: rsync only existing subdirectories in destination"
+      ],
+      "Top-3 Scripts": [
+        "ul_580277: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "read",
+      "MP Summary": "read a line from standard input",
+      "Most Similar TLDR Task": "Use a specific character as a delimiter instead of a new line",
+      "Most Similar TLDR Script": "read -d {{new_delimiter}} {{variable}}",
+      "Most Similar NL2Bash Task": "Display differences between /destination/dir/1 and /destination/dir/2 excluding files that match any pattern in file \"exclude.pats\".",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "diff /destination/dir/1 /destination/dir/2 -r -X exclude.pats\n",
+          "command-options": {
+            "diff": {
+              "mpsum": "compare two files"
+            },
+            "dir": {
+              "mpsum": "list directory contents",
+              "-r": "reverse order while sorting",
+              "-X": "sort alphabetically by entry extension"
+            }
+          },
+          "TLDR_inform": {
+            "diff": {
+              "man1_diff_6775": "compar file directori compar directori recurs show name differ file directori well chang made file compar directori show name file differ compar file list chang turn old_fil new_fil compar file ignor white space compar file show differ unifi format use git diff compar file show differ side side"
+            },
+            "dir": {
+              "man1_dir_6819": ""
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_28974338: replacing some commands in an existing BASH script",
+        "so_37037419: Copy all files from subfolders, ZIP's and RAR's, without overwriting files with same name in destination folders"
+      ],
+      "Top-3 Scripts": [
+        "so_28974338: ",
+        "so_37037419: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "unzip",
+      "MP Summary": "list, test and extract compressed files in a ZIP archive",
+      "Most Similar TLDR Task": "Extract zip file(s) (for multiple files, separate file paths by spaces)",
+      "Most Similar TLDR Script": "unzip {{file(s)}}",
+      "Most Similar NL2Bash Task": "Display differences between /destination/dir/1 and /destination/dir/2 excluding files that match any pattern in file \"exclude.pats\".",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "diff /destination/dir/1 /destination/dir/2 -r -X exclude.pats\n",
+          "command-options": {
+            "diff": {
+              "mpsum": "compare two files"
+            },
+            "dir": {
+              "mpsum": "list directory contents",
+              "-r": "reverse order while sorting",
+              "-X": "sort alphabetically by entry extension"
+            }
+          },
+          "TLDR_inform": {
+            "diff": {
+              "man1_diff_6775": "compar file directori compar directori recurs show name differ file directori well chang made file compar directori show name file differ compar file list chang turn old_fil new_fil compar file ignor white space compar file show differ unifi format use git diff compar file show differ side side"
+            },
+            "dir": {
+              "man1_dir_6819": ""
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_37037419: Copy all files from subfolders, ZIP's and RAR's, without overwriting files with same name in destination folders"
+      ],
+      "Top-3 Scripts": [
+        "so_37037419: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "cpio",
+      "MP Summary": "copy files to and from archives",
+      "Most Similar TLDR Task": "Copy all files and directories in a directory and add them [o]nto an archive, in [v]erbose mode",
+      "Most Similar TLDR Script": "find {{path/to/directory}} | cpio -ov > {{archive.cpio}}",
+      "Most Similar NL2Bash Task": "Display differences between /destination/dir/1 and /destination/dir/2 excluding files that match any pattern in file \"exclude.pats\".",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "diff /destination/dir/1 /destination/dir/2 -r -X exclude.pats\n",
+          "command-options": {
+            "diff": {
+              "mpsum": "compare two files"
+            },
+            "dir": {
+              "mpsum": "list directory contents",
+              "-r": "reverse order while sorting",
+              "-X": "sort alphabetically by entry extension"
+            }
+          },
+          "TLDR_inform": {
+            "diff": {
+              "man1_diff_6775": "compar file directori compar directori recurs show name differ file directori well chang made file compar directori show name file differ compar file list chang turn old_fil new_fil compar file ignor white space compar file show differ unifi format use git diff compar file show differ side side"
+            },
+            "dir": {
+              "man1_dir_6819": ""
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_1080590: how to use find in scp command"
+      ],
+      "Top-3 Scripts": [
+        "au_1080590: ssh username@ip-adress '(cd /path/to/sourcedir; find . -print | cpio -oBav -Hcrc)' | ( cd /path/to/targetdir && cpio -ivumd )"
+      ],
+      "Explanations about Options": {
+        "-d": "(i and p modes) Create directories as necessary.",
+        "-a": "(o and p modes) Reset access times on files after they are read.",
+        "-u": "(i and p modes) Unconditionally overwrite existing files. Ordinarily, an older file\n will not overwrite a newer file on disk.",
+        "-B": "(o mode only) Block output to records of 5120 bytes.",
+        "-v": "Print the name of each file to stderr as it is processed. With -t, provide a\n detailed listing of each file.",
+        "-o": "Output mode. See above for description.",
+        "-m": "(i and p modes) Set file modification time on created files to match those in the\n source.",
+        "-i": "Input mode. See above for description."
+      }
+    },
+    {
+      "Command": "sed",
+      "MP Summary": "stream editor for filtering and transforming text",
+      "Most Similar TLDR Task": "Replace all occurrences of a string in a file, overwriting the file (i.e. in-place)",
+      "Most Similar TLDR Script": "sed -i 's/{{find}}/{{replace}}/g' {{filename}}",
+      "Most Similar NL2Bash Task": "Display differences between /destination/dir/1 and /destination/dir/2 excluding files that match any pattern in file \"exclude.pats\".",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "diff /destination/dir/1 /destination/dir/2 -r -X exclude.pats\n",
+          "command-options": {
+            "diff": {
+              "mpsum": "compare two files"
+            },
+            "dir": {
+              "mpsum": "list directory contents",
+              "-r": "reverse order while sorting",
+              "-X": "sort alphabetically by entry extension"
+            }
+          },
+          "TLDR_inform": {
+            "diff": {
+              "man1_diff_6775": "compar file directori compar directori recurs show name differ file directori well chang made file compar directori show name file differ compar file list chang turn old_fil new_fil compar file ignor white space compar file show differ unifi format use git diff compar file show differ side side"
+            },
+            "dir": {
+              "man1_dir_6819": ""
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_4437901: find and replace string in a file"
+      ],
+      "Top-3 Scripts": [
+        "so_4437901: sed -i \"s/$OLD/$NEW/g\" \"$f\"\n    ^^"
+      ],
+      "Explanations about Options": {
+        "-i": "edit files in place (makes backup if SUFFIX supplied)"
+      }
+    },
+    {
+      "Command": "ssh-add",
+      "MP Summary": "adds private key identities to the OpenSSH authentication agent",
+      "Most Similar TLDR Task": "Delete a key from the ssh-agent",
+      "Most Similar TLDR Script": "ssh-add -d {{path/to/private_key}}",
+      "Most Similar NL2Bash Task": "Display differences between /destination/dir/1 and /destination/dir/2 excluding files that match any pattern in file \"exclude.pats\".",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "diff /destination/dir/1 /destination/dir/2 -r -X exclude.pats\n",
+          "command-options": {
+            "diff": {
+              "mpsum": "compare two files"
+            },
+            "dir": {
+              "mpsum": "list directory contents",
+              "-r": "reverse order while sorting",
+              "-X": "sort alphabetically by entry extension"
+            }
+          },
+          "TLDR_inform": {
+            "diff": {
+              "man1_diff_6775": "compar file directori compar directori recurs show name differ file directori well chang made file compar directori show name file differ compar file list chang turn old_fil new_fil compar file ignor white space compar file show differ unifi format use git diff compar file show differ side side"
+            },
+            "dir": {
+              "man1_dir_6819": ""
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_184651: Seeing file names in SCP"
+      ],
+      "Top-3 Scripts": [
+        "ul_184651: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "pwd",
+      "MP Summary": "print name of current/working directory",
+      "Most Similar TLDR Task": "Print the current directory, and resolve all symlinks (i.e. show the \"physical\" path)",
+      "Most Similar TLDR Script": "pwd -P",
+      "Most Similar NL2Bash Task": "Display differences between /destination/dir/1 and /destination/dir/2 excluding files that match any pattern in file \"exclude.pats\".",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "diff /destination/dir/1 /destination/dir/2 -r -X exclude.pats\n",
+          "command-options": {
+            "diff": {
+              "mpsum": "compare two files"
+            },
+            "dir": {
+              "mpsum": "list directory contents",
+              "-r": "reverse order while sorting",
+              "-X": "sort alphabetically by entry extension"
+            }
+          },
+          "TLDR_inform": {
+            "diff": {
+              "man1_diff_6775": "compar file directori compar directori recurs show name differ file directori well chang made file compar directori show name file differ compar file list chang turn old_fil new_fil compar file ignor white space compar file show differ unifi format use git diff compar file show differ side side"
+            },
+            "dir": {
+              "man1_dir_6819": ""
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_40015807: How do I copy with scp with a wildcard(*) in the destination path?"
+      ],
+      "Top-3 Scripts": [
+        "so_40015807: $ pwd\n/tmp/expand-glob\n$ ls\nFILE\n$ cp /tmp/expand-*/*"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "ls",
+      "MP Summary": "list directory contents",
+      "Most Similar TLDR Task": "List all files, including hidden files",
+      "Most Similar TLDR Script": "ls -a",
+      "Most Similar NL2Bash Task": "Display differences between /destination/dir/1 and /destination/dir/2 excluding files that match any pattern in file \"exclude.pats\".",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "diff /destination/dir/1 /destination/dir/2 -r -X exclude.pats\n",
+          "command-options": {
+            "diff": {
+              "mpsum": "compare two files"
+            },
+            "dir": {
+              "mpsum": "list directory contents",
+              "-r": "reverse order while sorting",
+              "-X": "sort alphabetically by entry extension"
+            }
+          },
+          "TLDR_inform": {
+            "diff": {
+              "man1_diff_6775": "compar file directori compar directori recurs show name differ file directori well chang made file compar directori show name file differ compar file list chang turn old_fil new_fil compar file ignor white space compar file show differ unifi format use git diff compar file show differ side side"
+            },
+            "dir": {
+              "man1_dir_6819": ""
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "su_1347233: SCP off the most recently modified file in a remote directory",
+        "so_40015807: How do I copy with scp with a wildcard(*) in the destination path?"
+      ],
+      "Top-3 Scripts": [
+        "su_1347233: ls -Art | tail -n 1\n\nls \u2026 | tail \u2026",
+        "so_40015807: $ pwd\n/tmp/expand-glob\n$ ls\nFILE\n$ cp /tmp/expand-*/*"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "echo",
+      "MP Summary": "display a line of text",
+      "Most Similar TLDR Task": "Print a message without the trailing newline",
+      "Most Similar TLDR Script": "echo -n \"{{Hello World}}\"",
+      "Most Similar NL2Bash Task": "Display differences between /destination/dir/1 and /destination/dir/2 excluding files that match any pattern in file \"exclude.pats\".",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "diff /destination/dir/1 /destination/dir/2 -r -X exclude.pats\n",
+          "command-options": {
+            "diff": {
+              "mpsum": "compare two files"
+            },
+            "dir": {
+              "mpsum": "list directory contents",
+              "-r": "reverse order while sorting",
+              "-X": "sort alphabetically by entry extension"
+            }
+          },
+          "TLDR_inform": {
+            "diff": {
+              "man1_diff_6775": "compar file directori compar directori recurs show name differ file directori well chang made file compar directori show name file differ compar file list chang turn old_fil new_fil compar file ignor white space compar file show differ unifi format use git diff compar file show differ side side"
+            },
+            "dir": {
+              "man1_dir_6819": ""
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_28974338: replacing some commands in an existing BASH script"
+      ],
+      "Top-3 Scripts": [
+        "so_28974338: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "command",
+      "MP Summary": "execute a simple command",
+      "Most Similar TLDR Task": "Execute the ls program literally, even if an ls alias exists",
+      "Most Similar TLDR Script": "command {{ls}}",
+      "Most Similar NL2Bash Task": "Display differences between /destination/dir/1 and /destination/dir/2 excluding files that match any pattern in file \"exclude.pats\".",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "diff /destination/dir/1 /destination/dir/2 -r -X exclude.pats\n",
+          "command-options": {
+            "diff": {
+              "mpsum": "compare two files"
+            },
+            "dir": {
+              "mpsum": "list directory contents",
+              "-r": "reverse order while sorting",
+              "-X": "sort alphabetically by entry extension"
+            }
+          },
+          "TLDR_inform": {
+            "diff": {
+              "man1_diff_6775": "compar file directori compar directori recurs show name differ file directori well chang made file compar directori show name file differ compar file list chang turn old_fil new_fil compar file ignor white space compar file show differ unifi format use git diff compar file show differ side side"
+            },
+            "dir": {
+              "man1_dir_6819": ""
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_28974338: replacing some commands in an existing BASH script"
+      ],
+      "Top-3 Scripts": [
+        "so_28974338: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "hostname",
+      "MP Summary": "show or set the system's host name",
+      "Most Similar TLDR Task": "Show the FQDN (Fully Qualified Domain Name)",
+      "Most Similar TLDR Script": "hostname --fqdn",
+      "Most Similar NL2Bash Task": "Display differences between /destination/dir/1 and /destination/dir/2 excluding files that match any pattern in file \"exclude.pats\".",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "diff /destination/dir/1 /destination/dir/2 -r -X exclude.pats\n",
+          "command-options": {
+            "diff": {
+              "mpsum": "compare two files"
+            },
+            "dir": {
+              "mpsum": "list directory contents",
+              "-r": "reverse order while sorting",
+              "-X": "sort alphabetically by entry extension"
+            }
+          },
+          "TLDR_inform": {
+            "diff": {
+              "man1_diff_6775": "compar file directori compar directori recurs show name differ file directori well chang made file compar directori show name file differ compar file list chang turn old_fil new_fil compar file ignor white space compar file show differ unifi format use git diff compar file show differ side side"
+            },
+            "dir": {
+              "man1_dir_6819": ""
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "su_115997: How can I copy multiple files over scp in one command?"
+      ],
+      "Top-3 Scripts": [
+        "su_115997: tar cvzf - -T list_of_filenames | ssh hostname tar xzf -"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "grep",
+      "MP Summary": "print lines that match patterns",
+      "Most Similar TLDR Task": "Invert match for excluding specific strings",
+      "Most Similar TLDR Script": "grep -v {{search_pattern}}",
+      "Most Similar NL2Bash Task": "Display differences between /destination/dir/1 and /destination/dir/2 excluding files that match any pattern in file \"exclude.pats\".",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "diff /destination/dir/1 /destination/dir/2 -r -X exclude.pats\n",
+          "command-options": {
+            "diff": {
+              "mpsum": "compare two files"
+            },
+            "dir": {
+              "mpsum": "list directory contents",
+              "-r": "reverse order while sorting",
+              "-X": "sort alphabetically by entry extension"
+            }
+          },
+          "TLDR_inform": {
+            "diff": {
+              "man1_diff_6775": "compar file directori compar directori recurs show name differ file directori well chang made file compar directori show name file differ compar file list chang turn old_fil new_fil compar file ignor white space compar file show differ unifi format use git diff compar file show differ side side"
+            },
+            "dir": {
+              "man1_dir_6819": ""
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_36074541: Replace existing file in bash scripting"
+      ],
+      "Top-3 Scripts": [
+        "so_36074541: grep \"ERROR\" error | grep -v \"Login errors\" > /tmp/tmp$$ && mv /tmp/tmp$$ error"
+      ],
+      "Explanations about Options": {
+        "-v": "Invert the sense of matching, to select non-matching lines."
+      }
+    },
+    {
+      "Command": "tshark",
+      "MP Summary": "Dump and analyze network traffic",
+      "Most Similar TLDR Task": "Only capture packets matching a specific capture filter",
+      "Most Similar TLDR Script": "tshark -f '{{udp port 53}}'",
+      "Most Similar NL2Bash Task": "Display differences between /destination/dir/1 and /destination/dir/2 excluding files that match any pattern in file \"exclude.pats\".",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "diff /destination/dir/1 /destination/dir/2 -r -X exclude.pats\n",
+          "command-options": {
+            "diff": {
+              "mpsum": "compare two files"
+            },
+            "dir": {
+              "mpsum": "list directory contents",
+              "-r": "reverse order while sorting",
+              "-X": "sort alphabetically by entry extension"
+            }
+          },
+          "TLDR_inform": {
+            "diff": {
+              "man1_diff_6775": "compar file directori compar directori recurs show name differ file directori well chang made file compar directori show name file differ compar file list chang turn old_fil new_fil compar file ignor white space compar file show differ unifi format use git diff compar file show differ side side"
+            },
+            "dir": {
+              "man1_dir_6819": ""
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_28974338: replacing some commands in an existing BASH script"
+      ],
+      "Top-3 Scripts": [
+        "so_28974338: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "tail",
+      "MP Summary": "output the last part of files",
+      "Most Similar TLDR Task": "Keep reading file until `Ctrl + C`, even if the file is rotated",
+      "Most Similar TLDR Script": "tail -F {{file}}",
+      "Most Similar NL2Bash Task": "Display differences between /destination/dir/1 and /destination/dir/2 excluding files that match any pattern in file \"exclude.pats\".",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "diff /destination/dir/1 /destination/dir/2 -r -X exclude.pats\n",
+          "command-options": {
+            "diff": {
+              "mpsum": "compare two files"
+            },
+            "dir": {
+              "mpsum": "list directory contents",
+              "-r": "reverse order while sorting",
+              "-X": "sort alphabetically by entry extension"
+            }
+          },
+          "TLDR_inform": {
+            "diff": {
+              "man1_diff_6775": "compar file directori compar directori recurs show name differ file directori well chang made file compar directori show name file differ compar file list chang turn old_fil new_fil compar file ignor white space compar file show differ unifi format use git diff compar file show differ side side"
+            },
+            "dir": {
+              "man1_dir_6819": ""
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "su_1347233: SCP off the most recently modified file in a remote directory"
+      ],
+      "Top-3 Scripts": [
+        "su_1347233: ls -Art | tail -n 1\n\nls \u2026 | tail \u2026"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "md5sum",
+      "MP Summary": "compute and check MD5 message digest",
+      "Most Similar TLDR Task": "Read a file of MD5SUMs and verify all files have matching checksums",
+      "Most Similar TLDR Script": "md5sum -c {{filename.md5}}",
+      "Most Similar NL2Bash Task": "Display differences between /destination/dir/1 and /destination/dir/2 excluding files that match any pattern in file \"exclude.pats\".",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "diff /destination/dir/1 /destination/dir/2 -r -X exclude.pats\n",
+          "command-options": {
+            "diff": {
+              "mpsum": "compare two files"
+            },
+            "dir": {
+              "mpsum": "list directory contents",
+              "-r": "reverse order while sorting",
+              "-X": "sort alphabetically by entry extension"
+            }
+          },
+          "TLDR_inform": {
+            "diff": {
+              "man1_diff_6775": "compar file directori compar directori recurs show name differ file directori well chang made file compar directori show name file differ compar file list chang turn old_fil new_fil compar file ignor white space compar file show differ unifi format use git diff compar file show differ side side"
+            },
+            "dir": {
+              "man1_dir_6819": ""
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_28974338: replacing some commands in an existing BASH script"
+      ],
+      "Top-3 Scripts": [
+        "so_28974338: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "wc",
+      "MP Summary": "print newline, word, and byte counts for each file",
+      "Most Similar TLDR Task": "Count characters (bytes) in file",
+      "Most Similar TLDR Script": "wc -c {{file}}",
+      "Most Similar NL2Bash Task": "Display differences between /destination/dir/1 and /destination/dir/2 excluding files that match any pattern in file \"exclude.pats\".",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "diff /destination/dir/1 /destination/dir/2 -r -X exclude.pats\n",
+          "command-options": {
+            "diff": {
+              "mpsum": "compare two files"
+            },
+            "dir": {
+              "mpsum": "list directory contents",
+              "-r": "reverse order while sorting",
+              "-X": "sort alphabetically by entry extension"
+            }
+          },
+          "TLDR_inform": {
+            "diff": {
+              "man1_diff_6775": "compar file directori compar directori recurs show name differ file directori well chang made file compar directori show name file differ compar file list chang turn old_fil new_fil compar file ignor white space compar file show differ unifi format use git diff compar file show differ side side"
+            },
+            "dir": {
+              "man1_dir_6819": ""
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "su_1347233: SCP off the most recently modified file in a remote directory"
+      ],
+      "Top-3 Scripts": [
+        "su_1347233: find . ! -name . -prune -type f -exec sh -c '\n   [ \"$(find . ! -name . -prune -type f -newer \"$1\" -exec printf a \\; |\n   wc -c)\" -eq 0 ]' sh {} \\; -print\n\nwc -c\n\nssh usr@remote\n# now on the remote system\ncd \"/source/dir/\" &&\nfind . ! -name . -prune -type f -exec sh -c '\n   [ \"$(find . ! -name . -prune -type f -newer \"$1\" -exec printf a \\; |\n   wc -c)\" -eq 0 ]' sh {} \\; -exec scp {} usr@local:\"/target/dir/\" \\;\n\nssh usr@remote '\n   cd \"/source/dir/\" &&\n   find . ! -name . -prune -type f -exec sh -c '\"'\"'\n      [ \"$(find . ! -name . -prune -type f -newer \"$1\" -exec printf a \\; |\n      wc -c)\" -eq 0 ]'\"'\"' sh {} \\; -exec scp {} usr@local:\"/target/dir/\" \\;\n   '\n\nssh usr@remote '\n   cd \"/source/dir/\" &&\n   find . ! -name . -prune -type f -exec sh -c '\"'\"'\n      [ \"$(find . ! -name . -prune -type f -newer \"$1\" -exec printf a \\; |\n      wc -c)\" -eq 0 ]'\"'\"' sh {} \\; -print\n   '"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "sort",
+      "MP Summary": "sort lines of text files",
+      "Most Similar TLDR Task": "Sort a file preserving only unique lines",
+      "Most Similar TLDR Script": "sort -u {{path/to/file}}",
+      "Most Similar NL2Bash Task": "Display differences between /destination/dir/1 and /destination/dir/2 excluding files that match any pattern in file \"exclude.pats\".",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "diff /destination/dir/1 /destination/dir/2 -r -X exclude.pats\n",
+          "command-options": {
+            "diff": {
+              "mpsum": "compare two files"
+            },
+            "dir": {
+              "mpsum": "list directory contents",
+              "-r": "reverse order while sorting",
+              "-X": "sort alphabetically by entry extension"
+            }
+          },
+          "TLDR_inform": {
+            "diff": {
+              "man1_diff_6775": "compar file directori compar directori recurs show name differ file directori well chang made file compar directori show name file differ compar file list chang turn old_fil new_fil compar file ignor white space compar file show differ unifi format use git diff compar file show differ side side"
+            },
+            "dir": {
+              "man1_dir_6819": ""
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "su_1347233: SCP off the most recently modified file in a remote directory"
+      ],
+      "Top-3 Scripts": [
+        "su_1347233: find . -maxdepth 1 -type f -printf '%T@ %p\\0' |\n   sort -zrn |\n   head -zn 1 |\n   cut -z -d \" \" -f 2-\n\nfind \u2026 | sort -z \u2026 | head -z \u2026 | cut -z \u2026 | xargs -0 \u2026\n\nsshfs usr@remote:\"/source/dir/\" \"/local/path/\"\nfind \"/local/path/\" -maxdepth 1 -type f -printf '%T@ %p\\0' |\n   sort -zrn |\n   head -zn 1 |\n   cut -z -d \" \" -f 2- |\n   xargs -0r cp -t \"/target/dir/\" --\nfusermount -u \"/local/path/\""
+      ],
+      "Explanations about Options": {
+        "-z": "line delimiter is NUL, not newline",
+        "-r": "reverse the result of comparisons",
+        "-n": "compare according to string numerical value"
+      }
+    },
+    {
+      "Command": "script",
+      "MP Summary": "make typescript of terminal session",
+      "Most Similar TLDR Task": "Record a new session to a file named `typescript` in the current directory",
+      "Most Similar TLDR Script": "script",
+      "Most Similar NL2Bash Task": "Display differences between /destination/dir/1 and /destination/dir/2 excluding files that match any pattern in file \"exclude.pats\".",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "diff /destination/dir/1 /destination/dir/2 -r -X exclude.pats\n",
+          "command-options": {
+            "diff": {
+              "mpsum": "compare two files"
+            },
+            "dir": {
+              "mpsum": "list directory contents",
+              "-r": "reverse order while sorting",
+              "-X": "sort alphabetically by entry extension"
+            }
+          },
+          "TLDR_inform": {
+            "diff": {
+              "man1_diff_6775": "compar file directori compar directori recurs show name differ file directori well chang made file compar directori show name file differ compar file list chang turn old_fil new_fil compar file ignor white space compar file show differ unifi format use git diff compar file show differ side side"
+            },
+            "dir": {
+              "man1_dir_6819": ""
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_28974338: replacing some commands in an existing BASH script"
+      ],
+      "Top-3 Scripts": [
+        "so_28974338: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "awk",
+      "MP Summary": "pattern scanning and processing language",
+      "Most Similar TLDR Task": "Print the second column of the lines containing \"something\" in a space-separated file",
+      "Most Similar TLDR Script": "awk '/{{something}}/ {print $2}' {{filename}}",
+      "Most Similar NL2Bash Task": "Display differences between /destination/dir/1 and /destination/dir/2 excluding files that match any pattern in file \"exclude.pats\".",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "diff /destination/dir/1 /destination/dir/2 -r -X exclude.pats\n",
+          "command-options": {
+            "diff": {
+              "mpsum": "compare two files"
+            },
+            "dir": {
+              "mpsum": "list directory contents",
+              "-r": "reverse order while sorting",
+              "-X": "sort alphabetically by entry extension"
+            }
+          },
+          "TLDR_inform": {
+            "diff": {
+              "man1_diff_6775": "compar file directori compar directori recurs show name differ file directori well chang made file compar directori show name file differ compar file list chang turn old_fil new_fil compar file ignor white space compar file show differ unifi format use git diff compar file show differ side side"
+            },
+            "dir": {
+              "man1_dir_6819": ""
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_28974338: replacing some commands in an existing BASH script"
+      ],
+      "Top-3 Scripts": [
+        "so_28974338: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "print",
+      "MP Summary": "execute programs via entries in the mailcap file",
+      "Most Similar TLDR Task": "Print action can be used to print any file on default run-mailcap tool",
+      "Most Similar TLDR Script": "print {{filename}}",
+      "Most Similar NL2Bash Task": "Display differences between /destination/dir/1 and /destination/dir/2 excluding files that match any pattern in file \"exclude.pats\".",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "diff /destination/dir/1 /destination/dir/2 -r -X exclude.pats\n",
+          "command-options": {
+            "diff": {
+              "mpsum": "compare two files"
+            },
+            "dir": {
+              "mpsum": "list directory contents",
+              "-r": "reverse order while sorting",
+              "-X": "sort alphabetically by entry extension"
+            }
+          },
+          "TLDR_inform": {
+            "diff": {
+              "man1_diff_6775": "compar file directori compar directori recurs show name differ file directori well chang made file compar directori show name file differ compar file list chang turn old_fil new_fil compar file ignor white space compar file show differ unifi format use git diff compar file show differ side side"
+            },
+            "dir": {
+              "man1_dir_6819": ""
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_28974338: replacing some commands in an existing BASH script"
+      ],
+      "Top-3 Scripts": [
+        "so_28974338: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "head",
+      "MP Summary": "output the first part of files",
+      "Most Similar TLDR Task": "Output everything but the last few lines of a file",
+      "Most Similar TLDR Script": "head -n -{{count_of_lines}} {{filename}}",
+      "Most Similar NL2Bash Task": "Display differences between /destination/dir/1 and /destination/dir/2 excluding files that match any pattern in file \"exclude.pats\".",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "diff /destination/dir/1 /destination/dir/2 -r -X exclude.pats\n",
+          "command-options": {
+            "diff": {
+              "mpsum": "compare two files"
+            },
+            "dir": {
+              "mpsum": "list directory contents",
+              "-r": "reverse order while sorting",
+              "-X": "sort alphabetically by entry extension"
+            }
+          },
+          "TLDR_inform": {
+            "diff": {
+              "man1_diff_6775": "compar file directori compar directori recurs show name differ file directori well chang made file compar directori show name file differ compar file list chang turn old_fil new_fil compar file ignor white space compar file show differ unifi format use git diff compar file show differ side side"
+            },
+            "dir": {
+              "man1_dir_6819": ""
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "su_1347233: SCP off the most recently modified file in a remote directory"
+      ],
+      "Top-3 Scripts": [
+        "su_1347233: find . -maxdepth 1 -type f -printf '%T@ %p\\0' |\n   sort -zrn |\n   head -zn 1 |\n   cut -z -d \" \" -f 2-\n\nfind \u2026 | sort -z \u2026 | head -z \u2026 | cut -z \u2026 | xargs -0 \u2026\n\nsshfs usr@remote:\"/source/dir/\" \"/local/path/\"\nfind \"/local/path/\" -maxdepth 1 -type f -printf '%T@ %p\\0' |\n   sort -zrn |\n   head -zn 1 |\n   cut -z -d \" \" -f 2- |\n   xargs -0r cp -t \"/target/dir/\" --\nfusermount -u \"/local/path/\""
+      ],
+      "Explanations about Options": {
+        "-z": "line delimiter is NUL, not newline",
+        "-n": "print the first NUM lines instead of the first 10; with the leading '-', print all\n but the last NUM lines of each file"
+      }
+    },
+    {
+      "Command": "module",
+      "MP Summary": "command interface to the Modules package",
+      "Most Similar TLDR Task": "Unload a specific loaded module",
+      "Most Similar TLDR Script": "module {{module_name}}",
+      "Most Similar NL2Bash Task": "Display differences between /destination/dir/1 and /destination/dir/2 excluding files that match any pattern in file \"exclude.pats\".",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "diff /destination/dir/1 /destination/dir/2 -r -X exclude.pats\n",
+          "command-options": {
+            "diff": {
+              "mpsum": "compare two files"
+            },
+            "dir": {
+              "mpsum": "list directory contents",
+              "-r": "reverse order while sorting",
+              "-X": "sort alphabetically by entry extension"
+            }
+          },
+          "TLDR_inform": {
+            "diff": {
+              "man1_diff_6775": "compar file directori compar directori recurs show name differ file directori well chang made file compar directori show name file differ compar file list chang turn old_fil new_fil compar file ignor white space compar file show differ unifi format use git diff compar file show differ side side"
+            },
+            "dir": {
+              "man1_dir_6819": ""
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_52695200: Find string in each file. If it exists don't append. If it doesn't exist, append"
+      ],
+      "Top-3 Scripts": [
+        "so_52695200: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "sudo",
+      "MP Summary": "execute a command as another user",
+      "Most Similar TLDR Task": "Run a command as another user and/or group",
+      "Most Similar TLDR Script": "sudo -u {{user}} -g {{group}} {{id -a}}",
+      "Most Similar NL2Bash Task": "Display differences between /destination/dir/1 and /destination/dir/2 excluding files that match any pattern in file \"exclude.pats\".",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "diff /destination/dir/1 /destination/dir/2 -r -X exclude.pats\n",
+          "command-options": {
+            "diff": {
+              "mpsum": "compare two files"
+            },
+            "dir": {
+              "mpsum": "list directory contents",
+              "-r": "reverse order while sorting",
+              "-X": "sort alphabetically by entry extension"
+            }
+          },
+          "TLDR_inform": {
+            "diff": {
+              "man1_diff_6775": "compar file directori compar directori recurs show name differ file directori well chang made file compar directori show name file differ compar file list chang turn old_fil new_fil compar file ignor white space compar file show differ unifi format use git diff compar file show differ side side"
+            },
+            "dir": {
+              "man1_dir_6819": ""
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_28974338: replacing some commands in an existing BASH script"
+      ],
+      "Top-3 Scripts": [
+        "so_28974338: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "type",
+      "MP Summary": "write a description of command type",
+      "Most Similar TLDR Task": "Display all locations containing the specified executable",
+      "Most Similar TLDR Script": "type -a {{command}}",
+      "Most Similar NL2Bash Task": "Display differences between /destination/dir/1 and /destination/dir/2 excluding files that match any pattern in file \"exclude.pats\".",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "diff /destination/dir/1 /destination/dir/2 -r -X exclude.pats\n",
+          "command-options": {
+            "diff": {
+              "mpsum": "compare two files"
+            },
+            "dir": {
+              "mpsum": "list directory contents",
+              "-r": "reverse order while sorting",
+              "-X": "sort alphabetically by entry extension"
+            }
+          },
+          "TLDR_inform": {
+            "diff": {
+              "man1_diff_6775": "compar file directori compar directori recurs show name differ file directori well chang made file compar directori show name file differ compar file list chang turn old_fil new_fil compar file ignor white space compar file show differ unifi format use git diff compar file show differ side side"
+            },
+            "dir": {
+              "man1_dir_6819": ""
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_28974338: replacing some commands in an existing BASH script"
+      ],
+      "Top-3 Scripts": [
+        "so_28974338: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "cut",
+      "MP Summary": "remove sections from each line of files",
+      "Most Similar TLDR Task": "Cut out everything from the 3rd character to the end of each line",
+      "Most Similar TLDR Script": "cut -c {{3-}}",
+      "Most Similar NL2Bash Task": "Display differences between /destination/dir/1 and /destination/dir/2 excluding files that match any pattern in file \"exclude.pats\".",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "diff /destination/dir/1 /destination/dir/2 -r -X exclude.pats\n",
+          "command-options": {
+            "diff": {
+              "mpsum": "compare two files"
+            },
+            "dir": {
+              "mpsum": "list directory contents",
+              "-r": "reverse order while sorting",
+              "-X": "sort alphabetically by entry extension"
+            }
+          },
+          "TLDR_inform": {
+            "diff": {
+              "man1_diff_6775": "compar file directori compar directori recurs show name differ file directori well chang made file compar directori show name file differ compar file list chang turn old_fil new_fil compar file ignor white space compar file show differ unifi format use git diff compar file show differ side side"
+            },
+            "dir": {
+              "man1_dir_6819": ""
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "su_1347233: SCP off the most recently modified file in a remote directory"
+      ],
+      "Top-3 Scripts": [
+        "su_1347233: find . -maxdepth 1 -type f -printf '%T@ %p\\0' |\n   sort -zrn |\n   head -zn 1 |\n   cut -z -d \" \" -f 2-\n\nfind \u2026 | sort -z \u2026 | head -z \u2026 | cut -z \u2026 | xargs -0 \u2026\n\nsshfs usr@remote:\"/source/dir/\" \"/local/path/\"\nfind \"/local/path/\" -maxdepth 1 -type f -printf '%T@ %p\\0' |\n   sort -zrn |\n   head -zn 1 |\n   cut -z -d \" \" -f 2- |\n   xargs -0r cp -t \"/target/dir/\" --\nfusermount -u \"/local/path/\""
+      ],
+      "Explanations about Options": {
+        "-d": "use DELIM instead of TAB for field delimiter",
+        "-z": "line delimiter is NUL, not newline",
+        "-f": "select only these fields; also print any line that contains no delimiter\n character, unless the -s option is specified"
+      }
+    },
+    {
+      "Command": "chmod",
+      "MP Summary": "change file mode bits",
+      "Most Similar TLDR Task": "Change permissions recursively giving [g]roup and [o]thers the ability to [w]rite",
+      "Most Similar TLDR Script": "chmod -R g+w,o+w {{directory}}",
+      "Most Similar NL2Bash Task": "Display differences between /destination/dir/1 and /destination/dir/2 excluding files that match any pattern in file \"exclude.pats\".",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "diff /destination/dir/1 /destination/dir/2 -r -X exclude.pats\n",
+          "command-options": {
+            "diff": {
+              "mpsum": "compare two files"
+            },
+            "dir": {
+              "mpsum": "list directory contents",
+              "-r": "reverse order while sorting",
+              "-X": "sort alphabetically by entry extension"
+            }
+          },
+          "TLDR_inform": {
+            "diff": {
+              "man1_diff_6775": "compar file directori compar directori recurs show name differ file directori well chang made file compar directori show name file differ compar file list chang turn old_fil new_fil compar file ignor white space compar file show differ unifi format use git diff compar file show differ side side"
+            },
+            "dir": {
+              "man1_dir_6819": ""
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_617808: How to copy a file and change destination file permission in one step?"
+      ],
+      "Top-3 Scripts": [
+        "ul_617808: ...|  xargs sh -c 'for file; do \n                      cp -- \"$file\" /my/destination/path/ && \n                        chmod 700 /my/destination/path/\"$file\"; \n                    done' sh\n\n...|  xargs sh -c 'for file; do \n                  cp -- \"$file\" /my/destination/path/ && \n                    chmod 700 /my/destination/path/\"${file##*/}\"; \n                done' sh"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "zsh",
+      "MP Summary": "the Z shell",
+      "Most Similar TLDR Task": "Run commands from file and print them as they are executed",
+      "Most Similar TLDR Script": "zsh -x {{file}}",
+      "Most Similar NL2Bash Task": "Display differences between /destination/dir/1 and /destination/dir/2 excluding files that match any pattern in file \"exclude.pats\".",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "diff /destination/dir/1 /destination/dir/2 -r -X exclude.pats\n",
+          "command-options": {
+            "diff": {
+              "mpsum": "compare two files"
+            },
+            "dir": {
+              "mpsum": "list directory contents",
+              "-r": "reverse order while sorting",
+              "-X": "sort alphabetically by entry extension"
+            }
+          },
+          "TLDR_inform": {
+            "diff": {
+              "man1_diff_6775": "compar file directori compar directori recurs show name differ file directori well chang made file compar directori show name file differ compar file list chang turn old_fil new_fil compar file ignor white space compar file show differ unifi format use git diff compar file show differ side side"
+            },
+            "dir": {
+              "man1_dir_6819": ""
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_184651: Seeing file names in SCP"
+      ],
+      "Top-3 Scripts": [
+        "ul_184651: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "date",
+      "MP Summary": "print or set the system date and time",
+      "Most Similar TLDR Task": "Display a specific date (represented as a Unix timestamp) using the default format",
+      "Most Similar TLDR Script": "date -d @1473305798",
+      "Most Similar NL2Bash Task": "Display differences between /destination/dir/1 and /destination/dir/2 excluding files that match any pattern in file \"exclude.pats\".",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "diff /destination/dir/1 /destination/dir/2 -r -X exclude.pats\n",
+          "command-options": {
+            "diff": {
+              "mpsum": "compare two files"
+            },
+            "dir": {
+              "mpsum": "list directory contents",
+              "-r": "reverse order while sorting",
+              "-X": "sort alphabetically by entry extension"
+            }
+          },
+          "TLDR_inform": {
+            "diff": {
+              "man1_diff_6775": "compar file directori compar directori recurs show name differ file directori well chang made file compar directori show name file differ compar file list chang turn old_fil new_fil compar file ignor white space compar file show differ unifi format use git diff compar file show differ side side"
+            },
+            "dir": {
+              "man1_dir_6819": ""
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_410608: backup original in scp"
+      ],
+      "Top-3 Scripts": [
+        "ul_410608: rsync -ab --suffix \".$(date +'%Y%m%d')\" myfile.ext foo@example.com:/bar/baz\n\nssh foo@example.com 'cp -p /bar/baz /bar/baz.\"$(date +'%Y%m%d')\"' &&\nscp -p myfile.ext foo@example.com:/bar/baz"
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

@@ -1,0 +1,90 @@
+{
+    "Answers": [
+        {
+            "Command": "readlink",
+            "Explanations about Options": {},
+            "MP Summary": "print resolved symbolic links or canonical file names",
+            "Most Similar TLDR Script": "readlink {{filename}}",
+            "Most Similar TLDR Task": "Get the actual file to which the symlink points",
+            "Top-3 Scripts": [
+                "ul_193122: find /dir/with/symlinks/ -lname \"/home/s01/public_html/cgi-bin/uploads/00029/*\" \\\n    -exec  sh -c 'ln -sf `echo $(readlink $0) | sed s/home/home2/` $0' {} \\;",
+                "so_7167424: #!/usr/bin/bash\n\nfor link in $(find /symdir -type l)\ndo\n  loc=\"$(dirname \"$link\")\"\n  dir=\"$(readlink \"$link\")\"\n  mv \"$dir\" \"$loc\"\n  rm \"$link\"\ndone",
+                "ul_473928: ln -s -- \"$(readlink symlink1)\" symlink4"
+            ],
+            "Top-3 Similar Questions": [
+                "ul_193122: How I can change all symlink to the new path",
+                "so_7167424: replace all symlinks with original",
+                "ul_473928: ln: create symlink using another symlink"
+            ]
+        },
+        {
+            "Command": "pwd",
+            "Explanations about Options": {
+                "-P(M)": "avoid all symlinks"
+            },
+            "MP Summary": "print name of current/working directory",
+            "Most Similar TLDR Script": "pwd -P",
+            "Most Similar TLDR Task": "Print the current directory, and resolve all symlinks (i.e. show the \"physical\" path)",
+            "Top-3 Scripts": [
+                "ul_604837: # includes complete left path\nalias ls2l='if [[ $(diff <(ls \"$PWD\" | sed \"s|.*|$(ls -d \"$PWD/\")&|g\") <(ls -d \"$(pwd -P)/\"*) | wc -l) == \"0\" ]]; then ls -l; else paste -d \" -> \" <(ls \"$PWD\" | sed \"s|.*|$(ls -d \"$PWD/\")&|g\") /dev/null /dev/null /dev/null <(ls -d \"$(pwd -P)/\"*); fi'\n\n# or \n\nalias  ls2='if [[ $(diff <(ls \"$PWD\" | sed \"s|.*|$(ls -d \"$PWD/\")&|g\") <(ls -d \"$(pwd -P)/\"*) | wc -l) == \"0\" ]]; then ls -l; else paste -d \" -> \" <(ls \"$PWD\") /dev/null /dev/null /dev/null <(ls -d \"$(pwd -P)/\"*); fi'",
+                "ul_120726: % pwd\n/tmp/sf-582772\n% find top-2 -maxdepth 1 -mindepth 1 -type d -exec ln -s ../'{}' top-1/ \\;"
+            ],
+            "Top-3 Similar Questions": [
+                "ul_604837: recognize symlink from symlinked folder",
+                "ul_120726: Symlink all subdirectories in a directory to another directory"
+            ]
+        },
+        {
+            "Command": "cd",
+            "Explanations about Options": {},
+            "MP Summary": "change the working directory",
+            "Most Similar TLDR Script": "cd ..",
+            "Most Similar TLDR Task": "Go up to the parent of the current directory",
+            "Top-3 Scripts": [
+                "ul_519963: cd \"${HOME}\"\ncp -rs \"${DIR}/.*\" \"${DIR}/*\" .",
+                "ul_74721: cd ~/path/to/dirs || exit 1\nfind /path/to/dirs -type d -printf %P\\\\0 | xargs -0 mkdir -p \nfind /path/to/dirs -type f -print0 | \n  xargs -0 cp --symbolic-link --parents --target-directory=.",
+                "so_8463146: mkdir someothersite && cd someothersite \nfind /your/project -type f ! -name 'CONFIGFILE' -exec ln -s \\{\\} ./ \\;"
+            ],
+            "Top-3 Similar Questions": [
+                "ul_519963: Create a directory if it doesn't exist when symlinking a file into that directory",
+                "ul_74721: How do I copy directories and symlink files?",
+                "so_8463146: Is there a way to create symlink[s] to directory's *contents*?"
+            ]
+        },
+        {
+            "Command": "ln",
+            "Explanations about Options": {
+                "-f(M)": "remove existing destination files",
+                "-n(M)": "treat LINK_NAME as a normal file if it is a symbolic link to a directory",
+                "-s(M)": "make symbolic links instead of hard links"
+            },
+            "MP Summary": "make links between files",
+            "Most Similar TLDR Script": "ln -s {{path/to/file_or_directory}} {{path/to/symlink}}",
+            "Most Similar TLDR Task": "Create a symbolic link to a file or directory",
+            "Top-3 Scripts": [
+                "ul_544073: ln -s\n\nln file dir",
+                "so_1951742: ln -s /path/to/file /path/to/symlink\n\nln -sf /path/to/file /path/to/symlink",
+                "ul_151999: ln -s /media/files/tb-prod/files files\n\nln -sfn /a/new/path files"
+            ],
+            "Top-3 Similar Questions": [
+                "ul_544073: Symlink not working",
+                "so_1951742: How can I symlink a file in Linux?",
+                "ul_151999: How to change where a symlink points"
+            ]
+        },
+        {
+            "Command": "chown",
+            "Explanations about Options": {
+                "-R(M)": "operate on files and directories recursively"
+            },
+            "MP Summary": "change file owner and group",
+            "Most Similar TLDR Script": "chown -R {{user}} {{path/to/directory}}",
+            "Most Similar TLDR Task": "Recursively change the owner of a directory and its contents",
+            "Top-3 Scripts": [],
+            "Top-3 Similar Questions": [
+                "ul_293763: How to change the Symlink permission?"
+            ]
+        }
+    ],
+    "Query": "How can I edit symlinks?"
+}

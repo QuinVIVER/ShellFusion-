@@ -1,0 +1,1629 @@
+{
+  "Query": "How to import load a .sql or .csv file into SQLite?",
+  "Answers": [
+    {
+      "Command": "csvsql",
+      "MP Summary": "manual page for csvsql 1.0.2",
+      "Most Similar TLDR Task": "Import a CSV file into an SQL database",
+      "Most Similar TLDR Script": "csvsql --insert --db \"{{mysql://user:password@host/database}}\" {{data.csv}}",
+      "Most Similar NL2Bash Task": "display all sqlite files in the current directory along with their timestamp",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find ./ -name \"*.sqlite\" -printf '%Tc %p\\n'\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-printf": "True; print format on the standard output, interpreting `\\' escapes and `%'\n directives. Field widths and precisions can be specified as with the `printf' C\n function. Please note that many of the fields are printed as %s rather than %d,\n and this may mean that flags don't work as you might expect. This also means that\n the `-' flag does work (it forces fields to be left-aligned). Unlike -print,\n -printf does not add a newline at the end of the string. The escapes and\n directives are:"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "tldr_8209: Import a CSV file into an SQL database",
+        "tldr_1294: Run an SQL query on a CSV file"
+      ],
+      "Top-3 Scripts": [
+        "tldr_8209: csvsql --insert --db \"{{mysql://user:password@host/database}}\" {{data.csv}}",
+        "tldr_1294: csvsql --query \"{{select * from 'data'}}\" {{data.csv}}"
+      ],
+      "Explanations about Options": {
+        "--db": "CONNECTION_STRING\n If present, a sqlalchemy connection string to use to directly execute generated SQL\n on a database.",
+        "--query": "QUERY\n Execute one or more SQL queries delimited by \";\" and output the result of the last\n query as CSV.",
+        "--insert": "In addition to creating the table, also insert the data into the table. Only valid\n when --db is specified."
+      }
+    },
+    {
+      "Command": "sqlite3",
+      "MP Summary": "A command line interface for SQLite version 3",
+      "Most Similar TLDR Task": "Execute an SQL statement against a database and then exit",
+      "Most Similar TLDR Script": "sqlite3 {{path/to/database.sqlite3}} '{{SELECT * FROM some_table;}}'",
+      "Most Similar NL2Bash Task": "display all sqlite files in the current directory along with their timestamp",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find ./ -name \"*.sqlite\" -printf '%Tc %p\\n'\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-printf": "True; print format on the standard output, interpreting `\\' escapes and `%'\n directives. Field widths and precisions can be specified as with the `printf' C\n function. Please note that many of the fields are printed as %s rather than %d,\n and this may mean that flags don't work as you might expect. This also means that\n the `-' flag does work (it forces fields to be left-aligned). Unlike -print,\n -printf does not add a newline at the end of the string. The escapes and\n directives are:"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_4924699: In Linux, is there a command for converting a CSV file into an SQLite file?",
+        "so_14433372: Importing badly formed CSV into SQLite",
+        "so_67962861: Pipe string, file contents, string into sqlite without intermediate file?"
+      ],
+      "Top-3 Scripts": [
+        "so_4924699: sqlite3 my_db.sqlite \"CREATE TABLE my_table(food TEXT, color TEXT)\"\nsqlite3 my_db.sqlite \".import my_input.csv my_table\"",
+        "so_14433372: ",
+        "so_67962861: {\n  printf %s\\\\n 'BEGIN TRANSACTION;'\n  cat \"$file_name_original_sql\"\n  printf %s\\\\n 'COMMIT;'\n} | sqlite3 \"$file_name_sqlite_db\" 2> \"$path_to_insert_error\"\n\nsqlite3 \"$file_name_sqlite_db\" 2> \"$path_to_insert_error\" <<EOF\nBEGIN TRANSACTION\n$(cat \"$file_name_original_sql\")\nCOMMIT;\nEOF\n\nprintf 'BEGIN TRANSACTION;\\n%sCOMMIT;\\n' \"$(cat \"$file_name_original_sql\")\" |\n  sqlite3 \"$file_name_sqlite_db\" 2> \"$path_to_insert_error\"\n\nsql_transaction() {\n  printf %s\\\\n 'BEGIN TRANSACTION;'\n  cat\n  printf %s\\\\n 'COMMIT;'\n}\n\nsql_transaction <\"$file_name_original_sql\" |\n  sqlite3 \"$file_name_sqlite_db\" 2> \"$path_to_insert_error\""
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "csvpy",
+      "MP Summary": "manual page for csvpy 1.0.2",
+      "Most Similar TLDR Task": "Load a CSV file into a `CSVKitDictReader` object",
+      "Most Similar TLDR Script": "csvpy --dict {{data.csv}}",
+      "Most Similar NL2Bash Task": "display all sqlite files in the current directory along with their timestamp",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find ./ -name \"*.sqlite\" -printf '%Tc %p\\n'\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-printf": "True; print format on the standard output, interpreting `\\' escapes and `%'\n directives. Field widths and precisions can be specified as with the `printf' C\n function. Please note that many of the fields are printed as %s rather than %d,\n and this may mean that flags don't work as you might expect. This also means that\n the `-' flag does work (it forces fields to be left-aligned). Unlike -print,\n -printf does not add a newline at the end of the string. The escapes and\n directives are:"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "tldr_1118: Load a CSV file into a `CSVKitReader` object",
+        "tldr_1117: Load a CSV file into a `CSVKitDictReader` object"
+      ],
+      "Top-3 Scripts": [
+        "tldr_1118: csvpy {{data.csv}}",
+        "tldr_1117: csvpy --dict {{data.csv}}"
+      ],
+      "Explanations about Options": {
+        "--dict": "Load the CSV file into a DictReader."
+      }
+    },
+    {
+      "Command": "echo",
+      "MP Summary": "display a line of text",
+      "Most Similar TLDR Task": "Append a message to the file",
+      "Most Similar TLDR Script": "echo \"{{Hello World}}\" >> {{file.txt}}",
+      "Most Similar NL2Bash Task": "display all sqlite files in the current directory along with their timestamp",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find ./ -name \"*.sqlite\" -printf '%Tc %p\\n'\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-printf": "True; print format on the standard output, interpreting `\\' escapes and `%'\n directives. Field widths and precisions can be specified as with the `printf' C\n function. Please note that many of the fields are printed as %s rather than %d,\n and this may mean that flags don't work as you might expect. This also means that\n the `-' flag does work (it forces fields to be left-aligned). Unlike -print,\n -printf does not add a newline at the end of the string. The escapes and\n directives are:"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_24762223: Import CSV value into Bash",
+        "so_57530463: Using bash, awk or sed to templatize a CSV file into a SQL file",
+        "so_7256984: Windows Shell Script to load csv into variables"
+      ],
+      "Top-3 Scripts": [
+        "so_24762223: #!/bin/bash\n\nwhile IFS=\",\" read Alabama  Alaska  Arizona Arkansas  California  Colorado  Connecticut Delaware Florida  Georgia  Hawaii  Idaho  Illinois  Indiana  Iowa \ndo\n    echo $Alabama\ndone < my_file.csv",
+        "so_57530463: $: sed \"s/ *= %ID%/ IN ( $(echo $(<ids.csv) ) )/\" template.sql > update_products.sql",
+        "so_7256984: echo off\nsetlocal enabledelayedexpansion\n\nfor /f \"tokens=1,2* delims=,\" %%i in (host-info.txt) do call:handler %%i %%j\ngoto:eof\n\n:handler\n    echo client name is %1 location is %2 ..."
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "file",
+      "MP Summary": "determine file type",
+      "Most Similar TLDR Task": "Look inside a zipped file and determine the file type(s) inside",
+      "Most Similar TLDR Script": "file -z {{foo.zip}}",
+      "Most Similar NL2Bash Task": "display all sqlite files in the current directory along with their timestamp",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find ./ -name \"*.sqlite\" -printf '%Tc %p\\n'\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-printf": "True; print format on the standard output, interpreting `\\' escapes and `%'\n directives. Field widths and precisions can be specified as with the `printf' C\n function. Please note that many of the fields are printed as %s rather than %d,\n and this may mean that flags don't work as you might expect. This also means that\n the `-' flag does work (it forces fields to be left-aligned). Unlike -print,\n -printf does not add a newline at the end of the string. The escapes and\n directives are:"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_27454089: how do I convert a log file into a csv",
+        "so_22204911: How to pass a bash variable into an sql file",
+        "so_22234270: Importing .sql file into MongoDB, iterating this action 1000 times"
+      ],
+      "Top-3 Scripts": [
+        "so_27454089: cut -d':' -f 2 file | paste -s -d ',,,\n'  # behold the new line which alternates the sequence.",
+        "so_22204911: #!/bin/bash\ndbase_connect=\"psql -h server -U username dbase\"\nfile=\"/tmp/$fname.csv\"\nsql=\"/home/user/sql_files/query.sql\"\ntmp=\"home/user/sql_files/query.sql.tmp\"\ns=\"s/\\$1/$1/g\"\ncat $sql | sed $s > $tmp\n\nsudo bash -c \"$dbase_connect -c -q -A -F , -f $tmp -o $file\"\nrm -f $tmp",
+        "so_22234270: filename_in=\"inputfile.txt\"  \n filename_out=\"outputfile.txt\" \n size=\"2000000000\"       #2GB\n echo > $filename_out\n while [  $(stat -c%s \"$filename_out\") -lt \"$size\" ]; do\n      echo file size =  $(stat -c%s \"$filename_out\")\n      cat $filename_in >> $filename_out\ndone"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "cat",
+      "MP Summary": "concatenate files and print on the standard output",
+      "Most Similar TLDR Task": "Append several files into the target file",
+      "Most Similar TLDR Script": "cat {{file1}} {{file2}} >> {{target_file}}",
+      "Most Similar NL2Bash Task": "display all sqlite files in the current directory along with their timestamp",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find ./ -name \"*.sqlite\" -printf '%Tc %p\\n'\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-printf": "True; print format on the standard output, interpreting `\\' escapes and `%'\n directives. Field widths and precisions can be specified as with the `printf' C\n function. Please note that many of the fields are printed as %s rather than %d,\n and this may mean that flags don't work as you might expect. This also means that\n the `-' flag does work (it forces fields to be left-aligned). Unlike -print,\n -printf does not add a newline at the end of the string. The escapes and\n directives are:"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_22204911: How to pass a bash variable into an sql file",
+        "so_57530463: Using bash, awk or sed to templatize a CSV file into a SQL file",
+        "so_22234270: Importing .sql file into MongoDB, iterating this action 1000 times"
+      ],
+      "Top-3 Scripts": [
+        "so_22204911: #!/bin/bash\ndbase_connect=\"psql -h server -U username dbase\"\nfile=\"/tmp/$fname.csv\"\nsql=\"/home/user/sql_files/query.sql\"\ntmp=\"home/user/sql_files/query.sql.tmp\"\ns=\"s/\\$1/$1/g\"\ncat $sql | sed $s > $tmp\n\nsudo bash -c \"$dbase_connect -c -q -A -F , -f $tmp -o $file\"\nrm -f $tmp",
+        "so_57530463: ",
+        "so_22234270: filename_in=\"inputfile.txt\"  \n filename_out=\"outputfile.txt\" \n size=\"2000000000\"       #2GB\n echo > $filename_out\n while [  $(stat -c%s \"$filename_out\") -lt \"$size\" ]; do\n      echo file size =  $(stat -c%s \"$filename_out\")\n      cat $filename_in >> $filename_out\ndone"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "pg_dump",
+      "MP Summary": "extract a PostgreSQL database into a script file or other archive file",
+      "Most Similar TLDR Task": "Dump only database data into an SQL-script file",
+      "Most Similar TLDR Script": "pg_dump -a {{db_name}} > {{path/to/output_file.sql}}",
+      "Most Similar NL2Bash Task": "display all sqlite files in the current directory along with their timestamp",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find ./ -name \"*.sqlite\" -printf '%Tc %p\\n'\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-printf": "True; print format on the standard output, interpreting `\\' escapes and `%'\n directives. Field widths and precisions can be specified as with the `printf' C\n function. Please note that many of the fields are printed as %s rather than %d,\n and this may mean that flags don't work as you might expect. This also means that\n the `-' flag does work (it forces fields to be left-aligned). Unlike -print,\n -printf does not add a newline at the end of the string. The escapes and\n directives are:"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_26557125: How do i import imdb list files into postgresql database?"
+      ],
+      "Top-3 Scripts": [
+        "so_26557125: pg_dump imdbdata > imdbdata.pgdump"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "sed",
+      "MP Summary": "stream editor for filtering and transforming text",
+      "Most Similar TLDR Task": "Replace all occurrences of an extended regular expression in a file, and print the result",
+      "Most Similar TLDR Script": "sed -r 's/{{regex}}/{{replace}}/g' {{filename}}",
+      "Most Similar NL2Bash Task": "display all sqlite files in the current directory along with their timestamp",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find ./ -name \"*.sqlite\" -printf '%Tc %p\\n'\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-printf": "True; print format on the standard output, interpreting `\\' escapes and `%'\n directives. Field widths and precisions can be specified as with the `printf' C\n function. Please note that many of the fields are printed as %s rather than %d,\n and this may mean that flags don't work as you might expect. This also means that\n the `-' flag does work (it forces fields to be left-aligned). Unlike -print,\n -printf does not add a newline at the end of the string. The escapes and\n directives are:"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_24762223: Import CSV value into Bash",
+        "so_22204911: How to pass a bash variable into an sql file",
+        "so_57530463: Using bash, awk or sed to templatize a CSV file into a SQL file"
+      ],
+      "Top-3 Scripts": [
+        "so_24762223: sed -n ...p",
+        "so_22204911: #!/bin/bash\ndbase_connect=\"psql -h server -U username dbase\"\nfile=\"/tmp/$fname.csv\"\nsql=\"/home/user/sql_files/query.sql\"\ntmp=\"home/user/sql_files/query.sql.tmp\"\ns=\"s/\\$1/$1/g\"\ncat $sql | sed $s > $tmp\n\nsudo bash -c \"$dbase_connect -c -q -A -F , -f $tmp -o $file\"\nrm -f $tmp",
+        "so_57530463: $: sed \"s/ *= %ID%/ IN ( $(echo $(<ids.csv) ) )/\" template.sql > update_products.sql"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "mysql",
+      "MP Summary": "the MySQL command-line client",
+      "Most Similar TLDR Task": "Execute SQL statements in a script file (batch file)",
+      "Most Similar TLDR Script": "mysql -e \"source {{filename.sql}}\" {{database_name}}",
+      "Most Similar NL2Bash Task": "display all sqlite files in the current directory along with their timestamp",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find ./ -name \"*.sqlite\" -printf '%Tc %p\\n'\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-printf": "True; print format on the standard output, interpreting `\\' escapes and `%'\n directives. Field widths and precisions can be specified as with the `printf' C\n function. Please note that many of the fields are printed as %s rather than %d,\n and this may mean that flags don't work as you might expect. This also means that\n the `-' flag does work (it forces fields to be left-aligned). Unlike -print,\n -printf does not add a newline at the end of the string. The escapes and\n directives are:"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_405897: How can I import multiple .sql files into MySQL?",
+        "nl2bash_15240: Import the uncompressed contents of the last modified file  matching \"*.sql.gz\" into \"mysql\""
+      ],
+      "Top-3 Scripts": [
+        "au_405897: for SQL in *.sql; do DB=${SQL/\\.sql/}; mysql $DB < $SQL; done\n\nfor SQL in *.sql; do DB=${SQL/\\.sql/}; mysql -u user --password=11111 $DB < $SQL; done\"",
+        "nl2bash_15240: ls -Art *.sql.gz |tail -n 1 |xargs gunzip -c | mysql --user=user --password=password database"
+      ],
+      "Explanations about Options": {
+        "--user": "The user name of the MySQL account to use for connecting to the server.",
+        "-u": "The user name of the MySQL account to use for connecting to the server."
+      }
+    },
+    {
+      "Command": "print",
+      "MP Summary": "execute programs via entries in the mailcap file",
+      "Most Similar TLDR Task": "Print action can be used to print any file on default run-mailcap tool",
+      "Most Similar TLDR Script": "print {{filename}}",
+      "Most Similar NL2Bash Task": "display all sqlite files in the current directory along with their timestamp",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find ./ -name \"*.sqlite\" -printf '%Tc %p\\n'\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-printf": "True; print format on the standard output, interpreting `\\' escapes and `%'\n directives. Field widths and precisions can be specified as with the `printf' C\n function. Please note that many of the fields are printed as %s rather than %d,\n and this may mean that flags don't work as you might expect. This also means that\n the `-' flag does work (it forces fields to be left-aligned). Unlike -print,\n -printf does not add a newline at the end of the string. The escapes and\n directives are:"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_29188683: split mydumper sql file into separate sql files",
+        "ul_16849: Importing CSV contacts into Evolution 3.0.2",
+        "so_10353467: How to insert binary data into sqlite3 database in bash?"
+      ],
+      "Top-3 Scripts": [
+        "so_29188683: /bin/awk 'BEGIN{RS=\";\"}{close(\"export\" i \".sql\"); x=\"export.\"++i;} {print $0\";\"> x\".sql\";}'",
+        "ul_16849: ",
+        "so_10353467: [somneone@somewhere tmp]$ sqlite3 foodb \"select quote(bar) from foo;\" | perl -ne 's/([0-9a-f]{2})/print chr hex $1/gie' > bla.jpg \n[somneone@somewhere tmp]$ ll *.jpg\n-rw-rw-r-- 1 someone someone 618441 Apr 28 16:59 bla.jpg\n-rw-rw-r-- 1 someone someone 618441 Apr 28 16:37 test.jpg\n[someone@somewhere tmp]$ md5sum *.jpg \n3237a2b76050f2780c592455b3414813  bla.jpg\n3237a2b76050f2780c592455b3414813  test.jpg"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "read",
+      "MP Summary": "read a line from standard input",
+      "Most Similar TLDR Task": "Store each of the next lines you enter as values of an array",
+      "Most Similar TLDR Script": "read -a {{array}}",
+      "Most Similar NL2Bash Task": "display all sqlite files in the current directory along with their timestamp",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find ./ -name \"*.sqlite\" -printf '%Tc %p\\n'\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-printf": "True; print format on the standard output, interpreting `\\' escapes and `%'\n directives. Field widths and precisions can be specified as with the `printf' C\n function. Please note that many of the fields are printed as %s rather than %d,\n and this may mean that flags don't work as you might expect. This also means that\n the `-' flag does work (it forces fields to be left-aligned). Unlike -print,\n -printf does not add a newline at the end of the string. The escapes and\n directives are:"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_24762223: Import CSV value into Bash",
+        "so_57530463: Using bash, awk or sed to templatize a CSV file into a SQL file"
+      ],
+      "Top-3 Scripts": [
+        "so_24762223: #!/bin/bash\n\nwhile IFS=\",\" read Alabama  Alaska  Arizona Arkansas  California  Colorado  Connecticut Delaware Florida  Georgia  Hawaii  Idaho  Illinois  Indiana  Iowa \ndo\n    echo $Alabama\ndone < my_file.csv",
+        "so_57530463: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "import",
+      "MP Summary": "saves any visible window on an X server and outputs it as an image file. You can capture a single window, the entire screen, or any rectangular portion of the screen.",
+      "Most Similar TLDR Task": "Capture contents of a remote X server screen in the PNG image format",
+      "Most Similar TLDR Script": "import -window root -display {{remote_host}}:{screen}.{display} {{output.png}}",
+      "Most Similar NL2Bash Task": "display all sqlite files in the current directory along with their timestamp",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find ./ -name \"*.sqlite\" -printf '%Tc %p\\n'\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-printf": "True; print format on the standard output, interpreting `\\' escapes and `%'\n directives. Field widths and precisions can be specified as with the `printf' C\n function. Please note that many of the fields are printed as %s rather than %d,\n and this may mean that flags don't work as you might expect. This also means that\n the `-' flag does work (it forces fields to be left-aligned). Unlike -print,\n -printf does not add a newline at the end of the string. The escapes and\n directives are:"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_4924699: In Linux, is there a command for converting a CSV file into an SQLite file?",
+        "ul_16849: Importing CSV contacts into Evolution 3.0.2"
+      ],
+      "Top-3 Scripts": [
+        "so_4924699: ",
+        "ul_16849: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "paste",
+      "MP Summary": "merge lines of files",
+      "Most Similar TLDR Task": "Join all the lines into a single line, using the specified delimiter",
+      "Most Similar TLDR Script": "paste -s -d {{delimiter}} {{file}}",
+      "Most Similar NL2Bash Task": "display all sqlite files in the current directory along with their timestamp",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find ./ -name \"*.sqlite\" -printf '%Tc %p\\n'\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-printf": "True; print format on the standard output, interpreting `\\' escapes and `%'\n directives. Field widths and precisions can be specified as with the `printf' C\n function. Please note that many of the fields are printed as %s rather than %d,\n and this may mean that flags don't work as you might expect. This also means that\n the `-' flag does work (it forces fields to be left-aligned). Unlike -print,\n -printf does not add a newline at the end of the string. The escapes and\n directives are:"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_27454089: how do I convert a log file into a csv"
+      ],
+      "Top-3 Scripts": [
+        "so_27454089: cut -d':' -f 2 file | paste -s -d ',,,\n'  # behold the new line which alternates the sequence."
+      ],
+      "Explanations about Options": {
+        "-d": "reuse characters from LIST instead of TABs",
+        "-s": "paste one file at a time instead of in parallel"
+      }
+    },
+    {
+      "Command": "awk",
+      "MP Summary": "pattern scanning and processing language",
+      "Most Similar TLDR Task": "Print the last column of each line in a file, using a comma (instead of space) as a field separator",
+      "Most Similar TLDR Script": "awk -F ',' '{print $NF}' {{filename}}",
+      "Most Similar NL2Bash Task": "display all sqlite files in the current directory along with their timestamp",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find ./ -name \"*.sqlite\" -printf '%Tc %p\\n'\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-printf": "True; print format on the standard output, interpreting `\\' escapes and `%'\n directives. Field widths and precisions can be specified as with the `printf' C\n function. Please note that many of the fields are printed as %s rather than %d,\n and this may mean that flags don't work as you might expect. This also means that\n the `-' flag does work (it forces fields to be left-aligned). Unlike -print,\n -printf does not add a newline at the end of the string. The escapes and\n directives are:"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_29188683: split mydumper sql file into separate sql files",
+        "so_31979812: how to parse out file name and import the data into csv files using shellscript?"
+      ],
+      "Top-3 Scripts": [
+        "so_29188683: /bin/awk 'BEGIN{RS=\";\"}{close(\"export\" i \".sql\"); x=\"export.\"++i;} {print $0\";\"> x\".sql\";}'",
+        "so_31979812: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "bash",
+      "MP Summary": "GNU Bourne-Again SHell",
+      "Most Similar TLDR Task": "Run commands from a file",
+      "Most Similar TLDR Script": "bash {{file.sh}}",
+      "Most Similar NL2Bash Task": "display all sqlite files in the current directory along with their timestamp",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find ./ -name \"*.sqlite\" -printf '%Tc %p\\n'\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-printf": "True; print format on the standard output, interpreting `\\' escapes and `%'\n directives. Field widths and precisions can be specified as with the `printf' C\n function. Please note that many of the fields are printed as %s rather than %d,\n and this may mean that flags don't work as you might expect. This also means that\n the `-' flag does work (it forces fields to be left-aligned). Unlike -print,\n -printf does not add a newline at the end of the string. The escapes and\n directives are:"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_22204911: How to pass a bash variable into an sql file"
+      ],
+      "Top-3 Scripts": [
+        "so_22204911: #!/bin/bash\ndbase_connect=\"psql -h server -U username dbase\"\nfile=\"/tmp/$fname.csv\"\nsql=\"/home/user/sql_files/query.sql\"\ntmp=\"home/user/sql_files/query.sql.tmp\"\ns=\"s/\\$1/$1/g\"\ncat $sql | sed $s > $tmp\n\nsudo bash -c \"$dbase_connect -c -q -A -F , -f $tmp -o $file\"\nrm -f $tmp"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "cp",
+      "MP Summary": "copy files and directories",
+      "Most Similar TLDR Task": "Copy a file into another directory, keeping the filename",
+      "Most Similar TLDR Script": "cp {{path/to/source_file.ext}} {{path/to/target_parent_directory}}",
+      "Most Similar NL2Bash Task": "display all sqlite files in the current directory along with their timestamp",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find ./ -name \"*.sqlite\" -printf '%Tc %p\\n'\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-printf": "True; print format on the standard output, interpreting `\\' escapes and `%'\n directives. Field widths and precisions can be specified as with the `printf' C\n function. Please note that many of the fields are printed as %s rather than %d,\n and this may mean that flags don't work as you might expect. This also means that\n the `-' flag does work (it forces fields to be left-aligned). Unlike -print,\n -printf does not add a newline at the end of the string. The escapes and\n directives are:"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_31979812: how to parse out file name and import the data into csv files using shellscript?"
+      ],
+      "Top-3 Scripts": [
+        "so_31979812: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "which",
+      "MP Summary": "locate a command",
+      "Most Similar TLDR Task": "Search the PATH environment variable and display the location of any matching executables",
+      "Most Similar TLDR Script": "which {{executable}}",
+      "Most Similar NL2Bash Task": "display all sqlite files in the current directory along with their timestamp",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find ./ -name \"*.sqlite\" -printf '%Tc %p\\n'\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-printf": "True; print format on the standard output, interpreting `\\' escapes and `%'\n directives. Field widths and precisions can be specified as with the `printf' C\n function. Please note that many of the fields are printed as %s rather than %d,\n and this may mean that flags don't work as you might expect. This also means that\n the `-' flag does work (it forces fields to be left-aligned). Unlike -print,\n -printf does not add a newline at the end of the string. The escapes and\n directives are:"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_27454089: how do I convert a log file into a csv"
+      ],
+      "Top-3 Scripts": [
+        "so_27454089: cut -d':' -f 2 file | paste -s -d ',,,\n'  # behold the new line which alternates the sequence."
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "psql",
+      "MP Summary": "PostgreSQL interactive terminal",
+      "Most Similar TLDR Task": "Execute a single SQL query or PostgreSQL command on the given database (useful in shell scripts)",
+      "Most Similar TLDR Script": "psql -c '{{query}}' {{database}}",
+      "Most Similar NL2Bash Task": "display all sqlite files in the current directory along with their timestamp",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find ./ -name \"*.sqlite\" -printf '%Tc %p\\n'\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-printf": "True; print format on the standard output, interpreting `\\' escapes and `%'\n directives. Field widths and precisions can be specified as with the `printf' C\n function. Please note that many of the fields are printed as %s rather than %d,\n and this may mean that flags don't work as you might expect. This also means that\n the `-' flag does work (it forces fields to be left-aligned). Unlike -print,\n -printf does not add a newline at the end of the string. The escapes and\n directives are:"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_26557125: How do i import imdb list files into postgresql database?"
+      ],
+      "Top-3 Scripts": [
+        "so_26557125: psql imdbdata < imdbdata.pgdump"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "rm",
+      "MP Summary": "remove files or directories",
+      "Most Similar TLDR Task": "Interactively remove multiple files, with a prompt before every removal",
+      "Most Similar TLDR Script": "rm -i {{file(s)}}",
+      "Most Similar NL2Bash Task": "display all sqlite files in the current directory along with their timestamp",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find ./ -name \"*.sqlite\" -printf '%Tc %p\\n'\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-printf": "True; print format on the standard output, interpreting `\\' escapes and `%'\n directives. Field widths and precisions can be specified as with the `printf' C\n function. Please note that many of the fields are printed as %s rather than %d,\n and this may mean that flags don't work as you might expect. This also means that\n the `-' flag does work (it forces fields to be left-aligned). Unlike -print,\n -printf does not add a newline at the end of the string. The escapes and\n directives are:"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_22204911: How to pass a bash variable into an sql file"
+      ],
+      "Top-3 Scripts": [
+        "so_22204911: #!/bin/bash\ndbase_connect=\"psql -h server -U username dbase\"\nfile=\"/tmp/$fname.csv\"\nsql=\"/home/user/sql_files/query.sql\"\ntmp=\"home/user/sql_files/query.sql.tmp\"\ns=\"s/\\$1/$1/g\"\ncat $sql | sed $s > $tmp\n\nsudo bash -c \"$dbase_connect -c -q -A -F , -f $tmp -o $file\"\nrm -f $tmp"
+      ],
+      "Explanations about Options": {
+        "-f": "ignore nonexistent files and arguments, never prompt"
+      }
+    },
+    {
+      "Command": "xargs",
+      "MP Summary": "build and execute command lines from standard input",
+      "Most Similar TLDR Task": "Run multiple chained commands on the input data",
+      "Most Similar TLDR Script": "{{arguments_source}} | xargs sh -c \"{{command1}} && {{command2}} | {{command3}}\"",
+      "Most Similar NL2Bash Task": "display all sqlite files in the current directory along with their timestamp",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find ./ -name \"*.sqlite\" -printf '%Tc %p\\n'\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-printf": "True; print format on the standard output, interpreting `\\' escapes and `%'\n directives. Field widths and precisions can be specified as with the `printf' C\n function. Please note that many of the fields are printed as %s rather than %d,\n and this may mean that flags don't work as you might expect. This also means that\n the `-' flag does work (it forces fields to be left-aligned). Unlike -print,\n -printf does not add a newline at the end of the string. The escapes and\n directives are:"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_15240: Import the uncompressed contents of the last modified file  matching \"*.sql.gz\" into \"mysql\""
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_15240: ls -Art *.sql.gz |tail -n 1 |xargs gunzip -c | mysql --user=user --password=password database"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "cut",
+      "MP Summary": "remove sections from each line of files",
+      "Most Similar TLDR Task": "Cut out the fifth field of each line, using a colon as a field delimiter (default delimiter is tab)",
+      "Most Similar TLDR Script": "cut -d'{{:}}' -f{{5}}",
+      "Most Similar NL2Bash Task": "display all sqlite files in the current directory along with their timestamp",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find ./ -name \"*.sqlite\" -printf '%Tc %p\\n'\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-printf": "True; print format on the standard output, interpreting `\\' escapes and `%'\n directives. Field widths and precisions can be specified as with the `printf' C\n function. Please note that many of the fields are printed as %s rather than %d,\n and this may mean that flags don't work as you might expect. This also means that\n the `-' flag does work (it forces fields to be left-aligned). Unlike -print,\n -printf does not add a newline at the end of the string. The escapes and\n directives are:"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_27454089: how do I convert a log file into a csv"
+      ],
+      "Top-3 Scripts": [
+        "so_27454089: cut -d':' -f 2 file | paste -s -d ',,,\n'  # behold the new line which alternates the sequence."
+      ],
+      "Explanations about Options": {
+        "-f": "select only these fields; also print any line that contains no delimiter\n character, unless the -s option is specified"
+      }
+    },
+    {
+      "Command": "stat",
+      "MP Summary": "display file or file system status",
+      "Most Similar TLDR Task": "Show file properties such as size, permissions, creation and access dates among others",
+      "Most Similar TLDR Script": "stat {{file}}",
+      "Most Similar NL2Bash Task": "display all sqlite files in the current directory along with their timestamp",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find ./ -name \"*.sqlite\" -printf '%Tc %p\\n'\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-printf": "True; print format on the standard output, interpreting `\\' escapes and `%'\n directives. Field widths and precisions can be specified as with the `printf' C\n function. Please note that many of the fields are printed as %s rather than %d,\n and this may mean that flags don't work as you might expect. This also means that\n the `-' flag does work (it forces fields to be left-aligned). Unlike -print,\n -printf does not add a newline at the end of the string. The escapes and\n directives are:"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_22234270: Importing .sql file into MongoDB, iterating this action 1000 times"
+      ],
+      "Top-3 Scripts": [
+        "so_22234270: filename_in=\"inputfile.txt\"  \n filename_out=\"outputfile.txt\" \n size=\"2000000000\"       #2GB\n echo > $filename_out\n while [  $(stat -c%s \"$filename_out\") -lt \"$size\" ]; do\n      echo file size =  $(stat -c%s \"$filename_out\")\n      cat $filename_in >> $filename_out\ndone"
+      ],
+      "Explanations about Options": {
+        "-t": "print the information in terse form"
+      }
+    },
+    {
+      "Command": "sudo",
+      "MP Summary": "execute a command as another user",
+      "Most Similar TLDR Task": "Run a command as another user and/or group",
+      "Most Similar TLDR Script": "sudo -u {{user}} -g {{group}} {{id -a}}",
+      "Most Similar NL2Bash Task": "display all sqlite files in the current directory along with their timestamp",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find ./ -name \"*.sqlite\" -printf '%Tc %p\\n'\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-printf": "True; print format on the standard output, interpreting `\\' escapes and `%'\n directives. Field widths and precisions can be specified as with the `printf' C\n function. Please note that many of the fields are printed as %s rather than %d,\n and this may mean that flags don't work as you might expect. This also means that\n the `-' flag does work (it forces fields to be left-aligned). Unlike -print,\n -printf does not add a newline at the end of the string. The escapes and\n directives are:"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_22204911: How to pass a bash variable into an sql file"
+      ],
+      "Top-3 Scripts": [
+        "so_22204911: #!/bin/bash\ndbase_connect=\"psql -h server -U username dbase\"\nfile=\"/tmp/$fname.csv\"\nsql=\"/home/user/sql_files/query.sql\"\ntmp=\"home/user/sql_files/query.sql.tmp\"\ns=\"s/\\$1/$1/g\"\ncat $sql | sed $s > $tmp\n\nsudo bash -c \"$dbase_connect -c -q -A -F , -f $tmp -o $file\"\nrm -f $tmp"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "set",
+      "MP Summary": "set or unset options and positional parameters",
+      "Most Similar TLDR Task": "Mark variables that are modified or created for export",
+      "Most Similar TLDR Script": "set -a",
+      "Most Similar NL2Bash Task": "display all sqlite files in the current directory along with their timestamp",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find ./ -name \"*.sqlite\" -printf '%Tc %p\\n'\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-printf": "True; print format on the standard output, interpreting `\\' escapes and `%'\n directives. Field widths and precisions can be specified as with the `printf' C\n function. Please note that many of the fields are printed as %s rather than %d,\n and this may mean that flags don't work as you might expect. This also means that\n the `-' flag does work (it forces fields to be left-aligned). Unlike -print,\n -printf does not add a newline at the end of the string. The escapes and\n directives are:"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_7256984: Windows Shell Script to load csv into variables",
+        "so_5346159: Load data from .csv applying regex before insert into table"
+      ],
+      "Top-3 Scripts": [
+        "so_7256984: ",
+        "so_5346159: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "id",
+      "MP Summary": "print real and effective user and group IDs",
+      "Most Similar TLDR Task": "Display the current user identity as a number",
+      "Most Similar TLDR Script": "id -u",
+      "Most Similar NL2Bash Task": "display all sqlite files in the current directory along with their timestamp",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find ./ -name \"*.sqlite\" -printf '%Tc %p\\n'\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-printf": "True; print format on the standard output, interpreting `\\' escapes and `%'\n directives. Field widths and precisions can be specified as with the `printf' C\n function. Please note that many of the fields are printed as %s rather than %d,\n and this may mean that flags don't work as you might expect. This also means that\n the `-' flag does work (it forces fields to be left-aligned). Unlike -print,\n -printf does not add a newline at the end of the string. The escapes and\n directives are:"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_57530463: Using bash, awk or sed to templatize a CSV file into a SQL file",
+        "so_5346159: Load data from .csv applying regex before insert into table"
+      ],
+      "Top-3 Scripts": [
+        "so_57530463: ",
+        "so_5346159: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "line",
+      "MP Summary": "cache line size",
+      "Most Similar TLDR Task": "Read input",
+      "Most Similar TLDR Script": "line",
+      "Most Similar NL2Bash Task": "display all sqlite files in the current directory along with their timestamp",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find ./ -name \"*.sqlite\" -printf '%Tc %p\\n'\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-printf": "True; print format on the standard output, interpreting `\\' escapes and `%'\n directives. Field widths and precisions can be specified as with the `printf' C\n function. Please note that many of the fields are printed as %s rather than %d,\n and this may mean that flags don't work as you might expect. This also means that\n the `-' flag does work (it forces fields to be left-aligned). Unlike -print,\n -printf does not add a newline at the end of the string. The escapes and\n directives are:"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_27454089: how do I convert a log file into a csv"
+      ],
+      "Top-3 Scripts": [
+        "so_27454089: cut -d':' -f 2 file | paste -s -d ',,,\n'  # behold the new line which alternates the sequence."
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "printf",
+      "MP Summary": "format and print data",
+      "Most Similar TLDR Task": "Store a formatted message in a variable (does not work on zsh)",
+      "Most Similar TLDR Script": "printf -v {{myvar}} {{\"This is %s = %d\\n\" \"a year\" 2016}}",
+      "Most Similar NL2Bash Task": "display all sqlite files in the current directory along with their timestamp",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find ./ -name \"*.sqlite\" -printf '%Tc %p\\n'\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-printf": "True; print format on the standard output, interpreting `\\' escapes and `%'\n directives. Field widths and precisions can be specified as with the `printf' C\n function. Please note that many of the fields are printed as %s rather than %d,\n and this may mean that flags don't work as you might expect. This also means that\n the `-' flag does work (it forces fields to be left-aligned). Unlike -print,\n -printf does not add a newline at the end of the string. The escapes and\n directives are:"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_67962861: Pipe string, file contents, string into sqlite without intermediate file?"
+      ],
+      "Top-3 Scripts": [
+        "so_67962861: {\n  printf %s\\\\n 'BEGIN TRANSACTION;'\n  cat \"$file_name_original_sql\"\n  printf %s\\\\n 'COMMIT;'\n} | sqlite3 \"$file_name_sqlite_db\" 2> \"$path_to_insert_error\"\n\nprintf 'BEGIN TRANSACTION;\\n%sCOMMIT;\\n' \"$(cat \"$file_name_original_sql\")\" |\n  sqlite3 \"$file_name_sqlite_db\" 2> \"$path_to_insert_error\"\n\nsql_transaction() {\n  printf %s\\\\n 'BEGIN TRANSACTION;'\n  cat\n  printf %s\\\\n 'COMMIT;'\n}\n\nsql_transaction <\"$file_name_original_sql\" |\n  sqlite3 \"$file_name_sqlite_db\" 2> \"$path_to_insert_error\""
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "convert",
+      "MP Summary": "convert between image formats as well as resize an image, blur, crop, despeckle, dither, draw on, flip, join, re-sample, and much more.",
+      "Most Similar TLDR Task": "Convert an image from JPG to PNG",
+      "Most Similar TLDR Script": "convert {{image.jpg}} {{image.png}}",
+      "Most Similar NL2Bash Task": "display all sqlite files in the current directory along with their timestamp",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find ./ -name \"*.sqlite\" -printf '%Tc %p\\n'\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-printf": "True; print format on the standard output, interpreting `\\' escapes and `%'\n directives. Field widths and precisions can be specified as with the `printf' C\n function. Please note that many of the fields are printed as %s rather than %d,\n and this may mean that flags don't work as you might expect. This also means that\n the `-' flag does work (it forces fields to be left-aligned). Unlike -print,\n -printf does not add a newline at the end of the string. The escapes and\n directives are:"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_16849: Importing CSV contacts into Evolution 3.0.2"
+      ],
+      "Top-3 Scripts": [
+        "ul_16849: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "split",
+      "MP Summary": "split a file into pieces",
+      "Most Similar TLDR Task": "Split a file into 5 files. File is split such that each split has same size (except the last split)",
+      "Most Similar TLDR Script": "split -n {{5}} {{filename}}",
+      "Most Similar NL2Bash Task": "display all sqlite files in the current directory along with their timestamp",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find ./ -name \"*.sqlite\" -printf '%Tc %p\\n'\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-printf": "True; print format on the standard output, interpreting `\\' escapes and `%'\n directives. Field widths and precisions can be specified as with the `printf' C\n function. Please note that many of the fields are printed as %s rather than %d,\n and this may mean that flags don't work as you might expect. This also means that\n the `-' flag does work (it forces fields to be left-aligned). Unlike -print,\n -printf does not add a newline at the end of the string. The escapes and\n directives are:"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_20356755: SQL syntax errors when importing database into phpMyAdmin (MAMP)"
+      ],
+      "Top-3 Scripts": [
+        "so_20356755: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "see",
+      "MP Summary": "execute programs via entries in the mailcap file",
+      "Most Similar TLDR Task": "See action can be used to view any file (usually image) on default mailcap explorer",
+      "Most Similar TLDR Script": "see {{filename}}",
+      "Most Similar NL2Bash Task": "display all sqlite files in the current directory along with their timestamp",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find ./ -name \"*.sqlite\" -printf '%Tc %p\\n'\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-printf": "True; print format on the standard output, interpreting `\\' escapes and `%'\n directives. Field widths and precisions can be specified as with the `printf' C\n function. Please note that many of the fields are printed as %s rather than %d,\n and this may mean that flags don't work as you might expect. This also means that\n the `-' flag does work (it forces fields to be left-aligned). Unlike -print,\n -printf does not add a newline at the end of the string. The escapes and\n directives are:"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_25322908: How to load delimited file (multiple delimiters) into Oracle?"
+      ],
+      "Top-3 Scripts": [
+        "so_25322908: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "hexdump",
+      "MP Summary": "ASCII, decimal, hexadecimal, octal dump",
+      "Most Similar TLDR Task": "Display the hexadecimal representation of a file, but interpret only n bytes of the input",
+      "Most Similar TLDR Script": "hexdump -C -n{{number_of_bytes}} {{file}}",
+      "Most Similar NL2Bash Task": "display all sqlite files in the current directory along with their timestamp",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find ./ -name \"*.sqlite\" -printf '%Tc %p\\n'\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-printf": "True; print format on the standard output, interpreting `\\' escapes and `%'\n directives. Field widths and precisions can be specified as with the `printf' C\n function. Please note that many of the fields are printed as %s rather than %d,\n and this may mean that flags don't work as you might expect. This also means that\n the `-' flag does work (it forces fields to be left-aligned). Unlike -print,\n -printf does not add a newline at the end of the string. The escapes and\n directives are:"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_10353467: How to insert binary data into sqlite3 database in bash?"
+      ],
+      "Top-3 Scripts": [
+        "so_10353467: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "md5sum",
+      "MP Summary": "compute and check MD5 message digest",
+      "Most Similar TLDR Task": "Read a file of MD5SUMs and verify all files have matching checksums",
+      "Most Similar TLDR Script": "md5sum -c {{filename.md5}}",
+      "Most Similar NL2Bash Task": "display all sqlite files in the current directory along with their timestamp",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find ./ -name \"*.sqlite\" -printf '%Tc %p\\n'\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-printf": "True; print format on the standard output, interpreting `\\' escapes and `%'\n directives. Field widths and precisions can be specified as with the `printf' C\n function. Please note that many of the fields are printed as %s rather than %d,\n and this may mean that flags don't work as you might expect. This also means that\n the `-' flag does work (it forces fields to be left-aligned). Unlike -print,\n -printf does not add a newline at the end of the string. The escapes and\n directives are:"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_10353467: How to insert binary data into sqlite3 database in bash?"
+      ],
+      "Top-3 Scripts": [
+        "so_10353467: [somneone@somewhere tmp]$ sqlite3 foodb \"select quote(bar) from foo;\" | perl -ne 's/([0-9a-f]{2})/print chr hex $1/gie' > bla.jpg \n[somneone@somewhere tmp]$ ll *.jpg\n-rw-rw-r-- 1 someone someone 618441 Apr 28 16:59 bla.jpg\n-rw-rw-r-- 1 someone someone 618441 Apr 28 16:37 test.jpg\n[someone@somewhere tmp]$ md5sum *.jpg \n3237a2b76050f2780c592455b3414813  bla.jpg\n3237a2b76050f2780c592455b3414813  test.jpg"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "as",
+      "MP Summary": "or  any situation  where  you want to make sure you're doing a clean install of your dependencies. It  can  be  significantly  faster  than  a  regular  npm  install  by  skipping   certain user-oriented  features.  It  is  also  more strict than a regular install, which can help catch errors or inconsistencies caused by the incrementally-installed  local  environments of most npm users. In short, the main differences between using npm install and npm ci are: \u00b7 The project must have an existing package-lock.json or npm-shrinkwrap.json. \u00b7 If dependencies in the package lock do not match those in package.json, npm ci will exit with an error, instead of updating the package lock. \u00b7 npm ci can only install entire projects at a time:  individual  dependencies  cannot  be added with this command. \u00b7 If  a  node_modules  is  already present, it will be automatically removed before npm ci begins its install. \u00b7 It will  never  write  to  package.json  or  any  of  the  package-locks:  installs  are essentially frozen. See Also \u00b7 npm help install \u00b7 npm help package-locks April 2020                                  NPM-CI(1)",
+      "Most Similar TLDR Task": "Assemble a file, writing the output to a.out",
+      "Most Similar TLDR Script": "as {{file.s}}",
+      "Most Similar NL2Bash Task": "display all sqlite files in the current directory along with their timestamp",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find ./ -name \"*.sqlite\" -printf '%Tc %p\\n'\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-printf": "True; print format on the standard output, interpreting `\\' escapes and `%'\n directives. Field widths and precisions can be specified as with the `printf' C\n function. Please note that many of the fields are printed as %s rather than %d,\n and this may mean that flags don't work as you might expect. This also means that\n the `-' flag does work (it forces fields to be left-aligned). Unlike -print,\n -printf does not add a newline at the end of the string. The escapes and\n directives are:"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_25322908: How to load delimited file (multiple delimiters) into Oracle?"
+      ],
+      "Top-3 Scripts": [
+        "so_25322908: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "perl",
+      "MP Summary": "The Perl 5 language interpreter",
+      "Most Similar TLDR Task": "Run a multi-line find/replace expression on a file, and save the result in another file",
+      "Most Similar TLDR Script": "perl -p0e 's/{{foo\\nbar}}/{{foobar}}/g' {{input_file}} > {{output_file}}",
+      "Most Similar NL2Bash Task": "display all sqlite files in the current directory along with their timestamp",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find ./ -name \"*.sqlite\" -printf '%Tc %p\\n'\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-printf": "True; print format on the standard output, interpreting `\\' escapes and `%'\n directives. Field widths and precisions can be specified as with the `printf' C\n function. Please note that many of the fields are printed as %s rather than %d,\n and this may mean that flags don't work as you might expect. This also means that\n the `-' flag does work (it forces fields to be left-aligned). Unlike -print,\n -printf does not add a newline at the end of the string. The escapes and\n directives are:"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_10353467: How to insert binary data into sqlite3 database in bash?"
+      ],
+      "Top-3 Scripts": [
+        "so_10353467: [somneone@somewhere tmp]$ sqlite3 foodb \"select quote(bar) from foo;\" | perl -ne 's/([0-9a-f]{2})/print chr hex $1/gie' > bla.jpg \n[somneone@somewhere tmp]$ ll *.jpg\n-rw-rw-r-- 1 someone someone 618441 Apr 28 16:59 bla.jpg\n-rw-rw-r-- 1 someone someone 618441 Apr 28 16:37 test.jpg\n[someone@somewhere tmp]$ md5sum *.jpg \n3237a2b76050f2780c592455b3414813  bla.jpg\n3237a2b76050f2780c592455b3414813  test.jpg"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "type",
+      "MP Summary": "write a description of command type",
+      "Most Similar TLDR Task": "Display the name of the disk file that would be executed",
+      "Most Similar TLDR Script": "type -p {{command}}",
+      "Most Similar NL2Bash Task": "display all sqlite files in the current directory along with their timestamp",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find ./ -name \"*.sqlite\" -printf '%Tc %p\\n'\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-printf": "True; print format on the standard output, interpreting `\\' escapes and `%'\n directives. Field widths and precisions can be specified as with the `printf' C\n function. Please note that many of the fields are printed as %s rather than %d,\n and this may mean that flags don't work as you might expect. This also means that\n the `-' flag does work (it forces fields to be left-aligned). Unlike -print,\n -printf does not add a newline at the end of the string. The escapes and\n directives are:"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_25322908: How to load delimited file (multiple delimiters) into Oracle?"
+      ],
+      "Top-3 Scripts": [
+        "so_25322908: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "command",
+      "MP Summary": "execute a simple command",
+      "Most Similar TLDR Task": "Display the path to the executable or the alias definition of a specific command",
+      "Most Similar TLDR Script": "command -v {{command_name}}",
+      "Most Similar NL2Bash Task": "display all sqlite files in the current directory along with their timestamp",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find ./ -name \"*.sqlite\" -printf '%Tc %p\\n'\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-printf": "True; print format on the standard output, interpreting `\\' escapes and `%'\n directives. Field widths and precisions can be specified as with the `printf' C\n function. Please note that many of the fields are printed as %s rather than %d,\n and this may mean that flags don't work as you might expect. This also means that\n the `-' flag does work (it forces fields to be left-aligned). Unlike -print,\n -printf does not add a newline at the end of the string. The escapes and\n directives are:"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_35541806: import custom Windows event viewer logs form csv into sql table"
+      ],
+      "Top-3 Scripts": [
+        "so_35541806: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "tail",
+      "MP Summary": "output the last part of files",
+      "Most Similar TLDR Task": "Show last 'num' lines in 'file' and refresh every 'n' seconds",
+      "Most Similar TLDR Script": "tail -n {{num}} -s {{n}} -f {{file}}",
+      "Most Similar NL2Bash Task": "display all sqlite files in the current directory along with their timestamp",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find ./ -name \"*.sqlite\" -printf '%Tc %p\\n'\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-printf": "True; print format on the standard output, interpreting `\\' escapes and `%'\n directives. Field widths and precisions can be specified as with the `printf' C\n function. Please note that many of the fields are printed as %s rather than %d,\n and this may mean that flags don't work as you might expect. This also means that\n the `-' flag does work (it forces fields to be left-aligned). Unlike -print,\n -printf does not add a newline at the end of the string. The escapes and\n directives are:"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_15240: Import the uncompressed contents of the last modified file  matching \"*.sql.gz\" into \"mysql\""
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_15240: ls -Art *.sql.gz |tail -n 1 |xargs gunzip -c | mysql --user=user --password=password database"
+      ],
+      "Explanations about Options": {
+        "-n": "output the last NUM lines, instead of the last 10; or use -n +NUM to output\n starting with line NUM"
+      }
+    },
+    {
+      "Command": "ls",
+      "MP Summary": "list directory contents",
+      "Most Similar TLDR Task": "List all files, including hidden files",
+      "Most Similar TLDR Script": "ls -a",
+      "Most Similar NL2Bash Task": "display all sqlite files in the current directory along with their timestamp",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find ./ -name \"*.sqlite\" -printf '%Tc %p\\n'\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-printf": "True; print format on the standard output, interpreting `\\' escapes and `%'\n directives. Field widths and precisions can be specified as with the `printf' C\n function. Please note that many of the fields are printed as %s rather than %d,\n and this may mean that flags don't work as you might expect. This also means that\n the `-' flag does work (it forces fields to be left-aligned). Unlike -print,\n -printf does not add a newline at the end of the string. The escapes and\n directives are:"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_15240: Import the uncompressed contents of the last modified file  matching \"*.sql.gz\" into \"mysql\""
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_15240: ls -Art *.sql.gz |tail -n 1 |xargs gunzip -c | mysql --user=user --password=password database"
+      ],
+      "Explanations about Options": {
+        "-t": "sort by modification time , newest first",
+        "-r": "reverse order while sorting",
+        "-A": "do not list implied . and .."
+      }
+    },
+    {
+      "Command": "sh",
+      "MP Summary": "MirBSD Korn shell",
+      "Most Similar TLDR Task": "Run commands from a file",
+      "Most Similar TLDR Script": "sh {{file.sh}}",
+      "Most Similar NL2Bash Task": "display all sqlite files in the current directory along with their timestamp",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find ./ -name \"*.sqlite\" -printf '%Tc %p\\n'\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-printf": "True; print format on the standard output, interpreting `\\' escapes and `%'\n directives. Field widths and precisions can be specified as with the `printf' C\n function. Please note that many of the fields are printed as %s rather than %d,\n and this may mean that flags don't work as you might expect. This also means that\n the `-' flag does work (it forces fields to be left-aligned). Unlike -print,\n -printf does not add a newline at the end of the string. The escapes and\n directives are:"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_24762223: Import CSV value into Bash"
+      ],
+      "Top-3 Scripts": [
+        "so_24762223: sh$ ./m.sh \nAlabama\n1000\n100\n10001"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "banana",
+      "MP Summary": "Plot bending and curvature data for B-DNA",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "display all sqlite files in the current directory along with their timestamp",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find ./ -name \"*.sqlite\" -printf '%Tc %p\\n'\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-printf": "True; print format on the standard output, interpreting `\\' escapes and `%'\n directives. Field widths and precisions can be specified as with the `printf' C\n function. Please note that many of the fields are printed as %s rather than %d,\n and this may mean that flags don't work as you might expect. This also means that\n the `-' flag does work (it forces fields to be left-aligned). Unlike -print,\n -printf does not add a newline at the end of the string. The escapes and\n directives are:"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_4924699: In Linux, is there a command for converting a CSV file into an SQLite file?"
+      ],
+      "Top-3 Scripts": [
+        "so_4924699: apple|red\nbanana|yellow\ncelery|green"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "args",
+      "MP Summary": "manipulate and output command arguments.",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "display all sqlite files in the current directory along with their timestamp",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find ./ -name \"*.sqlite\" -printf '%Tc %p\\n'\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-printf": "True; print format on the standard output, interpreting `\\' escapes and `%'\n directives. Field widths and precisions can be specified as with the `printf' C\n function. Please note that many of the fields are printed as %s rather than %d,\n and this may mean that flags don't work as you might expect. This also means that\n the `-' flag does work (it forces fields to be left-aligned). Unlike -print,\n -printf does not add a newline at the end of the string. The escapes and\n directives are:"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_4924699: In Linux, is there a command for converting a CSV file into an SQLite file?",
+        "ul_16849: Importing CSV contacts into Evolution 3.0.2"
+      ],
+      "Top-3 Scripts": [
+        "so_4924699: ",
+        "ul_16849: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "new",
+      "MP Summary": "report on nmh folders with new messages",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "display all sqlite files in the current directory along with their timestamp",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find ./ -name \"*.sqlite\" -printf '%Tc %p\\n'\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-printf": "True; print format on the standard output, interpreting `\\' escapes and `%'\n directives. Field widths and precisions can be specified as with the `printf' C\n function. Please note that many of the fields are printed as %s rather than %d,\n and this may mean that flags don't work as you might expect. This also means that\n the `-' flag does work (it forces fields to be left-aligned). Unlike -print,\n -printf does not add a newline at the end of the string. The escapes and\n directives are:"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_27454089: how do I convert a log file into a csv"
+      ],
+      "Top-3 Scripts": [
+        "so_27454089: cut -d':' -f 2 file | paste -s -d ',,,\n'  # behold the new line which alternates the sequence."
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "then",
+      "MP Summary": "presumably creating or updating package.json and running any other initialization-related operations. The init command is transformed to a corresponding npx operation as follows: \u00b7 npm init foo -> npx create-foo \u00b7 npm init @usr/foo -> npx @usr/create-foo \u00b7 npm init @usr -> npx @usr/create Any  additional  options  will  be passed directly to the command, so npm init foo --hello will map to npx create-foo --hello. If the initializer is omitted (by just calling npm init), init will fall  back  to  legacy init  behavior.  It  will  ask you a bunch of questions, and then write a package.json for you. It will attempt to make reasonable guesses based on  existing  fields,  dependencies, and  options selected. It is strictly additive, so it will keep any fields and values that were already set. You can also use -y/--yes to skip the questionnaire altogether.  If  you pass --scope, it will create a scoped package. See Also \u00b7 https://github.com/isaacs/init-package-json \u00b7 npm help package.json \u00b7 npm help version \u00b7 npm help scope April 2020                                NPM-INIT(1)",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "display all sqlite files in the current directory along with their timestamp",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find ./ -name \"*.sqlite\" -printf '%Tc %p\\n'\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-printf": "True; print format on the standard output, interpreting `\\' escapes and `%'\n directives. Field widths and precisions can be specified as with the `printf' C\n function. Please note that many of the fields are printed as %s rather than %d,\n and this may mean that flags don't work as you might expect. This also means that\n the `-' flag does work (it forces fields to be left-aligned). Unlike -print,\n -printf does not add a newline at the end of the string. The escapes and\n directives are:"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_24762223: Import CSV value into Bash"
+      ],
+      "Top-3 Scripts": [
+        "so_24762223: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "dir",
+      "MP Summary": "list directory contents",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "display all sqlite files in the current directory along with their timestamp",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find ./ -name \"*.sqlite\" -printf '%Tc %p\\n'\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-printf": "True; print format on the standard output, interpreting `\\' escapes and `%'\n directives. Field widths and precisions can be specified as with the `printf' C\n function. Please note that many of the fields are printed as %s rather than %d,\n and this may mean that flags don't work as you might expect. This also means that\n the `-' flag does work (it forces fields to be left-aligned). Unlike -print,\n -printf does not add a newline at the end of the string. The escapes and\n directives are:"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_23934172: Import csv into excel and specify cell format"
+      ],
+      "Top-3 Scripts": [
+        "so_23934172: $files = dir -Path $csvDir*.txt"
+      ],
+      "Explanations about Options": {
+        "-h": "with -l and -s, print sizes like 1K 234M 2G etc.",
+        "-t": "sort by modification time , newest first",
+        "-a": "do not ignore entries starting with ."
+      }
+    },
+    {
+      "Command": "server",
+      "MP Summary": "server has been renamed to rspserver in rsplib-3.0.0!",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "display all sqlite files in the current directory along with their timestamp",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find ./ -name \"*.sqlite\" -printf '%Tc %p\\n'\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-printf": "True; print format on the standard output, interpreting `\\' escapes and `%'\n directives. Field widths and precisions can be specified as with the `printf' C\n function. Please note that many of the fields are printed as %s rather than %d,\n and this may mean that flags don't work as you might expect. This also means that\n the `-' flag does work (it forces fields to be left-aligned). Unlike -print,\n -printf does not add a newline at the end of the string. The escapes and\n directives are:"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_22204911: How to pass a bash variable into an sql file"
+      ],
+      "Top-3 Scripts": [
+        "so_22204911: #!/bin/bash\ndbase_connect=\"psql -h server -U username dbase\"\nfile=\"/tmp/$fname.csv\"\nsql=\"/home/user/sql_files/query.sql\"\ntmp=\"home/user/sql_files/query.sql.tmp\"\ns=\"s/\\$1/$1/g\"\ncat $sql | sed $s > $tmp\n\nsudo bash -c \"$dbase_connect -c -q -A -F , -f $tmp -o $file\"\nrm -f $tmp"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "sql",
+      "MP Summary": "execute a command on a database determined by a dburl",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "display all sqlite files in the current directory along with their timestamp",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find ./ -name \"*.sqlite\" -printf '%Tc %p\\n'\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-printf": "True; print format on the standard output, interpreting `\\' escapes and `%'\n directives. Field widths and precisions can be specified as with the `printf' C\n function. Please note that many of the fields are printed as %s rather than %d,\n and this may mean that flags don't work as you might expect. This also means that\n the `-' flag does work (it forces fields to be left-aligned). Unlike -print,\n -printf does not add a newline at the end of the string. The escapes and\n directives are:"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_22204911: How to pass a bash variable into an sql file"
+      ],
+      "Top-3 Scripts": [
+        "so_22204911: #!/bin/bash\ndbase_connect=\"psql -h server -U username dbase\"\nfile=\"/tmp/$fname.csv\"\nsql=\"/home/user/sql_files/query.sql\"\ntmp=\"home/user/sql_files/query.sql.tmp\"\ns=\"s/\\$1/$1/g\"\ncat $sql | sed $s > $tmp\n\nsudo bash -c \"$dbase_connect -c -q -A -F , -f $tmp -o $file\"\nrm -f $tmp"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "from",
+      "MP Summary": "print names of those who have sent mail",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "display all sqlite files in the current directory along with their timestamp",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find ./ -name \"*.sqlite\" -printf '%Tc %p\\n'\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-printf": "True; print format on the standard output, interpreting `\\' escapes and `%'\n directives. Field widths and precisions can be specified as with the `printf' C\n function. Please note that many of the fields are printed as %s rather than %d,\n and this may mean that flags don't work as you might expect. This also means that\n the `-' flag does work (it forces fields to be left-aligned). Unlike -print,\n -printf does not add a newline at the end of the string. The escapes and\n directives are:"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_57983154: Write-SqlTableData to import CSV into a Azure SQL Server table",
+        "so_4608318: Import multiple files into a table",
+        "so_25322908: How to load delimited file (multiple delimiters) into Oracle?"
+      ],
+      "Top-3 Scripts": [
+        "so_57983154: ",
+        "so_4608318: ",
+        "so_25322908: select * from my_table;\n\nA          B          C0101      C0102      C0103      C0201      C0202      C0203      C0301      C0302      C0303      D0101      D0102      D0103      D0201      D0202      D0203      D0301      D0302      D0303      E          F        \n---------- ---------- ---------- ---------- ---------- ---------- ---------- ---------- ---------- ---------- ---------- ---------- ---------- ---------- ---------- ---------- ---------- ---------- ---------- ---------- ---------- ----------\nFieldA     FieldB     FieldC111  FieldC112  FieldC113  FieldC121  FieldC122  FieldC123                                   FieldD111  FieldD112  FieldD113  FieldD121  FieldD122  FieldD123                                   FieldE     FieldF     \nFieldA     FieldB     FieldC111  FieldC112  FieldC113  FieldC121  FieldC122  FieldC123  FieldC131  FieldC132  FieldC133  FieldD111  FieldD112  FieldD113  FieldD121  FieldD122  FieldD123                                   FieldE     FieldF     \nFieldA     FieldB     FieldC111  FieldC112  FieldC113  FieldC121  FieldC122  FieldC123  FieldC131  FieldC132  FieldC133  FieldD111  FieldD112  FieldD113  FieldD121  FieldD122  FieldD123  FieldD131  FieldD132  FieldD133  FieldE     FieldF     \nFieldA     FieldB     FieldC111  FieldC112  FieldC113  FieldC121  FieldC122  FieldC123                                   FieldD111  FieldD112  FieldD113  FieldD121  FieldD122  FieldD123  FieldD131  FieldD132  FieldD133  FieldE     FieldF"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "xmlstarlet",
+      "MP Summary": "command line XML/XSLT toolkit",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "display all sqlite files in the current directory along with their timestamp",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find ./ -name \"*.sqlite\" -printf '%Tc %p\\n'\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-printf": "True; print format on the standard output, interpreting `\\' escapes and `%'\n directives. Field widths and precisions can be specified as with the `printf' C\n function. Please note that many of the fields are printed as %s rather than %d,\n and this may mean that flags don't work as you might expect. This also means that\n the `-' flag does work (it forces fields to be left-aligned). Unlike -print,\n -printf does not add a newline at the end of the string. The escapes and\n directives are:"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_59599268: using bash to insert values into sqlite database"
+      ],
+      "Top-3 Scripts": [
+        "so_59599268: # Was book/id\nbook_id=$(xmlstarlet sel -t -v //book/book_id $line);\nbook_url=$(xmlstarlet sel -t -v //book/book_url $line);\ndescription=$(xmlstarlet sel -t -v //book/description $line);\n  # Was book/name\nbook_name=$(xmlstarlet sel -t -v //book/book_name $line);"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "bin",
+      "MP Summary": "presumably creating or updating package.json and running any other initialization-related operations. The init command is transformed to a corresponding npx operation as follows: \u00b7 npm init foo -> npx create-foo \u00b7 npm init @usr/foo -> npx @usr/create-foo \u00b7 npm init @usr -> npx @usr/create Any  additional  options  will  be passed directly to the command, so npm init foo --hello will map to npx create-foo --hello. If the initializer is omitted (by just calling npm init), init will fall  back  to  legacy init  behavior.  It  will  ask you a bunch of questions, and then write a package.json for you. It will attempt to make reasonable guesses based on  existing  fields,  dependencies, and  options selected. It is strictly additive, so it will keep any fields and values that were already set. You can also use -y/--yes to skip the questionnaire altogether.  If  you pass --scope, it will create a scoped package. See Also \u00b7 https://github.com/isaacs/init-package-json \u00b7 npm help package.json \u00b7 npm help version \u00b7 npm help scope April 2020                                NPM-INIT(1)",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "display all sqlite files in the current directory along with their timestamp",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find ./ -name \"*.sqlite\" -printf '%Tc %p\\n'\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-printf": "True; print format on the standard output, interpreting `\\' escapes and `%'\n directives. Field widths and precisions can be specified as with the `printf' C\n function. Please note that many of the fields are printed as %s rather than %d,\n and this may mean that flags don't work as you might expect. This also means that\n the `-' flag does work (it forces fields to be left-aligned). Unlike -print,\n -printf does not add a newline at the end of the string. The escapes and\n directives are:"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_29188683: split mydumper sql file into separate sql files"
+      ],
+      "Top-3 Scripts": [
+        "so_29188683: /bin/awk 'BEGIN{RS=\";\"}{close(\"export\" i \".sql\"); x=\"export.\"++i;} {print $0\";\"> x\".sql\";}'"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "xl",
+      "MP Summary": "Xen management tool, based on LibXenlight",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "display all sqlite files in the current directory along with their timestamp",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find ./ -name \"*.sqlite\" -printf '%Tc %p\\n'\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-printf": "True; print format on the standard output, interpreting `\\' escapes and `%'\n directives. Field widths and precisions can be specified as with the `printf' C\n function. Please note that many of the fields are printed as %s rather than %d,\n and this may mean that flags don't work as you might expect. This also means that\n the `-' flag does work (it forces fields to be left-aligned). Unlike -print,\n -printf does not add a newline at the end of the string. The escapes and\n directives are:"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_25562837: Importing large csv file into Excel using PowerShell"
+      ],
+      "Top-3 Scripts": [
+        "so_25562837: "
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

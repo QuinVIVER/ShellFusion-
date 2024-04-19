@@ -1,0 +1,93 @@
+{
+    "Answers": [
+        {
+            "Command": "cp",
+            "Explanations about Options": {
+                "--parents(M)": "use full source file name under DIRECTORY",
+                "-p(M)": "same as --preserve=mode , ownership , timestamps",
+                "-r(M)": "copy directories recursively"
+            },
+            "MP Summary": "copy files and directories",
+            "Most Similar TLDR Script": "cp {{path/to/source_file.ext}} {{path/to/target_parent_directory}}",
+            "Most Similar TLDR Task": "Copy a file into another directory, keeping the filename",
+            "Top-3 Scripts": [
+                "so_36142838: cp --parents\n\ncat /path/to/files | xargs cp --parents -t new_directory\n\nwhile read -r file; do\n    new_dir=\"new_directory/$(dirname \"$file\")\"\n    #        ^ this is the new directory root\n    mkdir -p \"$new_dir\"\n    cp \"$file\" \"$new_dir/$file\"\ndone < <(cat /path/to/files.txt)",
+                "ul_465341: mkdir newdir\ncp --parents -rp directory[123]/sub2 newdir",
+                "so_65195454: find . -iname \"*.type\" -exec cp {} /some/another/location/Folder_I \\;"
+            ],
+            "Top-3 Similar Questions": [
+                "so_36142838: Copy files from list while keeping subdirectory structure",
+                "ul_465341: Copy specific sub-directory and keep directory tree structure",
+                "so_65195454: Copy files (of specific extension) from a folder structure to another folder"
+            ]
+        },
+        {
+            "Command": "tar",
+            "Explanations about Options": {
+                "-C(M)": "Change to DIR before performing any operations. This option is order-sensitive,\n i.e. it affects all options that follow.",
+                "-T(M)": "Get names to extract or create from FILE.",
+                "-c(M)": "Create a new archive. Arguments supply the names of the files to be archived.\n Directories are archived recursively, unless the --no-recursion option is given.",
+                "-x(M)": "Extract files from an archive. Arguments are optional. When given, they specify\n names of the archive members to be extracted."
+            },
+            "MP Summary": "an archiving utility",
+            "Most Similar TLDR Script": "tar xf {{source.tar}} {{source.tar/path/to/extract}} --strip-components={{depth_to_strip}}",
+            "Most Similar TLDR Task": "Extract a specific file without preserving the folder structure",
+            "Top-3 Scripts": [
+                "so_8798153: find . -name '*.mov' -print | tar -c -f - -T - |\n(cd /new-dir; tar -xf -)",
+                "so_13008520: #!/bin/bash\nmkdir -p \"$2\" && find . -type f ! -mtime +$1 | tar -cT - -f - |tar -C \"$2\" -xf -",
+                "so_43309388: tar cf - .| ( cd /other directory; tar xf -)"
+            ],
+            "Top-3 Similar Questions": [
+                "so_8798153: Recursively move files of certain type and keep their directory structure",
+                "so_13008520: Copy files preserving folder structure",
+                "so_43309388: Copying directory structure from one directory to another in Bash"
+            ]
+        },
+        {
+            "Command": "mv",
+            "Explanations about Options": {},
+            "MP Summary": "move (rename) files",
+            "Most Similar TLDR Script": "mv {{source}} {{target}}",
+            "Most Similar TLDR Task": "Move files in arbitrary locations",
+            "Top-3 Scripts": [
+                "so_55766097: cd /path/to\nfor f in group*/folder/number123\ndo\n    d=\"/path/toOther/${f%/*}\"\n    mkdir -p \"$d\"\n    mv \"$f\" \"$d/.\"\ndone",
+                "ul_518133: shopt -s dotglob failglob\nfind . -depth -regextype egrep -type d -regex '.*/([^/]*)/\\1' -print0 |\nwhile IFS= read -r -d '' path; do\n  mv -n -t \"$path/..\" \"$path\"/* &&\n  rmdir \"$path\"\ndone\n\nfind . -depth -type d | grep -E -x '.*/([^/]*)/\\1' |\nwhile IFS= read -r path; do\n  mv \"$path\"/* \"$path/..\" &&\n  rmdir \"$path\"\ndone",
+                "so_27797992: find olddir -iname \"*.html\" -type f -exec bash -c 'f=${0#olddir/}; mv $0 newdir/${f//\\//_}' {} \\;\n\nfind olddir -iname \"*.html\" -type f -exec bash -c 'f=${0#olddir/}; echo mv $0 newdir/${f//\\//_}' {} \\;\n\n$ find olddir -type f -exec bash -c 'f=${0#olddir/}; echo mv $0 newdir/${f//\\//_}' {} \\;\nmv olddir/subdir/subdir_two/f4 newdir/subdir_subdir_two_f4\nmv olddir/subdir/subdir_two/f5 newdir/subdir_subdir_two_f5\nmv olddir/subdir/subdir_three/f6 newdir/subdir_subdir_three_f6\nmv olddir/subdir/f3 newdir/subdir_f3\nmv olddir/f1 newdir/f1\nmv olddir/f2 newdir/f2"
+            ],
+            "Top-3 Similar Questions": [
+                "so_55766097: How to move a certain pattern of subfolders to another folder, keeping the structure using bash?",
+                "ul_518133: How to move some specific folder keeping a predefined directory structure?",
+                "so_27797992: How to keep subdirectory path while copying into a new file?"
+            ]
+        },
+        {
+            "Command": "7z",
+            "Explanations about Options": {
+                "-r(M)": "Recurse subdirectories (CAUTION: this flag does not do what you think, avoid using\n it)"
+            },
+            "MP Summary": "A file archiver with high compression ratio format",
+            "Most Similar TLDR Script": "7z a -t{{zip|gzip|bzip2|tar}} {{archived.7z}} {{path/to/file_or_directory}}",
+            "Most Similar TLDR Task": "Archive using a specific archive type",
+            "Top-3 Scripts": [
+                "ul_453511: 7z a -r \"$backupfilename\" \\*.ini \\*.cfg \\*.txt"
+            ],
+            "Top-3 Similar Questions": [
+                "ul_453511: find and zip multiple file extensions while keeping the folder structure"
+            ]
+        },
+        {
+            "Command": "install",
+            "Explanations about Options": {},
+            "MP Summary": "copy files and set attributes",
+            "Most Similar TLDR Script": "install {{path/to/source}} {{path/to/destination}}",
+            "Most Similar TLDR Task": "Copy files to destination",
+            "Top-3 Scripts": [
+                "au_359793: apt-get install wput\n\ncat /you/large/file/list | wput ftp:/host/ -i -"
+            ],
+            "Top-3 Similar Questions": [
+                "au_359793: How to move specific files while preserving their directory structure"
+            ]
+        }
+    ],
+    "Query": "Copy specific file type keeping the folder structure"
+}

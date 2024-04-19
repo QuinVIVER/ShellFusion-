@@ -1,0 +1,70 @@
+{
+  "Query": "How to recursively find and list the latest modified files in a directory with subdirectories and times?",
+  "Answers": [
+    {
+      "Command": "find",
+      "Top-3 Similar Questions": [
+        "nl2bash_5159: Find grub.conf files in entire file system discarding errors in csh or tcsh shell",
+        "ul_173771: Find files older than x amount of time in specific directory with ignoring subdirectories",
+        "so_6355539: How can I find all *.js file in directory recursively in Linux?"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_5159: find / -name grub.conf >& /dev/null",
+        "ul_173771: find \"$dir\" \\! -name \"$(basename -- \"$dir\")\" -type d -prune -o -mmin +3 -type f -print",
+        "so_6355539: find /abs/path/ -name '*.js'"
+      ]
+    },
+    {
+      "Command": "grep",
+      "Top-3 Similar Questions": [
+        "so_33832044: Find replace text in multiple files in subdirectories. Exclude some subdirectories",
+        "so_25821119: Find files in multiple directories taken from list in a file?",
+        "ul_7383: Finding a substring in files across subdirectories with a single built-in command?"
+      ],
+      "Top-3 Scripts": [
+        "so_33832044: man grep",
+        "so_25821119: for line in \"`cat fromDirs.txt`\"; do find \"$line\" -type f \\( -name '*good*' -o -exec grep -F \"(NODES_'TASK')\" {} \\; \\) -exec cp {} /tmp/ \\;; done",
+        "ul_7383: grep -r --include='*.h' 'the string' ."
+      ]
+    },
+    {
+      "Command": "sort",
+      "Top-3 Similar Questions": [
+        "so_36469457: Bash script find directories with modified files in it",
+        "so_10707145: Find last modified file in a directory with white space",
+        "so_4561895: How to recursively find the latest modified file in a directory?"
+      ],
+      "Top-3 Scripts": [
+        "so_36469457: find . -mindepth 2 -type f -mtime -1 | sed 's,^\\./,,;s,/.*$,,' | sort -u | \\\nwhile read repo; do\n   svnadmin dump -q $repodir/$repo | bzip2 -9 > $backupdir/$repo-`date +%F`.dump.bz2\ndone\n\nsort -u",
+        "so_10707145: find $i -type f | perl -lne 'chomp(@files = <>); my $p = 9; foreach my $f (sort { (stat($b))[$p] <=> (stat($a))[$p] } @files) { print scalar localtime((stat($f))[$p]), \"\\t\", $f; exit }'\n\nfind  -type f | perl -lne 'chomp(@files = <>); my $p = 9; @files = sort { (stat($b))[$p] <=> (stat($a))[$p] } @files; print scalar localtime((stat($files[0]))[$p]), \"\\t\", $files[0]'",
+        "so_4561895: find . -type f -printf '%T@ %p\\n' \\\n| sort -n | tail -1 | cut -f2- -d\" \""
+      ]
+    },
+    {
+      "Command": "print",
+      "Top-3 Similar Questions": [
+        "so_10707145: Find last modified file in a directory with white space",
+        "ul_664283: How do I find a file in a list of directories set in an environment variable?",
+        "so_66157257: Find the list of immediate next directory to the current directory for reaching a destination file?"
+      ],
+      "Top-3 Scripts": [
+        "so_10707145: find $i -type f | perl -lne 'chomp(@files = <>); my $p = 9; foreach my $f (sort { (stat($b))[$p] <=> (stat($a))[$p] } @files) { print scalar localtime((stat($f))[$p]), \"\\t\", $f; exit }'\n\nfind  -type f | perl -lne 'chomp(@files = <>); my $p = 9; @files = sort { (stat($b))[$p] <=> (stat($a))[$p] } @files; print scalar localtime((stat($files[0]))[$p]), \"\\t\", $files[0]'",
+        "ul_664283: print -rC1 - ${(s[:])^LD_LIBRARY_PATH}/*libdl*(ND)",
+        "so_66157257: find . -type f -name 'foo.log' -printf '%d %p\\n' |awk -F '[ /]' '$1>1 {list=sprintf(\"%s\\047%s\\047\", ((!list)?\"\":list \",\"),$3)} END {print \"[\" list \"]\"}'"
+      ]
+    },
+    {
+      "Command": "xargs",
+      "Top-3 Similar Questions": [
+        "so_23562236: find in list of directories saved to a file",
+        "ul_293115: How to Find All .tex Files in Directories in Recurse Grep?",
+        "nl2bash_4331: Find all regular files under $DIR/tmp/daily/, sort them in reverse numerical order and copy the first two files to $DIR/tmp/weekly/"
+      ],
+      "Top-3 Scripts": [
+        "so_23562236: # Find unwritable files and chmod them\nxargs -I {} -0r -a $FILE_LIST find {} ! -perm -u+w -print0 | xargs -0r chmod -R 700 -v\n\nFILE_LIST=`mktemp --suffix=.list`\nfind ~/udit65_backup/ -maxdepth 1 -iname \"$PREFIX-*\" -type d -mtime +$NDAYS -print0 > $FILE_LIST\n# Make unwritable files... writable\nxargs -I {} -0r -a $FILE_LIST find {} ! -perm -u+w -print0 | xargs -0r chmod -R 700 -v\nxargs -0r -a $FILE_LIST rm -rf -v\nrm -f $FILE_LIST",
+        "ul_293115: $ find . -type l -name \"Math*\" -print0 |\n  xargs -0 -n 1 -IXXX find XXX/ -type f -name \"*.tex\" -print0 |\n  xargs -0 fgrep \"word\"",
+        "nl2bash_4331: find $DIR/tmp/daily/ -type f -printf \"%p\\n\" | sort -rn | head -n 2 | xargs -I{} cp {} $DIR/tmp/weekly/"
+      ]
+    }
+  ]
+}

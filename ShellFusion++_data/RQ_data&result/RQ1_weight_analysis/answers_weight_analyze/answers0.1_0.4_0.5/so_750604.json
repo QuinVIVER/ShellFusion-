@@ -1,0 +1,94 @@
+{
+  "Query": "Freeing up a TCP/IP port?",
+  "Answers": [
+    {
+      "Command": "nc",
+      "MP Summary": "arbitrary TCP and UDP connections and listens",
+      "Most Similar TLDR Task": "Connect to a certain port (you can then write to this port)",
+      "Most Similar TLDR Script": "nc {{ip_address}} {{port}}",
+      "Top-3 Similar Questions": [
+        "ul_214471: How to create a TCP listener?",
+        "so_54321431: How can I loop until IP:port is not responding"
+      ],
+      "Top-3 Scripts": [
+        "ul_214471: nc -l",
+        "so_54321431: #!/bin/bash\nfor i in `seq 1 10`;\ndo\n        nc -z -w 1 google.com 80 &> /dev/null\n        if [ $? -eq 0 ]; then\n            echo OK\n        else\n            echo FAIL\n        fi\ndone"
+      ],
+      "Explanations about Options": {
+        "-l": "Listen for an incoming connection rather than initiating a connection to a remote\n host. The destination and port to listen on can be specified either as non-optional\n arguments, or with options -s and -p respectively. Cannot be used together with -x\n or -z. Additionally, any timeouts specified with the -w option are ignored.",
+        "-w": "Connections which cannot be established or are idle timeout after timeout seconds.\n The -w flag has no effect on the -l option, i.e. nc will listen forever for a\n connection, with or without the -w flag. The default is no timeout.",
+        "-z": "Only scan for listening daemons, without sending any data to them. Cannot be used\n together with -l."
+      }
+    },
+    {
+      "Command": "netstat",
+      "MP Summary": "Print  network  connections,  routing tables, interface statistics, masquerade connections, and multicast memberships",
+      "Most Similar TLDR Task": "List listening TCP ports",
+      "Most Similar TLDR Script": "netstat -t",
+      "Top-3 Similar Questions": [
+        "so_28989069: How to find a free TCP port",
+        "ul_140021: How to close ports in Linux?",
+        "so_23461139: How to know what processes open TCP ports?"
+      ],
+      "Top-3 Scripts": [
+        "so_28989069: netstat -lntu",
+        "ul_140021: me@myhost:~$ sudo netstat -tlnp\nActive Internet connections (only servers)\nProto Recv-Q Send-Q Local Address   Foreign Address   State    PID/Program name\ntcp        0      0 127.0.0.1:53    0.0.0.0:*         LISTEN   1004/dnsmasq    \ntcp        0      0 0.0.0.0:22      0.0.0.0:*         LISTEN   380/sshd        \ntcp        0      0 127.0.0.1:631   0.0.0.0:*         LISTEN   822/cupsd       \ntcp6       0      0 :::22           :::*              LISTEN   380/sshd        \ntcp6       0      0 ::1:631         :::*              LISTEN   822/cupsd\n\nnetstat -anb",
+        "so_23461139: man netstat"
+      ],
+      "Explanations about Options": {
+        "-a": "Show both listening and non-listening sockets. With the --interfaces option, show\n interfaces that are not up",
+        "-l": "Show only listening sockets. (These are omitted by default.)",
+        "-n": "Show numerical addresses instead of trying to determine symbolic host, port or user names."
+      }
+    },
+    {
+      "Command": "free",
+      "MP Summary": "Display amount of free and used memory in the system",
+      "Most Similar TLDR Task": "Display system memory",
+      "Most Similar TLDR Script": "free",
+      "Top-3 Similar Questions": [
+        "so_32404907: When to free string pointer?",
+        "ul_49058: Shouldn't there be more RAM free than this?",
+        "ul_33541: `free`: output format"
+      ],
+      "Top-3 Scripts": [
+        "so_32404907: #define PRINT_ERR(y) ....\n\n#define PRINT_ERR_FREE(y) \\\n    do { \\\n        PRINT_ERR(y);  \\\n        free(y);\\\n     } while (0);",
+        "ul_49058: free -m\n\n$ free -m\n             total       used       free     shared    buffers     cached\nMem:          5868       4031       1836          0        282       2260\n-/+ buffers/cache:       1489       4379\nSwap:         6143          0       6143",
+        "ul_33541: "
+      ],
+      "Explanations about Options": {
+        "-m": "Display the amount of memory in mebibytes."
+      }
+    },
+    {
+      "Command": "telnet",
+      "MP Summary": "user interface to the TELNET protocol",
+      "Most Similar TLDR Task": "Telnet to a specific port of a host",
+      "Most Similar TLDR Script": "telnet {{ip_address}} {{port}}",
+      "Top-3 Similar Questions": [
+        "ul_140021: How to close ports in Linux?"
+      ],
+      "Top-3 Scripts": [
+        "ul_140021: telnet 127.0.0.1"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "ip",
+      "MP Summary": "show / manipulate routing, network devices, interfaces and tunnels",
+      "Most Similar TLDR Task": "Add/Delete an ip address to an interface",
+      "Most Similar TLDR Script": "ip addr add/del {{ip}}/{{mask}} dev {{interface}}",
+      "Top-3 Similar Questions": [
+        "su_605715: Disable tcp slow start",
+        "ul_130797: Can TCP provide more than 65535 ports?",
+        "so_13054291: How to listen to a TCP port using PHP?"
+      ],
+      "Top-3 Scripts": [
+        "su_605715: $ ip route | grep default\ndefault via 192.168.1.1 dev eth0  proto static\n\n$ sudo ip route change default via 192.168.1.1 dev eth0 proto static initcwnd 10",
+        "ul_130797: $ sudo ip link set eth0 up\n$ sudo ip addr add 192.0.2.1/24 dev eth0\n$ sudo ip addr add 192.0.2.2/24 dev eth0\n$ ip addr show dev eth0\n2: eth0: <NO-CARRIER,BROADCAST,MULTICAST,UP> mtu 1500 qdisc\n      pfifo_fast state DOWN qlen 1000\n    link/ether 00:d0:b7:2d:ce:cf brd ff:ff:ff:ff:ff:ff\n    inet 192.0.2.1/24 brd 192.0.2.255 scope global eth1\n    inet 192.0.2.2/24 scope global secondary eth1",
+        "so_13054291: "
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

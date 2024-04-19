@@ -1,0 +1,1606 @@
+{
+  "Query": "How to mount an LVM volume?",
+  "Answers": [
+    {
+      "Command": "mount",
+      "MP Summary": "mount a filesystem",
+      "Most Similar TLDR Task": "Mount a device to a directory",
+      "Most Similar TLDR Script": "mount -t {{filesystem_type}} {{path/to/device_file}} {{path/to/target_directory}}",
+      "Most Similar NL2Bash Task": "Display what flags mount points are mounted with",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mount -l\n",
+          "command-options": {
+            "mount": {
+              "mpsum": "mount a filesystem",
+              "-l": "Add the labels in the mount output. mount must have permission to read the disk\n device (e.g. be set-user-ID root) for this to work. One can set such a label for\n ext2, ext3 or ext4 using the e2label(8) utility, or for XFS using xfs_admin(8), or\n for reiserfs using reiserfstune(8)."
+            }
+          },
+          "TLDR_inform": {
+            "mount": {
+              "man8_mount_3067": "provid access entir filesystem one directori mount cd-rom devic filetyp iso9660 cdrom readonli mount devic directori mount directori anoth directori mount specif filesystem describ etc fstab e g\ndev sda1 my_driv ext2 default 0 2 mount filesystem defin etc fstab show mount filesystem"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_339011: How do I mount an LVM partition?",
+        "au_1314461: LVM instructions confuses me",
+        "ul_275632: how to fetch lvm mount point (generic)"
+      ],
+      "Top-3 Scripts": [
+        "ul_339011: sudo apt-get install lvm2   #This step may or may not be required.\nsudo pvscan                 #Use this to verify your LVM partition(s) is/are detected.\nsudo vgscan                 #Scans for LVM Volume Group(s)\nsudo vgchange -ay           #Activates LVM Volume Group(s)\nsudo lvscan                 #Scans for available Logical Volumes\nsudo mount /dev/YourVolGroup00/YourLogVol00 /YourMountPoint",
+        "au_1314461: $ sudo mkfs.ext4 /dev/ubuntu-vg/my-new-lv\n$ sudo mkdir -p /mnt/media\n$ sudo mount /dev/ubuntu-vg/my-new-lv /mnt/media",
+        "ul_275632: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "pvcreate",
+      "MP Summary": "Initialize physical volume(s) for use by LVM",
+      "Most Similar TLDR Task": "Initialize the `/dev/sda1` volume for use by LVM",
+      "Most Similar TLDR Script": "pvcreate {{/dev/sda1}}",
+      "Most Similar NL2Bash Task": "Display what flags mount points are mounted with",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mount -l\n",
+          "command-options": {
+            "mount": {
+              "mpsum": "mount a filesystem",
+              "-l": "Add the labels in the mount output. mount must have permission to read the disk\n device (e.g. be set-user-ID root) for this to work. One can set such a label for\n ext2, ext3 or ext4 using the e2label(8) utility, or for XFS using xfs_admin(8), or\n for reiserfs using reiserfstune(8)."
+            }
+          },
+          "TLDR_inform": {
+            "mount": {
+              "man8_mount_3067": "provid access entir filesystem one directori mount cd-rom devic filetyp iso9660 cdrom readonli mount devic directori mount directori anoth directori mount specif filesystem describ etc fstab e g\ndev sda1 my_driv ext2 default 0 2 mount filesystem defin etc fstab show mount filesystem"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_274382: How to create a LVM Partition/physical volume > 2TB",
+        "au_838436: How can I extend my LVM partition",
+        "ul_185057: Where does LVM store its configuration?"
+      ],
+      "Top-3 Scripts": [
+        "au_274382: sudo pvcreate PhysicalVolume\n\nDESCRIPTION\n       pvcreate initializes PhysicalVolume for later use by the Logical Volume\n       Manager  (LVM).   Each  PhysicalVolume  can  be a disk partition, whole\n       disk, meta device, or loopback file.   For  DOS  disk  partitions,  the\n       partition  id  should  be  set  to 0x8e using fdisk(8), cfdisk(8), or a\n       equivalent.  For whole disk devices only the partition  table  must  be\n       erased, which will effectively destroy all data on that disk.  This can\n       be done by zeroing the first sector with:\n\n       dd if=/dev/zero of=PhysicalVolume bs=512 count=1",
+        "au_838436: ",
+        "ul_185057: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "lvresize",
+      "MP Summary": "Resize a logical volume",
+      "Most Similar TLDR Task": "Change a volume's size to 120GB",
+      "Most Similar TLDR Script": "lvresize -L {{120G}} {{logical_volume}}",
+      "Most Similar NL2Bash Task": "Display what flags mount points are mounted with",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mount -l\n",
+          "command-options": {
+            "mount": {
+              "mpsum": "mount a filesystem",
+              "-l": "Add the labels in the mount output. mount must have permission to read the disk\n device (e.g. be set-user-ID root) for this to work. One can set such a label for\n ext2, ext3 or ext4 using the e2label(8) utility, or for XFS using xfs_admin(8), or\n for reiserfs using reiserfstune(8)."
+            }
+          },
+          "TLDR_inform": {
+            "mount": {
+              "man8_mount_3067": "provid access entir filesystem one directori mount cd-rom devic filetyp iso9660 cdrom readonli mount devic directori mount directori anoth directori mount specif filesystem describ etc fstab e g\ndev sda1 my_driv ext2 default 0 2 mount filesystem defin etc fstab show mount filesystem"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_220307: Resize NTFS Volume LVM",
+        "au_877743: Cannot extend lvm partition",
+        "ul_604230: How to resize LVM"
+      ],
+      "Top-3 Scripts": [
+        "au_220307: ",
+        "au_877743: ",
+        "ul_604230: lvresize -L +50G -r main/root"
+      ],
+      "Explanations about Options": {
+        "-L": "Specifies the new size of the LV. The --size and --extents options are alternate\n methods of specifying size. The total number of physical extents used will be\n greater when redundant data is needed for RAID levels. When the plus + or minus -\n prefix is used, the value is not an absolute size, but is relative and added or\n subtracted from the current size.",
+        "-r": "Resize underlying filesystem together with the LV using fsadm(8)."
+      }
+    },
+    {
+      "Command": "lvreduce",
+      "MP Summary": "Reduce the size of a logical volume",
+      "Most Similar TLDR Task": "Reduce a volume's size to 120GB",
+      "Most Similar TLDR Script": "lvreduce --size {{120G}} {{logical_volume}}",
+      "Most Similar NL2Bash Task": "Display what flags mount points are mounted with",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mount -l\n",
+          "command-options": {
+            "mount": {
+              "mpsum": "mount a filesystem",
+              "-l": "Add the labels in the mount output. mount must have permission to read the disk\n device (e.g. be set-user-ID root) for this to work. One can set such a label for\n ext2, ext3 or ext4 using the e2label(8) utility, or for XFS using xfs_admin(8), or\n for reiserfs using reiserfstune(8)."
+            }
+          },
+          "TLDR_inform": {
+            "mount": {
+              "man8_mount_3067": "provid access entir filesystem one directori mount cd-rom devic filetyp iso9660 cdrom readonli mount devic directori mount directori anoth directori mount specif filesystem describ etc fstab e g\ndev sda1 my_driv ext2 default 0 2 mount filesystem defin etc fstab show mount filesystem"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_651438: Unable to create Local Volume",
+        "au_1048941: Partitioning existing LVM partition?",
+        "ul_83149: reverse extending the LVM group volume"
+      ],
+      "Top-3 Scripts": [
+        "ul_651438: ",
+        "au_1048941: umount /dev/mapper/vg-lv\n fsck /dev/mapper/vg-lv\n resize2fs /dev/mapper/vg-lv (X-1)G \n lvreduce -L XG /dev/mapper/vg-lv \n resize2fs  /dev/mapper/vg-lv (to fill up the lv)\n lvcreate -l 100%FREE -n lv-var vg \n mkfs -t ext4 /dev/mapper/lv-var",
+        "ul_83149: lvreduce -L NNNNNNNk /dev/myvg/rootvol"
+      ],
+      "Explanations about Options": {
+        "-L": "Specifies the new size of the LV. The --size and --extents options are alternate\n methods of specifying size. The total number of physical extents used will be\n greater when redundant data is needed for RAID levels. When the plus + or minus -\n prefix is used, the value is not an absolute size, but is relative and added or\n subtracted from the current size."
+      }
+    },
+    {
+      "Command": "lvcreate",
+      "MP Summary": "Create a logical volume",
+      "Most Similar TLDR Task": "Create a logical volume of 10 gigabytes in the volume group vg1",
+      "Most Similar TLDR Script": "lvcreate -L {{10G}} {{vg1}}",
+      "Most Similar NL2Bash Task": "Display what flags mount points are mounted with",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mount -l\n",
+          "command-options": {
+            "mount": {
+              "mpsum": "mount a filesystem",
+              "-l": "Add the labels in the mount output. mount must have permission to read the disk\n device (e.g. be set-user-ID root) for this to work. One can set such a label for\n ext2, ext3 or ext4 using the e2label(8) utility, or for XFS using xfs_admin(8), or\n for reiserfs using reiserfstune(8)."
+            }
+          },
+          "TLDR_inform": {
+            "mount": {
+              "man8_mount_3067": "provid access entir filesystem one directori mount cd-rom devic filetyp iso9660 cdrom readonli mount devic directori mount directori anoth directori mount specif filesystem describ etc fstab e g\ndev sda1 my_driv ext2 default 0 2 mount filesystem defin etc fstab show mount filesystem"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "su_908271: How to mount this LVM volume?",
+        "au_1048941: Partitioning existing LVM partition?",
+        "au_1314461: LVM instructions confuses me"
+      ],
+      "Top-3 Scripts": [
+        "su_908271: ",
+        "au_1048941: umount /dev/mapper/vg-lv\n fsck /dev/mapper/vg-lv\n resize2fs /dev/mapper/vg-lv (X-1)G \n lvreduce -L XG /dev/mapper/vg-lv \n resize2fs  /dev/mapper/vg-lv (to fill up the lv)\n lvcreate -l 100%FREE -n lv-var vg \n mkfs -t ext4 /dev/mapper/lv-var",
+        "au_1314461: $ sudo lvcreate -L100g /dev/ubuntu-vg/my-new-lv"
+      ],
+      "Explanations about Options": {
+        "-n": "Specifies the name of a new LV. When unspecified, a default name of \"lvol#\" is\n generated, where # is a number generated by LVM."
+      }
+    },
+    {
+      "Command": "lvextend",
+      "MP Summary": "Add space to a logical volume",
+      "Most Similar TLDR Task": "Increase a volume's size to 120GB",
+      "Most Similar TLDR Script": "lvextend --size {{120G}} {{logical_volume}}",
+      "Most Similar NL2Bash Task": "Display what flags mount points are mounted with",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mount -l\n",
+          "command-options": {
+            "mount": {
+              "mpsum": "mount a filesystem",
+              "-l": "Add the labels in the mount output. mount must have permission to read the disk\n device (e.g. be set-user-ID root) for this to work. One can set such a label for\n ext2, ext3 or ext4 using the e2label(8) utility, or for XFS using xfs_admin(8), or\n for reiserfs using reiserfstune(8)."
+            }
+          },
+          "TLDR_inform": {
+            "mount": {
+              "man8_mount_3067": "provid access entir filesystem one directori mount cd-rom devic filetyp iso9660 cdrom readonli mount devic directori mount directori anoth directori mount specif filesystem describ etc fstab e g\ndev sda1 my_driv ext2 default 0 2 mount filesystem defin etc fstab show mount filesystem"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_368695: Mounted logical volume size not matching actual volume size",
+        "ul_664486: LVM root partition only uses half the volume size",
+        "au_838436: How can I extend my LVM partition"
+      ],
+      "Top-3 Scripts": [
+        "ul_368695: ",
+        "ul_664486: sudo lvextend --resizefs -L +5G ubuntu-vg/ubuntu-lv\n\nsudo lvextend --resizefs -l +100%FREE ubuntu-vg/ubuntu-lv",
+        "au_838436: lvextend -rl +100%FREE pve/data\n\nlvextend -rL +50G pve/data"
+      ],
+      "Explanations about Options": {
+        "-L": "Specifies the new size of the LV. The --size and --extents options are alternate\n methods of specifying size. The total number of physical extents used will be\n greater when redundant data is needed for RAID levels. When the plus + or minus -\n prefix is used, the value is not an absolute size, but is relative and added or\n subtracted from the current size.",
+        "-r": "Resize underlying filesystem together with the LV using fsadm(8).",
+        "--resizefs": "Resize underlying filesystem together with the LV using fsadm(8)."
+      }
+    },
+    {
+      "Command": "umount",
+      "MP Summary": "unmount file systems",
+      "Most Similar TLDR Task": "Unmount a filesystem, by passing the path to the source it is mounted from",
+      "Most Similar TLDR Script": "umount {{path/to/device_file}}",
+      "Most Similar NL2Bash Task": "Display what flags mount points are mounted with",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mount -l\n",
+          "command-options": {
+            "mount": {
+              "mpsum": "mount a filesystem",
+              "-l": "Add the labels in the mount output. mount must have permission to read the disk\n device (e.g. be set-user-ID root) for this to work. One can set such a label for\n ext2, ext3 or ext4 using the e2label(8) utility, or for XFS using xfs_admin(8), or\n for reiserfs using reiserfstune(8)."
+            }
+          },
+          "TLDR_inform": {
+            "mount": {
+              "man8_mount_3067": "provid access entir filesystem one directori mount cd-rom devic filetyp iso9660 cdrom readonli mount devic directori mount directori anoth directori mount specif filesystem describ etc fstab e g\ndev sda1 my_driv ext2 default 0 2 mount filesystem defin etc fstab show mount filesystem"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_1330148: Trying to unmount Logical Volume, gives error \"umount: /dev/lvm3/nlv1: not mounted\"",
+        "au_1048941: Partitioning existing LVM partition?",
+        "ul_604230: How to resize LVM"
+      ],
+      "Top-3 Scripts": [
+        "au_1330148: sudo umount /dev/mapper/nv-nlv1\n\nsudo umount /media/theperson/97ee469c-3af3-4a2d-a6be-b86847d686ef",
+        "au_1048941: umount /dev/mapper/vg-lv\n fsck /dev/mapper/vg-lv\n resize2fs /dev/mapper/vg-lv (X-1)G \n lvreduce -L XG /dev/mapper/vg-lv \n resize2fs  /dev/mapper/vg-lv (to fill up the lv)\n lvcreate -l 100%FREE -n lv-var vg \n mkfs -t ext4 /dev/mapper/lv-var",
+        "ul_604230: umount /home"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "fdisk",
+      "MP Summary": "manipulate disk partition table",
+      "Most Similar TLDR Task": "Start the partition manipulator",
+      "Most Similar TLDR Script": "fdisk {{/dev/sda}}",
+      "Most Similar NL2Bash Task": "Display what flags mount points are mounted with",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mount -l\n",
+          "command-options": {
+            "mount": {
+              "mpsum": "mount a filesystem",
+              "-l": "Add the labels in the mount output. mount must have permission to read the disk\n device (e.g. be set-user-ID root) for this to work. One can set such a label for\n ext2, ext3 or ext4 using the e2label(8) utility, or for XFS using xfs_admin(8), or\n for reiserfs using reiserfstune(8)."
+            }
+          },
+          "TLDR_inform": {
+            "mount": {
+              "man8_mount_3067": "provid access entir filesystem one directori mount cd-rom devic filetyp iso9660 cdrom readonli mount devic directori mount directori anoth directori mount specif filesystem describ etc fstab e g\ndev sda1 my_driv ext2 default 0 2 mount filesystem defin etc fstab show mount filesystem"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_78886: LVM to extend a partition?",
+        "ul_479545: How to shrink a physical volume?",
+        "au_274382: How to create a LVM Partition/physical volume > 2TB"
+      ],
+      "Top-3 Scripts": [
+        "ul_78886: fdisk -l",
+        "ul_479545: fdisk /dev/sda",
+        "au_274382: DESCRIPTION\n       pvcreate initializes PhysicalVolume for later use by the Logical Volume\n       Manager  (LVM).   Each  PhysicalVolume  can  be a disk partition, whole\n       disk, meta device, or loopback file.   For  DOS  disk  partitions,  the\n       partition  id  should  be  set  to 0x8e using fdisk(8), cfdisk(8), or a\n       equivalent.  For whole disk devices only the partition  table  must  be\n       erased, which will effectively destroy all data on that disk.  This can\n       be done by zeroing the first sector with:\n\n       dd if=/dev/zero of=PhysicalVolume bs=512 count=1"
+      ],
+      "Explanations about Options": {
+        "-l": "List the partition tables for the specified devices and then exit. If no devices\n are given, those mentioned in /proc/partitions (if that file exists) are used."
+      }
+    },
+    {
+      "Command": "lvs",
+      "MP Summary": "Display information about logical volumes",
+      "Most Similar TLDR Task": "Display all logical volumes",
+      "Most Similar TLDR Script": "lvs -a",
+      "Most Similar NL2Bash Task": "Display what flags mount points are mounted with",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mount -l\n",
+          "command-options": {
+            "mount": {
+              "mpsum": "mount a filesystem",
+              "-l": "Add the labels in the mount output. mount must have permission to read the disk\n device (e.g. be set-user-ID root) for this to work. One can set such a label for\n ext2, ext3 or ext4 using the e2label(8) utility, or for XFS using xfs_admin(8), or\n for reiserfs using reiserfstune(8)."
+            }
+          },
+          "TLDR_inform": {
+            "mount": {
+              "man8_mount_3067": "provid access entir filesystem one directori mount cd-rom devic filetyp iso9660 cdrom readonli mount devic directori mount directori anoth directori mount specif filesystem describ etc fstab e g\ndev sda1 my_driv ext2 default 0 2 mount filesystem defin etc fstab show mount filesystem"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_275632: how to fetch lvm mount point (generic)",
+        "au_838436: How can I extend my LVM partition",
+        "ul_485867: how to resize / lvm partition"
+      ],
+      "Top-3 Scripts": [
+        "ul_275632: ",
+        "au_838436: ",
+        "ul_485867: lvs && lsblk"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "mkfs",
+      "MP Summary": "build a Linux filesystem",
+      "Most Similar TLDR Task": "Build a Linux ext2 filesystem on a partition",
+      "Most Similar TLDR Script": "mkfs {{path/to/partition}}",
+      "Most Similar NL2Bash Task": "Display what flags mount points are mounted with",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mount -l\n",
+          "command-options": {
+            "mount": {
+              "mpsum": "mount a filesystem",
+              "-l": "Add the labels in the mount output. mount must have permission to read the disk\n device (e.g. be set-user-ID root) for this to work. One can set such a label for\n ext2, ext3 or ext4 using the e2label(8) utility, or for XFS using xfs_admin(8), or\n for reiserfs using reiserfstune(8)."
+            }
+          },
+          "TLDR_inform": {
+            "mount": {
+              "man8_mount_3067": "provid access entir filesystem one directori mount cd-rom devic filetyp iso9660 cdrom readonli mount devic directori mount directori anoth directori mount specif filesystem describ etc fstab e g\ndev sda1 my_driv ext2 default 0 2 mount filesystem defin etc fstab show mount filesystem"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_275129: Cannot mount newly created Logical Volume",
+        "au_1048941: Partitioning existing LVM partition?"
+      ],
+      "Top-3 Scripts": [
+        "ul_275129: ",
+        "au_1048941: umount /dev/mapper/vg-lv\n fsck /dev/mapper/vg-lv\n resize2fs /dev/mapper/vg-lv (X-1)G \n lvreduce -L XG /dev/mapper/vg-lv \n resize2fs  /dev/mapper/vg-lv (to fill up the lv)\n lvcreate -l 100%FREE -n lv-var vg \n mkfs -t ext4 /dev/mapper/lv-var"
+      ],
+      "Explanations about Options": {
+        "-t": "Specify the type of filesystem to be built. If not specified, the default\n filesystem type (currently ext2) is used."
+      }
+    },
+    {
+      "Command": "resize2fs",
+      "MP Summary": "ext2/ext3/ext4 file system resizer",
+      "Most Similar TLDR Task": "Automatically resize a filesystem",
+      "Most Similar TLDR Script": "resize2fs {{/dev/sdXN}}",
+      "Most Similar NL2Bash Task": "Display what flags mount points are mounted with",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mount -l\n",
+          "command-options": {
+            "mount": {
+              "mpsum": "mount a filesystem",
+              "-l": "Add the labels in the mount output. mount must have permission to read the disk\n device (e.g. be set-user-ID root) for this to work. One can set such a label for\n ext2, ext3 or ext4 using the e2label(8) utility, or for XFS using xfs_admin(8), or\n for reiserfs using reiserfstune(8)."
+            }
+          },
+          "TLDR_inform": {
+            "mount": {
+              "man8_mount_3067": "provid access entir filesystem one directori mount cd-rom devic filetyp iso9660 cdrom readonli mount devic directori mount directori anoth directori mount specif filesystem describ etc fstab e g\ndev sda1 my_driv ext2 default 0 2 mount filesystem defin etc fstab show mount filesystem"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_1048941: Partitioning existing LVM partition?",
+        "ul_368695: Mounted logical volume size not matching actual volume size",
+        "ul_664486: LVM root partition only uses half the volume size"
+      ],
+      "Top-3 Scripts": [
+        "au_1048941: umount /dev/mapper/vg-lv\n fsck /dev/mapper/vg-lv\n resize2fs /dev/mapper/vg-lv (X-1)G \n lvreduce -L XG /dev/mapper/vg-lv \n resize2fs  /dev/mapper/vg-lv (to fill up the lv)\n lvcreate -l 100%FREE -n lv-var vg \n mkfs -t ext4 /dev/mapper/lv-var",
+        "ul_368695: ",
+        "ul_664486: resize2fs /dev/mapper/ubuntu--vg-ubuntu--lv"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "cryptsetup",
+      "MP Summary": "manage plain dm-crypt and LUKS encrypted volumes",
+      "Most Similar TLDR Task": "Initialize a LUKS volume (overwrites all data on the partition)",
+      "Most Similar TLDR Script": "cryptsetup luksFormat {{/dev/sda1}}",
+      "Most Similar NL2Bash Task": "Display what flags mount points are mounted with",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mount -l\n",
+          "command-options": {
+            "mount": {
+              "mpsum": "mount a filesystem",
+              "-l": "Add the labels in the mount output. mount must have permission to read the disk\n device (e.g. be set-user-ID root) for this to work. One can set such a label for\n ext2, ext3 or ext4 using the e2label(8) utility, or for XFS using xfs_admin(8), or\n for reiserfs using reiserfstune(8)."
+            }
+          },
+          "TLDR_inform": {
+            "mount": {
+              "man8_mount_3067": "provid access entir filesystem one directori mount cd-rom devic filetyp iso9660 cdrom readonli mount devic directori mount directori anoth directori mount specif filesystem describ etc fstab e g\ndev sda1 my_driv ext2 default 0 2 mount filesystem defin etc fstab show mount filesystem"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_835525: How to mount LUKS encrypted file?"
+      ],
+      "Top-3 Scripts": [
+        "au_835525: cryptsetup open --type luks /path/to/dump desired-name"
+      ],
+      "Explanations about Options": {
+        "--type": "Specifies required device type, for more info read BASIC COMMANDS section."
+      }
+    },
+    {
+      "Command": "df",
+      "MP Summary": "report file system disk space usage",
+      "Most Similar TLDR Task": "Display all filesystems and their disk usage",
+      "Most Similar TLDR Script": "df",
+      "Most Similar NL2Bash Task": "Display what flags mount points are mounted with",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mount -l\n",
+          "command-options": {
+            "mount": {
+              "mpsum": "mount a filesystem",
+              "-l": "Add the labels in the mount output. mount must have permission to read the disk\n device (e.g. be set-user-ID root) for this to work. One can set such a label for\n ext2, ext3 or ext4 using the e2label(8) utility, or for XFS using xfs_admin(8), or\n for reiserfs using reiserfstune(8)."
+            }
+          },
+          "TLDR_inform": {
+            "mount": {
+              "man8_mount_3067": "provid access entir filesystem one directori mount cd-rom devic filetyp iso9660 cdrom readonli mount devic directori mount directori anoth directori mount specif filesystem describ etc fstab e g\ndev sda1 my_driv ext2 default 0 2 mount filesystem defin etc fstab show mount filesystem"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_368695: Mounted logical volume size not matching actual volume size",
+        "au_1314461: LVM instructions confuses me"
+      ],
+      "Top-3 Scripts": [
+        "ul_368695: ",
+        "au_1314461: $ df -h /mnt/media"
+      ],
+      "Explanations about Options": {
+        "-h": "print sizes in powers of 1024 (e.g., 1023M)"
+      }
+    },
+    {
+      "Command": "pvs",
+      "MP Summary": "Display information about physical volumes",
+      "Most Similar TLDR Task": "Display non-physical volumes",
+      "Most Similar TLDR Script": "pvs -a",
+      "Most Similar NL2Bash Task": "Display what flags mount points are mounted with",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mount -l\n",
+          "command-options": {
+            "mount": {
+              "mpsum": "mount a filesystem",
+              "-l": "Add the labels in the mount output. mount must have permission to read the disk\n device (e.g. be set-user-ID root) for this to work. One can set such a label for\n ext2, ext3 or ext4 using the e2label(8) utility, or for XFS using xfs_admin(8), or\n for reiserfs using reiserfstune(8)."
+            }
+          },
+          "TLDR_inform": {
+            "mount": {
+              "man8_mount_3067": "provid access entir filesystem one directori mount cd-rom devic filetyp iso9660 cdrom readonli mount devic directori mount directori anoth directori mount specif filesystem describ etc fstab e g\ndev sda1 my_driv ext2 default 0 2 mount filesystem defin etc fstab show mount filesystem"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_838436: How can I extend my LVM partition"
+      ],
+      "Top-3 Scripts": [
+        "au_838436: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "kpartx",
+      "MP Summary": "Create device maps from partition tables.",
+      "Most Similar TLDR Task": "Delete partition mappings",
+      "Most Similar TLDR Script": "kpartx -d {{whole_disk.img}}",
+      "Most Similar NL2Bash Task": "Display what flags mount points are mounted with",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mount -l\n",
+          "command-options": {
+            "mount": {
+              "mpsum": "mount a filesystem",
+              "-l": "Add the labels in the mount output. mount must have permission to read the disk\n device (e.g. be set-user-ID root) for this to work. One can set such a label for\n ext2, ext3 or ext4 using the e2label(8) utility, or for XFS using xfs_admin(8), or\n for reiserfs using reiserfstune(8)."
+            }
+          },
+          "TLDR_inform": {
+            "mount": {
+              "man8_mount_3067": "provid access entir filesystem one directori mount cd-rom devic filetyp iso9660 cdrom readonli mount devic directori mount directori anoth directori mount specif filesystem describ etc fstab e g\ndev sda1 my_driv ext2 default 0 2 mount filesystem defin etc fstab show mount filesystem"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_88211: Mounting LVM2 volume gives me 'mount: you must specify the filesystem type'"
+      ],
+      "Top-3 Scripts": [
+        "ul_88211: kpartx -av /dev/vgXEN/test-disk"
+      ],
+      "Explanations about Options": {
+        "-a": "Add partition mappings.",
+        "-v": "Operate verbosely."
+      }
+    },
+    {
+      "Command": "fsck",
+      "MP Summary": "check and repair a Linux filesystem",
+      "Most Similar TLDR Task": "Check filesystem /dev/sda, reporting any damaged blocks and automatically repairing them",
+      "Most Similar TLDR Script": "fsck -a {{/dev/sda}}",
+      "Most Similar NL2Bash Task": "Display what flags mount points are mounted with",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mount -l\n",
+          "command-options": {
+            "mount": {
+              "mpsum": "mount a filesystem",
+              "-l": "Add the labels in the mount output. mount must have permission to read the disk\n device (e.g. be set-user-ID root) for this to work. One can set such a label for\n ext2, ext3 or ext4 using the e2label(8) utility, or for XFS using xfs_admin(8), or\n for reiserfs using reiserfstune(8)."
+            }
+          },
+          "TLDR_inform": {
+            "mount": {
+              "man8_mount_3067": "provid access entir filesystem one directori mount cd-rom devic filetyp iso9660 cdrom readonli mount devic directori mount directori anoth directori mount specif filesystem describ etc fstab e g\ndev sda1 my_driv ext2 default 0 2 mount filesystem defin etc fstab show mount filesystem"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_1048941: Partitioning existing LVM partition?"
+      ],
+      "Top-3 Scripts": [
+        "au_1048941: umount /dev/mapper/vg-lv\n fsck /dev/mapper/vg-lv\n resize2fs /dev/mapper/vg-lv (X-1)G \n lvreduce -L XG /dev/mapper/vg-lv \n resize2fs  /dev/mapper/vg-lv (to fill up the lv)\n lvcreate -l 100%FREE -n lv-var vg \n mkfs -t ext4 /dev/mapper/lv-var"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "vgs",
+      "MP Summary": "Display information about volume groups",
+      "Most Similar TLDR Task": "Display all volume groups",
+      "Most Similar TLDR Script": "vgs -a",
+      "Most Similar NL2Bash Task": "Display what flags mount points are mounted with",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mount -l\n",
+          "command-options": {
+            "mount": {
+              "mpsum": "mount a filesystem",
+              "-l": "Add the labels in the mount output. mount must have permission to read the disk\n device (e.g. be set-user-ID root) for this to work. One can set such a label for\n ext2, ext3 or ext4 using the e2label(8) utility, or for XFS using xfs_admin(8), or\n for reiserfs using reiserfstune(8)."
+            }
+          },
+          "TLDR_inform": {
+            "mount": {
+              "man8_mount_3067": "provid access entir filesystem one directori mount cd-rom devic filetyp iso9660 cdrom readonli mount devic directori mount directori anoth directori mount specif filesystem describ etc fstab e g\ndev sda1 my_driv ext2 default 0 2 mount filesystem defin etc fstab show mount filesystem"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_838436: How can I extend my LVM partition"
+      ],
+      "Top-3 Scripts": [
+        "au_838436: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "lsblk",
+      "MP Summary": "list block devices",
+      "Most Similar TLDR Task": "List all storage devices in a tree-like format",
+      "Most Similar TLDR Script": "lsblk",
+      "Most Similar NL2Bash Task": "Display what flags mount points are mounted with",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mount -l\n",
+          "command-options": {
+            "mount": {
+              "mpsum": "mount a filesystem",
+              "-l": "Add the labels in the mount output. mount must have permission to read the disk\n device (e.g. be set-user-ID root) for this to work. One can set such a label for\n ext2, ext3 or ext4 using the e2label(8) utility, or for XFS using xfs_admin(8), or\n for reiserfs using reiserfstune(8)."
+            }
+          },
+          "TLDR_inform": {
+            "mount": {
+              "man8_mount_3067": "provid access entir filesystem one directori mount cd-rom devic filetyp iso9660 cdrom readonli mount devic directori mount directori anoth directori mount specif filesystem describ etc fstab e g\ndev sda1 my_driv ext2 default 0 2 mount filesystem defin etc fstab show mount filesystem"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_322802: Check logical volume mount point (command line)",
+        "ul_485867: how to resize / lvm partition"
+      ],
+      "Top-3 Scripts": [
+        "ul_322802: ",
+        "ul_485867: lvs && lsblk"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "tune2fs",
+      "MP Summary": "adjust tunable filesystem parameters on ext2/ext3/ext4 filesystems",
+      "Most Similar TLDR Task": "Enable journaling for a filesystem",
+      "Most Similar TLDR Script": "tune2fs -o^{{nobarrier}} {{/dev/sdXN}}",
+      "Most Similar NL2Bash Task": "Display what flags mount points are mounted with",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mount -l\n",
+          "command-options": {
+            "mount": {
+              "mpsum": "mount a filesystem",
+              "-l": "Add the labels in the mount output. mount must have permission to read the disk\n device (e.g. be set-user-ID root) for this to work. One can set such a label for\n ext2, ext3 or ext4 using the e2label(8) utility, or for XFS using xfs_admin(8), or\n for reiserfs using reiserfstune(8)."
+            }
+          },
+          "TLDR_inform": {
+            "mount": {
+              "man8_mount_3067": "provid access entir filesystem one directori mount cd-rom devic filetyp iso9660 cdrom readonli mount devic directori mount directori anoth directori mount specif filesystem describ etc fstab e g\ndev sda1 my_driv ext2 default 0 2 mount filesystem defin etc fstab show mount filesystem"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_83149: reverse extending the LVM group volume"
+      ],
+      "Top-3 Scripts": [
+        "ul_83149: tune2fs -l /dev/myvg/rootvol"
+      ],
+      "Explanations about Options": {
+        "-l": "List the contents of the filesystem superblock, including the current values of the\n parameters that can be set via this program."
+      }
+    },
+    {
+      "Command": "docker",
+      "MP Summary": "Docker image and container command line interface",
+      "Most Similar TLDR Task": "Pull an image from a docker registry",
+      "Most Similar TLDR Script": "docker pull {{image}}",
+      "Most Similar NL2Bash Task": "Display what flags mount points are mounted with",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mount -l\n",
+          "command-options": {
+            "mount": {
+              "mpsum": "mount a filesystem",
+              "-l": "Add the labels in the mount output. mount must have permission to read the disk\n device (e.g. be set-user-ID root) for this to work. One can set such a label for\n ext2, ext3 or ext4 using the e2label(8) utility, or for XFS using xfs_admin(8), or\n for reiserfs using reiserfstune(8)."
+            }
+          },
+          "TLDR_inform": {
+            "mount": {
+              "man8_mount_3067": "provid access entir filesystem one directori mount cd-rom devic filetyp iso9660 cdrom readonli mount devic directori mount directori anoth directori mount specif filesystem describ etc fstab e g\ndev sda1 my_driv ext2 default 0 2 mount filesystem defin etc fstab show mount filesystem"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_32148445: Docker Volumes mounting issue",
+        "tldr_9013: Filter containers that mount a specific volume or have a volume mounted in a specific path",
+        "so_34369056: Docker: Permissions for a mounted volume"
+      ],
+      "Top-3 Scripts": [
+        "so_32148445: test -f $HOME/.myapp_configs/specificConfig.txt || touch $HOME/.myapp_configs/specificConfig.txt\ndocker run -it --name Test1 -v $HOME/.myapp_configs/specificConfig.txt:/bin/specificConfig.txt:rw docker-image /bin/bash",
+        "tldr_9013: docker ps --filter=\"volume={{path/to/directory}}\" --format \"table {{.ID}}\\t{{.Image}}\\t{{.Names}}\\t{{.Mounts}}\"",
+        "so_34369056: docker build --build-arg USER_ID=$(id -u)"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "dd",
+      "MP Summary": "convert and copy a file",
+      "Most Similar TLDR Task": "Check progress of an ongoing dd operation (Run this command from another shell)",
+      "Most Similar TLDR Script": "kill -USR1 $(pgrep ^dd)",
+      "Most Similar NL2Bash Task": "Display what flags mount points are mounted with",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mount -l\n",
+          "command-options": {
+            "mount": {
+              "mpsum": "mount a filesystem",
+              "-l": "Add the labels in the mount output. mount must have permission to read the disk\n device (e.g. be set-user-ID root) for this to work. One can set such a label for\n ext2, ext3 or ext4 using the e2label(8) utility, or for XFS using xfs_admin(8), or\n for reiserfs using reiserfstune(8)."
+            }
+          },
+          "TLDR_inform": {
+            "mount": {
+              "man8_mount_3067": "provid access entir filesystem one directori mount cd-rom devic filetyp iso9660 cdrom readonli mount devic directori mount directori anoth directori mount specif filesystem describ etc fstab e g\ndev sda1 my_driv ext2 default 0 2 mount filesystem defin etc fstab show mount filesystem"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_274382: How to create a LVM Partition/physical volume > 2TB",
+        "ul_255107: LVM: How to clone thin-volume",
+        "ul_185057: Where does LVM store its configuration?"
+      ],
+      "Top-3 Scripts": [
+        "au_274382: sudo dd if=/dev/zero of=PhysicalVolume bs=512 count=1\n\nDESCRIPTION\n       pvcreate initializes PhysicalVolume for later use by the Logical Volume\n       Manager  (LVM).   Each  PhysicalVolume  can  be a disk partition, whole\n       disk, meta device, or loopback file.   For  DOS  disk  partitions,  the\n       partition  id  should  be  set  to 0x8e using fdisk(8), cfdisk(8), or a\n       equivalent.  For whole disk devices only the partition  table  must  be\n       erased, which will effectively destroy all data on that disk.  This can\n       be done by zeroing the first sector with:\n\n       dd if=/dev/zero of=PhysicalVolume bs=512 count=1",
+        "ul_255107: dd if=/dev/mapper/original_thin_volume of=/dev/mapper/new_thin_volume conv=sparse",
+        "ul_185057: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "sudo",
+      "MP Summary": "execute a command as another user",
+      "Most Similar TLDR Task": "Launch the default shell with superuser privileges",
+      "Most Similar TLDR Script": "sudo -i",
+      "Most Similar NL2Bash Task": "Display what flags mount points are mounted with",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mount -l\n",
+          "command-options": {
+            "mount": {
+              "mpsum": "mount a filesystem",
+              "-l": "Add the labels in the mount output. mount must have permission to read the disk\n device (e.g. be set-user-ID root) for this to work. One can set such a label for\n ext2, ext3 or ext4 using the e2label(8) utility, or for XFS using xfs_admin(8), or\n for reiserfs using reiserfstune(8)."
+            }
+          },
+          "TLDR_inform": {
+            "mount": {
+              "man8_mount_3067": "provid access entir filesystem one directori mount cd-rom devic filetyp iso9660 cdrom readonli mount devic directori mount directori anoth directori mount specif filesystem describ etc fstab e g\ndev sda1 my_driv ext2 default 0 2 mount filesystem defin etc fstab show mount filesystem"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_339011: How do I mount an LVM partition?",
+        "au_274382: How to create a LVM Partition/physical volume > 2TB",
+        "au_1330148: Trying to unmount Logical Volume, gives error \"umount: /dev/lvm3/nlv1: not mounted\""
+      ],
+      "Top-3 Scripts": [
+        "ul_339011: sudo apt-get install lvm2   #This step may or may not be required.\nsudo pvscan                 #Use this to verify your LVM partition(s) is/are detected.\nsudo vgscan                 #Scans for LVM Volume Group(s)\nsudo vgchange -ay           #Activates LVM Volume Group(s)\nsudo lvscan                 #Scans for available Logical Volumes\nsudo mount /dev/YourVolGroup00/YourLogVol00 /YourMountPoint",
+        "au_274382: sudo dd if=/dev/zero of=PhysicalVolume bs=512 count=1\n\nsudo partprobe\n\nsudo pvcreate PhysicalVolume",
+        "au_1330148: sudo umount /dev/mapper/nv-nlv1\n\nsudo umount /media/theperson/97ee469c-3af3-4a2d-a6be-b86847d686ef"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "install",
+      "MP Summary": "copy files and set attributes",
+      "Most Similar TLDR Task": "Copy files and apply access/modification times of source to destination",
+      "Most Similar TLDR Script": "install -p {{path/to/source}} {{path/to/destination}}",
+      "Most Similar NL2Bash Task": "Display what flags mount points are mounted with",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mount -l\n",
+          "command-options": {
+            "mount": {
+              "mpsum": "mount a filesystem",
+              "-l": "Add the labels in the mount output. mount must have permission to read the disk\n device (e.g. be set-user-ID root) for this to work. One can set such a label for\n ext2, ext3 or ext4 using the e2label(8) utility, or for XFS using xfs_admin(8), or\n for reiserfs using reiserfstune(8)."
+            }
+          },
+          "TLDR_inform": {
+            "mount": {
+              "man8_mount_3067": "provid access entir filesystem one directori mount cd-rom devic filetyp iso9660 cdrom readonli mount devic directori mount directori anoth directori mount specif filesystem describ etc fstab e g\ndev sda1 my_driv ext2 default 0 2 mount filesystem defin etc fstab show mount filesystem"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_339011: How do I mount an LVM partition?"
+      ],
+      "Top-3 Scripts": [
+        "ul_339011: sudo apt-get install lvm2   #This step may or may not be required.\nsudo pvscan                 #Use this to verify your LVM partition(s) is/are detected.\nsudo vgscan                 #Scans for LVM Volume Group(s)\nsudo vgchange -ay           #Activates LVM Volume Group(s)\nsudo lvscan                 #Scans for available Logical Volumes\nsudo mount /dev/YourVolGroup00/YourLogVol00 /YourMountPoint"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "mdadm",
+      "MP Summary": "manage MD devices aka Linux Software RAID",
+      "Most Similar TLDR Task": "Remove disk",
+      "Most Similar TLDR Script": "mdadm {{/path/to/raid_device_file}} -r {{/path/to/disk_device_file}}",
+      "Most Similar NL2Bash Task": "Display what flags mount points are mounted with",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mount -l\n",
+          "command-options": {
+            "mount": {
+              "mpsum": "mount a filesystem",
+              "-l": "Add the labels in the mount output. mount must have permission to read the disk\n device (e.g. be set-user-ID root) for this to work. One can set such a label for\n ext2, ext3 or ext4 using the e2label(8) utility, or for XFS using xfs_admin(8), or\n for reiserfs using reiserfstune(8)."
+            }
+          },
+          "TLDR_inform": {
+            "mount": {
+              "man8_mount_3067": "provid access entir filesystem one directori mount cd-rom devic filetyp iso9660 cdrom readonli mount devic directori mount directori anoth directori mount specif filesystem describ etc fstab e g\ndev sda1 my_driv ext2 default 0 2 mount filesystem defin etc fstab show mount filesystem"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_130771: Why can't I create an LVM RAID1 or mirror volume?"
+      ],
+      "Top-3 Scripts": [
+        "ul_130771: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "debugfs",
+      "MP Summary": "ext2/ext3/ext4 file system debugger",
+      "Most Similar TLDR Task": "View the filesystem stats in debugfs console",
+      "Most Similar TLDR Script": "stats",
+      "Most Similar NL2Bash Task": "Display what flags mount points are mounted with",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mount -l\n",
+          "command-options": {
+            "mount": {
+              "mpsum": "mount a filesystem",
+              "-l": "Add the labels in the mount output. mount must have permission to read the disk\n device (e.g. be set-user-ID root) for this to work. One can set such a label for\n ext2, ext3 or ext4 using the e2label(8) utility, or for XFS using xfs_admin(8), or\n for reiserfs using reiserfstune(8)."
+            }
+          },
+          "TLDR_inform": {
+            "mount": {
+              "man8_mount_3067": "provid access entir filesystem one directori mount cd-rom devic filetyp iso9660 cdrom readonli mount devic directori mount directori anoth directori mount specif filesystem describ etc fstab e g\ndev sda1 my_driv ext2 default 0 2 mount filesystem defin etc fstab show mount filesystem"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_107447: mount does not print mounted partitions"
+      ],
+      "Top-3 Scripts": [
+        "ul_107447: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "chown",
+      "MP Summary": "change file owner and group",
+      "Most Similar TLDR Task": "Change the owner user of a file/directory",
+      "Most Similar TLDR Script": "chown {{user}} {{path/to/file_or_directory}}",
+      "Most Similar NL2Bash Task": "Display what flags mount points are mounted with",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mount -l\n",
+          "command-options": {
+            "mount": {
+              "mpsum": "mount a filesystem",
+              "-l": "Add the labels in the mount output. mount must have permission to read the disk\n device (e.g. be set-user-ID root) for this to work. One can set such a label for\n ext2, ext3 or ext4 using the e2label(8) utility, or for XFS using xfs_admin(8), or\n for reiserfs using reiserfstune(8)."
+            }
+          },
+          "TLDR_inform": {
+            "mount": {
+              "man8_mount_3067": "provid access entir filesystem one directori mount cd-rom devic filetyp iso9660 cdrom readonli mount devic directori mount directori anoth directori mount specif filesystem describ etc fstab e g\ndev sda1 my_driv ext2 default 0 2 mount filesystem defin etc fstab show mount filesystem"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_159992: How to mount ext4 partition?"
+      ],
+      "Top-3 Scripts": [
+        "au_159992: sudo chown yourname.yourname /path/to/mount"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "mkdir",
+      "MP Summary": "make directories",
+      "Most Similar TLDR Task": "Create directories recursively (useful for creating nested dirs)",
+      "Most Similar TLDR Script": "mkdir -p {{path/to/directory}}",
+      "Most Similar NL2Bash Task": "Display what flags mount points are mounted with",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mount -l\n",
+          "command-options": {
+            "mount": {
+              "mpsum": "mount a filesystem",
+              "-l": "Add the labels in the mount output. mount must have permission to read the disk\n device (e.g. be set-user-ID root) for this to work. One can set such a label for\n ext2, ext3 or ext4 using the e2label(8) utility, or for XFS using xfs_admin(8), or\n for reiserfs using reiserfstune(8)."
+            }
+          },
+          "TLDR_inform": {
+            "mount": {
+              "man8_mount_3067": "provid access entir filesystem one directori mount cd-rom devic filetyp iso9660 cdrom readonli mount devic directori mount directori anoth directori mount specif filesystem describ etc fstab e g\ndev sda1 my_driv ext2 default 0 2 mount filesystem defin etc fstab show mount filesystem"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_1314461: LVM instructions confuses me"
+      ],
+      "Top-3 Scripts": [
+        "au_1314461: $ sudo mkfs.ext4 /dev/ubuntu-vg/my-new-lv\n$ sudo mkdir -p /mnt/media\n$ sudo mount /dev/ubuntu-vg/my-new-lv /mnt/media"
+      ],
+      "Explanations about Options": {
+        "-p": "no error if existing, make parent directories as needed"
+      }
+    },
+    {
+      "Command": "file",
+      "MP Summary": "determine file type",
+      "Most Similar TLDR Task": "Look inside a zipped file and determine the file type(s) inside",
+      "Most Similar TLDR Script": "file -z {{foo.zip}}",
+      "Most Similar NL2Bash Task": "Display what flags mount points are mounted with",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mount -l\n",
+          "command-options": {
+            "mount": {
+              "mpsum": "mount a filesystem",
+              "-l": "Add the labels in the mount output. mount must have permission to read the disk\n device (e.g. be set-user-ID root) for this to work. One can set such a label for\n ext2, ext3 or ext4 using the e2label(8) utility, or for XFS using xfs_admin(8), or\n for reiserfs using reiserfstune(8)."
+            }
+          },
+          "TLDR_inform": {
+            "mount": {
+              "man8_mount_3067": "provid access entir filesystem one directori mount cd-rom devic filetyp iso9660 cdrom readonli mount devic directori mount directori anoth directori mount specif filesystem describ etc fstab e g\ndev sda1 my_driv ext2 default 0 2 mount filesystem defin etc fstab show mount filesystem"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_88211: Mounting LVM2 volume gives me 'mount: you must specify the filesystem type'",
+        "ul_185057: Where does LVM store its configuration?"
+      ],
+      "Top-3 Scripts": [
+        "ul_88211: file -Ls /dev/vgXEN/test-disk",
+        "ul_185057: vgcfgbackup -f /path/of/your/choice/file <your_vg_name>\n\n/path/of/your/choice/file"
+      ],
+      "Explanations about Options": {
+        "-L": "option causes symlinks to be followed, as the like-named option in ls(1) (on systems\n that support symbolic links). This is the default if the environment variable\n POSIXLY_CORRECT is defined."
+      }
+    },
+    {
+      "Command": "useradd",
+      "MP Summary": "create a new user or update default new user information",
+      "Most Similar TLDR Task": "Create new user with a default home directory",
+      "Most Similar TLDR Script": "useradd --create-home {{name}}",
+      "Most Similar NL2Bash Task": "Display what flags mount points are mounted with",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mount -l\n",
+          "command-options": {
+            "mount": {
+              "mpsum": "mount a filesystem",
+              "-l": "Add the labels in the mount output. mount must have permission to read the disk\n device (e.g. be set-user-ID root) for this to work. One can set such a label for\n ext2, ext3 or ext4 using the e2label(8) utility, or for XFS using xfs_admin(8), or\n for reiserfs using reiserfstune(8)."
+            }
+          },
+          "TLDR_inform": {
+            "mount": {
+              "man8_mount_3067": "provid access entir filesystem one directori mount cd-rom devic filetyp iso9660 cdrom readonli mount devic directori mount directori anoth directori mount specif filesystem describ etc fstab e g\ndev sda1 my_driv ext2 default 0 2 mount filesystem defin etc fstab show mount filesystem"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_34369056: Docker: Permissions for a mounted volume"
+      ],
+      "Top-3 Scripts": [
+        "so_34369056: # Setup User to match Host User, and give superuser permissions\nARG USER_ID=0\nRUN useradd code_executor -u ${USER_ID} -g sudo\nRUN echo 'code_executor ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers\nUSER ${USER_ID}"
+      ],
+      "Explanations about Options": {
+        "-g": "The group name or ID for a new user's initial group (when the -N/--no-user-group is\n used or when the USERGROUPS_ENAB variable is set to no in /etc/login.defs). The named\n group must exist, and a numerical group ID must have an existing entry.",
+        "-u": "The numerical value of the user's ID. This value must be unique, unless the -o option\n is used. The value must be non-negative. The default is to use the smallest ID value\n greater than or equal to UID_MIN and greater than every other user."
+      }
+    },
+    {
+      "Command": "id",
+      "MP Summary": "print real and effective user and group IDs",
+      "Most Similar TLDR Task": "Display the current user identity as a number",
+      "Most Similar TLDR Script": "id -u",
+      "Most Similar NL2Bash Task": "Display what flags mount points are mounted with",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mount -l\n",
+          "command-options": {
+            "mount": {
+              "mpsum": "mount a filesystem",
+              "-l": "Add the labels in the mount output. mount must have permission to read the disk\n device (e.g. be set-user-ID root) for this to work. One can set such a label for\n ext2, ext3 or ext4 using the e2label(8) utility, or for XFS using xfs_admin(8), or\n for reiserfs using reiserfstune(8)."
+            }
+          },
+          "TLDR_inform": {
+            "mount": {
+              "man8_mount_3067": "provid access entir filesystem one directori mount cd-rom devic filetyp iso9660 cdrom readonli mount devic directori mount directori anoth directori mount specif filesystem describ etc fstab e g\ndev sda1 my_driv ext2 default 0 2 mount filesystem defin etc fstab show mount filesystem"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_274382: How to create a LVM Partition/physical volume > 2TB",
+        "so_34369056: Docker: Permissions for a mounted volume",
+        "ul_185057: Where does LVM store its configuration?"
+      ],
+      "Top-3 Scripts": [
+        "au_274382: DESCRIPTION\n       pvcreate initializes PhysicalVolume for later use by the Logical Volume\n       Manager  (LVM).   Each  PhysicalVolume  can  be a disk partition, whole\n       disk, meta device, or loopback file.   For  DOS  disk  partitions,  the\n       partition  id  should  be  set  to 0x8e using fdisk(8), cfdisk(8), or a\n       equivalent.  For whole disk devices only the partition  table  must  be\n       erased, which will effectively destroy all data on that disk.  This can\n       be done by zeroing the first sector with:\n\n       dd if=/dev/zero of=PhysicalVolume bs=512 count=1",
+        "so_34369056: docker build --build-arg USER_ID=$(id -u)",
+        "ul_185057: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "su",
+      "MP Summary": "run a command with substitute user and group ID",
+      "Most Similar TLDR Task": "Switch to superuser (requires the root password)",
+      "Most Similar TLDR Script": "su",
+      "Most Similar NL2Bash Task": "Display what flags mount points are mounted with",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mount -l\n",
+          "command-options": {
+            "mount": {
+              "mpsum": "mount a filesystem",
+              "-l": "Add the labels in the mount output. mount must have permission to read the disk\n device (e.g. be set-user-ID root) for this to work. One can set such a label for\n ext2, ext3 or ext4 using the e2label(8) utility, or for XFS using xfs_admin(8), or\n for reiserfs using reiserfstune(8)."
+            }
+          },
+          "TLDR_inform": {
+            "mount": {
+              "man8_mount_3067": "provid access entir filesystem one directori mount cd-rom devic filetyp iso9660 cdrom readonli mount devic directori mount directori anoth directori mount specif filesystem describ etc fstab e g\ndev sda1 my_driv ext2 default 0 2 mount filesystem defin etc fstab show mount filesystem"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_485867: how to resize / lvm partition"
+      ],
+      "Top-3 Scripts": [
+        "ul_485867: sudo su"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "modprobe",
+      "MP Summary": "Add and remove modules from the Linux Kernel",
+      "Most Similar TLDR Task": "Remove a module from the kernel",
+      "Most Similar TLDR Script": "sudo modprobe --remove {{module_name}}",
+      "Most Similar NL2Bash Task": "Display what flags mount points are mounted with",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mount -l\n",
+          "command-options": {
+            "mount": {
+              "mpsum": "mount a filesystem",
+              "-l": "Add the labels in the mount output. mount must have permission to read the disk\n device (e.g. be set-user-ID root) for this to work. One can set such a label for\n ext2, ext3 or ext4 using the e2label(8) utility, or for XFS using xfs_admin(8), or\n for reiserfs using reiserfstune(8)."
+            }
+          },
+          "TLDR_inform": {
+            "mount": {
+              "man8_mount_3067": "provid access entir filesystem one directori mount cd-rom devic filetyp iso9660 cdrom readonli mount devic directori mount directori anoth directori mount specif filesystem describ etc fstab e g\ndev sda1 my_driv ext2 default 0 2 mount filesystem defin etc fstab show mount filesystem"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_835525: How to mount LUKS encrypted file?"
+      ],
+      "Top-3 Scripts": [
+        "au_835525: modprobe dm-crypt"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "free",
+      "MP Summary": "Display amount of free and used memory in the system",
+      "Most Similar TLDR Task": "Display system memory",
+      "Most Similar TLDR Script": "free",
+      "Most Similar NL2Bash Task": "Display what flags mount points are mounted with",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mount -l\n",
+          "command-options": {
+            "mount": {
+              "mpsum": "mount a filesystem",
+              "-l": "Add the labels in the mount output. mount must have permission to read the disk\n device (e.g. be set-user-ID root) for this to work. One can set such a label for\n ext2, ext3 or ext4 using the e2label(8) utility, or for XFS using xfs_admin(8), or\n for reiserfs using reiserfstune(8)."
+            }
+          },
+          "TLDR_inform": {
+            "mount": {
+              "man8_mount_3067": "provid access entir filesystem one directori mount cd-rom devic filetyp iso9660 cdrom readonli mount devic directori mount directori anoth directori mount specif filesystem describ etc fstab e g\ndev sda1 my_driv ext2 default 0 2 mount filesystem defin etc fstab show mount filesystem"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_130771: Why can't I create an LVM RAID1 or mirror volume?"
+      ],
+      "Top-3 Scripts": [
+        "ul_130771: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "bash",
+      "MP Summary": "GNU Bourne-Again SHell",
+      "Most Similar TLDR Task": "Run commands from a file, logging all commands executed to the terminal",
+      "Most Similar TLDR Script": "bash -x {{file.sh}}",
+      "Most Similar NL2Bash Task": "Display what flags mount points are mounted with",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mount -l\n",
+          "command-options": {
+            "mount": {
+              "mpsum": "mount a filesystem",
+              "-l": "Add the labels in the mount output. mount must have permission to read the disk\n device (e.g. be set-user-ID root) for this to work. One can set such a label for\n ext2, ext3 or ext4 using the e2label(8) utility, or for XFS using xfs_admin(8), or\n for reiserfs using reiserfstune(8)."
+            }
+          },
+          "TLDR_inform": {
+            "mount": {
+              "man8_mount_3067": "provid access entir filesystem one directori mount cd-rom devic filetyp iso9660 cdrom readonli mount devic directori mount directori anoth directori mount specif filesystem describ etc fstab e g\ndev sda1 my_driv ext2 default 0 2 mount filesystem defin etc fstab show mount filesystem"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_32148445: Docker Volumes mounting issue"
+      ],
+      "Top-3 Scripts": [
+        "so_32148445: test -f $HOME/.myapp_configs/specificConfig.txt || touch $HOME/.myapp_configs/specificConfig.txt\ndocker run -it --name Test1 -v $HOME/.myapp_configs/specificConfig.txt:/bin/specificConfig.txt:rw docker-image /bin/bash"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "set",
+      "MP Summary": "set or unset options and positional parameters",
+      "Most Similar TLDR Task": "Mark variables that are modified or created for export",
+      "Most Similar TLDR Script": "set -a",
+      "Most Similar NL2Bash Task": "Display what flags mount points are mounted with",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mount -l\n",
+          "command-options": {
+            "mount": {
+              "mpsum": "mount a filesystem",
+              "-l": "Add the labels in the mount output. mount must have permission to read the disk\n device (e.g. be set-user-ID root) for this to work. One can set such a label for\n ext2, ext3 or ext4 using the e2label(8) utility, or for XFS using xfs_admin(8), or\n for reiserfs using reiserfstune(8)."
+            }
+          },
+          "TLDR_inform": {
+            "mount": {
+              "man8_mount_3067": "provid access entir filesystem one directori mount cd-rom devic filetyp iso9660 cdrom readonli mount devic directori mount directori anoth directori mount specif filesystem describ etc fstab e g\ndev sda1 my_driv ext2 default 0 2 mount filesystem defin etc fstab show mount filesystem"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_274382: How to create a LVM Partition/physical volume > 2TB"
+      ],
+      "Top-3 Scripts": [
+        "au_274382: DESCRIPTION\n       pvcreate initializes PhysicalVolume for later use by the Logical Volume\n       Manager  (LVM).   Each  PhysicalVolume  can  be a disk partition, whole\n       disk, meta device, or loopback file.   For  DOS  disk  partitions,  the\n       partition  id  should  be  set  to 0x8e using fdisk(8), cfdisk(8), or a\n       equivalent.  For whole disk devices only the partition  table  must  be\n       erased, which will effectively destroy all data on that disk.  This can\n       be done by zeroing the first sector with:\n\n       dd if=/dev/zero of=PhysicalVolume bs=512 count=1"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "apt-get",
+      "MP Summary": "APT package handling utility - command-line interface",
+      "Most Similar TLDR Task": "Remove a package and its configuration files",
+      "Most Similar TLDR Script": "apt-get purge {{package}}",
+      "Most Similar NL2Bash Task": "Display what flags mount points are mounted with",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mount -l\n",
+          "command-options": {
+            "mount": {
+              "mpsum": "mount a filesystem",
+              "-l": "Add the labels in the mount output. mount must have permission to read the disk\n device (e.g. be set-user-ID root) for this to work. One can set such a label for\n ext2, ext3 or ext4 using the e2label(8) utility, or for XFS using xfs_admin(8), or\n for reiserfs using reiserfstune(8)."
+            }
+          },
+          "TLDR_inform": {
+            "mount": {
+              "man8_mount_3067": "provid access entir filesystem one directori mount cd-rom devic filetyp iso9660 cdrom readonli mount devic directori mount directori anoth directori mount specif filesystem describ etc fstab e g\ndev sda1 my_driv ext2 default 0 2 mount filesystem defin etc fstab show mount filesystem"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_339011: How do I mount an LVM partition?"
+      ],
+      "Top-3 Scripts": [
+        "ul_339011: sudo apt-get install lvm2   #This step may or may not be required.\nsudo pvscan                 #Use this to verify your LVM partition(s) is/are detected.\nsudo vgscan                 #Scans for LVM Volume Group(s)\nsudo vgchange -ay           #Activates LVM Volume Group(s)\nsudo lvscan                 #Scans for available Logical Volumes\nsudo mount /dev/YourVolGroup00/YourLogVol00 /YourMountPoint"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "which",
+      "MP Summary": "locate a command",
+      "Most Similar TLDR Task": "Search the PATH environment variable and display the location of any matching executables",
+      "Most Similar TLDR Script": "which {{executable}}",
+      "Most Similar NL2Bash Task": "Display what flags mount points are mounted with",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mount -l\n",
+          "command-options": {
+            "mount": {
+              "mpsum": "mount a filesystem",
+              "-l": "Add the labels in the mount output. mount must have permission to read the disk\n device (e.g. be set-user-ID root) for this to work. One can set such a label for\n ext2, ext3 or ext4 using the e2label(8) utility, or for XFS using xfs_admin(8), or\n for reiserfs using reiserfstune(8)."
+            }
+          },
+          "TLDR_inform": {
+            "mount": {
+              "man8_mount_3067": "provid access entir filesystem one directori mount cd-rom devic filetyp iso9660 cdrom readonli mount devic directori mount directori anoth directori mount specif filesystem describ etc fstab e g\ndev sda1 my_driv ext2 default 0 2 mount filesystem defin etc fstab show mount filesystem"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_274382: How to create a LVM Partition/physical volume > 2TB"
+      ],
+      "Top-3 Scripts": [
+        "au_274382: DESCRIPTION\n       pvcreate initializes PhysicalVolume for later use by the Logical Volume\n       Manager  (LVM).   Each  PhysicalVolume  can  be a disk partition, whole\n       disk, meta device, or loopback file.   For  DOS  disk  partitions,  the\n       partition  id  should  be  set  to 0x8e using fdisk(8), cfdisk(8), or a\n       equivalent.  For whole disk devices only the partition  table  must  be\n       erased, which will effectively destroy all data on that disk.  This can\n       be done by zeroing the first sector with:\n\n       dd if=/dev/zero of=PhysicalVolume bs=512 count=1"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "as",
+      "MP Summary": "or  any situation  where  you want to make sure you're doing a clean install of your dependencies. It  can  be  significantly  faster  than  a  regular  npm  install  by  skipping   certain user-oriented  features.  It  is  also  more strict than a regular install, which can help catch errors or inconsistencies caused by the incrementally-installed  local  environments of most npm users. In short, the main differences between using npm install and npm ci are: \u00b7 The project must have an existing package-lock.json or npm-shrinkwrap.json. \u00b7 If dependencies in the package lock do not match those in package.json, npm ci will exit with an error, instead of updating the package lock. \u00b7 npm ci can only install entire projects at a time:  individual  dependencies  cannot  be added with this command. \u00b7 If  a  node_modules  is  already present, it will be automatically removed before npm ci begins its install. \u00b7 It will  never  write  to  package.json  or  any  of  the  package-locks:  installs  are essentially frozen. See Also \u00b7 npm help install \u00b7 npm help package-locks April 2020                                  NPM-CI(1)",
+      "Most Similar TLDR Task": "Include a given path to the list of directories to search for files specified in .include directives",
+      "Most Similar TLDR Script": "as -I {{path/to/directory}} {{file.s}}",
+      "Most Similar NL2Bash Task": "Display what flags mount points are mounted with",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mount -l\n",
+          "command-options": {
+            "mount": {
+              "mpsum": "mount a filesystem",
+              "-l": "Add the labels in the mount output. mount must have permission to read the disk\n device (e.g. be set-user-ID root) for this to work. One can set such a label for\n ext2, ext3 or ext4 using the e2label(8) utility, or for XFS using xfs_admin(8), or\n for reiserfs using reiserfstune(8)."
+            }
+          },
+          "TLDR_inform": {
+            "mount": {
+              "man8_mount_3067": "provid access entir filesystem one directori mount cd-rom devic filetyp iso9660 cdrom readonli mount devic directori mount directori anoth directori mount specif filesystem describ etc fstab e g\ndev sda1 my_driv ext2 default 0 2 mount filesystem defin etc fstab show mount filesystem"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_1198329: Mounting a Luks partition"
+      ],
+      "Top-3 Scripts": [
+        "au_1198329: Backup file: /media/ubuntu/external-drive/backups-2019/ubuntu.img\nAccessible as a loop device at: /dev/loop100\nUnlocked on: /dev/mapper/img5\nPV: /dev/mapper/img5\nVG: ubuntu-vg\nLV: ubuntu-vg/root\nLV Location: /dev/mapper/ubuntu--vg--root"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "ps",
+      "MP Summary": "report a snapshot of the current processes.",
+      "Most Similar TLDR Task": "Sort processes by memory consumption",
+      "Most Similar TLDR Script": "ps --sort size",
+      "Most Similar NL2Bash Task": "Display what flags mount points are mounted with",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mount -l\n",
+          "command-options": {
+            "mount": {
+              "mpsum": "mount a filesystem",
+              "-l": "Add the labels in the mount output. mount must have permission to read the disk\n device (e.g. be set-user-ID root) for this to work. One can set such a label for\n ext2, ext3 or ext4 using the e2label(8) utility, or for XFS using xfs_admin(8), or\n for reiserfs using reiserfstune(8)."
+            }
+          },
+          "TLDR_inform": {
+            "mount": {
+              "man8_mount_3067": "provid access entir filesystem one directori mount cd-rom devic filetyp iso9660 cdrom readonli mount devic directori mount directori anoth directori mount specif filesystem describ etc fstab e g\ndev sda1 my_driv ext2 default 0 2 mount filesystem defin etc fstab show mount filesystem"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "tldr_9013: Filter containers that mount a specific volume or have a volume mounted in a specific path"
+      ],
+      "Top-3 Scripts": [
+        "tldr_9013: docker ps --filter=\"volume={{path/to/directory}}\" --format \"table {{.ID}}\\t{{.Image}}\\t{{.Names}}\\t{{.Mounts}}\""
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "touch",
+      "MP Summary": "change file timestamps",
+      "Most Similar TLDR Task": "Create a new empty file(s) or change the times for existing file(s) to current time",
+      "Most Similar TLDR Script": "touch {{filename}}",
+      "Most Similar NL2Bash Task": "Display what flags mount points are mounted with",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mount -l\n",
+          "command-options": {
+            "mount": {
+              "mpsum": "mount a filesystem",
+              "-l": "Add the labels in the mount output. mount must have permission to read the disk\n device (e.g. be set-user-ID root) for this to work. One can set such a label for\n ext2, ext3 or ext4 using the e2label(8) utility, or for XFS using xfs_admin(8), or\n for reiserfs using reiserfstune(8)."
+            }
+          },
+          "TLDR_inform": {
+            "mount": {
+              "man8_mount_3067": "provid access entir filesystem one directori mount cd-rom devic filetyp iso9660 cdrom readonli mount devic directori mount directori anoth directori mount specif filesystem describ etc fstab e g\ndev sda1 my_driv ext2 default 0 2 mount filesystem defin etc fstab show mount filesystem"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_32148445: Docker Volumes mounting issue"
+      ],
+      "Top-3 Scripts": [
+        "so_32148445: test -f $HOME/.myapp_configs/specificConfig.txt || touch $HOME/.myapp_configs/specificConfig.txt\ndocker run -it --name Test1 -v $HOME/.myapp_configs/specificConfig.txt:/bin/specificConfig.txt:rw docker-image /bin/bash\n\ntouch <some file>"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "semanage",
+      "MP Summary": "SELinux Policy Management tool",
+      "Most Similar TLDR Task": "Manage policy modules",
+      "Most Similar TLDR Script": "semanage module -S {{store}} {{--add|--delete|--list|--modify}} {{--enable|--disable}} {{module_name}}",
+      "Most Similar NL2Bash Task": "Display what flags mount points are mounted with",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mount -l\n",
+          "command-options": {
+            "mount": {
+              "mpsum": "mount a filesystem",
+              "-l": "Add the labels in the mount output. mount must have permission to read the disk\n device (e.g. be set-user-ID root) for this to work. One can set such a label for\n ext2, ext3 or ext4 using the e2label(8) utility, or for XFS using xfs_admin(8), or\n for reiserfs using reiserfstune(8)."
+            }
+          },
+          "TLDR_inform": {
+            "mount": {
+              "man8_mount_3067": "provid access entir filesystem one directori mount cd-rom devic filetyp iso9660 cdrom readonli mount devic directori mount directori anoth directori mount specif filesystem describ etc fstab e g\ndev sda1 my_driv ext2 default 0 2 mount filesystem defin etc fstab show mount filesystem"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_52075: Problem with permissions when sharing a mounted filesystem"
+      ],
+      "Top-3 Scripts": [
+        "ul_52075: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "type",
+      "MP Summary": "write a description of command type",
+      "Most Similar TLDR Task": "Display all locations containing the specified executable",
+      "Most Similar TLDR Script": "type -a {{command}}",
+      "Most Similar NL2Bash Task": "Display what flags mount points are mounted with",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mount -l\n",
+          "command-options": {
+            "mount": {
+              "mpsum": "mount a filesystem",
+              "-l": "Add the labels in the mount output. mount must have permission to read the disk\n device (e.g. be set-user-ID root) for this to work. One can set such a label for\n ext2, ext3 or ext4 using the e2label(8) utility, or for XFS using xfs_admin(8), or\n for reiserfs using reiserfstune(8)."
+            }
+          },
+          "TLDR_inform": {
+            "mount": {
+              "man8_mount_3067": "provid access entir filesystem one directori mount cd-rom devic filetyp iso9660 cdrom readonli mount devic directori mount directori anoth directori mount specif filesystem describ etc fstab e g\ndev sda1 my_driv ext2 default 0 2 mount filesystem defin etc fstab show mount filesystem"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_838436: How can I extend my LVM partition"
+      ],
+      "Top-3 Scripts": [
+        "au_838436: # fdisk /dev/sdb\nCommand (m for help): t\nPartition number (1-5): 5\nHex code (type L to list codes): 8e\nChanged system type of partition 5 to 8e (Linux LVM)\nCommand (m for help): w"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "printf",
+      "MP Summary": "format and print data",
+      "Most Similar TLDR Task": "Print a text message composed with environment variables",
+      "Most Similar TLDR Script": "printf \"{{var1: %s\\tvar2: %s\\n}}\" \"{{$VAR1}}\" \"{{$VAR2}}\"",
+      "Most Similar NL2Bash Task": "Display what flags mount points are mounted with",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mount -l\n",
+          "command-options": {
+            "mount": {
+              "mpsum": "mount a filesystem",
+              "-l": "Add the labels in the mount output. mount must have permission to read the disk\n device (e.g. be set-user-ID root) for this to work. One can set such a label for\n ext2, ext3 or ext4 using the e2label(8) utility, or for XFS using xfs_admin(8), or\n for reiserfs using reiserfstune(8)."
+            }
+          },
+          "TLDR_inform": {
+            "mount": {
+              "man8_mount_3067": "provid access entir filesystem one directori mount cd-rom devic filetyp iso9660 cdrom readonli mount devic directori mount directori anoth directori mount specif filesystem describ etc fstab e g\ndev sda1 my_driv ext2 default 0 2 mount filesystem defin etc fstab show mount filesystem"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_275632: how to fetch lvm mount point (generic)"
+      ],
+      "Top-3 Scripts": [
+        "ul_275632: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "test",
+      "MP Summary": "check file types and compare values",
+      "Most Similar TLDR Task": "Test if directory not exists",
+      "Most Similar TLDR Script": "test ! -d {{path/to/directory}}",
+      "Most Similar NL2Bash Task": "Display what flags mount points are mounted with",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mount -l\n",
+          "command-options": {
+            "mount": {
+              "mpsum": "mount a filesystem",
+              "-l": "Add the labels in the mount output. mount must have permission to read the disk\n device (e.g. be set-user-ID root) for this to work. One can set such a label for\n ext2, ext3 or ext4 using the e2label(8) utility, or for XFS using xfs_admin(8), or\n for reiserfs using reiserfstune(8)."
+            }
+          },
+          "TLDR_inform": {
+            "mount": {
+              "man8_mount_3067": "provid access entir filesystem one directori mount cd-rom devic filetyp iso9660 cdrom readonli mount devic directori mount directori anoth directori mount specif filesystem describ etc fstab e g\ndev sda1 my_driv ext2 default 0 2 mount filesystem defin etc fstab show mount filesystem"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_32148445: Docker Volumes mounting issue"
+      ],
+      "Top-3 Scripts": [
+        "so_32148445: test -f $HOME/.myapp_configs/specificConfig.txt || touch $HOME/.myapp_configs/specificConfig.txt\ndocker run -it --name Test1 -v $HOME/.myapp_configs/specificConfig.txt:/bin/specificConfig.txt:rw docker-image /bin/bash\n\ntest -f <some file>"
+      ],
+      "Explanations about Options": {
+        "-f": "FILE\n FILE exists and is a regular file"
+      }
+    },
+    {
+      "Command": "ls",
+      "MP Summary": "list directory contents",
+      "Most Similar TLDR Task": "List all files, with trailing `/` added to directory names",
+      "Most Similar TLDR Script": "ls -F",
+      "Most Similar NL2Bash Task": "Display what flags mount points are mounted with",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mount -l\n",
+          "command-options": {
+            "mount": {
+              "mpsum": "mount a filesystem",
+              "-l": "Add the labels in the mount output. mount must have permission to read the disk\n device (e.g. be set-user-ID root) for this to work. One can set such a label for\n ext2, ext3 or ext4 using the e2label(8) utility, or for XFS using xfs_admin(8), or\n for reiserfs using reiserfstune(8)."
+            }
+          },
+          "TLDR_inform": {
+            "mount": {
+              "man8_mount_3067": "provid access entir filesystem one directori mount cd-rom devic filetyp iso9660 cdrom readonli mount devic directori mount directori anoth directori mount specif filesystem describ etc fstab e g\ndev sda1 my_driv ext2 default 0 2 mount filesystem defin etc fstab show mount filesystem"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_52075: Problem with permissions when sharing a mounted filesystem"
+      ],
+      "Top-3 Scripts": [
+        "ul_52075: ls -Z"
+      ],
+      "Explanations about Options": {
+        "-Z": "print any security context of each file"
+      }
+    },
+    {
+      "Command": "at",
+      "MP Summary": "queue, examine, or delete jobs for later execution",
+      "Most Similar TLDR Task": "Open an `at` prompt to create a new set of scheduled commands, press `Ctrl + D` to save and exit",
+      "Most Similar TLDR Script": "at {{hh:mm}}",
+      "Most Similar NL2Bash Task": "Display what flags mount points are mounted with",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mount -l\n",
+          "command-options": {
+            "mount": {
+              "mpsum": "mount a filesystem",
+              "-l": "Add the labels in the mount output. mount must have permission to read the disk\n device (e.g. be set-user-ID root) for this to work. One can set such a label for\n ext2, ext3 or ext4 using the e2label(8) utility, or for XFS using xfs_admin(8), or\n for reiserfs using reiserfstune(8)."
+            }
+          },
+          "TLDR_inform": {
+            "mount": {
+              "man8_mount_3067": "provid access entir filesystem one directori mount cd-rom devic filetyp iso9660 cdrom readonli mount devic directori mount directori anoth directori mount specif filesystem describ etc fstab e g\ndev sda1 my_driv ext2 default 0 2 mount filesystem defin etc fstab show mount filesystem"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_185057: Where does LVM store its configuration?"
+      ],
+      "Top-3 Scripts": [
+        "ul_185057: Writing physical volume data to disk \"/dev/sdc1\"\n        lvmcache: /dev/sdc1: now in VG #orphans_lvm2 (#orphans_lvm2) with 0 mdas\n        Creating metadata area on /dev/sdc1 at sector 8 size 2040 sectors\n        Opened /dev/sdc1 RW O_DIRECT\n        /dev/sdc1: block size is 1024 bytes\n        /dev/sdc1: physical block size is 512 bytes\n        /dev/sdc1: Preparing PV label header xxx.xxxxx.xxxxxxxxxxxxxxx\n\n      /dev/sdc1: Writing label to sector 1 with stored offset 32."
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "print",
+      "MP Summary": "execute programs via entries in the mailcap file",
+      "Most Similar TLDR Task": "With `run-mailcap`",
+      "Most Similar TLDR Script": "run-mailcap --action=print {{filename}}",
+      "Most Similar NL2Bash Task": "Display what flags mount points are mounted with",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mount -l\n",
+          "command-options": {
+            "mount": {
+              "mpsum": "mount a filesystem",
+              "-l": "Add the labels in the mount output. mount must have permission to read the disk\n device (e.g. be set-user-ID root) for this to work. One can set such a label for\n ext2, ext3 or ext4 using the e2label(8) utility, or for XFS using xfs_admin(8), or\n for reiserfs using reiserfstune(8)."
+            }
+          },
+          "TLDR_inform": {
+            "mount": {
+              "man8_mount_3067": "provid access entir filesystem one directori mount cd-rom devic filetyp iso9660 cdrom readonli mount devic directori mount directori anoth directori mount specif filesystem describ etc fstab e g\ndev sda1 my_driv ext2 default 0 2 mount filesystem defin etc fstab show mount filesystem"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_275632: how to fetch lvm mount point (generic)"
+      ],
+      "Top-3 Scripts": [
+        "ul_275632: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "strace",
+      "MP Summary": "trace system calls and signals",
+      "Most Similar TLDR Task": "Start tracing file operations of a program",
+      "Most Similar TLDR Script": "strace -e trace=file {{program}}",
+      "Most Similar NL2Bash Task": "Display what flags mount points are mounted with",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mount -l\n",
+          "command-options": {
+            "mount": {
+              "mpsum": "mount a filesystem",
+              "-l": "Add the labels in the mount output. mount must have permission to read the disk\n device (e.g. be set-user-ID root) for this to work. One can set such a label for\n ext2, ext3 or ext4 using the e2label(8) utility, or for XFS using xfs_admin(8), or\n for reiserfs using reiserfstune(8)."
+            }
+          },
+          "TLDR_inform": {
+            "mount": {
+              "man8_mount_3067": "provid access entir filesystem one directori mount cd-rom devic filetyp iso9660 cdrom readonli mount devic directori mount directori anoth directori mount specif filesystem describ etc fstab e g\ndev sda1 my_driv ext2 default 0 2 mount filesystem defin etc fstab show mount filesystem"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_107447: mount does not print mounted partitions"
+      ],
+      "Top-3 Scripts": [
+        "ul_107447: $ strace -o mount_strace.log mount"
+      ],
+      "Explanations about Options": {
+        "-o": "Write the trace output to the file filename rather than to stderr.\n filename.pid form is used if -ff option is supplied. If the argument begins\n with '|' or '!', the rest of the argument is treated as a command and all\n output is piped to it. This is convenient for piping the debugging output to\n a program without affecting the redirections of executed programs. The latter\n is not compatible with -ff option currently."
+      }
+    },
+    {
+      "Command": "cat",
+      "MP Summary": "concatenate files and print on the standard output",
+      "Most Similar TLDR Task": "Concatenate several files into the target file",
+      "Most Similar TLDR Script": "cat {{file1}} {{file2}} > {{target_file}}",
+      "Most Similar NL2Bash Task": "Display what flags mount points are mounted with",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mount -l\n",
+          "command-options": {
+            "mount": {
+              "mpsum": "mount a filesystem",
+              "-l": "Add the labels in the mount output. mount must have permission to read the disk\n device (e.g. be set-user-ID root) for this to work. One can set such a label for\n ext2, ext3 or ext4 using the e2label(8) utility, or for XFS using xfs_admin(8), or\n for reiserfs using reiserfstune(8)."
+            }
+          },
+          "TLDR_inform": {
+            "mount": {
+              "man8_mount_3067": "provid access entir filesystem one directori mount cd-rom devic filetyp iso9660 cdrom readonli mount devic directori mount directori anoth directori mount specif filesystem describ etc fstab e g\ndev sda1 my_driv ext2 default 0 2 mount filesystem defin etc fstab show mount filesystem"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_479545: How to shrink a physical volume?"
+      ],
+      "Top-3 Scripts": [
+        "ul_479545: cat /proc/partitions"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "man",
+      "MP Summary": "an interface to the system reference manuals",
+      "Most Similar TLDR Task": "Display the location of a manpage rather than the manpage itself",
+      "Most Similar TLDR Script": "man -w {{command}}",
+      "Most Similar NL2Bash Task": "Display what flags mount points are mounted with",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mount -l\n",
+          "command-options": {
+            "mount": {
+              "mpsum": "mount a filesystem",
+              "-l": "Add the labels in the mount output. mount must have permission to read the disk\n device (e.g. be set-user-ID root) for this to work. One can set such a label for\n ext2, ext3 or ext4 using the e2label(8) utility, or for XFS using xfs_admin(8), or\n for reiserfs using reiserfstune(8)."
+            }
+          },
+          "TLDR_inform": {
+            "mount": {
+              "man8_mount_3067": "provid access entir filesystem one directori mount cd-rom devic filetyp iso9660 cdrom readonli mount devic directori mount directori anoth directori mount specif filesystem describ etc fstab e g\ndev sda1 my_driv ext2 default 0 2 mount filesystem defin etc fstab show mount filesystem"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_314493: How to restore previous LVM volume group configuration?"
+      ],
+      "Top-3 Scripts": [
+        "ul_314493: man vgcfgrestore"
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

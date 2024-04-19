@@ -1,0 +1,1905 @@
+{
+  "Query": "How to create an animated GIF from MP4 video via command line?",
+  "Answers": [
+    {
+      "Command": "ffmpeg",
+      "MP Summary": "ffmpeg video converter",
+      "Most Similar TLDR Task": "Convert frames from a video or GIF into individual numbered images",
+      "Most Similar TLDR Script": "ffmpeg -i {{video.mpg|video.gif}} {{frame_%d.png}}",
+      "Most Similar NL2Bash Task": "find *.gif files under the currently directory and sub-directories and list them using the ls command",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -name *.gif -exec ls {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "ls": {
+              "mpsum": "list directory contents"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "ls": {
+              "man1_ls_18038": "list directori content list file includ hidden file list file trail ad directori name list file one per line long format list permiss ownership size modif date file long format list file sort modif date oldest first long format list sort size descend long format list size display use human readabl unit kb mb gb"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_648603: How to create an animated GIF from MP4 video via command line?",
+        "au_53182: how to create an audio clip from a video file using command line?",
+        "ul_24014: Creating a GIF animation from PNG files"
+      ],
+      "Top-3 Scripts": [
+        "au_648603: sudo apt install ffmpeg\nwget -O opengl-rotating-triangle.mp4 https://github.com/cirosantilli/media/blob/master/opengl-rotating-triangle.mp4?raw=true\nffmpeg \\\n  -i opengl-rotating-triangle.mp4 \\\n  -r 15 \\\n  -vf scale=512:-1 \\\n  -ss 00:00:03 -to 00:00:06 \\\n  opengl-rotating-triangle.gif\n\nffmpeg \\\n  -i opengl-rotating-triangle.mp4 \\\n  -r 15 \\\n  -vf \"scale=512:-1,split[s0][s1];[s0]palettegen[p];[s1][p]paletteuse\" \\\n  -ss 00:00:03 -to 00:00:06 \\\n  opengl-rotating-triangle-palettegen.gif\n\nwget https://upload.wikimedia.org/wikipedia/commons/f/f9/STS-132_Liftoff_Space_Shuttle_Atlantis.ogv\nffmpeg -i STS-132_Liftoff_Space_Shuttle_Atlantis.ogv -r 15 -vf scale=512:-1 \\\n  -ss 00:00:17 -to 00:00:22 STS-132_Liftoff_Space_Shuttle_Atlantis.gif\n\nsudo apt-get install ffmpeg\nffmpeg -i in.mp4 out.gif\n\nsudo apt-get install ffmpeg imagemagick\nffmpeg -i opengl-rotating-triangle.mp4 -r 15 -vf scale=512:-1 \\\n  -ss 00:00:03 -to 00:00:06 -f image2pipe -vcodec ppm - |\n  convert -deconstruct -delay 5 -loop 0 - opengl-rotating-triangle-image-magick.gif\n\nffmpeg -i STS-132_Liftoff_Space_Shuttle_Atlantis.ogv -r 15 -vf scale=512:-1 \\\n  -ss 00:00:17 -to 00:00:22 -f image2pipe -vcodec ppm - |\n  convert -deconstruct -delay 5 -loop 0 - STS-132_Liftoff_Space_Shuttle_Atlantis_512x.gif\n\nsudo snap install gifski\nmkdir -p frames\nffmpeg \\\n  -i opengl-rotating-triangle.mp4 \\\n  -r 15 \\\n  -vf scale=512:-1 \\\n  -ss 00:00:03 -to 00:00:06 \\\n  frames/%04d.png\ngifski -o opengl-rotating-triangle-gifski.gif frames/*.png",
+        "au_53182: $ ffmpeg -i youtubemusicvideo.flv -vn -acodec libvorbis result.ogg",
+        "ul_24014: ffmpeg -i %03d.png output.gif\n\n# cf. http://pages.uoregon.edu/noeckel/MakeMovie.html\n\n# first convert an image sequence to a movie\nffmpeg -sameq -i %03d.jpg output.mp4\n\n# ... and then convert the movie to a GIF animation\nffmpeg -i output.mp4 -pix_fmt rgb24 -s qcif -loop_output 0 output.gif"
+      ],
+      "Explanations about Options": {
+        "-acodec": "Set the audio codec. This is an alias for \"-codec:a\".",
+        "-q": " Use fixed quality scale (VBR). The meaning of q/qscale is codec-dependent. If qscale\n is used without a stream_specifier then it applies only to the video stream, this is\n to maintain compatibility with previous behavior and as specifying the same codec\n specific value to 2 different codecs that is audio and video generally is not what is\n intended when no stream_specifier is used.",
+        "-vn": "As an input option, blocks all video streams of a file from being filtered or being\n automatically selected or mapped for any output. See \"-discard\" option to disable\n streams individually.",
+        "-i": "input file url"
+      }
+    },
+    {
+      "Command": "youtube-dl",
+      "MP Summary": "download videos from youtube.com or other video platforms",
+      "Most Similar TLDR Task": "Download video(s) as MP4 files with custom filenames",
+      "Most Similar TLDR Script": "youtube-dl --format {{mp4}} -o \"{{%(title)s by %(uploader)s on %(upload_date)s in %(playlist)s.%(ext)s}}\" '{{url}}'",
+      "Most Similar NL2Bash Task": "find *.gif files under the currently directory and sub-directories and list them using the ls command",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -name *.gif -exec ls {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "ls": {
+              "mpsum": "list directory contents"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "ls": {
+              "man1_ls_18038": "list directori content list file includ hidden file list file trail ad directori name list file one per line long format list permiss ownership size modif date file long format list file sort modif date oldest first long format list sort size descend long format list size display use human readabl unit kb mb gb"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_51222752: Download all mp4 videos from a website",
+        "au_469845: how to play video downloaded from terminal"
+      ],
+      "Top-3 Scripts": [
+        "so_51222752: ",
+        "au_469845: totem \"$(youtube-dl youtube.com/watch?v=ES6OyV-RfHU |& grep -oP 'Destination:\\s\\K.*')\""
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "convert",
+      "MP Summary": "convert between image formats as well as resize an image, blur, crop, despeckle, dither, draw on, flip, join, re-sample, and much more.",
+      "Most Similar TLDR Task": "Create a gif from a series of images with 100ms delay between them",
+      "Most Similar TLDR Script": "convert {{image1.png}} {{image2.png}} {{image3.png}} -delay {{10}} {{animation.gif}}",
+      "Most Similar NL2Bash Task": "find *.gif files under the currently directory and sub-directories and list them using the ls command",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -name *.gif -exec ls {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "ls": {
+              "mpsum": "list directory contents"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "ls": {
+              "man1_ls_18038": "list directori content list file includ hidden file list file trail ad directori name list file one per line long format list permiss ownership size modif date file long format list file sort modif date oldest first long format list sort size descend long format list size display use human readabl unit kb mb gb"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_648603: How to create an animated GIF from MP4 video via command line?",
+        "au_648244: How do I create an animated gif from still images (preferably with the command line)?",
+        "au_140269: How can I extract frames from GIF animation image on Gimp"
+      ],
+      "Top-3 Scripts": [
+        "au_648603: sudo apt-get install ffmpeg imagemagick\nffmpeg -i opengl-rotating-triangle.mp4 -r 15 -vf scale=512:-1 \\\n  -ss 00:00:03 -to 00:00:06 -f image2pipe -vcodec ppm - |\n  convert -deconstruct -delay 5 -loop 0 - opengl-rotating-triangle-image-magick.gif\n\nffmpeg -i STS-132_Liftoff_Space_Shuttle_Atlantis.ogv -r 15 -vf scale=512:-1 \\\n  -ss 00:00:17 -to 00:00:22 -f image2pipe -vcodec ppm - |\n  convert -deconstruct -delay 5 -loop 0 - STS-132_Liftoff_Space_Shuttle_Atlantis_512x.gif\n\nconvert input.mp4 rpi2-bare-metal-blink.gif",
+        "au_648244: convert -delay 20 -loop 0 *.jpg myimage.gif",
+        "au_140269: convert image to PNG"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "echo",
+      "MP Summary": "display a line of text",
+      "Most Similar TLDR Task": "Print a text message. Note: quotes are optional",
+      "Most Similar TLDR Script": "echo \"{{Hello World}}\"",
+      "Most Similar NL2Bash Task": "find *.gif files under the currently directory and sub-directories and list them using the ls command",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -name *.gif -exec ls {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "ls": {
+              "mpsum": "list directory contents"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "ls": {
+              "man1_ls_18038": "list directori content list file includ hidden file list file trail ad directori name list file one per line long format list permiss ownership size modif date file long format list file sort modif date oldest first long format list sort size descend long format list size display use human readabl unit kb mb gb"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_278365: FFMpeg : Converting a video file to a gif with multiple images from video",
+        "au_1163088: How to list all mp4 files with HDp60 (to separate them from p30)?",
+        "ul_36262: How to grab the audio channel from an MP4 video file into a separate audio file?"
+      ],
+      "Top-3 Scripts": [
+        "ul_278365: l=$(ffmpeg -i ${vidfile} 2>&1 | grep Duration | cut -d ' ' -f 4 | sed s/,//)\nh=$(echo $l|cut -d: -f1)\nm=$(echo $l|cut -d: -f2)\ns=$(echo $l|cut -d: -f3|cut -d\".\" -f1)\n(( hh=$h*3600 ))\n(( mm=$m*60 ))\n(( LengthSeconds=$hh+$mm+$s ))",
+        "au_1163088: for videofile in *.mp4; do\n echo -n \"$videofile\\t\"\n ffprobe -v error -select_streams v \\\n -of default=noprint_wrappers=1:nokey=1 \\\n -show_entries stream=r_frame_rate $videofile",
+        "ul_36262: eval $(ffmpeg -i \"movie.mp4\" 2>&1 |awk '/Stream.*Audio/{print \"stream=\" $2 \";codec=\" $4}' |head -n1)\nstream=${stream:1}; stream=${stream/:/}\nextn=${codec/,/}; [[ $extn == \"aac\" ]] || \n    { echo \"You need to manually set the fiie extension. Codec type is: $codec\"; exit 1; } \n\nffmpeg -map $stream -acodec copy -i \"movie.mp4\" \"audio.$extn\""
+      ],
+      "Explanations about Options": {
+        "-n": "do not output the trailing newline"
+      }
+    },
+    {
+      "Command": "ffprobe",
+      "MP Summary": "ffprobe media prober",
+      "Most Similar TLDR Task": "Display the average bit rate of a video",
+      "Most Similar TLDR Script": "ffprobe -v error -select_streams v:0 -show_entries stream=bit_rate -of default=noprint_wrappers=1:nokey=1 {{input.mp4}}",
+      "Most Similar NL2Bash Task": "find *.gif files under the currently directory and sub-directories and list them using the ls command",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -name *.gif -exec ls {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "ls": {
+              "mpsum": "list directory contents"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "ls": {
+              "man1_ls_18038": "list directori content list file includ hidden file list file trail ad directori name list file one per line long format list permiss ownership size modif date file long format list file sort modif date oldest first long format list sort size descend long format list size display use human readabl unit kb mb gb"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_648603: How to create an animated GIF from MP4 video via command line?",
+        "au_1127603: How can I create a 30 second GIF from a long random video?",
+        "au_1163088: How to list all mp4 files with HDp60 (to separate them from p30)?"
+      ],
+      "Top-3 Scripts": [
+        "au_648603: ",
+        "au_1127603: #!/bin/bash\nmkdir 30gif\nfor f in *.mp4; do\n  duration=$(ffprobe -loglevel error -show_entries format=duration -of default=nk=1:nw=1 \"$f\")\n  ffmpeg -i \"$f\" -filter_complex \"[0:v]select='lt(mod(t,${duration}/10),3)',setpts=N/(FRAME_RATE*TB),scale=560:340:force_original_aspect_ratio=decrease,pad=560:340:(ow-iw)/2:(oh-ih)/2,setsar=1,split[v0][v1];[v0]palettegen[p];[v1][p]paletteuse[v]\" -map \"[v]\" \"30gif/${f%.mp4}.gif\"\ndone",
+        "au_1163088: ffprobe -v error -select_streams \\\nv -of default=noprint_wrappers=1:nokey=1 \\\n-show_entries stream=r_frame_rate <your-filename>.mp4\n\nfor videofile in *.mp4; do\n echo -n \"$videofile\\t\"\n ffprobe -v error -select_streams v \\\n -of default=noprint_wrappers=1:nokey=1 \\\n -show_entries stream=r_frame_rate $videofile\n\nfind -name '*.mp4' -printf '%p\\t' \\\n-exec ffprobe -v error -select_streams \\\nv -of default=noprint_wrappers=1:nokey=1  \\\n-show_entries stream=r_frame_rate {} \\;"
+      ],
+      "Explanations about Options": {
+        "-loglevel": "Set logging level and flags used by the library."
+      }
+    },
+    {
+      "Command": "sed",
+      "MP Summary": "stream editor for filtering and transforming text",
+      "Most Similar TLDR Task": "Replace the first occurrence of a regular expression in each line of a file, and print the result",
+      "Most Similar TLDR Script": "sed 's/{{regex}}/{{replace}}/' {{filename}}",
+      "Most Similar NL2Bash Task": "find *.gif files under the currently directory and sub-directories and list them using the ls command",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -name *.gif -exec ls {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "ls": {
+              "mpsum": "list directory contents"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "ls": {
+              "man1_ls_18038": "list directori content list file includ hidden file list file trail ad directori name list file one per line long format list permiss ownership size modif date file long format list file sort modif date oldest first long format list sort size descend long format list size display use human readabl unit kb mb gb"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_278365: FFMpeg : Converting a video file to a gif with multiple images from video",
+        "ul_174503: Convert Multiple Videos to Multiple GIFs",
+        "so_51121333: ffmpeg extract subclips from video at 10s; 30%; 60%; last 30s of a video"
+      ],
+      "Top-3 Scripts": [
+        "ul_278365: ffmpeg -i ${vidfile} 2>&1 | grep Duration | cut -d ' ' -f 4 | sed s/,//\n\nl=$(ffmpeg -i ${vidfile} 2>&1 | grep Duration | cut -d ' ' -f 4 | sed s/,//)\nh=$(echo $l|cut -d: -f1)\nm=$(echo $l|cut -d: -f2)\ns=$(echo $l|cut -d: -f3|cut -d\".\" -f1)\n(( hh=$h*3600 ))\n(( mm=$m*60 ))\n(( LengthSeconds=$hh+$mm+$s ))",
+        "ul_174503: find . -maxdepth 1 -name \"*.flv\" -print0 |\n  sed 's/\\.flv\\x00/\\x00/g' |\n  xargs -r0 -I FILENAME ffmpeg -i FILENAME.flv -vf scale=320:-1 FILENAME.gif",
+        "so_51121333: DURATION=$(ffmpeg -i $file 2>&1 | grep \"Duration\" | awk '{print $2}' | sed 's/\\..*//g' | awk '{split($1, a, \":\"); print 3600*a[1] + 60*a[2] + a[3]}')"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "vlc",
+      "MP Summary": "the VLC media player",
+      "Most Similar TLDR Task": "Play video from a URL",
+      "Most Similar TLDR Script": "vlc {{https://www.youtube.com/watch?v=oHg5SJYRHA0}}",
+      "Most Similar NL2Bash Task": "find *.gif files under the currently directory and sub-directories and list them using the ls command",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -name *.gif -exec ls {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "ls": {
+              "mpsum": "list directory contents"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "ls": {
+              "man1_ls_18038": "list directori content list file includ hidden file list file trail ad directori name list file one per line long format list permiss ownership size modif date file long format list file sort modif date oldest first long format list sort size descend long format list size display use human readabl unit kb mb gb"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_278365: FFMpeg : Converting a video file to a gif with multiple images from video",
+        "au_809981: Set the default video player from the command line"
+      ],
+      "Top-3 Scripts": [
+        "ul_278365: apt-get install vlc",
+        "au_809981: % sed -n '\n1i[Default Applications]\n/^video/{\ns/Totem/vlc/\ns/org\\.gnome\\.//p\n}' /usr/share/applications/defaults.list > ~/.local/share/applications/defaults.list"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "import",
+      "MP Summary": "saves any visible window on an X server and outputs it as an image file. You can capture a single window, the entire screen, or any rectangular portion of the screen.",
+      "Most Similar TLDR Task": "Capture contents of a remote X server screen in the PNG image format",
+      "Most Similar TLDR Script": "import -window root -display {{remote_host}}:{screen}.{display} {{output.png}}",
+      "Most Similar NL2Bash Task": "find *.gif files under the currently directory and sub-directories and list them using the ls command",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -name *.gif -exec ls {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "ls": {
+              "mpsum": "list directory contents"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "ls": {
+              "man1_ls_18038": "list directori content list file includ hidden file list file trail ad directori name list file one per line long format list permiss ownership size modif date file long format list file sort modif date oldest first long format list sort size descend long format list size display use human readabl unit kb mb gb"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_35511074: Create animated gif from multiple HTML pages using command line",
+        "au_155045: How do I show an animated gif in the app I am developing?"
+      ],
+      "Top-3 Scripts": [
+        "so_35511074: ",
+        "au_155045: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "apt-get",
+      "MP Summary": "APT package handling utility - command-line interface",
+      "Most Similar TLDR Task": "Remove a package and its configuration files",
+      "Most Similar TLDR Script": "apt-get purge {{package}}",
+      "Most Similar NL2Bash Task": "find *.gif files under the currently directory and sub-directories and list them using the ls command",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -name *.gif -exec ls {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "ls": {
+              "mpsum": "list directory contents"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "ls": {
+              "man1_ls_18038": "list directori content list file includ hidden file list file trail ad directori name list file one per line long format list permiss ownership size modif date file long format list file sort modif date oldest first long format list sort size descend long format list size display use human readabl unit kb mb gb"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_648603: How to create an animated GIF from MP4 video via command line?",
+        "au_648244: How do I create an animated gif from still images (preferably with the command line)?",
+        "so_35511074: Create animated gif from multiple HTML pages using command line"
+      ],
+      "Top-3 Scripts": [
+        "au_648603: sudo apt-get install ffmpeg\nffmpeg -i in.mp4 out.gif\n\nsudo apt-get install ffmpeg imagemagick\nffmpeg -i opengl-rotating-triangle.mp4 -r 15 -vf scale=512:-1 \\\n  -ss 00:00:03 -to 00:00:06 -f image2pipe -vcodec ppm - |\n  convert -deconstruct -delay 5 -loop 0 - opengl-rotating-triangle-image-magick.gif",
+        "au_648244: sudo apt-get install imagemagick",
+        "so_35511074: apt-get install scrot\n\napt-get install imagemagick"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "find",
+      "MP Summary": "search for files in a directory hierarchy",
+      "Most Similar TLDR Task": "Run a command for each file (use `{}` within the command to access the filename)",
+      "Most Similar TLDR Script": "find {{root_path}} -name '{{*.ext}}' -exec {{wc -l {} }}\\;",
+      "Most Similar NL2Bash Task": "find *.gif files under the currently directory and sub-directories and list them using the ls command",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -name *.gif -exec ls {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "ls": {
+              "mpsum": "list directory contents"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "ls": {
+              "man1_ls_18038": "list directori content list file includ hidden file list file trail ad directori name list file one per line long format list permiss ownership size modif date file long format list file sort modif date oldest first long format list sort size descend long format list size display use human readabl unit kb mb gb"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_1163088: How to list all mp4 files with HDp60 (to separate them from p30)?",
+        "ul_633488: remove all mp4 files recursively from selected directories",
+        "ul_174503: Convert Multiple Videos to Multiple GIFs"
+      ],
+      "Top-3 Scripts": [
+        "au_1163088: find -name '*.mp4' -printf '%p\\t' \\\n-exec ffprobe -v error -select_streams \\\nv -of default=noprint_wrappers=1:nokey=1  \\\n-show_entries stream=r_frame_rate {} \\;",
+        "ul_633488: find ./*_rsync_bak.* -type f -name '*.mp4' -print    # -delete",
+        "ul_174503: find . -maxdepth 1 -name \"*.flv\" -print0 |\n  sed 's/\\.flv\\x00/\\x00/g' |\n  xargs -r0 -I FILENAME ffmpeg -i FILENAME.flv -vf scale=320:-1 FILENAME.gif"
+      ],
+      "Explanations about Options": {
+        "-d": "A synonym for -depth, for compatibility with FreeBSD, NetBSD, MacOS X and OpenBSD.",
+        "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+        "-maxdepth": "Descend at most levels (a non-negative integer) levels of directories below the\n starting-points. -maxdepth 0 means only apply the tests and actions to the\n starting-points themselves.",
+        "-type": "File is of type c:",
+        "-printf": "True; print format on the standard output, interpreting `\\' escapes and `%'\n directives. Field widths and precisions can be specified as with the `printf' C\n function. Please note that many of the fields are printed as %s rather than %d,\n and this may mean that flags don't work as you might expect. This also means that\n the `-' flag does work (it forces fields to be left-aligned). Unlike -print,\n -printf does not add a newline at the end of the string. The escapes and\n directives are:",
+        "-print": "Quoting is handled in the same way as for -printf and -fprintf. If you are using\n find in a script or in a situation where the matched files might have arbitrary\n names, you should consider using -print0 instead of -print.",
+        "-print0": "Always print the exact filename, unchanged, even if the output is going to a\n terminal."
+      }
+    },
+    {
+      "Command": "print",
+      "MP Summary": "execute programs via entries in the mailcap file",
+      "Most Similar TLDR Task": "Print action can be used to print any file on default run-mailcap tool",
+      "Most Similar TLDR Script": "print {{filename}}",
+      "Most Similar NL2Bash Task": "find *.gif files under the currently directory and sub-directories and list them using the ls command",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -name *.gif -exec ls {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "ls": {
+              "mpsum": "list directory contents"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "ls": {
+              "man1_ls_18038": "list directori content list file includ hidden file list file trail ad directori name list file one per line long format list permiss ownership size modif date file long format list file sort modif date oldest first long format list sort size descend long format list size display use human readabl unit kb mb gb"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_155045: How do I show an animated gif in the app I am developing?",
+        "ul_36262: How to grab the audio channel from an MP4 video file into a separate audio file?",
+        "so_51121333: ffmpeg extract subclips from video at 10s; 30%; 60%; last 30s of a video"
+      ],
+      "Top-3 Scripts": [
+        "au_155045: ",
+        "ul_36262: eval $(ffmpeg -i \"movie.mp4\" 2>&1 |awk '/Stream.*Audio/{print \"stream=\" $2 \";codec=\" $4}' |head -n1)\nstream=${stream:1}; stream=${stream/:/}\nextn=${codec/,/}; [[ $extn == \"aac\" ]] || \n    { echo \"You need to manually set the fiie extension. Codec type is: $codec\"; exit 1; } \n\nffmpeg -map $stream -acodec copy -i \"movie.mp4\" \"audio.$extn\"",
+        "so_51121333: DURATION=$(ffmpeg -i $file 2>&1 | grep \"Duration\" | awk '{print $2}' | sed 's/\\..*//g' | awk '{split($1, a, \":\"); print 3600*a[1] + 60*a[2] + a[3]}')"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "scrot",
+      "MP Summary": "command line screen capture utility",
+      "Most Similar TLDR Task": "Capture a screenshot and save it as \"capture.png\"",
+      "Most Similar TLDR Script": "scrot {{capture.png}}",
+      "Most Similar NL2Bash Task": "find *.gif files under the currently directory and sub-directories and list them using the ls command",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -name *.gif -exec ls {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "ls": {
+              "mpsum": "list directory contents"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "ls": {
+              "man1_ls_18038": "list directori content list file includ hidden file list file trail ad directori name list file one per line long format list permiss ownership size modif date file long format list file sort modif date oldest first long format list sort size descend long format list size display use human readabl unit kb mb gb"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_35511074: Create animated gif from multiple HTML pages using command line"
+      ],
+      "Top-3 Scripts": [
+        "so_35511074: apt-get install scrot"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "sudo",
+      "MP Summary": "execute a command as another user",
+      "Most Similar TLDR Task": "Run a command as another user and/or group",
+      "Most Similar TLDR Script": "sudo -u {{user}} -g {{group}} {{id -a}}",
+      "Most Similar NL2Bash Task": "find *.gif files under the currently directory and sub-directories and list them using the ls command",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -name *.gif -exec ls {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "ls": {
+              "mpsum": "list directory contents"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "ls": {
+              "man1_ls_18038": "list directori content list file includ hidden file list file trail ad directori name list file one per line long format list permiss ownership size modif date file long format list file sort modif date oldest first long format list sort size descend long format list size display use human readabl unit kb mb gb"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_648603: How to create an animated GIF from MP4 video via command line?",
+        "au_648244: How do I create an animated gif from still images (preferably with the command line)?",
+        "au_580732: How to remove audio from a specific time duration of a video"
+      ],
+      "Top-3 Scripts": [
+        "au_648603: sudo apt install ffmpeg\nwget -O opengl-rotating-triangle.mp4 https://github.com/cirosantilli/media/blob/master/opengl-rotating-triangle.mp4?raw=true\nffmpeg \\\n  -i opengl-rotating-triangle.mp4 \\\n  -r 15 \\\n  -vf scale=512:-1 \\\n  -ss 00:00:03 -to 00:00:06 \\\n  opengl-rotating-triangle.gif\n\nsudo apt-get install ffmpeg\nffmpeg -i in.mp4 out.gif\n\nsudo apt-get install ffmpeg imagemagick\nffmpeg -i opengl-rotating-triangle.mp4 -r 15 -vf scale=512:-1 \\\n  -ss 00:00:03 -to 00:00:06 -f image2pipe -vcodec ppm - |\n  convert -deconstruct -delay 5 -loop 0 - opengl-rotating-triangle-image-magick.gif\n\nsudo snap install gifski\nmkdir -p frames\nffmpeg \\\n  -i opengl-rotating-triangle.mp4 \\\n  -r 15 \\\n  -vf scale=512:-1 \\\n  -ss 00:00:03 -to 00:00:06 \\\n  frames/%04d.png\ngifski -o opengl-rotating-triangle-gifski.gif frames/*.png",
+        "au_648244: sudo apt-get install imagemagick",
+        "au_580732: sudo apt-get install openshot"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "install",
+      "MP Summary": "copy files and set attributes",
+      "Most Similar TLDR Task": "Copy files and apply access/modification times of source to destination",
+      "Most Similar TLDR Script": "install -p {{path/to/source}} {{path/to/destination}}",
+      "Most Similar NL2Bash Task": "find *.gif files under the currently directory and sub-directories and list them using the ls command",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -name *.gif -exec ls {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "ls": {
+              "mpsum": "list directory contents"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "ls": {
+              "man1_ls_18038": "list directori content list file includ hidden file list file trail ad directori name list file one per line long format list permiss ownership size modif date file long format list file sort modif date oldest first long format list sort size descend long format list size display use human readabl unit kb mb gb"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_648603: How to create an animated GIF from MP4 video via command line?",
+        "au_648244: How do I create an animated gif from still images (preferably with the command line)?",
+        "so_35511074: Create animated gif from multiple HTML pages using command line"
+      ],
+      "Top-3 Scripts": [
+        "au_648603: sudo apt install ffmpeg\nwget -O opengl-rotating-triangle.mp4 https://github.com/cirosantilli/media/blob/master/opengl-rotating-triangle.mp4?raw=true\nffmpeg \\\n  -i opengl-rotating-triangle.mp4 \\\n  -r 15 \\\n  -vf scale=512:-1 \\\n  -ss 00:00:03 -to 00:00:06 \\\n  opengl-rotating-triangle.gif\n\nsudo apt-get install ffmpeg\nffmpeg -i in.mp4 out.gif\n\nsudo apt-get install ffmpeg imagemagick\nffmpeg -i opengl-rotating-triangle.mp4 -r 15 -vf scale=512:-1 \\\n  -ss 00:00:03 -to 00:00:06 -f image2pipe -vcodec ppm - |\n  convert -deconstruct -delay 5 -loop 0 - opengl-rotating-triangle-image-magick.gif\n\nsudo snap install gifski\nmkdir -p frames\nffmpeg \\\n  -i opengl-rotating-triangle.mp4 \\\n  -r 15 \\\n  -vf scale=512:-1 \\\n  -ss 00:00:03 -to 00:00:06 \\\n  frames/%04d.png\ngifski -o opengl-rotating-triangle-gifski.gif frames/*.png",
+        "au_648244: sudo apt-get install imagemagick",
+        "so_35511074: apt-get install scrot\n\napt-get install imagemagick"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "file",
+      "MP Summary": "determine file type",
+      "Most Similar TLDR Task": "Look inside a zipped file and determine the file type(s) inside",
+      "Most Similar TLDR Script": "file -z {{foo.zip}}",
+      "Most Similar NL2Bash Task": "find *.gif files under the currently directory and sub-directories and list them using the ls command",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -name *.gif -exec ls {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "ls": {
+              "mpsum": "list directory contents"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "ls": {
+              "man1_ls_18038": "list directori content list file includ hidden file list file trail ad directori name list file one per line long format list permiss ownership size modif date file long format list file sort modif date oldest first long format list sort size descend long format list size display use human readabl unit kb mb gb"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_977162: How to remove a few seconds from .mp4 file using ffmpeg?",
+        "au_1139812: How to extract specific audio track (track 2) from mp4 file using ffmpeg?",
+        "au_376012: ffmpeg how to output images from a video"
+      ],
+      "Top-3 Scripts": [
+        "au_977162: file 'segment1.mp4'\nfile 'segment2.mp4'",
+        "au_1139812: ",
+        "au_376012: -i              > The input video file\n-ss  00:00:05   > Start at Second 5 of movie\n-f image2       > Force image output\n-vframes 1      > Set the number of video frames to record"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "awk",
+      "MP Summary": "pattern scanning and processing language",
+      "Most Similar TLDR Task": "Print the last column of each line in a file, using a comma (instead of space) as a field separator",
+      "Most Similar TLDR Script": "awk -F ',' '{print $NF}' {{filename}}",
+      "Most Similar NL2Bash Task": "find *.gif files under the currently directory and sub-directories and list them using the ls command",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -name *.gif -exec ls {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "ls": {
+              "mpsum": "list directory contents"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "ls": {
+              "man1_ls_18038": "list directori content list file includ hidden file list file trail ad directori name list file one per line long format list permiss ownership size modif date file long format list file sort modif date oldest first long format list sort size descend long format list size display use human readabl unit kb mb gb"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_36262: How to grab the audio channel from an MP4 video file into a separate audio file?",
+        "so_51121333: ffmpeg extract subclips from video at 10s; 30%; 60%; last 30s of a video",
+        "so_46238941: Calculate total runtime of videos in folder using command line"
+      ],
+      "Top-3 Scripts": [
+        "ul_36262: eval $(ffmpeg -i \"movie.mp4\" 2>&1 |awk '/Stream.*Audio/{print \"stream=\" $2 \";codec=\" $4}' |head -n1)\nstream=${stream:1}; stream=${stream/:/}\nextn=${codec/,/}; [[ $extn == \"aac\" ]] || \n    { echo \"You need to manually set the fiie extension. Codec type is: $codec\"; exit 1; } \n\nffmpeg -map $stream -acodec copy -i \"movie.mp4\" \"audio.$extn\"",
+        "so_51121333: DURATION=$(ffmpeg -i $file 2>&1 | grep \"Duration\" | awk '{print $2}' | sed 's/\\..*//g' | awk '{split($1, a, \":\"); print 3600*a[1] + 60*a[2] + a[3]}')",
+        "so_46238941: find . -iname \"*.mp4\" -exec ffprobe -v error -print_format json -show_format {} \\; | jq -r '.[].duration' | awk '{total+=$0}END{printf \"%.6f\",total}'\n\nawk '{total+=$0}END{printf \"%.6f\",total}'"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "mkdir",
+      "MP Summary": "make directories",
+      "Most Similar TLDR Task": "Create directories recursively (useful for creating nested dirs)",
+      "Most Similar TLDR Script": "mkdir -p {{path/to/directory}}",
+      "Most Similar NL2Bash Task": "find *.gif files under the currently directory and sub-directories and list them using the ls command",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -name *.gif -exec ls {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "ls": {
+              "mpsum": "list directory contents"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "ls": {
+              "man1_ls_18038": "list directori content list file includ hidden file list file trail ad directori name list file one per line long format list permiss ownership size modif date file long format list file sort modif date oldest first long format list sort size descend long format list size display use human readabl unit kb mb gb"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_648603: How to create an animated GIF from MP4 video via command line?",
+        "au_1127603: How can I create a 30 second GIF from a long random video?"
+      ],
+      "Top-3 Scripts": [
+        "au_648603: sudo snap install gifski\nmkdir -p frames\nffmpeg \\\n  -i opengl-rotating-triangle.mp4 \\\n  -r 15 \\\n  -vf scale=512:-1 \\\n  -ss 00:00:03 -to 00:00:06 \\\n  frames/%04d.png\ngifski -o opengl-rotating-triangle-gifski.gif frames/*.png",
+        "au_1127603: #!/bin/bash\nmkdir 30gif\nfor f in *.mp4; do\n  duration=$(ffprobe -loglevel error -show_entries format=duration -of default=nk=1:nw=1 \"$f\")\n  ffmpeg -i \"$f\" -filter_complex \"[0:v]select='lt(mod(t,${duration}/10),3)',setpts=N/(FRAME_RATE*TB),scale=560:340:force_original_aspect_ratio=decrease,pad=560:340:(ow-iw)/2:(oh-ih)/2,setsar=1,split[v0][v1];[v0]palettegen[p];[v1][p]paletteuse[v]\" -map \"[v]\" \"30gif/${f%.mp4}.gif\"\ndone"
+      ],
+      "Explanations about Options": {
+        "-p": "no error if existing, make parent directories as needed"
+      }
+    },
+    {
+      "Command": "grep",
+      "MP Summary": "print lines that match patterns",
+      "Most Similar TLDR Task": "Invert match for excluding specific strings",
+      "Most Similar TLDR Script": "grep -v {{search_pattern}}",
+      "Most Similar NL2Bash Task": "find *.gif files under the currently directory and sub-directories and list them using the ls command",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -name *.gif -exec ls {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "ls": {
+              "mpsum": "list directory contents"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "ls": {
+              "man1_ls_18038": "list directori content list file includ hidden file list file trail ad directori name list file one per line long format list permiss ownership size modif date file long format list file sort modif date oldest first long format list sort size descend long format list size display use human readabl unit kb mb gb"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_278365: FFMpeg : Converting a video file to a gif with multiple images from video",
+        "au_469845: how to play video downloaded from terminal",
+        "so_51121333: ffmpeg extract subclips from video at 10s; 30%; 60%; last 30s of a video"
+      ],
+      "Top-3 Scripts": [
+        "ul_278365: ffmpeg -i ${vidfile} 2>&1 | grep Duration | cut -d ' ' -f 4 | sed s/,//\n\nl=$(ffmpeg -i ${vidfile} 2>&1 | grep Duration | cut -d ' ' -f 4 | sed s/,//)\nh=$(echo $l|cut -d: -f1)\nm=$(echo $l|cut -d: -f2)\ns=$(echo $l|cut -d: -f3|cut -d\".\" -f1)\n(( hh=$h*3600 ))\n(( mm=$m*60 ))\n(( LengthSeconds=$hh+$mm+$s ))",
+        "au_469845: totem \"$(youtube-dl youtube.com/watch?v=ES6OyV-RfHU |& grep -oP 'Destination:\\s\\K.*')\"",
+        "so_51121333: DURATION=$(ffmpeg -i $file 2>&1 | grep \"Duration\" | awk '{print $2}' | sed 's/\\..*//g' | awk '{split($1, a, \":\"); print 3600*a[1] + 60*a[2] + a[3]}')"
+      ],
+      "Explanations about Options": {
+        "-o": "Print only the matched (non-empty) parts of a matching line, with each such part on\n a separate output line.",
+        "-P": "Interpret PATTERNS as Perl-compatible regular expressions (PCREs). This option is\n experimental when combined with the -z (--null-data) option, and grep -P may warn\n of unimplemented features."
+      }
+    },
+    {
+      "Command": "type",
+      "MP Summary": "write a description of command type",
+      "Most Similar TLDR Task": "Display all locations containing the specified executable",
+      "Most Similar TLDR Script": "type -a {{command}}",
+      "Most Similar NL2Bash Task": "find *.gif files under the currently directory and sub-directories and list them using the ls command",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -name *.gif -exec ls {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "ls": {
+              "mpsum": "list directory contents"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "ls": {
+              "man1_ls_18038": "list directori content list file includ hidden file list file trail ad directori name list file one per line long format list permiss ownership size modif date file long format list file sort modif date oldest first long format list sort size descend long format list size display use human readabl unit kb mb gb"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "su_595177: How to retrieve video file information from command line under Linux?",
+        "ul_36262: How to grab the audio channel from an MP4 video file into a separate audio file?"
+      ],
+      "Top-3 Scripts": [
+        "su_595177: ",
+        "ul_36262: eval $(ffmpeg -i \"movie.mp4\" 2>&1 |awk '/Stream.*Audio/{print \"stream=\" $2 \";codec=\" $4}' |head -n1)\nstream=${stream:1}; stream=${stream/:/}\nextn=${codec/,/}; [[ $extn == \"aac\" ]] || \n    { echo \"You need to manually set the fiie extension. Codec type is: $codec\"; exit 1; } \n\nffmpeg -map $stream -acodec copy -i \"movie.mp4\" \"audio.$extn\""
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "firefox",
+      "MP Summary": "a free and open source web browser from Mozilla",
+      "Most Similar TLDR Task": "Use a specific profile to allow multiple separate instances of Firefox to run at once",
+      "Most Similar TLDR Script": "firefox --profile {{path/to/directory}} {{https://example.com/}}",
+      "Most Similar NL2Bash Task": "find *.gif files under the currently directory and sub-directories and list them using the ls command",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -name *.gif -exec ls {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "ls": {
+              "mpsum": "list directory contents"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "ls": {
+              "man1_ls_18038": "list directori content list file includ hidden file list file trail ad directori name list file one per line long format list permiss ownership size modif date file long format list file sort modif date oldest first long format list sort size descend long format list size display use human readabl unit kb mb gb"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_648603: How to create an animated GIF from MP4 video via command line?"
+      ],
+      "Top-3 Scripts": [
+        "au_648603: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "xargs",
+      "MP Summary": "build and execute command lines from standard input",
+      "Most Similar TLDR Task": "Execute the command once for each input line, replacing any occurrences of the placeholder (here marked as `_`) with the input line",
+      "Most Similar TLDR Script": "{{arguments_source}} | xargs -I _ {{command}} _ {{optional_extra_arguments}}",
+      "Most Similar NL2Bash Task": "find *.gif files under the currently directory and sub-directories and list them using the ls command",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -name *.gif -exec ls {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "ls": {
+              "mpsum": "list directory contents"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "ls": {
+              "man1_ls_18038": "list directori content list file includ hidden file list file trail ad directori name list file one per line long format list permiss ownership size modif date file long format list file sort modif date oldest first long format list sort size descend long format list size display use human readabl unit kb mb gb"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_174503: Convert Multiple Videos to Multiple GIFs"
+      ],
+      "Top-3 Scripts": [
+        "ul_174503: find . -maxdepth 1 -name \"*.flv\" -print0 |\n  sed 's/\\.flv\\x00/\\x00/g' |\n  xargs -r0 -I FILENAME ffmpeg -i FILENAME.flv -vf scale=320:-1 FILENAME.gif"
+      ],
+      "Explanations about Options": {
+        "-I": "Replace occurrences of replace-str in the initial-arguments with names read from\n standard input. Also, unquoted blanks do not terminate input items; instead the\n separator is the newline character. Implies -x and -L 1."
+      }
+    },
+    {
+      "Command": "apt",
+      "MP Summary": "command-line interface",
+      "Most Similar TLDR Task": "Remove a package (using `purge` instead also removes its configuration files)",
+      "Most Similar TLDR Script": "sudo apt remove {{package}}",
+      "Most Similar NL2Bash Task": "find *.gif files under the currently directory and sub-directories and list them using the ls command",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -name *.gif -exec ls {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "ls": {
+              "mpsum": "list directory contents"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "ls": {
+              "man1_ls_18038": "list directori content list file includ hidden file list file trail ad directori name list file one per line long format list permiss ownership size modif date file long format list file sort modif date oldest first long format list sort size descend long format list size display use human readabl unit kb mb gb"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_648603: How to create an animated GIF from MP4 video via command line?",
+        "au_1163088: How to list all mp4 files with HDp60 (to separate them from p30)?",
+        "au_610903: How can I create a video file from a set of jpg images?"
+      ],
+      "Top-3 Scripts": [
+        "au_648603: sudo apt install ffmpeg\nwget -O opengl-rotating-triangle.mp4 https://github.com/cirosantilli/media/blob/master/opengl-rotating-triangle.mp4?raw=true\nffmpeg \\\n  -i opengl-rotating-triangle.mp4 \\\n  -r 15 \\\n  -vf scale=512:-1 \\\n  -ss 00:00:03 -to 00:00:06 \\\n  opengl-rotating-triangle.gif",
+        "au_1163088: apt install ffmpeg",
+        "au_610903: sudo apt install ffmpeg"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "cut",
+      "MP Summary": "remove sections from each line of files",
+      "Most Similar TLDR Task": "Cut out everything from the 3rd character to the end of each line",
+      "Most Similar TLDR Script": "cut -c {{3-}}",
+      "Most Similar NL2Bash Task": "find *.gif files under the currently directory and sub-directories and list them using the ls command",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -name *.gif -exec ls {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "ls": {
+              "mpsum": "list directory contents"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "ls": {
+              "man1_ls_18038": "list directori content list file includ hidden file list file trail ad directori name list file one per line long format list permiss ownership size modif date file long format list file sort modif date oldest first long format list sort size descend long format list size display use human readabl unit kb mb gb"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_278365: FFMpeg : Converting a video file to a gif with multiple images from video"
+      ],
+      "Top-3 Scripts": [
+        "ul_278365: ffmpeg -i ${vidfile} 2>&1 | grep Duration | cut -d ' ' -f 4 | sed s/,//\n\nl=$(ffmpeg -i ${vidfile} 2>&1 | grep Duration | cut -d ' ' -f 4 | sed s/,//)\nh=$(echo $l|cut -d: -f1)\nm=$(echo $l|cut -d: -f2)\ns=$(echo $l|cut -d: -f3|cut -d\".\" -f1)\n(( hh=$h*3600 ))\n(( mm=$m*60 ))\n(( LengthSeconds=$hh+$mm+$s ))"
+      ],
+      "Explanations about Options": {
+        "-d": "use DELIM instead of TAB for field delimiter",
+        "-f": "select only these fields; also print any line that contains no delimiter\n character, unless the -s option is specified"
+      }
+    },
+    {
+      "Command": "yes",
+      "MP Summary": "output a string repeatedly until killed",
+      "Most Similar TLDR Task": "Repeatedly output \"message\"",
+      "Most Similar TLDR Script": "yes {{message}}",
+      "Most Similar NL2Bash Task": "find *.gif files under the currently directory and sub-directories and list them using the ls command",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -name *.gif -exec ls {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "ls": {
+              "mpsum": "list directory contents"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "ls": {
+              "man1_ls_18038": "list directori content list file includ hidden file list file trail ad directori name list file one per line long format list permiss ownership size modif date file long format list file sort modif date oldest first long format list sort size descend long format list size display use human readabl unit kb mb gb"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_35511074: Create animated gif from multiple HTML pages using command line"
+      ],
+      "Top-3 Scripts": [
+        "so_35511074: phantomjs-2.1.1-linux-x86_64/bin/phantomjs --remote-debugger-port=9000 --remote-debugger-autorun=yes hello.js"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "snap",
+      "MP Summary": "Tool to interact with snaps",
+      "Most Similar TLDR Task": "Display basic information about installed snap software",
+      "Most Similar TLDR Script": "snap list",
+      "Most Similar NL2Bash Task": "find *.gif files under the currently directory and sub-directories and list them using the ls command",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -name *.gif -exec ls {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "ls": {
+              "mpsum": "list directory contents"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "ls": {
+              "man1_ls_18038": "list directori content list file includ hidden file list file trail ad directori name list file one per line long format list permiss ownership size modif date file long format list file sort modif date oldest first long format list sort size descend long format list size display use human readabl unit kb mb gb"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_648603: How to create an animated GIF from MP4 video via command line?"
+      ],
+      "Top-3 Scripts": [
+        "au_648603: sudo snap install gifski\nmkdir -p frames\nffmpeg \\\n  -i opengl-rotating-triangle.mp4 \\\n  -r 15 \\\n  -vf scale=512:-1 \\\n  -ss 00:00:03 -to 00:00:06 \\\n  frames/%04d.png\ngifski -o opengl-rotating-triangle-gifski.gif frames/*.png"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "tar",
+      "MP Summary": "an archiving utility",
+      "Most Similar TLDR Task": "Create a gzipped archive from a directory using relative paths",
+      "Most Similar TLDR Script": "tar czf {{target.tar.gz}} -C {{path/to/directory}} .",
+      "Most Similar NL2Bash Task": "find *.gif files under the currently directory and sub-directories and list them using the ls command",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -name *.gif -exec ls {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "ls": {
+              "mpsum": "list directory contents"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "ls": {
+              "man1_ls_18038": "list directori content list file includ hidden file list file trail ad directori name list file one per line long format list permiss ownership size modif date file long format list file sort modif date oldest first long format list sort size descend long format list size display use human readabl unit kb mb gb"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_143669: Create animated WebP file from WebP files?"
+      ],
+      "Top-3 Scripts": [
+        "ul_143669: man 1 tar\n\nman tar"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "exit",
+      "MP Summary": "cause the shell to exit",
+      "Most Similar TLDR Task": "Exit the shell with the exit code of the last command executed",
+      "Most Similar TLDR Script": "exit",
+      "Most Similar NL2Bash Task": "find *.gif files under the currently directory and sub-directories and list them using the ls command",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -name *.gif -exec ls {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "ls": {
+              "mpsum": "list directory contents"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "ls": {
+              "man1_ls_18038": "list directori content list file includ hidden file list file trail ad directori name list file one per line long format list permiss ownership size modif date file long format list file sort modif date oldest first long format list sort size descend long format list size display use human readabl unit kb mb gb"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_36262: How to grab the audio channel from an MP4 video file into a separate audio file?",
+        "ul_29101: Obtain .avi file info from command line"
+      ],
+      "Top-3 Scripts": [
+        "ul_36262: eval $(ffmpeg -i \"movie.mp4\" 2>&1 |awk '/Stream.*Audio/{print \"stream=\" $2 \";codec=\" $4}' |head -n1)\nstream=${stream:1}; stream=${stream/:/}\nextn=${codec/,/}; [[ $extn == \"aac\" ]] || \n    { echo \"You need to manually set the fiie extension. Codec type is: $codec\"; exit 1; } \n\nffmpeg -map $stream -acodec copy -i \"movie.mp4\" \"audio.$extn\"",
+        "ul_29101: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "head",
+      "MP Summary": "output the first part of files",
+      "Most Similar TLDR Task": "Output everything but the last few lines of a file",
+      "Most Similar TLDR Script": "head -n -{{count_of_lines}} {{filename}}",
+      "Most Similar NL2Bash Task": "find *.gif files under the currently directory and sub-directories and list them using the ls command",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -name *.gif -exec ls {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "ls": {
+              "mpsum": "list directory contents"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "ls": {
+              "man1_ls_18038": "list directori content list file includ hidden file list file trail ad directori name list file one per line long format list permiss ownership size modif date file long format list file sort modif date oldest first long format list sort size descend long format list size display use human readabl unit kb mb gb"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_36262: How to grab the audio channel from an MP4 video file into a separate audio file?"
+      ],
+      "Top-3 Scripts": [
+        "ul_36262: eval $(ffmpeg -i \"movie.mp4\" 2>&1 |awk '/Stream.*Audio/{print \"stream=\" $2 \";codec=\" $4}' |head -n1)\nstream=${stream:1}; stream=${stream/:/}\nextn=${codec/,/}; [[ $extn == \"aac\" ]] || \n    { echo \"You need to manually set the fiie extension. Codec type is: $codec\"; exit 1; } \n\nffmpeg -map $stream -acodec copy -i \"movie.mp4\" \"audio.$extn\""
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "command",
+      "MP Summary": "execute a simple command",
+      "Most Similar TLDR Task": "Display the path to the executable or the alias definition of a specific command",
+      "Most Similar TLDR Script": "command -v {{command_name}}",
+      "Most Similar NL2Bash Task": "find *.gif files under the currently directory and sub-directories and list them using the ls command",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -name *.gif -exec ls {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "ls": {
+              "mpsum": "list directory contents"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "ls": {
+              "man1_ls_18038": "list directori content list file includ hidden file list file trail ad directori name list file one per line long format list permiss ownership size modif date file long format list file sort modif date oldest first long format list sort size descend long format list size display use human readabl unit kb mb gb"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_143669: Create animated WebP file from WebP files?"
+      ],
+      "Top-3 Scripts": [
+        "ul_143669: man command"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "jq",
+      "MP Summary": "Command-line JSON processor",
+      "Most Similar TLDR Task": "Output the value of a given key to a string (and disable JSON output)",
+      "Most Similar TLDR Script": "cat {{file.json}} | jq --raw-output '\"some text: \\(.{{key_name}})\"'",
+      "Most Similar NL2Bash Task": "find *.gif files under the currently directory and sub-directories and list them using the ls command",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -name *.gif -exec ls {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "ls": {
+              "mpsum": "list directory contents"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "ls": {
+              "man1_ls_18038": "list directori content list file includ hidden file list file trail ad directori name list file one per line long format list permiss ownership size modif date file long format list file sort modif date oldest first long format list sort size descend long format list size display use human readabl unit kb mb gb"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_46238941: Calculate total runtime of videos in folder using command line"
+      ],
+      "Top-3 Scripts": [
+        "so_46238941: find . -iname \"*.mp4\" -exec ffprobe -v error -print_format json -show_format {} \\; | jq -r '.[].duration' | awk '{total+=$0}END{printf \"%.6f\",total}'\n\nffprobe -v error -print_format json -show_format file.mp4  | jq -r '.[].duration'"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "cat",
+      "MP Summary": "concatenate files and print on the standard output",
+      "Most Similar TLDR Task": "Concatenate several files into the target file",
+      "Most Similar TLDR Script": "cat {{file1}} {{file2}} > {{target_file}}",
+      "Most Similar NL2Bash Task": "find *.gif files under the currently directory and sub-directories and list them using the ls command",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -name *.gif -exec ls {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "ls": {
+              "mpsum": "list directory contents"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "ls": {
+              "man1_ls_18038": "list directori content list file includ hidden file list file trail ad directori name list file one per line long format list permiss ownership size modif date file long format list file sort modif date oldest first long format list sort size descend long format list size display use human readabl unit kb mb gb"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_809981: Set the default video player from the command line"
+      ],
+      "Top-3 Scripts": [
+        "au_809981: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "date",
+      "MP Summary": "print or set the system date and time",
+      "Most Similar TLDR Task": "Display a specific date (represented as a Unix timestamp) using the default format",
+      "Most Similar TLDR Script": "date -d @1473305798",
+      "Most Similar NL2Bash Task": "find *.gif files under the currently directory and sub-directories and list them using the ls command",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -name *.gif -exec ls {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "ls": {
+              "mpsum": "list directory contents"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "ls": {
+              "man1_ls_18038": "list directori content list file includ hidden file list file trail ad directori name list file one per line long format list permiss ownership size modif date file long format list file sort modif date oldest first long format list sort size descend long format list size display use human readabl unit kb mb gb"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "su_595177: How to retrieve video file information from command line under Linux?"
+      ],
+      "Top-3 Scripts": [
+        "su_595177: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "printf",
+      "MP Summary": "format and print data",
+      "Most Similar TLDR Task": "Print a text message composed with environment variables",
+      "Most Similar TLDR Script": "printf \"{{var1: %s\\tvar2: %s\\n}}\" \"{{$VAR1}}\" \"{{$VAR2}}\"",
+      "Most Similar NL2Bash Task": "find *.gif files under the currently directory and sub-directories and list them using the ls command",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -name *.gif -exec ls {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "ls": {
+              "mpsum": "list directory contents"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "ls": {
+              "man1_ls_18038": "list directori content list file includ hidden file list file trail ad directori name list file one per line long format list permiss ownership size modif date file long format list file sort modif date oldest first long format list sort size descend long format list size display use human readabl unit kb mb gb"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_46238941: Calculate total runtime of videos in folder using command line"
+      ],
+      "Top-3 Scripts": [
+        "so_46238941: find . -iname \"*.mp4\" -exec ffprobe -v error -print_format json -show_format {} \\; | jq -r '.[].duration' | awk '{total+=$0}END{printf \"%.6f\",total}'\n\nawk '{total+=$0}END{printf \"%.6f\",total}'\n\nprintf \"%.6f\",total"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "make",
+      "MP Summary": "GNU make utility to maintain groups of programs",
+      "Most Similar TLDR Task": "Use a specific Makefile",
+      "Most Similar TLDR Script": "make --file {{file}}",
+      "Most Similar NL2Bash Task": "find *.gif files under the currently directory and sub-directories and list them using the ls command",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -name *.gif -exec ls {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "ls": {
+              "mpsum": "list directory contents"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "ls": {
+              "man1_ls_18038": "list directori content list file includ hidden file list file trail ad directori name list file one per line long format list permiss ownership size modif date file long format list file sort modif date oldest first long format list sort size descend long format list size display use human readabl unit kb mb gb"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_143669: Create animated WebP file from WebP files?"
+      ],
+      "Top-3 Scripts": [
+        "ul_143669: ./configure\nmake\nmake install"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "eval",
+      "MP Summary": "construct command by concatenating arguments",
+      "Most Similar TLDR Task": "Set a variable in the current shell",
+      "Most Similar TLDR Script": "eval \"{{foo=bar}}\"",
+      "Most Similar NL2Bash Task": "find *.gif files under the currently directory and sub-directories and list them using the ls command",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -name *.gif -exec ls {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "ls": {
+              "mpsum": "list directory contents"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "ls": {
+              "man1_ls_18038": "list directori content list file includ hidden file list file trail ad directori name list file one per line long format list permiss ownership size modif date file long format list file sort modif date oldest first long format list sort size descend long format list size display use human readabl unit kb mb gb"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_36262: How to grab the audio channel from an MP4 video file into a separate audio file?"
+      ],
+      "Top-3 Scripts": [
+        "ul_36262: eval $(ffmpeg -i \"movie.mp4\" 2>&1 |awk '/Stream.*Audio/{print \"stream=\" $2 \";codec=\" $4}' |head -n1)\nstream=${stream:1}; stream=${stream/:/}\nextn=${codec/,/}; [[ $extn == \"aac\" ]] || \n    { echo \"You need to manually set the fiie extension. Codec type is: $codec\"; exit 1; } \n\nffmpeg -map $stream -acodec copy -i \"movie.mp4\" \"audio.$extn\""
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "alias",
+      "MP Summary": "define or display aliases",
+      "Most Similar TLDR Task": "Remove an aliased command",
+      "Most Similar TLDR Script": "unalias {{word}}",
+      "Most Similar NL2Bash Task": "find *.gif files under the currently directory and sub-directories and list them using the ls command",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -name *.gif -exec ls {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "ls": {
+              "mpsum": "list directory contents"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "ls": {
+              "man1_ls_18038": "list directori content list file includ hidden file list file trail ad directori name list file one per line long format list permiss ownership size modif date file long format list file sort modif date oldest first long format list sort size descend long format list size display use human readabl unit kb mb gb"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_40463: Is there any way to initiate \"urgent animation\" of an icon on the Unity launcher from command line?"
+      ],
+      "Top-3 Scripts": [
+        "au_40463: alias set_urgent='wmctrl -i -r $WINDOWID -b add,demands_attention'"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "man",
+      "MP Summary": "an interface to the system reference manuals",
+      "Most Similar TLDR Task": "Display the location of a manpage rather than the manpage itself",
+      "Most Similar TLDR Script": "man -w {{command}}",
+      "Most Similar NL2Bash Task": "find *.gif files under the currently directory and sub-directories and list them using the ls command",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -name *.gif -exec ls {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "ls": {
+              "mpsum": "list directory contents"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "ls": {
+              "man1_ls_18038": "list directori content list file includ hidden file list file trail ad directori name list file one per line long format list permiss ownership size modif date file long format list file sort modif date oldest first long format list sort size descend long format list size display use human readabl unit kb mb gb"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_1139812: How to extract specific audio track (track 2) from mp4 file using ffmpeg?",
+        "ul_143669: Create animated WebP file from WebP files?"
+      ],
+      "Top-3 Scripts": [
+        "au_1139812: man ffmpeg",
+        "ul_143669: man command\n\nman 1 tar\n\nman tar\n\nman webpmux\n\nman cwebp\n\nman dwebp"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "set",
+      "MP Summary": "set or unset options and positional parameters",
+      "Most Similar TLDR Task": "Display the names and values of shell variables",
+      "Most Similar TLDR Script": "set",
+      "Most Similar NL2Bash Task": "find *.gif files under the currently directory and sub-directories and list them using the ls command",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -name *.gif -exec ls {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "ls": {
+              "mpsum": "list directory contents"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "ls": {
+              "man1_ls_18038": "list directori content list file includ hidden file list file trail ad directori name list file one per line long format list permiss ownership size modif date file long format list file sort modif date oldest first long format list sort size descend long format list size display use human readabl unit kb mb gb"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_36262: How to grab the audio channel from an MP4 video file into a separate audio file?"
+      ],
+      "Top-3 Scripts": [
+        "ul_36262: eval $(ffmpeg -i \"movie.mp4\" 2>&1 |awk '/Stream.*Audio/{print \"stream=\" $2 \";codec=\" $4}' |head -n1)\nstream=${stream:1}; stream=${stream/:/}\nextn=${codec/,/}; [[ $extn == \"aac\" ]] || \n    { echo \"You need to manually set the fiie extension. Codec type is: $codec\"; exit 1; } \n\nffmpeg -map $stream -acodec copy -i \"movie.mp4\" \"audio.$extn\""
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "rename",
+      "MP Summary": "rename files",
+      "Most Similar TLDR Task": "Change file extensions",
+      "Most Similar TLDR Script": "rename {{.ext}} {{.bak}} {{*.ext}}",
+      "Most Similar NL2Bash Task": "find *.gif files under the currently directory and sub-directories and list them using the ls command",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -name *.gif -exec ls {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "ls": {
+              "mpsum": "list directory contents"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "ls": {
+              "man1_ls_18038": "list directori content list file includ hidden file list file trail ad directori name list file one per line long format list permiss ownership size modif date file long format list file sort modif date oldest first long format list sort size descend long format list size display use human readabl unit kb mb gb"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_881342: ImageMagick convert command to make a .gif from a large number of .xpm files"
+      ],
+      "Top-3 Scripts": [
+        "au_881342: rename 's/plot(\\d{1})\\.xpm/plot0000$1\\.xpm/' *  # plot#.xpm     >    plot0000#.xpm\nrename 's/plot(\\d{2})\\.xpm/plot000$1\\.xpm/' *   # plot##.xpm    >    plot000##.xpm\nrename 's/plot(\\d{3})\\.xpm/plot00$1\\.xpm/' *    # plot###.xpm   >    plot00###.xpm\nrename 's/plot(\\d{4})\\.xpm/plot0$1\\.xpm/' * # plot####.xpm  >    plot0####.xpm\n\nconvert -loop 0 -delay 10 *.xpm output.gif"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "wmctrl",
+      "MP Summary": "interact with a EWMH/NetWM compatible X Window Manager.",
+      "Most Similar TLDR Task": "List all windows, managed by the window manager",
+      "Most Similar TLDR Script": "wmctrl -l",
+      "Most Similar NL2Bash Task": "find *.gif files under the currently directory and sub-directories and list them using the ls command",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -name *.gif -exec ls {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "ls": {
+              "mpsum": "list directory contents"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "ls": {
+              "man1_ls_18038": "list directori content list file includ hidden file list file trail ad directori name list file one per line long format list permiss ownership size modif date file long format list file sort modif date oldest first long format list sort size descend long format list size display use human readabl unit kb mb gb"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_40463: Is there any way to initiate \"urgent animation\" of an icon on the Unity launcher from command line?"
+      ],
+      "Top-3 Scripts": [
+        "au_40463: some_task ; wmctrl -i -r $WINDOWID -b add,demands_attention"
+      ],
+      "Explanations about Options": {
+        "-i": "Interpret window arguments (<WIN>) as a numeric value rather than a string name for\n the window. If the numeric value starts with the prefix '0x' it is assumed to be a\n hexadecimal number.",
+        "-r": "Specify a target window for an action."
+      }
+    },
+    {
+      "Command": "ulimit",
+      "MP Summary": "set or report file size limit",
+      "Most Similar TLDR Task": "Get hard limit for the number of simultaneously opened files",
+      "Most Similar TLDR Script": "ulimit -H -n",
+      "Most Similar NL2Bash Task": "find *.gif files under the currently directory and sub-directories and list them using the ls command",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -name *.gif -exec ls {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "ls": {
+              "mpsum": "list directory contents"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "ls": {
+              "man1_ls_18038": "list directori content list file includ hidden file list file trail ad directori name list file one per line long format list permiss ownership size modif date file long format list file sort modif date oldest first long format list sort size descend long format list size display use human readabl unit kb mb gb"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_648603: How to create an animated GIF from MP4 video via command line?"
+      ],
+      "Top-3 Scripts": [
+        "au_648603: ulimit -Sv 1000000"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "at",
+      "MP Summary": "queue, examine, or delete jobs for later execution",
+      "Most Similar TLDR Task": "Open an `at` prompt to create a new set of scheduled commands, press `Ctrl + D` to save and exit",
+      "Most Similar TLDR Script": "at {{hh:mm}}",
+      "Most Similar NL2Bash Task": "find *.gif files under the currently directory and sub-directories and list them using the ls command",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -name *.gif -exec ls {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "ls": {
+              "mpsum": "list directory contents"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "ls": {
+              "man1_ls_18038": "list directori content list file includ hidden file list file trail ad directori name list file one per line long format list permiss ownership size modif date file long format list file sort modif date oldest first long format list sort size descend long format list size display use human readabl unit kb mb gb"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_376012: ffmpeg how to output images from a video"
+      ],
+      "Top-3 Scripts": [
+        "au_376012: -i              > The input video file\n-ss  00:00:05   > Start at Second 5 of movie\n-f image2       > Force image output\n-vframes 1      > Set the number of video frames to record"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "opt",
+      "MP Summary": "LLVM optimizer",
+      "Most Similar TLDR Task": "Optimize the program at level 2 and output the result to another file",
+      "Most Similar TLDR Script": "opt -O2 {{path/to/file.bc}} -S -o {{path/to/output_file.bc}}",
+      "Most Similar NL2Bash Task": "find *.gif files under the currently directory and sub-directories and list them using the ls command",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -name *.gif -exec ls {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "ls": {
+              "mpsum": "list directory contents"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "ls": {
+              "man1_ls_18038": "list directori content list file includ hidden file list file trail ad directori name list file one per line long format list permiss ownership size modif date file long format list file sort modif date oldest first long format list sort size descend long format list size display use human readabl unit kb mb gb"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_35511074: Create animated gif from multiple HTML pages using command line"
+      ],
+      "Top-3 Scripts": [
+        "so_35511074: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "mv",
+      "MP Summary": "move (rename) files",
+      "Most Similar TLDR Task": "Move files in arbitrary locations",
+      "Most Similar TLDR Script": "mv {{source}} {{target}}",
+      "Most Similar NL2Bash Task": "find *.gif files under the currently directory and sub-directories and list them using the ls command",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -name *.gif -exec ls {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "ls": {
+              "mpsum": "list directory contents"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "ls": {
+              "man1_ls_18038": "list directori content list file includ hidden file list file trail ad directori name list file one per line long format list permiss ownership size modif date file long format list file sort modif date oldest first long format list sort size descend long format list size display use human readabl unit kb mb gb"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "su_546842: Creating a movie from pdf images"
+      ],
+      "Top-3 Scripts": [
+        "su_546842: for i in {2..9087}\ndo \n   sips -z 1024 -s format png fig${i}.pdf --out png/fig${i}.png\n   convert png/fig${i}.png -background=white -flatten +matte aa.png && \n   mv aa.png png/fig${i}.png\ndone"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "split",
+      "MP Summary": "split a file into pieces",
+      "Most Similar TLDR Task": "Split a file with 512 bytes in each split (except the last split; use 512k for kilobytes and 512m for megabytes)",
+      "Most Similar TLDR Script": "split -b {{512}} {{filename}}",
+      "Most Similar NL2Bash Task": "find *.gif files under the currently directory and sub-directories and list them using the ls command",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -name *.gif -exec ls {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "ls": {
+              "mpsum": "list directory contents"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "ls": {
+              "man1_ls_18038": "list directori content list file includ hidden file list file trail ad directori name list file one per line long format list permiss ownership size modif date file long format list file sort modif date oldest first long format list sort size descend long format list size display use human readabl unit kb mb gb"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_51121333: ffmpeg extract subclips from video at 10s; 30%; 60%; last 30s of a video"
+      ],
+      "Top-3 Scripts": [
+        "so_51121333: DURATION=$(ffmpeg -i $file 2>&1 | grep \"Duration\" | awk '{print $2}' | sed 's/\\..*//g' | awk '{split($1, a, \":\"); print 3600*a[1] + 60*a[2] + a[3]}')"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "true",
+      "MP Summary": "do nothing, successfully",
+      "Most Similar TLDR Task": "Return a successful exit code",
+      "Most Similar TLDR Script": "true",
+      "Most Similar NL2Bash Task": "find *.gif files under the currently directory and sub-directories and list them using the ls command",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -name *.gif -exec ls {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "ls": {
+              "mpsum": "list directory contents"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "ls": {
+              "man1_ls_18038": "list directori content list file includ hidden file list file trail ad directori name list file one per line long format list permiss ownership size modif date file long format list file sort modif date oldest first long format list sort size descend long format list size display use human readabl unit kb mb gb"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_648603: How to create an animated GIF from MP4 video via command line?"
+      ],
+      "Top-3 Scripts": [
+        "au_648603: sudo apt install ffmpeg\nwget -O opengl-rotating-triangle.mp4 https://github.com/cirosantilli/media/blob/master/opengl-rotating-triangle.mp4?raw=true\nffmpeg \\\n  -i opengl-rotating-triangle.mp4 \\\n  -r 15 \\\n  -vf scale=512:-1 \\\n  -ss 00:00:03 -to 00:00:06 \\\n  opengl-rotating-triangle.gif"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "time",
+      "MP Summary": "time a simple command",
+      "Most Similar TLDR Task": "Time \"ls\"",
+      "Most Similar TLDR Script": "time ls",
+      "Most Similar NL2Bash Task": "find *.gif files under the currently directory and sub-directories and list them using the ls command",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -name *.gif -exec ls {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "ls": {
+              "mpsum": "list directory contents"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "ls": {
+              "man1_ls_18038": "list directori content list file includ hidden file list file trail ad directori name list file one per line long format list permiss ownership size modif date file long format list file sort modif date oldest first long format list sort size descend long format list size display use human readabl unit kb mb gb"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_35511074: Create animated gif from multiple HTML pages using command line"
+      ],
+      "Top-3 Scripts": [
+        "so_35511074: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "cd",
+      "MP Summary": "change the working directory",
+      "Most Similar TLDR Task": "Go up to the parent of the current directory",
+      "Most Similar TLDR Script": "cd ..",
+      "Most Similar NL2Bash Task": "find *.gif files under the currently directory and sub-directories and list them using the ls command",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -name *.gif -exec ls {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "ls": {
+              "mpsum": "list directory contents"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "ls": {
+              "man1_ls_18038": "list directori content list file includ hidden file list file trail ad directori name list file one per line long format list permiss ownership size modif date file long format list file sort modif date oldest first long format list sort size descend long format list size display use human readabl unit kb mb gb"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_143669: Create animated WebP file from WebP files?"
+      ],
+      "Top-3 Scripts": [
+        "ul_143669: cd libwebp-0.4.0"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "less",
+      "MP Summary": "opposite of more",
+      "Most Similar TLDR Task": "Forward search for a string (press `n`/`N` to go to next/previous match)",
+      "Most Similar TLDR Script": "/{{something}}",
+      "Most Similar NL2Bash Task": "find *.gif files under the currently directory and sub-directories and list them using the ls command",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -name *.gif -exec ls {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "ls": {
+              "mpsum": "list directory contents"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "ls": {
+              "man1_ls_18038": "list directori content list file includ hidden file list file trail ad directori name list file one per line long format list permiss ownership size modif date file long format list file sort modif date oldest first long format list sort size descend long format list size display use human readabl unit kb mb gb"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_143669: Create animated WebP file from WebP files?"
+      ],
+      "Top-3 Scripts": [
+        "ul_143669: less README"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "master",
+      "MP Summary": "Postfix master process",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "find *.gif files under the currently directory and sub-directories and list them using the ls command",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -name *.gif -exec ls {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "ls": {
+              "mpsum": "list directory contents"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "ls": {
+              "man1_ls_18038": "list directori content list file includ hidden file list file trail ad directori name list file one per line long format list permiss ownership size modif date file long format list file sort modif date oldest first long format list sort size descend long format list size display use human readabl unit kb mb gb"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_648603: How to create an animated GIF from MP4 video via command line?"
+      ],
+      "Top-3 Scripts": [
+        "au_648603: sudo apt install ffmpeg\nwget -O opengl-rotating-triangle.mp4 https://github.com/cirosantilli/media/blob/master/opengl-rotating-triangle.mp4?raw=true\nffmpeg \\\n  -i opengl-rotating-triangle.mp4 \\\n  -r 15 \\\n  -vf scale=512:-1 \\\n  -ss 00:00:03 -to 00:00:06 \\\n  opengl-rotating-triangle.gif"
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

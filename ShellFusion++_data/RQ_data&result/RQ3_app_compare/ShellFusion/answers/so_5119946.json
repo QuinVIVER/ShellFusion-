@@ -1,0 +1,97 @@
+{
+    "Answers": [
+        {
+            "Command": "find",
+            "Explanations about Options": {
+                "-depth(M)": "Process each directory's contents before the directory itself. The -delete action\n also implies -depth.",
+                "-n(M)": "for less than n ,",
+                "-name(C)": "example: .  \"find /path/to/file1 /path/to/file2 -name 'abc*' -o -name 'def*.gz' -type f -mtime +7 -exec rm {} \\;\".",
+                "-name(M)": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+                "-type(M)": "File is of type c:"
+            },
+            "MP Summary": "search for files in a directory hierarchy",
+            "Most Similar TLDR Script": "find {{root_path}} -name '{{*pattern_1*}}' -or -name '{{*pattern_2*}}'",
+            "Most Similar TLDR Task": "Find files by matching multiple patterns",
+            "Top-3 Scripts": [
+                "so_27532452: find /path/to/file1 /path/to/file2 -name 'abc*' -o -name 'def*.gz' -type f -mtime +7 -exec rm {} \\;",
+                "ul_18077: find . -name \"*\" -exec chgrp -v new_group '{}' \\; -exec chmod -v 770 '{}' \\;\n\nfind . -name \"*\" \\( -exec chgrp -v new_group {} \\; -o -true \\) -exec chmod -v 770 {} \\;",
+                "so_59825894: find .. -type d -depth 1 -exec touch \"{}/abc\" \\;\n\nfind .. -type d -depth 1 -exec git -C \"{}\" some_git_action \\;"
+            ],
+            "Top-3 Similar Questions": [
+                "so_27532452: Multiple find -exec commands in one bash script doesn't work?",
+                "ul_18077: How can I use two bash commands in -exec of find command?",
+                "so_59825894: executing multiple commands with find -exec but one of the command is 'cd'"
+            ]
+        },
+        {
+            "Command": "xargs",
+            "Explanations about Options": {
+                "-0(M)": "Input items are terminated by a null character instead of by whitespace, and the\n quotes and backslash are not special (every character is taken literally).\n Disables the end of file string, which is treated like any other argument. Useful\n when input items might contain white space, quote marks, or backslashes. The GNU\n find -print0 option produces input suitable for this mode.",
+                "-i(M)": "This option is a synonym for -Ireplace-str if replace-str is specified. If the\n replace-str argument is missing, the effect is the same as -I{}. This option is\n deprecated; use -I instead."
+            },
+            "MP Summary": "build and execute command lines from standard input",
+            "Most Similar TLDR Script": "{{arguments_source}} | xargs sh -c \"{{command1}} && {{command2}} | {{command3}}\"",
+            "Most Similar TLDR Task": "Run multiple chained commands on the input data",
+            "Top-3 Scripts": [
+                "ul_212957: find . -type f -exec grep -lFZ <i>SOME_STRING</i> {} + | xargs -0 gsed -s -i '<i>COMMAND</i>'\n\ngfind /tmp/ -type f \\( -name \"*.h\" -o -name \"*.cpp\" \\) \\\n-exec ggrep -lFZ LARGE_INTEGER {} + | \\\nxargs -0 gsed -s -i '1s/^/#include <stdint.h>\\n/'",
+                "ul_507023: find ./ -type f -name \"*.txt\" | \n    xargs -I{} grep -EiH something {} | \n        grep -EiH somethingelse | \n            grep -EiH other\n\nfind ./ -type f -name \"*.txt\" -print0 | \n    xargs -0 grep -EiH something {} | \n        grep -Ei somethingelse | \n            grep -Ei other",
+                "ul_605930: find /path/to/files -type f -print0 | \\\n    xargs -0 -r $HOME/bin/doit\n\nman find xargs bash"
+            ],
+            "Top-3 Similar Questions": [
+                "ul_212957: find: multiple `-exec`s with conditions",
+                "ul_507023: pipe commands inside find -exec?",
+                "ul_195939: What is meaning of {} + in find's -exec command?"
+            ]
+        },
+        {
+            "Command": "command",
+            "Explanations about Options": {},
+            "MP Summary": "execute a simple command",
+            "Most Similar TLDR Script": "command -v {{command_name}}",
+            "Most Similar TLDR Task": "Display the path to the executable or the alias definition of a specific command",
+            "Top-3 Scripts": [
+                "au_651315: find -printf '%p' -exec command \\;",
+                "ul_3682: find . -type f -exec command '{}' \\;\n\ncommand file1\ncommand file2\ncommand file3\ncommand file4\n\nfind . -type f -exec command '{}' \\+\n\ncommand file1 file2 file3 file4"
+            ],
+            "Top-3 Similar Questions": [
+                "au_651315: How do you output the filename in find command while using -exec?",
+                "ul_3682: What's the + in find /path/ -exec command '{}' + do?"
+            ]
+        },
+        {
+            "Command": "rm",
+            "Explanations about Options": {
+                "-f(M)": "ignore nonexistent files and arguments, never prompt",
+                "-i(M)": "prompt before every removal",
+                "-r(M)": "remove directories and their contents recursively"
+            },
+            "MP Summary": "remove files or directories",
+            "Most Similar TLDR Script": "rm -i {{file(s)}}",
+            "Most Similar TLDR Task": "Interactively remove multiple files, with a prompt before every removal",
+            "Top-3 Scripts": [
+                "so_27532452: find /path/to/file1 /path/to/file2 -name 'abc*' -o -name 'def*.gz' -type f -mtime +7 -exec rm {} \\;",
+                "su_477803: find /path -criteria -exec mkdir {} \\; -exec extract {} \\; -exec rm {} \\;\n\nfind /path -criteria -exec /bin/sh '\n    for d; do\n        mkdir \"${d##*/}\" && tar xvf \"$d\" && rm \"$d\"\n    done' _ {} +",
+                "ul_187088: $(rm -rf /)\n\nrm -rf /"
+            ],
+            "Top-3 Similar Questions": [
+                "so_27532452: Multiple find -exec commands in one bash script doesn't work?",
+                "su_477803: How can I execute multiple expressions using the -exec option in Linux via the find command?",
+                "ul_187088: if command in find -exec"
+            ]
+        },
+        {
+            "Command": "parallel",
+            "Explanations about Options": {},
+            "MP Summary": "run programs in parallel",
+            "Most Similar TLDR Script": "{{args}} | parallel -X {{command}}",
+            "Most Similar TLDR Task": "Parallel xargs, cram as many args as possible onto one command",
+            "Top-3 Scripts": [
+                "so_11576755: find . -type f -name '*.flac' | parallel ffmpeg -i {} -acodec libmp3lame -ab 320k {.}.mp3 '&&' rm {}"
+            ],
+            "Top-3 Similar Questions": [
+                "so_11576755: xargs - multiple commands and rm at the end"
+            ]
+        }
+    ],
+    "Query": "find -exec with multiple commands"
+}

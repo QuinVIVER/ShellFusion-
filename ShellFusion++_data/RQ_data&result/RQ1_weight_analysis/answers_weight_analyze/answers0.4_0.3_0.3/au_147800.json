@@ -1,0 +1,84 @@
+{
+  "Query": "Ripping DVD to iso Accurately",
+  "Answers": [
+    {
+      "Command": "eject",
+      "MP Summary": "eject removable media",
+      "Most Similar TLDR Task": "Eject a floppy drive",
+      "Most Similar TLDR Script": "eject -f {{/mnt/floppy}}",
+      "Top-3 Similar Questions": [
+        "ul_125794: How do I make an ISO copy of a DVD movie?",
+        "au_1211780: is there a way to set handbrake to eject the tray after ripping a dvd?",
+        "ul_4410: How do I copy DVDs"
+      ],
+      "Top-3 Scripts": [
+        "ul_125794: $ dvdbackup -M\n$ genisoimage -dvd-video -udf -o movie.iso /dir/where/you/save/the/dvd\n$ eject /dev/dvd",
+        "au_1211780: handbrake <parameters> && eject",
+        "ul_4410: dd if=/dev/dvd of=saved.iso\n\nfor i in {1..20}; do\n    eject /dev/dvd\n    read -p 'Insert disc and press RETURN: '\n    eject -t /dev/dvd\n    growisofs -Z /dev/dvd=saved.iso\ndone\neject /dev/dvd"
+      ],
+      "Explanations about Options": {
+        "-t": "With this option the drive is given a CD-ROM tray close command. Not all devices\n support this command."
+      }
+    },
+    {
+      "Command": "wodim",
+      "MP Summary": "write data to optical disk media",
+      "Most Similar TLDR Task": "Burn a file to the disc in an optical drive, potentially writing to multiple discs in succession",
+      "Most Similar TLDR Script": "wodim -tao dev=/dev/{{optical_drive}} -data {{file.iso}}",
+      "Top-3 Similar Questions": [
+        "au_174626: How do I burn a DVD ISO using the terminal?",
+        "ul_313840: How do I resume a 'wodim' DVD burn aborted with Ctrl+C?"
+      ],
+      "Top-3 Scripts": [
+        "au_174626: wodim -eject -tao  speed=2 dev=/dev/sr1 -v -data myiso.iso\n\nwodim -prcap dev=/dev/sr1\n\nman wodim",
+        "ul_313840: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "dd",
+      "MP Summary": "convert and copy a file",
+      "Most Similar TLDR Task": "Make a bootable usb drive from an isohybrid file (such like archlinux-xxx.iso) and show the progress",
+      "Most Similar TLDR Script": "dd if={{file.iso}} of=/dev/{{usb_drive}} status=progress",
+      "Top-3 Similar Questions": [
+        "ul_206205: Size difference between an iso file burnt to a cd and the file retrieved with dd",
+        "au_581033: How to compare a DVD to an ISO?",
+        "au_137966: Copy CD / DVD contents into an iso file"
+      ],
+      "Top-3 Scripts": [
+        "ul_206205: dd if=/dev/cdrom of=foo2.iso",
+        "au_581033: dd if=/dev/cdrom of=/tmp/Vicibox_test.iso\nmd5sum /tmp/Vicibox_test.iso",
+        "au_137966: dd if=/dev/dvd of=/myiso.iso bs=1024"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "sync",
+      "MP Summary": "Synchronize cached writes to persistent storage",
+      "Most Similar TLDR Task": "Flush all pending write operations on a single file to disk",
+      "Most Similar TLDR Script": "sync {{path/to/file}}",
+      "Top-3 Similar Questions": [
+        "au_967029: How to burn .iso file to external hard-drive",
+        "au_301095: Convert bootable USB stick to ISO file"
+      ],
+      "Top-3 Scripts": [
+        "au_967029: sudo dd if=iso_file_path of=/dev/sdx bs=4M && sudo sync",
+        "au_301095: mount /dev/sdf1 /mnt/tmp\ndd if=/dev/zero bs=1M | split -b 1G - /mnt/tmp/zerofile\nsync\nrm /mnt/tmp/zerofile*\numount /mnt/tmp"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "convert",
+      "MP Summary": "convert between image formats as well as resize an image, blur, crop, despeckle, dither, draw on, flip, join, re-sample, and much more.",
+      "Most Similar TLDR Task": "Horizontally append images",
+      "Most Similar TLDR Script": "convert {{image1.png}} {{image2.png}} {{image3.png}} +append {{image123.png}}",
+      "Top-3 Similar Questions": [
+        "ul_4374: How to convert a PDF file to a DVD movie?"
+      ],
+      "Top-3 Scripts": [
+        "ul_4374: convert -scale 1600x1600 -density 300 pdffile.pdf somename.jpg"
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

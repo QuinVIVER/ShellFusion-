@@ -1,0 +1,818 @@
+{
+  "Query": "Ubuntu refuses to output audio via HDMI",
+  "Answers": [
+    {
+      "Command": "pactl",
+      "MP Summary": "Control a running PulseAudio sound server",
+      "Most Similar TLDR Task": "List all sinks (or other types - sinks are outputs and sink-inputs are active audio streams)",
+      "Most Similar TLDR Script": "pactl list {{sinks}} short",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "au_63599: Configuring HDMI Audio via command line",
+        "su_1157370: How to configure PulseAudio to input/output via ALSA?",
+        "ul_390907: Sound via HDMI on Arch Linux"
+      ],
+      "Top-3 Scripts": [
+        "au_63599: pactl set-card-profile 0 output:hdmi-audio",
+        "su_1157370: pactl exit; pulseaudio --start",
+        "ul_390907: pactl set-card-profile 0 output:hdmi-stereo"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "pulseaudio",
+      "MP Summary": "The PulseAudio Sound System",
+      "Most Similar TLDR Task": "List available modules",
+      "Most Similar TLDR Script": "pulseaudio --dump-modules",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "su_1157370: How to configure PulseAudio to input/output via ALSA?",
+        "au_225271: Stream sound card output to icecast2 via darkice",
+        "so_67465088: (PySide2+anaconda) playing audio via QMediaPlayer: Warning: \"Could not open audio device for playback.\""
+      ],
+      "Top-3 Scripts": [
+        "su_1157370: pulseaudio -k\n\nkillall pulseaudio\n\npulseaudio -vv\n\npactl exit; pulseaudio --start",
+        "au_225271: device = default\ndevice = pulse # in case we have pulseaudio running.",
+        "so_67465088: # create env\nconda create -y -c conda-forge -n qt37 python=3.7\nconda activate qt37\n# Gst-compatible installation\nconda install -y -c conda-forge gst-plugins-base gst-plugins-good gstreamer\nconda install -y -c conda-forge pulseaudio\nconda install -y -c dtk-forge gst-plugins-good-pulseaudio\n# Now the forge pyside2 is your friend\nconda install -y -c conda-forge pyside2"
+      ],
+      "Explanations about Options": {
+        "--start": "Start PulseAudio if it is not running yet. This is different from starting\n PulseAudio without --start which would fail if PA is already running. PulseAudio is\n guaranteed to be fully initialized when this call returns. Implies --daemonize."
+      }
+    },
+    {
+      "Command": "aplay",
+      "MP Summary": "command-line sound recorder and player for ALSA soundcard driver",
+      "Most Similar TLDR Task": "Play a specific file (sampling rate, bit depth, etc. will be automatically determined for the file format)",
+      "Most Similar TLDR Script": "aplay {{path/to/file}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "su_1157370: How to configure PulseAudio to input/output via ALSA?",
+        "au_225271: Stream sound card output to icecast2 via darkice",
+        "au_1257982: no HDMI audio output device in settings (Ubuntu 16.04)"
+      ],
+      "Top-3 Scripts": [
+        "su_1157370: ",
+        "au_225271: aplay -l",
+        "au_1257982: aplay -l"
+      ],
+      "Explanations about Options": {
+        "-l": "List all soundcards and digital audio devices"
+      }
+    },
+    {
+      "Command": "amixer",
+      "MP Summary": "command-line mixer for ALSA soundcard driver",
+      "Most Similar TLDR Task": "Turn down the master volume by 10%",
+      "Most Similar TLDR Script": "amixer -D pulse sset Master {{10%-}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "su_109998: How to enable capture via amixer",
+        "ul_424757: Set audio output using command line"
+      ],
+      "Top-3 Scripts": [
+        "su_109998: amixer set \"Capture\" cap",
+        "ul_424757: amixer cset numid=3 2\n\namixer cset numid=3 1"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "tee",
+      "MP Summary": "read from standard input and write to standard output and files",
+      "Most Similar TLDR Task": "Print standard input to the terminal, and also pipe it into another program for further processing",
+      "Most Similar TLDR Script": "echo \"example\" | tee {{/dev/tty}} | {{xargs printf \"[%s]\"}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "ul_635484: why does tee refuse to work when launched remotely via ssh?",
+        "au_1018981: Sounds issue in ubuntu 16.04"
+      ],
+      "Top-3 Scripts": [
+        "ul_635484: bash -c tee archive.tar | tar -xf -",
+        "au_1018981: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "read",
+      "MP Summary": "read a line from standard input",
+      "Most Similar TLDR Task": "Enable backspace and GNU readline hotkeys when entering input with read",
+      "Most Similar TLDR Script": "read -e {{variable}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "au_835740: switch audio device via bash command",
+        "so_52148203: How to iterate through basename output via SSH",
+        "su_635576: How to boot into Ubuntu 13 via Windows 7?"
+      ],
+      "Top-3 Scripts": [
+        "au_835740: #!/bin/bash\n\nSINK=`pacmd list-sinks | grep '  index' | cut -f6 -d' '`\npacmd set-default-sink ${SINK}\npacmd list-sink-inputs | grep index | while read line\ndo\npacmd move-sink-input `echo $line | cut -f2 -d' '` ${SINK}\ndone",
+        "so_52148203: ",
+        "su_635576: sudo fdisk -l\nsudo mount /dev/sdaX /mnt #where X is your ubuntu ext4 /(read root) partition\nsudo grub-install --root-directory=/mnt /dev/sda"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "apt-get",
+      "MP Summary": "APT package handling utility - command-line interface",
+      "Most Similar TLDR Task": "Remove a package and its configuration files",
+      "Most Similar TLDR Script": "apt-get purge {{package}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "so_43447364: Installing package via Ubuntu Software",
+        "au_747151: How to upgrade only the software (but not upgrade Ubuntu release) via shell?",
+        "au_377445: how can I connect Ubuntu through Windows via localhost?"
+      ],
+      "Top-3 Scripts": [
+        "so_43447364: $ sudo apt-get update\n$ sudo apt-get install chromium-browser",
+        "au_747151: sudo apt-get update\nsudo apt-get dist-upgrade",
+        "au_377445: sudo apt-get install xrdp"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "echo",
+      "MP Summary": "display a line of text",
+      "Most Similar TLDR Task": "Print a message with environment variables",
+      "Most Similar TLDR Script": "echo \"{{My path is $PATH}}\"",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "so_16494492: Bash function for searching Google via Chrome for last output of terminal",
+        "so_45744704: Check Teamspeak status via Shellscript (Ubuntu)",
+        "so_52148203: How to iterate through basename output via SSH"
+      ],
+      "Top-3 Scripts": [
+        "so_16494492: $ echo \"foo bar quux\"\nfoo bar quux\n$ google that\nopen /Applications/Google Chrome.app/ http://www.google.com/search?q=foo+bar+quux\n\n$ google\nopen /Applications/Google Chrome.app/ http://www.google.com/\n\n$ google foo    bar    quux\nopen /Applications/Google Chrome.app/ http://www.google.com/search?q=foo+bar+quux",
+        "so_45744704: #!/bin/bash\na=$(sh /home/teamspeak3/ts3/teamspeak3-\nserver_linux_amd64/ts3server_startscript.sh status)\necho \"$a\"\nif [ \"$a\" -ne \"Server is running\" ]; then\n    echo \"...\"\nfi\nexit 0",
+        "so_52148203: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "arecord",
+      "MP Summary": "command-line sound recorder and player for ALSA soundcard driver",
+      "Most Similar TLDR Task": "List all sound cards and digital audio devices",
+      "Most Similar TLDR Script": "arecord --list-devices",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "su_1157370: How to configure PulseAudio to input/output via ALSA?"
+      ],
+      "Top-3 Scripts": [
+        "su_1157370: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "mpv",
+      "MP Summary": "a media player",
+      "Most Similar TLDR Task": "Display the output of webcam or other video input device",
+      "Most Similar TLDR Script": "mpv /dev/{{video0}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "su_1157370: How to configure PulseAudio to input/output via ALSA?"
+      ],
+      "Top-3 Scripts": [
+        "su_1157370: mpv -ao pulse ..."
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "as",
+      "MP Summary": "or  any situation  where  you want to make sure you're doing a clean install of your dependencies. It  can  be  significantly  faster  than  a  regular  npm  install  by  skipping   certain user-oriented  features.  It  is  also  more strict than a regular install, which can help catch errors or inconsistencies caused by the incrementally-installed  local  environments of most npm users. In short, the main differences between using npm install and npm ci are: \u00b7 The project must have an existing package-lock.json or npm-shrinkwrap.json. \u00b7 If dependencies in the package lock do not match those in package.json, npm ci will exit with an error, instead of updating the package lock. \u00b7 npm ci can only install entire projects at a time:  individual  dependencies  cannot  be added with this command. \u00b7 If  a  node_modules  is  already present, it will be automatically removed before npm ci begins its install. \u00b7 It will  never  write  to  package.json  or  any  of  the  package-locks:  installs  are essentially frozen. See Also \u00b7 npm help install \u00b7 npm help package-locks April 2020                                  NPM-CI(1)",
+      "Most Similar TLDR Task": "Assemble a file, writing the output to a.out",
+      "Most Similar TLDR Script": "as {{file.s}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "au_1005488: How to start the preferred audio player via the command line?",
+        "au_263248: Set HDMI sound output automatically on connect/disconnect"
+      ],
+      "Top-3 Scripts": [
+        "au_1005488: xdg-open opens a file or URL in the user's preferred application. If a\n   URL is provided the URL will be opened in the user's preferred web\n   browser. If a file is provided the file will be opened in the preferred\n   application for files of that type. xdg-open supports file, ftp, http\n   and https URLs.\n\n   xdg-open is for use inside a desktop session only. It is not\n   recommended to use xdg-open as root.",
+        "au_263248: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "ssh",
+      "MP Summary": "OpenSSH SSH client (remote login program)",
+      "Most Similar TLDR Task": "Connect to a remote server with a specific identity (private key)",
+      "Most Similar TLDR Script": "ssh -i {{path/to/key_file}} {{username}}@{{remote_host}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "so_52963953: Accessing Ubuntu server via SSH alias- permission denied",
+        "ul_635484: why does tee refuse to work when launched remotely via ssh?",
+        "su_1291923: executing a script via ssh, not real output"
+      ],
+      "Top-3 Scripts": [
+        "so_52963953: ssh test",
+        "ul_635484: ssh root@192.168.1.248 bash -c \"tee archive.tar | tar -xf -\"\n\nssh root@192.168.1.248 'tee archive.tar | tar -xf -'",
+        "su_1291923: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "bash",
+      "MP Summary": "GNU Bourne-Again SHell",
+      "Most Similar TLDR Task": "Run commands from a file, logging all commands executed to the terminal",
+      "Most Similar TLDR Script": "bash -x {{file.sh}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "ul_635484: why does tee refuse to work when launched remotely via ssh?"
+      ],
+      "Top-3 Scripts": [
+        "ul_635484: ssh root@192.168.1.248 bash -c \"tee archive.tar | tar -xf -\"\n\nbash -c tee archive.tar | tar -xf -"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "install",
+      "MP Summary": "copy files and set attributes",
+      "Most Similar TLDR Task": "Copy files and apply access/modification times of source to destination",
+      "Most Similar TLDR Script": "install -p {{path/to/source}} {{path/to/destination}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "so_67465088: (PySide2+anaconda) playing audio via QMediaPlayer: Warning: \"Could not open audio device for playback.\"",
+        "so_43447364: Installing package via Ubuntu Software",
+        "au_377445: how can I connect Ubuntu through Windows via localhost?"
+      ],
+      "Top-3 Scripts": [
+        "so_67465088: # create env\nconda create -y -c conda-forge -n qt37 python=3.7\nconda activate qt37\n# Gst-compatible installation\nconda install -y -c conda-forge gst-plugins-base gst-plugins-good gstreamer\nconda install -y -c conda-forge pulseaudio\nconda install -y -c dtk-forge gst-plugins-good-pulseaudio\n# Now the forge pyside2 is your friend\nconda install -y -c conda-forge pyside2",
+        "so_43447364: $ sudo apt-get update\n$ sudo apt-get install chromium-browser",
+        "au_377445: sudo apt-get install xrdp"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "sudo",
+      "MP Summary": "execute a command as another user",
+      "Most Similar TLDR Task": "Launch the default shell with superuser privileges",
+      "Most Similar TLDR Script": "sudo -i",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "su_17312: Restart Ubuntu sound processes via command line",
+        "so_43447364: Installing package via Ubuntu Software",
+        "au_747151: How to upgrade only the software (but not upgrade Ubuntu release) via shell?"
+      ],
+      "Top-3 Scripts": [
+        "su_17312: sudo /etc/init.d/alsa-utils restart",
+        "so_43447364: $ sudo apt-get update\n$ sudo apt-get install chromium-browser",
+        "au_747151: sudo apt-get update\nsudo apt-get dist-upgrade"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "mpg321",
+      "MP Summary": "Simple and lightweight command line MP3 player",
+      "Most Similar TLDR Task": "Play an audio source exactly N times (N=0 means forever)",
+      "Most Similar TLDR Script": "mpg321 -l {{N}} {{path/to/file_a|URL}} {{path/to/file_b|URL}} {{...}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "ul_222370: mpg321 playing too fast, at high pitch, via USB Audio"
+      ],
+      "Top-3 Scripts": [
+        "ul_222370: mpg321 -o alsa -a plughw:0,0 \u2026"
+      ],
+      "Explanations about Options": {
+        "-o": "Set the output device type to devicetype. devicetype can be one of:",
+        "-a": "Use device for audio-out instead of the default device, depending on the output\n device you've chosen (via -o devicetype). By default this is the native sound\n device. Generally this is the device for devicetype (or the default system\n device) to use for output (i.e. /dev/sound/dsp1)."
+      }
+    },
+    {
+      "Command": "pip",
+      "MP Summary": "A tool for installing and managing Python packages",
+      "Most Similar TLDR Task": "Install packages from file",
+      "Most Similar TLDR Script": "pip install -r {{requirements.txt}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "so_67465088: (PySide2+anaconda) playing audio via QMediaPlayer: Warning: \"Could not open audio device for playback.\"",
+        "so_45276984: Ubuntu install apache spark via apt-get"
+      ],
+      "Top-3 Scripts": [
+        "so_67465088: ",
+        "so_45276984: pip install pyspark"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "apt",
+      "MP Summary": "command-line interface",
+      "Most Similar TLDR Task": "Remove a package (using `purge` instead also removes its configuration files)",
+      "Most Similar TLDR Script": "sudo apt remove {{package}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "so_48182930: Couldn't build Android Studio project via Ubuntu terminal",
+        "ul_495592: How do I install dselect package via terminal?"
+      ],
+      "Top-3 Scripts": [
+        "so_48182930: sudo apt install ca-certificates-java",
+        "ul_495592: /etc/apt/sources.list\n\nsudo apt updates\nsudo apt install dselect"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "killall",
+      "MP Summary": "kill processes by name",
+      "Most Similar TLDR Task": "Terminate a process using the default SIGTERM (terminate) signal",
+      "Most Similar TLDR Script": "killall {{process_name}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "su_1157370: How to configure PulseAudio to input/output via ALSA?",
+        "au_1018981: Sounds issue in ubuntu 16.04"
+      ],
+      "Top-3 Scripts": [
+        "su_1157370: killall pulseaudio\n\nkillall skype",
+        "au_1018981: killall pulseaudio &"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "add-apt-repository",
+      "MP Summary": "Adds   a   repository   into   the   /etc/apt/sources.list   or /etc/apt/sources.list.d or removes an existing one",
+      "Most Similar TLDR Task": "Enable source packages",
+      "Most Similar TLDR Script": "add-apt-repository --enable-source {{repository_spec}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "so_48182930: Couldn't build Android Studio project via Ubuntu terminal",
+        "so_45276984: Ubuntu install apache spark via apt-get"
+      ],
+      "Top-3 Scripts": [
+        "so_48182930: sudo add-apt-repository ppa:openjdk-r/ppa\nsudo apt-get update\nsudo apt-get install openjdk-8-jdk\nsudo update-alternatives --config java\nsudo update-alternatives --config javac",
+        "so_45276984: $ apt-get update\n$ apt-get -y install software-properties-common\n$ add-apt-repository -y ppa:webupd8team/java\n$ echo debconf shared/accepted-oracle-license-v1-1 select true | debconf-set-selections\n$ echo debconf shared/accepted-oracle-license-v1-1 seen true | debconf-set-selections\n$ apt-get update\n$ apt-get -y install oracle-java8-installer"
+      ],
+      "Explanations about Options": {
+        "-y": "Assume yes to all queries"
+      }
+    },
+    {
+      "Command": "set",
+      "MP Summary": "set or unset options and positional parameters",
+      "Most Similar TLDR Task": "Notify of job termination immediately",
+      "Most Similar TLDR Script": "set -b",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "su_109998: How to enable capture via amixer",
+        "so_56374585: how to resize images via nginx"
+      ],
+      "Top-3 Scripts": [
+        "su_109998: amixer set \"Capture\" cap",
+        "so_56374585: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "cat",
+      "MP Summary": "concatenate files and print on the standard output",
+      "Most Similar TLDR Task": "Concatenate several files into the target file",
+      "Most Similar TLDR Script": "cat {{file1}} {{file2}} > {{target_file}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "su_1291923: executing a script via ssh, not real output"
+      ],
+      "Top-3 Scripts": [
+        "su_1291923: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "stdbuf",
+      "MP Summary": "Run COMMAND, with modified buffering operations for its standard streams.",
+      "Most Similar TLDR Task": "Change the standard output buffer to line-buffered",
+      "Most Similar TLDR Script": "stdbuf --output={{L}} {{command}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "su_1291923: executing a script via ssh, not real output"
+      ],
+      "Top-3 Scripts": [
+        "su_1291923: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "route",
+      "MP Summary": "show / manipulate the IP routing table",
+      "Most Similar TLDR Task": "Display the information of route table",
+      "Most Similar TLDR Script": "route -n",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "so_17105845: Select a default alsa PCM (not card) via environment variable"
+      ],
+      "Top-3 Scripts": [
+        "so_17105845: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "notify-send",
+      "MP Summary": "a program to send desktop notifications",
+      "Most Similar TLDR Task": "Show a notification with the title \"Test\" and the content \"This is a test\"",
+      "Most Similar TLDR Script": "notify-send \"{{Test}}\" \"{{This is a test}}\"",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "au_263248: Set HDMI sound output automatically on connect/disconnect"
+      ],
+      "Top-3 Scripts": [
+        "au_263248: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "import",
+      "MP Summary": "saves any visible window on an X server and outputs it as an image file. You can capture a single window, the entire screen, or any rectangular portion of the screen.",
+      "Most Similar TLDR Task": "Capture contents of a remote X server screen in the PNG image format",
+      "Most Similar TLDR Script": "import -window root -display {{remote_host}}:{screen}.{display} {{output.png}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "au_263248: Set HDMI sound output automatically on connect/disconnect"
+      ],
+      "Top-3 Scripts": [
+        "au_263248: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "kill",
+      "MP Summary": "send a signal to a process",
+      "Most Similar TLDR Task": "Signal the operating system to immediately terminate a program (which gets no chance to capture the signal)",
+      "Most Similar TLDR Script": "kill -{{9|KILL}} {{process_id}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "su_17312: Restart Ubuntu sound processes via command line"
+      ],
+      "Top-3 Scripts": [
+        "su_17312: name@comp:~$ lsof | grep pcm\nsh 5079 name 70u CHR 116,6 13639 /dev/snd/pcmC0D0p\n\nname@comp:~$ kill -9 5079"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "ip",
+      "MP Summary": "show / manipulate routing, network devices, interfaces and tunnels",
+      "Most Similar TLDR Task": "Display the routing table",
+      "Most Similar TLDR Script": "ip route",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "so_48294144: Jenkins container running but not accessible via host"
+      ],
+      "Top-3 Scripts": [
+        "so_48294144: docker-machine ip default"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "do-release-upgrade",
+      "MP Summary": "upgrade operating system to latest release",
+      "Most Similar TLDR Task": "Upgrade to the latest proposed release",
+      "Most Similar TLDR Script": "sudo do-release-upgrade --proposed",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "au_1227533: Ubuntu 16.04 is not detecting monitor connected via HDMI cable"
+      ],
+      "Top-3 Scripts": [
+        "au_1227533: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "printf",
+      "MP Summary": "format and print data",
+      "Most Similar TLDR Task": "Print a text message composed with environment variables",
+      "Most Similar TLDR Script": "printf \"{{var1: %s\\tvar2: %s\\n}}\" \"{{$VAR1}}\" \"{{$VAR2}}\"",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "su_1291923: executing a script via ssh, not real output"
+      ],
+      "Top-3 Scripts": [
+        "su_1291923: $ find . -name \\*.c -exec grep 'Ignoring non-mail file' {} +\n./notmuch-new.c:    fprintf (stderr, \"Note: Ignoring non-mail file: %s\\n\", filename);\n$ find . -name \\*.c -exec grep 'No new mail' {} +\n./notmuch-new.c:    printf (\"No new mail.\");\n$"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "scp",
+      "MP Summary": "secure copy (remote file copy program)",
+      "Most Similar TLDR Task": "Recursively copy the contents of a directory from a remote host to a local directory",
+      "Most Similar TLDR Script": "scp -r {{remote_host}}:{{path/to/remote_directory}} {{path/to/local_directory}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "su_579497: Reinstalling Ubuntu via Wubi, ubuntu/disks for backup?"
+      ],
+      "Top-3 Scripts": [
+        "su_579497: scp(1)"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "true",
+      "MP Summary": "do nothing, successfully",
+      "Most Similar TLDR Task": "Return a successful exit code",
+      "Most Similar TLDR Script": "true",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "so_45276984: Ubuntu install apache spark via apt-get"
+      ],
+      "Top-3 Scripts": [
+        "so_45276984: $ apt-get update\n$ apt-get -y install software-properties-common\n$ add-apt-repository -y ppa:webupd8team/java\n$ echo debconf shared/accepted-oracle-license-v1-1 select true | debconf-set-selections\n$ echo debconf shared/accepted-oracle-license-v1-1 seen true | debconf-set-selections\n$ apt-get update\n$ apt-get -y install oracle-java8-installer"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "docker-compose",
+      "MP Summary": "Define and run multi-container applications with Docker.",
+      "Most Similar TLDR Task": "Start all containers using an alternate compose file",
+      "Most Similar TLDR Script": "docker-compose --file {{path/to/file}} up",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "so_34461305: How to run symfony via docker-composer"
+      ],
+      "Top-3 Scripts": [
+        "so_34461305: $ docker-compose up"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "script",
+      "MP Summary": "make typescript of terminal session",
+      "Most Similar TLDR Task": "Record timing information (data is outputted to the standard error)",
+      "Most Similar TLDR Script": "script -t 2> {{path/to/timingfile}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "so_3515208: Can colorized output be captured via shell redirect?"
+      ],
+      "Top-3 Scripts": [
+        "so_3515208: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "exit",
+      "MP Summary": "cause the shell to exit",
+      "Most Similar TLDR Task": "Exit the shell with the exit code of the last command executed",
+      "Most Similar TLDR Script": "exit",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "so_45744704: Check Teamspeak status via Shellscript (Ubuntu)"
+      ],
+      "Top-3 Scripts": [
+        "so_45744704: #!/bin/bash\na=$(sh /home/teamspeak3/ts3/teamspeak3-\nserver_linux_amd64/ts3server_startscript.sh status)\necho \"$a\"\nif [ \"$a\" -ne \"Server is running\" ]; then\n    echo \"...\"\nfi\nexit 0"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "docker",
+      "MP Summary": "Docker image and container command line interface",
+      "Most Similar TLDR Task": "Open a shell inside of an already running container",
+      "Most Similar TLDR Script": "docker exec -it {{container_name}} {{sh}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "so_48294144: Jenkins container running but not accessible via host"
+      ],
+      "Top-3 Scripts": [
+        "so_48294144: docker run"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "openssl",
+      "MP Summary": "OpenSSL command line tool",
+      "Most Similar TLDR Task": "Generate a 2048bit RSA private key and save it to a file",
+      "Most Similar TLDR Script": "openssl genrsa -out {{filename.key}} 2048",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "so_67465088: (PySide2+anaconda) playing audio via QMediaPlayer: Warning: \"Could not open audio device for playback.\""
+      ],
+      "Top-3 Scripts": [
+        "so_67465088: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "gradle",
+      "MP Summary": "Adaptable, fast automation for all",
+      "Most Similar TLDR Task": "Run in offline mode to prevent gradle from accessing the network during builds",
+      "Most Similar TLDR Script": "gradle build --offline",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "so_48182930: Couldn't build Android Studio project via Ubuntu terminal"
+      ],
+      "Top-3 Scripts": [
+        "so_48182930: wget https://services.gradle.org/distributions/gradle-4.4.1-bin.zip\nsudo mkdir /opt/gradle\nsudo unzip -d /opt/gradle gradle-4.4.1-bin.zip\nexport PATH=$PATH:/opt/gradle/gradle-4.4.1/bin\n\ngradle -v\n\ngradle build"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "fdisk",
+      "MP Summary": "manipulate disk partition table",
+      "Most Similar TLDR Task": "List partitions",
+      "Most Similar TLDR Script": "fdisk -l",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "su_635576: How to boot into Ubuntu 13 via Windows 7?"
+      ],
+      "Top-3 Scripts": [
+        "su_635576: sudo fdisk -l\nsudo mount /dev/sdaX /mnt #where X is your ubuntu ext4 /(read root) partition\nsudo grub-install --root-directory=/mnt /dev/sda"
+      ],
+      "Explanations about Options": {
+        "-l": "List the partition tables for the specified devices and then exit. If no devices\n are given, those mentioned in /proc/partitions (if that file exists) are used."
+      }
+    },
+    {
+      "Command": "unzip",
+      "MP Summary": "list, test and extract compressed files in a ZIP archive",
+      "Most Similar TLDR Task": "Extract the contents of the file(s) to `stdout` alongside the extracted file names",
+      "Most Similar TLDR Script": "unzip -c {{file.zip}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "so_48182930: Couldn't build Android Studio project via Ubuntu terminal"
+      ],
+      "Top-3 Scripts": [
+        "so_48182930: wget https://services.gradle.org/distributions/gradle-4.4.1-bin.zip\nsudo mkdir /opt/gradle\nsudo unzip -d /opt/gradle gradle-4.4.1-bin.zip\nexport PATH=$PATH:/opt/gradle/gradle-4.4.1/bin"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "cut",
+      "MP Summary": "remove sections from each line of files",
+      "Most Similar TLDR Task": "Cut out everything from the 3rd character to the end of each line",
+      "Most Similar TLDR Script": "cut -c {{3-}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "au_835740: switch audio device via bash command"
+      ],
+      "Top-3 Scripts": [
+        "au_835740: #!/bin/bash\n\nSINK=`pacmd list-sinks | grep '  index' | cut -f6 -d' '`\npacmd set-default-sink ${SINK}\npacmd list-sink-inputs | grep index | while read line\ndo\npacmd move-sink-input `echo $line | cut -f2 -d' '` ${SINK}\ndone"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "line",
+      "MP Summary": "cache line size",
+      "Most Similar TLDR Task": "Read input",
+      "Most Similar TLDR Script": "line",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "au_835740: switch audio device via bash command"
+      ],
+      "Top-3 Scripts": [
+        "au_835740: #!/bin/bash\n\nSINK=`pacmd list-sinks | grep '  index' | cut -f6 -d' '`\npacmd set-default-sink ${SINK}\npacmd list-sink-inputs | grep index | while read line\ndo\npacmd move-sink-input `echo $line | cut -f2 -d' '` ${SINK}\ndone"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "test",
+      "MP Summary": "check file types and compare values",
+      "Most Similar TLDR Task": "Test if given variable is empty",
+      "Most Similar TLDR Script": "test -z $GIT_BRANCH",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "so_52963953: Accessing Ubuntu server via SSH alias- permission denied"
+      ],
+      "Top-3 Scripts": [
+        "so_52963953: ssh test"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "cp",
+      "MP Summary": "copy files and directories",
+      "Most Similar TLDR Task": "Recursively copy a directory's contents to another location (if the destination exists, the directory is copied inside it)",
+      "Most Similar TLDR Script": "cp -r {{path/to/source_directory}} {{path/to/target_directory}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "au_1018981: Sounds issue in ubuntu 16.04"
+      ],
+      "Top-3 Scripts": [
+        "au_1018981: cd /tmp/hda-jack-retask-QW1EEZ\ncp script.sh ~username/speaker.sh"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "rsync",
+      "MP Summary": "a fast, versatile, remote (and local) file-copying tool",
+      "Most Similar TLDR Task": "Transfer directory contents (but not the directory itself) from a remote to local",
+      "Most Similar TLDR Script": "rsync -r {{remote_host}}:{{path/to/remote_directory}}/ {{path/to/local_directory}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "su_579497: Reinstalling Ubuntu via Wubi, ubuntu/disks for backup?"
+      ],
+      "Top-3 Scripts": [
+        "su_579497: rsync(1)"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "useradd",
+      "MP Summary": "create a new user or update default new user information",
+      "Most Similar TLDR Task": "Create new user with specified shell",
+      "Most Similar TLDR Script": "useradd --shell {{/path/to/shell}} {{name}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "so_13926275: Creating FTP user via PHP"
+      ],
+      "Top-3 Scripts": [
+        "so_13926275: sudo pure-pw useradd joe -u ftpuser -d /home/ftpusers/joe"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "xz",
+      "MP Summary": "Compress or decompress .xz and .lzma files",
+      "Most Similar TLDR Task": "Compress a file, but don't delete the original",
+      "Most Similar TLDR Script": "xz -k {{file}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "so_67465088: (PySide2+anaconda) playing audio via QMediaPlayer: Warning: \"Could not open audio device for playback.\""
+      ],
+      "Top-3 Scripts": [
+        "so_67465088: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "notmuch",
+      "MP Summary": "thread-based email index, search, and tagging",
+      "Most Similar TLDR Task": "Configure for first use",
+      "Most Similar TLDR Script": "notmuch setup",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "su_1291923: executing a script via ssh, not real output"
+      ],
+      "Top-3 Scripts": [
+        "su_1291923: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "nginx",
+      "MP Summary": "HTTP and reverse proxy server, mail proxy server",
+      "Most Similar TLDR Task": "Reload the configuration by sending a signal with no downtime",
+      "Most Similar TLDR Script": "nginx -s reload",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "so_34461305: How to run symfony via docker-composer"
+      ],
+      "Top-3 Scripts": [
+        "so_34461305: docker-symfony\n  code\n  elk/logstash\n  nginx\n  php-fpm\n  .gitignore\n  .travis.yml\n  README.md\n  symfony   <====== Add your folder there"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "service",
+      "MP Summary": "run a System V init script",
+      "Most Similar TLDR Task": "List the name and status of all services",
+      "Most Similar TLDR Script": "service --status-all",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "so_24482868: Run commands via Jenkins?"
+      ],
+      "Top-3 Scripts": [
+        "so_24482868: sudo service apache2 reload\n\nsudo service apache restart"
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

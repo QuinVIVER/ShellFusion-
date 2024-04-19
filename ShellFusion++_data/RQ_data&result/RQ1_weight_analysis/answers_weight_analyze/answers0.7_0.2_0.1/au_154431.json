@@ -1,0 +1,94 @@
+{
+  "Query": "How do I delete multiple lines in nano without affecting the clipboard?",
+  "Answers": [
+    {
+      "Command": "echo",
+      "MP Summary": "display a line of text",
+      "Most Similar TLDR Task": "Print a message without the trailing newline",
+      "Most Similar TLDR Script": "echo -n \"{{Hello World}}\"",
+      "Top-3 Similar Questions": [
+        "so_51567078: How do I delete lines matching multiple pattern in text file using bash command?",
+        "ul_120759: Partially remove formatting from text in clipboard",
+        "so_40757485: Delete part of name of multiple files in Linux"
+      ],
+      "Top-3 Scripts": [
+        "so_51567078: while read -r line; do [[ $line =~ ^[ATGC] ]] || echo \"$line\"; done < infile.txt",
+        "ul_120759: var=$(xsel --clipboard; echo .)\nvar=${var%?}\n\nvar=$(xsel --clipboard; ret=$?; echo .; exit \"$ret\")\nret=$?\nvar=${var%?}\n\ncmdsubst() {\n  _var=$1; shift\n  eval \"$_var=\"'$(\"$@\"; ret=$?; echo .; exit \"$ret\")\n    _ret=$?\n    '\"$_var=\\${$_var%?}\"\n  return \"$_ret\"\n}",
+        "so_40757485: for file in *.fastq.gz; do\n    start=${file%%_*}  ## Gets only the portion before first `_`\n    end=${file#*_*_*_*}  ## Gets the portion after 3 `_`s from start\n    echo mv -- \"$file\" \"${start}_${end}\"\ndone"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "sed",
+      "MP Summary": "stream editor for filtering and transforming text",
+      "Most Similar TLDR Task": "Delete lines matching the line pattern",
+      "Most Similar TLDR Script": "sed '/{{line_pattern}}/d' {{filename}}",
+      "Top-3 Similar Questions": [
+        "so_39563366: how to delete specific characters without deleting a file using sed",
+        "so_23162855: Delete specific lines using sed in multiple files",
+        "ul_166768: Deleting lines with different patterns in a file"
+      ],
+      "Top-3 Scripts": [
+        "so_39563366: sed 's/b//g' file.ext",
+        "so_23162855: find /rootdir/ -name index.html -exec sed -i '1,196d' {} \\;",
+        "ul_166768: sed '/paris\\|london\\|rome\\|pais/Id' cities"
+      ],
+      "Explanations about Options": {
+        "-i": "edit files in place (makes backup if SUFFIX supplied)"
+      }
+    },
+    {
+      "Command": "vim",
+      "MP Summary": "Vi IMproved, a programmer's text editor",
+      "Most Similar TLDR Task": "Open a file at a specified line number",
+      "Most Similar TLDR Script": "vim +{{line_number}} {{path/to/file}}",
+      "Top-3 Similar Questions": [
+        "so_16613108: How to delete multiple lines of special characters in vi editor",
+        "so_22170483: How to delete non-contiguous duplicate lines in vi without sorting?"
+      ],
+      "Top-3 Scripts": [
+        "so_16613108: ",
+        "so_22170483: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "xclip",
+      "MP Summary": "command line interface to X selections (clipboard)",
+      "Most Similar TLDR Task": "Copy the contents of a file into the system clipboard",
+      "Most Similar TLDR Script": "xclip -sel clip {{input_file.txt}}",
+      "Top-3 Similar Questions": [
+        "ul_120759: Partially remove formatting from text in clipboard"
+      ],
+      "Top-3 Scripts": [
+        "ul_120759: cmdsubst html xclip -sel c -o -t text/html\n\nxclip -sel c -o -t TARGETS"
+      ],
+      "Explanations about Options": {
+        "-l": "number of X selection requests (pastes into X applications) to wait for before\n exiting, with a value of 0 (default) causing xclip to wait for an unlimited number\n of requests until another application (possibly another invocation of xclip) takes\n ownership of the selection",
+        "-t": "specify a particular data format using the given target atom. With -o the special\n target atom name \"TARGETS\" can be used to get a list of valid target atoms for this\n selection. For more information about target atoms refer to ICCCM section 2.6.2",
+        "-o": "print the selection to standard out (generally for piping to a file or program)"
+      }
+    },
+    {
+      "Command": "rm",
+      "MP Summary": "remove files or directories",
+      "Most Similar TLDR Task": "Interactively remove multiple files, with a prompt before every removal",
+      "Most Similar TLDR Script": "rm -i {{file(s)}}",
+      "Top-3 Similar Questions": [
+        "so_22515569: How do I delete an extracted file in UNIX without deleting the compressed version?",
+        "so_22176446: zsh: how to delete contents in folder without deleting the folder?",
+        "su_491902: How do I delete a directory from Terminal without knowing its name?"
+      ],
+      "Top-3 Scripts": [
+        "so_22515569: adaml@adaml-ws:~/test$ ls\ntest  test.txt\nadaml@adaml-ws:~/test$ rm test\nadaml@adaml-ws:~/test$ ls\ntest.txt\nadaml@adaml-ws:~/test$\n\nrm -i something.log.2014-02-24",
+        "so_22176446: rm -r myfolder/*\n\nrm -rf myfolder && mkdir myfolder",
+        "su_491902: rm -r path_to_dir/*"
+      ],
+      "Explanations about Options": {
+        "-i": "prompt before every removal",
+        "-r": "remove directories and their contents recursively",
+        "-f": "ignore nonexistent files and arguments, never prompt"
+      }
+    }
+  ]
+}

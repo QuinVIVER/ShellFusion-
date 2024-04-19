@@ -1,0 +1,92 @@
+{
+  "Query": "Efficiently delete large directory containing thousands of files",
+  "Answers": [
+    {
+      "Command": "mv",
+      "MP Summary": "move (rename) files",
+      "Most Similar TLDR Task": "Move files in arbitrary locations",
+      "Most Similar TLDR Script": "mv {{source}} {{target}}",
+      "Top-3 Similar Questions": [
+        "au_574667: How can I delete all folders of a specific name without deleting Contents in it?",
+        "so_56122171: Effective way to delete first N lines of a large 100M-line file in linux shell",
+        "au_711603: how to delete one directory of a path?"
+      ],
+      "Top-3 Scripts": [
+        "au_574667: #!/bin/bash\n\nwhile IFS= read -r -d '' n; \ndo   \n   dir=$(dirname \"$n\") ; \n   mv \"${n}\"/* \"${dir}\"\n   rmdir \"${n}\"\ndone < <(find -type d -name \"128Kbps_Songs\" -print0)",
+        "so_56122171: tail -n +50000000 file > tmp && mv tmp file",
+        "au_711603: mv Leonardo/data/approach/tennis Leonardo/data && rmdir Leonardo/data/approach"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "rm",
+      "MP Summary": "remove files or directories",
+      "Most Similar TLDR Task": "Recursively remove a directory and all its subdirectories",
+      "Most Similar TLDR Script": "rm -r {{path/to/directory}}",
+      "Top-3 Similar Questions": [
+        "so_27449149: How can I recursively delete a set of directories across a large array of different folders using bash?",
+        "so_35615581: How to delete X number of files in a directory",
+        "so_37710667: How to delete one set of files in a directory containing similarly named files?"
+      ],
+      "Top-3 Scripts": [
+        "so_27449149: find [a-z][a-z]* -type d \\( -name .gnome -o -name .mozilla \\) -exec rm -r {} \\;",
+        "so_35615581: ls -U | head -40000 | xargs rm -rf\n\nfind . -maxdepth 1 -print0 | xargs -0 rm -rf",
+        "so_37710667: ls text_*.txt | { read first; rm *\"${first:4:4}\"*; };\n\nrm *\"\"*\n\nrm *_xx.*\n\nls text_??.txt | { read first; rm *_\"${first:5:2}\".*; };"
+      ],
+      "Explanations about Options": {
+        "-f": "ignore nonexistent files and arguments, never prompt",
+        "-r": "remove directories and their contents recursively"
+      }
+    },
+    {
+      "Command": "find",
+      "MP Summary": "search for files in a directory hierarchy",
+      "Most Similar TLDR Task": "Find files matching a given pattern, excluding specific paths",
+      "Most Similar TLDR Script": "find {{root_path}} -name '{{*.py}}' -not -path '{{*/site-packages/*}}'",
+      "Top-3 Similar Questions": [
+        "ul_556906: Delete Hundreds of thousands of files by date",
+        "so_27449149: How can I recursively delete a set of directories across a large array of different folders using bash?",
+        "so_35615581: How to delete X number of files in a directory"
+      ],
+      "Top-3 Scripts": [
+        "ul_556906: find ... -delete\n\nfind dir1 dir2 dir3 -type f -mtime  +7 -delete\n\nfind dir4 dir5 dir6 -type f -mtime +30 -delete",
+        "so_27449149: find [a-z][a-z]* -type d \\( -name .gnome -o -name .mozilla \\) -exec rm -r {} \\;",
+        "so_35615581: find . -maxdepth 1 -print0 | xargs -0 rm -rf"
+      ],
+      "Explanations about Options": {
+        "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+        "-mtime": "File's data was last modified n*24 hours ago. See the comments for -atime to\n understand how rounding affects the interpretation of file modification times.",
+        "-maxdepth": "Descend at most levels (a non-negative integer) levels of directories below the\n starting-points. -maxdepth 0 means only apply the tests and actions to the\n starting-points themselves.",
+        "-d": "A synonym for -depth, for compatibility with FreeBSD, NetBSD, MacOS X and OpenBSD.",
+        "-type": "File is of type c:",
+        "-print0": "Always print the exact filename, unchanged, even if the output is going to a\n terminal."
+      }
+    },
+    {
+      "Command": "dirname",
+      "MP Summary": "strip last component from file name",
+      "Most Similar TLDR Task": "Delimit output with a NUL character instead of a newline (useful when combining with `xargs`)",
+      "Most Similar TLDR Script": "dirname --zero {{path/to/directory_a}} {{path/to/file_b}}",
+      "Top-3 Similar Questions": [
+        "au_574667: How can I delete all folders of a specific name without deleting Contents in it?"
+      ],
+      "Top-3 Scripts": [
+        "au_574667: #!/bin/bash\n\nwhile IFS= read -r -d '' n; \ndo   \n   dir=$(dirname \"$n\") ; \n   mv \"${n}\"/* \"${dir}\"\n   rmdir \"${n}\"\ndone < <(find -type d -name \"128Kbps_Songs\" -print0)"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "tree",
+      "MP Summary": "list contents of directories in a tree-like format.",
+      "Most Similar TLDR Task": "Print directories only",
+      "Most Similar TLDR Script": "tree -d",
+      "Top-3 Similar Questions": [
+        "au_711603: how to delete one directory of a path?"
+      ],
+      "Top-3 Scripts": [
+        "au_711603: "
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

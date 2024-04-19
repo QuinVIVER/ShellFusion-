@@ -1,0 +1,82 @@
+{
+    "Answers": [
+        {
+            "Command": "ffmpeg",
+            "Explanations about Options": {
+                "-acodec(M)": "Set the audio codec. This is an alias for \"-codec:a\".",
+                "-i(M)": "input file url",
+                "-n(M)": "Do not overwrite output files, and exit immediately if a specified output file already\n exists.",
+                "-vf(M)": "Create the filtergraph specified by filtergraph and use it to filter the stream.",
+                "-vn(M)": "As an input option, blocks all video streams of a file from being filtered or being\n automatically selected or mapped for any output. See \"-discard\" option to disable\n streams individually."
+            },
+            "MP Summary": "ffmpeg video converter",
+            "Most Similar TLDR Script": "ffmpeg -i {{video.mp4}} -vn {{sound}}.mp3",
+            "Most Similar TLDR Task": "Extract the sound from a video and save it as MP3",
+            "Top-3 Scripts": [
+                "ul_170398: ffmpeg -i video.mp4 -vn -acodec copy audio.aac",
+                "so_50249695: ffmpeg \\\n-loop 1 -framerate 24 -t 10 -i item1.jpg \\\n-t 10 -i \"https://audio-ssl.itunes.apple.com/apple-assets-us-std-000001/Music/66/58/f7/mzi.eoocfriy.aac.p.m4a\" \\\n-i item4.mp4 \\\n-f lavfi -t 1 -i anullsrc \\\n-filter_complex \\\n\"[0]scale=432:432,setsar=1[img1]; \\\n [2]scale=432:432,setsar=1[vid1]; \\\n [img1][1][vid1][3] concat=n=2:v=1:a=1\" \\\noutputfile.mp4",
+                "au_937244: ffmpeg -i YourFile -vf scale=3840:2160 OutputFile4k.mp4"
+            ],
+            "Top-3 Similar Questions": [
+                "su_1046871: FFmpeg converting video convert only audio in linux",
+                "ul_170398: Command to extract audio from video without conversion",
+                "su_1571126: How to add audio to video using ffmpeg on Linux?"
+            ]
+        },
+        {
+            "Command": "winff",
+            "Explanations about Options": {},
+            "MP Summary": "video and audio batch converter using ffmpeg or avconv",
+            "Most Similar TLDR Script": "",
+            "Most Similar TLDR Task": "",
+            "Top-3 Scripts": [
+                "au_101885: sudo apt-get install winff",
+                "au_80954: sudo apt-get install winff libavcodec-extra"
+            ],
+            "Top-3 Similar Questions": [
+                "au_101885: Which software can I use to extract an audio track from a video?",
+                "au_80954: How can I convert audio from MP4 or FLV video files to mp3?"
+            ]
+        },
+        {
+            "Command": "vlc",
+            "Explanations about Options": {},
+            "MP Summary": "the VLC media player",
+            "Most Similar TLDR Script": "vlc {{https://www.youtube.com/watch?v=oHg5SJYRHA0}}",
+            "Most Similar TLDR Task": "Play video from a URL",
+            "Top-3 Scripts": [
+                "au_80954: sudo apt-get install vlc libavcodec-extra"
+            ],
+            "Top-3 Similar Questions": [
+                "au_80954: How can I convert audio from MP4 or FLV video files to mp3?"
+            ]
+        },
+        {
+            "Command": "convert",
+            "Explanations about Options": {},
+            "MP Summary": "convert between image formats as well as resize an image, blur, crop, despeckle, dither, draw on, flip, join, re-sample, and much more.",
+            "Most Similar TLDR Script": "convert {{image.jpg}} {{image.png}}",
+            "Most Similar TLDR Task": "Convert an image from JPG to PNG",
+            "Top-3 Scripts": [
+                "su_594008: #!/bin/bash\nFOLDER_SRC=\"/home/J/Music/TestBatchConv\"\nfind \"$FOLDER_SRC\" -type f -print0 | while IFS= read -r -d '' myvid; do\n  echo \"Trying to convert $myvid\"\n  avconv -i \"$myvid\" -c:a libmp3lame -q:a 4 \"${myvid%.*}.mp3\" 2>/dev/null || echo \"$myvid is not a valid file.\"\ndone"
+            ],
+            "Top-3 Similar Questions": [
+                "su_594008: Bash script to extract audio from video"
+            ]
+        },
+        {
+            "Command": "pactl",
+            "Explanations about Options": {},
+            "MP Summary": "Control a running PulseAudio sound server",
+            "Most Similar TLDR Script": "pactl list {{sinks}} short",
+            "Most Similar TLDR Task": "List all sinks (or other types - sinks are outputs and sink-inputs are active audio streams)",
+            "Top-3 Scripts": [
+                "au_421014: $ pactl list short sources\n0   alsa_output.pci-0000_01_00.1.hdmi-stereo.monitor    module-alsa-card.c  s16le 2ch 44100Hz   SUSPENDED\n1   alsa_output.pci-0000_00_1b.0.analog-stereo.monitor  module-alsa-card.c  s16le 2ch 44100Hz   IDLE\n2   alsa_input.pci-0000_00_1b.0.analog-stereo   module-alsa-card.c  s16le 2ch 44100Hz   SUSPENDED\n3   combined.monitor    module-combine-sink.c   s16le 2ch 44100Hz   SUSPENDED\n\n$ pactl list short sinks\n0   alsa_output.pci-0000_01_00.1.hdmi-stereo    module-alsa-card.c  s16le 2ch 44100Hz   RUNNING\n1   alsa_output.pci-0000_00_1b.0.analog-stereo  module-alsa-card.c  s16le 2ch 48000Hz   RUNNING\n2   combined    module-combine-sink.c   s16le 2ch 44100Hz   IDLE\n\npactl load-module module-null-sink sink_name=Virtual1 sink_properties=device.description=Virtual1\npactl load-module module-null-sink sink_name=Virtual2 sink_properties=device.description=Virtual2\n\npactl load-module module-loopback latency_msec=1 sink=Virtual1\n\npactl load-module module-loopback latency_msec=1 sink=Virtual1 source=Virtual2.monitor\n\npactl load-module module-loopback latency_msec=1 sink=1 source=Virtual2.monitor\n\npactl set-default-source Virtual1.monitor\n\npactl set-default-sink 1\n\npactl list short clients\n\n$ pactl list short sink-inputs\n17  3   24  protocol-native.c   s16le 2ch 44100Hz\n58  0   -   module-combine-sink.c   s16le 2ch 44009Hz\n59  1   -   module-combine-sink.c   s16le 2ch 44100Hz\n\n$ pactl move-sink-input 17 Virtual2\n\npactl list short modules\n\npactl unload-module id"
+            ],
+            "Top-3 Similar Questions": [
+                "au_421014: Share an audio playback stream through a live audio (video) conversation like Skype"
+            ]
+        }
+    ],
+    "Query": "What are some audio/video converters for Linux?"
+}

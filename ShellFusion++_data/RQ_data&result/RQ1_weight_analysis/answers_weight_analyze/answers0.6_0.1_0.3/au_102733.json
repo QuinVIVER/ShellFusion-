@@ -1,0 +1,85 @@
+{
+  "Query": "How can I increase a partition's size?",
+  "Answers": [
+    {
+      "Command": "lvextend",
+      "MP Summary": "Add space to a logical volume",
+      "Most Similar TLDR Task": "Increase a volume's size to 120GB",
+      "Most Similar TLDR Script": "lvextend --size {{120G}} {{logical_volume}}",
+      "Top-3 Similar Questions": [
+        "ul_527968: Increase the size lvm2 partition to use all unallocated disk space",
+        "su_1072547: No more space in root filesystem, how could I increase the size?",
+        "ul_382773: How to increase size of filesystem to match partition"
+      ],
+      "Top-3 Scripts": [
+        "ul_527968: sudo lvextend -r -L <desired new size> /dev/cl/root",
+        "su_1072547: sudo lvextend --size +10G --resizefs /dev/fedora/root",
+        "ul_382773: lvextend -l +100%FREE /dev/mapper/fedora-root <Physical Volume name>"
+      ],
+      "Explanations about Options": {
+        "--size": "Specifies the new size of the LV. The --size and --extents options are alternate\n methods of specifying size. The total number of physical extents used will be\n greater when redundant data is needed for RAID levels. When the plus + or minus -\n prefix is used, the value is not an absolute size, but is relative and added or\n subtracted from the current size.",
+        "-L": "Specifies the new size of the LV. The --size and --extents options are alternate\n methods of specifying size. The total number of physical extents used will be\n greater when redundant data is needed for RAID levels. When the plus + or minus -\n prefix is used, the value is not an absolute size, but is relative and added or\n subtracted from the current size.",
+        "-r": "Resize underlying filesystem together with the LV using fsadm(8).",
+        "--resizefs": "Resize underlying filesystem together with the LV using fsadm(8)."
+      }
+    },
+    {
+      "Command": "lvresize",
+      "MP Summary": "Resize a logical volume",
+      "Most Similar TLDR Task": "Change a volume's size to 120GB",
+      "Most Similar TLDR Script": "lvresize -L {{120G}} {{logical_volume}}",
+      "Top-3 Similar Questions": [
+        "so_25907464: Home directory is full. How to increase it's size?"
+      ],
+      "Top-3 Scripts": [
+        "so_25907464: sudo su -\numount /srv\nresize2fs /dev/mapper/vg00-srv 800G\nlvresize -L 810G /dev/mapper/vg00-srv\nlvresize -L +80G /dev/mapper/vg00-home\nresize2fs /dev/mapper/vg00-home\nmount /srv"
+      ],
+      "Explanations about Options": {
+        "-L": "Specifies the new size of the LV. The --size and --extents options are alternate\n methods of specifying size. The total number of physical extents used will be\n greater when redundant data is needed for RAID levels. When the plus + or minus -\n prefix is used, the value is not an absolute size, but is relative and added or\n subtracted from the current size."
+      }
+    },
+    {
+      "Command": "fdisk",
+      "MP Summary": "manipulate disk partition table",
+      "Most Similar TLDR Task": "List partitions",
+      "Most Similar TLDR Script": "fdisk -l",
+      "Top-3 Similar Questions": [
+        "ul_527968: Increase the size lvm2 partition to use all unallocated disk space"
+      ],
+      "Top-3 Scripts": [
+        "ul_527968: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "du",
+      "MP Summary": "estimate file space usage",
+      "Most Similar TLDR Task": "List the human-readable sizes of a directory and of all the files and directories within it",
+      "Most Similar TLDR Script": "du -ah {{path/to/directory}}",
+      "Top-3 Similar Questions": [
+        "ul_285392: Why does size increase after I copy?"
+      ],
+      "Top-3 Scripts": [
+        "ul_285392: du -hs bin\n\ndu -b"
+      ],
+      "Explanations about Options": {
+        "-b": "equivalent to '--apparent-size --block-size=1'"
+      }
+    },
+    {
+      "Command": "pvcreate",
+      "MP Summary": "Initialize physical volume(s) for use by LVM",
+      "Most Similar TLDR Task": "Initialize the `/dev/sda1` volume for use by LVM",
+      "Most Similar TLDR Script": "pvcreate {{/dev/sda1}}",
+      "Top-3 Similar Questions": [
+        "ul_83141: How do I increase my root volume",
+        "ul_595897: How to increase LVM partition"
+      ],
+      "Top-3 Scripts": [
+        "ul_83141: pvcreate /dev/md4\nvgcreate main /dev/md4",
+        "ul_595897: pvcreate /dev/sda3"
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

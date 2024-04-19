@@ -1,0 +1,90 @@
+{
+  "Query": "How can I increase a partition's size?",
+  "Answers": [
+    {
+      "Command": "lvextend",
+      "MP Summary": "Add space to a logical volume",
+      "Most Similar TLDR Task": "Increase a volume's size to 120GB",
+      "Most Similar TLDR Script": "lvextend --size {{120G}} {{logical_volume}}",
+      "Top-3 Similar Questions": [
+        "ul_527968: Increase the size lvm2 partition to use all unallocated disk space",
+        "su_1072547: No more space in root filesystem, how could I increase the size?",
+        "ul_284424: Increasing a Volume"
+      ],
+      "Top-3 Scripts": [
+        "ul_527968: sudo lvextend -r -L <desired new size> /dev/cl/root",
+        "su_1072547: sudo lvextend --size +10G --resizefs /dev/fedora/root",
+        "ul_284424: lvextend /dev/vg1/your_lv /dev/vda5"
+      ],
+      "Explanations about Options": {
+        "--size": "Specifies the new size of the LV. The --size and --extents options are alternate\n methods of specifying size. The total number of physical extents used will be\n greater when redundant data is needed for RAID levels. When the plus + or minus -\n prefix is used, the value is not an absolute size, but is relative and added or\n subtracted from the current size.",
+        "-L": "Specifies the new size of the LV. The --size and --extents options are alternate\n methods of specifying size. The total number of physical extents used will be\n greater when redundant data is needed for RAID levels. When the plus + or minus -\n prefix is used, the value is not an absolute size, but is relative and added or\n subtracted from the current size.",
+        "-r": "Resize underlying filesystem together with the LV using fsadm(8).",
+        "--resizefs": "Resize underlying filesystem together with the LV using fsadm(8)."
+      }
+    },
+    {
+      "Command": "lvresize",
+      "MP Summary": "Resize a logical volume",
+      "Most Similar TLDR Task": "Change a volume's size to 120GB",
+      "Most Similar TLDR Script": "lvresize -L {{120G}} {{logical_volume}}",
+      "Top-3 Similar Questions": [
+        "so_25907464: Home directory is full. How to increase it's size?"
+      ],
+      "Top-3 Scripts": [
+        "so_25907464: sudo su -\numount /srv\nresize2fs /dev/mapper/vg00-srv 800G\nlvresize -L 810G /dev/mapper/vg00-srv\nlvresize -L +80G /dev/mapper/vg00-home\nresize2fs /dev/mapper/vg00-home\nmount /srv"
+      ],
+      "Explanations about Options": {
+        "-L": "Specifies the new size of the LV. The --size and --extents options are alternate\n methods of specifying size. The total number of physical extents used will be\n greater when redundant data is needed for RAID levels. When the plus + or minus -\n prefix is used, the value is not an absolute size, but is relative and added or\n subtracted from the current size."
+      }
+    },
+    {
+      "Command": "fdisk",
+      "MP Summary": "manipulate disk partition table",
+      "Most Similar TLDR Task": "List partitions",
+      "Most Similar TLDR Script": "fdisk -l",
+      "Top-3 Similar Questions": [
+        "ul_527968: Increase the size lvm2 partition to use all unallocated disk space",
+        "su_1344092: Increase root disk space",
+        "au_88106: How to solve my partition table?"
+      ],
+      "Top-3 Scripts": [
+        "ul_527968: ",
+        "su_1344092: fdisk -l",
+        "au_88106: sudo fdisk /dev/sda"
+      ],
+      "Explanations about Options": {
+        "-l": "List the partition tables for the specified devices and then exit. If no devices\n are given, those mentioned in /proc/partitions (if that file exists) are used."
+      }
+    },
+    {
+      "Command": "blkid",
+      "MP Summary": "locate/print block device attributes",
+      "Most Similar TLDR Task": "List all partitions",
+      "Most Similar TLDR Script": "sudo blkid",
+      "Top-3 Similar Questions": [
+        "au_88106: How to solve my partition table?"
+      ],
+      "Top-3 Scripts": [
+        "au_88106: sudo blkid"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "du",
+      "MP Summary": "estimate file space usage",
+      "Most Similar TLDR Task": "List the human-readable sizes of a directory and of all the files and directories within it",
+      "Most Similar TLDR Script": "du -ah {{path/to/directory}}",
+      "Top-3 Similar Questions": [
+        "ul_564719: How to increase dev/sda2 partition - OVH Sever"
+      ],
+      "Top-3 Scripts": [
+        "ul_564719: du /* -sh\n\ndu /var/* -sh"
+      ],
+      "Explanations about Options": {
+        "-h": "print sizes in human readable format (e.g., 1K 234M 2G)",
+        "-s": "display only a total for each argument"
+      }
+    }
+  ]
+}

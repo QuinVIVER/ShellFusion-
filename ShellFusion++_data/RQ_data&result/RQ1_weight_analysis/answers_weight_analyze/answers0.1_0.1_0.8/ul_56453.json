@@ -1,0 +1,90 @@
+{
+  "Query": "How can I monitor all outgoing requests/connections from my machine?",
+  "Answers": [
+    {
+      "Command": "ping",
+      "MP Summary": "send ICMP ECHO_REQUEST to network hosts",
+      "Most Similar TLDR Task": "Ping host, specifying the interval in seconds between requests (default is 1 second)",
+      "Most Similar TLDR Script": "ping -i {{seconds}} {{host}}",
+      "Top-3 Similar Questions": [
+        "au_576209: how to monitor connection to NFS mount",
+        "au_564349: Remote monitor PC status",
+        "ul_482766: Is it possible to check the connectivity between 2 linux machines by pinging from a third machine?"
+      ],
+      "Top-3 Scripts": [
+        "au_576209: ping -D -i 2 1.2.3.4 > /var/log/ServerName.log",
+        "au_564349: ping -c1 ipadress\n\n#!/bin/bash\n\n# machine 1\nping -c1 ipadress &> /dev/null && echo \"machine 1 is up\" || echo \"machine 1 is down\"\n\n# machine 2\nping -c1 ipadress &> /dev/null && echo \"machine 2 is up\" || echo \"machine 2 is down\"\n# ..",
+        "ul_482766: ssh machineA ping machineB"
+      ],
+      "Explanations about Options": {
+        "-D": "Print timestamp (unix time + microseconds as in gettimeofday) before each line.",
+        "-i": "Wait interval seconds between sending each packet. The default is to wait for one\n second between each packet normally, or not to wait in flood mode. Only super-user may\n set interval to values less than 0.2 seconds."
+      }
+    },
+    {
+      "Command": "tcpdump",
+      "MP Summary": "dump traffic on a network",
+      "Most Similar TLDR Task": "Capture the traffic of a specific interface",
+      "Most Similar TLDR Script": "tcpdump -i {{eth0}}",
+      "Top-3 Similar Questions": [
+        "au_93861: Monitor all incoming pings/requests",
+        "ul_416990: How can I monitor requested IPs to a specific domain?",
+        "ul_466584: tcpdump/tshark: view only outgoing TCP connections requests"
+      ],
+      "Top-3 Scripts": [
+        "au_93861: tcpdump ip proto \\\\icmp",
+        "ul_416990: ",
+        "ul_466584: $ tcpdump -i any -nn src host 10.0.2.15 and port 80\n\n$ tcpdump -i any -nn src host 10.0.2.15 and port 80\ntcpdump: verbose output suppressed, use -v or -vv for full protocol decode\nlistening on any, link-type LINUX_SLL (Linux cooked), capture size 262144 bytes\n11:04:19.585773 IP 10.0.2.15.50642 > 216.58.218.4.80: Flags [S], seq 315169574, win 29200, options [mss 1460,sackOK,TS val 38358006 ecr 0,nop,wscale 7], length 0\n11:04:19.623676 IP 10.0.2.15.50642 > 216.58.218.4.80: Flags [.], ack 470600706, win 29200, length 0\n\n$ tcpdump -i any -nn src host 10.0.2.15 and \"tcp[tcpflags] == tcp-syn\"\ntcpdump: verbose output suppressed, use -v or -vv for full protocol decode\nlistening on any, link-type LINUX_SLL (Linux cooked), capture size 262144 bytes\n11:13:39.962475 IP 10.0.2.15.44810 > 64.233.185.103.80: Flags [S], seq 3710429425, win 29200, options [mss 1460,sackOK,TS val 38918382 ecr 0,nop,wscale 7], length 0"
+      ],
+      "Explanations about Options": {
+        "-i": " Listen on interface. If unspecified, tcpdump searches the system interface list\n for the lowest numbered, configured up interface (excluding loopback), which may\n turn out to be, for example, ``eth0''.",
+        "-n": "Don't convert addresses (i.e., host addresses, port numbers, etc.) to names."
+      }
+    },
+    {
+      "Command": "ssh",
+      "MP Summary": "OpenSSH SSH client (remote login program)",
+      "Most Similar TLDR Task": "Connect to a remote server",
+      "Most Similar TLDR Script": "ssh {{username}}@{{remote_host}}",
+      "Top-3 Similar Questions": [
+        "ul_158819: Remote monitoring Linux server from Ubuntu workstation via SSH",
+        "ul_472554: Block outgoing SSH connection from server",
+        "so_28887947: How to Monitor files that are present in another server"
+      ],
+      "Top-3 Scripts": [
+        "ul_158819: ssh -X user@server",
+        "ul_472554: /etc/ssh/ssh_config",
+        "so_28887947: */10 * * * * /usr/bin/rsync -zrvh -e ssh root@<remoteIP>:<remoteDir> >/var/log/rsync_my.log  2>&1"
+      ],
+      "Explanations about Options": {
+        "-X": "Enables X11 forwarding. This can also be specified on a per-host basis in a\n configuration file."
+      }
+    },
+    {
+      "Command": "ifconfig",
+      "MP Summary": "configure network interfaces",
+      "Most Similar TLDR Task": "Display details of all interfaces, including disabled interfaces",
+      "Most Similar TLDR Script": "ifconfig -a",
+      "Top-3 Similar Questions": [
+        "so_25098327: Monitoring traffic (calculating bytes transferred) on specific port without root access"
+      ],
+      "Top-3 Scripts": [
+        "so_25098327: while true; \ndo MARKER=$(ifconfig eth0 | grep \"[RT]X bytes\" | awk '{print $2}' | cut -c 7-); \nsleep 10; \nNEWMARKER=$(ifconfig eth0 | grep \"[RT]X bytes\" | awk '{print $2}' | cut -c 7-); \nexpr ${NEWMARKER} - ${MARKER}; \nset $MARKER=$NEWMARKER; done"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "sftp",
+      "MP Summary": "OpenSSH secure file transfer",
+      "Most Similar TLDR Task": "Connect using an alternate port",
+      "Most Similar TLDR Script": "sftp -P {{remote_port}} {{remote_user}}@{{remote_host}}",
+      "Top-3 Similar Questions": [
+        "ul_472554: Block outgoing SSH connection from server"
+      ],
+      "Top-3 Scripts": [
+        "ul_472554: $ sftp root@site\nCouldn't read packet: Connection reset by peer\n\n$ sudo sftp site\nssh: Could not resolve hostname dontdothat: Name or service not known"
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

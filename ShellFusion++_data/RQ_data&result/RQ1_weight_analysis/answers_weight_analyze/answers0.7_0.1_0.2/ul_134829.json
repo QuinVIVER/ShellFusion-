@@ -1,0 +1,87 @@
+{
+  "Query": "compare two columns of different files and print if it matches",
+  "Answers": [
+    {
+      "Command": "join",
+      "MP Summary": "join lines of two files on a common field",
+      "Most Similar TLDR Task": "Join two files using a comma (instead of a space) as the field separator",
+      "Most Similar TLDR Script": "join -t {{','}} {{file1}} {{file2}}",
+      "Top-3 Similar Questions": [
+        "ul_419239: match two columns from one file to three columns from another file, print out lines from the file with two columns",
+        "so_49958479: compare two columns in two different files in shell script",
+        "ul_454678: compare first column of 2 file : while second have 2 column but first have one column"
+      ],
+      "Top-3 Scripts": [
+        "ul_419239: join --nocheck-order -j 1 A B | \nwhile read a b c d ; do \n    [[ ( b -le d && b -ge c ) || ( b -le c && b -ge d ) ]] && echo $a $b\ndone",
+        "so_49958479: join -t',' -a 1 -a 2 -j 2 file1 file2\n2018042100,21,45\n2018042101,22\n2018042102,87,86\n2018042103,98,87\n\njoin -t',' -a 1 -a 2 -e \"0\" -j 2 file1 file2  | sed -r 's/^[^,]+,[^,]+$/&,0/'\n2018042100,21,45\n2018042101,22,0\n2018042102,87,86\n2018042103,98,87",
+        "ul_454678: "
+      ],
+      "Explanations about Options": {
+        "-a": "FILENUM\n also print unpairable lines from file FILENUM, where FILENUM is 1 or 2,\n corresponding to FILE1 or FILE2",
+        "-j": "FIELD\n equivalent to '-1 FIELD -2 FIELD'",
+        "-e": "EMPTY\n replace missing input fields with EMPTY",
+        "--nocheck-order": "do not check that the input is correctly sorted"
+      }
+    },
+    {
+      "Command": "diff",
+      "MP Summary": "compare two files",
+      "Most Similar TLDR Task": "Compare directories, only showing the names of files that differ",
+      "Most Similar TLDR Script": "diff -rq {{old_directory}} {{new_directory}}",
+      "Top-3 Similar Questions": [
+        "su_1329584: How to compare two columns of two different files",
+        "au_1067061: How to compare the output of the \"head\" command applied to two different files?",
+        "so_27066633: compare if two columns of a file is identiical in linux"
+      ],
+      "Top-3 Scripts": [
+        "su_1329584: diff <(sort file1 | cut -d , -f 1-2) <(sort file2 | cut -d , -f 1-2)",
+        "au_1067061: # lines different, have output\n$ diff <(head -n 1 /etc/passwd) <(head -n1 input.txt)\n1c1\n< root:x:0:0:root:/root:/bin/bash\n---\n> hello world\n# same file, first lines aren't different, no output\n$ diff <(head -n 1 /etc/passwd) <(head -n1 passwd.copy)\n$\n\n$ diff <(head -n 1 /etc/passwd) <(head -n1 passwd.copy)\n1c1\n< root:x:0:0:root:/root:/bin/bash\n---\n> root:x:0:0:root:/root:/bin/bash",
+        "so_27066633: diff <(awk '{print $1}' data) <(awk '{print $4}' data)\n\nif diff <(awk '{print $1}' data) <(awk '{print $4}' data) >& /dev/null;\nthen \n    echo same; \nelse \n    echo different; \nfi"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "cat",
+      "MP Summary": "concatenate files and print on the standard output",
+      "Most Similar TLDR Task": "Append several files into the target file",
+      "Most Similar TLDR Script": "cat {{file1}} {{file2}} >> {{target_file}}",
+      "Top-3 Similar Questions": [
+        "so_18592736: awk compare columns from two files, impute values of another column",
+        "so_54485639: How to compare parts of lines of two txt files?"
+      ],
+      "Top-3 Scripts": [
+        "so_18592736: ",
+        "so_54485639: $ cat a\naaaa   bbbb\ncccc   dddd\n$ cat b\naaaa   eeee\nffff   gggg\n$ join a b\naaaa bbbb eeee"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "comm",
+      "MP Summary": "select or reject lines common to two files",
+      "Most Similar TLDR Task": "Produce three tab-separated columns: lines only in first file, lines only in second file and common lines",
+      "Most Similar TLDR Script": "comm {{file1}} {{file2}}",
+      "Top-3 Similar Questions": [
+        "so_14450562: Compare lines of two files, print lines unique to first file"
+      ],
+      "Top-3 Scripts": [
+        "so_14450562: comm -23 \"File 1\" \"File 2\""
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "paste",
+      "MP Summary": "merge lines of files",
+      "Most Similar TLDR Task": "Merge two files, with lines added alternatively",
+      "Most Similar TLDR Script": "paste -d '\\n' {{file1}} {{file2}}",
+      "Top-3 Similar Questions": [
+        "au_1251013: How to compare two columns from two different files?",
+        "so_37951225: Compare two files field by field in Unix"
+      ],
+      "Top-3 Scripts": [
+        "au_1251013: paste file1 file2 | awk '{print $2, $14 == $3 ? \"OK\" : \"error\"}'",
+        "so_37951225: paste/awk\n\n$ paste -d'|' file1 file2 | \n  awk -F'|' '{w=NF/2; \n              for(i=1;i<=w;i++) \n                 if($i!=$(i+w)) printf \"%d %d %s %s\", NR,i,$i,$(i+w); \n              print \"\"}'\n\n1 5 lmn 123"
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

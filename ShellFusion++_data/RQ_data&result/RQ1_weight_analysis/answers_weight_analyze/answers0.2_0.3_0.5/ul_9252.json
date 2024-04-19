@@ -1,0 +1,82 @@
+{
+  "Query": "Determining what process is bound to a port",
+  "Answers": [
+    {
+      "Command": "kill",
+      "MP Summary": "send a signal to a process",
+      "Most Similar TLDR Task": "Signal the operating system to immediately terminate a program (which gets no chance to capture the signal)",
+      "Most Similar TLDR Script": "kill -{{9|KILL}} {{process_id}}",
+      "Top-3 Similar Questions": [
+        "ul_366613: How to determine what process is eating up all available disk space?",
+        "so_39974335: How to determine which process is using a port in Linux",
+        "ul_266100: How can I determine if a process is running unseen in terminal?"
+      ],
+      "Top-3 Scripts": [
+        "ul_366613: sudo kill -9 $(lsof | grep deleted | cut -d \" \" -f4)",
+        "so_39974335: 1.  lsof -i:8080\n2.  kill $(lsof -t -i:8080)\nor\n2 . kill -9 $(lsof -t -i:8080)",
+        "ul_266100: $ for job in $(jobs -p); do kill $job; wait $job; done"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "netstat",
+      "MP Summary": "Print  network  connections,  routing tables, interface statistics, masquerade connections, and multicast memberships",
+      "Most Similar TLDR Task": "List listening TCP and UDP ports (+ user and process if you're root)",
+      "Most Similar TLDR Script": "netstat -lepunt",
+      "Top-3 Similar Questions": [
+        "su_142408: How do I determine which application is using port 8080?",
+        "so_21897119: How do I determine if a port is in use, e.g. via netstat?",
+        "su_781543: How can I check which ports are in use from the Linux command line?"
+      ],
+      "Top-3 Scripts": [
+        "su_142408: netstat -tulpn | grep :8080",
+        "so_21897119: ",
+        "su_781543: netstat | grep port_number\n\nsudo lsof -i\nsudo netstat -lptu\nsudo netstat -tulpn"
+      ],
+      "Explanations about Options": {
+        "-p": "Show the PID and name of the program to which each socket belongs.",
+        "-l": "Show only listening sockets. (These are omitted by default.)",
+        "-n": "Show numerical addresses instead of trying to determine symbolic host, port or user names."
+      }
+    },
+    {
+      "Command": "fuser",
+      "MP Summary": "identify processes using files or sockets",
+      "Most Similar TLDR Task": "Identify processes using a TCP socket",
+      "Most Similar TLDR Script": "fuser --namespace tcp {{port}}",
+      "Top-3 Similar Questions": [
+        "su_97844: How can I determine what process has a file open in Linux?"
+      ],
+      "Top-3 Scripts": [
+        "su_97844: ~> less .vimrc\n# put in background\n~> fuser .vimrc\n.vimrc:              28135\n~> ps 28135\n  PID TTY      STAT   TIME COMMAND\n28135 pts/36   T      0:00 less .vimrc"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "pidof",
+      "MP Summary": "find the process ID of a running program.",
+      "Most Similar TLDR Task": "List process IDs including scripts with given name",
+      "Most Similar TLDR Script": "pidof -x {{script.py}}",
+      "Top-3 Similar Questions": [
+        "so_9117507: Linux/Unix command to determine if process is running?"
+      ],
+      "Top-3 Scripts": [
+        "so_9117507: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "tcpdump",
+      "MP Summary": "dump traffic on a network",
+      "Most Similar TLDR Task": "Capture the traffic from a specific interface, source, destination and destination port",
+      "Most Similar TLDR Script": "tcpdump -i {{eth0}} src {{192.168.1.1}} and dst {{192.168.1.2}} and dst port {{80}}",
+      "Top-3 Similar Questions": [
+        "su_403139: How to determine which process sends UDP packets periodically to an IP address?"
+      ],
+      "Top-3 Scripts": [
+        "su_403139: "
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

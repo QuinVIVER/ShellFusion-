@@ -1,0 +1,109 @@
+{
+    "Answers": [
+        {
+            "Command": "tar",
+            "Explanations about Options": {
+                "-C(M)": "Change to DIR before performing any operations. This option is order-sensitive,\n i.e. it affects all options that follow.",
+                "-f(C)": "If you want it saved to \"/tmp\": \"tar -f /tmp/name_of_file.tar ....\".",
+                "-x(M)": "Extract files from an archive. Arguments are optional. When given, they specify\n names of the archive members to be extracted."
+            },
+            "MP Summary": "an archiving utility",
+            "Most Similar TLDR Script": "tar xf {{source.tar[.gz|.bz2|.xz]}}",
+            "Most Similar TLDR Task": "Extract a (compressed) archive into the current directory",
+            "Top-3 Scripts": [
+                "su_1129321: cd /target/dir && ssh user@source_server \"cat /path/to/your/file.tar\" | tar -xvv\n\nssh user@target_system \"cd /target/dir && tar -xvv\" < /path/to/your/file.tar\n\nscp user@source_server:/path/to/your/file.tar >(cd /target/dir && tar -x)\n\ncd /target/dir && scp user@source_server:/path/to/your/file.tar /proc/self/fd/1 | tar -x",
+                "au_1236768: ssh ubuntu-server tar c -C /path/to/target_directory . | tar xvf - -C /path/to/local_directory",
+                "ul_531455: tar -f /tmp/name_of_file.tar ...."
+            ],
+            "Top-3 Similar Questions": [
+                "su_1129321: scp and decompress file at the same time without saving it",
+                "au_1236768: How to compress and download directory from remote to local?",
+                "ul_531455: tar on remote machine and save the compress file under specific folder"
+            ]
+        },
+        {
+            "Command": "scp",
+            "Explanations about Options": {
+                "-P(M)": "Specifies the port to connect to on the remote host. Note that this option is\n written with a capital ‘P’, because -p is already reserved for preserving the times\n and modes of the file.",
+                "-o(M)": "Can be used to pass options to ssh in the format used in ssh_config(5). This is\n useful for specifying options for which there is no separate scp command-line flag.\n For full details of the options listed below, and their possible values, see\n ssh_config(5).",
+                "-p(M)": "Preserves modification times, access times, and modes from the original file.",
+                "-r(M)": "Recursively copy entire directories. Note that scp follows symbolic links\n encountered in the tree traversal."
+            },
+            "MP Summary": "secure copy (remote file copy program)",
+            "Most Similar TLDR Script": "scp {{path/to/local_file}} {{remote_host}}:{{path/to/remote_file}}",
+            "Most Similar TLDR Task": "Copy a local file to a remote host",
+            "Top-3 Scripts": [
+                "ul_327802: scp -oProxyJump=userB@hostB,userC@hostC infile.txt userD@hostD:\"~/outfile.txt\"",
+                "su_1129321: scp user@source_server:/path/to/your/file.tar >(cd /target/dir && tar -x)\n\ncd /target/dir && scp user@source_server:/path/to/your/file.tar /proc/self/fd/1 | tar -x",
+                "au_923937: spawn scp ./$arg1 C:destination\n\nspawn scp -oProxyJump=B ./$arg1 C:destination"
+            ],
+            "Top-3 Similar Questions": [
+                "ul_327802: How to scp through two intermediate servers to a third-hop server",
+                "su_1129321: scp and decompress file at the same time without saving it",
+                "au_923937: expect script to scp via an intermediate host"
+            ]
+        },
+        {
+            "Command": "rsync",
+            "Explanations about Options": {
+                "--delete-excluded(C)": " Try this one. -m deletes \"empty\" directories that were created while traversing SRS sub directories, and --delete-excluded to make rsync not look like cp.",
+                "--delete-excluded(M)": "In addition to deleting the files on the receiving side that are not on the sending\n side, this tells rsync to also delete any files on the receiving side that are\n excluded (see --exclude). See the FILTER RULES section for a way to make\n individual exclusions behave this way on the receiver, and for a way to protect\n files from --delete-excluded. See --delete (which is implied) for more details on\n file-deletion.",
+                "--exclude(M)": "This option is a simplified form of the --filter option that defaults to an exclude\n rule and does not allow the full rule-parsing syntax of normal filter rules.",
+                "--include(M)": "This option is a simplified form of the --filter option that defaults to an include\n rule and does not allow the full rule-parsing syntax of normal filter rules.",
+                "--partial(M)": "By default, rsync will delete any partially transferred file if the transfer is\n interrupted. In some circumstances it is more desirable to keep partially\n transferred files. Using the --partial option tells rsync to keep the partial file\n which should make a subsequent transfer of the rest of the file much faster.",
+                "--progress(M)": "This option tells rsync to print information showing the progress of the transfer.\n This gives a bored user something to watch. With a modern rsync this is the same\n as specifying --info=flist2,name,progress, but any user-supplied settings for those\n info flags takes precedence (e.g. \"--info=flist0 --progress\").",
+                "--rsh(M)": "This option allows you to choose an alternative remote shell program to use for\n communication between the local and remote copies of rsync. Typically, rsync is\n configured to use ssh by default, but you may prefer to use rsh on a local network.",
+                "-a(M)": "This is equivalent to -rlptgoD. It is a quick way of saying you want recursion and\n want to preserve almost everything (with -H being a notable omission). The only\n exception to the above equivalence is when --files-from is specified, in which case\n -r is not implied.",
+                "-e(M)": "This option allows you to choose an alternative remote shell program to use for\n communication between the local and remote copies of rsync. Typically, rsync is\n configured to use ssh by default, but you may prefer to use rsh on a local network.",
+                "-m(M)": "This option tells the receiving rsync to get rid of empty directories from the\n file-list, including nested directories that have no non-directory children. This\n is useful for avoiding the creation of a bunch of useless directories when the\n sending rsync is recursively scanning a hierarchy of files using\n include/exclude/filter rules.",
+                "-v(M)": "This option increases the amount of information you are given during the transfer.\n By default, rsync works silently. A single -v will give you information about what\n files are being transferred and a brief summary at the end. Two -v options will\n give you information on what files are being skipped and slightly more information\n at the end. More than two -v options should only be used if you are debugging\n rsync.",
+                "-z(M)": "With this option, rsync compresses the file data as it is sent to the destination\n machine, which reduces the amount of data being transmitted - something that is\n useful over a slow connection."
+            },
+            "MP Summary": "a fast, versatile, remote (and local) file-copying tool",
+            "Most Similar TLDR Script": "rsync -e ssh --delete {{remote_host}}:{{path/to/remote_file}} {{path/to/local_file}}",
+            "Most Similar TLDR Task": "Transfer file over SSH and delete local files that do not exist on remote host",
+            "Top-3 Scripts": [
+                "su_1115715: rsync -azv -e 'ssh -o \"ProxyCommand ssh -A PROXYHOST -W %h:%p\"' foo/ dest:./foo/\n\nrsync -azv -e 'ssh -A -J USER@PROXYHOST:PORT' foo/ dest:./foo/\n\nrsync -azv -e 'ssh -o \"ProxyCommand ssh -A PROXYHOST nc %h %p\"' foo/ dest:./foo/\n\nrsync -azv foo/ C:./foo/",
+                "ul_431905: rsync --partial --progress --rsh=ssh local_file user@host:remote_file",
+                "ul_217247: rsync -am --include='**/OK/**/*OK*' --include='*/' --exclude='*' --delete-excluded SRS DEST"
+            ],
+            "Top-3 Similar Questions": [
+                "su_1115715: Rsync files via intermediate host",
+                "au_1236768: How to compress and download directory from remote to local?",
+                "ul_431905: file transfer using SCP"
+            ]
+        },
+        {
+            "Command": "xz",
+            "Explanations about Options": {},
+            "MP Summary": "Compress or decompress .xz and .lzma files",
+            "Most Similar TLDR Script": "xz -9 {{file}}",
+            "Most Similar TLDR Task": "Compress a file using the best compression",
+            "Top-3 Scripts": [
+                "su_775773: tar cf - apache24/ | bar -s $(du -sb apache24 | cut -f1) | xz > apache24.tar.xz"
+            ],
+            "Top-3 Similar Questions": [
+                "su_775773: Compressing with BarCat?"
+            ]
+        },
+        {
+            "Command": "cpio",
+            "Explanations about Options": {
+                "--create(M)": "Output mode. See above for description.",
+                "--format(M)": "(o mode only) Produce the output archive in the specified format. Supported formats\n include:",
+                "--null(M)": "Read filenames separated by NUL characters instead of newlines. This is necessary\n if any of the filenames being read might contain newlines.",
+                "-o(M)": "Output mode. See above for description."
+            },
+            "MP Summary": "copy files to and from archives",
+            "Most Similar TLDR Script": "echo \"{{file1}} {{file2}} {{file3}}\" | cpio -o > {{archive.cpio}}",
+            "Most Similar TLDR Task": "Take a list of file names from standard input and add them [o]nto an archive in cpio's binary format",
+            "Top-3 Scripts": [
+                "ul_72142: find /var/lib/edumate/backup/archive_logs/db2inst1/SAAS \\\n   -newermt 20130310 -not -newermt 20130314 -type f -print0 \\\n   | cpio --create --null  --format=ustar \\\n   | gzip > /tmp/saas_archive_logs.tar.gz"
+            ],
+            "Top-3 Similar Questions": [
+                "ul_72142: How to scp/tar files that are in between specific days?"
+            ]
+        }
+    ],
+    "Query": "scp and compress at the same time, no intermediate save"
+}

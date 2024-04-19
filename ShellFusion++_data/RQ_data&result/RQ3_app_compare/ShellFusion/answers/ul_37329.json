@@ -1,0 +1,98 @@
+{
+    "Answers": [
+        {
+            "Command": "rm",
+            "Explanations about Options": {
+                "-f(C)": "So if you found a huge of files, i.e 10000 files, you called \"rm\" 10000 times. .  \"xargs\" will treat ouput of \"find\" as command argument to \"rm\", so that, xargs will provide as many arguments as \"rm\" can handle at once, i.e \"rm -f file1 file2 ...\" So it makes less fork call, make program run faster.",
+                "-f(M)": "ignore nonexistent files and arguments, never prompt",
+                "-r(M)": "remove directories and their contents recursively"
+            },
+            "MP Summary": "remove files or directories",
+            "Most Similar TLDR Script": "rm -r {{path/to/directory}}",
+            "Most Similar TLDR Task": "Recursively remove a directory and all its subdirectories",
+            "Top-3 Scripts": [
+                "so_11339534: rm -r\n\nfind (...) -exec rm {} \\;\n\nfind (...) -print0 | xargs -0 rm",
+                "ul_152513: find . -mindepth 2 -mtime +5 -type f -print0 | xargs -0 echo rm",
+                "ul_96935: find ./cache -mtime +0.5 -print0 | xargs -0 rm -f\n\nrm -f file1 file2 ..."
+            ],
+            "Top-3 Similar Questions": [
+                "so_11339534: What is the best and the fastest way to delete large directory containing thousands of files (in ubuntu)",
+                "ul_152513: Can the \"find\" command work more efficiently to delete many files?",
+                "ul_96935: Faster way to delete large number of files"
+            ]
+        },
+        {
+            "Command": "find",
+            "Explanations about Options": {
+                "-mindepth(C)": "We want to find only plain files, no symlinks, directories, special files etc: .  \"find . -mindepth 2 -mtime +5 -type f\". is very different from the usual tryout variant, leaving out the dangerous part, \"-delete\": .  \"find . -mindepth 2 -mtime +5 -print\". The command .  \"find . -mindepth 2 -mtime +5 -print -delete\". and should be tested with .  \"find . -depth -mindepth 2 -mtime +5 -print\". Testing this command - note the \"echo\" in front of the \"rm\", so it prints what will be run later: .  \"find . -mindepth 2 -mtime +5 -type f -print0 | xargs -0 echo rm\". The command including delete is really .  \"find . -depth -mindepth 2 -mtime +5 -print -delete\".",
+                "-mindepth(M)": "Do not apply any tests or actions at levels less than levels (a non-negative\n integer). -mindepth 1 means process all files except the starting-points.",
+                "-mtime(M)": "File's data was last modified n*24 hours ago. See the comments for -atime to\n understand how rounding affects the interpretation of file modification times.",
+                "-n(M)": "for less than n ,",
+                "-name(M)": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+                "-print0(C)": "EDIT: As suggested by user946850, you can also skip the whole tempfile and use \"find (...) -print0 | xargs -0 rm\".",
+                "-print0(M)": "Always print the exact filename, unchanged, even if the output is going to a\n terminal.",
+                "-type(M)": "File is of type c:"
+            },
+            "MP Summary": "search for files in a directory hierarchy",
+            "Most Similar TLDR Script": "find {{root_path}} -name '{{*pattern_1*}}' -or -name '{{*pattern_2*}}'",
+            "Most Similar TLDR Task": "Find files by matching multiple patterns",
+            "Top-3 Scripts": [
+                "so_11339534: find (...) -exec rm {} \\;\n\nfind (...) -print0 | xargs -0 rm",
+                "ul_508658: find /grid/sdh/hadoop/yarn/local/usercache/hdfs/appcache \\\n    -type d -exec bash -O dotglob -c '\n        for pathname do\n            set -- \"$pathname\"/*\n            if [ \"$#\" -gt 1000 ]; then\n                printf \"%d\\t%s\\n\" \"$#\" \"$pathname\"\n            fi\n        done' bash {} +",
+                "ul_152513: find . -mindepth 2 -mtime +5 -print -delete\n\nfind . -depth -mindepth 2 -mtime +5 -print -delete\n\nman find\n\nfind . -mindepth 2 -mtime +5 -type f\n\nfind . -mindepth 2 -mtime +5 -type f -print0 | xargs -0 echo rm"
+            ],
+            "Top-3 Similar Questions": [
+                "so_11339534: What is the best and the fastest way to delete large directory containing thousands of files (in ubuntu)",
+                "au_116899: How do I move all directories into a single directory efficiently in the same folder?",
+                "ul_508658: How to search for large directory containing thousands of files?"
+            ]
+        },
+        {
+            "Command": "tar",
+            "Explanations about Options": {
+                "--delete(M)": "Delete from the archive. The arguments supply names of the archive members to be\n removed. At least one argument must be given.",
+                "--wildcards(M)": "Use wildcards (default for exclusion)."
+            },
+            "MP Summary": "an archiving utility",
+            "Most Similar TLDR Script": "tar xf {{source.tar[.gz|.bz2|.xz]}}",
+            "Most Similar TLDR Task": "Extract a (compressed) archive into the current directory",
+            "Top-3 Scripts": [
+                "ul_80239: pigz -d < file.tgz |\n  tar --delete --wildcards -f - '*/prefix*.jpg' |\n  pigz > newfile.tgz\n\n{ pigz -d < file.tgz |\n    tar --delete --wildcards -f - '*/prefix*.jpg' |\n    pigz &&\n    perl -e 'truncate STDOUT, tell STDOUT'\n} 1<> file.tgz"
+            ],
+            "Top-3 Similar Questions": [
+                "ul_80239: Efficiently remove file(s) from large .tgz"
+            ]
+        },
+        {
+            "Command": "pigz",
+            "Explanations about Options": {
+                "-(M)": "All arguments after \"--\" are treated as file names (for names that start with \"-\")",
+                "-d(M)": "Decompress the compressed input."
+            },
+            "MP Summary": "compress or expand files",
+            "Most Similar TLDR Script": "tar cf - {{path/to/directory}} | pigz > {{filename}}.tar.gz",
+            "Most Similar TLDR Task": "Compress a directory using tar",
+            "Top-3 Scripts": [
+                "ul_80239: pigz -d < file.tgz |\n  tar --delete --wildcards -f - '*/prefix*.jpg' |\n  pigz > newfile.tgz\n\npigz -d < file.tgz |\n  bsdtar -cf - --exclude='*/prefix*.jpg' @- |\n  pigz > newfile.tgz\n\n{ pigz -d < file.tgz |\n    tar --delete --wildcards -f - '*/prefix*.jpg' |\n    pigz &&\n    perl -e 'truncate STDOUT, tell STDOUT'\n} 1<> file.tgz"
+            ],
+            "Top-3 Similar Questions": [
+                "ul_80239: Efficiently remove file(s) from large .tgz"
+            ]
+        },
+        {
+            "Command": "tree",
+            "Explanations about Options": {
+                "--prune(M)": "Makes tree prune empty directories from the output, useful when used in conjunction\n with -P or -I. See BUGS AND NOTES below for more information on this option.",
+                "-P(M)": "List only those files that match the wild-card pattern. Note: you must use the -a\n option to also consider those files beginning with a dot `.' for matching. Valid\n wildcard operators are `*' (any zero or more characters), `?' (any single\n character), `[...]' (any single character listed between brackets (optional -\n (dash) for character range may be used: ex: [A-Z]), and `[^...]' (any single\n character not listed in brackets) and `|' separates alternate patterns."
+            },
+            "MP Summary": "list contents of directories in a tree-like format.",
+            "Most Similar TLDR Script": "tree -P '{{*.txt}}' --prune",
+            "Most Similar TLDR Task": "Print files within the tree hierarchy, using a wildcard (glob) pattern, and pruning out directories that don't contain matching files",
+            "Top-3 Scripts": [],
+            "Top-3 Similar Questions": [
+                "ul_624009: Directory structure for large amount of files"
+            ]
+        }
+    ],
+    "Query": "Efficiently delete large directory containing thousands of files"
+}

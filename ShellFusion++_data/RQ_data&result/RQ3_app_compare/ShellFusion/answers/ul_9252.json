@@ -1,0 +1,99 @@
+{
+    "Answers": [
+        {
+            "Command": "fuser",
+            "Explanations about Options": {
+                "--namespace(M)": "Select a different name space. The name spaces file (file names, the default), udp\n (local UDP ports), and tcp (local TCP ports) are supported. For ports, either the\n port number or the symbolic name can be specified. If there is no ambiguity, the\n shortcut notation name/space (e.g., 80/tcp) can be used.",
+                "-v(C)": "On the command line, you may also want to execute \"fuser -v <port>/<proto>\" first, to see what you are going to kill."
+            },
+            "MP Summary": "identify processes using files or sockets",
+            "Most Similar TLDR Script": "fuser --namespace tcp {{port}}",
+            "Most Similar TLDR Task": "Identify processes using a TCP socket",
+            "Top-3 Scripts": [
+                "au_227161: fuser 43796/tcp\n\n$ fuser 1723/tcp\n1723/tcp:             2870",
+                "su_97844: ~> less .vimrc\n# put in background\n~> fuser .vimrc\n.vimrc:              28135\n~> ps 28135\n  PID TTY      STAT   TIME COMMAND\n28135 pts/36   T      0:00 less .vimrc",
+                "so_41523255: fuser -k [-<SIGNAL>] <port>/<proto>\nfuser -n <proto> -k [-<SIGNAL>] <port>\n\nfuser -k 12345/tcp\nfuser -n udp -k -KILL 23456\n\nfuser -v <port>/<proto>"
+            ],
+            "Top-3 Similar Questions": [
+                "au_227161: How can we find which process is using a particular port?",
+                "su_97844: How can I determine what process has a file open in Linux?",
+                "so_41523255: Kill process that is taking specific port"
+            ]
+        },
+        {
+            "Command": "netstat",
+            "Explanations about Options": {
+                "-l(M)": "Show only listening sockets. (These are omitted by default.)",
+                "-n(M)": "Show numerical addresses instead of trying to determine symbolic host, port or user names.",
+                "-p(M)": "Show the PID and name of the program to which each socket belongs."
+            },
+            "MP Summary": "Print  network  connections,  routing tables, interface statistics, masquerade connections, and multicast memberships",
+            "Most Similar TLDR Script": "netstat -l",
+            "Most Similar TLDR Task": "List all listening ports",
+            "Top-3 Scripts": [
+                "so_9856590: netstat -l -p",
+                "su_258277: sudo lsof -i\nsudo netstat -lptu",
+                "su_142408: netstat -tulpn | grep :8080"
+            ],
+            "Top-3 Similar Questions": [
+                "so_9856590: Determine the process pid  listening on a certain port",
+                "su_258277: How can I find out which process is listening on a port on linux?",
+                "su_142408: How do I determine which application is using port 8080?"
+            ]
+        },
+        {
+            "Command": "ss",
+            "Explanations about Options": {
+                "-l(M)": "Display only listening sockets (these are omitted by default).",
+                "-n(M)": "Do not try to resolve service names. Show exact bandwidth values, instead of human-\n readable.",
+                "-p(M)": "Show process using socket.",
+                "-t(M)": "Display TCP sockets."
+            },
+            "MP Summary": "another utility to investigate sockets",
+            "Most Similar TLDR Script": "ss -pt dst :{{ssh}}",
+            "Most Similar TLDR Task": "Show all TCP sockets along with processes connected to a remote ssh port",
+            "Top-3 Scripts": [
+                "ul_106561: $ sudo ss -lptn 'sport = :80'\nState   Local Address:Port  Peer Address:Port              \nLISTEN  127.0.0.1:80        *:*                users:((\"nginx\",pid=125004,fd=12))\nLISTEN  ::1:80              :::*               users:((\"nginx\",pid=125004,fd=11))"
+            ],
+            "Top-3 Similar Questions": [
+                "ul_106561: Finding the PID of the process using a specific port?",
+                "ul_612753: Determine the PID of a process that is calling out to an IP"
+            ]
+        },
+        {
+            "Command": "nc",
+            "Explanations about Options": {
+                "-l(M)": "Listen for an incoming connection rather than initiating a connection to a remote\n host. The destination and port to listen on can be specified either as non-optional\n arguments, or with options -s and -p respectively. Cannot be used together with -x\n or -z. Additionally, any timeouts specified with the -w option are ignored."
+            },
+            "MP Summary": "arbitrary TCP and UDP connections and listens",
+            "Most Similar TLDR Script": "nc {{ip_address}} {{port}}",
+            "Most Similar TLDR Task": "Connect to a certain port (you can then write to this port)",
+            "Top-3 Scripts": [
+                "ul_612753: # iptables -t nat -A OUTPUT -p tcp --dport 7000 -j DNAT --to-destination 127.0.0.1:7777\n\n$ nc -l 7777",
+                "ul_246903: # Start a process (nc) that listens on port 8080\n$ nc -l 8080 & bg\n[1] 17454\n[1] nc -l 8080\n\n# Get the process listening on port 8080:\n$ fstat | grep :8080\ncmihai   nc         17454    3* internet stream tcp 0x0 *:8080\n\n$ kill $(portpid 8080)\n[1] + Terminated           nc -l 8080"
+            ],
+            "Top-3 Similar Questions": [
+                "ul_612753: Determine the PID of a process that is calling out to an IP",
+                "ul_246903: Kill process on specific port"
+            ]
+        },
+        {
+            "Command": "nmap",
+            "Explanations about Options": {
+                "-A(C)": "You could try \"nmap -v -A -p {the port that you can't recognise} {the host IP}\".",
+                "-n(M)": "Tells Nmap to never do reverse DNS",
+                "-v(M)": "(Increase verbosity level) , -vlevel (Set verbosity level)\n Increases the verbosity level, causing Nmap to print more information about the scan\n in progress. Open ports are shown as they are found and completion time estimates are\n provided when Nmap thinks a scan will take more than a few minutes. Use it twice or\n more for even greater verbosity: -vv, or give a verbosity level directly, for example\n -v3."
+            },
+            "MP Summary": "Network exploration tool and security / port scanner",
+            "Most Similar TLDR Script": "nmap -sn {{ip_or_hostname}} {{optional_another_address}}",
+            "Most Similar TLDR Task": "Try to determine whether the specified hosts are up and what are their names",
+            "Top-3 Scripts": [
+                "su_1406725: nmap -v -A -p {the port that you can't recognise} {the host IP}"
+            ],
+            "Top-3 Similar Questions": [
+                "su_1406725: Using lsof and fuser I can't find the process listening on a strange port"
+            ]
+        }
+    ],
+    "Query": "Determining what process is bound to a port"
+}

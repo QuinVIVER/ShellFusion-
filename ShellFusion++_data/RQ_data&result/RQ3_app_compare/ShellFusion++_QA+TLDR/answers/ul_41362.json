@@ -1,0 +1,82 @@
+{
+  "Query": "View pdf file in terminal",
+  "Answers": [
+    {
+      "Command": "pdfinfo",
+      "MP Summary": "Portable Document Format (PDF) document information extractor (version 3.03)",
+      "Most Similar TLDR Task": "Print PDF file information",
+      "Most Similar TLDR Script": "pdfinfo {{path/to/file.pdf}}",
+      "Top-3 Similar Questions": [
+        "ul_20408: Possible to extract title and pagenum of each page in a pdf file",
+        "so_51168569: Removing last page of PDF using Python or Bash",
+        "ul_448212: Splitting a single large PDF file into n PDF files based on content and rename each splitted file (in Bash)"
+      ],
+      "Top-3 Scripts": [
+        "ul_20408: #!/bin/bash\nif=\"$1\"\npages=$(pdfinfo \"$if\" | sed -nre 's/^Pages: +([0-9]+)$/\\1/p')\nfor ((i=1; i<=$pages; i++)) ;do\n    printf \"%s %d\\n\" \"$(pdftotext -f $i -l $i -layout \"$if\" - | head -n 1)\" $i\ndone",
+        "so_51168569: #!/bin/bash\n\nfor file in *.pdf\ndo\n    page_nb=$(pdfinfo $file | awk '/^Pages/ { print $2 }')\n\n    file_name=$(echo $file | cut -d'.' -f 1)\n\n    gs -sDEVICE=pdfwrite -dNOPAUSE -dQUIET -dBATCH -dFirstPage=1 -dLastPage=$(expr $page_nb - 1) -sOutputFile=$file_name\"_without_last_page.pdf\" $file\ndone",
+        "ul_448212: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "pdfunite",
+      "MP Summary": "Portable Document Format (PDF) page merger",
+      "Most Similar TLDR Task": "Merge a directory of PDFs into a single PDF",
+      "Most Similar TLDR Script": "pdfunite {{path/to/directory/*.pdf}} {{path/to/merged_output.pdf}}",
+      "Top-3 Similar Questions": [
+        "so_23643274: Merge pdf files with numerical sort"
+      ],
+      "Top-3 Scripts": [
+        "so_23643274: $ pdfunite $(ls -v *.pdf) output.pdf\n\n$ pdfunite $(ls *.pdf | sort -n) output.pdf"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "pdfimages",
+      "MP Summary": "Portable Document Format (PDF) image extractor (version 3.03)",
+      "Most Similar TLDR Task": "Extract all images from a PDF file and save them as PNGs",
+      "Most Similar TLDR Script": "pdfimages -png {{path/to/file.pdf}} {{filename_prefix}}",
+      "Top-3 Similar Questions": [
+        "so_30345709: Unable to extract text and images from specific PDF"
+      ],
+      "Top-3 Scripts": [
+        "so_30345709: pdfimages -f 4 -l 7 -j the.pdf myprefix--"
+      ],
+      "Explanations about Options": {
+        "-j": "Write images in JPEG format as JPEG files instead of the default format. The JPEG\n file is identical to the JPEG data stored in the PDF.",
+        "-l": "Specifies the last page to scan.",
+        "-f": "Specifies the first page to scan."
+      }
+    },
+    {
+      "Command": "gs",
+      "MP Summary": "Ghostscript (PostScript and PDF language interpreter and previewer)",
+      "Most Similar TLDR Task": "Merge PDF files",
+      "Most Similar TLDR Script": "gs -dQUIET -dBATCH -dNOPAUSE -sDEVICE=pdfwrite -sOutputFile={{output.pdf}} {{input1.pdf}} {{input2.pdf}}",
+      "Top-3 Similar Questions": [
+        "so_51168569: Removing last page of PDF using Python or Bash"
+      ],
+      "Top-3 Scripts": [
+        "so_51168569: #!/bin/bash\n\nfor file in *.pdf\ndo\n    page_nb=$(pdfinfo $file | awk '/^Pages/ { print $2 }')\n\n    file_name=$(echo $file | cut -d'.' -f 1)\n\n    gs -sDEVICE=pdfwrite -dNOPAUSE -dQUIET -dBATCH -dFirstPage=1 -dLastPage=$(expr $page_nb - 1) -sOutputFile=$file_name\"_without_last_page.pdf\" $file\ndone"
+      ],
+      "Explanations about Options": {
+        "-sDEVICE": "Selects an alternate initial output device, as described above.",
+        "-P": "Makes Ghostscript to look first in the current directory for library files. By\n default, Ghostscript no longer looks in the current directory, unless, of course,\n the first explicitly supplied directory is \".\" in -I. See also the INITIALIZATION\n FILES section below, and bundled Use.htm for detailed discussion on search paths\n and how Ghostcript finds files.",
+        "-dNOPAUSE": "Disables the prompt and pause at the end of each page. This may be desirable for\n applications where another program is driving Ghostscript."
+      }
+    },
+    {
+      "Command": "pdffonts",
+      "MP Summary": "Portable Document Format (PDF) font analyzer (version 3.03)",
+      "Most Similar TLDR Task": "Print additional information on location of the font that will be used when the PDF file is converted to PostScript",
+      "Most Similar TLDR Script": "pdffonts -locPS {{path/to/file.pdf}}",
+      "Top-3 Similar Questions": [
+        "ul_335466: Is there a way to know/tell which fonts are used in a pdf file?"
+      ],
+      "Top-3 Scripts": [
+        "ul_335466: "
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

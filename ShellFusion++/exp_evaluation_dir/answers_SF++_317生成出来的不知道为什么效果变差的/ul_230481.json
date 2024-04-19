@@ -1,0 +1,869 @@
+{
+  "Query": "How to download portion of video with youtube-dl command?",
+  "Answers": [
+    {
+      "Command": "youtube-dl",
+      "MP Summary": "download videos from youtube.com or other video platforms",
+      "Most Similar TLDR Task": "Download a video or playlist",
+      "Most Similar TLDR Script": "youtube-dl '{{https://www.youtube.com/watch?v=oHg5SJYRHA0}}'",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "au_1063190: Change name of the video file using youtube-dl not working",
+        "au_948516: How do I download with youtube-dl to get video title as filename?",
+        "au_1074697: How can I download part of a playlist from YouTube with 'youtube-dl'?"
+      ],
+      "Top-3 Scripts": [
+        "au_1063190: youtube-dl -o video.mp4 https://res.cloudinary.com/dqozdyzvu/video/upload/v1514809216/29836749002162.mp4",
+        "au_948516: man youtube-dl\n\nyoutube-dl -o '%(title)s.%(ext)s' <URL-of-video>",
+        "au_1074697: youtube-dl -c -f '...' --playlist-start 2 --playlist-end 8 https://youtube.com/watch/foo\n\nyoutube-dl -c -f '...' --playlist-end 5 https://youtube.com/watch/foo\n\nyoutube-dl -c -f '...' --playlist-start 7 https://youtube.com/watch/foo\n\nyoutube-dl -c -f '...' --playlist-items 2,4,6 https://youtube.com/watch/bar\n\nyoutube-dl -c --playlist-items 2-3,5,8-10,18 https://youtube.com/watch/bar\n\nyoutube-dl -c -f '...' --playlist-end 6 --playlist-reverse"
+      ],
+      "Explanations about Options": {
+        "--playlist-end": "Playlist video to end at (default is last)",
+        "-o": "Output filename template, see the \"OUTPUT TEMPLATE\" for all the info",
+        "--playlist-reverse": "Download playlist videos in reverse order",
+        "-c": "Force resume of partially downloaded files. By default, youtube-dl will resume\n downloads if possible."
+      }
+    },
+    {
+      "Command": "ffmpeg",
+      "MP Summary": "ffmpeg video converter",
+      "Most Similar TLDR Task": "Extract the sound from a video and save it as MP3",
+      "Most Similar TLDR Script": "ffmpeg -i {{video.mp4}} -vn {{sound}}.mp3",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "au_59383: Extract part of a video with a one-line command",
+        "su_1661048: How to download a portion of a YouTube video",
+        "so_48428756: FFmpeg how generate a sequence of videos with bash"
+      ],
+      "Top-3 Scripts": [
+        "au_59383: ffmpeg -formats -E\n\nffmpeg -ss 00:00:30 -i orginalfile -t 00:00:05 -vcodec copy -acodec copy newfile",
+        "su_1661048: # Download 2 minutes of the video between 5 mins in to 7 mins, using timestamps:\nffmpeg -ss 00:05:00.00 -to 00:07:00.00 -i \"$video_url\" -ss 00:05:00.00 -to 00:07:00.00 -i \"$audio_url\" output.mkv\n\n# Download 2 minutes of the video between 5 mins in to 7 mins, using duration:  \nffmpeg -ss 00:05:00.00 -i \"$video_url\" -ss 00:05:00.00 -i \"$audio_url\" -t 2:00 output.mkv\n\n# Download 2 minutes of the video between 5 mins in to 7 mins, using timestamps:\nffmpeg -ss 00:05:00.00 -to 00:07:00.00 -i <video_url> -ss 00:05:00.00 -to 00:07:00.00 -i <audio_url> output.mkv\n\n# Download 2 minutes of the video between 5 mins in to 7 mins, using duration:  \nffmpeg -ss 00:05:00.00 -i <video_url> -ss 00:05:00.00 -i <audio_url> -t 2:00 output.mkv",
+        "so_48428756: ffmpeg -i small.mp4 -acodec aac -ab 192k -vcodec libx264 -vb 1024k -f mp4 output.mp4"
+      ],
+      "Explanations about Options": {
+        "-acodec": "Set the audio codec. This is an alias for \"-codec:a\".",
+        "-t": "When used as an input option (before \"-i\"), limit the duration of data read from the\n input file.",
+        "-vcodec": "Set the video codec. This is an alias for \"-codec:v\".",
+        "-ss": "When used as an input option (before \"-i\"), seeks in this input file to position. Note\n that in most formats it is not possible to seek exactly, so ffmpeg will seek to the\n closest seek point before position. When transcoding and -accurate_seek is enabled\n (the default), this extra segment between the seek point and position will be decoded\n and discarded. When doing stream copy or when -noaccurate_seek is used, it will be\n preserved.",
+        "-i": "input file url"
+      }
+    },
+    {
+      "Command": "ffprobe",
+      "MP Summary": "ffprobe media prober",
+      "Most Similar TLDR Task": "Display the frame rate of a video",
+      "Most Similar TLDR Script": "ffprobe -v error -select_streams v:0 -show_entries stream=avg_frame_rate -of default=noprint_wrappers=1:nokey=1 {{input.mp4}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "so_48428756: FFmpeg how generate a sequence of videos with bash",
+        "au_816906: A problem merge subtitle vtt with video using youtube-dl",
+        "au_1133616: Script/Command to add play length of all video in a given directory tree"
+      ],
+      "Top-3 Scripts": [
+        "so_48428756: ffprobe -report input.mp4",
+        "au_816906: [debug] exe versions: avconv v12_dev0-3134-g6755eb5, avprobe v12_dev0-3134-g6755eb5, \nffmpeg 3.1.2-1, ffprobe 3.1.2-1, rtmpdump 2.4",
+        "au_1133616: find . -maxdepth 1 -iname '*.mp4' -exec ffprobe -v quiet -of csv=p=0 -show_entries format=duration {} \\; | paste -sd+ -| bc\n\nfind . -exec ffprobe -v quiet -of csv=p=0 -show_entries format=duration {} \\; | paste -sd+ -| bc"
+      ],
+      "Explanations about Options": {
+        "-report": "Dump full command line and console output to a file named\n \"program-YYYYMMDD-HHMMSS.log\" in the current directory. This file can be useful for\n bug reports. It also implies \"-loglevel debug\".",
+        "-of": "Set the output printing format.",
+        "-show_entries": "Set list of entries to show."
+      }
+    },
+    {
+      "Command": "curl",
+      "MP Summary": "transfer a URL",
+      "Most Similar TLDR Task": "Download the contents of an URL to a file",
+      "Most Similar TLDR Script": "curl {{http://example.com}} -o {{filename}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "ul_462646: A file on AkamaiGlobalHost downloads with a browser but not with curl",
+        "so_3518968: is it possbile to download one part of a file from web ?"
+      ],
+      "Top-3 Scripts": [
+        "ul_462646: ",
+        "so_3518968: curl -o filename -r 0-1048575 <a href=\"http://url/to/file\" rel=\"nofollow noreferrer\">http://url/to/file</a>"
+      ],
+      "Explanations about Options": {
+        "-o": "Write output to <file> instead of stdout. If you are using {} or [] to fetch\n multiple documents, you can use '#' followed by a number in the <file> specifier.\n That variable will be replaced with the current string for the URL being fetched.\n Like in:"
+      }
+    },
+    {
+      "Command": "read",
+      "MP Summary": "read a line from standard input",
+      "Most Similar TLDR Task": "Store data that you type from the keyboard",
+      "Most Similar TLDR Script": "read {{variable}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "au_910454: Running a directory full of .sh files with one command",
+        "su_1661048: How to download a portion of a YouTube video",
+        "so_31745759: How to extract a portion of a file in shell script"
+      ],
+      "Top-3 Scripts": [
+        "au_910454: while read url; do\n    youtube-dl \"$url\"\ndone < file\n\nwhile read url; do\n    youtube-dl \"$url\" &\ndone < file",
+        "su_1661048: # As scary as it looks, perfectly safe to run in a terminal \n{   \n   read -r video_url  \n   read -r audio_url\n} < <(\n   youtube-dl --get-url --youtube-skip-dash-manifest https://www.youtube.com/watch?v=MfnzBYV5fxs\n)",
+        "so_31745759: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "sudo",
+      "MP Summary": "execute a command as another user",
+      "Most Similar TLDR Task": "Run a command as another user and/or group",
+      "Most Similar TLDR Script": "sudo -u {{user}} -g {{group}} {{id -a}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "au_460825: How to open youtube video with youtube-dl",
+        "au_892480: Download replay videos from periscope with wget",
+        "au_627133: How to download facebook videos by using 'youtube-dl' in linux?"
+      ],
+      "Top-3 Scripts": [
+        "au_460825: sudo add-apt-repository ppa:videolan/stable-daily\nsudo apt-get update\nsudo apt-get install vlc",
+        "au_892480: sudo wget https://yt-dl.org/downloads/latest/youtube-dl -O /usr/local/bin/youtube-dl\nsudo chmod a+rx /usr/local/bin/youtube-dl",
+        "au_627133: sudo apt-get remove youtube-dl\nsudo apt-get install $(apt-cache depends youtube-dl | grep Depends | sed \"s/.*ends:\\ //\" | tr '\\n' ' ')\nsudo pip install youtube-dl"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "vlc",
+      "MP Summary": "the VLC media player",
+      "Most Similar TLDR Task": "Play video from a URL",
+      "Most Similar TLDR Script": "vlc {{https://www.youtube.com/watch?v=oHg5SJYRHA0}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "au_460825: How to open youtube video with youtube-dl"
+      ],
+      "Top-3 Scripts": [
+        "au_460825: cd /path/videos\nvlc \"Videoname.avi\"\n\nsudo add-apt-repository ppa:videolan/stable-daily\nsudo apt-get update\nsudo apt-get install vlc"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "rtmpdump",
+      "MP Summary": "RTMP streaming media client",
+      "Most Similar TLDR Task": "Download a file from a Flash player",
+      "Most Similar TLDR Script": "rtmpdump --rtmp {{rtmp://example.com/path/to/video}} --swfVfy {{http://example.com/player}} --flashVer \"{{LNX 10,0,32,18}}\" -o {{file.ext}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "au_816906: A problem merge subtitle vtt with video using youtube-dl"
+      ],
+      "Top-3 Scripts": [
+        "au_816906: [debug] exe versions: avconv v12_dev0-3134-g6755eb5, avprobe v12_dev0-3134-g6755eb5, \nffmpeg 3.1.2-1, ffprobe 3.1.2-1, rtmpdump 2.4"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "apt-get",
+      "MP Summary": "APT package handling utility - command-line interface",
+      "Most Similar TLDR Task": "Clean the local repository - removing package files (.deb) from interrupted downloads that can no longer be downloaded",
+      "Most Similar TLDR Script": "apt-get autoclean",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "au_460825: How to open youtube video with youtube-dl",
+        "au_627133: How to download facebook videos by using 'youtube-dl' in linux?"
+      ],
+      "Top-3 Scripts": [
+        "au_460825: sudo add-apt-repository ppa:videolan/stable-daily\nsudo apt-get update\nsudo apt-get install vlc",
+        "au_627133: sudo apt-get remove youtube-dl\nsudo apt-get install $(apt-cache depends youtube-dl | grep Depends | sed \"s/.*ends:\\ //\" | tr '\\n' ' ')\nsudo pip install youtube-dl"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "find",
+      "MP Summary": "search for files in a directory hierarchy",
+      "Most Similar TLDR Task": "Run a command for each file (use `{}` within the command to access the filename)",
+      "Most Similar TLDR Script": "find {{root_path}} -name '{{*.ext}}' -exec {{wc -l {} }}\\;",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "au_1133616: Script/Command to add play length of all video in a given directory tree",
+        "so_46238941: Calculate total runtime of videos in folder using command line",
+        "ul_170961: Get total duration of video files in a directory"
+      ],
+      "Top-3 Scripts": [
+        "au_1133616: find . -maxdepth 1 -iname '*.mp4' -exec ffprobe -v quiet -of csv=p=0 -show_entries format=duration {} \\; | paste -sd+ -| bc\n\nfind . -exec ffprobe -v quiet -of csv=p=0 -show_entries format=duration {} \\; | paste -sd+ -| bc",
+        "so_46238941: find . -iname \"*.mp4\" -exec ffprobe -v error -print_format json -show_format {} \\; | jq -r '.[].duration' | awk '{total+=$0}END{printf \"%.6f\",total}'",
+        "ul_170961: find . -maxdepth 1 -iname '*.mp4' -exec ffprobe -v quiet -of csv=p=0 -show_entries format=duration {} \\;\n149.233333\n130.146667\n275.690000\n\nfind . -maxdepth 1 -iname '*.mp4' -exec ffprobe -v quiet -of csv=p=0 -show_entries format=duration {} \\; | paste -sd+ -| bc\n555.070000\n\nfind . -maxdepth 1 -iname '*.ts' -exec ffprobe -v quiet -of csv=p=0 -show_entries format=duration {} \\; | paste -sd+ -| bc"
+      ],
+      "Explanations about Options": {
+        "-iname": "Like -name, but the match is case insensitive. For example, the patterns `fo*' and\n `F??' match the file names `Foo', `FOO', `foo', `fOo', etc. The pattern `*foo*`\n will also match a file called '.foobar'.",
+        "-maxdepth": "Descend at most levels (a non-negative integer) levels of directories below the\n starting-points. -maxdepth 0 means only apply the tests and actions to the\n starting-points themselves."
+      }
+    },
+    {
+      "Command": "mpv",
+      "MP Summary": "a media player",
+      "Most Similar TLDR Task": "Play a video or audio file",
+      "Most Similar TLDR Script": "mpv {{file}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "ul_298086: Play youtube playlist with youtube-dl with shuffling or repeat"
+      ],
+      "Top-3 Scripts": [
+        "ul_298086: mpv '<yt-playlist-link>' --no-video --shuffle"
+      ],
+      "Explanations about Options": {
+        "--shuffle": "Play files in random order."
+      }
+    },
+    {
+      "Command": "file",
+      "MP Summary": "determine file type",
+      "Most Similar TLDR Task": "Don't stop at first file type match; keep going until the end of the file",
+      "Most Similar TLDR Script": "file -k {{filename}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "au_910454: Running a directory full of .sh files with one command",
+        "au_460825: How to open youtube video with youtube-dl",
+        "so_48428756: FFmpeg how generate a sequence of videos with bash"
+      ],
+      "Top-3 Scripts": [
+        "au_910454: while read url; do\n    youtube-dl \"$url\"\ndone < file\n\nwhile read url; do\n    youtube-dl \"$url\" &\ndone < file",
+        "au_460825: xdg-open $file",
+        "so_48428756: [concat @ 0x7fbfd1000000] Unsafe file name './small.mp4'"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "watch",
+      "MP Summary": "execute a program periodically, showing output fullscreen",
+      "Most Similar TLDR Task": "Monitor \"node\" processes, refreshing every 3 seconds",
+      "Most Similar TLDR Script": "watch -n {{3}} \"{{ps aux | grep node}}\"",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "au_1074697: How can I download part of a playlist from YouTube with 'youtube-dl'?"
+      ],
+      "Top-3 Scripts": [
+        "au_1074697: youtube-dl -c -f '...' --playlist-start 2 --playlist-end 8 https://youtube.com/watch/foo\n\nyoutube-dl -c -f '...' --playlist-end 5 https://youtube.com/watch/foo\n\nyoutube-dl -c -f '...' --playlist-start 7 https://youtube.com/watch/foo\n\nyoutube-dl -c -f '...' --playlist-items 2,4,6 https://youtube.com/watch/bar\n\nyoutube-dl -c --playlist-items 2-3,5,8-10,18 https://youtube.com/watch/bar"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "printf",
+      "MP Summary": "format and print data",
+      "Most Similar TLDR Task": "Print a text message",
+      "Most Similar TLDR Script": "printf \"{{%s\\n}}\" \"{{Hello world}}\"",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "au_768773: Move part of file name to metadata",
+        "so_31745759: How to extract a portion of a file in shell script",
+        "so_46238941: Calculate total runtime of videos in folder using command line"
+      ],
+      "Top-3 Scripts": [
+        "au_768773: for f in *.mp3; do\n   artist=\"$(printf \"$f\" | cut -d '-' -f 1 | sed 's/ *$//')\"\n   eyeD3 --artist \"$artist\" \"$f\" \n   mv -nv \"$f\" \"$(printf \"$f\" | cut -d'-' -f 2 | sed 's/^ *//')\"\ndone",
+        "so_31745759: ",
+        "so_46238941: find . -iname \"*.mp4\" -exec ffprobe -v error -print_format json -show_format {} \\; | jq -r '.[].duration' | awk '{total+=$0}END{printf \"%.6f\",total}'\n\nawk '{total+=$0}END{printf \"%.6f\",total}'\n\nprintf \"%.6f\",total"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "date",
+      "MP Summary": "print or set the system date and time",
+      "Most Similar TLDR Task": "Convert a specific date to the Unix timestamp format",
+      "Most Similar TLDR Script": "date -d \"{{2018-09-01 00:00}}\" +%s --utc",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "au_948516: How do I download with youtube-dl to get video title as filename?",
+        "ul_116628: How can I restore file timestamps of video recordings using the embedded metadata?"
+      ],
+      "Top-3 Scripts": [
+        "au_948516: ",
+        "ul_116628: date +%:::z"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "sed",
+      "MP Summary": "stream editor for filtering and transforming text",
+      "Most Similar TLDR Task": "Replace only on lines matching the line pattern",
+      "Most Similar TLDR Script": "sed '/{{line_pattern}}/s/{{find}}/{{replace}}/' {{filename}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "au_768773: Move part of file name to metadata",
+        "au_627133: How to download facebook videos by using 'youtube-dl' in linux?",
+        "so_51121333: ffmpeg extract subclips from video at 10s; 30%; 60%; last 30s of a video"
+      ],
+      "Top-3 Scripts": [
+        "au_768773: for f in *.mp3; do\n   artist=\"$(printf \"$f\" | cut -d '-' -f 1 | sed 's/ *$//')\"\n   eyeD3 --artist \"$artist\" \"$f\" \n   mv -nv \"$f\" \"$(printf \"$f\" | cut -d'-' -f 2 | sed 's/^ *//')\"\ndone",
+        "au_627133: sudo apt-get remove youtube-dl\nsudo apt-get install $(apt-cache depends youtube-dl | grep Depends | sed \"s/.*ends:\\ //\" | tr '\\n' ' ')\nsudo pip install youtube-dl",
+        "so_51121333: DURATION=$(ffmpeg -i $file 2>&1 | grep \"Duration\" | awk '{print $2}' | sed 's/\\..*//g' | awk '{split($1, a, \":\"); print 3600*a[1] + 60*a[2] + a[3]}')"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "awk",
+      "MP Summary": "pattern scanning and processing language",
+      "Most Similar TLDR Task": "Print the last column of each line in a file, using a comma (instead of space) as a field separator",
+      "Most Similar TLDR Script": "awk -F ',' '{print $NF}' {{filename}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "so_51121333: ffmpeg extract subclips from video at 10s; 30%; 60%; last 30s of a video",
+        "so_46238941: Calculate total runtime of videos in folder using command line",
+        "so_64536484: I am trying to use awk to extract a portion of each line in my file"
+      ],
+      "Top-3 Scripts": [
+        "so_51121333: DURATION=$(ffmpeg -i $file 2>&1 | grep \"Duration\" | awk '{print $2}' | sed 's/\\..*//g' | awk '{split($1, a, \":\"); print 3600*a[1] + 60*a[2] + a[3]}')",
+        "so_46238941: find . -iname \"*.mp4\" -exec ffprobe -v error -print_format json -show_format {} \\; | jq -r '.[].duration' | awk '{total+=$0}END{printf \"%.6f\",total}'\n\nawk '{total+=$0}END{printf \"%.6f\",total}'",
+        "so_64536484: awk -F / '/product/ { print $5 }' filename\n\nawk 'BEGIN {FS=\"GET /product/\"}\n  NF==2{\n    # second field is now everything after /product/ -- split on slash\n    split($2, f, \"/\")\n    print f[1] }' file\n\nawk '/\\/product\\// { sub(\".*/product/\", \"\"), sub(\"/.*\", \"\"); print }' file"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "echo",
+      "MP Summary": "display a line of text",
+      "Most Similar TLDR Task": "Print a text message. Note: quotes are optional",
+      "Most Similar TLDR Script": "echo \"{{Hello World}}\"",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "ul_338949: Extract only version portion of a package name with bash",
+        "au_673442: Downloading youtube playlist with youtube-dl, skipping existing files"
+      ],
+      "Top-3 Scripts": [
+        "ul_338949: echo $var | egrep -o '[0-9].*-[0-9]'\n1.2.6-6",
+        "au_673442: for n in *.mp3\ndo if [[ \"$n\" =~ -[-_0-9a-zA-Z]{11}.mp3$ ]]\n   then echo \"youtube ${n: -15: 11}\" >> downloaded.txt\n   fi\ndone"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "install",
+      "MP Summary": "copy files and set attributes",
+      "Most Similar TLDR Task": "Copy files to destination, setting their group ownership",
+      "Most Similar TLDR Script": "install -g {{user}} {{path/to/source}} {{path/to/destination}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "au_460825: How to open youtube video with youtube-dl",
+        "au_627133: How to download facebook videos by using 'youtube-dl' in linux?",
+        "ul_462646: A file on AkamaiGlobalHost downloads with a browser but not with curl"
+      ],
+      "Top-3 Scripts": [
+        "au_460825: sudo add-apt-repository ppa:videolan/stable-daily\nsudo apt-get update\nsudo apt-get install vlc",
+        "au_627133: sudo apt-get remove youtube-dl\nsudo apt-get install $(apt-cache depends youtube-dl | grep Depends | sed \"s/.*ends:\\ //\" | tr '\\n' ' ')\nsudo pip install youtube-dl",
+        "ul_462646: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "eyeD3",
+      "MP Summary": "displays and manipulates id3-tags on mp3 files",
+      "Most Similar TLDR Task": "Set the front cover art for an MP3 file",
+      "Most Similar TLDR Script": "eyeD3 --add-image {{front_cover.jpeg}}:FRONT_COVER: {{filename.mp3}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "au_768773: Move part of file name to metadata"
+      ],
+      "Top-3 Scripts": [
+        "au_768773: for f in *.mp3; do\n   artist=\"$(printf \"$f\" | cut -d '-' -f 1 | sed 's/ *$//')\"\n   eyeD3 --artist \"$artist\" \"$f\" \n   mv -nv \"$f\" \"$(printf \"$f\" | cut -d'-' -f 2 | sed 's/^ *//')\"\ndone"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "tail",
+      "MP Summary": "output the last part of files",
+      "Most Similar TLDR Task": "Show last 'num' lines in 'file' and refresh every 'n' seconds",
+      "Most Similar TLDR Script": "tail -n {{num}} -s {{n}} -f {{file}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "ul_170961: Get total duration of video files in a directory"
+      ],
+      "Top-3 Scripts": [
+        "ul_170961: exiftool -n -q -p '${Duration;our $sum;$_=ConvertDuration($sum+=$_)\n                    }' ./*.mp4| tail -n1\n0:09:15"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "cat",
+      "MP Summary": "concatenate files and print on the standard output",
+      "Most Similar TLDR Task": "Print the contents of a file to the standard output",
+      "Most Similar TLDR Script": "cat {{file}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "so_55457120: How to split a video up into <2.5GB parts with FFmpeg",
+        "ul_509610: youtube-dl, how to write all subs of a youtube playlist to ONE single file?"
+      ],
+      "Top-3 Scripts": [
+        "so_55457120: # sender does:\n\nsplit -b 2500m file.mpg file.mpg__split_\n\n# recipient downloads all the pieces and does:\n\ncat file.mpg__split_* > file.mpg",
+        "ul_509610: $ cat ./* > all-subs.vtt"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "grep",
+      "MP Summary": "print lines that match patterns",
+      "Most Similar TLDR Task": "Search for a pattern within a file",
+      "Most Similar TLDR Script": "grep {{search_pattern}} {{path/to/file}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "ul_338949: Extract only version portion of a package name with bash",
+        "au_627133: How to download facebook videos by using 'youtube-dl' in linux?",
+        "so_51121333: ffmpeg extract subclips from video at 10s; 30%; 60%; last 30s of a video"
+      ],
+      "Top-3 Scripts": [
+        "ul_338949: ",
+        "au_627133: sudo apt-get remove youtube-dl\nsudo apt-get install $(apt-cache depends youtube-dl | grep Depends | sed \"s/.*ends:\\ //\" | tr '\\n' ' ')\nsudo pip install youtube-dl",
+        "so_51121333: DURATION=$(ffmpeg -i $file 2>&1 | grep \"Duration\" | awk '{print $2}' | sed 's/\\..*//g' | awk '{split($1, a, \":\"); print 3600*a[1] + 60*a[2] + a[3]}')"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "paste",
+      "MP Summary": "merge lines of files",
+      "Most Similar TLDR Task": "Merge two files side by side, each in its column, using TAB as delimiter",
+      "Most Similar TLDR Script": "paste {{file1}} {{file2}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "au_1133616: Script/Command to add play length of all video in a given directory tree",
+        "ul_170961: Get total duration of video files in a directory"
+      ],
+      "Top-3 Scripts": [
+        "au_1133616: find . -maxdepth 1 -iname '*.mp4' -exec ffprobe -v quiet -of csv=p=0 -show_entries format=duration {} \\; | paste -sd+ -| bc\n\nfind . -exec ffprobe -v quiet -of csv=p=0 -show_entries format=duration {} \\; | paste -sd+ -| bc",
+        "ul_170961: find . -maxdepth 1 -iname '*.mp4' -exec ffprobe -v quiet -of csv=p=0 -show_entries format=duration {} \\; | paste -sd+ -| bc\n555.070000\n\nfind . -maxdepth 1 -iname '*.ts' -exec ffprobe -v quiet -of csv=p=0 -show_entries format=duration {} \\; | paste -sd+ -| bc\n\nexiftool -S -n ./*.mp4 | awk '/^Duration/ {print $2}' | paste -sd+ -| bc\n555.070000000000\nexiftool -q -p '$Duration#' ./*.mp4 | awk '{sum += $0}; END{print sum}'\n555.070000000000"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "split",
+      "MP Summary": "split a file into pieces",
+      "Most Similar TLDR Task": "Split a file into 5 files. File is split such that each split has same size (except the last split)",
+      "Most Similar TLDR Script": "split -n {{5}} {{filename}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "so_55457120: How to split a video up into <2.5GB parts with FFmpeg",
+        "so_51121333: ffmpeg extract subclips from video at 10s; 30%; 60%; last 30s of a video",
+        "so_64536484: I am trying to use awk to extract a portion of each line in my file"
+      ],
+      "Top-3 Scripts": [
+        "so_55457120: # sender does:\n\nsplit -b 2500m file.mpg file.mpg__split_\n\n# recipient downloads all the pieces and does:\n\ncat file.mpg__split_* > file.mpg",
+        "so_51121333: DURATION=$(ffmpeg -i $file 2>&1 | grep \"Duration\" | awk '{print $2}' | sed 's/\\..*//g' | awk '{split($1, a, \":\"); print 3600*a[1] + 60*a[2] + a[3]}')",
+        "so_64536484: awk 'BEGIN {FS=\"GET /product/\"}\n  NF==2{\n    # second field is now everything after /product/ -- split on slash\n    split($2, f, \"/\")\n    print f[1] }' file"
+      ],
+      "Explanations about Options": {
+        "-b": "put SIZE bytes per output file"
+      }
+    },
+    {
+      "Command": "print",
+      "MP Summary": "execute programs via entries in the mailcap file",
+      "Most Similar TLDR Task": "Print action can be used to print any file on default run-mailcap tool",
+      "Most Similar TLDR Script": "print {{filename}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "so_51121333: ffmpeg extract subclips from video at 10s; 30%; 60%; last 30s of a video",
+        "so_64536484: I am trying to use awk to extract a portion of each line in my file",
+        "ul_170961: Get total duration of video files in a directory"
+      ],
+      "Top-3 Scripts": [
+        "so_51121333: DURATION=$(ffmpeg -i $file 2>&1 | grep \"Duration\" | awk '{print $2}' | sed 's/\\..*//g' | awk '{split($1, a, \":\"); print 3600*a[1] + 60*a[2] + a[3]}')",
+        "so_64536484: awk -F / '/product/ { print $5 }' filename\n\nawk 'BEGIN {FS=\"GET /product/\"}\n  NF==2{\n    # second field is now everything after /product/ -- split on slash\n    split($2, f, \"/\")\n    print f[1] }' file\n\nawk '/\\/product\\// { sub(\".*/product/\", \"\"), sub(\"/.*\", \"\"); print }' file",
+        "ul_170961: exiftool -S -n ./*.mp4 | awk '/^Duration/ {print $2}' | paste -sd+ -| bc\n555.070000000000\nexiftool -q -p '$Duration#' ./*.mp4 | awk '{sum += $0}; END{print sum}'\n555.070000000000"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "cut",
+      "MP Summary": "remove sections from each line of files",
+      "Most Similar TLDR Task": "Cut out everything from the 3rd character to the end of each line",
+      "Most Similar TLDR Script": "cut -c {{3-}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "au_768773: Move part of file name to metadata"
+      ],
+      "Top-3 Scripts": [
+        "au_768773: for f in *.mp3; do\n   artist=\"$(printf \"$f\" | cut -d '-' -f 1 | sed 's/ *$//')\"\n   eyeD3 --artist \"$artist\" \"$f\" \n   mv -nv \"$f\" \"$(printf \"$f\" | cut -d'-' -f 2 | sed 's/^ *//')\"\ndone"
+      ],
+      "Explanations about Options": {
+        "-d": "use DELIM instead of TAB for field delimiter",
+        "-f": "select only these fields; also print any line that contains no delimiter\n character, unless the -s option is specified"
+      }
+    },
+    {
+      "Command": "touch",
+      "MP Summary": "change file timestamps",
+      "Most Similar TLDR Task": "Use the times from a file to set the times on a second file",
+      "Most Similar TLDR Script": "touch -r {{filename}} {{filename2}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "au_816906: A problem merge subtitle vtt with video using youtube-dl",
+        "ul_116628: How can I restore file timestamps of video recordings using the embedded metadata?"
+      ],
+      "Top-3 Scripts": [
+        "au_816906: touch ~/.config/youtube-dl.conf",
+        "ul_116628: for file in *.mp4; do touch -t \"$(mediainfo \"$file\" | grep -m 1 'Tagged date' | sed -r 's/.*([0-9]{4})-([0-9]{2})-([0-9]{2}) ([0-9]{2}):([0-9]{2}):([0-9]{2}).*/\\1\\2\\3\\4\\5.\\6/')\" \"$file\"; done\n\ntouch -t"
+      ],
+      "Explanations about Options": {
+        "-t": "STAMP\n use [[CC]YY]MMDDhhmm[.ss] instead of current time"
+      }
+    },
+    {
+      "Command": "pip",
+      "MP Summary": "A tool for installing and managing Python packages",
+      "Most Similar TLDR Task": "Save installed packages to file",
+      "Most Similar TLDR Script": "pip freeze > {{requirements.txt}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "au_627133: How to download facebook videos by using 'youtube-dl' in linux?"
+      ],
+      "Top-3 Scripts": [
+        "au_627133: sudo apt-get remove youtube-dl\nsudo apt-get install $(apt-cache depends youtube-dl | grep Depends | sed \"s/.*ends:\\ //\" | tr '\\n' ' ')\nsudo pip install youtube-dl"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "cd",
+      "MP Summary": "change the working directory",
+      "Most Similar TLDR Task": "Go up to the parent of the current directory",
+      "Most Similar TLDR Script": "cd ..",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "au_266568: Downloading videos to an external drive with youtube-dl",
+        "au_460825: How to open youtube video with youtube-dl"
+      ],
+      "Top-3 Scripts": [
+        "au_266568: cd '/media/New Volume/Youtube Downloads'\nyoutube-dl URL1...\nyoutube-dl URL2...\n\n...",
+        "au_460825: cd /path/videos\nvlc \"Videoname.avi\""
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "info",
+      "MP Summary": "read Info documents",
+      "Most Similar TLDR Task": "Start reading at given menu item node from top-level directory",
+      "Most Similar TLDR Script": "info {{menu_item}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "ul_116628: How can I restore file timestamps of video recordings using the embedded metadata?",
+        "ul_509610: youtube-dl, how to write all subs of a youtube playlist to ONE single file?"
+      ],
+      "Top-3 Scripts": [
+        "ul_116628: ",
+        "ul_509610: $ youtube-dl --output '%(autonumber)s.%(ext)s' --skip-download --write-sub 'https://www.youtube.com/watch?v=-5wpm-gesOY' 'https://www.youtube.com/watch?v=w3_0x6oaDmI'\n[youtube] -5wpm-gesOY: Downloading webpage\n[youtube] -5wpm-gesOY: Downloading video info webpage\n[info] Writing video subtitles to: 00001.en-GB.vtt\n[youtube] w3_0x6oaDmI: Downloading webpage\n[youtube] w3_0x6oaDmI: Downloading video info webpage\n[info] Writing video subtitles to: 00002.en.vtt\n\n$ youtube-dl --output '%(autonumber)s.%(ext)s' --skip-download --sub-format 'vtt' --write-sub 'https://www.youtube.com/watch?v=-5wpm-gesOY'\n[youtube] -5wpm-gesOY: Downloading webpage\n[youtube] -5wpm-gesOY: Downloading video info webpage\n[info] Writing video subtitles to: 00001.en-GB.vtt\n\n$ youtube-dl --output '%(autonumber)s.%(ext)s' --skip-download --sub-format 'ttml' --write-sub 'https://www.youtube.com/watch?v=-5wpm-gesOY'\n[youtube] -5wpm-gesOY: Downloading webpage\n[youtube] -5wpm-gesOY: Downloading video info webpage\n[info] Writing video subtitles to: 00001.en-GB.ttml"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "apt-cache",
+      "MP Summary": "query the APT cache",
+      "Most Similar TLDR Task": "Search for a package in your current sources",
+      "Most Similar TLDR Script": "apt-cache search {{query}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "au_627133: How to download facebook videos by using 'youtube-dl' in linux?"
+      ],
+      "Top-3 Scripts": [
+        "au_627133: sudo apt-get remove youtube-dl\nsudo apt-get install $(apt-cache depends youtube-dl | grep Depends | sed \"s/.*ends:\\ //\" | tr '\\n' ' ')\nsudo pip install youtube-dl"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "tr",
+      "MP Summary": "translate or delete characters",
+      "Most Similar TLDR Task": "Translate the contents of a file to upper-case",
+      "Most Similar TLDR Script": "tr \"[:lower:]\" \"[:upper:]\" < {{filename}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "au_627133: How to download facebook videos by using 'youtube-dl' in linux?"
+      ],
+      "Top-3 Scripts": [
+        "au_627133: sudo apt-get remove youtube-dl\nsudo apt-get install $(apt-cache depends youtube-dl | grep Depends | sed \"s/.*ends:\\ //\" | tr '\\n' ' ')\nsudo pip install youtube-dl"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "line",
+      "MP Summary": "cache line size",
+      "Most Similar TLDR Task": "Read input",
+      "Most Similar TLDR Script": "line",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "so_31745759: How to extract a portion of a file in shell script"
+      ],
+      "Top-3 Scripts": [
+        "so_31745759: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "ls",
+      "MP Summary": "list directory contents",
+      "Most Similar TLDR Task": "Long format list sorted by size (descending)",
+      "Most Similar TLDR Script": "ls -lS",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "ul_462646: A file on AkamaiGlobalHost downloads with a browser but not with curl"
+      ],
+      "Top-3 Scripts": [
+        "ul_462646: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "rename",
+      "MP Summary": "rename files",
+      "Most Similar TLDR Task": "Rename files using simple substitutions (substitute 'foo' with 'bar' wherever found)",
+      "Most Similar TLDR Script": "rename {{foo}} {{bar}} {{*}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "au_626258: Delete pattern of names from files"
+      ],
+      "Top-3 Scripts": [
+        "au_626258: rename -n 's/-[^-]*\\././' *"
+      ],
+      "Explanations about Options": {
+        "-n": "Do not make any changes; add --verbose to see what would be made."
+      }
+    },
+    {
+      "Command": "jq",
+      "MP Summary": "Command-line JSON processor",
+      "Most Similar TLDR Task": "Output the first element in a JSON file",
+      "Most Similar TLDR Script": "jq '.[0]' {{file.json}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "so_46238941: Calculate total runtime of videos in folder using command line"
+      ],
+      "Top-3 Scripts": [
+        "so_46238941: find . -iname \"*.mp4\" -exec ffprobe -v error -print_format json -show_format {} \\; | jq -r '.[].duration' | awk '{total+=$0}END{printf \"%.6f\",total}'\n\nffprobe -v error -print_format json -show_format file.mp4  | jq -r '.[].duration'"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "exiftool",
+      "MP Summary": "Read and write meta information in files",
+      "Most Similar TLDR Task": "Recursively rename all JPEG photos in a directory based on the `DateTimeOriginal` field",
+      "Most Similar TLDR Script": "exiftool '-filename<DateTimeOriginal' -d %Y-%m-%d_%H-%M-%S%%lc.%%e {{path/to/directory}} -r -ext jpg",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "ul_170961: Get total duration of video files in a directory"
+      ],
+      "Top-3 Scripts": [
+        "ul_170961: exiftool -S -n Inception.mp4 | grep ^Duration\nDuration: 275.69\nexiftool -q -p '$Duration#' Inception.mp4\n275.69\n\nexiftool -S -n ./*.mp4 | awk '/^Duration/ {print $2}' | paste -sd+ -| bc\n555.070000000000\nexiftool -q -p '$Duration#' ./*.mp4 | awk '{sum += $0}; END{print sum}'\n555.070000000000\n\nexiftool -n -q -p '${Duration;our $sum;$_=ConvertDuration($sum+=$_)\n                    }' ./*.mp4| tail -n1\n0:09:15"
+      ],
+      "Explanations about Options": {
+        "-q": "Quiet processing. One -q suppresses normal informational messages, and a second -q\n suppresses warnings as well. Error messages can not be suppressed, although minor\n errors may be downgraded to warnings with the -m option, which may then be suppressed\n with \"-q -q\".",
+        "-p": "Print output in the format specified by the given file or string. The argument is\n interpreted as a string unless a file of that name exists, in which case the string\n is loaded from the contents of the file. Tag names in the format file or string\n begin with a \"$\" symbol and may contain a leading group names and/or a trailing \"#\".\n Case is not significant. Braces \"{}\" may be used around the tag name to separate it\n from subsequent text. Use $$ to represent a \"$\" symbol, and $/ for a newline.",
+        "-n": "Disable print conversion for all tags. By default, extracted values are converted to\n a more human-readable format, but the -n option disables this conversion, revealing\n the machine-readable values. For example:"
+      }
+    },
+    {
+      "Command": "stat",
+      "MP Summary": "display file or file system status",
+      "Most Similar TLDR Task": "Show the size of the file in bytes",
+      "Most Similar TLDR Script": "stat -c \"%s %n\" {{file}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "ul_116628: How can I restore file timestamps of video recordings using the embedded metadata?"
+      ],
+      "Top-3 Scripts": [
+        "ul_116628: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "dot",
+      "MP Summary": "filter for drawing directed graphs",
+      "Most Similar TLDR Task": "Render an image file and determine output filename based on input filename and selected format",
+      "Most Similar TLDR Script": "dot -Tpng -O {{path/to/file.dot}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "so_9234518: Extract portion of a file name in shell"
+      ],
+      "Top-3 Scripts": [
+        "so_9234518: f=\"${name%.*}\"   # strip everything from the last dot onward\nf=\"${f##*-}\"     # strip everything up through the last hyphen"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "apt",
+      "MP Summary": "command-line interface",
+      "Most Similar TLDR Task": "Update the list of available packages and versions (it's recommended to run this before other `apt` commands)",
+      "Most Similar TLDR Script": "sudo apt update",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "au_627133: How to download facebook videos by using 'youtube-dl' in linux?"
+      ],
+      "Top-3 Scripts": [
+        "au_627133: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "last",
+      "MP Summary": "show a listing of last logged in users",
+      "Most Similar TLDR Task": "View last logins, their duration and other information as read from /var/log/wtmp",
+      "Most Similar TLDR Script": "last",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "so_9234518: Extract portion of a file name in shell"
+      ],
+      "Top-3 Scripts": [
+        "so_9234518: f=\"${name%.*}\"   # strip everything from the last dot onward\nf=\"${f##*-}\"     # strip everything up through the last hyphen"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "add-apt-repository",
+      "MP Summary": "Adds   a   repository   into   the   /etc/apt/sources.list   or /etc/apt/sources.list.d or removes an existing one",
+      "Most Similar TLDR Task": "Add a new apt repository",
+      "Most Similar TLDR Script": "add-apt-repository {{repository_spec}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "au_460825: How to open youtube video with youtube-dl"
+      ],
+      "Top-3 Scripts": [
+        "au_460825: sudo add-apt-repository ppa:videolan/stable-daily\nsudo apt-get update\nsudo apt-get install vlc"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "man",
+      "MP Summary": "an interface to the system reference manuals",
+      "Most Similar TLDR Task": "Display the man page for a command from section 7",
+      "Most Similar TLDR Script": "man {{command}}.{{7}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "au_948516: How do I download with youtube-dl to get video title as filename?"
+      ],
+      "Top-3 Scripts": [
+        "au_948516: man youtube-dl"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "export",
+      "MP Summary": "set the export attribute for variables",
+      "Most Similar TLDR Task": "Append something to the PATH variable",
+      "Most Similar TLDR Script": "export PATH=$PATH:{{path/to/append}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "ul_116628: How can I restore file timestamps of video recordings using the embedded metadata?"
+      ],
+      "Top-3 Scripts": [
+        "ul_116628: export TZ=\"UTC0\""
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "sum",
+      "MP Summary": "checksum and count the blocks in a file",
+      "Most Similar TLDR Task": "Compute a checksum with BSD-compatible algorithm and 1024-byte blocks",
+      "Most Similar TLDR Script": "sum {{file}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "ul_170961: Get total duration of video files in a directory"
+      ],
+      "Top-3 Scripts": [
+        "ul_170961: exiftool -S -n ./*.mp4 | awk '/^Duration/ {print $2}' | paste -sd+ -| bc\n555.070000000000\nexiftool -q -p '$Duration#' ./*.mp4 | awk '{sum += $0}; END{print sum}'\n555.070000000000"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "chmod",
+      "MP Summary": "change file mode bits",
+      "Most Similar TLDR Task": "Give [o]thers (not in the file owner's group) the same rights as the [g]roup",
+      "Most Similar TLDR Script": "chmod o=g {{file}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "au_892480: Download replay videos from periscope with wget"
+      ],
+      "Top-3 Scripts": [
+        "au_892480: sudo wget https://yt-dl.org/downloads/latest/youtube-dl -O /usr/local/bin/youtube-dl\nsudo chmod a+rx /usr/local/bin/youtube-dl"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "bc",
+      "MP Summary": "An arbitrary precision calculator language",
+      "Most Similar TLDR Task": "Run calculator in interactive mode using the standard math library",
+      "Most Similar TLDR Script": "bc -l",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "au_1133616: Script/Command to add play length of all video in a given directory tree",
+        "ul_170961: Get total duration of video files in a directory"
+      ],
+      "Top-3 Scripts": [
+        "au_1133616: find . -maxdepth 1 -iname '*.mp4' -exec ffprobe -v quiet -of csv=p=0 -show_entries format=duration {} \\; | paste -sd+ -| bc\n\nfind . -exec ffprobe -v quiet -of csv=p=0 -show_entries format=duration {} \\; | paste -sd+ -| bc",
+        "ul_170961: find . -maxdepth 1 -iname '*.mp4' -exec ffprobe -v quiet -of csv=p=0 -show_entries format=duration {} \\; | paste -sd+ -| bc\n555.070000\n\nfind . -maxdepth 1 -iname '*.ts' -exec ffprobe -v quiet -of csv=p=0 -show_entries format=duration {} \\; | paste -sd+ -| bc\n\nexiftool -S -n ./*.mp4 | awk '/^Duration/ {print $2}' | paste -sd+ -| bc\n555.070000000000\nexiftool -q -p '$Duration#' ./*.mp4 | awk '{sum += $0}; END{print sum}'\n555.070000000000"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "mv",
+      "MP Summary": "move (rename) files",
+      "Most Similar TLDR Task": "Move files in verbose mode, showing files after they are moved",
+      "Most Similar TLDR Script": "mv -v {{source}} {{target}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "au_768773: Move part of file name to metadata"
+      ],
+      "Top-3 Scripts": [
+        "au_768773: for f in *.mp3; do\n   artist=\"$(printf \"$f\" | cut -d '-' -f 1 | sed 's/ *$//')\"\n   eyeD3 --artist \"$artist\" \"$f\" \n   mv -nv \"$f\" \"$(printf \"$f\" | cut -d'-' -f 2 | sed 's/^ *//')\"\ndone"
+      ],
+      "Explanations about Options": {
+        "-n": "do not overwrite an existing file",
+        "-v": "explain what is being done"
+      }
+    },
+    {
+      "Command": "id",
+      "MP Summary": "print real and effective user and group IDs",
+      "Most Similar TLDR Task": "Display the current user identity as a number",
+      "Most Similar TLDR Script": "id -u",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "au_948516: How do I download with youtube-dl to get video title as filename?"
+      ],
+      "Top-3 Scripts": [
+        "au_948516: "
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

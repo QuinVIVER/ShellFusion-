@@ -1,0 +1,1885 @@
+{
+  "Query": "How to search strings inside files like in Windows without search monkey?",
+  "Answers": [
+    {
+      "Command": "find",
+      "MP Summary": "search for files in a directory hierarchy",
+      "Most Similar TLDR Task": "Find files by matching multiple patterns",
+      "Most Similar TLDR Script": "find {{root_path}} -name '{{*pattern_1*}}' -or -name '{{*pattern_2*}}'",
+      "Most Similar NL2Bash Task": "Search for case-insensitive \"string\" in \"log.tar.gz\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "zcat log.tar.gz | grep -a -i \"string\"\n",
+          "command-options": {
+            "zcat": {
+              "mpsum": "decompress and concatenate files to standard output"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-i": "Ignore case distinctions in patterns and input data, so that characters that differ\n only in case match each other."
+            }
+          },
+          "TLDR_inform": {
+            "zcat": {
+              "man1_zcat_38304": "print data gzip compress file print compress detail gzip file standard output print uncompress content gzip file standard output"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_34153172: Finding all usages of a filename string in other files",
+        "so_37612886: Searching a string using grep in a range of multiple files",
+        "nl2bash_6234: Search the *.c files residing in the current directory tree for string \"blash\""
+      ],
+      "Top-3 Scripts": [
+        "so_34153172: cd /base/dir/to/check/presence/of/image/files\n\nwhile IFS= read -d '' -r f; do\n   img=\"${f##*/}\" # get the filename\n   grep -qFr \"$img\" --include=*.html --include=*.php --include=*.css . ||\n      echo \"$img not found\"\ndone < <(find /img-dir -type f -print0) > imgNotFound.txt",
+        "so_37612886: find -type f -name ...",
+        "nl2bash_6234: find . -name *.c -exec grep -n -e blash {} \\;"
+      ],
+      "Explanations about Options": {
+        "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+        "-type": "File is of type c:"
+      }
+    },
+    {
+      "Command": "grep",
+      "MP Summary": "print lines that match patterns",
+      "Most Similar TLDR Task": "Search for a pattern within a file",
+      "Most Similar TLDR Script": "grep {{search_pattern}} {{path/to/file}}",
+      "Most Similar NL2Bash Task": "Search for case-insensitive \"string\" in \"log.tar.gz\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "zcat log.tar.gz | grep -a -i \"string\"\n",
+          "command-options": {
+            "zcat": {
+              "mpsum": "decompress and concatenate files to standard output"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-i": "Ignore case distinctions in patterns and input data, so that characters that differ\n only in case match each other."
+            }
+          },
+          "TLDR_inform": {
+            "zcat": {
+              "man1_zcat_38304": "print data gzip compress file print compress detail gzip file standard output print uncompress content gzip file standard output"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_30991630: shell script : find a string by searching inside all the files in a folder?",
+        "so_56564290: Search string in file via bash but only work match",
+        "su_424828: Is there a program which can count occurrence of a certain string in a binary file?"
+      ],
+      "Top-3 Scripts": [
+        "so_30991630: grep -Hnr PATTERN .\n\ngrep -d skip -Hn PATTERN {,.[!.]}*{,/{,.[!.]}*}",
+        "so_56564290: grep -i current test.xml | grep -o \" docBase=\\\"[^\\\"]*\" | rev | cut -d'/' -f1 | rev",
+        "su_424828: grep -F --text -o --byte-offset mystring binaryfile\n\n$ grep -F --text -o --byte-offset option /bin/tar\n226542:option\n237529:option\n237612:option\n..."
+      ],
+      "Explanations about Options": {
+        "-d": "If an input file is a directory, use ACTION to process it. By default, ACTION is\n read, i.e., read directories just as if they were ordinary files. If ACTION is\n skip, silently skip directories. If ACTION is recurse, read all files under each\n directory, recursively, following symbolic links only if they are on the command\n line. This is equivalent to the -r option.",
+        "-o": "Print only the matched (non-empty) parts of a matching line, with each such part on\n a separate output line.",
+        "-F": "Interpret PATTERNS as fixed strings, not regular expressions.",
+        "-i": "Ignore case distinctions in patterns and input data, so that characters that differ\n only in case match each other.",
+        "-n": "Prefix each line of output with the 1-based line number within its input file.",
+        "-H": "Print the file name for each match. This is the default when there is more than\n one file to search."
+      }
+    },
+    {
+      "Command": "sed",
+      "MP Summary": "stream editor for filtering and transforming text",
+      "Most Similar TLDR Task": "Replace separator / by any other character not used in the find or replace patterns, e.g., #",
+      "Most Similar TLDR Script": "sed 's#{{find}}#{{replace}}#' {{filename}}",
+      "Most Similar NL2Bash Task": "Search for case-insensitive \"string\" in \"log.tar.gz\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "zcat log.tar.gz | grep -a -i \"string\"\n",
+          "command-options": {
+            "zcat": {
+              "mpsum": "decompress and concatenate files to standard output"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-i": "Ignore case distinctions in patterns and input data, so that characters that differ\n only in case match each other."
+            }
+          },
+          "TLDR_inform": {
+            "zcat": {
+              "man1_zcat_38304": "print data gzip compress file print compress detail gzip file standard output print uncompress content gzip file standard output"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_58233049: Search sub string then Replace Line in a file without regex",
+        "so_32116407: search and replace part of string in file",
+        "so_37612886: Searching a string using grep in a range of multiple files"
+      ],
+      "Top-3 Scripts": [
+        "so_58233049: $ custom_prompt=\"\\[\\e[36m\\]\\h\\[\\e[m\\]\\[\\e[33m\\]@\\[\\e[m\\]\\[\\e[33m\\]\\u\\[\\e[m\\]:\\[\\e[32m\\]\\W\\[\\e[m\\]>\\\\$ \"\n$ sed_custom_prompt=$(<<<\"$custom_prompt\" sed 's/\\\\/\\\\\\\\/g')\n$ sed -i \"s/PS1=.*/PS1=\\\"$sed_custom_prompt\\\"/\" testrc\n$ source testrc\nlaptop@user:~>$",
+        "so_32116407: sed 's/mysqlarch[12]/mysqldata1/g' file\n/n01/mysqldata1/mysql-bin.000011\n/n01/mysqldata1/mysql-bin.000012\n/n01/mysqldata1/mysql-bin.000013\n/n01/mysqldata1/mysql-bin.000014\n/n01/mysqldata1/mysql-bin.000015\n/n01/mysqldata1/mysql-bin.000016",
+        "so_37612886: ls * | sed \"/2015-06-01/,/2016-06-03/p\" -n | xargs grep \"Live message\"\n\nsed \"/<BEGIN_REGEX>/,/<END_REGEX>/p\" -n"
+      ],
+      "Explanations about Options": {
+        "-i": "edit files in place (makes backup if SUFFIX supplied)"
+      }
+    },
+    {
+      "Command": "echo",
+      "MP Summary": "display a line of text",
+      "Most Similar TLDR Task": "Print a message without the trailing newline",
+      "Most Similar TLDR Script": "echo -n \"{{Hello World}}\"",
+      "Most Similar NL2Bash Task": "Search for case-insensitive \"string\" in \"log.tar.gz\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "zcat log.tar.gz | grep -a -i \"string\"\n",
+          "command-options": {
+            "zcat": {
+              "mpsum": "decompress and concatenate files to standard output"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-i": "Ignore case distinctions in patterns and input data, so that characters that differ\n only in case match each other."
+            }
+          },
+          "TLDR_inform": {
+            "zcat": {
+              "man1_zcat_38304": "print data gzip compress file print compress detail gzip file standard output print uncompress content gzip file standard output"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_34153172: Finding all usages of a filename string in other files",
+        "ul_531424: How to find character locations of a string in a file?",
+        "ul_255324: Linux bash: Search and replace in file without escaping hassle"
+      ],
+      "Top-3 Scripts": [
+        "so_34153172: cd /base/dir/to/check/presence/of/image/files\n\nwhile IFS= read -d '' -r f; do\n   img=\"${f##*/}\" # get the filename\n   grep -qFr \"$img\" --include=*.html --include=*.php --include=*.css . ||\n      echo \"$img not found\"\ndone < <(find /img-dir -type f -print0) > imgNotFound.txt",
+        "ul_531424: $ echo 'a\u00f6\u00e6a\u00e6a\u00e6a' | perl -CSDLA -ne 'BEGIN { $pattern = shift }; printf \"%d\\n\", $-[0] while $_ =~ m/$pattern/g;'  \u00e6a\n2\n4\n6\n\n$ echo 'a\u00f6\u00e6a\u00e6a\u00e6a' | perl match.pl \u00e6a -\n2\n4\n6",
+        "ul_255324: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "file",
+      "MP Summary": "determine file type",
+      "Most Similar TLDR Task": "Look inside a zipped file and determine the file type(s) inside",
+      "Most Similar TLDR Script": "file -z {{foo.zip}}",
+      "Most Similar NL2Bash Task": "Search for case-insensitive \"string\" in \"log.tar.gz\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "zcat log.tar.gz | grep -a -i \"string\"\n",
+          "command-options": {
+            "zcat": {
+              "mpsum": "decompress and concatenate files to standard output"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-i": "Ignore case distinctions in patterns and input data, so that characters that differ\n only in case match each other."
+            }
+          },
+          "TLDR_inform": {
+            "zcat": {
+              "man1_zcat_38304": "print data gzip compress file print compress detail gzip file standard output print uncompress content gzip file standard output"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_202222: Search a String in a directory- Get output without filename",
+        "so_32116407: search and replace part of string in file",
+        "su_424828: Is there a program which can count occurrence of a certain string in a binary file?"
+      ],
+      "Top-3 Scripts": [
+        "ul_202222: -h, --no-filename\n             Suppress  the  prefixing  of file names on output.  This is    \n  the default when there is only one file (or only standard input) to\n          search.",
+        "so_32116407: sed 's/mysqlarch[12]/mysqldata1/g' file\n/n01/mysqldata1/mysql-bin.000011\n/n01/mysqldata1/mysql-bin.000012\n/n01/mysqldata1/mysql-bin.000013\n/n01/mysqldata1/mysql-bin.000014\n/n01/mysqldata1/mysql-bin.000015\n/n01/mysqldata1/mysql-bin.000016",
+        "su_424828: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "xargs",
+      "MP Summary": "build and execute command lines from standard input",
+      "Most Similar TLDR Task": "Execute the command once for each input line, replacing any occurrences of the placeholder (here marked as `_`) with the input line",
+      "Most Similar TLDR Script": "{{arguments_source}} | xargs -I _ {{command}} _ {{optional_extra_arguments}}",
+      "Most Similar NL2Bash Task": "Search for case-insensitive \"string\" in \"log.tar.gz\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "zcat log.tar.gz | grep -a -i \"string\"\n",
+          "command-options": {
+            "zcat": {
+              "mpsum": "decompress and concatenate files to standard output"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-i": "Ignore case distinctions in patterns and input data, so that characters that differ\n only in case match each other."
+            }
+          },
+          "TLDR_inform": {
+            "zcat": {
+              "man1_zcat_38304": "print data gzip compress file print compress detail gzip file standard output print uncompress content gzip file standard output"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_37612886: Searching a string using grep in a range of multiple files",
+        "so_11391916: how to search for a string and replace it with other string in linux?",
+        "nl2bash_5837: Search all regular files in the current directory tree for \"string\""
+      ],
+      "Top-3 Scripts": [
+        "so_37612886: ls * | sed \"/2015-06-01/,/2016-06-03/p\" -n | xargs grep \"Live message\"\n\nxargs grep \"Live message\"",
+        "so_11391916: find dir -type f | xargs sed -i.bak 's#from#to#'",
+        "nl2bash_5837: find . -type f | xargs -d '\\n' grep string"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "awk",
+      "MP Summary": "pattern scanning and processing language",
+      "Most Similar TLDR Task": "Print the last column of each line in a file, using a comma (instead of space) as a field separator",
+      "Most Similar TLDR Script": "awk -F ',' '{print $NF}' {{filename}}",
+      "Most Similar NL2Bash Task": "Search for case-insensitive \"string\" in \"log.tar.gz\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "zcat log.tar.gz | grep -a -i \"string\"\n",
+          "command-options": {
+            "zcat": {
+              "mpsum": "decompress and concatenate files to standard output"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-i": "Ignore case distinctions in patterns and input data, so that characters that differ\n only in case match each other."
+            }
+          },
+          "TLDR_inform": {
+            "zcat": {
+              "man1_zcat_38304": "print data gzip compress file print compress detail gzip file standard output print uncompress content gzip file standard output"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_66196857: how to search through a binary file for a string and output how many bytes there are before string in bash",
+        "so_1422382: How to search for a pattern inside a file and delete the lines in Unix on the command line?",
+        "so_23535923: How to get a pattern from a file and search in another file in unix"
+      ],
+      "Top-3 Scripts": [
+        "so_66196857: lookforstring() (\n    string=\"$1\"\n    filetocut=\"$2\"\n    grep --text --byte-offset --only-matching \"$string\" \"$filetocut\" | awk -F: '{print $1}'\n)",
+        "so_1422382: awk -f logstrip.awk  in.log > out.log",
+        "so_23535923: awk -F'|' 'NR==FNR{a[$2]=$1;next} $1 in a { print a[$1],$1,$2 }' OFS=\"|\" file1 file2 > file3\n\nawk  'BEGIN{ OFS=FS=\"|\";} NR==FNR{a[$2]=$1;next} $1 in a { print a[$1],$1,$2 }' file1 file2 > file3\n\nawk  'BEGIN{ OFS=FS=\"|\";} NR==FNR{a[$2]=$1;next} $1 in a { print a[$1],$0 }' file1 file2 > file3"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "as",
+      "MP Summary": "or  any situation  where  you want to make sure you're doing a clean install of your dependencies. It  can  be  significantly  faster  than  a  regular  npm  install  by  skipping   certain user-oriented  features.  It  is  also  more strict than a regular install, which can help catch errors or inconsistencies caused by the incrementally-installed  local  environments of most npm users. In short, the main differences between using npm install and npm ci are: \u00b7 The project must have an existing package-lock.json or npm-shrinkwrap.json. \u00b7 If dependencies in the package lock do not match those in package.json, npm ci will exit with an error, instead of updating the package lock. \u00b7 npm ci can only install entire projects at a time:  individual  dependencies  cannot  be added with this command. \u00b7 If  a  node_modules  is  already present, it will be automatically removed before npm ci begins its install. \u00b7 It will  never  write  to  package.json  or  any  of  the  package-locks:  installs  are essentially frozen. See Also \u00b7 npm help install \u00b7 npm help package-locks April 2020                                  NPM-CI(1)",
+      "Most Similar TLDR Task": "Include a given path to the list of directories to search for files specified in .include directives",
+      "Most Similar TLDR Script": "as -I {{path/to/directory}} {{file.s}}",
+      "Most Similar NL2Bash Task": "Search for case-insensitive \"string\" in \"log.tar.gz\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "zcat log.tar.gz | grep -a -i \"string\"\n",
+          "command-options": {
+            "zcat": {
+              "mpsum": "decompress and concatenate files to standard output"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-i": "Ignore case distinctions in patterns and input data, so that characters that differ\n only in case match each other."
+            }
+          },
+          "TLDR_inform": {
+            "zcat": {
+              "man1_zcat_38304": "print data gzip compress file print compress detail gzip file standard output print uncompress content gzip file standard output"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "su_424828: Is there a program which can count occurrence of a certain string in a binary file?",
+        "so_15041608: Searching all files in folder for strings"
+      ],
+      "Top-3 Scripts": [
+        "su_424828: ",
+        "so_15041608: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "cat",
+      "MP Summary": "concatenate files and print on the standard output",
+      "Most Similar TLDR Task": "Append several files into the target file",
+      "Most Similar TLDR Script": "cat {{file1}} {{file2}} >> {{target_file}}",
+      "Most Similar NL2Bash Task": "Search for case-insensitive \"string\" in \"log.tar.gz\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "zcat log.tar.gz | grep -a -i \"string\"\n",
+          "command-options": {
+            "zcat": {
+              "mpsum": "decompress and concatenate files to standard output"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-i": "Ignore case distinctions in patterns and input data, so that characters that differ\n only in case match each other."
+            }
+          },
+          "TLDR_inform": {
+            "zcat": {
+              "man1_zcat_38304": "print data gzip compress file print compress detail gzip file standard output print uncompress content gzip file standard output"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_263385: Search a string in files in the current directory, omit duplicates",
+        "so_21265716: Search part of a string in a file"
+      ],
+      "Top-3 Scripts": [
+        "ul_263385: find . ! -name . -prune -type f -exec cat {} + |\n  grep mystring |\n  LC_ALL=C sort -u\n\nfind . ! -name . -prune -type f -exec cat {} + | awk '\n  /mystring/ && !seen[$0]++'\n\nfind . -type f -exec cat {} + |\n  grep mystring |\n  LC_ALL=C sort -u\n\nfind . -type f -exec cat {} + | awk '\n  /mystring/ && !seen[$0]++'",
+        "so_21265716: cat <file> | grep <pattern>"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "read",
+      "MP Summary": "read a line from standard input",
+      "Most Similar TLDR Task": "Use a specific character as a delimiter instead of a new line",
+      "Most Similar TLDR Script": "read -d {{new_delimiter}} {{variable}}",
+      "Most Similar NL2Bash Task": "Search for case-insensitive \"string\" in \"log.tar.gz\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "zcat log.tar.gz | grep -a -i \"string\"\n",
+          "command-options": {
+            "zcat": {
+              "mpsum": "decompress and concatenate files to standard output"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-i": "Ignore case distinctions in patterns and input data, so that characters that differ\n only in case match each other."
+            }
+          },
+          "TLDR_inform": {
+            "zcat": {
+              "man1_zcat_38304": "print data gzip compress file print compress detail gzip file standard output print uncompress content gzip file standard output"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_34153172: Finding all usages of a filename string in other files",
+        "so_55501846: Bash: How to search a string in file with Regex and get the associated value"
+      ],
+      "Top-3 Scripts": [
+        "so_34153172: cd /base/dir/to/check/presence/of/image/files\n\nwhile IFS= read -d '' -r f; do\n   img=\"${f##*/}\" # get the filename\n   grep -qFr \"$img\" --include=*.html --include=*.php --include=*.css . ||\n      echo \"$img not found\"\ndone < <(find /img-dir -type f -print0) > imgNotFound.txt",
+        "so_55501846: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "print",
+      "MP Summary": "execute programs via entries in the mailcap file",
+      "Most Similar TLDR Task": "Print action can be used to print any file on default run-mailcap tool",
+      "Most Similar TLDR Script": "print {{filename}}",
+      "Most Similar NL2Bash Task": "Search for case-insensitive \"string\" in \"log.tar.gz\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "zcat log.tar.gz | grep -a -i \"string\"\n",
+          "command-options": {
+            "zcat": {
+              "mpsum": "decompress and concatenate files to standard output"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-i": "Ignore case distinctions in patterns and input data, so that characters that differ\n only in case match each other."
+            }
+          },
+          "TLDR_inform": {
+            "zcat": {
+              "man1_zcat_38304": "print data gzip compress file print compress detail gzip file standard output print uncompress content gzip file standard output"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "su_424828: Is there a program which can count occurrence of a certain string in a binary file?",
+        "so_66196857: how to search through a binary file for a string and output how many bytes there are before string in bash",
+        "so_1422382: How to search for a pattern inside a file and delete the lines in Unix on the command line?"
+      ],
+      "Top-3 Scripts": [
+        "su_424828: ",
+        "so_66196857: lookforstring() (\n    string=\"$1\"\n    filetocut=\"$2\"\n    grep --text --byte-offset --only-matching \"$string\" \"$filetocut\" | awk -F: '{print $1}'\n)",
+        "so_1422382: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "line",
+      "MP Summary": "cache line size",
+      "Most Similar TLDR Task": "Read input",
+      "Most Similar TLDR Script": "line",
+      "Most Similar NL2Bash Task": "Search for case-insensitive \"string\" in \"log.tar.gz\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "zcat log.tar.gz | grep -a -i \"string\"\n",
+          "command-options": {
+            "zcat": {
+              "mpsum": "decompress and concatenate files to standard output"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-i": "Ignore case distinctions in patterns and input data, so that characters that differ\n only in case match each other."
+            }
+          },
+          "TLDR_inform": {
+            "zcat": {
+              "man1_zcat_38304": "print data gzip compress file print compress detail gzip file standard output print uncompress content gzip file standard output"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "su_424828: Is there a program which can count occurrence of a certain string in a binary file?",
+        "so_67641372: Multiple strings search in consecutive lines in a log file",
+        "so_55501846: Bash: How to search a string in file with Regex and get the associated value"
+      ],
+      "Top-3 Scripts": [
+        "su_424828: ",
+        "so_67641372: ",
+        "so_55501846: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "which",
+      "MP Summary": "locate a command",
+      "Most Similar TLDR Task": "Search the PATH environment variable and display the location of any matching executables",
+      "Most Similar TLDR Script": "which {{executable}}",
+      "Most Similar NL2Bash Task": "Search for case-insensitive \"string\" in \"log.tar.gz\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "zcat log.tar.gz | grep -a -i \"string\"\n",
+          "command-options": {
+            "zcat": {
+              "mpsum": "decompress and concatenate files to standard output"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-i": "Ignore case distinctions in patterns and input data, so that characters that differ\n only in case match each other."
+            }
+          },
+          "TLDR_inform": {
+            "zcat": {
+              "man1_zcat_38304": "print data gzip compress file print compress detail gzip file standard output print uncompress content gzip file standard output"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "su_424828: Is there a program which can count occurrence of a certain string in a binary file?"
+      ],
+      "Top-3 Scripts": [
+        "su_424828: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "printf",
+      "MP Summary": "format and print data",
+      "Most Similar TLDR Task": "Print a text message composed with environment variables",
+      "Most Similar TLDR Script": "printf \"{{var1: %s\\tvar2: %s\\n}}\" \"{{$VAR1}}\" \"{{$VAR2}}\"",
+      "Most Similar NL2Bash Task": "Search for case-insensitive \"string\" in \"log.tar.gz\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "zcat log.tar.gz | grep -a -i \"string\"\n",
+          "command-options": {
+            "zcat": {
+              "mpsum": "decompress and concatenate files to standard output"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-i": "Ignore case distinctions in patterns and input data, so that characters that differ\n only in case match each other."
+            }
+          },
+          "TLDR_inform": {
+            "zcat": {
+              "man1_zcat_38304": "print data gzip compress file print compress detail gzip file standard output print uncompress content gzip file standard output"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_55501846: Bash: How to search a string in file with Regex and get the associated value",
+        "ul_531424: How to find character locations of a string in a file?"
+      ],
+      "Top-3 Scripts": [
+        "so_55501846: ",
+        "ul_531424: $ echo 'a\u00f6\u00e6a\u00e6a\u00e6a' | perl -CSDLA -ne 'BEGIN { $pattern = shift }; printf \"%d\\n\", $-[0] while $_ =~ m/$pattern/g;'  \u00e6a\n2\n4\n6"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "bash",
+      "MP Summary": "GNU Bourne-Again SHell",
+      "Most Similar TLDR Task": "Run commands from a file, logging all commands executed to the terminal",
+      "Most Similar TLDR Script": "bash -x {{file.sh}}",
+      "Most Similar NL2Bash Task": "Search for case-insensitive \"string\" in \"log.tar.gz\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "zcat log.tar.gz | grep -a -i \"string\"\n",
+          "command-options": {
+            "zcat": {
+              "mpsum": "decompress and concatenate files to standard output"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-i": "Ignore case distinctions in patterns and input data, so that characters that differ\n only in case match each other."
+            }
+          },
+          "TLDR_inform": {
+            "zcat": {
+              "man1_zcat_38304": "print data gzip compress file print compress detail gzip file standard output print uncompress content gzip file standard output"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_16071128: Replacing strings in one file with strings from second file"
+      ],
+      "Top-3 Scripts": [
+        "so_16071128: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "wc",
+      "MP Summary": "print newline, word, and byte counts for each file",
+      "Most Similar TLDR Task": "Count characters (bytes) in file",
+      "Most Similar TLDR Script": "wc -c {{file}}",
+      "Most Similar NL2Bash Task": "Search for case-insensitive \"string\" in \"log.tar.gz\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "zcat log.tar.gz | grep -a -i \"string\"\n",
+          "command-options": {
+            "zcat": {
+              "mpsum": "decompress and concatenate files to standard output"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-i": "Ignore case distinctions in patterns and input data, so that characters that differ\n only in case match each other."
+            }
+          },
+          "TLDR_inform": {
+            "zcat": {
+              "man1_zcat_38304": "print data gzip compress file print compress detail gzip file standard output print uncompress content gzip file standard output"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "su_424828: Is there a program which can count occurrence of a certain string in a binary file?"
+      ],
+      "Top-3 Scripts": [
+        "su_424828: | wc -l"
+      ],
+      "Explanations about Options": {
+        "-l": "print the newline counts"
+      }
+    },
+    {
+      "Command": "ls",
+      "MP Summary": "list directory contents",
+      "Most Similar TLDR Task": "List all files, including hidden files",
+      "Most Similar TLDR Script": "ls -a",
+      "Most Similar NL2Bash Task": "Search for case-insensitive \"string\" in \"log.tar.gz\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "zcat log.tar.gz | grep -a -i \"string\"\n",
+          "command-options": {
+            "zcat": {
+              "mpsum": "decompress and concatenate files to standard output"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-i": "Ignore case distinctions in patterns and input data, so that characters that differ\n only in case match each other."
+            }
+          },
+          "TLDR_inform": {
+            "zcat": {
+              "man1_zcat_38304": "print data gzip compress file print compress detail gzip file standard output print uncompress content gzip file standard output"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_37612886: Searching a string using grep in a range of multiple files",
+        "so_59213659: Search Unix file name by positions of the characters in file name"
+      ],
+      "Top-3 Scripts": [
+        "so_37612886: ls * | sed \"/2015-06-01/,/2016-06-03/p\" -n | xargs grep \"Live message\"",
+        "so_59213659: $ ls -1 ABC*C\nABC2019120601C\nABC2019120611C\n$ ls -1 ABC????????0??\nABC2019120601C\n$ ls -1 ABC????????1??\nABC2019120611C"
+      ],
+      "Explanations about Options": {
+        "-1": "list one file per line. Avoid '\\n' with -q or -b"
+      }
+    },
+    {
+      "Command": "rm",
+      "MP Summary": "remove files or directories",
+      "Most Similar TLDR Task": "Remove files in verbose mode, printing a message for each removed file",
+      "Most Similar TLDR Script": "rm -v {{path/to/directory/*}}",
+      "Most Similar NL2Bash Task": "Search for case-insensitive \"string\" in \"log.tar.gz\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "zcat log.tar.gz | grep -a -i \"string\"\n",
+          "command-options": {
+            "zcat": {
+              "mpsum": "decompress and concatenate files to standard output"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-i": "Ignore case distinctions in patterns and input data, so that characters that differ\n only in case match each other."
+            }
+          },
+          "TLDR_inform": {
+            "zcat": {
+              "man1_zcat_38304": "print data gzip compress file print compress detail gzip file standard output print uncompress content gzip file standard output"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_16071128: Replacing strings in one file with strings from second file"
+      ],
+      "Top-3 Scripts": [
+        "so_16071128: sed 's/^\\(>contig-[0-9]*_[0-9]*\\)_.*/s%^\\1 %& %/' File2 > sed.script\nsed -f sed.script File1 > File.Out\nrm -f sed.script"
+      ],
+      "Explanations about Options": {
+        "-f": "ignore nonexistent files and arguments, never prompt"
+      }
+    },
+    {
+      "Command": "tee",
+      "MP Summary": "read from standard input and write to standard output and files",
+      "Most Similar TLDR Task": "Print standard input to the terminal, and also pipe it into another program for further processing",
+      "Most Similar TLDR Script": "echo \"example\" | tee {{/dev/tty}} | {{xargs printf \"[%s]\"}}",
+      "Most Similar NL2Bash Task": "Search for case-insensitive \"string\" in \"log.tar.gz\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "zcat log.tar.gz | grep -a -i \"string\"\n",
+          "command-options": {
+            "zcat": {
+              "mpsum": "decompress and concatenate files to standard output"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-i": "Ignore case distinctions in patterns and input data, so that characters that differ\n only in case match each other."
+            }
+          },
+          "TLDR_inform": {
+            "zcat": {
+              "man1_zcat_38304": "print data gzip compress file print compress detail gzip file standard output print uncompress content gzip file standard output"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "su_360617: Search text in list of files"
+      ],
+      "Top-3 Scripts": [
+        "su_360617: grep -l oranges $(find . -name \"*txt\" | xargs grep -l apples | tee apples.txt)"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "tac",
+      "MP Summary": "concatenate and print files in reverse",
+      "Most Similar TLDR Task": "Concatenate several files reversed into the target file",
+      "Most Similar TLDR Script": "tac {{file1}} {{file2}} > {{target_file}}",
+      "Most Similar NL2Bash Task": "Search for case-insensitive \"string\" in \"log.tar.gz\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "zcat log.tar.gz | grep -a -i \"string\"\n",
+          "command-options": {
+            "zcat": {
+              "mpsum": "decompress and concatenate files to standard output"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-i": "Ignore case distinctions in patterns and input data, so that characters that differ\n only in case match each other."
+            }
+          },
+          "TLDR_inform": {
+            "zcat": {
+              "man1_zcat_38304": "print data gzip compress file print compress detail gzip file standard output print uncompress content gzip file standard output"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_21474706: replace the last occurance of a string in a file"
+      ],
+      "Top-3 Scripts": [
+        "so_21474706: tac file | awk '!done && /Gottagohome saab 90 75n/{done=1; sub(/&$/, \"\")}1' | tac"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "rev",
+      "MP Summary": "reverse lines characterwise",
+      "Most Similar TLDR Task": "Reverse an entire file and print to `stdout`",
+      "Most Similar TLDR Script": "rev {{file}}",
+      "Most Similar NL2Bash Task": "Search for case-insensitive \"string\" in \"log.tar.gz\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "zcat log.tar.gz | grep -a -i \"string\"\n",
+          "command-options": {
+            "zcat": {
+              "mpsum": "decompress and concatenate files to standard output"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-i": "Ignore case distinctions in patterns and input data, so that characters that differ\n only in case match each other."
+            }
+          },
+          "TLDR_inform": {
+            "zcat": {
+              "man1_zcat_38304": "print data gzip compress file print compress detail gzip file standard output print uncompress content gzip file standard output"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_56564290: Search string in file via bash but only work match"
+      ],
+      "Top-3 Scripts": [
+        "so_56564290: grep -i current test.xml | grep -o \" docBase=\\\"[^\\\"]*\" | rev | cut -d'/' -f1 | rev\n\nxmllint --xpath \"//Context[contains(translate(@docBase,'CENRTU', 'cenrtu'), 'current')]/@docBase\" test.xml | rev | cut -d'/' -f1 | cut -c2- | rev"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "man",
+      "MP Summary": "an interface to the system reference manuals",
+      "Most Similar TLDR Task": "Search for manpages containing a search string",
+      "Most Similar TLDR Script": "man -k \"{{search string}}\"",
+      "Most Similar NL2Bash Task": "Search for case-insensitive \"string\" in \"log.tar.gz\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "zcat log.tar.gz | grep -a -i \"string\"\n",
+          "command-options": {
+            "zcat": {
+              "mpsum": "decompress and concatenate files to standard output"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-i": "Ignore case distinctions in patterns and input data, so that characters that differ\n only in case match each other."
+            }
+          },
+          "TLDR_inform": {
+            "zcat": {
+              "man1_zcat_38304": "print data gzip compress file print compress detail gzip file standard output print uncompress content gzip file standard output"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_9782568: Searching a string in multiple files in a directory in UNIX"
+      ],
+      "Top-3 Scripts": [
+        "so_9782568: man grep"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "split",
+      "MP Summary": "split a file into pieces",
+      "Most Similar TLDR Task": "Split a file with at most 512 bytes in each split without breaking lines",
+      "Most Similar TLDR Script": "split -C {{512}} {{filename}}",
+      "Most Similar NL2Bash Task": "Search for case-insensitive \"string\" in \"log.tar.gz\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "zcat log.tar.gz | grep -a -i \"string\"\n",
+          "command-options": {
+            "zcat": {
+              "mpsum": "decompress and concatenate files to standard output"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-i": "Ignore case distinctions in patterns and input data, so that characters that differ\n only in case match each other."
+            }
+          },
+          "TLDR_inform": {
+            "zcat": {
+              "man1_zcat_38304": "print data gzip compress file print compress detail gzip file standard output print uncompress content gzip file standard output"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_16071128: Replacing strings in one file with strings from second file"
+      ],
+      "Top-3 Scripts": [
+        "so_16071128: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "cut",
+      "MP Summary": "remove sections from each line of files",
+      "Most Similar TLDR Task": "Cut out the fifth field of each line, using a colon as a field delimiter (default delimiter is tab)",
+      "Most Similar TLDR Script": "cut -d'{{:}}' -f{{5}}",
+      "Most Similar NL2Bash Task": "Search for case-insensitive \"string\" in \"log.tar.gz\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "zcat log.tar.gz | grep -a -i \"string\"\n",
+          "command-options": {
+            "zcat": {
+              "mpsum": "decompress and concatenate files to standard output"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-i": "Ignore case distinctions in patterns and input data, so that characters that differ\n only in case match each other."
+            }
+          },
+          "TLDR_inform": {
+            "zcat": {
+              "man1_zcat_38304": "print data gzip compress file print compress detail gzip file standard output print uncompress content gzip file standard output"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_56564290: Search string in file via bash but only work match"
+      ],
+      "Top-3 Scripts": [
+        "so_56564290: grep -i current test.xml | grep -o \" docBase=\\\"[^\\\"]*\" | rev | cut -d'/' -f1 | rev\n\nxmllint --xpath \"//Context[contains(translate(@docBase,'CENRTU', 'cenrtu'), 'current')]/@docBase\" test.xml | rev | cut -d'/' -f1 | cut -c2- | rev"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "sort",
+      "MP Summary": "sort lines of text files",
+      "Most Similar TLDR Task": "Sort a file preserving only unique lines",
+      "Most Similar TLDR Script": "sort -u {{path/to/file}}",
+      "Most Similar NL2Bash Task": "Search for case-insensitive \"string\" in \"log.tar.gz\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "zcat log.tar.gz | grep -a -i \"string\"\n",
+          "command-options": {
+            "zcat": {
+              "mpsum": "decompress and concatenate files to standard output"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-i": "Ignore case distinctions in patterns and input data, so that characters that differ\n only in case match each other."
+            }
+          },
+          "TLDR_inform": {
+            "zcat": {
+              "man1_zcat_38304": "print data gzip compress file print compress detail gzip file standard output print uncompress content gzip file standard output"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_263385: Search a string in files in the current directory, omit duplicates"
+      ],
+      "Top-3 Scripts": [
+        "ul_263385: find . ! -name . -prune -type f -exec cat {} + |\n  grep mystring |\n  LC_ALL=C sort -u\n\nLC_ALL=C grep -hr --exclude-dir='?*' mystring | LC_ALL=C sort -u\n\ngrep -h mystring ./*(D.) | LC_ALL=C sort -u\n\nfind . -type f -exec cat {} + |\n  grep mystring |\n  LC_ALL=C sort -u\n\ngrep -hr mystring | LC_ALL=C sort -u"
+      ],
+      "Explanations about Options": {
+        "-u": "with -c, check for strict ordering; without -c, output only the first of an equal\n run"
+      }
+    },
+    {
+      "Command": "env",
+      "MP Summary": "run a program in a modified environment",
+      "Most Similar TLDR Task": "Remove variable from the environment and run a program",
+      "Most Similar TLDR Script": "env -u {{variable}} {{program}}",
+      "Most Similar NL2Bash Task": "Search for case-insensitive \"string\" in \"log.tar.gz\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "zcat log.tar.gz | grep -a -i \"string\"\n",
+          "command-options": {
+            "zcat": {
+              "mpsum": "decompress and concatenate files to standard output"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-i": "Ignore case distinctions in patterns and input data, so that characters that differ\n only in case match each other."
+            }
+          },
+          "TLDR_inform": {
+            "zcat": {
+              "man1_zcat_38304": "print data gzip compress file print compress detail gzip file standard output print uncompress content gzip file standard output"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_66196857: how to search through a binary file for a string and output how many bytes there are before string in bash"
+      ],
+      "Top-3 Scripts": [
+        "so_66196857: lookforstring '#!/usr/bin/env xdg-open' \"$filetocut\""
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "exit",
+      "MP Summary": "cause the shell to exit",
+      "Most Similar TLDR Task": "Exit the shell with the exit code of the last command executed",
+      "Most Similar TLDR Script": "exit",
+      "Most Similar NL2Bash Task": "Search for case-insensitive \"string\" in \"log.tar.gz\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "zcat log.tar.gz | grep -a -i \"string\"\n",
+          "command-options": {
+            "zcat": {
+              "mpsum": "decompress and concatenate files to standard output"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-i": "Ignore case distinctions in patterns and input data, so that characters that differ\n only in case match each other."
+            }
+          },
+          "TLDR_inform": {
+            "zcat": {
+              "man1_zcat_38304": "print data gzip compress file print compress detail gzip file standard output print uncompress content gzip file standard output"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_58233049: Search sub string then Replace Line in a file without regex",
+        "so_55501846: Bash: How to search a string in file with Regex and get the associated value"
+      ],
+      "Top-3 Scripts": [
+        "so_58233049: ",
+        "so_55501846: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "tar",
+      "MP Summary": "an archiving utility",
+      "Most Similar TLDR Task": "Extract a specific file without preserving the folder structure",
+      "Most Similar TLDR Script": "tar xf {{source.tar}} {{source.tar/path/to/extract}} --strip-components={{depth_to_strip}}",
+      "Most Similar NL2Bash Task": "Search for case-insensitive \"string\" in \"log.tar.gz\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "zcat log.tar.gz | grep -a -i \"string\"\n",
+          "command-options": {
+            "zcat": {
+              "mpsum": "decompress and concatenate files to standard output"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-i": "Ignore case distinctions in patterns and input data, so that characters that differ\n only in case match each other."
+            }
+          },
+          "TLDR_inform": {
+            "zcat": {
+              "man1_zcat_38304": "print data gzip compress file print compress detail gzip file standard output print uncompress content gzip file standard output"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "su_424828: Is there a program which can count occurrence of a certain string in a binary file?"
+      ],
+      "Top-3 Scripts": [
+        "su_424828: $ grep -F --text -o --byte-offset option /bin/tar\n226542:option\n237529:option\n237612:option\n..."
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "cd",
+      "MP Summary": "change the working directory",
+      "Most Similar TLDR Task": "Go to home directory of current user",
+      "Most Similar TLDR Script": "cd",
+      "Most Similar NL2Bash Task": "Search for case-insensitive \"string\" in \"log.tar.gz\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "zcat log.tar.gz | grep -a -i \"string\"\n",
+          "command-options": {
+            "zcat": {
+              "mpsum": "decompress and concatenate files to standard output"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-i": "Ignore case distinctions in patterns and input data, so that characters that differ\n only in case match each other."
+            }
+          },
+          "TLDR_inform": {
+            "zcat": {
+              "man1_zcat_38304": "print data gzip compress file print compress detail gzip file standard output print uncompress content gzip file standard output"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_34153172: Finding all usages of a filename string in other files"
+      ],
+      "Top-3 Scripts": [
+        "so_34153172: cd /base/dir/to/check/presence/of/image/files\n\nwhile IFS= read -d '' -r f; do\n   img=\"${f##*/}\" # get the filename\n   grep -qFr \"$img\" --include=*.html --include=*.php --include=*.css . ||\n      echo \"$img not found\"\ndone < <(find /img-dir -type f -print0) > imgNotFound.txt"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "xmllint",
+      "MP Summary": "command line XML tool",
+      "Most Similar TLDR Task": "Check that a XML file meets the requirements of its DOCTYPE declaration",
+      "Most Similar TLDR Script": "xmllint --valid {{source_file.xml}}",
+      "Most Similar NL2Bash Task": "Search for case-insensitive \"string\" in \"log.tar.gz\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "zcat log.tar.gz | grep -a -i \"string\"\n",
+          "command-options": {
+            "zcat": {
+              "mpsum": "decompress and concatenate files to standard output"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-i": "Ignore case distinctions in patterns and input data, so that characters that differ\n only in case match each other."
+            }
+          },
+          "TLDR_inform": {
+            "zcat": {
+              "man1_zcat_38304": "print data gzip compress file print compress detail gzip file standard output print uncompress content gzip file standard output"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_56564290: Search string in file via bash but only work match"
+      ],
+      "Top-3 Scripts": [
+        "so_56564290: xmllint --xpath \"//Context[contains(translate(@docBase,'CENRTU', 'cenrtu'), 'current')]/@docBase\" test.xml | rev | cut -d'/' -f1 | cut -c2- | rev"
+      ],
+      "Explanations about Options": {
+        "--xpath": "Run an XPath expression given as argument and print the result. In case of a nodeset\n result, each node in the node set is serialized in full in the output. In case of an\n empty node set the \"XPath set is empty\" result will be shown and an error exit code\n will be returned."
+      }
+    },
+    {
+      "Command": "perl",
+      "MP Summary": "The Perl 5 language interpreter",
+      "Most Similar TLDR Task": "Run a multi-line find/replace expression on a file, and save the result in another file",
+      "Most Similar TLDR Script": "perl -p0e 's/{{foo\\nbar}}/{{foobar}}/g' {{input_file}} > {{output_file}}",
+      "Most Similar NL2Bash Task": "Search for case-insensitive \"string\" in \"log.tar.gz\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "zcat log.tar.gz | grep -a -i \"string\"\n",
+          "command-options": {
+            "zcat": {
+              "mpsum": "decompress and concatenate files to standard output"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-i": "Ignore case distinctions in patterns and input data, so that characters that differ\n only in case match each other."
+            }
+          },
+          "TLDR_inform": {
+            "zcat": {
+              "man1_zcat_38304": "print data gzip compress file print compress detail gzip file standard output print uncompress content gzip file standard output"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_531424: How to find character locations of a string in a file?"
+      ],
+      "Top-3 Scripts": [
+        "ul_531424: $ echo 'a\u00f6\u00e6a\u00e6a\u00e6a' | perl -CSDLA -ne 'BEGIN { $pattern = shift }; printf \"%d\\n\", $-[0] while $_ =~ m/$pattern/g;'  \u00e6a\n2\n4\n6\n\n$ echo 'a\u00f6\u00e6a\u00e6a\u00e6a' | perl match.pl \u00e6a -\n2\n4\n6"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "zsh",
+      "MP Summary": "the Z shell",
+      "Most Similar TLDR Task": "Run commands from file and print them as they are executed",
+      "Most Similar TLDR Script": "zsh -x {{file}}",
+      "Most Similar NL2Bash Task": "Search for case-insensitive \"string\" in \"log.tar.gz\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "zcat log.tar.gz | grep -a -i \"string\"\n",
+          "command-options": {
+            "zcat": {
+              "mpsum": "decompress and concatenate files to standard output"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-i": "Ignore case distinctions in patterns and input data, so that characters that differ\n only in case match each other."
+            }
+          },
+          "TLDR_inform": {
+            "zcat": {
+              "man1_zcat_38304": "print data gzip compress file print compress detail gzip file standard output print uncompress content gzip file standard output"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_263385: Search a string in files in the current directory, omit duplicates"
+      ],
+      "Top-3 Scripts": [
+        "ul_263385: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "at",
+      "MP Summary": "queue, examine, or delete jobs for later execution",
+      "Most Similar TLDR Task": "Execute a script at the given time",
+      "Most Similar TLDR Script": "at {{hh:mm}} -f {{path/to/file}}",
+      "Most Similar NL2Bash Task": "Search for case-insensitive \"string\" in \"log.tar.gz\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "zcat log.tar.gz | grep -a -i \"string\"\n",
+          "command-options": {
+            "zcat": {
+              "mpsum": "decompress and concatenate files to standard output"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-i": "Ignore case distinctions in patterns and input data, so that characters that differ\n only in case match each other."
+            }
+          },
+          "TLDR_inform": {
+            "zcat": {
+              "man1_zcat_38304": "print data gzip compress file print compress detail gzip file standard output print uncompress content gzip file standard output"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_1422382: How to search for a pattern inside a file and delete the lines in Unix on the command line?"
+      ],
+      "Top-3 Scripts": [
+        "so_1422382: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "pdftotext",
+      "MP Summary": "Portable Document Format (PDF) to text converter (version 3.03)",
+      "Most Similar TLDR Task": "Convert filename.pdf to plain text and save it as filename.txt",
+      "Most Similar TLDR Script": "pdftotext {{filename.pdf}}",
+      "Most Similar NL2Bash Task": "Search for case-insensitive \"string\" in \"log.tar.gz\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "zcat log.tar.gz | grep -a -i \"string\"\n",
+          "command-options": {
+            "zcat": {
+              "mpsum": "decompress and concatenate files to standard output"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-i": "Ignore case distinctions in patterns and input data, so that characters that differ\n only in case match each other."
+            }
+          },
+          "TLDR_inform": {
+            "zcat": {
+              "man1_zcat_38304": "print data gzip compress file print compress detail gzip file standard output print uncompress content gzip file standard output"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_24563763: search a word inside a pdf in terminal linux without any app"
+      ],
+      "Top-3 Scripts": [
+        "so_24563763: pdftotext myfile.pdf - | grep 'pattern'"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "true",
+      "MP Summary": "do nothing, successfully",
+      "Most Similar TLDR Task": "Return a successful exit code",
+      "Most Similar TLDR Script": "true",
+      "Most Similar NL2Bash Task": "Search for case-insensitive \"string\" in \"log.tar.gz\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "zcat log.tar.gz | grep -a -i \"string\"\n",
+          "command-options": {
+            "zcat": {
+              "mpsum": "decompress and concatenate files to standard output"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-i": "Ignore case distinctions in patterns and input data, so that characters that differ\n only in case match each other."
+            }
+          },
+          "TLDR_inform": {
+            "zcat": {
+              "man1_zcat_38304": "print data gzip compress file print compress detail gzip file standard output print uncompress content gzip file standard output"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_41285502: Creating search option in windows form from powershell"
+      ],
+      "Top-3 Scripts": [
+        "so_41285502: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "hello",
+      "MP Summary": "friendly greeting program",
+      "Most Similar TLDR Task": "Print a text message",
+      "Most Similar TLDR Script": "hello --greeting=\"{{greeting_text}}\"",
+      "Most Similar NL2Bash Task": "Search for case-insensitive \"string\" in \"log.tar.gz\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "zcat log.tar.gz | grep -a -i \"string\"\n",
+          "command-options": {
+            "zcat": {
+              "mpsum": "decompress and concatenate files to standard output"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-i": "Ignore case distinctions in patterns and input data, so that characters that differ\n only in case match each other."
+            }
+          },
+          "TLDR_inform": {
+            "zcat": {
+              "man1_zcat_38304": "print data gzip compress file print compress detail gzip file standard output print uncompress content gzip file standard output"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_255324: Linux bash: Search and replace in file without escaping hassle"
+      ],
+      "Top-3 Scripts": [
+        "ul_255324: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "ac",
+      "MP Summary": "print statistics about users' connect time",
+      "Most Similar TLDR Task": "Also display additional details",
+      "Most Similar TLDR Script": "ac --compatibility",
+      "Most Similar NL2Bash Task": "Search for case-insensitive \"string\" in \"log.tar.gz\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "zcat log.tar.gz | grep -a -i \"string\"\n",
+          "command-options": {
+            "zcat": {
+              "mpsum": "decompress and concatenate files to standard output"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-i": "Ignore case distinctions in patterns and input data, so that characters that differ\n only in case match each other."
+            }
+          },
+          "TLDR_inform": {
+            "zcat": {
+              "man1_zcat_38304": "print data gzip compress file print compress detail gzip file standard output print uncompress content gzip file standard output"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_18127274: Search a file in 4 different path using powershell"
+      ],
+      "Top-3 Scripts": [
+        "so_18127274: $p = \"C:\\Program Files\\test1\", \"C:\\Program Files\\test3\", \"C:\\Program Files (x86)\\test6\", \"D:\\\"\n\nGet-ChildItem -Path $p -Filter file.txt -Recurse | select directory | ac C:\\filereport.txt"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "time",
+      "MP Summary": "time a simple command",
+      "Most Similar TLDR Task": "Time \"ls\"",
+      "Most Similar TLDR Script": "time ls",
+      "Most Similar NL2Bash Task": "Search for case-insensitive \"string\" in \"log.tar.gz\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "zcat log.tar.gz | grep -a -i \"string\"\n",
+          "command-options": {
+            "zcat": {
+              "mpsum": "decompress and concatenate files to standard output"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-i": "Ignore case distinctions in patterns and input data, so that characters that differ\n only in case match each other."
+            }
+          },
+          "TLDR_inform": {
+            "zcat": {
+              "man1_zcat_38304": "print data gzip compress file print compress detail gzip file standard output print uncompress content gzip file standard output"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_1422382: How to search for a pattern inside a file and delete the lines in Unix on the command line?"
+      ],
+      "Top-3 Scripts": [
+        "so_1422382: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "or",
+      "MP Summary": "A user friendly system monitoring program.",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "Search for case-insensitive \"string\" in \"log.tar.gz\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "zcat log.tar.gz | grep -a -i \"string\"\n",
+          "command-options": {
+            "zcat": {
+              "mpsum": "decompress and concatenate files to standard output"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-i": "Ignore case distinctions in patterns and input data, so that characters that differ\n only in case match each other."
+            }
+          },
+          "TLDR_inform": {
+            "zcat": {
+              "man1_zcat_38304": "print data gzip compress file print compress detail gzip file standard output print uncompress content gzip file standard output"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_202222: Search a String in a directory- Get output without filename"
+      ],
+      "Top-3 Scripts": [
+        "ul_202222: -h, --no-filename\n             Suppress  the  prefixing  of file names on output.  This is    \n  the default when there is only one file (or only standard input) to\n          search."
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "to",
+      "MP Summary": "as the filename. --logdir <name> Writes each synchronization log output in a new file in the specified directory. --logexpire <hours> Removes logs older than the value specified (in hours). This command is  used  with --logdir. --logflush Clears (flushes) the log file after each write action. --logdebug Also  output  debug-level  messages  in  the log (equivalent to setting the env var QT_LOGGING_RULES=\"qt.*=true;*.debug=true\"). ) --confdir <dirname> Uses the specified configuration directory. The ownCloud Client reads a configuration file.  You can locate this configuration file as follows: On Linux distributions: $HOME/.config/ownCloud/owncloud.cfg On Microsoft Windows systems: %APPDATA%\\ownCloud\\owncloud.cfg On MAC OS X systems: $HOME/Library/Preferences/ownCloud/owncloud.cfg The configuration file contains settings using the Microsoft Windows .ini file format. You can overwrite changes using the ownCloud configuration dialog. NOTE: Use caution when making changes to the ownCloud Client configuration  file.   Incorrect settings can produce unintended results. Some interesting values that can be set on the configuration file are: \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510 \u2502[ownCloud] section          \u2502         \u2502                          \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502Variable                    \u2502 Default \u2502 Meaning                  \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502remotePollInterval          \u2502 30000   \u2502 Specifies  the poll time \u2502 \u2502                            \u2502         \u2502 for      the      remote \u2502 \u2502                            \u2502         \u2502 repository            in \u2502 \u2502                            \u2502         \u2502 milliseconds.            \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502forceSyncInterval           \u2502 7200000 \u2502 The   duration   of   no \u2502 \u2502                            \u2502         \u2502 activity  after  which a \u2502 \u2502                            \u2502         \u2502 synchronization      run \u2502 \u2502                            \u2502         \u2502 shall    be    triggered \u2502 \u2502                            \u2502         \u2502 automatically.           \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502fullLocalDiscoveryInterval  \u2502 3600000 \u2502 The interval after which \u2502 \u2502                            \u2502         \u2502 the next synchronization \u2502 \u2502                            \u2502         \u2502 will   perform   a  full \u2502 \u2502                            \u2502         \u2502 local discovery.         \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502notificationRefreshInterval \u2502 300000  \u2502 Specifies   the  default \u2502 \u2502                            \u2502         \u2502 interval of checking for \u2502 \u2502                            \u2502         \u2502 new server notifications \u2502 \u2502                            \u2502         \u2502 in milliseconds.         \u2502 \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518 \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510 \u2502[General] section       \u2502         \u2502                          \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502Variable                \u2502 Default \u2502 Meaning                  \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502chunkSize               \u2502 5242880 \u2502 Specifies the chunk size \u2502 \u2502                        \u2502         \u2502 of   uploaded  files  in \u2502 \u2502                        \u2502         \u2502 bytes.                   \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502promptDeleteAllFiles    \u2502 true    \u2502 If a  UI  prompt  should \u2502 \u2502                        \u2502         \u2502 ask  for confirmation if \u2502 \u2502                        \u2502         \u2502 it was detected that all \u2502 \u2502                        \u2502         \u2502 files  and  folders were \u2502 \u2502                        \u2502         \u2502 deleted.                 \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502maxLogLines             \u2502 20000   \u2502 Specifies  the   maximum \u2502 \u2502                        \u2502         \u2502 number   of   log  lines \u2502 \u2502                        \u2502         \u2502 displayed  in  the   log \u2502 \u2502                        \u2502         \u2502 window.                  \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502timeout                 \u2502 300     \u2502 The  timeout for network \u2502 \u2502                        \u2502         \u2502 connections in seconds.  \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502moveToTrash             \u2502 false   \u2502 If  non-locally  deleted \u2502 \u2502                        \u2502         \u2502 files should be moved to \u2502 \u2502                        \u2502         \u2502 trash     instead     of \u2502 \u2502                        \u2502         \u2502 deleting            them \u2502 \u2502                        \u2502         \u2502 completely.  This option \u2502 \u2502                        \u2502         \u2502 only works on linux      \u2502 \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518 \u2502showExperimentalOptions \u2502 false   \u2502 Whether      to     show \u2502 \u2502                        \u2502         \u2502 experimental     options \u2502 \u2502                        \u2502         \u2502 that      are      still \u2502 \u2502                        \u2502         \u2502 undergoing  testing   in \u2502 \u2502                        \u2502         \u2502 the    user   interface. \u2502 \u2502                        \u2502         \u2502 Turning this on does not \u2502 \u2502                        \u2502         \u2502 enable      experimental \u2502 \u2502                        \u2502         \u2502 behavior on its own.  It \u2502 \u2502                        \u2502         \u2502 does     enable     user \u2502 \u2502                        \u2502         \u2502 inferface  options  that \u2502 \u2502                        \u2502         \u2502 can be used to opt in to \u2502 \u2502                        \u2502         \u2502 experimental features.   \u2502 \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518 \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510 \u2502[Proxy] section      \u2502           \u2502                          \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502Variable             \u2502 Default   \u2502 Meaning                  \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502host                 \u2502 127.0.0.1 \u2502 The address of the proxy \u2502 \u2502                     \u2502           \u2502 server.                  \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502port                 \u2502 8080      \u2502 The  port were the proxy \u2502 \u2502                     \u2502           \u2502 is listening.            \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502type                 \u2502 2         \u2502 0 for System Proxy.      \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u25021 for SOCKS5 Proxy.  \u2502           \u2502                          \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u25022 for No Proxy.      \u2502           \u2502                          \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u25023 for HTTP(S) Proxy. \u2502           \u2502                          \u2502 \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518 Please report bugs at https://github.com/owncloud/client/issues. owncloudcmd(1)",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "Search for case-insensitive \"string\" in \"log.tar.gz\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "zcat log.tar.gz | grep -a -i \"string\"\n",
+          "command-options": {
+            "zcat": {
+              "mpsum": "decompress and concatenate files to standard output"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-i": "Ignore case distinctions in patterns and input data, so that characters that differ\n only in case match each other."
+            }
+          },
+          "TLDR_inform": {
+            "zcat": {
+              "man1_zcat_38304": "print data gzip compress file print compress detail gzip file standard output print uncompress content gzip file standard output"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_202222: Search a String in a directory- Get output without filename",
+        "su_424828: Is there a program which can count occurrence of a certain string in a binary file?",
+        "so_67641372: Multiple strings search in consecutive lines in a log file"
+      ],
+      "Top-3 Scripts": [
+        "ul_202222: -h, --no-filename\n             Suppress  the  prefixing  of file names on output.  This is    \n  the default when there is only one file (or only standard input) to\n          search.",
+        "su_424828: ",
+        "so_67641372: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "egrep",
+      "MP Summary": "print lines that match patterns",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "Search for case-insensitive \"string\" in \"log.tar.gz\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "zcat log.tar.gz | grep -a -i \"string\"\n",
+          "command-options": {
+            "zcat": {
+              "mpsum": "decompress and concatenate files to standard output"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-i": "Ignore case distinctions in patterns and input data, so that characters that differ\n only in case match each other."
+            }
+          },
+          "TLDR_inform": {
+            "zcat": {
+              "man1_zcat_38304": "print data gzip compress file print compress detail gzip file standard output print uncompress content gzip file standard output"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_32665048: use regex string from a file to do a search in another file"
+      ],
+      "Top-3 Scripts": [
+        "so_32665048: egrep -f your_regex.file file_to_be_search > search.result"
+      ],
+      "Explanations about Options": {
+        "-f": "Obtain patterns from FILE, one per line. If this option is used multiple times or\n is combined with the -e (--regexp) option, search for all patterns given. The\n empty file contains zero patterns, and therefore matches nothing."
+      }
+    },
+    {
+      "Command": "translate",
+      "MP Summary": "looks up for words in a dictionary",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "Search for case-insensitive \"string\" in \"log.tar.gz\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "zcat log.tar.gz | grep -a -i \"string\"\n",
+          "command-options": {
+            "zcat": {
+              "mpsum": "decompress and concatenate files to standard output"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-i": "Ignore case distinctions in patterns and input data, so that characters that differ\n only in case match each other."
+            }
+          },
+          "TLDR_inform": {
+            "zcat": {
+              "man1_zcat_38304": "print data gzip compress file print compress detail gzip file standard output print uncompress content gzip file standard output"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_56564290: Search string in file via bash but only work match"
+      ],
+      "Top-3 Scripts": [
+        "so_56564290: xmllint --xpath \"//Context[contains(translate(@docBase,'CENRTU', 'cenrtu'), 'current')]/@docBase\" test.xml | rev | cut -d'/' -f1 | cut -c2- | rev"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "option",
+      "MP Summary": "manual page for option --version not recognized",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "Search for case-insensitive \"string\" in \"log.tar.gz\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "zcat log.tar.gz | grep -a -i \"string\"\n",
+          "command-options": {
+            "zcat": {
+              "mpsum": "decompress and concatenate files to standard output"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-i": "Ignore case distinctions in patterns and input data, so that characters that differ\n only in case match each other."
+            }
+          },
+          "TLDR_inform": {
+            "zcat": {
+              "man1_zcat_38304": "print data gzip compress file print compress detail gzip file standard output print uncompress content gzip file standard output"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "su_424828: Is there a program which can count occurrence of a certain string in a binary file?"
+      ],
+      "Top-3 Scripts": [
+        "su_424828: $ grep -F --text -o --byte-offset option /bin/tar\n226542:option\n237529:option\n237612:option\n..."
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "bin",
+      "MP Summary": "presumably creating or updating package.json and running any other initialization-related operations. The init command is transformed to a corresponding npx operation as follows: \u00b7 npm init foo -> npx create-foo \u00b7 npm init @usr/foo -> npx @usr/create-foo \u00b7 npm init @usr -> npx @usr/create Any  additional  options  will  be passed directly to the command, so npm init foo --hello will map to npx create-foo --hello. If the initializer is omitted (by just calling npm init), init will fall  back  to  legacy init  behavior.  It  will  ask you a bunch of questions, and then write a package.json for you. It will attempt to make reasonable guesses based on  existing  fields,  dependencies, and  options selected. It is strictly additive, so it will keep any fields and values that were already set. You can also use -y/--yes to skip the questionnaire altogether.  If  you pass --scope, it will create a scoped package. See Also \u00b7 https://github.com/isaacs/init-package-json \u00b7 npm help package.json \u00b7 npm help version \u00b7 npm help scope April 2020                                NPM-INIT(1)",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "Search for case-insensitive \"string\" in \"log.tar.gz\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "zcat log.tar.gz | grep -a -i \"string\"\n",
+          "command-options": {
+            "zcat": {
+              "mpsum": "decompress and concatenate files to standard output"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-i": "Ignore case distinctions in patterns and input data, so that characters that differ\n only in case match each other."
+            }
+          },
+          "TLDR_inform": {
+            "zcat": {
+              "man1_zcat_38304": "print data gzip compress file print compress detail gzip file standard output print uncompress content gzip file standard output"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "su_424828: Is there a program which can count occurrence of a certain string in a binary file?",
+        "so_66196857: how to search through a binary file for a string and output how many bytes there are before string in bash"
+      ],
+      "Top-3 Scripts": [
+        "su_424828: $ grep -F --text -o --byte-offset option /bin/tar\n226542:option\n237529:option\n237612:option\n...",
+        "so_66196857: lookforstring '#!/usr/bin/env xdg-open' \"$filetocut\""
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "list",
+      "MP Summary": "list algorithms and features",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "Search for case-insensitive \"string\" in \"log.tar.gz\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "zcat log.tar.gz | grep -a -i \"string\"\n",
+          "command-options": {
+            "zcat": {
+              "mpsum": "decompress and concatenate files to standard output"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-i": "Ignore case distinctions in patterns and input data, so that characters that differ\n only in case match each other."
+            }
+          },
+          "TLDR_inform": {
+            "zcat": {
+              "man1_zcat_38304": "print data gzip compress file print compress detail gzip file standard output print uncompress content gzip file standard output"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "su_424828: Is there a program which can count occurrence of a certain string in a binary file?"
+      ],
+      "Top-3 Scripts": [
+        "su_424828: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "by",
+      "MP Summary": "presumably creating or updating package.json and running any other initialization-related operations. The init command is transformed to a corresponding npx operation as follows: \u00b7 npm init foo -> npx create-foo \u00b7 npm init @usr/foo -> npx @usr/create-foo \u00b7 npm init @usr -> npx @usr/create Any  additional  options  will  be passed directly to the command, so npm init foo --hello will map to npx create-foo --hello. If the initializer is omitted (by just calling npm init), init will fall  back  to  legacy init  behavior.  It  will  ask you a bunch of questions, and then write a package.json for you. It will attempt to make reasonable guesses based on  existing  fields,  dependencies, and  options selected. It is strictly additive, so it will keep any fields and values that were already set. You can also use -y/--yes to skip the questionnaire altogether.  If  you pass --scope, it will create a scoped package. See Also \u00b7 https://github.com/isaacs/init-package-json \u00b7 npm help package.json \u00b7 npm help version \u00b7 npm help scope April 2020                                NPM-INIT(1)",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "Search for case-insensitive \"string\" in \"log.tar.gz\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "zcat log.tar.gz | grep -a -i \"string\"\n",
+          "command-options": {
+            "zcat": {
+              "mpsum": "decompress and concatenate files to standard output"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-i": "Ignore case distinctions in patterns and input data, so that characters that differ\n only in case match each other."
+            }
+          },
+          "TLDR_inform": {
+            "zcat": {
+              "man1_zcat_38304": "print data gzip compress file print compress detail gzip file standard output print uncompress content gzip file standard output"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "su_424828: Is there a program which can count occurrence of a certain string in a binary file?"
+      ],
+      "Top-3 Scripts": [
+        "su_424828: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "be",
+      "MP Summary": "distributed bug tracking from the command line",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "Search for case-insensitive \"string\" in \"log.tar.gz\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "zcat log.tar.gz | grep -a -i \"string\"\n",
+          "command-options": {
+            "zcat": {
+              "mpsum": "decompress and concatenate files to standard output"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-i": "Ignore case distinctions in patterns and input data, so that characters that differ\n only in case match each other."
+            }
+          },
+          "TLDR_inform": {
+            "zcat": {
+              "man1_zcat_38304": "print data gzip compress file print compress detail gzip file standard output print uncompress content gzip file standard output"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "su_424828: Is there a program which can count occurrence of a certain string in a binary file?"
+      ],
+      "Top-3 Scripts": [
+        "su_424828: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "such",
+      "MP Summary": "or  any situation  where  you want to make sure you're doing a clean install of your dependencies. It  can  be  significantly  faster  than  a  regular  npm  install  by  skipping   certain user-oriented  features.  It  is  also  more strict than a regular install, which can help catch errors or inconsistencies caused by the incrementally-installed  local  environments of most npm users. In short, the main differences between using npm install and npm ci are: \u00b7 The project must have an existing package-lock.json or npm-shrinkwrap.json. \u00b7 If dependencies in the package lock do not match those in package.json, npm ci will exit with an error, instead of updating the package lock. \u00b7 npm ci can only install entire projects at a time:  individual  dependencies  cannot  be added with this command. \u00b7 If  a  node_modules  is  already present, it will be automatically removed before npm ci begins its install. \u00b7 It will  never  write  to  package.json  or  any  of  the  package-locks:  installs  are essentially frozen. See Also \u00b7 npm help install \u00b7 npm help package-locks April 2020                                  NPM-CI(1)",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "Search for case-insensitive \"string\" in \"log.tar.gz\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "zcat log.tar.gz | grep -a -i \"string\"\n",
+          "command-options": {
+            "zcat": {
+              "mpsum": "decompress and concatenate files to standard output"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-i": "Ignore case distinctions in patterns and input data, so that characters that differ\n only in case match each other."
+            }
+          },
+          "TLDR_inform": {
+            "zcat": {
+              "man1_zcat_38304": "print data gzip compress file print compress detail gzip file standard output print uncompress content gzip file standard output"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "su_424828: Is there a program which can count occurrence of a certain string in a binary file?"
+      ],
+      "Top-3 Scripts": [
+        "su_424828: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "output",
+      "MP Summary": "as the filename. --logdir <name> Writes each synchronization log output in a new file in the specified directory. --logexpire <hours> Removes logs older than the value specified (in hours). This command is  used  with --logdir. --logflush Clears (flushes) the log file after each write action. --logdebug Also  output  debug-level  messages  in  the log (equivalent to setting the env var QT_LOGGING_RULES=\"qt.*=true;*.debug=true\"). ) --confdir <dirname> Uses the specified configuration directory. The ownCloud Client reads a configuration file.  You can locate this configuration file as follows: On Linux distributions: $HOME/.config/ownCloud/owncloud.cfg On Microsoft Windows systems: %APPDATA%\\ownCloud\\owncloud.cfg On MAC OS X systems: $HOME/Library/Preferences/ownCloud/owncloud.cfg The configuration file contains settings using the Microsoft Windows .ini file format. You can overwrite changes using the ownCloud configuration dialog. NOTE: Use caution when making changes to the ownCloud Client configuration  file.   Incorrect settings can produce unintended results. Some interesting values that can be set on the configuration file are: \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510 \u2502[ownCloud] section          \u2502         \u2502                          \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502Variable                    \u2502 Default \u2502 Meaning                  \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502remotePollInterval          \u2502 30000   \u2502 Specifies  the poll time \u2502 \u2502                            \u2502         \u2502 for      the      remote \u2502 \u2502                            \u2502         \u2502 repository            in \u2502 \u2502                            \u2502         \u2502 milliseconds.            \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502forceSyncInterval           \u2502 7200000 \u2502 The   duration   of   no \u2502 \u2502                            \u2502         \u2502 activity  after  which a \u2502 \u2502                            \u2502         \u2502 synchronization      run \u2502 \u2502                            \u2502         \u2502 shall    be    triggered \u2502 \u2502                            \u2502         \u2502 automatically.           \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502fullLocalDiscoveryInterval  \u2502 3600000 \u2502 The interval after which \u2502 \u2502                            \u2502         \u2502 the next synchronization \u2502 \u2502                            \u2502         \u2502 will   perform   a  full \u2502 \u2502                            \u2502         \u2502 local discovery.         \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502notificationRefreshInterval \u2502 300000  \u2502 Specifies   the  default \u2502 \u2502                            \u2502         \u2502 interval of checking for \u2502 \u2502                            \u2502         \u2502 new server notifications \u2502 \u2502                            \u2502         \u2502 in milliseconds.         \u2502 \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518 \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510 \u2502[General] section       \u2502         \u2502                          \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502Variable                \u2502 Default \u2502 Meaning                  \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502chunkSize               \u2502 5242880 \u2502 Specifies the chunk size \u2502 \u2502                        \u2502         \u2502 of   uploaded  files  in \u2502 \u2502                        \u2502         \u2502 bytes.                   \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502promptDeleteAllFiles    \u2502 true    \u2502 If a  UI  prompt  should \u2502 \u2502                        \u2502         \u2502 ask  for confirmation if \u2502 \u2502                        \u2502         \u2502 it was detected that all \u2502 \u2502                        \u2502         \u2502 files  and  folders were \u2502 \u2502                        \u2502         \u2502 deleted.                 \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502maxLogLines             \u2502 20000   \u2502 Specifies  the   maximum \u2502 \u2502                        \u2502         \u2502 number   of   log  lines \u2502 \u2502                        \u2502         \u2502 displayed  in  the   log \u2502 \u2502                        \u2502         \u2502 window.                  \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502timeout                 \u2502 300     \u2502 The  timeout for network \u2502 \u2502                        \u2502         \u2502 connections in seconds.  \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502moveToTrash             \u2502 false   \u2502 If  non-locally  deleted \u2502 \u2502                        \u2502         \u2502 files should be moved to \u2502 \u2502                        \u2502         \u2502 trash     instead     of \u2502 \u2502                        \u2502         \u2502 deleting            them \u2502 \u2502                        \u2502         \u2502 completely.  This option \u2502 \u2502                        \u2502         \u2502 only works on linux      \u2502 \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518 \u2502showExperimentalOptions \u2502 false   \u2502 Whether      to     show \u2502 \u2502                        \u2502         \u2502 experimental     options \u2502 \u2502                        \u2502         \u2502 that      are      still \u2502 \u2502                        \u2502         \u2502 undergoing  testing   in \u2502 \u2502                        \u2502         \u2502 the    user   interface. \u2502 \u2502                        \u2502         \u2502 Turning this on does not \u2502 \u2502                        \u2502         \u2502 enable      experimental \u2502 \u2502                        \u2502         \u2502 behavior on its own.  It \u2502 \u2502                        \u2502         \u2502 does     enable     user \u2502 \u2502                        \u2502         \u2502 inferface  options  that \u2502 \u2502                        \u2502         \u2502 can be used to opt in to \u2502 \u2502                        \u2502         \u2502 experimental features.   \u2502 \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518 \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510 \u2502[Proxy] section      \u2502           \u2502                          \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502Variable             \u2502 Default   \u2502 Meaning                  \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502host                 \u2502 127.0.0.1 \u2502 The address of the proxy \u2502 \u2502                     \u2502           \u2502 server.                  \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502port                 \u2502 8080      \u2502 The  port were the proxy \u2502 \u2502                     \u2502           \u2502 is listening.            \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502type                 \u2502 2         \u2502 0 for System Proxy.      \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u25021 for SOCKS5 Proxy.  \u2502           \u2502                          \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u25022 for No Proxy.      \u2502           \u2502                          \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u25023 for HTTP(S) Proxy. \u2502           \u2502                          \u2502 \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518 Please report bugs at https://github.com/owncloud/client/issues. owncloudcmd(1)",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "Search for case-insensitive \"string\" in \"log.tar.gz\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "zcat log.tar.gz | grep -a -i \"string\"\n",
+          "command-options": {
+            "zcat": {
+              "mpsum": "decompress and concatenate files to standard output"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-i": "Ignore case distinctions in patterns and input data, so that characters that differ\n only in case match each other."
+            }
+          },
+          "TLDR_inform": {
+            "zcat": {
+              "man1_zcat_38304": "print data gzip compress file print compress detail gzip file standard output print uncompress content gzip file standard output"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "su_424828: Is there a program which can count occurrence of a certain string in a binary file?"
+      ],
+      "Top-3 Scripts": [
+        "su_424828: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "input",
+      "MP Summary": "Yagi-Uda project antenna defining program",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "Search for case-insensitive \"string\" in \"log.tar.gz\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "zcat log.tar.gz | grep -a -i \"string\"\n",
+          "command-options": {
+            "zcat": {
+              "mpsum": "decompress and concatenate files to standard output"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-i": "Ignore case distinctions in patterns and input data, so that characters that differ\n only in case match each other."
+            }
+          },
+          "TLDR_inform": {
+            "zcat": {
+              "man1_zcat_38304": "print data gzip compress file print compress detail gzip file standard output print uncompress content gzip file standard output"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "su_424828: Is there a program which can count occurrence of a certain string in a binary file?",
+        "so_55501846: Bash: How to search a string in file with Regex and get the associated value"
+      ],
+      "Top-3 Scripts": [
+        "su_424828: ",
+        "so_55501846: [[ $input == $pattern ]]"
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

@@ -1,0 +1,90 @@
+
+
+Query:                How to download an MP3 track from a YouTube video
+
+
+########################################################################################################################
+
+
+Question Title:       Problem downloading youtube video
+Question Link:        https://superuser.com/questions/319402
+
+Accepted Answer:      If you have a GUI, I would recommend Video Download Helper; it is a rock solid Firefox extension that detects any flash media on a page (including YouTube) and gives you an easy menu to select it for download from. 
+                      
+                      https://addons.mozilla.org/en-US/firefox/addon/video-downloadhelper/
+
+
+########################################################################################################################
+
+
+Question Title:       Download youtube playlist from youtube-dl. but no sounds
+Question Link:        https://askubuntu.com/questions/1222471
+
+Accepted Answer:      Video format 136 is a video only. Video format 22 is 720p video with audio.
+
+
+########################################################################################################################
+
+
+Question Title:       Unable to download youtube video
+Question Link:        https://unix.stackexchange.com/questions/118804
+
+Accepted Answer:      The youtube-dl script comes with its own update mechanism. Simply run this to update it:
+                      
+                      $ youtube-dl -U
+                      
+                      
+                      See the help (--help):
+                      
+                      -U, --update        update this program to latest version. Make sure 
+                                          that you have sufficient permissions (run with sudo if 
+                                          needed)
+                      
+                      
+                      This is a little cat and mouse game that users of this script have to periodically update the script, because YouTube breaks the ability to download videos from the site.
+                      
+                      I would also encourage you to use single/double quotes when passing the URLs to youtube-dl via the command line on the off chance that they include unusual characters such as question marks and ampersands. This way, the shell does not interpret those characters!
+                      
+                      
+                        Here's a example of using single quotes:
+                        
+                        $ youtube-dl 'http://www.youtube.com/watch?v=ONWvX8ESrsk'
+                      
+
+
+########################################################################################################################
+
+
+Question Title:       Downloading youtube playlist with youtube-dl, skipping existing files
+Question Link:        https://askubuntu.com/questions/709258
+
+Accepted Answer:      With the option --download-archive FILE youtube-dl both reads and adds to a list of files not to download again.  Every time a file is successfully downloaded, that video id is added to FILE.
+                      
+                      You can use it as follows:
+                      
+                      youtube-dl --download-archive downloaded.txt --no-post-overwrites -ciwx --audio-format mp3 -o "%(title)s.%(ext)s" [path here]
+                      
+                      It will redownload any videos from before that you didn't keep for one last time as it creates the list.  You can now delete them.
+                      
+                      If your MP3 files had been named with the default format of %(title)s-%(id)s.%(ext)s, you could have avoided the redownload by creating downloaded.txt from the youtube %(id)s in a bash terminal as follows:
+                      
+                      for n in *.mp3
+                      do if [[ "$n" =~ -[-_0-9a-zA-Z]{11}.mp3$ ]]
+                         then echo "youtube ${n: -15: 11}" &gt;&gt; downloaded.txt
+                         fi
+                      done
+                      
+
+
+########################################################################################################################
+
+
+Question Title:       youtube-dl not downloading the whole playlist
+Question Link:        https://unix.stackexchange.com/questions/364676
+
+Accepted Answer:      Both are playlist URLs and both will work if you properly escape special characters or enclose URL in quotes.
+                      
+                      youtube-dl -f bestaudio 'https://www.youtube.com/watch?v=JGwWNGJdvx8&amp;list=PLx0sYbCqOb8TBPRdmBHs5Iftvv9TPboYG'
+                      
+                      
+                      Also, do not use sudo with youtube-dl except for updating using sudo youtube-dl -U.

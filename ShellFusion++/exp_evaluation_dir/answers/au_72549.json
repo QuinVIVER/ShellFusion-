@@ -1,0 +1,959 @@
+{
+  "Query": "How to determine which window manager is running",
+  "Answers": [
+    {
+      "Command": "find",
+      "MP Summary": "search for files in a directory hierarchy",
+      "Most Similar TLDR Task": "Run a command for each file (use `{}` within the command to access the filename)",
+      "Most Similar TLDR Script": "find {{root_path}} -name '{{*.ext}}' -exec {{wc -l {} }}\\;",
+      "Most Similar NL2Bash Task": "Run 'git pull' in every git repository in the current directory",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -name \".git\" -type d | sed 's/\\/.git//' |  xargs -P10 -I{} git -C {} pull\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-type": "File is of type c:"
+            },
+            "sed": {
+              "mpsum": "stream editor for filtering and transforming text"
+            },
+            "xargs": {
+              "mpsum": "build and execute command lines from standard input",
+              "-I": "Replace occurrences of replace-str in the initial-arguments with names read from\n standard input. Also, unquoted blanks do not terminate input items; instead the\n separator is the newline character. Implies -x and -L 1."
+            },
+            "git": {
+              "mpsum": "the stupid content tracker",
+              "-C": "Run as if git was started in <path> instead of the current working directory. When\n multiple -C options are given, each subsequent non-absolute -C <path> is interpreted\n relative to the preceding -C <path>. If <path> is present but empty, e.g. -C \"\", then\n the current working directory is left unchanged."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "sed": {
+              "man1_sed_30692": "edit text scriptabl manner appli multipl find-replac express file delet line match line pattern print first 11 line file replac occurr string file overwrit file e\nin-plac replac occurr extend regular express file print result replac line match line pattern replac separ charact use find replac pattern e g replac first occurr regular express line file print result"
+            },
+            "xargs": {
+              "man1_xargs_37433": "execut command pipe argument come anoth command file etc\ninput treat singl block text split separ piec space tab newlin end-of-fil delet file backup extens -print0 use null charact split file name -0 use delimit execut command input line replac occurr placehold mark _ input line parallel run max-proc process time default 1 max-proc 0 xarg run mani process possibl time run command use input data argument run multipl chain command input data"
+            },
+            "git": {
+              "man1_git_12328": "distribut version control system check git version execut git subcommand execut git subcommand custom repositori root path execut git subcommand given configur set show gener help show help git subcommand like commit log etc"
+            }
+          }
+        },
+        "1": {
+          "script": "find . -type d -name .git -exec sh -c \"cd \\\"{}\\\"/../ && pwd && git pull\" \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-type": "File is of type c:"
+            },
+            "sh": {
+              "mpsum": "MirBSD Korn shell",
+              "-c": "Impose a size limit of n blocks on the size of core dumps."
+            },
+            "pwd": {
+              "mpsum": "print name of current/working directory"
+            },
+            "git": {
+              "mpsum": "the stupid content tracker"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "sh": {
+              "man1_sh_20845": "bourn shell\nstandard command languag interpret execut command run command stdin run command file start interact shell"
+            },
+            "pwd": {
+              "man1_pwd_27745": "print name current work directori print current directori print current directori resolv symlink e\nshow physic path"
+            },
+            "git": {
+              "man1_git_12328": "distribut version control system check git version execut git subcommand execut git subcommand custom repositori root path execut git subcommand given configur set show gener help show help git subcommand like commit log etc"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_976: display all the files in the current folder which have been modified in the last 24 hours excluding all directories",
+        "nl2bash_9887: Print the list of files in the current directory tree ignoring .svn, .git, and other hidden directories",
+        "nl2bash_7773: find all the php/javascript files in current folder using regular expressions"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_976: find . \\( -type d ! -name . -prune \\) -o \\( -mtime -1 -print \\)",
+        "nl2bash_9887: find . -type f -not -path '*/\\.*'",
+        "nl2bash_7773: find . -regex '.+\\.\\(php|js\\)'"
+      ],
+      "Explanations about Options": {
+        "-prune": "True; if the file is a directory, do not descend into it. If -depth is given, then\n -prune has no effect. Because -delete implies -depth, you cannot usefully use\n -prune and -delete together.\n For example, to skip the directory `src/emacs' and all files and directories\n under it, and print the names of the other files found, do something like this:\n find . -path ./src/emacs -prune -o -print",
+        "-mtime": "File's data was last modified n*24 hours ago. See the comments for -atime to\n understand how rounding affects the interpretation of file modification times.",
+        "-type": "File is of type c:",
+        "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+        "-print": "Quoting is handled in the same way as for -printf and -fprintf. If you are using\n find in a script or in a situation where the matched files might have arbitrary\n names, you should consider using -print0 instead of -print.",
+        "-not": "Same as ! expr, but not POSIX compliant.",
+        "-regex": "File name matches regular expression pattern. This is a match on the whole path,\n not a search. For example, to match a file named `./fubar3', you can use the\n regular expression `.*bar.' or `.*b.*3', but not `f.*r3'. The regular expressions\n understood by find are by default Emacs Regular Expressions (except that `.'\n matches newline), but this can be changed with the -regextype option."
+      }
+    },
+    {
+      "Command": "php",
+      "MP Summary": "PHP Command Line Interface 'CLI'",
+      "Most Similar TLDR Task": "Parse and execute a php script",
+      "Most Similar TLDR Script": "php {{file}}",
+      "Most Similar NL2Bash Task": "Run 'git pull' in every git repository in the current directory",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -name \".git\" -type d | sed 's/\\/.git//' |  xargs -P10 -I{} git -C {} pull\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-type": "File is of type c:"
+            },
+            "sed": {
+              "mpsum": "stream editor for filtering and transforming text"
+            },
+            "xargs": {
+              "mpsum": "build and execute command lines from standard input",
+              "-I": "Replace occurrences of replace-str in the initial-arguments with names read from\n standard input. Also, unquoted blanks do not terminate input items; instead the\n separator is the newline character. Implies -x and -L 1."
+            },
+            "git": {
+              "mpsum": "the stupid content tracker",
+              "-C": "Run as if git was started in <path> instead of the current working directory. When\n multiple -C options are given, each subsequent non-absolute -C <path> is interpreted\n relative to the preceding -C <path>. If <path> is present but empty, e.g. -C \"\", then\n the current working directory is left unchanged."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "sed": {
+              "man1_sed_30692": "edit text scriptabl manner appli multipl find-replac express file delet line match line pattern print first 11 line file replac occurr string file overwrit file e\nin-plac replac occurr extend regular express file print result replac line match line pattern replac separ charact use find replac pattern e g replac first occurr regular express line file print result"
+            },
+            "xargs": {
+              "man1_xargs_37433": "execut command pipe argument come anoth command file etc\ninput treat singl block text split separ piec space tab newlin end-of-fil delet file backup extens -print0 use null charact split file name -0 use delimit execut command input line replac occurr placehold mark _ input line parallel run max-proc process time default 1 max-proc 0 xarg run mani process possibl time run command use input data argument run multipl chain command input data"
+            },
+            "git": {
+              "man1_git_12328": "distribut version control system check git version execut git subcommand execut git subcommand custom repositori root path execut git subcommand given configur set show gener help show help git subcommand like commit log etc"
+            }
+          }
+        },
+        "1": {
+          "script": "find . -type d -name .git -exec sh -c \"cd \\\"{}\\\"/../ && pwd && git pull\" \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-type": "File is of type c:"
+            },
+            "sh": {
+              "mpsum": "MirBSD Korn shell",
+              "-c": "Impose a size limit of n blocks on the size of core dumps."
+            },
+            "pwd": {
+              "mpsum": "print name of current/working directory"
+            },
+            "git": {
+              "mpsum": "the stupid content tracker"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "sh": {
+              "man1_sh_20845": "bourn shell\nstandard command languag interpret execut command run command stdin run command file start interact shell"
+            },
+            "pwd": {
+              "man1_pwd_27745": "print name current work directori print current directori print current directori resolv symlink e\nshow physic path"
+            },
+            "git": {
+              "man1_git_12328": "distribut version control system check git version execut git subcommand execut git subcommand custom repositori root path execut git subcommand given configur set show gener help show help git subcommand like commit log etc"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_7773: find all the php/javascript files in current folder using regular expressions"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_7773: find . -regex '.+\\.\\(php|js\\)'"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "xargs",
+      "MP Summary": "build and execute command lines from standard input",
+      "Most Similar TLDR Task": "Parallel runs of up to `max-procs` processes at a time; the default is 1. If `max-procs` is 0, xargs will run as many processes as possible at a time",
+      "Most Similar TLDR Script": "{{arguments_source}} | xargs -P {{max-procs}} {{command}}",
+      "Most Similar NL2Bash Task": "Run 'git pull' in every git repository in the current directory",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -name \".git\" -type d | sed 's/\\/.git//' |  xargs -P10 -I{} git -C {} pull\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-type": "File is of type c:"
+            },
+            "sed": {
+              "mpsum": "stream editor for filtering and transforming text"
+            },
+            "xargs": {
+              "mpsum": "build and execute command lines from standard input",
+              "-I": "Replace occurrences of replace-str in the initial-arguments with names read from\n standard input. Also, unquoted blanks do not terminate input items; instead the\n separator is the newline character. Implies -x and -L 1."
+            },
+            "git": {
+              "mpsum": "the stupid content tracker",
+              "-C": "Run as if git was started in <path> instead of the current working directory. When\n multiple -C options are given, each subsequent non-absolute -C <path> is interpreted\n relative to the preceding -C <path>. If <path> is present but empty, e.g. -C \"\", then\n the current working directory is left unchanged."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "sed": {
+              "man1_sed_30692": "edit text scriptabl manner appli multipl find-replac express file delet line match line pattern print first 11 line file replac occurr string file overwrit file e\nin-plac replac occurr extend regular express file print result replac line match line pattern replac separ charact use find replac pattern e g replac first occurr regular express line file print result"
+            },
+            "xargs": {
+              "man1_xargs_37433": "execut command pipe argument come anoth command file etc\ninput treat singl block text split separ piec space tab newlin end-of-fil delet file backup extens -print0 use null charact split file name -0 use delimit execut command input line replac occurr placehold mark _ input line parallel run max-proc process time default 1 max-proc 0 xarg run mani process possibl time run command use input data argument run multipl chain command input data"
+            },
+            "git": {
+              "man1_git_12328": "distribut version control system check git version execut git subcommand execut git subcommand custom repositori root path execut git subcommand given configur set show gener help show help git subcommand like commit log etc"
+            }
+          }
+        },
+        "1": {
+          "script": "find . -type d -name .git -exec sh -c \"cd \\\"{}\\\"/../ && pwd && git pull\" \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-type": "File is of type c:"
+            },
+            "sh": {
+              "mpsum": "MirBSD Korn shell",
+              "-c": "Impose a size limit of n blocks on the size of core dumps."
+            },
+            "pwd": {
+              "mpsum": "print name of current/working directory"
+            },
+            "git": {
+              "mpsum": "the stupid content tracker"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "sh": {
+              "man1_sh_20845": "bourn shell\nstandard command languag interpret execut command run command stdin run command file start interact shell"
+            },
+            "pwd": {
+              "man1_pwd_27745": "print name current work directori print current directori print current directori resolv symlink e\nshow physic path"
+            },
+            "git": {
+              "man1_git_12328": "distribut version control system check git version execut git subcommand execut git subcommand custom repositori root path execut git subcommand given configur set show gener help show help git subcommand like commit log etc"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_2179: Find all *.jpg (case-insensitive) files under maximum 2 levels down the temp/medium/* paths and run `mogrify -resize 428x270\">\" -quality 80 -compress JPEG -monitor -strip` with the file paths as arguments",
+        "nl2bash_1562: Run 'git pull' in every git repository in the current directory"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_2179: find temp/medium/* -maxdepth 2 -iname \"*.jpg\" -print0 | xargs -0 mogrify -resize 428x270\">\" -quality 80 -compress JPEG -monitor -strip",
+        "nl2bash_1562: find . -name \".git\" -type d | sed 's/\\/.git//' |  xargs -P10 -I{} git -C {} pull"
+      ],
+      "Explanations about Options": {
+        "-0": "Input items are terminated by a null character instead of by whitespace, and the\n quotes and backslash are not special (every character is taken literally).\n Disables the end of file string, which is treated like any other argument. Useful\n when input items might contain white space, quote marks, or backslashes. The GNU\n find -print0 option produces input suitable for this mode.",
+        "-I": "Replace occurrences of replace-str in the initial-arguments with names read from\n standard input. Also, unquoted blanks do not terminate input items; instead the\n separator is the newline character. Implies -x and -L 1."
+      }
+    },
+    {
+      "Command": "mogrify",
+      "MP Summary": "resize an image, blur, crop, despeckle, dither, draw on, flip, join, re-sample, and much more. Mogrify overwrites the original image file, whereas, convert-im6.q16hdri(1) writes to a different image file.",
+      "Most Similar TLDR Task": "Double the brightness of all image files in the current directory",
+      "Most Similar TLDR Script": "mogrify -modulate {{200}} {{*}}",
+      "Most Similar NL2Bash Task": "Run 'git pull' in every git repository in the current directory",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -name \".git\" -type d | sed 's/\\/.git//' |  xargs -P10 -I{} git -C {} pull\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-type": "File is of type c:"
+            },
+            "sed": {
+              "mpsum": "stream editor for filtering and transforming text"
+            },
+            "xargs": {
+              "mpsum": "build and execute command lines from standard input",
+              "-I": "Replace occurrences of replace-str in the initial-arguments with names read from\n standard input. Also, unquoted blanks do not terminate input items; instead the\n separator is the newline character. Implies -x and -L 1."
+            },
+            "git": {
+              "mpsum": "the stupid content tracker",
+              "-C": "Run as if git was started in <path> instead of the current working directory. When\n multiple -C options are given, each subsequent non-absolute -C <path> is interpreted\n relative to the preceding -C <path>. If <path> is present but empty, e.g. -C \"\", then\n the current working directory is left unchanged."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "sed": {
+              "man1_sed_30692": "edit text scriptabl manner appli multipl find-replac express file delet line match line pattern print first 11 line file replac occurr string file overwrit file e\nin-plac replac occurr extend regular express file print result replac line match line pattern replac separ charact use find replac pattern e g replac first occurr regular express line file print result"
+            },
+            "xargs": {
+              "man1_xargs_37433": "execut command pipe argument come anoth command file etc\ninput treat singl block text split separ piec space tab newlin end-of-fil delet file backup extens -print0 use null charact split file name -0 use delimit execut command input line replac occurr placehold mark _ input line parallel run max-proc process time default 1 max-proc 0 xarg run mani process possibl time run command use input data argument run multipl chain command input data"
+            },
+            "git": {
+              "man1_git_12328": "distribut version control system check git version execut git subcommand execut git subcommand custom repositori root path execut git subcommand given configur set show gener help show help git subcommand like commit log etc"
+            }
+          }
+        },
+        "1": {
+          "script": "find . -type d -name .git -exec sh -c \"cd \\\"{}\\\"/../ && pwd && git pull\" \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-type": "File is of type c:"
+            },
+            "sh": {
+              "mpsum": "MirBSD Korn shell",
+              "-c": "Impose a size limit of n blocks on the size of core dumps."
+            },
+            "pwd": {
+              "mpsum": "print name of current/working directory"
+            },
+            "git": {
+              "mpsum": "the stupid content tracker"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "sh": {
+              "man1_sh_20845": "bourn shell\nstandard command languag interpret execut command run command stdin run command file start interact shell"
+            },
+            "pwd": {
+              "man1_pwd_27745": "print name current work directori print current directori print current directori resolv symlink e\nshow physic path"
+            },
+            "git": {
+              "man1_git_12328": "distribut version control system check git version execut git subcommand execut git subcommand custom repositori root path execut git subcommand given configur set show gener help show help git subcommand like commit log etc"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_2179: Find all *.jpg (case-insensitive) files under maximum 2 levels down the temp/medium/* paths and run `mogrify -resize 428x270\">\" -quality 80 -compress JPEG -monitor -strip` with the file paths as arguments"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_2179: find temp/medium/* -maxdepth 2 -iname \"*.jpg\" -print0 | xargs -0 mogrify -resize 428x270\">\" -quality 80 -compress JPEG -monitor -strip"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "sleep",
+      "MP Summary": "delay for a specified amount of time",
+      "Most Similar TLDR Task": "Delay in minutes",
+      "Most Similar TLDR Script": "sleep {{minutes}}m",
+      "Most Similar NL2Bash Task": "Run 'git pull' in every git repository in the current directory",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -name \".git\" -type d | sed 's/\\/.git//' |  xargs -P10 -I{} git -C {} pull\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-type": "File is of type c:"
+            },
+            "sed": {
+              "mpsum": "stream editor for filtering and transforming text"
+            },
+            "xargs": {
+              "mpsum": "build and execute command lines from standard input",
+              "-I": "Replace occurrences of replace-str in the initial-arguments with names read from\n standard input. Also, unquoted blanks do not terminate input items; instead the\n separator is the newline character. Implies -x and -L 1."
+            },
+            "git": {
+              "mpsum": "the stupid content tracker",
+              "-C": "Run as if git was started in <path> instead of the current working directory. When\n multiple -C options are given, each subsequent non-absolute -C <path> is interpreted\n relative to the preceding -C <path>. If <path> is present but empty, e.g. -C \"\", then\n the current working directory is left unchanged."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "sed": {
+              "man1_sed_30692": "edit text scriptabl manner appli multipl find-replac express file delet line match line pattern print first 11 line file replac occurr string file overwrit file e\nin-plac replac occurr extend regular express file print result replac line match line pattern replac separ charact use find replac pattern e g replac first occurr regular express line file print result"
+            },
+            "xargs": {
+              "man1_xargs_37433": "execut command pipe argument come anoth command file etc\ninput treat singl block text split separ piec space tab newlin end-of-fil delet file backup extens -print0 use null charact split file name -0 use delimit execut command input line replac occurr placehold mark _ input line parallel run max-proc process time default 1 max-proc 0 xarg run mani process possibl time run command use input data argument run multipl chain command input data"
+            },
+            "git": {
+              "man1_git_12328": "distribut version control system check git version execut git subcommand execut git subcommand custom repositori root path execut git subcommand given configur set show gener help show help git subcommand like commit log etc"
+            }
+          }
+        },
+        "1": {
+          "script": "find . -type d -name .git -exec sh -c \"cd \\\"{}\\\"/../ && pwd && git pull\" \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-type": "File is of type c:"
+            },
+            "sh": {
+              "mpsum": "MirBSD Korn shell",
+              "-c": "Impose a size limit of n blocks on the size of core dumps."
+            },
+            "pwd": {
+              "mpsum": "print name of current/working directory"
+            },
+            "git": {
+              "mpsum": "the stupid content tracker"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "sh": {
+              "man1_sh_20845": "bourn shell\nstandard command languag interpret execut command run command stdin run command file start interact shell"
+            },
+            "pwd": {
+              "man1_pwd_27745": "print name current work directori print current directori print current directori resolv symlink e\nshow physic path"
+            },
+            "git": {
+              "man1_git_12328": "distribut version control system check git version execut git subcommand execut git subcommand custom repositori root path execut git subcommand given configur set show gener help show help git subcommand like commit log etc"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_1524: Executes 'sleep 10' in a subshell created by a pipeline of built-in function 'true'."
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_1524: true | sleep 10"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "sh",
+      "MP Summary": "MirBSD Korn shell",
+      "Most Similar TLDR Task": "Execute a command",
+      "Most Similar TLDR Script": "sh -c {{command}}",
+      "Most Similar NL2Bash Task": "Run 'git pull' in every git repository in the current directory",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -name \".git\" -type d | sed 's/\\/.git//' |  xargs -P10 -I{} git -C {} pull\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-type": "File is of type c:"
+            },
+            "sed": {
+              "mpsum": "stream editor for filtering and transforming text"
+            },
+            "xargs": {
+              "mpsum": "build and execute command lines from standard input",
+              "-I": "Replace occurrences of replace-str in the initial-arguments with names read from\n standard input. Also, unquoted blanks do not terminate input items; instead the\n separator is the newline character. Implies -x and -L 1."
+            },
+            "git": {
+              "mpsum": "the stupid content tracker",
+              "-C": "Run as if git was started in <path> instead of the current working directory. When\n multiple -C options are given, each subsequent non-absolute -C <path> is interpreted\n relative to the preceding -C <path>. If <path> is present but empty, e.g. -C \"\", then\n the current working directory is left unchanged."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "sed": {
+              "man1_sed_30692": "edit text scriptabl manner appli multipl find-replac express file delet line match line pattern print first 11 line file replac occurr string file overwrit file e\nin-plac replac occurr extend regular express file print result replac line match line pattern replac separ charact use find replac pattern e g replac first occurr regular express line file print result"
+            },
+            "xargs": {
+              "man1_xargs_37433": "execut command pipe argument come anoth command file etc\ninput treat singl block text split separ piec space tab newlin end-of-fil delet file backup extens -print0 use null charact split file name -0 use delimit execut command input line replac occurr placehold mark _ input line parallel run max-proc process time default 1 max-proc 0 xarg run mani process possibl time run command use input data argument run multipl chain command input data"
+            },
+            "git": {
+              "man1_git_12328": "distribut version control system check git version execut git subcommand execut git subcommand custom repositori root path execut git subcommand given configur set show gener help show help git subcommand like commit log etc"
+            }
+          }
+        },
+        "1": {
+          "script": "find . -type d -name .git -exec sh -c \"cd \\\"{}\\\"/../ && pwd && git pull\" \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-type": "File is of type c:"
+            },
+            "sh": {
+              "mpsum": "MirBSD Korn shell",
+              "-c": "Impose a size limit of n blocks on the size of core dumps."
+            },
+            "pwd": {
+              "mpsum": "print name of current/working directory"
+            },
+            "git": {
+              "mpsum": "the stupid content tracker"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "sh": {
+              "man1_sh_20845": "bourn shell\nstandard command languag interpret execut command run command stdin run command file start interact shell"
+            },
+            "pwd": {
+              "man1_pwd_27745": "print name current work directori print current directori print current directori resolv symlink e\nshow physic path"
+            },
+            "git": {
+              "man1_git_12328": "distribut version control system check git version execut git subcommand execut git subcommand custom repositori root path execut git subcommand given configur set show gener help show help git subcommand like commit log etc"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_1562: Run 'git pull' in every git repository in the current directory"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_1562: find . -type d -name .git -exec sh -c \"cd \\\"{}\\\"/../ && pwd && git pull\" \\;"
+      ],
+      "Explanations about Options": {
+        "-c": "Impose a size limit of n blocks on the size of core dumps."
+      }
+    },
+    {
+      "Command": "sed",
+      "MP Summary": "stream editor for filtering and transforming text",
+      "Most Similar TLDR Task": "Replace separator / by any other character not used in the find or replace patterns, e.g., #",
+      "Most Similar TLDR Script": "sed 's#{{find}}#{{replace}}#' {{filename}}",
+      "Most Similar NL2Bash Task": "Run 'git pull' in every git repository in the current directory",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -name \".git\" -type d | sed 's/\\/.git//' |  xargs -P10 -I{} git -C {} pull\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-type": "File is of type c:"
+            },
+            "sed": {
+              "mpsum": "stream editor for filtering and transforming text"
+            },
+            "xargs": {
+              "mpsum": "build and execute command lines from standard input",
+              "-I": "Replace occurrences of replace-str in the initial-arguments with names read from\n standard input. Also, unquoted blanks do not terminate input items; instead the\n separator is the newline character. Implies -x and -L 1."
+            },
+            "git": {
+              "mpsum": "the stupid content tracker",
+              "-C": "Run as if git was started in <path> instead of the current working directory. When\n multiple -C options are given, each subsequent non-absolute -C <path> is interpreted\n relative to the preceding -C <path>. If <path> is present but empty, e.g. -C \"\", then\n the current working directory is left unchanged."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "sed": {
+              "man1_sed_30692": "edit text scriptabl manner appli multipl find-replac express file delet line match line pattern print first 11 line file replac occurr string file overwrit file e\nin-plac replac occurr extend regular express file print result replac line match line pattern replac separ charact use find replac pattern e g replac first occurr regular express line file print result"
+            },
+            "xargs": {
+              "man1_xargs_37433": "execut command pipe argument come anoth command file etc\ninput treat singl block text split separ piec space tab newlin end-of-fil delet file backup extens -print0 use null charact split file name -0 use delimit execut command input line replac occurr placehold mark _ input line parallel run max-proc process time default 1 max-proc 0 xarg run mani process possibl time run command use input data argument run multipl chain command input data"
+            },
+            "git": {
+              "man1_git_12328": "distribut version control system check git version execut git subcommand execut git subcommand custom repositori root path execut git subcommand given configur set show gener help show help git subcommand like commit log etc"
+            }
+          }
+        },
+        "1": {
+          "script": "find . -type d -name .git -exec sh -c \"cd \\\"{}\\\"/../ && pwd && git pull\" \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-type": "File is of type c:"
+            },
+            "sh": {
+              "mpsum": "MirBSD Korn shell",
+              "-c": "Impose a size limit of n blocks on the size of core dumps."
+            },
+            "pwd": {
+              "mpsum": "print name of current/working directory"
+            },
+            "git": {
+              "mpsum": "the stupid content tracker"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "sh": {
+              "man1_sh_20845": "bourn shell\nstandard command languag interpret execut command run command stdin run command file start interact shell"
+            },
+            "pwd": {
+              "man1_pwd_27745": "print name current work directori print current directori print current directori resolv symlink e\nshow physic path"
+            },
+            "git": {
+              "man1_git_12328": "distribut version control system check git version execut git subcommand execut git subcommand custom repositori root path execut git subcommand given configur set show gener help show help git subcommand like commit log etc"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_1562: Run 'git pull' in every git repository in the current directory"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_1562: find . -name \".git\" -type d | sed 's/\\/.git//' |  xargs -P10 -I{} git -C {} pull"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "true",
+      "MP Summary": "do nothing, successfully",
+      "Most Similar TLDR Task": "Return a successful exit code",
+      "Most Similar TLDR Script": "true",
+      "Most Similar NL2Bash Task": "Run 'git pull' in every git repository in the current directory",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -name \".git\" -type d | sed 's/\\/.git//' |  xargs -P10 -I{} git -C {} pull\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-type": "File is of type c:"
+            },
+            "sed": {
+              "mpsum": "stream editor for filtering and transforming text"
+            },
+            "xargs": {
+              "mpsum": "build and execute command lines from standard input",
+              "-I": "Replace occurrences of replace-str in the initial-arguments with names read from\n standard input. Also, unquoted blanks do not terminate input items; instead the\n separator is the newline character. Implies -x and -L 1."
+            },
+            "git": {
+              "mpsum": "the stupid content tracker",
+              "-C": "Run as if git was started in <path> instead of the current working directory. When\n multiple -C options are given, each subsequent non-absolute -C <path> is interpreted\n relative to the preceding -C <path>. If <path> is present but empty, e.g. -C \"\", then\n the current working directory is left unchanged."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "sed": {
+              "man1_sed_30692": "edit text scriptabl manner appli multipl find-replac express file delet line match line pattern print first 11 line file replac occurr string file overwrit file e\nin-plac replac occurr extend regular express file print result replac line match line pattern replac separ charact use find replac pattern e g replac first occurr regular express line file print result"
+            },
+            "xargs": {
+              "man1_xargs_37433": "execut command pipe argument come anoth command file etc\ninput treat singl block text split separ piec space tab newlin end-of-fil delet file backup extens -print0 use null charact split file name -0 use delimit execut command input line replac occurr placehold mark _ input line parallel run max-proc process time default 1 max-proc 0 xarg run mani process possibl time run command use input data argument run multipl chain command input data"
+            },
+            "git": {
+              "man1_git_12328": "distribut version control system check git version execut git subcommand execut git subcommand custom repositori root path execut git subcommand given configur set show gener help show help git subcommand like commit log etc"
+            }
+          }
+        },
+        "1": {
+          "script": "find . -type d -name .git -exec sh -c \"cd \\\"{}\\\"/../ && pwd && git pull\" \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-type": "File is of type c:"
+            },
+            "sh": {
+              "mpsum": "MirBSD Korn shell",
+              "-c": "Impose a size limit of n blocks on the size of core dumps."
+            },
+            "pwd": {
+              "mpsum": "print name of current/working directory"
+            },
+            "git": {
+              "mpsum": "the stupid content tracker"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "sh": {
+              "man1_sh_20845": "bourn shell\nstandard command languag interpret execut command run command stdin run command file start interact shell"
+            },
+            "pwd": {
+              "man1_pwd_27745": "print name current work directori print current directori print current directori resolv symlink e\nshow physic path"
+            },
+            "git": {
+              "man1_git_12328": "distribut version control system check git version execut git subcommand execut git subcommand custom repositori root path execut git subcommand given configur set show gener help show help git subcommand like commit log etc"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_1524: Executes 'sleep 10' in a subshell created by a pipeline of built-in function 'true'."
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_1524: true | sleep 10"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "pwd",
+      "MP Summary": "print name of current/working directory",
+      "Most Similar TLDR Task": "Print the current directory, and resolve all symlinks (i.e. show the \"physical\" path)",
+      "Most Similar TLDR Script": "pwd -P",
+      "Most Similar NL2Bash Task": "Run 'git pull' in every git repository in the current directory",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -name \".git\" -type d | sed 's/\\/.git//' |  xargs -P10 -I{} git -C {} pull\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-type": "File is of type c:"
+            },
+            "sed": {
+              "mpsum": "stream editor for filtering and transforming text"
+            },
+            "xargs": {
+              "mpsum": "build and execute command lines from standard input",
+              "-I": "Replace occurrences of replace-str in the initial-arguments with names read from\n standard input. Also, unquoted blanks do not terminate input items; instead the\n separator is the newline character. Implies -x and -L 1."
+            },
+            "git": {
+              "mpsum": "the stupid content tracker",
+              "-C": "Run as if git was started in <path> instead of the current working directory. When\n multiple -C options are given, each subsequent non-absolute -C <path> is interpreted\n relative to the preceding -C <path>. If <path> is present but empty, e.g. -C \"\", then\n the current working directory is left unchanged."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "sed": {
+              "man1_sed_30692": "edit text scriptabl manner appli multipl find-replac express file delet line match line pattern print first 11 line file replac occurr string file overwrit file e\nin-plac replac occurr extend regular express file print result replac line match line pattern replac separ charact use find replac pattern e g replac first occurr regular express line file print result"
+            },
+            "xargs": {
+              "man1_xargs_37433": "execut command pipe argument come anoth command file etc\ninput treat singl block text split separ piec space tab newlin end-of-fil delet file backup extens -print0 use null charact split file name -0 use delimit execut command input line replac occurr placehold mark _ input line parallel run max-proc process time default 1 max-proc 0 xarg run mani process possibl time run command use input data argument run multipl chain command input data"
+            },
+            "git": {
+              "man1_git_12328": "distribut version control system check git version execut git subcommand execut git subcommand custom repositori root path execut git subcommand given configur set show gener help show help git subcommand like commit log etc"
+            }
+          }
+        },
+        "1": {
+          "script": "find . -type d -name .git -exec sh -c \"cd \\\"{}\\\"/../ && pwd && git pull\" \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-type": "File is of type c:"
+            },
+            "sh": {
+              "mpsum": "MirBSD Korn shell",
+              "-c": "Impose a size limit of n blocks on the size of core dumps."
+            },
+            "pwd": {
+              "mpsum": "print name of current/working directory"
+            },
+            "git": {
+              "mpsum": "the stupid content tracker"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "sh": {
+              "man1_sh_20845": "bourn shell\nstandard command languag interpret execut command run command stdin run command file start interact shell"
+            },
+            "pwd": {
+              "man1_pwd_27745": "print name current work directori print current directori print current directori resolv symlink e\nshow physic path"
+            },
+            "git": {
+              "man1_git_12328": "distribut version control system check git version execut git subcommand execut git subcommand custom repositori root path execut git subcommand given configur set show gener help show help git subcommand like commit log etc"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_1562: Run 'git pull' in every git repository in the current directory"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_1562: find . -type d -name .git -exec sh -c \"cd \\\"{}\\\"/../ && pwd && git pull\" \\;"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "git",
+      "MP Summary": "the stupid content tracker",
+      "Most Similar TLDR Task": "Show general help",
+      "Most Similar TLDR Script": "git --help",
+      "Most Similar NL2Bash Task": "Run 'git pull' in every git repository in the current directory",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -name \".git\" -type d | sed 's/\\/.git//' |  xargs -P10 -I{} git -C {} pull\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-type": "File is of type c:"
+            },
+            "sed": {
+              "mpsum": "stream editor for filtering and transforming text"
+            },
+            "xargs": {
+              "mpsum": "build and execute command lines from standard input",
+              "-I": "Replace occurrences of replace-str in the initial-arguments with names read from\n standard input. Also, unquoted blanks do not terminate input items; instead the\n separator is the newline character. Implies -x and -L 1."
+            },
+            "git": {
+              "mpsum": "the stupid content tracker",
+              "-C": "Run as if git was started in <path> instead of the current working directory. When\n multiple -C options are given, each subsequent non-absolute -C <path> is interpreted\n relative to the preceding -C <path>. If <path> is present but empty, e.g. -C \"\", then\n the current working directory is left unchanged."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "sed": {
+              "man1_sed_30692": "edit text scriptabl manner appli multipl find-replac express file delet line match line pattern print first 11 line file replac occurr string file overwrit file e\nin-plac replac occurr extend regular express file print result replac line match line pattern replac separ charact use find replac pattern e g replac first occurr regular express line file print result"
+            },
+            "xargs": {
+              "man1_xargs_37433": "execut command pipe argument come anoth command file etc\ninput treat singl block text split separ piec space tab newlin end-of-fil delet file backup extens -print0 use null charact split file name -0 use delimit execut command input line replac occurr placehold mark _ input line parallel run max-proc process time default 1 max-proc 0 xarg run mani process possibl time run command use input data argument run multipl chain command input data"
+            },
+            "git": {
+              "man1_git_12328": "distribut version control system check git version execut git subcommand execut git subcommand custom repositori root path execut git subcommand given configur set show gener help show help git subcommand like commit log etc"
+            }
+          }
+        },
+        "1": {
+          "script": "find . -type d -name .git -exec sh -c \"cd \\\"{}\\\"/../ && pwd && git pull\" \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-type": "File is of type c:"
+            },
+            "sh": {
+              "mpsum": "MirBSD Korn shell",
+              "-c": "Impose a size limit of n blocks on the size of core dumps."
+            },
+            "pwd": {
+              "mpsum": "print name of current/working directory"
+            },
+            "git": {
+              "mpsum": "the stupid content tracker"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "sh": {
+              "man1_sh_20845": "bourn shell\nstandard command languag interpret execut command run command stdin run command file start interact shell"
+            },
+            "pwd": {
+              "man1_pwd_27745": "print name current work directori print current directori print current directori resolv symlink e\nshow physic path"
+            },
+            "git": {
+              "man1_git_12328": "distribut version control system check git version execut git subcommand execut git subcommand custom repositori root path execut git subcommand given configur set show gener help show help git subcommand like commit log etc"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_1562: Run 'git pull' in every git repository in the current directory"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_1562: find . -name \".git\" -type d | sed 's/\\/.git//' |  xargs -P10 -I{} git -C {} pull\n\n\nfind . -type d -name .git -exec sh -c \"cd \\\"{}\\\"/../ && pwd && git pull\" \\;"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "nop",
+      "MP Summary": "pretty-print graph file",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "Run 'git pull' in every git repository in the current directory",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -name \".git\" -type d | sed 's/\\/.git//' |  xargs -P10 -I{} git -C {} pull\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-type": "File is of type c:"
+            },
+            "sed": {
+              "mpsum": "stream editor for filtering and transforming text"
+            },
+            "xargs": {
+              "mpsum": "build and execute command lines from standard input",
+              "-I": "Replace occurrences of replace-str in the initial-arguments with names read from\n standard input. Also, unquoted blanks do not terminate input items; instead the\n separator is the newline character. Implies -x and -L 1."
+            },
+            "git": {
+              "mpsum": "the stupid content tracker",
+              "-C": "Run as if git was started in <path> instead of the current working directory. When\n multiple -C options are given, each subsequent non-absolute -C <path> is interpreted\n relative to the preceding -C <path>. If <path> is present but empty, e.g. -C \"\", then\n the current working directory is left unchanged."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "sed": {
+              "man1_sed_30692": "edit text scriptabl manner appli multipl find-replac express file delet line match line pattern print first 11 line file replac occurr string file overwrit file e\nin-plac replac occurr extend regular express file print result replac line match line pattern replac separ charact use find replac pattern e g replac first occurr regular express line file print result"
+            },
+            "xargs": {
+              "man1_xargs_37433": "execut command pipe argument come anoth command file etc\ninput treat singl block text split separ piec space tab newlin end-of-fil delet file backup extens -print0 use null charact split file name -0 use delimit execut command input line replac occurr placehold mark _ input line parallel run max-proc process time default 1 max-proc 0 xarg run mani process possibl time run command use input data argument run multipl chain command input data"
+            },
+            "git": {
+              "man1_git_12328": "distribut version control system check git version execut git subcommand execut git subcommand custom repositori root path execut git subcommand given configur set show gener help show help git subcommand like commit log etc"
+            }
+          }
+        },
+        "1": {
+          "script": "find . -type d -name .git -exec sh -c \"cd \\\"{}\\\"/../ && pwd && git pull\" \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-type": "File is of type c:"
+            },
+            "sh": {
+              "mpsum": "MirBSD Korn shell",
+              "-c": "Impose a size limit of n blocks on the size of core dumps."
+            },
+            "pwd": {
+              "mpsum": "print name of current/working directory"
+            },
+            "git": {
+              "mpsum": "the stupid content tracker"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "sh": {
+              "man1_sh_20845": "bourn shell\nstandard command languag interpret execut command run command stdin run command file start interact shell"
+            },
+            "pwd": {
+              "man1_pwd_27745": "print name current work directori print current directori print current directori resolv symlink e\nshow physic path"
+            },
+            "git": {
+              "man1_git_12328": "distribut version control system check git version execut git subcommand execut git subcommand custom repositori root path execut git subcommand given configur set show gener help show help git subcommand like commit log etc"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_39195848: How can I determine at runtime whether ASM code is running in x86 or x64 CPU?"
+      ],
+      "Top-3 Scripts": [
+        "so_39195848: rex.w nop   ; still a nop\n\ndec eax\nnop"
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

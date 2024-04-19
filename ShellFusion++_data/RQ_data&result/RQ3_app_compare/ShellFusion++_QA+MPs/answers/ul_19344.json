@@ -1,0 +1,85 @@
+{
+  "Query": "Move folder content up one level",
+  "Answers": [
+    {
+      "Command": "dir",
+      "MP Summary": "list directory contents",
+      "Top-3 Similar Questions": [
+        "ul_285340: Move all sub-directory content up one level",
+        "so_28894976: Powershell - How to move folders named \"yyyy-mm-dd\""
+      ],
+      "Top-3 Scripts": [
+        "ul_285340: for dir in *; do mv \"$dir\"/v2.3.0/* \"$dir\"/; done\n\nfor dir in *; do mv \"$dir\"/v2.3.0/*php \"$dir\"/; done\n\nfor dir in *; do [ -d \"$dir\" ] && mv \"$dir\"/v2.3.0/* \"$dir\"/; done",
+        "so_28894976: $SourceDir = \"SourceDir\"\n$DestinationDir = \"DestDir\"\n$dir = dir $SourceDir | ?{$_.PSISContainer}\n\n$dir | ? {$_.Name -match '^[0-9]{4}-[0-9]{2}-[0-9]{2}$'} | % {\n    $source = $SourceDir +$_\n    Move-Item $source $DestinationDir\n    }"
+      ],
+      "Explanations about Options": {
+        "-c": "with -lt: sort by , and show , ctime (time of last modification of file status\n information); with -l: show ctime and sort by name; otherwise: sort by ctime,\n newest first",
+        "-d": "list directories themselves, not their contents",
+        "-m": "fill width with a comma separated list of entries",
+        "-h": "with -l and -s, print sizes like 1K 234M 2G etc.",
+        "-t": "sort by modification time , newest first",
+        "-a": "do not ignore entries starting with ."
+      }
+    },
+    {
+      "Command": "ls",
+      "MP Summary": "list directory contents",
+      "Top-3 Similar Questions": [
+        "so_43275083: Move all folders except one",
+        "so_19796053: Move Files X Per Folder",
+        "au_946385: Accidentally moved home folder?"
+      ],
+      "Top-3 Scripts": [
+        "so_43275083: ",
+        "so_19796053: ls|parallel -k -N100 x=\\$\\(printf %03d {#}\\)\\;mkdir -p \\$x\\;mv {} \\$x",
+        "au_946385: test -d ~/Desktop/~ && ls -l ~/Desktop/~ || echo 'it is a file'"
+      ],
+      "Explanations about Options": {
+        "-l": "use a long listing format"
+      }
+    },
+    {
+      "Command": "cp",
+      "MP Summary": "copy files and directories",
+      "Top-3 Similar Questions": [
+        "so_22714524: Bash: Move Content of Any Directory Named n10 Up One Level",
+        "so_670460: Move all files except one",
+        "ul_595438: bash alias to create folder and move file"
+      ],
+      "Top-3 Scripts": [
+        "so_22714524: find . -type d -name n10 \\\n  -exec bash -c '\n     for arg; do\n       cp \"$arg\"/* \"${arg%/*}\"\n     done\n  ' _ {} +",
+        "so_670460: cp -r !(Backups.backupdb) /home/masi/Documents/",
+        "ul_595438: my-function() {\n    local subdir=\"$(date +%F)-List\"\n    mkdir -v -p \"$subdir\" &&\n        cp \"$1\" \"$subdir/$1\" &&\n        cd \"$subdir\"\n}"
+      ],
+      "Explanations about Options": {
+        "-r": "copy directories recursively"
+      }
+    },
+    {
+      "Command": "rename",
+      "MP Summary": "rename files",
+      "Top-3 Similar Questions": [
+        "so_39663770: bash script to create folders and move files",
+        "ul_391441: If foldername equals \"somestring\", move all files in the folder one level up"
+      ],
+      "Top-3 Scripts": [
+        "so_39663770: rename --dry-run 's/[^0-9]//g; my $d=int($_/1000)+1; $_=\"folder$d/res_$_.root\"' *root",
+        "ul_391441: find . -path '*/FOLDER.DUPLICATE.$DRIVEBENDER/*' -prune -type f -print0 |\n  perl -0lne '\n    if (m{(.*)/FOLDER.DUPLICATE.\\$DRIVEBENDER/(.*)}s) {\n      $upperfile = \"$1/$2\";\n      if (-s > -s $upperfile) {\n        rename $_, $upperfile or warn \"rename $_: $!\\n\";\n      } else {\n        unlink $_ or warn \"unlink $_: $!\\n\";\n      }\n    }'"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "rm",
+      "MP Summary": "remove files or directories",
+      "Top-3 Similar Questions": [
+        "ul_629165: Move files up one directory"
+      ],
+      "Top-3 Scripts": [
+        "ul_629165: mv /var/www/html/wordpress/* /var/www/html/ && rm -r /var/www/html/wordpress"
+      ],
+      "Explanations about Options": {
+        "-r": "remove directories and their contents recursively"
+      }
+    }
+  ]
+}

@@ -1,0 +1,89 @@
+{
+    "Answers": [
+        {
+            "Command": "psql",
+            "Explanations about Options": {
+                "-U(M)": " Connect to the database as the user username instead of the default. (You must have\n permission to do so, of course.)",
+                "-c(M)": " Specifies that psql is to execute the given command string, command. This option can\n be repeated and combined in any order with the -f option. When either -c or -f is\n specified, psql does not read commands from standard input; instead it terminates\n after processing all the -c and -f options in sequence.",
+                "-d(M)": " Specifies the name of the database to connect to. This is equivalent to specifying\n dbname as the first non-option argument on the command line.",
+                "-h(M)": " Specifies the host name of the machine on which the server is running. If the value\n begins with a slash, it is used as the directory for the Unix-domain socket."
+            },
+            "MP Summary": "PostgreSQL interactive terminal",
+            "Most Similar TLDR Script": "psql -c '{{query}}' {{database}}",
+            "Most Similar TLDR Task": "Execute a single SQL query or PostgreSQL command on the given database (useful in shell scripts)",
+            "Top-3 Scripts": [
+                "so_58459058: queryResult () {\n    psql -h $HOSTNAME -U $USERNAME -d $DATABASE <<SQL\n        SELECT CASE WHEN COUNT(*) = 0 THEN 0 ELSE 1 END\n        FROM myTable \n        WHERE valueA > 5.0 OR valueB > 5.0;\n    SQL\n}\n\nqueryResult () {\n    psql -h $HOSTNAME -U $USERNAME -d $DATABASE <<SQL\n        SELECT CASE WHEN EXISTS (\n            SELECT 1 FROM myTable WHERE valueA > 5.0 OR valueB > 5.0\n        ) THEN 1 ELSE 0 END;\n    SQL\n}",
+                "so_15418351: napp=$(psql -U postgres appdb -c \"\n    select appno frpm app.apps\n    where properties&2048=1024;\"\n)\ncap=$(echo \"$napp\" | sed -nr 's/.*\\(([0-9]+) rows.*/\\1/p')\necho \"$cap\""
+            ],
+            "Top-3 Similar Questions": [
+                "so_58459058: Bash script to run SQL query and return result to variable",
+                "so_15418351: Query values into a variable in shell script"
+            ]
+        },
+        {
+            "Command": "mysql",
+            "Explanations about Options": {
+                "--user(M)": "The user name of the MySQL account to use for connecting to the server.",
+                "-D(M)": "The database to use. This is useful primarily in an option file.",
+                "-e(M)": "Execute the statement and quit. The default output format is like that produced with\n --batch. See Section 4.2.2.1, “Using Options on the Command Line”, for some examples.\n With this option, mysql does not use the history file.",
+                "-s(M)": "Silent mode. Produce less output. This option can be given multiple times to produce\n less and less output.\n This option results in nontabular output format and escaping of special characters.\n Escaping may be disabled by using raw mode; see the description for the --raw option.",
+                "-u(M)": "The user name of the MySQL account to use for connecting to the server."
+            },
+            "MP Summary": "the MySQL command-line client",
+            "Most Similar TLDR Script": "mysql -e \"source {{filename.sql}}\" {{database_name}}",
+            "Most Similar TLDR Task": "Execute SQL statements in a script file (batch file)",
+            "Top-3 Scripts": [
+                "so_17774405: $ myvar=$(mysql -D$MYDB -u$MYUSER -p$MYPASS -se \"SELECT domain FROM domains\")\n$ echo $myvar\ndomain1 domain2 domain3\n\nread var1 var2 var3 <<< $(mysql -D$MYDB -u$MYUSER -p$MYPASS -se \"SELECT domain FROM domains\")\n\n$ read -ra vars <<< $(mysql -D$MYDB -u$MYUSER -p$MYPASS -se \"SELECT domain FROM domains\")\n$ for i in \"${vars[@]}\"; do\n$     echo $i\n$ done\ndomain1\ndomain2\ndomain3",
+                "so_1636977: myvariable=$(echo \"SELECT A, B, C FROM table_a\" | mysql database -u $user -p$password)\n\nmyvariable=$(mysql database -u $user -p$password<<<\"SELECT A, B, C FROM table_a\")",
+                "so_26907952: echo -n 'Please enter the domain you wish to use > '\nread domain\n\n{\n  echo \"SET @domain='${domain}';\";\n  cat mailserver-databases.sql;\n} | mysql --user=\"root\" --password=\"$mysql_password\""
+            ],
+            "Top-3 Similar Questions": [
+                "so_17774405: bash - SQL Query Outputs to variable",
+                "so_1636977: Store mysql query output into a shell variable",
+                "so_26907952: Passing variables to SQL script in bash"
+            ]
+        },
+        {
+            "Command": "printf",
+            "Explanations about Options": {},
+            "MP Summary": "format and print data",
+            "Most Similar TLDR Script": "printf -v {{myvar}} {{\"This is %s = %d\\n\" \"a year\" 2016}}",
+            "Most Similar TLDR Task": "Store a formatted message in a variable (does not work on zsh)",
+            "Top-3 Scripts": [
+                "so_55485288: printf '%s\\n' \"$iUSERNAME\"",
+                "so_7389963: SOMETHING=5\n\nwhile -r read n ; do\n    if [ $n -ge $SOMETHING ] ; then\n        break\n    fi\n    sqlplus foo/bar @test2.sql \"$n\"\n    printf '%.2f%%\\n' $(expr \"$n\" \\* 100 / \"$SOMETHING\")\ndone < <(sqlplus foo/bar @test.sql)\n\nintlist=($(sqlplus foo/bar @test.sql))\n\nfor n in \"${intlist[@]}\"; do\n    if [ $n -ge ${#intlist[@]} ] ; then\n        break\n    fi\n    sqlplus foo/bar @test2.sql \"$n\"\n    printf '%.2f%%\\n' $(expr \"$n\" \\* 100 / ${#intlist[@]})\ndone < <(sqlplus foo/bar @test.sql)"
+            ],
+            "Top-3 Similar Questions": [
+                "so_55485288: How to use output in bash to assign it as variable",
+                "so_7389963: How to use sql result stored on shell variable?"
+            ]
+        },
+        {
+            "Command": "host",
+            "Explanations about Options": {},
+            "MP Summary": "DNS lookup utility",
+            "Most Similar TLDR Script": "host {{domain}} {{8.8.8.8}}",
+            "Most Similar TLDR Task": "Specify an alternate DNS server to query",
+            "Top-3 Scripts": [
+                "so_30322984: read code;\necho \"INSERT INTO data (id) VALUES ('$code')\" | mysql -p host=192.168.1.2 --user=root --password=secret databasename"
+            ],
+            "Top-3 Similar Questions": [
+                "so_30322984: bash scripting variable in SQL file"
+            ]
+        },
+        {
+            "Command": "export",
+            "Explanations about Options": {},
+            "MP Summary": "set the export attribute for variables",
+            "Most Similar TLDR Script": "export PATH=$PATH:{{path/to/append}}",
+            "Most Similar TLDR Task": "Append something to the PATH variable",
+            "Top-3 Scripts": [
+                "so_30322984: export code"
+            ],
+            "Top-3 Similar Questions": [
+                "so_30322984: bash scripting variable in SQL file"
+            ]
+        }
+    ],
+    "Query": "Assigning the output of a SQL query to variable"
+}

@@ -1,0 +1,69 @@
+{
+  "Query": "Determining what process is bound to a port",
+  "Answers": [
+    {
+      "Command": "grep",
+      "Top-3 Similar Questions": [
+        "su_123304: Determine what files are being accessed by a process",
+        "su_441792: How do I determine what running process is using java?",
+        "ul_122479: Determine what java applications are running within the java process name"
+      ],
+      "Top-3 Scripts": [
+        "su_123304: lsof -p 6714 | grep REG",
+        "su_441792: ps -ef | grep java | grep -v grep",
+        "ul_122479: jps | grep \"[0-9][0-9]* js-test-driver\""
+      ]
+    },
+    {
+      "Command": "sudo",
+      "Top-3 Similar Questions": [
+        "ul_290510: How can I determine what is printing on my console?",
+        "ul_366613: How to determine what process is eating up all available disk space?",
+        "ul_208368: How can I tell which process is IO bound?"
+      ],
+      "Top-3 Scripts": [
+        "ul_290510: sudo dmesg -n 1",
+        "ul_366613: sudo lsof -nP | grep '(deleted)'\n\nsudo kill -9 $(lsof | grep deleted | cut -d \" \" -f4)",
+        "ul_208368: sudo iotop\n\nsudo apt-get install iotop"
+      ]
+    },
+    {
+      "Command": "ps",
+      "Top-3 Similar Questions": [
+        "su_97844: How can I determine what process has a file open in Linux?",
+        "su_441792: How do I determine what running process is using java?",
+        "su_946178: How do I determine what programs are running with root privileges?"
+      ],
+      "Top-3 Scripts": [
+        "su_97844: ~> less .vimrc\n# put in background\n~> fuser .vimrc\n.vimrc:              28135\n~> ps 28135\n  PID TTY      STAT   TIME COMMAND\n28135 pts/36   T      0:00 less .vimrc",
+        "su_441792: ps -fp <pid>\n\nps -ef | grep java | grep -v grep",
+        "su_946178: ps -elf|grep root"
+      ]
+    },
+    {
+      "Command": "echo",
+      "Top-3 Similar Questions": [
+        "so_22439342: How do I determine what shell a script was meant to use?",
+        "au_683861: initramfs: where can I determine what goes into /sbin?",
+        "so_9117507: Linux/Unix command to determine if process is running?"
+      ],
+      "Top-3 Scripts": [
+        "so_9117507: echo ps cax | grep aasdfasdf | grep -o '^[ ]*[0-9]*'\n\n#!/bin/bash\nps cax | grep httpd > /dev/null\nif [ $? -eq 0 ]; then\n  echo \"Process is running.\"\nelse\n  echo \"Process is not running.\"\nfi\n\n#!/bin/bash\nps cax | grep httpd\nif [ $? -eq 0 ]; then\n  echo \"Process is running.\"\nelse\n  echo \"Process is not running.\"\nfi",
+        "ul_594141: #!/usr/bin/env bash\n\nprintf 'My PID is %s.\\n' \"$$\"\nsleep 15 && echo '123' &\nsleep 15 && echo '456' &\nsleep 15 && echo '999' &\nwait < <(jobs -p)"
+      ]
+    },
+    {
+      "Command": "dev",
+      "Top-3 Similar Questions": [
+        "ul_128471: Determine what device a directory is located on",
+        "au_200900: How do I determine what device my DVD drive is mapped to?",
+        "so_9117507: Linux/Unix command to determine if process is running?"
+      ],
+      "Top-3 Scripts": [
+        "ul_128471: $ df -h \nFilesystem                         Size  Used Avail Use% Mounted on\n/dev/mapper/fedora_greeneggs-root   50G   21G   27G  44% /\ndevtmpfs                           3.8G     0  3.8G   0% /dev\ntmpfs                              3.8G   14M  3.8G   1% /dev/shm\ntmpfs                              3.8G  984K  3.8G   1% /run\ntmpfs                              3.8G     0  3.8G   0% /sys/fs/cgroup\ntmpfs                              3.8G  3.4M  3.8G   1% /tmp\n/dev/sda1                          477M   99M  349M  23% /boot\n/dev/mapper/fedora_greeneggs-home  402G  184G  198G  49% /home\n\n/dev/sda1\n\n$ df -h /mnt\nFilesystem                         Size  Used Avail Use% Mounted on\n/dev/sda1                          477M   99M  349M  23% /\n\n$ mount | grep '^/dev'\n/dev/mapper/fedora_greeneggs-root on / type ext4 (rw,relatime,seclabel,data=ordered)\n/dev/sda1 on /boot type ext4 (rw,relatime,seclabel,data=ordered)\n/dev/mapper/fedora_greeneggs-home on /home type ext4 (rw,relatime,seclabel,data=ordered)",
+        "au_200900: mount | grep ^'/dev/sg' | awk '{print $1}'",
+        "so_9117507: #!/bin/bash\nps cax | grep httpd > /dev/null\nif [ $? -eq 0 ]; then\n  echo \"Process is running.\"\nelse\n  echo \"Process is not running.\"\nfi"
+      ]
+    }
+  ]
+}

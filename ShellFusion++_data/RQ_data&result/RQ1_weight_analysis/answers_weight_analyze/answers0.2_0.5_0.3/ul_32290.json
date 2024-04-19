@@ -1,0 +1,94 @@
+{
+  "Query": "Pass command line arguments to bash script",
+  "Answers": [
+    {
+      "Command": "eval",
+      "MP Summary": "construct command by concatenating arguments",
+      "Most Similar TLDR Task": "Call `echo` with the \"foo\" argument",
+      "Most Similar TLDR Script": "eval \"{{echo foo}}\"",
+      "Top-3 Similar Questions": [
+        "so_64667638: Appending command line arguments to a Bash array",
+        "ul_644911: Passing a command with arguments and redirection to a function",
+        "ul_213750: Split command and arguments, and put into variable in a bash script"
+      ],
+      "Top-3 Scripts": [
+        "so_64667638: ",
+        "ul_644911: eval \"$@\"\n\n#!/bin/bash\n\nf() {\n  echo \"command: $@\"\n  eval \"$@\"\n}",
+        "ul_213750: eval $_rscmd --exclude=alternatives /etc/ $_mn | eval $_grep >> \"$_rslog\""
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "xargs",
+      "MP Summary": "build and execute command lines from standard input",
+      "Most Similar TLDR Task": "Run a command using the input data as arguments",
+      "Most Similar TLDR Script": "{{arguments_source}} | xargs {{command}}",
+      "Top-3 Similar Questions": [
+        "so_65825618: How to pass arguments to bash command",
+        "ul_61183: Bash script that reads filenames from a pipe or from command line args?",
+        "so_21716789: BASH Set multiple variables depending on number of lines then pass them as command arguments"
+      ],
+      "Top-3 Scripts": [
+        "so_65825618: cat asnlookups_domains_ip.txt | awk '{print $1}' | xargs -n1 amass intel -whois -d",
+        "ul_61183: ",
+        "so_21716789: xargs -n 4"
+      ],
+      "Explanations about Options": {
+        "-i": "This option is a synonym for -Ireplace-str if replace-str is specified. If the\n replace-str argument is missing, the effect is the same as -I{}. This option is\n deprecated; use -I instead.",
+        "-n": "Use at most max-args arguments per command line. Fewer than max-args arguments\n will be used if the size (see the -s option) is exceeded, unless the -x option is\n given, in which case xargs will exit.",
+        "-o": "Reopen stdin as /dev/tty in the child process before executing the command. This\n is useful if you want xargs to run an interactive application."
+      }
+    },
+    {
+      "Command": "echo",
+      "MP Summary": "display a line of text",
+      "Most Similar TLDR Task": "Append a message to the file",
+      "Most Similar TLDR Script": "echo \"{{Hello World}}\" >> {{file.txt}}",
+      "Top-3 Similar Questions": [
+        "so_23866255: Bash shell argument passing...?",
+        "so_24522187: How to pass and get array as an argument to shell script",
+        "so_809333: Powershell Command Processing (Passing in Variables)"
+      ],
+      "Top-3 Scripts": [
+        "so_23866255: ./foo ; echo \"y\" | ./bar ; ./baz",
+        "so_24522187: #!/bin/bash\necho 'Alright! Here we can retrieve some arguments!'\necho \"Here we go: $@\" # that is including 'Wheeee' from the previous script. But we can use the same trick from above if we want to.",
+        "so_809333: > cmd \"/c echo foo\"\nfoo\"\n\n49> $param = \"/c echo foo\"\n50> echoargs $param\nArg 0 is </c echo foo>"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "command",
+      "MP Summary": "execute a simple command",
+      "Most Similar TLDR Task": "Display the path to the executable or the alias definition of a specific command",
+      "Most Similar TLDR Script": "command -v {{command_name}}",
+      "Top-3 Similar Questions": [
+        "so_48110439: Argument isn't passed (bash)",
+        "so_64667638: Appending command line arguments to a Bash array",
+        "so_1355247: Passing BASH arguments"
+      ],
+      "Top-3 Scripts": [
+        "so_48110439: [-z: command not found",
+        "so_64667638: #!/bin/bash\n\ndeclare -a COMMANDS=( )\n\nprintf -v command '%q ' \"/path/to/myscript\" \"$@\"\nCOMMANDS+=( \"$command\" )\nCMD_COUNT=${#COMMANDS[@]}\necho \"$CMD_COUNT\"",
+        "so_1355247: $ ./myscript.sh 25\nFound somestuff\n./myscript.sh: line 6: 25: command not found\n$"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "read",
+      "MP Summary": "read a line from standard input",
+      "Most Similar TLDR Task": "Store each of the next lines you enter as values of an array",
+      "Most Similar TLDR Script": "read -a {{array}}",
+      "Top-3 Similar Questions": [
+        "so_52477927: Passing an array to a function as one argument and other arguments after it",
+        "ul_532141: Passing lines from the text file of a list of files to or as arguments",
+        "ul_61183: Bash script that reads filenames from a pipe or from command line args?"
+      ],
+      "Top-3 Scripts": [
+        "so_52477927: is_node(){\n    (( $# < 3 )) && { printf 'insufficient args provided' >&2; return 1; }\n    read -ra arrayArgs <<<\"$1\"\n    printf 'Printing the array content \\n'\n    for element in \"${arrayArgs[@]}\"; do\n        printf '%s\\n' \"$element\"\n    done\n    printf '2nd arg=%s 3rd arg=%s\\n' \"$2\" \"$3\"       \n}",
+        "ul_532141: while read\n\nwhile read -r file1 file2 trash; do\n  something with \"$file1\" and \"$file2\"\ndone < /path/to/input_file",
+        "ul_61183: #!/bin/bash\n\ndeclare -a ARGS=(\"$@\")\n\nwhile read -rt .02 arg;do\n    ARGS+=($arg)\n    done\n\ndeclare -p ARGS\n\nread -t .02\n\nwhile read -t 0 &&\n    read -r arg;do\n        ARGS+=($arg)\ndone\n\nif [ $# -gt 0 ] ;then\n    for filename in  \"$@\" ; do\n        process_file \"$filename\"\n    done\n  else\n    IFS=$'\\n' read -d '' -r -a filenames\n    for filename in \"${filenames[@]}\"; do\n        process_file \"$filename\"\n    done\n  fi\n\nIFS=$'\\n' read -d '' -r -a filenames\n  for filename in \"${filenames[@]}\" \"$@\" ; do\n        process_file \"$filename\"\n    done\n  fi"
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

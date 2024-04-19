@@ -1,0 +1,91 @@
+{
+  "Query": "How to play mp3 files from the command line?",
+  "Answers": [
+    {
+      "Command": "eyeD3",
+      "MP Summary": "displays and manipulates id3-tags on mp3 files",
+      "Most Similar TLDR Task": "Set the title of an MP3 file",
+      "Most Similar TLDR Script": "eyeD3 --title \"{{A Title}}\" {{filename.mp3}}",
+      "Top-3 Similar Questions": [
+        "ul_41287: How to Extract Album Cover Image from MP3 file?"
+      ],
+      "Top-3 Scripts": [
+        "ul_41287: eyeD3 --write-images=DIR mp3_file"
+      ],
+      "Explanations about Options": {
+        "--write-images": "Causes all attached images (APIC frames) to be written to the specified directory."
+      }
+    },
+    {
+      "Command": "vlc",
+      "MP Summary": "the VLC media player",
+      "Most Similar TLDR Task": "Play a file",
+      "Most Similar TLDR Script": "vlc {{path/to/file}}",
+      "Top-3 Similar Questions": [
+        "so_38171169: How to play mp3 from URL",
+        "au_997691: How to play first n seconds of each file from a playlist",
+        "au_953631: Read .mp3 files from an USB stick, is it possible?"
+      ],
+      "Top-3 Scripts": [
+        "so_38171169: import vlc\np = vlc.MediaPlayer(\"http://your_mp3_url\")\np.play()",
+        "au_997691: vlc --playlist-autostart <path/to/playlist.xspf> --run-time=10\n\nexport DISPLAY=:0; vlc --playlist-autostart <path/to/playlist.xspf> --run-time=10\n\nexport DISPLAY=:0; vlc --playlist-autostart <path/to/playlist.xspf> --run-time=10 vlc://quit",
+        "au_953631: sudo apt-get update\nsudo apt-get install vlc\n\nsudo add-apt-repository universe  # and press Enter\nsudo apt-get update\nsudo apt-get install vlc\nsudo apt-get install pulseaudio pavucontrol"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "ffmpeg",
+      "MP Summary": "ffmpeg video converter",
+      "Most Similar TLDR Task": "Extract the sound from a video and save it as MP3",
+      "Most Similar TLDR Script": "ffmpeg -i {{video.mp4}} -vn {{sound}}.mp3",
+      "Top-3 Similar Questions": [
+        "au_928583: extract a segment from some mp3 file",
+        "ul_626722: Remove album art from MP3 files using the command line",
+        "so_16463276: Trim the first 11 seconds from an mp3 file"
+      ],
+      "Top-3 Scripts": [
+        "au_928583: ffmpeg -ss 00:01:20 -t 00:01:20 -acodec copy -i /path/to/input.mp3 /path/to/output.mp3",
+        "ul_626722: for song in **/*.mp3\n   do NAME=$(echo ${song%/*} | sed -e 's|[/ ]|-|g\u2019)\n      ffmpeg -y -i $song -vn -c copy /path/NOART/\"$NAME-\"${song##*/}; \ndone",
+        "so_16463276: ffmpeg -i infile.mp3 -ss 11 outfile.mp3\n\nffmpeg -i infile.mp3 -ss 11 /tmp/outfile.wav\nlame /tmp/outfile.wav outfile.mp3"
+      ],
+      "Explanations about Options": {
+        "-ss": "When used as an input option (before \"-i\"), seeks in this input file to position. Note\n that in most formats it is not possible to seek exactly, so ffmpeg will seek to the\n closest seek point before position. When transcoding and -accurate_seek is enabled\n (the default), this extra segment between the seek point and position will be decoded\n and discarded. When doing stream copy or when -noaccurate_seek is used, it will be\n preserved.",
+        "-t": "When used as an input option (before \"-i\"), limit the duration of data read from the\n input file.",
+        "-vn": "As an input option, blocks all video streams of a file from being filtered or being\n automatically selected or mapped for any output. See \"-discard\" option to disable\n streams individually.",
+        "-y": "Overwrite output files without asking.",
+        "-acodec": "Set the audio codec. This is an alias for \"-codec:a\".",
+        "-i": "input file url"
+      }
+    },
+    {
+      "Command": "echo",
+      "MP Summary": "display a line of text",
+      "Most Similar TLDR Task": "Append a message to the file",
+      "Most Similar TLDR Script": "echo \"{{Hello World}}\" >> {{file.txt}}",
+      "Top-3 Similar Questions": [
+        "ul_626722: Remove album art from MP3 files using the command line",
+        "so_55636258: How to play sound from base64 converted files using bash script?",
+        "au_196890: How to find the bitrate of an mp3 file via command line?"
+      ],
+      "Top-3 Scripts": [
+        "ul_626722: for song in **/*.mp3\n   do NAME=$(echo ${song%/*} | sed -e 's|[/ ]|-|g\u2019)\n      ffmpeg -y -i $song -vn -c copy /path/NOART/\"$NAME-\"${song##*/}; \ndone\n\necho ${song%/*} | sed -e 's|[/ ]|-|g\u2019",
+        "so_55636258: ",
+        "au_196890: bitrate () {\n    echo `basename \"$1\"`: `file \"$1\" | sed 's/.*, \\(.*\\)kbps.*/\\1/' | tr -d \" \" ` kbps\n}"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "unzip",
+      "MP Summary": "list, test and extract compressed files in a ZIP archive",
+      "Most Similar TLDR Task": "List the contents of a zip file without extracting",
+      "Most Similar TLDR Script": "unzip -l {{file.zip}}",
+      "Top-3 Similar Questions": [
+        "ul_49992: How can I view files in zip from a terminal command line"
+      ],
+      "Top-3 Scripts": [
+        "ul_49992: unzip -l <filename>"
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

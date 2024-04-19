@@ -1,0 +1,86 @@
+{
+    "Answers": [
+        {
+            "Command": "uptime",
+            "Explanations about Options": {},
+            "MP Summary": "Tell how long the system has been running.",
+            "Most Similar TLDR Script": "uptime",
+            "Most Similar TLDR Task": "Print current time, uptime, number of logged-in users and other information",
+            "Top-3 Scripts": [
+                "ul_166318: /proc/uptime\n\ncat /proc/uptime\n\n# if your awk is new enough, 1 second resolution.\nawk '//{print strftime(\"%c\",systime()-$1)}' /proc/uptime \n# for older awk, but requires bc binary, high resolution\ndate -d @$(echo $(date +%s.%N) - $(awk '{print $1}' /proc/uptime) |bc )\n# older awk, 1 second resolution, no bc\ndate -d @$(( $(date +%s) - $(awk '{printf \"%d\",$1}' /proc/uptime) ))",
+                "ul_275907: /proc/uptime\n\n/proc/uptime\n          This file contains two numbers: the uptime of the system\n          (seconds), and the amount of time spent in idle process\n          (seconds).",
+                "ul_257135: /proc/uptime"
+            ],
+            "Top-3 Similar Questions": [
+                "ul_166318: Find out at what time my machine got restarted and why?",
+                "so_3070278: Uptime under linux in C",
+                "ul_275907: On Linux, when does \"uptime\" start counting from?"
+            ]
+        },
+        {
+            "Command": "ps",
+            "Explanations about Options": {
+                "-e(M)": "Select all processes. Identical to -A.",
+                "-f(M)": "Do full-format listing. This option can be combined with many other UNIX-style\n options to add additional columns. It also causes the command arguments to be\n printed. When used with -L, the NLWP (number of threads) and LWP (thread ID)\n columns will be added. See the c option, the format keyword args, and the format\n keyword comm.",
+                "-p(M)": "Select by PID. This selects the processes whose process ID numbers appear in\n pidlist. Identical to p and --pid."
+            },
+            "MP Summary": "report a snapshot of the current processes.",
+            "Most Similar TLDR Script": "ps -o ppid= -p {{pid}}",
+            "Most Similar TLDR Task": "Get the parent pid of a process",
+            "Top-3 Scripts": [
+                "ul_27276: LC_ALL=POSIX ps -o etime= -p $PID\n\nt=$(LC_ALL=POSIX ps -o etime= -p $PID)\nd=0 h=0\ncase $t in *-*) d=$((0 + ${t%%-*})); t=${t#*-};; esac\ncase $t in *:*:*) h=$((0 + ${t%%:*})); t=${t#*:};; esac\ns=$((10#$d*86400 + 10#$h*3600 + 10#${t%%:*}*60 + 10#${t#*:}))",
+                "so_2598145: ps -eo pid,etime | grep $YOUR_PID | awk '{print $2}'\n\nps -eo pid,stime | grep $YOUR_PID | awk '{print $2}'",
+                "ul_50416: ps  -p 1983  -f   # 1983 being the PID your screenshot shows"
+            ],
+            "Top-3 Similar Questions": [
+                "ul_27276: How to get a process uptime under different OS?",
+                "so_2598145: How to retrieve the process start time (or uptime) in python",
+                "ul_50416: How to find out what is this process for?"
+            ]
+        },
+        {
+            "Command": "pstree",
+            "Explanations about Options": {
+                "-p(M)": "Show PIDs. PIDs are shown as decimal numbers in parentheses after each process\n name. -p implicitly disables compaction."
+            },
+            "MP Summary": "display a tree of processes",
+            "Most Similar TLDR Script": "pstree -p",
+            "Most Similar TLDR Task": "Display a tree of processes with PIDs",
+            "Top-3 Scripts": [
+                "so_34499251: $ pstree\n\n$ pstree | grep <proc_name> -B 10",
+                "su_137462: $ pstree -p dharris\nscreen(17796)─┬─bash(4467)───emacs(4498)───sh(3344)───sh(3345)\n              ├─bash(4532)───su(31037)───bash(31041)\n              ├─bash(4916)───pstree(26456)\n              ├─bash(13547)───su(20442)───bash(20443)\n              └─bash(17797)\n\nsshd(25813)───bash(25817)───screen(25870)"
+            ],
+            "Top-3 Similar Questions": [
+                "so_34499251: How to find out where the process comes from in Linux?",
+                "su_137462: How do you find the parent process of a zombie process?"
+            ]
+        },
+        {
+            "Command": "top",
+            "Explanations about Options": {
+                "-i(M)": "Starts top with the last remembered `i' state reversed. When this toggle is Off,\n tasks that have not used any CPU since the last update will not be displayed. For\n additional information regarding this toggle see topic 4c. TASK AREA Commands, SIZE."
+            },
+            "MP Summary": "display Linux processes",
+            "Most Similar TLDR Script": "top -i",
+            "Most Similar TLDR Task": "Do not show any idle or zombie processes",
+            "Top-3 Scripts": [],
+            "Top-3 Similar Questions": [
+                "so_3070278: Uptime under linux in C"
+            ]
+        },
+        {
+            "Command": "wait",
+            "Explanations about Options": {},
+            "MP Summary": "await process completion",
+            "Most Similar TLDR Script": "wait {{pid}}",
+            "Most Similar TLDR Task": "Wait for a process to finish given its process ID (PID) and return its exit status",
+            "Top-3 Scripts": [
+                "su_137462: $ ps l\nF   UID   PID  PPID PRI  NI    VSZ   RSS WCHAN  STAT TTY        TIME COMMAND\n0   508  3344  4498  18   0   2452  1236 wait   Ss   pts/12     0:00 /bin/sh\n0   508  4467 17796  15   0   4664  1572 wait   Ss   pts/5      0:00 -/bin/bash\n0   508  4498  4467  15   0  23032 15108 -      S+   pts/5      2:20 emacs -nw\n0   508  4532 17796  15   0   4532  1464 wait   Ss   pts/13     0:00 -/bin/bash\n0   508  4916 17796  15   0   4664  1648 wait   Ss   pts/7      0:01 -/bin/bash"
+            ],
+            "Top-3 Similar Questions": [
+                "su_137462: How do you find the parent process of a zombie process?"
+            ]
+        }
+    ],
+    "Query": "How to find uptime of a linux process"
+}

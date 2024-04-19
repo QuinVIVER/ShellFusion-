@@ -1,0 +1,101 @@
+
+
+Query:                How to recover deleted files?
+
+
+########################################################################################################################
+
+
+Question Title:       Git - remove deleted files
+Question Link:        https://unix.stackexchange.com/questions/14504
+
+Accepted Answer:      ls-files has a switch designed for this purpose, -z:
+                      
+                      -z    \0 line termination on output.
+                      
+                      
+                      xargs has a switch to let you separate input items by a null character instead of whitespace, -0. Combining them, you get:
+                      
+                      $ git ls-files -dz | xargs -0 git rm
+                      
+
+
+########################################################################################################################
+
+
+Question Title:       wget: delete incomplete files
+Question Link:        https://stackoverflow.com/questions/31215191
+
+Accepted Answer:      I made surprising discovery when attempting to implement tvm's suggestion. 
+                      
+                      It turns out, and this something I didn't realize, that when you run wget -N, wget actually checks file sizes and verifies they are the same. If they are not, the files are deleted and then downloaded again. 
+                      
+                      So cool tip if you're having the same issue I am!
+
+
+########################################################################################################################
+
+
+Question Title:       Determining and Deleting Unused Firmware Files
+Question Link:        https://unix.stackexchange.com/questions/593685
+
+Accepted Answer:      Firmware actually loaded will have an entry in /var/log/syslog. So you can look there to see the ones in use.
+                      The process of firmware loading and how to check/debug it is detailed in this page:
+                      How is Firmware Used?
+                      
+                      Each driver for devices that require firmware have some special logic to retrieve firmware from files in /lib/firmware. The basic process is:
+                      
+                          Driver requests firmware file &quot;ar9170.fw&quot;
+                          The kernel sends an event to udev asking for the firmware
+                          The udev program runs a script that shoves the data in the firmware file into a special file created by the kernel
+                          The kernel reads the firmware data from the special file it created and hands the data to the driver
+                          The driver then does what it needs to do to load the firmware into the device 
+                      
+                      If everything goes well you should see something like the following in your /var/log/syslog:
+                      
+                      [ 12.860701] iwlagn 0000:03:00.0: firmware: requesting lbm-iwlwifi-5000-1.ucode
+                      [ 12.949384] iwlagn 0000:03:00.0: loaded firmware version 8.24.2.12
+                      
+
+
+########################################################################################################################
+
+
+Question Title:       Compare folders and delete duplicates
+Question Link:        https://stackoverflow.com/questions/19672631
+
+Accepted Answer:      To answer your question, here's an example of how I've done something similar in the past:
+                      
+                      $one = Get-ChildItem C:\temp\test1
+                      $two = Get-ChildItem C:\temp\test2
+                      
+                      $matches = (Compare-Object -ReferenceObject $one  -DifferenceObject $two -Property Name,Length -ExcludeDifferent -IncludeEqual)
+                      
+                      foreach ($file in $matches)
+                      {
+                          Remove-Item c:\temp\test2\$($file.Name)
+                      }
+                      
+                      
+                      I suspect you may want to add some logging to this, maybe even prompt for deletion if you're the extremely nervous type. :)
+
+
+########################################################################################################################
+
+
+Question Title:       Delete identical files
+Question Link:        https://stackoverflow.com/questions/48946148
+
+Accepted Answer:      This is off-topic on this site, but I'll answer. Since your question is somewhat unclear to me, whether you want to delete all identical files, or only one of the files, so I'll give you both options.
+                      
+                      This deletes all matched files:
+                      
+                      diff -srq sub1/ sub2/ | grep identical | xargs rm
+                      
+                      
+                      This deletes only first matched file:
+                      
+                      diff -srq sub1/ sub2/ | grep identical | head -1 | xargs rm
+                      
+                      
+                      Note, I haven't tested this, but at least you have a starting point.

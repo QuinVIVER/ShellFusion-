@@ -1,0 +1,90 @@
+{
+  "Query": "How do I mount a hibernated NTFS partition?",
+  "Answers": [
+    {
+      "Command": "mount",
+      "MP Summary": "mount a filesystem",
+      "Most Similar TLDR Task": "Mount a device to a directory",
+      "Most Similar TLDR Script": "mount -t {{filesystem_type}} {{path/to/device_file}} {{path/to/target_directory}}",
+      "Top-3 Similar Questions": [
+        "au_304642: Trying to mount Windows partition - get Failed to mount: <path> is a directory",
+        "au_145902: Unable to mount Windows (NTFS) filesystem due to hibernation",
+        "au_369984: How to automatically mount hibernated NTFS to read-only?"
+      ],
+      "Top-3 Scripts": [
+        "au_304642: mount -t type device dir\n\nsudo mount -t ntfs-3g /dev/sda3 /media/windows",
+        "au_145902: mount -t ntfs-3g -o ro /dev/sda3 /media/windows\n\nremove_hiberfile\n              Unlike in case of  read-only  mount,  the  read-write  mount  is\n              denied  if  the  NTFS  volume is hibernated. One needs either to\n              resume Windows and shutdown it  properly,  or  use  this  option\n              which  will  remove  the  Windows hibernation file. Please note,\n              this means that the saved Windows  session  will  be  completely\n              lost. Use this option under your own responsibility.",
+        "au_369984: sudo mount /dev/sda7 /media/Dane\nif [ $? -eq 14 ]\nthen\n  sudo mount -o ro /dev/sda7 /media/Dane\nfi\nexit 0"
+      ],
+      "Explanations about Options": {
+        "-t": "The argument following the -t is used to indicate the filesystem type. The\n filesystem types which are currently supported depend on the running kernel. See\n /proc/filesystems and /lib/modules/$(uname -r)/kernel/fs for a complete list of the\n filesystems. The most common are ext2, ext3, ext4, xfs, btrfs, vfat, sysfs, proc,\n nfs and cifs.",
+        "-o": "Use the specified mount options. The opts argument is a comma-separated list. For\n example:"
+      }
+    },
+    {
+      "Command": "ntfsfix",
+      "MP Summary": "fix common errors and force Windows to check NTFS",
+      "Most Similar TLDR Task": "Fix a given NTFS partition",
+      "Most Similar TLDR Script": "sudo ntfsfix {{/dev/sdXN}}",
+      "Top-3 Similar Questions": [
+        "au_748163: Unable to mount NTFS partition (no hibernation)",
+        "au_903794: can't mount 1TB NTFS drive",
+        "su_826457: Why is a mounted NTFS partition not showing up in the Linux file manager?"
+      ],
+      "Top-3 Scripts": [
+        "au_748163: sudo ntfsfix /dev/sda2",
+        "au_903794: sudo ntfsfix /dev/[DRIVE_NAME]\n\nsudo ntfsfix /dev/sdc1",
+        "su_826457: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "blkid",
+      "MP Summary": "locate/print block device attributes",
+      "Most Similar TLDR Task": "List all partitions",
+      "Most Similar TLDR Script": "sudo blkid",
+      "Top-3 Similar Questions": [
+        "au_45607: How to mount partition permanently?",
+        "au_644957: How to mount the newly created linux partitions?",
+        "au_481898: Can't automatically mount ext4 partitions under Ubuntu 14.04 (but can mount NTFS ones)"
+      ],
+      "Top-3 Scripts": [
+        "au_45607: sudo blkid",
+        "au_644957: sudo blkid",
+        "au_481898: sudo blkid"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "fdisk",
+      "MP Summary": "manipulate disk partition table",
+      "Most Similar TLDR Task": "Start the partition manipulator",
+      "Most Similar TLDR Script": "fdisk {{/dev/sda}}",
+      "Top-3 Similar Questions": [
+        "au_1115905: Ubuntu mounting partition read only error"
+      ],
+      "Top-3 Scripts": [
+        "au_1115905: sudo fdisk -l"
+      ],
+      "Explanations about Options": {
+        "-l": "List the partition tables for the specified devices and then exit. If no devices\n are given, those mentioned in /proc/partitions (if that file exists) are used."
+      }
+    },
+    {
+      "Command": "kpartx",
+      "MP Summary": "Create device maps from partition tables.",
+      "Most Similar TLDR Task": "Delete partition mappings",
+      "Most Similar TLDR Script": "kpartx -d {{whole_disk.img}}",
+      "Top-3 Similar Questions": [
+        "su_344899: How can I mount a disk image?"
+      ],
+      "Top-3 Scripts": [
+        "su_344899: kpartx -a -v myimage.disk\nmount /dev/mapper/loop0p1 /mnt/myimage\n\numount /mnt/myimage\nkpartx -d -v myimage.disk"
+      ],
+      "Explanations about Options": {
+        "-v": "Operate verbosely.",
+        "-d": "Delete partition mappings."
+      }
+    }
+  ]
+}

@@ -1,0 +1,87 @@
+{
+  "Query": "How to hear my voice in speakers with a mic?",
+  "Answers": [
+    {
+      "Command": "beep",
+      "MP Summary": "beep the pc speaker any number of ways",
+      "Most Similar TLDR Task": "Play a beep at a specified frequency (Hz) and duration (milliseconds)",
+      "Most Similar TLDR Script": "beep -f {{frequency}} -l {{duration}}",
+      "Top-3 Similar Questions": [
+        "ul_585229: How do I make my pc speaker beep in WSL?",
+        "ul_584386: Is there a way to switch the output sound of the beep program to the normal loud speaker instead of beeper?"
+      ],
+      "Top-3 Scripts": [
+        "ul_585229: _beep () {\n  powershell.exe \"[console]::beep($1,$2)\"\n}\n\nalias bleep=\"_beep 1000 800\"  # A strong bleep (for profanity)\nalias  beep=\"_beep 2000 300\"  # Quick yet noticeable beep\nalias  blip=\"_beep 4000  80\"  # A less distracting blip",
+        "ul_584386: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "pactl",
+      "MP Summary": "Control a running PulseAudio sound server",
+      "Most Similar TLDR Task": "Move sink-input 627 to sink 1",
+      "Most Similar TLDR Script": "pactl move-sink-input {{627}} {{1}}",
+      "Top-3 Similar Questions": [
+        "ul_340766: Change volume on bluetooth speaker with amixer",
+        "au_211136: Get the audio from Line-in to output to the speaker",
+        "au_984615: how to connect a multifunction speaker to ubuntu 16.04 via bluetooth?"
+      ],
+      "Top-3 Scripts": [
+        "ul_340766: pactl set-sink-volume name_of_bluetooth_speaker +3%",
+        "au_211136: # Manually start the module-loopback.\npactl load-module module-loopback\n\n# Configure your system to load module-loopback on startup.\n# This places load-module module-loopback at the end of\n# the /etc/pulse/default.pa pulseaudio configuration file.\nsudo sh -c ' echo \"load-module module-loopback\" >>  /etc/pulse/default.pa '",
+        "au_984615: pactl load-module module-bluetooth-discover"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "amixer",
+      "MP Summary": "command-line mixer for ALSA soundcard driver",
+      "Most Similar TLDR Task": "Turn down the master volume by 10%",
+      "Most Similar TLDR Script": "amixer -D pulse sset Master {{10%-}}",
+      "Top-3 Similar Questions": [
+        "ul_340766: Change volume on bluetooth speaker with amixer",
+        "au_56486: \"amixer set master mute\" not working with external USB speakers",
+        "su_134952: How do I quickly switch to/from the front panel speakers in Ubuntu?"
+      ],
+      "Top-3 Scripts": [
+        "ul_340766: ",
+        "au_56486: amixer -c 0 set Master 0DB\n\namixer --help\n\namixer -c 0 set Front 50DB \namixer -c 0 set Front 64DB\n\namixer -c X",
+        "su_134952: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "aplay",
+      "MP Summary": "command-line sound recorder and player for ALSA soundcard driver",
+      "Most Similar TLDR Task": "Play a specific file (sampling rate, bit depth, etc. will be automatically determined for the file format)",
+      "Most Similar TLDR Script": "aplay {{path/to/file}}",
+      "Top-3 Similar Questions": [
+        "au_162160: How do you test multiple speakers in Ubuntu distributions?",
+        "so_43319199: How to loop back the microphone entry directly to speakers on linux?"
+      ],
+      "Top-3 Scripts": [
+        "au_162160: aplay -L",
+        "so_43319199: arecord | aplay\n\naplay -l\n\narecord -Dhw:<card_num>,<device_num> -c <channel_number> \u2013f <format> -r <sample_rate> | aplay -Dhw:<card_num>,<device_num>"
+      ],
+      "Explanations about Options": {
+        "-L": "List all PCMs defined"
+      }
+    },
+    {
+      "Command": "arecord",
+      "MP Summary": "command-line sound recorder and player for ALSA soundcard driver",
+      "Most Similar TLDR Task": "List all sound cards and digital audio devices",
+      "Most Similar TLDR Script": "arecord --list-devices",
+      "Top-3 Similar Questions": [
+        "so_43319199: How to loop back the microphone entry directly to speakers on linux?"
+      ],
+      "Top-3 Scripts": [
+        "so_43319199: arecord | aplay\n\narecord -l\n\narecord -Dhw:<card_num>,<device_num> -c <channel_number> \u2013f <format> -r <sample_rate> | aplay -Dhw:<card_num>,<device_num>"
+      ],
+      "Explanations about Options": {
+        "-r": "Sampling rate in Hertz. The default rate is 8000 Hertz. If the value specified is\n less than 300, it is taken as the rate in kilohertz. Valid values are 2000 through\n 192000 Hertz.",
+        "-c": " The number of channels. The default is one channel. Valid values are 1 through\n 32."
+      }
+    }
+  ]
+}

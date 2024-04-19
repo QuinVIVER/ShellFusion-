@@ -1,0 +1,933 @@
+{
+  "Query": "CISCO VPN configuration steps",
+  "Answers": [
+    {
+      "Command": "xargs",
+      "MP Summary": "build and execute command lines from standard input",
+      "Most Similar TLDR Task": "Parallel runs of up to `max-procs` processes at a time; the default is 1. If `max-procs` is 0, xargs will run as many processes as possible at a time",
+      "Most Similar TLDR Script": "{{arguments_source}} | xargs -P {{max-procs}} {{command}}",
+      "Most Similar NL2Bash Task": "find all the files that have been modified exactly yesterday (from 00:00 to 23:59 yesterday)",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -type f -daystart -mtime 1\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-mtime": "File's data was last modified n*24 hours ago. See the comments for -atime to\n understand how rounding affects the interpretation of file modification times.",
+              "-daystart": "Measure times (for -amin, -atime, -cmin, -ctime, -mmin, and -mtime) from the\n beginning of today rather than from 24 hours ago. This option only affects tests\n which appear later on the command line.",
+              "-type": "File is of type c:"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_8059: find regular files in the \"mail\" folder under the user's home directory, displaying filenames and lines that contain the text \"Linux\"",
+        "nl2bash_7105: find all regular files in a folder using regular expressions which do not have a specific name pattern and send these files as input to the script.bash script file",
+        "nl2bash_4942: Find files not matching the posix extended regex '.+\\-[0-9]{2,4}x[0-9]{2,4}\\.jpg' in their paths under Folder1 and copy them to Folder2"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_8059: find ~/mail -type f | xargs grep \"Linux\"",
+        "nl2bash_7105: find \"$DIRECTORY_TO_PROCESS\" -type f -iregex \".*\\.$FILES_TO_PROCES\"  ! -name \"$find_excludes\" -print0 | xargs -0 -I {} bash script.bash {}",
+        "nl2bash_4942: find Folder1 -type f -regextype posix-extended \\( ! -regex '.+\\-[0-9]{2,4}x[0-9]{2,4}\\.jpg' \\) -print0 |  xargs -0 cp -p --target-directory=Folder2"
+      ],
+      "Explanations about Options": {
+        "-0": "Input items are terminated by a null character instead of by whitespace, and the\n quotes and backslash are not special (every character is taken literally).\n Disables the end of file string, which is treated like any other argument. Useful\n when input items might contain white space, quote marks, or backslashes. The GNU\n find -print0 option produces input suitable for this mode.",
+        "-I": "Replace occurrences of replace-str in the initial-arguments with names read from\n standard input. Also, unquoted blanks do not terminate input items; instead the\n separator is the newline character. Implies -x and -L 1."
+      }
+    },
+    {
+      "Command": "find",
+      "MP Summary": "search for files in a directory hierarchy",
+      "Most Similar TLDR Task": "Find files modified in the last 7 days, and delete them",
+      "Most Similar TLDR Script": "find {{root_path}} -mtime {{-7}} -delete",
+      "Most Similar NL2Bash Task": "find all the files that have been modified exactly yesterday (from 00:00 to 23:59 yesterday)",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -type f -daystart -mtime 1\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-mtime": "File's data was last modified n*24 hours ago. See the comments for -atime to\n understand how rounding affects the interpretation of file modification times.",
+              "-daystart": "Measure times (for -amin, -atime, -cmin, -ctime, -mmin, and -mtime) from the\n beginning of today rather than from 24 hours ago. This option only affects tests\n which appear later on the command line.",
+              "-type": "File is of type c:"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_4616: Find and delete all core files in the user's home directory and below.",
+        "nl2bash_2261: Find all *.php (case insensitive) files and *.js files/directories (case insensitive) under /home/jul/here excluding $EXCLUDE/* paths",
+        "nl2bash_8059: find regular files in the \"mail\" folder under the user's home directory, displaying filenames and lines that contain the text \"Linux\""
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_4616: find ~/ -name 'core*' -exec rm {} \\",
+        "nl2bash_2261: find /home/jul/here -type f -iname \"*.php\" ! -path \"$EXCLUDE/*\" -o -iname \"*.js\" ! -path \"$EXCLUDE/*\"",
+        "nl2bash_8059: find ~/mail -type f | xargs grep \"Linux\""
+      ],
+      "Explanations about Options": {
+        "-type": "File is of type c:",
+        "-iname": "Like -name, but the match is case insensitive. For example, the patterns `fo*' and\n `F??' match the file names `Foo', `FOO', `foo', `fOo', etc. The pattern `*foo*`\n will also match a file called '.foobar'.",
+        "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+      }
+    },
+    {
+      "Command": "mail",
+      "MP Summary": "send and receive mail",
+      "Most Similar TLDR Task": "Send a typed email message. The commandline below continues after pressing Enter key. Input CC email-id (optional) press Enter key. Input message text (can be multi-line). Press \"Ctrl-D\" key to complete the message text",
+      "Most Similar TLDR Script": "mail --subject=\"{{subject line}}\" {{to_user@example.com}}",
+      "Most Similar NL2Bash Task": "find all the files that have been modified exactly yesterday (from 00:00 to 23:59 yesterday)",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -type f -daystart -mtime 1\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-mtime": "File's data was last modified n*24 hours ago. See the comments for -atime to\n understand how rounding affects the interpretation of file modification times.",
+              "-daystart": "Measure times (for -amin, -atime, -cmin, -ctime, -mmin, and -mtime) from the\n beginning of today rather than from 24 hours ago. This option only affects tests\n which appear later on the command line.",
+              "-type": "File is of type c:"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_8059: find regular files in the \"mail\" folder under the user's home directory, displaying filenames and lines that contain the text \"Linux\"",
+        "nl2bash_4276: Find all regular files in the the user's home/mail directory and search for the word \"Linux\"."
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_8059: find ~/mail -type f | xargs grep \"Linux\"",
+        "nl2bash_4276: find ~/mail -type f | xargs grep \"Linux\""
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "rm",
+      "MP Summary": "remove files or directories",
+      "Most Similar TLDR Task": "Remove files from arbitrary locations",
+      "Most Similar TLDR Script": "rm {{path/to/file}} {{path/to/another/file}}",
+      "Most Similar NL2Bash Task": "find all the files that have been modified exactly yesterday (from 00:00 to 23:59 yesterday)",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -type f -daystart -mtime 1\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-mtime": "File's data was last modified n*24 hours ago. See the comments for -atime to\n understand how rounding affects the interpretation of file modification times.",
+              "-daystart": "Measure times (for -amin, -atime, -cmin, -ctime, -mmin, and -mtime) from the\n beginning of today rather than from 24 hours ago. This option only affects tests\n which appear later on the command line.",
+              "-type": "File is of type c:"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_4616: Find and delete all core files in the user's home directory and below."
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_4616: find ~/ -name 'core*' -exec rm {} \\"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "bash",
+      "MP Summary": "GNU Bourne-Again SHell",
+      "Most Similar TLDR Task": "Execute a command",
+      "Most Similar TLDR Script": "bash -c \"{{command}}\"",
+      "Most Similar NL2Bash Task": "find all the files that have been modified exactly yesterday (from 00:00 to 23:59 yesterday)",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -type f -daystart -mtime 1\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-mtime": "File's data was last modified n*24 hours ago. See the comments for -atime to\n understand how rounding affects the interpretation of file modification times.",
+              "-daystart": "Measure times (for -amin, -atime, -cmin, -ctime, -mmin, and -mtime) from the\n beginning of today rather than from 24 hours ago. This option only affects tests\n which appear later on the command line.",
+              "-type": "File is of type c:"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_7105: find all regular files in a folder using regular expressions which do not have a specific name pattern and send these files as input to the script.bash script file"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_7105: find \"$DIRECTORY_TO_PROCESS\" -type f -iregex \".*\\.$FILES_TO_PROCES\"  ! -name \"$find_excludes\" -print0 | xargs -0 -I {} bash script.bash {}"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "sed",
+      "MP Summary": "stream editor for filtering and transforming text",
+      "Most Similar TLDR Task": "Apply multiple find-replace expressions to a file",
+      "Most Similar TLDR Script": "sed -e 's/{{find}}/{{replace}}/' -e 's/{{find}}/{{replace}}/' {{filename}}",
+      "Most Similar NL2Bash Task": "find all the files that have been modified exactly yesterday (from 00:00 to 23:59 yesterday)",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -type f -daystart -mtime 1\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-mtime": "File's data was last modified n*24 hours ago. See the comments for -atime to\n understand how rounding affects the interpretation of file modification times.",
+              "-daystart": "Measure times (for -amin, -atime, -cmin, -ctime, -mmin, and -mtime) from the\n beginning of today rather than from 24 hours ago. This option only affects tests\n which appear later on the command line.",
+              "-type": "File is of type c:"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_5849: Search current directory for any directory named \"config\" and go to first match found.",
+        "nl2bash_8064: find regular files under the current directory, whose name ends in .mbox and rename each file, to the same name without .mbox at the end"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_5849: cd \"$(find . -name config -type d | sed 1q)\"",
+        "nl2bash_8064: find . -type f -wholename \\*.mbox | sed 's/\\(.*\\)\\.mbox/mv \"\\1.mbox\" \"\\1\"/' | sh"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "ffmpeg",
+      "MP Summary": "ffmpeg video converter",
+      "Most Similar TLDR Task": "Quickly extract a single frame from a video at time mm:ss and save it as a 128x128 resolution image",
+      "Most Similar TLDR Script": "ffmpeg -ss {{mm:ss}} -i {{video.mp4}} -frames 1 -s {{128x128}} -f image2 {{image.png}}",
+      "Most Similar NL2Bash Task": "find all the files that have been modified exactly yesterday (from 00:00 to 23:59 yesterday)",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -type f -daystart -mtime 1\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-mtime": "File's data was last modified n*24 hours ago. See the comments for -atime to\n understand how rounding affects the interpretation of file modification times.",
+              "-daystart": "Measure times (for -amin, -atime, -cmin, -ctime, -mmin, and -mtime) from the\n beginning of today rather than from 24 hours ago. This option only affects tests\n which appear later on the command line.",
+              "-type": "File is of type c:"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_2213: Find all *.mov (case insensitive) files under current directory and run an ffmpeg command with the literal '%p' and '%f' as the path and name respectively for each file"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_2213: find . -iname \"*.mov\" -exec ffmpeg -i \"%p\" -f flv \"%f\" \\;"
+      ],
+      "Explanations about Options": {
+        "-i": "input file url"
+      }
+    },
+    {
+      "Command": "cd",
+      "MP Summary": "change the working directory",
+      "Most Similar TLDR Task": "Go to the given directory",
+      "Most Similar TLDR Script": "cd {{path/to/directory}}",
+      "Most Similar NL2Bash Task": "find all the files that have been modified exactly yesterday (from 00:00 to 23:59 yesterday)",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -type f -daystart -mtime 1\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-mtime": "File's data was last modified n*24 hours ago. See the comments for -atime to\n understand how rounding affects the interpretation of file modification times.",
+              "-daystart": "Measure times (for -amin, -atime, -cmin, -ctime, -mmin, and -mtime) from the\n beginning of today rather than from 24 hours ago. This option only affects tests\n which appear later on the command line.",
+              "-type": "File is of type c:"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_5849: Search current directory for any directory named \"config\" and go to first match found.",
+        "so_56117295: How to make step failed on pylint failure (in Docker Container) on Jenkins"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_5849: cd \"$(find . -name config -type d | sed 1q)\"",
+        "so_56117295: cd $awd && cd $(dirname \"${file}\") && pylint \"${filename}\" || exit 1"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "cp",
+      "MP Summary": "copy files and directories",
+      "Most Similar TLDR Task": "Copy a file to another location",
+      "Most Similar TLDR Script": "cp {{path/to/source_file.ext}} {{path/to/target_file.ext}}",
+      "Most Similar NL2Bash Task": "find all the files that have been modified exactly yesterday (from 00:00 to 23:59 yesterday)",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -type f -daystart -mtime 1\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-mtime": "File's data was last modified n*24 hours ago. See the comments for -atime to\n understand how rounding affects the interpretation of file modification times.",
+              "-daystart": "Measure times (for -amin, -atime, -cmin, -ctime, -mmin, and -mtime) from the\n beginning of today rather than from 24 hours ago. This option only affects tests\n which appear later on the command line.",
+              "-type": "File is of type c:"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_4942: Find files not matching the posix extended regex '.+\\-[0-9]{2,4}x[0-9]{2,4}\\.jpg' in their paths under Folder1 and copy them to Folder2"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_4942: find Folder1 -type f -regextype posix-extended \\( ! -regex '.+\\-[0-9]{2,4}x[0-9]{2,4}\\.jpg' \\) -print0 |  xargs -0 cp -p --target-directory=Folder2"
+      ],
+      "Explanations about Options": {
+        "-p": "same as --preserve=mode , ownership , timestamps",
+        "--target-directory": "copy all SOURCE arguments into DIRECTORY"
+      }
+    },
+    {
+      "Command": "perl",
+      "MP Summary": "The Perl 5 language interpreter",
+      "Most Similar TLDR Task": "Parse and execute a Perl script",
+      "Most Similar TLDR Script": "perl {{script.pl}}",
+      "Most Similar NL2Bash Task": "find all the files that have been modified exactly yesterday (from 00:00 to 23:59 yesterday)",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -type f -daystart -mtime 1\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-mtime": "File's data was last modified n*24 hours ago. See the comments for -atime to\n understand how rounding affects the interpretation of file modification times.",
+              "-daystart": "Measure times (for -amin, -atime, -cmin, -ctime, -mmin, and -mtime) from the\n beginning of today rather than from 24 hours ago. This option only affects tests\n which appear later on the command line.",
+              "-type": "File is of type c:"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_8266: search for all html files in current folder and replace a pattern in all the files"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_8266: find . -type f -name \"*html\" -exec perl -pi -e 's|pibeta.psi.ch/~stefan|midas.psi.ch/~stefan|g' {} ;"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "dirname",
+      "MP Summary": "strip last component from file name",
+      "Most Similar TLDR Task": "Calculate the parent directory of multiple paths",
+      "Most Similar TLDR Script": "dirname {{path/to/file_a}} {{path/to/directory_b}}",
+      "Most Similar NL2Bash Task": "find all the files that have been modified exactly yesterday (from 00:00 to 23:59 yesterday)",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -type f -daystart -mtime 1\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-mtime": "File's data was last modified n*24 hours ago. See the comments for -atime to\n understand how rounding affects the interpretation of file modification times.",
+              "-daystart": "Measure times (for -amin, -atime, -cmin, -ctime, -mmin, and -mtime) from the\n beginning of today rather than from 24 hours ago. This option only affects tests\n which appear later on the command line.",
+              "-type": "File is of type c:"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_56117295: How to make step failed on pylint failure (in Docker Container) on Jenkins"
+      ],
+      "Top-3 Scripts": [
+        "so_56117295: cd $awd && cd $(dirname \"${file}\") && pylint \"${filename}\" || exit 1"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "opt",
+      "MP Summary": "LLVM optimizer",
+      "Most Similar TLDR Task": "Run an optimization or analysis on a bitcode file",
+      "Most Similar TLDR Script": "opt -{{passname}} {{path/to/file.bc}} -S -o {{file_opt.bc}}",
+      "Most Similar NL2Bash Task": "find all the files that have been modified exactly yesterday (from 00:00 to 23:59 yesterday)",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -type f -daystart -mtime 1\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-mtime": "File's data was last modified n*24 hours ago. See the comments for -atime to\n understand how rounding affects the interpretation of file modification times.",
+              "-daystart": "Measure times (for -amin, -atime, -cmin, -ctime, -mmin, and -mtime) from the\n beginning of today rather than from 24 hours ago. This option only affects tests\n which appear later on the command line.",
+              "-type": "File is of type c:"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_5850: Search directories /opt, /usr, /var for regular file foo"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_5850: find /opt /usr /var -name foo -type f"
+      ],
+      "Explanations about Options": {
+        "-p": "Print module after each transformation."
+      }
+    },
+    {
+      "Command": "sudo",
+      "MP Summary": "execute a command as another user",
+      "Most Similar TLDR Task": "Run a command as another user and/or group",
+      "Most Similar TLDR Script": "sudo -u {{user}} -g {{group}} {{id -a}}",
+      "Most Similar NL2Bash Task": "find all the files that have been modified exactly yesterday (from 00:00 to 23:59 yesterday)",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -type f -daystart -mtime 1\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-mtime": "File's data was last modified n*24 hours ago. See the comments for -atime to\n understand how rounding affects the interpretation of file modification times.",
+              "-daystart": "Measure times (for -amin, -atime, -cmin, -ctime, -mmin, and -mtime) from the\n beginning of today rather than from 24 hours ago. This option only affects tests\n which appear later on the command line.",
+              "-type": "File is of type c:"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_3947: Find all files/directories under /var/www/some/subset and change their owner and group to www-data"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_3947: sudo find /var/www/some/subset -print0 | xargs -0 chown www-data:www-data"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "echo",
+      "MP Summary": "display a line of text",
+      "Most Similar TLDR Task": "Print a message with environment variables",
+      "Most Similar TLDR Script": "echo \"{{My path is $PATH}}\"",
+      "Most Similar NL2Bash Task": "find all the files that have been modified exactly yesterday (from 00:00 to 23:59 yesterday)",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -type f -daystart -mtime 1\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-mtime": "File's data was last modified n*24 hours ago. See the comments for -atime to\n understand how rounding affects the interpretation of file modification times.",
+              "-daystart": "Measure times (for -amin, -atime, -cmin, -ctime, -mmin, and -mtime) from the\n beginning of today rather than from 24 hours ago. This option only affects tests\n which appear later on the command line.",
+              "-type": "File is of type c:"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_56117295: How to make step failed on pylint failure (in Docker Container) on Jenkins"
+      ],
+      "Top-3 Scripts": [
+        "so_56117295: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "mv",
+      "MP Summary": "move (rename) files",
+      "Most Similar TLDR Task": "Move files in arbitrary locations",
+      "Most Similar TLDR Script": "mv {{source}} {{target}}",
+      "Most Similar NL2Bash Task": "find all the files that have been modified exactly yesterday (from 00:00 to 23:59 yesterday)",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -type f -daystart -mtime 1\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-mtime": "File's data was last modified n*24 hours ago. See the comments for -atime to\n understand how rounding affects the interpretation of file modification times.",
+              "-daystart": "Measure times (for -amin, -atime, -cmin, -ctime, -mmin, and -mtime) from the\n beginning of today rather than from 24 hours ago. This option only affects tests\n which appear later on the command line.",
+              "-type": "File is of type c:"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_8064: find regular files under the current directory, whose name ends in .mbox and rename each file, to the same name without .mbox at the end"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_8064: find . -type f -wholename \\*.mbox | sed 's/\\(.*\\)\\.mbox/mv \"\\1.mbox\" \"\\1\"/' | sh"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "md5sum",
+      "MP Summary": "compute and check MD5 message digest",
+      "Most Similar TLDR Task": "Calculate MD5 checksums for multiple files",
+      "Most Similar TLDR Script": "md5sum {{filename1}} {{filename2}}",
+      "Most Similar NL2Bash Task": "find all the files that have been modified exactly yesterday (from 00:00 to 23:59 yesterday)",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -type f -daystart -mtime 1\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-mtime": "File's data was last modified n*24 hours ago. See the comments for -atime to\n understand how rounding affects the interpretation of file modification times.",
+              "-daystart": "Measure times (for -amin, -atime, -cmin, -ctime, -mmin, and -mtime) from the\n beginning of today rather than from 24 hours ago. This option only affects tests\n which appear later on the command line.",
+              "-type": "File is of type c:"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_8062: find regular files under the current directory and execute an md5sum command on each one"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_8062: find -type f -exec md5sum {} +"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "chown",
+      "MP Summary": "change file owner and group",
+      "Most Similar TLDR Task": "Recursively change the owner of a directory and its contents",
+      "Most Similar TLDR Script": "chown -R {{user}} {{path/to/directory}}",
+      "Most Similar NL2Bash Task": "find all the files that have been modified exactly yesterday (from 00:00 to 23:59 yesterday)",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -type f -daystart -mtime 1\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-mtime": "File's data was last modified n*24 hours ago. See the comments for -atime to\n understand how rounding affects the interpretation of file modification times.",
+              "-daystart": "Measure times (for -amin, -atime, -cmin, -ctime, -mmin, and -mtime) from the\n beginning of today rather than from 24 hours ago. This option only affects tests\n which appear later on the command line.",
+              "-type": "File is of type c:"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_3947: Find all files/directories under /var/www/some/subset and change their owner and group to www-data"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_3947: sudo find /var/www/some/subset -print0 | xargs -0 chown www-data:www-data"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "grep",
+      "MP Summary": "print lines that match patterns",
+      "Most Similar TLDR Task": "Invert match for excluding specific strings",
+      "Most Similar TLDR Script": "grep -v {{search_pattern}}",
+      "Most Similar NL2Bash Task": "find all the files that have been modified exactly yesterday (from 00:00 to 23:59 yesterday)",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -type f -daystart -mtime 1\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-mtime": "File's data was last modified n*24 hours ago. See the comments for -atime to\n understand how rounding affects the interpretation of file modification times.",
+              "-daystart": "Measure times (for -amin, -atime, -cmin, -ctime, -mmin, and -mtime) from the\n beginning of today rather than from 24 hours ago. This option only affects tests\n which appear later on the command line.",
+              "-type": "File is of type c:"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_8059: find regular files in the \"mail\" folder under the user's home directory, displaying filenames and lines that contain the text \"Linux\"",
+        "nl2bash_4276: Find all regular files in the the user's home/mail directory and search for the word \"Linux\"."
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_8059: find ~/mail -type f | xargs grep \"Linux\"",
+        "nl2bash_4276: find ~/mail -type f | xargs grep \"Linux\""
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "python",
+      "MP Summary": "an interpreted, interactive, object-oriented programming language",
+      "Most Similar TLDR Task": "Run library module as a script (terminates option list)",
+      "Most Similar TLDR Script": "python -m {{module}} {{arguments}}",
+      "Most Similar NL2Bash Task": "find all the files that have been modified exactly yesterday (from 00:00 to 23:59 yesterday)",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -type f -daystart -mtime 1\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-mtime": "File's data was last modified n*24 hours ago. See the comments for -atime to\n understand how rounding affects the interpretation of file modification times.",
+              "-daystart": "Measure times (for -amin, -atime, -cmin, -ctime, -mmin, and -mtime) from the\n beginning of today rather than from 24 hours ago. This option only affects tests\n which appear later on the command line.",
+              "-type": "File is of type c:"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_56117295: How to make step failed on pylint failure (in Docker Container) on Jenkins"
+      ],
+      "Top-3 Scripts": [
+        "so_56117295: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "exit",
+      "MP Summary": "cause the shell to exit",
+      "Most Similar TLDR Task": "Exit the shell with the specified exit code",
+      "Most Similar TLDR Script": "exit {{exit_code}}",
+      "Most Similar NL2Bash Task": "find all the files that have been modified exactly yesterday (from 00:00 to 23:59 yesterday)",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -type f -daystart -mtime 1\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-mtime": "File's data was last modified n*24 hours ago. See the comments for -atime to\n understand how rounding affects the interpretation of file modification times.",
+              "-daystart": "Measure times (for -amin, -atime, -cmin, -ctime, -mmin, and -mtime) from the\n beginning of today rather than from 24 hours ago. This option only affects tests\n which appear later on the command line.",
+              "-type": "File is of type c:"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_56117295: How to make step failed on pylint failure (in Docker Container) on Jenkins"
+      ],
+      "Top-3 Scripts": [
+        "so_56117295: cd $awd && cd $(dirname \"${file}\") && pylint \"${filename}\" || exit 1"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "file",
+      "MP Summary": "determine file type",
+      "Most Similar TLDR Task": "Look inside a zipped file and determine the file type(s) inside",
+      "Most Similar TLDR Script": "file -z {{foo.zip}}",
+      "Most Similar NL2Bash Task": "find all the files that have been modified exactly yesterday (from 00:00 to 23:59 yesterday)",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -type f -daystart -mtime 1\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-mtime": "File's data was last modified n*24 hours ago. See the comments for -atime to\n understand how rounding affects the interpretation of file modification times.",
+              "-daystart": "Measure times (for -amin, -atime, -cmin, -ctime, -mmin, and -mtime) from the\n beginning of today rather than from 24 hours ago. This option only affects tests\n which appear later on the command line.",
+              "-type": "File is of type c:"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_56117295: How to make step failed on pylint failure (in Docker Container) on Jenkins"
+      ],
+      "Top-3 Scripts": [
+        "so_56117295: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "basename",
+      "MP Summary": "strip directory and suffix from filenames",
+      "Most Similar TLDR Task": "Show only the file name from a path, with a suffix removed",
+      "Most Similar TLDR Script": "basename {{path/to/file}} {{suffix}}",
+      "Most Similar NL2Bash Task": "find all the files that have been modified exactly yesterday (from 00:00 to 23:59 yesterday)",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -type f -daystart -mtime 1\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-mtime": "File's data was last modified n*24 hours ago. See the comments for -atime to\n understand how rounding affects the interpretation of file modification times.",
+              "-daystart": "Measure times (for -amin, -atime, -cmin, -ctime, -mmin, and -mtime) from the\n beginning of today rather than from 24 hours ago. This option only affects tests\n which appear later on the command line.",
+              "-type": "File is of type c:"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_56117295: How to make step failed on pylint failure (in Docker Container) on Jenkins"
+      ],
+      "Top-3 Scripts": [
+        "so_56117295: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "sh",
+      "MP Summary": "MirBSD Korn shell",
+      "Most Similar TLDR Task": "Execute a command",
+      "Most Similar TLDR Script": "sh -c {{command}}",
+      "Most Similar NL2Bash Task": "find all the files that have been modified exactly yesterday (from 00:00 to 23:59 yesterday)",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -type f -daystart -mtime 1\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-mtime": "File's data was last modified n*24 hours ago. See the comments for -atime to\n understand how rounding affects the interpretation of file modification times.",
+              "-daystart": "Measure times (for -amin, -atime, -cmin, -ctime, -mmin, and -mtime) from the\n beginning of today rather than from 24 hours ago. This option only affects tests\n which appear later on the command line.",
+              "-type": "File is of type c:"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_8064: find regular files under the current directory, whose name ends in .mbox and rename each file, to the same name without .mbox at the end"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_8064: find . -type f -wholename \\*.mbox | sed 's/\\(.*\\)\\.mbox/mv \"\\1.mbox\" \"\\1\"/' | sh"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "num",
+      "MP Summary": "number utilities for mathematics",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "find all the files that have been modified exactly yesterday (from 00:00 to 23:59 yesterday)",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -type f -daystart -mtime 1\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-mtime": "File's data was last modified n*24 hours ago. See the comments for -atime to\n understand how rounding affects the interpretation of file modification times.",
+              "-daystart": "Measure times (for -amin, -atime, -cmin, -ctime, -mmin, and -mtime) from the\n beginning of today rather than from 24 hours ago. This option only affects tests\n which appear later on the command line.",
+              "-type": "File is of type c:"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_6075: Search for files specifying the maximum depth of the search"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_6075: find -maxdepth num -name query"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "config",
+      "MP Summary": "build system configuration files",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "find all the files that have been modified exactly yesterday (from 00:00 to 23:59 yesterday)",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -type f -daystart -mtime 1\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-mtime": "File's data was last modified n*24 hours ago. See the comments for -atime to\n understand how rounding affects the interpretation of file modification times.",
+              "-daystart": "Measure times (for -amin, -atime, -cmin, -ctime, -mmin, and -mtime) from the\n beginning of today rather than from 24 hours ago. This option only affects tests\n which appear later on the command line.",
+              "-type": "File is of type c:"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_5849: Search current directory for any directory named \"config\" and go to first match found."
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_5849: cd \"$(find . -name config -type d | sed 1q)\""
+      ],
+      "Explanations about Options": {
+        "-p": "Configure a system for profiling; for example, kgmon(8) and gprof(1). If two\n or more -p options are supplied, config configures a system for high resolution\n profiling."
+      }
+    },
+    {
+      "Command": "awd",
+      "MP Summary": "interactive text windows",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "find all the files that have been modified exactly yesterday (from 00:00 to 23:59 yesterday)",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -type f -daystart -mtime 1\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-mtime": "File's data was last modified n*24 hours ago. See the comments for -atime to\n understand how rounding affects the interpretation of file modification times.",
+              "-daystart": "Measure times (for -amin, -atime, -cmin, -ctime, -mmin, and -mtime) from the\n beginning of today rather than from 24 hours ago. This option only affects tests\n which appear later on the command line.",
+              "-type": "File is of type c:"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_56117295: How to make step failed on pylint failure (in Docker Container) on Jenkins"
+      ],
+      "Top-3 Scripts": [
+        "so_56117295: cd $awd && cd $(dirname \"${file}\") && pylint \"${filename}\" || exit 1"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "pylint",
+      "MP Summary": "python code static checker",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "find all the files that have been modified exactly yesterday (from 00:00 to 23:59 yesterday)",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -type f -daystart -mtime 1\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-mtime": "File's data was last modified n*24 hours ago. See the comments for -atime to\n understand how rounding affects the interpretation of file modification times.",
+              "-daystart": "Measure times (for -amin, -atime, -cmin, -ctime, -mmin, and -mtime) from the\n beginning of today rather than from 24 hours ago. This option only affects tests\n which appear later on the command line.",
+              "-type": "File is of type c:"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_56117295: How to make step failed on pylint failure (in Docker Container) on Jenkins"
+      ],
+      "Top-3 Scripts": [
+        "so_56117295: cd $awd && cd $(dirname \"${file}\") && pylint \"${filename}\" || exit 1"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "then",
+      "MP Summary": "presumably creating or updating package.json and running any other initialization-related operations. The init command is transformed to a corresponding npx operation as follows: \u00b7 npm init foo -> npx create-foo \u00b7 npm init @usr/foo -> npx @usr/create-foo \u00b7 npm init @usr -> npx @usr/create Any  additional  options  will  be passed directly to the command, so npm init foo --hello will map to npx create-foo --hello. If the initializer is omitted (by just calling npm init), init will fall  back  to  legacy init  behavior.  It  will  ask you a bunch of questions, and then write a package.json for you. It will attempt to make reasonable guesses based on  existing  fields,  dependencies, and  options selected. It is strictly additive, so it will keep any fields and values that were already set. You can also use -y/--yes to skip the questionnaire altogether.  If  you pass --scope, it will create a scoped package. See Also \u00b7 https://github.com/isaacs/init-package-json \u00b7 npm help package.json \u00b7 npm help version \u00b7 npm help scope April 2020                                NPM-INIT(1)",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "find all the files that have been modified exactly yesterday (from 00:00 to 23:59 yesterday)",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -type f -daystart -mtime 1\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-mtime": "File's data was last modified n*24 hours ago. See the comments for -atime to\n understand how rounding affects the interpretation of file modification times.",
+              "-daystart": "Measure times (for -amin, -atime, -cmin, -ctime, -mmin, and -mtime) from the\n beginning of today rather than from 24 hours ago. This option only affects tests\n which appear later on the command line.",
+              "-type": "File is of type c:"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_56117295: How to make step failed on pylint failure (in Docker Container) on Jenkins"
+      ],
+      "Top-3 Scripts": [
+        "so_56117295: "
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

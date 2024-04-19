@@ -1,0 +1,90 @@
+{
+  "Query": "extract part of a string using bash/cut/split",
+  "Answers": [
+    {
+      "Command": "split",
+      "MP Summary": "split a file into pieces",
+      "Most Similar TLDR Task": "Split a file, each split having 10 lines (except the last split)",
+      "Most Similar TLDR Script": "split -l {{10}} {{filename}}",
+      "Top-3 Similar Questions": [
+        "so_3658382: Extracting multiple parts of a string using bash",
+        "so_70185533: sed extract part of string from a file",
+        "so_23722113: Extracting content of a file in bash"
+      ],
+      "Top-3 Scripts": [
+        "so_3658382: echo '1=A00^35=D^150=1^33=1\n      1=a00^35=d^157=11^33=11\n      ' | awk -vLST=1,33 -F^ '{s=\"\";split(LST,k,\",\");for(i=1;i<=NF;i++){for(j in k){split($i,arr,\"=\");if(arr[1]==k[j]){printf s\"\"arr[1]\"=\"arr[2];s=\"^\";}}}if(s!=\"\"){print s;}}'",
+        "so_70185533: awk 'match($0,/^str3=.*-/){split(substr($0,RSTART,RLENGTH),arr,\"-\");print arr[2]}'  Input_file",
+        "so_23722113: $ awk -v RS= -F'\\n' '{n=split($1,a,/ /); sub(/\\| */,\"\",$7); print a[n], $7}' file\nx.x.x.x var1:var2\ny.y.y.y var3:var4\nz.z.z.z No valid accounts found\n\n$ awk -v RS= -F'\\n' '$7~/:/{n=split($1,a,/ /); sub(/\\| */,\"\",$7); print a[n], $7}' file\nx.x.x.x var1:var2\ny.y.y.y var3:var4"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "cut",
+      "MP Summary": "remove sections from each line of files",
+      "Most Similar TLDR Task": "Cut out the fields 3 through to the end of each line, using a space as a delimiter",
+      "Most Similar TLDR Script": "cut -d'{{ }}' -f{{3-}}",
+      "Top-3 Similar Questions": [
+        "ul_461543: Need to extract part of string using shell",
+        "so_51330638: Extracting 2 parts of a String",
+        "so_12426659: How to extract last part of string in bash?"
+      ],
+      "Top-3 Scripts": [
+        "ul_461543: LATESTBUILD=echo $LASTBUILD | cut -d ' ' -f 3\n\nLATESTBUILD=$(cut -d ' ' -f5 <<<\"$LASTBUILD\")\n\n#!/bin/bash\n\nLASTBUILD='174254491   2018-08-08T11:04:40Z  gs://abc/kishor/5.4.0.61/xyz-5.4.0-61.tgz TOTAL: 46 objects, 7325896651 bytes (6.82 GiB)'\n\necho \"this is the LASTBUILD ============== $LASTBUILD\"\n\nLATESTBUILD=$(cut -d ' ' -f5 <<<\"$LASTBUILD\")\n\necho \"this is the LATESTBUILD ############### $LATESTBUILD\"",
+        "so_51330638: string1=$(echo \"max. bit rate:      ('2.5 MBit/s', '16.7 MBit/s')\" | cut -d\"'\" -f2)\nstring2=$(echo \"max. bit rate:      ('2.5 MBit/s', '16.7 MBit/s')\" | cut -d\"'\" -f4)",
+        "so_12426659: B=$(echo $A | cut -d ' ' -f 5-)"
+      ],
+      "Explanations about Options": {
+        "-f": "select only these fields; also print any line that contains no delimiter\n character, unless the -s option is specified",
+        "-d": "use DELIM instead of TAB for field delimiter"
+      }
+    },
+    {
+      "Command": "grep",
+      "MP Summary": "print lines that match patterns",
+      "Most Similar TLDR Task": "Print file name with the corresponding line number for each match",
+      "Most Similar TLDR Script": "grep -Hn {{search_pattern}} {{path/to/file}}",
+      "Top-3 Similar Questions": [
+        "ul_121774: Extract part of string using grep",
+        "so_29857548: how to extract part of a string in shell script?",
+        "so_27727169: How to extract text from a string in Bash using Grep"
+      ],
+      "Top-3 Scripts": [
+        "ul_121774: ls | grep -oP \"(?<=$study.)[A-Z]$\"",
+        "so_29857548: last | grep pts/ | awk '{print $1 \" \"$4 \" \"$5 \" \"$6 \" \"$7}' >> sampletest.txt",
+        "so_27727169: grep Host: $FILE | tail -1 | grep -Po '.*Host: \\K.*\\)'"
+      ],
+      "Explanations about Options": {
+        "-o": "Print only the matched (non-empty) parts of a matching line, with each such part on\n a separate output line.",
+        "-P": "Interpret PATTERNS as Perl-compatible regular expressions (PCREs). This option is\n experimental when combined with the -z (--null-data) option, and grep -P may warn\n of unimplemented features."
+      }
+    },
+    {
+      "Command": "wc",
+      "MP Summary": "print newline, word, and byte counts for each file",
+      "Most Similar TLDR Task": "Count words in file",
+      "Most Similar TLDR Script": "wc -w {{file}}",
+      "Top-3 Similar Questions": [
+        "so_18351284: How to get the count of fields in a delimited string?"
+      ],
+      "Top-3 Scripts": [
+        "so_18351284: $ echo \"field1;field2;field3;field4;\" | grep -o \";\" | wc -l\n4\n\n$ tr -dc ';' <<< \"field1;field2;field3;field4;\" | wc -c\n4"
+      ],
+      "Explanations about Options": {
+        "-c": "print the byte counts"
+      }
+    },
+    {
+      "Command": "dirname",
+      "MP Summary": "strip last component from file name",
+      "Most Similar TLDR Task": "Delimit output with a NUL character instead of a newline (useful when combining with `xargs`)",
+      "Most Similar TLDR Script": "dirname --zero {{path/to/directory_a}} {{path/to/file_b}}",
+      "Top-3 Similar Questions": [
+        "so_49527596: Extract specific word of String in bash"
+      ],
+      "Top-3 Scripts": [
+        "so_49527596: $ input=\"xxx/yyy/zzz/foo.txt\"; echo $(basename $(dirname $input))\nzzz"
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

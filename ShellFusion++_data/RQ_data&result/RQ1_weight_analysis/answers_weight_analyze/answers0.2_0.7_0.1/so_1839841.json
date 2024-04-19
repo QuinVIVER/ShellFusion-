@@ -1,0 +1,88 @@
+{
+  "Query": "Convert a video to MP4 (H.264/AAC) with ffmpeg",
+  "Answers": [
+    {
+      "Command": "ffmpeg",
+      "MP Summary": "ffmpeg video converter",
+      "Most Similar TLDR Task": "Convert AVI video to MP4. AAC Audio @ 128kbit, h264 Video @ CRF 23",
+      "Most Similar TLDR Script": "ffmpeg -i {{input_video}}.avi -codec:audio aac -b:audio 128k -codec:video libx264 -crf 23 {{output_video}}.mp4",
+      "Top-3 Similar Questions": [
+        "su_556463: Converting video to WebM with ffmpeg/avconv",
+        "ul_291032: Converting files to OGG with FFMPEG produces an extremely large file",
+        "au_376743: How to convert a Video to avi xvid with custom Frame Size?"
+      ],
+      "Top-3 Scripts": [
+        "su_556463: ffmpeg -i input.mp4 -c:v libvpx-vp9 -crf 30 -b:v 0 output.webm\n\nffmpeg -i input.mp4 -c:v libvpx-vp9 -b:v 5M -pass 1 -f webm /dev/null && \\\nffmpeg -i input.mp4 -c:v libvpx-vp9 -b:v 5M -pass 2 output.webm\n\nffmpeg -i input.mp4 -c:v libvpx-vp9 -minrate 5M -maxrate 5M -b:v 5M output.webm",
+        "ul_291032: ffmpeg -i in.mp3 -c libvorbis out.ogg",
+        "au_376743: sudo apt-get install ffmpeg ffmpeg-doc libav-tools winff winff-doc winff-gtk2 checkinstall yasm texi2html libfaac-dev libmp3lame-dev libopencore-amrnb-dev libopencore-amrwb-dev libsdl1.2-dev libtheora-dev libvorbis-dev libx11-dev libxfixes-dev libxvidcore-dev zlib1g-dev frei0r-plugins-dev libdc1394-22 libdc1394-22-dev libgsm1 libgsm1-dev libopenjpeg-dev libschroedinger-1.0-0 libschroedinger-dev libschroedinger-doc libspeex-dev libvdpau-dev vflib3-dev librtmp-dev libva-dev libjack-jackd2-dev libass4 libass-dev libmodplug1 libmodplug-dev libvo-aacenc0 libvo-aacenc-dev libvo-amrwbenc0 libvo-amrwbenc-dev libopenal1 libopenal-dev libavcodec-extra-53 libavdevice-extra-53 libavfilter-extra-2 libavformat-extra-53 libavutil-extra-51 libpostproc-extra-52 libswscale-extra-2\n\nffmpeg -i [VIDEO NAME].[FORMAT] -vcodec -s mpeg4 -vpre [VIDEO PRESET EX. MEDIUM/HIGH ] -b [BANDWIDTH] -s [WIDTH]*[HEIGHT] -acodec copy [OUTPUT VIDEO NAME].avi\n\nffmpeg -i Myvideo.mp4 -vcodec -s mpeg4 -vpre medium -b 3000k -s 700x292 -acodec copy Output.avi"
+      ],
+      "Explanations about Options": {
+        "-t": "When used as an input option (before \"-i\"), limit the duration of data read from the\n input file.",
+        "-acodec": "Set the audio codec. This is an alias for \"-codec:a\".",
+        "-i": "input file url",
+        "-n": "Do not overwrite output files, and exit immediately if a specified output file already\n exists.",
+        "-vcodec": "Set the video codec. This is an alias for \"-codec:v\"."
+      }
+    },
+    {
+      "Command": "vlc",
+      "MP Summary": "the VLC media player",
+      "Most Similar TLDR Task": "Play video from a URL",
+      "Most Similar TLDR Script": "vlc {{https://www.youtube.com/watch?v=oHg5SJYRHA0}}",
+      "Top-3 Similar Questions": [
+        "ul_278365: FFMpeg : Converting a video file to a gif with multiple images from video"
+      ],
+      "Top-3 Scripts": [
+        "ul_278365: apt-get install vlc"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "ffprobe",
+      "MP Summary": "ffprobe media prober",
+      "Most Similar TLDR Task": "Display the frame rate of a video",
+      "Most Similar TLDR Script": "ffprobe -v error -select_streams v:0 -show_entries stream=avg_frame_rate -of default=noprint_wrappers=1:nokey=1 {{input.mp4}}",
+      "Top-3 Similar Questions": [
+        "ul_198354: how to convert MOD video file without loosing quality to modern popular format for TV",
+        "au_1214782: Ffmpeg: can TS video be converted directly to MP4 video without re-coding?",
+        "so_59256447: Converting mkv to mp4 with ffmpeg sometimes loses video"
+      ],
+      "Top-3 Scripts": [
+        "ul_198354: ffprobe yourfile.MOD",
+        "au_1214782: ",
+        "so_59256447: $ ffprobe -loglevel error -select_streams a:0 -show_entries stream=codec_name -of default=nw=1 input.mp4\ncodec_name=aac"
+      ],
+      "Explanations about Options": {
+        "-loglevel": "Set logging level and flags used by the library."
+      }
+    },
+    {
+      "Command": "convert",
+      "MP Summary": "convert between image formats as well as resize an image, blur, crop, despeckle, dither, draw on, flip, join, re-sample, and much more.",
+      "Most Similar TLDR Task": "Convert an image from JPG to PNG",
+      "Most Similar TLDR Script": "convert {{image.jpg}} {{image.png}}",
+      "Top-3 Similar Questions": [
+        "so_69691394: How to convert images with negative number as a name to animation/video?"
+      ],
+      "Top-3 Scripts": [
+        "so_69691394: readarray -t files < <(printf '%s\\n' *.gif | LC_ALL=C sort -n)\nconvert \"${files[@]}\" -resize 600x600 a600_100.gif\n\nreadarray -t files < <(find . -maxdepth 1 -type f -name '*.gif' -printf \"%f\\n\" | LC_ALL=C sort -n)\nconvert \"${files[@]}\" -resize 600x600 a600_100.gif\n\nconvert *.gif -resize 600x600 a600_100.gif"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "import",
+      "MP Summary": "saves any visible window on an X server and outputs it as an image file. You can capture a single window, the entire screen, or any rectangular portion of the screen.",
+      "Most Similar TLDR Task": "Capture contents of a remote X server screen in the PNG image format",
+      "Most Similar TLDR Script": "import -window root -display {{remote_host}}:{screen}.{display} {{output.png}}",
+      "Top-3 Similar Questions": [
+        "au_971119: Convert a sequence of ppm images to avi video",
+        "so_33448759: python converting video to audio"
+      ],
+      "Top-3 Scripts": [
+        "au_971119: ",
+        "so_33448759: import moviepy.editor as mp\nclip = mp.VideoFileClip(\"myvideo.mp4\").subclip(0,20)\nclip.audio.write_audiofile(\"theaudio.mp3\")"
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

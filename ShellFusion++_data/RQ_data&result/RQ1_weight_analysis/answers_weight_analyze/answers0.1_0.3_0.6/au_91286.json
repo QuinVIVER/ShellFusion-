@@ -1,0 +1,82 @@
+{
+  "Query": "How to see log to find a boot problem",
+  "Answers": [
+    {
+      "Command": "who",
+      "MP Summary": "show who is logged on",
+      "Most Similar TLDR Task": "Display the username, line, and time of all currently logged-in sessions",
+      "Most Similar TLDR Script": "who",
+      "Top-3 Similar Questions": [
+        "ul_77954: How to see Current users on the system"
+      ],
+      "Top-3 Scripts": [
+        "ul_77954: who | cut -d ' ' -f 1 | sort | uniq | \n  while read user; do ps -u $user -o %u%c%a; done"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "journalctl",
+      "MP Summary": "Query the systemd journal",
+      "Most Similar TLDR Task": "Show all messages from this boot",
+      "Most Similar TLDR Script": "journalctl -b",
+      "Top-3 Similar Questions": [
+        "ul_106982: How to save boot.log between reboots?",
+        "so_57624756: See user id in linux journalctl",
+        "ul_605457: See the output of the program started at boot"
+      ],
+      "Top-3 Scripts": [
+        "ul_106982: ",
+        "so_57624756: journalctl -o verbose\n\nman journalctl",
+        "ul_605457: journalctl -b\n\njournalctl -f -u rc-local.service\n\njournalctl -f $(which python)"
+      ],
+      "Explanations about Options": {
+        "-f": "Show only the most recent journal entries, and continuously print new entries as they\n are appended to the journal."
+      }
+    },
+    {
+      "Command": "mount",
+      "MP Summary": "mount a filesystem",
+      "Most Similar TLDR Task": "Show all mounted filesystems",
+      "Most Similar TLDR Script": "mount",
+      "Top-3 Similar Questions": [
+        "au_186140: Cannot see boot options after editing grub background",
+        "au_40471: Where can I find the log files for mounting disks?"
+      ],
+      "Top-3 Scripts": [
+        "au_186140: sudo mount /dev/sda1 /mnt && sudo mount --bind /dev /mnt/dev && sudo mount --bind /proc /mnt/proc && sudo mount --bind /sys /mnt/sys && sudo mount --bind /dev/pts /mnt/dev/pts && sudo chroot /mnt",
+        "au_40471: grep -e mount -e ext4 -lR /var/log 2> /dev/null"
+      ],
+      "Explanations about Options": {
+        "-l": "Add the labels in the mount output. mount must have permission to read the disk\n device (e.g. be set-user-ID root) for this to work. One can set such a label for\n ext2, ext3 or ext4 using the e2label(8) utility, or for XFS using xfs_admin(8), or\n for reiserfs using reiserfstune(8).",
+        "--bind": "Remount a subtree somewhere else (so that its contents are available in both\n places). See above, under Bind mounts.",
+        "-R": "Remount a subtree and all possible submounts somewhere else (so that its contents\n are available in both places). See above, the subsection Bind mounts."
+      }
+    },
+    {
+      "Command": "systemctl",
+      "MP Summary": "Control the systemd system and service manager",
+      "Most Similar TLDR Task": "Mask/Unmask a unit, prevent it to be started on bootup",
+      "Most Similar TLDR Script": "systemctl mask/unmask {{unit}}",
+      "Top-3 Similar Questions": [
+        "ul_663155: Why do I see a black screen after boot until I press Alt+F1"
+      ],
+      "Top-3 Scripts": [
+        "ul_663155: systemctl set-default multi-user.target"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "screen",
+      "MP Summary": "screen manager with VT100/ANSI terminal emulation",
+      "Most Similar TLDR Task": "Show open screen sessions",
+      "Most Similar TLDR Script": "screen -ls",
+      "Top-3 Similar Questions": [
+        "ul_10077: Where can I see a list of kernel killed processes?"
+      ],
+      "Top-3 Scripts": [
+        "ul_10077: "
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

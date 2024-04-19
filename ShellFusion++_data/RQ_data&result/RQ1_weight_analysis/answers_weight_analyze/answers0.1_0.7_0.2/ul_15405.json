@@ -1,0 +1,89 @@
+{
+  "Query": "How do I send HTML email using linux 'mail' command?",
+  "Answers": [
+    {
+      "Command": "mailx",
+      "MP Summary": "send and receive mail",
+      "Most Similar TLDR Task": "Send mail with content passed from another command",
+      "Most Similar TLDR Script": "echo \"{{content}}\" | mailx -s \"{{subject}}\" {{to_addr}}",
+      "Top-3 Similar Questions": [
+        "so_25916462: sending a mail using informatica workflow",
+        "su_1088509: How to send an email attachment using command line in Linux without physically creating the file"
+      ],
+      "Top-3 Scripts": [
+        "so_25916462: if [ `wc -l < \"/data/informatica/Services/myfolder/TgtFiles/filename.csv\"` -gt 0 ]\n   # //here i am trying to check if there are any records in the target\nthen\n    mailx -s \"Target is populated\" \"reciepent1@abc.com reciepent2@abc.com \"<<ed\n    Validation completed\n    ed\nelse\n    exit\n    eod\nfi",
+        "su_1088509: echo \"MESSAGE BODY\" | mailx -s \"SUBJECT\" -a <(echo something | sed 's/thing/thong/g') USER@DOM.TLD"
+      ],
+      "Explanations about Options": {
+        "-a": "Specify additional header fields on the command line such as \"X-Loop: foo@bar\" etc.\n It can be also used to override MIME headers mail adds by default to each outgoing\n mail, see Character sets and MIME below. You have to use quotes if the string\n contains spaces. This argument may be specified more than once, the headers will\n then be concatenated.",
+        "-s": "Specify subject on command line (only the first argument after the -s flag is used\n as a subject; be careful to quote subjects containing spaces)."
+      }
+    },
+    {
+      "Command": "mail",
+      "MP Summary": "send and receive mail",
+      "Most Similar TLDR Task": "Send an email that contains file content",
+      "Most Similar TLDR Script": "mail --subject=\"{{$HOSTNAME filename.txt}}\" {{to_user@example.com}} < {{path/to/filename.txt}}",
+      "Top-3 Similar Questions": [
+        "so_3317174: Sending HTML mail using a shell script",
+        "so_1781989: Sending email using unix shell scripting",
+        "ul_287579: Script to send mail using function"
+      ],
+      "Top-3 Scripts": [
+        "so_3317174: body = '...'\n\necho $body | mail \\\n-a \"From: me@example.com\" \\\n-a \"MIME-Version: 1.0\" \\\n-a \"Content-Type: text/html\" \\\n-s \"This is the subject\" \\\nyou@example.com",
+        "so_1781989: echo $body | mail $receiver -s \"$subj\"",
+        "ul_287579: "
+      ],
+      "Explanations about Options": {
+        "-s": "Specify subject on command line (only the first argument after the -s flag is used\n as a subject; be careful to quote subjects containing spaces)."
+      }
+    },
+    {
+      "Command": "sendmail",
+      "MP Summary": "send a message using smtp",
+      "Most Similar TLDR Task": "Send a message with the content of message.txt to the mail directory of local user `username`",
+      "Most Similar TLDR Script": "sendmail {{username}} < {{message.txt}}",
+      "Top-3 Similar Questions": [
+        "au_315753: send email using sendmail",
+        "au_355823: sending file using sendmail",
+        "so_24854116: How to send simple email using Python"
+      ],
+      "Top-3 Scripts": [
+        "au_315753: ",
+        "au_355823: file=/path/to/file\nmailalert(){\nsendmail -F Sender-Name -it <<END_MESSAGE\nTo: Recipient@example.com\nSubject: Subject\n\n$(cat $file)\nEND_MESSAGE\n}",
+        "so_24854116: "
+      ],
+      "Explanations about Options": {
+        "-t": "Read message, searching for recipients. ``To:'', `Cc:'', and ``Bcc:'' lines will\n be scanned for people to send to. Any addresses in the argument list will be\n suppressed (not supported)."
+      }
+    },
+    {
+      "Command": "msmtp",
+      "MP Summary": "An SMTP client",
+      "Most Similar TLDR Task": "Send an email using a specific account configured in `~/.msmtprc`",
+      "Most Similar TLDR Script": "echo \"{{Hello world}}\" | msmtp --account={{account_name}} {{to@example.org}}",
+      "Top-3 Similar Questions": [
+        "au_1163881: Having some issues to send mails using ssmtp",
+        "so_65861238: How to send email using ssmtp"
+      ],
+      "Top-3 Scripts": [
+        "au_1163881: apt install msmtp msmtp-mta ca-certificates\n\nadduser --system --home /var/lib/msmtp --no-create-home --group msmtp\nchown root:msmtp /etc/msmtprc\nchmod 640 /etc/msmtprc\nchown syslog:msmtp /var/log/mail.log\nchmod 660 /var/log/mail.log",
+        "so_65861238: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "postfix",
+      "MP Summary": "Postfix control program",
+      "Most Similar TLDR Task": "Flush the mail queue",
+      "Most Similar TLDR Script": "sudo postfix flush",
+      "Top-3 Similar Questions": [
+        "au_729366: How can I immediately disable all emails using postfix?"
+      ],
+      "Top-3 Scripts": [
+        "au_729366: /etc/postfix/main.cf\n\nsudo /etc/init.d/postfix restart"
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

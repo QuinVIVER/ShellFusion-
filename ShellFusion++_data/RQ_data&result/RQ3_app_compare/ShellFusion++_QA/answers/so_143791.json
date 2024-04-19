@@ -1,0 +1,69 @@
+{
+  "Query": "how do i find which process is leaking memory",
+  "Answers": [
+    {
+      "Command": "grep",
+      "Top-3 Similar Questions": [
+        "su_1443306: Is there any way to find which process utilizing swap memory in Linux OS?",
+        "ul_616125: Linux command to find which port a process is running?",
+        "ul_3109: How do I find out which processes are preventing unmounting of a device?"
+      ],
+      "Top-3 Scripts": [
+        "su_1443306: grep '^VmSwap:' /proc/*/status \\\n    | grep -v '0 kB$' \\\n    | sed -re 's#^/proc/([0-9]+)/status:VmSwap:[ \\t]+([0-9]+) kB$#\\1 \\2#' \\\n    | sort -nrk2 \\\n    | while read pid swap; do \\\n        printf \"%10s kB    %-6s    \" ${swap} ${pid}; \\\n        cat /proc/${pid}/cmdline | xargs -0 | fold -sw160 | sed -re '/^$/d; 1!s/^/\\t\\t\\t\\t/;'; \\\n      done \\\n    | less -cRS\n\ngrep -v '0 kB$'",
+        "ul_616125: sudo lsof -i -P -n | grep LISTEN | grep <your_process_name>\n\nalias magic=\"sudo lsof -i -P -n | grep LISTEN | grep \"",
+        "ul_3109: lsof | grep /media/whatever"
+      ]
+    },
+    {
+      "Command": "ps",
+      "Top-3 Similar Questions": [
+        "ul_4999: How to find which processes are taking all the memory?",
+        "so_13850254: Way to find which process is spawining another process in linux?",
+        "au_867927: How can I find out which service started a process so I can disable that service?"
+      ],
+      "Top-3 Scripts": [
+        "ul_4999: $ ps -eo pmem,pcpu,vsize,pid,cmd | sort -k 1 -nr | head -5",
+        "so_13850254: $ ps -o pid,ppid 4708\n  PID  PPID\n 4708  4580\n\n$ ps -o ppid= 4708\n 4580",
+        "au_867927: ps -o unit -p <PID>\n\n$ ps -o pid,unit -p $(pgrep chrome -n) 561 \n  PID UNIT\n  320 session-c2.scope\n  561 sshd.service"
+      ]
+    },
+    {
+      "Command": "top",
+      "Top-3 Similar Questions": [
+        "ul_4999: How to find which processes are taking all the memory?",
+        "ul_20483: How to find which Process is causing High CPU usage",
+        "au_53264: How do you find out which program is using too much memory?"
+      ],
+      "Top-3 Scripts": [
+        "au_53264: top -c",
+        "su_470181: top -c"
+      ]
+    },
+    {
+      "Command": "sudo",
+      "Top-3 Similar Questions": [
+        "ul_616125: Linux command to find which port a process is running?",
+        "su_258277: How can I find out which process is listening on a port on linux?",
+        "au_227161: How can we find which process is using a particular port?"
+      ],
+      "Top-3 Scripts": [
+        "ul_616125: sudo lsof -i -P -n | grep LISTEN | grep <your_process_name>",
+        "su_258277: sudo lsof -i\nsudo netstat -lptu",
+        "au_227161: sudo netstat -nlp"
+      ]
+    },
+    {
+      "Command": "to",
+      "Top-3 Similar Questions": [
+        "ul_99074: Find which process is modifying a file",
+        "su_212714: How to find which Tmux session a process belongs to?",
+        "so_28029947: how do you find out which partition maps to which memory device type on embedded linux?"
+      ],
+      "Top-3 Scripts": [
+        "ul_99074: auditctl -w /path/to/that/file -p wa",
+        "su_212714: lsof /path/to/.file.swp",
+        "ul_191779: iotop  watches  I/O  usage  information  output  by  the  Linux  kernel\n   (requires 2.6.20 or later) and displays a table of current I/O usage by\n   processes   or   threads   on   the   system.   At   least   the   CON\u2010\n   FIG_TASK_DELAY_ACCT,  CONFIG_TASK_IO_ACCOUNTING,  CONFIG_TASKSTATS  and\n   CONFIG_VM_EVENT_COUNTERS  options need to be enabled in your Linux ker\u2010\n   nel build configuration."
+      ]
+    }
+  ]
+}

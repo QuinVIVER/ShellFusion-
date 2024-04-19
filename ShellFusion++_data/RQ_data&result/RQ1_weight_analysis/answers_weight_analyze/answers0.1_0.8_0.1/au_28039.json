@@ -1,0 +1,86 @@
+{
+  "Query": "How to stream music over the network to multiple computers?",
+  "Answers": [
+    {
+      "Command": "ping",
+      "MP Summary": "send ICMP ECHO_REQUEST to network hosts",
+      "Most Similar TLDR Task": "Ping a host only a specific number of times",
+      "Most Similar TLDR Script": "ping -c {{count}} {{host}}",
+      "Top-3 Similar Questions": [
+        "au_82480: How to see all computers connected to a network"
+      ],
+      "Top-3 Scripts": [
+        "au_82480: for ip in $(seq 1 254); do ping -c 1 192.168.1.$ip>/dev/null; \n    [ $? -eq 0 ] && echo \"192.168.1.$ip UP\" || : ;\ndone"
+      ],
+      "Explanations about Options": {
+        "-c": "Stop after sending count ECHO_REQUEST packets. With deadline option, ping waits for\n count ECHO_REPLY packets, until the timeout expires."
+      }
+    },
+    {
+      "Command": "ffmpeg",
+      "MP Summary": "ffmpeg video converter",
+      "Most Similar TLDR Task": "Convert frames from a video or GIF into individual numbered images",
+      "Most Similar TLDR Script": "ffmpeg -i {{video.mpg|video.gif}} {{frame_%d.png}}",
+      "Top-3 Similar Questions": [
+        "au_1276243: Stream a recoreded Video to youtube",
+        "su_1663509: How to have a side-channel stream while writing video recording to a file",
+        "so_49273070: ffmpeg stream video file from ubuntu to youtube"
+      ],
+      "Top-3 Scripts": [
+        "au_1276243: ",
+        "su_1663509: ffmpeg -video_size 1920x1080 -pixel_format mjpeg -i /dev/video5 -c:v libx264 -copyts -crf 0 -preset veryfast /tmp/test.mkv -map 0 -f fifo -fifo_format rawvideo -drop_pkts_on_overflow true -attempt_recovery 1 -recovery_wait_time 1 rawvideo pipe: | my_process",
+        "so_49273070: ffmpeg -re -i video.flv -c copy -f flv rtmp://a.rtmp.youtube.com/live2/XXXXXX\n\nffmpeg -re -i video.flv -c:v libx264 -b:v 4000k -maxrate 4000k -bufsize 6000k -pix_fmt yuv420p -g 60 -c:a aac -f flv rtmp://a.rtmp.youtube.com/live2/XXXXXX"
+      ],
+      "Explanations about Options": {
+        "-pixel_format": "Request the video device to use a specific pixel format. If the specified format is\n not supported, a list of available formats is given and the first one in this list is\n used instead. Available pixel formats are: \"monob, rgb555be, rgb555le, rgb565be,\n rgb565le, rgb24, bgr24, 0rgb, bgr0, 0bgr, rgb0,\n bgr48be, uyvy422, yuva444p, yuva444p16le, yuv444p, yuv422p16, yuv422p10, yuv444p10,\n yuv420p, nv12, yuyv422, gray\"",
+        "-re": "Read input at native frame rate. Mainly used to simulate a grab device, or live input\n stream (e.g. when reading from a file). Should not be used with actual grab devices or\n live input streams (where it can cause packet loss). By default ffmpeg attempts to\n read the input(s) as fast as possible. This option will slow down the reading of the\n input(s) to the native frame rate of the input(s). It is useful for real-time output\n (e.g. live streaming).",
+        "-t": "When used as an input option (before \"-i\"), limit the duration of data read from the\n input file.",
+        "-video_size": "Set the video frame size.",
+        "-i": "input file url"
+      }
+    },
+    {
+      "Command": "ip",
+      "MP Summary": "show / manipulate routing, network devices, interfaces and tunnels",
+      "Most Similar TLDR Task": "Add/Delete an ip address to an interface",
+      "Most Similar TLDR Script": "ip addr add/del {{ip}}/{{mask}} dev {{interface}}",
+      "Top-3 Similar Questions": [
+        "au_82480: How to see all computers connected to a network",
+        "ul_666878: When connected to Wifi I am unable to ping directly connected computer",
+        "au_547289: How can I (from CLI) assign multiple IP addresses to one interface?"
+      ],
+      "Top-3 Scripts": [
+        "au_82480: for ip in $(seq 1 254); do ping -c 1 192.168.1.$ip>/dev/null; \n    [ $? -eq 0 ] && echo \"192.168.1.$ip UP\" || : ;\ndone",
+        "ul_666878: ip route del 192.254.0.0/16 dev enp3s0",
+        "au_547289: sudo ip address add <ip-address>/<prefix-length> dev <interface>\n\nsudo ip address add 172.16.100.17/24 dev eth0\n\nip address show eth0\n\nsudo ip address del 172.16.100.17/24 dev eth0"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "tee",
+      "MP Summary": "read from standard input and write to standard output and files",
+      "Most Similar TLDR Task": "Print standard input to the terminal, and also pipe it into another program for further processing",
+      "Most Similar TLDR Script": "echo \"example\" | tee {{/dev/tty}} | {{xargs printf \"[%s]\"}}",
+      "Top-3 Similar Questions": [
+        "so_2264466: pipe bash output to two different streams"
+      ],
+      "Top-3 Scripts": [
+        "so_2264466: man tee"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "sed",
+      "MP Summary": "stream editor for filtering and transforming text",
+      "Most Similar TLDR Task": "Apply multiple find-replace expressions to a file",
+      "Most Similar TLDR Script": "sed -e 's/{{find}}/{{replace}}/' -e 's/{{find}}/{{replace}}/' {{filename}}",
+      "Top-3 Similar Questions": [
+        "ul_550035: Add own information to error stream"
+      ],
+      "Top-3 Scripts": [
+        "ul_550035: ./thescript.sh 2>&1 1>/dev/null | sed '1 s/^/error_message_starts:\\n/' >> error_log;"
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

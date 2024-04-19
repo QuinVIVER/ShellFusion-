@@ -1,0 +1,95 @@
+{
+  "Query": "How to send an email using command line?",
+  "Answers": [
+    {
+      "Command": "mailx",
+      "MP Summary": "send and receive mail",
+      "Most Similar TLDR Task": "Send mail with content read from a file",
+      "Most Similar TLDR Script": "mailx -s \"{{subject}}\" {{to_addr}} < {{content.txt}}",
+      "Top-3 Similar Questions": [
+        "so_3831871: How to send an email from unix script",
+        "su_1088509: How to send an email attachment using command line in Linux without physically creating the file",
+        "so_43699496: How to send email for failed jobs in shell scripts"
+      ],
+      "Top-3 Scripts": [
+        "so_3831871: if grep -q something sql.out\nthen\n    # send email containing the output of the SQL statement\n    cat sql.out | mailx -s \"UP ALERT\" xyz@mail.com\nfi\n\n#delete sql.out\nrm sql.out",
+        "su_1088509: echo \"MESSAGE BODY\" | mailx -s \"SUBJECT\" -a <(echo something | sed 's/thing/thong/g') USER@DOM.TLD",
+        "so_43699496: $(uuencode file1.txt file2.txt) | mailx -s \"Subject\" user@example.com"
+      ],
+      "Explanations about Options": {
+        "-a": "Specify additional header fields on the command line such as \"X-Loop: foo@bar\" etc.\n It can be also used to override MIME headers mail adds by default to each outgoing\n mail, see Character sets and MIME below. You have to use quotes if the string\n contains spaces. This argument may be specified more than once, the headers will\n then be concatenated.",
+        "-s": "Specify subject on command line (only the first argument after the -s flag is used\n as a subject; be careful to quote subjects containing spaces)."
+      }
+    },
+    {
+      "Command": "mail",
+      "MP Summary": "send and receive mail",
+      "Most Similar TLDR Task": "Send an email that contains file content",
+      "Most Similar TLDR Script": "mail --subject=\"{{$HOSTNAME filename.txt}}\" {{to_user@example.com}} < {{path/to/filename.txt}}",
+      "Top-3 Similar Questions": [
+        "so_1781989: Sending email using unix shell scripting",
+        "ul_287579: Script to send mail using function",
+        "so_36498: How do I Send Email from the Command Line?"
+      ],
+      "Top-3 Scripts": [
+        "so_1781989: echo $body | mail $receiver -s \"$subj\"",
+        "ul_287579: ",
+        "so_36498: $mail -s <subject> <recipients>\n\n$<mail-generating-program> | mail -s <subject> <recipients>"
+      ],
+      "Explanations about Options": {
+        "-s": "Specify subject on command line (only the first argument after the -s flag is used\n as a subject; be careful to quote subjects containing spaces)."
+      }
+    },
+    {
+      "Command": "sendmail",
+      "MP Summary": "send a message using smtp",
+      "Most Similar TLDR Task": "Send a message with the content of message.txt to the mail directory of local user `username`",
+      "Most Similar TLDR Script": "sendmail {{username}} < {{message.txt}}",
+      "Top-3 Similar Questions": [
+        "au_315753: send email using sendmail",
+        "au_355823: sending file using sendmail",
+        "so_25586355: How to loop over text in a file and send output using sendmail?"
+      ],
+      "Top-3 Scripts": [
+        "au_315753: ",
+        "au_355823: file=/path/to/file\nmailalert(){\nsendmail -F Sender-Name -it <<END_MESSAGE\nTo: Recipient@example.com\nSubject: Subject\n\n$(cat $file)\nEND_MESSAGE\n}",
+        "so_25586355: "
+      ],
+      "Explanations about Options": {
+        "-t": "Read message, searching for recipients. ``To:'', `Cc:'', and ``Bcc:'' lines will\n be scanned for people to send to. Any addresses in the argument list will be\n suppressed (not supported)."
+      }
+    },
+    {
+      "Command": "msmtp",
+      "MP Summary": "An SMTP client",
+      "Most Similar TLDR Task": "Send an email using the default account configured in `~/.msmtprc`",
+      "Most Similar TLDR Script": "echo \"{{Hello world}}\" | msmtp {{to@example.org}}",
+      "Top-3 Similar Questions": [
+        "so_65861238: How to send email using ssmtp",
+        "au_1163881: Having some issues to send mails using ssmtp"
+      ],
+      "Top-3 Scripts": [
+        "so_65861238: ",
+        "au_1163881: apt install msmtp msmtp-mta ca-certificates\n\nadduser --system --home /var/lib/msmtp --no-create-home --group msmtp\nchown root:msmtp /etc/msmtprc\nchmod 640 /etc/msmtprc\nchown syslog:msmtp /var/log/mail.log\nchmod 660 /var/log/mail.log"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "echo",
+      "MP Summary": "display a line of text",
+      "Most Similar TLDR Task": "Append a message to the file",
+      "Most Similar TLDR Script": "echo \"{{Hello World}}\" >> {{file.txt}}",
+      "Top-3 Similar Questions": [
+        "so_17359: How do I send a file as an email attachment using Linux command line?",
+        "so_1781989: Sending email using unix shell scripting",
+        "au_315753: send email using sendmail"
+      ],
+      "Top-3 Scripts": [
+        "so_17359: echo \"This is the message body\" | mutt -a \"/path/to/file.to.attach\" -s \"subject of message\" -- recipient@domain.com",
+        "so_1781989: echo $body | mail $receiver -s \"$subj\"",
+        "au_315753: "
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

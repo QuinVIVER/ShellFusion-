@@ -1,0 +1,93 @@
+{
+  "Query": "Need to downsample video to a lower resolution",
+  "Answers": [
+    {
+      "Command": "ffmpeg",
+      "MP Summary": "ffmpeg video converter",
+      "Most Similar TLDR Task": "Quickly extract a single frame from a video at time mm:ss and save it as a 128x128 resolution image",
+      "Most Similar TLDR Script": "ffmpeg -ss {{mm:ss}} -i {{video.mp4}} -frames 1 -s {{128x128}} -f image2 {{image.png}}",
+      "Top-3 Similar Questions": [
+        "au_310094: convert and rotate video from MOV (iphone) to WMV (windows)",
+        "su_1571126: How to add audio to video using ffmpeg on Linux?",
+        "au_778137: How to convert a video file from mkv to a format supported by the TV set?"
+      ],
+      "Top-3 Scripts": [
+        "au_310094: sudo apt-get install ffmpeg\n\nffmpeg -i input.mov -vf transpose=1 output.wmv\n\nffmpeg -i input.mov -vf transpose=2 output.wmv\n\nffmpeg -i input.mov -vf transpose=1,transpose=1 output.wmv",
+        "su_1571126: ",
+        "au_778137: apt install ffmpeg"
+      ],
+      "Explanations about Options": {
+        "-vf": "Create the filtergraph specified by filtergraph and use it to filter the stream.",
+        "-i": "input file url"
+      }
+    },
+    {
+      "Command": "apt-get",
+      "MP Summary": "APT package handling utility - command-line interface",
+      "Most Similar TLDR Task": "Remove all packages that are no longer needed",
+      "Most Similar TLDR Script": "apt-get autoremove",
+      "Top-3 Similar Questions": [
+        "au_310094: convert and rotate video from MOV (iphone) to WMV (windows)",
+        "au_106501: video gets corrupt after converting ogv to any format using ffmpeg",
+        "au_680436: Unable to play videos after converting from Netbook 10.04 to Lubuntu 14.04"
+      ],
+      "Top-3 Scripts": [
+        "au_310094: sudo apt-get install ffmpeg",
+        "au_106501: sudo add-apt-repository ppa:kazam-team/unstable-series\nsudo apt-get update\nsudo apt-get install kazam",
+        "au_680436: sudo apt-get install --reinstall vlc\nsudo apt-get remove ubuntu-restricted-extras\nsudo apt-get install ubuntu-restricted-extras"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "ffprobe",
+      "MP Summary": "ffprobe media prober",
+      "Most Similar TLDR Task": "Display the average bit rate of a video",
+      "Most Similar TLDR Script": "ffprobe -v error -select_streams v:0 -show_entries stream=bit_rate -of default=noprint_wrappers=1:nokey=1 {{input.mp4}}",
+      "Top-3 Similar Questions": [
+        "au_1145071: Get video length in hours:minutes:seconds round result to second",
+        "ul_198354: how to convert MOD video file without loosing quality to modern popular format for TV",
+        "ul_170961: Get total duration of video files in a directory"
+      ],
+      "Top-3 Scripts": [
+        "au_1145071: $ ffprobe -v error -show_entries format=duration -of default=noprint_wrappers=1:nokey=1 -sexagesimal 'video file.mp4' | awk -F: '{printf \"%02d:%02d:%02d\\n\",$1,$2,$3}'\n00:33:29",
+        "ul_198354: ffprobe yourfile.MOD",
+        "ul_170961: ffprobe -v quiet -of csv=p=0 -show_entries format=duration Inception.mp4 \n275.690000\n\nfind . -maxdepth 1 -iname '*.mp4' -exec ffprobe -v quiet -of csv=p=0 -show_entries format=duration {} \\;\n149.233333\n130.146667\n275.690000\n\nfind . -maxdepth 1 -iname '*.mp4' -exec ffprobe -v quiet -of csv=p=0 -show_entries format=duration {} \\; | paste -sd+ -| bc\n555.070000\n\nfind . -maxdepth 1 -iname '*.ts' -exec ffprobe -v quiet -of csv=p=0 -show_entries format=duration {} \\; | paste -sd+ -| bc"
+      ],
+      "Explanations about Options": {
+        "-show_entries": "Set list of entries to show.",
+        "-of": "Set the output printing format."
+      }
+    },
+    {
+      "Command": "youtube-dl",
+      "MP Summary": "download videos from youtube.com or other video platforms",
+      "Most Similar TLDR Task": "Download the best quality audio and video and merge them",
+      "Most Similar TLDR Script": "youtube-dl -f bestvideo+bestaudio '{{url}}'",
+      "Top-3 Similar Questions": [
+        "au_266568: Downloading videos to an external drive with youtube-dl"
+      ],
+      "Top-3 Scripts": [
+        "au_266568: cd '/media/New Volume/Youtube Downloads'\nyoutube-dl URL1...\nyoutube-dl URL2...\n\n..."
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "xrandr",
+      "MP Summary": "primitive command line interface to RandR extension",
+      "Most Similar TLDR Task": "Change the resolution and update frequency of DisplayPort 1 to 1920x1080, 60Hz",
+      "Most Similar TLDR Script": "xrandr --output {{DP1}} --mode {{1920x1080}} --rate {{60}}",
+      "Top-3 Similar Questions": [
+        "su_311378: How to get a higher resolution on Ubuntu 11.04 using an intel chipset"
+      ],
+      "Top-3 Scripts": [
+        "su_311378: xrandr --newmode clever_name 173.00  1920 2048 2248 2576  1080 1083 1088 1120\n\nxrandr --addmode VGA1 clever_name\n\nxrandr --output VGA1 --mode clever_name\n\n#!/bin/sh\nxrandr --newmode clever_name 173.00  1920 2048 2248 2576  1080 1083 1088 1120\nxrandr --addmode VGA1 clever_name\nxrandr --output VGA1 --mode clever_name"
+      ],
+      "Explanations about Options": {
+        "--output": "Selects an output to reconfigure. Use either the name of the output or the XID.",
+        "--mode": "This selects a mode. Use either the name or the XID for mode",
+        "--newmode": "New modelines can be added to the server and then associated with outputs. This\n option does the former. The mode is specified using the ModeLine syntax for\n xorg.conf: clock hdisp hsyncstart hsyncend htotal vdisp vsyncstart vsyncend vtotal\n flags. flags can be zero or more of +HSync, -HSync, +VSync, -VSync, Interlace,\n DoubleScan, CSync, +CSync, -CSync. Several tools permit to compute the usual\n modeline from a height, width, and refresh rate, for instance you can use cvt.",
+        "--addmode": "output name\n Add a mode to the set of valid modes for an output."
+      }
+    }
+  ]
+}

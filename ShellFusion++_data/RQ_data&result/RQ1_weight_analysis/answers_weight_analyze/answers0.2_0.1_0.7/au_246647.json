@@ -1,0 +1,86 @@
+{
+  "Query": "Convert a directory of JPEG files to a single PDF document",
+  "Answers": [
+    {
+      "Command": "enscript",
+      "MP Summary": "convert text files to PostScript, HTML, RTF, ANSI, and overstrikes",
+      "Most Similar TLDR Task": "Generate a PostScript file from a text file",
+      "Most Similar TLDR Script": "enscript {{path/to/input_file}} --output={{path/to/output_file}}",
+      "Top-3 Similar Questions": [
+        "au_942727: Convert Website to PDF (recursively)",
+        "ul_287744: Convert output of script(1) to pdf",
+        "so_54632016: Convert all files of a specified extension within a directory to pdf, recursively for all sub-directories"
+      ],
+      "Top-3 Scripts": [
+        "au_942727: sudo apt update && sudo apt install enscript\n\nfind /path/to/folder/ -type f -name '*.php' -exec printf \"\\n\\n{}\\n\\n\" \\; -exec cat \"{}\" \\; | enscript -o - | ps2pdf - output.pdf\n\nfind /var/www/wordpress/ -type f -name '*.php' -exec printf \"\\n\\n{}\\n\\n\" \\; -exec cat \"{}\" \\; | enscript -o - | ps2pdf - output.pdf",
+        "ul_287744: ",
+        "so_54632016: "
+      ],
+      "Explanations about Options": {
+        "-o": "An alias for the option -p, --output."
+      }
+    },
+    {
+      "Command": "gs",
+      "MP Summary": "Ghostscript (PostScript and PDF language interpreter and previewer)",
+      "Most Similar TLDR Task": "Merge PDF files",
+      "Most Similar TLDR Script": "gs -dQUIET -dBATCH -dNOPAUSE -sDEVICE=pdfwrite -sOutputFile={{output.pdf}} {{input1.pdf}} {{input2.pdf}}",
+      "Top-3 Similar Questions": [
+        "au_942727: Convert Website to PDF (recursively)",
+        "so_624678: Problems with linux Imagemagick converting PDFs to JPGs",
+        "ul_476997: Convert PDF to images in 1920x1080"
+      ],
+      "Top-3 Scripts": [
+        "au_942727: gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -dPDFSETTINGS=/prepress -sOutputFile=merged-output.pdf $(ls -1 *.pdf)\n\n#!/bin/sh\nTARGET_SITE=\"$1\"\nwget --spider --force-html -r -l2 \"$TARGET_SITE\" 2>&1 | grep '^--' | awk '{ print $3 }' | grep -v '\\.\\(css\\|js\\|png\\|gif\\|jpg\\|txt\\)$' > url-list.txt\nwhile read i; do wkhtmltopdf \"$i\" \"$(echo \"$i\" | sed -e 's/https\\?:\\/\\///' -e 's/\\//-/g' ).pdf\"; done < url-list.txt\ngs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -dPDFSETTINGS=/prepress -sOutputFile=merged-output.pdf $(ls -1 *.pdf)",
+        "so_624678: gs -q -sDEVICE=jpeg -dBATCH -dNOPAUSE -dFirstPage=1 -dLastPage=1 -r<OUTPUT RESOLUTION> -sOutputFile=<OUTPUT>.jpg <INPUT>.pdf 2>&1",
+        "ul_476997: gs -r92.38 -sDEVICE=png48 -sOutputFile=ghostscript.png file.pdf"
+      ],
+      "Explanations about Options": {
+        "-sDEVICE": "Selects an alternate initial output device, as described above.",
+        "-q": "Quiet startup: suppress normal startup messages, and also do the equivalent of\n -dQUIET.",
+        "-dNOPAUSE": "Disables the prompt and pause at the end of each page. This may be desirable for\n applications where another program is driving Ghostscript.",
+        "-P": "Makes Ghostscript to look first in the current directory for library files. By\n default, Ghostscript no longer looks in the current directory, unless, of course,\n the first explicitly supplied directory is \".\" in -I. See also the INITIALIZATION\n FILES section below, and bundled Use.htm for detailed discussion on search paths\n and how Ghostcript finds files.",
+        "-sOutputFile": "Selects an alternate output file (or pipe) for the initial output device, as\n described above."
+      }
+    },
+    {
+      "Command": "pdfinfo",
+      "MP Summary": "Portable Document Format (PDF) document information extractor (version 3.03)",
+      "Most Similar TLDR Task": "Print PDF file information",
+      "Most Similar TLDR Script": "pdfinfo {{path/to/file.pdf}}",
+      "Top-3 Similar Questions": [
+        "so_11467369: ImageMagick converting pdf to images, converted page count"
+      ],
+      "Top-3 Scripts": [
+        "so_11467369: pdfinfo file.pdf\npdfinfo file.pdf | grep Pages:\npdfinfo file.pdf | grep Pages: | awk '{print $2}'"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "wasm2wat",
+      "MP Summary": "translate from the binary format to the text format",
+      "Most Similar TLDR Task": "Convert a file to the text format and display it to the console",
+      "Most Similar TLDR Script": "wasm2wat {{file.wasm}}",
+      "Top-3 Similar Questions": [
+        "tldr_7159: Convert a file to the text format and display it to the console"
+      ],
+      "Top-3 Scripts": [
+        "tldr_7159: wasm2wat {{file.wasm}}"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "mogrify",
+      "MP Summary": "resize an image, blur, crop, despeckle, dither, draw on, flip, join, re-sample, and much more. Mogrify overwrites the original image file, whereas, convert-im6.q16hdri(1) writes to a different image file.",
+      "Most Similar TLDR Task": "Convert all PNG images in the directory to JPEG",
+      "Most Similar TLDR Script": "mogrify -format {{jpg}} {{*.png}}",
+      "Top-3 Similar Questions": [
+        "so_20975025: How to convert jpg files into png files with linux command? + Difficulty = Subfolders"
+      ],
+      "Top-3 Scripts": [
+        "so_20975025: find . -name \"*.jpg\" -exec mogrify -format png {} \\;"
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

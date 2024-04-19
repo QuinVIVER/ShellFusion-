@@ -1,0 +1,94 @@
+{
+  "Query": "Getting the count of unique values in a column in bash",
+  "Answers": [
+    {
+      "Command": "awk",
+      "MP Summary": "pattern scanning and processing language",
+      "Most Similar TLDR Task": "Sum the values in the first column of a file and print the total",
+      "Most Similar TLDR Script": "awk '{s+=$1} END {print s}' {{filename}}",
+      "Top-3 Similar Questions": [
+        "so_52214717: How to get a unique value of the same value in both columns in a Unix command",
+        "so_36987166: How do I get the total number of distinct values in a column in a CSV?",
+        "so_70219812: Getting sum of values in a particular column with some conditions"
+      ],
+      "Top-3 Scripts": [
+        "so_52214717: awk -F, '{ if( $6 == $7) print \"equal\" }' test.csv\n\nawk -F,  ' $6 == $7 { print \"equal\" }' test.csv\n\nawk -F,  'NR >1 && $6 != $7 { print $6 $7 }' test.csv",
+        "so_36987166: awk -F, '!seen[$1]++{c++} END{print c}' file\n\n2",
+        "so_70219812: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "wc",
+      "MP Summary": "print newline, word, and byte counts for each file",
+      "Most Similar TLDR Task": "Count characters (bytes) in file",
+      "Most Similar TLDR Script": "wc -c {{file}}",
+      "Top-3 Similar Questions": [
+        "so_52155969: How can I get the directory count of a given directory in bash?",
+        "so_18351284: How to get the count of fields in a delimited string?",
+        "so_29801249: Bash - get a reverse count of loop in output"
+      ],
+      "Top-3 Scripts": [
+        "so_52155969: find . -maxdepth 1 -type d -exec echo \\; | wc -l\n\nfind . -maxdepth 1 -type d -print0 | tr -cd '\\0' | wc -c",
+        "so_18351284: $ echo \"field1;field2;field3;field4;\" | grep -o \";\" | wc -l\n4\n\n$ tr -dc ';' <<< \"field1;field2;field3;field4;\" | wc -c\n4",
+        "so_29801249: num=$(wc -l < ip.txt)\nwhile read -r ip; do\n    # Do your work, use $num as needed\n\n    # Then decrement num\n    num=$((num-1))\ndone < ip.txt"
+      ],
+      "Explanations about Options": {
+        "-l": "print the newline counts",
+        "-c": "print the byte counts"
+      }
+    },
+    {
+      "Command": "uniq",
+      "MP Summary": "report or omit repeated lines",
+      "Most Similar TLDR Task": "Display only unique lines",
+      "Most Similar TLDR Script": "sort {{file}} | uniq -u",
+      "Top-3 Similar Questions": [
+        "su_414343: I want to get a count of unique entries in the Apache error logs on",
+        "so_24255015: How to get frequency counts of unique values in a list using UNIX?"
+      ],
+      "Top-3 Scripts": [
+        "su_414343: sed -e \"s/\\[.*\\]\\([^:]*\\)\\(.*\\)/\\1/\" error.sml.log | sort | uniq -c\n      1  Apache configured -- resuming normal operations\n   3886  client denied by server configuration\n      2  Digest\n   6091  File does not exist\n     20  request failed\n\n$ sed -e \"s/\\[.*\\]\\([^:]*\\)\\(.*\\)/\\1/\" error.sml.log | sort | uniq -cd\n   3886  client denied by server configuration\n      2  Digest\n   6091  File does not exist\n     20  request failed\n\n$ sed -e \"s/\\[.*\\]\\([^:]*\\)\\(.*\\)/\\1/\" error.sml.log | sort | uniq -u  \n  Apache configured -- resuming normal operations",
+        "so_24255015: uniq -c"
+      ],
+      "Explanations about Options": {
+        "-u": "only print unique lines",
+        "-c": "prefix lines by the number of occurrences"
+      }
+    },
+    {
+      "Command": "tr",
+      "MP Summary": "translate or delete characters",
+      "Most Similar TLDR Task": "Replace all occurrences of a character in a file, and print the result",
+      "Most Similar TLDR Script": "tr {{find_character}} {{replace_character}} < {{filename}}",
+      "Top-3 Similar Questions": [
+        "so_52155969: How can I get the directory count of a given directory in bash?",
+        "so_24302247: getting a column of a specific line in bash",
+        "so_53959715: Getting a list of substring based unique filenames in an array"
+      ],
+      "Top-3 Scripts": [
+        "so_52155969: find . -maxdepth 1 -type d -print0 | tr -cd '\\0' | wc -c",
+        "so_24302247: id=$(xl list|egrep 'new_redhat9 '| tr -s ' ' | cut -d ' ' -f 2)",
+        "so_53959715: array=($(\n    find . -type f -iname \\*.json |\n    sed -E 's|(.*/)*(.*_v)([0-9]+)\\..*|\\2 \\3|' |\n    sort -Vr | sort -uk1,1 | tr -d ' '\n))"
+      ],
+      "Explanations about Options": {
+        "-d": "delete characters in SET1, do not translate",
+        "-s": "replace each sequence of a repeated character that is listed in the last specified\n SET, with a single occurrence of that character",
+        "-c": "use the complement of SET1"
+      }
+    },
+    {
+      "Command": "column",
+      "MP Summary": "columnate lists",
+      "Most Similar TLDR Task": "Specify column delimiter character for the -t option (e.g. \",\" for csv); default is whitespace",
+      "Most Similar TLDR Script": "printf \"header1,header2\\nbar,foo\\n\" | column -t -s{{,}}",
+      "Top-3 Similar Questions": [
+        "so_29176850: How to get unique string from variable in bash"
+      ],
+      "Top-3 Scripts": [
+        "so_29176850: route=$(echo $line | awk -F'[:]' '{print $2}') #get path from log file\n    if [ \"`dirname \"$route\"`\" == \"`xrealpath \"$PWD\"`\" ]; then #compare path from log file with $PWD\n        name=$(echo $line | awk -F'[:]' '{print $1}') #take name from 1st column in log file"
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

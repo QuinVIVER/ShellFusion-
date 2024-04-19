@@ -1,0 +1,95 @@
+{
+  "Query": "How to encrypt individual folders?",
+  "Answers": [
+    {
+      "Command": "cryptsetup",
+      "MP Summary": "manage plain dm-crypt and LUKS encrypted volumes",
+      "Most Similar TLDR Task": "Change the LUKS volume's passphrase",
+      "Most Similar TLDR Script": "cryptsetup luksChangeKey {{/dev/sda1}}",
+      "Top-3 Similar Questions": [
+        "au_928813: encrypt external disk does not work",
+        "su_182099: What is the easiest way to encrypt a dir? (on Ubuntu)",
+        "ul_445652: How to mount and de-encrypt a LUKS encrypted partition to recover files"
+      ],
+      "Top-3 Scripts": [
+        "au_928813: cryptsetup luksFormat /dev/sdc1",
+        "su_182099: ",
+        "ul_445652: sudo cryptsetup open /dev/sda3 luksrecoverytarget --type luks\n\nsudo umount /mnt/recoverytarget\nsudo cryptsetup close luksrecoverytarget"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "install",
+      "MP Summary": "copy files and set attributes",
+      "Most Similar TLDR Task": "Copy files to destination",
+      "Most Similar TLDR Script": "install {{path/to/source}} {{path/to/destination}}",
+      "Top-3 Similar Questions": [
+        "au_1281476: I want to encrypt folder",
+        "su_182099: What is the easiest way to encrypt a dir? (on Ubuntu)"
+      ],
+      "Top-3 Scripts": [
+        "au_1281476: $ sudo apt install ecryptfs-utils",
+        "su_182099: aptitude install encfs\nencfs ~/.work.encrypted ~/work\n... work ...\nfusermount -u ~/work"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "find",
+      "MP Summary": "search for files in a directory hierarchy",
+      "Most Similar TLDR Task": "Find files matching a given pattern, excluding specific paths",
+      "Most Similar TLDR Script": "find {{root_path}} -name '{{*.py}}' -not -path '{{*/site-packages/*}}'",
+      "Top-3 Similar Questions": [
+        "au_866862: Most efficient way to encrypt files?",
+        "au_1035424: Ubuntu 18.04: mount encrypted disk",
+        "au_755689: Do I need unencrypted files underneath encrypted overmount?"
+      ],
+      "Top-3 Scripts": [
+        "au_866862: find -maxdepth 1 -type f -name 'large_file.part.*' | sort | xargs -I % openssl smime -encrypt -binary -aes-256-cbc -in % -out %.enc -outform DER PUBLIC_PEM_FILE\n\nfind -maxdepth 1 -type f -name 'large_file.part.*.enc' | sort | xargs -I % openssl smime -decrypt -in % -binary -inform DEM -inkey PRIVATE_PEM_FILE -out %.dec\nfind -maxdepth 1 -type f -name 'large_file.part.*.dec' | sort | xargs cat > restored_large_file",
+        "au_1035424: Could not find key with description: [XXX]\nprocess_request_key_err: No key\nCould not find valid key in user session keyring for sig specified in mount option: [XXX]",
+        "au_755689: find /home/user -maxdepth 1 \\( \\! -type l -a -type d \\) -exec echo rm {} \\;"
+      ],
+      "Explanations about Options": {
+        "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+        "-maxdepth": "Descend at most levels (a non-negative integer) levels of directories below the\n starting-points. -maxdepth 0 means only apply the tests and actions to the\n starting-points themselves.",
+        "-type": "File is of type c:"
+      }
+    },
+    {
+      "Command": "gpg",
+      "MP Summary": "OpenPGP encryption and signing tool",
+      "Most Similar TLDR Task": "Encrypt a specified file for a specified recipient, writing the output to a new file with `.gpg` appended",
+      "Most Similar TLDR Script": "gpg2 --encrypt --recipient {{alice@example.com}} {{path/to/doc.txt}}",
+      "Top-3 Similar Questions": [
+        "ul_186237: Encrypt a single file and read/edit on-the-fly",
+        "su_145143: Compress, encrypt and upload a directory to an FTP server in Linux"
+      ],
+      "Top-3 Scripts": [
+        "ul_186237: edit-gpg() {\ngpg -v --no-use-agent --passphrase-file=/path/to/keyfile --output \"/tmp/gpg-edit.out\" \"$1\" &&\ngedit \"/tmp/gpg-edit.out\" &&\ngpg -v --no-use-agent --cipher-algo AES256 --passphrase-file=/path/to/keyfile --output \"$1\" -c \"/tmp/gpg-edit.out\" &&\nrm \"/tmp/gpg-edit.out\"\n}\n\ncrypt-gpg() { \ngpg -v --no-use-agent --cipher-algo AES256 --passphrase-file=/path/to/keyfile -c \"$1\" &&\nrm \"$1\"\n}",
+        "su_145143: gpg -r RECIP --output OUTPUT_FILE_NAME --encrypt INPUT_FILE_NAME"
+      ],
+      "Explanations about Options": {
+        "-v": "Give more information during processing. If used twice, the input data is listed in\n detail.",
+        "--output": " Write output to file.",
+        "--no-use-agent": "Try to use the GnuPG-Agent. With this option, GnuPG first tries to connect to the\n agent before it asks for a passphrase. --no-use-agent disables this option. Note,\n that the tool gpg-preset-passphrase, which comes with GnuPG-2, cannot be used to\n preset a passphrase for this version of GnuPG.",
+        "--passphrase-file": "Read the passphrase from file file. Only the first line will be read from file\n file. This can only be used if only one passphrase is supplied. Obviously, a\n passphrase stored in a file is of questionable security if other users can read\n this file. Don't use this option if you can avoid it.",
+        "--cipher-algo": "Use name as cipher algorithm. Running the program with the command --version yields\n a list of supported algorithms. If this is not used the cipher algorithm is\n selected from the preferences stored with the key. In general, you do not want to\n use this option as it allows you to violate the OpenPGP standard. --personal-\n cipher-preferences is the safe way to accomplish the same thing.",
+        "--encrypt": "Encrypt data. This option may be combined with --sign (for a signed and encrypted\n message), --symmetric (for a message that may be decrypted via a secret key or a\n passphrase), or --sign and --symmetric together (for a signed message that may be\n decrypted via a secret key or a passphrase)."
+      }
+    },
+    {
+      "Command": "rm",
+      "MP Summary": "remove files or directories",
+      "Most Similar TLDR Task": "Recursively remove a directory and all its subdirectories",
+      "Most Similar TLDR Script": "rm -r {{path/to/directory}}",
+      "Top-3 Similar Questions": [
+        "ul_186237: Encrypt a single file and read/edit on-the-fly",
+        "au_755689: Do I need unencrypted files underneath encrypted overmount?"
+      ],
+      "Top-3 Scripts": [
+        "ul_186237: edit-gpg() {\ngpg -v --no-use-agent --passphrase-file=/path/to/keyfile --output \"/tmp/gpg-edit.out\" \"$1\" &&\ngedit \"/tmp/gpg-edit.out\" &&\ngpg -v --no-use-agent --cipher-algo AES256 --passphrase-file=/path/to/keyfile --output \"$1\" -c \"/tmp/gpg-edit.out\" &&\nrm \"/tmp/gpg-edit.out\"\n}\n\ncrypt-gpg() { \ngpg -v --no-use-agent --cipher-algo AES256 --passphrase-file=/path/to/keyfile -c \"$1\" &&\nrm \"$1\"\n}",
+        "au_755689: find /home/user -maxdepth 1 \\( \\! -type l -a -type d \\) -exec echo rm {} \\;"
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

@@ -1,0 +1,2155 @@
+{
+  "Query": "Access mysql remote database from command line",
+  "Answers": [
+    {
+      "Command": "mysql",
+      "MP Summary": "the MySQL command-line client",
+      "Most Similar TLDR Task": "Connect to a database",
+      "Most Similar TLDR Script": "mysql {{database_name}}",
+      "Most Similar NL2Bash Task": "Dump all MySQL databases over an ssh tunnel to \"user@yoursever.com\" and use it as input to mysql",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mysqldump --all-databases | ssh user@yourserver.com mysql\n",
+          "command-options": {
+            "mysqldump": {
+              "mpsum": "a database backup program"
+            },
+            "ssh": {
+              "mpsum": "OpenSSH SSH client (remote login program)"
+            },
+            "mysql": {
+              "mpsum": "the MySQL command-line client"
+            }
+          },
+          "TLDR_inform": {
+            "mysqldump": {
+              "man1_mysqldump_21886": "backup mysql databas\nsee also mysql restor databas backup databas redirect output file user prompt password creat backup user prompt password"
+            },
+            "ssh": {
+              "man1_ssh_32381": "secur shell protocol use secur log onto remot system\nuse log execut command remot server agent forward : forward authent inform remot machin see man ssh_config avail option connect remot server connect remot server use specif port connect remot server specif ident privat key run command remot server ssh jump : connect jumphost remot server multipl jump hop may specifi separ comma charact ssh tunnel : dynam port forward sock proxi localhost:9999 ssh tunnel : forward specif port localhost:9999 exampl org:80 along disabl pseudo- ty alloc executio n remot command"
+            },
+            "mysql": {
+              "man1_mysql_21925": "mysql command-lin tool connect databas connect databas anoth host connect databas unix socket connect databas user prompt password execut sql statement script file batch file restor databas backup creat mysqldump user prompt password restor databas backup user prompt password"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_198170: Restoring MULTIPLE MySQL databases from one file at the command line?",
+        "so_2428416: How to create a database from shell command?",
+        "so_23668261: Script to import databases from a remote server"
+      ],
+      "Top-3 Scripts": [
+        "au_198170: mysql -u username -p < dump.sql",
+        "so_2428416: cat filename.sql | mysql -u username -p # type mysql password when asked for it\n\necho \"create database `database-name`\" | mysql -u username -p",
+        "so_23668261: ssh -p $Port $Username@$Hostname << SSH\nIgnore=$(mysql --user=root --password=$Password -BNe \"SELECT CONCAT( TABLE_SCHEMA , '.' ,  TABLE_NAME ) FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME LIKE 'rec%' ORDER BY CONCAT( TABLE_SCHEMA , '.' , TABLE_NAME );\" | awk '{ printf \" --ignore-table=%s\", \\$0 }')\nmysql --user=root --password=$Password -e \"SHOW DATABASES;\" | grep -Ev \"information_schema|mysql|performance_schema\" | xargs mysqldump --force --user=root --password=$Password \\$Ignore --databases | gzip > $Location/full.sql.gz"
+      ],
+      "Explanations about Options": {
+        "--user": "The user name of the MySQL account to use for connecting to the server.",
+        "-B": "Print results using tab as the column separator, with each row on a new line. With\n this option, mysql does not use the history file.\n Batch mode results in nontabular output format and escaping of special characters.\n Escaping may be disabled by using raw mode; see the description for the --raw option.",
+        "-e": "Execute the statement and quit. The default output format is like that produced with\n --batch. See Section 4.2.2.1, \u201cUsing Options on the Command Line\u201d, for some examples.\n With this option, mysql does not use the history file.",
+        "-u": "The user name of the MySQL account to use for connecting to the server.",
+        "-N": "Do not write column names in results."
+      }
+    },
+    {
+      "Command": "mysqldump",
+      "MP Summary": "a database backup program",
+      "Most Similar TLDR Task": "Backup all databases redirecting the output to a file (user will be prompted for a password)",
+      "Most Similar TLDR Script": "mysqldump --user {{user}} --password --all-databases > {{path/to/file.sql}}",
+      "Most Similar NL2Bash Task": "Dump all MySQL databases over an ssh tunnel to \"user@yoursever.com\" and use it as input to mysql",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mysqldump --all-databases | ssh user@yourserver.com mysql\n",
+          "command-options": {
+            "mysqldump": {
+              "mpsum": "a database backup program"
+            },
+            "ssh": {
+              "mpsum": "OpenSSH SSH client (remote login program)"
+            },
+            "mysql": {
+              "mpsum": "the MySQL command-line client"
+            }
+          },
+          "TLDR_inform": {
+            "mysqldump": {
+              "man1_mysqldump_21886": "backup mysql databas\nsee also mysql restor databas backup databas redirect output file user prompt password creat backup user prompt password"
+            },
+            "ssh": {
+              "man1_ssh_32381": "secur shell protocol use secur log onto remot system\nuse log execut command remot server agent forward : forward authent inform remot machin see man ssh_config avail option connect remot server connect remot server use specif port connect remot server specif ident privat key run command remot server ssh jump : connect jumphost remot server multipl jump hop may specifi separ comma charact ssh tunnel : dynam port forward sock proxi localhost:9999 ssh tunnel : forward specif port localhost:9999 exampl org:80 along disabl pseudo- ty alloc executio n remot command"
+            },
+            "mysql": {
+              "man1_mysql_21925": "mysql command-lin tool connect databas connect databas anoth host connect databas unix socket connect databas user prompt password execut sql statement script file batch file restor databas backup creat mysqldump user prompt password restor databas backup user prompt password"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_198170: Restoring MULTIPLE MySQL databases from one file at the command line?",
+        "so_23668261: Script to import databases from a remote server",
+        "au_964417: Is it possible to restore a mysql database from the /var/lib/mysql/database folder?"
+      ],
+      "Top-3 Scripts": [
+        "au_198170: mysqldump -u username -p --all-databases > dump.sql",
+        "so_23668261: ssh -p $Port $Username@$Hostname << SSH\nIgnore=$(mysql --user=root --password=$Password -BNe \"SELECT CONCAT( TABLE_SCHEMA , '.' ,  TABLE_NAME ) FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME LIKE 'rec%' ORDER BY CONCAT( TABLE_SCHEMA , '.' , TABLE_NAME );\" | awk '{ printf \" --ignore-table=%s\", \\$0 }')\nmysql --user=root --password=$Password -e \"SHOW DATABASES;\" | grep -Ev \"information_schema|mysql|performance_schema\" | xargs mysqldump --force --user=root --password=$Password \\$Ignore --databases | gzip > $Location/full.sql.gz",
+        "au_964417: mysqldump -u root -p <databasename> > database.sql"
+      ],
+      "Explanations about Options": {
+        "--databases": "Dump several databases. Normally, mysqldump treats the first name argument on the\n command line as a database name and following names as table names. With this option,\n it treats all name arguments as database names. CREATE DATABASE and USE statements\n are included in the output before each new database.\n This option may be used to dump the performance_schema database, which normally is not\n dumped even with the --all-databases option. (Also use the --skip-lock-tables option.)",
+        "-u": "The user name of the MySQL account to use for connecting to the server.",
+        "--user": "The user name of the MySQL account to use for connecting to the server."
+      }
+    },
+    {
+      "Command": "bash",
+      "MP Summary": "GNU Bourne-Again SHell",
+      "Most Similar TLDR Task": "Execute a command",
+      "Most Similar TLDR Script": "bash -c \"{{command}}\"",
+      "Most Similar NL2Bash Task": "Dump all MySQL databases over an ssh tunnel to \"user@yoursever.com\" and use it as input to mysql",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mysqldump --all-databases | ssh user@yourserver.com mysql\n",
+          "command-options": {
+            "mysqldump": {
+              "mpsum": "a database backup program"
+            },
+            "ssh": {
+              "mpsum": "OpenSSH SSH client (remote login program)"
+            },
+            "mysql": {
+              "mpsum": "the MySQL command-line client"
+            }
+          },
+          "TLDR_inform": {
+            "mysqldump": {
+              "man1_mysqldump_21886": "backup mysql databas\nsee also mysql restor databas backup databas redirect output file user prompt password creat backup user prompt password"
+            },
+            "ssh": {
+              "man1_ssh_32381": "secur shell protocol use secur log onto remot system\nuse log execut command remot server agent forward : forward authent inform remot machin see man ssh_config avail option connect remot server connect remot server use specif port connect remot server specif ident privat key run command remot server ssh jump : connect jumphost remot server multipl jump hop may specifi separ comma charact ssh tunnel : dynam port forward sock proxi localhost:9999 ssh tunnel : forward specif port localhost:9999 exampl org:80 along disabl pseudo- ty alloc executio n remot command"
+            },
+            "mysql": {
+              "man1_mysql_21925": "mysql command-lin tool connect databas connect databas anoth host connect databas unix socket connect databas user prompt password execut sql statement script file batch file restor databas backup creat mysqldump user prompt password restor databas backup user prompt password"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_23668261: Script to import databases from a remote server",
+        "so_8055694: How to execute a MySQL command from a shell script?"
+      ],
+      "Top-3 Scripts": [
+        "so_23668261: ",
+        "so_8055694: $ bash -x myscript.sh"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "ssh",
+      "MP Summary": "OpenSSH SSH client (remote login program)",
+      "Most Similar TLDR Task": "Run a command on a remote server",
+      "Most Similar TLDR Script": "ssh {{remote_host}} {{command -with -flags}}",
+      "Most Similar NL2Bash Task": "Dump all MySQL databases over an ssh tunnel to \"user@yoursever.com\" and use it as input to mysql",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mysqldump --all-databases | ssh user@yourserver.com mysql\n",
+          "command-options": {
+            "mysqldump": {
+              "mpsum": "a database backup program"
+            },
+            "ssh": {
+              "mpsum": "OpenSSH SSH client (remote login program)"
+            },
+            "mysql": {
+              "mpsum": "the MySQL command-line client"
+            }
+          },
+          "TLDR_inform": {
+            "mysqldump": {
+              "man1_mysqldump_21886": "backup mysql databas\nsee also mysql restor databas backup databas redirect output file user prompt password creat backup user prompt password"
+            },
+            "ssh": {
+              "man1_ssh_32381": "secur shell protocol use secur log onto remot system\nuse log execut command remot server agent forward : forward authent inform remot machin see man ssh_config avail option connect remot server connect remot server use specif port connect remot server specif ident privat key run command remot server ssh jump : connect jumphost remot server multipl jump hop may specifi separ comma charact ssh tunnel : dynam port forward sock proxi localhost:9999 ssh tunnel : forward specif port localhost:9999 exampl org:80 along disabl pseudo- ty alloc executio n remot command"
+            },
+            "mysql": {
+              "man1_mysql_21925": "mysql command-lin tool connect databas connect databas anoth host connect databas unix socket connect databas user prompt password execut sql statement script file batch file restor databas backup creat mysqldump user prompt password restor databas backup user prompt password"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_23668261: Script to import databases from a remote server",
+        "so_39668821: Can't ssh to remote repository from command line",
+        "su_541342: How can I remotely lock a Windows 7 computer from linux command line?"
+      ],
+      "Top-3 Scripts": [
+        "so_23668261: ssh -p $Port $Username@$Hostname << SSH\nIgnore=$(mysql --user=root --password=$Password -BNe \"SELECT CONCAT( TABLE_SCHEMA , '.' ,  TABLE_NAME ) FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME LIKE 'rec%' ORDER BY CONCAT( TABLE_SCHEMA , '.' , TABLE_NAME );\" | awk '{ printf \" --ignore-table=%s\", \\$0 }')\nmysql --user=root --password=$Password -e \"SHOW DATABASES;\" | grep -Ev \"information_schema|mysql|performance_schema\" | xargs mysqldump --force --user=root --password=$Password \\$Ignore --databases | gzip > $Location/full.sql.gz",
+        "so_39668821: GIT_SSH=ssh\nssh -v sshusername@sshserver -i ~/.ssh/id_rsa",
+        "su_541342: "
+      ],
+      "Explanations about Options": {
+        "-p": "Port to connect to on the remote host. This can be specified on a per-host basis in\n the configuration file.",
+        "-v": "Verbose mode. Causes ssh to print debugging messages about its progress. This is\n helpful in debugging connection, authentication, and configuration problems.\n Multiple -v options increase the verbosity. The maximum is 3."
+      }
+    },
+    {
+      "Command": "sudo",
+      "MP Summary": "execute a command as another user",
+      "Most Similar TLDR Task": "Run a command as another user and/or group",
+      "Most Similar TLDR Script": "sudo -u {{user}} -g {{group}} {{id -a}}",
+      "Most Similar NL2Bash Task": "Dump all MySQL databases over an ssh tunnel to \"user@yoursever.com\" and use it as input to mysql",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mysqldump --all-databases | ssh user@yourserver.com mysql\n",
+          "command-options": {
+            "mysqldump": {
+              "mpsum": "a database backup program"
+            },
+            "ssh": {
+              "mpsum": "OpenSSH SSH client (remote login program)"
+            },
+            "mysql": {
+              "mpsum": "the MySQL command-line client"
+            }
+          },
+          "TLDR_inform": {
+            "mysqldump": {
+              "man1_mysqldump_21886": "backup mysql databas\nsee also mysql restor databas backup databas redirect output file user prompt password creat backup user prompt password"
+            },
+            "ssh": {
+              "man1_ssh_32381": "secur shell protocol use secur log onto remot system\nuse log execut command remot server agent forward : forward authent inform remot machin see man ssh_config avail option connect remot server connect remot server use specif port connect remot server specif ident privat key run command remot server ssh jump : connect jumphost remot server multipl jump hop may specifi separ comma charact ssh tunnel : dynam port forward sock proxi localhost:9999 ssh tunnel : forward specif port localhost:9999 exampl org:80 along disabl pseudo- ty alloc executio n remot command"
+            },
+            "mysql": {
+              "man1_mysql_21925": "mysql command-lin tool connect databas connect databas anoth host connect databas unix socket connect databas user prompt password execut sql statement script file batch file restor databas backup creat mysqldump user prompt password restor databas backup user prompt password"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_398006: what is the command to connect a database remotely from other PC",
+        "au_609639: unable to excecute mysql from command line",
+        "so_25195932: Can't connect to database from a remote server after setting it up to allow connections"
+      ],
+      "Top-3 Scripts": [
+        "au_398006: sudo apt-get install vsftpd\n\nsudo nano /etc/vsftpd.conf\n\nsudo /etc/init.d/vsftpd restart\n\nsudo apt-get install gftp",
+        "au_609639: sudo apt-get install mysql-server-5.5\n\nsudo service mysqld start\n\nsudo /etc/init.d/mysqld start\n\nsudo service mysql start",
+        "so_25195932: sudo vi /etc/csf/csf.allow"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "mongod",
+      "MP Summary": "MongoDB Server",
+      "Most Similar TLDR Task": "Specify database profiling level. 0 is off, 1 is only slow operations, 2 is all",
+      "Most Similar TLDR Script": "mongod --profile {{0|1|2}}",
+      "Most Similar NL2Bash Task": "Dump all MySQL databases over an ssh tunnel to \"user@yoursever.com\" and use it as input to mysql",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mysqldump --all-databases | ssh user@yourserver.com mysql\n",
+          "command-options": {
+            "mysqldump": {
+              "mpsum": "a database backup program"
+            },
+            "ssh": {
+              "mpsum": "OpenSSH SSH client (remote login program)"
+            },
+            "mysql": {
+              "mpsum": "the MySQL command-line client"
+            }
+          },
+          "TLDR_inform": {
+            "mysqldump": {
+              "man1_mysqldump_21886": "backup mysql databas\nsee also mysql restor databas backup databas redirect output file user prompt password creat backup user prompt password"
+            },
+            "ssh": {
+              "man1_ssh_32381": "secur shell protocol use secur log onto remot system\nuse log execut command remot server agent forward : forward authent inform remot machin see man ssh_config avail option connect remot server connect remot server use specif port connect remot server specif ident privat key run command remot server ssh jump : connect jumphost remot server multipl jump hop may specifi separ comma charact ssh tunnel : dynam port forward sock proxi localhost:9999 ssh tunnel : forward specif port localhost:9999 exampl org:80 along disabl pseudo- ty alloc executio n remot command"
+            },
+            "mysql": {
+              "man1_mysql_21925": "mysql command-lin tool connect databas connect databas anoth host connect databas unix socket connect databas user prompt password execut sql statement script file batch file restor databas backup creat mysqldump user prompt password restor databas backup user prompt password"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_13396758: Is it possible to access MongoDB's profile from the command line programatically?"
+      ],
+      "Top-3 Scripts": [
+        "so_13396758: mongod --rest"
+      ],
+      "Explanations about Options": {
+        "--rest": "Enables the simple REST API."
+      }
+    },
+    {
+      "Command": "apt-get",
+      "MP Summary": "APT package handling utility - command-line interface",
+      "Most Similar TLDR Task": "Remove a package and its configuration files",
+      "Most Similar TLDR Script": "apt-get purge {{package}}",
+      "Most Similar NL2Bash Task": "Dump all MySQL databases over an ssh tunnel to \"user@yoursever.com\" and use it as input to mysql",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mysqldump --all-databases | ssh user@yourserver.com mysql\n",
+          "command-options": {
+            "mysqldump": {
+              "mpsum": "a database backup program"
+            },
+            "ssh": {
+              "mpsum": "OpenSSH SSH client (remote login program)"
+            },
+            "mysql": {
+              "mpsum": "the MySQL command-line client"
+            }
+          },
+          "TLDR_inform": {
+            "mysqldump": {
+              "man1_mysqldump_21886": "backup mysql databas\nsee also mysql restor databas backup databas redirect output file user prompt password creat backup user prompt password"
+            },
+            "ssh": {
+              "man1_ssh_32381": "secur shell protocol use secur log onto remot system\nuse log execut command remot server agent forward : forward authent inform remot machin see man ssh_config avail option connect remot server connect remot server use specif port connect remot server specif ident privat key run command remot server ssh jump : connect jumphost remot server multipl jump hop may specifi separ comma charact ssh tunnel : dynam port forward sock proxi localhost:9999 ssh tunnel : forward specif port localhost:9999 exampl org:80 along disabl pseudo- ty alloc executio n remot command"
+            },
+            "mysql": {
+              "man1_mysql_21925": "mysql command-lin tool connect databas connect databas anoth host connect databas unix socket connect databas user prompt password execut sql statement script file batch file restor databas backup creat mysqldump user prompt password restor databas backup user prompt password"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_398006: what is the command to connect a database remotely from other PC",
+        "au_609639: unable to excecute mysql from command line",
+        "au_964417: Is it possible to restore a mysql database from the /var/lib/mysql/database folder?"
+      ],
+      "Top-3 Scripts": [
+        "au_398006: sudo apt-get install vsftpd\n\nsudo apt-get install gftp",
+        "au_609639: sudo apt-get install mysql-server-5.5",
+        "au_964417: sudo apt-get purge mysql-server* mariadb*\n\nsudo apt-get install mysql-server"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "echo",
+      "MP Summary": "display a line of text",
+      "Most Similar TLDR Task": "Print a message with environment variables",
+      "Most Similar TLDR Script": "echo \"{{My path is $PATH}}\"",
+      "Most Similar NL2Bash Task": "Dump all MySQL databases over an ssh tunnel to \"user@yoursever.com\" and use it as input to mysql",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mysqldump --all-databases | ssh user@yourserver.com mysql\n",
+          "command-options": {
+            "mysqldump": {
+              "mpsum": "a database backup program"
+            },
+            "ssh": {
+              "mpsum": "OpenSSH SSH client (remote login program)"
+            },
+            "mysql": {
+              "mpsum": "the MySQL command-line client"
+            }
+          },
+          "TLDR_inform": {
+            "mysqldump": {
+              "man1_mysqldump_21886": "backup mysql databas\nsee also mysql restor databas backup databas redirect output file user prompt password creat backup user prompt password"
+            },
+            "ssh": {
+              "man1_ssh_32381": "secur shell protocol use secur log onto remot system\nuse log execut command remot server agent forward : forward authent inform remot machin see man ssh_config avail option connect remot server connect remot server use specif port connect remot server specif ident privat key run command remot server ssh jump : connect jumphost remot server multipl jump hop may specifi separ comma charact ssh tunnel : dynam port forward sock proxi localhost:9999 ssh tunnel : forward specif port localhost:9999 exampl org:80 along disabl pseudo- ty alloc executio n remot command"
+            },
+            "mysql": {
+              "man1_mysql_21925": "mysql command-lin tool connect databas connect databas anoth host connect databas unix socket connect databas user prompt password execut sql statement script file batch file restor databas backup creat mysqldump user prompt password restor databas backup user prompt password"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_2428416: How to create a database from shell command?",
+        "so_37638357: Bash read line from variables",
+        "so_20817013: Restore all MySQL Databases from individual files"
+      ],
+      "Top-3 Scripts": [
+        "so_2428416: echo \"create database `database-name`\" | mysql -u username -p",
+        "so_37638357: if somecommand; then\n     echo \"Database upgraded..\"\nelse # ... etc",
+        "so_20817013: for f in *.sql.gz; do\n   db=\"${f%%.*}\"\n   echo \"creating database $db\"\n   mysql -h localhost -u root -p mysql --password=passwd <<< \"create database $db\"\n   echo \"restoring database $db\"\n   gunzip \"$f\"\n   mysql -h localhost -u root -ppasswd \"$db\" < \"$db.sql\"\ndone"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "php",
+      "MP Summary": "PHP Command Line Interface 'CLI'",
+      "Most Similar TLDR Task": "Parse and execute a php script",
+      "Most Similar TLDR Script": "php {{file}}",
+      "Most Similar NL2Bash Task": "Dump all MySQL databases over an ssh tunnel to \"user@yoursever.com\" and use it as input to mysql",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mysqldump --all-databases | ssh user@yourserver.com mysql\n",
+          "command-options": {
+            "mysqldump": {
+              "mpsum": "a database backup program"
+            },
+            "ssh": {
+              "mpsum": "OpenSSH SSH client (remote login program)"
+            },
+            "mysql": {
+              "mpsum": "the MySQL command-line client"
+            }
+          },
+          "TLDR_inform": {
+            "mysqldump": {
+              "man1_mysqldump_21886": "backup mysql databas\nsee also mysql restor databas backup databas redirect output file user prompt password creat backup user prompt password"
+            },
+            "ssh": {
+              "man1_ssh_32381": "secur shell protocol use secur log onto remot system\nuse log execut command remot server agent forward : forward authent inform remot machin see man ssh_config avail option connect remot server connect remot server use specif port connect remot server specif ident privat key run command remot server ssh jump : connect jumphost remot server multipl jump hop may specifi separ comma charact ssh tunnel : dynam port forward sock proxi localhost:9999 ssh tunnel : forward specif port localhost:9999 exampl org:80 along disabl pseudo- ty alloc executio n remot command"
+            },
+            "mysql": {
+              "man1_mysql_21925": "mysql command-lin tool connect databas connect databas anoth host connect databas unix socket connect databas user prompt password execut sql statement script file batch file restor databas backup creat mysqldump user prompt password restor databas backup user prompt password"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_25236803: How to delete all files except large list from database?"
+      ],
+      "Top-3 Scripts": [
+        "so_25236803: find /path/to/dir -not \\(  $(php files.php) \\) -delete"
+      ],
+      "Explanations about Options": {
+        "-e": "Generate extended information for debugger/profiler",
+        "-l": "Syntax check only (lint)"
+      }
+    },
+    {
+      "Command": "install",
+      "MP Summary": "copy files and set attributes",
+      "Most Similar TLDR Task": "Copy files and apply access/modification times of source to destination",
+      "Most Similar TLDR Script": "install -p {{path/to/source}} {{path/to/destination}}",
+      "Most Similar NL2Bash Task": "Dump all MySQL databases over an ssh tunnel to \"user@yoursever.com\" and use it as input to mysql",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mysqldump --all-databases | ssh user@yourserver.com mysql\n",
+          "command-options": {
+            "mysqldump": {
+              "mpsum": "a database backup program"
+            },
+            "ssh": {
+              "mpsum": "OpenSSH SSH client (remote login program)"
+            },
+            "mysql": {
+              "mpsum": "the MySQL command-line client"
+            }
+          },
+          "TLDR_inform": {
+            "mysqldump": {
+              "man1_mysqldump_21886": "backup mysql databas\nsee also mysql restor databas backup databas redirect output file user prompt password creat backup user prompt password"
+            },
+            "ssh": {
+              "man1_ssh_32381": "secur shell protocol use secur log onto remot system\nuse log execut command remot server agent forward : forward authent inform remot machin see man ssh_config avail option connect remot server connect remot server use specif port connect remot server specif ident privat key run command remot server ssh jump : connect jumphost remot server multipl jump hop may specifi separ comma charact ssh tunnel : dynam port forward sock proxi localhost:9999 ssh tunnel : forward specif port localhost:9999 exampl org:80 along disabl pseudo- ty alloc executio n remot command"
+            },
+            "mysql": {
+              "man1_mysql_21925": "mysql command-lin tool connect databas connect databas anoth host connect databas unix socket connect databas user prompt password execut sql statement script file batch file restor databas backup creat mysqldump user prompt password restor databas backup user prompt password"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_398006: what is the command to connect a database remotely from other PC",
+        "au_609639: unable to excecute mysql from command line",
+        "au_964417: Is it possible to restore a mysql database from the /var/lib/mysql/database folder?"
+      ],
+      "Top-3 Scripts": [
+        "au_398006: sudo apt-get install vsftpd\n\nsudo apt-get install gftp",
+        "au_609639: sudo apt-get install mysql-server-5.5",
+        "au_964417: sudo apt-get install mysql-server"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "type",
+      "MP Summary": "write a description of command type",
+      "Most Similar TLDR Task": "Display all locations containing the specified executable",
+      "Most Similar TLDR Script": "type -a {{command}}",
+      "Most Similar NL2Bash Task": "Dump all MySQL databases over an ssh tunnel to \"user@yoursever.com\" and use it as input to mysql",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mysqldump --all-databases | ssh user@yourserver.com mysql\n",
+          "command-options": {
+            "mysqldump": {
+              "mpsum": "a database backup program"
+            },
+            "ssh": {
+              "mpsum": "OpenSSH SSH client (remote login program)"
+            },
+            "mysql": {
+              "mpsum": "the MySQL command-line client"
+            }
+          },
+          "TLDR_inform": {
+            "mysqldump": {
+              "man1_mysqldump_21886": "backup mysql databas\nsee also mysql restor databas backup databas redirect output file user prompt password creat backup user prompt password"
+            },
+            "ssh": {
+              "man1_ssh_32381": "secur shell protocol use secur log onto remot system\nuse log execut command remot server agent forward : forward authent inform remot machin see man ssh_config avail option connect remot server connect remot server use specif port connect remot server specif ident privat key run command remot server ssh jump : connect jumphost remot server multipl jump hop may specifi separ comma charact ssh tunnel : dynam port forward sock proxi localhost:9999 ssh tunnel : forward specif port localhost:9999 exampl org:80 along disabl pseudo- ty alloc executio n remot command"
+            },
+            "mysql": {
+              "man1_mysql_21925": "mysql command-lin tool connect databas connect databas anoth host connect databas unix socket connect databas user prompt password execut sql statement script file batch file restor databas backup creat mysqldump user prompt password restor databas backup user prompt password"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_2428416: How to create a database from shell command?",
+        "so_8055694: How to execute a MySQL command from a shell script?",
+        "so_6513011: Android application that gets data from a remote database"
+      ],
+      "Top-3 Scripts": [
+        "so_2428416: cat filename.sql | mysql -u username -p # type mysql password when asked for it",
+        "so_8055694: $ mysql -h \"server-name\" -u \"root\" -p \"XXXXXXXX\" \"database-name\" < \"filename.sql\"\nEnter password: <you type it in here>\nERROR 1049 (42000): Unknown database 'XXXXXXXX'",
+        "so_6513011: does it matter what type of database I use?"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "as",
+      "MP Summary": "or  any situation  where  you want to make sure you're doing a clean install of your dependencies. It  can  be  significantly  faster  than  a  regular  npm  install  by  skipping   certain user-oriented  features.  It  is  also  more strict than a regular install, which can help catch errors or inconsistencies caused by the incrementally-installed  local  environments of most npm users. In short, the main differences between using npm install and npm ci are: \u00b7 The project must have an existing package-lock.json or npm-shrinkwrap.json. \u00b7 If dependencies in the package lock do not match those in package.json, npm ci will exit with an error, instead of updating the package lock. \u00b7 npm ci can only install entire projects at a time:  individual  dependencies  cannot  be added with this command. \u00b7 If  a  node_modules  is  already present, it will be automatically removed before npm ci begins its install. \u00b7 It will  never  write  to  package.json  or  any  of  the  package-locks:  installs  are essentially frozen. See Also \u00b7 npm help install \u00b7 npm help package-locks April 2020                                  NPM-CI(1)",
+      "Most Similar TLDR Task": "Assemble a file, writing the output to a.out",
+      "Most Similar TLDR Script": "as {{file.s}}",
+      "Most Similar NL2Bash Task": "Dump all MySQL databases over an ssh tunnel to \"user@yoursever.com\" and use it as input to mysql",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mysqldump --all-databases | ssh user@yourserver.com mysql\n",
+          "command-options": {
+            "mysqldump": {
+              "mpsum": "a database backup program"
+            },
+            "ssh": {
+              "mpsum": "OpenSSH SSH client (remote login program)"
+            },
+            "mysql": {
+              "mpsum": "the MySQL command-line client"
+            }
+          },
+          "TLDR_inform": {
+            "mysqldump": {
+              "man1_mysqldump_21886": "backup mysql databas\nsee also mysql restor databas backup databas redirect output file user prompt password creat backup user prompt password"
+            },
+            "ssh": {
+              "man1_ssh_32381": "secur shell protocol use secur log onto remot system\nuse log execut command remot server agent forward : forward authent inform remot machin see man ssh_config avail option connect remot server connect remot server use specif port connect remot server specif ident privat key run command remot server ssh jump : connect jumphost remot server multipl jump hop may specifi separ comma charact ssh tunnel : dynam port forward sock proxi localhost:9999 ssh tunnel : forward specif port localhost:9999 exampl org:80 along disabl pseudo- ty alloc executio n remot command"
+            },
+            "mysql": {
+              "man1_mysql_21925": "mysql command-lin tool connect databas connect databas anoth host connect databas unix socket connect databas user prompt password execut sql statement script file batch file restor databas backup creat mysqldump user prompt password restor databas backup user prompt password"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_37638357: Bash read line from variables",
+        "so_40693894: Automatically delete outdated rows from database every n seconds"
+      ],
+      "Top-3 Scripts": [
+        "so_37638357: var=`command`  # This executes the command immediately, and stores\n               # its result (NOT the command itself) in the variable\n\n... < \"${UP_VER}\"  # Treats the contents of $UP_VER as a filename, and tries\n                   # to use that file as input\n\nif [[ \"${OUT}\" -eq \"0\" ]]; then  # $OUT is not defined anywhere\n\n... current_db_vers='${UP_VER}' ...  # this sets current_db_vers to the entire\n                                     # list of versions at once",
+        "so_40693894: create view v_t as\n    select t.*\n    from t\n    where timestamp > CURRENT_TIMESTAMP - ??;"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "service",
+      "MP Summary": "run a System V init script",
+      "Most Similar TLDR Task": "List the name and status of all services",
+      "Most Similar TLDR Script": "service --status-all",
+      "Most Similar NL2Bash Task": "Dump all MySQL databases over an ssh tunnel to \"user@yoursever.com\" and use it as input to mysql",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mysqldump --all-databases | ssh user@yourserver.com mysql\n",
+          "command-options": {
+            "mysqldump": {
+              "mpsum": "a database backup program"
+            },
+            "ssh": {
+              "mpsum": "OpenSSH SSH client (remote login program)"
+            },
+            "mysql": {
+              "mpsum": "the MySQL command-line client"
+            }
+          },
+          "TLDR_inform": {
+            "mysqldump": {
+              "man1_mysqldump_21886": "backup mysql databas\nsee also mysql restor databas backup databas redirect output file user prompt password creat backup user prompt password"
+            },
+            "ssh": {
+              "man1_ssh_32381": "secur shell protocol use secur log onto remot system\nuse log execut command remot server agent forward : forward authent inform remot machin see man ssh_config avail option connect remot server connect remot server use specif port connect remot server specif ident privat key run command remot server ssh jump : connect jumphost remot server multipl jump hop may specifi separ comma charact ssh tunnel : dynam port forward sock proxi localhost:9999 ssh tunnel : forward specif port localhost:9999 exampl org:80 along disabl pseudo- ty alloc executio n remot command"
+            },
+            "mysql": {
+              "man1_mysql_21925": "mysql command-lin tool connect databas connect databas anoth host connect databas unix socket connect databas user prompt password execut sql statement script file batch file restor databas backup creat mysqldump user prompt password restor databas backup user prompt password"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_609639: unable to excecute mysql from command line",
+        "au_956920: Access the database via PHP from outside the server"
+      ],
+      "Top-3 Scripts": [
+        "au_609639: sudo service mysqld start\n\nsudo service mysql start",
+        "au_956920: sudo ufw allow 3306/tcp\nsudo service ufw restart"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "sqlite3",
+      "MP Summary": "A command line interface for SQLite version 3",
+      "Most Similar TLDR Task": "Execute an SQL statement against a database and then exit",
+      "Most Similar TLDR Script": "sqlite3 {{path/to/database.sqlite3}} '{{SELECT * FROM some_table;}}'",
+      "Most Similar NL2Bash Task": "Dump all MySQL databases over an ssh tunnel to \"user@yoursever.com\" and use it as input to mysql",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mysqldump --all-databases | ssh user@yourserver.com mysql\n",
+          "command-options": {
+            "mysqldump": {
+              "mpsum": "a database backup program"
+            },
+            "ssh": {
+              "mpsum": "OpenSSH SSH client (remote login program)"
+            },
+            "mysql": {
+              "mpsum": "the MySQL command-line client"
+            }
+          },
+          "TLDR_inform": {
+            "mysqldump": {
+              "man1_mysqldump_21886": "backup mysql databas\nsee also mysql restor databas backup databas redirect output file user prompt password creat backup user prompt password"
+            },
+            "ssh": {
+              "man1_ssh_32381": "secur shell protocol use secur log onto remot system\nuse log execut command remot server agent forward : forward authent inform remot machin see man ssh_config avail option connect remot server connect remot server use specif port connect remot server specif ident privat key run command remot server ssh jump : connect jumphost remot server multipl jump hop may specifi separ comma charact ssh tunnel : dynam port forward sock proxi localhost:9999 ssh tunnel : forward specif port localhost:9999 exampl org:80 along disabl pseudo- ty alloc executio n remot command"
+            },
+            "mysql": {
+              "man1_mysql_21925": "mysql command-lin tool connect databas connect databas anoth host connect databas unix socket connect databas user prompt password execut sql statement script file batch file restor databas backup creat mysqldump user prompt password restor databas backup user prompt password"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_13415389: SQLITE3: Creating database from command line takes forever"
+      ],
+      "Top-3 Scripts": [
+        "so_13415389: strace -f -s 1000 -tt sqlite3 newDatabase.db < myschema.sql"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "svn",
+      "MP Summary": "Subversion command line client tool",
+      "Most Similar TLDR Task": "Send changes from your working copy to the repository",
+      "Most Similar TLDR Script": "svn ci -m {{commit log message}} [{{PATH}}]",
+      "Most Similar NL2Bash Task": "Dump all MySQL databases over an ssh tunnel to \"user@yoursever.com\" and use it as input to mysql",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mysqldump --all-databases | ssh user@yourserver.com mysql\n",
+          "command-options": {
+            "mysqldump": {
+              "mpsum": "a database backup program"
+            },
+            "ssh": {
+              "mpsum": "OpenSSH SSH client (remote login program)"
+            },
+            "mysql": {
+              "mpsum": "the MySQL command-line client"
+            }
+          },
+          "TLDR_inform": {
+            "mysqldump": {
+              "man1_mysqldump_21886": "backup mysql databas\nsee also mysql restor databas backup databas redirect output file user prompt password creat backup user prompt password"
+            },
+            "ssh": {
+              "man1_ssh_32381": "secur shell protocol use secur log onto remot system\nuse log execut command remot server agent forward : forward authent inform remot machin see man ssh_config avail option connect remot server connect remot server use specif port connect remot server specif ident privat key run command remot server ssh jump : connect jumphost remot server multipl jump hop may specifi separ comma charact ssh tunnel : dynam port forward sock proxi localhost:9999 ssh tunnel : forward specif port localhost:9999 exampl org:80 along disabl pseudo- ty alloc executio n remot command"
+            },
+            "mysql": {
+              "man1_mysql_21925": "mysql command-lin tool connect databas connect databas anoth host connect databas unix socket connect databas user prompt password execut sql statement script file batch file restor databas backup creat mysqldump user prompt password restor databas backup user prompt password"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_378656: Why I cannot access the svn server from remote?"
+      ],
+      "Top-3 Scripts": [
+        "ul_378656: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "find",
+      "MP Summary": "search for files in a directory hierarchy",
+      "Most Similar TLDR Task": "Run a command for each file (use `{}` within the command to access the filename)",
+      "Most Similar TLDR Script": "find {{root_path}} -name '{{*.ext}}' -exec {{wc -l {} }}\\;",
+      "Most Similar NL2Bash Task": "Dump all MySQL databases over an ssh tunnel to \"user@yoursever.com\" and use it as input to mysql",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mysqldump --all-databases | ssh user@yourserver.com mysql\n",
+          "command-options": {
+            "mysqldump": {
+              "mpsum": "a database backup program"
+            },
+            "ssh": {
+              "mpsum": "OpenSSH SSH client (remote login program)"
+            },
+            "mysql": {
+              "mpsum": "the MySQL command-line client"
+            }
+          },
+          "TLDR_inform": {
+            "mysqldump": {
+              "man1_mysqldump_21886": "backup mysql databas\nsee also mysql restor databas backup databas redirect output file user prompt password creat backup user prompt password"
+            },
+            "ssh": {
+              "man1_ssh_32381": "secur shell protocol use secur log onto remot system\nuse log execut command remot server agent forward : forward authent inform remot machin see man ssh_config avail option connect remot server connect remot server use specif port connect remot server specif ident privat key run command remot server ssh jump : connect jumphost remot server multipl jump hop may specifi separ comma charact ssh tunnel : dynam port forward sock proxi localhost:9999 ssh tunnel : forward specif port localhost:9999 exampl org:80 along disabl pseudo- ty alloc executio n remot command"
+            },
+            "mysql": {
+              "man1_mysql_21925": "mysql command-lin tool connect databas connect databas anoth host connect databas unix socket connect databas user prompt password execut sql statement script file batch file restor databas backup creat mysqldump user prompt password restor databas backup user prompt password"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_10627674: Access mysql database from a different installation",
+        "so_4708013: Import Multiple .sql dump files into mysql database from shell",
+        "so_25236803: How to delete all files except large list from database?"
+      ],
+      "Top-3 Scripts": [
+        "so_10627674: find / -name \"mysql\"",
+        "so_4708013: find . -name '*.sql' | awk '{ print \"source\",$0 }' | mysql --batch",
+        "so_25236803: find /path/to/dir -not \\(  $(php files.php) \\) -delete"
+      ],
+      "Explanations about Options": {
+        "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+      }
+    },
+    {
+      "Command": "cat",
+      "MP Summary": "concatenate files and print on the standard output",
+      "Most Similar TLDR Task": "Concatenate several files into the target file",
+      "Most Similar TLDR Script": "cat {{file1}} {{file2}} > {{target_file}}",
+      "Most Similar NL2Bash Task": "Dump all MySQL databases over an ssh tunnel to \"user@yoursever.com\" and use it as input to mysql",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mysqldump --all-databases | ssh user@yourserver.com mysql\n",
+          "command-options": {
+            "mysqldump": {
+              "mpsum": "a database backup program"
+            },
+            "ssh": {
+              "mpsum": "OpenSSH SSH client (remote login program)"
+            },
+            "mysql": {
+              "mpsum": "the MySQL command-line client"
+            }
+          },
+          "TLDR_inform": {
+            "mysqldump": {
+              "man1_mysqldump_21886": "backup mysql databas\nsee also mysql restor databas backup databas redirect output file user prompt password creat backup user prompt password"
+            },
+            "ssh": {
+              "man1_ssh_32381": "secur shell protocol use secur log onto remot system\nuse log execut command remot server agent forward : forward authent inform remot machin see man ssh_config avail option connect remot server connect remot server use specif port connect remot server specif ident privat key run command remot server ssh jump : connect jumphost remot server multipl jump hop may specifi separ comma charact ssh tunnel : dynam port forward sock proxi localhost:9999 ssh tunnel : forward specif port localhost:9999 exampl org:80 along disabl pseudo- ty alloc executio n remot command"
+            },
+            "mysql": {
+              "man1_mysql_21925": "mysql command-lin tool connect databas connect databas anoth host connect databas unix socket connect databas user prompt password execut sql statement script file batch file restor databas backup creat mysqldump user prompt password restor databas backup user prompt password"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_2428416: How to create a database from shell command?",
+        "so_23668261: Script to import databases from a remote server",
+        "so_4708013: Import Multiple .sql dump files into mysql database from shell"
+      ],
+      "Top-3 Scripts": [
+        "so_2428416: cat filename.sql | mysql -u username -p # type mysql password when asked for it",
+        "so_23668261: ",
+        "so_4708013: cat *.sql | mysql"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "exec",
+      "MP Summary": "execute commands and open, close, or copy file descriptors",
+      "Most Similar TLDR Task": "Replace with the specified command using the current environment variables",
+      "Most Similar TLDR Script": "exec {{command -with -flags}}",
+      "Most Similar NL2Bash Task": "Dump all MySQL databases over an ssh tunnel to \"user@yoursever.com\" and use it as input to mysql",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mysqldump --all-databases | ssh user@yourserver.com mysql\n",
+          "command-options": {
+            "mysqldump": {
+              "mpsum": "a database backup program"
+            },
+            "ssh": {
+              "mpsum": "OpenSSH SSH client (remote login program)"
+            },
+            "mysql": {
+              "mpsum": "the MySQL command-line client"
+            }
+          },
+          "TLDR_inform": {
+            "mysqldump": {
+              "man1_mysqldump_21886": "backup mysql databas\nsee also mysql restor databas backup databas redirect output file user prompt password creat backup user prompt password"
+            },
+            "ssh": {
+              "man1_ssh_32381": "secur shell protocol use secur log onto remot system\nuse log execut command remot server agent forward : forward authent inform remot machin see man ssh_config avail option connect remot server connect remot server use specif port connect remot server specif ident privat key run command remot server ssh jump : connect jumphost remot server multipl jump hop may specifi separ comma charact ssh tunnel : dynam port forward sock proxi localhost:9999 ssh tunnel : forward specif port localhost:9999 exampl org:80 along disabl pseudo- ty alloc executio n remot command"
+            },
+            "mysql": {
+              "man1_mysql_21925": "mysql command-lin tool connect databas connect databas anoth host connect databas unix socket connect databas user prompt password execut sql statement script file batch file restor databas backup creat mysqldump user prompt password restor databas backup user prompt password"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_32062271: Linux: Java program called from Upstart cannot access mysql database"
+      ],
+      "Top-3 Scripts": [
+        "so_32062271: exec java -cp .:/user/jdbc.jar:/user/server UploadProgram >> /home/user/upload.log"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "awk",
+      "MP Summary": "pattern scanning and processing language",
+      "Most Similar TLDR Task": "Print every third line starting from the first line",
+      "Most Similar TLDR Script": "awk 'NR%3==1' {{filename}}",
+      "Most Similar NL2Bash Task": "Dump all MySQL databases over an ssh tunnel to \"user@yoursever.com\" and use it as input to mysql",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mysqldump --all-databases | ssh user@yourserver.com mysql\n",
+          "command-options": {
+            "mysqldump": {
+              "mpsum": "a database backup program"
+            },
+            "ssh": {
+              "mpsum": "OpenSSH SSH client (remote login program)"
+            },
+            "mysql": {
+              "mpsum": "the MySQL command-line client"
+            }
+          },
+          "TLDR_inform": {
+            "mysqldump": {
+              "man1_mysqldump_21886": "backup mysql databas\nsee also mysql restor databas backup databas redirect output file user prompt password creat backup user prompt password"
+            },
+            "ssh": {
+              "man1_ssh_32381": "secur shell protocol use secur log onto remot system\nuse log execut command remot server agent forward : forward authent inform remot machin see man ssh_config avail option connect remot server connect remot server use specif port connect remot server specif ident privat key run command remot server ssh jump : connect jumphost remot server multipl jump hop may specifi separ comma charact ssh tunnel : dynam port forward sock proxi localhost:9999 ssh tunnel : forward specif port localhost:9999 exampl org:80 along disabl pseudo- ty alloc executio n remot command"
+            },
+            "mysql": {
+              "man1_mysql_21925": "mysql command-lin tool connect databas connect databas anoth host connect databas unix socket connect databas user prompt password execut sql statement script file batch file restor databas backup creat mysqldump user prompt password restor databas backup user prompt password"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_23668261: Script to import databases from a remote server",
+        "so_4708013: Import Multiple .sql dump files into mysql database from shell"
+      ],
+      "Top-3 Scripts": [
+        "so_23668261: ssh -p $Port $Username@$Hostname << SSH\nIgnore=$(mysql --user=root --password=$Password -BNe \"SELECT CONCAT( TABLE_SCHEMA , '.' ,  TABLE_NAME ) FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME LIKE 'rec%' ORDER BY CONCAT( TABLE_SCHEMA , '.' , TABLE_NAME );\" | awk '{ printf \" --ignore-table=%s\", \\$0 }')\nmysql --user=root --password=$Password -e \"SHOW DATABASES;\" | grep -Ev \"information_schema|mysql|performance_schema\" | xargs mysqldump --force --user=root --password=$Password \\$Ignore --databases | gzip > $Location/full.sql.gz",
+        "so_4708013: find . -name '*.sql' | awk '{ print \"source\",$0 }' | mysql --batch"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "xargs",
+      "MP Summary": "build and execute command lines from standard input",
+      "Most Similar TLDR Task": "Execute the command once for each input line, replacing any occurrences of the placeholder (here marked as `_`) with the input line",
+      "Most Similar TLDR Script": "{{arguments_source}} | xargs -I _ {{command}} _ {{optional_extra_arguments}}",
+      "Most Similar NL2Bash Task": "Dump all MySQL databases over an ssh tunnel to \"user@yoursever.com\" and use it as input to mysql",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mysqldump --all-databases | ssh user@yourserver.com mysql\n",
+          "command-options": {
+            "mysqldump": {
+              "mpsum": "a database backup program"
+            },
+            "ssh": {
+              "mpsum": "OpenSSH SSH client (remote login program)"
+            },
+            "mysql": {
+              "mpsum": "the MySQL command-line client"
+            }
+          },
+          "TLDR_inform": {
+            "mysqldump": {
+              "man1_mysqldump_21886": "backup mysql databas\nsee also mysql restor databas backup databas redirect output file user prompt password creat backup user prompt password"
+            },
+            "ssh": {
+              "man1_ssh_32381": "secur shell protocol use secur log onto remot system\nuse log execut command remot server agent forward : forward authent inform remot machin see man ssh_config avail option connect remot server connect remot server use specif port connect remot server specif ident privat key run command remot server ssh jump : connect jumphost remot server multipl jump hop may specifi separ comma charact ssh tunnel : dynam port forward sock proxi localhost:9999 ssh tunnel : forward specif port localhost:9999 exampl org:80 along disabl pseudo- ty alloc executio n remot command"
+            },
+            "mysql": {
+              "man1_mysql_21925": "mysql command-lin tool connect databas connect databas anoth host connect databas unix socket connect databas user prompt password execut sql statement script file batch file restor databas backup creat mysqldump user prompt password restor databas backup user prompt password"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_23668261: Script to import databases from a remote server"
+      ],
+      "Top-3 Scripts": [
+        "so_23668261: ssh -p $Port $Username@$Hostname << SSH\nIgnore=$(mysql --user=root --password=$Password -BNe \"SELECT CONCAT( TABLE_SCHEMA , '.' ,  TABLE_NAME ) FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME LIKE 'rec%' ORDER BY CONCAT( TABLE_SCHEMA , '.' , TABLE_NAME );\" | awk '{ printf \" --ignore-table=%s\", \\$0 }')\nmysql --user=root --password=$Password -e \"SHOW DATABASES;\" | grep -Ev \"information_schema|mysql|performance_schema\" | xargs mysqldump --force --user=root --password=$Password \\$Ignore --databases | gzip > $Location/full.sql.gz"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "test",
+      "MP Summary": "check file types and compare values",
+      "Most Similar TLDR Task": "Test if given variable is empty",
+      "Most Similar TLDR Script": "test -z $GIT_BRANCH",
+      "Most Similar NL2Bash Task": "Dump all MySQL databases over an ssh tunnel to \"user@yoursever.com\" and use it as input to mysql",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mysqldump --all-databases | ssh user@yourserver.com mysql\n",
+          "command-options": {
+            "mysqldump": {
+              "mpsum": "a database backup program"
+            },
+            "ssh": {
+              "mpsum": "OpenSSH SSH client (remote login program)"
+            },
+            "mysql": {
+              "mpsum": "the MySQL command-line client"
+            }
+          },
+          "TLDR_inform": {
+            "mysqldump": {
+              "man1_mysqldump_21886": "backup mysql databas\nsee also mysql restor databas backup databas redirect output file user prompt password creat backup user prompt password"
+            },
+            "ssh": {
+              "man1_ssh_32381": "secur shell protocol use secur log onto remot system\nuse log execut command remot server agent forward : forward authent inform remot machin see man ssh_config avail option connect remot server connect remot server use specif port connect remot server specif ident privat key run command remot server ssh jump : connect jumphost remot server multipl jump hop may specifi separ comma charact ssh tunnel : dynam port forward sock proxi localhost:9999 ssh tunnel : forward specif port localhost:9999 exampl org:80 along disabl pseudo- ty alloc executio n remot command"
+            },
+            "mysql": {
+              "man1_mysql_21925": "mysql command-lin tool connect databas connect databas anoth host connect databas unix socket connect databas user prompt password execut sql statement script file batch file restor databas backup creat mysqldump user prompt password restor databas backup user prompt password"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_23668261: Script to import databases from a remote server",
+        "so_13396758: Is it possible to access MongoDB's profile from the command line programatically?"
+      ],
+      "Top-3 Scripts": [
+        "so_23668261: ",
+        "so_13396758: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "nano",
+      "MP Summary": "Nano's ANOther editor, inspired by Pico",
+      "Most Similar TLDR Task": "Open a file positioning the cursor at the specified line and column",
+      "Most Similar TLDR Script": "nano +{{line}},{{column}} {{path/to/file}}",
+      "Most Similar NL2Bash Task": "Dump all MySQL databases over an ssh tunnel to \"user@yoursever.com\" and use it as input to mysql",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mysqldump --all-databases | ssh user@yourserver.com mysql\n",
+          "command-options": {
+            "mysqldump": {
+              "mpsum": "a database backup program"
+            },
+            "ssh": {
+              "mpsum": "OpenSSH SSH client (remote login program)"
+            },
+            "mysql": {
+              "mpsum": "the MySQL command-line client"
+            }
+          },
+          "TLDR_inform": {
+            "mysqldump": {
+              "man1_mysqldump_21886": "backup mysql databas\nsee also mysql restor databas backup databas redirect output file user prompt password creat backup user prompt password"
+            },
+            "ssh": {
+              "man1_ssh_32381": "secur shell protocol use secur log onto remot system\nuse log execut command remot server agent forward : forward authent inform remot machin see man ssh_config avail option connect remot server connect remot server use specif port connect remot server specif ident privat key run command remot server ssh jump : connect jumphost remot server multipl jump hop may specifi separ comma charact ssh tunnel : dynam port forward sock proxi localhost:9999 ssh tunnel : forward specif port localhost:9999 exampl org:80 along disabl pseudo- ty alloc executio n remot command"
+            },
+            "mysql": {
+              "man1_mysql_21925": "mysql command-lin tool connect databas connect databas anoth host connect databas unix socket connect databas user prompt password execut sql statement script file batch file restor databas backup creat mysqldump user prompt password restor databas backup user prompt password"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_398006: what is the command to connect a database remotely from other PC",
+        "au_956920: Access the database via PHP from outside the server"
+      ],
+      "Top-3 Scripts": [
+        "au_398006: sudo nano /etc/vsftpd.conf",
+        "au_956920: sudo nano /etc/mysql/my.cnf"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "command",
+      "MP Summary": "execute a simple command",
+      "Most Similar TLDR Task": "Display the path to the executable or the alias definition of a specific command",
+      "Most Similar TLDR Script": "command -v {{command_name}}",
+      "Most Similar NL2Bash Task": "Dump all MySQL databases over an ssh tunnel to \"user@yoursever.com\" and use it as input to mysql",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mysqldump --all-databases | ssh user@yourserver.com mysql\n",
+          "command-options": {
+            "mysqldump": {
+              "mpsum": "a database backup program"
+            },
+            "ssh": {
+              "mpsum": "OpenSSH SSH client (remote login program)"
+            },
+            "mysql": {
+              "mpsum": "the MySQL command-line client"
+            }
+          },
+          "TLDR_inform": {
+            "mysqldump": {
+              "man1_mysqldump_21886": "backup mysql databas\nsee also mysql restor databas backup databas redirect output file user prompt password creat backup user prompt password"
+            },
+            "ssh": {
+              "man1_ssh_32381": "secur shell protocol use secur log onto remot system\nuse log execut command remot server agent forward : forward authent inform remot machin see man ssh_config avail option connect remot server connect remot server use specif port connect remot server specif ident privat key run command remot server ssh jump : connect jumphost remot server multipl jump hop may specifi separ comma charact ssh tunnel : dynam port forward sock proxi localhost:9999 ssh tunnel : forward specif port localhost:9999 exampl org:80 along disabl pseudo- ty alloc executio n remot command"
+            },
+            "mysql": {
+              "man1_mysql_21925": "mysql command-lin tool connect databas connect databas anoth host connect databas unix socket connect databas user prompt password execut sql statement script file batch file restor databas backup creat mysqldump user prompt password restor databas backup user prompt password"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_37638357: Bash read line from variables"
+      ],
+      "Top-3 Scripts": [
+        "so_37638357: var=`command`  # This executes the command immediately, and stores\n               # its result (NOT the command itself) in the variable\n\n... < \"${UP_VER}\"  # Treats the contents of $UP_VER as a filename, and tries\n                   # to use that file as input\n\nif [[ \"${OUT}\" -eq \"0\" ]]; then  # $OUT is not defined anywhere\n\n... current_db_vers='${UP_VER}' ...  # this sets current_db_vers to the entire\n                                     # list of versions at once"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "chown",
+      "MP Summary": "change file owner and group",
+      "Most Similar TLDR Task": "Recursively change the owner of a directory and its contents",
+      "Most Similar TLDR Script": "chown -R {{user}} {{path/to/directory}}",
+      "Most Similar NL2Bash Task": "Dump all MySQL databases over an ssh tunnel to \"user@yoursever.com\" and use it as input to mysql",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mysqldump --all-databases | ssh user@yourserver.com mysql\n",
+          "command-options": {
+            "mysqldump": {
+              "mpsum": "a database backup program"
+            },
+            "ssh": {
+              "mpsum": "OpenSSH SSH client (remote login program)"
+            },
+            "mysql": {
+              "mpsum": "the MySQL command-line client"
+            }
+          },
+          "TLDR_inform": {
+            "mysqldump": {
+              "man1_mysqldump_21886": "backup mysql databas\nsee also mysql restor databas backup databas redirect output file user prompt password creat backup user prompt password"
+            },
+            "ssh": {
+              "man1_ssh_32381": "secur shell protocol use secur log onto remot system\nuse log execut command remot server agent forward : forward authent inform remot machin see man ssh_config avail option connect remot server connect remot server use specif port connect remot server specif ident privat key run command remot server ssh jump : connect jumphost remot server multipl jump hop may specifi separ comma charact ssh tunnel : dynam port forward sock proxi localhost:9999 ssh tunnel : forward specif port localhost:9999 exampl org:80 along disabl pseudo- ty alloc executio n remot command"
+            },
+            "mysql": {
+              "man1_mysql_21925": "mysql command-lin tool connect databas connect databas anoth host connect databas unix socket connect databas user prompt password execut sql statement script file batch file restor databas backup creat mysqldump user prompt password restor databas backup user prompt password"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_964417: Is it possible to restore a mysql database from the /var/lib/mysql/database folder?"
+      ],
+      "Top-3 Scripts": [
+        "au_964417: sudo chown -R mysql:mysql /var/lib/mysql"
+      ],
+      "Explanations about Options": {
+        "-R": "operate on files and directories recursively"
+      }
+    },
+    {
+      "Command": "passwd",
+      "MP Summary": "change user password",
+      "Most Similar TLDR Task": "Change the password of the specified user",
+      "Most Similar TLDR Script": "passwd {{username}} {{new_password}}",
+      "Most Similar NL2Bash Task": "Dump all MySQL databases over an ssh tunnel to \"user@yoursever.com\" and use it as input to mysql",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mysqldump --all-databases | ssh user@yourserver.com mysql\n",
+          "command-options": {
+            "mysqldump": {
+              "mpsum": "a database backup program"
+            },
+            "ssh": {
+              "mpsum": "OpenSSH SSH client (remote login program)"
+            },
+            "mysql": {
+              "mpsum": "the MySQL command-line client"
+            }
+          },
+          "TLDR_inform": {
+            "mysqldump": {
+              "man1_mysqldump_21886": "backup mysql databas\nsee also mysql restor databas backup databas redirect output file user prompt password creat backup user prompt password"
+            },
+            "ssh": {
+              "man1_ssh_32381": "secur shell protocol use secur log onto remot system\nuse log execut command remot server agent forward : forward authent inform remot machin see man ssh_config avail option connect remot server connect remot server use specif port connect remot server specif ident privat key run command remot server ssh jump : connect jumphost remot server multipl jump hop may specifi separ comma charact ssh tunnel : dynam port forward sock proxi localhost:9999 ssh tunnel : forward specif port localhost:9999 exampl org:80 along disabl pseudo- ty alloc executio n remot command"
+            },
+            "mysql": {
+              "man1_mysql_21925": "mysql command-lin tool connect databas connect databas anoth host connect databas unix socket connect databas user prompt password execut sql statement script file batch file restor databas backup creat mysqldump user prompt password restor databas backup user prompt password"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_20817013: Restore all MySQL Databases from individual files"
+      ],
+      "Top-3 Scripts": [
+        "so_20817013: for f in *.sql.gz; do\n   db=\"${f%%.*}\"\n   echo \"creating database $db\"\n   mysql -h localhost -u root -p mysql --password=passwd <<< \"create database $db\"\n   echo \"restoring database $db\"\n   gunzip \"$f\"\n   mysql -h localhost -u root -ppasswd \"$db\" < \"$db.sql\"\ndone"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "read",
+      "MP Summary": "read a line from standard input",
+      "Most Similar TLDR Task": "Use a specific character as a delimiter instead of a new line",
+      "Most Similar TLDR Script": "read -d {{new_delimiter}} {{variable}}",
+      "Most Similar NL2Bash Task": "Dump all MySQL databases over an ssh tunnel to \"user@yoursever.com\" and use it as input to mysql",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mysqldump --all-databases | ssh user@yourserver.com mysql\n",
+          "command-options": {
+            "mysqldump": {
+              "mpsum": "a database backup program"
+            },
+            "ssh": {
+              "mpsum": "OpenSSH SSH client (remote login program)"
+            },
+            "mysql": {
+              "mpsum": "the MySQL command-line client"
+            }
+          },
+          "TLDR_inform": {
+            "mysqldump": {
+              "man1_mysqldump_21886": "backup mysql databas\nsee also mysql restor databas backup databas redirect output file user prompt password creat backup user prompt password"
+            },
+            "ssh": {
+              "man1_ssh_32381": "secur shell protocol use secur log onto remot system\nuse log execut command remot server agent forward : forward authent inform remot machin see man ssh_config avail option connect remot server connect remot server use specif port connect remot server specif ident privat key run command remot server ssh jump : connect jumphost remot server multipl jump hop may specifi separ comma charact ssh tunnel : dynam port forward sock proxi localhost:9999 ssh tunnel : forward specif port localhost:9999 exampl org:80 along disabl pseudo- ty alloc executio n remot command"
+            },
+            "mysql": {
+              "man1_mysql_21925": "mysql command-lin tool connect databas connect databas anoth host connect databas unix socket connect databas user prompt password execut sql statement script file batch file restor databas backup creat mysqldump user prompt password restor databas backup user prompt password"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_6513011: Android application that gets data from a remote database"
+      ],
+      "Top-3 Scripts": [
+        "so_6513011: I read in multiple places that it is not kosher to connect to a database from anything over the internet directly"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "curl",
+      "MP Summary": "transfer a URL",
+      "Most Similar TLDR Task": "Pass a user name and password for server authentication",
+      "Most Similar TLDR Script": "curl -u myusername:mypassword {{http://example.com}}",
+      "Most Similar NL2Bash Task": "Dump all MySQL databases over an ssh tunnel to \"user@yoursever.com\" and use it as input to mysql",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mysqldump --all-databases | ssh user@yourserver.com mysql\n",
+          "command-options": {
+            "mysqldump": {
+              "mpsum": "a database backup program"
+            },
+            "ssh": {
+              "mpsum": "OpenSSH SSH client (remote login program)"
+            },
+            "mysql": {
+              "mpsum": "the MySQL command-line client"
+            }
+          },
+          "TLDR_inform": {
+            "mysqldump": {
+              "man1_mysqldump_21886": "backup mysql databas\nsee also mysql restor databas backup databas redirect output file user prompt password creat backup user prompt password"
+            },
+            "ssh": {
+              "man1_ssh_32381": "secur shell protocol use secur log onto remot system\nuse log execut command remot server agent forward : forward authent inform remot machin see man ssh_config avail option connect remot server connect remot server use specif port connect remot server specif ident privat key run command remot server ssh jump : connect jumphost remot server multipl jump hop may specifi separ comma charact ssh tunnel : dynam port forward sock proxi localhost:9999 ssh tunnel : forward specif port localhost:9999 exampl org:80 along disabl pseudo- ty alloc executio n remot command"
+            },
+            "mysql": {
+              "man1_mysql_21925": "mysql command-lin tool connect databas connect databas anoth host connect databas unix socket connect databas user prompt password execut sql statement script file batch file restor databas backup creat mysqldump user prompt password restor databas backup user prompt password"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_13396758: Is it possible to access MongoDB's profile from the command line programatically?"
+      ],
+      "Top-3 Scripts": [
+        "so_13396758: $ curl -i http://localhost:28017/<dbName>/<collectionName>/"
+      ],
+      "Explanations about Options": {
+        "-i": "Include the HTTP response headers in the output. The HTTP response headers can\n include things like server name, cookies, date of the document, HTTP version and\n more..."
+      }
+    },
+    {
+      "Command": "ifconfig",
+      "MP Summary": "configure network interfaces",
+      "Most Similar TLDR Task": "Disable eth0 interface",
+      "Most Similar TLDR Script": "ifconfig eth0 down",
+      "Most Similar NL2Bash Task": "Dump all MySQL databases over an ssh tunnel to \"user@yoursever.com\" and use it as input to mysql",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mysqldump --all-databases | ssh user@yourserver.com mysql\n",
+          "command-options": {
+            "mysqldump": {
+              "mpsum": "a database backup program"
+            },
+            "ssh": {
+              "mpsum": "OpenSSH SSH client (remote login program)"
+            },
+            "mysql": {
+              "mpsum": "the MySQL command-line client"
+            }
+          },
+          "TLDR_inform": {
+            "mysqldump": {
+              "man1_mysqldump_21886": "backup mysql databas\nsee also mysql restor databas backup databas redirect output file user prompt password creat backup user prompt password"
+            },
+            "ssh": {
+              "man1_ssh_32381": "secur shell protocol use secur log onto remot system\nuse log execut command remot server agent forward : forward authent inform remot machin see man ssh_config avail option connect remot server connect remot server use specif port connect remot server specif ident privat key run command remot server ssh jump : connect jumphost remot server multipl jump hop may specifi separ comma charact ssh tunnel : dynam port forward sock proxi localhost:9999 ssh tunnel : forward specif port localhost:9999 exampl org:80 along disabl pseudo- ty alloc executio n remot command"
+            },
+            "mysql": {
+              "man1_mysql_21925": "mysql command-lin tool connect databas connect databas anoth host connect databas unix socket connect databas user prompt password execut sql statement script file batch file restor databas backup creat mysqldump user prompt password restor databas backup user prompt password"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_398006: what is the command to connect a database remotely from other PC"
+      ],
+      "Top-3 Scripts": [
+        "au_398006: ifconfig | grep inet"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "pass",
+      "MP Summary": "stores, retrieves, generates, and synchronizes passwords securely",
+      "Most Similar TLDR Task": "Initialize a new Git repository (any changes done by pass will be committed automatically)",
+      "Most Similar TLDR Script": "pass git init",
+      "Most Similar NL2Bash Task": "Dump all MySQL databases over an ssh tunnel to \"user@yoursever.com\" and use it as input to mysql",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mysqldump --all-databases | ssh user@yourserver.com mysql\n",
+          "command-options": {
+            "mysqldump": {
+              "mpsum": "a database backup program"
+            },
+            "ssh": {
+              "mpsum": "OpenSSH SSH client (remote login program)"
+            },
+            "mysql": {
+              "mpsum": "the MySQL command-line client"
+            }
+          },
+          "TLDR_inform": {
+            "mysqldump": {
+              "man1_mysqldump_21886": "backup mysql databas\nsee also mysql restor databas backup databas redirect output file user prompt password creat backup user prompt password"
+            },
+            "ssh": {
+              "man1_ssh_32381": "secur shell protocol use secur log onto remot system\nuse log execut command remot server agent forward : forward authent inform remot machin see man ssh_config avail option connect remot server connect remot server use specif port connect remot server specif ident privat key run command remot server ssh jump : connect jumphost remot server multipl jump hop may specifi separ comma charact ssh tunnel : dynam port forward sock proxi localhost:9999 ssh tunnel : forward specif port localhost:9999 exampl org:80 along disabl pseudo- ty alloc executio n remot command"
+            },
+            "mysql": {
+              "man1_mysql_21925": "mysql command-lin tool connect databas connect databas anoth host connect databas unix socket connect databas user prompt password execut sql statement script file batch file restor databas backup creat mysqldump user prompt password restor databas backup user prompt password"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_19040532: MySQL Date_Sub issue while deleting from database (using variables)"
+      ],
+      "Top-3 Scripts": [
+        "so_19040532: mysql -u$user -p$pass <<EOF\nDELETE FROM tablename\nWHERE datetimestamp < DATE_SUB(NOW(), INTERVAL $daysret DAY)\nEOF\n\nmysql -u$user -p$pass -e \"DELETE FROM tablename WHERE datetimestamp < DATE_SUB(NOW(), INTERVAL $daysret DAY)\""
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "systemctl",
+      "MP Summary": "Control the systemd system and service manager",
+      "Most Similar TLDR Task": "Start/Stop/Restart/Reload a service",
+      "Most Similar TLDR Script": "systemctl start/stop/restart/reload {{unit}}",
+      "Most Similar NL2Bash Task": "Dump all MySQL databases over an ssh tunnel to \"user@yoursever.com\" and use it as input to mysql",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mysqldump --all-databases | ssh user@yourserver.com mysql\n",
+          "command-options": {
+            "mysqldump": {
+              "mpsum": "a database backup program"
+            },
+            "ssh": {
+              "mpsum": "OpenSSH SSH client (remote login program)"
+            },
+            "mysql": {
+              "mpsum": "the MySQL command-line client"
+            }
+          },
+          "TLDR_inform": {
+            "mysqldump": {
+              "man1_mysqldump_21886": "backup mysql databas\nsee also mysql restor databas backup databas redirect output file user prompt password creat backup user prompt password"
+            },
+            "ssh": {
+              "man1_ssh_32381": "secur shell protocol use secur log onto remot system\nuse log execut command remot server agent forward : forward authent inform remot machin see man ssh_config avail option connect remot server connect remot server use specif port connect remot server specif ident privat key run command remot server ssh jump : connect jumphost remot server multipl jump hop may specifi separ comma charact ssh tunnel : dynam port forward sock proxi localhost:9999 ssh tunnel : forward specif port localhost:9999 exampl org:80 along disabl pseudo- ty alloc executio n remot command"
+            },
+            "mysql": {
+              "man1_mysql_21925": "mysql command-lin tool connect databas connect databas anoth host connect databas unix socket connect databas user prompt password execut sql statement script file batch file restor databas backup creat mysqldump user prompt password restor databas backup user prompt password"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_956920: Access the database via PHP from outside the server",
+        "au_964417: Is it possible to restore a mysql database from the /var/lib/mysql/database folder?"
+      ],
+      "Top-3 Scripts": [
+        "au_956920: sudo systemctl restart mysql",
+        "au_964417: sudo systemctl stop mysql\n\nsystemctl start mysql"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "grep",
+      "MP Summary": "print lines that match patterns",
+      "Most Similar TLDR Task": "Invert match for excluding specific strings",
+      "Most Similar TLDR Script": "grep -v {{search_pattern}}",
+      "Most Similar NL2Bash Task": "Dump all MySQL databases over an ssh tunnel to \"user@yoursever.com\" and use it as input to mysql",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mysqldump --all-databases | ssh user@yourserver.com mysql\n",
+          "command-options": {
+            "mysqldump": {
+              "mpsum": "a database backup program"
+            },
+            "ssh": {
+              "mpsum": "OpenSSH SSH client (remote login program)"
+            },
+            "mysql": {
+              "mpsum": "the MySQL command-line client"
+            }
+          },
+          "TLDR_inform": {
+            "mysqldump": {
+              "man1_mysqldump_21886": "backup mysql databas\nsee also mysql restor databas backup databas redirect output file user prompt password creat backup user prompt password"
+            },
+            "ssh": {
+              "man1_ssh_32381": "secur shell protocol use secur log onto remot system\nuse log execut command remot server agent forward : forward authent inform remot machin see man ssh_config avail option connect remot server connect remot server use specif port connect remot server specif ident privat key run command remot server ssh jump : connect jumphost remot server multipl jump hop may specifi separ comma charact ssh tunnel : dynam port forward sock proxi localhost:9999 ssh tunnel : forward specif port localhost:9999 exampl org:80 along disabl pseudo- ty alloc executio n remot command"
+            },
+            "mysql": {
+              "man1_mysql_21925": "mysql command-lin tool connect databas connect databas anoth host connect databas unix socket connect databas user prompt password execut sql statement script file batch file restor databas backup creat mysqldump user prompt password restor databas backup user prompt password"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_398006: what is the command to connect a database remotely from other PC",
+        "so_23668261: Script to import databases from a remote server"
+      ],
+      "Top-3 Scripts": [
+        "au_398006: ifconfig | grep inet",
+        "so_23668261: ssh -p $Port $Username@$Hostname << SSH\nIgnore=$(mysql --user=root --password=$Password -BNe \"SELECT CONCAT( TABLE_SCHEMA , '.' ,  TABLE_NAME ) FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME LIKE 'rec%' ORDER BY CONCAT( TABLE_SCHEMA , '.' , TABLE_NAME );\" | awk '{ printf \" --ignore-table=%s\", \\$0 }')\nmysql --user=root --password=$Password -e \"SHOW DATABASES;\" | grep -Ev \"information_schema|mysql|performance_schema\" | xargs mysqldump --force --user=root --password=$Password \\$Ignore --databases | gzip > $Location/full.sql.gz"
+      ],
+      "Explanations about Options": {
+        "-v": "Invert the sense of matching, to select non-matching lines."
+      }
+    },
+    {
+      "Command": "git",
+      "MP Summary": "the stupid content tracker",
+      "Most Similar TLDR Task": "Execute a Git subcommand with a given configuration set",
+      "Most Similar TLDR Script": "git -c '{{config.key}}={{value}}' {{subcommand}}",
+      "Most Similar NL2Bash Task": "Dump all MySQL databases over an ssh tunnel to \"user@yoursever.com\" and use it as input to mysql",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mysqldump --all-databases | ssh user@yourserver.com mysql\n",
+          "command-options": {
+            "mysqldump": {
+              "mpsum": "a database backup program"
+            },
+            "ssh": {
+              "mpsum": "OpenSSH SSH client (remote login program)"
+            },
+            "mysql": {
+              "mpsum": "the MySQL command-line client"
+            }
+          },
+          "TLDR_inform": {
+            "mysqldump": {
+              "man1_mysqldump_21886": "backup mysql databas\nsee also mysql restor databas backup databas redirect output file user prompt password creat backup user prompt password"
+            },
+            "ssh": {
+              "man1_ssh_32381": "secur shell protocol use secur log onto remot system\nuse log execut command remot server agent forward : forward authent inform remot machin see man ssh_config avail option connect remot server connect remot server use specif port connect remot server specif ident privat key run command remot server ssh jump : connect jumphost remot server multipl jump hop may specifi separ comma charact ssh tunnel : dynam port forward sock proxi localhost:9999 ssh tunnel : forward specif port localhost:9999 exampl org:80 along disabl pseudo- ty alloc executio n remot command"
+            },
+            "mysql": {
+              "man1_mysql_21925": "mysql command-lin tool connect databas connect databas anoth host connect databas unix socket connect databas user prompt password execut sql statement script file batch file restor databas backup creat mysqldump user prompt password restor databas backup user prompt password"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "su_547263: Open remote git repository from command line"
+      ],
+      "Top-3 Scripts": [
+        "su_547263: git instaweb"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "rsync",
+      "MP Summary": "a fast, versatile, remote (and local) file-copying tool",
+      "Most Similar TLDR Task": "Transfer directory contents (but not the directory itself) from a remote to local",
+      "Most Similar TLDR Script": "rsync -r {{remote_host}}:{{path/to/remote_directory}}/ {{path/to/local_directory}}",
+      "Most Similar NL2Bash Task": "Dump all MySQL databases over an ssh tunnel to \"user@yoursever.com\" and use it as input to mysql",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mysqldump --all-databases | ssh user@yourserver.com mysql\n",
+          "command-options": {
+            "mysqldump": {
+              "mpsum": "a database backup program"
+            },
+            "ssh": {
+              "mpsum": "OpenSSH SSH client (remote login program)"
+            },
+            "mysql": {
+              "mpsum": "the MySQL command-line client"
+            }
+          },
+          "TLDR_inform": {
+            "mysqldump": {
+              "man1_mysqldump_21886": "backup mysql databas\nsee also mysql restor databas backup databas redirect output file user prompt password creat backup user prompt password"
+            },
+            "ssh": {
+              "man1_ssh_32381": "secur shell protocol use secur log onto remot system\nuse log execut command remot server agent forward : forward authent inform remot machin see man ssh_config avail option connect remot server connect remot server use specif port connect remot server specif ident privat key run command remot server ssh jump : connect jumphost remot server multipl jump hop may specifi separ comma charact ssh tunnel : dynam port forward sock proxi localhost:9999 ssh tunnel : forward specif port localhost:9999 exampl org:80 along disabl pseudo- ty alloc executio n remot command"
+            },
+            "mysql": {
+              "man1_mysql_21925": "mysql command-lin tool connect databas connect databas anoth host connect databas unix socket connect databas user prompt password execut sql statement script file batch file restor databas backup creat mysqldump user prompt password restor databas backup user prompt password"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_964417: Is it possible to restore a mysql database from the /var/lib/mysql/database folder?"
+      ],
+      "Top-3 Scripts": [
+        "au_964417: sudo rsync -r <backedupfolder>/ib* /var/lib/mysql/"
+      ],
+      "Explanations about Options": {
+        "-r": "This tells rsync to copy directories recursively. See also --dirs (-d)."
+      }
+    },
+    {
+      "Command": "nginx",
+      "MP Summary": "HTTP and reverse proxy server, mail proxy server",
+      "Most Similar TLDR Task": "Reload the configuration by sending a signal with no downtime",
+      "Most Similar TLDR Script": "nginx -s reload",
+      "Most Similar NL2Bash Task": "Dump all MySQL databases over an ssh tunnel to \"user@yoursever.com\" and use it as input to mysql",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mysqldump --all-databases | ssh user@yourserver.com mysql\n",
+          "command-options": {
+            "mysqldump": {
+              "mpsum": "a database backup program"
+            },
+            "ssh": {
+              "mpsum": "OpenSSH SSH client (remote login program)"
+            },
+            "mysql": {
+              "mpsum": "the MySQL command-line client"
+            }
+          },
+          "TLDR_inform": {
+            "mysqldump": {
+              "man1_mysqldump_21886": "backup mysql databas\nsee also mysql restor databas backup databas redirect output file user prompt password creat backup user prompt password"
+            },
+            "ssh": {
+              "man1_ssh_32381": "secur shell protocol use secur log onto remot system\nuse log execut command remot server agent forward : forward authent inform remot machin see man ssh_config avail option connect remot server connect remot server use specif port connect remot server specif ident privat key run command remot server ssh jump : connect jumphost remot server multipl jump hop may specifi separ comma charact ssh tunnel : dynam port forward sock proxi localhost:9999 ssh tunnel : forward specif port localhost:9999 exampl org:80 along disabl pseudo- ty alloc executio n remot command"
+            },
+            "mysql": {
+              "man1_mysql_21925": "mysql command-lin tool connect databas connect databas anoth host connect databas unix socket connect databas user prompt password execut sql statement script file batch file restor databas backup creat mysqldump user prompt password restor databas backup user prompt password"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_960689: apache2 and sshd are listening, but only sshd is accessible from remote"
+      ],
+      "Top-3 Scripts": [
+        "au_960689: Nmap scan report for 10.1.1.1\nHost is up (0.062s latency).\nPORT   STATE SERVICE VERSION\n22/tcp open  ssh     OpenSSH 7.2p2 Ubuntu 4ubuntu2.2 (Ubuntu Linux; protocol 2.0)\n80/tcp filtered  http    nginx 1.10.3 (Ubuntu)\n\nNmap scan report for 10.1.1.1\nHost is up (0.062s latency).\nPORT   STATE SERVICE VERSION\n22/tcp open  ssh     OpenSSH 7.2p2 Ubuntu 4ubuntu2.2 (Ubuntu Linux; protocol 2.0)\n80/tcp open  http    nginx 1.10.3 (Ubuntu)"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "set",
+      "MP Summary": "set or unset options and positional parameters",
+      "Most Similar TLDR Task": "Display the names and values of shell variables",
+      "Most Similar TLDR Script": "set",
+      "Most Similar NL2Bash Task": "Dump all MySQL databases over an ssh tunnel to \"user@yoursever.com\" and use it as input to mysql",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mysqldump --all-databases | ssh user@yourserver.com mysql\n",
+          "command-options": {
+            "mysqldump": {
+              "mpsum": "a database backup program"
+            },
+            "ssh": {
+              "mpsum": "OpenSSH SSH client (remote login program)"
+            },
+            "mysql": {
+              "mpsum": "the MySQL command-line client"
+            }
+          },
+          "TLDR_inform": {
+            "mysqldump": {
+              "man1_mysqldump_21886": "backup mysql databas\nsee also mysql restor databas backup databas redirect output file user prompt password creat backup user prompt password"
+            },
+            "ssh": {
+              "man1_ssh_32381": "secur shell protocol use secur log onto remot system\nuse log execut command remot server agent forward : forward authent inform remot machin see man ssh_config avail option connect remot server connect remot server use specif port connect remot server specif ident privat key run command remot server ssh jump : connect jumphost remot server multipl jump hop may specifi separ comma charact ssh tunnel : dynam port forward sock proxi localhost:9999 ssh tunnel : forward specif port localhost:9999 exampl org:80 along disabl pseudo- ty alloc executio n remot command"
+            },
+            "mysql": {
+              "man1_mysql_21925": "mysql command-lin tool connect databas connect databas anoth host connect databas unix socket connect databas user prompt password execut sql statement script file batch file restor databas backup creat mysqldump user prompt password restor databas backup user prompt password"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_19040532: MySQL Date_Sub issue while deleting from database (using variables)"
+      ],
+      "Top-3 Scripts": [
+        "so_19040532: set -x"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "ssh-keygen",
+      "MP Summary": "authentication key generation, management and conversion",
+      "Most Similar TLDR Task": "Generate a key interactively",
+      "Most Similar TLDR Script": "ssh-keygen",
+      "Most Similar NL2Bash Task": "Dump all MySQL databases over an ssh tunnel to \"user@yoursever.com\" and use it as input to mysql",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mysqldump --all-databases | ssh user@yourserver.com mysql\n",
+          "command-options": {
+            "mysqldump": {
+              "mpsum": "a database backup program"
+            },
+            "ssh": {
+              "mpsum": "OpenSSH SSH client (remote login program)"
+            },
+            "mysql": {
+              "mpsum": "the MySQL command-line client"
+            }
+          },
+          "TLDR_inform": {
+            "mysqldump": {
+              "man1_mysqldump_21886": "backup mysql databas\nsee also mysql restor databas backup databas redirect output file user prompt password creat backup user prompt password"
+            },
+            "ssh": {
+              "man1_ssh_32381": "secur shell protocol use secur log onto remot system\nuse log execut command remot server agent forward : forward authent inform remot machin see man ssh_config avail option connect remot server connect remot server use specif port connect remot server specif ident privat key run command remot server ssh jump : connect jumphost remot server multipl jump hop may specifi separ comma charact ssh tunnel : dynam port forward sock proxi localhost:9999 ssh tunnel : forward specif port localhost:9999 exampl org:80 along disabl pseudo- ty alloc executio n remot command"
+            },
+            "mysql": {
+              "man1_mysql_21925": "mysql command-lin tool connect databas connect databas anoth host connect databas unix socket connect databas user prompt password execut sql statement script file batch file restor databas backup creat mysqldump user prompt password restor databas backup user prompt password"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_39668821: Can't ssh to remote repository from command line"
+      ],
+      "Top-3 Scripts": [
+        "so_39668821: ssh-keygen -e -f ~/.ssh/id_dsa > ~/.ssh/id_dsa_com.pub\n\nssh-keygen -i -f ~/.ssh/id_dsa_com.pub > ~/.ssh/id_dsa.pub"
+      ],
+      "Explanations about Options": {
+        "-i": "This option will read an unencrypted private (or public) key file in the format\n specified by the -m option and print an OpenSSH compatible private (or public) key\n to stdout. This option allows importing keys from other software, including several\n commercial SSH implementations. The default import format is \u201cRFC4716\u201d.",
+        "-f": "Specifies the filename of the key file."
+      }
+    },
+    {
+      "Command": "at",
+      "MP Summary": "queue, examine, or delete jobs for later execution",
+      "Most Similar TLDR Task": "Execute the commands and email the result using a local mailing program such as sendmail",
+      "Most Similar TLDR Script": "at {{hh:mm}} -m",
+      "Most Similar NL2Bash Task": "Dump all MySQL databases over an ssh tunnel to \"user@yoursever.com\" and use it as input to mysql",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mysqldump --all-databases | ssh user@yourserver.com mysql\n",
+          "command-options": {
+            "mysqldump": {
+              "mpsum": "a database backup program"
+            },
+            "ssh": {
+              "mpsum": "OpenSSH SSH client (remote login program)"
+            },
+            "mysql": {
+              "mpsum": "the MySQL command-line client"
+            }
+          },
+          "TLDR_inform": {
+            "mysqldump": {
+              "man1_mysqldump_21886": "backup mysql databas\nsee also mysql restor databas backup databas redirect output file user prompt password creat backup user prompt password"
+            },
+            "ssh": {
+              "man1_ssh_32381": "secur shell protocol use secur log onto remot system\nuse log execut command remot server agent forward : forward authent inform remot machin see man ssh_config avail option connect remot server connect remot server use specif port connect remot server specif ident privat key run command remot server ssh jump : connect jumphost remot server multipl jump hop may specifi separ comma charact ssh tunnel : dynam port forward sock proxi localhost:9999 ssh tunnel : forward specif port localhost:9999 exampl org:80 along disabl pseudo- ty alloc executio n remot command"
+            },
+            "mysql": {
+              "man1_mysql_21925": "mysql command-lin tool connect databas connect databas anoth host connect databas unix socket connect databas user prompt password execut sql statement script file batch file restor databas backup creat mysqldump user prompt password restor databas backup user prompt password"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_4038861: Creating an \"at\" job from command line for a MYSQL query"
+      ],
+      "Top-3 Scripts": [
+        "so_4038861: at 17:30 mysql -e \"\\\"MY QUERY;\\\"\""
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "print",
+      "MP Summary": "execute programs via entries in the mailcap file",
+      "Most Similar TLDR Task": "Print action can be used to print any file on default run-mailcap tool",
+      "Most Similar TLDR Script": "print {{filename}}",
+      "Most Similar NL2Bash Task": "Dump all MySQL databases over an ssh tunnel to \"user@yoursever.com\" and use it as input to mysql",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mysqldump --all-databases | ssh user@yourserver.com mysql\n",
+          "command-options": {
+            "mysqldump": {
+              "mpsum": "a database backup program"
+            },
+            "ssh": {
+              "mpsum": "OpenSSH SSH client (remote login program)"
+            },
+            "mysql": {
+              "mpsum": "the MySQL command-line client"
+            }
+          },
+          "TLDR_inform": {
+            "mysqldump": {
+              "man1_mysqldump_21886": "backup mysql databas\nsee also mysql restor databas backup databas redirect output file user prompt password creat backup user prompt password"
+            },
+            "ssh": {
+              "man1_ssh_32381": "secur shell protocol use secur log onto remot system\nuse log execut command remot server agent forward : forward authent inform remot machin see man ssh_config avail option connect remot server connect remot server use specif port connect remot server specif ident privat key run command remot server ssh jump : connect jumphost remot server multipl jump hop may specifi separ comma charact ssh tunnel : dynam port forward sock proxi localhost:9999 ssh tunnel : forward specif port localhost:9999 exampl org:80 along disabl pseudo- ty alloc executio n remot command"
+            },
+            "mysql": {
+              "man1_mysql_21925": "mysql command-lin tool connect databas connect databas anoth host connect databas unix socket connect databas user prompt password execut sql statement script file batch file restor databas backup creat mysqldump user prompt password restor databas backup user prompt password"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_4708013: Import Multiple .sql dump files into mysql database from shell"
+      ],
+      "Top-3 Scripts": [
+        "so_4708013: find . -name '*.sql' | awk '{ print \"source\",$0 }' | mysql --batch"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "ufw",
+      "MP Summary": "program for managing a netfilter firewall",
+      "Most Similar TLDR Task": "Delete a particular rule. The rule number can be retrieved from the `ufw status numbered` command",
+      "Most Similar TLDR Script": "ufw delete {{rule_number}}",
+      "Most Similar NL2Bash Task": "Dump all MySQL databases over an ssh tunnel to \"user@yoursever.com\" and use it as input to mysql",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mysqldump --all-databases | ssh user@yourserver.com mysql\n",
+          "command-options": {
+            "mysqldump": {
+              "mpsum": "a database backup program"
+            },
+            "ssh": {
+              "mpsum": "OpenSSH SSH client (remote login program)"
+            },
+            "mysql": {
+              "mpsum": "the MySQL command-line client"
+            }
+          },
+          "TLDR_inform": {
+            "mysqldump": {
+              "man1_mysqldump_21886": "backup mysql databas\nsee also mysql restor databas backup databas redirect output file user prompt password creat backup user prompt password"
+            },
+            "ssh": {
+              "man1_ssh_32381": "secur shell protocol use secur log onto remot system\nuse log execut command remot server agent forward : forward authent inform remot machin see man ssh_config avail option connect remot server connect remot server use specif port connect remot server specif ident privat key run command remot server ssh jump : connect jumphost remot server multipl jump hop may specifi separ comma charact ssh tunnel : dynam port forward sock proxi localhost:9999 ssh tunnel : forward specif port localhost:9999 exampl org:80 along disabl pseudo- ty alloc executio n remot command"
+            },
+            "mysql": {
+              "man1_mysql_21925": "mysql command-lin tool connect databas connect databas anoth host connect databas unix socket connect databas user prompt password execut sql statement script file batch file restor databas backup creat mysqldump user prompt password restor databas backup user prompt password"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_956920: Access the database via PHP from outside the server"
+      ],
+      "Top-3 Scripts": [
+        "au_956920: sudo ufw allow 3306/tcp\nsudo service ufw restart"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "date",
+      "MP Summary": "print or set the system date and time",
+      "Most Similar TLDR Task": "Display a specific date (represented as a Unix timestamp) using the default format",
+      "Most Similar TLDR Script": "date -d @1473305798",
+      "Most Similar NL2Bash Task": "Dump all MySQL databases over an ssh tunnel to \"user@yoursever.com\" and use it as input to mysql",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mysqldump --all-databases | ssh user@yourserver.com mysql\n",
+          "command-options": {
+            "mysqldump": {
+              "mpsum": "a database backup program"
+            },
+            "ssh": {
+              "mpsum": "OpenSSH SSH client (remote login program)"
+            },
+            "mysql": {
+              "mpsum": "the MySQL command-line client"
+            }
+          },
+          "TLDR_inform": {
+            "mysqldump": {
+              "man1_mysqldump_21886": "backup mysql databas\nsee also mysql restor databas backup databas redirect output file user prompt password creat backup user prompt password"
+            },
+            "ssh": {
+              "man1_ssh_32381": "secur shell protocol use secur log onto remot system\nuse log execut command remot server agent forward : forward authent inform remot machin see man ssh_config avail option connect remot server connect remot server use specif port connect remot server specif ident privat key run command remot server ssh jump : connect jumphost remot server multipl jump hop may specifi separ comma charact ssh tunnel : dynam port forward sock proxi localhost:9999 ssh tunnel : forward specif port localhost:9999 exampl org:80 along disabl pseudo- ty alloc executio n remot command"
+            },
+            "mysql": {
+              "man1_mysql_21925": "mysql command-lin tool connect databas connect databas anoth host connect databas unix socket connect databas user prompt password execut sql statement script file batch file restor databas backup creat mysqldump user prompt password restor databas backup user prompt password"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_37125: Create MySQL database name using variable from date"
+      ],
+      "Top-3 Scripts": [
+        "ul_37125: dbnya=`echo $(date +%Y%m%d%H%M%S)`"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "truncate",
+      "MP Summary": "shrink or extend the size of a file to the specified size",
+      "Most Similar TLDR Task": "Empty the file's content",
+      "Most Similar TLDR Script": "truncate -s 0 {{filename}}",
+      "Most Similar NL2Bash Task": "Dump all MySQL databases over an ssh tunnel to \"user@yoursever.com\" and use it as input to mysql",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mysqldump --all-databases | ssh user@yourserver.com mysql\n",
+          "command-options": {
+            "mysqldump": {
+              "mpsum": "a database backup program"
+            },
+            "ssh": {
+              "mpsum": "OpenSSH SSH client (remote login program)"
+            },
+            "mysql": {
+              "mpsum": "the MySQL command-line client"
+            }
+          },
+          "TLDR_inform": {
+            "mysqldump": {
+              "man1_mysqldump_21886": "backup mysql databas\nsee also mysql restor databas backup databas redirect output file user prompt password creat backup user prompt password"
+            },
+            "ssh": {
+              "man1_ssh_32381": "secur shell protocol use secur log onto remot system\nuse log execut command remot server agent forward : forward authent inform remot machin see man ssh_config avail option connect remot server connect remot server use specif port connect remot server specif ident privat key run command remot server ssh jump : connect jumphost remot server multipl jump hop may specifi separ comma charact ssh tunnel : dynam port forward sock proxi localhost:9999 ssh tunnel : forward specif port localhost:9999 exampl org:80 along disabl pseudo- ty alloc executio n remot command"
+            },
+            "mysql": {
+              "man1_mysql_21925": "mysql command-lin tool connect databas connect databas anoth host connect databas unix socket connect databas user prompt password execut sql statement script file batch file restor databas backup creat mysqldump user prompt password restor databas backup user prompt password"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_37892757: Truncate a specific table from a MySQL database using Command Line"
+      ],
+      "Top-3 Scripts": [
+        "so_37892757: mysql -u root -h localhost\ntruncate table `site-local`.`cloud_securities`;"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "rm",
+      "MP Summary": "remove files or directories",
+      "Most Similar TLDR Task": "Interactively remove multiple files, with a prompt before every removal",
+      "Most Similar TLDR Script": "rm -i {{file(s)}}",
+      "Most Similar NL2Bash Task": "Dump all MySQL databases over an ssh tunnel to \"user@yoursever.com\" and use it as input to mysql",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mysqldump --all-databases | ssh user@yourserver.com mysql\n",
+          "command-options": {
+            "mysqldump": {
+              "mpsum": "a database backup program"
+            },
+            "ssh": {
+              "mpsum": "OpenSSH SSH client (remote login program)"
+            },
+            "mysql": {
+              "mpsum": "the MySQL command-line client"
+            }
+          },
+          "TLDR_inform": {
+            "mysqldump": {
+              "man1_mysqldump_21886": "backup mysql databas\nsee also mysql restor databas backup databas redirect output file user prompt password creat backup user prompt password"
+            },
+            "ssh": {
+              "man1_ssh_32381": "secur shell protocol use secur log onto remot system\nuse log execut command remot server agent forward : forward authent inform remot machin see man ssh_config avail option connect remot server connect remot server use specif port connect remot server specif ident privat key run command remot server ssh jump : connect jumphost remot server multipl jump hop may specifi separ comma charact ssh tunnel : dynam port forward sock proxi localhost:9999 ssh tunnel : forward specif port localhost:9999 exampl org:80 along disabl pseudo- ty alloc executio n remot command"
+            },
+            "mysql": {
+              "man1_mysql_21925": "mysql command-lin tool connect databas connect databas anoth host connect databas unix socket connect databas user prompt password execut sql statement script file batch file restor databas backup creat mysqldump user prompt password restor databas backup user prompt password"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_964417: Is it possible to restore a mysql database from the /var/lib/mysql/database folder?"
+      ],
+      "Top-3 Scripts": [
+        "au_964417: sudo rm -rf /var/lib/mysql\nsudo rm -rf /etc/mysql\nsudo rm -rf /var/log/mysql"
+      ],
+      "Explanations about Options": {
+        "-r": "remove directories and their contents recursively",
+        "-f": "ignore nonexistent files and arguments, never prompt"
+      }
+    },
+    {
+      "Command": "exit",
+      "MP Summary": "cause the shell to exit",
+      "Most Similar TLDR Task": "Exit the shell with the exit code of the last command executed",
+      "Most Similar TLDR Script": "exit",
+      "Most Similar NL2Bash Task": "Dump all MySQL databases over an ssh tunnel to \"user@yoursever.com\" and use it as input to mysql",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mysqldump --all-databases | ssh user@yourserver.com mysql\n",
+          "command-options": {
+            "mysqldump": {
+              "mpsum": "a database backup program"
+            },
+            "ssh": {
+              "mpsum": "OpenSSH SSH client (remote login program)"
+            },
+            "mysql": {
+              "mpsum": "the MySQL command-line client"
+            }
+          },
+          "TLDR_inform": {
+            "mysqldump": {
+              "man1_mysqldump_21886": "backup mysql databas\nsee also mysql restor databas backup databas redirect output file user prompt password creat backup user prompt password"
+            },
+            "ssh": {
+              "man1_ssh_32381": "secur shell protocol use secur log onto remot system\nuse log execut command remot server agent forward : forward authent inform remot machin see man ssh_config avail option connect remot server connect remot server use specif port connect remot server specif ident privat key run command remot server ssh jump : connect jumphost remot server multipl jump hop may specifi separ comma charact ssh tunnel : dynam port forward sock proxi localhost:9999 ssh tunnel : forward specif port localhost:9999 exampl org:80 along disabl pseudo- ty alloc executio n remot command"
+            },
+            "mysql": {
+              "man1_mysql_21925": "mysql command-lin tool connect databas connect databas anoth host connect databas unix socket connect databas user prompt password execut sql statement script file batch file restor databas backup creat mysqldump user prompt password restor databas backup user prompt password"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_37638357: Bash read line from variables"
+      ],
+      "Top-3 Scripts": [
+        "so_37638357: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "pwd",
+      "MP Summary": "print name of current/working directory",
+      "Most Similar TLDR Task": "Print the current directory, and resolve all symlinks (i.e. show the \"physical\" path)",
+      "Most Similar TLDR Script": "pwd -P",
+      "Most Similar NL2Bash Task": "Dump all MySQL databases over an ssh tunnel to \"user@yoursever.com\" and use it as input to mysql",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mysqldump --all-databases | ssh user@yourserver.com mysql\n",
+          "command-options": {
+            "mysqldump": {
+              "mpsum": "a database backup program"
+            },
+            "ssh": {
+              "mpsum": "OpenSSH SSH client (remote login program)"
+            },
+            "mysql": {
+              "mpsum": "the MySQL command-line client"
+            }
+          },
+          "TLDR_inform": {
+            "mysqldump": {
+              "man1_mysqldump_21886": "backup mysql databas\nsee also mysql restor databas backup databas redirect output file user prompt password creat backup user prompt password"
+            },
+            "ssh": {
+              "man1_ssh_32381": "secur shell protocol use secur log onto remot system\nuse log execut command remot server agent forward : forward authent inform remot machin see man ssh_config avail option connect remot server connect remot server use specif port connect remot server specif ident privat key run command remot server ssh jump : connect jumphost remot server multipl jump hop may specifi separ comma charact ssh tunnel : dynam port forward sock proxi localhost:9999 ssh tunnel : forward specif port localhost:9999 exampl org:80 along disabl pseudo- ty alloc executio n remot command"
+            },
+            "mysql": {
+              "man1_mysql_21925": "mysql command-lin tool connect databas connect databas anoth host connect databas unix socket connect databas user prompt password execut sql statement script file batch file restor databas backup creat mysqldump user prompt password restor databas backup user prompt password"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_68815139: Access XAMPP mysql from powershell"
+      ],
+      "Top-3 Scripts": [
+        "so_68815139: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "id",
+      "MP Summary": "print real and effective user and group IDs",
+      "Most Similar TLDR Task": "Display the current user identity as a number",
+      "Most Similar TLDR Script": "id -u",
+      "Most Similar NL2Bash Task": "Dump all MySQL databases over an ssh tunnel to \"user@yoursever.com\" and use it as input to mysql",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mysqldump --all-databases | ssh user@yourserver.com mysql\n",
+          "command-options": {
+            "mysqldump": {
+              "mpsum": "a database backup program"
+            },
+            "ssh": {
+              "mpsum": "OpenSSH SSH client (remote login program)"
+            },
+            "mysql": {
+              "mpsum": "the MySQL command-line client"
+            }
+          },
+          "TLDR_inform": {
+            "mysqldump": {
+              "man1_mysqldump_21886": "backup mysql databas\nsee also mysql restor databas backup databas redirect output file user prompt password creat backup user prompt password"
+            },
+            "ssh": {
+              "man1_ssh_32381": "secur shell protocol use secur log onto remot system\nuse log execut command remot server agent forward : forward authent inform remot machin see man ssh_config avail option connect remot server connect remot server use specif port connect remot server specif ident privat key run command remot server ssh jump : connect jumphost remot server multipl jump hop may specifi separ comma charact ssh tunnel : dynam port forward sock proxi localhost:9999 ssh tunnel : forward specif port localhost:9999 exampl org:80 along disabl pseudo- ty alloc executio n remot command"
+            },
+            "mysql": {
+              "man1_mysql_21925": "mysql command-lin tool connect databas connect databas anoth host connect databas unix socket connect databas user prompt password execut sql statement script file batch file restor databas backup creat mysqldump user prompt password restor databas backup user prompt password"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_68815139: Access XAMPP mysql from powershell"
+      ],
+      "Top-3 Scripts": [
+        "so_68815139: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "printf",
+      "MP Summary": "format and print data",
+      "Most Similar TLDR Task": "Print a text message composed with environment variables",
+      "Most Similar TLDR Script": "printf \"{{var1: %s\\tvar2: %s\\n}}\" \"{{$VAR1}}\" \"{{$VAR2}}\"",
+      "Most Similar NL2Bash Task": "Dump all MySQL databases over an ssh tunnel to \"user@yoursever.com\" and use it as input to mysql",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mysqldump --all-databases | ssh user@yourserver.com mysql\n",
+          "command-options": {
+            "mysqldump": {
+              "mpsum": "a database backup program"
+            },
+            "ssh": {
+              "mpsum": "OpenSSH SSH client (remote login program)"
+            },
+            "mysql": {
+              "mpsum": "the MySQL command-line client"
+            }
+          },
+          "TLDR_inform": {
+            "mysqldump": {
+              "man1_mysqldump_21886": "backup mysql databas\nsee also mysql restor databas backup databas redirect output file user prompt password creat backup user prompt password"
+            },
+            "ssh": {
+              "man1_ssh_32381": "secur shell protocol use secur log onto remot system\nuse log execut command remot server agent forward : forward authent inform remot machin see man ssh_config avail option connect remot server connect remot server use specif port connect remot server specif ident privat key run command remot server ssh jump : connect jumphost remot server multipl jump hop may specifi separ comma charact ssh tunnel : dynam port forward sock proxi localhost:9999 ssh tunnel : forward specif port localhost:9999 exampl org:80 along disabl pseudo- ty alloc executio n remot command"
+            },
+            "mysql": {
+              "man1_mysql_21925": "mysql command-lin tool connect databas connect databas anoth host connect databas unix socket connect databas user prompt password execut sql statement script file batch file restor databas backup creat mysqldump user prompt password restor databas backup user prompt password"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_23668261: Script to import databases from a remote server"
+      ],
+      "Top-3 Scripts": [
+        "so_23668261: ssh -p $Port $Username@$Hostname << SSH\nIgnore=$(mysql --user=root --password=$Password -BNe \"SELECT CONCAT( TABLE_SCHEMA , '.' ,  TABLE_NAME ) FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME LIKE 'rec%' ORDER BY CONCAT( TABLE_SCHEMA , '.' , TABLE_NAME );\" | awk '{ printf \" --ignore-table=%s\", \\$0 }')\nmysql --user=root --password=$Password -e \"SHOW DATABASES;\" | grep -Ev \"information_schema|mysql|performance_schema\" | xargs mysqldump --force --user=root --password=$Password \\$Ignore --databases | gzip > $Location/full.sql.gz"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "ln",
+      "MP Summary": "make links between files",
+      "Most Similar TLDR Task": "Create a symbolic link to a file or directory",
+      "Most Similar TLDR Script": "ln -s {{path/to/file_or_directory}} {{path/to/symlink}}",
+      "Most Similar NL2Bash Task": "Dump all MySQL databases over an ssh tunnel to \"user@yoursever.com\" and use it as input to mysql",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mysqldump --all-databases | ssh user@yourserver.com mysql\n",
+          "command-options": {
+            "mysqldump": {
+              "mpsum": "a database backup program"
+            },
+            "ssh": {
+              "mpsum": "OpenSSH SSH client (remote login program)"
+            },
+            "mysql": {
+              "mpsum": "the MySQL command-line client"
+            }
+          },
+          "TLDR_inform": {
+            "mysqldump": {
+              "man1_mysqldump_21886": "backup mysql databas\nsee also mysql restor databas backup databas redirect output file user prompt password creat backup user prompt password"
+            },
+            "ssh": {
+              "man1_ssh_32381": "secur shell protocol use secur log onto remot system\nuse log execut command remot server agent forward : forward authent inform remot machin see man ssh_config avail option connect remot server connect remot server use specif port connect remot server specif ident privat key run command remot server ssh jump : connect jumphost remot server multipl jump hop may specifi separ comma charact ssh tunnel : dynam port forward sock proxi localhost:9999 ssh tunnel : forward specif port localhost:9999 exampl org:80 along disabl pseudo- ty alloc executio n remot command"
+            },
+            "mysql": {
+              "man1_mysql_21925": "mysql command-lin tool connect databas connect databas anoth host connect databas unix socket connect databas user prompt password execut sql statement script file batch file restor databas backup creat mysqldump user prompt password restor databas backup user prompt password"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_964417: Is it possible to restore a mysql database from the /var/lib/mysql/database folder?"
+      ],
+      "Top-3 Scripts": [
+        "au_964417: ln -s /etc/mysql/mysql.conf.d /etc/mysql/conf.d"
+      ],
+      "Explanations about Options": {
+        "-s": "make symbolic links instead of hard links"
+      }
+    },
+    {
+      "Command": "iotop",
+      "MP Summary": "simple top-like I/O monitor",
+      "Most Similar TLDR Task": "Show I/O usage of a given user",
+      "Most Similar TLDR Script": "iotop -u {{user}}",
+      "Most Similar NL2Bash Task": "Dump all MySQL databases over an ssh tunnel to \"user@yoursever.com\" and use it as input to mysql",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mysqldump --all-databases | ssh user@yourserver.com mysql\n",
+          "command-options": {
+            "mysqldump": {
+              "mpsum": "a database backup program"
+            },
+            "ssh": {
+              "mpsum": "OpenSSH SSH client (remote login program)"
+            },
+            "mysql": {
+              "mpsum": "the MySQL command-line client"
+            }
+          },
+          "TLDR_inform": {
+            "mysqldump": {
+              "man1_mysqldump_21886": "backup mysql databas\nsee also mysql restor databas backup databas redirect output file user prompt password creat backup user prompt password"
+            },
+            "ssh": {
+              "man1_ssh_32381": "secur shell protocol use secur log onto remot system\nuse log execut command remot server agent forward : forward authent inform remot machin see man ssh_config avail option connect remot server connect remot server use specif port connect remot server specif ident privat key run command remot server ssh jump : connect jumphost remot server multipl jump hop may specifi separ comma charact ssh tunnel : dynam port forward sock proxi localhost:9999 ssh tunnel : forward specif port localhost:9999 exampl org:80 along disabl pseudo- ty alloc executio n remot command"
+            },
+            "mysql": {
+              "man1_mysql_21925": "mysql command-lin tool connect databas connect databas anoth host connect databas unix socket connect databas user prompt password execut sql statement script file batch file restor databas backup creat mysqldump user prompt password restor databas backup user prompt password"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_13415389: SQLITE3: Creating database from command line takes forever"
+      ],
+      "Top-3 Scripts": [
+        "so_13415389: iotop -oPa"
+      ],
+      "Explanations about Options": {
+        "-o": "Only show processes or threads actually doing I/O, instead of showing all processes\n or threads. This can be dynamically toggled by pressing o.",
+        "-a": "Show accumulated I/O instead of bandwidth. In this mode, iotop shows the amount of\n I/O processes have done since iotop started.",
+        "-P": "Only show processes. Normally iotop shows all threads."
+      }
+    },
+    {
+      "Command": "strace",
+      "MP Summary": "trace system calls and signals",
+      "Most Similar TLDR Task": "Start tracing a program by executing it",
+      "Most Similar TLDR Script": "strace {{program}}",
+      "Most Similar NL2Bash Task": "Dump all MySQL databases over an ssh tunnel to \"user@yoursever.com\" and use it as input to mysql",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mysqldump --all-databases | ssh user@yourserver.com mysql\n",
+          "command-options": {
+            "mysqldump": {
+              "mpsum": "a database backup program"
+            },
+            "ssh": {
+              "mpsum": "OpenSSH SSH client (remote login program)"
+            },
+            "mysql": {
+              "mpsum": "the MySQL command-line client"
+            }
+          },
+          "TLDR_inform": {
+            "mysqldump": {
+              "man1_mysqldump_21886": "backup mysql databas\nsee also mysql restor databas backup databas redirect output file user prompt password creat backup user prompt password"
+            },
+            "ssh": {
+              "man1_ssh_32381": "secur shell protocol use secur log onto remot system\nuse log execut command remot server agent forward : forward authent inform remot machin see man ssh_config avail option connect remot server connect remot server use specif port connect remot server specif ident privat key run command remot server ssh jump : connect jumphost remot server multipl jump hop may specifi separ comma charact ssh tunnel : dynam port forward sock proxi localhost:9999 ssh tunnel : forward specif port localhost:9999 exampl org:80 along disabl pseudo- ty alloc executio n remot command"
+            },
+            "mysql": {
+              "man1_mysql_21925": "mysql command-lin tool connect databas connect databas anoth host connect databas unix socket connect databas user prompt password execut sql statement script file batch file restor databas backup creat mysqldump user prompt password restor databas backup user prompt password"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_13415389: SQLITE3: Creating database from command line takes forever"
+      ],
+      "Top-3 Scripts": [
+        "so_13415389: strace -f -s 1000 -tt sqlite3 newDatabase.db < myschema.sql"
+      ],
+      "Explanations about Options": {
+        "-s": "Specify the maximum string size to print (the default is 32). Note that\n filenames are not considered strings and are always printed in full.",
+        "-tt": "If given twice, the time printed will include the microseconds.",
+        "-f": "Trace child processes as they are created by currently traced processes as a\n result of the fork(2), vfork(2) and clone(2) system calls. Note that -p PID\n -f will attach all threads of process PID if it is multi-threaded, not only\n thread with thread_id = PID."
+      }
+    },
+    {
+      "Command": "view",
+      "MP Summary": "text editors",
+      "Most Similar TLDR Task": "Open a file",
+      "Most Similar TLDR Script": "view {{file}}",
+      "Most Similar NL2Bash Task": "Dump all MySQL databases over an ssh tunnel to \"user@yoursever.com\" and use it as input to mysql",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mysqldump --all-databases | ssh user@yourserver.com mysql\n",
+          "command-options": {
+            "mysqldump": {
+              "mpsum": "a database backup program"
+            },
+            "ssh": {
+              "mpsum": "OpenSSH SSH client (remote login program)"
+            },
+            "mysql": {
+              "mpsum": "the MySQL command-line client"
+            }
+          },
+          "TLDR_inform": {
+            "mysqldump": {
+              "man1_mysqldump_21886": "backup mysql databas\nsee also mysql restor databas backup databas redirect output file user prompt password creat backup user prompt password"
+            },
+            "ssh": {
+              "man1_ssh_32381": "secur shell protocol use secur log onto remot system\nuse log execut command remot server agent forward : forward authent inform remot machin see man ssh_config avail option connect remot server connect remot server use specif port connect remot server specif ident privat key run command remot server ssh jump : connect jumphost remot server multipl jump hop may specifi separ comma charact ssh tunnel : dynam port forward sock proxi localhost:9999 ssh tunnel : forward specif port localhost:9999 exampl org:80 along disabl pseudo- ty alloc executio n remot command"
+            },
+            "mysql": {
+              "man1_mysql_21925": "mysql command-lin tool connect databas connect databas anoth host connect databas unix socket connect databas user prompt password execut sql statement script file batch file restor databas backup creat mysqldump user prompt password restor databas backup user prompt password"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_40693894: Automatically delete outdated rows from database every n seconds"
+      ],
+      "Top-3 Scripts": [
+        "so_40693894: create view v_t as\n    select t.*\n    from t\n    where timestamp > CURRENT_TIMESTAMP - ??;"
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

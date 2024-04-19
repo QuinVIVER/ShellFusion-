@@ -1,0 +1,100 @@
+{
+    "Answers": [
+        {
+            "Command": "fuser",
+            "Explanations about Options": {
+                "--kill(M)": "Kill processes accessing the file. Unless changed with -SIGNAL, SIGKILL is sent.\n An fuser process never kills itself, but may kill other fuser processes. The\n effective user ID of the process executing fuser is set to its real user ID before\n attempting to kill.",
+                "-k(C)": "Using \";\" in place of \"&&\" in either methods makes \"/opt/lampp/xampp start\" execute despite \"fuser -k 443/tcp\" not killing any process.",
+                "-k(M)": "Kill processes accessing the file. Unless changed with -SIGNAL, SIGKILL is sent.\n An fuser process never kills itself, but may kill other fuser processes. The\n effective user ID of the process executing fuser is set to its real user ID before\n attempting to kill.",
+                "-n(M)": "Select a different name space. The name spaces file (file names, the default), udp\n (local UDP ports), and tcp (local TCP ports) are supported. For ports, either the\n port number or the symbolic name can be specified. If there is no ambiguity, the\n shortcut notation name/space (e.g., 80/tcp) can be used.",
+                "-v(C)": "On the command line, you may also want to execute \"fuser -v <port>/<proto>\" first, to see what you are going to kill."
+            },
+            "MP Summary": "identify processes using files or sockets",
+            "Most Similar TLDR Script": "fuser --kill {{path/to/file_or_directory}}",
+            "Most Similar TLDR Task": "Kill all processes accessing a file or directory (sends the `SIGKILL` signal)",
+            "Top-3 Scripts": [
+                "so_41523255: fuser -k [-<SIGNAL>] <port>/<proto>\nfuser -n <proto> -k [-<SIGNAL>] <port>\n\nfuser -k 12345/tcp\nfuser -n udp -k -KILL 23456\n\nfuser -v <port>/<proto>",
+                "ul_116183: $ sudo kill $(fuser -n tcp <port_number> 2> /dev/null)\n\n$ mykill () { sudo kill $(fuser -n tcp \"$1\" 2> /dev/null); }\n\n$ mykill () { echo \"sudo kill \\$(fuser -n tcp \"$1\" 2> /dev/null)\"; }\n$ mykill 123\nsudo kill $(fuser -n tcp 123 2> /dev/null)",
+                "au_618674: fuser -k 443/tcp; /opt/lampp/xampp start"
+            ],
+            "Top-3 Similar Questions": [
+                "so_41523255: Kill process that is taking specific port",
+                "ul_116183: Why does kill not have a parameter for file and not for port number?",
+                "au_618674: Ubuntu Terminal: C program (or other solutions) to kill processes running on a specific port and start xampp"
+            ]
+        },
+        {
+            "Command": "nc",
+            "Explanations about Options": {
+                "-l(M)": "Listen for an incoming connection rather than initiating a connection to a remote\n host. The destination and port to listen on can be specified either as non-optional\n arguments, or with options -s and -p respectively. Cannot be used together with -x\n or -z. Additionally, any timeouts specified with the -w option are ignored.",
+                "-p(M)": "Specify the source port nc should use, subject to privilege restrictions and\n availability."
+            },
+            "MP Summary": "arbitrary TCP and UDP connections and listens",
+            "Most Similar TLDR Script": "nc {{ip_address}} {{port}}",
+            "Most Similar TLDR Task": "Connect to a certain port (you can then write to this port)",
+            "Top-3 Scripts": [
+                "ul_246903: # Start a process (nc) that listens on port 8080\n$ nc -l 8080 & bg\n[1] 17454\n[1] nc -l 8080\n\n# Get the process listening on port 8080:\n$ fstat | grep :8080\ncmihai   nc         17454    3* internet stream tcp 0x0 *:8080\n\n$ kill $(portpid 8080)\n[1] + Terminated           nc -l 8080",
+                "so_61296308: nc -l -p 7777 -e your-script.sh"
+            ],
+            "Top-3 Similar Questions": [
+                "ul_246903: Kill process on specific port",
+                "so_61296308: start a service when a port is requested"
+            ]
+        },
+        {
+            "Command": "ssh",
+            "Explanations about Options": {
+                "-p(M)": "Port to connect to on the remote host. This can be specified on a per-host basis in\n the configuration file.",
+                "-t(M)": "Force pseudo-terminal allocation. This can be used to execute arbitrary screen-\n based programs on a remote machine, which can be very useful, e.g. when implementing\n menu services. Multiple -t options force tty allocation, even if ssh has no local\n tty."
+            },
+            "MP Summary": "OpenSSH SSH client (remote login program)",
+            "Most Similar TLDR Script": "ssh {{username}}@{{remote_host}} -p {{2222}}",
+            "Most Similar TLDR Task": "Connect to a remote server using a specific port",
+            "Top-3 Scripts": [
+                "ul_600539: /etc/ssh/sshd_config\n\ncp /etc/ssh/sshd_config /etc/ssh/sshd_config_custom\n\nExecStart=/usr/sbin/sshd -D $SSHD_OPTS -f /etc/ssh/sshd_config_custom",
+                "ul_484184: ssh -t test@192.168.94.139  \"sudo netstat -plnt | grep 2020 | awk '{print \\$7}' | sed s+/.*++g | sort -u | xargs kill\"\n\nserver=test@192.168.94.139 ; port=2020 ; ssh -t $server \"sudo netstat -plnt | grep $port | awk '{print \\$7}' | sed s+/.*++g | sort -u | xargs kill\"",
+                "so_61443935: /etc/ssh/sshd_config\n\ncp /etc/ssh/sshd_config /etc/ssh/sshd_config_custom\n\n/etc/ssh/sshd_config_custom\n\nExecStart=/usr/sbin/sshd -D $SSHD_OPTS -f /etc/ssh/sshd_config_custom"
+            ],
+            "Top-3 Similar Questions": [
+                "ul_600539: SSH service running on multiple ports with custom rules in Linux",
+                "ul_484184: SSH to a remote server and find the specific pid and kill it",
+                "so_61443935: SSH service running on multiple ports with custom rules in Linux"
+            ]
+        },
+        {
+            "Command": "systemctl",
+            "Explanations about Options": {},
+            "MP Summary": "Control the systemd system and service manager",
+            "Most Similar TLDR Script": "systemctl start/stop/restart/reload {{unit}}",
+            "Most Similar TLDR Task": "Start/Stop/Restart/Reload a service",
+            "Top-3 Scripts": [
+                "ul_600539: systemctl enable sshd-custom.service\nsystemctl start sshd-custom.service",
+                "so_61443935: systemctl enable sshd-custom.service\nsystemctl start sshd-custom.service"
+            ],
+            "Top-3 Similar Questions": [
+                "ul_600539: SSH service running on multiple ports with custom rules in Linux",
+                "so_61443935: SSH service running on multiple ports with custom rules in Linux"
+            ]
+        },
+        {
+            "Command": "ss",
+            "Explanations about Options": {
+                "-l(M)": "Display only listening sockets (these are omitted by default).",
+                "-n(M)": "Do not try to resolve service names. Show exact bandwidth values, instead of human-\n readable.",
+                "-p(M)": "Show process using socket.",
+                "-t(M)": "Display TCP sockets.",
+                "-u(M)": "Display UDP sockets."
+            },
+            "MP Summary": "another utility to investigate sockets",
+            "Most Similar TLDR Script": "ss -u 'sport == :{{source_port}} and dport == :{{destination_port}}'",
+            "Most Similar TLDR Task": "Show all UDP sockets connected on specific source and destination ports",
+            "Top-3 Scripts": [
+                "ul_106561: $ sudo ss -lptn 'sport = :80'\nState   Local Address:Port  Peer Address:Port              \nLISTEN  127.0.0.1:80        *:*                users:((\"nginx\",pid=125004,fd=12))\nLISTEN  ::1:80              :::*               users:((\"nginx\",pid=125004,fd=11))"
+            ],
+            "Top-3 Similar Questions": [
+                "ul_106561: Finding the PID of the process using a specific port?"
+            ]
+        }
+    ],
+    "Query": "Kill any service running at a specific port"
+}

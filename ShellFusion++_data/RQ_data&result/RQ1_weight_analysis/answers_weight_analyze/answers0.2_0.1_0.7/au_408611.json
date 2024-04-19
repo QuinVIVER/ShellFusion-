@@ -1,0 +1,82 @@
+{
+  "Query": "How to remove or delete single cron job using linux command?",
+  "Answers": [
+    {
+      "Command": "atrm",
+      "MP Summary": "queue, examine, or delete jobs for later execution",
+      "Most Similar TLDR Task": "Remove many jobs, separated by spaces",
+      "Most Similar TLDR Script": "atrm {{15}} {{17}} {{22}}",
+      "Top-3 Similar Questions": [
+        "ul_53144: Remove all `at` jobs",
+        "ul_478605: Remove jobs from at queue on a specified date"
+      ],
+      "Top-3 Scripts": [
+        "ul_53144: for i in `atq | awk '{print $1}'`;do atrm $i;done",
+        "ul_478605: atrm $( atq | grep 'Oct 29' | cut -d' ' -f 1 | tr '\\n' ' ' )"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "crontab",
+      "MP Summary": "maintain crontab files for individual users (Vixie Cron)",
+      "Most Similar TLDR Task": "Remove all cron jobs for the current user",
+      "Most Similar TLDR Script": "crontab -r",
+      "Top-3 Similar Questions": [
+        "so_22462716: Remove log files using cron job",
+        "so_33255249: How to delete a cron job with Ansible?",
+        "au_146384: Deleting a file owned by root"
+      ],
+      "Top-3 Scripts": [
+        "so_22462716: crontab -e",
+        "so_33255249: /var/spool/cron/crontab/$USER\n\ncrontab -l\n\ncrontab -r\n\ncrontab -e\n\nhosts : all\ntasks :\n  - name : add crontab test entry\n    cron :\n      name  : crontab test\n      job   : echo 'Testing!' > /var/log/crontest.log\n      state : present\n\nhosts : all\ntasks :\n  - name  : remove user's crontab\n    shell : crontab -r",
+        "au_146384: sudo crontab -l\n\nsudo crontab -e"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "xargs",
+      "MP Summary": "build and execute command lines from standard input",
+      "Most Similar TLDR Task": "Execute the command once for each input line, replacing any occurrences of the placeholder (here marked as `_`) with the input line",
+      "Most Similar TLDR Script": "{{arguments_source}} | xargs -I _ {{command}} _ {{optional_extra_arguments}}",
+      "Top-3 Similar Questions": [
+        "so_22527048: remove duplicate files using fdupes command",
+        "au_990678: Delete old backup folders from directory using cron"
+      ],
+      "Top-3 Scripts": [
+        "so_22527048: ls | grep -v '-' | xargs rm",
+        "au_990678: find /BACKUPDIR/ -mindepth 1 -maxdepth 1 -type d -print0 | sort -z | head -zn-6 | xargs -0 echo rm -rf\n\n00 18 * * 0 find /BACKUPDIR/ -mindepth 1 -maxdepth 1 -type d -print0 | sort -z | head -zn-6 | xargs -0 rm -rf"
+      ],
+      "Explanations about Options": {
+        "-0": "Input items are terminated by a null character instead of by whitespace, and the\n quotes and backslash are not special (every character is taken literally).\n Disables the end of file string, which is treated like any other argument. Useful\n when input items might contain white space, quote marks, or backslashes. The GNU\n find -print0 option produces input suitable for this mode."
+      }
+    },
+    {
+      "Command": "atq",
+      "MP Summary": "queue, examine, or delete jobs for later execution",
+      "Most Similar TLDR Task": "Show the current user's scheduled jobs",
+      "Most Similar TLDR Script": "atq",
+      "Top-3 Similar Questions": [
+        "ul_478605: Remove jobs from at queue on a specified date"
+      ],
+      "Top-3 Scripts": [
+        "ul_478605: atrm $( atq | grep 'Oct 29' | cut -d' ' -f 1 | tr '\\n' ' ' )\n\natq | grep 'Oct 29' | cut -d' ' -f 1 | tr '\\n' ' '"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "env",
+      "MP Summary": "run a program in a modified environment",
+      "Most Similar TLDR Task": "Remove variable from the environment and run a program",
+      "Most Similar TLDR Script": "env -u {{variable}} {{program}}",
+      "Top-3 Similar Questions": [
+        "so_28609178: rsync does not exclude extension when executed as a cron job"
+      ],
+      "Top-3 Scripts": [
+        "so_28609178: /usr/bin/env -i /path/to/script.sh"
+      ],
+      "Explanations about Options": {
+        "-i": "start with an empty environment"
+      }
+    }
+  ]
+}

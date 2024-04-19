@@ -1,0 +1,80 @@
+{
+  "Query": "View pdf file in terminal",
+  "Answers": [
+    {
+      "Command": "echo",
+      "MP Summary": "display a line of text",
+      "Most Similar TLDR Task": "Append a message to the file",
+      "Most Similar TLDR Script": "echo \"{{Hello World}}\" >> {{file.txt}}",
+      "Top-3 Similar Questions": [
+        "au_1163711: Opening a PDF File by script, printing it, and closing it",
+        "ul_138933: Concatenate in a PDF the first page of several odt files alphabetically",
+        "so_51168569: Removing last page of PDF using Python or Bash"
+      ],
+      "Top-3 Scripts": [
+        "au_1163711: find . -maxdepth 1 -type f -exec echo {} \\;",
+        "ul_138933: ",
+        "so_51168569: #!/bin/bash\n\nfor file in *.pdf\ndo\n    page_nb=$(pdfinfo $file | awk '/^Pages/ { print $2 }')\n\n    file_name=$(echo $file | cut -d'.' -f 1)\n\n    gs -sDEVICE=pdfwrite -dNOPAUSE -dQUIET -dBATCH -dFirstPage=1 -dLastPage=$(expr $page_nb - 1) -sOutputFile=$file_name\"_without_last_page.pdf\" $file\ndone"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "pdfgrep",
+      "MP Summary": "search PDF files for a regular expression",
+      "Most Similar TLDR Task": "Find pattern in files with a .pdf extension in the current directory recursively",
+      "Most Similar TLDR Script": "pdfgrep --recursive {{pattern}}",
+      "Top-3 Similar Questions": [
+        "au_577881: Convert PDF or FDF to CSV?"
+      ],
+      "Top-3 Scripts": [
+        "au_577881: pdfgrep 'CompanyName|CountryOrRegion|EmailAddress' filled_form-submit_format_fdf.pdf"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "gs",
+      "MP Summary": "Ghostscript (PostScript and PDF language interpreter and previewer)",
+      "Most Similar TLDR Task": "Merge PDF files",
+      "Most Similar TLDR Script": "gs -dQUIET -dBATCH -dNOPAUSE -sDEVICE=pdfwrite -sOutputFile={{output.pdf}} {{input1.pdf}} {{input2.pdf}}",
+      "Top-3 Similar Questions": [
+        "so_51168569: Removing last page of PDF using Python or Bash"
+      ],
+      "Top-3 Scripts": [
+        "so_51168569: #!/bin/bash\n\nfor file in *.pdf\ndo\n    page_nb=$(pdfinfo $file | awk '/^Pages/ { print $2 }')\n\n    file_name=$(echo $file | cut -d'.' -f 1)\n\n    gs -sDEVICE=pdfwrite -dNOPAUSE -dQUIET -dBATCH -dFirstPage=1 -dLastPage=$(expr $page_nb - 1) -sOutputFile=$file_name\"_without_last_page.pdf\" $file\ndone"
+      ],
+      "Explanations about Options": {
+        "-sDEVICE": "Selects an alternate initial output device, as described above.",
+        "-dNOPAUSE": "Disables the prompt and pause at the end of each page. This may be desirable for\n applications where another program is driving Ghostscript.",
+        "-P": "Makes Ghostscript to look first in the current directory for library files. By\n default, Ghostscript no longer looks in the current directory, unless, of course,\n the first explicitly supplied directory is \".\" in -I. See also the INITIALIZATION\n FILES section below, and bundled Use.htm for detailed discussion on search paths\n and how Ghostcript finds files."
+      }
+    },
+    {
+      "Command": "cp",
+      "MP Summary": "copy files and directories",
+      "Most Similar TLDR Task": "Copy a file into another directory, keeping the filename",
+      "Most Similar TLDR Script": "cp {{path/to/source_file.ext}} {{path/to/target_parent_directory}}",
+      "Top-3 Similar Questions": [
+        "ul_383552: Adding tags to files (PDFs) and process from the command-line or script"
+      ],
+      "Top-3 Scripts": [
+        "ul_383552: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "unzip",
+      "MP Summary": "list, test and extract compressed files in a ZIP archive",
+      "Most Similar TLDR Task": "Extract zip file(s) (for multiple files, separate file paths by spaces)",
+      "Most Similar TLDR Script": "unzip {{file(s)}}",
+      "Top-3 Similar Questions": [
+        "so_48346354: Unzip to pipe and then run PDF info on the files in the stream"
+      ],
+      "Top-3 Scripts": [
+        "so_48346354: $ unzip -l aaa.zip \nArchive:  aaa.zip\n  Length      Date    Time    Name\n---------  ---------- -----   ----\n    19318  2018-02-19 22:49   zlib 3.pdf\n   442780  2018-02-28 15:32   file2.pdf\n      757  2018-02-28 15:22   try.sh\n---------                     -------\n   462855                     3 files\n\n$ unzip -p aaa.zip file2.pdf | pdfinfo - | grep Pages\nPages:          94\n\n$ unzip -p aaa.zip \"zlib 3.pdf\" | pdfinfo - | grep Pages\nPages:          2\n\nfor zip in *.zip ; do \n    zipinfo -1 \"$zip\" | grep 'pdf$'| while read pdf\n    do\n        unzip  -p \"$zip\" \"$pdf\" | pdfinfo - | grep Pages | sed -e \"s/Pages:\\s*//g\"\n    done  \ndone | awk '{ sum += $1;} END { print sum; }'"
+      ],
+      "Explanations about Options": {
+        "-p": "extract files to pipe (stdout). Nothing but the file data is sent to stdout , and\n the files are always extracted in binary format, just as they are stored (no\n conversions)."
+      }
+    }
+  ]
+}

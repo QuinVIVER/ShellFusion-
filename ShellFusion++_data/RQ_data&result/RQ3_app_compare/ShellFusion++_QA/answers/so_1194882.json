@@ -1,0 +1,70 @@
+{
+  "Query": "How to generate random number in Bash?",
+  "Answers": [
+    {
+      "Command": "echo",
+      "Top-3 Similar Questions": [
+        "so_54554364: Generate random number except values in bash",
+        "so_66460929: How to generate a random string in bash?",
+        "so_58894982: How to generate a random string in a specific range (bash)"
+      ],
+      "Top-3 Scripts": [
+        "so_54554364: shuf -n 1 <(seq 2; seq 4 7; echo 9)\n\necho $(( ($RANDOM % 7 * 5 + 6) / 4 ))",
+        "so_58894982: #! /bin/bash\n\nsymbols='0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIGKLMNOPQRSTUVYXWZ~#$&_+-=/\\'  # Stupid SO: '\ncount_symbols=${#symbols}\n(( length = RANDOM % 6 + 10 ))\npassword=\"\"\nfor i in $(seq 1 $length) ; do\n    password+=${symbols:RANDOM % count_symbols:1}\ndone\necho \"$password\"",
+        "ul_157250: log2() {\n  local x=$1 n=1 l=0\n  while (( x>n && n>0 ))\n  do\n    let n*=2 l++\n  done\n  echo $l\n}\n\nget_n_rand_bits() {\n  local n=$1 rnd=$RANDOM rnd_bitlen=15\n  while (( rnd_bitlen < n ))\n  do\n    rnd=$(( rnd<<15|$RANDOM ))\n    let rnd_bitlen+=15\n  done\n  echo $(( rnd>>(rnd_bitlen-n) ))\n}\n\nget_n_rand_bits_alt() {\n  local n=$1\n  local nb_bytes=$(( (n+7)/8 ))\n  local rnd=$(od --read-bytes=$nb_bytes --address-radix=n --format=uL /dev/urandom | tr --delete \" \")\n  echo $(( rnd>>(nb_bytes*8-n) ))\n}\n\ndiff=$((max-min)) && diff=${diff#-}\n\necho $(( $(rand $diff) + min ))\n\n$ echo $((2**63-1))\n9223372036854775807\n$ echo $((2**63))\n-9223372036854775808"
+      ]
+    },
+    {
+      "Command": "dev",
+      "Top-3 Similar Questions": [
+        "so_13541724: Generate random text file in terminal",
+        "so_47501917: How to generate 10 million random strings in bash",
+        "so_2793812: Generate a random filename in unix shell"
+      ],
+      "Top-3 Scripts": [
+        "so_13541724: tr -dc A-Za-z0-9 < /dev/urandom | head -c100\nKk4kfjR3O0UraMpfTGicGvYCziFClJQUTO3zCXdo05RTxEUigqPXTkjtiGOsTsaNyqNR3rX2dsmPlHkSdqO5qWBTmIFIYezsekWT[~]:;",
+        "so_47501917: cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 10 | head -n 10000000 > file",
+        "so_2793812: cat /dev/urandom | tr -cd 'a-f0-9' | head -c 32\n\n/dev/urandom\n\n/dev/random\n\ncat /dev/urandom | env LC_CTYPE=C tr -cd 'a-f0-9' | head -c 32"
+      ]
+    },
+    {
+      "Command": "head",
+      "Top-3 Similar Questions": [
+        "so_13541724: Generate random text file in terminal",
+        "so_47501917: How to generate 10 million random strings in bash",
+        "so_2793812: Generate a random filename in unix shell"
+      ],
+      "Top-3 Scripts": [
+        "so_13541724: tr -dc A-Za-z0-9 < /dev/urandom | head -c100\nKk4kfjR3O0UraMpfTGicGvYCziFClJQUTO3zCXdo05RTxEUigqPXTkjtiGOsTsaNyqNR3rX2dsmPlHkSdqO5qWBTmIFIYezsekWT[~]:;",
+        "so_47501917: cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 10 | head -n 10000000 > file",
+        "so_2793812: cat /dev/urandom | tr -cd 'a-f0-9' | head -c 32\n\ncat /dev/urandom | env LC_CTYPE=C tr -cd 'a-f0-9' | head -c 32"
+      ]
+    },
+    {
+      "Command": "tr",
+      "Top-3 Similar Questions": [
+        "so_13541724: Generate random text file in terminal",
+        "so_47501917: How to generate 10 million random strings in bash",
+        "so_2793812: Generate a random filename in unix shell"
+      ],
+      "Top-3 Scripts": [
+        "so_13541724: tr -dc A-Za-z0-9 < /dev/urandom | head -c100\nKk4kfjR3O0UraMpfTGicGvYCziFClJQUTO3zCXdo05RTxEUigqPXTkjtiGOsTsaNyqNR3rX2dsmPlHkSdqO5qWBTmIFIYezsekWT[~]:;",
+        "so_47501917: cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 10 | head -n 10000000 > file",
+        "so_2793812: cat /dev/urandom | tr -cd 'a-f0-9' | head -c 32\n\ncat /dev/urandom | env LC_CTYPE=C tr -cd 'a-f0-9' | head -c 32"
+      ]
+    },
+    {
+      "Command": "printf",
+      "Top-3 Similar Questions": [
+        "so_54554364: Generate random number except values in bash",
+        "so_43462892: How do I generate random numbers in 3 lines - Linux Shell Script",
+        "so_10497236: Generate random char in bash"
+      ],
+      "Top-3 Scripts": [
+        "so_54554364: shuf -n 1 <(printf %s\\\\n 1 2 4 5 6 7 9)\n\nshuf -n 1 <(printf %s\\\\n 1 2 {4..7} 9)",
+        "so_10497236: printf \\\\$(printf '%03o' $((65)))",
+        "so_39619439: # Read the elements into bash array, with IFS being the de-limiter for input\nIFS=\",\" read -ra randomNos <<< \"1,22,33,400,400,23,12,53\"\n\n# Print the random numbers using the '$RANDOM' variable built-in modulo with \n# array length.\nprintf \"%s\\n\" \"${randomNos[ $RANDOM % ${#randomNos[@]}]}\"\n\n#!/bin/bash\n\n# Initilzing the ignore list with the numbers you have mentioned\ndeclare -A ignoreList='([21]=\"1\" [25]=\"1\" [53]=\"1\" [80]=\"1\" [143]=\"1\" [587]=\"1\" [990]=\"1\" [993]=\"1\")'\n\n# Generating the random number\nrandomNumber=\"$(($RANDOM % 1023))\"\n\n# Printing the number if it is not in the ignore list\n[[ ! -n \"${ignoreList[\"$randomNumber\"]}\" ]] && printf \"%s\\n\" \"$randomNumber\"\n\nrandomPortNumber=$([[ ! -n \"${ignoreList[\"$randomNumber\"]}\" ]] && printf \"%s\\n\" \"$randomNumber\")"
+      ]
+    }
+  ]
+}

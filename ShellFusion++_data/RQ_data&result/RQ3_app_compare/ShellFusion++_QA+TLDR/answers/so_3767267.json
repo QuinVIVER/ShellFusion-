@@ -1,0 +1,86 @@
+{
+  "Query": "Check if file exists and whether it contains a specific string",
+  "Answers": [
+    {
+      "Command": "test",
+      "MP Summary": "check file types and compare values",
+      "Most Similar TLDR Task": "Test if directory not exists",
+      "Most Similar TLDR Script": "test ! -d {{path/to/directory}}",
+      "Top-3 Similar Questions": [
+        "so_16367592: Powershell: how to check if string contains any significant characters?"
+      ],
+      "Top-3 Scripts": [
+        "so_16367592: if ($test -match 'regex_here') { 'It matched' }"
+      ],
+      "Explanations about Options": {
+        "-h": "FILE\n FILE exists and is a symbolic link (same as -L)",
+        "-t": "FD file descriptor FD is opened on a terminal",
+        "-c": "FILE\n FILE exists and is character special"
+      }
+    },
+    {
+      "Command": "sed",
+      "MP Summary": "stream editor for filtering and transforming text",
+      "Most Similar TLDR Task": "Delete lines matching the line pattern",
+      "Most Similar TLDR Script": "sed '/{{line_pattern}}/d' {{filename}}",
+      "Top-3 Similar Questions": [
+        "ul_480732: how to check if the first line of file contain a specific string?",
+        "so_26645841: Check if a string in one file exists in another in unix",
+        "ul_528009: Check if multiple files from a list (different paths) exist"
+      ],
+      "Top-3 Scripts": [
+        "ul_480732: sed -n '1{/^#include/p};q'   file\n\nsed -n '/^#include/p;q'   file\n\nfor file in *\ndo\n    [ \"$(sed -n '/^#include/p;q' \"$file\")\" ] && printf '%s\\n' \"$file\"\ndone\n\nsed -n '1{/^#include/!q};p'  file\n\nsed -ne '1{/^#include/!q;}' -e p  file\n\nsed -n '1{\n           /^#include/!q\n         }\n         p\n       '  file",
+        "so_26645841: for a in $(sed -n '/>=/p' File1.txt | grep -o '^[^ ]*'); do for b in $(sed -n \"/^$a /{s/.*>=\\(.*\\)$/\\1/p}\" File1.txt); do ((! $(grep -c \"$a.*$b\" File2.txt))) && (echo \"$a $b\" >> missing_pkgs.txt); done; done;",
+        "ul_528009: grep -Po '^\\s*\\K/.*' file | \n    sed 's/\\s*\\\\//'  | \n        while IFS= read -r path; do \n            [[ -e \"$path\" ]] && \n                printf 'FOUND: \"%s\"\\n' \"$path\" || \n                printf \"ERROR: '%s' doesn't exist\\n\" \"$path\"; \n        done\n\nsed 's/\\s*\\\\//'"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "find",
+      "MP Summary": "search for files in a directory hierarchy",
+      "Most Similar TLDR Task": "Find files by matching multiple patterns",
+      "Most Similar TLDR Script": "find {{root_path}} -name '{{*pattern_1*}}' -or -name '{{*pattern_2*}}'",
+      "Top-3 Similar Questions": [
+        "so_37967164: Check if file exists in a directory specified by regex Linux"
+      ],
+      "Top-3 Scripts": [
+        "so_37967164: if find . -regex '/agent/[0-9 \\.]*/bin/run.sh'"
+      ],
+      "Explanations about Options": {
+        "-regex": "File name matches regular expression pattern. This is a match on the whole path,\n not a search. For example, to match a file named `./fubar3', you can use the\n regular expression `.*bar.' or `.*b.*3', but not `f.*r3'. The regular expressions\n understood by find are by default Emacs Regular Expressions (except that `.'\n matches newline), but this can be changed with the -regextype option."
+      }
+    },
+    {
+      "Command": "awk",
+      "MP Summary": "pattern scanning and processing language",
+      "Most Similar TLDR Task": "Print the second column of the lines containing \"something\" in a space-separated file",
+      "Most Similar TLDR Script": "awk '/{{something}}/ {print $2}' {{filename}}",
+      "Top-3 Similar Questions": [
+        "so_39104293: How do I test if a file contains a specific, multiline, literal string?",
+        "so_18320290: bash: check if multiple files in a directory contain strings from a list",
+        "so_26645841: Check if a string in one file exists in another in unix"
+      ],
+      "Top-3 Scripts": [
+        "so_39104293: awk -v str=\"$string\" 'BEGIN { n = split(str, lines, /\\n/); i = 1 } \n    lines[i] == $0 { if (i++ == n) print \"matched\"; next } { i = 1 }' file",
+        "so_18320290: awk 'NR==FNR{a[$0];next} { for (word in a) if ($0 ~ word) print FILENAME, $0 }' fileOfWords /wherever/dir/*",
+        "so_26645841: while read each; do read a b < <(echo $each) && ((! $(grep -c \"$a.*$b\" File2.txt))) && (echo \"$a $b\" >> missing_pkgs.txt); done < <(awk '/>=/{ print $1\" \"$3 }' File1.txt)\n\nwhile read a b; do ((! $(grep -c \"$a.*$b\" File2.txt))) && (echo \"$a $b\" >> missing_pkgs.txt); done < <(awk '/>=/{ print $1\" \"$3 }' File1.txt)"
+      ],
+      "Explanations about Options": {
+        "-v": "FS=sepstring"
+      }
+    },
+    {
+      "Command": "type",
+      "MP Summary": "write a description of command type",
+      "Most Similar TLDR Task": "Display all locations containing the specified executable",
+      "Most Similar TLDR Script": "type -a {{command}}",
+      "Top-3 Similar Questions": [
+        "so_14598338: how to check if a specific file extension exists in a folder using powershell?"
+      ],
+      "Top-3 Scripts": [
+        "so_14598338: "
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

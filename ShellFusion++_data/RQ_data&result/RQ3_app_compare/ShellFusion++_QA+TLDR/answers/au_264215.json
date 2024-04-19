@@ -1,0 +1,85 @@
+{
+  "Query": "What are some audio/video converters for Linux?",
+  "Answers": [
+    {
+      "Command": "ffmpeg",
+      "MP Summary": "ffmpeg video converter",
+      "Most Similar TLDR Task": "Extract the sound from a video and save it as MP3",
+      "Most Similar TLDR Script": "ffmpeg -i {{video.mp4}} -vn {{sound}}.mp3",
+      "Top-3 Similar Questions": [
+        "au_937244: How To Command Linux Ubuntu Convert Video To 4k?",
+        "so_4365058: Python video converter packages",
+        "au_841059: Batch video convert with FFmpeg in Ubuntu: combine image and audio"
+      ],
+      "Top-3 Scripts": [
+        "au_937244: ffmpeg -i YourFile -vf scale=3840:2160 OutputFile4k.mp4",
+        "so_4365058: ",
+        "au_841059: ffmpeg -framerate 60 -i input.png -i input.mp3 -vcodec libx264 -crf 20 -preset medium -acodec aac -vf scale=1280:-2,format=yuv420p output.mp4\n\n#! /bin/bash\n###################################################################\npicture=\"input.jpg\"  # Change this to the file name of your picture\n###################################################################\nfor i in *.mp3; do\n  ffmpeg -framerate 60 -f image2 -i $picture -i input.mp3 -vcodec libx264 -crf 20 -preset medium -acodec aac -vf scale=1280:-2,format=yuv420p \"${i%.*}.\".mp4\ndone"
+      ],
+      "Explanations about Options": {
+        "-acodec": "Set the audio codec. This is an alias for \"-codec:a\".",
+        "-framerate": "Set the grabbing frame rate. Default is \"ntsc\", corresponding to a frame rate of\n \"30000/1001\".",
+        "-vcodec": "Set the video codec. This is an alias for \"-codec:v\".",
+        "-vf": "Create the filtergraph specified by filtergraph and use it to filter the stream.",
+        "-preset": "Configuration preset. This does some automatic settings based on the general type of\n the image.",
+        "-i": "input file url"
+      }
+    },
+    {
+      "Command": "vlc",
+      "MP Summary": "the VLC media player",
+      "Most Similar TLDR Task": "Play video from a URL",
+      "Most Similar TLDR Script": "vlc {{https://www.youtube.com/watch?v=oHg5SJYRHA0}}",
+      "Top-3 Similar Questions": [
+        "au_80954: How can I convert audio from MP4 or FLV video files to mp3?",
+        "au_92164: Why is VLC minimized while playing video or audio?"
+      ],
+      "Top-3 Scripts": [
+        "au_80954: sudo apt-get install vlc libavcodec-extra",
+        "au_92164: vlc --reset-config\n\nmv ~/.config/vlc ~/.config/vlc_backup"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "ffprobe",
+      "MP Summary": "ffprobe media prober",
+      "Most Similar TLDR Task": "Display the frame rate of a video",
+      "Most Similar TLDR Script": "ffprobe -v error -select_streams v:0 -show_entries stream=avg_frame_rate -of default=noprint_wrappers=1:nokey=1 {{input.mp4}}",
+      "Top-3 Similar Questions": [
+        "su_1180108: Conditionally encode or copy audio stream using FFMpeg"
+      ],
+      "Top-3 Scripts": [
+        "su_1180108: #!/bin/bash\n\naudioformat=$(ffprobe -loglevel error -select_streams a:0 -show_entries stream=codec_name -of default=nw=1:nk=1 \"$1\")\n\nif [ \"$audioformat\" = \"aac\" ]; then\n  ffmpeg -i \"$1\" -c:v libx264 -c:a copy \"${1%.*}_new.mkv\"\nelse\n  ffmpeg -i \"$1\" -c:v libx264 -c:a aac \"${1%.*}_new.mkv\"\nfi"
+      ],
+      "Explanations about Options": {
+        "-loglevel": "Set logging level and flags used by the library."
+      }
+    },
+    {
+      "Command": "import",
+      "MP Summary": "saves any visible window on an X server and outputs it as an image file. You can capture a single window, the entire screen, or any rectangular portion of the screen.",
+      "Most Similar TLDR Task": "Capture contents of a remote X server screen in the PNG image format",
+      "Most Similar TLDR Script": "import -window root -display {{remote_host}}:{screen}.{display} {{output.png}}",
+      "Top-3 Similar Questions": [
+        "so_4365058: Python video converter packages"
+      ],
+      "Top-3 Scripts": [
+        "so_4365058: >>> import subprocess\n>>> command = ['ffmpeg']\n>>> subprocess.call(command)"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "sync",
+      "MP Summary": "Synchronize cached writes to persistent storage",
+      "Most Similar TLDR Task": "Flush all pending write operations on a single file to disk",
+      "Most Similar TLDR Script": "sync {{path/to/file}}",
+      "Top-3 Similar Questions": [
+        "so_8720996: gstreamer and mp4 or avi output with audio"
+      ],
+      "Top-3 Scripts": [
+        "so_8720996: gst-launch v4l2src ! your caps ! other elements ! tee name=t_vid ! \\\n  xvimagesink sync=false t_vid. ! queue ! caps adjustment if you need it ! \\\n  x264enc ! queue ! avi_mux.  \\\n  alsasrc ! caps ! faac (or whatever will go with avi) ! avimux name=avi_mux ! \\\n  filesink location=testavi.avi"
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

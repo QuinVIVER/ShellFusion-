@@ -1,0 +1,95 @@
+{
+  "Query": "How to download portion of video with youtube-dl command?",
+  "Answers": [
+    {
+      "Command": "youtube-dl",
+      "MP Summary": "download videos from youtube.com or other video platforms",
+      "Most Similar TLDR Task": "Download a video or playlist",
+      "Most Similar TLDR Script": "youtube-dl '{{https://www.youtube.com/watch?v=oHg5SJYRHA0}}'",
+      "Top-3 Similar Questions": [
+        "su_1661048: How to download a portion of a YouTube video",
+        "au_1074697: How can I download part of a playlist from YouTube with 'youtube-dl'?",
+        "au_948516: How do I download with youtube-dl to get video title as filename?"
+      ],
+      "Top-3 Scripts": [
+        "su_1661048: # As scary as it looks, perfectly safe to run in a terminal \n{   \n   read -r video_url  \n   read -r audio_url\n} < <(\n   youtube-dl --get-url --youtube-skip-dash-manifest https://www.youtube.com/watch?v=MfnzBYV5fxs\n)\n\nyoutube-dl --get-url --youtube-skip-dash-manifest \"https://www.youtube.com/watch?v=MfnzBYV5fxs\"",
+        "au_1074697: youtube-dl -c -f '...' --playlist-start 2 --playlist-end 8 https://youtube.com/watch/foo\n\nyoutube-dl -c -f '...' --playlist-end 5 https://youtube.com/watch/foo\n\nyoutube-dl -c -f '...' --playlist-start 7 https://youtube.com/watch/foo\n\nyoutube-dl -c -f '...' --playlist-items 2,4,6 https://youtube.com/watch/bar\n\nyoutube-dl -c --playlist-items 2-3,5,8-10,18 https://youtube.com/watch/bar\n\nyoutube-dl -c -f '...' --playlist-end 6 --playlist-reverse",
+        "au_948516: man youtube-dl\n\nyoutube-dl -o '%(title)s.%(ext)s' <URL-of-video>"
+      ],
+      "Explanations about Options": {
+        "--playlist-reverse": "Download playlist videos in reverse order",
+        "--get-url": "Simulate, quiet but print URL",
+        "-o": "Output filename template, see the \"OUTPUT TEMPLATE\" for all the info",
+        "--youtube-skip-dash-manifest": "Do not download the DASH manifests and related data on YouTube videos",
+        "-c": "Force resume of partially downloaded files. By default, youtube-dl will resume\n downloads if possible.",
+        "--playlist-end": "Playlist video to end at (default is last)"
+      }
+    },
+    {
+      "Command": "ffmpeg",
+      "MP Summary": "ffmpeg video converter",
+      "Most Similar TLDR Task": "Extract the sound from a video and save it as MP3",
+      "Most Similar TLDR Script": "ffmpeg -i {{video.mp4}} -vn {{sound}}.mp3",
+      "Top-3 Similar Questions": [
+        "su_1661048: How to download a portion of a YouTube video",
+        "au_59383: Extract part of a video with a one-line command",
+        "au_634584: How to download youtube videos as a best quality audio mp3 using youtube-dl"
+      ],
+      "Top-3 Scripts": [
+        "su_1661048: # Download 2 minutes of the video between 5 mins in to 7 mins, using timestamps:\nffmpeg -ss 00:05:00.00 -to 00:07:00.00 -i \"$video_url\" -ss 00:05:00.00 -to 00:07:00.00 -i \"$audio_url\" output.mkv\n\n# Download 2 minutes of the video between 5 mins in to 7 mins, using duration:  \nffmpeg -ss 00:05:00.00 -i \"$video_url\" -ss 00:05:00.00 -i \"$audio_url\" -t 2:00 output.mkv\n\n# Download 2 minutes of the video between 5 mins in to 7 mins, using timestamps:\nffmpeg -ss 00:05:00.00 -to 00:07:00.00 -i <video_url> -ss 00:05:00.00 -to 00:07:00.00 -i <audio_url> output.mkv\n\n# Download 2 minutes of the video between 5 mins in to 7 mins, using duration:  \nffmpeg -ss 00:05:00.00 -i <video_url> -ss 00:05:00.00 -i <audio_url> -t 2:00 output.mkv",
+        "au_59383: ffmpeg -formats -E\n\nffmpeg -ss 00:00:30 -i orginalfile -t 00:00:05 -vcodec copy -acodec copy newfile",
+        "au_634584: -x, --extract-audio                  Convert video files to audio-only files (requires ffmpeg or avconv and ffprobe or avprobe)\n    --audio-format FORMAT            Specify audio format: \"best\", \"aac\", \"vorbis\", \"mp3\", \"m4a\", \"opus\", or \"wav\"; \"best\" by default\n    --audio-quality QUALITY          Specify ffmpeg/avconv audio quality, insert a value between 0 (better) and 9 (worse) for VBR or a specific bitrate like 128K (default"
+      ],
+      "Explanations about Options": {
+        "-t": "When used as an input option (before \"-i\"), limit the duration of data read from the\n input file.",
+        "-acodec": "Set the audio codec. This is an alias for \"-codec:a\".",
+        "-vcodec": "Set the video codec. This is an alias for \"-codec:v\".",
+        "-ss": "When used as an input option (before \"-i\"), seeks in this input file to position. Note\n that in most formats it is not possible to seek exactly, so ffmpeg will seek to the\n closest seek point before position. When transcoding and -accurate_seek is enabled\n (the default), this extra segment between the seek point and position will be decoded\n and discarded. When doing stream copy or when -noaccurate_seek is used, it will be\n preserved.",
+        "-i": "input file url"
+      }
+    },
+    {
+      "Command": "curl",
+      "MP Summary": "transfer a URL",
+      "Most Similar TLDR Task": "Download the contents of an URL to a file",
+      "Most Similar TLDR Script": "curl {{http://example.com}} -o {{filename}}",
+      "Top-3 Similar Questions": [
+        "ul_121314: Download only a part of a file",
+        "ul_462646: A file on AkamaiGlobalHost downloads with a browser but not with curl"
+      ],
+      "Top-3 Scripts": [
+        "ul_121314: $ curl --header \"Range: bytes=2-3\" https://localhost/testfile.txt -k\n34\n$ curl --header \"Range: bytes=0-1\" https://localhost/testfile.txt -k\n12 \n$ curl --header \"Range: bytes=4-\" https://localhost/testfile.txt -k\n5",
+        "ul_462646: "
+      ],
+      "Explanations about Options": {
+        "-k": "(TLS) By default, every SSL connection curl makes is verified to be secure. This\n option allows curl to proceed and operate even for server connections otherwise\n considered insecure."
+      }
+    },
+    {
+      "Command": "ftp",
+      "MP Summary": "Internet file transfer program",
+      "Most Similar TLDR Task": "Download multiple files (glob expression)",
+      "Most Similar TLDR Script": "mget {{*.png}}",
+      "Top-3 Similar Questions": [
+        "ul_121314: Download only a part of a file"
+      ],
+      "Top-3 Scripts": [
+        "ul_121314: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "ffprobe",
+      "MP Summary": "ffprobe media prober",
+      "Most Similar TLDR Task": "Display the frame rate of a video",
+      "Most Similar TLDR Script": "ffprobe -v error -select_streams v:0 -show_entries stream=avg_frame_rate -of default=noprint_wrappers=1:nokey=1 {{input.mp4}}",
+      "Top-3 Similar Questions": [
+        "au_634584: How to download youtube videos as a best quality audio mp3 using youtube-dl"
+      ],
+      "Top-3 Scripts": [
+        "au_634584: -x, --extract-audio                  Convert video files to audio-only files (requires ffmpeg or avconv and ffprobe or avprobe)\n    --audio-format FORMAT            Specify audio format: \"best\", \"aac\", \"vorbis\", \"mp3\", \"m4a\", \"opus\", or \"wav\"; \"best\" by default\n    --audio-quality QUALITY          Specify ffmpeg/avconv audio quality, insert a value between 0 (better) and 9 (worse) for VBR or a specific bitrate like 128K (default"
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

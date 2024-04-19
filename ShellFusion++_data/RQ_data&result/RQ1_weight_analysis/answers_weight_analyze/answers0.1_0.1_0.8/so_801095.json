@@ -1,0 +1,91 @@
+{
+  "Query": "How do I find all the files that were created today in Unix/Linux?",
+  "Answers": [
+    {
+      "Command": "find",
+      "MP Summary": "search for files in a directory hierarchy",
+      "Most Similar TLDR Task": "Find files modified in the last 7 days, and delete them",
+      "Most Similar TLDR Script": "find {{root_path}} -mtime {{-7}} -delete",
+      "Top-3 Similar Questions": [
+        "so_66579490: how to find the file which is created today?",
+        "nl2bash_6893: find all files in the current directory with default depth size and compress them to lpicpio.1 file",
+        "nl2bash_6912: find all files in the current folder which have been modified after a specific time stamp and do not search in the subfolders;"
+      ],
+      "Top-3 Scripts": [
+        "so_66579490: minutes_since_midnight=$(( ($(date +%s) - $(date -d '00:00' +%s))/60 ))\nfind /var/options -type f -mmin -\"$minutes_since_midnight\"",
+        "nl2bash_6893: find . -depth -print0 | cpio --null -o > ../lpicpio.1",
+        "nl2bash_6912: find -maxdepth 1 -type f newermt \"$timestamp\"'"
+      ],
+      "Explanations about Options": {
+        "-depth": "Process each directory's contents before the directory itself. The -delete action\n also implies -depth.",
+        "-mmin": "File's data was last modified n minutes ago.",
+        "-print0": "Always print the exact filename, unchanged, even if the output is going to a\n terminal.",
+        "-type": "File is of type c:",
+        "-maxdepth": "Descend at most levels (a non-negative integer) levels of directories below the\n starting-points. -maxdepth 0 means only apply the tests and actions to the\n starting-points themselves."
+      }
+    },
+    {
+      "Command": "touch",
+      "MP Summary": "change file timestamps",
+      "Most Similar TLDR Task": "Create a new empty file(s) or change the times for existing file(s) to current time",
+      "Most Similar TLDR Script": "touch {{filename}}",
+      "Top-3 Similar Questions": [
+        "au_708403: Delete files that were created before today",
+        "so_16757326: Linux Find: How to find .PDF files created after a specific year?",
+        "so_14132210: Use find command but exclude files in two directories"
+      ],
+      "Top-3 Scripts": [
+        "au_708403: touch -d 'today + 2 days ago' ref.txt",
+        "so_16757326: tmp=$(mktemp /tmp/time-XXXXXXXX)\ntouch -t 200801010000 \"$tmp\"\nfind . -type f -iname '*.pdf' -newer \"$tmp\"\nrm \"$tmp\"",
+        "so_14132210: $ mkdir a b c d e\n$ touch a/1 b/2 c/3 d/4 e/5 e/a e/b\n$ find . -type f ! -path \"./a/*\" ! -path \"./b/*\"\n\n./d/4\n./c/3\n./e/a\n./e/b\n./e/5"
+      ],
+      "Explanations about Options": {
+        "-t": "STAMP\n use [[CC]YY]MMDDhhmm[.ss] instead of current time",
+        "-d": "parse STRING and use it instead of current time"
+      }
+    },
+    {
+      "Command": "file",
+      "MP Summary": "determine file type",
+      "Most Similar TLDR Task": "Look inside a zipped file and determine the file type(s) inside",
+      "Most Similar TLDR Script": "file -z {{foo.zip}}",
+      "Top-3 Similar Questions": [
+        "so_22582760: How do we find a file that is located some where in directory tree",
+        "so_24683908: Find specific folders then search specific files inside them for a word",
+        "so_64066555: Comparing file created yesterday with file created today"
+      ],
+      "Top-3 Scripts": [
+        "so_22582760: find /osting -iname \"*.txt\" -mtime -60 -print\n\n-mtime +60 means you are looking for a file modified 60 days ago.\n-mtime -60 means less than 60 days.\n-mtime 60 If you skip + or - it means exactly 60 days.",
+        "so_24683908: for file in $(find ./k0* -name 'test.log'); do \n   grep -w 'ERROR' $file\n\ndone\n\nfor file in $(find ./k0* -name 'test.log'); do grep -w 'ERROR' $file; done",
+        "so_64066555: for file in *-${today}.txt; do \n    base=\"${file%-${today}.txt}\"\n    if ! diff \"${base}-$today.txt\" \"${base}-$yesteday.txt\"; then    \n        python script.py \"${base}-$today.txt\"\n    fi\ndone"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "mktemp",
+      "MP Summary": "create a temporary file or directory",
+      "Most Similar TLDR Task": "Create an empty temporary file and return the absolute path to it",
+      "Most Similar TLDR Script": "mktemp",
+      "Top-3 Similar Questions": [
+        "so_16757326: Linux Find: How to find .PDF files created after a specific year?"
+      ],
+      "Top-3 Scripts": [
+        "so_16757326: tmp=$(mktemp /tmp/time-XXXXXXXX)\ntouch -t 200801010000 \"$tmp\"\nfind . -type f -iname '*.pdf' -newer \"$tmp\"\nrm \"$tmp\""
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "install",
+      "MP Summary": "copy files and set attributes",
+      "Most Similar TLDR Task": "Copy files and apply access/modification times of source to destination",
+      "Most Similar TLDR Script": "install -p {{path/to/source}} {{path/to/destination}}",
+      "Top-3 Similar Questions": [
+        "so_27696079: Linux/Unix Find Command"
+      ],
+      "Top-3 Scripts": [
+        "so_27696079: brew install findutils --default-names"
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

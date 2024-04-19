@@ -1,0 +1,138 @@
+
+
+Query:              	How to download an MP3 track from a YouTube video
+
+
+########################################################################################################################
+
+
+Cmd:                	youtube-dl          
+
+MP Summary:         	download videos from youtube.com or other video platforms
+
+TLDR Task:          	Download a video or playlist
+TLDR Script:        	youtube-dl '{{https://www.youtube.com/watch?v=oHg5SJYRHA0}}'
+
+>>> Top-3 Similar Questions with Accepted Scripts: =====================================================================
+
+Question Title:     	How can i download youtube videos one after another automatically from terminal
+Question Link:      	https://askubuntu.com/questions/401550: How can i download youtube videos one after another automatically from terminal
+Accepted Script:    	youtube-dl http://www.youtube.com/watch?v=CP8CNp-vksc http://www.youtube.com/watch?v=JmOXHH3DTwg
+
+Question Title:     	How to download newly uploaded videos from a youtube channel?
+Question Link:      	https://askubuntu.com/questions/964835: How to download newly uploaded videos from a youtube channel?
+Accepted Script:    	sudo apt remove youtube-dl # uninstall the repo version\nsudo wget https://yt-dl.org/latest/youtube-dl -O /usr/local/bin/youtube-dl # download\nsudo chmod a+x /usr/local/bin/youtube-dl # make it executable\nhash -r # hash\n\nsudo youtube-dl -U\n\nyoutube-dl --date now -- 'PLFs4vir_WsTyXrrpFstD64Qj95vpy-yo1'\n\nyoutube-dl --dateafter now-7days -a file\n\nyoutube-dl --dateafter now-1month -a file -w\n\nman youtube-dl
+
+Question Title:     	How can I download an entire playlist from youtube even it exceeds 25 videos?
+Question Link:      	https://askubuntu.com/questions/705166: How can I download an entire playlist from youtube even it exceeds 25 videos?
+Accepted Script:    	sudo apt-get purge youtube-dl\n\nsudo rm /usr/local/bin/youtube-dl\n\nsudo wget https://yt-dl.org/downloads/2015.11.27.1/youtube-dl -O /usr/local/bin/youtube-dl\n\nsudo chmod a+rx /usr/local/bin/youtube-dl\n\nyoutube-dl https://www.youtube.com/playlist?list=PLKopOf5__2tjZ3oHnreRYjxGW_7yXV0OS\n\nyoutube-dl -U\n\nyoutube-dl --help
+
+>>> Explanations about Options: ========================================================================================
+
+--help:             	Print this help text and exit
+
+
+########################################################################################################################
+
+
+Cmd:                	ffmpeg              
+
+MP Summary:         	ffmpeg video converter
+
+TLDR Task:          	Remux MKV video to MP4 without re-encoding audio or video streams
+TLDR Script:        	ffmpeg -i {{input_video}}.mkv -codec copy {{output_video}}.mp4
+
+>>> Top-3 Similar Questions with Accepted Scripts: =====================================================================
+
+Question Title:     	Bash                
+Question Link:      	https://stackoverflow.com/questions/41310196: Bash: bash script to download trimmed mp3 from youtube url
+Accepted Script:    	mytrim() {\n    local downloaded_file\n    youtube-dl --extract-audio --embed-thumbnail --audio-format mp3 -o "%(title)s.%(ext)s" $1\n    downloaded_file=$(youtube-dl --get-filename --extract-audio --embed-thumbnail --audio-format mp3 -o "%(title)s.%(ext)s" $1)\n    ffmpeg -ss $2 -i "${downloaded_file}" -acodec copy -y temp.mp3\n    mv temp.mp3 "${downloaded_file}"\n}
+
+Question Title:     	extract a segment from some mp3 file
+Question Link:      	https://askubuntu.com/questions/928583: extract a segment from some mp3 file
+Accepted Script:    	ffmpeg -ss 00:01:20 -t 00:01:20 -acodec copy -i /path/to/input.mp3 /path/to/output.mp3
+
+Question Title:     	Quickly extract multiple frames from multiple videos
+Question Link:      	https://stackoverflow.com/questions/56088966: Quickly extract multiple frames from multiple videos
+Accepted Script:    	ffmpeg -nostdin -loglevel fatal\n       -ss 15     -i "${filename}"\n       -sseof -15 -i "${filename}"\n       -ss 15     -i "${filename2}"\n       -sseof -15 -i "${filename2}"\n       -map 0:v:0 -frames:v 1 "${file1-head}"\n       -map 1:v:0 -frames:v 1 "${file1-tail}"\n       -map 2:v:0 -frames:v 1 "${file2-head}"\n       -map 3:v:0 -frames:v 1 "${file2-tail}"\n...
+
+>>> Explanations about Options: ========================================================================================
+
+-y:                 	Overwrite output files without asking.
+-n:                 	Do not overwrite output files, and exit immediately if a specified output file already
+ exists.
+-loglevel:          	Set logging level and flags used by the library.
+-ss:                	When used as an input option (before "-i"), seeks in this input file to position. Note
+ that in most formats it is not possible to seek exactly, so ffmpeg will seek to the
+ closest seek point before position. When transcoding and -accurate_seek is enabled
+ (the default), this extra segment between the seek point and position will be decoded
+ and discarded. When doing stream copy or when -noaccurate_seek is used, it will be
+ preserved.
+-i:                 	input file url      
+-acodec:            	Set the audio codec. This is an alias for "-codec:a".
+-t:                 	When used as an input option (before "-i"), limit the duration of data read from the
+ input file.
+
+
+########################################################################################################################
+
+
+Cmd:                	eyeD3               
+
+MP Summary:         	displays and manipulates id3-tags on mp3 files
+
+TLDR Task:          	Set the title of an MP3 file
+TLDR Script:        	eyeD3 --title "{{A Title}}" {{filename.mp3}}
+
+>>> Top-3 Similar Questions with Accepted Scripts: =====================================================================
+
+Question Title:     	How to Extract Album Cover Image from MP3 file?
+Question Link:      	https://unix.stackexchange.com/questions/41287: How to Extract Album Cover Image from MP3 file?
+Accepted Script:    	eyeD3 --write-images=DIR mp3_file
+
+>>> Explanations about Options: ========================================================================================
+
+--write-images:     	Causes all attached images (APIC frames) to be written to the specified directory.
+
+
+########################################################################################################################
+
+
+Cmd:                	ffprobe             
+
+MP Summary:         	ffprobe media prober
+
+TLDR Task:          	Display media duration
+TLDR Script:        	ffprobe -v error -show_entries format=duration -of default=noprint_wrappers=1:nokey=1 {{input.mp4}}
+
+>>> Top-3 Similar Questions with Accepted Scripts: =====================================================================
+
+Question Title:     	How to download youtube videos as a best quality audio mp3 using youtube-dl
+Question Link:      	https://askubuntu.com/questions/634584: How to download youtube videos as a best quality audio mp3 using youtube-dl
+Accepted Script:    	-x, --extract-audio                  Convert video files to audio-only files (requires ffmpeg or avconv and ffprobe or avprobe)\n    --audio-format FORMAT            Specify audio format
+
+>>> Explanations about Options: ========================================================================================
+
+
+
+########################################################################################################################
+
+
+Cmd:                	convert             
+
+MP Summary:         	convert between image formats as well as resize an image, blur, crop, despeckle, dither, draw on, flip, join, re-sample, and much more.
+
+TLDR Task:          	Horizontally append images
+TLDR Script:        	convert {{image1.png}} {{image2.png}} {{image3.png}} +append {{image123.png}}
+
+>>> Top-3 Similar Questions with Accepted Scripts: =====================================================================
+
+Question Title:     	Bash script to extract audio from video
+Question Link:      	https://superuser.com//questions/594008: Bash script to extract audio from video
+Accepted Script:    	#!/bin/bash\nFOLDER_SRC="/home/J/Music/TestBatchConv"\nfind "$FOLDER_SRC" -type f -print0 | while IFS= read -r -d '' myvid; do\n  echo "Trying to convert $myvid"\n  avconv -i "$myvid" -c:a libmp3lame -q:a 4 "${myvid%.*}.mp3" 2>/dev/null || echo "$myvid is not a valid file."\ndone
+
+>>> Explanations about Options: ========================================================================================
+
+
+
+########################################################################################################################

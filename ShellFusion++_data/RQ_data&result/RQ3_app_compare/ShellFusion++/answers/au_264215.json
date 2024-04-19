@@ -1,0 +1,85 @@
+{
+  "Query": "What are some audio/video converters for Linux?",
+  "Answers": [
+    {
+      "Command": "ffmpeg",
+      "MP Summary": "ffmpeg video converter",
+      "Most Similar TLDR Task": "Remux MKV video to MP4 without re-encoding audio or video streams",
+      "Most Similar TLDR Script": "ffmpeg -i {{input_video}}.mkv -codec copy {{output_video}}.mp4",
+      "Top-3 Similar Questions": [
+        "au_937244: How To Command Linux Ubuntu Convert Video To 4k?",
+        "so_4365058: Python video converter packages",
+        "au_841059: Batch video convert with FFmpeg in Ubuntu: combine image and audio"
+      ],
+      "Top-3 Scripts": [
+        "au_937244: ffmpeg -i YourFile -vf scale=3840:2160 OutputFile4k.mp4",
+        "so_4365058: ",
+        "au_841059: ffmpeg -framerate 60 -i input.png -i input.mp3 -vcodec libx264 -crf 20 -preset medium -acodec aac -vf scale=1280:-2,format=yuv420p output.mp4\n\n#! /bin/bash\n###################################################################\npicture=\"input.jpg\"  # Change this to the file name of your picture\n###################################################################\nfor i in *.mp3; do\n  ffmpeg -framerate 60 -f image2 -i $picture -i input.mp3 -vcodec libx264 -crf 20 -preset medium -acodec aac -vf scale=1280:-2,format=yuv420p \"${i%.*}.\".mp4\ndone"
+      ],
+      "Explanations about Options": {
+        "-vcodec": "Set the video codec. This is an alias for \"-codec:v\".",
+        "-vf": "Create the filtergraph specified by filtergraph and use it to filter the stream.",
+        "-preset": "Configuration preset. This does some automatic settings based on the general type of\n the image.",
+        "-i": "input file url",
+        "-acodec": "Set the audio codec. This is an alias for \"-codec:a\".",
+        "-framerate": "Set the grabbing frame rate. Default is \"ntsc\", corresponding to a frame rate of\n \"30000/1001\"."
+      }
+    },
+    {
+      "Command": "vlc",
+      "MP Summary": "the VLC media player",
+      "Most Similar TLDR Task": "Play muted",
+      "Most Similar TLDR Script": "vlc --no-audio {{path/to/file}}",
+      "Top-3 Similar Questions": [
+        "au_80954: How can I convert audio from MP4 or FLV video files to mp3?",
+        "au_92164: Why is VLC minimized while playing video or audio?"
+      ],
+      "Top-3 Scripts": [
+        "au_80954: sudo apt-get install vlc libavcodec-extra",
+        "au_92164: vlc --reset-config\n\nmv ~/.config/vlc ~/.config/vlc_backup"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "ffprobe",
+      "MP Summary": "ffprobe media prober",
+      "Most Similar TLDR Task": "Display media duration",
+      "Most Similar TLDR Script": "ffprobe -v error -show_entries format=duration -of default=noprint_wrappers=1:nokey=1 {{input.mp4}}",
+      "Top-3 Similar Questions": [
+        "su_1180108: Conditionally encode or copy audio stream using FFMpeg"
+      ],
+      "Top-3 Scripts": [
+        "su_1180108: #!/bin/bash\n\naudioformat=$(ffprobe -loglevel error -select_streams a:0 -show_entries stream=codec_name -of default=nw=1:nk=1 \"$1\")\n\nif [ \"$audioformat\" = \"aac\" ]; then\n  ffmpeg -i \"$1\" -c:v libx264 -c:a copy \"${1%.*}_new.mkv\"\nelse\n  ffmpeg -i \"$1\" -c:v libx264 -c:a aac \"${1%.*}_new.mkv\"\nfi"
+      ],
+      "Explanations about Options": {
+        "-loglevel": "Set logging level and flags used by the library."
+      }
+    },
+    {
+      "Command": "printf",
+      "MP Summary": "format and print data",
+      "Most Similar TLDR Task": "Print a text message",
+      "Most Similar TLDR Script": "printf \"{{%s\\n}}\" \"{{Hello world}}\"",
+      "Top-3 Similar Questions": [
+        "so_8724621: difference between sending int or char to /dev/audio (in Linux)"
+      ],
+      "Top-3 Scripts": [
+        "so_8724621: man printf"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "unrar",
+      "MP Summary": "extract files from rar archives",
+      "Most Similar TLDR Task": "List files inside the archive file without decompressing it",
+      "Most Similar TLDR Script": "unrar l {{compressed.rar}}",
+      "Top-3 Similar Questions": [
+        "au_386570: I am not able to download any plugin for audio or video on Ubuntu 13.10"
+      ],
+      "Top-3 Scripts": [
+        "au_386570: "
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

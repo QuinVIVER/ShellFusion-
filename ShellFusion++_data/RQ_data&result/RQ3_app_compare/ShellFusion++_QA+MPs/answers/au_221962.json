@@ -1,0 +1,73 @@
+{
+  "Query": "How can I extract a page range / a part of a PDF?",
+  "Answers": [
+    {
+      "Command": "unzip",
+      "MP Summary": "list, test and extract compressed files in a ZIP archive",
+      "Top-3 Similar Questions": [
+        "au_1195340: Extract a specific pdf from a zip file with lots of pdfs",
+        "so_51449715: Extract range of lines using sed"
+      ],
+      "Top-3 Scripts": [
+        "au_1195340: unzip -j \"myarchive.zip\" \"in/archive/file.pdf\" -d \"/destination/path/\"",
+        "so_51449715: unzip -c ./*.zip | sed -n \"$var1,$var2 p\""
+      ],
+      "Explanations about Options": {
+        "-j": "junk paths. The archive's directory structure is not recreated; all files are\n deposited in the extraction directory (by default, the current one).",
+        "-c": "extract files to stdout/screen (``CRT''). This option is similar to the -p option\n except that the name of each file is printed as it is extracted, the -a option is\n allowed, and ASCII-EBCDIC conversion is automatically performed if appropriate.\n This option is not listed in the unzip usage screen."
+      }
+    },
+    {
+      "Command": "echo",
+      "MP Summary": "display a line of text",
+      "Top-3 Similar Questions": [
+        "so_12588884: Extract part of file name with multiple sections",
+        "au_1195340: Extract a specific pdf from a zip file with lots of pdfs",
+        "so_3658382: Extracting multiple parts of a string using bash"
+      ],
+      "Top-3 Scripts": [
+        "so_12588884: file=EMDEON.270.60054.1234567890123456789.70949996.20120925.014606403\ntransitId=$(echo $file | cut -d. -f4)\n\nfile=EMDEON.270.60054.1234567890123456789.70949996.20120925.014606403\ntransitId=$(echo $file | awk -F. '{print $4}')",
+        "au_1195340: ",
+        "so_3658382: $ echo $(echo \"1=A00^35=D^150=1^33=1\"|egrep -o \"35=[^/^]*\\^|150=[^/^]*\\^\")\n35=D^ 150=1^\n\necho '1=A00^35=D^150=1^33=1\n      1=a00^35=d^157=11^33=11\n      ' | awk -vLST=1,33 -F^ '{s=\"\";split(LST,k,\",\");for(i=1;i<=NF;i++){for(j in k){split($i,arr,\"=\");if(arr[1]==k[j]){printf s\"\"arr[1]\"=\"arr[2];s=\"^\";}}}if(s!=\"\"){print s;}}'"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "cat",
+      "MP Summary": "concatenate files and print on the standard output",
+      "Top-3 Similar Questions": [
+        "su_625565: How to extract and/or remove the last page of a bunch of PDFs?",
+        "au_687331: Extracting part of a specific column in text file",
+        "au_796444: How to extract first 10pages from each pdf files of a folder"
+      ],
+      "Top-3 Scripts": [
+        "su_625565: pdftk input.pdf cat end-1 output temp.pdf\npdftk temp.pdf  cat end-2 output output.pdf\nrm temp.pdf\n\npdftk input.pdf cat 1-$((last-1)) output output.pdf",
+        "au_687331: % cat in\nffmj0010.09o:FFMJ MARKER NAME\nffmj0020.09o:BRMU MARKER NAME\n% sed 's/.*:\\(.\\{4\\}\\).*/\\1/' in > out\n% cat out\nFFMJ\nBRMU",
+        "au_796444: find . -name '*.pdf' -type f -exec bash -c \\\n'pdftk \"$0\" cat 3-10 output \"${0%.pdf}_3-10.pdf\"' {} \\;\n\nfind . -name '*.pdf' -type f -exec bash -c \\\n'pdftk \"$0\" cat 3-10 output \"~/extracted/${0%.pdf}_3-10.pdf\"' {} \\;"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "say",
+      "MP Summary": "convert text to audible speech using the GNUstep speech engine",
+      "Top-3 Similar Questions": [
+        "au_1125752: AWK - How to extract matches including part of filename from multiple files"
+      ],
+      "Top-3 Scripts": [
+        "au_1125752: $ perl -lnE '$x = (split /=/,$ARGV)[1]; say \"$x:$1\" if /\"number\":(\\d+)/' total_val*\n5555:1234"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "basename",
+      "MP Summary": "strip directory and suffix from filenames",
+      "Top-3 Similar Questions": [
+        "ul_80793: extract part of string using sed"
+      ],
+      "Top-3 Scripts": [
+        "ul_80793: basename lib/oracle-11.2.0.3.0.txt .txt\n\nls lib/oracle-11.2.0.3.0.txt | xargs -I{} basename {} .txt"
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

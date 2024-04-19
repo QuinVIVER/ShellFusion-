@@ -1,0 +1,86 @@
+{
+  "Query": "Renaming user name",
+  "Answers": [
+    {
+      "Command": "usermod",
+      "MP Summary": "modify a user account",
+      "Most Similar TLDR Task": "Change a user's name",
+      "Most Similar TLDR Script": "usermod -l {{newname}} {{user}}",
+      "Top-3 Similar Questions": [
+        "ul_629: Is it possible to rename a Unix user account?"
+      ],
+      "Top-3 Scripts": [
+        "ul_629: usermod --move-home --login <new-login-name> --home <new-home-dir> <old-login-name>\n\nman usermod"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "dirname",
+      "MP Summary": "strip last component from file name",
+      "Most Similar TLDR Task": "Calculate the parent directory of multiple paths",
+      "Most Similar TLDR Script": "dirname {{path/to/file_a}} {{path/to/directory_b}}",
+      "Top-3 Similar Questions": [
+        "au_1159225: Rename folders from file name [script]",
+        "so_31343309: Rename filename to another name",
+        "so_61764013: Bash to rename files to append folder name"
+      ],
+      "Top-3 Scripts": [
+        "au_1159225: #!/bin/bash\nfor i in Folder*/*\ndo\n    FILE=\"$(basename \"$i\")\"\n    mv \"$(dirname \"$i\")\" \"${FILE%.*}\"\ndone\n\n#!/bin/bash\nfor i in Folder*/*\ndo\n    if [[ $i =~ (jpg|png)$ ]]\n    then\n        FILE=\"$(basename \"$i\")\"\n        mv \"$(dirname \"$i\")\" \"${FILE%.*}\"\n    fi\ndone\n\necho mv \"$(dirname \"$i\")\" \"${FILE%.*}\"",
+        "so_31343309: ",
+        "so_61764013: find /Desktop -iname '*.jpg' -exec sh -c '\n  for img; do\n    parentdir=${img%/*}      # leave the parent dir (remove the last `/` and filename)\n    dirname=${parentdir##*/} # leave the parent directory name (remove all parent paths `*/`)\n    echo mv -i \"$img\" \"$parentdir/$dirname ${img##*/}\"\n  done\n' sh {} +"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "basename",
+      "MP Summary": "strip directory and suffix from filenames",
+      "Most Similar TLDR Task": "Show only the file name from a path, with a suffix removed",
+      "Most Similar TLDR Script": "basename {{path/to/file}} {{suffix}}",
+      "Top-3 Similar Questions": [
+        "au_1159225: Rename folders from file name [script]",
+        "so_31343309: Rename filename to another name",
+        "so_61764013: Bash to rename files to append folder name"
+      ],
+      "Top-3 Scripts": [
+        "au_1159225: #!/bin/bash\nfor i in Folder*/*\ndo\n    FILE=\"$(basename \"$i\")\"\n    mv \"$(dirname \"$i\")\" \"${FILE%.*}\"\ndone\n\n#!/bin/bash\nfor i in Folder*/*\ndo\n    if [[ $i =~ (jpg|png)$ ]]\n    then\n        FILE=\"$(basename \"$i\")\"\n        mv \"$(dirname \"$i\")\" \"${FILE%.*}\"\n    fi\ndone",
+        "so_31343309: ",
+        "so_61764013: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "find",
+      "MP Summary": "search for files in a directory hierarchy",
+      "Most Similar TLDR Task": "Find files matching a given pattern, excluding specific paths",
+      "Most Similar TLDR Script": "find {{root_path}} -name '{{*.py}}' -not -path '{{*/site-packages/*}}'",
+      "Top-3 Similar Questions": [
+        "au_529542: Renaming multiple files",
+        "ul_449965: Copy files under modified name",
+        "su_1136926: How to rename multiple file name include subfolders?"
+      ],
+      "Top-3 Scripts": [
+        "au_529542: find $katalog -name '*.dav.avi' -execdir rename .dav.avi .avi {} \\;\n\nfind . -name \"*.dav.avi\" | while read file; do newFile=`echo $file | awk '{ print substr($0,1,match($0,\"\\\\[\")-1) \".avi\"; }'`; mv $file $newFile; done",
+        "ul_449965: find $folder -maxdepth 1 -type f -name \"*-[0-9].jpg\" -exec \\\nbash -c 'cp \"$1\" \"${1:0:-4}-mini.jpg\"' _ {} \\;",
+        "su_1136926: find . -type f -name '*.png' -execdir bash -c 'mv \"$1\" \"${1%.png}@2x.png\"' Move {} \\;\n\n$ find . -type f -name '*.png' -execdir bash -c 'mv \"$1\" \"${1%.png}@2x.png\"' Move {} \\;"
+      ],
+      "Explanations about Options": {
+        "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+        "-type": "File is of type c:",
+        "-d": "A synonym for -depth, for compatibility with FreeBSD, NetBSD, MacOS X and OpenBSD."
+      }
+    },
+    {
+      "Command": "cp",
+      "MP Summary": "copy files and directories",
+      "Most Similar TLDR Task": "Copy a file to another location",
+      "Most Similar TLDR Script": "cp {{path/to/source_file.ext}} {{path/to/target_file.ext}}",
+      "Top-3 Similar Questions": [
+        "ul_183021: Rename file by its folder name"
+      ],
+      "Top-3 Scripts": [
+        "ul_183021: mkdir -p result || exit 1\nfor pathname in \"$insub_FIM_M_1\"/*/file.txt; do\n    cp \"$pathname\" \"result/$( basename \"$( dirname \"$pathname\" )\" )_file.txt\"\ndone"
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

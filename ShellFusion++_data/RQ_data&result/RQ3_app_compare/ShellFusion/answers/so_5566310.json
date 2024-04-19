@@ -1,0 +1,107 @@
+{
+    "Answers": [
+        {
+            "Command": "find",
+            "Explanations about Options": {
+                "-d(M)": "A synonym for -depth, for compatibility with FreeBSD, NetBSD, MacOS X and OpenBSD.",
+                "-links(M)": "File has n hard links.",
+                "-mtime(M)": "File's data was last modified n*24 hours ago. See the comments for -atime to\n understand how rounding affects the interpretation of file modification times.",
+                "-name(M)": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+                "-print0(M)": "Always print the exact filename, unchanged, even if the output is going to a\n terminal.",
+                "-printf(C)": "If anything changes at all (new files, deleted files, modified files), then the checksum will change also! .  \"find . -type f -printf '%T@,' | cksum\" .   \"'%T@,'\" returns the modification time of each file as a unix timestamp, all on the same line. \"cksum\" calculates the checksum of the timestamps. ???? Profit!!!!  It's actually even faster than the previous solution (by ~20%), because we don't need to sort (which is one of the slowest operations).",
+                "-printf(M)": "True; print format on the standard output, interpreting `\\' escapes and `%'\n directives. Field widths and precisions can be specified as with the `printf' C\n function. Please note that many of the fields are printed as %s rather than %d,\n and this may mean that flags don't work as you might expect. This also means that\n the `-' flag does work (it forces fields to be left-aligned). Unlike -print,\n -printf does not add a newline at the end of the string. The escapes and\n directives are:",
+                "-type(M)": "File is of type c:"
+            },
+            "MP Summary": "search for files in a directory hierarchy",
+            "Most Similar TLDR Script": "find {{root_path}} -mtime {{-7}} -delete",
+            "Most Similar TLDR Task": "Find files modified in the last 7 days, and delete them",
+            "Top-3 Scripts": [
+                "so_4561895: find . -type f -printf '%T@ %p\\n' \\\n| sort -n | tail -1 | cut -f2- -d\" \"",
+                "so_30959872: find . -type f -printf '%T@,' | cksum",
+                "ul_241048: find . -type d -links 2 -print0 | xargs -0 -I{} find {} -name \\*.jpg"
+            ],
+            "Top-3 Similar Questions": [
+                "so_4561895: How to recursively find the latest modified file in a directory?",
+                "so_30959872: How to find the timestamp of the latest modified file in a directory (recursively)?",
+                "ul_342767: Why doesn't find list files in subdirectories?"
+            ]
+        },
+        {
+            "Command": "cd",
+            "Explanations about Options": {},
+            "MP Summary": "change the working directory",
+            "Most Similar TLDR Script": "cd {{path/to/directory}}",
+            "Most Similar TLDR Task": "Go to the given directory",
+            "Top-3 Scripts": [
+                "ul_189760: find . -type d -exec sh -c '\n  cd \"$0\" || exit\n  set -- *.jpg\n  if [ -e \"$1\" ]; then\n    gmic \"$@\" -gimp_montage 4,\\\"\"V(H(0,1),H(2,V(3,4)))\"\\\",1,1.0,0,5,0,0,0,255,0,0,0,0 -o -0000.\"$(date)\".jpg\n  fi\n' {} \\;"
+            ],
+            "Top-3 Similar Questions": [
+                "ul_189760: Run a command with wildcards in each subdirectory",
+                "ul_66834: `ls` command does not list latest directory contents"
+            ]
+        },
+        {
+            "Command": "touch",
+            "Explanations about Options": {
+                "-r(M)": "use this file's times instead of current time",
+                "-t(M)": "STAMP\n use [[CC]YY]MMDDhhmm[.ss] instead of current time"
+            },
+            "MP Summary": "change file timestamps",
+            "Most Similar TLDR Script": "touch -r {{filename}} {{filename2}}",
+            "Most Similar TLDR Task": "Use the times from a file to set the times on a second file",
+            "Top-3 Scripts": [
+                "so_6964747: time=$(date -r 1312603983 '+%Y%m%d%H%M.%S')\nmarker=/tmp/marker.$$\ntrap \"rm -f $marker; exit 1\" 0 1 2 3 13 15\ntouch -t $time $marker\nfind . -type f -newer $marker\nrm -f $marker\ntrap 0",
+                "so_42666143: $ mkdir temp\n$ touch temp/passwd.list\n$ touch log.txt\n$ touch foo.txt\n$ find . -type f\n./foo.txt\n./log.txt\n./temp/passwd.list",
+                "ul_452332: TIMEFILE=$HOME/.lastlogin\n[[ ! -f $TIMEFILE ]] && touch $TIMEFILE\nfind $HOME -newer $TIMEFILE\ntouch $TIMEFILE\n\ntouch $HOME/.lastlogin"
+            ],
+            "Top-3 Similar Questions": [
+                "so_6964747: Recursively find all files newer than a given time",
+                "so_42666143: List all file, but not directories, recursively in BASh",
+                "ul_452332: show a recursive list of files modified since i last logged in"
+            ]
+        },
+        {
+            "Command": "mkdir",
+            "Explanations about Options": {
+                "-p(M)": "no error if existing, make parent directories as needed"
+            },
+            "MP Summary": "make directories",
+            "Most Similar TLDR Script": "mkdir -p {{path/to/directory}}",
+            "Most Similar TLDR Task": "Create directories recursively (useful for creating nested dirs)",
+            "Top-3 Scripts": [
+                "so_42666143: $ mkdir temp\n$ touch temp/passwd.list\n$ touch log.txt\n$ touch foo.txt\n$ find . -type f\n./foo.txt\n./log.txt\n./temp/passwd.list",
+                "so_46292847: if [ $f != \"./directory_to_cop\" ]\n    then\n              mkdir ./directory_to_copy/$f 2>/dev/null\n              cp $f/`ls -t $f | head -1` ./directory_to_copy/$f\n    fi\n\nmkdir path_to_directory/name_of_directory/$f 2>/dev/null\n\ncp $f/`ls -t | head -1` path_to_directory/name_of_directory/$f"
+            ],
+            "Top-3 Similar Questions": [
+                "so_42666143: List all file, but not directories, recursively in BASh",
+                "so_53330946: How to get a list of subdirectories from a file and then create those subdirectories in a directory?",
+                "so_46292847: Copy latest modified file from all subdirectories to a new directory having same sub directory structure"
+            ]
+        },
+        {
+            "Command": "ls",
+            "Explanations about Options": {
+                "-F(M)": "append indicator (one of */=>@|) to entries",
+                "-R(M)": "list subdirectories recursively",
+                "-d(M)": "list directories themselves, not their contents",
+                "-l(M)": "use a long listing format",
+                "-r(M)": "reverse order while sorting",
+                "-t(M)": "sort by modification time , newest first"
+            },
+            "MP Summary": "list directory contents",
+            "Most Similar TLDR Script": "ls -F",
+            "Most Similar TLDR Task": "List all files, with trailing `/` added to directory names",
+            "Top-3 Scripts": [
+                "ul_287863: ls -ld /bin /sbin",
+                "ul_240418: ls -ltrR <sometopdir>",
+                "so_15686514: ls -R dir1"
+            ],
+            "Top-3 Similar Questions": [
+                "ul_287863: \"find\" doesn't list all files under specific directories",
+                "ul_240418: Find latest files",
+                "so_15686514: how to recursively list files from a folder?"
+            ]
+        }
+    ],
+    "Query": "How to recursively find and list the latest modified files in a directory with subdirectories and times?"
+}

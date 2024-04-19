@@ -1,0 +1,1830 @@
+{
+  "Query": "How to Zip and Unzip a directory and its files in Linux",
+  "Answers": [
+    {
+      "Command": "find",
+      "MP Summary": "search for files in a directory hierarchy",
+      "Most Similar TLDR Task": "Find files by extension",
+      "Most Similar TLDR Script": "find {{root_path}} -name '{{*.ext}}'",
+      "Most Similar NL2Bash Task": "Search the current directory tree for .log files containing the string \"The SAS System\", and save their names to sas_log_list.txt",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -name \"*.log\" -exec grep -l \"The SAS System\" {} \\; > sas_log_list.txt\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-l": "Suppress normal output; instead print the name of each input file from which output\n would normally have been printed. The scanning will stop on the first match."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_14397: List all files/directories under /data1/Marcel which are greater than 524288 bytes and were modified or accessed more than 1 year ago",
+        "nl2bash_9406: Print and delete all directories named 'work' under '/usr/ports/' directory tree",
+        "nl2bash_13956: Counts total number of only lines with alphanumeric symbols in all *.php files in a current folder and subfolders."
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_14397: find /data1/Marcel -size +1024 \\( -mtime +365 -o -atime +365 \\) -ls",
+        "nl2bash_9406: find /usr/ports/ -name work -type d -print -exec rm -rf {} \\;",
+        "nl2bash_13956: find . -name '*.php' | xargs cat | awk '/[a-zA-Z0-9]/ {i++} END{print i}'"
+      ],
+      "Explanations about Options": {
+        "-ls": "Unusual characters are always escaped. White space, backslash, and double quote\n characters are printed using C-style escaping (for example `\\f', `\\\"'). Other\n unusual characters are printed using an octal escape. Other printable characters\n (for -ls and -fls these are the characters between octal 041 and 0176) are printed\n as-is.",
+        "-mtime": "File's data was last modified n*24 hours ago. See the comments for -atime to\n understand how rounding affects the interpretation of file modification times.",
+        "-size": "File uses n units of space, rounding up. The following suffixes can be used:",
+        "-type": "File is of type c:",
+        "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+        "-atime": "File was last accessed n*24 hours ago. When find figures out how many 24-hour\n periods ago the file was last accessed, any fractional part is ignored, so to match\n -atime +1, a file has to have been accessed at least two days ago.",
+        "-print": "Quoting is handled in the same way as for -printf and -fprintf. If you are using\n find in a script or in a situation where the matched files might have arbitrary\n names, you should consider using -print0 instead of -print."
+      }
+    },
+    {
+      "Command": "xargs",
+      "MP Summary": "build and execute command lines from standard input",
+      "Most Similar TLDR Task": "Delete all files with a `.backup` extension (`-print0` uses a null character to split file names, and `-0` uses it as delimiter)",
+      "Most Similar TLDR Script": "find . -name {{'*.backup'}} -print0 | xargs -0 rm -v",
+      "Most Similar NL2Bash Task": "Search the current directory tree for .log files containing the string \"The SAS System\", and save their names to sas_log_list.txt",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -name \"*.log\" -exec grep -l \"The SAS System\" {} \\; > sas_log_list.txt\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-l": "Suppress normal output; instead print the name of each input file from which output\n would normally have been printed. The scanning will stop on the first match."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_13956: Counts total number of only lines with alphanumeric symbols in all *.php files in a current folder and subfolders.",
+        "nl2bash_13738: Calculate the sum of all the numbers from 1 to 10",
+        "nl2bash_13737: Calculate the sum of all the numbers from -5 to 10"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_13956: find . -name '*.php' | xargs cat | awk '/[a-zA-Z0-9]/ {i++} END{print i}'",
+        "nl2bash_13738: seq 10 | tr '[\\n]' '+' | sed -e 's/+/ + /g' -e's/ + $/\\n/' | xargs expr",
+        "nl2bash_13737: seq -5 10 | xargs printf \"- - %s\" | xargs  | bc"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "rm",
+      "MP Summary": "remove files or directories",
+      "Most Similar TLDR Task": "Recursively remove a directory and all its subdirectories",
+      "Most Similar TLDR Script": "rm -r {{path/to/directory}}",
+      "Most Similar NL2Bash Task": "Search the current directory tree for .log files containing the string \"The SAS System\", and save their names to sas_log_list.txt",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -name \"*.log\" -exec grep -l \"The SAS System\" {} \\; > sas_log_list.txt\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-l": "Suppress normal output; instead print the name of each input file from which output\n would normally have been printed. The scanning will stop on the first match."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_9406: Print and delete all directories named 'work' under '/usr/ports/' directory tree",
+        "nl2bash_11749: delete all text files in the entire file system"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_9406: find /usr/ports/ -name work -type d -print -exec rm -rf {} \\;",
+        "nl2bash_11749: find / -type f -name \"*.txt\" -print | xargs rm"
+      ],
+      "Explanations about Options": {
+        "-r": "remove directories and their contents recursively",
+        "-f": "ignore nonexistent files and arguments, never prompt"
+      }
+    },
+    {
+      "Command": "cat",
+      "MP Summary": "concatenate files and print on the standard output",
+      "Most Similar TLDR Task": "Append several files into the target file",
+      "Most Similar TLDR Script": "cat {{file1}} {{file2}} >> {{target_file}}",
+      "Most Similar NL2Bash Task": "Search the current directory tree for .log files containing the string \"The SAS System\", and save their names to sas_log_list.txt",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -name \"*.log\" -exec grep -l \"The SAS System\" {} \\; > sas_log_list.txt\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-l": "Suppress normal output; instead print the name of each input file from which output\n would normally have been printed. The scanning will stop on the first match."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_13956: Counts total number of only lines with alphanumeric symbols in all *.php files in a current folder and subfolders.",
+        "nl2bash_3464: Find all files under /usr/tom that matches the extended regex '*.pl| *.pm'   in their names and also matches the regex <PATTERN> in their contents",
+        "nl2bash_3463: Find all files under /usr/tom that matches the extended regex '*.pl| *.pm'   in their names and also matches the regex <PATTERN> in their contents"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_13956: find . -name '*.php' | xargs cat | awk '/[a-zA-Z0-9]/ {i++} END{print i}'",
+        "nl2bash_3464: find /usr/tom | egrep '*.pl| *.pm' | xargs cat | grep <PATTERN>",
+        "nl2bash_3463: find /usr/tom | egrep '*.pl| *.pm' | xargs cat | grep <PATTERN>"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "chown",
+      "MP Summary": "change file owner and group",
+      "Most Similar TLDR Task": "Change the owner user of a file/directory",
+      "Most Similar TLDR Script": "chown {{user}} {{path/to/file_or_directory}}",
+      "Most Similar NL2Bash Task": "Search the current directory tree for .log files containing the string \"The SAS System\", and save their names to sas_log_list.txt",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -name \"*.log\" -exec grep -l \"The SAS System\" {} \\; > sas_log_list.txt\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-l": "Suppress normal output; instead print the name of each input file from which output\n would normally have been printed. The scanning will stop on the first match."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_5120: Find files/directories that is under group 'root' or have no group and set their group to 'apache'",
+        "nl2bash_13957: Evaluate the output of recursively changing the owner and group of \"/data/*\" to \"mongodb\"",
+        "nl2bash_12486: Recursively change the owner to \"user\" and group to \"www-data\" of \"yourprojectfoldername\""
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_5120: find /var/www -group root -o -nogroup -print0 | xargs -0 chown :apache",
+        "nl2bash_13957: `sudo chown -R mongodb:mongodb /data/*`",
+        "nl2bash_12486: chown -R user:www-data yourprojectfoldername"
+      ],
+      "Explanations about Options": {
+        "-R": "operate on files and directories recursively"
+      }
+    },
+    {
+      "Command": "bash",
+      "MP Summary": "GNU Bourne-Again SHell",
+      "Most Similar TLDR Task": "Run commands from a file, logging all commands executed to the terminal",
+      "Most Similar TLDR Script": "bash -x {{file.sh}}",
+      "Most Similar NL2Bash Task": "Search the current directory tree for .log files containing the string \"The SAS System\", and save their names to sas_log_list.txt",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -name \"*.log\" -exec grep -l \"The SAS System\" {} \\; > sas_log_list.txt\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-l": "Suppress normal output; instead print the name of each input file from which output\n would normally have been printed. The scanning will stop on the first match."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_10869: Rename all files under current directory by formatting the filenames with the sed scripts '\\''s/^([^-]*)-\\s*([^\\.]*)/\\L\\1\\E-\\2/'\\'', '\\''s/ /_/g'\\'' and '\\''s/_-/-/g'\\''",
+        "nl2bash_10868: Rename all files under current directory by formatting the filenames with the sed scripts '\\''s/^([^-]*)-\\s*([^\\.]*)/\\L\\1\\E-\\2/'\\'', '\\''s/ /_/g'\\'' and '\\''s/_-/-/g'\\''",
+        "nl2bash_8460: search for bash and rsync files in the entire file system excluding search in the path /usr/share folder and discard all the errors"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_10869: find ./ -type f -exec bash -c 'mv \"$1\" \"$(echo \"$1\" | sed -re '\\''s/^([^-]*)-\\s*([^\\.]*)/\\L\\1\\E-\\2/'\\'' -e '\\''s/ /_/g'\\'' -e '\\''s/_-/-/g'\\'')\"' - {} \\;",
+        "nl2bash_10868: find ./ -type f -exec bash -c 'mv \"$1\" \"$(echo \"$1\" | sed -re '\\''s/^([^-]*)-\\s*([^\\.]*)/\\L\\1\\E-\\2/'\\'' -e '\\''s/ /_/g'\\'' -e '\\''s/_-/-/g'\\'')\"' - {} \\;",
+        "nl2bash_8460: find / -path /usr/share -prune -o \\( -name rsync -o -name bash \\) -print 2>/dev/nul"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "tee",
+      "MP Summary": "read from standard input and write to standard output and files",
+      "Most Similar TLDR Task": "Append to the given FILEs, do not overwrite",
+      "Most Similar TLDR Script": "echo \"example\" | tee -a {{FILE}}",
+      "Most Similar NL2Bash Task": "Search the current directory tree for .log files containing the string \"The SAS System\", and save their names to sas_log_list.txt",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -name \"*.log\" -exec grep -l \"The SAS System\" {} \\; > sas_log_list.txt\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-l": "Suppress normal output; instead print the name of each input file from which output\n would normally have been printed. The scanning will stop on the first match."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_13736: Calculate the sin values of the interval from 0 to pi/2 with a step of 1, add a line number, and write the output to standard output and \"y.txt\"",
+        "nl2bash_13125: create a backup of all the files in the home folder on a partition and save the log to a file"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_13736: octave -q --eval 'printf (\"%f\\n\", sin([0:0.1:pi/2]))'|nl|tee y.txt",
+        "nl2bash_13125: find /home -depth -print | cpio -ov -0 /dev/rmt0 | tee -a tape.log"
+      ],
+      "Explanations about Options": {
+        "-a": "append to the given FILEs, do not overwrite"
+      }
+    },
+    {
+      "Command": "sed",
+      "MP Summary": "stream editor for filtering and transforming text",
+      "Most Similar TLDR Task": "Replace all occurrences of a string in a file, overwriting the file (i.e. in-place)",
+      "Most Similar TLDR Script": "sed -i 's/{{find}}/{{replace}}/g' {{filename}}",
+      "Most Similar NL2Bash Task": "Search the current directory tree for .log files containing the string \"The SAS System\", and save their names to sas_log_list.txt",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -name \"*.log\" -exec grep -l \"The SAS System\" {} \\; > sas_log_list.txt\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-l": "Suppress normal output; instead print the name of each input file from which output\n would normally have been printed. The scanning will stop on the first match."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_10869: Rename all files under current directory by formatting the filenames with the sed scripts '\\''s/^([^-]*)-\\s*([^\\.]*)/\\L\\1\\E-\\2/'\\'', '\\''s/ /_/g'\\'' and '\\''s/_-/-/g'\\''",
+        "nl2bash_13738: Calculate the sum of all the numbers from 1 to 10",
+        "nl2bash_10868: Rename all files under current directory by formatting the filenames with the sed scripts '\\''s/^([^-]*)-\\s*([^\\.]*)/\\L\\1\\E-\\2/'\\'', '\\''s/ /_/g'\\'' and '\\''s/_-/-/g'\\''"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_10869: find ./ -type f -exec bash -c 'mv \"$1\" \"$(echo \"$1\" | sed -re '\\''s/^([^-]*)-\\s*([^\\.]*)/\\L\\1\\E-\\2/'\\'' -e '\\''s/ /_/g'\\'' -e '\\''s/_-/-/g'\\'')\"' - {} \\;",
+        "nl2bash_13738: seq 10 | tr '[\\n]' '+' | sed -e 's/+/ + /g' -e's/ + $/\\n/' | xargs expr",
+        "nl2bash_10868: find ./ -type f -exec bash -c 'mv \"$1\" \"$(echo \"$1\" | sed -re '\\''s/^([^-]*)-\\s*([^\\.]*)/\\L\\1\\E-\\2/'\\'' -e '\\''s/ /_/g'\\'' -e '\\''s/_-/-/g'\\'')\"' - {} \\;"
+      ],
+      "Explanations about Options": {
+        "-r": "use extended regular expressions in the script (for portability use POSIX -E).",
+        "-e": "add the script to the commands to be executed"
+      }
+    },
+    {
+      "Command": "ln",
+      "MP Summary": "make links between files",
+      "Most Similar TLDR Task": "Create a symbolic link to a file or directory",
+      "Most Similar TLDR Script": "ln -s {{path/to/file_or_directory}} {{path/to/symlink}}",
+      "Most Similar NL2Bash Task": "Search the current directory tree for .log files containing the string \"The SAS System\", and save their names to sas_log_list.txt",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -name \"*.log\" -exec grep -l \"The SAS System\" {} \\; > sas_log_list.txt\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-l": "Suppress normal output; instead print the name of each input file from which output\n would normally have been printed. The scanning will stop on the first match."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_13151: create a symbolic link named \"$ORACLE_HOME/include\" to file \"/usr/include/oracle/11.2/client\"",
+        "nl2bash_13152: create a symbolic link named \"-pdf-kundendienst\" to \"local--pdf-kundendienst\" file",
+        "nl2bash_13149: create a symbolic link in current directory named \"environments\" to file \"../config/environments\""
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_13151: sudo ln -s /usr/include/oracle/11.2/client $ORACLE_HOME/include",
+        "nl2bash_13152: ln -s -- ./local--pdf-kundendienst -pdf-kundendienst",
+        "nl2bash_13149: ln -s \"../config/environments\""
+      ],
+      "Explanations about Options": {
+        "-s": "make symbolic links instead of hard links"
+      }
+    },
+    {
+      "Command": "echo",
+      "MP Summary": "display a line of text",
+      "Most Similar TLDR Task": "Append a message to the file",
+      "Most Similar TLDR Script": "echo \"{{Hello World}}\" >> {{file.txt}}",
+      "Most Similar NL2Bash Task": "Search the current directory tree for .log files containing the string \"The SAS System\", and save their names to sas_log_list.txt",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -name \"*.log\" -exec grep -l \"The SAS System\" {} \\; > sas_log_list.txt\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-l": "Suppress normal output; instead print the name of each input file from which output\n would normally have been printed. The scanning will stop on the first match."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_10869: Rename all files under current directory by formatting the filenames with the sed scripts '\\''s/^([^-]*)-\\s*([^\\.]*)/\\L\\1\\E-\\2/'\\'', '\\''s/ /_/g'\\'' and '\\''s/_-/-/g'\\''",
+        "nl2bash_10868: Rename all files under current directory by formatting the filenames with the sed scripts '\\''s/^([^-]*)-\\s*([^\\.]*)/\\L\\1\\E-\\2/'\\'', '\\''s/ /_/g'\\'' and '\\''s/_-/-/g'\\''",
+        "nl2bash_1553: Run \"command\" on server \"host\" as user \"user\""
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_10869: find ./ -type f -exec bash -c 'mv \"$1\" \"$(echo \"$1\" | sed -re '\\''s/^([^-]*)-\\s*([^\\.]*)/\\L\\1\\E-\\2/'\\'' -e '\\''s/ /_/g'\\'' -e '\\''s/_-/-/g'\\'')\"' - {} \\;",
+        "nl2bash_10868: find ./ -type f -exec bash -c 'mv \"$1\" \"$(echo \"$1\" | sed -re '\\''s/^([^-]*)-\\s*([^\\.]*)/\\L\\1\\E-\\2/'\\'' -e '\\''s/ /_/g'\\'' -e '\\''s/_-/-/g'\\'')\"' - {} \\;",
+        "nl2bash_1553: echo \"command\" | ssh user@host"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "cpio",
+      "MP Summary": "copy files to and from archives",
+      "Most Similar TLDR Task": "Copy all files and directories in a directory and add them [o]nto an archive, in [v]erbose mode",
+      "Most Similar TLDR Script": "find {{path/to/directory}} | cpio -ov > {{archive.cpio}}",
+      "Most Similar NL2Bash Task": "Search the current directory tree for .log files containing the string \"The SAS System\", and save their names to sas_log_list.txt",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -name \"*.log\" -exec grep -l \"The SAS System\" {} \\; > sas_log_list.txt\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-l": "Suppress normal output; instead print the name of each input file from which output\n would normally have been printed. The scanning will stop on the first match."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_13125: create a backup of all the files in the home folder on a partition and save the log to a file",
+        "nl2bash_13126: create a backup of all the files which have been modified in the last 48 hours"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_13125: find /home -depth -print | cpio -ov -0 /dev/rmt0 | tee -a tape.log",
+        "nl2bash_13126: find source/directory -ctime -2 | cpio -pvdm /my/dest/directory"
+      ],
+      "Explanations about Options": {
+        "-0": "Read filenames separated by NUL characters instead of newlines. This is necessary\n if any of the filenames being read might contain newlines.",
+        "-o": "Output mode. See above for description.",
+        "-v": "Print the name of each file to stderr as it is processed. With -t, provide a\n detailed listing of each file.",
+        "-d": "(i and p modes) Create directories as necessary.",
+        "-p": "Pass-through mode. See above for description.",
+        "-m": "(i and p modes) Set file modification time on created files to match those in the\n source."
+      }
+    },
+    {
+      "Command": "head",
+      "MP Summary": "output the first part of files",
+      "Most Similar TLDR Task": "Output everything but the last few lines of a file",
+      "Most Similar TLDR Script": "head -n -{{count_of_lines}} {{filename}}",
+      "Most Similar NL2Bash Task": "Search the current directory tree for .log files containing the string \"The SAS System\", and save their names to sas_log_list.txt",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -name \"*.log\" -exec grep -l \"The SAS System\" {} \\; > sas_log_list.txt\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-l": "Suppress normal output; instead print the name of each input file from which output\n would normally have been printed. The scanning will stop on the first match."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_10384: print top 10 largest files and directories",
+        "nl2bash_10462: Send SIGTERM signal to the first process whose command matches \"csp_build\""
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_10384: du -a . | sort -nr | head",
+        "nl2bash_10462: ps aux | grep 'python csp_build.py' | head -1 | cut -d \" \" -f 2 | xargs kill"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "sort",
+      "MP Summary": "sort lines of text files",
+      "Most Similar TLDR Task": "Sort a file preserving only unique lines",
+      "Most Similar TLDR Script": "sort -u {{path/to/file}}",
+      "Most Similar NL2Bash Task": "Search the current directory tree for .log files containing the string \"The SAS System\", and save their names to sas_log_list.txt",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -name \"*.log\" -exec grep -l \"The SAS System\" {} \\; > sas_log_list.txt\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-l": "Suppress normal output; instead print the name of each input file from which output\n would normally have been printed. The scanning will stop on the first match."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_10384: print top 10 largest files and directories"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_10384: du -a . | sort -nr | head"
+      ],
+      "Explanations about Options": {
+        "-r": "reverse the result of comparisons",
+        "-n": "compare according to string numerical value"
+      }
+    },
+    {
+      "Command": "grep",
+      "MP Summary": "print lines that match patterns",
+      "Most Similar TLDR Task": "Search for a pattern [R]ecursively in the current directory, showing matching line [n]umbers, [I]gnoring non-text files",
+      "Most Similar TLDR Script": "grep -RIn {{search_pattern}} .",
+      "Most Similar NL2Bash Task": "Search the current directory tree for .log files containing the string \"The SAS System\", and save their names to sas_log_list.txt",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -name \"*.log\" -exec grep -l \"The SAS System\" {} \\; > sas_log_list.txt\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-l": "Suppress normal output; instead print the name of each input file from which output\n would normally have been printed. The scanning will stop on the first match."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_8623: search for the word \"damian\" in all the regular/normal files in the /etc folder and display only the matched file name",
+        "nl2bash_3464: Find all files under /usr/tom that matches the extended regex '*.pl| *.pm'   in their names and also matches the regex <PATTERN> in their contents",
+        "nl2bash_8649: search for the word foo in all the js files in the current folder"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_8623: find /etc -type f | xargs grep -l -i \"damian\"",
+        "nl2bash_3464: find /usr/tom | egrep '*.pl| *.pm' | xargs cat | grep <PATTERN>",
+        "nl2bash_8649: find . -name \"*.js\" -exec grep -iH foo {} \\;\n\n\ngrep -iH foo `find . -name \"*.js\"`"
+      ],
+      "Explanations about Options": {
+        "-l": "Suppress normal output; instead print the name of each input file from which output\n would normally have been printed. The scanning will stop on the first match.",
+        "-n": "Prefix each line of output with the 1-based line number within its input file.",
+        "-H": "Print the file name for each match. This is the default when there is more than\n one file to search.",
+        "-i": "Ignore case distinctions in patterns and input data, so that characters that differ\n only in case match each other."
+      }
+    },
+    {
+      "Command": "nl",
+      "MP Summary": "number lines of files",
+      "Most Similar TLDR Task": "Number all lines including blank lines",
+      "Most Similar TLDR Script": "nl -b a {{file}}",
+      "Most Similar NL2Bash Task": "Search the current directory tree for .log files containing the string \"The SAS System\", and save their names to sas_log_list.txt",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -name \"*.log\" -exec grep -l \"The SAS System\" {} \\; > sas_log_list.txt\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-l": "Suppress normal output; instead print the name of each input file from which output\n would normally have been printed. The scanning will stop on the first match."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_13736: Calculate the sin values of the interval from 0 to pi/2 with a step of 1, add a line number, and write the output to standard output and \"y.txt\""
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_13736: octave -q --eval 'printf (\"%f\\n\", sin([0:0.1:pi/2]))'|nl|tee y.txt"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "du",
+      "MP Summary": "estimate file space usage",
+      "Most Similar TLDR Task": "List the human-readable sizes of a directory and of all the files and directories within it",
+      "Most Similar TLDR Script": "du -ah {{path/to/directory}}",
+      "Most Similar NL2Bash Task": "Search the current directory tree for .log files containing the string \"The SAS System\", and save their names to sas_log_list.txt",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -name \"*.log\" -exec grep -l \"The SAS System\" {} \\; > sas_log_list.txt\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-l": "Suppress normal output; instead print the name of each input file from which output\n would normally have been printed. The scanning will stop on the first match."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_10384: print top 10 largest files and directories"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_10384: du -a . | sort -nr | head"
+      ],
+      "Explanations about Options": {
+        "-a": "write counts for all files, not just directories"
+      }
+    },
+    {
+      "Command": "print",
+      "MP Summary": "execute programs via entries in the mailcap file",
+      "Most Similar TLDR Task": "Print action can be used to print any file on default run-mailcap tool",
+      "Most Similar TLDR Script": "print {{filename}}",
+      "Most Similar NL2Bash Task": "Search the current directory tree for .log files containing the string \"The SAS System\", and save their names to sas_log_list.txt",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -name \"*.log\" -exec grep -l \"The SAS System\" {} \\; > sas_log_list.txt\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-l": "Suppress normal output; instead print the name of each input file from which output\n would normally have been printed. The scanning will stop on the first match."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_13956: Counts total number of only lines with alphanumeric symbols in all *.php files in a current folder and subfolders."
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_13956: find . -name '*.php' | xargs cat | awk '/[a-zA-Z0-9]/ {i++} END{print i}'"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "rsync",
+      "MP Summary": "a fast, versatile, remote (and local) file-copying tool",
+      "Most Similar TLDR Task": "Transfer directory contents (but not the directory itself) from a remote to local",
+      "Most Similar TLDR Script": "rsync -r {{remote_host}}:{{path/to/remote_directory}}/ {{path/to/local_directory}}",
+      "Most Similar NL2Bash Task": "Search the current directory tree for .log files containing the string \"The SAS System\", and save their names to sas_log_list.txt",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -name \"*.log\" -exec grep -l \"The SAS System\" {} \\; > sas_log_list.txt\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-l": "Suppress normal output; instead print the name of each input file from which output\n would normally have been printed. The scanning will stop on the first match."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_8460: search for bash and rsync files in the entire file system excluding search in the path /usr/share folder and discard all the errors",
+        "nl2bash_10696: Recursively copy \"dir_a\" to \"dir_b\" and delete any new files in \"dir_b\"",
+        "nl2bash_10695: Recursively copy \"/path/to/data/myappdata/*.txt\" to \"user@host:/remote/path/to/data/myappdata/\""
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_8460: find / -path /usr/share -prune -o \\( -name rsync -o -name bash \\) -print 2>/dev/nul",
+        "nl2bash_10696: rsync -u -r --delete dir_a dir_b",
+        "nl2bash_10695: rsync -rvv /path/to/data/myappdata/*.txt user@host:/remote/path/to/data/myappdata/"
+      ],
+      "Explanations about Options": {
+        "-o": "This option causes rsync to set the owner of the destination file to be the same as\n the source file, but only if the receiving rsync is being run as the super-user\n (see also the --super and --fake-super options). Without this option, the owner of\n new and/or transferred files are set to the invoking user on the receiving side.",
+        "-a": "This is equivalent to -rlptgoD. It is a quick way of saying you want recursion and\n want to preserve almost everything (with -H being a notable omission). The only\n exception to the above equivalence is when --files-from is specified, in which case\n -r is not implied.",
+        "-n": "This makes rsync perform a trial run that doesn\u2019t make any changes (and produces\n mostly the same output as a real run). It is most commonly used in combination\n with the -v, --verbose and/or -i, --itemize-changes options to see what an rsync\n command is going to do before one actually runs it.",
+        "-e": "This option allows you to choose an alternative remote shell program to use for\n communication between the local and remote copies of rsync. Typically, rsync is\n configured to use ssh by default, but you may prefer to use rsh on a local network.",
+        "-v": "This option increases the amount of information you are given during the transfer.\n By default, rsync works silently. A single -v will give you information about what\n files are being transferred and a brief summary at the end. Two -v options will\n give you information on what files are being skipped and slightly more information\n at the end. More than two -v options should only be used if you are debugging\n rsync.",
+        "-u": "This forces rsync to skip any files which exist on the destination and have a\n modified time that is newer than the source file. (If an existing destination file\n has a modification time equal to the source file\u2019s, it will be updated if the sizes\n are different.)",
+        "-r": "This tells rsync to copy directories recursively. See also --dirs (-d).",
+        "-m": "This option tells the receiving rsync to get rid of empty directories from the\n file-list, including nested directories that have no non-directory children. This\n is useful for avoiding the creation of a bunch of useless directories when the\n sending rsync is recursively scanning a hierarchy of files using\n include/exclude/filter rules."
+      }
+    },
+    {
+      "Command": "ls",
+      "MP Summary": "list directory contents",
+      "Most Similar TLDR Task": "List all files, with trailing `/` added to directory names",
+      "Most Similar TLDR Script": "ls -F",
+      "Most Similar NL2Bash Task": "Search the current directory tree for .log files containing the string \"The SAS System\", and save their names to sas_log_list.txt",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -name \"*.log\" -exec grep -l \"The SAS System\" {} \\; > sas_log_list.txt\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-l": "Suppress normal output; instead print the name of each input file from which output\n would normally have been printed. The scanning will stop on the first match."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_1427: Execute \"ls -l\" every 2 seconds and highlight the differences in runs"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_1427: watch -d ls -l"
+      ],
+      "Explanations about Options": {
+        "-l": "use a long listing format"
+      }
+    },
+    {
+      "Command": "kill",
+      "MP Summary": "send a signal to a process",
+      "Most Similar TLDR Task": "Terminate a program using the default SIGTERM (terminate) signal",
+      "Most Similar TLDR Script": "kill {{process_id}}",
+      "Most Similar NL2Bash Task": "Search the current directory tree for .log files containing the string \"The SAS System\", and save their names to sas_log_list.txt",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -name \"*.log\" -exec grep -l \"The SAS System\" {} \\; > sas_log_list.txt\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-l": "Suppress normal output; instead print the name of each input file from which output\n would normally have been printed. The scanning will stop on the first match."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_10463: Send SIGWINCH process to current shell, causing it to update the LINES and COLUMNS variables which describe the size of the screen/window in characters.",
+        "nl2bash_10460: Send SIGTERM signal to first process sent to background by the current shell.",
+        "nl2bash_10461: Send SIGTERM signal to last process sent to background by the current shell."
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_10463: kill -s WINCH $$",
+        "nl2bash_10460: kill %1",
+        "nl2bash_10461: kill $!"
+      ],
+      "Explanations about Options": {
+        "-s": " Specify the signal to be sent. The signal can be specified by using name or\n number. The behavior of signals is explained in signal(7) manual page."
+      }
+    },
+    {
+      "Command": "more",
+      "MP Summary": "file perusal filter for crt viewing",
+      "Most Similar TLDR Task": "Open a file",
+      "Most Similar TLDR Script": "more {{source_file}}",
+      "Most Similar NL2Bash Task": "Search the current directory tree for .log files containing the string \"The SAS System\", and save their names to sas_log_list.txt",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -name \"*.log\" -exec grep -l \"The SAS System\" {} \\; > sas_log_list.txt\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-l": "Suppress normal output; instead print the name of each input file from which output\n would normally have been printed. The scanning will stop on the first match."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_1555: Run \"myprogram\", pausing for user input at each page.",
+        "nl2bash_1554: Run \"myprogram\" in the current directory, pausing for user input at each page."
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_1555: myprogram|more",
+        "nl2bash_1554: ./myprogram | more"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "tr",
+      "MP Summary": "translate or delete characters",
+      "Most Similar TLDR Task": "Compress a series of identical characters to a single character",
+      "Most Similar TLDR Script": "tr -s '{{input_characters}}' < {{filename}}",
+      "Most Similar NL2Bash Task": "Search the current directory tree for .log files containing the string \"The SAS System\", and save their names to sas_log_list.txt",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -name \"*.log\" -exec grep -l \"The SAS System\" {} \\; > sas_log_list.txt\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-l": "Suppress normal output; instead print the name of each input file from which output\n would normally have been printed. The scanning will stop on the first match."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_13738: Calculate the sum of all the numbers from 1 to 10"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_13738: seq 10 | tr '[\\n]' '+' | sed -e 's/+/ + /g' -e's/ + $/\\n/' | xargs expr"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "awk",
+      "MP Summary": "pattern scanning and processing language",
+      "Most Similar TLDR Task": "Print the second column of the lines containing \"something\" in a space-separated file",
+      "Most Similar TLDR Script": "awk '/{{something}}/ {print $2}' {{filename}}",
+      "Most Similar NL2Bash Task": "Search the current directory tree for .log files containing the string \"The SAS System\", and save their names to sas_log_list.txt",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -name \"*.log\" -exec grep -l \"The SAS System\" {} \\; > sas_log_list.txt\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-l": "Suppress normal output; instead print the name of each input file from which output\n would normally have been printed. The scanning will stop on the first match."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_13956: Counts total number of only lines with alphanumeric symbols in all *.php files in a current folder and subfolders."
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_13956: find . -name '*.php' | xargs cat | awk '/[a-zA-Z0-9]/ {i++} END{print i}'"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "cd",
+      "MP Summary": "change the working directory",
+      "Most Similar TLDR Task": "Go to home directory of current user",
+      "Most Similar TLDR Script": "cd",
+      "Most Similar NL2Bash Task": "Search the current directory tree for .log files containing the string \"The SAS System\", and save their names to sas_log_list.txt",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -name \"*.log\" -exec grep -l \"The SAS System\" {} \\; > sas_log_list.txt\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-l": "Suppress normal output; instead print the name of each input file from which output\n would normally have been printed. The scanning will stop on the first match."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_655208: Game came in a .zip file. How to install it?"
+      ],
+      "Top-3 Scripts": [
+        "au_655208: cd ~/Downloads/linux64\n\ncd ~/Downloads/linux32"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "seq",
+      "MP Summary": "print a sequence of numbers",
+      "Most Similar TLDR Task": "Separate the output with a space instead of a newline",
+      "Most Similar TLDR Script": "seq -s \" \" 5 3 20",
+      "Most Similar NL2Bash Task": "Search the current directory tree for .log files containing the string \"The SAS System\", and save their names to sas_log_list.txt",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -name \"*.log\" -exec grep -l \"The SAS System\" {} \\; > sas_log_list.txt\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-l": "Suppress normal output; instead print the name of each input file from which output\n would normally have been printed. The scanning will stop on the first match."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_13738: Calculate the sum of all the numbers from 1 to 10",
+        "nl2bash_13737: Calculate the sum of all the numbers from -5 to 10",
+        "nl2bash_13739: Calculate the sum of all the numbers from 1 to 100000"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_13738: seq 10 | jq -s 'add'\n\n\nseq 10 | tr '[\\n]' '+' | sed -e 's/+/ + /g' -e's/ + $/\\n/' | xargs expr\n\n\nseq 10|jq -s add",
+        "nl2bash_13737: seq -5 10 | xargs printf \"- - %s\" | xargs  | bc\n\n\nseq -s+ -5 10 | bc",
+        "nl2bash_13739: seq 100000 | paste -sd+ | bc -l"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "paste",
+      "MP Summary": "merge lines of files",
+      "Most Similar TLDR Task": "Merge two files, with lines added alternatively",
+      "Most Similar TLDR Script": "paste -d '\\n' {{file1}} {{file2}}",
+      "Most Similar NL2Bash Task": "Search the current directory tree for .log files containing the string \"The SAS System\", and save their names to sas_log_list.txt",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -name \"*.log\" -exec grep -l \"The SAS System\" {} \\; > sas_log_list.txt\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-l": "Suppress normal output; instead print the name of each input file from which output\n would normally have been printed. The scanning will stop on the first match."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_13739: Calculate the sum of all the numbers from 1 to 100000"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_13739: seq 100000 | paste -sd+ | bc -l"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "chmod",
+      "MP Summary": "change file mode bits",
+      "Most Similar TLDR Task": "Give the [u]ser rights to [r]ead and [w]rite to a file/directory",
+      "Most Similar TLDR Script": "chmod u+rw {{file_or_directory}}",
+      "Most Similar NL2Bash Task": "Search the current directory tree for .log files containing the string \"The SAS System\", and save their names to sas_log_list.txt",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -name \"*.log\" -exec grep -l \"The SAS System\" {} \\; > sas_log_list.txt\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-l": "Suppress normal output; instead print the name of each input file from which output\n would normally have been printed. The scanning will stop on the first match."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_655208: Game came in a .zip file. How to install it?"
+      ],
+      "Top-3 Scripts": [
+        "au_655208: chmod +x campfire\n./campfire"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "which",
+      "MP Summary": "locate a command",
+      "Most Similar TLDR Task": "Search the PATH environment variable and display the location of any matching executables",
+      "Most Similar TLDR Script": "which {{executable}}",
+      "Most Similar NL2Bash Task": "Search the current directory tree for .log files containing the string \"The SAS System\", and save their names to sas_log_list.txt",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -name \"*.log\" -exec grep -l \"The SAS System\" {} \\; > sas_log_list.txt\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-l": "Suppress normal output; instead print the name of each input file from which output\n would normally have been printed. The scanning will stop on the first match."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_1552: Run \"./configure\" with a new environment variable CC set to the full path of the command 'gcc'"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_1552: CC=$(which gcc) ./configure"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "sudo",
+      "MP Summary": "execute a command as another user",
+      "Most Similar TLDR Task": "Run a command as another user and/or group",
+      "Most Similar TLDR Script": "sudo -u {{user}} -g {{group}} {{id -a}}",
+      "Most Similar NL2Bash Task": "Search the current directory tree for .log files containing the string \"The SAS System\", and save their names to sas_log_list.txt",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -name \"*.log\" -exec grep -l \"The SAS System\" {} \\; > sas_log_list.txt\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-l": "Suppress normal output; instead print the name of each input file from which output\n would normally have been printed. The scanning will stop on the first match."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_13151: create a symbolic link named \"$ORACLE_HOME/include\" to file \"/usr/include/oracle/11.2/client\""
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_13151: sudo ln -s /usr/include/oracle/11.2/client $ORACLE_HOME/include"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "jq",
+      "MP Summary": "Command-line JSON processor",
+      "Most Similar TLDR Task": "Output all elements from arrays (or all the values from objects) in a JSON file",
+      "Most Similar TLDR Script": "jq '.[]' {{file.json}}",
+      "Most Similar NL2Bash Task": "Search the current directory tree for .log files containing the string \"The SAS System\", and save their names to sas_log_list.txt",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -name \"*.log\" -exec grep -l \"The SAS System\" {} \\; > sas_log_list.txt\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-l": "Suppress normal output; instead print the name of each input file from which output\n would normally have been printed. The scanning will stop on the first match."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_13738: Calculate the sum of all the numbers from 1 to 10"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_13738: seq 10 | jq -s 'add'\n\n\nseq 10|jq -s add"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "diff",
+      "MP Summary": "compare two files",
+      "Most Similar TLDR Task": "Compare directories recursively (shows names for differing files/directories as well as changes made to files)",
+      "Most Similar TLDR Script": "diff -r {{old_directory}} {{new_directory}}",
+      "Most Similar NL2Bash Task": "Search the current directory tree for .log files containing the string \"The SAS System\", and save their names to sas_log_list.txt",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -name \"*.log\" -exec grep -l \"The SAS System\" {} \\; > sas_log_list.txt\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-l": "Suppress normal output; instead print the name of each input file from which output\n would normally have been printed. The scanning will stop on the first match."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_9319: Print a minimal set of differences between files in directories \"teste1\" and \"teste2\", treat absent files as empty, ignore differences in whitespace, treat all files as text, and print 3 lines of unified context"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_9319: diff -burNad teste1 teste2"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "watch",
+      "MP Summary": "execute a program periodically, showing output fullscreen",
+      "Most Similar TLDR Task": "Monitor files in the current directory",
+      "Most Similar TLDR Script": "watch {{ls}}",
+      "Most Similar NL2Bash Task": "Search the current directory tree for .log files containing the string \"The SAS System\", and save their names to sas_log_list.txt",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -name \"*.log\" -exec grep -l \"The SAS System\" {} \\; > sas_log_list.txt\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-l": "Suppress normal output; instead print the name of each input file from which output\n would normally have been printed. The scanning will stop on the first match."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_1427: Execute \"ls -l\" every 2 seconds and highlight the differences in runs"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_1427: watch -d ls -l"
+      ],
+      "Explanations about Options": {
+        "-d": "Highlight the differences between successive updates. Option will read optional\n argument that changes highlight to be permanent, allowing to see what has changed\n at least once since first iteration."
+      }
+    },
+    {
+      "Command": "printf",
+      "MP Summary": "format and print data",
+      "Most Similar TLDR Task": "Print a text message composed with environment variables",
+      "Most Similar TLDR Script": "printf \"{{var1: %s\\tvar2: %s\\n}}\" \"{{$VAR1}}\" \"{{$VAR2}}\"",
+      "Most Similar NL2Bash Task": "Search the current directory tree for .log files containing the string \"The SAS System\", and save their names to sas_log_list.txt",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -name \"*.log\" -exec grep -l \"The SAS System\" {} \\; > sas_log_list.txt\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-l": "Suppress normal output; instead print the name of each input file from which output\n would normally have been printed. The scanning will stop on the first match."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_13737: Calculate the sum of all the numbers from -5 to 10"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_13737: seq -5 10 | xargs printf \"- - %s\" | xargs  | bc"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "cut",
+      "MP Summary": "remove sections from each line of files",
+      "Most Similar TLDR Task": "Cut out the first sixteen characters of each line of the given files",
+      "Most Similar TLDR Script": "cut -c {{1-16}} {{file}}",
+      "Most Similar NL2Bash Task": "Search the current directory tree for .log files containing the string \"The SAS System\", and save their names to sas_log_list.txt",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -name \"*.log\" -exec grep -l \"The SAS System\" {} \\; > sas_log_list.txt\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-l": "Suppress normal output; instead print the name of each input file from which output\n would normally have been printed. The scanning will stop on the first match."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_10462: Send SIGTERM signal to the first process whose command matches \"csp_build\""
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_10462: ps aux | grep 'python csp_build.py' | head -1 | cut -d \" \" -f 2 | xargs kill"
+      ],
+      "Explanations about Options": {
+        "-d": "use DELIM instead of TAB for field delimiter",
+        "-f": "select only these fields; also print any line that contains no delimiter\n character, unless the -s option is specified"
+      }
+    },
+    {
+      "Command": "ssh",
+      "MP Summary": "OpenSSH SSH client (remote login program)",
+      "Most Similar TLDR Task": "Run a command on a remote server",
+      "Most Similar TLDR Script": "ssh {{remote_host}} {{command -with -flags}}",
+      "Most Similar NL2Bash Task": "Search the current directory tree for .log files containing the string \"The SAS System\", and save their names to sas_log_list.txt",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -name \"*.log\" -exec grep -l \"The SAS System\" {} \\; > sas_log_list.txt\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-l": "Suppress normal output; instead print the name of each input file from which output\n would normally have been printed. The scanning will stop on the first match."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_1553: Run \"command\" on server \"host\" as user \"user\""
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_1553: echo \"command\" | ssh user@host"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "expr",
+      "MP Summary": "evaluate arguments as an expression",
+      "Most Similar TLDR Task": "Get position of the first character in 'string' that matches 'substring'",
+      "Most Similar TLDR Script": "echo $(expr index {{string}} {{substring}})",
+      "Most Similar NL2Bash Task": "Search the current directory tree for .log files containing the string \"The SAS System\", and save their names to sas_log_list.txt",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -name \"*.log\" -exec grep -l \"The SAS System\" {} \\; > sas_log_list.txt\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-l": "Suppress normal output; instead print the name of each input file from which output\n would normally have been printed. The scanning will stop on the first match."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_13738: Calculate the sum of all the numbers from 1 to 10"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_13738: seq 10 | tr '[\\n]' '+' | sed -e 's/+/ + /g' -e's/ + $/\\n/' | xargs expr"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "bc",
+      "MP Summary": "An arbitrary precision calculator language",
+      "Most Similar TLDR Task": "Calculate expression and force number of decimal places to 10",
+      "Most Similar TLDR Script": "bc <<< \"scale=10; 5 / 3\"",
+      "Most Similar NL2Bash Task": "Search the current directory tree for .log files containing the string \"The SAS System\", and save their names to sas_log_list.txt",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -name \"*.log\" -exec grep -l \"The SAS System\" {} \\; > sas_log_list.txt\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-l": "Suppress normal output; instead print the name of each input file from which output\n would normally have been printed. The scanning will stop on the first match."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_13737: Calculate the sum of all the numbers from -5 to 10",
+        "nl2bash_13739: Calculate the sum of all the numbers from 1 to 100000"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_13737: seq -5 10 | xargs printf \"- - %s\" | xargs  | bc\n\n\nseq -s+ -5 10 | bc",
+        "nl2bash_13739: seq 100000 | paste -sd+ | bc -l"
+      ],
+      "Explanations about Options": {
+        "-l": "Define the standard math library."
+      }
+    },
+    {
+      "Command": "perl",
+      "MP Summary": "The Perl 5 language interpreter",
+      "Most Similar TLDR Task": "Run a multi-line find/replace expression on a file, and save the result in another file",
+      "Most Similar TLDR Script": "perl -p0e 's/{{foo\\nbar}}/{{foobar}}/g' {{input_file}} > {{output_file}}",
+      "Most Similar NL2Bash Task": "Search the current directory tree for .log files containing the string \"The SAS System\", and save their names to sas_log_list.txt",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -name \"*.log\" -exec grep -l \"The SAS System\" {} \\; > sas_log_list.txt\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-l": "Suppress normal output; instead print the name of each input file from which output\n would normally have been printed. The scanning will stop on the first match."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_3553: Find all files under current directory that match the case insensitive regex .\\|./.git and replace all occurrences of the regex $1 (literal) with $upper2 (literal) in these files"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_3553: find . -type f \\! -iregex '.\\|./.git' -exec perl -i -pe 's/$1/$upper2/gi' {} \\;"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "ps",
+      "MP Summary": "report a snapshot of the current processes.",
+      "Most Similar TLDR Task": "List all running processes including the full command string",
+      "Most Similar TLDR Script": "ps auxww",
+      "Most Similar NL2Bash Task": "Search the current directory tree for .log files containing the string \"The SAS System\", and save their names to sas_log_list.txt",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -name \"*.log\" -exec grep -l \"The SAS System\" {} \\; > sas_log_list.txt\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-l": "Suppress normal output; instead print the name of each input file from which output\n would normally have been printed. The scanning will stop on the first match."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_10462: Send SIGTERM signal to the first process whose command matches \"csp_build\""
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_10462: ps aux | grep 'python csp_build.py' | head -1 | cut -d \" \" -f 2 | xargs kill"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "screen",
+      "MP Summary": "screen manager with VT100/ANSI terminal emulation",
+      "Most Similar TLDR Task": "Detach from inside a screen",
+      "Most Similar TLDR Script": "Ctrl + A, D",
+      "Most Similar NL2Bash Task": "Search the current directory tree for .log files containing the string \"The SAS System\", and save their names to sas_log_list.txt",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -name \"*.log\" -exec grep -l \"The SAS System\" {} \\; > sas_log_list.txt\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-l": "Suppress normal output; instead print the name of each input file from which output\n would normally have been printed. The scanning will stop on the first match."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_8795: start new screen session or to take over the most recent detached one"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_8795: screen -Rd"
+      ],
+      "Explanations about Options": {
+        "-d": "does not start screen, but detaches the elsewhere running screen session. It has the\n same effect as typing \"C-a d\" from screen's controlling terminal. -D is the\n equivalent to the power detach key. If no session can be detached, this option is\n ignored. In combination with the -r/-R option more powerful effects can be achieved:"
+      }
+    },
+    {
+      "Command": "dig",
+      "MP Summary": "DNS lookup utility",
+      "Most Similar TLDR Task": "Perform iterative queries and display the entire trace path to resolve a domain name",
+      "Most Similar TLDR Script": "dig +trace {{example.com}}",
+      "Most Similar NL2Bash Task": "Search the current directory tree for .log files containing the string \"The SAS System\", and save their names to sas_log_list.txt",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -name \"*.log\" -exec grep -l \"The SAS System\" {} \\; > sas_log_list.txt\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-l": "Suppress normal output; instead print the name of each input file from which output\n would normally have been printed. The scanning will stop on the first match."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_9659: Print short TXT record of domain o-o.myaddr.l.google.com from nameserver 8.8.8.8"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_9659: dig TXT +short o-o.myaddr.l.google.com @8.8.8.8"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "octave",
+      "MP Summary": "A high-level interactive language for numerical computations.",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "Search the current directory tree for .log files containing the string \"The SAS System\", and save their names to sas_log_list.txt",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -name \"*.log\" -exec grep -l \"The SAS System\" {} \\; > sas_log_list.txt\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-l": "Suppress normal output; instead print the name of each input file from which output\n would normally have been printed. The scanning will stop on the first match."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_13736: Calculate the sin values of the interval from 0 to pi/2 with a step of 1, add a line number, and write the output to standard output and \"y.txt\""
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_13736: octave -q --eval 'printf (\"%f\\n\", sin([0:0.1:pi/2]))'|nl|tee y.txt"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "egrep",
+      "MP Summary": "print lines that match patterns",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "Search the current directory tree for .log files containing the string \"The SAS System\", and save their names to sas_log_list.txt",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -name \"*.log\" -exec grep -l \"The SAS System\" {} \\; > sas_log_list.txt\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-l": "Suppress normal output; instead print the name of each input file from which output\n would normally have been printed. The scanning will stop on the first match."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_3464: Find all files under /usr/tom that matches the extended regex '*.pl| *.pm'   in their names and also matches the regex <PATTERN> in their contents",
+        "nl2bash_3463: Find all files under /usr/tom that matches the extended regex '*.pl| *.pm'   in their names and also matches the regex <PATTERN> in their contents"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_3464: find /usr/tom | egrep '*.pl| *.pm' | xargs cat | grep <PATTERN>",
+        "nl2bash_3463: find /usr/tom | egrep '*.pl| *.pm' | xargs cat | grep <PATTERN>"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "dev",
+      "MP Summary": "release candidate LaTeX testing",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "Search the current directory tree for .log files containing the string \"The SAS System\", and save their names to sas_log_list.txt",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -name \"*.log\" -exec grep -l \"The SAS System\" {} \\; > sas_log_list.txt\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-l": "Suppress normal output; instead print the name of each input file from which output\n would normally have been printed. The scanning will stop on the first match."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_8460: search for bash and rsync files in the entire file system excluding search in the path /usr/share folder and discard all the errors",
+        "nl2bash_13125: create a backup of all the files in the home folder on a partition and save the log to a file"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_8460: find / -path /usr/share -prune -o \\( -name rsync -o -name bash \\) -print 2>/dev/nul",
+        "nl2bash_13125: find /home -depth -print | cpio -ov -0 /dev/rmt0 | tee -a tape.log"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "to",
+      "MP Summary": "as the filename. --logdir <name> Writes each synchronization log output in a new file in the specified directory. --logexpire <hours> Removes logs older than the value specified (in hours). This command is  used  with --logdir. --logflush Clears (flushes) the log file after each write action. --logdebug Also  output  debug-level  messages  in  the log (equivalent to setting the env var QT_LOGGING_RULES=\"qt.*=true;*.debug=true\"). ) --confdir <dirname> Uses the specified configuration directory. The ownCloud Client reads a configuration file.  You can locate this configuration file as follows: On Linux distributions: $HOME/.config/ownCloud/owncloud.cfg On Microsoft Windows systems: %APPDATA%\\ownCloud\\owncloud.cfg On MAC OS X systems: $HOME/Library/Preferences/ownCloud/owncloud.cfg The configuration file contains settings using the Microsoft Windows .ini file format. You can overwrite changes using the ownCloud configuration dialog. NOTE: Use caution when making changes to the ownCloud Client configuration  file.   Incorrect settings can produce unintended results. Some interesting values that can be set on the configuration file are: \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510 \u2502[ownCloud] section          \u2502         \u2502                          \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502Variable                    \u2502 Default \u2502 Meaning                  \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502remotePollInterval          \u2502 30000   \u2502 Specifies  the poll time \u2502 \u2502                            \u2502         \u2502 for      the      remote \u2502 \u2502                            \u2502         \u2502 repository            in \u2502 \u2502                            \u2502         \u2502 milliseconds.            \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502forceSyncInterval           \u2502 7200000 \u2502 The   duration   of   no \u2502 \u2502                            \u2502         \u2502 activity  after  which a \u2502 \u2502                            \u2502         \u2502 synchronization      run \u2502 \u2502                            \u2502         \u2502 shall    be    triggered \u2502 \u2502                            \u2502         \u2502 automatically.           \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502fullLocalDiscoveryInterval  \u2502 3600000 \u2502 The interval after which \u2502 \u2502                            \u2502         \u2502 the next synchronization \u2502 \u2502                            \u2502         \u2502 will   perform   a  full \u2502 \u2502                            \u2502         \u2502 local discovery.         \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502notificationRefreshInterval \u2502 300000  \u2502 Specifies   the  default \u2502 \u2502                            \u2502         \u2502 interval of checking for \u2502 \u2502                            \u2502         \u2502 new server notifications \u2502 \u2502                            \u2502         \u2502 in milliseconds.         \u2502 \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518 \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510 \u2502[General] section       \u2502         \u2502                          \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502Variable                \u2502 Default \u2502 Meaning                  \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502chunkSize               \u2502 5242880 \u2502 Specifies the chunk size \u2502 \u2502                        \u2502         \u2502 of   uploaded  files  in \u2502 \u2502                        \u2502         \u2502 bytes.                   \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502promptDeleteAllFiles    \u2502 true    \u2502 If a  UI  prompt  should \u2502 \u2502                        \u2502         \u2502 ask  for confirmation if \u2502 \u2502                        \u2502         \u2502 it was detected that all \u2502 \u2502                        \u2502         \u2502 files  and  folders were \u2502 \u2502                        \u2502         \u2502 deleted.                 \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502maxLogLines             \u2502 20000   \u2502 Specifies  the   maximum \u2502 \u2502                        \u2502         \u2502 number   of   log  lines \u2502 \u2502                        \u2502         \u2502 displayed  in  the   log \u2502 \u2502                        \u2502         \u2502 window.                  \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502timeout                 \u2502 300     \u2502 The  timeout for network \u2502 \u2502                        \u2502         \u2502 connections in seconds.  \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502moveToTrash             \u2502 false   \u2502 If  non-locally  deleted \u2502 \u2502                        \u2502         \u2502 files should be moved to \u2502 \u2502                        \u2502         \u2502 trash     instead     of \u2502 \u2502                        \u2502         \u2502 deleting            them \u2502 \u2502                        \u2502         \u2502 completely.  This option \u2502 \u2502                        \u2502         \u2502 only works on linux      \u2502 \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518 \u2502showExperimentalOptions \u2502 false   \u2502 Whether      to     show \u2502 \u2502                        \u2502         \u2502 experimental     options \u2502 \u2502                        \u2502         \u2502 that      are      still \u2502 \u2502                        \u2502         \u2502 undergoing  testing   in \u2502 \u2502                        \u2502         \u2502 the    user   interface. \u2502 \u2502                        \u2502         \u2502 Turning this on does not \u2502 \u2502                        \u2502         \u2502 enable      experimental \u2502 \u2502                        \u2502         \u2502 behavior on its own.  It \u2502 \u2502                        \u2502         \u2502 does     enable     user \u2502 \u2502                        \u2502         \u2502 inferface  options  that \u2502 \u2502                        \u2502         \u2502 can be used to opt in to \u2502 \u2502                        \u2502         \u2502 experimental features.   \u2502 \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518 \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510 \u2502[Proxy] section      \u2502           \u2502                          \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502Variable             \u2502 Default   \u2502 Meaning                  \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502host                 \u2502 127.0.0.1 \u2502 The address of the proxy \u2502 \u2502                     \u2502           \u2502 server.                  \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502port                 \u2502 8080      \u2502 The  port were the proxy \u2502 \u2502                     \u2502           \u2502 is listening.            \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502type                 \u2502 2         \u2502 0 for System Proxy.      \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u25021 for SOCKS5 Proxy.  \u2502           \u2502                          \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u25022 for No Proxy.      \u2502           \u2502                          \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u25023 for HTTP(S) Proxy. \u2502           \u2502                          \u2502 \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518 Please report bugs at https://github.com/owncloud/client/issues. owncloudcmd(1)",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "Search the current directory tree for .log files containing the string \"The SAS System\", and save their names to sas_log_list.txt",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -name \"*.log\" -exec grep -l \"The SAS System\" {} \\; > sas_log_list.txt\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-l": "Suppress normal output; instead print the name of each input file from which output\n would normally have been printed. The scanning will stop on the first match."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_10695: Recursively copy \"/path/to/data/myappdata/*.txt\" to \"user@host:/remote/path/to/data/myappdata/\""
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_10695: rsync -rvv /path/to/data/myappdata/*.txt user@host:/remote/path/to/data/myappdata/"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "config",
+      "MP Summary": "build system configuration files",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "Search the current directory tree for .log files containing the string \"The SAS System\", and save their names to sas_log_list.txt",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -name \"*.log\" -exec grep -l \"The SAS System\" {} \\; > sas_log_list.txt\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-l": "Suppress normal output; instead print the name of each input file from which output\n would normally have been printed. The scanning will stop on the first match."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_13149: create a symbolic link in current directory named \"environments\" to file \"../config/environments\""
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_13149: ln -s \"../config/environments\""
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

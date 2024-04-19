@@ -1,0 +1,98 @@
+{
+  "Query": "How do I download a file from the internet to my linux server with Bash",
+  "Answers": [
+    {
+      "Command": "ftp",
+      "MP Summary": "Internet file transfer program",
+      "Most Similar TLDR Task": "Delete multiple files on the remote server",
+      "Most Similar TLDR Script": "mdelete {{*.txt}}",
+      "Top-3 Similar Questions": [
+        "su_891479: Download multiple files from ftp server with bash script"
+      ],
+      "Top-3 Scripts": [
+        "su_891479: ftp -in ftp://user:pw@ftp.srv1.de << EOF\n    binary\n    cd Datenbankbackup\n    mget *\nEOF"
+      ],
+      "Explanations about Options": {
+        "-i": "Turns off interactive prompting during multiple file transfers.",
+        "-n": "Restrains ftp from attempting \u201cauto-login\u201d upon initial connection. If auto-login is\n enabled, ftp will check the .netrc (see netrc(5)) file in the user's home directory\n for an entry describing an account on the remote machine. If no entry exists, ftp\n will prompt for the remote machine login name (default is the user identity on the\n local machine), and, if necessary, prompt for a password and an account with which to\n login."
+      }
+    },
+    {
+      "Command": "aria2c",
+      "MP Summary": "The ultra fast download utility",
+      "Most Similar TLDR Task": "Download with multiple connections",
+      "Most Similar TLDR Script": "aria2c -s {{connections_num}} {{url}}",
+      "Top-3 Similar Questions": [
+        "au_679813: Download manager with browser integration in chrome",
+        "so_22114610: Downloading a file with wget using multiple connections"
+      ],
+      "Top-3 Scripts": [
+        "au_679813: aria2c \"https://upload.wikimedia.org/wikipedia/commons/a/a3/Philaethria_hecale_2_Richard_Bartz.jpg\"\n\naria2c -x8 \"https://upload.wikimedia.org/wikipedia/commons/a/a3/Philaethria_hecale_2_Richard_Bartz.jpg\"\n\ncd ~/Downloads\naria2c -x8 \"https://upload.wikimedia.org/wikipedia/commons/a/a3/Philaethria_hecale_2_Richard_Bartz.jpg\"\n\nman aria2c",
+        "so_22114610: aria2c -x 16 [url] #where 16 is the number of connections"
+      ],
+      "Explanations about Options": {
+        "-x": "The maximum number of connections to one server for each download. Default: 1"
+      }
+    },
+    {
+      "Command": "scp",
+      "MP Summary": "secure copy (remote file copy program)",
+      "Most Similar TLDR Task": "Copy a file between two remote hosts transferring through the local host",
+      "Most Similar TLDR Script": "scp -3 {{host1}}:{{path/to/remote_file}} {{host2}}:{{path/to/remote_directory}}",
+      "Top-3 Similar Questions": [
+        "so_21621968: Download a file from a Server with double ssh",
+        "ul_295704: How do I download a file from a host i'm already connected to over ssh",
+        "so_9427553: How to download a file from server using SSH?"
+      ],
+      "Top-3 Scripts": [
+        "so_21621968: scp -r -i path-to-secret-key ubuntu@ec2-address:/home/ubuntu/app-folder-location /home/user/local-mc-location\n\nscp -r ubuntu@ec2-address:/home/ubuntu/app-folder-location /home/user/local-mc-location",
+        "ul_295704: scp xyz@remote:/home/user/test /home/user\n\n[local] $ ssh -R 2222:localhost:22 remote\n[remote]$ scp -P 2222 /home/user/test xyz@localhost:/home/user",
+        "so_9427553: scp your_username@remotehost.edu:foobar.txt /local/dir\n\nscp -i key_file.pem your_username@remotehost.edu:/remote/dir/foobar.txt /local/dir"
+      ],
+      "Explanations about Options": {
+        "-i": "Selects the file from which the identity (private key) for public key authentication\n is read. This option is directly passed to ssh(1).",
+        "-r": "Recursively copy entire directories. Note that scp follows symbolic links\n encountered in the tree traversal.",
+        "-P": "Specifies the port to connect to on the remote host. Note that this option is\n written with a capital \u2018P\u2019, because -p is already reserved for preserving the times\n and modes of the file."
+      }
+    },
+    {
+      "Command": "ssh",
+      "MP Summary": "OpenSSH SSH client (remote login program)",
+      "Most Similar TLDR Task": "Run a command on a remote server",
+      "Most Similar TLDR Script": "ssh {{remote_host}} {{command -with -flags}}",
+      "Top-3 Similar Questions": [
+        "ul_295704: How do I download a file from a host i'm already connected to over ssh",
+        "so_68230707: Downloading a File from SSH with Sudo"
+      ],
+      "Top-3 Scripts": [
+        "ul_295704: [local] $ ssh -R 2222:localhost:22 remote\n[remote]$ scp -P 2222 /home/user/test xyz@localhost:/home/user",
+        "so_68230707: $ CONTENT=$(expect -c 'spawn ssh -t user@localhost \"sudo cat /tmp/file.txt\"; expect \"password\"; send \"userpassword\\r\"; expect \"password\"; send \"userpassword\\r\"; interact' | sed -n '4p')\n\n$ CONTENT=$(expect -c \n       'spawn ssh -t user@localhost \"sudo cat /tmp/deneme.txt\";\n        expect \"password\"; send \"userpassword\\r\";       #for first prompt of remote connection.\n        expect \"password\"; send \"userpassword\\r\";       #for second prompt of sudo.\n        interact' | sed -n '4p')                        #4th line displayed in the terminal is the file content.\n\n$ expect -c 'spawn ssh -t user@localhost \"sudo cat /tmp/file.txt\"; expect \"password\"; send \"userpassword\\r\"; expect \"password\"; send \"userpassword\\r\"; interact'\nspawn ssh -t user@localhost sudo cat /tmp/file.txt\nuser@localhost's password: \n[sudo] password for user: \nlorem ipsum dolor sit amet\nConnection to localhost closed."
+      ],
+      "Explanations about Options": {
+        "-t": "Force pseudo-terminal allocation. This can be used to execute arbitrary screen-\n based programs on a remote machine, which can be very useful, e.g. when implementing\n menu services. Multiple -t options force tty allocation, even if ssh has no local\n tty."
+      }
+    },
+    {
+      "Command": "curl",
+      "MP Summary": "transfer a URL",
+      "Most Similar TLDR Task": "Download the contents of an URL to a file",
+      "Most Similar TLDR Script": "curl {{http://example.com}} -o {{filename}}",
+      "Top-3 Similar Questions": [
+        "so_69816743: Download multiple files simultaneously with variable in URL with Curl",
+        "so_53134352: How to download images from Google with terminal? (Mac)",
+        "su_234749: How do I download a single file in 2 parts to different locations using wget?"
+      ],
+      "Top-3 Scripts": [
+        "so_69816743: curl 'https://website.com/shop.php?store_id=[4-80]&page=[1-200]&PHPSESSID=sessionID' -O --parallel --parallel-max 100",
+        "so_53134352: curl -O https://i.imgur.com/PmPGYHR.png\n\ncurl https://imgur.com/gallery/yu5An |grep \"link rel=\\\"image_src\" |cut -d'\"' -f4",
+        "su_234749: curl -o customname -r0-499 <url>"
+      ],
+      "Explanations about Options": {
+        "--parallel-max": "When asked to do parallel transfers, using -Z, --parallel, this option controls the\n maximum amount of transfers to do simultaneously.",
+        "-O": "Write output to a local file named like the remote file we get. (Only the file part\n of the remote file is used, the path is cut off.)",
+        "-o": "Write output to <file> instead of stdout. If you are using {} or [] to fetch\n multiple documents, you can use '#' followed by a number in the <file> specifier.\n That variable will be replaced with the current string for the URL being fetched.\n Like in:",
+        "--parallel": "Makes curl perform its transfers in parallel as compared to the regular serial\n manner."
+      }
+    }
+  ]
+}

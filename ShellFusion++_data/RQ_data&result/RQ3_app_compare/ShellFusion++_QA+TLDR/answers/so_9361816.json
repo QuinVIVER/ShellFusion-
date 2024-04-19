@@ -1,0 +1,89 @@
+{
+  "Query": "Maximum number of processes in linux",
+  "Answers": [
+    {
+      "Command": "ulimit",
+      "MP Summary": "set or report file size limit",
+      "Most Similar TLDR Task": "Set max per-user process limit",
+      "Most Similar TLDR Script": "ulimit -u 30",
+      "Top-3 Similar Questions": [
+        "so_344203: Maximum number of threads per process in Linux?",
+        "so_18464041: UNIX: Maximum number of threads in a program",
+        "so_29605502: Maximum number of children processes on Linux"
+      ],
+      "Top-3 Scripts": [
+        "so_344203: ulimit/getrlimit",
+        "so_18464041: ulimit -s 4000",
+        "so_29605502: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "ps",
+      "MP Summary": "report a snapshot of the current processes.",
+      "Most Similar TLDR Task": "List all running processes",
+      "Most Similar TLDR Script": "ps aux",
+      "Top-3 Similar Questions": [
+        "su_530291: Sort top 10 processes by the number of threads each created in Linux",
+        "so_8043246: Enumerate the number of running processes with a given name - assign to variable",
+        "ul_192384: List running processes without procfs"
+      ],
+      "Top-3 Scripts": [
+        "su_530291: $ ps axo nlwp,pid,cmd | sort -rn | head -10\n\nps ax  - see every process\n    o  - format\n         nlwp: number of lightweight processes (threads) in the process",
+        "so_8043246: pids=($(\n    ps -eo pid,command |\n    sed -n '/[t]omcat/{s/^ *\\([0-9]\\+\\).*/\\1/;p}'\n))\nnumber=${#pids[@]}",
+        "ul_192384: "
+      ],
+      "Explanations about Options": {
+        "-e": "Select all processes. Identical to -A.",
+        "-": "not reported\n TS SCHED_OTHER\n FF SCHED_FIFO\n RR SCHED_RR\n B SCHED_BATCH\n ISO SCHED_ISO\n IDL SCHED_IDLE\n DLN SCHED_DEADLINE\n ? unknown value"
+      }
+    },
+    {
+      "Command": "exec",
+      "MP Summary": "execute commands and open, close, or copy file descriptors",
+      "Most Similar TLDR Task": "Replace with the specified command and change the process name",
+      "Most Similar TLDR Script": "exec -a {{process_name}} {{command -with -flags}}",
+      "Top-3 Similar Questions": [
+        "so_4185017: Maximum number of Bash arguments != max num cp arguments?",
+        "ul_213054: How to list processes belonging to a network namespace?"
+      ],
+      "Top-3 Scripts": [
+        "so_4185017: exec()",
+        "ul_213054: sudo ip netns exec \"$netns\" socat abstract-listen:test-ns,fork /dev/null &\nps -eopid= |\n  while read p; do\n    nsenter -n\"/proc/$p/ns/net\" socat -u abstract:test-ns - 2> /dev/null &&\n      echo \"$p\"\n  done"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "pgrep",
+      "MP Summary": "look up or signal processes based on name and other attributes",
+      "Most Similar TLDR Task": "Search full command line with parameters instead of just the process name",
+      "Most Similar TLDR Script": "pgrep -f \"{{process_name}} {{parameter}}\"",
+      "Top-3 Similar Questions": [
+        "au_699805: Listing all human users and number of their processes",
+        "su_1590161: List child process IDs"
+      ],
+      "Top-3 Scripts": [
+        "au_699805: (echo root; awk -F: '{if($3>=1000)print $1}' /etc/passwd) | xargs -i sh -c 'echo \"{} $(pgrep -cu {})\"'",
+        "su_1590161: pgrep -P 6330"
+      ],
+      "Explanations about Options": {
+        "-u": "Only match processes whose effective user ID is listed. Either the numerical or\n symbolical value may be used.",
+        "-P": "Only match processes whose parent process ID is listed.",
+        "-c": "Suppress normal output; instead print a count of matching processes. When count\n does not match anything, e.g. returns zero, the command will return non-zero value."
+      }
+    },
+    {
+      "Command": "ab",
+      "MP Summary": "Apache HTTP server benchmarking tool",
+      "Most Similar TLDR Task": "Set the maximum number of seconds to spend for benchmarking",
+      "Most Similar TLDR Script": "ab -t {{60}} {{url}}",
+      "Top-3 Similar Questions": [
+        "so_21966576: Maximum number of images on folder"
+      ],
+      "Top-3 Scripts": [
+        "so_21966576: ab/cd/ef/1234...png"
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

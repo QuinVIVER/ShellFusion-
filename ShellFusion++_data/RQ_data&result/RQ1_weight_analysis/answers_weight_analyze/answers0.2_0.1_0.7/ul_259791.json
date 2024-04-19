@@ -1,0 +1,96 @@
+{
+  "Query": "How to change the Home directory of the currently logged In user",
+  "Answers": [
+    {
+      "Command": "usermod",
+      "MP Summary": "modify a user account",
+      "Most Similar TLDR Task": "Create a new home directory for a user and move their files to it",
+      "Most Similar TLDR Script": "usermod -m -d {{/path/to/home}} {{user}}",
+      "Top-3 Similar Questions": [
+        "ul_267904: What is a good way to change a group of users UIDs without usermod executing a time consuming chown on the user home directory?",
+        "su_40450: How does one change user's home directory in Ubuntu 9.04?",
+        "au_892057: My home folder ('/home/<user>/ ') is changed to Desktop"
+      ],
+      "Top-3 Scripts": [
+        "ul_267904: # mkdir -p /tmp/home/jsmith  ## uncomment if required.\nusermod -d /tmp/home/jsmith jsmith\nusermod -u fixedUID jsmith -o\nusermod -d /home/jsmith jsmith\n\n# mkdir -p /tmp/home/jsmith  ## uncomment if required.\nhomedir=$(getent passwd jsmith | awk -F: '{print $6}')\nusermod -d /tmp/home/jsmith jsmith\nusermod -u fixedUID jsmith -o\nusermod -d \"$homedir\" jsmith",
+        "su_40450: sudo usermod\u00a0 -d <i>new_home_dir</i>\u00a0 <i>username</i>\n\nsudo usermod  -d <i>new_home_dir</i>  -m\u00a0 <i>username</i>",
+        "au_892057: sudo usermod --home /home/abhishek abhishek"
+      ],
+      "Explanations about Options": {
+        "--home": "The user's new login directory.",
+        "-d": "The user's new login directory.",
+        "-o": "When used with the -u option, this option allows to change the user ID to a non-unique\n value.",
+        "-u": "The new numerical value of the user's ID.",
+        "-m": "Move the content of the user's home directory to the new location."
+      }
+    },
+    {
+      "Command": "passwd",
+      "MP Summary": "change user password",
+      "Most Similar TLDR Task": "Change the password of the current user",
+      "Most Similar TLDR Script": "passwd {{new_password}}",
+      "Top-3 Similar Questions": [
+        "au_209858: Change root user's home directory in Ubuntu?",
+        "ul_74961: Changing username but not home directory",
+        "su_1132626: Changing home directory of user on Windows Subsystem for Linux"
+      ],
+      "Top-3 Scripts": [
+        "au_209858: /etc/passwd",
+        "ul_74961: /etc/passwd",
+        "su_1132626: sudo vim /etc/passwd"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "cd",
+      "MP Summary": "change the working directory",
+      "Most Similar TLDR Task": "Go to home directory of current user",
+      "Most Similar TLDR Script": "cd",
+      "Top-3 Similar Questions": [
+        "su_1132626: Changing home directory of user on Windows Subsystem for Linux",
+        "au_1269583: How to change subtitle user's home directory?",
+        "su_446211: Change to home directory in PowerShell"
+      ],
+      "Top-3 Scripts": [
+        "su_1132626: cd ~",
+        "au_1269583: ",
+        "su_446211: cd $home"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "chown",
+      "MP Summary": "change file owner and group",
+      "Most Similar TLDR Task": "Change the owner user of a file/directory",
+      "Most Similar TLDR Script": "chown {{user}} {{path/to/file_or_directory}}",
+      "Top-3 Similar Questions": [
+        "au_829537: How to change owner of folder to current user recursively?",
+        "ul_17782: Problem changing the /home directory to another location",
+        "nl2bash_12187: Change the owner of \"$JBOSS_CONSOLE_LOG\" to \"$JBOSS_USER\""
+      ],
+      "Top-3 Scripts": [
+        "au_829537: sudo find ~ -type d -user root -exec sudo chown -R $USER: {} +\n\nsudo chown -R\n\nsudo find ~ -user root -exec sudo chown $USER: {} +",
+        "ul_17782: chown -R username:username /home/username\nchmod 644 /home/username/.dmrc\nchmod 644 /home/username/.ICEauthority",
+        "nl2bash_12187: chown $JBOSS_USER $JBOSS_CONSOLE_LOG"
+      ],
+      "Explanations about Options": {
+        "-R": "operate on files and directories recursively"
+      }
+    },
+    {
+      "Command": "useradd",
+      "MP Summary": "create a new user or update default new user information",
+      "Most Similar TLDR Task": "Create new user with a default home directory",
+      "Most Similar TLDR Script": "useradd --create-home {{name}}",
+      "Top-3 Similar Questions": [
+        "ul_118079: /home/user: change directory failed error"
+      ],
+      "Top-3 Scripts": [
+        "ul_118079: useradd -m fox"
+      ],
+      "Explanations about Options": {
+        "-m": "Create the user's home directory if it does not exist. The files and directories\n contained in the skeleton directory (which can be defined with the -k option) will be\n copied to the home directory."
+      }
+    }
+  ]
+}

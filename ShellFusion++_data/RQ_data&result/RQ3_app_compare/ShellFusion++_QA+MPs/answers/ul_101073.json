@@ -1,0 +1,84 @@
+{
+  "Query": "How to change permissions from root user to all users?",
+  "Answers": [
+    {
+      "Command": "passwd",
+      "MP Summary": "change user password",
+      "Top-3 Similar Questions": [
+        "au_695223: How do I change one username to another?",
+        "ul_411788: change root password back to user password",
+        "au_209858: Change root user's home directory in Ubuntu?"
+      ],
+      "Top-3 Scripts": [
+        "au_695223: sudo passwd root\n\n/etc/passwd",
+        "ul_411788: sudo passwd -dl root",
+        "au_209858: /etc/passwd"
+      ],
+      "Explanations about Options": {
+        "-d": "Delete a user's password (make it empty). This is a quick way to disable a password\n for an account. It will set the named account passwordless.",
+        "-l": "Lock the password of the named account. This option disables a password by changing it\n to a value which matches no possible encrypted value (it adds a \u00b4!\u00b4 at the beginning\n of the password)."
+      }
+    },
+    {
+      "Command": "usermod",
+      "MP Summary": "modify a user account",
+      "Top-3 Similar Questions": [
+        "ul_405618: How to change autologin from root to non-root user?",
+        "so_7092261: How to change user affilations to group in Linux",
+        "su_858727: change permissions for only one user in Apache-managed directory"
+      ],
+      "Top-3 Scripts": [
+        "ul_405618: sudo usermod -a -G audio m\nsudo usermod -a -G video m",
+        "so_7092261: ",
+        "su_858727: sudo usermod -aG <groupname> <username>"
+      ],
+      "Explanations about Options": {
+        "-G": "GROUP1[,GROUP2,...[,GROUPN]]]\n A list of supplementary groups which the user is also a member of. Each group is\n separated from the next by a comma, with no intervening whitespace. The groups are\n subject to the same restrictions as the group given with the -g option.",
+        "-a": "Add the user to the supplementary group(s). Use only with the -G option."
+      }
+    },
+    {
+      "Command": "sudo",
+      "MP Summary": "execute a command as another user",
+      "Top-3 Similar Questions": [
+        "ul_393984: Fail to change user from postgres to other",
+        "ul_405618: How to change autologin from root to non-root user?",
+        "ul_605468: How do I switch from root user to another user who has a nologin shell?"
+      ],
+      "Top-3 Scripts": [
+        "ul_393984: ",
+        "ul_405618: $ sudo systemctl set-default multi-user.target\n\n$ sudo systemctl edit getty@tty1\n\n$ sudo systemctl cat getty@tty1 \n ...\n# /etc/systemd/system/getty@tty1.service.d/override.conf\n[Service]\nExecStart=\nExecStart=-/sbin/agetty --autologin xiaobai %I $TERM\n\nsudo usermod -a -G audio m\nsudo usermod -a -G video m",
+        "ul_605468: sudo -u USERNAME /bin/bash"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "groups",
+      "MP Summary": "print the groups a user is in",
+      "Top-3 Similar Questions": [
+        "so_7092261: How to change user affilations to group in Linux",
+        "au_695223: How do I change one username to another?"
+      ],
+      "Top-3 Scripts": [
+        "so_7092261: -G, --groups group,...\nWith this option a list of supplementary groups can be specified, which the user should become a member of. Each group is separated from the next one only by a comma, without whitespace. The user is removed from all other groups not specified.\n\n\n-R, --remove-from-group group,...\nWith this option a list of groups can be specified, from which the user should be removed. Each group is separated from the next one only by a comma, without whitespace.",
+        "au_695223: /etc/groups"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "id",
+      "MP Summary": "print real and effective user and group IDs",
+      "Top-3 Similar Questions": [
+        "au_43570: Change owner of internal hard drive partition from root to user",
+        "so_69957981: How to avoid changing permissions on node_modules for a non-root user in docker"
+      ],
+      "Top-3 Scripts": [
+        "au_43570: id -u\n\nid -g",
+        "so_69957981: docker run                          \\\n  -d                                \\ # in the background\n  -u $(id -u)                       \\ # as an alternate user\n  -v \"$PWD/data:/node-servers/data\" \\ # mounting a data directory\n  -p 8080:80                        \\ # publishing a port\n  my-image\n\ndocker run ...                  \\\n  -u $(id -u)                   \\\n  -v \"$PWD:/node-servers\"       \\ # run the application from the host, not the image\n  -v /node-servers/node_modules \\ # with libraries that will not be updated ever\n  ..."
+      ],
+      "Explanations about Options": {
+        "-g": "print only the effective group ID"
+      }
+    }
+  ]
+}

@@ -1,0 +1,82 @@
+{
+  "Query": "Convert mkv to mp4 with ffmpeg",
+  "Answers": [
+    {
+      "Command": "ffmpeg",
+      "MP Summary": "ffmpeg video converter",
+      "Top-3 Similar Questions": [
+        "so_59256447: Converting mkv to mp4 with ffmpeg sometimes loses video",
+        "ul_114908: Bash script to convert all *flac to *.mp3 with FFmpeg?",
+        "au_707397: Batch convert H.265 mkv to H.264 with ffmpeg to make files compatible for re-encoding"
+      ],
+      "Top-3 Scripts": [
+        "so_59256447: ",
+        "ul_114908: for i in *.flac ; do \n    ffmpeg -i \"$i\" -acodec libmp3lame \"$(basename \"${i/.flac}\")\".mp3\n    sleep 60\ndone",
+        "au_707397: INPUT=\"$1\"\nfor i in *.mkv ; do\n    ffmpeg -i \"$i\" -bsf:v h264_mp4toannexb -sn -map 0:0 -map 0:1 -vcodec libx264 \"$i.ts\"\n    mv \"$i.ts\" \"$i.mpg\"\n    sleep 3\ndone\n\nffmpeg -i \"$i\""
+      ],
+      "Explanations about Options": {
+        "-acodec": "Set the audio codec. This is an alias for \"-codec:a\".",
+        "-i": "input file url"
+      }
+    },
+    {
+      "Command": "lame",
+      "MP Summary": "create mp3 audio files",
+      "Top-3 Similar Questions": [
+        "so_7465223: What codec do I need to convert .wav to .mp3 with ffmpeg?",
+        "ul_176886: Convert to WAV using FFMPEG for pipe into LAME?"
+      ],
+      "Top-3 Scripts": [
+        "so_7465223: lame -b 192 -h input.wav output.mp3  # bitrate 192, highest quality\n\napt-get install lame\n\nman lame",
+        "ul_176886: ffmpeg -i file.m4a -f wav -acodec pcm_s16le -ac 2 - | \\\n    lame -m s -b 320 -q 0 --replaygain-accurate - file.mp3"
+      ],
+      "Explanations about Options": {
+        "-q": "0 <= qual <= 9",
+        "--replaygain-accurate": "Compute ReplayGain more accurately and find the peak sample.",
+        "-b": "For MPEG-1 (sampling frequencies of 32, 44.1 and 48 kHz)\n n = 32, 40, 48, 56, 64, 80, 96, 112, 128, 160, 192, 224, 256, 320",
+        "-m": "mode = s, j, f, d, m, l, r"
+      }
+    },
+    {
+      "Command": "mencoder",
+      "MP Summary": "movie encoder",
+      "Top-3 Similar Questions": [
+        "au_355047: Add image to 3GP file and convert it to MP4 using avconv por ffmpeg"
+      ],
+      "Top-3 Scripts": [
+        "au_355047: mencoder mf://myimage.png -o out.avi -ovc lavc -lavcopts vcodec=mjpeg -audiofile myfile.3gp -oac pcm -fps 1/187 -ofps 30"
+      ],
+      "Explanations about Options": {
+        "-v": "Increment verbosity level, one level for each -v found on the command line.",
+        "-ofps": "Specify a frames per second (fps) value for the output file, which can be different\n from that of the source material. Must be set for variable fps (ASF, some MOV) and\n progressive (30000/1001 fps telecined MPEG) files.",
+        "-fps": "Override video framerate. Useful if the original value is wrong or missing.",
+        "-audiofile": "Play audio from an external file (WAV, MP3 or Ogg Vorbis) while viewing a movie.",
+        "-o": "Outputs to the given filename.\n If you want a default output filename, you can put this option in the MEncoder\n config file.",
+        "-ovc": "Encode with the given video codec (no default set).\n NOTE: Use -ovc help to get a list of available video codecs.",
+        "-oac": "Encode with the given audio codec (no default set).\n NOTE: Use -oac help to get a list of available audio codecs."
+      }
+    },
+    {
+      "Command": "srt",
+      "MP Summary": "Srt subtitle editor",
+      "Top-3 Similar Questions": [
+        "su_1090989: Changing subtitle format with ffmpeg"
+      ],
+      "Top-3 Scripts": [
+        "su_1090989: ffmpeg -i input.mkv -c copy -c:s srt out.mkv"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "vlc",
+      "MP Summary": "the VLC media player",
+      "Top-3 Similar Questions": [
+        "ul_278365: FFMpeg : Converting a video file to a gif with multiple images from video"
+      ],
+      "Top-3 Scripts": [
+        "ul_278365: apt-get install vlc"
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

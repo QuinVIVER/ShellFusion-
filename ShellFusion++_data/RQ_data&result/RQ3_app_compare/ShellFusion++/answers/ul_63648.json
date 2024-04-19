@@ -1,0 +1,83 @@
+{
+  "Query": "How to send many commands to shell and wait for the command behind ends",
+  "Answers": [
+    {
+      "Command": "kill",
+      "MP Summary": "send a signal to a process",
+      "Most Similar TLDR Task": "Signal the operating system to pause a program until a SIGCONT (\"continue\") signal is received",
+      "Most Similar TLDR Script": "kill -{{17|STOP}} {{process_id}}",
+      "Top-3 Similar Questions": [
+        "so_65374164: How can I send a signal without the shell waiting for the currently running program to finish?",
+        "so_33239959: Send signal to process from command line"
+      ],
+      "Top-3 Scripts": [
+        "so_65374164: kill -s INT 0",
+        "so_33239959: kill -s signal $(ps -C executable)\n\nman kill"
+      ],
+      "Explanations about Options": {
+        "-s": " Specify the signal to be sent. The signal can be specified by using name or\n number. The behavior of signals is explained in signal(7) manual page."
+      }
+    },
+    {
+      "Command": "command",
+      "MP Summary": "execute a simple command",
+      "Most Similar TLDR Task": "Execute the ls program literally, even if an ls alias exists",
+      "Most Similar TLDR Script": "command {{ls}}",
+      "Top-3 Similar Questions": [
+        "ul_196271: how to use ssh command to connect to multiple computers and send different commands to each computers at same time",
+        "so_24587007: send EXIT code as variable to next command in a pipeline [bash]",
+        "so_46631920: Silently send command to comint without printing prompt"
+      ],
+      "Top-3 Scripts": [
+        "ul_196271: ssh -f user@host '<your command here>'\n\n-f      Requests ssh to go to background just before command execution.\n             This is useful if ssh is going to ask for passwords or\n             passphrases, but the user wants it in the background.",
+        "so_24587007: while read line; do\n    stdout=$(command $line)\n    case $? in\n        0) awk -v l=\"$line\" -f horsepower <<< \"$stdout\" ;;\n        # other cases, as needed\n    esac\ndone",
+        "so_46631920: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "sudo",
+      "MP Summary": "execute a command as another user",
+      "Most Similar TLDR Task": "Run a command as another user and/or group",
+      "Most Similar TLDR Script": "sudo -u {{user}} -g {{group}} {{id -a}}",
+      "Top-3 Similar Questions": [
+        "ul_306806: Send commands to another terminal",
+        "au_641683: How can I send commands to specific terminal windows?"
+      ],
+      "Top-3 Scripts": [
+        "ul_306806: $ sudo perl -MTerm::TtyWrite \\\n  -e 'Term::TtyWrite->new(\"/dev/pts/2\")->write(\"echo hi\\n\")'",
+        "au_641683: target_term -run 1 sudo apt-get update\n\nsudo apt-get update\n\nsudo apt-get install wmctrl xdotool"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "write",
+      "MP Summary": "send a message to another user",
+      "Most Similar TLDR Task": "Send message to \"testuser\" on terminal \"/dev/tty/5\"",
+      "Most Similar TLDR Script": "write {{testuser}} {{tty/5}}",
+      "Top-3 Similar Questions": [
+        "so_44021118: How can I send multiple commands' output to a single shell pipeline?"
+      ],
+      "Top-3 Scripts": [
+        "so_44021118: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "mail",
+      "MP Summary": "send and receive mail",
+      "Most Similar TLDR Task": "Send a tar.gz file as an attachment",
+      "Most Similar TLDR Script": "tar cvzf - {{path/to/directory1 path/to/directory2}} | uuencode {{data.tar.gz}} | mail --subject=\"{{subject line}}\" {{to_user@example.com}}",
+      "Top-3 Similar Questions": [
+        "so_43869832: Sending mail using shell command in Ruby"
+      ],
+      "Top-3 Scripts": [
+        "so_43869832: %x{echo \"sometext\" | mail -s \"Account report #{file_tmp}\" -a /home/linux/reports/#{file.strip} #{address[0]}}"
+      ],
+      "Explanations about Options": {
+        "-a": "Specify additional header fields on the command line such as \"X-Loop: foo@bar\" etc.\n It can be also used to override MIME headers mail adds by default to each outgoing\n mail, see Character sets and MIME below. You have to use quotes if the string\n contains spaces. This argument may be specified more than once, the headers will\n then be concatenated.",
+        "-s": "Specify subject on command line (only the first argument after the -s flag is used\n as a subject; be careful to quote subjects containing spaces)."
+      }
+    }
+  ]
+}

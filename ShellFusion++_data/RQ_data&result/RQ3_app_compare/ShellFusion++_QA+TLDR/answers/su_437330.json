@@ -1,0 +1,81 @@
+{
+  "Query": "How do you add a certificate authority (CA) to Ubuntu?",
+  "Answers": [
+    {
+      "Command": "openssl",
+      "MP Summary": "OpenSSL command line tool",
+      "Most Similar TLDR Task": "Generate a certificate signing request to be sent to a certificate authority",
+      "Most Similar TLDR Script": "openssl req -new -sha256 -key {{filename.key}} -out {{filename.csr}}",
+      "Top-3 Similar Questions": [
+        "su_1430089: How to add a self-signed SSL certificate to Linux (Ubuntu/Alpine) trust store?",
+        "ul_612594: Add custom CA certificate to Ubuntu 20.04 works fine, but fails on Debian"
+      ],
+      "Top-3 Scripts": [
+        "su_1430089: $ openssl req -x509 -days 365 -newkey rsa:1024 -keyout bar.pem -nodes -out foo.crt -config openssl_conf",
+        "ul_612594: openssl x509 -in /usr/local/share/ca-certificates/nexus-custom-ca-chain.pem -noout -text\n\n# FROM ubuntu:20:04\nFROM debian:10\nRUN apt update &&  DEBIAN_FRONTEND=noninteractive apt install -y curl openssl ca-certificates\nCOPY root.pem /usr/local/share/ca-certificates/root.pem\nCOPY intermediate.pem /usr/local/share/ca-certificates/intermediate.pem\nRUN chmod 644 /usr/local/share/ca-certificates/root.pem /usr/local/share/ca-certificates/intermediate.pem\nRUN update-ca-certificates\nRUN curl https://nexus-using-custom-cert.custom.org\n\nopenssl x509 -noout\n\nopenssl x509 -in mycert.crt -noout -text\n\nopenssl x509 -in mycert.crt  -inform der -outform PEM -out mycert.crt\n\nopenssl x509 -in mycert.pem -outform der -out mycert.der"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "curl",
+      "MP Summary": "transfer a URL",
+      "Most Similar TLDR Task": "Pass client certificate and key for a resource, skipping certificate validation",
+      "Most Similar TLDR Script": "curl --cert {{client.pem}} --key {{key.pem}} --insecure {{https://example.com}}",
+      "Top-3 Similar Questions": [
+        "ul_612594: Add custom CA certificate to Ubuntu 20.04 works fine, but fails on Debian",
+        "ul_90450: Adding a self-signed certificate to the \"trusted list\""
+      ],
+      "Top-3 Scripts": [
+        "ul_612594: # FROM ubuntu:20:04\nFROM debian:10\nRUN apt update &&  DEBIAN_FRONTEND=noninteractive apt install -y curl openssl ca-certificates\nCOPY root.pem /usr/local/share/ca-certificates/root.pem\nCOPY intermediate.pem /usr/local/share/ca-certificates/intermediate.pem\nRUN chmod 644 /usr/local/share/ca-certificates/root.pem /usr/local/share/ca-certificates/intermediate.pem\nRUN update-ca-certificates\nRUN curl https://nexus-using-custom-cert.custom.org\n\ncurl -v",
+        "ul_90450: curl --cacert  /path/to/CA/cert.file https://...\n\ncurl --insecure https://..."
+      ],
+      "Explanations about Options": {
+        "--insecure": "(TLS) By default, every SSL connection curl makes is verified to be secure. This\n option allows curl to proceed and operate even for server connections otherwise\n considered insecure.",
+        "-v": "Makes curl verbose during the operation. Useful for debugging and seeing what's\n going on \"under the hood\". A line starting with '>' means \"header data\" sent by\n curl, '<' means \"header data\" received by curl that is hidden in normal cases, and\n a line starting with '*' means additional info provided by curl."
+      }
+    },
+    {
+      "Command": "apt-get",
+      "MP Summary": "APT package handling utility - command-line interface",
+      "Most Similar TLDR Task": "Install a package, or update it to the latest available version",
+      "Most Similar TLDR Script": "apt-get install {{package}}",
+      "Top-3 Similar Questions": [
+        "ul_90450: Adding a self-signed certificate to the \"trusted list\"",
+        "au_507707: How to add Linuxmint repositories to Ubuntu?",
+        "so_15138901: How do I add the qtWebKit module to qt creator?"
+      ],
+      "Top-3 Scripts": [
+        "ul_90450: apt-get install ca-certificates",
+        "au_507707: sudo apt-get update\n\nsudo apt-get install linuxmint-keyring",
+        "so_15138901: sudo apt-get install libqt5webkit5 libqt5webkit5-dev libqt5webkit5-qmlwebkitplugin"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "add-apt-repository",
+      "MP Summary": "Adds   a   repository   into   the   /etc/apt/sources.list   or /etc/apt/sources.list.d or removes an existing one",
+      "Most Similar TLDR Task": "Add a new apt repository",
+      "Most Similar TLDR Script": "add-apt-repository {{repository_spec}}",
+      "Top-3 Similar Questions": [
+        "au_980688: Add software to Ubuntu live usb"
+      ],
+      "Top-3 Scripts": [
+        "au_980688: sudo add-apt-repository universe"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "pip",
+      "MP Summary": "A tool for installing and managing Python packages",
+      "Most Similar TLDR Task": "Save installed packages to file",
+      "Most Similar TLDR Script": "pip freeze > {{requirements.txt}}",
+      "Top-3 Similar Questions": [
+        "so_35436350: how to add a module to Anaconda"
+      ],
+      "Top-3 Scripts": [
+        "so_35436350: pip install <package>"
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

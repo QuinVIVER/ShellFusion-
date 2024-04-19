@@ -1,0 +1,73 @@
+{
+  "Query": "Total size of the contents of all the files in a directory",
+  "Answers": [
+    {
+      "Command": "size",
+      "MP Summary": "list section sizes and total size of binary files",
+      "Top-3 Similar Questions": [
+        "so_60269359: List files recursively with folder and file size",
+        "ul_430019: Recursively output filename and file size for all subdirectories?"
+      ],
+      "Top-3 Scripts": [
+        "so_60269359: find . -print0 | \n  xargs -0 -I% du -h \"%\" | \n  awk ' { \n      size = $1 \n      $1 = \"\" \n      print $0, \"(\" size \")\" }\n  ' | \n  sed -e 's;[^/]*/;|____;g;s;____|; |;g'\n\nfind . -print0 | xargs -0 -I% du -h \"%\" | awk ' { size = $1 ; $1 = \"\"; print $0, size }' | sed -e 's;[^/]*/;|____;g;s;____|; |;g' | awk ' {size=$NF ; $NF=\"\"; printf(\"(%5s) %s\\n\", size, $0) }'",
+        "ul_430019: {\n    printf '%s\\t%s\\n' size path\n    find / \\( -path /proc -o -path /sys \\) -prune -o -printf '%s\\t\"%P\"\\n' |\n        numfmt --to=iec\n} > outputfile.csv"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "ls",
+      "MP Summary": "list directory contents",
+      "Top-3 Similar Questions": [
+        "au_57603: How to list recursive file sizes of files and directories in a directory?",
+        "so_13282786: List files over a specific size in current directory and all subdirectories",
+        "su_668381: In linux, how do you get a total size of a folder for files that are 1MB and up"
+      ],
+      "Top-3 Scripts": [
+        "au_57603: ls -l\n\nls -lh\n\nls -lR\n\nls -lhR\n\nman ls",
+        "so_13282786: find . -size +10k -exec ls -lh {} \\+\n\nls -lh\n\nls -l found.file; ls -l found.file.2; ls -l found.file.3\n\nls -l found.file found.file.2  found.file.3\n\nls -ls\n\nfind . -size +10k -exec ls -ls {} \\+ | sort -n\n\nfind . -size +10k -exec ls -ls {} \\+ | sort -nr\n\nfind . -size +10k -exec ls -ls {} \\+ | sort -n | tail -1\n\nfind . -size +10k -exec ls -lS {} \\+ | head -1",
+        "su_668381: ls -1h | grep 'M '"
+      ],
+      "Explanations about Options": {
+        "-S": "sort by file size , largest first",
+        "-l": "use a long listing format"
+      }
+    },
+    {
+      "Command": "tail",
+      "MP Summary": "output the last part of files",
+      "Top-3 Similar Questions": [
+        "nl2bash_115: Get the disk space used by all *.txt (case insensitive) files/directories under folder 1 and folder2",
+        "so_13282786: List files over a specific size in current directory and all subdirectories",
+        "su_668381: In linux, how do you get a total size of a folder for files that are 1MB and up"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_115: find folder1 folder2 -iname '*.txt' -print0 | du --files0-from - -c -s | tail -1",
+        "so_13282786: find . -size +10k -exec ls -ls {} \\+ | sort -n | tail -1",
+        "su_668381: find . -type f -size +1M -print0 | du -sch --files0-from=- | tail -1\n\nfind . -maxdepth 1 -type f -size +1M -print0 | du -sch --files0-from=- | tail -1\n\nfind . -type f -size -1M -print0 | du -sch --files0-from=- | tail -1\nfind . -maxdepth 1 -type f -size -1M -print0 | du -sch --files0-from=- | tail -1\n\nfind . -type f -size +1M -exec du -sch {} + | tail -1\n\nfind . -type f -size +1M -exec sh -c 'du -sch \"$@\" | tail -1' _ {} +"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "sum",
+      "MP Summary": "checksum and count the blocks in a file",
+      "Top-3 Similar Questions": [
+        "su_649031: adding file size of two or more files in powershell"
+      ],
+      "Top-3 Scripts": [
+        "su_649031: PS C:\\> $sum = ((Get-ChildItem \"\\\\blahhh.com\\foo\\bar\\*.vhd\") | \n        Measure-Object -Property length -sum) | \n        Select-Object -ExpandProperty Sum\nPS C:\\> $sum\nSum of the value of 'length' for each object in collection outputted here"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "head",
+      "MP Summary": "output the first part of files",
+      "Top-3 Similar Questions": [
+        "so_13282786: List files over a specific size in current directory and all subdirectories"
+      ],
+      "Top-3 Scripts": [
+        "so_13282786: find . -size +10k -exec ls -lS {} \\+ | head -1"
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

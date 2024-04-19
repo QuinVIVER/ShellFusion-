@@ -1,0 +1,97 @@
+{
+  "Query": "Test if remote TCP port is open from a shell script",
+  "Answers": [
+    {
+      "Command": "nc",
+      "MP Summary": "arbitrary TCP and UDP connections and listens",
+      "Most Similar TLDR Task": "Scan the open ports of a specified host",
+      "Most Similar TLDR Script": "nc -v -z {{ip_address}} {{port}}",
+      "Top-3 Similar Questions": [
+        "su_307153: How can I open a TCP/UDP connection on Linux?",
+        "so_62499366: Bash: Serve a file through tcp"
+      ],
+      "Top-3 Scripts": [
+        "su_307153: ",
+        "so_62499366: #!/bin/bash\nnc -l $2 < $1\n\nman nc"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "ss",
+      "MP Summary": "another utility to investigate sockets",
+      "Most Similar TLDR Task": "Show all TCP sockets along with processes connected to a remote ssh port",
+      "Most Similar TLDR Script": "ss -pt dst :{{ssh}}",
+      "Top-3 Similar Questions": [
+        "ul_344521: The mysterious open port 554 tcp on every machine of my network!",
+        "so_19261962: with root, open other process socket and get tcp_info with python?"
+      ],
+      "Top-3 Scripts": [
+        "ul_344521: hafw1:~# ss -tapn | grep \":22\"\nLISTEN     0      128            :::22                      :::*      users:((\"sshd\",9828,4))\nLISTEN     0      128             *:22                       *:*      users:((\"sshd\",9828,3))\nESTAB      0      0  my_ip:59233        dest:22     users:((\"ssh\",1625,3))\n\nwatch -n 1  ss -tapn \\| grep \":554\"",
+        "so_19261962: #!/usr/bin/python\nfrom subprocess import check_output as co\n\nco(\"ss -tp > ss.out\", shell=True)\nrtts = co(\"cat ss.out | grep ESTAB | awk '{print $4}' | xargs -I {} ss -i 'src {}' | grep \\\"rtt:\\\" | awk '{print $4}' | cut -d : -f 2 | cut -d / -f 1\", shell=True)\npids = co(\"cat ss.out | grep ESTAB | awk '{print $6}' | cut -d , -f 2\", shell=True)\n\nprint zip(rtts.split('\\n'), pids.split('\\n'))"
+      ],
+      "Explanations about Options": {
+        "-a": "Display both listening and non-listening (for TCP this means established\n connections) sockets.",
+        "-p": "Show process using socket.",
+        "-t": "Display TCP sockets.",
+        "-i": "Show internal TCP information. Below fields may appear:",
+        "-n": "Do not try to resolve service names. Show exact bandwidth values, instead of human-\n readable."
+      }
+    },
+    {
+      "Command": "ssh",
+      "MP Summary": "OpenSSH SSH client (remote login program)",
+      "Most Similar TLDR Task": "Connect to a remote server using a specific port",
+      "Most Similar TLDR Script": "ssh {{username}}@{{remote_host}} -p {{2222}}",
+      "Top-3 Similar Questions": [
+        "so_38938709: Shell Script to open SSH connection execute a command",
+        "au_405916: Open a window in a remote machine",
+        "ul_345832: How can I start a remote process on a remote machine via ssh?"
+      ],
+      "Top-3 Scripts": [
+        "so_38938709: #!/usr/bin/expect -f\n\nspawn ssh $username@$host bash script_to_run_on_server \"$directory_path\"\nsleep 2\nexpect \"password:\" {\n    send \"${$password}\\r\"\n}\ninteract",
+        "au_405916: eddie@local$ ssh eddie@remote\neddie@remote$ export DISPLAY=:0\neddie@remote$ eog",
+        "ul_345832: ssh user@example.com 'nohup sleep 300 >/dev/null 2>/dev/null </dev/null &'\n\nssh user@example.com -t 'screen -D -RR -S this /bin/sleep 300'"
+      ],
+      "Explanations about Options": {
+        "-t": "Force pseudo-terminal allocation. This can be used to execute arbitrary screen-\n based programs on a remote machine, which can be very useful, e.g. when implementing\n menu services. Multiple -t options force tty allocation, even if ssh has no local\n tty.",
+        "-S": "Specifies the location of a control socket for connection sharing, or the string\n \u201cnone\u201d to disable connection sharing. Refer to the description of ControlPath and\n ControlMaster in ssh_config(5) for details."
+      }
+    },
+    {
+      "Command": "netstat",
+      "MP Summary": "Print  network  connections,  routing tables, interface statistics, masquerade connections, and multicast memberships",
+      "Most Similar TLDR Task": "List listening TCP ports",
+      "Most Similar TLDR Script": "netstat -t",
+      "Top-3 Similar Questions": [
+        "ul_34509: Trying to Open a Port using CentOS",
+        "au_408506: How to open a port?",
+        "au_566331: How can I open port 80?"
+      ],
+      "Top-3 Scripts": [
+        "ul_34509: ",
+        "au_408506: ",
+        "au_566331: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "nmap",
+      "MP Summary": "Network exploration tool and security / port scanner",
+      "Most Similar TLDR Task": "Check if an IP address is up, and guess the remote host's operating system",
+      "Most Similar TLDR Script": "nmap -O {{ip_or_hostname}}",
+      "Top-3 Similar Questions": [
+        "au_408506: How to open a port?",
+        "so_20906163: list opened ports, close port and open port under centos",
+        "au_566331: How can I open port 80?"
+      ],
+      "Top-3 Scripts": [
+        "au_408506: ",
+        "so_20906163: e.g\nnmap --top-ports 20 localhost",
+        "au_566331: "
+      ],
+      "Explanations about Options": {
+        "--top-ports": "Scans the n highest-ratio ports found in nmap-services file after excluding all ports\n specified by --exclude-ports. n must be 1 or greater."
+      }
+    }
+  ]
+}

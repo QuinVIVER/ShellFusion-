@@ -1,0 +1,2082 @@
+{
+  "Query": "Moving from JDK 1.7 to JDK 1.8 on Ubuntu",
+  "Answers": [
+    {
+      "Command": "find",
+      "MP Summary": "search for files in a directory hierarchy",
+      "Most Similar TLDR Task": "Find files modified in the last 7 days, and delete them",
+      "Most Similar TLDR Script": "find {{root_path}} -mtime {{-7}} -delete",
+      "Most Similar NL2Bash Task": "Delete all files not owned by valid users",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find / -nouser | xargs -0 rm\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-nouser": "No user corresponds to file's numeric user ID."
+            },
+            "xargs": {
+              "mpsum": "build and execute command lines from standard input",
+              "-0": "Input items are terminated by a null character instead of by whitespace, and the\n quotes and backslash are not special (every character is taken literally).\n Disables the end of file string, which is treated like any other argument. Useful\n when input items might contain white space, quote marks, or backslashes. The GNU\n find -print0 option produces input suitable for this mode."
+            },
+            "rm": {
+              "mpsum": "remove files or directories"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "xargs": {
+              "man1_xargs_37433": "execut command pipe argument come anoth command file etc\ninput treat singl block text split separ piec space tab newlin end-of-fil delet file backup extens -print0 use null charact split file name -0 use delimit execut command input line replac occurr placehold mark _ input line parallel run max-proc process time default 1 max-proc 0 xarg run mani process possibl time run command use input data argument run multipl chain command input data"
+            },
+            "rm": {
+              "man1_rm_29530": "remov file directori forcibl remov directori without prompt confirm show error messag interact remov multipl file prompt everi remov recurs remov directori subdirectori remov file arbitrari locat remov file verbos mode print messag remov file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_10749: copy the entire contents of the current directory to another directory, while preserving the permissions, times, and ownership of every file and sub-directory",
+        "nl2bash_4186: Find all pdf files excluding *_signed.pdf files under /some/dir with null character as the delimiter",
+        "nl2bash_11207: Delete the files under the current working directory with inode numbers specified on standard input"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_10749: find . | cpio -pdumv /path/to/destination/dir",
+        "nl2bash_4186: find /some/dir -name \"*.pdf\" ! -name \"*_signed.pdf\" -print0",
+        "nl2bash_11207: xargs -n 1 -I '{}' find \"$(pwd)\" -type f -inum '{}' -delete"
+      ],
+      "Explanations about Options": {
+        "-d": "A synonym for -depth, for compatibility with FreeBSD, NetBSD, MacOS X and OpenBSD.",
+        "-inum": "File has inode number n. It is normally easier to use the -samefile test instead.",
+        "-type": "File is of type c:"
+      }
+    },
+    {
+      "Command": "xargs",
+      "MP Summary": "build and execute command lines from standard input",
+      "Most Similar TLDR Task": "Parallel runs of up to `max-procs` processes at a time; the default is 1. If `max-procs` is 0, xargs will run as many processes as possible at a time",
+      "Most Similar TLDR Script": "{{arguments_source}} | xargs -P {{max-procs}} {{command}}",
+      "Most Similar NL2Bash Task": "Delete all files not owned by valid users",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find / -nouser | xargs -0 rm\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-nouser": "No user corresponds to file's numeric user ID."
+            },
+            "xargs": {
+              "mpsum": "build and execute command lines from standard input",
+              "-0": "Input items are terminated by a null character instead of by whitespace, and the\n quotes and backslash are not special (every character is taken literally).\n Disables the end of file string, which is treated like any other argument. Useful\n when input items might contain white space, quote marks, or backslashes. The GNU\n find -print0 option produces input suitable for this mode."
+            },
+            "rm": {
+              "mpsum": "remove files or directories"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "xargs": {
+              "man1_xargs_37433": "execut command pipe argument come anoth command file etc\ninput treat singl block text split separ piec space tab newlin end-of-fil delet file backup extens -print0 use null charact split file name -0 use delimit execut command input line replac occurr placehold mark _ input line parallel run max-proc process time default 1 max-proc 0 xarg run mani process possibl time run command use input data argument run multipl chain command input data"
+            },
+            "rm": {
+              "man1_rm_29530": "remov file directori forcibl remov directori without prompt confirm show error messag interact remov multipl file prompt everi remov recurs remov directori subdirectori remov file arbitrari locat remov file verbos mode print messag remov file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_11207: Delete the files under the current working directory with inode numbers specified on standard input",
+        "nl2bash_10924: rename all the png files to jpg files in the current fodler",
+        "nl2bash_5223: Find recursively the latest modified file in the current directory"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_11207: xargs -n 1 -I '{}' find \"$(pwd)\" -type f -inum '{}' -delete",
+        "nl2bash_10924: find . -name \"*.png\" -print0 | sed 'p;s/\\.png/\\.jpg/' | xargs -0 -n2 mv",
+        "nl2bash_5223: find . -type f -print0 | xargs -0 ls -ltr | tail -n 1\n\n\nfind . -type f -print0 | xargs -0 stat -f \"%m %N\" | sort -n | tail -1 | cut -f2- -d\" \"\n\n\nfind . -type f -print0 | xargs -0 stat -f \"%m %N\" | sort -rn | head -1 | cut -f2- -d\" \"\n\n\nfind . -type f -print0|xargs -0 ls -drt|tail -n 1\n\n\nfind . -type f -printf '%T@ %p\\n' | sort -n | tail -1 | cut -f2- -d\" \" | sed 's/.*/\"&\"/' | xargs ls -l\n\n\nfind . -type f | sed 's/.*/\"&\"/' | xargs ls -E | awk '{ print $6,\" \",$7 }' | sort | tail -1\n\n\nfind . -type f | sed 's/.*/\"&\"/' | xargs ls -E | awk '{ print $6,\" \",$7,\" \",$9 }' | sort | tail -1\n\n\nfind . -type f | xargs ls -ltr | tail -n 1"
+      ],
+      "Explanations about Options": {
+        "-0": "Input items are terminated by a null character instead of by whitespace, and the\n quotes and backslash are not special (every character is taken literally).\n Disables the end of file string, which is treated like any other argument. Useful\n when input items might contain white space, quote marks, or backslashes. The GNU\n find -print0 option produces input suitable for this mode.",
+        "-I": "Replace occurrences of replace-str in the initial-arguments with names read from\n standard input. Also, unquoted blanks do not terminate input items; instead the\n separator is the newline character. Implies -x and -L 1.",
+        "-n": "Use at most max-args arguments per command line. Fewer than max-args arguments\n will be used if the size (see the -s option) is exceeded, unless the -x option is\n given, in which case xargs will exit."
+      }
+    },
+    {
+      "Command": "rm",
+      "MP Summary": "remove files or directories",
+      "Most Similar TLDR Task": "Remove files in verbose mode, printing a message for each removed file",
+      "Most Similar TLDR Script": "rm -v {{path/to/directory/*}}",
+      "Most Similar NL2Bash Task": "Delete all files not owned by valid users",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find / -nouser | xargs -0 rm\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-nouser": "No user corresponds to file's numeric user ID."
+            },
+            "xargs": {
+              "mpsum": "build and execute command lines from standard input",
+              "-0": "Input items are terminated by a null character instead of by whitespace, and the\n quotes and backslash are not special (every character is taken literally).\n Disables the end of file string, which is treated like any other argument. Useful\n when input items might contain white space, quote marks, or backslashes. The GNU\n find -print0 option produces input suitable for this mode."
+            },
+            "rm": {
+              "mpsum": "remove files or directories"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "xargs": {
+              "man1_xargs_37433": "execut command pipe argument come anoth command file etc\ninput treat singl block text split separ piec space tab newlin end-of-fil delet file backup extens -print0 use null charact split file name -0 use delimit execut command input line replac occurr placehold mark _ input line parallel run max-proc process time default 1 max-proc 0 xarg run mani process possibl time run command use input data argument run multipl chain command input data"
+            },
+            "rm": {
+              "man1_rm_29530": "remov file directori forcibl remov directori without prompt confirm show error messag interact remov multipl file prompt everi remov recurs remov directori subdirectori remov file arbitrari locat remov file verbos mode print messag remov file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_11210: Delete the oldest file with '.tgz' or '.gz' extension under '/home/backups' directory tree",
+        "nl2bash_11084: Delete all files not owned by valid users",
+        "nl2bash_11762: delete all the empty files in the current directory only if they are ok and the user has the permission to delete them"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_11210: ls -tr $(find /home/backups -name '*.gz' -o -name '*.tgz')|head -1|xargs rm -f",
+        "nl2bash_11084: find / -nouser | xargs -0 rm",
+        "nl2bash_11762: find . -empty -ok rm {}\\;"
+      ],
+      "Explanations about Options": {
+        "-f": "ignore nonexistent files and arguments, never prompt"
+      }
+    },
+    {
+      "Command": "cpio",
+      "MP Summary": "copy files to and from archives",
+      "Most Similar TLDR Task": "Copy all files and directories in a directory and add them [o]nto an archive, in [v]erbose mode",
+      "Most Similar TLDR Script": "find {{path/to/directory}} | cpio -ov > {{archive.cpio}}",
+      "Most Similar NL2Bash Task": "Delete all files not owned by valid users",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find / -nouser | xargs -0 rm\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-nouser": "No user corresponds to file's numeric user ID."
+            },
+            "xargs": {
+              "mpsum": "build and execute command lines from standard input",
+              "-0": "Input items are terminated by a null character instead of by whitespace, and the\n quotes and backslash are not special (every character is taken literally).\n Disables the end of file string, which is treated like any other argument. Useful\n when input items might contain white space, quote marks, or backslashes. The GNU\n find -print0 option produces input suitable for this mode."
+            },
+            "rm": {
+              "mpsum": "remove files or directories"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "xargs": {
+              "man1_xargs_37433": "execut command pipe argument come anoth command file etc\ninput treat singl block text split separ piec space tab newlin end-of-fil delet file backup extens -print0 use null charact split file name -0 use delimit execut command input line replac occurr placehold mark _ input line parallel run max-proc process time default 1 max-proc 0 xarg run mani process possibl time run command use input data argument run multipl chain command input data"
+            },
+            "rm": {
+              "man1_rm_29530": "remov file directori forcibl remov directori without prompt confirm show error messag interact remov multipl file prompt everi remov recurs remov directori subdirectori remov file arbitrari locat remov file verbos mode print messag remov file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_10749: copy the entire contents of the current directory to another directory, while preserving the permissions, times, and ownership of every file and sub-directory",
+        "nl2bash_10751: copy the entire contents of the current directory to another directory, while preserving the permissions, times, and ownership of every file and sub-directory"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_10749: find . | cpio -pdumv /path/to/destination/dir",
+        "nl2bash_10751: find . | cpio -pdumv /path/to/destination/dir"
+      ],
+      "Explanations about Options": {
+        "-d": "(i and p modes) Create directories as necessary.",
+        "-u": "(i and p modes) Unconditionally overwrite existing files. Ordinarily, an older file\n will not overwrite a newer file on disk.",
+        "-v": "Print the name of each file to stderr as it is processed. With -t, provide a\n detailed listing of each file.",
+        "-p": "Pass-through mode. See above for description.",
+        "-m": "(i and p modes) Set file modification time on created files to match those in the\n source."
+      }
+    },
+    {
+      "Command": "sed",
+      "MP Summary": "stream editor for filtering and transforming text",
+      "Most Similar TLDR Task": "Print the first 11 lines of a file",
+      "Most Similar TLDR Script": "sed 11q {{filename}}",
+      "Most Similar NL2Bash Task": "Delete all files not owned by valid users",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find / -nouser | xargs -0 rm\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-nouser": "No user corresponds to file's numeric user ID."
+            },
+            "xargs": {
+              "mpsum": "build and execute command lines from standard input",
+              "-0": "Input items are terminated by a null character instead of by whitespace, and the\n quotes and backslash are not special (every character is taken literally).\n Disables the end of file string, which is treated like any other argument. Useful\n when input items might contain white space, quote marks, or backslashes. The GNU\n find -print0 option produces input suitable for this mode."
+            },
+            "rm": {
+              "mpsum": "remove files or directories"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "xargs": {
+              "man1_xargs_37433": "execut command pipe argument come anoth command file etc\ninput treat singl block text split separ piec space tab newlin end-of-fil delet file backup extens -print0 use null charact split file name -0 use delimit execut command input line replac occurr placehold mark _ input line parallel run max-proc process time default 1 max-proc 0 xarg run mani process possibl time run command use input data argument run multipl chain command input data"
+            },
+            "rm": {
+              "man1_rm_29530": "remov file directori forcibl remov directori without prompt confirm show error messag interact remov multipl file prompt everi remov recurs remov directori subdirectori remov file arbitrari locat remov file verbos mode print messag remov file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_10924: rename all the png files to jpg files in the current fodler",
+        "nl2bash_5223: Find recursively the latest modified file in the current directory"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_10924: find . -name \"*.png\" -print0 | sed 'p;s/\\.png/\\.jpg/' | xargs -0 -n2 mv",
+        "nl2bash_5223: find . -type f -printf '%T@ %p\\n' | sort -n | tail -1 | cut -f2- -d\" \" | sed 's/.*/\"&\"/' | xargs ls -l\n\n\nfind . -type f | sed 's/.*/\"&\"/' | xargs ls -E | awk '{ print $6,\" \",$7 }' | sort | tail -1\n\n\nfind . -type f | sed 's/.*/\"&\"/' | xargs ls -E | awk '{ print $6,\" \",$7,\" \",$9 }' | sort | tail -1"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "dirname",
+      "MP Summary": "strip last component from file name",
+      "Most Similar TLDR Task": "Calculate the parent directory of multiple paths",
+      "Most Similar TLDR Script": "dirname {{path/to/file_a}} {{path/to/directory_b}}",
+      "Most Similar NL2Bash Task": "Delete all files not owned by valid users",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find / -nouser | xargs -0 rm\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-nouser": "No user corresponds to file's numeric user ID."
+            },
+            "xargs": {
+              "mpsum": "build and execute command lines from standard input",
+              "-0": "Input items are terminated by a null character instead of by whitespace, and the\n quotes and backslash are not special (every character is taken literally).\n Disables the end of file string, which is treated like any other argument. Useful\n when input items might contain white space, quote marks, or backslashes. The GNU\n find -print0 option produces input suitable for this mode."
+            },
+            "rm": {
+              "mpsum": "remove files or directories"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "xargs": {
+              "man1_xargs_37433": "execut command pipe argument come anoth command file etc\ninput treat singl block text split separ piec space tab newlin end-of-fil delet file backup extens -print0 use null charact split file name -0 use delimit execut command input line replac occurr placehold mark _ input line parallel run max-proc process time default 1 max-proc 0 xarg run mani process possibl time run command use input data argument run multipl chain command input data"
+            },
+            "rm": {
+              "man1_rm_29530": "remov file directori forcibl remov directori without prompt confirm show error messag interact remov multipl file prompt everi remov recurs remov directori subdirectori remov file arbitrari locat remov file verbos mode print messag remov file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_3262: Find all files named \"file.ext\" within the current folder and print the path where each one is located",
+        "nl2bash_3263: Find all files named \"file.ext\" within the current folder and print the path where each one is located"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_3262: find `pwd` -name \"file.ext\" -exec dirname {} \\;\n\n\nfind `pwd` -name \"file.ext\" -exec echo $(dirname {}) \\;",
+        "nl2bash_3263: find `pwd` -name \"file.ext\" -exec dirname {} \\;\n\n\nfind `pwd` -name \"file.ext\" -exec echo $(dirname {}) \\;"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "chmod",
+      "MP Summary": "change file mode bits",
+      "Most Similar TLDR Task": "Give [a]ll users rights to [r]ead and e[x]ecute",
+      "Most Similar TLDR Script": "chmod a+rx {{file}}",
+      "Most Similar NL2Bash Task": "Delete all files not owned by valid users",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find / -nouser | xargs -0 rm\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-nouser": "No user corresponds to file's numeric user ID."
+            },
+            "xargs": {
+              "mpsum": "build and execute command lines from standard input",
+              "-0": "Input items are terminated by a null character instead of by whitespace, and the\n quotes and backslash are not special (every character is taken literally).\n Disables the end of file string, which is treated like any other argument. Useful\n when input items might contain white space, quote marks, or backslashes. The GNU\n find -print0 option produces input suitable for this mode."
+            },
+            "rm": {
+              "mpsum": "remove files or directories"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "xargs": {
+              "man1_xargs_37433": "execut command pipe argument come anoth command file etc\ninput treat singl block text split separ piec space tab newlin end-of-fil delet file backup extens -print0 use null charact split file name -0 use delimit execut command input line replac occurr placehold mark _ input line parallel run max-proc process time default 1 max-proc 0 xarg run mani process possibl time run command use input data argument run multipl chain command input data"
+            },
+            "rm": {
+              "man1_rm_29530": "remov file directori forcibl remov directori without prompt confirm show error messag interact remov multipl file prompt everi remov recurs remov directori subdirectori remov file arbitrari locat remov file verbos mode print messag remov file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_10950: Fix permissions for a group of files with given extension",
+        "nl2bash_10953: Give all directories in the /path/to/base/dir tree read and execute privileges",
+        "nl2bash_8858: Set permission of all files in \"img\", \"js\", and \"html\" to 644"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_10950: find /usr/local -name \"*.html\" -type f -exec chmod 644 {} \\;",
+        "nl2bash_10953: find /path/to/base/dir -type d -exec chmod 755 {} +\n\n\nfind /path/to/base/dir -type d -print0 | xargs -0 chmod 755",
+        "nl2bash_8858: chmod 644 img/* js/* html/*"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "echo",
+      "MP Summary": "display a line of text",
+      "Most Similar TLDR Task": "Append a message to the file",
+      "Most Similar TLDR Script": "echo \"{{Hello World}}\" >> {{file.txt}}",
+      "Most Similar NL2Bash Task": "Delete all files not owned by valid users",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find / -nouser | xargs -0 rm\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-nouser": "No user corresponds to file's numeric user ID."
+            },
+            "xargs": {
+              "mpsum": "build and execute command lines from standard input",
+              "-0": "Input items are terminated by a null character instead of by whitespace, and the\n quotes and backslash are not special (every character is taken literally).\n Disables the end of file string, which is treated like any other argument. Useful\n when input items might contain white space, quote marks, or backslashes. The GNU\n find -print0 option produces input suitable for this mode."
+            },
+            "rm": {
+              "mpsum": "remove files or directories"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "xargs": {
+              "man1_xargs_37433": "execut command pipe argument come anoth command file etc\ninput treat singl block text split separ piec space tab newlin end-of-fil delet file backup extens -print0 use null charact split file name -0 use delimit execut command input line replac occurr placehold mark _ input line parallel run max-proc process time default 1 max-proc 0 xarg run mani process possibl time run command use input data argument run multipl chain command input data"
+            },
+            "rm": {
+              "man1_rm_29530": "remov file directori forcibl remov directori without prompt confirm show error messag interact remov multipl file prompt everi remov recurs remov directori subdirectori remov file arbitrari locat remov file verbos mode print messag remov file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_11582: Remove spaces from output of \"echo aa | wc -l\"",
+        "nl2bash_3262: Find all files named \"file.ext\" within the current folder and print the path where each one is located",
+        "nl2bash_9740: Print the current working directory prepended by \"pwd: \""
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_11582: echo aa | wc -l | tr -d ' '",
+        "nl2bash_3262: find `pwd` -name \"file.ext\" -exec echo $(dirname {}) \\;",
+        "nl2bash_9740: echo pwd: `pwd`"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "grep",
+      "MP Summary": "print lines that match patterns",
+      "Most Similar TLDR Task": "Print 3 lines of [C]ontext around, [B]efore, or [A]fter each match",
+      "Most Similar TLDR Script": "grep -{{C|B|A}} 3 {{search_pattern}} {{path/to/file}}",
+      "Most Similar NL2Bash Task": "Delete all files not owned by valid users",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find / -nouser | xargs -0 rm\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-nouser": "No user corresponds to file's numeric user ID."
+            },
+            "xargs": {
+              "mpsum": "build and execute command lines from standard input",
+              "-0": "Input items are terminated by a null character instead of by whitespace, and the\n quotes and backslash are not special (every character is taken literally).\n Disables the end of file string, which is treated like any other argument. Useful\n when input items might contain white space, quote marks, or backslashes. The GNU\n find -print0 option produces input suitable for this mode."
+            },
+            "rm": {
+              "mpsum": "remove files or directories"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "xargs": {
+              "man1_xargs_37433": "execut command pipe argument come anoth command file etc\ninput treat singl block text split separ piec space tab newlin end-of-fil delet file backup extens -print0 use null charact split file name -0 use delimit execut command input line replac occurr placehold mark _ input line parallel run max-proc process time default 1 max-proc 0 xarg run mani process possibl time run command use input data argument run multipl chain command input data"
+            },
+            "rm": {
+              "man1_rm_29530": "remov file directori forcibl remov directori without prompt confirm show error messag interact remov multipl file prompt everi remov recurs remov directori subdirectori remov file arbitrari locat remov file verbos mode print messag remov file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_7342: find all the files in current folder ending with \"ini\" and search for a word in all these files",
+        "nl2bash_10965: Request A record from nameserver $ns for domain name $d, filter strings with domain name and exclude lines matching 'DIG'",
+        "nl2bash_8230: search for a word in all the files in the current directory and display the file paths relative to the current directory"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_7342: find . -name *.ini -exec grep -w PROJECT_A {} \\; -print | grep ini",
+        "nl2bash_10965: dig @$ns $d A | grep $d | grep -v \"DiG\"",
+        "nl2bash_8230: find . -exec grep -l foo {} +"
+      ],
+      "Explanations about Options": {
+        "-l": "Suppress normal output; instead print the name of each input file from which output\n would normally have been printed. The scanning will stop on the first match.",
+        "-w": "Select only those lines containing matches that form whole words. The test is that\n the matching substring must either be at the beginning of the line, or preceded by\n a non-word constituent character. Similarly, it must be either at the end of the\n line or followed by a non-word constituent character. Word-constituent characters\n are letters, digits, and the underscore. This option has no effect if -x is also\n specified.",
+        "-n": "Prefix each line of output with the 1-based line number within its input file.",
+        "-v": "Invert the sense of matching, to select non-matching lines.",
+        "-r": "Read all files under each directory, recursively, following symbolic links only if\n they are on the command line. Note that if no file operand is given, grep searches\n the working directory. This is equivalent to the -d recurse option.",
+        "-i": "Ignore case distinctions in patterns and input data, so that characters that differ\n only in case match each other."
+      }
+    },
+    {
+      "Command": "cut",
+      "MP Summary": "remove sections from each line of files",
+      "Most Similar TLDR Task": "Cut out the fields 3 through to the end of each line, using a space as a delimiter",
+      "Most Similar TLDR Script": "cut -d'{{ }}' -f{{3-}}",
+      "Most Similar NL2Bash Task": "Delete all files not owned by valid users",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find / -nouser | xargs -0 rm\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-nouser": "No user corresponds to file's numeric user ID."
+            },
+            "xargs": {
+              "mpsum": "build and execute command lines from standard input",
+              "-0": "Input items are terminated by a null character instead of by whitespace, and the\n quotes and backslash are not special (every character is taken literally).\n Disables the end of file string, which is treated like any other argument. Useful\n when input items might contain white space, quote marks, or backslashes. The GNU\n find -print0 option produces input suitable for this mode."
+            },
+            "rm": {
+              "mpsum": "remove files or directories"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "xargs": {
+              "man1_xargs_37433": "execut command pipe argument come anoth command file etc\ninput treat singl block text split separ piec space tab newlin end-of-fil delet file backup extens -print0 use null charact split file name -0 use delimit execut command input line replac occurr placehold mark _ input line parallel run max-proc process time default 1 max-proc 0 xarg run mani process possibl time run command use input data argument run multipl chain command input data"
+            },
+            "rm": {
+              "man1_rm_29530": "remov file directori forcibl remov directori without prompt confirm show error messag interact remov multipl file prompt everi remov recurs remov directori subdirectori remov file arbitrari locat remov file verbos mode print messag remov file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_5223: Find recursively the latest modified file in the current directory",
+        "nl2bash_13677: Calculate md5 sum of file ${my_iso_file} and save it to variable 'md5'"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_5223: find . -type f -print0 | xargs -0 stat -f \"%m %N\" | sort -n | tail -1 | cut -f2- -d\" \"\n\n\nfind . -type f -print0 | xargs -0 stat -f \"%m %N\" | sort -rn | head -1 | cut -f2- -d\" \"\n\n\nfind . -type f -printf '%T@ %p\\n' | sort -n | tail -1 | cut -f2- -d\" \"\n\n\nfind . -type f -printf '%T@ %p\\n' | sort -n | tail -1 | cut -f2- -d\" \" | sed 's/.*/\"&\"/' | xargs ls -l",
+        "nl2bash_13677: md5=`md5sum ${my_iso_file} | cut -b-32`"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "head",
+      "MP Summary": "output the first part of files",
+      "Most Similar TLDR Task": "Output everything but the last few bytes of a file",
+      "Most Similar TLDR Script": "head -c -{{size_in_bytes}} {{filename}}",
+      "Most Similar NL2Bash Task": "Delete all files not owned by valid users",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find / -nouser | xargs -0 rm\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-nouser": "No user corresponds to file's numeric user ID."
+            },
+            "xargs": {
+              "mpsum": "build and execute command lines from standard input",
+              "-0": "Input items are terminated by a null character instead of by whitespace, and the\n quotes and backslash are not special (every character is taken literally).\n Disables the end of file string, which is treated like any other argument. Useful\n when input items might contain white space, quote marks, or backslashes. The GNU\n find -print0 option produces input suitable for this mode."
+            },
+            "rm": {
+              "mpsum": "remove files or directories"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "xargs": {
+              "man1_xargs_37433": "execut command pipe argument come anoth command file etc\ninput treat singl block text split separ piec space tab newlin end-of-fil delet file backup extens -print0 use null charact split file name -0 use delimit execut command input line replac occurr placehold mark _ input line parallel run max-proc process time default 1 max-proc 0 xarg run mani process possibl time run command use input data argument run multipl chain command input data"
+            },
+            "rm": {
+              "man1_rm_29530": "remov file directori forcibl remov directori without prompt confirm show error messag interact remov multipl file prompt everi remov recurs remov directori subdirectori remov file arbitrari locat remov file verbos mode print messag remov file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_5223: Find recursively the latest modified file in the current directory",
+        "nl2bash_11210: Delete the oldest file with '.tgz' or '.gz' extension under '/home/backups' directory tree"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_5223: find . -type f -print0 | xargs -0 stat -f \"%m %N\" | sort -rn | head -1 | cut -f2- -d\" \"",
+        "nl2bash_11210: ls -tr $(find /home/backups -name '*.gz' -o -name '*.tgz')|head -1|xargs rm -f"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "awk",
+      "MP Summary": "pattern scanning and processing language",
+      "Most Similar TLDR Task": "Sum the values in the first column of a file and print the total",
+      "Most Similar TLDR Script": "awk '{s+=$1} END {print s}' {{filename}}",
+      "Most Similar NL2Bash Task": "Delete all files not owned by valid users",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find / -nouser | xargs -0 rm\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-nouser": "No user corresponds to file's numeric user ID."
+            },
+            "xargs": {
+              "mpsum": "build and execute command lines from standard input",
+              "-0": "Input items are terminated by a null character instead of by whitespace, and the\n quotes and backslash are not special (every character is taken literally).\n Disables the end of file string, which is treated like any other argument. Useful\n when input items might contain white space, quote marks, or backslashes. The GNU\n find -print0 option produces input suitable for this mode."
+            },
+            "rm": {
+              "mpsum": "remove files or directories"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "xargs": {
+              "man1_xargs_37433": "execut command pipe argument come anoth command file etc\ninput treat singl block text split separ piec space tab newlin end-of-fil delet file backup extens -print0 use null charact split file name -0 use delimit execut command input line replac occurr placehold mark _ input line parallel run max-proc process time default 1 max-proc 0 xarg run mani process possibl time run command use input data argument run multipl chain command input data"
+            },
+            "rm": {
+              "man1_rm_29530": "remov file directori forcibl remov directori without prompt confirm show error messag interact remov multipl file prompt everi remov recurs remov directori subdirectori remov file arbitrari locat remov file verbos mode print messag remov file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_5223: Find recursively the latest modified file in the current directory",
+        "nl2bash_12025: Prints calendar of $month, $year, and redirects all output to the awk script 'cal.awk', with predefined variable 'day=$day'."
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_5223: find . -type f | sed 's/.*/\"&\"/' | xargs ls -E | awk '{ print $6,\" \",$7 }' | sort | tail -1\n\n\nfind . -type f | sed 's/.*/\"&\"/' | xargs ls -E | awk '{ print $6,\" \",$7,\" \",$9 }' | sort | tail -1",
+        "nl2bash_12025: cal $month $year | awk -v day=$day -f cal.awk"
+      ],
+      "Explanations about Options": {
+        "-v": "FS=sepstring"
+      }
+    },
+    {
+      "Command": "mv",
+      "MP Summary": "move (rename) files",
+      "Most Similar TLDR Task": "Move files in verbose mode, showing files after they are moved",
+      "Most Similar TLDR Script": "mv -v {{source}} {{target}}",
+      "Most Similar NL2Bash Task": "Delete all files not owned by valid users",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find / -nouser | xargs -0 rm\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-nouser": "No user corresponds to file's numeric user ID."
+            },
+            "xargs": {
+              "mpsum": "build and execute command lines from standard input",
+              "-0": "Input items are terminated by a null character instead of by whitespace, and the\n quotes and backslash are not special (every character is taken literally).\n Disables the end of file string, which is treated like any other argument. Useful\n when input items might contain white space, quote marks, or backslashes. The GNU\n find -print0 option produces input suitable for this mode."
+            },
+            "rm": {
+              "mpsum": "remove files or directories"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "xargs": {
+              "man1_xargs_37433": "execut command pipe argument come anoth command file etc\ninput treat singl block text split separ piec space tab newlin end-of-fil delet file backup extens -print0 use null charact split file name -0 use delimit execut command input line replac occurr placehold mark _ input line parallel run max-proc process time default 1 max-proc 0 xarg run mani process possibl time run command use input data argument run multipl chain command input data"
+            },
+            "rm": {
+              "man1_rm_29530": "remov file directori forcibl remov directori without prompt confirm show error messag interact remov multipl file prompt everi remov recurs remov directori subdirectori remov file arbitrari locat remov file verbos mode print messag remov file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_10924: rename all the png files to jpg files in the current fodler"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_10924: find . -name \"*.png\" -print0 | sed 'p;s/\\.png/\\.jpg/' | xargs -0 -n2 mv"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "tr",
+      "MP Summary": "translate or delete characters",
+      "Most Similar TLDR Task": "Map each character of the first set to the corresponding character of the second set",
+      "Most Similar TLDR Script": "tr '{{abcd}}' '{{jkmn}}' < {{filename}}",
+      "Most Similar NL2Bash Task": "Delete all files not owned by valid users",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find / -nouser | xargs -0 rm\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-nouser": "No user corresponds to file's numeric user ID."
+            },
+            "xargs": {
+              "mpsum": "build and execute command lines from standard input",
+              "-0": "Input items are terminated by a null character instead of by whitespace, and the\n quotes and backslash are not special (every character is taken literally).\n Disables the end of file string, which is treated like any other argument. Useful\n when input items might contain white space, quote marks, or backslashes. The GNU\n find -print0 option produces input suitable for this mode."
+            },
+            "rm": {
+              "mpsum": "remove files or directories"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "xargs": {
+              "man1_xargs_37433": "execut command pipe argument come anoth command file etc\ninput treat singl block text split separ piec space tab newlin end-of-fil delet file backup extens -print0 use null charact split file name -0 use delimit execut command input line replac occurr placehold mark _ input line parallel run max-proc process time default 1 max-proc 0 xarg run mani process possibl time run command use input data argument run multipl chain command input data"
+            },
+            "rm": {
+              "man1_rm_29530": "remov file directori forcibl remov directori without prompt confirm show error messag interact remov multipl file prompt everi remov recurs remov directori subdirectori remov file arbitrari locat remov file verbos mode print messag remov file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_11582: Remove spaces from output of \"echo aa | wc -l\""
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_11582: echo aa | wc -l | tr -d ' '"
+      ],
+      "Explanations about Options": {
+        "-d": "delete characters in SET1, do not translate"
+      }
+    },
+    {
+      "Command": "add-apt-repository",
+      "MP Summary": "Adds   a   repository   into   the   /etc/apt/sources.list   or /etc/apt/sources.list.d or removes an existing one",
+      "Most Similar TLDR Task": "Add a new apt repository",
+      "Most Similar TLDR Script": "add-apt-repository {{repository_spec}}",
+      "Most Similar NL2Bash Task": "Delete all files not owned by valid users",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find / -nouser | xargs -0 rm\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-nouser": "No user corresponds to file's numeric user ID."
+            },
+            "xargs": {
+              "mpsum": "build and execute command lines from standard input",
+              "-0": "Input items are terminated by a null character instead of by whitespace, and the\n quotes and backslash are not special (every character is taken literally).\n Disables the end of file string, which is treated like any other argument. Useful\n when input items might contain white space, quote marks, or backslashes. The GNU\n find -print0 option produces input suitable for this mode."
+            },
+            "rm": {
+              "mpsum": "remove files or directories"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "xargs": {
+              "man1_xargs_37433": "execut command pipe argument come anoth command file etc\ninput treat singl block text split separ piec space tab newlin end-of-fil delet file backup extens -print0 use null charact split file name -0 use delimit execut command input line replac occurr placehold mark _ input line parallel run max-proc process time default 1 max-proc 0 xarg run mani process possibl time run command use input data argument run multipl chain command input data"
+            },
+            "rm": {
+              "man1_rm_29530": "remov file directori forcibl remov directori without prompt confirm show error messag interact remov multipl file prompt everi remov recurs remov directori subdirectori remov file arbitrari locat remov file verbos mode print messag remov file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_791021: Unable to open .jar files with Java"
+      ],
+      "Top-3 Scripts": [
+        "au_791021: sudo add-apt-repository ppa:minecraft-installer-peeps/minecraft-installer\nsudo apt-get update\nsudo apt-get install minecraft-installer"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "which",
+      "MP Summary": "locate a command",
+      "Most Similar TLDR Task": "Search the PATH environment variable and display the location of any matching executables",
+      "Most Similar TLDR Script": "which {{executable}}",
+      "Most Similar NL2Bash Task": "Delete all files not owned by valid users",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find / -nouser | xargs -0 rm\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-nouser": "No user corresponds to file's numeric user ID."
+            },
+            "xargs": {
+              "mpsum": "build and execute command lines from standard input",
+              "-0": "Input items are terminated by a null character instead of by whitespace, and the\n quotes and backslash are not special (every character is taken literally).\n Disables the end of file string, which is treated like any other argument. Useful\n when input items might contain white space, quote marks, or backslashes. The GNU\n find -print0 option produces input suitable for this mode."
+            },
+            "rm": {
+              "mpsum": "remove files or directories"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "xargs": {
+              "man1_xargs_37433": "execut command pipe argument come anoth command file etc\ninput treat singl block text split separ piec space tab newlin end-of-fil delet file backup extens -print0 use null charact split file name -0 use delimit execut command input line replac occurr placehold mark _ input line parallel run max-proc process time default 1 max-proc 0 xarg run mani process possibl time run command use input data argument run multipl chain command input data"
+            },
+            "rm": {
+              "man1_rm_29530": "remov file directori forcibl remov directori without prompt confirm show error messag interact remov multipl file prompt everi remov recurs remov directori subdirectori remov file arbitrari locat remov file verbos mode print messag remov file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_13256: Export full path of command \"git\" to variable \"git\""
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_13256: export git=$(which git)"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "wc",
+      "MP Summary": "print newline, word, and byte counts for each file",
+      "Most Similar TLDR Task": "Count characters (bytes) in file",
+      "Most Similar TLDR Script": "wc -c {{file}}",
+      "Most Similar NL2Bash Task": "Delete all files not owned by valid users",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find / -nouser | xargs -0 rm\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-nouser": "No user corresponds to file's numeric user ID."
+            },
+            "xargs": {
+              "mpsum": "build and execute command lines from standard input",
+              "-0": "Input items are terminated by a null character instead of by whitespace, and the\n quotes and backslash are not special (every character is taken literally).\n Disables the end of file string, which is treated like any other argument. Useful\n when input items might contain white space, quote marks, or backslashes. The GNU\n find -print0 option produces input suitable for this mode."
+            },
+            "rm": {
+              "mpsum": "remove files or directories"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "xargs": {
+              "man1_xargs_37433": "execut command pipe argument come anoth command file etc\ninput treat singl block text split separ piec space tab newlin end-of-fil delet file backup extens -print0 use null charact split file name -0 use delimit execut command input line replac occurr placehold mark _ input line parallel run max-proc process time default 1 max-proc 0 xarg run mani process possibl time run command use input data argument run multipl chain command input data"
+            },
+            "rm": {
+              "man1_rm_29530": "remov file directori forcibl remov directori without prompt confirm show error messag interact remov multipl file prompt everi remov recurs remov directori subdirectori remov file arbitrari locat remov file verbos mode print messag remov file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_11582: Remove spaces from output of \"echo aa | wc -l\""
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_11582: echo aa | wc -l | tr -d ' '"
+      ],
+      "Explanations about Options": {
+        "-l": "print the newline counts"
+      }
+    },
+    {
+      "Command": "ls",
+      "MP Summary": "list directory contents",
+      "Most Similar TLDR Task": "List files one per line",
+      "Most Similar TLDR Script": "ls -1",
+      "Most Similar NL2Bash Task": "Delete all files not owned by valid users",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find / -nouser | xargs -0 rm\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-nouser": "No user corresponds to file's numeric user ID."
+            },
+            "xargs": {
+              "mpsum": "build and execute command lines from standard input",
+              "-0": "Input items are terminated by a null character instead of by whitespace, and the\n quotes and backslash are not special (every character is taken literally).\n Disables the end of file string, which is treated like any other argument. Useful\n when input items might contain white space, quote marks, or backslashes. The GNU\n find -print0 option produces input suitable for this mode."
+            },
+            "rm": {
+              "mpsum": "remove files or directories"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "xargs": {
+              "man1_xargs_37433": "execut command pipe argument come anoth command file etc\ninput treat singl block text split separ piec space tab newlin end-of-fil delet file backup extens -print0 use null charact split file name -0 use delimit execut command input line replac occurr placehold mark _ input line parallel run max-proc process time default 1 max-proc 0 xarg run mani process possibl time run command use input data argument run multipl chain command input data"
+            },
+            "rm": {
+              "man1_rm_29530": "remov file directori forcibl remov directori without prompt confirm show error messag interact remov multipl file prompt everi remov recurs remov directori subdirectori remov file arbitrari locat remov file verbos mode print messag remov file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_5223: Find recursively the latest modified file in the current directory",
+        "nl2bash_11210: Delete the oldest file with '.tgz' or '.gz' extension under '/home/backups' directory tree"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_5223: find . -type f -print0 | xargs -0 ls -ltr | tail -n 1\n\n\nfind . -type f -print0|xargs -0 ls -drt|tail -n 1\n\n\nfind . -type f -printf '%T@ %p\\n' | sort -n | tail -1 | cut -f2- -d\" \" | sed 's/.*/\"&\"/' | xargs ls -l\n\n\nfind . -type f | sed 's/.*/\"&\"/' | xargs ls -E | awk '{ print $6,\" \",$7 }' | sort | tail -1\n\n\nfind . -type f | sed 's/.*/\"&\"/' | xargs ls -E | awk '{ print $6,\" \",$7,\" \",$9 }' | sort | tail -1\n\n\nfind . -type f | xargs ls -ltr | tail -n 1",
+        "nl2bash_11210: ls -tr $(find /home/backups -name '*.gz' -o -name '*.tgz')|head -1|xargs rm -f"
+      ],
+      "Explanations about Options": {
+        "-l": "use a long listing format",
+        "-t": "sort by modification time , newest first",
+        "-r": "reverse order while sorting"
+      }
+    },
+    {
+      "Command": "export",
+      "MP Summary": "set the export attribute for variables",
+      "Most Similar TLDR Task": "Append something to the PATH variable",
+      "Most Similar TLDR Script": "export PATH=$PATH:{{path/to/append}}",
+      "Most Similar NL2Bash Task": "Delete all files not owned by valid users",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find / -nouser | xargs -0 rm\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-nouser": "No user corresponds to file's numeric user ID."
+            },
+            "xargs": {
+              "mpsum": "build and execute command lines from standard input",
+              "-0": "Input items are terminated by a null character instead of by whitespace, and the\n quotes and backslash are not special (every character is taken literally).\n Disables the end of file string, which is treated like any other argument. Useful\n when input items might contain white space, quote marks, or backslashes. The GNU\n find -print0 option produces input suitable for this mode."
+            },
+            "rm": {
+              "mpsum": "remove files or directories"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "xargs": {
+              "man1_xargs_37433": "execut command pipe argument come anoth command file etc\ninput treat singl block text split separ piec space tab newlin end-of-fil delet file backup extens -print0 use null charact split file name -0 use delimit execut command input line replac occurr placehold mark _ input line parallel run max-proc process time default 1 max-proc 0 xarg run mani process possibl time run command use input data argument run multipl chain command input data"
+            },
+            "rm": {
+              "man1_rm_29530": "remov file directori forcibl remov directori without prompt confirm show error messag interact remov multipl file prompt everi remov recurs remov directori subdirectori remov file arbitrari locat remov file verbos mode print messag remov file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_13256: Export full path of command \"git\" to variable \"git\""
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_13256: export git=$(which git)"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "chown",
+      "MP Summary": "change file owner and group",
+      "Most Similar TLDR Task": "Change the owner of a file/directory to match a reference file",
+      "Most Similar TLDR Script": "chown --reference={{path/to/reference_file}} {{path/to/file_or_directory}}",
+      "Most Similar NL2Bash Task": "Delete all files not owned by valid users",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find / -nouser | xargs -0 rm\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-nouser": "No user corresponds to file's numeric user ID."
+            },
+            "xargs": {
+              "mpsum": "build and execute command lines from standard input",
+              "-0": "Input items are terminated by a null character instead of by whitespace, and the\n quotes and backslash are not special (every character is taken literally).\n Disables the end of file string, which is treated like any other argument. Useful\n when input items might contain white space, quote marks, or backslashes. The GNU\n find -print0 option produces input suitable for this mode."
+            },
+            "rm": {
+              "mpsum": "remove files or directories"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "xargs": {
+              "man1_xargs_37433": "execut command pipe argument come anoth command file etc\ninput treat singl block text split separ piec space tab newlin end-of-fil delet file backup extens -print0 use null charact split file name -0 use delimit execut command input line replac occurr placehold mark _ input line parallel run max-proc process time default 1 max-proc 0 xarg run mani process possibl time run command use input data argument run multipl chain command input data"
+            },
+            "rm": {
+              "man1_rm_29530": "remov file directori forcibl remov directori without prompt confirm show error messag interact remov multipl file prompt everi remov recurs remov directori subdirectori remov file arbitrari locat remov file verbos mode print messag remov file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_12098: Change owner to \"$user\" and group to \"$group\" of \"$file\""
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_12098: chown -- \"$user:$group\" \"$file\""
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "tail",
+      "MP Summary": "output the last part of files",
+      "Most Similar TLDR Task": "Show last 'num' lines in 'file' and refresh every 'n' seconds",
+      "Most Similar TLDR Script": "tail -n {{num}} -s {{n}} -f {{file}}",
+      "Most Similar NL2Bash Task": "Delete all files not owned by valid users",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find / -nouser | xargs -0 rm\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-nouser": "No user corresponds to file's numeric user ID."
+            },
+            "xargs": {
+              "mpsum": "build and execute command lines from standard input",
+              "-0": "Input items are terminated by a null character instead of by whitespace, and the\n quotes and backslash are not special (every character is taken literally).\n Disables the end of file string, which is treated like any other argument. Useful\n when input items might contain white space, quote marks, or backslashes. The GNU\n find -print0 option produces input suitable for this mode."
+            },
+            "rm": {
+              "mpsum": "remove files or directories"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "xargs": {
+              "man1_xargs_37433": "execut command pipe argument come anoth command file etc\ninput treat singl block text split separ piec space tab newlin end-of-fil delet file backup extens -print0 use null charact split file name -0 use delimit execut command input line replac occurr placehold mark _ input line parallel run max-proc process time default 1 max-proc 0 xarg run mani process possibl time run command use input data argument run multipl chain command input data"
+            },
+            "rm": {
+              "man1_rm_29530": "remov file directori forcibl remov directori without prompt confirm show error messag interact remov multipl file prompt everi remov recurs remov directori subdirectori remov file arbitrari locat remov file verbos mode print messag remov file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_5223: Find recursively the latest modified file in the current directory"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_5223: find . -type f -print0 | xargs -0 ls -ltr | tail -n 1\n\n\nfind . -type f -print0 | xargs -0 stat -f \"%m %N\" | sort -n | tail -1 | cut -f2- -d\" \"\n\n\nfind . -type f -print0|xargs -0 ls -drt|tail -n 1\n\n\nfind . -type f -printf '%T@ %p\\n' | sort -n | tail -1 | cut -f2- -d\" \"\n\n\nfind . -type f -printf '%T@ %p\\n' | sort -n | tail -1 | cut -f2- -d\" \" | sed 's/.*/\"&\"/' | xargs ls -l\n\n\nfind . -type f -printf '%TY-%Tm-%Td %TH:%TM: %Tz %p\\n'| sort -n | tail -n1\n\n\nfind . -type f | sed 's/.*/\"&\"/' | xargs ls -E | awk '{ print $6,\" \",$7 }' | sort | tail -1\n\n\nfind . -type f | sed 's/.*/\"&\"/' | xargs ls -E | awk '{ print $6,\" \",$7,\" \",$9 }' | sort | tail -1\n\n\nfind . -type f | xargs ls -ltr | tail -n 1"
+      ],
+      "Explanations about Options": {
+        "-n": "output the last NUM lines, instead of the last 10; or use -n +NUM to output\n starting with line NUM"
+      }
+    },
+    {
+      "Command": "sudo",
+      "MP Summary": "execute a command as another user",
+      "Most Similar TLDR Task": "Edit a file as the superuser with your default editor",
+      "Most Similar TLDR Script": "sudo -e {{/etc/fstab}}",
+      "Most Similar NL2Bash Task": "Delete all files not owned by valid users",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find / -nouser | xargs -0 rm\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-nouser": "No user corresponds to file's numeric user ID."
+            },
+            "xargs": {
+              "mpsum": "build and execute command lines from standard input",
+              "-0": "Input items are terminated by a null character instead of by whitespace, and the\n quotes and backslash are not special (every character is taken literally).\n Disables the end of file string, which is treated like any other argument. Useful\n when input items might contain white space, quote marks, or backslashes. The GNU\n find -print0 option produces input suitable for this mode."
+            },
+            "rm": {
+              "mpsum": "remove files or directories"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "xargs": {
+              "man1_xargs_37433": "execut command pipe argument come anoth command file etc\ninput treat singl block text split separ piec space tab newlin end-of-fil delet file backup extens -print0 use null charact split file name -0 use delimit execut command input line replac occurr placehold mark _ input line parallel run max-proc process time default 1 max-proc 0 xarg run mani process possibl time run command use input data argument run multipl chain command input data"
+            },
+            "rm": {
+              "man1_rm_29530": "remov file directori forcibl remov directori without prompt confirm show error messag interact remov multipl file prompt everi remov recurs remov directori subdirectori remov file arbitrari locat remov file verbos mode print messag remov file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_791021: Unable to open .jar files with Java"
+      ],
+      "Top-3 Scripts": [
+        "au_791021: sudo apt-get remove openjdk-9-*\nsudo apt-get install default-jre\n\nsudo add-apt-repository ppa:minecraft-installer-peeps/minecraft-installer\nsudo apt-get update\nsudo apt-get install minecraft-installer"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "install",
+      "MP Summary": "copy files and set attributes",
+      "Most Similar TLDR Task": "Copy files and apply access/modification times of source to destination",
+      "Most Similar TLDR Script": "install -p {{path/to/source}} {{path/to/destination}}",
+      "Most Similar NL2Bash Task": "Delete all files not owned by valid users",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find / -nouser | xargs -0 rm\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-nouser": "No user corresponds to file's numeric user ID."
+            },
+            "xargs": {
+              "mpsum": "build and execute command lines from standard input",
+              "-0": "Input items are terminated by a null character instead of by whitespace, and the\n quotes and backslash are not special (every character is taken literally).\n Disables the end of file string, which is treated like any other argument. Useful\n when input items might contain white space, quote marks, or backslashes. The GNU\n find -print0 option produces input suitable for this mode."
+            },
+            "rm": {
+              "mpsum": "remove files or directories"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "xargs": {
+              "man1_xargs_37433": "execut command pipe argument come anoth command file etc\ninput treat singl block text split separ piec space tab newlin end-of-fil delet file backup extens -print0 use null charact split file name -0 use delimit execut command input line replac occurr placehold mark _ input line parallel run max-proc process time default 1 max-proc 0 xarg run mani process possibl time run command use input data argument run multipl chain command input data"
+            },
+            "rm": {
+              "man1_rm_29530": "remov file directori forcibl remov directori without prompt confirm show error messag interact remov multipl file prompt everi remov recurs remov directori subdirectori remov file arbitrari locat remov file verbos mode print messag remov file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_791021: Unable to open .jar files with Java"
+      ],
+      "Top-3 Scripts": [
+        "au_791021: sudo apt-get remove openjdk-9-*\nsudo apt-get install default-jre\n\nsudo add-apt-repository ppa:minecraft-installer-peeps/minecraft-installer\nsudo apt-get update\nsudo apt-get install minecraft-installer"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "apt-get",
+      "MP Summary": "APT package handling utility - command-line interface",
+      "Most Similar TLDR Task": "Clean the local repository - removing package files (.deb) from interrupted downloads that can no longer be downloaded",
+      "Most Similar TLDR Script": "apt-get autoclean",
+      "Most Similar NL2Bash Task": "Delete all files not owned by valid users",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find / -nouser | xargs -0 rm\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-nouser": "No user corresponds to file's numeric user ID."
+            },
+            "xargs": {
+              "mpsum": "build and execute command lines from standard input",
+              "-0": "Input items are terminated by a null character instead of by whitespace, and the\n quotes and backslash are not special (every character is taken literally).\n Disables the end of file string, which is treated like any other argument. Useful\n when input items might contain white space, quote marks, or backslashes. The GNU\n find -print0 option produces input suitable for this mode."
+            },
+            "rm": {
+              "mpsum": "remove files or directories"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "xargs": {
+              "man1_xargs_37433": "execut command pipe argument come anoth command file etc\ninput treat singl block text split separ piec space tab newlin end-of-fil delet file backup extens -print0 use null charact split file name -0 use delimit execut command input line replac occurr placehold mark _ input line parallel run max-proc process time default 1 max-proc 0 xarg run mani process possibl time run command use input data argument run multipl chain command input data"
+            },
+            "rm": {
+              "man1_rm_29530": "remov file directori forcibl remov directori without prompt confirm show error messag interact remov multipl file prompt everi remov recurs remov directori subdirectori remov file arbitrari locat remov file verbos mode print messag remov file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_791021: Unable to open .jar files with Java"
+      ],
+      "Top-3 Scripts": [
+        "au_791021: sudo apt-get remove openjdk-9-*\nsudo apt-get install default-jre\n\nsudo add-apt-repository ppa:minecraft-installer-peeps/minecraft-installer\nsudo apt-get update\nsudo apt-get install minecraft-installer"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "stat",
+      "MP Summary": "display file or file system status",
+      "Most Similar TLDR Task": "Show the size of the file in bytes",
+      "Most Similar TLDR Script": "stat -c \"%s %n\" {{file}}",
+      "Most Similar NL2Bash Task": "Delete all files not owned by valid users",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find / -nouser | xargs -0 rm\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-nouser": "No user corresponds to file's numeric user ID."
+            },
+            "xargs": {
+              "mpsum": "build and execute command lines from standard input",
+              "-0": "Input items are terminated by a null character instead of by whitespace, and the\n quotes and backslash are not special (every character is taken literally).\n Disables the end of file string, which is treated like any other argument. Useful\n when input items might contain white space, quote marks, or backslashes. The GNU\n find -print0 option produces input suitable for this mode."
+            },
+            "rm": {
+              "mpsum": "remove files or directories"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "xargs": {
+              "man1_xargs_37433": "execut command pipe argument come anoth command file etc\ninput treat singl block text split separ piec space tab newlin end-of-fil delet file backup extens -print0 use null charact split file name -0 use delimit execut command input line replac occurr placehold mark _ input line parallel run max-proc process time default 1 max-proc 0 xarg run mani process possibl time run command use input data argument run multipl chain command input data"
+            },
+            "rm": {
+              "man1_rm_29530": "remov file directori forcibl remov directori without prompt confirm show error messag interact remov multipl file prompt everi remov recurs remov directori subdirectori remov file arbitrari locat remov file verbos mode print messag remov file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_5223: Find recursively the latest modified file in the current directory"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_5223: find . -type f -print0 | xargs -0 stat -f \"%m %N\" | sort -n | tail -1 | cut -f2- -d\" \"\n\n\nfind . -type f -print0 | xargs -0 stat -f \"%m %N\" | sort -rn | head -1 | cut -f2- -d\" \""
+      ],
+      "Explanations about Options": {
+        "-f": "display file system status instead of file status"
+      }
+    },
+    {
+      "Command": "su",
+      "MP Summary": "run a command with substitute user and group ID",
+      "Most Similar TLDR Task": "Switch to a given user (requires the user's password)",
+      "Most Similar TLDR Script": "su {{username}}",
+      "Most Similar NL2Bash Task": "Delete all files not owned by valid users",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find / -nouser | xargs -0 rm\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-nouser": "No user corresponds to file's numeric user ID."
+            },
+            "xargs": {
+              "mpsum": "build and execute command lines from standard input",
+              "-0": "Input items are terminated by a null character instead of by whitespace, and the\n quotes and backslash are not special (every character is taken literally).\n Disables the end of file string, which is treated like any other argument. Useful\n when input items might contain white space, quote marks, or backslashes. The GNU\n find -print0 option produces input suitable for this mode."
+            },
+            "rm": {
+              "mpsum": "remove files or directories"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "xargs": {
+              "man1_xargs_37433": "execut command pipe argument come anoth command file etc\ninput treat singl block text split separ piec space tab newlin end-of-fil delet file backup extens -print0 use null charact split file name -0 use delimit execut command input line replac occurr placehold mark _ input line parallel run max-proc process time default 1 max-proc 0 xarg run mani process possibl time run command use input data argument run multipl chain command input data"
+            },
+            "rm": {
+              "man1_rm_29530": "remov file directori forcibl remov directori without prompt confirm show error messag interact remov multipl file prompt everi remov recurs remov directori subdirectori remov file arbitrari locat remov file verbos mode print messag remov file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_1707: run ksh shell as user apache"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_1707: su apache -s /bin/ksh"
+      ],
+      "Explanations about Options": {
+        "-s": "Run the specified shell instead of the default. The shell to run is selected\n according to the following rules, in order:"
+      }
+    },
+    {
+      "Command": "od",
+      "MP Summary": "dump files in octal and other formats",
+      "Most Similar TLDR Task": "Display file using default settings: octal format, 8 bytes per line, byte offsets in octal, and duplicate lines replaced with `*`",
+      "Most Similar TLDR Script": "od {{path/to/file}}",
+      "Most Similar NL2Bash Task": "Delete all files not owned by valid users",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find / -nouser | xargs -0 rm\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-nouser": "No user corresponds to file's numeric user ID."
+            },
+            "xargs": {
+              "mpsum": "build and execute command lines from standard input",
+              "-0": "Input items are terminated by a null character instead of by whitespace, and the\n quotes and backslash are not special (every character is taken literally).\n Disables the end of file string, which is treated like any other argument. Useful\n when input items might contain white space, quote marks, or backslashes. The GNU\n find -print0 option produces input suitable for this mode."
+            },
+            "rm": {
+              "mpsum": "remove files or directories"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "xargs": {
+              "man1_xargs_37433": "execut command pipe argument come anoth command file etc\ninput treat singl block text split separ piec space tab newlin end-of-fil delet file backup extens -print0 use null charact split file name -0 use delimit execut command input line replac occurr placehold mark _ input line parallel run max-proc process time default 1 max-proc 0 xarg run mani process possibl time run command use input data argument run multipl chain command input data"
+            },
+            "rm": {
+              "man1_rm_29530": "remov file directori forcibl remov directori without prompt confirm show error messag interact remov multipl file prompt everi remov recurs remov directori subdirectori remov file arbitrari locat remov file verbos mode print messag remov file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_13260: Dump \"/dev/ttySomething\" in both hex and text"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_13260: od -t x1 -t a /dev/ttySomething"
+      ],
+      "Explanations about Options": {
+        "-t": "select output format or formats"
+      }
+    },
+    {
+      "Command": "tee",
+      "MP Summary": "read from standard input and write to standard output and files",
+      "Most Similar TLDR Task": "Create a directory called \"example\", count the number of characters in \"example\" and write \"example\" to the terminal",
+      "Most Similar TLDR Script": "echo \"example\" | tee >(xargs mkdir) >(wc -c)",
+      "Most Similar NL2Bash Task": "Delete all files not owned by valid users",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find / -nouser | xargs -0 rm\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-nouser": "No user corresponds to file's numeric user ID."
+            },
+            "xargs": {
+              "mpsum": "build and execute command lines from standard input",
+              "-0": "Input items are terminated by a null character instead of by whitespace, and the\n quotes and backslash are not special (every character is taken literally).\n Disables the end of file string, which is treated like any other argument. Useful\n when input items might contain white space, quote marks, or backslashes. The GNU\n find -print0 option produces input suitable for this mode."
+            },
+            "rm": {
+              "mpsum": "remove files or directories"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "xargs": {
+              "man1_xargs_37433": "execut command pipe argument come anoth command file etc\ninput treat singl block text split separ piec space tab newlin end-of-fil delet file backup extens -print0 use null charact split file name -0 use delimit execut command input line replac occurr placehold mark _ input line parallel run max-proc process time default 1 max-proc 0 xarg run mani process possibl time run command use input data argument run multipl chain command input data"
+            },
+            "rm": {
+              "man1_rm_29530": "remov file directori forcibl remov directori without prompt confirm show error messag interact remov multipl file prompt everi remov recurs remov directori subdirectori remov file arbitrari locat remov file verbos mode print messag remov file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_10257: Write output and error of \"ant\" to the console and to \"build.log\""
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_10257: ant 2>&1|tee build.log"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "cal",
+      "MP Summary": "displays a calendar and the date of Easter",
+      "Most Similar TLDR Task": "Display a calendar for a specific year (4 digits)",
+      "Most Similar TLDR Script": "cal {{year}}",
+      "Most Similar NL2Bash Task": "Delete all files not owned by valid users",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find / -nouser | xargs -0 rm\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-nouser": "No user corresponds to file's numeric user ID."
+            },
+            "xargs": {
+              "mpsum": "build and execute command lines from standard input",
+              "-0": "Input items are terminated by a null character instead of by whitespace, and the\n quotes and backslash are not special (every character is taken literally).\n Disables the end of file string, which is treated like any other argument. Useful\n when input items might contain white space, quote marks, or backslashes. The GNU\n find -print0 option produces input suitable for this mode."
+            },
+            "rm": {
+              "mpsum": "remove files or directories"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "xargs": {
+              "man1_xargs_37433": "execut command pipe argument come anoth command file etc\ninput treat singl block text split separ piec space tab newlin end-of-fil delet file backup extens -print0 use null charact split file name -0 use delimit execut command input line replac occurr placehold mark _ input line parallel run max-proc process time default 1 max-proc 0 xarg run mani process possibl time run command use input data argument run multipl chain command input data"
+            },
+            "rm": {
+              "man1_rm_29530": "remov file directori forcibl remov directori without prompt confirm show error messag interact remov multipl file prompt everi remov recurs remov directori subdirectori remov file arbitrari locat remov file verbos mode print messag remov file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_12025: Prints calendar of $month, $year, and redirects all output to the awk script 'cal.awk', with predefined variable 'day=$day'."
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_12025: cal $month $year | awk -v day=$day -f cal.awk"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "sort",
+      "MP Summary": "sort lines of text files",
+      "Most Similar TLDR Task": "Sort the passwd file by the 3rd field, numerically",
+      "Most Similar TLDR Script": "sort -t: -k 3n /etc/passwd",
+      "Most Similar NL2Bash Task": "Delete all files not owned by valid users",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find / -nouser | xargs -0 rm\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-nouser": "No user corresponds to file's numeric user ID."
+            },
+            "xargs": {
+              "mpsum": "build and execute command lines from standard input",
+              "-0": "Input items are terminated by a null character instead of by whitespace, and the\n quotes and backslash are not special (every character is taken literally).\n Disables the end of file string, which is treated like any other argument. Useful\n when input items might contain white space, quote marks, or backslashes. The GNU\n find -print0 option produces input suitable for this mode."
+            },
+            "rm": {
+              "mpsum": "remove files or directories"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "xargs": {
+              "man1_xargs_37433": "execut command pipe argument come anoth command file etc\ninput treat singl block text split separ piec space tab newlin end-of-fil delet file backup extens -print0 use null charact split file name -0 use delimit execut command input line replac occurr placehold mark _ input line parallel run max-proc process time default 1 max-proc 0 xarg run mani process possibl time run command use input data argument run multipl chain command input data"
+            },
+            "rm": {
+              "man1_rm_29530": "remov file directori forcibl remov directori without prompt confirm show error messag interact remov multipl file prompt everi remov recurs remov directori subdirectori remov file arbitrari locat remov file verbos mode print messag remov file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_5223: Find recursively the latest modified file in the current directory"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_5223: find . -type f -print0 | xargs -0 stat -f \"%m %N\" | sort -n | tail -1 | cut -f2- -d\" \"\n\n\nfind . -type f -print0 | xargs -0 stat -f \"%m %N\" | sort -rn | head -1 | cut -f2- -d\" \"\n\n\nfind . -type f -printf '%T@ %p\\n' | sort -n | tail -1 | cut -f2- -d\" \"\n\n\nfind . -type f -printf '%T@ %p\\n' | sort -n | tail -1 | cut -f2- -d\" \" | sed 's/.*/\"&\"/' | xargs ls -l\n\n\nfind . -type f -printf '%TY-%Tm-%Td %TH:%TM: %Tz %p\\n'| sort -n | tail -n1\n\n\nfind . -type f | sed 's/.*/\"&\"/' | xargs ls -E | awk '{ print $6,\" \",$7 }' | sort | tail -1\n\n\nfind . -type f | sed 's/.*/\"&\"/' | xargs ls -E | awk '{ print $6,\" \",$7,\" \",$9 }' | sort | tail -1"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "rmdir",
+      "MP Summary": "remove empty directories",
+      "Most Similar TLDR Task": "Remove the target and its parent directories (useful for nested dirs)",
+      "Most Similar TLDR Script": "rmdir -p {{path/to/directory}}",
+      "Most Similar NL2Bash Task": "Delete all files not owned by valid users",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find / -nouser | xargs -0 rm\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-nouser": "No user corresponds to file's numeric user ID."
+            },
+            "xargs": {
+              "mpsum": "build and execute command lines from standard input",
+              "-0": "Input items are terminated by a null character instead of by whitespace, and the\n quotes and backslash are not special (every character is taken literally).\n Disables the end of file string, which is treated like any other argument. Useful\n when input items might contain white space, quote marks, or backslashes. The GNU\n find -print0 option produces input suitable for this mode."
+            },
+            "rm": {
+              "mpsum": "remove files or directories"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "xargs": {
+              "man1_xargs_37433": "execut command pipe argument come anoth command file etc\ninput treat singl block text split separ piec space tab newlin end-of-fil delet file backup extens -print0 use null charact split file name -0 use delimit execut command input line replac occurr placehold mark _ input line parallel run max-proc process time default 1 max-proc 0 xarg run mani process possibl time run command use input data argument run multipl chain command input data"
+            },
+            "rm": {
+              "man1_rm_29530": "remov file directori forcibl remov directori without prompt confirm show error messag interact remov multipl file prompt everi remov recurs remov directori subdirectori remov file arbitrari locat remov file verbos mode print messag remov file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_11214: Deletes folder like /tmp/*/* or deeper, older than +7 days if they don`t contain files or other folders."
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_11214: find /tmp/*/* -mtime +7 -type d -exec rmdir {} \\;"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "tar",
+      "MP Summary": "an archiving utility",
+      "Most Similar TLDR Task": "Extract a specific file without preserving the folder structure",
+      "Most Similar TLDR Script": "tar xf {{source.tar}} {{source.tar/path/to/extract}} --strip-components={{depth_to_strip}}",
+      "Most Similar NL2Bash Task": "Delete all files not owned by valid users",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find / -nouser | xargs -0 rm\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-nouser": "No user corresponds to file's numeric user ID."
+            },
+            "xargs": {
+              "mpsum": "build and execute command lines from standard input",
+              "-0": "Input items are terminated by a null character instead of by whitespace, and the\n quotes and backslash are not special (every character is taken literally).\n Disables the end of file string, which is treated like any other argument. Useful\n when input items might contain white space, quote marks, or backslashes. The GNU\n find -print0 option produces input suitable for this mode."
+            },
+            "rm": {
+              "mpsum": "remove files or directories"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "xargs": {
+              "man1_xargs_37433": "execut command pipe argument come anoth command file etc\ninput treat singl block text split separ piec space tab newlin end-of-fil delet file backup extens -print0 use null charact split file name -0 use delimit execut command input line replac occurr placehold mark _ input line parallel run max-proc process time default 1 max-proc 0 xarg run mani process possibl time run command use input data argument run multipl chain command input data"
+            },
+            "rm": {
+              "man1_rm_29530": "remov file directori forcibl remov directori without prompt confirm show error messag interact remov multipl file prompt everi remov recurs remov directori subdirectori remov file arbitrari locat remov file verbos mode print messag remov file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_13168: create a tar of all png & jpg images in the current folder"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_13168: find . \\( -iname \"*.png\" -o -iname \"*.jpg\" \\) -print -exec tar -rf images.tar {} \\;"
+      ],
+      "Explanations about Options": {
+        "-r": "Append files to the end of an archive. Arguments have the same meaning as for -c\n (--create)."
+      }
+    },
+    {
+      "Command": "ant",
+      "MP Summary": "a Java based make tool.",
+      "Most Similar TLDR Task": "Print information on possible targets for this project",
+      "Most Similar TLDR Script": "ant -p",
+      "Most Similar NL2Bash Task": "Delete all files not owned by valid users",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find / -nouser | xargs -0 rm\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-nouser": "No user corresponds to file's numeric user ID."
+            },
+            "xargs": {
+              "mpsum": "build and execute command lines from standard input",
+              "-0": "Input items are terminated by a null character instead of by whitespace, and the\n quotes and backslash are not special (every character is taken literally).\n Disables the end of file string, which is treated like any other argument. Useful\n when input items might contain white space, quote marks, or backslashes. The GNU\n find -print0 option produces input suitable for this mode."
+            },
+            "rm": {
+              "mpsum": "remove files or directories"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "xargs": {
+              "man1_xargs_37433": "execut command pipe argument come anoth command file etc\ninput treat singl block text split separ piec space tab newlin end-of-fil delet file backup extens -print0 use null charact split file name -0 use delimit execut command input line replac occurr placehold mark _ input line parallel run max-proc process time default 1 max-proc 0 xarg run mani process possibl time run command use input data argument run multipl chain command input data"
+            },
+            "rm": {
+              "man1_rm_29530": "remov file directori forcibl remov directori without prompt confirm show error messag interact remov multipl file prompt everi remov recurs remov directori subdirectori remov file arbitrari locat remov file verbos mode print messag remov file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_10257: Write output and error of \"ant\" to the console and to \"build.log\""
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_10257: ant 2>&1|tee build.log"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "git",
+      "MP Summary": "the stupid content tracker",
+      "Most Similar TLDR Task": "Check the Git version",
+      "Most Similar TLDR Script": "git --version",
+      "Most Similar NL2Bash Task": "Delete all files not owned by valid users",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find / -nouser | xargs -0 rm\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-nouser": "No user corresponds to file's numeric user ID."
+            },
+            "xargs": {
+              "mpsum": "build and execute command lines from standard input",
+              "-0": "Input items are terminated by a null character instead of by whitespace, and the\n quotes and backslash are not special (every character is taken literally).\n Disables the end of file string, which is treated like any other argument. Useful\n when input items might contain white space, quote marks, or backslashes. The GNU\n find -print0 option produces input suitable for this mode."
+            },
+            "rm": {
+              "mpsum": "remove files or directories"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "xargs": {
+              "man1_xargs_37433": "execut command pipe argument come anoth command file etc\ninput treat singl block text split separ piec space tab newlin end-of-fil delet file backup extens -print0 use null charact split file name -0 use delimit execut command input line replac occurr placehold mark _ input line parallel run max-proc process time default 1 max-proc 0 xarg run mani process possibl time run command use input data argument run multipl chain command input data"
+            },
+            "rm": {
+              "man1_rm_29530": "remov file directori forcibl remov directori without prompt confirm show error messag interact remov multipl file prompt everi remov recurs remov directori subdirectori remov file arbitrari locat remov file verbos mode print messag remov file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_13256: Export full path of command \"git\" to variable \"git\""
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_13256: export git=$(which git)"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "readlink",
+      "MP Summary": "print resolved symbolic links or canonical file names",
+      "Most Similar TLDR Task": "Get the absolute path to a file",
+      "Most Similar TLDR Script": "readlink -f {{filename}}",
+      "Most Similar NL2Bash Task": "Delete all files not owned by valid users",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find / -nouser | xargs -0 rm\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-nouser": "No user corresponds to file's numeric user ID."
+            },
+            "xargs": {
+              "mpsum": "build and execute command lines from standard input",
+              "-0": "Input items are terminated by a null character instead of by whitespace, and the\n quotes and backslash are not special (every character is taken literally).\n Disables the end of file string, which is treated like any other argument. Useful\n when input items might contain white space, quote marks, or backslashes. The GNU\n find -print0 option produces input suitable for this mode."
+            },
+            "rm": {
+              "mpsum": "remove files or directories"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "xargs": {
+              "man1_xargs_37433": "execut command pipe argument come anoth command file etc\ninput treat singl block text split separ piec space tab newlin end-of-fil delet file backup extens -print0 use null charact split file name -0 use delimit execut command input line replac occurr placehold mark _ input line parallel run max-proc process time default 1 max-proc 0 xarg run mani process possibl time run command use input data argument run multipl chain command input data"
+            },
+            "rm": {
+              "man1_rm_29530": "remov file directori forcibl remov directori without prompt confirm show error messag interact remov multipl file prompt everi remov recurs remov directori subdirectori remov file arbitrari locat remov file verbos mode print messag remov file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_9997: Print true directory name of the current directory"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_9997: readlink `pwd`"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "print",
+      "MP Summary": "execute programs via entries in the mailcap file",
+      "Most Similar TLDR Task": "Print action can be used to print any file on default run-mailcap tool",
+      "Most Similar TLDR Script": "print {{filename}}",
+      "Most Similar NL2Bash Task": "Delete all files not owned by valid users",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find / -nouser | xargs -0 rm\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-nouser": "No user corresponds to file's numeric user ID."
+            },
+            "xargs": {
+              "mpsum": "build and execute command lines from standard input",
+              "-0": "Input items are terminated by a null character instead of by whitespace, and the\n quotes and backslash are not special (every character is taken literally).\n Disables the end of file string, which is treated like any other argument. Useful\n when input items might contain white space, quote marks, or backslashes. The GNU\n find -print0 option produces input suitable for this mode."
+            },
+            "rm": {
+              "mpsum": "remove files or directories"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "xargs": {
+              "man1_xargs_37433": "execut command pipe argument come anoth command file etc\ninput treat singl block text split separ piec space tab newlin end-of-fil delet file backup extens -print0 use null charact split file name -0 use delimit execut command input line replac occurr placehold mark _ input line parallel run max-proc process time default 1 max-proc 0 xarg run mani process possibl time run command use input data argument run multipl chain command input data"
+            },
+            "rm": {
+              "man1_rm_29530": "remov file directori forcibl remov directori without prompt confirm show error messag interact remov multipl file prompt everi remov recurs remov directori subdirectori remov file arbitrari locat remov file verbos mode print messag remov file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_5223: Find recursively the latest modified file in the current directory"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_5223: find . -type f | sed 's/.*/\"&\"/' | xargs ls -E | awk '{ print $6,\" \",$7 }' | sort | tail -1\n\n\nfind . -type f | sed 's/.*/\"&\"/' | xargs ls -E | awk '{ print $6,\" \",$7,\" \",$9 }' | sort | tail -1"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "dig",
+      "MP Summary": "DNS lookup utility",
+      "Most Similar TLDR Task": "Perform iterative queries and display the entire trace path to resolve a domain name",
+      "Most Similar TLDR Script": "dig +trace {{example.com}}",
+      "Most Similar NL2Bash Task": "Delete all files not owned by valid users",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find / -nouser | xargs -0 rm\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-nouser": "No user corresponds to file's numeric user ID."
+            },
+            "xargs": {
+              "mpsum": "build and execute command lines from standard input",
+              "-0": "Input items are terminated by a null character instead of by whitespace, and the\n quotes and backslash are not special (every character is taken literally).\n Disables the end of file string, which is treated like any other argument. Useful\n when input items might contain white space, quote marks, or backslashes. The GNU\n find -print0 option produces input suitable for this mode."
+            },
+            "rm": {
+              "mpsum": "remove files or directories"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "xargs": {
+              "man1_xargs_37433": "execut command pipe argument come anoth command file etc\ninput treat singl block text split separ piec space tab newlin end-of-fil delet file backup extens -print0 use null charact split file name -0 use delimit execut command input line replac occurr placehold mark _ input line parallel run max-proc process time default 1 max-proc 0 xarg run mani process possibl time run command use input data argument run multipl chain command input data"
+            },
+            "rm": {
+              "man1_rm_29530": "remov file directori forcibl remov directori without prompt confirm show error messag interact remov multipl file prompt everi remov recurs remov directori subdirectori remov file arbitrari locat remov file verbos mode print messag remov file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_10965: Request A record from nameserver $ns for domain name $d, filter strings with domain name and exclude lines matching 'DIG'"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_10965: dig @$ns $d A | grep $d | grep -v \"DiG\""
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "md5sum",
+      "MP Summary": "compute and check MD5 message digest",
+      "Most Similar TLDR Task": "Read a file of MD5SUMs and verify all files have matching checksums",
+      "Most Similar TLDR Script": "md5sum -c {{filename.md5}}",
+      "Most Similar NL2Bash Task": "Delete all files not owned by valid users",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find / -nouser | xargs -0 rm\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-nouser": "No user corresponds to file's numeric user ID."
+            },
+            "xargs": {
+              "mpsum": "build and execute command lines from standard input",
+              "-0": "Input items are terminated by a null character instead of by whitespace, and the\n quotes and backslash are not special (every character is taken literally).\n Disables the end of file string, which is treated like any other argument. Useful\n when input items might contain white space, quote marks, or backslashes. The GNU\n find -print0 option produces input suitable for this mode."
+            },
+            "rm": {
+              "mpsum": "remove files or directories"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "xargs": {
+              "man1_xargs_37433": "execut command pipe argument come anoth command file etc\ninput treat singl block text split separ piec space tab newlin end-of-fil delet file backup extens -print0 use null charact split file name -0 use delimit execut command input line replac occurr placehold mark _ input line parallel run max-proc process time default 1 max-proc 0 xarg run mani process possibl time run command use input data argument run multipl chain command input data"
+            },
+            "rm": {
+              "man1_rm_29530": "remov file directori forcibl remov directori without prompt confirm show error messag interact remov multipl file prompt everi remov recurs remov directori subdirectori remov file arbitrari locat remov file verbos mode print messag remov file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_13677: Calculate md5 sum of file ${my_iso_file} and save it to variable 'md5'"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_13677: md5=\"$(md5sum \"${my_iso_file}\")\""
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "to",
+      "MP Summary": "as the filename. --logdir <name> Writes each synchronization log output in a new file in the specified directory. --logexpire <hours> Removes logs older than the value specified (in hours). This command is  used  with --logdir. --logflush Clears (flushes) the log file after each write action. --logdebug Also  output  debug-level  messages  in  the log (equivalent to setting the env var QT_LOGGING_RULES=\"qt.*=true;*.debug=true\"). ) --confdir <dirname> Uses the specified configuration directory. The ownCloud Client reads a configuration file.  You can locate this configuration file as follows: On Linux distributions: $HOME/.config/ownCloud/owncloud.cfg On Microsoft Windows systems: %APPDATA%\\ownCloud\\owncloud.cfg On MAC OS X systems: $HOME/Library/Preferences/ownCloud/owncloud.cfg The configuration file contains settings using the Microsoft Windows .ini file format. You can overwrite changes using the ownCloud configuration dialog. NOTE: Use caution when making changes to the ownCloud Client configuration  file.   Incorrect settings can produce unintended results. Some interesting values that can be set on the configuration file are: \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510 \u2502[ownCloud] section          \u2502         \u2502                          \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502Variable                    \u2502 Default \u2502 Meaning                  \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502remotePollInterval          \u2502 30000   \u2502 Specifies  the poll time \u2502 \u2502                            \u2502         \u2502 for      the      remote \u2502 \u2502                            \u2502         \u2502 repository            in \u2502 \u2502                            \u2502         \u2502 milliseconds.            \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502forceSyncInterval           \u2502 7200000 \u2502 The   duration   of   no \u2502 \u2502                            \u2502         \u2502 activity  after  which a \u2502 \u2502                            \u2502         \u2502 synchronization      run \u2502 \u2502                            \u2502         \u2502 shall    be    triggered \u2502 \u2502                            \u2502         \u2502 automatically.           \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502fullLocalDiscoveryInterval  \u2502 3600000 \u2502 The interval after which \u2502 \u2502                            \u2502         \u2502 the next synchronization \u2502 \u2502                            \u2502         \u2502 will   perform   a  full \u2502 \u2502                            \u2502         \u2502 local discovery.         \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502notificationRefreshInterval \u2502 300000  \u2502 Specifies   the  default \u2502 \u2502                            \u2502         \u2502 interval of checking for \u2502 \u2502                            \u2502         \u2502 new server notifications \u2502 \u2502                            \u2502         \u2502 in milliseconds.         \u2502 \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518 \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510 \u2502[General] section       \u2502         \u2502                          \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502Variable                \u2502 Default \u2502 Meaning                  \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502chunkSize               \u2502 5242880 \u2502 Specifies the chunk size \u2502 \u2502                        \u2502         \u2502 of   uploaded  files  in \u2502 \u2502                        \u2502         \u2502 bytes.                   \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502promptDeleteAllFiles    \u2502 true    \u2502 If a  UI  prompt  should \u2502 \u2502                        \u2502         \u2502 ask  for confirmation if \u2502 \u2502                        \u2502         \u2502 it was detected that all \u2502 \u2502                        \u2502         \u2502 files  and  folders were \u2502 \u2502                        \u2502         \u2502 deleted.                 \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502maxLogLines             \u2502 20000   \u2502 Specifies  the   maximum \u2502 \u2502                        \u2502         \u2502 number   of   log  lines \u2502 \u2502                        \u2502         \u2502 displayed  in  the   log \u2502 \u2502                        \u2502         \u2502 window.                  \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502timeout                 \u2502 300     \u2502 The  timeout for network \u2502 \u2502                        \u2502         \u2502 connections in seconds.  \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502moveToTrash             \u2502 false   \u2502 If  non-locally  deleted \u2502 \u2502                        \u2502         \u2502 files should be moved to \u2502 \u2502                        \u2502         \u2502 trash     instead     of \u2502 \u2502                        \u2502         \u2502 deleting            them \u2502 \u2502                        \u2502         \u2502 completely.  This option \u2502 \u2502                        \u2502         \u2502 only works on linux      \u2502 \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518 \u2502showExperimentalOptions \u2502 false   \u2502 Whether      to     show \u2502 \u2502                        \u2502         \u2502 experimental     options \u2502 \u2502                        \u2502         \u2502 that      are      still \u2502 \u2502                        \u2502         \u2502 undergoing  testing   in \u2502 \u2502                        \u2502         \u2502 the    user   interface. \u2502 \u2502                        \u2502         \u2502 Turning this on does not \u2502 \u2502                        \u2502         \u2502 enable      experimental \u2502 \u2502                        \u2502         \u2502 behavior on its own.  It \u2502 \u2502                        \u2502         \u2502 does     enable     user \u2502 \u2502                        \u2502         \u2502 inferface  options  that \u2502 \u2502                        \u2502         \u2502 can be used to opt in to \u2502 \u2502                        \u2502         \u2502 experimental features.   \u2502 \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518 \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510 \u2502[Proxy] section      \u2502           \u2502                          \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502Variable             \u2502 Default   \u2502 Meaning                  \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502host                 \u2502 127.0.0.1 \u2502 The address of the proxy \u2502 \u2502                     \u2502           \u2502 server.                  \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502port                 \u2502 8080      \u2502 The  port were the proxy \u2502 \u2502                     \u2502           \u2502 is listening.            \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502type                 \u2502 2         \u2502 0 for System Proxy.      \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u25021 for SOCKS5 Proxy.  \u2502           \u2502                          \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u25022 for No Proxy.      \u2502           \u2502                          \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u25023 for HTTP(S) Proxy. \u2502           \u2502                          \u2502 \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518 Please report bugs at https://github.com/owncloud/client/issues. owncloudcmd(1)",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "Delete all files not owned by valid users",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find / -nouser | xargs -0 rm\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-nouser": "No user corresponds to file's numeric user ID."
+            },
+            "xargs": {
+              "mpsum": "build and execute command lines from standard input",
+              "-0": "Input items are terminated by a null character instead of by whitespace, and the\n quotes and backslash are not special (every character is taken literally).\n Disables the end of file string, which is treated like any other argument. Useful\n when input items might contain white space, quote marks, or backslashes. The GNU\n find -print0 option produces input suitable for this mode."
+            },
+            "rm": {
+              "mpsum": "remove files or directories"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "xargs": {
+              "man1_xargs_37433": "execut command pipe argument come anoth command file etc\ninput treat singl block text split separ piec space tab newlin end-of-fil delet file backup extens -print0 use null charact split file name -0 use delimit execut command input line replac occurr placehold mark _ input line parallel run max-proc process time default 1 max-proc 0 xarg run mani process possibl time run command use input data argument run multipl chain command input data"
+            },
+            "rm": {
+              "man1_rm_29530": "remov file directori forcibl remov directori without prompt confirm show error messag interact remov multipl file prompt everi remov recurs remov directori subdirectori remov file arbitrari locat remov file verbos mode print messag remov file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_10749: copy the entire contents of the current directory to another directory, while preserving the permissions, times, and ownership of every file and sub-directory",
+        "nl2bash_10953: Give all directories in the /path/to/base/dir tree read and execute privileges",
+        "nl2bash_10751: copy the entire contents of the current directory to another directory, while preserving the permissions, times, and ownership of every file and sub-directory"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_10749: find . | cpio -pdumv /path/to/destination/dir",
+        "nl2bash_10953: find /path/to/base/dir -type d -exec chmod 755 {} +\n\n\nfind /path/to/base/dir -type d -print0 | xargs -0 chmod 755",
+        "nl2bash_10751: find . | cpio -pdumv /path/to/destination/dir"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "dir",
+      "MP Summary": "list directory contents",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "Delete all files not owned by valid users",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find / -nouser | xargs -0 rm\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-nouser": "No user corresponds to file's numeric user ID."
+            },
+            "xargs": {
+              "mpsum": "build and execute command lines from standard input",
+              "-0": "Input items are terminated by a null character instead of by whitespace, and the\n quotes and backslash are not special (every character is taken literally).\n Disables the end of file string, which is treated like any other argument. Useful\n when input items might contain white space, quote marks, or backslashes. The GNU\n find -print0 option produces input suitable for this mode."
+            },
+            "rm": {
+              "mpsum": "remove files or directories"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "xargs": {
+              "man1_xargs_37433": "execut command pipe argument come anoth command file etc\ninput treat singl block text split separ piec space tab newlin end-of-fil delet file backup extens -print0 use null charact split file name -0 use delimit execut command input line replac occurr placehold mark _ input line parallel run max-proc process time default 1 max-proc 0 xarg run mani process possibl time run command use input data argument run multipl chain command input data"
+            },
+            "rm": {
+              "man1_rm_29530": "remov file directori forcibl remov directori without prompt confirm show error messag interact remov multipl file prompt everi remov recurs remov directori subdirectori remov file arbitrari locat remov file verbos mode print messag remov file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_10749: copy the entire contents of the current directory to another directory, while preserving the permissions, times, and ownership of every file and sub-directory",
+        "nl2bash_4186: Find all pdf files excluding *_signed.pdf files under /some/dir with null character as the delimiter",
+        "nl2bash_10953: Give all directories in the /path/to/base/dir tree read and execute privileges"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_10749: find . | cpio -pdumv /path/to/destination/dir",
+        "nl2bash_4186: find /some/dir -name \"*.pdf\" ! -name \"*_signed.pdf\" -print0",
+        "nl2bash_10953: find /path/to/base/dir -type d -exec chmod 755 {} +\n\n\nfind /path/to/base/dir -type d -print0 | xargs -0 chmod 755"
+      ],
+      "Explanations about Options": {
+        "-n": "like -l, but list numeric user and group IDs",
+        "-a": "do not ignore entries starting with .",
+        "-t": "sort by modification time , newest first",
+        "-p": "append / indicator to directories",
+        "-m": "fill width with a comma separated list of entries"
+      }
+    },
+    {
+      "Command": "aa",
+      "MP Summary": "astronomical almanac - calculate planet and star positions",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "Delete all files not owned by valid users",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find / -nouser | xargs -0 rm\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-nouser": "No user corresponds to file's numeric user ID."
+            },
+            "xargs": {
+              "mpsum": "build and execute command lines from standard input",
+              "-0": "Input items are terminated by a null character instead of by whitespace, and the\n quotes and backslash are not special (every character is taken literally).\n Disables the end of file string, which is treated like any other argument. Useful\n when input items might contain white space, quote marks, or backslashes. The GNU\n find -print0 option produces input suitable for this mode."
+            },
+            "rm": {
+              "mpsum": "remove files or directories"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "xargs": {
+              "man1_xargs_37433": "execut command pipe argument come anoth command file etc\ninput treat singl block text split separ piec space tab newlin end-of-fil delet file backup extens -print0 use null charact split file name -0 use delimit execut command input line replac occurr placehold mark _ input line parallel run max-proc process time default 1 max-proc 0 xarg run mani process possibl time run command use input data argument run multipl chain command input data"
+            },
+            "rm": {
+              "man1_rm_29530": "remov file directori forcibl remov directori without prompt confirm show error messag interact remov multipl file prompt everi remov recurs remov directori subdirectori remov file arbitrari locat remov file verbos mode print messag remov file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_11582: Remove spaces from output of \"echo aa | wc -l\""
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_11582: echo aa | wc -l | tr -d ' '"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "local",
+      "MP Summary": "Postfix local mail delivery",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "Delete all files not owned by valid users",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find / -nouser | xargs -0 rm\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-nouser": "No user corresponds to file's numeric user ID."
+            },
+            "xargs": {
+              "mpsum": "build and execute command lines from standard input",
+              "-0": "Input items are terminated by a null character instead of by whitespace, and the\n quotes and backslash are not special (every character is taken literally).\n Disables the end of file string, which is treated like any other argument. Useful\n when input items might contain white space, quote marks, or backslashes. The GNU\n find -print0 option produces input suitable for this mode."
+            },
+            "rm": {
+              "mpsum": "remove files or directories"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "xargs": {
+              "man1_xargs_37433": "execut command pipe argument come anoth command file etc\ninput treat singl block text split separ piec space tab newlin end-of-fil delet file backup extens -print0 use null charact split file name -0 use delimit execut command input line replac occurr placehold mark _ input line parallel run max-proc process time default 1 max-proc 0 xarg run mani process possibl time run command use input data argument run multipl chain command input data"
+            },
+            "rm": {
+              "man1_rm_29530": "remov file directori forcibl remov directori without prompt confirm show error messag interact remov multipl file prompt everi remov recurs remov directori subdirectori remov file arbitrari locat remov file verbos mode print messag remov file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_10950: Fix permissions for a group of files with given extension"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_10950: find /usr/local -name \"*.html\" -type f -exec chmod 644 {} \\;"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "bin",
+      "MP Summary": "presumably creating or updating package.json and running any other initialization-related operations. The init command is transformed to a corresponding npx operation as follows: \u00b7 npm init foo -> npx create-foo \u00b7 npm init @usr/foo -> npx @usr/create-foo \u00b7 npm init @usr -> npx @usr/create Any  additional  options  will  be passed directly to the command, so npm init foo --hello will map to npx create-foo --hello. If the initializer is omitted (by just calling npm init), init will fall  back  to  legacy init  behavior.  It  will  ask you a bunch of questions, and then write a package.json for you. It will attempt to make reasonable guesses based on  existing  fields,  dependencies, and  options selected. It is strictly additive, so it will keep any fields and values that were already set. You can also use -y/--yes to skip the questionnaire altogether.  If  you pass --scope, it will create a scoped package. See Also \u00b7 https://github.com/isaacs/init-package-json \u00b7 npm help package.json \u00b7 npm help version \u00b7 npm help scope April 2020                                NPM-INIT(1)",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "Delete all files not owned by valid users",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find / -nouser | xargs -0 rm\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-nouser": "No user corresponds to file's numeric user ID."
+            },
+            "xargs": {
+              "mpsum": "build and execute command lines from standard input",
+              "-0": "Input items are terminated by a null character instead of by whitespace, and the\n quotes and backslash are not special (every character is taken literally).\n Disables the end of file string, which is treated like any other argument. Useful\n when input items might contain white space, quote marks, or backslashes. The GNU\n find -print0 option produces input suitable for this mode."
+            },
+            "rm": {
+              "mpsum": "remove files or directories"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "xargs": {
+              "man1_xargs_37433": "execut command pipe argument come anoth command file etc\ninput treat singl block text split separ piec space tab newlin end-of-fil delet file backup extens -print0 use null charact split file name -0 use delimit execut command input line replac occurr placehold mark _ input line parallel run max-proc process time default 1 max-proc 0 xarg run mani process possibl time run command use input data argument run multipl chain command input data"
+            },
+            "rm": {
+              "man1_rm_29530": "remov file directori forcibl remov directori without prompt confirm show error messag interact remov multipl file prompt everi remov recurs remov directori subdirectori remov file arbitrari locat remov file verbos mode print messag remov file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_1707: run ksh shell as user apache",
+        "nl2bash_11342: Remove all \"core\" files that were last changed more than 4 days ago from the current directory tree"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_1707: su apache -s /bin/ksh",
+        "nl2bash_11342: find . -name core -ctime +4 -exec /bin/rm -f {} \\;"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "etags",
+      "MP Summary": "generate tag file for Emacs, vi",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "Delete all files not owned by valid users",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find / -nouser | xargs -0 rm\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-nouser": "No user corresponds to file's numeric user ID."
+            },
+            "xargs": {
+              "mpsum": "build and execute command lines from standard input",
+              "-0": "Input items are terminated by a null character instead of by whitespace, and the\n quotes and backslash are not special (every character is taken literally).\n Disables the end of file string, which is treated like any other argument. Useful\n when input items might contain white space, quote marks, or backslashes. The GNU\n find -print0 option produces input suitable for this mode."
+            },
+            "rm": {
+              "mpsum": "remove files or directories"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "xargs": {
+              "man1_xargs_37433": "execut command pipe argument come anoth command file etc\ninput treat singl block text split separ piec space tab newlin end-of-fil delet file backup extens -print0 use null charact split file name -0 use delimit execut command input line replac occurr placehold mark _ input line parallel run max-proc process time default 1 max-proc 0 xarg run mani process possibl time run command use input data argument run multipl chain command input data"
+            },
+            "rm": {
+              "man1_rm_29530": "remov file directori forcibl remov directori without prompt confirm show error messag interact remov multipl file prompt everi remov recurs remov directori subdirectori remov file arbitrari locat remov file verbos mode print messag remov file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_6729: find C, C++ source and header files in current folder and create etags for them"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_6729: find . -type f ( -iname '.cpp' -o -iname '.hpp' -o -iname '.c' -o -iname '.h' -o -iname '.cc' -o -iname '.hh' ) -print | xargs etags -a"
+      ],
+      "Explanations about Options": {
+        "-a": "Append to existing tag file. (For vi-format tag files, see also --update.)"
+      }
+    },
+    {
+      "Command": "dev",
+      "MP Summary": "release candidate LaTeX testing",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "Delete all files not owned by valid users",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find / -nouser | xargs -0 rm\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-nouser": "No user corresponds to file's numeric user ID."
+            },
+            "xargs": {
+              "mpsum": "build and execute command lines from standard input",
+              "-0": "Input items are terminated by a null character instead of by whitespace, and the\n quotes and backslash are not special (every character is taken literally).\n Disables the end of file string, which is treated like any other argument. Useful\n when input items might contain white space, quote marks, or backslashes. The GNU\n find -print0 option produces input suitable for this mode."
+            },
+            "rm": {
+              "mpsum": "remove files or directories"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "xargs": {
+              "man1_xargs_37433": "execut command pipe argument come anoth command file etc\ninput treat singl block text split separ piec space tab newlin end-of-fil delet file backup extens -print0 use null charact split file name -0 use delimit execut command input line replac occurr placehold mark _ input line parallel run max-proc process time default 1 max-proc 0 xarg run mani process possibl time run command use input data argument run multipl chain command input data"
+            },
+            "rm": {
+              "man1_rm_29530": "remov file directori forcibl remov directori without prompt confirm show error messag interact remov multipl file prompt everi remov recurs remov directori subdirectori remov file arbitrari locat remov file verbos mode print messag remov file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_13260: Dump \"/dev/ttySomething\" in both hex and text"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_13260: od -t x1 -t a /dev/ttySomething"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "ns",
+      "MP Summary": "network simulator (version 2)",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "Delete all files not owned by valid users",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find / -nouser | xargs -0 rm\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-nouser": "No user corresponds to file's numeric user ID."
+            },
+            "xargs": {
+              "mpsum": "build and execute command lines from standard input",
+              "-0": "Input items are terminated by a null character instead of by whitespace, and the\n quotes and backslash are not special (every character is taken literally).\n Disables the end of file string, which is treated like any other argument. Useful\n when input items might contain white space, quote marks, or backslashes. The GNU\n find -print0 option produces input suitable for this mode."
+            },
+            "rm": {
+              "mpsum": "remove files or directories"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "xargs": {
+              "man1_xargs_37433": "execut command pipe argument come anoth command file etc\ninput treat singl block text split separ piec space tab newlin end-of-fil delet file backup extens -print0 use null charact split file name -0 use delimit execut command input line replac occurr placehold mark _ input line parallel run max-proc process time default 1 max-proc 0 xarg run mani process possibl time run command use input data argument run multipl chain command input data"
+            },
+            "rm": {
+              "man1_rm_29530": "remov file directori forcibl remov directori without prompt confirm show error messag interact remov multipl file prompt everi remov recurs remov directori subdirectori remov file arbitrari locat remov file verbos mode print messag remov file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_10965: Request A record from nameserver $ns for domain name $d, filter strings with domain name and exclude lines matching 'DIG'"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_10965: dig @$ns $d A | grep $d | grep -v \"DiG\""
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

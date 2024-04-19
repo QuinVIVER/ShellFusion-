@@ -1,0 +1,81 @@
+{
+  "Query": "Convert date time string to epoch in Bash",
+  "Answers": [
+    {
+      "Command": "date",
+      "MP Summary": "print or set the system date and time",
+      "Most Similar TLDR Task": "Convert a specific date to the Unix timestamp format",
+      "Most Similar TLDR Script": "date -d \"{{2018-09-01 00:00}}\" +%s --utc",
+      "Top-3 Similar Questions": [
+        "so_58568635: Bash - Convert date to timestamp",
+        "so_24907609: Bash - extract date from string and reformat",
+        "ul_623046: Convert/replace time from epoch milliseconds to human readable date in logfiles"
+      ],
+      "Top-3 Scripts": [
+        "so_58568635: prev=$(date --date='Mon Aug 30 14:46:39 2019' +\"%s\")\ntoday=$(date +%s)\nnumber_of_seconds=$(( ($today - $prev ) ))\nprintf '%dd:%dh:%dm:%ds\\n' $(($number_of_seconds/86400)) $(($number_of_seconds%86400/3600)) $(($number_of_seconds%3600/60)) $(($number_of_seconds%60))\n\n56d:17h:29m:14s\n##### Where my system's date is: #####\ndate\nSat Oct 26 08:16:14 UTC 2019\n\nprev=$(date --date='Mon Sep 30 17:37:39 2019' +\"%s\")\ntoday=$(date +%s)\necho $(( ($today - $prev )/(60*60*24) ))\n\ndate --date...\n\nprev=$(date --date='Mon Aug 30 17:37:39 2019' +\"%s\")\ntoday=$(date +%s)\necho $(( ($today - $prev )/(60*60*24) ))\n56",
+        "so_24907609: user=bob lastb $user -t $(date -d \"$(last $user | head -n 1 | tr -s '[:space:]' '\\t' | cut -f 4-7)\" +%Y%m%d%H%M%S)\n\nuser=bob\nlast_login=$(last $user | head -n 1 | tr -s '[:space:]' '\\t' | cut -f 4-7)\ndatetime=$(date -d \"$last_login\" +%Y%m%d%H%M%S)\nlastb $user -t $datetime",
+        "ul_623046: "
+      ],
+      "Explanations about Options": {
+        "-d": "display time described by STRING, not 'now'",
+        "--date": "display time described by STRING, not 'now'"
+      }
+    },
+    {
+      "Command": "timedatectl",
+      "MP Summary": "Control the system time and date",
+      "Most Similar TLDR Task": "Check the current system clock time",
+      "Most Similar TLDR Script": "timedatectl",
+      "Top-3 Similar Questions": [
+        "ul_98078: Change System Time/Date"
+      ],
+      "Top-3 Scripts": [
+        "ul_98078: timedatectl list-timezones\n\ntimedatectl set-timezone <timezone>"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "touch",
+      "MP Summary": "change file timestamps",
+      "Most Similar TLDR Task": "Set the times on a file to a specific date and time",
+      "Most Similar TLDR Script": "touch -t {{YYYYMMDDHHMM.SS}} {{filename}}",
+      "Top-3 Similar Questions": [
+        "so_40335398: Shell Scripting: Convert file string to be usable in a command"
+      ],
+      "Top-3 Scripts": [
+        "so_40335398: $ touch \"[foo] bar - foo.mkv\"\n$ ls\n[foo] bar - foo.mkv\n$ mv \"[foo] bar - foo.mkv\" \"abcd\"\n$ ls\nabcd"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "printf",
+      "MP Summary": "format and print data",
+      "Most Similar TLDR Task": "Store a formatted message in a variable (does not work on zsh)",
+      "Most Similar TLDR Script": "printf -v {{myvar}} {{\"This is %s = %d\\n\" \"a year\" 2016}}",
+      "Top-3 Similar Questions": [
+        "so_58568635: Bash - Convert date to timestamp",
+        "so_37649909: string parsing & date formatting unix",
+        "so_40335398: Shell Scripting: Convert file string to be usable in a command"
+      ],
+      "Top-3 Scripts": [
+        "so_58568635: prev=$(date --date='Mon Aug 30 14:46:39 2019' +\"%s\")\ntoday=$(date +%s)\nnumber_of_seconds=$(( ($today - $prev ) ))\nprintf '%dd:%dh:%dm:%ds\\n' $(($number_of_seconds/86400)) $(($number_of_seconds%86400/3600)) $(($number_of_seconds%3600/60)) $(($number_of_seconds%60))",
+        "so_37649909: string=\"Connected to Integration Service: [is_infa01]. Integration Service status: [Running] Integration Service startup time: [Mon May 09 10:27:22 2016] Integration Service current time: [Sun Jun 05 21:57:33 2016] Folder: [TEST] Workflow: [wf_MASTER_DAILY] version [2]. Workflow run status: [Succeeded] Workflow run error code: [0] Workflow run error message: [Completed successfully.] Workflow run id [425197]. Start time: [Sat Jun 04 13:14:11 2016] End time: [Sat Jun 04 13:20:37 2016] Workflow log file: [/informatica/pc961/server/infa_shared/Working/infa01/WorkflowLogs/wf_MASTER_DAILY.log]\"\nw=\"Workflow run status\" s=\"Start time\" e=\"End time\"\n{ \n    printf \"%s\\n\" \"$w\" \"$s\" \"$e\"\n    grep -oP \"$w: \\\\[\\\\K.*?(?=\\\\])\" <<<\"$string\" \n    date -d \"$(grep -oP \"$s: \\\\[\\\\K.*?(?=\\\\])\" <<<\"$string\")\" \"+%F %T\"\n    date -d \"$(grep -oP \"$e: \\\\[\\\\K.*?(?=\\\\])\" <<<\"$string\")\" \"+%F %T\"\n} | paste -d'|' - - -",
+        "so_40335398: $ printf '%q' \"[foo] bar - foo.mkv\"\n\\[foo\\]\\ bar\\ -\\ foo.mkv"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "time",
+      "MP Summary": "time a simple command",
+      "Most Similar TLDR Task": "Time \"ls\"",
+      "Most Similar TLDR Script": "time ls",
+      "Top-3 Similar Questions": [
+        "so_37649909: string parsing & date formatting unix"
+      ],
+      "Top-3 Scripts": [
+        "so_37649909: Workflow run status|Start time|End time\nSucceeded|2016-06-04 13:14:11|2016-06-04 13:20:37"
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

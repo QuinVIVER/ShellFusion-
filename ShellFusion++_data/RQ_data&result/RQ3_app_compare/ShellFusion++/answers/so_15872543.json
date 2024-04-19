@@ -1,0 +1,97 @@
+{
+  "Query": "Access mysql remote database from command line",
+  "Answers": [
+    {
+      "Command": "mysql",
+      "MP Summary": "the MySQL command-line client",
+      "Most Similar TLDR Task": "Connect to a database",
+      "Most Similar TLDR Script": "mysql {{database_name}}",
+      "Top-3 Similar Questions": [
+        "ul_78959: What mysql command can show me the tables in a database and how many rows there are?",
+        "so_33470753: Create mysql database and user in bash script",
+        "so_35622068: creating a bash script to create database and user automatically"
+      ],
+      "Top-3 Scripts": [
+        "ul_78959: ",
+        "so_33470753: ",
+        "so_35622068: mysql -u $user -p$pass  << EOF\nCREATE DATABASE $2;\nGRANT ALL PRIVILEGES ON $2.* TO $2@'localhost' IDENTIFIED BY '$3';\n EOF"
+      ],
+      "Explanations about Options": {
+        "-u": "The user name of the MySQL account to use for connecting to the server."
+      }
+    },
+    {
+      "Command": "mysqldump",
+      "MP Summary": "a database backup program",
+      "Most Similar TLDR Task": "Backup all databases redirecting the output to a file (user will be prompted for a password)",
+      "Most Similar TLDR Script": "mysqldump --user {{user}} --password --all-databases > {{path/to/file.sql}}",
+      "Top-3 Similar Questions": [
+        "ul_17359: Want a separate file to store mysql username, password, and database name",
+        "so_27617361: How to clone a mysql database using shell and terminal without taking mysql dump and uploading",
+        "so_7146879: MySQL export command doesn't output anything"
+      ],
+      "Top-3 Scripts": [
+        "ul_17359: #!/bin/sh\n\nsource /path/to/db.conf\ncd /home/sh\ndumpfile_name=$database-$(date +%d%m%Y).sql\n\nmysqldump -u\"$username\" -p\"$password\" --opt \"$database\" > $dumpfile_name\ngzip $dumpfile_name",
+        "so_27617361: mysqldump -h [server] -u [user] -p[password] db1 | mysql -h [server] -u [user] -p[password] db2",
+        "so_7146879: "
+      ],
+      "Explanations about Options": {
+        "-h": "Dump data from the MySQL server on the given host. The default host is localhost.",
+        "-u": "The user name of the MySQL account to use for connecting to the server."
+      }
+    },
+    {
+      "Command": "ssh",
+      "MP Summary": "OpenSSH SSH client (remote login program)",
+      "Most Similar TLDR Task": "Connect to a remote server",
+      "Most Similar TLDR Script": "ssh {{username}}@{{remote_host}}",
+      "Top-3 Similar Questions": [
+        "so_1666848: mysql create database and user script",
+        "au_981993: about ssh multiple remote access",
+        "so_36613151: Bash Script SSH into MYSQL Server and create database with dash in it"
+      ],
+      "Top-3 Scripts": [
+        "so_1666848: ssh -p 8899 root@$REMOTEIP \"mysql -u root -p -e \\\"$SQL\\\"\"",
+        "au_981993: for machine in hostname1 hostname2 ... hostnameN; do\n  ssh user@$machine <<< 'lshw; cat /etc/resolv.conf'\ndone",
+        "so_36613151: ssh -t $SSSSHUSER@$SSSSH \"echo 'CREATE DATABASE \\`$NEWDB\\`; GRANT ALL ON \\`$NEWDB\\`.* TO $SSMYSQLUSER@$SSMYSQLSERVER;' | /usr/bin/mysql -u$SSMYSQLUSER -p$SSMYSQLPWD ; \""
+      ],
+      "Explanations about Options": {
+        "-e": "Sets the escape character for sessions with a pty (default: \u2018~\u2019). The escape\n character is only recognized at the beginning of a line. The escape character\n followed by a dot (\u2018.\u2019) closes the connection; followed by control-Z suspends the\n connection; and followed by itself sends the escape character once. Setting the\n character to \u201cnone\u201d disables any escapes and makes the session fully transparent.",
+        "-p": "Port to connect to on the remote host. This can be specified on a per-host basis in\n the configuration file.",
+        "-t": "Force pseudo-terminal allocation. This can be used to execute arbitrary screen-\n based programs on a remote machine, which can be very useful, e.g. when implementing\n menu services. Multiple -t options force tty allocation, even if ssh has no local\n tty."
+      }
+    },
+    {
+      "Command": "sudo",
+      "MP Summary": "execute a command as another user",
+      "Most Similar TLDR Task": "Run a command as another user and/or group",
+      "Most Similar TLDR Script": "sudo -u {{user}} -g {{group}} {{id -a}}",
+      "Top-3 Similar Questions": [
+        "so_62564439: MySQL MariaDB Server Raspberry Pi remote access",
+        "so_26914543: Remote Connections Mysql Ubuntu - bind address failed",
+        "ul_443747: MySQL dump, access denied 1045 with correct username and password"
+      ],
+      "Top-3 Scripts": [
+        "so_62564439: sudo vi /etc/mysql/my.cnf\n\nsudo service mysql restart",
+        "so_26914543: sudo apt-get update\nsudo apt-get mysql-server\nsudo mysql_install_db\nsudo mysql_secure_installation\n\nsudo service mysql restart",
+        "ul_443747: sudo mysqldump  -h 127.0.0.1 --user=backup -password=SuperS3f@kePass --all-databases > all_databases.sql"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "psql",
+      "MP Summary": "PostgreSQL interactive terminal",
+      "Most Similar TLDR Task": "Execute a single SQL query or PostgreSQL command on the given database (useful in shell scripts)",
+      "Most Similar TLDR Script": "psql -c '{{query}}' {{database}}",
+      "Top-3 Similar Questions": [
+        "so_41102915: How can I setup a new user, password and database all in one command for my PostgreSQL database"
+      ],
+      "Top-3 Scripts": [
+        "so_41102915: psql -U postgres -c \"CREATE ROLE testuser PASSWORD 'secret' LOGIN\"; psql -U postgres -c \"CREATE DATABASE test\""
+      ],
+      "Explanations about Options": {
+        "-U": " Connect to the database as the user username instead of the default. (You must have\n permission to do so, of course.)"
+      }
+    }
+  ]
+}

@@ -1,0 +1,87 @@
+{
+  "Query": "How to grep for same string but multiple files at the same time?",
+  "Answers": [
+    {
+      "Command": "sed",
+      "MP Summary": "stream editor for filtering and transforming text",
+      "Most Similar TLDR Task": "Replace all occurrences of a string in a file, overwriting the file (i.e. in-place)",
+      "Most Similar TLDR Script": "sed -i 's/{{find}}/{{replace}}/g' {{filename}}",
+      "Top-3 Similar Questions": [
+        "so_11773888: How do I grep multiple lines (output from another command) at the same time?",
+        "ul_168813: How do I grep for multiple patterns on multiple lines?",
+        "so_69731339: How to grep for multiple strings in the same line inside a file with similar pattern?"
+      ],
+      "Top-3 Scripts": [
+        "so_11773888: $ echo abc | tee >(sed s/a/_a_/ > file1) | tee >(sed s/b/_b_/ > file2) | sed s/c/_c_/ > file3\n$ grep \"\" file[123]\nfile1:_a_bc\nfile2:a_b_c\nfile3:ab_c_",
+        "ul_168813: sed '/^begin$/,/^end$/!d'",
+        "so_69731339: sed -r '/^\\s*#/d' my.txt | grep \"$f_name\" | grep \"$p_name\""
+      ],
+      "Explanations about Options": {
+        "-r": "use extended regular expressions in the script (for portability use POSIX -E)."
+      }
+    },
+    {
+      "Command": "strings",
+      "MP Summary": "print the strings of printable characters in files.",
+      "Most Similar TLDR Task": "Print all strings in a binary",
+      "Most Similar TLDR Script": "strings {{file}}",
+      "Top-3 Similar Questions": [
+        "ul_632929: grep in txt file or files without extension, require multiple strings to be present in the file"
+      ],
+      "Top-3 Scripts": [
+        "ul_632929: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "find",
+      "MP Summary": "search for files in a directory hierarchy",
+      "Most Similar TLDR Task": "Find files by matching multiple patterns",
+      "Most Similar TLDR Script": "find {{root_path}} -name '{{*pattern_1*}}' -or -name '{{*pattern_2*}}'",
+      "Top-3 Similar Questions": [
+        "au_1335318: How do I grep a exact string from multiple files at the same time?",
+        "so_20308053: How to grep a group of files within a specific time range",
+        "ul_632929: grep in txt file or files without extension, require multiple strings to be present in the file"
+      ],
+      "Top-3 Scripts": [
+        "au_1335318: find . -type f -name 'file[2-3].txt' -exec  grep -P '/abc/bce/12345/input/part3/(?!err)' {} \\;",
+        "so_20308053: find . -maxdepth 1 -newermt \"2013-10-28 00:00:00\" ! -newermt \"2013-10-29 00:00:00\"",
+        "ul_632929: find directory -type f \\( -name '*.txt' -o ! -name '*.*' \\) \\\n    -exec grep -q -F -e 'string 1' {} \\; \\\n    -exec grep -q -F -e 'string 2' {} \\; \\\n    -exec grep -q -F -e 'string 3' {} \\; \\\n    -print\n\nfind directory -type f \\( -name '*.txt' -o ! -name '*.*' \\) -exec sh -c '\n    for pathname do\n        if  grep -q -F -e \"string 1\" \"$pathname\" &&\n            grep -q -F -e \"string 2\" \"$pathname\" &&\n            grep -q -F -e \"string 3\" \"$pathname\"\n        then\n            printf \"All were found in \\\"%s\\\"\\n\" \"$pathname\"\n        fi\n    done' sh {} +"
+      ],
+      "Explanations about Options": {
+        "-maxdepth": "Descend at most levels (a non-negative integer) levels of directories below the\n starting-points. -maxdepth 0 means only apply the tests and actions to the\n starting-points themselves.",
+        "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+        "-type": "File is of type c:",
+        "-n": "for less than n ,"
+      }
+    },
+    {
+      "Command": "zgrep",
+      "MP Summary": "search compressed files for a regular expression",
+      "Most Similar TLDR Task": "Grep a compressed file for multiple patterns",
+      "Most Similar TLDR Script": "zgrep -e \"{{pattern_1}}\" -e \"{{pattern_2}}\" {{path/to/compressed/file}}",
+      "Top-3 Similar Questions": [
+        "so_47130122: grep several strings from gz file"
+      ],
+      "Top-3 Scripts": [
+        "so_47130122: zgrep -f match_strings.txt file.gz"
+      ],
+      "Explanations about Options": {
+        "-f": "obtain patterns from <file>"
+      }
+    },
+    {
+      "Command": "wc",
+      "MP Summary": "print newline, word, and byte counts for each file",
+      "Most Similar TLDR Task": "Count characters (bytes) in file",
+      "Most Similar TLDR Script": "wc -c {{file}}",
+      "Top-3 Similar Questions": [
+        "ul_163810: grep on a variable"
+      ],
+      "Top-3 Scripts": [
+        "ul_163810: wc(1)"
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

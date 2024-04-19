@@ -1,0 +1,82 @@
+{
+  "Query": "Move files and folders recursively on Linux",
+  "Answers": [
+    {
+      "Command": "mkdir",
+      "MP Summary": "make directories",
+      "Most Similar TLDR Task": "Create directories recursively (useful for creating nested dirs)",
+      "Most Similar TLDR Script": "mkdir -p {{path/to/directory}}",
+      "Top-3 Similar Questions": [
+        "so_14355279: How can I move all folders in a directory to subdirectories based on their value?",
+        "au_1026703: Move files to folder based on parts of filename",
+        "ul_443125: Move all files with matching prefixes to folder based on a csv list"
+      ],
+      "Top-3 Scripts": [
+        "so_14355279: ",
+        "au_1026703: echo ${filename%%\" \"-*} | xargs -d '\\n' mkdir\n\n#!/usr/bin/env bash\n\nwhile IFS= read -r var\ndo\n    mkdir \"${var%\" \"-*}\"\ndone < \"$1\"",
+        "ul_443125: awk 'NR > 1 { print $1, $2 }' list.csv |\nwhile read -r prefix group; do\n    find . -type f -name \"$prefix*\" -exec sh -c '\n        group=\"$1\"; shift\n        mkdir -p \"$group\"\n        for name do echo mv \"$name\" \"$group\"; done' sh \"$group\" {} +\ndone\n\ngroup=\"$1\"\nshift\n\nmkdir -p \"$group\"\nfor name do\n    echo mv \"$name\" \"$group\"\ndone"
+      ],
+      "Explanations about Options": {
+        "-p": "no error if existing, make parent directories as needed"
+      }
+    },
+    {
+      "Command": "cp",
+      "MP Summary": "copy files and directories",
+      "Most Similar TLDR Task": "Copy a file into another directory, keeping the filename",
+      "Most Similar TLDR Script": "cp {{path/to/source_file.ext}} {{path/to/target_parent_directory}}",
+      "Top-3 Similar Questions": [
+        "so_3686860: Move all files of same type in multiple directories up one folder",
+        "so_12476993: moving a file from local machine to cluster"
+      ],
+      "Top-3 Scripts": [
+        "so_3686860: ",
+        "so_12476993: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "mv",
+      "MP Summary": "move (rename) files",
+      "Most Similar TLDR Task": "Move files in arbitrary locations",
+      "Most Similar TLDR Script": "mv {{source}} {{target}}",
+      "Top-3 Similar Questions": [
+        "ul_177355: Moving files from folder to folder on a remote server using SSH without downloading those to local computer",
+        "au_91740: How to move all files in current folder to subfolder?",
+        "ul_527073: Move files to specific folders based on name"
+      ],
+      "Top-3 Scripts": [
+        "ul_177355: $ mv /home/bigfile.txt /home/mydir/ # Instant.\n$ mv /home/bigfile.txt /srv # Takes time.",
+        "au_91740: mv !(new) new\n\nshopt -s extglob dotglob\nmv !(new) new\nshopt -u dotglob",
+        "ul_527073: #! /bin/bash\nfor f in aula-??.?.mp4 ; do\n    num=${f:5:2}\n    mv \"$f\" Aula\"$num\"/\ndone\n\n#! /bin/bash\nfor f in *.mp4 ; do\n    if [[ $f =~ ([0-9][0-9]) ]] ; then\n        num=${BASH_REMATCH[1]}\n        mv \"$f\" Aula\"$num\"/\n    else\n        echo \"Can't extract number form '$f'\" >&2\n    fi\ndone"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "rm",
+      "MP Summary": "remove files or directories",
+      "Most Similar TLDR Task": "Recursively remove a directory and all its subdirectories",
+      "Most Similar TLDR Script": "rm -r {{path/to/directory}}",
+      "Top-3 Similar Questions": [
+        "so_14355279: How can I move all folders in a directory to subdirectories based on their value?"
+      ],
+      "Top-3 Scripts": [
+        "so_14355279: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "scp",
+      "MP Summary": "secure copy (remote file copy program)",
+      "Most Similar TLDR Task": "Recursively copy the contents of a directory from a remote host to a local directory",
+      "Most Similar TLDR Script": "scp -r {{remote_host}}:{{path/to/remote_directory}} {{path/to/local_directory}}",
+      "Top-3 Similar Questions": [
+        "so_12476993: moving a file from local machine to cluster"
+      ],
+      "Top-3 Scripts": [
+        "so_12476993: scp \\path\\to\\your\\file.txt user@cluster_address:\\path\\in\\cluster"
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

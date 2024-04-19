@@ -1,0 +1,96 @@
+{
+  "Query": "How to grep, excluding some patterns?",
+  "Answers": [
+    {
+      "Command": "grep",
+      "MP Summary": "print lines that match patterns",
+      "Most Similar TLDR Task": "Invert match for excluding specific strings",
+      "Most Similar TLDR Script": "grep -v {{search_pattern}}",
+      "Top-3 Similar Questions": [
+        "so_24837635: grep excluding file name pattern",
+        "so_25781642: How to search for a pattern using grep and exclude another pattern",
+        "so_31309531: Exclude a pattern from grep result"
+      ],
+      "Top-3 Scripts": [
+        "so_24837635: grep -r --exclude=\"*.cmd\"  \"ckim\" ./",
+        "so_25781642: grep -P 'http://\\S*tt(?!p:)' file\n\ngrep -cP 'http://\\S*tt(?!p:)' file\n\ngrep -P '(<=http://)?\\S*tt(?!p:)' file\n\ngrep -oP '.*?\\K(http:/)?/\\S*tt(?!p:)\\S*' file\n\ngrep -oP '.*?\\Khttp://\\S*tt(?!p:)\\S*' file\n\nhttp://example.com/redirect?http://some/anyttany.html\nhttp://example.com/http.html\nhttp://example.com/tt.html\nhttp://example.com/somett.html\nhttp://example.com/somettsome.html",
+        "so_31309531: find . -exec grep -i -n -w 'search text' /dev/null {} \\; | grep -v '/\\*'\n\ngrep -v"
+      ],
+      "Explanations about Options": {
+        "-v": "Invert the sense of matching, to select non-matching lines.",
+        "-o": "Print only the matched (non-empty) parts of a matching line, with each such part on\n a separate output line.",
+        "-P": "Interpret PATTERNS as Perl-compatible regular expressions (PCREs). This option is\n experimental when combined with the -z (--null-data) option, and grep -P may warn\n of unimplemented features.",
+        "--exclude": "Skip any command-line file with a name suffix that matches the pattern GLOB, using\n wildcard matching; a name suffix is either the whole name, or a trailing part that\n starts with a non-slash character immediately after a slash (/) in the name. When\n searching recursively, skip any subfile whose base name matches GLOB; the base name\n is the part after the last slash. A pattern can use *, ?, and [...] as wildcards,\n and \\ to quote a wildcard or backslash character literally.",
+        "-r": "Read all files under each directory, recursively, following symbolic links only if\n they are on the command line. Note that if no file operand is given, grep searches\n the working directory. This is equivalent to the -d recurse option."
+      }
+    },
+    {
+      "Command": "find",
+      "MP Summary": "search for files in a directory hierarchy",
+      "Most Similar TLDR Task": "Find files matching a given pattern, excluding specific paths",
+      "Most Similar TLDR Script": "find {{root_path}} -name '{{*.py}}' -not -path '{{*/site-packages/*}}'",
+      "Top-3 Similar Questions": [
+        "so_31309531: Exclude a pattern from grep result",
+        "ul_523716: grep files with pattern A but exclude files with pattern B",
+        "so_37561162: Shell globbing exclude directory patterns"
+      ],
+      "Top-3 Scripts": [
+        "so_31309531: find . -exec grep -i -n -w 'search text' /dev/null {} \\; | grep -v '/\\*'",
+        "ul_523716: find . -type f ! -exec grep -q \"$idontwant\" {} ';' -exec grep -q \"$iwant\" {} ';' -print\n\nfind . -type f -exec grep -q \"$iwant\" {} ';' ! -exec grep -q \"$idontwant\" {} ';' -print\n\nfind . ! -type d",
+        "so_37561162: "
+      ],
+      "Explanations about Options": {
+        "-type": "File is of type c:"
+      }
+    },
+    {
+      "Command": "awk",
+      "MP Summary": "pattern scanning and processing language",
+      "Most Similar TLDR Task": "Print the last column of each line in a file, using a comma (instead of space) as a field separator",
+      "Most Similar TLDR Script": "awk -F ',' '{print $NF}' {{filename}}",
+      "Top-3 Similar Questions": [
+        "so_22492441: How to exclude patterns in regex conditionally in bash?",
+        "so_39463714: Need grep statement to exclude lines",
+        "so_25599346: Excluding with grep"
+      ],
+      "Top-3 Scripts": [
+        "so_22492441: awk 'BEGIN{FS=OFS=\"=\"} NF==2 && $1!=\"\"{gsub(/^\\(|\\)$/, \"\", $2); print}' file\nhello=123\nstack=23(4)\noverflow=345\nfriends=987",
+        "so_39463714: awk '/IN=eth0/ && !/SRC=0\\.0\\.0\\.0/ && !/SRC=10\\.0\\.1\\.15/' uwf.log",
+        "so_25599346: awk '/^foo[34]$/||!/^foo/{print}' foo"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "sed",
+      "MP Summary": "stream editor for filtering and transforming text",
+      "Most Similar TLDR Task": "Delete lines matching the line pattern",
+      "Most Similar TLDR Script": "sed '/{{line_pattern}}/d' {{filename}}",
+      "Top-3 Similar Questions": [
+        "so_51743995: grep to exclude pattern and exclude 2 preceding lines",
+        "so_41973161: How to remove a specific pattern from a file",
+        "so_13350855: Exclude lines by pattern in sed"
+      ],
+      "Top-3 Scripts": [
+        "so_51743995: GNU sed\n\nsed -E 'N;N; /[acgt]{3}cc[acgt][acgt]{3}/d' ip.txt",
+        "so_41973161: cat file.log | sed 's/\\.txt:/:/'\n\nsed 's/\\.txt:/:/' file.log",
+        "so_13350855: sed '/MANAGER_WIDGET/!s/\\.\\([jscss]\\+\\)\\\"/\\.min\\.\\1\\\"/g' index.html"
+      ],
+      "Explanations about Options": {
+        "-E": "use extended regular expressions in the script (for portability use POSIX -E)."
+      }
+    },
+    {
+      "Command": "paste",
+      "MP Summary": "merge lines of files",
+      "Most Similar TLDR Task": "Merge two files, with lines added alternatively",
+      "Most Similar TLDR Script": "paste -d '\\n' {{file1}} {{file2}}",
+      "Top-3 Similar Questions": [
+        "so_50610985: Deleting lines from a file with binary pattern strings"
+      ],
+      "Top-3 Scripts": [
+        "so_50610985: paste fileB fileA | grep '^1' | cut -f2-"
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

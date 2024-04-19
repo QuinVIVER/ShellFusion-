@@ -1,0 +1,82 @@
+{
+  "Query": "How to create an animated GIF from MP4 video via command line?",
+  "Answers": [
+    {
+      "Command": "ffmpeg",
+      "MP Summary": "ffmpeg video converter",
+      "Most Similar TLDR Task": "Combine numbered images (frame_1.jpg, frame_2.jpg, etc) into a video or GIF",
+      "Most Similar TLDR Script": "ffmpeg -i {{frame_%d.jpg}} -f image2 {{video.mpg|video.gif}}",
+      "Top-3 Similar Questions": [
+        "au_648603: How to create an animated GIF from MP4 video via command line?",
+        "ul_24014: Creating a GIF animation from PNG files",
+        "au_1127603: How can I create a 30 second GIF from a long random video?"
+      ],
+      "Top-3 Scripts": [
+        "au_648603: sudo apt install ffmpeg\nwget -O opengl-rotating-triangle.mp4 https://github.com/cirosantilli/media/blob/master/opengl-rotating-triangle.mp4?raw=true\nffmpeg \\\n  -i opengl-rotating-triangle.mp4 \\\n  -r 15 \\\n  -vf scale=512:-1 \\\n  -ss 00:00:03 -to 00:00:06 \\\n  opengl-rotating-triangle.gif\n\nffmpeg \\\n  -i opengl-rotating-triangle.mp4 \\\n  -r 15 \\\n  -vf \"scale=512:-1,split[s0][s1];[s0]palettegen[p];[s1][p]paletteuse\" \\\n  -ss 00:00:03 -to 00:00:06 \\\n  opengl-rotating-triangle-palettegen.gif\n\nwget https://upload.wikimedia.org/wikipedia/commons/f/f9/STS-132_Liftoff_Space_Shuttle_Atlantis.ogv\nffmpeg -i STS-132_Liftoff_Space_Shuttle_Atlantis.ogv -r 15 -vf scale=512:-1 \\\n  -ss 00:00:17 -to 00:00:22 STS-132_Liftoff_Space_Shuttle_Atlantis.gif\n\nsudo apt-get install ffmpeg\nffmpeg -i in.mp4 out.gif\n\nsudo apt-get install ffmpeg imagemagick\nffmpeg -i opengl-rotating-triangle.mp4 -r 15 -vf scale=512:-1 \\\n  -ss 00:00:03 -to 00:00:06 -f image2pipe -vcodec ppm - |\n  convert -deconstruct -delay 5 -loop 0 - opengl-rotating-triangle-image-magick.gif\n\nffmpeg -i STS-132_Liftoff_Space_Shuttle_Atlantis.ogv -r 15 -vf scale=512:-1 \\\n  -ss 00:00:17 -to 00:00:22 -f image2pipe -vcodec ppm - |\n  convert -deconstruct -delay 5 -loop 0 - STS-132_Liftoff_Space_Shuttle_Atlantis_512x.gif\n\nsudo snap install gifski\nmkdir -p frames\nffmpeg \\\n  -i opengl-rotating-triangle.mp4 \\\n  -r 15 \\\n  -vf scale=512:-1 \\\n  -ss 00:00:03 -to 00:00:06 \\\n  frames/%04d.png\ngifski -o opengl-rotating-triangle-gifski.gif frames/*.png",
+        "ul_24014: ffmpeg -i %03d.png output.gif\n\n# cf. http://pages.uoregon.edu/noeckel/MakeMovie.html\n\n# first convert an image sequence to a movie\nffmpeg -sameq -i %03d.jpg output.mp4\n\n# ... and then convert the movie to a GIF animation\nffmpeg -i output.mp4 -pix_fmt rgb24 -s qcif -loop_output 0 output.gif",
+        "au_1127603: #!/bin/bash\nmkdir 30gif\nfor f in *.mp4; do\n  duration=$(ffprobe -loglevel error -show_entries format=duration -of default=nk=1:nw=1 \"$f\")\n  ffmpeg -i \"$f\" -filter_complex \"[0:v]select='lt(mod(t,${duration}/10),3)',setpts=N/(FRAME_RATE*TB),scale=560:340:force_original_aspect_ratio=decrease,pad=560:340:(ow-iw)/2:(oh-ih)/2,setsar=1,split[v0][v1];[v0]palettegen[p];[v1][p]paletteuse[v]\" -map \"[v]\" \"30gif/${f%.mp4}.gif\"\ndone"
+      ],
+      "Explanations about Options": {
+        "-q": " Use fixed quality scale (VBR). The meaning of q/qscale is codec-dependent. If qscale\n is used without a stream_specifier then it applies only to the video stream, this is\n to maintain compatibility with previous behavior and as specifying the same codec\n specific value to 2 different codecs that is audio and video generally is not what is\n intended when no stream_specifier is used.",
+        "-i": "input file url",
+        "-filter_complex": "Define a complex filtergraph, i.e. one with arbitrary number of inputs and/or outputs.\n For simple graphs - those with one input and one output of the same type - see the\n -filter options. filtergraph is a description of the filtergraph, as described in the\n ``Filtergraph syntax'' section of the ffmpeg-filters manual."
+      }
+    },
+    {
+      "Command": "scrot",
+      "MP Summary": "command line screen capture utility",
+      "Most Similar TLDR Task": "Capture a screenshot and save it as \"capture.png\"",
+      "Most Similar TLDR Script": "scrot {{capture.png}}",
+      "Top-3 Similar Questions": [
+        "so_35511074: Create animated gif from multiple HTML pages using command line"
+      ],
+      "Top-3 Scripts": [
+        "so_35511074: apt-get install scrot"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "convert",
+      "MP Summary": "convert between image formats as well as resize an image, blur, crop, despeckle, dither, draw on, flip, join, re-sample, and much more.",
+      "Most Similar TLDR Task": "Create a gif from a series of images with 100ms delay between them",
+      "Most Similar TLDR Script": "convert {{image1.png}} {{image2.png}} {{image3.png}} -delay {{10}} {{animation.gif}}",
+      "Top-3 Similar Questions": [
+        "au_648603: How to create an animated GIF from MP4 video via command line?",
+        "au_648244: How do I create an animated gif from still images (preferably with the command line)?",
+        "so_56450486: How to create an animated gif image from a number of png images?"
+      ],
+      "Top-3 Scripts": [
+        "au_648603: sudo apt-get install ffmpeg imagemagick\nffmpeg -i opengl-rotating-triangle.mp4 -r 15 -vf scale=512:-1 \\\n  -ss 00:00:03 -to 00:00:06 -f image2pipe -vcodec ppm - |\n  convert -deconstruct -delay 5 -loop 0 - opengl-rotating-triangle-image-magick.gif\n\nffmpeg -i STS-132_Liftoff_Space_Shuttle_Atlantis.ogv -r 15 -vf scale=512:-1 \\\n  -ss 00:00:17 -to 00:00:22 -f image2pipe -vcodec ppm - |\n  convert -deconstruct -delay 5 -loop 0 - STS-132_Liftoff_Space_Shuttle_Atlantis_512x.gif\n\nconvert input.mp4 rpi2-bare-metal-blink.gif",
+        "au_648244: convert -delay 20 -loop 0 *.jpg myimage.gif",
+        "so_56450486: for ((i=0;i<100;i++)) ; do\n   convert lena.png -resize $i% -background none -gravity center -extent 512x512 miff:-\ndone | convert miff:- -delay 80 anim.gif"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "import",
+      "MP Summary": "saves any visible window on an X server and outputs it as an image file. You can capture a single window, the entire screen, or any rectangular portion of the screen.",
+      "Most Similar TLDR Task": "Capture contents of a remote X server screen in the PNG image format",
+      "Most Similar TLDR Script": "import -window root -display {{remote_host}}:{screen}.{display} {{output.png}}",
+      "Top-3 Similar Questions": [
+        "so_35511074: Create animated gif from multiple HTML pages using command line"
+      ],
+      "Top-3 Scripts": [
+        "so_35511074: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "montage",
+      "MP Summary": "create  a composite image by combining several separate images. The images are tiled on the composite image optionally adorned with a  border,  frame,  image  name,  and more.",
+      "Most Similar TLDR Task": "Tile images into a grid, automatically calculating the grid cell size from the largest image",
+      "Most Similar TLDR Script": "montage {{image1.png}} {{image2.jpg}} {{imageN.png}} -geometry +0+0 montage.jpg",
+      "Top-3 Similar Questions": [
+        "ul_63769: Fast tool to generate thumbnail video galleries for command line"
+      ],
+      "Top-3 Scripts": [
+        "ul_63769: montage -title \"Movie Name\\nSubtitle\" -geometry +4+4 capture*.png output.png"
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

@@ -1,0 +1,143 @@
+
+
+Query:                With the Linux "cat" command, how do I show only certain lines by number
+
+
+########################################################################################################################
+
+
+Question Title:       Portable way (linux & Windows) to have a file only modifiable by 1 process and not others in C/C++
+Question Link:        https://stackoverflow.com/questions/24505568
+
+Accepted Answer:      You should make use of the "inter process communications"
+                      
+                      For instance ,on Windows you could use following code, which makes sure that only one process would be able to write into this file.
+                      
+                          int WriteToFile()
+                          {
+                               HANDLE _mutex = CreateMutex(NULL, TRUE, L"__File_Write__");
+                               if(GetLastError() == ERROR_ALREADY_EXISTS) 
+                               {
+                                   return -1;
+                               }
+                               else
+                               {
+                                   //write to file
+                                   return 0;
+                               }
+                          }
+                      
+
+
+########################################################################################################################
+
+
+Question Title:       Powershell select line number line only from file
+Question Link:        https://stackoverflow.com/questions/32459257
+
+Accepted Answer:      You could do something like this:
+                      
+                      Select-String -Pattern "ORA-" -Path $_.FullName -SimpleMatch | %{ "{0}: {1}" -f ($_.LineNumber, $_.Line)}
+                      
+
+
+########################################################################################################################
+
+
+Question Title:       linux sed command - adding string on every end of the line of csv
+Question Link:        https://stackoverflow.com/questions/28474327
+
+Accepted Answer:      Sed is probably not the right tool to handle csv files since the rules are way more complicated than how it may look (it's probably possible, but such scripts are in general rather error-prone, etc.). You can however use csvtools to handle this:
+                      
+                      file="FILE.csv"
+                      nr=$(csvtool height $file)
+                      ot=$(perl -e "print \"COLUMN5\\n\";for\$i(2..$nr){print \"FRUIT\\n\";}")
+                      echo "$ot" | csvtool paste "$file" -
+                      
+                      
+                      The script works as follows:
+                      
+                      
+                      First we calculate the number of rows with csvtool height,
+                      Next we generate the additional column by printing COLUMN5 followed by n-1 times FRUIT.
+                      Finally we paste that content to the right of the file.
+                      
+
+
+########################################################################################################################
+
+
+Question Title:       Linux driver keep saying 0 bytes free, and only root can write
+Question Link:        https://superuser.com/questions/215375
+
+Accepted Answer:      To list the contents of the file system superblock use this command:
+                      
+                      tune2fs -l &lt;device&gt;
+                      
+                      
+                      Please note that this takes the physical device, not the mount point, as its parameter.
+                      
+                      Items of interest are your free inode count, free block count, and reserved block count. Assuming that you have this file system mounted somewhere important, here meaning a system-necessary directory tree such as /, it is advisable to maintain reserved super user blocks. If, however, you have limited option you can leverage the tune2fs command again as:
+                      
+                      tune2fs -m n &lt;device&gt;
+                      
+                      
+                      to set the percentage of the file system reserved for the super user to n.
+
+
+########################################################################################################################
+
+
+Question Title:       Unix Shell Script get only needed lines from a file content
+Question Link:        https://stackoverflow.com/questions/18839637
+
+Accepted Answer:      sed -n -e '/value:ACCOUNT_NO/{N;N;s/\n/|/g;p;}' logs.txt &gt; outfile.txt
+                      
+                      
+                      EDIT:
+                      
+                      I've modified the command above to redirect the output to a file, but it's more important that we correct the output. I've tested the command using the example logs.txt you gave; I don't know enough about your system to say why it doesn't work there, so let us experiment. Try this:
+                      
+                      sed -n -e '/value:ACCOUNT_NO/p' logs.txt
+                      
+                      
+                      What is the output?
+                      
+                      EDIT:
+                      
+                      So far, so good. Now try this:
+                      
+                      sed -n -e '/value:ACCOUNT_NO/{p;}' logs.txt
+                      
+                      
+                      Same output?
+                      
+                      EDIT:
+                      
+                      Good! Now:
+                      
+                      sed -n -e '/value:ACCOUNT_NO/{N;N;p;}' logs.txt
+                      
+                      
+                      What is the output?
+                      
+                      EDIT:
+                      
+                      Last step, we redirect to outputfile.txt and remove the newlines. As @ChrisJester-Young said, we can remove the trailing spaces in the same step:
+                      
+                      sed -n -e '/value:ACCOUNT_NO/{N;N;s/ \n/|/;p;}' logs.txt &gt; outputfile.txt
+                      
+                      
+                      EDIT
+                      
+                      Try this, and let's call it code 6:
+                      
+                      sed -n -e '/value:ACCOUNT_NO/{N;N;s/..\n/|/g;p;}' logs.txt &gt; outputfile.txt
+                      
+                      
+                      EDIT:
+                      
+                      The problem is that your logs.txt has DOS-style line endings. I think that Code 6 changes them to UNIX-style, and ultra edit is warning you that they are strange. Try this (code 7):
+                      
+                      sed -n -e '/value:ACCOUNT_NO/{N;N;s/..\n\(.\)/|\1/g;p;}'
+                      

@@ -1,0 +1,70 @@
+{
+  "Query": "How do I change extension of multiple files recursively from the command line?",
+  "Answers": [
+    {
+      "Command": "mv",
+      "Top-3 Similar Questions": [
+        "ul_642974: How to change the extension of all files from a directory?",
+        "ul_68912: How to change extension of all files in a directory?",
+        "au_333026: Changing extension of multiple files in Ubuntu 12.04"
+      ],
+      "Top-3 Scripts": [
+        "ul_642974: #!/bin/sh\nmv \"$2\" \"$1\"  ||  exit               # Make $2 a subdirectory of $1\ncd \"$1/$(basename \"$2\")\"  ||  exit   # Change directories for simplicity\nfor f in *; do\n    mv \"$f\" \"${f%.*}.txt\"            # Add or change the extension\ndone",
+        "ul_68912: for x in !(*.*); do\n  mv -- \"$x\" \"$x.md\"\ndone\n\nfor x in *; do\n  case \"$x\" in\n    *.*) ;;         # skip this file\n    *) mv -- \"$x\" \"$x.md\";;\n  esac\ndone",
+        "au_333026: find -L . -type f -name \"*.oldextension\" -print0 | while IFS= read -r -d '' FNAME; do\n    mv -- \"$FNAME\" \"${FNAME%.oldextension}.newextension\"\ndone\n\nfind -L . -type f -print0 | while IFS= read -r -d '' FNAME; do\n    mv -- \"$FNAME\" \"${FNAME%}.newextension\"\ndone"
+      ]
+    },
+    {
+      "Command": "rename",
+      "Top-3 Similar Questions": [
+        "au_1228206: Change duplicated extension of multiple files recursively from the command line",
+        "so_46578496: How to add and change the extension of files in a directory?",
+        "ul_215821: change last 10 characters of the base (not extension) of multiple files"
+      ],
+      "Top-3 Scripts": [
+        "au_1228206: $ shopt -s globstar; rename 's/\\.zip$//' **/*.zip.zip",
+        "so_46578496: for f in *               # loop all items in the current dir\ndo \n  if [ -f \"$f\" ]         # test that $f is a file\n  then\n    t=\"${f%.*}\"          # strip extension off ie. everything after last .\n    mv -i \"$f\" \"$t\".ext  # rename file with the new extension\n  fi\ndone",
+        "ul_215821: $ rename --version\nperl-rename 1.9\n$ rename 's/\\(12345678\\)/abcdefghij/' *.txt\n\n$ rename --version\nrename from util-linux 2.26.2\n$ rename '(12345678)' abcdefghij *.txt\n\nrename 's/.{10}\\.txt\\Z/abcdefghij.txt/' *.txt -n"
+      ]
+    },
+    {
+      "Command": "find",
+      "Top-3 Similar Questions": [
+        "au_333026: Changing extension of multiple files in Ubuntu 12.04",
+        "au_1086839: How can I recursively change the permissions of specific files into a list of directories?",
+        "so_16665157: Replacing a line from multiple files, limiting to a line number range"
+      ],
+      "Top-3 Scripts": [
+        "au_333026: find -L . -type f -name \"*.oldextension\" -print0 | while IFS= read -r -d '' FNAME; do\n    mv -- \"$FNAME\" \"${FNAME%.oldextension}.newextension\"\ndone\n\nfind -L . -type f -print0 | while IFS= read -r -d '' FNAME; do\n    mv -- \"$FNAME\" \"${FNAME%}.newextension\"\ndone",
+        "au_1086839: find _dir_ -name '*.fastq' -exec chmod a-wx {} \\;",
+        "so_16665157: find . -exec grep -il -E 'Programmer.*Bob' {} \\; \\\n    | xargs sed -i '1,10 s/.*Programmer.*Bob.*/LINE REPLACED/'"
+      ]
+    },
+    {
+      "Command": "echo",
+      "Top-3 Similar Questions": [
+        "so_43503733: Change basename of multiple files in a single directory",
+        "au_821435: How can I change file types of multiple files at once?",
+        "ul_438476: Change extension of all file names containing specific string"
+      ],
+      "Top-3 Scripts": [
+        "so_43503733: # Looping for all the text files in the current \n# directory\nfor file in *.txt; do\n    # Stripping off '_R1' from the file-name\n    temp1=\"${file//_R1/}\"\n    # Replacing '_' with '.' and renaming the file to the name generated\n    temp2=\"${temp1//_/.}\"\n    echo \"$temp2\" \"$file\"\n    #mv -v \"$file\" \"$temp2\"\ndone",
+        "au_821435: for f in A*; do \n  printf -v fnew '%s.%02d' \"${f%.*}\" \"${f##*.}\"\n  echo mv -v -- \"$f\" \"$fnew\"\ndone",
+        "ul_438476: find -type f -name \"*x264*\" -execdir sh -c 'file=\"${1#./}\"; \n    echo mv -n \"$file\" \"${file%.*}.mp4\"' _ {}  \\;"
+      ]
+    },
+    {
+      "Command": "chown",
+      "Top-3 Similar Questions": [
+        "nl2bash_12472: Recursively change the owner of all files in \"/usr/local/lib/node_modules\" to the current user",
+        "nl2bash_12642: change the ownership of all regular/normal files in the current directory after users confirmation",
+        "nl2bash_12635: change the owner of all the files in the current directory"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_12472: sudo chown -R $USER /usr/local/lib/node_modules",
+        "nl2bash_12642: find . -type f -ok chown username {} \\;",
+        "nl2bash_12635: find . -exec chown myuser:a-common-group-name {} +"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "Query": "find -exec with multiple commands",
+  "Answers": [
+    {
+      "Command": "which",
+      "MP Summary": "locate a command",
+      "Most Similar TLDR Task": "If there are multiple executables which match, display all",
+      "Most Similar TLDR Script": "which -a {{executable}}",
+      "Top-3 Similar Questions": [
+        "au_79063: How do you find the directory of a command?"
+      ],
+      "Top-3 Scripts": [
+        "au_79063: $ which ls\n/bin/ls"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "xargs",
+      "MP Summary": "build and execute command lines from standard input",
+      "Most Similar TLDR Task": "Parallel runs of up to `max-procs` processes at a time; the default is 1. If `max-procs` is 0, xargs will run as many processes as possible at a time",
+      "Most Similar TLDR Script": "{{arguments_source}} | xargs -P {{max-procs}} {{command}}",
+      "Top-3 Similar Questions": [
+        "ul_320157: Widespread support for find with \"-exec \u2026 +\"?",
+        "ul_212957: find: multiple `-exec`s with conditions",
+        "ul_84265: linux shell: find -exec in find -exec"
+      ],
+      "Top-3 Scripts": [
+        "ul_320157: find -print0 | xargs -0",
+        "ul_212957: find . -type f -exec grep -lFZ <i>SOME_STRING</i> {} + | xargs -0 gsed -s -i '<i>COMMAND</i>'\n\ngfind /tmp/ -type f \\( -name \"*.h\" -o -name \"*.cpp\" \\) \\\n-exec ggrep -lFZ LARGE_INTEGER {} + | \\\nxargs -0 gsed -s -i '1s/^/#include <stdint.h>\\n/'",
+        "ul_84265: xargs -r0a <(\n    find ~/.config/google-chrome -type d -name test -print0\n  ) sh -c 'exec find \"$@\" -exec chmod 555 {} +' sh"
+      ],
+      "Explanations about Options": {
+        "-i": "This option is a synonym for -Ireplace-str if replace-str is specified. If the\n replace-str argument is missing, the effect is the same as -I{}. This option is\n deprecated; use -I instead.",
+        "-0": "Input items are terminated by a null character instead of by whitespace, and the\n quotes and backslash are not special (every character is taken literally).\n Disables the end of file string, which is treated like any other argument. Useful\n when input items might contain white space, quote marks, or backslashes. The GNU\n find -print0 option produces input suitable for this mode."
+      }
+    },
+    {
+      "Command": "dirname",
+      "MP Summary": "strip last component from file name",
+      "Most Similar TLDR Task": "Delimit output with a NUL character instead of a newline (useful when combining with `xargs`)",
+      "Most Similar TLDR Script": "dirname --zero {{path/to/directory_a}} {{path/to/file_b}}",
+      "Top-3 Similar Questions": [
+        "so_8106405: Bash find: changing matched name for use in -exec"
+      ],
+      "Top-3 Scripts": [
+        "so_8106405: find . -name \"*.less\" -exec sh -c \"plessc \\$0 \\$(dirname \\$0)/\\$(basename \\$0 less)css\" {} \\;"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "whereis",
+      "MP Summary": "locate the binary, source, and manual page files for a command",
+      "Most Similar TLDR Task": "Locate binary and man pages for ls",
+      "Most Similar TLDR Script": "whereis -bm {{ls}}",
+      "Top-3 Similar Questions": [
+        "au_79063: How do you find the directory of a command?"
+      ],
+      "Top-3 Scripts": [
+        "au_79063: $ whereis ls\nls: /bin/ls /usr/share/man/man1/ls.1.gz"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "sudo",
+      "MP Summary": "execute a command as another user",
+      "Most Similar TLDR Task": "Run a command as another user and/or group",
+      "Most Similar TLDR Script": "sudo -u {{user}} -g {{group}} {{id -a}}",
+      "Top-3 Similar Questions": [
+        "ul_193529: find: missing argument to `-exec'"
+      ],
+      "Top-3 Scripts": [
+        "ul_193529: sudo -s\n\nvar1=$(\n  sudo -u psoadmin -H ssh daill_scp@files.dc1.responsys.net '\n    find . -maxdepth 1 -type f -mtime +14 -exec ls -lh {} \\;' |\n    awk '{print $5, $9}' |\n    egrep -v '^./upload|^./download|^./archive|^\\.'\n)"
+      ],
+      "Explanations about Options": {
+        "-H": "Request that the security policy set the HOME environment variable to the home\n directory specified by the target user's password database entry. Depending on\n the policy, this may be the default behavior."
+      }
+    }
+  ]
+}

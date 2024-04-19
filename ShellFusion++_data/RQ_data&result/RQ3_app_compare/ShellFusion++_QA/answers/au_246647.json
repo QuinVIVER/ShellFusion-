@@ -1,0 +1,69 @@
+{
+  "Query": "Convert a directory of JPEG files to a single PDF document",
+  "Answers": [
+    {
+      "Command": "convert",
+      "Top-3 Similar Questions": [
+        "au_700369: Converting images of different types to PDF",
+        "so_32020450: convert single jpeg to single pdf in ubuntu 14.04.3 command",
+        "ul_29869: Converting multiple image files from JPEG to PDF format"
+      ],
+      "Top-3 Scripts": [
+        "au_700369: TMP=`mktemp -d`\nfor img in `ls`; do\n    convert \"$img\" \"$TMP\"/\"$img\".pdf\ndone\n\nconvert $TMP/*.pdf merged.pdf",
+        "so_32020450: convert page.jpg page.pdf",
+        "ul_29869: for f in *.jpg; do\n  convert ./\"$f\" ./\"${f%.jpg}.pdf\"\ndone"
+      ]
+    },
+    {
+      "Command": "file",
+      "Top-3 Similar Questions": [
+        "ul_121293: Convert every pdf in the current directory to png",
+        "ul_476997: Convert PDF to images in 1920x1080",
+        "so_22481015: Powershell script to convert PDF to TIFF with Ghostscript"
+      ],
+      "Top-3 Scripts": [
+        "ul_121293: find . -type f -name '*.pdf' -print0 |\n  while IFS= read -r -d '' file\n    do convert -verbose -density 500 -resize 800 \"${file}\" \"${file%.*}.png\"\n  done",
+        "ul_476997: $ convert -density 100 file.pdf -flatten file100.png\n$ file file100.png\nfile100.png: PNG image data, 827 x 1169, 8-bit colormap, non-interlaced\n$ echo $((1080*10000/1169))\n9238\n$ convert -density 92.38 file.pdf -flatten file9238.png\n$ file file9238.png\nfile9238.png: PNG image data, 764 x 1080, 8-bit colormap, non-interlaced",
+        "au_471178: for file in *.jpg ; do convert \"$file\" \"${file/%jpg/pdf}\"; done"
+      ]
+    },
+    {
+      "Command": "find",
+      "Top-3 Similar Questions": [
+        "nl2bash_12274: Convert *.doc files in the current directory tree to the .txt format",
+        "ul_121293: Convert every pdf in the current directory to png",
+        "so_41668596: How to convert all png files to pdf in Bash?"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_12274: find . -name '*.doc' | while read i; do antiword -i 1 \"${i}\" >\"${i/doc/txt}\"; done",
+        "ul_121293: find . -type f -name '*.pdf' -print0 |\n  while IFS= read -r -d '' file\n    do convert -verbose -density 500 -resize 800 \"${file}\" \"${file%.*}.png\"\n  done\n\nfind ... -print0",
+        "so_41668596: for f in $(find . -iname '*.png'); do convert \"$f\" \"$f\".pdf; done\n\nfind \"$PWD\" -iname '*.png' -execdir convert '{}' '{}'.pdf \\;"
+      ]
+    },
+    {
+      "Command": "read",
+      "Top-3 Similar Questions": [
+        "nl2bash_12274: Convert *.doc files in the current directory tree to the .txt format",
+        "ul_121293: Convert every pdf in the current directory to png",
+        "so_24051572: convert images to pdfs in subdirectories"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_12274: find . -name '*.doc' | while read i; do antiword -i 1 \"${i}\" >\"${i/doc/txt}\"; done",
+        "ul_121293: find . -type f -name '*.pdf' -print0 |\n  while IFS= read -r -d '' file\n    do convert -verbose -density 500 -resize 800 \"${file}\" \"${file%.*}.png\"\n  done\n\nread -r\n\nread -d ''",
+        "so_24051572: find . -type d | while read d; do convert \"${d}\"/*.jpg ./\"${d##*/}.pdf\"; done\n\nwhile read d"
+      ]
+    },
+    {
+      "Command": "to",
+      "Top-3 Similar Questions": [
+        "au_1161473: Convert every file from JPEG to GIF in terminal",
+        "so_25130458: Convert DOCX to PDF for mulitple folders",
+        "so_61061269: How to convert all tif files in one folder to pdf and save in another location without looping through, in bash script?"
+      ],
+      "Top-3 Scripts": [
+        "au_1161473: for f in /path/to/dir/*jpg /path/to/dir/*JPG; do\n    convert \"$f\" \"${f%.*}.gif\"\ndone\n\nshopt -s globstar\nfor f in /path/to/dir/**/*jpg /path/to/dir/**/*JPG; do\n    convert \"$f\" \"${f%.*}.gif\"\ndone",
+        "so_61061269: cd /path/to/tiffs && parallel tiff2pdf {} -o ../backup/{.}.pdf ::: *tif\n\ncd /path/to/tiffs && parallel --dry-run tiff2pdf {} -o ../backup/{.}.pdf ::: *tif\n\ncd /path/to/tiffs && magick mogrify -path ../backup -format PDF *tif"
+      ]
+    }
+  ]
+}

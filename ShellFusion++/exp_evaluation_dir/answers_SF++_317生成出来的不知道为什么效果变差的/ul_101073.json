@@ -1,0 +1,1606 @@
+{
+  "Query": "How to change permissions from root user to all users?",
+  "Answers": [
+    {
+      "Command": "usermod",
+      "MP Summary": "modify a user account",
+      "Most Similar TLDR Task": "Change a user's name",
+      "Most Similar TLDR Script": "usermod -l {{newname}} {{user}}",
+      "Most Similar NL2Bash Task": "run command 'source myfile; bash' as user root",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "su -c 'source myfile; bash'\n",
+          "command-options": {
+            "su": {
+              "mpsum": "run a command with substitute user and group ID",
+              "-c": "Pass command to the shell with the -c option."
+            }
+          },
+          "TLDR_inform": {
+            "su": {
+              "man1_su_32793": "switch shell anoth user execut command anoth user switch given user requir user password switch given user simul full login shell switch superus requir root password"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_405618: How to change autologin from root to non-root user?",
+        "so_7092261: How to change user affilations to group in Linux",
+        "au_45035: Disable sudo permission to user from command line"
+      ],
+      "Top-3 Scripts": [
+        "ul_405618: sudo usermod -a -G audio m\nsudo usermod -a -G video m",
+        "so_7092261: ",
+        "au_45035: root@toki:~# id username\nuid=1000(username) gid=1000(username) groups=1000(username),4(adm),20(dialout),24(cdrom),46(plugdev),111(lpadmin),119(admin),122(sambashare)\n\nroot@toki:~# usermod -G 4,20,24,46,111,122 username\n\nroot@toki:~# id username\nuid=1000(username) gid=1000(username) groups=1000(username),4(adm),20(dialout),24(cdrom),46(plugdev),111(lpadmin),122(sambashare)"
+      ],
+      "Explanations about Options": {
+        "-a": "Add the user to the supplementary group(s). Use only with the -G option.",
+        "-G": "GROUP1[,GROUP2,...[,GROUPN]]]\n A list of supplementary groups which the user is also a member of. Each group is\n separated from the next by a comma, with no intervening whitespace. The groups are\n subject to the same restrictions as the group given with the -g option."
+      }
+    },
+    {
+      "Command": "chown",
+      "MP Summary": "change file owner and group",
+      "Most Similar TLDR Task": "Change the owner user of a file/directory",
+      "Most Similar TLDR Script": "chown {{user}} {{path/to/file_or_directory}}",
+      "Most Similar NL2Bash Task": "run command 'source myfile; bash' as user root",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "su -c 'source myfile; bash'\n",
+          "command-options": {
+            "su": {
+              "mpsum": "run a command with substitute user and group ID",
+              "-c": "Pass command to the shell with the -c option."
+            }
+          },
+          "TLDR_inform": {
+            "su": {
+              "man1_su_32793": "switch shell anoth user execut command anoth user switch given user requir user password switch given user simul full login shell switch superus requir root password"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_179759: Moving a directory from a user to another user, keeping the correct permissions",
+        "au_643226: How to copy the permission of root to current user?",
+        "nl2bash_12592: change owner of the file process to user root"
+      ],
+      "Top-3 Scripts": [
+        "ul_179759: sudo mv ~bob/Documents ~bob/Documents.orig\nsudo mv ~alice/Documents/ ~bob/Documents\nsudo chown -PR bob ~bob/Documents\n\nsudo chown -PR bob:bob ~bob/Documents\n\nsudo chown -PR bob: ~bob/Documents\n\nsudo find ~bob/Documents -group alice -exec chown -h bob: {} +",
+        "au_643226: sudo chown -R $USER:$USER /<PATH>/<TO>/<COPIED>/<FOLDER>\n\n$ sudo chown $USER:$USER filert \n$ ls -l | grep file\n-rw-rw-r--.  1 wilf wilf         0 Jul  2 09:42 file\n-rw-r--r--.  1 wilf wilf         0 Jul  2 09:43 filert",
+        "nl2bash_12592: sudo chown root process"
+      ],
+      "Explanations about Options": {
+        "-h": "affect symbolic links instead of any referenced file (useful only on systems that\n can change the ownership of a symlink)"
+      }
+    },
+    {
+      "Command": "su",
+      "MP Summary": "run a command with substitute user and group ID",
+      "Most Similar TLDR Task": "Execute a command as another user",
+      "Most Similar TLDR Script": "su - {{username}} -c \"{{command}}\"",
+      "Most Similar NL2Bash Task": "run command 'source myfile; bash' as user root",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "su -c 'source myfile; bash'\n",
+          "command-options": {
+            "su": {
+              "mpsum": "run a command with substitute user and group ID",
+              "-c": "Pass command to the shell with the -c option."
+            }
+          },
+          "TLDR_inform": {
+            "su": {
+              "man1_su_32793": "switch shell anoth user execut command anoth user switch given user requir user password switch given user simul full login shell switch superus requir root password"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_1137643: How can I create a root user from the start of installing Ubuntu?",
+        "ul_304504: add users in root permissions to a remote server",
+        "ul_73978: using root to mkdir in another users home directory"
+      ],
+      "Top-3 Scripts": [
+        "au_1137643: su -\n\nsudo su",
+        "ul_304504: su -",
+        "ul_73978: su -c \"mkdir /home/[username]/public_html/[folder_name]\" [username]"
+      ],
+      "Explanations about Options": {
+        "-": "Start the shell as a login shell with an environment similar to a real login:",
+        "-c": "Pass command to the shell with the -c option."
+      }
+    },
+    {
+      "Command": "sudo",
+      "MP Summary": "execute a command as another user",
+      "Most Similar TLDR Task": "Run a command as another user and/or group",
+      "Most Similar TLDR Script": "sudo -u {{user}} -g {{group}} {{id -a}}",
+      "Most Similar NL2Bash Task": "run command 'source myfile; bash' as user root",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "su -c 'source myfile; bash'\n",
+          "command-options": {
+            "su": {
+              "mpsum": "run a command with substitute user and group ID",
+              "-c": "Pass command to the shell with the -c option."
+            }
+          },
+          "TLDR_inform": {
+            "su": {
+              "man1_su_32793": "switch shell anoth user execut command anoth user switch given user requir user password switch given user simul full login shell switch superus requir root password"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_179759: Moving a directory from a user to another user, keeping the correct permissions",
+        "au_1137643: How can I create a root user from the start of installing Ubuntu?",
+        "ul_304504: add users in root permissions to a remote server"
+      ],
+      "Top-3 Scripts": [
+        "ul_179759: sudo mv ~bob/Documents ~bob/Documents.orig\nsudo mv ~alice/Documents/ ~bob/Documents\nsudo chown -PR bob ~bob/Documents\n\nsudo chown -PR bob:bob ~bob/Documents\n\nsudo chown -PR bob: ~bob/Documents\n\nsudo find ~bob/Documents -group alice -exec chown -h bob: {} +",
+        "au_1137643: sudo su\n\nsudo -i",
+        "ul_304504: sudo <command>\n\nsudo -i"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "passwd",
+      "MP Summary": "change user password",
+      "Most Similar TLDR Task": "Change the password of the specified user",
+      "Most Similar TLDR Script": "passwd {{username}} {{new_password}}",
+      "Most Similar NL2Bash Task": "run command 'source myfile; bash' as user root",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "su -c 'source myfile; bash'\n",
+          "command-options": {
+            "su": {
+              "mpsum": "run a command with substitute user and group ID",
+              "-c": "Pass command to the shell with the -c option."
+            }
+          },
+          "TLDR_inform": {
+            "su": {
+              "man1_su_32793": "switch shell anoth user execut command anoth user switch given user requir user password switch given user simul full login shell switch superus requir root password"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_291337: Read only permission to sftp user in specific directory",
+        "ul_6387: I added a user to a group, but group permissions on files still have no effect"
+      ],
+      "Top-3 Scripts": [
+        "ul_291337: sudo useradd foo\nsudo passwd foo\n\n/etc/passwd\n\n$ sudo vi /etc/passwd\n\n..\nfoo:x:1001:1001::/var/www/vhosts/:\n..",
+        "ul_6387: /etc/passwd"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "groups",
+      "MP Summary": "print the groups a user is in",
+      "Most Similar TLDR Task": "Print group memberships for a specific user",
+      "Most Similar TLDR Script": "groups {{username}}",
+      "Most Similar NL2Bash Task": "run command 'source myfile; bash' as user root",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "su -c 'source myfile; bash'\n",
+          "command-options": {
+            "su": {
+              "mpsum": "run a command with substitute user and group ID",
+              "-c": "Pass command to the shell with the -c option."
+            }
+          },
+          "TLDR_inform": {
+            "su": {
+              "man1_su_32793": "switch shell anoth user execut command anoth user switch given user requir user password switch given user simul full login shell switch superus requir root password"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_7092261: How to change user affilations to group in Linux",
+        "au_45035: Disable sudo permission to user from command line",
+        "su_1158811: Granting root privileges to another user on my Cent OS install?"
+      ],
+      "Top-3 Scripts": [
+        "so_7092261: -G, --groups group,...\nWith this option a list of supplementary groups can be specified, which the user should become a member of. Each group is separated from the next one only by a comma, without whitespace. The user is removed from all other groups not specified.\n\n\n-R, --remove-from-group group,...\nWith this option a list of groups can be specified, from which the user should be removed. Each group is separated from the next one only by a comma, without whitespace.",
+        "au_45035: -G, --groups GROUP1[,GROUP2,...[,GROUPN]]]\n    A list of supplementary groups which the user is also a member of.\n    Each group is separated from the next by a comma, with no intervening\n    whitespace. The groups are subject to the same restrictions as the\n    group given with the -g option.\n\n    If the user is currently a member of a group which is not listed, the\n    user will be removed from the group. This behaviour can be changed via\n    the -a option, which appends the user to the current supplementary group\n    list.\n\nroot@toki:~# id username\nuid=1000(username) gid=1000(username) groups=1000(username),4(adm),20(dialout),24(cdrom),46(plugdev),111(lpadmin),119(admin),122(sambashare)\n\nroot@toki:~# usermod -G 4,20,24,46,111,122 username\n\nroot@toki:~# id username\nuid=1000(username) gid=1000(username) groups=1000(username),4(adm),20(dialout),24(cdrom),46(plugdev),111(lpadmin),122(sambashare)",
+        "su_1158811: groups username"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "chgrp",
+      "MP Summary": "change group ownership",
+      "Most Similar TLDR Task": "Change the owner group of a file/directory",
+      "Most Similar TLDR Script": "chgrp {{group}} {{path/to/file_or_directory}}",
+      "Most Similar NL2Bash Task": "run command 'source myfile; bash' as user root",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "su -c 'source myfile; bash'\n",
+          "command-options": {
+            "su": {
+              "mpsum": "run a command with substitute user and group ID",
+              "-c": "Pass command to the shell with the -c option."
+            }
+          },
+          "TLDR_inform": {
+            "su": {
+              "man1_su_32793": "switch shell anoth user execut command anoth user switch given user requir user password switch given user simul full login shell switch superus requir root password"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_187520: How to give user access to specific folder in home directory",
+        "ul_539335: How to group users to give similar file permissions to each user in the group",
+        "au_244406: How do I give www-data user to a folder in my home folder?"
+      ],
+      "Top-3 Scripts": [
+        "ul_187520: chgrp deploy /home/nazeem/public_html /home/nazeem\nchmod g+x /home/nazeem/public_html /home/nazeem",
+        "ul_539335: sudo -i\naddgroup mygroup\naddgroup user1 mygroup\naddgroup user2 mygroup\nchgrp -R mygroup /home/user1/programs/Output/\nchmod -R ug+rwX  /home/user1/programs/Output/\nfind /home/user1/programs/Output/ -type d -exec chmod g+s {} +\nexit",
+        "au_244406: chgrp www-data /home/myuser/folderA\nchmod g+rwxs /home/myuser/folderA"
+      ],
+      "Explanations about Options": {
+        "-R": "operate on files and directories recursively"
+      }
+    },
+    {
+      "Command": "useradd",
+      "MP Summary": "create a new user or update default new user information",
+      "Most Similar TLDR Task": "Create new user",
+      "Most Similar TLDR Script": "useradd {{name}}",
+      "Most Similar NL2Bash Task": "run command 'source myfile; bash' as user root",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "su -c 'source myfile; bash'\n",
+          "command-options": {
+            "su": {
+              "mpsum": "run a command with substitute user and group ID",
+              "-c": "Pass command to the shell with the -c option."
+            }
+          },
+          "TLDR_inform": {
+            "su": {
+              "man1_su_32793": "switch shell anoth user execut command anoth user switch given user requir user password switch given user simul full login shell switch superus requir root password"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_291337: Read only permission to sftp user in specific directory",
+        "su_1158811: Granting root privileges to another user on my Cent OS install?"
+      ],
+      "Top-3 Scripts": [
+        "ul_291337: sudo useradd foo\nsudo passwd foo",
+        "su_1158811: useradd -G groupname1,groupname2 username"
+      ],
+      "Explanations about Options": {
+        "-G": "GROUP1[,GROUP2,...[,GROUPN]]]\n A list of supplementary groups which the user is also a member of. Each group is\n separated from the next by a comma, with no intervening whitespace. The groups are\n subject to the same restrictions as the group given with the -g option. The default is\n for the user to belong only to the initial group."
+      }
+    },
+    {
+      "Command": "id",
+      "MP Summary": "print real and effective user and group IDs",
+      "Most Similar TLDR Task": "Display the current user identity as a number",
+      "Most Similar TLDR Script": "id -u",
+      "Most Similar NL2Bash Task": "run command 'source myfile; bash' as user root",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "su -c 'source myfile; bash'\n",
+          "command-options": {
+            "su": {
+              "mpsum": "run a command with substitute user and group ID",
+              "-c": "Pass command to the shell with the -c option."
+            }
+          },
+          "TLDR_inform": {
+            "su": {
+              "man1_su_32793": "switch shell anoth user execut command anoth user switch given user requir user password switch given user simul full login shell switch superus requir root password"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_45035: Disable sudo permission to user from command line",
+        "au_43570: Change owner of internal hard drive partition from root to user"
+      ],
+      "Top-3 Scripts": [
+        "au_45035: root@toki:~# id username\nuid=1000(username) gid=1000(username) groups=1000(username),4(adm),20(dialout),24(cdrom),46(plugdev),111(lpadmin),119(admin),122(sambashare)\n\nroot@toki:~# usermod -G 4,20,24,46,111,122 username\n\nroot@toki:~# id username\nuid=1000(username) gid=1000(username) groups=1000(username),4(adm),20(dialout),24(cdrom),46(plugdev),111(lpadmin),122(sambashare)",
+        "au_43570: id -u\n\nid -g"
+      ],
+      "Explanations about Options": {
+        "-g": "print only the effective group ID"
+      }
+    },
+    {
+      "Command": "whoami",
+      "MP Summary": "print effective userid",
+      "Most Similar TLDR Task": "Display the username after a change in the user ID",
+      "Most Similar TLDR Script": "sudo whoami",
+      "Most Similar NL2Bash Task": "run command 'source myfile; bash' as user root",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "su -c 'source myfile; bash'\n",
+          "command-options": {
+            "su": {
+              "mpsum": "run a command with substitute user and group ID",
+              "-c": "Pass command to the shell with the -c option."
+            }
+          },
+          "TLDR_inform": {
+            "su": {
+              "man1_su_32793": "switch shell anoth user execut command anoth user switch given user requir user password switch given user simul full login shell switch superus requir root password"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_460746: Is it possible to give permission to a user via sudo for only a specific Bash script?",
+        "so_57142953: Why I can not change root to normal user in root script with shell?"
+      ],
+      "Top-3 Scripts": [
+        "ul_460746: $ cat /usr/local/bin/user1.bash\n#!/bin/bash\n\nwhoami\n\n$ sudo whoami\n[sudo] password for user1:\nSorry, user user1 is not allowed to execute '/bin/whoami' as root on centos7.",
+        "so_57142953: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "ssh",
+      "MP Summary": "OpenSSH SSH client (remote login program)",
+      "Most Similar TLDR Task": "Connect to a remote server with a specific identity (private key)",
+      "Most Similar TLDR Script": "ssh -i {{path/to/key_file}} {{username}}@{{remote_host}}",
+      "Most Similar NL2Bash Task": "run command 'source myfile; bash' as user root",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "su -c 'source myfile; bash'\n",
+          "command-options": {
+            "su": {
+              "mpsum": "run a command with substitute user and group ID",
+              "-c": "Pass command to the shell with the -c option."
+            }
+          },
+          "TLDR_inform": {
+            "su": {
+              "man1_su_32793": "switch shell anoth user execut command anoth user switch given user requir user password switch given user simul full login shell switch superus requir root password"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_304504: add users in root permissions to a remote server",
+        "ul_291337: Read only permission to sftp user in specific directory",
+        "ul_6387: I added a user to a group, but group permissions on files still have no effect"
+      ],
+      "Top-3 Scripts": [
+        "ul_304504: /etc/ssh/sshd_config",
+        "ul_291337: /etc/ssh/sshd_config\n\nsudo vi /etc/ssh/sshd_config\n\nsudo service ssh restart",
+        "ul_6387: ssh localhost"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "mkdir",
+      "MP Summary": "make directories",
+      "Most Similar TLDR Task": "Create directories recursively (useful for creating nested dirs)",
+      "Most Similar TLDR Script": "mkdir -p {{path/to/directory}}",
+      "Most Similar NL2Bash Task": "run command 'source myfile; bash' as user root",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "su -c 'source myfile; bash'\n",
+          "command-options": {
+            "su": {
+              "mpsum": "run a command with substitute user and group ID",
+              "-c": "Pass command to the shell with the -c option."
+            }
+          },
+          "TLDR_inform": {
+            "su": {
+              "man1_su_32793": "switch shell anoth user execut command anoth user switch given user requir user password switch given user simul full login shell switch superus requir root password"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_73978: using root to mkdir in another users home directory",
+        "au_420285: How to give access permission to specific folder by specific user in ubuntu.[Terminal]",
+        "au_244406: How do I give www-data user to a folder in my home folder?"
+      ],
+      "Top-3 Scripts": [
+        "ul_73978: sudo -u [username] mkdir /home/[username]/public_html/[folder_name]",
+        "au_420285: sudo adduser X4\nsudo mkdir X4\nsudo chown X4:X4 X4\nsudo chmod 0750 X4",
+        "au_244406: sudo mkdir -m777 /home/shared-stuff"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "chmod",
+      "MP Summary": "change file mode bits",
+      "Most Similar TLDR Task": "Give [a]ll users rights to [r]ead and e[x]ecute",
+      "Most Similar TLDR Script": "chmod a+rx {{file}}",
+      "Most Similar NL2Bash Task": "run command 'source myfile; bash' as user root",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "su -c 'source myfile; bash'\n",
+          "command-options": {
+            "su": {
+              "mpsum": "run a command with substitute user and group ID",
+              "-c": "Pass command to the shell with the -c option."
+            }
+          },
+          "TLDR_inform": {
+            "su": {
+              "man1_su_32793": "switch shell anoth user execut command anoth user switch given user requir user password switch given user simul full login shell switch superus requir root password"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_71175: Copy file permissions from user to group",
+        "au_85233: How can I change a set of files Permsissions from Root to user",
+        "su_642099: Is it possible to make users subordinate to a user other than root in Linux?"
+      ],
+      "Top-3 Scripts": [
+        "ul_71175: chmod g=u file",
+        "au_85233: sudo chmod -R o+rwx ~/BlueJ\n\nsudo chmod -R 755 ~/Bluej",
+        "su_642099: "
+      ],
+      "Explanations about Options": {
+        "-R": "change files and directories recursively"
+      }
+    },
+    {
+      "Command": "cd",
+      "MP Summary": "change the working directory",
+      "Most Similar TLDR Task": "Go to home directory of current user",
+      "Most Similar TLDR Script": "cd",
+      "Most Similar NL2Bash Task": "run command 'source myfile; bash' as user root",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "su -c 'source myfile; bash'\n",
+          "command-options": {
+            "su": {
+              "mpsum": "run a command with substitute user and group ID",
+              "-c": "Pass command to the shell with the -c option."
+            }
+          },
+          "TLDR_inform": {
+            "su": {
+              "man1_su_32793": "switch shell anoth user execut command anoth user switch given user requir user password switch given user simul full login shell switch superus requir root password"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_639644: trying to copy from root to user",
+        "au_244406: How do I give www-data user to a folder in my home folder?"
+      ],
+      "Top-3 Scripts": [
+        "au_639644: tar cvf - * | ( cd /home/dev/build/mysource; tar xfp -)",
+        "au_244406: $ cd /home/shared-stuff ; ls -l\ndrwxrwsr-x 2 myuser www-data   4096 Jan 17 21:46 folderA\ndrwxrwx--- 2 myuser myuser     4096 Jan 17 21:46 folderB"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "adduser",
+      "MP Summary": "add a user or group to the system",
+      "Most Similar TLDR Task": "Create a new user with a home directory at the specified path",
+      "Most Similar TLDR Script": "adduser --home {{path/to/home}} {{username}}",
+      "Most Similar NL2Bash Task": "run command 'source myfile; bash' as user root",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "su -c 'source myfile; bash'\n",
+          "command-options": {
+            "su": {
+              "mpsum": "run a command with substitute user and group ID",
+              "-c": "Pass command to the shell with the -c option."
+            }
+          },
+          "TLDR_inform": {
+            "su": {
+              "man1_su_32793": "switch shell anoth user execut command anoth user switch given user requir user password switch given user simul full login shell switch superus requir root password"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_420285: How to give access permission to specific folder by specific user in ubuntu.[Terminal]"
+      ],
+      "Top-3 Scripts": [
+        "au_420285: sudo adduser X4\nsudo mkdir X4\nsudo chown X4:X4 X4\nsudo chmod 0750 X4"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "install",
+      "MP Summary": "copy files and set attributes",
+      "Most Similar TLDR Task": "Copy files and apply access/modification times of source to destination",
+      "Most Similar TLDR Script": "install -p {{path/to/source}} {{path/to/destination}}",
+      "Most Similar NL2Bash Task": "run command 'source myfile; bash' as user root",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "su -c 'source myfile; bash'\n",
+          "command-options": {
+            "su": {
+              "mpsum": "run a command with substitute user and group ID",
+              "-c": "Pass command to the shell with the -c option."
+            }
+          },
+          "TLDR_inform": {
+            "su": {
+              "man1_su_32793": "switch shell anoth user execut command anoth user switch given user requir user password switch given user simul full login shell switch superus requir root password"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_601877: How to change permission to the users on ubuntu 12.04?",
+        "au_612256: How do I allow a user to only run the apt-get update command with sudo?"
+      ],
+      "Top-3 Scripts": [
+        "au_601877: sudo apt-get install gnome-system-tools",
+        "au_612256: test-me@comp0:~$ sudo apt-get install test\n[sudo] password for test-me: \nSorry, user test-me is not allowed to execute '/usr/bin/apt-get install test' as root on comp0."
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "chroot",
+      "MP Summary": "run command or interactive shell with special root directory",
+      "Most Similar TLDR Task": "Run command as new root directory",
+      "Most Similar TLDR Script": "chroot {{/path/to/new/root}} {{command}}",
+      "Most Similar NL2Bash Task": "run command 'source myfile; bash' as user root",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "su -c 'source myfile; bash'\n",
+          "command-options": {
+            "su": {
+              "mpsum": "run a command with substitute user and group ID",
+              "-c": "Pass command to the shell with the -c option."
+            }
+          },
+          "TLDR_inform": {
+            "su": {
+              "man1_su_32793": "switch shell anoth user execut command anoth user switch given user requir user password switch given user simul full login shell switch superus requir root password"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_291337: Read only permission to sftp user in specific directory"
+      ],
+      "Top-3 Scripts": [
+        "ul_291337: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "users",
+      "MP Summary": "print the user names of users currently logged in to the current host",
+      "Most Similar TLDR Task": "Display a list of logged in users according to a specific file",
+      "Most Similar TLDR Script": "users {{/var/log/wmtp}}",
+      "Most Similar NL2Bash Task": "run command 'source myfile; bash' as user root",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "su -c 'source myfile; bash'\n",
+          "command-options": {
+            "su": {
+              "mpsum": "run a command with substitute user and group ID",
+              "-c": "Pass command to the shell with the -c option."
+            }
+          },
+          "TLDR_inform": {
+            "su": {
+              "man1_su_32793": "switch shell anoth user execut command anoth user switch given user requir user password switch given user simul full login shell switch superus requir root password"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_460746: Is it possible to give permission to a user via sudo for only a specific Bash script?"
+      ],
+      "Top-3 Scripts": [
+        "ul_460746: $ cat /etc/sudoers.d/users\nuser1            ALL = (ALL) NOPASSWD: /usr/local/bin/user1.bash\nuser2            ALL = (ALL) NOPASSWD: /usr/local/bin/user2.bash\nuser3            ALL = (ALL) NOPASSWD: /usr/local/bin/user3.bash"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "find",
+      "MP Summary": "search for files in a directory hierarchy",
+      "Most Similar TLDR Task": "Find files by extension",
+      "Most Similar TLDR Script": "find {{root_path}} -name '{{*.ext}}'",
+      "Most Similar NL2Bash Task": "run command 'source myfile; bash' as user root",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "su -c 'source myfile; bash'\n",
+          "command-options": {
+            "su": {
+              "mpsum": "run a command with substitute user and group ID",
+              "-c": "Pass command to the shell with the -c option."
+            }
+          },
+          "TLDR_inform": {
+            "su": {
+              "man1_su_32793": "switch shell anoth user execut command anoth user switch given user requir user password switch given user simul full login shell switch superus requir root password"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_179759: Moving a directory from a user to another user, keeping the correct permissions",
+        "au_829537: How to change owner of folder to current user recursively?",
+        "ul_539335: How to group users to give similar file permissions to each user in the group"
+      ],
+      "Top-3 Scripts": [
+        "ul_179759: sudo find ~bob/Documents -group alice -exec chown -h bob: {} +",
+        "au_829537: sudo find ~ -type d -user root\n\nsudo find ~ -type d -user root -exec sudo chown -R $USER: {} +\n\nsudo find ~ -user root -exec sudo chown $USER: {} +",
+        "ul_539335: sudo -i\naddgroup mygroup\naddgroup user1 mygroup\naddgroup user2 mygroup\nchgrp -R mygroup /home/user1/programs/Output/\nchmod -R ug+rwX  /home/user1/programs/Output/\nfind /home/user1/programs/Output/ -type d -exec chmod g+s {} +\nexit"
+      ],
+      "Explanations about Options": {
+        "-type": "File is of type c:",
+        "-user": "File is owned by user uname (numeric user ID allowed).",
+        "-group": "File belongs to group gname (numeric group ID allowed)."
+      }
+    },
+    {
+      "Command": "which",
+      "MP Summary": "locate a command",
+      "Most Similar TLDR Task": "Search the PATH environment variable and display the location of any matching executables",
+      "Most Similar TLDR Script": "which {{executable}}",
+      "Most Similar NL2Bash Task": "run command 'source myfile; bash' as user root",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "su -c 'source myfile; bash'\n",
+          "command-options": {
+            "su": {
+              "mpsum": "run a command with substitute user and group ID",
+              "-c": "Pass command to the shell with the -c option."
+            }
+          },
+          "TLDR_inform": {
+            "su": {
+              "man1_su_32793": "switch shell anoth user execut command anoth user switch given user requir user password switch given user simul full login shell switch superus requir root password"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_7092261: How to change user affilations to group in Linux",
+        "au_45035: Disable sudo permission to user from command line"
+      ],
+      "Top-3 Scripts": [
+        "so_7092261: -G, --groups group,...\nWith this option a list of supplementary groups can be specified, which the user should become a member of. Each group is separated from the next one only by a comma, without whitespace. The user is removed from all other groups not specified.\n\n\n-R, --remove-from-group group,...\nWith this option a list of groups can be specified, from which the user should be removed. Each group is separated from the next one only by a comma, without whitespace.",
+        "au_45035: -G, --groups GROUP1[,GROUP2,...[,GROUPN]]]\n    A list of supplementary groups which the user is also a member of.\n    Each group is separated from the next by a comma, with no intervening\n    whitespace. The groups are subject to the same restrictions as the\n    group given with the -g option.\n\n    If the user is currently a member of a group which is not listed, the\n    user will be removed from the group. This behaviour can be changed via\n    the -a option, which appends the user to the current supplementary group\n    list."
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "login",
+      "MP Summary": "begin session on the system",
+      "Most Similar TLDR Task": "Login as a user on a remote host",
+      "Most Similar TLDR Script": "login -h {{host}} {{user}}",
+      "Most Similar NL2Bash Task": "run command 'source myfile; bash' as user root",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "su -c 'source myfile; bash'\n",
+          "command-options": {
+            "su": {
+              "mpsum": "run a command with substitute user and group ID",
+              "-c": "Pass command to the shell with the -c option."
+            }
+          },
+          "TLDR_inform": {
+            "su": {
+              "man1_su_32793": "switch shell anoth user execut command anoth user switch given user requir user password switch given user simul full login shell switch superus requir root password"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_6387: I added a user to a group, but group permissions on files still have no effect"
+      ],
+      "Top-3 Scripts": [
+        "ul_6387: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "apt-get",
+      "MP Summary": "APT package handling utility - command-line interface",
+      "Most Similar TLDR Task": "Remove a package and its configuration files",
+      "Most Similar TLDR Script": "apt-get purge {{package}}",
+      "Most Similar NL2Bash Task": "run command 'source myfile; bash' as user root",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "su -c 'source myfile; bash'\n",
+          "command-options": {
+            "su": {
+              "mpsum": "run a command with substitute user and group ID",
+              "-c": "Pass command to the shell with the -c option."
+            }
+          },
+          "TLDR_inform": {
+            "su": {
+              "man1_su_32793": "switch shell anoth user execut command anoth user switch given user requir user password switch given user simul full login shell switch superus requir root password"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_601877: How to change permission to the users on ubuntu 12.04?",
+        "au_612256: How do I allow a user to only run the apt-get update command with sudo?"
+      ],
+      "Top-3 Scripts": [
+        "au_601877: sudo apt-get install gnome-system-tools",
+        "au_612256: $ sudo echo '#!/bin/bash' >> /usr/local/bin/updater.sh\n$ sudo echo 'sudo apt-get update && sudo apt-get upgrade -y' >> /usr/local/bin/updater.sh\n$ sudo chmod 0755 /usr/local/bin/updater.sh\n\ntest-me@comp0:~$ sudo apt-get install test\n[sudo] password for test-me: \nSorry, user test-me is not allowed to execute '/usr/bin/apt-get install test' as root on comp0."
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "groupadd",
+      "MP Summary": "create a new group",
+      "Most Similar TLDR Task": "Create a new Linux group",
+      "Most Similar TLDR Script": "groupadd {{group_name}}",
+      "Most Similar NL2Bash Task": "run command 'source myfile; bash' as user root",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "su -c 'source myfile; bash'\n",
+          "command-options": {
+            "su": {
+              "mpsum": "run a command with substitute user and group ID",
+              "-c": "Pass command to the shell with the -c option."
+            }
+          },
+          "TLDR_inform": {
+            "su": {
+              "man1_su_32793": "switch shell anoth user execut command anoth user switch given user requir user password switch given user simul full login shell switch superus requir root password"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_291337: Read only permission to sftp user in specific directory"
+      ],
+      "Top-3 Scripts": [
+        "ul_291337: $ sudo groupadd sftp_users"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "cp",
+      "MP Summary": "copy files and directories",
+      "Most Similar TLDR Task": "Copy text files to another location, in interactive mode (prompts user before overwriting)",
+      "Most Similar TLDR Script": "cp -i {{*.txt}} {{path/to/target_directory}}",
+      "Most Similar NL2Bash Task": "run command 'source myfile; bash' as user root",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "su -c 'source myfile; bash'\n",
+          "command-options": {
+            "su": {
+              "mpsum": "run a command with substitute user and group ID",
+              "-c": "Pass command to the shell with the -c option."
+            }
+          },
+          "TLDR_inform": {
+            "su": {
+              "man1_su_32793": "switch shell anoth user execut command anoth user switch given user requir user password switch given user simul full login shell switch superus requir root password"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_643226: How to copy the permission of root to current user?"
+      ],
+      "Top-3 Scripts": [
+        "au_643226: $ touch file\n$ sudo cp file filert\n$ ls -l | grep file\n-rw-rw-r--.  1 wilf wilf         0 Jul  2 09:42 file\n-rw-r--r--.  1 root root         0 Jul  2 09:43 filert"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "visudo",
+      "MP Summary": "edit the sudoers file",
+      "Most Similar TLDR Task": "Edit sudoers file",
+      "Most Similar TLDR Script": "sudo visudo",
+      "Most Similar NL2Bash Task": "run command 'source myfile; bash' as user root",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "su -c 'source myfile; bash'\n",
+          "command-options": {
+            "su": {
+              "mpsum": "run a command with substitute user and group ID",
+              "-c": "Pass command to the shell with the -c option."
+            }
+          },
+          "TLDR_inform": {
+            "su": {
+              "man1_su_32793": "switch shell anoth user execut command anoth user switch given user requir user password switch given user simul full login shell switch superus requir root password"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_45035: Disable sudo permission to user from command line",
+        "au_612256: How do I allow a user to only run the apt-get update command with sudo?"
+      ],
+      "Top-3 Scripts": [
+        "au_45035: ",
+        "au_612256: export editor=\"vi\" && sudo visudo"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "pwd",
+      "MP Summary": "print name of current/working directory",
+      "Most Similar TLDR Task": "Print the current directory, and resolve all symlinks (i.e. show the \"physical\" path)",
+      "Most Similar TLDR Script": "pwd -P",
+      "Most Similar NL2Bash Task": "run command 'source myfile; bash' as user root",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "su -c 'source myfile; bash'\n",
+          "command-options": {
+            "su": {
+              "mpsum": "run a command with substitute user and group ID",
+              "-c": "Pass command to the shell with the -c option."
+            }
+          },
+          "TLDR_inform": {
+            "su": {
+              "man1_su_32793": "switch shell anoth user execut command anoth user switch given user requir user password switch given user simul full login shell switch superus requir root password"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_57142953: Why I can not change root to normal user in root script with shell?",
+        "au_889413: How to switch to root user but stay in the same directory"
+      ],
+      "Top-3 Scripts": [
+        "so_57142953: ",
+        "au_889413: terdon@tpad ~ $ pwd\n/home/terdon\nterdon@tpad ~ $ sudo -i  ## changes directory\n[root@tpad ~]# pwd\n/root\n[root@tpad ~]# logout\nterdon@tpad ~ $ sudo -s  ## doesn't change directory\n[root@tpad terdon]# pwd\n/home/terdon"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "as",
+      "MP Summary": "or  any situation  where  you want to make sure you're doing a clean install of your dependencies. It  can  be  significantly  faster  than  a  regular  npm  install  by  skipping   certain user-oriented  features.  It  is  also  more strict than a regular install, which can help catch errors or inconsistencies caused by the incrementally-installed  local  environments of most npm users. In short, the main differences between using npm install and npm ci are: \u00b7 The project must have an existing package-lock.json or npm-shrinkwrap.json. \u00b7 If dependencies in the package lock do not match those in package.json, npm ci will exit with an error, instead of updating the package lock. \u00b7 npm ci can only install entire projects at a time:  individual  dependencies  cannot  be added with this command. \u00b7 If  a  node_modules  is  already present, it will be automatically removed before npm ci begins its install. \u00b7 It will  never  write  to  package.json  or  any  of  the  package-locks:  installs  are essentially frozen. See Also \u00b7 npm help install \u00b7 npm help package-locks April 2020                                  NPM-CI(1)",
+      "Most Similar TLDR Task": "Include a given path to the list of directories to search for files specified in .include directives",
+      "Most Similar TLDR Script": "as -I {{path/to/directory}} {{file.s}}",
+      "Most Similar NL2Bash Task": "run command 'source myfile; bash' as user root",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "su -c 'source myfile; bash'\n",
+          "command-options": {
+            "su": {
+              "mpsum": "run a command with substitute user and group ID",
+              "-c": "Pass command to the shell with the -c option."
+            }
+          },
+          "TLDR_inform": {
+            "su": {
+              "man1_su_32793": "switch shell anoth user execut command anoth user switch given user requir user password switch given user simul full login shell switch superus requir root password"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_45035: Disable sudo permission to user from command line",
+        "ul_460746: Is it possible to give permission to a user via sudo for only a specific Bash script?",
+        "au_612256: How do I allow a user to only run the apt-get update command with sudo?"
+      ],
+      "Top-3 Scripts": [
+        "au_45035: -G, --groups GROUP1[,GROUP2,...[,GROUPN]]]\n    A list of supplementary groups which the user is also a member of.\n    Each group is separated from the next by a comma, with no intervening\n    whitespace. The groups are subject to the same restrictions as the\n    group given with the -g option.\n\n    If the user is currently a member of a group which is not listed, the\n    user will be removed from the group. This behaviour can be changed via\n    the -a option, which appends the user to the current supplementary group\n    list.",
+        "ul_460746: $ sudo whoami\n[sudo] password for user1:\nSorry, user user1 is not allowed to execute '/bin/whoami' as root on centos7.",
+        "au_612256: test-me@comp0:~$ sudo apt-get install test\n[sudo] password for test-me: \nSorry, user test-me is not allowed to execute '/usr/bin/apt-get install test' as root on comp0."
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "ls",
+      "MP Summary": "list directory contents",
+      "Most Similar TLDR Task": "List all files, with trailing `/` added to directory names",
+      "Most Similar TLDR Script": "ls -F",
+      "Most Similar NL2Bash Task": "run command 'source myfile; bash' as user root",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "su -c 'source myfile; bash'\n",
+          "command-options": {
+            "su": {
+              "mpsum": "run a command with substitute user and group ID",
+              "-c": "Pass command to the shell with the -c option."
+            }
+          },
+          "TLDR_inform": {
+            "su": {
+              "man1_su_32793": "switch shell anoth user execut command anoth user switch given user requir user password switch given user simul full login shell switch superus requir root password"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_643226: How to copy the permission of root to current user?",
+        "au_612256: How do I allow a user to only run the apt-get update command with sudo?",
+        "au_244406: How do I give www-data user to a folder in my home folder?"
+      ],
+      "Top-3 Scripts": [
+        "au_643226: $ touch file\n$ sudo cp file filert\n$ ls -l | grep file\n-rw-rw-r--.  1 wilf wilf         0 Jul  2 09:42 file\n-rw-r--r--.  1 root root         0 Jul  2 09:43 filert\n\n$ sudo chown $USER:$USER filert \n$ ls -l | grep file\n-rw-rw-r--.  1 wilf wilf         0 Jul  2 09:42 file\n-rw-r--r--.  1 wilf wilf         0 Jul  2 09:43 filert",
+        "au_612256: $ ls -la /usr/local/bin/updater.sh\n-rwxr-xr-x 1 root root 60 Jan 22 08:50 /usr/local/bin/updater.sh*",
+        "au_244406: $ cd /home/shared-stuff ; ls -l\ndrwxrwsr-x 2 myuser www-data   4096 Jan 17 21:46 folderA\ndrwxrwx--- 2 myuser myuser     4096 Jan 17 21:46 folderB"
+      ],
+      "Explanations about Options": {
+        "-l": "use a long listing format",
+        "-a": "do not ignore entries starting with ."
+      }
+    },
+    {
+      "Command": "exec",
+      "MP Summary": "execute commands and open, close, or copy file descriptors",
+      "Most Similar TLDR Task": "Replace with the specified command and change the process name",
+      "Most Similar TLDR Script": "exec -a {{process_name}} {{command -with -flags}}",
+      "Most Similar NL2Bash Task": "run command 'source myfile; bash' as user root",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "su -c 'source myfile; bash'\n",
+          "command-options": {
+            "su": {
+              "mpsum": "run a command with substitute user and group ID",
+              "-c": "Pass command to the shell with the -c option."
+            }
+          },
+          "TLDR_inform": {
+            "su": {
+              "man1_su_32793": "switch shell anoth user execut command anoth user switch given user requir user password switch given user simul full login shell switch superus requir root password"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_405618: How to change autologin from root to non-root user?"
+      ],
+      "Top-3 Scripts": [
+        "ul_405618: echo \"$DISPLAY\" > /tmp/hole1\necho \"$XDG_VTNR\" > /tmp/hole2\nif [ -z \"$DISPLAY\" ] && [ -n \"$XDG_VTNR\" ] && [ \"$XDG_VTNR\" -eq 1 ]; then\n  echo lolo > /tmp/hole3\n  exec startx -- -nocursor\nfi\necho lili > /tmp/hole4\n\nexec startx\n\n$ cat /home/m/.xinitrc                                                                                                                             \n#!/usr/bin/env bash                                                                                                                                   \necho 55 > /tmp/test1\nexec openbox-session\necho 55 > /tmp/test2"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "file",
+      "MP Summary": "determine file type",
+      "Most Similar TLDR Task": "Look inside a zipped file and determine the file type(s) inside",
+      "Most Similar TLDR Script": "file -z {{foo.zip}}",
+      "Most Similar NL2Bash Task": "run command 'source myfile; bash' as user root",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "su -c 'source myfile; bash'\n",
+          "command-options": {
+            "su": {
+              "mpsum": "run a command with substitute user and group ID",
+              "-c": "Pass command to the shell with the -c option."
+            }
+          },
+          "TLDR_inform": {
+            "su": {
+              "man1_su_32793": "switch shell anoth user execut command anoth user switch given user requir user password switch given user simul full login shell switch superus requir root password"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_71175: Copy file permissions from user to group",
+        "au_643226: How to copy the permission of root to current user?",
+        "nl2bash_12573: change owner and group of the file \"file\" to user \"user\" and group \"group\""
+      ],
+      "Top-3 Scripts": [
+        "ul_71175: chmod g=u file",
+        "au_643226: $ touch file\n$ sudo cp file filert\n$ ls -l | grep file\n-rw-rw-r--.  1 wilf wilf         0 Jul  2 09:42 file\n-rw-r--r--.  1 root root         0 Jul  2 09:43 filert\n\n$ sudo chown $USER:$USER filert \n$ ls -l | grep file\n-rw-rw-r--.  1 wilf wilf         0 Jul  2 09:42 file\n-rw-r--r--.  1 wilf wilf         0 Jul  2 09:43 filert",
+        "nl2bash_12573: chown user:group file ..."
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "nologin",
+      "MP Summary": "politely refuse a login",
+      "Most Similar TLDR Task": "Customize message for users with the login shell of `nologin`",
+      "Most Similar TLDR Script": "echo \"{{declined_login_message}}\" > /etc/nologin.txt",
+      "Most Similar NL2Bash Task": "run command 'source myfile; bash' as user root",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "su -c 'source myfile; bash'\n",
+          "command-options": {
+            "su": {
+              "mpsum": "run a command with substitute user and group ID",
+              "-c": "Pass command to the shell with the -c option."
+            }
+          },
+          "TLDR_inform": {
+            "su": {
+              "man1_su_32793": "switch shell anoth user execut command anoth user switch given user requir user password switch given user simul full login shell switch superus requir root password"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_605468: How do I switch from root user to another user who has a nologin shell?"
+      ],
+      "Top-3 Scripts": [
+        "ul_605468: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "setfacl",
+      "MP Summary": "set file access control lists",
+      "Most Similar TLDR Task": "Remove ACL of a file for an user",
+      "Most Similar TLDR Script": "setfacl -x u:{{username}} {{file}}",
+      "Most Similar NL2Bash Task": "run command 'source myfile; bash' as user root",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "su -c 'source myfile; bash'\n",
+          "command-options": {
+            "su": {
+              "mpsum": "run a command with substitute user and group ID",
+              "-c": "Pass command to the shell with the -c option."
+            }
+          },
+          "TLDR_inform": {
+            "su": {
+              "man1_su_32793": "switch shell anoth user execut command anoth user switch given user requir user password switch given user simul full login shell switch superus requir root password"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_352298: How to give different permissions to multiple groups of users?"
+      ],
+      "Top-3 Scripts": [
+        "au_352298: setfacl -R -m g:Group01:rwx Folder01\nsetfacl -R -m g:Group02:r-- Folder01"
+      ],
+      "Explanations about Options": {
+        "-R": "Apply operations to all files and directories recursively. This option cannot be mixed\n with `--restore'."
+      }
+    },
+    {
+      "Command": "gpasswd",
+      "MP Summary": "administer /etc/group and /etc/gshadow",
+      "Most Similar TLDR Task": "Remove a user from the named group",
+      "Most Similar TLDR Script": "gpasswd -d {{user}} {{group}}",
+      "Most Similar NL2Bash Task": "run command 'source myfile; bash' as user root",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "su -c 'source myfile; bash'\n",
+          "command-options": {
+            "su": {
+              "mpsum": "run a command with substitute user and group ID",
+              "-c": "Pass command to the shell with the -c option."
+            }
+          },
+          "TLDR_inform": {
+            "su": {
+              "man1_su_32793": "switch shell anoth user execut command anoth user switch given user requir user password switch given user simul full login shell switch superus requir root password"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_45035: Disable sudo permission to user from command line"
+      ],
+      "Top-3 Scripts": [
+        "au_45035: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "systemctl",
+      "MP Summary": "Control the systemd system and service manager",
+      "Most Similar TLDR Task": "Enable/Disable a unit to be started on bootup",
+      "Most Similar TLDR Script": "systemctl enable/disable {{unit}}",
+      "Most Similar NL2Bash Task": "run command 'source myfile; bash' as user root",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "su -c 'source myfile; bash'\n",
+          "command-options": {
+            "su": {
+              "mpsum": "run a command with substitute user and group ID",
+              "-c": "Pass command to the shell with the -c option."
+            }
+          },
+          "TLDR_inform": {
+            "su": {
+              "man1_su_32793": "switch shell anoth user execut command anoth user switch given user requir user password switch given user simul full login shell switch superus requir root password"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_405618: How to change autologin from root to non-root user?"
+      ],
+      "Top-3 Scripts": [
+        "ul_405618: $ systemctl get-default\ngraphical.target\n\n$ sudo systemctl set-default multi-user.target\n\n$ systemctl list-dependencies multi-user.target | grep getty\n\u25cf \u251c\u2500getty.target\n\u25cf \u2502 \u251c\u2500getty-static.service\n\u25cf \u2502 \u2514\u2500getty@tty1.service\n\n$ sudo systemctl edit getty@tty1\n\n$ sudo systemctl cat getty@tty1 \n ...\n# /etc/systemd/system/getty@tty1.service.d/override.conf\n[Service]\nExecStart=\nExecStart=-/sbin/agetty --autologin xiaobai %I $TERM"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "mount",
+      "MP Summary": "mount a filesystem",
+      "Most Similar TLDR Task": "Mount a directory to another directory",
+      "Most Similar TLDR Script": "mount --bind {{path/to/old_dir}} {{path/to/new_dir}}",
+      "Most Similar NL2Bash Task": "run command 'source myfile; bash' as user root",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "su -c 'source myfile; bash'\n",
+          "command-options": {
+            "su": {
+              "mpsum": "run a command with substitute user and group ID",
+              "-c": "Pass command to the shell with the -c option."
+            }
+          },
+          "TLDR_inform": {
+            "su": {
+              "man1_su_32793": "switch shell anoth user execut command anoth user switch given user requir user password switch given user simul full login shell switch superus requir root password"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_244406: How do I give www-data user to a folder in my home folder?"
+      ],
+      "Top-3 Scripts": [
+        "au_244406: sudo mount --bind /home/myuser/folderA /var/www/mysite/folderA"
+      ],
+      "Explanations about Options": {
+        "--bind": "Remount a subtree somewhere else (so that its contents are available in both\n places). See above, under Bind mounts."
+      }
+    },
+    {
+      "Command": "umask",
+      "MP Summary": "get or set the file mode creation mask",
+      "Most Similar TLDR Task": "Change the mask symbolically to allow read permission for all users (the rest of the mask bits are unchanged)",
+      "Most Similar TLDR Script": "umask {{a+r}}",
+      "Most Similar NL2Bash Task": "run command 'source myfile; bash' as user root",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "su -c 'source myfile; bash'\n",
+          "command-options": {
+            "su": {
+              "mpsum": "run a command with substitute user and group ID",
+              "-c": "Pass command to the shell with the -c option."
+            }
+          },
+          "TLDR_inform": {
+            "su": {
+              "man1_su_32793": "switch shell anoth user execut command anoth user switch given user requir user password switch given user simul full login shell switch superus requir root password"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_244406: How do I give www-data user to a folder in my home folder?"
+      ],
+      "Top-3 Scripts": [
+        "au_244406: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "bash",
+      "MP Summary": "GNU Bourne-Again SHell",
+      "Most Similar TLDR Task": "Execute a command",
+      "Most Similar TLDR Script": "bash -c \"{{command}}\"",
+      "Most Similar NL2Bash Task": "run command 'source myfile; bash' as user root",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "su -c 'source myfile; bash'\n",
+          "command-options": {
+            "su": {
+              "mpsum": "run a command with substitute user and group ID",
+              "-c": "Pass command to the shell with the -c option."
+            }
+          },
+          "TLDR_inform": {
+            "su": {
+              "man1_su_32793": "switch shell anoth user execut command anoth user switch given user requir user password switch given user simul full login shell switch superus requir root password"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_605468: How do I switch from root user to another user who has a nologin shell?"
+      ],
+      "Top-3 Scripts": [
+        "ul_605468: sudo -u USERNAME /bin/bash"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "sftp",
+      "MP Summary": "OpenSSH secure file transfer",
+      "Most Similar TLDR Task": "Get list of files on remote machine",
+      "Most Similar TLDR Script": "ls",
+      "Most Similar NL2Bash Task": "run command 'source myfile; bash' as user root",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "su -c 'source myfile; bash'\n",
+          "command-options": {
+            "su": {
+              "mpsum": "run a command with substitute user and group ID",
+              "-c": "Pass command to the shell with the -c option."
+            }
+          },
+          "TLDR_inform": {
+            "su": {
+              "man1_su_32793": "switch shell anoth user execut command anoth user switch given user requir user password switch given user simul full login shell switch superus requir root password"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_291337: Read only permission to sftp user in specific directory"
+      ],
+      "Top-3 Scripts": [
+        "ul_291337: #Subsystem sftp /usr/lib/openssh/sftp-server\nSubsystem sftp internal-sftp"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "touch",
+      "MP Summary": "change file timestamps",
+      "Most Similar TLDR Task": "Create a new empty file(s) or change the times for existing file(s) to current time",
+      "Most Similar TLDR Script": "touch {{filename}}",
+      "Most Similar NL2Bash Task": "run command 'source myfile; bash' as user root",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "su -c 'source myfile; bash'\n",
+          "command-options": {
+            "su": {
+              "mpsum": "run a command with substitute user and group ID",
+              "-c": "Pass command to the shell with the -c option."
+            }
+          },
+          "TLDR_inform": {
+            "su": {
+              "man1_su_32793": "switch shell anoth user execut command anoth user switch given user requir user password switch given user simul full login shell switch superus requir root password"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_643226: How to copy the permission of root to current user?"
+      ],
+      "Top-3 Scripts": [
+        "au_643226: $ touch file\n$ sudo cp file filert\n$ ls -l | grep file\n-rw-rw-r--.  1 wilf wilf         0 Jul  2 09:42 file\n-rw-r--r--.  1 root root         0 Jul  2 09:43 filert"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "ps",
+      "MP Summary": "report a snapshot of the current processes.",
+      "Most Similar TLDR Task": "List all running processes including the full command string",
+      "Most Similar TLDR Script": "ps auxww",
+      "Most Similar NL2Bash Task": "run command 'source myfile; bash' as user root",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "su -c 'source myfile; bash'\n",
+          "command-options": {
+            "su": {
+              "mpsum": "run a command with substitute user and group ID",
+              "-c": "Pass command to the shell with the -c option."
+            }
+          },
+          "TLDR_inform": {
+            "su": {
+              "man1_su_32793": "switch shell anoth user execut command anoth user switch given user requir user password switch given user simul full login shell switch superus requir root password"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_405618: How to change autologin from root to non-root user?"
+      ],
+      "Top-3 Scripts": [
+        "ul_405618: ps a"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "realpath",
+      "MP Summary": "print the resolved path",
+      "Most Similar TLDR Task": "Disable symlink expansion",
+      "Most Similar TLDR Script": "realpath --no-symlinks {{path/to/file_or_directory}}",
+      "Most Similar NL2Bash Task": "run command 'source myfile; bash' as user root",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "su -c 'source myfile; bash'\n",
+          "command-options": {
+            "su": {
+              "mpsum": "run a command with substitute user and group ID",
+              "-c": "Pass command to the shell with the -c option."
+            }
+          },
+          "TLDR_inform": {
+            "su": {
+              "man1_su_32793": "switch shell anoth user execut command anoth user switch given user requir user password switch given user simul full login shell switch superus requir root password"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_405618: How to change autologin from root to non-root user?"
+      ],
+      "Top-3 Scripts": [
+        "ul_405618: $ type -a editor\neditor is /usr/bin/editor\neditor is /usr/bin/editor\n$ realpath /usr/bin/editor \n/usr/bin/vim.gtk3"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "mv",
+      "MP Summary": "move (rename) files",
+      "Most Similar TLDR Task": "Move files in arbitrary locations",
+      "Most Similar TLDR Script": "mv {{source}} {{target}}",
+      "Most Similar NL2Bash Task": "run command 'source myfile; bash' as user root",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "su -c 'source myfile; bash'\n",
+          "command-options": {
+            "su": {
+              "mpsum": "run a command with substitute user and group ID",
+              "-c": "Pass command to the shell with the -c option."
+            }
+          },
+          "TLDR_inform": {
+            "su": {
+              "man1_su_32793": "switch shell anoth user execut command anoth user switch given user requir user password switch given user simul full login shell switch superus requir root password"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_179759: Moving a directory from a user to another user, keeping the correct permissions"
+      ],
+      "Top-3 Scripts": [
+        "ul_179759: sudo mv ~bob/Documents ~bob/Documents.orig\nsudo mv ~alice/Documents/ ~bob/Documents\nsudo chown -PR bob ~bob/Documents"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "service",
+      "MP Summary": "run a System V init script",
+      "Most Similar TLDR Task": "Show the current status of a service",
+      "Most Similar TLDR Script": "service {{service_name}} status",
+      "Most Similar NL2Bash Task": "run command 'source myfile; bash' as user root",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "su -c 'source myfile; bash'\n",
+          "command-options": {
+            "su": {
+              "mpsum": "run a command with substitute user and group ID",
+              "-c": "Pass command to the shell with the -c option."
+            }
+          },
+          "TLDR_inform": {
+            "su": {
+              "man1_su_32793": "switch shell anoth user execut command anoth user switch given user requir user password switch given user simul full login shell switch superus requir root password"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_291337: Read only permission to sftp user in specific directory"
+      ],
+      "Top-3 Scripts": [
+        "ul_291337: sudo service ssh restart"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "edit",
+      "MP Summary": "execute programs via entries in the mailcap file",
+      "Most Similar TLDR Task": "Edit action can be used to view any file on default mailcap explorer",
+      "Most Similar TLDR Script": "edit {{filename}}",
+      "Most Similar NL2Bash Task": "run command 'source myfile; bash' as user root",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "su -c 'source myfile; bash'\n",
+          "command-options": {
+            "su": {
+              "mpsum": "run a command with substitute user and group ID",
+              "-c": "Pass command to the shell with the -c option."
+            }
+          },
+          "TLDR_inform": {
+            "su": {
+              "man1_su_32793": "switch shell anoth user execut command anoth user switch given user requir user password switch given user simul full login shell switch superus requir root password"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_405618: How to change autologin from root to non-root user?"
+      ],
+      "Top-3 Scripts": [
+        "ul_405618: $ sudo systemctl edit getty@tty1"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "gnome-terminal",
+      "MP Summary": "is a terminal emulation application.",
+      "Most Similar TLDR Task": "Run a specific command in a new terminal window",
+      "Most Similar TLDR Script": "gnome-terminal -- {{command}}",
+      "Most Similar NL2Bash Task": "run command 'source myfile; bash' as user root",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "su -c 'source myfile; bash'\n",
+          "command-options": {
+            "su": {
+              "mpsum": "run a command with substitute user and group ID",
+              "-c": "Pass command to the shell with the -c option."
+            }
+          },
+          "TLDR_inform": {
+            "su": {
+              "man1_su_32793": "switch shell anoth user execut command anoth user switch given user requir user password switch given user simul full login shell switch superus requir root password"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_43570: Change owner of internal hard drive partition from root to user"
+      ],
+      "Top-3 Scripts": [
+        "au_43570: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "export",
+      "MP Summary": "set the export attribute for variables",
+      "Most Similar TLDR Task": "Set a new environment variable",
+      "Most Similar TLDR Script": "export {{VARIABLE}}={{value}}",
+      "Most Similar NL2Bash Task": "run command 'source myfile; bash' as user root",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "su -c 'source myfile; bash'\n",
+          "command-options": {
+            "su": {
+              "mpsum": "run a command with substitute user and group ID",
+              "-c": "Pass command to the shell with the -c option."
+            }
+          },
+          "TLDR_inform": {
+            "su": {
+              "man1_su_32793": "switch shell anoth user execut command anoth user switch given user requir user password switch given user simul full login shell switch superus requir root password"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_612256: How do I allow a user to only run the apt-get update command with sudo?"
+      ],
+      "Top-3 Scripts": [
+        "au_612256: export editor=\"vi\" && sudo visudo"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "ln",
+      "MP Summary": "make links between files",
+      "Most Similar TLDR Task": "Create a symbolic link to a file or directory",
+      "Most Similar TLDR Script": "ln -s {{path/to/file_or_directory}} {{path/to/symlink}}",
+      "Most Similar NL2Bash Task": "run command 'source myfile; bash' as user root",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "su -c 'source myfile; bash'\n",
+          "command-options": {
+            "su": {
+              "mpsum": "run a command with substitute user and group ID",
+              "-c": "Pass command to the shell with the -c option."
+            }
+          },
+          "TLDR_inform": {
+            "su": {
+              "man1_su_32793": "switch shell anoth user execut command anoth user switch given user requir user password switch given user simul full login shell switch superus requir root password"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_386630: gksu texteditor changes rights from user to root after save"
+      ],
+      "Top-3 Scripts": [
+        "ul_386630: sudo ln -s /home/[your user]/.Xauthority /root/"
+      ],
+      "Explanations about Options": {
+        "-s": "make symbolic links instead of hard links"
+      }
+    },
+    {
+      "Command": "ip",
+      "MP Summary": "show / manipulate routing, network devices, interfaces and tunnels",
+      "Most Similar TLDR Task": "Add/Delete an ip address to an interface",
+      "Most Similar TLDR Script": "ip addr add/del {{ip}}/{{mask}} dev {{interface}}",
+      "Most Similar NL2Bash Task": "run command 'source myfile; bash' as user root",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "su -c 'source myfile; bash'\n",
+          "command-options": {
+            "su": {
+              "mpsum": "run a command with substitute user and group ID",
+              "-c": "Pass command to the shell with the -c option."
+            }
+          },
+          "TLDR_inform": {
+            "su": {
+              "man1_su_32793": "switch shell anoth user execut command anoth user switch given user requir user password switch given user simul full login shell switch superus requir root password"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_1194295: allow user to enable/disable network interface without root permission"
+      ],
+      "Top-3 Scripts": [
+        "au_1194295: user1 ALL=(ALL) /usr/bin/ip link set ens18 down"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "getfacl",
+      "MP Summary": "get file access control lists",
+      "Most Similar TLDR Task": "Display the file access control list with numeric user and group IDs",
+      "Most Similar TLDR Script": "getfacl -n {{path/to/file_or_directory}}",
+      "Most Similar NL2Bash Task": "run command 'source myfile; bash' as user root",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "su -c 'source myfile; bash'\n",
+          "command-options": {
+            "su": {
+              "mpsum": "run a command with substitute user and group ID",
+              "-c": "Pass command to the shell with the -c option."
+            }
+          },
+          "TLDR_inform": {
+            "su": {
+              "man1_su_32793": "switch shell anoth user execut command anoth user switch given user requir user password switch given user simul full login shell switch superus requir root password"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_352298: How to give different permissions to multiple groups of users?"
+      ],
+      "Top-3 Scripts": [
+        "au_352298: getfacl Folder01"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "set",
+      "MP Summary": "set or unset options and positional parameters",
+      "Most Similar TLDR Task": "Notify of job termination immediately",
+      "Most Similar TLDR Script": "set -b",
+      "Most Similar NL2Bash Task": "run command 'source myfile; bash' as user root",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "su -c 'source myfile; bash'\n",
+          "command-options": {
+            "su": {
+              "mpsum": "run a command with substitute user and group ID",
+              "-c": "Pass command to the shell with the -c option."
+            }
+          },
+          "TLDR_inform": {
+            "su": {
+              "man1_su_32793": "switch shell anoth user execut command anoth user switch given user requir user password switch given user simul full login shell switch superus requir root password"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_1194295: allow user to enable/disable network interface without root permission"
+      ],
+      "Top-3 Scripts": [
+        "au_1194295: user1 ALL=(ALL) /usr/bin/ip link set ens18 down"
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

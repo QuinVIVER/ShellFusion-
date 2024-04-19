@@ -1,0 +1,68 @@
+{
+  "Query": "How to Extend primary partition(/dev/sda1) in linux?",
+  "Answers": [
+    {
+      "Command": "dev",
+      "Top-3 Similar Questions": [
+        "su_639077: Extending Filesystem in Linux",
+        "ul_359251: LVM: is it possible to extend an in use partition?",
+        "ul_388698: How to merge or extend a volume in linux?"
+      ],
+      "Top-3 Scripts": [
+        "su_639077: /dev/sda2 on /media ...",
+        "ul_359251: /dev/sdb1\n\npvcreate /dev/sdb1\n\nvgcreate alex_os /dev/sdb1\n\nmkfs.ext4 /dev/mapper/alex_os-root\n\nservice mysql stop\nmount /dev/mapper/alex_os-db /mnt\nmv /var/lib/mysql/* /mnt\nmount --move /mnt /var/lib/mysql\nservice mysql start\n\n/dev/mapper/alex_os-db /var/lib/mysql ext4 errors=remount,ro 0 2\n\n/dev/mapper/alex_os-db /media/data ext4 errors=remount,ro 0 2\n\nmkfs.ext4 /dev/mapper/alex_os-root\nmount /dev/mapper/alex_os-root /media/alex_os-root\ncp -a /media/sda1 /media/alex_os-root\n\ncat /dev/sda1 >/dev/mapper/alex_os-root\nresize2fs /dev/mapper/alex_os-root\n\nchroot /media/alex_os-root\nupdate-initramfs\nupdate-grub\ngrub-install /dev/sdb",
+        "ul_388698: pycreate /dev/sdc\n\nvgextend hana2 /dev/sdc\n\nresize2fs /dev/hana2/hanalv"
+      ]
+    },
+    {
+      "Command": "gparted",
+      "Top-3 Similar Questions": [
+        "su_1401003: Extend linux root drive in Dual Boot OS",
+        "au_884684: How can I extend a hard disk in Ubuntu logical volume",
+        "au_1222325: Extending Ubuntu home partition using Gparted in dual boot"
+      ],
+      "Top-3 Scripts": [
+        "ul_196512: sudo apt-get install gparted"
+      ]
+    },
+    {
+      "Command": "resize2fs",
+      "Top-3 Similar Questions": [
+        "ul_359251: LVM: is it possible to extend an in use partition?",
+        "ul_388698: How to merge or extend a volume in linux?",
+        "so_16515739: extending logical volume in ubuntu"
+      ],
+      "Top-3 Scripts": [
+        "ul_359251: cat /dev/sda1 >/dev/mapper/alex_os-root\nresize2fs /dev/mapper/alex_os-root",
+        "ul_388698: resize2fs /dev/hana2/hanalv",
+        "so_16515739: resize2fs /dev/zabbix/root"
+      ]
+    },
+    {
+      "Command": "lvextend",
+      "Top-3 Similar Questions": [
+        "ul_388698: How to merge or extend a volume in linux?",
+        "su_612220: How to Extend a logical volume in VMware",
+        "so_16515739: extending logical volume in ubuntu"
+      ],
+      "Top-3 Scripts": [
+        "ul_388698: lvextend -n hanalv -L <extentnum>",
+        "so_16515739: lvextend -L+20G /dev/zabbix/root",
+        "su_1338244: lvextend -l +100%FREE /dev/path/to/your/logical/volume"
+      ]
+    },
+    {
+      "Command": "sudo",
+      "Top-3 Similar Questions": [
+        "au_1178069: How to extend the root partition in Ubuntu 18.04",
+        "au_884684: How can I extend a hard disk in Ubuntu logical volume",
+        "so_9151491: extending default lib search path in ubuntu"
+      ],
+      "Top-3 Scripts": [
+        "au_1178069: sudo file -s\n\nsudo mkfs -t ext4 /dev/nvme0n1p1\n\nsudo mkdir /mydata\n\nsudo mount /dev/nvme0n1p1 /mydata\n\nsudo nano /etc/fstab\n\nsudo lsblk -o +UUID\n\nsudo umount /mydata\nsudo mount -a",
+        "au_884684: sudo pvcreate /dev/sda4  # to make the partition available for LVM\n\nsudo vgdisplay\n\nsudo vgextend vg0 /dev/sda4\n\nsudo lvdisplay\n\nsudo lvresize -r -l 100%VG vg0-root",
+        "so_9151491: sudo echo \"/path-to-your-libs/\" >> /etc/ld.so.conf.d/your.conf\n\nsudo ldconfig"
+      ]
+    }
+  ]
+}

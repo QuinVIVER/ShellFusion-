@@ -1,0 +1,1694 @@
+{
+  "Query": "Speed up rsync with Simultaneous/Concurrent File Transfers?",
+  "Answers": [
+    {
+      "Command": "rsync",
+      "MP Summary": "a fast, versatile, remote (and local) file-copying tool",
+      "Most Similar TLDR Task": "Transfer file from local to remote host",
+      "Most Similar TLDR Script": "rsync {{path/to/local_file}} {{remote_host}}:{{path/to/remote_directory}}",
+      "Most Similar NL2Bash Task": "display all files in the entire file system excluding those that are in the transfer directory",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find / -name /transfer -prune -o -print\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-prune": "True; if the file is a directory, do not descend into it. If -depth is given, then\n -prune has no effect. Because -delete implies -depth, you cannot usefully use\n -prune and -delete together.\n For example, to skip the directory `src/emacs' and all files and directories\n under it, and print the names of the other files found, do something like this:\n find . -path ./src/emacs -prune -o -print",
+              "-print": "Quoting is handled in the same way as for -printf and -fprintf. If you are using\n find in a script or in a situation where the matched files might have arbitrary\n names, you should consider using -print0 instead of -print."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_78375: Move files and delete directories with rsync?",
+        "au_1220537: Using rsync to back up /home folder with same permissions, recursive",
+        "ul_563175: rsync sync specific folders (by pattern) with file filters"
+      ],
+      "Top-3 Scripts": [
+        "ul_78375: $ rsync -av --ignore-existing --remove-source-files source/ destination/ && \\\n  rsync -av --delete `mktemp -d`/ source/ && rmdir source/\n\n$ rsync -axvvES --remove-source-files source_directory /destination/ && \\\n  rm -rf source_directory",
+        "au_1220537: sudo rsync -av /mnt/laptop/home/jonathan /mnt/external/home",
+        "ul_563175: rsync -avR src/./201?/*bbb*.pdf dst/\n\nrsync -avR src/./201?/*bbb* dst/\ncreated directory dst\nsending incremental file list\n2016/\n2016/aaabbb1.pdf\n2016/aaabbb2.pdf\n2017/\n2017/aaabbb1.pdf\n2017/aaabbb2.pdf\n\nrsync --dry-run"
+      ],
+      "Explanations about Options": {
+        "-E": "This option causes rsync to preserve the executability (or non-executability) of\n regular files when --perms is not enabled. A regular file is considered to be\n executable if at least one \u2019x\u2019 is turned on in its permissions. When an existing\n destination file\u2019s executability differs from that of the corresponding source\n file, rsync modifies the destination file\u2019s permissions as follows:",
+        "-a": "This is equivalent to -rlptgoD. It is a quick way of saying you want recursion and\n want to preserve almost everything (with -H being a notable omission). The only\n exception to the above equivalence is when --files-from is specified, in which case\n -r is not implied.",
+        "--remove-source-files": "This tells rsync to remove from the sending side the files (meaning\n non-directories) that are a part of the transfer and have been successfully\n duplicated on the receiving side.",
+        "--dry-run": "This makes rsync perform a trial run that doesn\u2019t make any changes (and produces\n mostly the same output as a real run). It is most commonly used in combination\n with the -v, --verbose and/or -i, --itemize-changes options to see what an rsync\n command is going to do before one actually runs it.",
+        "-S": "Try to handle sparse files efficiently so they take up less space on the\n destination. If combined with --inplace the file created might not end up with\n sparse blocks with some combinations of kernel version and/or filesystem type. If\n --whole-file is in effect (e.g. for a local copy) then it will always work because\n rsync truncates the file prior to writing out the updated version.",
+        "-x": "This tells rsync to avoid crossing a filesystem boundary when recursing. This does\n not limit the user\u2019s ability to specify items to copy from multiple filesystems,\n just rsync\u2019s recursion through the hierarchy of each directory that the user\n specified, and also the analogous recursion on the receiving side during deletion.\n Also keep in mind that rsync treats a \"bind\" mount to the same device as being on\n the same filesystem.",
+        "-v": "This option increases the amount of information you are given during the transfer.\n By default, rsync works silently. A single -v will give you information about what\n files are being transferred and a brief summary at the end. Two -v options will\n give you information on what files are being skipped and slightly more information\n at the end. More than two -v options should only be used if you are debugging\n rsync."
+      }
+    },
+    {
+      "Command": "find",
+      "MP Summary": "search for files in a directory hierarchy",
+      "Most Similar TLDR Task": "Find files matching a given size range",
+      "Most Similar TLDR Script": "find {{root_path}} -size {{+500k}} -size {{-10M}}",
+      "Most Similar NL2Bash Task": "display all files in the entire file system excluding those that are in the transfer directory",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find / -name /transfer -prune -o -print\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-prune": "True; if the file is a directory, do not descend into it. If -depth is given, then\n -prune has no effect. Because -delete implies -depth, you cannot usefully use\n -prune and -delete together.\n For example, to skip the directory `src/emacs' and all files and directories\n under it, and print the names of the other files found, do something like this:\n find . -path ./src/emacs -prune -o -print",
+              "-print": "Quoting is handled in the same way as for -printf and -fprintf. If you are using\n find in a script or in a situation where the matched files might have arbitrary\n names, you should consider using -print0 instead of -print."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_17382802: How to process files concurrently with bash?",
+        "su_1551711: rsync - exclude files in directories with specific conditions",
+        "ul_180740: Using Rsync in conjunction with Find"
+      ],
+      "Top-3 Scripts": [
+        "so_17382802: find . -type f -print0 | parallel -0 -P 3 ./myscript {1}",
+        "su_1551711: find comp/work -regextype posix-extended \\\n  -regex '.*/(SHOT[^/]*)/\\1_([^/]*)/\\1_.*\\2\\..*\\.exr' -print",
+        "ul_180740: rsync -avz ... --files-from=<(ssh user@remote1 'cd /home/admin/Backup/; find . -mtime -1 -type f -name \"*.png\")\n\nfind /home/... ... -printf \"%P\\n\""
+      ],
+      "Explanations about Options": {
+        "-print0": "Always print the exact filename, unchanged, even if the output is going to a\n terminal.",
+        "-type": "File is of type c:",
+        "-printf": "True; print format on the standard output, interpreting `\\' escapes and `%'\n directives. Field widths and precisions can be specified as with the `printf' C\n function. Please note that many of the fields are printed as %s rather than %d,\n and this may mean that flags don't work as you might expect. This also means that\n the `-' flag does work (it forces fields to be left-aligned). Unlike -print,\n -printf does not add a newline at the end of the string. The escapes and\n directives are:"
+      }
+    },
+    {
+      "Command": "parallel",
+      "MP Summary": "run programs in parallel",
+      "Most Similar TLDR Task": "Gzip several files at once, using all cores",
+      "Most Similar TLDR Script": "parallel gzip ::: {{file1}} {{file2}} {{file3}}",
+      "Most Similar NL2Bash Task": "display all files in the entire file system excluding those that are in the transfer directory",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find / -name /transfer -prune -o -print\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-prune": "True; if the file is a directory, do not descend into it. If -depth is given, then\n -prune has no effect. Because -delete implies -depth, you cannot usefully use\n -prune and -delete together.\n For example, to skip the directory `src/emacs' and all files and directories\n under it, and print the names of the other files found, do something like this:\n find . -path ./src/emacs -prune -o -print",
+              "-print": "Quoting is handled in the same way as for -printf and -fprintf. If you are using\n find in a script or in a situation where the matched files might have arbitrary\n names, you should consider using -print0 instead of -print."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_17382802: How to process files concurrently with bash?",
+        "so_30648121: How to automate file transformation with simultanous execution?"
+      ],
+      "Top-3 Scripts": [
+        "so_17382802: find . -type f -print0 | parallel -0 -P 3 ./myscript {1}",
+        "so_30648121: parallel -j 5 convert {} \"-resample 200 -colorspace Gray\" {.}BW.png ::: *.png ; parallel -j 5 tesseract {} {} -l tla -psm 6 ::: *BW.png ; rm *BW.png"
+      ],
+      "Explanations about Options": {
+        "-j": "Use to limit the number of jobs that are run at the same time."
+      }
+    },
+    {
+      "Command": "read",
+      "MP Summary": "read a line from standard input",
+      "Most Similar TLDR Task": "Specify the number of maximum characters to be read",
+      "Most Similar TLDR Script": "read -n {{character_count}} {{variable}}",
+      "Most Similar NL2Bash Task": "display all files in the entire file system excluding those that are in the transfer directory",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find / -name /transfer -prune -o -print\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-prune": "True; if the file is a directory, do not descend into it. If -depth is given, then\n -prune has no effect. Because -delete implies -depth, you cannot usefully use\n -prune and -delete together.\n For example, to skip the directory `src/emacs' and all files and directories\n under it, and print the names of the other files found, do something like this:\n find . -path ./src/emacs -prune -o -print",
+              "-print": "Quoting is handled in the same way as for -printf and -fprintf. If you are using\n find in a script or in a situation where the matched files might have arbitrary\n names, you should consider using -print0 instead of -print."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_63267974: Parse rsync stats, line Number of files with bash only",
+        "ul_180740: Using Rsync in conjunction with Find",
+        "ul_199301: find files based on name and moving them with renaming simultaneously"
+      ],
+      "Top-3 Scripts": [
+        "so_63267974: declare -A stats=()\nwhile read -r k v; do stats[\"$k\"]=\"$v\"; done < <( \\\n  printf \"%s\\n\" \"$rawstats\" | \\\n    perl -ne '/Number of files: (\\d+)/ or next; print \"total $1\\n\"; print \"$1 $2\\n\" while (/([a-z]+): (\\d+)/g)' \\\n)",
+        "ul_180740: The  filenames  that  are read from the FILE are all relative to\n  the source dir -- any leading slashes are removed  and  no  \"..\"\n  references  are  allowed  to go higher than the source dir.",
+        "ul_199301: while read -r line\n\nfind -name 161901.pdf | while read -r line; do mv $line ./xyz/$(echo $line | cut -d \"/\" -f 2).pdf; done"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "sudo",
+      "MP Summary": "execute a command as another user",
+      "Most Similar TLDR Task": "Run a command as another user and/or group",
+      "Most Similar TLDR Script": "sudo -u {{user}} -g {{group}} {{id -a}}",
+      "Most Similar NL2Bash Task": "display all files in the entire file system excluding those that are in the transfer directory",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find / -name /transfer -prune -o -print\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-prune": "True; if the file is a directory, do not descend into it. If -depth is given, then\n -prune has no effect. Because -delete implies -depth, you cannot usefully use\n -prune and -delete together.\n For example, to skip the directory `src/emacs' and all files and directories\n under it, and print the names of the other files found, do something like this:\n find . -path ./src/emacs -prune -o -print",
+              "-print": "Quoting is handled in the same way as for -printf and -fprintf. If you are using\n find in a script or in a situation where the matched files might have arbitrary\n names, you should consider using -print0 instead of -print."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_12197: Syncing directories in both directions with rsync",
+        "au_1220537: Using rsync to back up /home folder with same permissions, recursive",
+        "so_66133869: Is it possible to overwrite file permissions at destination with rsync?"
+      ],
+      "Top-3 Scripts": [
+        "ul_12197: $ sudo apt-get install unison\n$ unison MAC/ LINUX/",
+        "au_1220537: sudo blkid\n\nsudo mkdir /mnt/laptop\nsudo mkdir /mnt/external\n\nsudo mount /dev/sdb /mnt/laptop\nsudo mount /dev/sdc /mnt/external\nsudo mkdir /mnt/external/home\n\nsudo rsync -av /mnt/laptop/home/jonathan /mnt/external/home",
+        "so_66133869: sudo rsync -avzp --rsync-path \"sudo rsync\" /home <dest-user@dest-server-ip>:/backup/"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "ssh",
+      "MP Summary": "OpenSSH SSH client (remote login program)",
+      "Most Similar TLDR Task": "Connect to a remote server with a specific identity (private key)",
+      "Most Similar TLDR Script": "ssh -i {{path/to/key_file}} {{username}}@{{remote_host}}",
+      "Most Similar NL2Bash Task": "display all files in the entire file system excluding those that are in the transfer directory",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find / -name /transfer -prune -o -print\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-prune": "True; if the file is a directory, do not descend into it. If -depth is given, then\n -prune has no effect. Because -delete implies -depth, you cannot usefully use\n -prune and -delete together.\n For example, to skip the directory `src/emacs' and all files and directories\n under it, and print the names of the other files found, do something like this:\n find . -path ./src/emacs -prune -o -print",
+              "-print": "Quoting is handled in the same way as for -printf and -fprintf. If you are using\n find in a script or in a situation where the matched files might have arbitrary\n names, you should consider using -print0 instead of -print."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_334859: How do I remotely exclude subdirectories with rsync?",
+        "ul_180740: Using Rsync in conjunction with Find"
+      ],
+      "Top-3 Scripts": [
+        "ul_334859: rsync -avr -e ssh root@10.18.30.1:/opt/intranet . --exclude=helpdesk\n\nrsync -avr -e ssh root@$HOSTNAME:/<source_folder> . --exclude=<relative folder>",
+        "ul_180740: rsync -avz ... --files-from=<(ssh user@remote1 'cd /home/admin/Backup/; find . -mtime -1 -type f -name \"*.png\")"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "cat",
+      "MP Summary": "concatenate files and print on the standard output",
+      "Most Similar TLDR Task": "Concatenate several files into the target file",
+      "Most Similar TLDR Script": "cat {{file1}} {{file2}} > {{target_file}}",
+      "Most Similar NL2Bash Task": "display all files in the entire file system excluding those that are in the transfer directory",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find / -name /transfer -prune -o -print\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-prune": "True; if the file is a directory, do not descend into it. If -depth is given, then\n -prune has no effect. Because -delete implies -depth, you cannot usefully use\n -prune and -delete together.\n For example, to skip the directory `src/emacs' and all files and directories\n under it, and print the names of the other files found, do something like this:\n find . -path ./src/emacs -prune -o -print",
+              "-print": "Quoting is handled in the same way as for -printf and -fprintf. If you are using\n find in a script or in a situation where the matched files might have arbitrary\n names, you should consider using -print0 instead of -print."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_550315: Multiple processes redirecting to the same file with >",
+        "ul_22091: How to exclude numeric directories with rsync?"
+      ],
+      "Top-3 Scripts": [
+        "ul_550315: #!/bin/sh\n\n( { echo hello; sleep 2; echo world; } | cat >file ) &\nsleep 1\necho 123 >file &\n\nwait",
+        "ul_22091: ( cat <<EOT\n123414\n42344523\n345343\n2323\nEOT ) > /tmp/rsync-directory-exclusions.txt"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "sleep",
+      "MP Summary": "delay for a specified amount of time",
+      "Most Similar TLDR Task": "Delay in minutes",
+      "Most Similar TLDR Script": "sleep {{minutes}}m",
+      "Most Similar NL2Bash Task": "display all files in the entire file system excluding those that are in the transfer directory",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find / -name /transfer -prune -o -print\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-prune": "True; if the file is a directory, do not descend into it. If -depth is given, then\n -prune has no effect. Because -delete implies -depth, you cannot usefully use\n -prune and -delete together.\n For example, to skip the directory `src/emacs' and all files and directories\n under it, and print the names of the other files found, do something like this:\n find . -path ./src/emacs -prune -o -print",
+              "-print": "Quoting is handled in the same way as for -printf and -fprintf. If you are using\n find in a script or in a situation where the matched files might have arbitrary\n names, you should consider using -print0 instead of -print."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_865680: Timing concurrent processes in bash with 'time'",
+        "ul_550315: Multiple processes redirecting to the same file with >"
+      ],
+      "Top-3 Scripts": [
+        "so_865680: $ time (sleep 5 & sleep 8 & wait)\n\nreal    0m8.019s\nuser    0m0.005s\nsys     0m0.005s",
+        "ul_550315: #!/bin/sh\n\n( { echo hello; sleep 2; echo world; } | cat >file ) &\nsleep 1\necho 123 >file &\n\nwait"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "file",
+      "MP Summary": "determine file type",
+      "Most Similar TLDR Task": "Look inside a zipped file and determine the file type(s) inside",
+      "Most Similar TLDR Script": "file -z {{foo.zip}}",
+      "Most Similar NL2Bash Task": "display all files in the entire file system excluding those that are in the transfer directory",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find / -name /transfer -prune -o -print\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-prune": "True; if the file is a directory, do not descend into it. If -depth is given, then\n -prune has no effect. Because -delete implies -depth, you cannot usefully use\n -prune and -delete together.\n For example, to skip the directory `src/emacs' and all files and directories\n under it, and print the names of the other files found, do something like this:\n find . -path ./src/emacs -prune -o -print",
+              "-print": "Quoting is handled in the same way as for -printf and -fprintf. If you are using\n find in a script or in a situation where the matched files might have arbitrary\n names, you should consider using -print0 instead of -print."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_563175: rsync sync specific folders (by pattern) with file filters",
+        "so_11549253: measure data transfer rate with 200 simultaneous users",
+        "ul_550315: Multiple processes redirecting to the same file with >"
+      ],
+      "Top-3 Scripts": [
+        "ul_563175: rsync -avR src/./201?/*bbb* dst/\ncreated directory dst\nsending incremental file list\n2016/\n2016/aaabbb1.pdf\n2016/aaabbb2.pdf\n2017/\n2017/aaabbb1.pdf\n2017/aaabbb2.pdf",
+        "so_11549253: ",
+        "ul_550315: $ hexdump -C file\n00000000  31 32 33 0a 00 00 77 6f  72 6c 64 0a              |123...world.|\n0000000c\n\n$ hexdump -C file\n00000000  31 32 33 35 36 37 77 6f  72 6c 64 0a              |123567world.|\n0000000c"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "rm",
+      "MP Summary": "remove files or directories",
+      "Most Similar TLDR Task": "Remove files from arbitrary locations",
+      "Most Similar TLDR Script": "rm {{path/to/file}} {{path/to/another/file}}",
+      "Most Similar NL2Bash Task": "display all files in the entire file system excluding those that are in the transfer directory",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find / -name /transfer -prune -o -print\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-prune": "True; if the file is a directory, do not descend into it. If -depth is given, then\n -prune has no effect. Because -delete implies -depth, you cannot usefully use\n -prune and -delete together.\n For example, to skip the directory `src/emacs' and all files and directories\n under it, and print the names of the other files found, do something like this:\n find . -path ./src/emacs -prune -o -print",
+              "-print": "Quoting is handled in the same way as for -printf and -fprintf. If you are using\n find in a script or in a situation where the matched files might have arbitrary\n names, you should consider using -print0 instead of -print."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_78375: Move files and delete directories with rsync?",
+        "ul_163170: copy symlinks with rsync",
+        "so_30648121: How to automate file transformation with simultanous execution?"
+      ],
+      "Top-3 Scripts": [
+        "ul_78375: $ rsync -axvvES --remove-source-files source_directory /destination/ && \\\n  rm -rf source_directory",
+        "ul_163170: cd /media/disk1/folder1\nrm folder2\nln -s ../folder2 folder2",
+        "so_30648121: parallel -j 5 convert {} \"-resample 200 -colorspace Gray\" {.}BW.png ::: *.png ; parallel -j 5 tesseract {} {} -l tla -psm 6 ::: *BW.png ; rm *BW.png"
+      ],
+      "Explanations about Options": {
+        "-r": "remove directories and their contents recursively",
+        "-f": "ignore nonexistent files and arguments, never prompt"
+      }
+    },
+    {
+      "Command": "mount",
+      "MP Summary": "mount a filesystem",
+      "Most Similar TLDR Task": "Mount a directory to another directory",
+      "Most Similar TLDR Script": "mount --bind {{path/to/old_dir}} {{path/to/new_dir}}",
+      "Most Similar NL2Bash Task": "display all files in the entire file system excluding those that are in the transfer directory",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find / -name /transfer -prune -o -print\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-prune": "True; if the file is a directory, do not descend into it. If -depth is given, then\n -prune has no effect. Because -delete implies -depth, you cannot usefully use\n -prune and -delete together.\n For example, to skip the directory `src/emacs' and all files and directories\n under it, and print the names of the other files found, do something like this:\n find . -path ./src/emacs -prune -o -print",
+              "-print": "Quoting is handled in the same way as for -printf and -fprintf. If you are using\n find in a script or in a situation where the matched files might have arbitrary\n names, you should consider using -print0 instead of -print."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_1220537: Using rsync to back up /home folder with same permissions, recursive",
+        "au_677773: Transfer file to Windows server from Ubuntu"
+      ],
+      "Top-3 Scripts": [
+        "au_1220537: sudo mount /dev/sdb /mnt/laptop\nsudo mount /dev/sdc /mnt/external\nsudo mkdir /mnt/external/home",
+        "au_677773: sudo mkdir /media/BACKUP\nsudo mount -t cifs -o username=domainusername //ip_add/ShareFolder /media/BACKUP"
+      ],
+      "Explanations about Options": {
+        "-t": "The argument following the -t is used to indicate the filesystem type. The\n filesystem types which are currently supported depend on the running kernel. See\n /proc/filesystems and /lib/modules/$(uname -r)/kernel/fs for a complete list of the\n filesystems. The most common are ext2, ext3, ext4, xfs, btrfs, vfat, sysfs, proc,\n nfs and cifs.",
+        "-o": "Use the specified mount options. The opts argument is a comma-separated list. For\n example:"
+      }
+    },
+    {
+      "Command": "echo",
+      "MP Summary": "display a line of text",
+      "Most Similar TLDR Task": "Append a message to the file",
+      "Most Similar TLDR Script": "echo \"{{Hello World}}\" >> {{file.txt}}",
+      "Most Similar NL2Bash Task": "display all files in the entire file system excluding those that are in the transfer directory",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find / -name /transfer -prune -o -print\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-prune": "True; if the file is a directory, do not descend into it. If -depth is given, then\n -prune has no effect. Because -delete implies -depth, you cannot usefully use\n -prune and -delete together.\n For example, to skip the directory `src/emacs' and all files and directories\n under it, and print the names of the other files found, do something like this:\n find . -path ./src/emacs -prune -o -print",
+              "-print": "Quoting is handled in the same way as for -printf and -fprintf. If you are using\n find in a script or in a situation where the matched files might have arbitrary\n names, you should consider using -print0 instead of -print."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "su_620652: Delete duplicate files with rsync",
+        "ul_199301: find files based on name and moving them with renaming simultaneously",
+        "ul_550315: Multiple processes redirecting to the same file with >"
+      ],
+      "Top-3 Scripts": [
+        "su_620652: ",
+        "ul_199301: find -name 161901.pdf | while read -r line; do mv $line ./xyz/$(echo $line | cut -d \"/\" -f 2).pdf; done\n\nmv $line ./xyz/$(echo $line | cut -d \"/\" -f 2).pdf",
+        "ul_550315: #!/bin/sh\n\n( { echo hello; sleep 2; echo world; } | cat >file ) &\nsleep 1\necho 123 >file &\n\nwait\n\necho 1234567890"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "mkdir",
+      "MP Summary": "make directories",
+      "Most Similar TLDR Task": "Create directories recursively (useful for creating nested dirs)",
+      "Most Similar TLDR Script": "mkdir -p {{path/to/directory}}",
+      "Most Similar NL2Bash Task": "display all files in the entire file system excluding those that are in the transfer directory",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find / -name /transfer -prune -o -print\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-prune": "True; if the file is a directory, do not descend into it. If -depth is given, then\n -prune has no effect. Because -delete implies -depth, you cannot usefully use\n -prune and -delete together.\n For example, to skip the directory `src/emacs' and all files and directories\n under it, and print the names of the other files found, do something like this:\n find . -path ./src/emacs -prune -o -print",
+              "-print": "Quoting is handled in the same way as for -printf and -fprintf. If you are using\n find in a script or in a situation where the matched files might have arbitrary\n names, you should consider using -print0 instead of -print."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_1220537: Using rsync to back up /home folder with same permissions, recursive",
+        "su_620652: Delete duplicate files with rsync",
+        "au_677773: Transfer file to Windows server from Ubuntu"
+      ],
+      "Top-3 Scripts": [
+        "au_1220537: sudo mkdir /mnt/laptop\nsudo mkdir /mnt/external\n\nsudo mount /dev/sdb /mnt/laptop\nsudo mount /dev/sdc /mnt/external\nsudo mkdir /mnt/external/home",
+        "su_620652: ",
+        "au_677773: sudo mkdir /media/BACKUP\nsudo mount -t cifs -o username=domainusername //ip_add/ShareFolder /media/BACKUP"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "pv",
+      "MP Summary": "monitor the progress of data through a pipe",
+      "Most Similar TLDR Task": "Measure the speed and amount of data flow between pipes (`-s` is optional)",
+      "Most Similar TLDR Script": "command1 | pv -s {{expected_amount_of_data_for_eta}} | command2",
+      "Most Similar NL2Bash Task": "display all files in the entire file system excluding those that are in the transfer directory",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find / -name /transfer -prune -o -print\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-prune": "True; if the file is a directory, do not descend into it. If -depth is given, then\n -prune has no effect. Because -delete implies -depth, you cannot usefully use\n -prune and -delete together.\n For example, to skip the directory `src/emacs' and all files and directories\n under it, and print the names of the other files found, do something like this:\n find . -path ./src/emacs -prune -o -print",
+              "-print": "Quoting is handled in the same way as for -printf and -fprintf. If you are using\n find in a script or in a situation where the matched files might have arbitrary\n names, you should consider using -print0 instead of -print."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_53654550: showing status with large file transfers via netcat/nc"
+      ],
+      "Top-3 Scripts": [
+        "so_53654550: tar cf - . | pv -b | nc -N [target server] 9000"
+      ],
+      "Explanations about Options": {
+        "-b": "Turn the total byte counter on. This will display the total amount of data\n transferred so far."
+      }
+    },
+    {
+      "Command": "install",
+      "MP Summary": "copy files and set attributes",
+      "Most Similar TLDR Task": "Copy files and apply access/modification times of source to destination",
+      "Most Similar TLDR Script": "install -p {{path/to/source}} {{path/to/destination}}",
+      "Most Similar NL2Bash Task": "display all files in the entire file system excluding those that are in the transfer directory",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find / -name /transfer -prune -o -print\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-prune": "True; if the file is a directory, do not descend into it. If -depth is given, then\n -prune has no effect. Because -delete implies -depth, you cannot usefully use\n -prune and -delete together.\n For example, to skip the directory `src/emacs' and all files and directories\n under it, and print the names of the other files found, do something like this:\n find . -path ./src/emacs -prune -o -print",
+              "-print": "Quoting is handled in the same way as for -printf and -fprintf. If you are using\n find in a script or in a situation where the matched files might have arbitrary\n names, you should consider using -print0 instead of -print."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_12197: Syncing directories in both directions with rsync"
+      ],
+      "Top-3 Scripts": [
+        "ul_12197: $ sudo apt-get install unison\n$ unison MAC/ LINUX/"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "lrzip",
+      "MP Summary": "a large-file compression program",
+      "Most Similar TLDR Task": "Compress a file with BZIP2 - good middle ground for compression/speed",
+      "Most Similar TLDR Script": "lrzip -b {{filename}}",
+      "Most Similar NL2Bash Task": "display all files in the entire file system excluding those that are in the transfer directory",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find / -name /transfer -prune -o -print\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-prune": "True; if the file is a directory, do not descend into it. If -depth is given, then\n -prune has no effect. Because -delete implies -depth, you cannot usefully use\n -prune and -delete together.\n For example, to skip the directory `src/emacs' and all files and directories\n under it, and print the names of the other files found, do something like this:\n find . -path ./src/emacs -prune -o -print",
+              "-print": "Quoting is handled in the same way as for -printf and -fprintf. If you are using\n find in a script or in a situation where the matched files might have arbitrary\n names, you should consider using -print0 instead of -print."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "tldr_93: Compress a file with BZIP2 - good middle ground for compression/speed"
+      ],
+      "Top-3 Scripts": [
+        "tldr_93: lrzip -b {{filename}}"
+      ],
+      "Explanations about Options": {
+        "-b": "Bzip2 compression. Uses bzip2 compression for the 2nd stage, much like the original\n rzip does."
+      }
+    },
+    {
+      "Command": "7z",
+      "MP Summary": "A file archiver with high compression ratio format",
+      "Most Similar TLDR Task": "Archive using a specific archive type",
+      "Most Similar TLDR Script": "7z a -t{{zip|gzip|bzip2|tar}} {{archived.7z}} {{path/to/file_or_directory}}",
+      "Most Similar NL2Bash Task": "display all files in the entire file system excluding those that are in the transfer directory",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find / -name /transfer -prune -o -print\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-prune": "True; if the file is a directory, do not descend into it. If -depth is given, then\n -prune has no effect. Because -delete implies -depth, you cannot usefully use\n -prune and -delete together.\n For example, to skip the directory `src/emacs' and all files and directories\n under it, and print the names of the other files found, do something like this:\n find . -path ./src/emacs -prune -o -print",
+              "-print": "Quoting is handled in the same way as for -printf and -fprintf. If you are using\n find in a script or in a situation where the matched files might have arbitrary\n names, you should consider using -print0 instead of -print."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_161840: rsync with colons in filenames"
+      ],
+      "Top-3 Scripts": [
+        "ul_161840: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "test",
+      "MP Summary": "check file types and compare values",
+      "Most Similar TLDR Task": "Test if given variable is empty",
+      "Most Similar TLDR Script": "test -z $GIT_BRANCH",
+      "Most Similar NL2Bash Task": "display all files in the entire file system excluding those that are in the transfer directory",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find / -name /transfer -prune -o -print\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-prune": "True; if the file is a directory, do not descend into it. If -depth is given, then\n -prune has no effect. Because -delete implies -depth, you cannot usefully use\n -prune and -delete together.\n For example, to skip the directory `src/emacs' and all files and directories\n under it, and print the names of the other files found, do something like this:\n find . -path ./src/emacs -prune -o -print",
+              "-print": "Quoting is handled in the same way as for -printf and -fprintf. If you are using\n find in a script or in a situation where the matched files might have arbitrary\n names, you should consider using -print0 instead of -print."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "su_620652: Delete duplicate files with rsync",
+        "so_11549253: measure data transfer rate with 200 simultaneous users"
+      ],
+      "Top-3 Scripts": [
+        "su_620652: ",
+        "so_11549253: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "progress",
+      "MP Summary": "Coreutils Progress Viewer",
+      "Most Similar TLDR Task": "Launch and monitor a single long-running command",
+      "Most Similar TLDR Script": "{{command}} & progress -mp $!",
+      "Most Similar NL2Bash Task": "display all files in the entire file system excluding those that are in the transfer directory",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find / -name /transfer -prune -o -print\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-prune": "True; if the file is a directory, do not descend into it. If -depth is given, then\n -prune has no effect. Because -delete implies -depth, you cannot usefully use\n -prune and -delete together.\n For example, to skip the directory `src/emacs' and all files and directories\n under it, and print the names of the other files found, do something like this:\n find . -path ./src/emacs -prune -o -print",
+              "-print": "Quoting is handled in the same way as for -printf and -fprintf. If you are using\n find in a script or in a situation where the matched files might have arbitrary\n names, you should consider using -print0 instead of -print."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_93396: Get a clean list of files transferred from rsync"
+      ],
+      "Top-3 Scripts": [
+        "ul_93396: --progress    show progress during transfer"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "zip",
+      "MP Summary": "package and compress (archive) files",
+      "Most Similar TLDR Task": "Package and compress multiple directories and files",
+      "Most Similar TLDR Script": "zip -r {{compressed.zip}} {{/path/to/dir1 /path/to/dir2 /path/to/file}}",
+      "Most Similar NL2Bash Task": "display all files in the entire file system excluding those that are in the transfer directory",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find / -name /transfer -prune -o -print\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-prune": "True; if the file is a directory, do not descend into it. If -depth is given, then\n -prune has no effect. Because -delete implies -depth, you cannot usefully use\n -prune and -delete together.\n For example, to skip the directory `src/emacs' and all files and directories\n under it, and print the names of the other files found, do something like this:\n find . -path ./src/emacs -prune -o -print",
+              "-print": "Quoting is handled in the same way as for -printf and -fprintf. If you are using\n find in a script or in a situation where the matched files might have arbitrary\n names, you should consider using -print0 instead of -print."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_161840: rsync with colons in filenames"
+      ],
+      "Top-3 Scripts": [
+        "ul_161840: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "cp",
+      "MP Summary": "copy files and directories",
+      "Most Similar TLDR Task": "Copy a file into another directory, keeping the filename",
+      "Most Similar TLDR Script": "cp {{path/to/source_file.ext}} {{path/to/target_parent_directory}}",
+      "Most Similar NL2Bash Task": "display all files in the entire file system excluding those that are in the transfer directory",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find / -name /transfer -prune -o -print\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-prune": "True; if the file is a directory, do not descend into it. If -depth is given, then\n -prune has no effect. Because -delete implies -depth, you cannot usefully use\n -prune and -delete together.\n For example, to skip the directory `src/emacs' and all files and directories\n under it, and print the names of the other files found, do something like this:\n find . -path ./src/emacs -prune -o -print",
+              "-print": "Quoting is handled in the same way as for -printf and -fprintf. If you are using\n find in a script or in a situation where the matched files might have arbitrary\n names, you should consider using -print0 instead of -print."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_251693: Copy a files with defined transfer rate"
+      ],
+      "Top-3 Scripts": [
+        "au_251693: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "print",
+      "MP Summary": "execute programs via entries in the mailcap file",
+      "Most Similar TLDR Task": "Print action can be used to print any file on default run-mailcap tool",
+      "Most Similar TLDR Script": "print {{filename}}",
+      "Most Similar NL2Bash Task": "display all files in the entire file system excluding those that are in the transfer directory",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find / -name /transfer -prune -o -print\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-prune": "True; if the file is a directory, do not descend into it. If -depth is given, then\n -prune has no effect. Because -delete implies -depth, you cannot usefully use\n -prune and -delete together.\n For example, to skip the directory `src/emacs' and all files and directories\n under it, and print the names of the other files found, do something like this:\n find . -path ./src/emacs -prune -o -print",
+              "-print": "Quoting is handled in the same way as for -printf and -fprintf. If you are using\n find in a script or in a situation where the matched files might have arbitrary\n names, you should consider using -print0 instead of -print."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_63267974: Parse rsync stats, line Number of files with bash only",
+        "so_11549253: measure data transfer rate with 200 simultaneous users"
+      ],
+      "Top-3 Scripts": [
+        "so_63267974: declare -A stats=()\nwhile read -r k v; do stats[\"$k\"]=\"$v\"; done < <( \\\n  printf \"%s\\n\" \"$rawstats\" | \\\n    perl -ne '/Number of files: (\\d+)/ or next; print \"total $1\\n\"; print \"$1 $2\\n\" while (/([a-z]+): (\\d+)/g)' \\\n)",
+        "so_11549253: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "tar",
+      "MP Summary": "an archiving utility",
+      "Most Similar TLDR Task": "Create a compressed archive, using archive suffix to determine the compression program",
+      "Most Similar TLDR Script": "tar caf {{target.tar.xz}} {{file1}} {{file2}} {{file3}}",
+      "Most Similar NL2Bash Task": "display all files in the entire file system excluding those that are in the transfer directory",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find / -name /transfer -prune -o -print\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-prune": "True; if the file is a directory, do not descend into it. If -depth is given, then\n -prune has no effect. Because -delete implies -depth, you cannot usefully use\n -prune and -delete together.\n For example, to skip the directory `src/emacs' and all files and directories\n under it, and print the names of the other files found, do something like this:\n find . -path ./src/emacs -prune -o -print",
+              "-print": "Quoting is handled in the same way as for -printf and -fprintf. If you are using\n find in a script or in a situation where the matched files might have arbitrary\n names, you should consider using -print0 instead of -print."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_53654550: showing status with large file transfers via netcat/nc"
+      ],
+      "Top-3 Scripts": [
+        "so_53654550: tar cf - . | pv -b | nc -N [target server] 9000"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "truncate",
+      "MP Summary": "shrink or extend the size of a file to the specified size",
+      "Most Similar TLDR Task": "Set a size of 10 GB to an exsting file, or create a new file with the specified size",
+      "Most Similar TLDR Script": "truncate -s {{10G}} {{filename}}",
+      "Most Similar NL2Bash Task": "display all files in the entire file system excluding those that are in the transfer directory",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find / -name /transfer -prune -o -print\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-prune": "True; if the file is a directory, do not descend into it. If -depth is given, then\n -prune has no effect. Because -delete implies -depth, you cannot usefully use\n -prune and -delete together.\n For example, to skip the directory `src/emacs' and all files and directories\n under it, and print the names of the other files found, do something like this:\n find . -path ./src/emacs -prune -o -print",
+              "-print": "Quoting is handled in the same way as for -printf and -fprintf. If you are using\n find in a script or in a situation where the matched files might have arbitrary\n names, you should consider using -print0 instead of -print."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_649893: rsync delete files during transfer"
+      ],
+      "Top-3 Scripts": [
+        "ul_649893: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "mv",
+      "MP Summary": "move (rename) files",
+      "Most Similar TLDR Task": "Move files in arbitrary locations",
+      "Most Similar TLDR Script": "mv {{source}} {{target}}",
+      "Most Similar NL2Bash Task": "display all files in the entire file system excluding those that are in the transfer directory",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find / -name /transfer -prune -o -print\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-prune": "True; if the file is a directory, do not descend into it. If -depth is given, then\n -prune has no effect. Because -delete implies -depth, you cannot usefully use\n -prune and -delete together.\n For example, to skip the directory `src/emacs' and all files and directories\n under it, and print the names of the other files found, do something like this:\n find . -path ./src/emacs -prune -o -print",
+              "-print": "Quoting is handled in the same way as for -printf and -fprintf. If you are using\n find in a script or in a situation where the matched files might have arbitrary\n names, you should consider using -print0 instead of -print."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_199301: find files based on name and moving them with renaming simultaneously"
+      ],
+      "Top-3 Scripts": [
+        "ul_199301: find -name 161901.pdf | while read -r line; do mv $line ./xyz/$(echo $line | cut -d \"/\" -f 2).pdf; done\n\nmv $line ./xyz/$(echo $line | cut -d \"/\" -f 2).pdf"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "touch",
+      "MP Summary": "change file timestamps",
+      "Most Similar TLDR Task": "Create a new empty file(s) or change the times for existing file(s) to current time",
+      "Most Similar TLDR Script": "touch {{filename}}",
+      "Most Similar NL2Bash Task": "display all files in the entire file system excluding those that are in the transfer directory",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find / -name /transfer -prune -o -print\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-prune": "True; if the file is a directory, do not descend into it. If -depth is given, then\n -prune has no effect. Because -delete implies -depth, you cannot usefully use\n -prune and -delete together.\n For example, to skip the directory `src/emacs' and all files and directories\n under it, and print the names of the other files found, do something like this:\n find . -path ./src/emacs -prune -o -print",
+              "-print": "Quoting is handled in the same way as for -printf and -fprintf. If you are using\n find in a script or in a situation where the matched files might have arbitrary\n names, you should consider using -print0 instead of -print."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "su_620652: Delete duplicate files with rsync"
+      ],
+      "Top-3 Scripts": [
+        "su_620652: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "ln",
+      "MP Summary": "make links between files",
+      "Most Similar TLDR Task": "Create a hard link to a file",
+      "Most Similar TLDR Script": "ln {{path/to/file}} {{path/to/hardlink}}",
+      "Most Similar NL2Bash Task": "display all files in the entire file system excluding those that are in the transfer directory",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find / -name /transfer -prune -o -print\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-prune": "True; if the file is a directory, do not descend into it. If -depth is given, then\n -prune has no effect. Because -delete implies -depth, you cannot usefully use\n -prune and -delete together.\n For example, to skip the directory `src/emacs' and all files and directories\n under it, and print the names of the other files found, do something like this:\n find . -path ./src/emacs -prune -o -print",
+              "-print": "Quoting is handled in the same way as for -printf and -fprintf. If you are using\n find in a script or in a situation where the matched files might have arbitrary\n names, you should consider using -print0 instead of -print."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_163170: copy symlinks with rsync"
+      ],
+      "Top-3 Scripts": [
+        "ul_163170: cd /media/disk1/folder1\nrm folder2\nln -s ../folder2 folder2\n\nln -s /media/disk1/folder2 folder2"
+      ],
+      "Explanations about Options": {
+        "-s": "make symbolic links instead of hard links"
+      }
+    },
+    {
+      "Command": "nc",
+      "MP Summary": "arbitrary TCP and UDP connections and listens",
+      "Most Similar TLDR Task": "Receive a file",
+      "Most Similar TLDR Script": "nc {{ip_address}} {{port}} > {{file}}",
+      "Most Similar NL2Bash Task": "display all files in the entire file system excluding those that are in the transfer directory",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find / -name /transfer -prune -o -print\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-prune": "True; if the file is a directory, do not descend into it. If -depth is given, then\n -prune has no effect. Because -delete implies -depth, you cannot usefully use\n -prune and -delete together.\n For example, to skip the directory `src/emacs' and all files and directories\n under it, and print the names of the other files found, do something like this:\n find . -path ./src/emacs -prune -o -print",
+              "-print": "Quoting is handled in the same way as for -printf and -fprintf. If you are using\n find in a script or in a situation where the matched files might have arbitrary\n names, you should consider using -print0 instead of -print."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_53654550: showing status with large file transfers via netcat/nc"
+      ],
+      "Top-3 Scripts": [
+        "so_53654550: tar cf - . | pv -b | nc -N [target server] 9000"
+      ],
+      "Explanations about Options": {
+        "-N": "shutdown(2) the network socket after EOF on the input. Some servers require this to\n finish their work."
+      }
+    },
+    {
+      "Command": "exec",
+      "MP Summary": "execute commands and open, close, or copy file descriptors",
+      "Most Similar TLDR Task": "Replace with the specified command using the current environment variables",
+      "Most Similar TLDR Script": "exec {{command -with -flags}}",
+      "Most Similar NL2Bash Task": "display all files in the entire file system excluding those that are in the transfer directory",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find / -name /transfer -prune -o -print\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-prune": "True; if the file is a directory, do not descend into it. If -depth is given, then\n -prune has no effect. Because -delete implies -depth, you cannot usefully use\n -prune and -delete together.\n For example, to skip the directory `src/emacs' and all files and directories\n under it, and print the names of the other files found, do something like this:\n find . -path ./src/emacs -prune -o -print",
+              "-print": "Quoting is handled in the same way as for -printf and -fprintf. If you are using\n find in a script or in a situation where the matched files might have arbitrary\n names, you should consider using -print0 instead of -print."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_39536897: Copy remote file with rsync in php"
+      ],
+      "Top-3 Scripts": [
+        "so_39536897: exec(\"rsync -crahvP /path/in/local/files/foldertocopy remoteuser@remoteserveraddress:/path/in/remote/destinationfolder/\", $output, $exit_code);"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "convert",
+      "MP Summary": "convert between image formats as well as resize an image, blur, crop, despeckle, dither, draw on, flip, join, re-sample, and much more.",
+      "Most Similar TLDR Task": "Create a gif from a series of images with 100ms delay between them",
+      "Most Similar TLDR Script": "convert {{image1.png}} {{image2.png}} {{image3.png}} -delay {{10}} {{animation.gif}}",
+      "Most Similar NL2Bash Task": "display all files in the entire file system excluding those that are in the transfer directory",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find / -name /transfer -prune -o -print\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-prune": "True; if the file is a directory, do not descend into it. If -depth is given, then\n -prune has no effect. Because -delete implies -depth, you cannot usefully use\n -prune and -delete together.\n For example, to skip the directory `src/emacs' and all files and directories\n under it, and print the names of the other files found, do something like this:\n find . -path ./src/emacs -prune -o -print",
+              "-print": "Quoting is handled in the same way as for -printf and -fprintf. If you are using\n find in a script or in a situation where the matched files might have arbitrary\n names, you should consider using -print0 instead of -print."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_30648121: How to automate file transformation with simultanous execution?"
+      ],
+      "Top-3 Scripts": [
+        "so_30648121: parallel -j 5 convert {} \"-resample 200 -colorspace Gray\" {.}BW.png ::: *.png ; parallel -j 5 tesseract {} {} -l tla -psm 6 ::: *BW.png ; rm *BW.png"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "apt-get",
+      "MP Summary": "APT package handling utility - command-line interface",
+      "Most Similar TLDR Task": "Remove a package and its configuration files",
+      "Most Similar TLDR Script": "apt-get purge {{package}}",
+      "Most Similar NL2Bash Task": "display all files in the entire file system excluding those that are in the transfer directory",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find / -name /transfer -prune -o -print\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-prune": "True; if the file is a directory, do not descend into it. If -depth is given, then\n -prune has no effect. Because -delete implies -depth, you cannot usefully use\n -prune and -delete together.\n For example, to skip the directory `src/emacs' and all files and directories\n under it, and print the names of the other files found, do something like this:\n find . -path ./src/emacs -prune -o -print",
+              "-print": "Quoting is handled in the same way as for -printf and -fprintf. If you are using\n find in a script or in a situation where the matched files might have arbitrary\n names, you should consider using -print0 instead of -print."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_12197: Syncing directories in both directions with rsync"
+      ],
+      "Top-3 Scripts": [
+        "ul_12197: $ sudo apt-get install unison\n$ unison MAC/ LINUX/"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "unison",
+      "MP Summary": "a file-synchronization tool for Unix and Windows",
+      "Most Similar TLDR Task": "Sync two directories (creates log first time these two directories are synchronised)",
+      "Most Similar TLDR Script": "unison {{path/to/directory_1}} {{path/to/directory_2}}",
+      "Most Similar NL2Bash Task": "display all files in the entire file system excluding those that are in the transfer directory",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find / -name /transfer -prune -o -print\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-prune": "True; if the file is a directory, do not descend into it. If -depth is given, then\n -prune has no effect. Because -delete implies -depth, you cannot usefully use\n -prune and -delete together.\n For example, to skip the directory `src/emacs' and all files and directories\n under it, and print the names of the other files found, do something like this:\n find . -path ./src/emacs -prune -o -print",
+              "-print": "Quoting is handled in the same way as for -printf and -fprintf. If you are using\n find in a script or in a situation where the matched files might have arbitrary\n names, you should consider using -print0 instead of -print."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_12197: Syncing directories in both directions with rsync"
+      ],
+      "Top-3 Scripts": [
+        "ul_12197: $ sudo apt-get install unison\n$ unison MAC/ LINUX/\n\n$ unison -perms 0 vlc-2.2.0/ /media/sf_vlc/vlc\nContacting server...\nLooking for changes\nReconciling changes\n\nvlc-2.2.0      vlc                \nnew dir  ---->            /  [f] \n\nProceed with propagating updates? [] y\nPropagating updates"
+      ],
+      "Explanations about Options": {
+        "-perms": "part of the permissions which is synchronized"
+      }
+    },
+    {
+      "Command": "ssh-copy-id",
+      "MP Summary": "use locally available keys to authorise logins on a remote machine",
+      "Most Similar TLDR Task": "Copy your keys to the remote machine",
+      "Most Similar TLDR Script": "ssh-copy-id {{username@remote_host}}",
+      "Most Similar NL2Bash Task": "display all files in the entire file system excluding those that are in the transfer directory",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find / -name /transfer -prune -o -print\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-prune": "True; if the file is a directory, do not descend into it. If -depth is given, then\n -prune has no effect. Because -delete implies -depth, you cannot usefully use\n -prune and -delete together.\n For example, to skip the directory `src/emacs' and all files and directories\n under it, and print the names of the other files found, do something like this:\n find . -path ./src/emacs -prune -o -print",
+              "-print": "Quoting is handled in the same way as for -printf and -fprintf. If you are using\n find in a script or in a situation where the matched files might have arbitrary\n names, you should consider using -print0 instead of -print."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_39536897: Copy remote file with rsync in php"
+      ],
+      "Top-3 Scripts": [
+        "so_39536897: ssh-copy-id -i ~/.ssh/id_rsa.pub remoteserveraddressip(xxx.xxx.xxx.xxx)"
+      ],
+      "Explanations about Options": {
+        "-i": "Use only the key(s) contained in identity_file (rather than looking for identities\n via ssh-add(1) or in the default_ID_file). If the filename does not end in .pub\n this is added. If the filename is omitted, the default_ID_file is used."
+      }
+    },
+    {
+      "Command": "ssh-keygen",
+      "MP Summary": "authentication key generation, management and conversion",
+      "Most Similar TLDR Task": "Specify file in which to save the key",
+      "Most Similar TLDR Script": "ssh-keygen -f ~/.ssh/{{filename}}",
+      "Most Similar NL2Bash Task": "display all files in the entire file system excluding those that are in the transfer directory",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find / -name /transfer -prune -o -print\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-prune": "True; if the file is a directory, do not descend into it. If -depth is given, then\n -prune has no effect. Because -delete implies -depth, you cannot usefully use\n -prune and -delete together.\n For example, to skip the directory `src/emacs' and all files and directories\n under it, and print the names of the other files found, do something like this:\n find . -path ./src/emacs -prune -o -print",
+              "-print": "Quoting is handled in the same way as for -printf and -fprintf. If you are using\n find in a script or in a situation where the matched files might have arbitrary\n names, you should consider using -print0 instead of -print."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_39536897: Copy remote file with rsync in php"
+      ],
+      "Top-3 Scripts": [
+        "so_39536897: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "line",
+      "MP Summary": "cache line size",
+      "Most Similar TLDR Task": "Read input",
+      "Most Similar TLDR Script": "line",
+      "Most Similar NL2Bash Task": "display all files in the entire file system excluding those that are in the transfer directory",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find / -name /transfer -prune -o -print\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-prune": "True; if the file is a directory, do not descend into it. If -depth is given, then\n -prune has no effect. Because -delete implies -depth, you cannot usefully use\n -prune and -delete together.\n For example, to skip the directory `src/emacs' and all files and directories\n under it, and print the names of the other files found, do something like this:\n find . -path ./src/emacs -prune -o -print",
+              "-print": "Quoting is handled in the same way as for -printf and -fprintf. If you are using\n find in a script or in a situation where the matched files might have arbitrary\n names, you should consider using -print0 instead of -print."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_199301: find files based on name and moving them with renaming simultaneously"
+      ],
+      "Top-3 Scripts": [
+        "ul_199301: while read -r line\n\nfind -name 161901.pdf | while read -r line; do mv $line ./xyz/$(echo $line | cut -d \"/\" -f 2).pdf; done\n\nmv $line ./xyz/$(echo $line | cut -d \"/\" -f 2).pdf"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "blkid",
+      "MP Summary": "locate/print block device attributes",
+      "Most Similar TLDR Task": "List all partitions in a table, including current mountpoints",
+      "Most Similar TLDR Script": "sudo blkid -o list",
+      "Most Similar NL2Bash Task": "display all files in the entire file system excluding those that are in the transfer directory",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find / -name /transfer -prune -o -print\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-prune": "True; if the file is a directory, do not descend into it. If -depth is given, then\n -prune has no effect. Because -delete implies -depth, you cannot usefully use\n -prune and -delete together.\n For example, to skip the directory `src/emacs' and all files and directories\n under it, and print the names of the other files found, do something like this:\n find . -path ./src/emacs -prune -o -print",
+              "-print": "Quoting is handled in the same way as for -printf and -fprintf. If you are using\n find in a script or in a situation where the matched files might have arbitrary\n names, you should consider using -print0 instead of -print."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_1220537: Using rsync to back up /home folder with same permissions, recursive"
+      ],
+      "Top-3 Scripts": [
+        "au_1220537: sudo blkid"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "import",
+      "MP Summary": "saves any visible window on an X server and outputs it as an image file. You can capture a single window, the entire screen, or any rectangular portion of the screen.",
+      "Most Similar TLDR Task": "Capture contents of a remote X server screen in the PNG image format",
+      "Most Similar TLDR Script": "import -window root -display {{remote_host}}:{screen}.{display} {{output.png}}",
+      "Most Similar NL2Bash Task": "display all files in the entire file system excluding those that are in the transfer directory",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find / -name /transfer -prune -o -print\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-prune": "True; if the file is a directory, do not descend into it. If -depth is given, then\n -prune has no effect. Because -delete implies -depth, you cannot usefully use\n -prune and -delete together.\n For example, to skip the directory `src/emacs' and all files and directories\n under it, and print the names of the other files found, do something like this:\n find . -path ./src/emacs -prune -o -print",
+              "-print": "Quoting is handled in the same way as for -printf and -fprintf. If you are using\n find in a script or in a situation where the matched files might have arbitrary\n names, you should consider using -print0 instead of -print."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_11549253: measure data transfer rate with 200 simultaneous users"
+      ],
+      "Top-3 Scripts": [
+        "so_11549253: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "grep",
+      "MP Summary": "print lines that match patterns",
+      "Most Similar TLDR Task": "Invert match for excluding specific strings",
+      "Most Similar TLDR Script": "grep -v {{search_pattern}}",
+      "Most Similar NL2Bash Task": "display all files in the entire file system excluding those that are in the transfer directory",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find / -name /transfer -prune -o -print\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-prune": "True; if the file is a directory, do not descend into it. If -depth is given, then\n -prune has no effect. Because -delete implies -depth, you cannot usefully use\n -prune and -delete together.\n For example, to skip the directory `src/emacs' and all files and directories\n under it, and print the names of the other files found, do something like this:\n find . -path ./src/emacs -prune -o -print",
+              "-print": "Quoting is handled in the same way as for -printf and -fprintf. If you are using\n find in a script or in a situation where the matched files might have arbitrary\n names, you should consider using -print0 instead of -print."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_50619033: Rsync compare files in two directories. list only files with difference",
+        "so_63267974: Parse rsync stats, line Number of files with bash only"
+      ],
+      "Top-3 Scripts": [
+        "so_50619033: rsync -avcn folder1/* folder2/ | grep -v '/$'",
+        "so_63267974: "
+      ],
+      "Explanations about Options": {
+        "-v": "Invert the sense of matching, to select non-matching lines."
+      }
+    },
+    {
+      "Command": "fallocate",
+      "MP Summary": "preallocate or deallocate space to a file",
+      "Most Similar TLDR Task": "Shrink an already allocated file by 200MB",
+      "Most Similar TLDR Script": "fallocate --collapse-range --length {{200M}} {{path/to/file}}",
+      "Most Similar NL2Bash Task": "display all files in the entire file system excluding those that are in the transfer directory",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find / -name /transfer -prune -o -print\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-prune": "True; if the file is a directory, do not descend into it. If -depth is given, then\n -prune has no effect. Because -delete implies -depth, you cannot usefully use\n -prune and -delete together.\n For example, to skip the directory `src/emacs' and all files and directories\n under it, and print the names of the other files found, do something like this:\n find . -path ./src/emacs -prune -o -print",
+              "-print": "Quoting is handled in the same way as for -printf and -fprintf. If you are using\n find in a script or in a situation where the matched files might have arbitrary\n names, you should consider using -print0 instead of -print."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_649893: rsync delete files during transfer"
+      ],
+      "Top-3 Scripts": [
+        "ul_649893: fallocate -p"
+      ],
+      "Explanations about Options": {
+        "-p": "Deallocates space (i.e., creates a hole) in the byte range starting at offset and\n continuing for length bytes. Within the specified range, partial filesystem blocks\n are zeroed, and whole filesystem blocks are removed from the file. After a\n successful call, subsequent reads from this range will return zeroes. This option\n may not be specified at the same time as the --zero-range option. Also, when using\n this option, --keep-size is implied."
+      }
+    },
+    {
+      "Command": "go",
+      "MP Summary": "tool for managing Go source code",
+      "Most Similar TLDR Task": "Download and install a package, specified by its import path",
+      "Most Similar TLDR Script": "go get {{package_path}}",
+      "Most Similar NL2Bash Task": "display all files in the entire file system excluding those that are in the transfer directory",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find / -name /transfer -prune -o -print\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-prune": "True; if the file is a directory, do not descend into it. If -depth is given, then\n -prune has no effect. Because -delete implies -depth, you cannot usefully use\n -prune and -delete together.\n For example, to skip the directory `src/emacs' and all files and directories\n under it, and print the names of the other files found, do something like this:\n find . -path ./src/emacs -prune -o -print",
+              "-print": "Quoting is handled in the same way as for -printf and -fprintf. If you are using\n find in a script or in a situation where the matched files might have arbitrary\n names, you should consider using -print0 instead of -print."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_180740: Using Rsync in conjunction with Find"
+      ],
+      "Top-3 Scripts": [
+        "ul_180740: The  filenames  that  are read from the FILE are all relative to\n  the source dir -- any leading slashes are removed  and  no  \"..\"\n  references  are  allowed  to go higher than the source dir."
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "date",
+      "MP Summary": "print or set the system date and time",
+      "Most Similar TLDR Task": "Convert a specific date to the Unix timestamp format",
+      "Most Similar TLDR Script": "date -d \"{{2018-09-01 00:00}}\" +%s --utc",
+      "Most Similar NL2Bash Task": "display all files in the entire file system excluding those that are in the transfer directory",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find / -name /transfer -prune -o -print\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-prune": "True; if the file is a directory, do not descend into it. If -depth is given, then\n -prune has no effect. Because -delete implies -depth, you cannot usefully use\n -prune and -delete together.\n For example, to skip the directory `src/emacs' and all files and directories\n under it, and print the names of the other files found, do something like this:\n find . -path ./src/emacs -prune -o -print",
+              "-print": "Quoting is handled in the same way as for -printf and -fprintf. If you are using\n find in a script or in a situation where the matched files might have arbitrary\n names, you should consider using -print0 instead of -print."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_542941: How to tell rsync to only fetch files with wW4 in the name"
+      ],
+      "Top-3 Scripts": [
+        "ul_542941: date +%U"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "printf",
+      "MP Summary": "format and print data",
+      "Most Similar TLDR Task": "Store a formatted message in a variable (does not work on zsh)",
+      "Most Similar TLDR Script": "printf -v {{myvar}} {{\"This is %s = %d\\n\" \"a year\" 2016}}",
+      "Most Similar NL2Bash Task": "display all files in the entire file system excluding those that are in the transfer directory",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find / -name /transfer -prune -o -print\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-prune": "True; if the file is a directory, do not descend into it. If -depth is given, then\n -prune has no effect. Because -delete implies -depth, you cannot usefully use\n -prune and -delete together.\n For example, to skip the directory `src/emacs' and all files and directories\n under it, and print the names of the other files found, do something like this:\n find . -path ./src/emacs -prune -o -print",
+              "-print": "Quoting is handled in the same way as for -printf and -fprintf. If you are using\n find in a script or in a situation where the matched files might have arbitrary\n names, you should consider using -print0 instead of -print."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_63267974: Parse rsync stats, line Number of files with bash only"
+      ],
+      "Top-3 Scripts": [
+        "so_63267974: declare -A stats=()\nwhile read -r k v; do stats[\"$k\"]=\"$v\"; done < <( \\\n  printf \"%s\\n\" \"$rawstats\" | \\\n    perl -ne '/Number of files: (\\d+)/ or next; print \"total $1\\n\"; print \"$1 $2\\n\" while (/([a-z]+): (\\d+)/g)' \\\n)"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "vlc",
+      "MP Summary": "the VLC media player",
+      "Most Similar TLDR Task": "Play repeatedly",
+      "Most Similar TLDR Script": "vlc --loop {{path/to/file}}",
+      "Most Similar NL2Bash Task": "display all files in the entire file system excluding those that are in the transfer directory",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find / -name /transfer -prune -o -print\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-prune": "True; if the file is a directory, do not descend into it. If -depth is given, then\n -prune has no effect. Because -delete implies -depth, you cannot usefully use\n -prune and -delete together.\n For example, to skip the directory `src/emacs' and all files and directories\n under it, and print the names of the other files found, do something like this:\n find . -path ./src/emacs -prune -o -print",
+              "-print": "Quoting is handled in the same way as for -printf and -fprintf. If you are using\n find in a script or in a situation where the matched files might have arbitrary\n names, you should consider using -print0 instead of -print."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_12197: Syncing directories in both directions with rsync"
+      ],
+      "Top-3 Scripts": [
+        "ul_12197: $ unison -perms 0 vlc-2.2.0/ /media/sf_vlc/vlc\nContacting server...\nLooking for changes\nReconciling changes\n\nvlc-2.2.0      vlc                \nnew dir  ---->            /  [f] \n\nProceed with propagating updates? [] y\nPropagating updates"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "gedit",
+      "MP Summary": "text editor for the GNOME Desktop",
+      "Most Similar TLDR Task": "Open multiple text files",
+      "Most Similar TLDR Script": "gedit {{file1 file2 ...}}",
+      "Most Similar NL2Bash Task": "display all files in the entire file system excluding those that are in the transfer directory",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find / -name /transfer -prune -o -print\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-prune": "True; if the file is a directory, do not descend into it. If -depth is given, then\n -prune has no effect. Because -delete implies -depth, you cannot usefully use\n -prune and -delete together.\n For example, to skip the directory `src/emacs' and all files and directories\n under it, and print the names of the other files found, do something like this:\n find . -path ./src/emacs -prune -o -print",
+              "-print": "Quoting is handled in the same way as for -printf and -fprintf. If you are using\n find in a script or in a situation where the matched files might have arbitrary\n names, you should consider using -print0 instead of -print."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_677773: Transfer file to Windows server from Ubuntu"
+      ],
+      "Top-3 Scripts": [
+        "au_677773: sudo gedit /etc/fstab\n\ngedit ~/.smbcredentials"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "pi",
+      "MP Summary": "compute decimal Archimedes' constant Pi to arbitrary accuracy.",
+      "Most Similar TLDR Task": "Display a specified number of decimal digits of Archimedes' constant Pi",
+      "Most Similar TLDR Script": "pi {{number}}",
+      "Most Similar NL2Bash Task": "display all files in the entire file system excluding those that are in the transfer directory",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find / -name /transfer -prune -o -print\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-prune": "True; if the file is a directory, do not descend into it. If -depth is given, then\n -prune has no effect. Because -delete implies -depth, you cannot usefully use\n -prune and -delete together.\n For example, to skip the directory `src/emacs' and all files and directories\n under it, and print the names of the other files found, do something like this:\n find . -path ./src/emacs -prune -o -print",
+              "-print": "Quoting is handled in the same way as for -printf and -fprintf. If you are using\n find in a script or in a situation where the matched files might have arbitrary\n names, you should consider using -print0 instead of -print."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_65937939: what options to use with rsync to sync online new files to remote ntfs drive?"
+      ],
+      "Top-3 Scripts": [
+        "so_65937939: rsync -re \"ssh -p 1234\u201d -K -L --copy-links --append --size-only --delete pi@remote.server.ip:/home/pi/source-directory/* /home/pi/target-directory/"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "perl",
+      "MP Summary": "The Perl 5 language interpreter",
+      "Most Similar TLDR Task": "Run a multi-line find/replace expression on a file, and save the result in another file",
+      "Most Similar TLDR Script": "perl -p0e 's/{{foo\\nbar}}/{{foobar}}/g' {{input_file}} > {{output_file}}",
+      "Most Similar NL2Bash Task": "display all files in the entire file system excluding those that are in the transfer directory",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find / -name /transfer -prune -o -print\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-prune": "True; if the file is a directory, do not descend into it. If -depth is given, then\n -prune has no effect. Because -delete implies -depth, you cannot usefully use\n -prune and -delete together.\n For example, to skip the directory `src/emacs' and all files and directories\n under it, and print the names of the other files found, do something like this:\n find . -path ./src/emacs -prune -o -print",
+              "-print": "Quoting is handled in the same way as for -printf and -fprintf. If you are using\n find in a script or in a situation where the matched files might have arbitrary\n names, you should consider using -print0 instead of -print."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_63267974: Parse rsync stats, line Number of files with bash only"
+      ],
+      "Top-3 Scripts": [
+        "so_63267974: declare -A stats=()\nwhile read -r k v; do stats[\"$k\"]=\"$v\"; done < <( \\\n  printf \"%s\\n\" \"$rawstats\" | \\\n    perl -ne '/Number of files: (\\d+)/ or next; print \"total $1\\n\"; print \"$1 $2\\n\" while (/([a-z]+): (\\d+)/g)' \\\n)"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "opt",
+      "MP Summary": "LLVM optimizer",
+      "Most Similar TLDR Task": "Optimize the program at level 2 and output the result to another file",
+      "Most Similar TLDR Script": "opt -O2 {{path/to/file.bc}} -S -o {{path/to/output_file.bc}}",
+      "Most Similar NL2Bash Task": "display all files in the entire file system excluding those that are in the transfer directory",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find / -name /transfer -prune -o -print\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-prune": "True; if the file is a directory, do not descend into it. If -depth is given, then\n -prune has no effect. Because -delete implies -depth, you cannot usefully use\n -prune and -delete together.\n For example, to skip the directory `src/emacs' and all files and directories\n under it, and print the names of the other files found, do something like this:\n find . -path ./src/emacs -prune -o -print",
+              "-print": "Quoting is handled in the same way as for -printf and -fprintf. If you are using\n find in a script or in a situation where the matched files might have arbitrary\n names, you should consider using -print0 instead of -print."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_334859: How do I remotely exclude subdirectories with rsync?"
+      ],
+      "Top-3 Scripts": [
+        "ul_334859: rsync -avr -e ssh root@10.18.30.1:/opt/intranet . --exclude=helpdesk"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "hexdump",
+      "MP Summary": "ASCII, decimal, hexadecimal, octal dump",
+      "Most Similar TLDR Task": "Print the hexadecimal representation of a file",
+      "Most Similar TLDR Script": "hexdump {{file}}",
+      "Most Similar NL2Bash Task": "display all files in the entire file system excluding those that are in the transfer directory",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find / -name /transfer -prune -o -print\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-prune": "True; if the file is a directory, do not descend into it. If -depth is given, then\n -prune has no effect. Because -delete implies -depth, you cannot usefully use\n -prune and -delete together.\n For example, to skip the directory `src/emacs' and all files and directories\n under it, and print the names of the other files found, do something like this:\n find . -path ./src/emacs -prune -o -print",
+              "-print": "Quoting is handled in the same way as for -printf and -fprintf. If you are using\n find in a script or in a situation where the matched files might have arbitrary\n names, you should consider using -print0 instead of -print."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_550315: Multiple processes redirecting to the same file with >"
+      ],
+      "Top-3 Scripts": [
+        "ul_550315: $ hexdump -C file\n00000000  31 32 33 0a 00 00 77 6f  72 6c 64 0a              |123...world.|\n0000000c\n\n$ hexdump -C file\n00000000  31 32 33 35 36 37 77 6f  72 6c 64 0a              |123567world.|\n0000000c"
+      ],
+      "Explanations about Options": {
+        "-C": "Canonical hex+ASCII display. Display the input offset in hexadecimal , followed by\n sixteen space-separated, two column, hexadecimal bytes, followed by the same sixteen\n bytes in %_p format enclosed in ``|'' characters."
+      }
+    },
+    {
+      "Command": "hostname",
+      "MP Summary": "show or set the system's host name",
+      "Most Similar TLDR Task": "Show the FQDN (Fully Qualified Domain Name)",
+      "Most Similar TLDR Script": "hostname --fqdn",
+      "Most Similar NL2Bash Task": "display all files in the entire file system excluding those that are in the transfer directory",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find / -name /transfer -prune -o -print\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-prune": "True; if the file is a directory, do not descend into it. If -depth is given, then\n -prune has no effect. Because -delete implies -depth, you cannot usefully use\n -prune and -delete together.\n For example, to skip the directory `src/emacs' and all files and directories\n under it, and print the names of the other files found, do something like this:\n find . -path ./src/emacs -prune -o -print",
+              "-print": "Quoting is handled in the same way as for -printf and -fprintf. If you are using\n find in a script or in a situation where the matched files might have arbitrary\n names, you should consider using -print0 instead of -print."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_127352: Specify identity file (id_rsa) with rsync"
+      ],
+      "Top-3 Scripts": [
+        "ul_127352: Host hostname\n    User username\n    IdentityFile ~/.ssh/somekey"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "cut",
+      "MP Summary": "remove sections from each line of files",
+      "Most Similar TLDR Task": "Cut out everything from the 3rd character to the end of each line",
+      "Most Similar TLDR Script": "cut -c {{3-}}",
+      "Most Similar NL2Bash Task": "display all files in the entire file system excluding those that are in the transfer directory",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find / -name /transfer -prune -o -print\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-prune": "True; if the file is a directory, do not descend into it. If -depth is given, then\n -prune has no effect. Because -delete implies -depth, you cannot usefully use\n -prune and -delete together.\n For example, to skip the directory `src/emacs' and all files and directories\n under it, and print the names of the other files found, do something like this:\n find . -path ./src/emacs -prune -o -print",
+              "-print": "Quoting is handled in the same way as for -printf and -fprintf. If you are using\n find in a script or in a situation where the matched files might have arbitrary\n names, you should consider using -print0 instead of -print."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_199301: find files based on name and moving them with renaming simultaneously"
+      ],
+      "Top-3 Scripts": [
+        "ul_199301: find -name 161901.pdf | while read -r line; do mv $line ./xyz/$(echo $line | cut -d \"/\" -f 2).pdf; done\n\nmv $line ./xyz/$(echo $line | cut -d \"/\" -f 2).pdf\n\ncut -d \"/\" -f 2"
+      ],
+      "Explanations about Options": {
+        "-d": "use DELIM instead of TAB for field delimiter",
+        "-f": "select only these fields; also print any line that contains no delimiter\n character, unless the -s option is specified"
+      }
+    }
+  ]
+}

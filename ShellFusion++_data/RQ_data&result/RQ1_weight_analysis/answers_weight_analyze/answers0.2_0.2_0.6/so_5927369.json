@@ -1,0 +1,91 @@
+{
+  "Query": "Recursively look for files with a specific extension",
+  "Answers": [
+    {
+      "Command": "find",
+      "MP Summary": "search for files in a directory hierarchy",
+      "Most Similar TLDR Task": "Find files by extension",
+      "Most Similar TLDR Script": "find {{root_path}} -name '{{*.ext}}'",
+      "Top-3 Similar Questions": [
+        "so_25693638: Recursively find files with a specific extension",
+        "nl2bash_3759: Find all files/directories matching the regex pattern \".*\\\\.rb$\" under current directory",
+        "so_4998290: How to find all file extensions recursively from a directory?"
+      ],
+      "Top-3 Scripts": [
+        "so_25693638: find . -name '*.jpg' -o -name '*.png' -print | grep Robert",
+        "nl2bash_3759: find . -regex \".*\\\\.rb$\"",
+        "so_4998290: find . -type f -name '*.*' | sed 's|.*\\.||' | sort -u"
+      ],
+      "Explanations about Options": {
+        "-regex": "File name matches regular expression pattern. This is a match on the whole path,\n not a search. For example, to match a file named `./fubar3', you can use the\n regular expression `.*bar.' or `.*b.*3', but not `f.*r3'. The regular expressions\n understood by find are by default Emacs Regular Expressions (except that `.'\n matches newline), but this can be changed with the -regextype option.",
+        "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+        "-print": "Quoting is handled in the same way as for -printf and -fprintf. If you are using\n find in a script or in a situation where the matched files might have arbitrary\n names, you should consider using -print0 instead of -print.",
+        "-type": "File is of type c:"
+      }
+    },
+    {
+      "Command": "mv",
+      "MP Summary": "move (rename) files",
+      "Most Similar TLDR Task": "Move files in arbitrary locations",
+      "Most Similar TLDR Script": "mv {{source}} {{target}}",
+      "Top-3 Similar Questions": [
+        "au_766644: Find a file beginning with a string but having a specific extension",
+        "so_16701618: How to find files differing only by extension",
+        "so_61044889: Bash: Find all files with specific extension and rename them according to first line of content within each file"
+      ],
+      "Top-3 Scripts": [
+        "au_766644: find . -type f -name 'start*.ext' -exec mv -i {} foobar.txt \\;\n\nfind . -maxdepth 1 -type f -name 'start*.ext' -exec mv -i {} foobar.txt \\;",
+        "so_16701618: $ mv `ls *.sql|sed s/.sql$/.txt/g` dir\n\n$ ls\na.sql b.sql a.txt b.txt c.txt\n$ echo mv `ls *.sql|sed s/.sql/.txt/g` dir\nmv a.txt b.txt dir\n\n$ for f in *.sql; do mv \"$(echo $f|sed s/.sql$/txt/)\" dir; done\n\n$ for f in *.sql; do mv \"$f\" \"$(echo $f|sed s/.sql$/txt/)\" dir; done",
+        "so_61044889: find . -type f -name '*.txt' -exec sh -c '\n  for file; do\n    if newname=$(grep -m1 \"specific text\" \"$file\"); then\n       echo mv -i \"$file\" \"${file%/*}/${newname}.txt\" \n    fi\n  done\n' sh {} +"
+      ],
+      "Explanations about Options": {
+        "-i": "prompt before overwrite"
+      }
+    },
+    {
+      "Command": "file",
+      "MP Summary": "determine file type",
+      "Most Similar TLDR Task": "Look inside a zipped file and determine the file type(s) inside",
+      "Most Similar TLDR Script": "file -z {{foo.zip}}",
+      "Top-3 Similar Questions": [
+        "so_38895490: bash finding files in directories recursively",
+        "so_59253913: search recursive files with type of data that ended with specific extension in order to delete the files",
+        "so_61044889: Bash: Find all files with specific extension and rename them according to first line of content within each file"
+      ],
+      "Top-3 Scripts": [
+        "so_38895490: for file in `ls $1`",
+        "so_59253913: find \"${path}\" \\\n    -type f \\\n    -name '*.pppd' \\\n    -exec bash -c 'test \"$(file \"${1}\"|awk -F: \"{print \\$NF}\")\" = \"data\"' -- {} \\; \\\n    -print",
+        "so_61044889: $file"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "dirname",
+      "MP Summary": "strip last component from file name",
+      "Most Similar TLDR Task": "Calculate the parent directory of multiple paths",
+      "Most Similar TLDR Script": "dirname {{path/to/file_a}} {{path/to/directory_b}}",
+      "Top-3 Similar Questions": [
+        "nl2bash_5429: Finds all folders that contain 'ssh' file and have 'bin' in path."
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_5429: dirname `find / -name ssh | grep bin`\n\n\nfind / -name ssh|grep bin|xargs dirname"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "mkdir",
+      "MP Summary": "make directories",
+      "Most Similar TLDR Task": "Create directories recursively (useful for creating nested dirs)",
+      "Most Similar TLDR Script": "mkdir -p {{path/to/directory}}",
+      "Top-3 Similar Questions": [
+        "so_22161083: Script to look at files in a directory"
+      ],
+      "Top-3 Scripts": [
+        "so_22161083: trash=/home/user/Trash\nrestore=$HOME/restored/\nmkdir -p \"$restore\" 2>/dev/null\n\nfor files in \"$trash\"/*\ndo\n  read -p \"Do you want to keep $file (y/n): \" yn\n  [[ \"$yn\" == [yY] ]] && mv \"$file\" \"restore\"\ndone"
+      ],
+      "Explanations about Options": {
+        "-p": "no error if existing, make parent directories as needed"
+      }
+    }
+  ]
+}

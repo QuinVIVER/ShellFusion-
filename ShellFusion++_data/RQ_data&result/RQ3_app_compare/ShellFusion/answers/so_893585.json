@@ -1,0 +1,76 @@
+{
+    "Answers": [
+        {
+            "Command": "xmllint",
+            "Explanations about Options": {
+                "--format(M)": "Reformat and reindent the output. The XMLLINT_INDENT environment variable controls the\n indentation. The default value is two spaces \" \").",
+                "--shell(M)": "Run a navigating shell. Details on available commands in shell mode are below (see the\n section called “SHELL COMMANDS”).",
+                "--xpath(M)": "Run an XPath expression given as argument and print the result. In case of a nodeset\n result, each node in the node set is serialized in full in the output. In case of an\n empty node set the \"XPath set is empty\" result will be shown and an error exit code\n will be returned."
+            },
+            "MP Summary": "command line XML tool",
+            "Most Similar TLDR Script": "xmllint --format {{source_file.xml}}",
+            "Most Similar TLDR Task": "Return human-readable (indented) XML from file",
+            "Top-3 Scripts": [
+                "so_16711592: xmllint --xpath '//Read[@IsIndexedRead = \"Y\"]/@NumCycles' RunInfo.xml | grep -o '[0-9]\\+'\n\nxmllint --xpath '//Read[@IsIndexedRead = \"N\"]/@NumCycles' RunInfo.xml | grep -o '[0-9]\\+'",
+                "so_34766833: echo \"$content\" | xmllint --xpath '//metadata/versioning/versions/version/text()' -\n\nxmllint --xpath '//metadata/versioning/versions/version/text()' file.xml\n\n$ id=1.0.0\n$ xmllint --xpath \"//metadata/versionsing/versions/version[text() = '$id']/text()\" file.xml\n1.0.0\n\nid=1.2.3\nxpath=\"//metadata/versionsing/versions/version[text() = '$id']\"\nif xmllint --xpath \"$xpath\" file.xml 2>/dev/null\nthen\n    echo \"version $id found\"\nelse\n    echo \"version $id not found\"\nfi",
+                "so_63163788: #!/usr/bin/env bash\n\n# Read the array from the output of processing xml\nmapfile -t array < <(\n  xmllint --shell <<<'cat //factor/@name' a.xml |\n    sed -n 's: name=\\\"\\(.*\\)\\\":\\1:p'\n)\n\n# Debug print the array declaration\ntypeset -p array\n\n#!/usr/bin/env bash\n\n# Read the array from the output of processing xml\nIFS=$'\\n' read -r -d '' -a array < <(\n  xmllint --shell <<<'cat //factor/@name' a.xml |\n    sed -n 's: name=\\\"\\(.*\\)\\\":\\1:p'\n)"
+            ],
+            "Top-3 Similar Questions": [
+                "so_16711592: parsing xml file in unix",
+                "so_34766833: Search for value in xml file bash script",
+                "so_63163788: How do I parse certain tags from an XML file and store them in an array using Bash?"
+            ]
+        },
+        {
+            "Command": "eval",
+            "Explanations about Options": {},
+            "MP Summary": "construct command by concatenating arguments",
+            "Most Similar TLDR Script": "eval \"{{foo=bar}}\"",
+            "Most Similar TLDR Task": "Set a variable in the current shell",
+            "Top-3 Scripts": [
+                "so_17424225: #!/bin/bash\n\nName=\"InvalidName\"\nwhile read line; do\n        case \"$line\" in\n                Name=*) eval \"$line\" ;; # assuming $line is always bash-friendly Name=\"Value\"\n                *) echo \"$Name;$line\" ;;\n        esac\ndone < <(egrep -o 'Name=\".*\"|<!\\[CDATA\\[.*?\\]\\]>' file.xml | sed -r 's/<!\\[CDATA\\[\"(.*)\"\\]\\]>/\\1/')"
+            ],
+            "Top-3 Similar Questions": [
+                "so_17424225: Should I parse this XML with BASH?"
+            ]
+        },
+        {
+            "Command": "perl",
+            "Explanations about Options": {},
+            "MP Summary": "The Perl 5 language interpreter",
+            "Most Similar TLDR Script": "perl {{script.pl}}",
+            "Most Similar TLDR Task": "Parse and execute a Perl script",
+            "Top-3 Scripts": [
+                "so_22808621: find /tmp/ -name \"testq.xml\" -exec perl -p -e \"s;name=\\\"text_$i\\\".*</string>;name=\\\"text_$i\\\">$my_var</string>;g\" '{}' \\;"
+            ],
+            "Top-3 Similar Questions": [
+                "so_22808621: Parsing XML via a shell script"
+            ]
+        },
+        {
+            "Command": "usage",
+            "Explanations about Options": {},
+            "MP Summary": "command-line parsing for shell scripts",
+            "Most Similar TLDR Script": "",
+            "Most Similar TLDR Task": "",
+            "Top-3 Scripts": [],
+            "Top-3 Similar Questions": [
+                "so_13306457: parse a special xml in python"
+            ]
+        },
+        {
+            "Command": "export",
+            "Explanations about Options": {},
+            "MP Summary": "set the export attribute for variables",
+            "Most Similar TLDR Script": "export PATH=$PATH:{{path/to/append}}",
+            "Most Similar TLDR Task": "Append something to the PATH variable",
+            "Top-3 Scripts": [
+                "so_17424225: #!/bin/bash\n\nName=\"InvalidName\"\nwhile read line; do\n        case \"$line\" in\n                Name=*) export -n \"$line\" ;; # assuming $line is always bash-friendly Name=Value\n                *) echo \"$Name;$line\" ;;\n        esac\ndone < <(egrep -o 'Name=\".*\"|<!\\[CDATA\\[.*?\\]\\]>' file.xml | sed -r 's/<!\\[CDATA\\[\"(.*?)\"\\]\\]>/\\1/; s/Name=\"(.*)\"/Name=\\1/')"
+            ],
+            "Top-3 Similar Questions": [
+                "so_17424225: Should I parse this XML with BASH?"
+            ]
+        }
+    ],
+    "Query": "How to parse XML in Bash?"
+}

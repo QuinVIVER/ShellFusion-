@@ -1,0 +1,70 @@
+{
+  "Query": "How to share a wired Internet connection with an Android phone (reverse-tethering)?",
+  "Answers": [
+    {
+      "Command": "sudo",
+      "Top-3 Similar Questions": [
+        "au_926116: Share my VPN connection with other LAN users",
+        "ul_234552: Create wireless access point and share internet connection with nmcli",
+        "au_1287717: How to share data Internet connection of Android Galaxy A01 with Ubuntu?"
+      ],
+      "Top-3 Scripts": [
+        "au_926116: sudo apt-get install hostapd -y\n\nsudo apt install dnsmasq",
+        "ul_234552: sudo vim /etc/NetworkManager/system-connections/Hotspot\n\nsudo systemctl restart NetworkManager",
+        "au_1287717: sudo apt install adb"
+      ]
+    },
+    {
+      "Command": "nat",
+      "Top-3 Similar Questions": [
+        "au_926116: Share my VPN connection with other LAN users",
+        "su_1633155: Share wifi connection with ethernet",
+        "so_64428220: sharing internet connection from two different connections with iptables"
+      ],
+      "Top-3 Scripts": [
+        "au_926116: iptables -t nat -A POSTROUTING -o tun+ -j MASQUERADE\n\niptables -A FORWARD -i wlan+ -o tun+ -j ACCEPT\niptables -A FORWARD -o tun+ -j ACCEPT\niptables -A FORWARD -i tun+ -m conntrack --ctstate ESTABLISHED,RELATED   -j ACCEPT\niptables -A INPUT -i tun+ -j ACCEPT",
+        "su_1633155: sudo iptables -t nat -A POSTROUTING -o wlan0 -j MASQUERADE",
+        "so_64428220: iptables -A FORWARD -o wlan0 -i eth0 -s 192.168.2.0/24 -m conntrack --ctstate NEW -j ACCEPT\niptables -A FORWARD -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT\niptables -t nat -F POSTROUTING\niptables -t nat -A POSTROUTING -o wlan0 -j MASQUERADE\niptables-save | tee /etc/iptables.sav\niptables-restore < /etc/iptables.sav\nsysctl net.ipv4.ip_forward=1\nip route add default via 192.168.2.230\n/etc/init.d/networking restart\n\niptables -D FORWARD -o wlan0 -i eth0 -s 192.168.2.0/24 -m conntrack --ctstate NEW -j ACCEPT\niptables -D FORWARD -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT\niptables -t nat -F POSTROUTING\niptables-save | tee /etc/iptables.sav\niptables-restore < /etc/iptables.sav\nsysctl net.ipv4.ip_forward=0\nip route del 192.168.2.0/24\n/etc/init.d/networking restart\n\niptables -D FORWARD -o ppp0 -i eth0 -s 192.168.2.0/24 -m conntrack --ctstate NEW -j ACCEPT\niptables -D FORWARD -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT\niptables -t nat -F POSTROUTING\niptables-save | tee /etc/iptables.sav\niptables-restore < /etc/iptables.sav\nsysctl net.ipv4.ip_forward=0\nip route del 192.168.2.0/24\n/etc/init.d/networking restart"
+      ]
+    },
+    {
+      "Command": "sysctl",
+      "Top-3 Similar Questions": [
+        "au_926116: Share my VPN connection with other LAN users",
+        "su_1633155: Share wifi connection with ethernet",
+        "so_64428220: sharing internet connection from two different connections with iptables"
+      ],
+      "Top-3 Scripts": [
+        "au_926116: echo \"net.ipv4.ip_forward=1\" >> /etc/sysctl.conf && sysctl\n-p",
+        "su_1633155: sudo sysctl net.ipv4.ip_forward=1",
+        "so_64428220: iptables -A FORWARD -o wlan0 -i eth0 -s 192.168.2.0/24 -m conntrack --ctstate NEW -j ACCEPT\niptables -A FORWARD -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT\niptables -t nat -F POSTROUTING\niptables -t nat -A POSTROUTING -o wlan0 -j MASQUERADE\niptables-save | tee /etc/iptables.sav\niptables-restore < /etc/iptables.sav\nsysctl net.ipv4.ip_forward=1\nip route add default via 192.168.2.230\n/etc/init.d/networking restart\n\niptables -D FORWARD -o wlan0 -i eth0 -s 192.168.2.0/24 -m conntrack --ctstate NEW -j ACCEPT\niptables -D FORWARD -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT\niptables -t nat -F POSTROUTING\niptables-save | tee /etc/iptables.sav\niptables-restore < /etc/iptables.sav\nsysctl net.ipv4.ip_forward=0\nip route del 192.168.2.0/24\n/etc/init.d/networking restart\n\niptables -D FORWARD -o ppp0 -i eth0 -s 192.168.2.0/24 -m conntrack --ctstate NEW -j ACCEPT\niptables -D FORWARD -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT\niptables -t nat -F POSTROUTING\niptables-save | tee /etc/iptables.sav\niptables-restore < /etc/iptables.sav\nsysctl net.ipv4.ip_forward=0\nip route del 192.168.2.0/24\n/etc/init.d/networking restart"
+      ]
+    },
+    {
+      "Command": "install",
+      "Top-3 Similar Questions": [
+        "au_926116: Share my VPN connection with other LAN users",
+        "au_1287717: How to share data Internet connection of Android Galaxy A01 with Ubuntu?",
+        "au_968720: Problems sharing internet to my phone"
+      ],
+      "Top-3 Scripts": [
+        "au_926116: sudo apt-get install hostapd -y\n\nsudo apt install dnsmasq",
+        "au_1287717: sudo apt install adb",
+        "au_968720: sudo apt-get install dnsmasq"
+      ]
+    },
+    {
+      "Command": "echo",
+      "Top-3 Similar Questions": [
+        "au_926116: Share my VPN connection with other LAN users",
+        "ul_249562: How to share a ppp internet connection over wlan interface on ubuntu?",
+        "au_167538: how to share WIFI internet to LAN port?"
+      ],
+      "Top-3 Scripts": [
+        "au_926116: echo \"net.ipv4.ip_forward=1\" >> /etc/sysctl.conf && sysctl\n-p\n\necho 1 > /proc/sys/net/ip/ipv4/ip_forward",
+        "ul_249562: sudo echo 1 > /proc/sys/net/ipv4/ip_forward",
+        "au_167538: /bin/echo 1 > /proc/sys/net/ipv4/ip_forward"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,1095 @@
+{
+  "Query": "Display curl output in readable JSON format in Unix shell script",
+  "Answers": [
+    {
+      "Command": "curl",
+      "MP Summary": "transfer a URL",
+      "Most Similar TLDR Task": "Send data in JSON format, specifying the appropriate content-type header",
+      "Most Similar TLDR Script": "curl -d {{'{\"name\":\"bob\"}'}} -H {{'Content-Type: application/json'}} {{http://example.com/users/1234}}",
+      "Most Similar NL2Bash Task": "Find files accessed at 23:59",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -atime -1 -print\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-print": "Quoting is handled in the same way as for -printf and -fprintf. If you are using\n find in a script or in a situation where the matched files might have arbitrary\n names, you should consider using -print0 instead of -print.",
+              "-atime": "File was last accessed n*24 hours ago. When find figures out how many 24-hour\n periods ago the file was last accessed, any fractional part is ignored, so to match\n -atime +1, a file has to have been accessed at least two days ago."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_52087680: Detect the final page of a paginated cURL response in a Bash loop",
+        "nl2bash_12312: Download \"http://www.multitran.ru/c/m.exe?CL=1&s=hello&l1=1\" and convert encoding to \"windows-1251\" and print only printable characters",
+        "nl2bash_12311: Download \"http://www.multitran.ru/c/m.exe?CL=1&s=hello&l1=1\" and convert encoding to \"windows-1251\" and print only printable characters"
+      ],
+      "Top-3 Scripts": [
+        "so_52087680: for ((i=0; ; i+=100)); do\n    contents=$(curl -u \"username:password\" -H \"Content-Type: application/json\" \"https://<url>/api/core/v3/places?count=100&startIndex=$i\")\n    echo \"$contents\" > $i.json\n    if jq -e '.list | length == 0' >/dev/null; then \n       break\n    fi <<< \"$contents\"\ndone",
+        "nl2bash_12312: curl 'http://www.multitran.ru/c/m.exe?CL=1&s=hello&l1=1' | iconv -f windows-1251 | tr -dc '[:print:]'",
+        "nl2bash_12311: curl 'http://www.multitran.ru/c/m.exe?CL=1&s=hello&l1=1' | iconv -f windows-1251 | tr -dc '[:print:]'"
+      ],
+      "Explanations about Options": {
+        "-u": "Specify the user name and password to use for server authentication. Overrides -n,\n --netrc and --netrc-optional."
+      }
+    },
+    {
+      "Command": "xargs",
+      "MP Summary": "build and execute command lines from standard input",
+      "Most Similar TLDR Task": "Run multiple chained commands on the input data",
+      "Most Similar TLDR Script": "{{arguments_source}} | xargs sh -c \"{{command1}} && {{command2}} | {{command3}}\"",
+      "Most Similar NL2Bash Task": "Find files accessed at 23:59",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -atime -1 -print\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-print": "Quoting is handled in the same way as for -printf and -fprintf. If you are using\n find in a script or in a situation where the matched files might have arbitrary\n names, you should consider using -print0 instead of -print.",
+              "-atime": "File was last accessed n*24 hours ago. When find figures out how many 24-hour\n periods ago the file was last accessed, any fractional part is ignored, so to match\n -atime +1, a file has to have been accessed at least two days ago."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_8396: search for all the jpg files in the folder \"/mnt/hda1/zdjecia/test1/\" and create a directory in /mnt/hda1/test with the same name as the mp3 file",
+        "nl2bash_4032: Find all files/directories under current directory with 'FooBar' in their paths and copy them to ~/foo/bar",
+        "nl2bash_12273: Convert *.au files to *.wav files using `sox'"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_8396: find /mnt/hda1/zdjecia/test1/ -type f -iname \u2018*.jpg\u2019 -printf \u2018%\u2019h\u2019\\'\u201d0\u2033 | xargs -0 -I \u2018{}\u2019 mkdir -p /mnt/hda1/test/{} \\;",
+        "nl2bash_4032: find . | grep \"FooBar\" | tr \\\\n \\\\0 | xargs -0 -I{} cp \"{}\" ~/foo/bar\n\n\nfind . | grep FooBar | xargs -I{} cp {} ~/foo/bar\n\n\nfind .|grep \"FooBar\"|xargs -I{} cp \"{}\" ~/foo/bar",
+        "nl2bash_12273: find -type f -name '*.au' | awk '{printf \"%s %s\\n\",$0,$0\".wav\" }' | xargs sox"
+      ],
+      "Explanations about Options": {
+        "-0": "Input items are terminated by a null character instead of by whitespace, and the\n quotes and backslash are not special (every character is taken literally).\n Disables the end of file string, which is treated like any other argument. Useful\n when input items might contain white space, quote marks, or backslashes. The GNU\n find -print0 option produces input suitable for this mode.",
+        "-I": "Replace occurrences of replace-str in the initial-arguments with names read from\n standard input. Also, unquoted blanks do not terminate input items; instead the\n separator is the newline character. Implies -x and -L 1."
+      }
+    },
+    {
+      "Command": "find",
+      "MP Summary": "search for files in a directory hierarchy",
+      "Most Similar TLDR Task": "Find files matching a given pattern, excluding specific paths",
+      "Most Similar TLDR Script": "find {{root_path}} -name '{{*.py}}' -not -path '{{*/site-packages/*}}'",
+      "Most Similar NL2Bash Task": "Find files accessed at 23:59",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -atime -1 -print\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-print": "Quoting is handled in the same way as for -printf and -fprintf. If you are using\n find in a script or in a situation where the matched files might have arbitrary\n names, you should consider using -print0 instead of -print.",
+              "-atime": "File was last accessed n*24 hours ago. When find figures out how many 24-hour\n periods ago the file was last accessed, any fractional part is ignored, so to match\n -atime +1, a file has to have been accessed at least two days ago."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_12274: Convert *.doc files in the current directory tree to the .txt format",
+        "nl2bash_8396: search for all the jpg files in the folder \"/mnt/hda1/zdjecia/test1/\" and create a directory in /mnt/hda1/test with the same name as the mp3 file",
+        "nl2bash_4032: Find all files/directories under current directory with 'FooBar' in their paths and copy them to ~/foo/bar"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_12274: find . -name '*.doc' | while read i; do antiword -i 1 \"${i}\" >\"${i/doc/txt}\"; done",
+        "nl2bash_8396: find /mnt/hda1/zdjecia/test1/ -type f -iname \u2018*.jpg\u2019 -printf \u2018%\u2019h\u2019\\'\u201d0\u2033 | xargs -0 -I \u2018{}\u2019 mkdir -p /mnt/hda1/test/{} \\;",
+        "nl2bash_4032: find . | grep \"FooBar\" | (mapfile -t; cp \"${MAPFILE[@]}\" ~/foobar)\n\n\nfind . | grep \"FooBar\" | tr \\\\n \\\\0 | xargs -0 -I{} cp \"{}\" ~/foo/bar\n\n\nfind . | grep FooBar | xargs -I{} cp {} ~/foo/bar\n\n\nfind .|grep \"FooBar\"|xargs -I{} cp \"{}\" ~/foo/bar\n\n\nfind .|grep \"FooBar\"|yargs -l 203 cp --after ~/foo/bar"
+      ],
+      "Explanations about Options": {
+        "-type": "File is of type c:",
+        "-printf": "True; print format on the standard output, interpreting `\\' escapes and `%'\n directives. Field widths and precisions can be specified as with the `printf' C\n function. Please note that many of the fields are printed as %s rather than %d,\n and this may mean that flags don't work as you might expect. This also means that\n the `-' flag does work (it forces fields to be left-aligned). Unlike -print,\n -printf does not add a newline at the end of the string. The escapes and\n directives are:",
+        "-iname": "Like -name, but the match is case insensitive. For example, the patterns `fo*' and\n `F??' match the file names `Foo', `FOO', `foo', `fOo', etc. The pattern `*foo*`\n will also match a file called '.foobar'.",
+        "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+      }
+    },
+    {
+      "Command": "tr",
+      "MP Summary": "translate or delete characters",
+      "Most Similar TLDR Task": "Replace all occurrences of a character from another command's output",
+      "Most Similar TLDR Script": "echo {{text}} | tr {{find_character}} {{replace_character}}",
+      "Most Similar NL2Bash Task": "Find files accessed at 23:59",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -atime -1 -print\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-print": "Quoting is handled in the same way as for -printf and -fprintf. If you are using\n find in a script or in a situation where the matched files might have arbitrary\n names, you should consider using -print0 instead of -print.",
+              "-atime": "File was last accessed n*24 hours ago. When find figures out how many 24-hour\n periods ago the file was last accessed, any fractional part is ignored, so to match\n -atime +1, a file has to have been accessed at least two days ago."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_4032: Find all files/directories under current directory with 'FooBar' in their paths and copy them to ~/foo/bar",
+        "nl2bash_12312: Download \"http://www.multitran.ru/c/m.exe?CL=1&s=hello&l1=1\" and convert encoding to \"windows-1251\" and print only printable characters",
+        "nl2bash_12311: Download \"http://www.multitran.ru/c/m.exe?CL=1&s=hello&l1=1\" and convert encoding to \"windows-1251\" and print only printable characters"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_4032: find . | grep \"FooBar\" | tr \\\\n \\\\0 | xargs -0 -I{} cp \"{}\" ~/foo/bar",
+        "nl2bash_12312: curl 'http://www.multitran.ru/c/m.exe?CL=1&s=hello&l1=1' | iconv -f windows-1251 | tr -dc '[:print:]'",
+        "nl2bash_12311: curl 'http://www.multitran.ru/c/m.exe?CL=1&s=hello&l1=1' | iconv -f windows-1251 | tr -dc '[:print:]'"
+      ],
+      "Explanations about Options": {
+        "-d": "delete characters in SET1, do not translate",
+        "-c": "use the complement of SET1"
+      }
+    },
+    {
+      "Command": "echo",
+      "MP Summary": "display a line of text",
+      "Most Similar TLDR Task": "Print a message with environment variables",
+      "Most Similar TLDR Script": "echo \"{{My path is $PATH}}\"",
+      "Most Similar NL2Bash Task": "Find files accessed at 23:59",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -atime -1 -print\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-print": "Quoting is handled in the same way as for -printf and -fprintf. If you are using\n find in a script or in a situation where the matched files might have arbitrary\n names, you should consider using -print0 instead of -print.",
+              "-atime": "File was last accessed n*24 hours ago. When find figures out how many 24-hour\n periods ago the file was last accessed, any fractional part is ignored, so to match\n -atime +1, a file has to have been accessed at least two days ago."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_52087680: Detect the final page of a paginated cURL response in a Bash loop"
+      ],
+      "Top-3 Scripts": [
+        "so_52087680: for ((i=0; ; i+=100)); do\n    contents=$(curl -u \"username:password\" -H \"Content-Type: application/json\" \"https://<url>/api/core/v3/places?count=100&startIndex=$i\")\n    echo \"$contents\" > $i.json\n    if jq -e '.list | length == 0' >/dev/null; then \n       break\n    fi <<< \"$contents\"\ndone"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "jq",
+      "MP Summary": "Command-line JSON processor",
+      "Most Similar TLDR Task": "Output a JSON file, in pretty-print format",
+      "Most Similar TLDR Script": "jq . {{file.json}}",
+      "Most Similar NL2Bash Task": "Find files accessed at 23:59",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -atime -1 -print\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-print": "Quoting is handled in the same way as for -printf and -fprintf. If you are using\n find in a script or in a situation where the matched files might have arbitrary\n names, you should consider using -print0 instead of -print.",
+              "-atime": "File was last accessed n*24 hours ago. When find figures out how many 24-hour\n periods ago the file was last accessed, any fractional part is ignored, so to match\n -atime +1, a file has to have been accessed at least two days ago."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_52087680: Detect the final page of a paginated cURL response in a Bash loop"
+      ],
+      "Top-3 Scripts": [
+        "so_52087680: for ((i=0; ; i+=100)); do\n    contents=$(curl -u \"username:password\" -H \"Content-Type: application/json\" \"https://<url>/api/core/v3/places?count=100&startIndex=$i\")\n    echo \"$contents\" > $i.json\n    if jq -e '.list | length == 0' >/dev/null; then \n       break\n    fi <<< \"$contents\"\ndone"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "iconv",
+      "MP Summary": "convert text from one character encoding to another",
+      "Most Similar TLDR Task": "Convert file to a specific encoding, and print to `stdout`",
+      "Most Similar TLDR Script": "iconv -f {{from_encoding}} -t {{to_encoding}} {{input_file}}",
+      "Most Similar NL2Bash Task": "Find files accessed at 23:59",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -atime -1 -print\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-print": "Quoting is handled in the same way as for -printf and -fprintf. If you are using\n find in a script or in a situation where the matched files might have arbitrary\n names, you should consider using -print0 instead of -print.",
+              "-atime": "File was last accessed n*24 hours ago. When find figures out how many 24-hour\n periods ago the file was last accessed, any fractional part is ignored, so to match\n -atime +1, a file has to have been accessed at least two days ago."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_12312: Download \"http://www.multitran.ru/c/m.exe?CL=1&s=hello&l1=1\" and convert encoding to \"windows-1251\" and print only printable characters",
+        "nl2bash_12311: Download \"http://www.multitran.ru/c/m.exe?CL=1&s=hello&l1=1\" and convert encoding to \"windows-1251\" and print only printable characters"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_12312: curl 'http://www.multitran.ru/c/m.exe?CL=1&s=hello&l1=1' | iconv -f windows-1251 | tr -dc '[:print:]'",
+        "nl2bash_12311: curl 'http://www.multitran.ru/c/m.exe?CL=1&s=hello&l1=1' | iconv -f windows-1251 | tr -dc '[:print:]'"
+      ],
+      "Explanations about Options": {
+        "-f": "Use from-encoding for input characters."
+      }
+    },
+    {
+      "Command": "grep",
+      "MP Summary": "print lines that match patterns",
+      "Most Similar TLDR Task": "Invert match for excluding specific strings",
+      "Most Similar TLDR Script": "grep -v {{search_pattern}}",
+      "Most Similar NL2Bash Task": "Find files accessed at 23:59",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -atime -1 -print\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-print": "Quoting is handled in the same way as for -printf and -fprintf. If you are using\n find in a script or in a situation where the matched files might have arbitrary\n names, you should consider using -print0 instead of -print.",
+              "-atime": "File was last accessed n*24 hours ago. When find figures out how many 24-hour\n periods ago the file was last accessed, any fractional part is ignored, so to match\n -atime +1, a file has to have been accessed at least two days ago."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_4032: Find all files/directories under current directory with 'FooBar' in their paths and copy them to ~/foo/bar",
+        "nl2bash_5883: Search for \"largecalculation\" in all processes owned by the current user"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_4032: find . | grep \"FooBar\" | (mapfile -t; cp \"${MAPFILE[@]}\" ~/foobar)\n\n\nfind . | grep \"FooBar\" | tr \\\\n \\\\0 | xargs -0 -I{} cp \"{}\" ~/foo/bar\n\n\nfind . | grep FooBar | xargs -I{} cp {} ~/foo/bar\n\n\nfind .|grep \"FooBar\"|xargs -I{} cp \"{}\" ~/foo/bar\n\n\nfind .|grep \"FooBar\"|yargs -l 203 cp --after ~/foo/bar",
+        "nl2bash_5883: ps -u `whoami` | grep largecalculation"
+      ],
+      "Explanations about Options": {
+        "-l": "Suppress normal output; instead print the name of each input file from which output\n would normally have been printed. The scanning will stop on the first match."
+      }
+    },
+    {
+      "Command": "read",
+      "MP Summary": "read a line from standard input",
+      "Most Similar TLDR Task": "Display a prompt before the input",
+      "Most Similar TLDR Script": "read -p \"{{Enter your input here: }}\" {{variable}}",
+      "Most Similar NL2Bash Task": "Find files accessed at 23:59",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -atime -1 -print\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-print": "Quoting is handled in the same way as for -printf and -fprintf. If you are using\n find in a script or in a situation where the matched files might have arbitrary\n names, you should consider using -print0 instead of -print.",
+              "-atime": "File was last accessed n*24 hours ago. When find figures out how many 24-hour\n periods ago the file was last accessed, any fractional part is ignored, so to match\n -atime +1, a file has to have been accessed at least two days ago."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_12274: Convert *.doc files in the current directory tree to the .txt format"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_12274: find . -name '*.doc' | while read i; do antiword -i 1 \"${i}\" >\"${i/doc/txt}\"; done"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "printf",
+      "MP Summary": "format and print data",
+      "Most Similar TLDR Task": "Store a formatted message in a variable (does not work on zsh)",
+      "Most Similar TLDR Script": "printf -v {{myvar}} {{\"This is %s = %d\\n\" \"a year\" 2016}}",
+      "Most Similar NL2Bash Task": "Find files accessed at 23:59",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -atime -1 -print\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-print": "Quoting is handled in the same way as for -printf and -fprintf. If you are using\n find in a script or in a situation where the matched files might have arbitrary\n names, you should consider using -print0 instead of -print.",
+              "-atime": "File was last accessed n*24 hours ago. When find figures out how many 24-hour\n periods ago the file was last accessed, any fractional part is ignored, so to match\n -atime +1, a file has to have been accessed at least two days ago."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_12273: Convert *.au files to *.wav files using `sox'"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_12273: find -type f -name '*.au' | awk '{printf \"%s %s\\n\",$0,$0\".wav\" }' | xargs sox\n\n\nfind -type f -name '*.au' | awk '{printf \"sox %s %s\\n\",$0,$0\".wav\" }' | bash"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "bash",
+      "MP Summary": "GNU Bourne-Again SHell",
+      "Most Similar TLDR Task": "Run commands from a file, logging all commands executed to the terminal",
+      "Most Similar TLDR Script": "bash -x {{file.sh}}",
+      "Most Similar NL2Bash Task": "Find files accessed at 23:59",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -atime -1 -print\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-print": "Quoting is handled in the same way as for -printf and -fprintf. If you are using\n find in a script or in a situation where the matched files might have arbitrary\n names, you should consider using -print0 instead of -print.",
+              "-atime": "File was last accessed n*24 hours ago. When find figures out how many 24-hour\n periods ago the file was last accessed, any fractional part is ignored, so to match\n -atime +1, a file has to have been accessed at least two days ago."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_12273: Convert *.au files to *.wav files using `sox'"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_12273: find -type f -name '*.au' | awk '{printf \"sox %s %s\\n\",$0,$0\".wav\" }' | bash"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "head",
+      "MP Summary": "output the first part of files",
+      "Most Similar TLDR Task": "Output everything but the last few lines of a file",
+      "Most Similar TLDR Script": "head -n -{{count_of_lines}} {{filename}}",
+      "Most Similar NL2Bash Task": "Find files accessed at 23:59",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -atime -1 -print\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-print": "Quoting is handled in the same way as for -printf and -fprintf. If you are using\n find in a script or in a situation where the matched files might have arbitrary\n names, you should consider using -print0 instead of -print.",
+              "-atime": "File was last accessed n*24 hours ago. When find figures out how many 24-hour\n periods ago the file was last accessed, any fractional part is ignored, so to match\n -atime +1, a file has to have been accessed at least two days ago."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_4565: Find all the files without permission 777 under current directory and show a few lines of output from the beginning"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_4565: find . -type f ! -perm 777 | head"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "test",
+      "MP Summary": "check file types and compare values",
+      "Most Similar TLDR Task": "Test if given variable is empty",
+      "Most Similar TLDR Script": "test -z $GIT_BRANCH",
+      "Most Similar NL2Bash Task": "Find files accessed at 23:59",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -atime -1 -print\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-print": "Quoting is handled in the same way as for -printf and -fprintf. If you are using\n find in a script or in a situation where the matched files might have arbitrary\n names, you should consider using -print0 instead of -print.",
+              "-atime": "File was last accessed n*24 hours ago. When find figures out how many 24-hour\n periods ago the file was last accessed, any fractional part is ignored, so to match\n -atime +1, a file has to have been accessed at least two days ago."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_8396: search for all the jpg files in the folder \"/mnt/hda1/zdjecia/test1/\" and create a directory in /mnt/hda1/test with the same name as the mp3 file"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_8396: find /mnt/hda1/zdjecia/test1/ -type f -iname \u2018*.jpg\u2019 -printf \u2018%\u2019h\u2019\\'\u201d0\u2033 | xargs -0 -I \u2018{}\u2019 mkdir -p /mnt/hda1/test/{} \\;"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "users",
+      "MP Summary": "print the user names of users currently logged in to the current host",
+      "Most Similar TLDR Task": "Display a list of logged in users according to a specific file",
+      "Most Similar TLDR Script": "users {{/var/log/wmtp}}",
+      "Most Similar NL2Bash Task": "Find files accessed at 23:59",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -atime -1 -print\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-print": "Quoting is handled in the same way as for -printf and -fprintf. If you are using\n find in a script or in a situation where the matched files might have arbitrary\n names, you should consider using -print0 instead of -print.",
+              "-atime": "File was last accessed n*24 hours ago. When find figures out how many 24-hour\n periods ago the file was last accessed, any fractional part is ignored, so to match\n -atime +1, a file has to have been accessed at least two days ago."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_4274: Find all regular files in the entire filesystem that belong to the group 'users'"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_4274: find /  -type f -group users"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "rm",
+      "MP Summary": "remove files or directories",
+      "Most Similar TLDR Task": "Remove files in verbose mode, printing a message for each removed file",
+      "Most Similar TLDR Script": "rm -v {{path/to/directory/*}}",
+      "Most Similar NL2Bash Task": "Find files accessed at 23:59",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -atime -1 -print\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-print": "Quoting is handled in the same way as for -printf and -fprintf. If you are using\n find in a script or in a situation where the matched files might have arbitrary\n names, you should consider using -print0 instead of -print.",
+              "-atime": "File was last accessed n*24 hours ago. When find figures out how many 24-hour\n periods ago the file was last accessed, any fractional part is ignored, so to match\n -atime +1, a file has to have been accessed at least two days ago."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_11140: Delete all regular files that have not been modified in the last 60 weeks under $DIR directory tree",
+        "nl2bash_11139: Delete all regular files that have not been modified in the last 31 days under '/path/to/junk/files' directory tree"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_11140: find $DIR -type f -mtime +60w -exec rm {} \\;",
+        "nl2bash_11139: find /path/to/junk/files -type f -mtime +31 -exec rm -f {} \\;"
+      ],
+      "Explanations about Options": {
+        "-f": "ignore nonexistent files and arguments, never prompt"
+      }
+    },
+    {
+      "Command": "cp",
+      "MP Summary": "copy files and directories",
+      "Most Similar TLDR Task": "Copy a directory recursively, in verbose mode (shows files as they are copied)",
+      "Most Similar TLDR Script": "cp -vr {{path/to/source_directory}} {{path/to/target_directory}}",
+      "Most Similar NL2Bash Task": "Find files accessed at 23:59",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -atime -1 -print\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-print": "Quoting is handled in the same way as for -printf and -fprintf. If you are using\n find in a script or in a situation where the matched files might have arbitrary\n names, you should consider using -print0 instead of -print.",
+              "-atime": "File was last accessed n*24 hours ago. When find figures out how many 24-hour\n periods ago the file was last accessed, any fractional part is ignored, so to match\n -atime +1, a file has to have been accessed at least two days ago."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_4032: Find all files/directories under current directory with 'FooBar' in their paths and copy them to ~/foo/bar"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_4032: find . | grep \"FooBar\" | (mapfile -t; cp \"${MAPFILE[@]}\" ~/foobar)\n\n\nfind . | grep \"FooBar\" | tr \\\\n \\\\0 | xargs -0 -I{} cp \"{}\" ~/foo/bar\n\n\nfind . | grep FooBar | xargs -I{} cp {} ~/foo/bar\n\n\nfind .|grep \"FooBar\"|xargs -I{} cp \"{}\" ~/foo/bar\n\n\nfind .|grep \"FooBar\"|yargs -l 203 cp --after ~/foo/bar"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "php",
+      "MP Summary": "PHP Command Line Interface 'CLI'",
+      "Most Similar TLDR Task": "Parse and execute a php script",
+      "Most Similar TLDR Script": "php {{file}}",
+      "Most Similar NL2Bash Task": "Find files accessed at 23:59",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -atime -1 -print\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-print": "Quoting is handled in the same way as for -printf and -fprintf. If you are using\n find in a script or in a situation where the matched files might have arbitrary\n names, you should consider using -print0 instead of -print.",
+              "-atime": "File was last accessed n*24 hours ago. When find figures out how many 24-hour\n periods ago the file was last accessed, any fractional part is ignored, so to match\n -atime +1, a file has to have been accessed at least two days ago."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_493: Print newline, word and byte count for all .h, .c, .cpp, .php and .cc files under current directory tree and also show the total counts"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_493: wc `find . -name '*.[h|c|cpp|php|cc]'`"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "awk",
+      "MP Summary": "pattern scanning and processing language",
+      "Most Similar TLDR Task": "Print the second column of the lines containing \"something\" in a space-separated file",
+      "Most Similar TLDR Script": "awk '/{{something}}/ {print $2}' {{filename}}",
+      "Most Similar NL2Bash Task": "Find files accessed at 23:59",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -atime -1 -print\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-print": "Quoting is handled in the same way as for -printf and -fprintf. If you are using\n find in a script or in a situation where the matched files might have arbitrary\n names, you should consider using -print0 instead of -print.",
+              "-atime": "File was last accessed n*24 hours ago. When find figures out how many 24-hour\n periods ago the file was last accessed, any fractional part is ignored, so to match\n -atime +1, a file has to have been accessed at least two days ago."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_12273: Convert *.au files to *.wav files using `sox'"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_12273: find -type f -name '*.au' | awk '{printf \"%s %s\\n\",$0,$0\".wav\" }' | xargs sox\n\n\nfind -type f -name '*.au' | awk '{printf \"sox %s %s\\n\",$0,$0\".wav\" }' | bash"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "file",
+      "MP Summary": "determine file type",
+      "Most Similar TLDR Task": "Look inside a zipped file and determine the file type(s) inside",
+      "Most Similar TLDR Script": "file -z {{foo.zip}}",
+      "Most Similar NL2Bash Task": "Find files accessed at 23:59",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -atime -1 -print\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-print": "Quoting is handled in the same way as for -printf and -fprintf. If you are using\n find in a script or in a situation where the matched files might have arbitrary\n names, you should consider using -print0 instead of -print.",
+              "-atime": "File was last accessed n*24 hours ago. When find figures out how many 24-hour\n periods ago the file was last accessed, any fractional part is ignored, so to match\n -atime +1, a file has to have been accessed at least two days ago."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_4140: Find all hard links to file /path/to/file that exist under the current directory tree"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_4140: find . -samefile /path/to/file"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "set",
+      "MP Summary": "set or unset options and positional parameters",
+      "Most Similar TLDR Task": "Display the names and values of shell variables",
+      "Most Similar TLDR Script": "set",
+      "Most Similar NL2Bash Task": "Find files accessed at 23:59",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -atime -1 -print\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-print": "Quoting is handled in the same way as for -printf and -fprintf. If you are using\n find in a script or in a situation where the matched files might have arbitrary\n names, you should consider using -print0 instead of -print.",
+              "-atime": "File was last accessed n*24 hours ago. When find figures out how many 24-hour\n periods ago the file was last accessed, any fractional part is ignored, so to match\n -atime +1, a file has to have been accessed at least two days ago."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_14008: Disables overwriting existing files"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_14008: set -o noclobber"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "chmod",
+      "MP Summary": "change file mode bits",
+      "Most Similar TLDR Task": "Change permissions recursively giving [g]roup and [o]thers the ability to [w]rite",
+      "Most Similar TLDR Script": "chmod -R g+w,o+w {{directory}}",
+      "Most Similar NL2Bash Task": "Find files accessed at 23:59",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -atime -1 -print\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-print": "Quoting is handled in the same way as for -printf and -fprintf. If you are using\n find in a script or in a situation where the matched files might have arbitrary\n names, you should consider using -print0 instead of -print.",
+              "-atime": "File was last accessed n*24 hours ago. When find figures out how many 24-hour\n periods ago the file was last accessed, any fractional part is ignored, so to match\n -atime +1, a file has to have been accessed at least two days ago."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_2826: Find all directories under /path/to/dir and change their permission to 755"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_2826: find /path/to/dir -type d -exec chmod 755 {} +"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "ps",
+      "MP Summary": "report a snapshot of the current processes.",
+      "Most Similar TLDR Task": "List all running processes including the full command string",
+      "Most Similar TLDR Script": "ps auxww",
+      "Most Similar NL2Bash Task": "Find files accessed at 23:59",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -atime -1 -print\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-print": "Quoting is handled in the same way as for -printf and -fprintf. If you are using\n find in a script or in a situation where the matched files might have arbitrary\n names, you should consider using -print0 instead of -print.",
+              "-atime": "File was last accessed n*24 hours ago. When find figures out how many 24-hour\n periods ago the file was last accessed, any fractional part is ignored, so to match\n -atime +1, a file has to have been accessed at least two days ago."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_5883: Search for \"largecalculation\" in all processes owned by the current user"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_5883: ps -u `whoami` | grep largecalculation"
+      ],
+      "Explanations about Options": {
+        "-u": "Select by effective user ID (EUID) or name. This selects the processes whose\n effective user name or ID is in userlist."
+      }
+    },
+    {
+      "Command": "wc",
+      "MP Summary": "print newline, word, and byte counts for each file",
+      "Most Similar TLDR Task": "Use standard input to count lines, words and characters (bytes) in that order",
+      "Most Similar TLDR Script": "{{find .}} | wc",
+      "Most Similar NL2Bash Task": "Find files accessed at 23:59",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -atime -1 -print\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-print": "Quoting is handled in the same way as for -printf and -fprintf. If you are using\n find in a script or in a situation where the matched files might have arbitrary\n names, you should consider using -print0 instead of -print.",
+              "-atime": "File was last accessed n*24 hours ago. When find figures out how many 24-hour\n periods ago the file was last accessed, any fractional part is ignored, so to match\n -atime +1, a file has to have been accessed at least two days ago."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_493: Print newline, word and byte count for all .h, .c, .cpp, .php and .cc files under current directory tree and also show the total counts"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_493: wc `find . -name '*.[h|c|cpp|php|cc]'`"
+      ],
+      "Explanations about Options": {
+        "-m": "print the character counts"
+      }
+    },
+    {
+      "Command": "mv",
+      "MP Summary": "move (rename) files",
+      "Most Similar TLDR Task": "Move files in arbitrary locations",
+      "Most Similar TLDR Script": "mv {{source}} {{target}}",
+      "Most Similar NL2Bash Task": "Find files accessed at 23:59",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -atime -1 -print\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-print": "Quoting is handled in the same way as for -printf and -fprintf. If you are using\n find in a script or in a situation where the matched files might have arbitrary\n names, you should consider using -print0 instead of -print.",
+              "-atime": "File was last accessed n*24 hours ago. When find figures out how many 24-hour\n periods ago the file was last accessed, any fractional part is ignored, so to match\n -atime +1, a file has to have been accessed at least two days ago."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_4859: Find files in the current directory tree that are named \"some_pattern\" and move them to directory \"target_location\""
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_4859: find . -name some_pattern -print0 | xargs -0 -i mv {} target_location"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "mkdir",
+      "MP Summary": "make directories",
+      "Most Similar TLDR Task": "Create directories recursively (useful for creating nested dirs)",
+      "Most Similar TLDR Script": "mkdir -p {{path/to/directory}}",
+      "Most Similar NL2Bash Task": "Find files accessed at 23:59",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -atime -1 -print\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-print": "Quoting is handled in the same way as for -printf and -fprintf. If you are using\n find in a script or in a situation where the matched files might have arbitrary\n names, you should consider using -print0 instead of -print.",
+              "-atime": "File was last accessed n*24 hours ago. When find figures out how many 24-hour\n periods ago the file was last accessed, any fractional part is ignored, so to match\n -atime +1, a file has to have been accessed at least two days ago."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_8396: search for all the jpg files in the folder \"/mnt/hda1/zdjecia/test1/\" and create a directory in /mnt/hda1/test with the same name as the mp3 file"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_8396: find /mnt/hda1/zdjecia/test1/ -type f -iname \u2018*.jpg\u2019 -printf \u2018%\u2019h\u2019\\'\u201d0\u2033 | xargs -0 -I \u2018{}\u2019 mkdir -p /mnt/hda1/test/{} \\;"
+      ],
+      "Explanations about Options": {
+        "-p": "no error if existing, make parent directories as needed"
+      }
+    },
+    {
+      "Command": "dev",
+      "MP Summary": "release candidate LaTeX testing",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "Find files accessed at 23:59",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -atime -1 -print\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-print": "Quoting is handled in the same way as for -printf and -fprintf. If you are using\n find in a script or in a situation where the matched files might have arbitrary\n names, you should consider using -print0 instead of -print.",
+              "-atime": "File was last accessed n*24 hours ago. When find figures out how many 24-hour\n periods ago the file was last accessed, any fractional part is ignored, so to match\n -atime +1, a file has to have been accessed at least two days ago."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_52087680: Detect the final page of a paginated cURL response in a Bash loop"
+      ],
+      "Top-3 Scripts": [
+        "so_52087680: for ((i=0; ; i+=100)); do\n    contents=$(curl -u \"username:password\" -H \"Content-Type: application/json\" \"https://<url>/api/core/v3/places?count=100&startIndex=$i\")\n    echo \"$contents\" > $i.json\n    if jq -e '.list | length == 0' >/dev/null; then \n       break\n    fi <<< \"$contents\"\ndone"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "then",
+      "MP Summary": "presumably creating or updating package.json and running any other initialization-related operations. The init command is transformed to a corresponding npx operation as follows: \u00b7 npm init foo -> npx create-foo \u00b7 npm init @usr/foo -> npx @usr/create-foo \u00b7 npm init @usr -> npx @usr/create Any  additional  options  will  be passed directly to the command, so npm init foo --hello will map to npx create-foo --hello. If the initializer is omitted (by just calling npm init), init will fall  back  to  legacy init  behavior.  It  will  ask you a bunch of questions, and then write a package.json for you. It will attempt to make reasonable guesses based on  existing  fields,  dependencies, and  options selected. It is strictly additive, so it will keep any fields and values that were already set. You can also use -y/--yes to skip the questionnaire altogether.  If  you pass --scope, it will create a scoped package. See Also \u00b7 https://github.com/isaacs/init-package-json \u00b7 npm help package.json \u00b7 npm help version \u00b7 npm help scope April 2020                                NPM-INIT(1)",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "Find files accessed at 23:59",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -atime -1 -print\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-print": "Quoting is handled in the same way as for -printf and -fprintf. If you are using\n find in a script or in a situation where the matched files might have arbitrary\n names, you should consider using -print0 instead of -print.",
+              "-atime": "File was last accessed n*24 hours ago. When find figures out how many 24-hour\n periods ago the file was last accessed, any fractional part is ignored, so to match\n -atime +1, a file has to have been accessed at least two days ago."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_52087680: Detect the final page of a paginated cURL response in a Bash loop"
+      ],
+      "Top-3 Scripts": [
+        "so_52087680: for ((i=0; ; i+=100)); do\n    contents=$(curl -u \"username:password\" -H \"Content-Type: application/json\" \"https://<url>/api/core/v3/places?count=100&startIndex=$i\")\n    echo \"$contents\" > $i.json\n    if jq -e '.list | length == 0' >/dev/null; then \n       break\n    fi <<< \"$contents\"\ndone"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "break",
+      "MP Summary": "exit from for, while, or until loop",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "Find files accessed at 23:59",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -atime -1 -print\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-print": "Quoting is handled in the same way as for -printf and -fprintf. If you are using\n find in a script or in a situation where the matched files might have arbitrary\n names, you should consider using -print0 instead of -print.",
+              "-atime": "File was last accessed n*24 hours ago. When find figures out how many 24-hour\n periods ago the file was last accessed, any fractional part is ignored, so to match\n -atime +1, a file has to have been accessed at least two days ago."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_52087680: Detect the final page of a paginated cURL response in a Bash loop"
+      ],
+      "Top-3 Scripts": [
+        "so_52087680: for ((i=0; ; i+=100)); do\n    contents=$(curl -u \"username:password\" -H \"Content-Type: application/json\" \"https://<url>/api/core/v3/places?count=100&startIndex=$i\")\n    echo \"$contents\" > $i.json\n    if jq -e '.list | length == 0' >/dev/null; then \n       break\n    fi <<< \"$contents\"\ndone"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "antiword",
+      "MP Summary": "show the text and images of MS Word documents",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "Find files accessed at 23:59",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -atime -1 -print\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-print": "Quoting is handled in the same way as for -printf and -fprintf. If you are using\n find in a script or in a situation where the matched files might have arbitrary\n names, you should consider using -print0 instead of -print.",
+              "-atime": "File was last accessed n*24 hours ago. When find figures out how many 24-hour\n periods ago the file was last accessed, any fractional part is ignored, so to match\n -atime +1, a file has to have been accessed at least two days ago."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_12274: Convert *.doc files in the current directory tree to the .txt format"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_12274: find . -name '*.doc' | while read i; do antiword -i 1 \"${i}\" >\"${i/doc/txt}\"; done"
+      ],
+      "Explanations about Options": {
+        "-i": "image level\n The image level determines how images will be shown."
+      }
+    },
+    {
+      "Command": "bar",
+      "MP Summary": "show information about a data transfer",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "Find files accessed at 23:59",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -atime -1 -print\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-print": "Quoting is handled in the same way as for -printf and -fprintf. If you are using\n find in a script or in a situation where the matched files might have arbitrary\n names, you should consider using -print0 instead of -print.",
+              "-atime": "File was last accessed n*24 hours ago. When find figures out how many 24-hour\n periods ago the file was last accessed, any fractional part is ignored, so to match\n -atime +1, a file has to have been accessed at least two days ago."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_4032: Find all files/directories under current directory with 'FooBar' in their paths and copy them to ~/foo/bar"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_4032: find . | grep \"FooBar\" | tr \\\\n \\\\0 | xargs -0 -I{} cp \"{}\" ~/foo/bar\n\n\nfind . | grep FooBar | xargs -I{} cp {} ~/foo/bar\n\n\nfind .|grep \"FooBar\"|xargs -I{} cp \"{}\" ~/foo/bar\n\n\nfind .|grep \"FooBar\"|yargs -l 203 cp --after ~/foo/bar"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "dir",
+      "MP Summary": "list directory contents",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "Find files accessed at 23:59",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -atime -1 -print\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-print": "Quoting is handled in the same way as for -printf and -fprintf. If you are using\n find in a script or in a situation where the matched files might have arbitrary\n names, you should consider using -print0 instead of -print.",
+              "-atime": "File was last accessed n*24 hours ago. When find figures out how many 24-hour\n periods ago the file was last accessed, any fractional part is ignored, so to match\n -atime +1, a file has to have been accessed at least two days ago."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_4750: Find directories under maximum 1 level down the directory $dir with 100 permission that are owned by the user $username",
+        "nl2bash_2826: Find all directories under /path/to/dir and change their permission to 755"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_4750: find $dir -maxdepth 1 -type d -user $username -perm -100",
+        "nl2bash_2826: find /path/to/dir -type d -exec chmod 755 {} +"
+      ],
+      "Explanations about Options": {
+        "-h": "with -l and -s, print sizes like 1K 234M 2G etc.",
+        "-t": "sort by modification time , newest first",
+        "-a": "do not ignore entries starting with .",
+        "-d": "list directories themselves, not their contents",
+        "-s": "print the allocated size of each file, in blocks",
+        "-c": "with -lt: sort by , and show , ctime (time of last modification of file status\n information); with -l: show ctime and sort by name; otherwise: sort by ctime,\n newest first",
+        "-u": "with -lt: sort by , and show , access time; with -l: show access time and sort by\n name; otherwise: sort by access time, newest first",
+        "-x": "list entries by lines instead of by columns",
+        "-r": "reverse order while sorting",
+        "-p": "append / indicator to directories",
+        "-m": "fill width with a comma separated list of entries"
+      }
+    },
+    {
+      "Command": "to",
+      "MP Summary": "as the filename. --logdir <name> Writes each synchronization log output in a new file in the specified directory. --logexpire <hours> Removes logs older than the value specified (in hours). This command is  used  with --logdir. --logflush Clears (flushes) the log file after each write action. --logdebug Also  output  debug-level  messages  in  the log (equivalent to setting the env var QT_LOGGING_RULES=\"qt.*=true;*.debug=true\"). ) --confdir <dirname> Uses the specified configuration directory. The ownCloud Client reads a configuration file.  You can locate this configuration file as follows: On Linux distributions: $HOME/.config/ownCloud/owncloud.cfg On Microsoft Windows systems: %APPDATA%\\ownCloud\\owncloud.cfg On MAC OS X systems: $HOME/Library/Preferences/ownCloud/owncloud.cfg The configuration file contains settings using the Microsoft Windows .ini file format. You can overwrite changes using the ownCloud configuration dialog. NOTE: Use caution when making changes to the ownCloud Client configuration  file.   Incorrect settings can produce unintended results. Some interesting values that can be set on the configuration file are: \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510 \u2502[ownCloud] section          \u2502         \u2502                          \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502Variable                    \u2502 Default \u2502 Meaning                  \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502remotePollInterval          \u2502 30000   \u2502 Specifies  the poll time \u2502 \u2502                            \u2502         \u2502 for      the      remote \u2502 \u2502                            \u2502         \u2502 repository            in \u2502 \u2502                            \u2502         \u2502 milliseconds.            \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502forceSyncInterval           \u2502 7200000 \u2502 The   duration   of   no \u2502 \u2502                            \u2502         \u2502 activity  after  which a \u2502 \u2502                            \u2502         \u2502 synchronization      run \u2502 \u2502                            \u2502         \u2502 shall    be    triggered \u2502 \u2502                            \u2502         \u2502 automatically.           \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502fullLocalDiscoveryInterval  \u2502 3600000 \u2502 The interval after which \u2502 \u2502                            \u2502         \u2502 the next synchronization \u2502 \u2502                            \u2502         \u2502 will   perform   a  full \u2502 \u2502                            \u2502         \u2502 local discovery.         \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502notificationRefreshInterval \u2502 300000  \u2502 Specifies   the  default \u2502 \u2502                            \u2502         \u2502 interval of checking for \u2502 \u2502                            \u2502         \u2502 new server notifications \u2502 \u2502                            \u2502         \u2502 in milliseconds.         \u2502 \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518 \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510 \u2502[General] section       \u2502         \u2502                          \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502Variable                \u2502 Default \u2502 Meaning                  \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502chunkSize               \u2502 5242880 \u2502 Specifies the chunk size \u2502 \u2502                        \u2502         \u2502 of   uploaded  files  in \u2502 \u2502                        \u2502         \u2502 bytes.                   \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502promptDeleteAllFiles    \u2502 true    \u2502 If a  UI  prompt  should \u2502 \u2502                        \u2502         \u2502 ask  for confirmation if \u2502 \u2502                        \u2502         \u2502 it was detected that all \u2502 \u2502                        \u2502         \u2502 files  and  folders were \u2502 \u2502                        \u2502         \u2502 deleted.                 \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502maxLogLines             \u2502 20000   \u2502 Specifies  the   maximum \u2502 \u2502                        \u2502         \u2502 number   of   log  lines \u2502 \u2502                        \u2502         \u2502 displayed  in  the   log \u2502 \u2502                        \u2502         \u2502 window.                  \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502timeout                 \u2502 300     \u2502 The  timeout for network \u2502 \u2502                        \u2502         \u2502 connections in seconds.  \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502moveToTrash             \u2502 false   \u2502 If  non-locally  deleted \u2502 \u2502                        \u2502         \u2502 files should be moved to \u2502 \u2502                        \u2502         \u2502 trash     instead     of \u2502 \u2502                        \u2502         \u2502 deleting            them \u2502 \u2502                        \u2502         \u2502 completely.  This option \u2502 \u2502                        \u2502         \u2502 only works on linux      \u2502 \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518 \u2502showExperimentalOptions \u2502 false   \u2502 Whether      to     show \u2502 \u2502                        \u2502         \u2502 experimental     options \u2502 \u2502                        \u2502         \u2502 that      are      still \u2502 \u2502                        \u2502         \u2502 undergoing  testing   in \u2502 \u2502                        \u2502         \u2502 the    user   interface. \u2502 \u2502                        \u2502         \u2502 Turning this on does not \u2502 \u2502                        \u2502         \u2502 enable      experimental \u2502 \u2502                        \u2502         \u2502 behavior on its own.  It \u2502 \u2502                        \u2502         \u2502 does     enable     user \u2502 \u2502                        \u2502         \u2502 inferface  options  that \u2502 \u2502                        \u2502         \u2502 can be used to opt in to \u2502 \u2502                        \u2502         \u2502 experimental features.   \u2502 \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518 \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510 \u2502[Proxy] section      \u2502           \u2502                          \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502Variable             \u2502 Default   \u2502 Meaning                  \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502host                 \u2502 127.0.0.1 \u2502 The address of the proxy \u2502 \u2502                     \u2502           \u2502 server.                  \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502port                 \u2502 8080      \u2502 The  port were the proxy \u2502 \u2502                     \u2502           \u2502 is listening.            \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502type                 \u2502 2         \u2502 0 for System Proxy.      \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u25021 for SOCKS5 Proxy.  \u2502           \u2502                          \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u25022 for No Proxy.      \u2502           \u2502                          \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u25023 for HTTP(S) Proxy. \u2502           \u2502                          \u2502 \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518 Please report bugs at https://github.com/owncloud/client/issues. owncloudcmd(1)",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "Find files accessed at 23:59",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -atime -1 -print\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-print": "Quoting is handled in the same way as for -printf and -fprintf. If you are using\n find in a script or in a situation where the matched files might have arbitrary\n names, you should consider using -print0 instead of -print.",
+              "-atime": "File was last accessed n*24 hours ago. When find figures out how many 24-hour\n periods ago the file was last accessed, any fractional part is ignored, so to match\n -atime +1, a file has to have been accessed at least two days ago."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_2826: Find all directories under /path/to/dir and change their permission to 755",
+        "nl2bash_4140: Find all hard links to file /path/to/file that exist under the current directory tree",
+        "nl2bash_11139: Delete all regular files that have not been modified in the last 31 days under '/path/to/junk/files' directory tree"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_2826: find /path/to/dir -type d -exec chmod 755 {} +",
+        "nl2bash_4140: find . -samefile /path/to/file",
+        "nl2bash_11139: find /path/to/junk/files -type f -mtime +31 -exec rm -f {} \\;"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "src",
+      "MP Summary": "simple revision control",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "Find files accessed at 23:59",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -atime -1 -print\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-print": "Quoting is handled in the same way as for -printf and -fprintf. If you are using\n find in a script or in a situation where the matched files might have arbitrary\n names, you should consider using -print0 instead of -print.",
+              "-atime": "File was last accessed n*24 hours ago. When find figures out how many 24-hour\n periods ago the file was last accessed, any fractional part is ignored, so to match\n -atime +1, a file has to have been accessed at least two days ago."
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_4807: Find files and directories that are at least seven levels of nesting in the directory /usr/src excluding CVS directory"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_4807: find /usr/src -name CVS -prune -o -depth +6 -print"
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

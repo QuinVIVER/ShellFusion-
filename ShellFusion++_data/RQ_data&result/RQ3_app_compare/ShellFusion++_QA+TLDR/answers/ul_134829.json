@@ -1,0 +1,88 @@
+{
+  "Query": "compare two columns of different files and print if it matches",
+  "Answers": [
+    {
+      "Command": "awk",
+      "MP Summary": "pattern scanning and processing language",
+      "Most Similar TLDR Task": "Print the last column of each line in a file, using a comma (instead of space) as a field separator",
+      "Most Similar TLDR Script": "awk -F ',' '{print $NF}' {{filename}}",
+      "Top-3 Similar Questions": [
+        "ul_648855: Compare first column of a file with value if matched get the record",
+        "so_46185033: AWK Compare 2 columns in 2 files, print if one is equal while other is not",
+        "ul_438192: Matching columns of different csv files, not working when column value is different length"
+      ],
+      "Top-3 Scripts": [
+        "ul_648855: #!/bin/bash\nm=$1\nawk -F \"|\" -v m=\"$m\" '$1 == m{print $2}' filename",
+        "so_46185033: $ awk 'NR==FNR{a[$1]=$3; next} ($1 in a) && (a[$1] != $3){print $0, a[$1]}' file2 file1\nJohn 12 Mango Grape\nJack 14 Orange Apple",
+        "ul_438192: awk -F, 'NR==FNR{c[$1+0,$2,$3]++;next};c[$120002+0,$120003,$120004] > 0' small.csv large.csv > output.csv"
+      ],
+      "Explanations about Options": {
+        "-v": "FS=sepstring"
+      }
+    },
+    {
+      "Command": "diff",
+      "MP Summary": "compare two files",
+      "Most Similar TLDR Task": "Compare directories, only showing the names of files that differ",
+      "Most Similar TLDR Script": "diff -rq {{old_directory}} {{new_directory}}",
+      "Top-3 Similar Questions": [
+        "au_1067061: How to compare the output of the \"head\" command applied to two different files?",
+        "au_1259031: How do I compare equality of two files in Ubuntu?",
+        "su_1329584: How to compare two columns of two different files"
+      ],
+      "Top-3 Scripts": [
+        "au_1067061: # lines different, have output\n$ diff <(head -n 1 /etc/passwd) <(head -n1 input.txt)\n1c1\n< root:x:0:0:root:/root:/bin/bash\n---\n> hello world\n# same file, first lines aren't different, no output\n$ diff <(head -n 1 /etc/passwd) <(head -n1 passwd.copy)\n$\n\n$ diff <(head -n 1 /etc/passwd) <(head -n1 passwd.copy)\n1c1\n< root:x:0:0:root:/root:/bin/bash\n---\n> root:x:0:0:root:/root:/bin/bash",
+        "au_1259031: $ diff -q a b\nFiles a and b differ\n\n$ diff -qs a b\nFiles a and b are identical",
+        "su_1329584: diff <(sort file1 | cut -d , -f 1-2) <(sort file2 | cut -d , -f 1-2)"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "sed",
+      "MP Summary": "stream editor for filtering and transforming text",
+      "Most Similar TLDR Task": "Replace only on lines matching the line pattern",
+      "Most Similar TLDR Script": "sed '/{{line_pattern}}/s/{{find}}/{{replace}}/' {{filename}}",
+      "Top-3 Similar Questions": [
+        "so_49958479: compare two columns in two different files in shell script",
+        "ul_419239: match two columns from one file to three columns from another file, print out lines from the file with two columns",
+        "ul_517745: compare two column of two different CSV file & merge the output"
+      ],
+      "Top-3 Scripts": [
+        "so_49958479: join -t',' -a 1 -a 2 -e \"0\" -j 2 file1 file2  | sed -r 's/^[^,]+,[^,]+$/&,0/'\n2018042100,21,45\n2018042101,22,0\n2018042102,87,86\n2018042103,98,87",
+        "ul_419239: sed -n \\\n    's#\\(\\w*\\)\\W*\\(\\w*\\)\\W*\\(\\w*\\)#numgrep /\\1/ A\\|numgrep /\\2..\\3,\\3..\\2/#e\n     /./p' B |\n    awk '!a[$0]++'",
+        "ul_517745: sed 's/^[^,]*, *\\([0-9]*,[^,]*\\)$/\\1/\nT2\nH;d\n:2\nG\ns/\\([^,]*,[^,]*, *\\)\\([0-9]*,\\)\\([^[:cntrl:]]*\\)\\n.*\\n\\2\\([^[:cntrl:]]*\\)/\\1\\2\\4, \\3/\nP;d' TABLE2.csv TABLE1.csv"
+      ],
+      "Explanations about Options": {
+        "-r": "use extended regular expressions in the script (for portability use POSIX -E)."
+      }
+    },
+    {
+      "Command": "cat",
+      "MP Summary": "concatenate files and print on the standard output",
+      "Most Similar TLDR Task": "Append several files into the target file",
+      "Most Similar TLDR Script": "cat {{file1}} {{file2}} >> {{target_file}}",
+      "Top-3 Similar Questions": [
+        "so_18592736: awk compare columns from two files, impute values of another column",
+        "so_54485639: How to compare parts of lines of two txt files?"
+      ],
+      "Top-3 Scripts": [
+        "so_18592736: ",
+        "so_54485639: $ cat a\naaaa   bbbb\ncccc   dddd\n$ cat b\naaaa   eeee\nffff   gggg\n$ join a b\naaaa bbbb eeee"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "comm",
+      "MP Summary": "select or reject lines common to two files",
+      "Most Similar TLDR Task": "Produce three tab-separated columns: lines only in first file, lines only in second file and common lines",
+      "Most Similar TLDR Script": "comm {{file1}} {{file2}}",
+      "Top-3 Similar Questions": [
+        "so_14450562: Compare lines of two files, print lines unique to first file"
+      ],
+      "Top-3 Scripts": [
+        "so_14450562: comm -23 \"File 1\" \"File 2\""
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

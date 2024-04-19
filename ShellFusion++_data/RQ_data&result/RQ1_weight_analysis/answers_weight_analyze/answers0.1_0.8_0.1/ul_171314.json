@@ -1,0 +1,94 @@
+{
+  "Query": "How to grep for same string but multiple files at the same time?",
+  "Answers": [
+    {
+      "Command": "sed",
+      "MP Summary": "stream editor for filtering and transforming text",
+      "Most Similar TLDR Task": "Replace all occurrences of a string in a file, overwriting the file (i.e. in-place)",
+      "Most Similar TLDR Script": "sed -i 's/{{find}}/{{replace}}/g' {{filename}}",
+      "Top-3 Similar Questions": [
+        "so_52522264: Unix - How to search for exact string in a file",
+        "so_11773888: How do I grep multiple lines (output from another command) at the same time?",
+        "so_42285269: grep a string inside double quotes"
+      ],
+      "Top-3 Scripts": [
+        "so_52522264: sed 's/$/\\\\b/' SearchList.txt\n\ngrep -lf <(sed 's/$/\\\\b/' /path/to/SearchList.txt) INFILES*",
+        "so_11773888: $ echo abc | tee >(sed s/a/_a_/ > file1) | tee >(sed s/b/_b_/ > file2) | sed s/c/_c_/ > file3\n$ grep \"\" file[123]\nfile1:_a_bc\nfile2:a_b_c\nfile3:ab_c_",
+        "so_42285269: for f in test.txt; do\n  echo \"Processing $f\"\n  while read line; do\n    grep 'name=\"'$line'\"' new1.xml \n  done < \"$f\" | sed -E 's/.+path=\"([^\"]+)\".+/\\1/'\ndone\n\nwhile read line; do\n    grep 'name=\"'$line'\"' new1.xml\n  done < \"test.txt\" | sed -E 's/.+path=\"([^\"]+)\".+/\\1/'"
+      ],
+      "Explanations about Options": {
+        "-E": "use extended regular expressions in the script (for portability use POSIX -E)."
+      }
+    },
+    {
+      "Command": "find",
+      "MP Summary": "search for files in a directory hierarchy",
+      "Most Similar TLDR Task": "Find files by matching multiple patterns",
+      "Most Similar TLDR Script": "find {{root_path}} -name '{{*pattern_1*}}' -or -name '{{*pattern_2*}}'",
+      "Top-3 Similar Questions": [
+        "so_62654652: Execute a command multiple times whose input files have different extensions",
+        "au_1335318: How do I grep a exact string from multiple files at the same time?",
+        "so_20308053: How to grep a group of files within a specific time range"
+      ],
+      "Top-3 Scripts": [
+        "so_62654652: ",
+        "au_1335318: find . -type f -name 'file[2-3].txt' -exec  grep -P '/abc/bce/12345/input/part3/(?!err)' {} \\;",
+        "so_20308053: find . -maxdepth 1 -newermt \"2013-10-28 00:00:00\" ! -newermt \"2013-10-29 00:00:00\""
+      ],
+      "Explanations about Options": {
+        "-n": "for less than n ,",
+        "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+        "-type": "File is of type c:",
+        "-maxdepth": "Descend at most levels (a non-negative integer) levels of directories below the\n starting-points. -maxdepth 0 means only apply the tests and actions to the\n starting-points themselves."
+      }
+    },
+    {
+      "Command": "sort",
+      "MP Summary": "sort lines of text files",
+      "Most Similar TLDR Task": "Sort a file preserving only unique lines",
+      "Most Similar TLDR Script": "sort -u {{path/to/file}}",
+      "Top-3 Similar Questions": [
+        "so_22351456: AWK text file comparison (how many times contains 'b' file the strings from 'a' file)",
+        "so_19972928: grep multiple strings, count lines, echo output for each string",
+        "so_47725660: grep multiple files get count of unique cut"
+      ],
+      "Top-3 Scripts": [
+        "so_22351456: grep -F -o -f a.txt b.txt | sort | uniq -c | sort -nr",
+        "so_19972928: cat  mylog.log |   grep  \"Error code\" | sort | uniq -c",
+        "so_47725660: grep -h \"invoking webservice\" *.log | cut -d ' ' -f1  -f11 | sort | uniq -c\n\ncat *.log | grep \"invoking webservice\" | cut -d ' ' -f1  -f11 | sort | uniq -c"
+      ],
+      "Explanations about Options": {
+        "-r": "reverse the result of comparisons",
+        "-n": "compare according to string numerical value"
+      }
+    },
+    {
+      "Command": "zgrep",
+      "MP Summary": "search compressed files for a regular expression",
+      "Most Similar TLDR Task": "Grep a compressed file for multiple patterns",
+      "Most Similar TLDR Script": "zgrep -e \"{{pattern_1}}\" -e \"{{pattern_2}}\" {{path/to/compressed/file}}",
+      "Top-3 Similar Questions": [
+        "so_47130122: grep several strings from gz file"
+      ],
+      "Top-3 Scripts": [
+        "so_47130122: zgrep -f match_strings.txt file.gz"
+      ],
+      "Explanations about Options": {
+        "-f": "obtain patterns from <file>"
+      }
+    },
+    {
+      "Command": "xargs",
+      "MP Summary": "build and execute command lines from standard input",
+      "Most Similar TLDR Task": "Parallel runs of up to `max-procs` processes at a time; the default is 1. If `max-procs` is 0, xargs will run as many processes as possible at a time",
+      "Most Similar TLDR Script": "{{arguments_source}} | xargs -P {{max-procs}} {{command}}",
+      "Top-3 Similar Questions": [
+        "so_52984021: grep string from locate results"
+      ],
+      "Top-3 Scripts": [
+        "so_52984021: locate myfile.conf | xargs grep --color -Hn filename"
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

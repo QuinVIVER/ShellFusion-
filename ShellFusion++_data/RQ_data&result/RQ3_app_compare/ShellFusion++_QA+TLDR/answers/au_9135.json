@@ -1,0 +1,85 @@
+{
+  "Query": "How to backup settings and list of installed packages",
+  "Answers": [
+    {
+      "Command": "dpkg",
+      "MP Summary": "package manager for Debian",
+      "Most Similar TLDR Task": "List installed packages",
+      "Most Similar TLDR Script": "dpkg -l {{pattern}}",
+      "Top-3 Similar Questions": [
+        "ul_654369: Where does Debian store the list of installed packages?",
+        "ul_838: Weekly cron job to save list of installed packages",
+        "au_9882: What directories do I need to save to backup my user settings?"
+      ],
+      "Top-3 Scripts": [
+        "ul_654369: /var/lib/dpkg/status\n\nman dpkg",
+        "ul_838: #!/bin/bash\n\ndpkg -l > ~/Dropbox/installed_packages",
+        "au_9882: dpkg --get-selections > ~/my-packages.txt\n\nsudo dpkg --set-selections < ~/my-packages.txt"
+      ],
+      "Explanations about Options": {
+        "--set-selections": "Set package selections using file read from stdin. This file should be in the\n format \u201cpackage state\u201d, where state is one of install, hold, deinstall or purge.\n Blank lines and comment lines beginning with \u2018#\u2019 are also permitted.",
+        "-l": "List packages matching given pattern.\n -s, --status package-name...\n Report status of specified package.\n -L, --listfiles package-name...\n List files installed to your system from package-name.\n -S, --search filename-search-pattern...\n Search for a filename from installed packages.\n -p, --print-avail package-name...\n Display details about package-name, as found in\n /var/lib/dpkg/available. Users of APT-based frontends\n should use apt-cache show package-name instead."
+      }
+    },
+    {
+      "Command": "apt-get",
+      "MP Summary": "APT package handling utility - command-line interface",
+      "Most Similar TLDR Task": "Remove a package and its configuration files",
+      "Most Similar TLDR Script": "apt-get purge {{package}}",
+      "Top-3 Similar Questions": [
+        "au_9882: What directories do I need to save to backup my user settings?",
+        "au_143642: How to backup programs without using apt cache?",
+        "au_37700: dump dpkg package list for fresh installation"
+      ],
+      "Top-3 Scripts": [
+        "au_9882: sudo apt-get -u dselect-upgrade",
+        "au_143642: sudo apt-get install -f",
+        "au_37700: sudo dpkg --set-selections <output-file \nsudo apt-get dselect-upgrade"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "apt",
+      "MP Summary": "command-line interface",
+      "Most Similar TLDR Task": "List installed packages",
+      "Most Similar TLDR Script": "apt list --installed",
+      "Top-3 Similar Questions": [
+        "ul_654369: Where does Debian store the list of installed packages?",
+        "au_9882: What directories do I need to save to backup my user settings?",
+        "au_757420: How can I keep track of all the packages / dependencies that are installed when I run apt-get for a specific package?"
+      ],
+      "Top-3 Scripts": [
+        "ul_654369: /var/lib/apt/extended_states",
+        "au_9882: /etc/apt/",
+        "au_757420: /var/log/apt/history.log"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "restic",
+      "MP Summary": "Backup and restore files",
+      "Most Similar TLDR Task": "Backup a directory to the repository",
+      "Most Similar TLDR Script": "restic -r {{path/to/repository}} backup {{path/to/directory}}",
+      "Top-3 Similar Questions": [
+        "ul_482588: CLI backup tool"
+      ],
+      "Top-3 Scripts": [
+        "ul_482588: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "add-apt-repository",
+      "MP Summary": "Adds   a   repository   into   the   /etc/apt/sources.list   or /etc/apt/sources.list.d or removes an existing one",
+      "Most Similar TLDR Task": "Enable source packages",
+      "Most Similar TLDR Script": "add-apt-repository --enable-source {{repository_spec}}",
+      "Top-3 Similar Questions": [
+        "au_28644: How can I backup my PPAs?"
+      ],
+      "Top-3 Scripts": [
+        "au_28644: <~/ppa-backup.txt xargs -I % sudo add-apt-repository %"
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

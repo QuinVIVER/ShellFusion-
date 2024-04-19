@@ -1,0 +1,95 @@
+{
+  "Query": "Speed up rsync with Simultaneous/Concurrent File Transfers?",
+  "Answers": [
+    {
+      "Command": "scp",
+      "MP Summary": "secure copy (remote file copy program)",
+      "Most Similar TLDR Task": "Copy a file between two remote hosts transferring through the local host",
+      "Most Similar TLDR Script": "scp -3 {{host1}}:{{path/to/remote_file}} {{host2}}:{{path/to/remote_directory}}",
+      "Top-3 Similar Questions": [
+        "ul_20713: Asking rsync to transfer files without connecting to the remote rsync server?",
+        "so_28025147: How to copy multiple files simultaneously using scp",
+        "ul_557120: Why does transfer files to another computer by `sudo rsync` require the destination computer's root's password?"
+      ],
+      "Top-3 Scripts": [
+        "ul_20713: ",
+        "so_28025147: for file in file1 file2 file3 ; do \n     scp $file server:/tmp/ & \ndone",
+        "ul_557120: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "tar",
+      "MP Summary": "an archiving utility",
+      "Most Similar TLDR Task": "Create a compressed archive, using archive suffix to determine the compression program",
+      "Most Similar TLDR Script": "tar caf {{target.tar.xz}} {{file1}} {{file2}} {{file3}}",
+      "Top-3 Similar Questions": [
+        "ul_120300: Rsync auto detect directories with small files and compress them together for transfer",
+        "au_1326158: How can I simultaneously extract files from .tar files and send them to the same directory?",
+        "ul_297249: Does linux tar block write access to files"
+      ],
+      "Top-3 Scripts": [
+        "ul_120300: $ tar zcvf - SOURCEDIR | ssh user1@remotehost 'cd DESTDIR; tar zxvf - '\n\n$ tar zcvf - SOURCEDIR | ssh user1@remotehost \"(cd DESTDIR; tar zxvf -)\"\n\n$ tar zcvf - SOURCEDIR | ssh -l user1 remotehost 'cd DESTDIR ; tar zxvf -'\n\n$ ssh remotehost 'tar zcvf - SOURCEDIR' | tar zxvf -\n\n$ ssh -n remotehost 'tar zcvf - SOURCEDIR' | tar zxvf -\n\n$ ssh remotehost \"( cd SOURCEDIR ; tar zcvf - SOURCEFILES ) \" | tar zxvf -",
+        "au_1326158: cat *.tar | tar -xvf - -i",
+        "ul_297249: "
+      ],
+      "Explanations about Options": {
+        "-x": "Extract files from an archive. Arguments are optional. When given, they specify\n names of the archive members to be extracted.",
+        "-v": "Verbosely list files processed.",
+        "-i": "Ignore zeroed blocks in archive. Normally two consecutive 512-blocks filled with\n zeroes mean EOF and tar stops reading after encountering them. This option\n instructs it to read further and is useful when reading archives created with the\n -A option."
+      }
+    },
+    {
+      "Command": "rsync",
+      "MP Summary": "a fast, versatile, remote (and local) file-copying tool",
+      "Most Similar TLDR Task": "Transfer file from local to remote host",
+      "Most Similar TLDR Script": "rsync {{path/to/local_file}} {{remote_host}}:{{path/to/remote_directory}}",
+      "Top-3 Similar Questions": [
+        "ul_2445: Resume transfer of a single file by rsync",
+        "au_677773: Transfer file to Windows server from Ubuntu",
+        "ul_20713: Asking rsync to transfer files without connecting to the remote rsync server?"
+      ],
+      "Top-3 Scripts": [
+        "ul_2445: rsync --append",
+        "au_677773: sudo rsync -azp /path/to/source /media/BACKUP/ShareFolder",
+        "ul_20713: rsync -e \"ssh -vvv\""
+      ],
+      "Explanations about Options": {
+        "-a": "This is equivalent to -rlptgoD. It is a quick way of saying you want recursion and\n want to preserve almost everything (with -H being a notable omission). The only\n exception to the above equivalence is when --files-from is specified, in which case\n -r is not implied.",
+        "-p": "This option causes the receiving rsync to set the destination permissions to be the\n same as the source permissions. (See also the --chmod option for a way to modify\n what rsync considers to be the source permissions.)",
+        "-z": "With this option, rsync compresses the file data as it is sent to the destination\n machine, which reduces the amount of data being transmitted - something that is\n useful over a slow connection.",
+        "-e": "This option allows you to choose an alternative remote shell program to use for\n communication between the local and remote copies of rsync. Typically, rsync is\n configured to use ssh by default, but you may prefer to use rsh on a local network."
+      }
+    },
+    {
+      "Command": "install",
+      "MP Summary": "copy files and set attributes",
+      "Most Similar TLDR Task": "Copy files and apply access/modification times of source to destination",
+      "Most Similar TLDR Script": "install -p {{path/to/source}} {{path/to/destination}}",
+      "Top-3 Similar Questions": [
+        "au_646443: copy files over ssh",
+        "ul_12197: Syncing directories in both directions with rsync"
+      ],
+      "Top-3 Scripts": [
+        "au_646443: sudo apt-get install openssh-server\n\nsudo apt-get install filezilla",
+        "ul_12197: $ sudo apt-get install unison\n$ unison MAC/ LINUX/"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "xz",
+      "MP Summary": "Compress or decompress .xz and .lzma files",
+      "Most Similar TLDR Task": "Compress a file, but don't delete the original",
+      "Most Similar TLDR Script": "xz -k {{file}}",
+      "Top-3 Similar Questions": [
+        "ul_298170: Why isn't rsync using delta transfers for a single file across a network?"
+      ],
+      "Top-3 Scripts": [
+        "ul_298170: xz --best"
+      ],
+      "Explanations about Options": {
+        "--best": "These are somewhat misleading aliases for -0 and -9, respectively. These are\n provided only for backwards compatibility with LZMA Utils. Avoid using these\n options."
+      }
+    }
+  ]
+}

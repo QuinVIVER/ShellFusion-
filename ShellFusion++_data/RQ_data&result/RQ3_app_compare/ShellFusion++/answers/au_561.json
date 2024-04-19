@@ -1,0 +1,87 @@
+{
+  "Query": "How do I know if my firewall is on?",
+  "Answers": [
+    {
+      "Command": "ufw",
+      "MP Summary": "program for managing a netfilter firewall",
+      "Most Similar TLDR Task": "Deny all UDP traffic to port 22",
+      "Most Similar TLDR Script": "ufw deny proto {{udp}} from {{any}} to {{any}} port {{22}}",
+      "Top-3 Similar Questions": [
+        "su_590600: UFW is active but not enabled why?",
+        "au_625638: How to allow this connection on the Firewall?",
+        "au_508679: Enable Firewall in Ubuntu"
+      ],
+      "Top-3 Scripts": [
+        "su_590600: mateusz@debian:~$ sudo ufw disable\nFirewall stopped and disabled on system startup\n\nmateusz@debian:~$ sudo ufw status verbose\nStatus: inactive\n\nmateusz@debian:~$ sudo ufw enable\nERROR: problem running ufw-init\n\nmateusz@debian:~$ sudo ufw status verbose\nStatus: active\nLogging: on (low)\nDefault: deny (incoming), allow (outgoing)\nNew profiles: skip\n\nTo                         Action      From\n--                         ------      ----\n80/tcp                     ALLOW IN    Anywhere\n22/tcp                     ALLOW IN    Anywhere\n\nmateusz@debian:~$ sudo service ufw status\n[ ok all is running...done.\n\nsudo nano /etc/ufw/ufw.conf",
+        "au_625638: sudo ufw allow from 192.168.1.0/24 to any port 111",
+        "au_508679: sudo apt-get update\nsudo apt-get install ufw\nsudo ufw enable"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "firewall-cmd",
+      "MP Summary": "firewalld command line client",
+      "Most Similar TLDR Task": "View the available firewall zones",
+      "Most Similar TLDR Script": "firewall-cmd --get-active-zones",
+      "Top-3 Similar Questions": [
+        "ul_460194: How to set up a firewall for testing web applications in a virtual machine?",
+        "ul_175255: how to make firewall changes permanent via firewall-cmd?",
+        "ul_19791: Set some firewall ports to only accept local network connections?"
+      ],
+      "Top-3 Scripts": [
+        "ul_460194: $ firewall-cmd --get-services\n\n$ firewall-cmd --get-services | grep -oE '\\shttp[s]*'\n http\n https\n\n$ firewall-cmd --permanent --add-service http --add-service https\nsuccess\n\n$ firewall-cmd --reload\nsuccess",
+        "ul_175255: sudo firewall-cmd --zone=public --add-port=7199/tcp --permanent\n   sudo firewall-cmd --reload\n\nsudo firewall-cmd --zone=public --list-all",
+        "ul_19791: "
+      ],
+      "Explanations about Options": {
+        "--reload": "Reload firewall rules and keep state information. Current permanent configuration will\n become new runtime configuration, i.e. all runtime only changes done until reload are\n lost with reload if they have not been also in permanent configuration.",
+        "--permanent": "Set the target of a permanent zone. target is one of: default, ACCEPT, DROP, REJECT"
+      }
+    },
+    {
+      "Command": "ip",
+      "MP Summary": "show / manipulate routing, network devices, interfaces and tunnels",
+      "Most Similar TLDR Task": "Add/Delete an ip address to an interface",
+      "Most Similar TLDR Script": "ip addr add/del {{ip}}/{{mask}} dev {{interface}}",
+      "Top-3 Similar Questions": [
+        "su_184540: How to install firewall script in Ubuntu?",
+        "ul_558581: nftables allow redis only from specific IP addresses"
+      ],
+      "Top-3 Scripts": [
+        "su_184540: #!/bin/sh\nif [ \"$IFACE\" = \"br0\" ] || [ \"$IFACE\" = \"eth0\" ]; then\n  if [ -n \"$(ip addr show br0 | grep '^ *inet ')\" ] 2>/dev/null &&\n     [ -n \"$(ip addr show eth0 | grep '^ *inet ')\" ] 2>/dev/null; then\n    /etc/init.d/local/my_firewall_script\n  fi\nfi",
+        "ul_558581: ip saddr 1.1.1.1 tcp dport 6379 accept\nip saddr 2.2.2.2 tcp dport 6379 accept\ntcp dport 6379 drop"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "rpcinfo",
+      "MP Summary": "report RPC information",
+      "Most Similar TLDR Task": "Display list of entries of given service name (mountd) and version number (2) on a remote nfs share",
+      "Most Similar TLDR Script": "rpcinfo -l {{remote_nfs_server_ip}} {{mountd}} {{2}}",
+      "Top-3 Similar Questions": [
+        "au_625638: How to allow this connection on the Firewall?"
+      ],
+      "Top-3 Scripts": [
+        "au_625638: rpcinfo -p"
+      ],
+      "Explanations about Options": {
+        "-p": "Probe rpcbind on host using version 2 of the rpcbind protocol, and display a list of\n all registered RPC programs. If host is not specified, it defaults to the local\n host. Note: Version 2 of the rpcbind protocol was previously known as the\n portmapper protocol."
+      }
+    },
+    {
+      "Command": "nmap",
+      "MP Summary": "Network exploration tool and security / port scanner",
+      "Most Similar TLDR Task": "Check if an IP address is up, and guess the remote host's operating system",
+      "Most Similar TLDR Script": "nmap -O {{ip_or_hostname}}",
+      "Top-3 Similar Questions": [
+        "ul_38662: How To See Which Ports Are Open On A Particular Firewall"
+      ],
+      "Top-3 Scripts": [
+        "ul_38662: nmap -v -sT localhost"
+      ],
+      "Explanations about Options": {
+        "-v": "(Increase verbosity level) , -vlevel (Set verbosity level)\n Increases the verbosity level, causing Nmap to print more information about the scan\n in progress. Open ports are shown as they are found and completion time estimates are\n provided when Nmap thinks a scan will take more than a few minutes. Use it twice or\n more for even greater verbosity: -vv, or give a verbosity level directly, for example\n -v3."
+      }
+    }
+  ]
+}

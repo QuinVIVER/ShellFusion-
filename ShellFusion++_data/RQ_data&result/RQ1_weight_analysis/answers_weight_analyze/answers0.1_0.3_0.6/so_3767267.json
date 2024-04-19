@@ -1,0 +1,93 @@
+{
+  "Query": "Check if file exists and whether it contains a specific string",
+  "Answers": [
+    {
+      "Command": "test",
+      "MP Summary": "check file types and compare values",
+      "Most Similar TLDR Task": "Test if directory not exists",
+      "Most Similar TLDR Script": "test ! -d {{path/to/directory}}",
+      "Top-3 Similar Questions": [
+        "ul_231622: Identify sub-directories that do not contain a specific string in a specific file",
+        "so_57971302: Globbing to check whether files with different file extension exist"
+      ],
+      "Top-3 Scripts": [
+        "ul_231622: find . -type d \\( ! -exec test -f '{}/stdout' \\; -o ! -exec grep -q str1 '{}/stdout' \\; \\) -print",
+        "so_57971302: test -f"
+      ],
+      "Explanations about Options": {
+        "-x": "FILE\n FILE exists and execute (or search) permission is granted",
+        "-c": "FILE\n FILE exists and is character special",
+        "-e": "FILE\n FILE exists",
+        "-f": "FILE\n FILE exists and is a regular file"
+      }
+    },
+    {
+      "Command": "grep",
+      "MP Summary": "print lines that match patterns",
+      "Most Similar TLDR Task": "Invert match for excluding specific strings",
+      "Most Similar TLDR Script": "grep -v {{search_pattern}}",
+      "Top-3 Similar Questions": [
+        "ul_528364: Iptables command to check whether rule exists at specific line number",
+        "ul_231622: Identify sub-directories that do not contain a specific string in a specific file",
+        "so_11287861: How to check if a file contains a specific string using Bash"
+      ],
+      "Top-3 Scripts": [
+        "ul_528364: iptables -S INPUT 1 | grep -ce '-j ACCEPT'\n\ngrep -c",
+        "ul_231622: find . -type d \\( ! -exec test -f '{}/stdout' \\; -o ! -exec grep -q str1 '{}/stdout' \\; \\) -print\n\nfind . -type d \\! -exec grep -q 'str1' {}/stdout 2>/dev/null \\; -print\n\nfor d in **/\ndo\n  if [[ ! -f \"$d\"stdout ]] then\n    printf '%s\\n' \"$d\"\n  else\n    grep -q str1 \"$d\"stdout || printf '%s\\n' \"$d\"\n  fi\ndone\n\nprint -rl **/*(/e_'[[ ! -f $REPLY/stdout ]] || ! grep -q str1 $REPLY/stdout'_)",
+        "so_11287861: if grep -q SomeString \"$File\"; then\n  Some Actions # SomeString was found\nfi\n\n$ echo hello | grep hi ; echo $?\n1\n$ echo hello | grep he ; echo $?\nhello\n0\n$ echo hello | grep -q he ; echo $?\n0"
+      ],
+      "Explanations about Options": {
+        "-q": "Quiet; do not write anything to standard output. Exit immediately with zero status\n if any match is found, even if an error was detected. Also see the -s or\n --no-messages option."
+      }
+    },
+    {
+      "Command": "find",
+      "MP Summary": "search for files in a directory hierarchy",
+      "Most Similar TLDR Task": "Find files by matching multiple patterns",
+      "Most Similar TLDR Script": "find {{root_path}} -name '{{*pattern_1*}}' -or -name '{{*pattern_2*}}'",
+      "Top-3 Similar Questions": [
+        "ul_231622: Identify sub-directories that do not contain a specific string in a specific file",
+        "au_625219: How to search and delete files who contain specific string in name",
+        "so_37967164: Check if file exists in a directory specified by regex Linux"
+      ],
+      "Top-3 Scripts": [
+        "ul_231622: find . -type d \\( ! -exec test -f '{}/stdout' \\; -o ! -exec grep -q str1 '{}/stdout' \\; \\) -print\n\nfind . -type d \\! -exec grep -q 'str1' {}/stdout 2>/dev/null \\; -print",
+        "au_625219: find . -type f -name \"*something*\"\n\nfind . -type f -name \"*something*\" -delete\n\nfind <your_search_starts_here> -type f -name \"*something*\" -delete\n\nfind ~ -type f -name \"*something*\"\n\nfind ~ -type f -name \"*something*\" -delete\n\nsudo find / -type f -name \"*something*\"\n\nsudo find / -type f -name \"*something*\" -delete\n\nfind <your_search_starts_here> -maxdepth 1 -type f -name \"*something*\" -delete",
+        "so_37967164: if find . -regex '/agent/[0-9 \\.]*/bin/run.sh'"
+      ],
+      "Explanations about Options": {
+        "-regex": "File name matches regular expression pattern. This is a match on the whole path,\n not a search. For example, to match a file named `./fubar3', you can use the\n regular expression `.*bar.' or `.*b.*3', but not `f.*r3'. The regular expressions\n understood by find are by default Emacs Regular Expressions (except that `.'\n matches newline), but this can be changed with the -regextype option.",
+        "-d": "A synonym for -depth, for compatibility with FreeBSD, NetBSD, MacOS X and OpenBSD.",
+        "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+        "-type": "File is of type c:",
+        "-maxdepth": "Descend at most levels (a non-negative integer) levels of directories below the\n starting-points. -maxdepth 0 means only apply the tests and actions to the\n starting-points themselves."
+      }
+    },
+    {
+      "Command": "locate",
+      "MP Summary": "list files in databases that match a pattern",
+      "Most Similar TLDR Task": "Look for a file by its exact filename (a pattern containing no globbing characters is interpreted as `*pattern*`)",
+      "Most Similar TLDR Script": "locate */{{filename}}",
+      "Top-3 Similar Questions": [
+        "au_625219: How to search and delete files who contain specific string in name"
+      ],
+      "Top-3 Scripts": [
+        "au_625219: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "cp",
+      "MP Summary": "copy files and directories",
+      "Most Similar TLDR Task": "Recursively copy a directory's contents to another location (if the destination exists, the directory is copied inside it)",
+      "Most Similar TLDR Script": "cp -r {{path/to/source_directory}} {{path/to/target_directory}}",
+      "Top-3 Similar Questions": [
+        "so_48350769: Check file exists in source before copying"
+      ],
+      "Top-3 Scripts": [
+        "so_48350769: $files = @(\"abc.ps1\", \"def.ps1\")\n$files | ?{ Test-Path $_ } | %{ $file = gi $_; cp $file.FullName \"destinationlocation\\$_\" -Force; }"
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

@@ -1,0 +1,91 @@
+{
+    "Answers": [
+        {
+            "Command": "unison",
+            "Explanations about Options": {},
+            "MP Summary": "a file-synchronization tool for Unix and Windows",
+            "Most Similar TLDR Script": "unison {{path/to/directory_1}} {{path/to/directory_2}}",
+            "Most Similar TLDR Task": "Sync two directories (creates log first time these two directories are synchronised)",
+            "Top-3 Scripts": [],
+            "Top-3 Similar Questions": [
+                "ul_26231: Finding out *what* is synchronizing two Linux servers",
+                "so_15301004: Script for updating files differences between computers"
+            ]
+        },
+        {
+            "Command": "cd",
+            "Explanations about Options": {},
+            "MP Summary": "change the working directory",
+            "Most Similar TLDR Script": "cd",
+            "Most Similar TLDR Task": "Go to home directory of current user",
+            "Top-3 Scripts": [
+                "so_62659148: $ cd /html/framework_b\n$ mv plugins plugins-backup\n$ ln -s /html/framework_a/plugins ./plugins\n\ncd /html/framework_b/plugins",
+                "ul_206311: comm -23 src.txt dst.txt | cut -b 43- | (cd /some/dir; tar cJvf - --files-from -) | split -b 3500MB -d\n\ncd /some/dir\n\ncat $( ls -1 x* | sort ) | (cd /some/dir; tar xJvpf -)",
+                "ul_463086: cd /\nsudo mount /dev/mapper/bubba-storage \"/media/linkan/Bubba root/home\"\n\ncd \"/media/linkan/Bubba root/home\"\nsudo chown -R linkan: old_linkan"
+            ],
+            "Top-3 Similar Questions": [
+                "so_62659148: Connect / Sync a folder to another folder with a correct path",
+                "ul_206311: Use USB to synchronize large directory between two disconnected servers",
+                "ul_463086: Reading home folder of old computer in a new computer"
+            ]
+        },
+        {
+            "Command": "rsync",
+            "Explanations about Options": {
+                "--ignore-existing(M)": "This tells rsync to skip updating files that already exist on the destination (this\n does not ignore existing directories, or nothing would get done). See also\n --existing.",
+                "-a(M)": "This is equivalent to -rlptgoD. It is a quick way of saying you want recursion and\n want to preserve almost everything (with -H being a notable omission). The only\n exception to the above equivalence is when --files-from is specified, in which case\n -r is not implied.",
+                "-d(C)": " I guess \"rsync -d dir2/ dir1\" would be next?.",
+                "-d(M)": "Tell the sending side to include any directories that are encountered. Unlike\n --recursive, a directory’s contents are not copied unless the directory name\n specified is \".\" or ends with a trailing slash (e.g. \".\", \"dir/.\", \"dir/\", etc.).\n Without this option or the --recursive option, rsync will skip all directories it\n encounters (and output a message to that effect for each one). If you specify both\n --dirs and --recursive, --recursive takes precedence.",
+                "-e(M)": "This option allows you to choose an alternative remote shell program to use for\n communication between the local and remote copies of rsync. Typically, rsync is\n configured to use ssh by default, but you may prefer to use rsh on a local network.",
+                "-r(M)": "This tells rsync to copy directories recursively. See also --dirs (-d).",
+                "-v(M)": "This option increases the amount of information you are given during the transfer.\n By default, rsync works silently. A single -v will give you information about what\n files are being transferred and a brief summary at the end. Two -v options will\n give you information on what files are being skipped and slightly more information\n at the end. More than two -v options should only be used if you are debugging\n rsync.",
+                "-z(M)": "With this option, rsync compresses the file data as it is sent to the destination\n machine, which reduces the amount of data being transmitted - something that is\n useful over a slow connection."
+            },
+            "MP Summary": "a fast, versatile, remote (and local) file-copying tool",
+            "Most Similar TLDR Script": "rsync -r {{remote_host}}:{{path/to/remote_directory}}/ {{path/to/local_directory}}",
+            "Most Similar TLDR Task": "Transfer directory contents (but not the directory itself) from a remote to local",
+            "Top-3 Scripts": [
+                "au_7539: rsync -e ssh -a $HOME/ myuser@officeserv:",
+                "ul_55442: man rsync\n\nrsync --ignore-existing -avz -e ssh source remoteuser@remoteserver:destination",
+                "so_44262393: rsync -d dir2/ dir1"
+            ],
+            "Top-3 Similar Questions": [
+                "so_714229: Synchronize home directories from multiple clients to a server",
+                "ul_114816: Sync Linux between two computers",
+                "ul_26231: Finding out *what* is synchronizing two Linux servers"
+            ]
+        },
+        {
+            "Command": "tar",
+            "Explanations about Options": {
+                "--files-from(C)": "the \"dst.txt\" and \"src.txt\" files contain SHA-1 sums of the files on the two machines \"comm -23 src.txt dst.txt\" selects the files that either exist only on the source machine, or exist on both but are different \"cut -b 43-\" keeps only the filenames; this is the list of files that need to be copied \"cd /some/dir\" changes \"CWD\" to the source directory \"tar cJvpf - --files-from -\" makes an archive of the bunch; \"--files-from -\" reads the list of files to archive from \"stdin\", \"f -\" tells \"tar\" to write the archive to \"stdout\", \"J\" means to compress the archive with \"xz\", and \"v\" makes \"tar\" print the list of files it archives to \"stderr\" \"split -b 3500MB -d\" splits the archive in chunks of 3500MB (I'm assuming you have a 4GB flash memory, and the data won't fit all in a single run; you might not need to do this at all) \"cat $( ls -1 x* | sort )\" concatenates the \"x*\" files; \"sort\" is there to make sure it does that in the right order \"cd /some/dir\" changes \"CWD\" to the destination directory \"tar xJvpf -\" saves the files; \"J\" means decompress with \"xz\", \"p\" means restore permissions, \"v\" makes the operation verbose, and \"f -\" tells \"tar\" to read the archive from \"stdin\".",
+                "--files-from(M)": "Get names to extract or create from FILE."
+            },
+            "MP Summary": "an archiving utility",
+            "Most Similar TLDR Script": "tar xf {{source.tar}} {{source.tar/path/to/extract}} --strip-components={{depth_to_strip}}",
+            "Most Similar TLDR Task": "Extract a specific file without preserving the folder structure",
+            "Top-3 Scripts": [
+                "ul_206311: comm -23 src.txt dst.txt | cut -b 43- | (cd /some/dir; tar cJvf - --files-from -) | split -b 3500MB -d\n\ncat $( ls -1 x* | sort ) | (cd /some/dir; tar xJvpf -)\n\ntar xJvpf -\n\ntar cJvpf - --files-from -"
+            ],
+            "Top-3 Similar Questions": [
+                "ul_206311: Use USB to synchronize large directory between two disconnected servers"
+            ]
+        },
+        {
+            "Command": "scp",
+            "Explanations about Options": {
+                "-3(M)": "Copies between two remote hosts are transferred through the local host. Without\n this option the data is copied directly between the two remote hosts. Note that\n this option disables the progress meter."
+            },
+            "MP Summary": "secure copy (remote file copy program)",
+            "Most Similar TLDR Script": "scp -3 {{host1}}:{{path/to/remote_file}} {{host2}}:{{path/to/remote_directory}}",
+            "Most Similar TLDR Task": "Copy a file between two remote hosts transferring through the local host",
+            "Top-3 Scripts": [
+                "su_353565: scp other_user@localhost:file ."
+            ],
+            "Top-3 Similar Questions": [
+                "su_353565: How do I copy a file/folder from another user's home directory in Linux?"
+            ]
+        }
+    ],
+    "Query": "How to synchronize the home folder between multiple computers?"
+}

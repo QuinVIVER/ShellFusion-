@@ -1,0 +1,91 @@
+{
+  "Query": "Freeing up a TCP/IP port?",
+  "Answers": [
+    {
+      "Command": "nc",
+      "MP Summary": "arbitrary TCP and UDP connections and listens",
+      "Most Similar TLDR Task": "Connect to a certain port (you can then write to this port)",
+      "Most Similar TLDR Script": "nc {{ip_address}} {{port}}",
+      "Top-3 Similar Questions": [
+        "ul_214471: How to create a TCP listener?",
+        "so_54321431: How can I loop until IP:port is not responding",
+        "ul_180492: Is it possible to connect to TCP port 0?"
+      ],
+      "Top-3 Scripts": [
+        "ul_214471: nc -l",
+        "so_54321431: #!/bin/bash\nfor i in `seq 1 10`;\ndo\n        nc -z -w 1 google.com 80 &> /dev/null\n        if [ $? -eq 0 ]; then\n            echo OK\n        else\n            echo FAIL\n        fi\ndone",
+        "ul_180492: "
+      ],
+      "Explanations about Options": {
+        "-l": "Listen for an incoming connection rather than initiating a connection to a remote\n host. The destination and port to listen on can be specified either as non-optional\n arguments, or with options -s and -p respectively. Cannot be used together with -x\n or -z. Additionally, any timeouts specified with the -w option are ignored.",
+        "-w": "Connections which cannot be established or are idle timeout after timeout seconds.\n The -w flag has no effect on the -l option, i.e. nc will listen forever for a\n connection, with or without the -w flag. The default is no timeout.",
+        "-z": "Only scan for listening daemons, without sending any data to them. Cannot be used\n together with -l."
+      }
+    },
+    {
+      "Command": "netstat",
+      "MP Summary": "Print  network  connections,  routing tables, interface statistics, masquerade connections, and multicast memberships",
+      "Most Similar TLDR Task": "List listening TCP ports",
+      "Most Similar TLDR Script": "netstat -t",
+      "Top-3 Similar Questions": [
+        "so_28989069: How to find a free TCP port",
+        "ul_140021: How to close ports in Linux?",
+        "su_370965: How can I check which ports are busy and which ports are free on my Linux machine?"
+      ],
+      "Top-3 Scripts": [
+        "so_28989069: netstat -lntu",
+        "ul_140021: me@myhost:~$ sudo netstat -tlnp\nActive Internet connections (only servers)\nProto Recv-Q Send-Q Local Address   Foreign Address   State    PID/Program name\ntcp        0      0 127.0.0.1:53    0.0.0.0:*         LISTEN   1004/dnsmasq    \ntcp        0      0 0.0.0.0:22      0.0.0.0:*         LISTEN   380/sshd        \ntcp        0      0 127.0.0.1:631   0.0.0.0:*         LISTEN   822/cupsd       \ntcp6       0      0 :::22           :::*              LISTEN   380/sshd        \ntcp6       0      0 ::1:631         :::*              LISTEN   822/cupsd\n\nnetstat -anb",
+        "su_370965: netstat -antu\n\n$ sudo netstat -antup\nActive Internet connections (servers and established)\nProto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name\ntcp        0      0 0.0.0.0:59753           0.0.0.0:*               LISTEN      860/rpc.statd"
+      ],
+      "Explanations about Options": {
+        "-a": "Show both listening and non-listening sockets. With the --interfaces option, show\n interfaces that are not up",
+        "-p": "Show the PID and name of the program to which each socket belongs.",
+        "-l": "Show only listening sockets. (These are omitted by default.)",
+        "-n": "Show numerical addresses instead of trying to determine symbolic host, port or user names."
+      }
+    },
+    {
+      "Command": "telnet",
+      "MP Summary": "user interface to the TELNET protocol",
+      "Most Similar TLDR Task": "Telnet to a specific port of a host",
+      "Most Similar TLDR Script": "telnet {{ip_address}} {{port}}",
+      "Top-3 Similar Questions": [
+        "ul_140021: How to close ports in Linux?"
+      ],
+      "Top-3 Scripts": [
+        "ul_140021: telnet 127.0.0.1"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "tcpdump",
+      "MP Summary": "dump traffic on a network",
+      "Most Similar TLDR Task": "Capture all TCP traffic showing contents (ASCII) in console",
+      "Most Similar TLDR Script": "tcpdump -A tcp",
+      "Top-3 Similar Questions": [
+        "su_604998: Monitor TCP Traffic on specific port"
+      ],
+      "Top-3 Scripts": [
+        "su_604998: tcpdump port 443 and '(tcp-syn|tcp-ack)!=0'"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "nmap",
+      "MP Summary": "Network exploration tool and security / port scanner",
+      "Most Similar TLDR Task": "Perform TCP and UDP scanning (use -sU for UDP only, -sZ for SCTP, -sO for IP)",
+      "Most Similar TLDR Script": "nmap -sSU {{address_or_addresses}}",
+      "Top-3 Similar Questions": [
+        "au_957429: How to find the ports of multiple ip's"
+      ],
+      "Top-3 Scripts": [
+        "au_957429: script nmap.log\nIP1=\"\"\nIP2=\"\"\nIP3=\"\"\nIP4=\"\"\nIP5=\"\"\nsudo nmap -P0 -PS -n -sS -p1-65535 -r -T4 $IP1 $IP2 $IP3 $IP4 $IP5\nexit"
+      ],
+      "Explanations about Options": {
+        "-r": "(Don't randomize ports)\n By default, Nmap randomizes the scanned port order (except that certain commonly\n accessible ports are moved near the beginning for efficiency reasons). This\n randomization is normally desirable, but you can specify -r for sequential (sorted\n from lowest to highest) port scanning instead.",
+        "-S": "IP_Address (Spoof source address)\n In some circumstances, Nmap may not be able to determine your source address (Nmap\n will tell you if this is the case). In this situation, use -S with the IP address of\n the interface you wish to send packets through.",
+        "-n": "Tells Nmap to never do reverse DNS"
+      }
+    }
+  ]
+}

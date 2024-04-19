@@ -1,0 +1,117 @@
+
+
+Query:                How to extract the first two characters of a string in shell scripting?
+
+
+########################################################################################################################
+
+
+Question Title:       Extract part of string using shell script
+Question Link:        https://stackoverflow.com/questions/45382348
+
+Accepted Answer:      Using awk:
+                      
+                       awk '{for (i=1;i&lt;=NF;++i) {if($i~/^[v]/){print $i}}}' yourfile.txt
+                      
+                      
+                      This is:
+                      
+                      
+                      Iterating the file record by record (because that's what awk does)
+                      Iterating each field delimited by the default : for (i=1;i&lt;=NF;++i)
+                      Testing to see if the field starts with a "v": if($i~/^[v]/)
+                      If so it prints the field value print $i
+                      
+                      
+                      I'm certain sed could make quick work of this too.
+
+
+########################################################################################################################
+
+
+Question Title:       cutting last n character in a string using shell script
+Question Link:        https://stackoverflow.com/questions/14338518
+
+Accepted Answer:      To answer the title of you question with specifies cutting last n character in a string, you can use the substring extraction feature in Bash.
+                      
+                      me@home$ A="123456"
+                      me@home$ echo ${A:0:-2}  # remove last 2 chars
+                      1234
+                      
+                      
+                      However, based on your examples you appear to want to remove all trailing commas, in which case you could use sed 's/,*$//'.
+                      
+                      me@home$ echo "ssl01:49188,ssl999999:49188,,,,," | sed 's/,*$//'
+                      ssl01:49188,ssl999999:49188
+                      
+                      
+                      or, for a purely Bash solution, you could use substring removal:
+                      
+                      me@home$ X="ssl01:49188,ssl999999:49188,,,,,"
+                      me@home$ shopt -s extglob
+                      me@home$ echo ${X%%+(,)}
+                      ssl01:49188,ssl999999:49188
+                      
+                      
+                      I would use the sed approach if the transformation needs to be applied to a whole file, and the bash substring removal approach if the target string is already in a bash variable.
+
+
+########################################################################################################################
+
+
+Question Title:       Extract Insert statements from Oracle DB through Shell script
+Question Link:        https://stackoverflow.com/questions/44909891
+
+Accepted Answer:      If your aim is : 
+                      Extract all insert statement for all tables in database, than run those insert in different database ? Or wish to save these insert statement for future use ?
+                      
+                      If above requirement is true, their are better way to achieve this. Insert statement with "data" shown expose data to anyone who can read these extract &amp; a serious security threat. You should look for using datapump for this requirement. 
+                      
+                      
+                      Abhi
+                      
+
+
+########################################################################################################################
+
+
+Question Title:       Extracting information from string using shell script
+Question Link:        https://stackoverflow.com/questions/31184998
+
+Accepted Answer:      An Example with grep with Perl regex:
+                      
+                      #!/bin/bash
+                      s="9999.0      @str:Attribute|ID=foo_1|SendingTime=2015-07-24 05:12:12.123|S-Id=9999|IDSource=Test_3|Qty=1555"
+                      var1="$(echo "$s" |grep -oP "(?&lt;=@str:)[^|]*")"        # @str:
+                      var2="$(echo "$s" |grep -oP "(?&lt;=SendingTime=)[^|]*")" # SendingTime=
+                      var3="${var2#* }"                                      # Date
+                      var2="${var2% *}"                                      # timestamp
+                      var4="$(echo "$s" |grep -oP "(?&lt;=Qty=)[^|]*")"         # Qty
+                      echo "$var1 | $var2 | $var3 | $var4"
+                      
+                      
+                      Output:
+                      
+                      Attribute | 2015-07-24 | 05:12:12.123 | 1555
+                      
+
+
+########################################################################################################################
+
+
+Question Title:       Extracting string between 2 strings with bash shell script
+Question Link:        https://stackoverflow.com/questions/25786380
+
+Accepted Answer:      Using awk you can do:
+                      
+                      awk '/START-OF-DATA/{p=1;next} /END-OF-DATA/{p=0;exit} p' file
+                      US345370CN85|0|4|FORD MOTOR COMPANY|FORD MOTOR COMPANY| | |
+                      US31679BAC46|0|4|FIFTH STREET FINANCE COR|FIFTH STREET FINANCE COR| | |
+                      
+                      
+                      Or using sed:
+                      
+                      sed -n '/START-OF-DATA/,/END-OF-DATA/{/START-OF-DATA\|END-OF-DATA/!p;}' file
+                      US345370CN85|0|4|FORD MOTOR COMPANY|FORD MOTOR COMPANY| | |
+                      US31679BAC46|0|4|FIFTH STREET FINANCE COR|FIFTH STREET FINANCE COR| | |
+                      

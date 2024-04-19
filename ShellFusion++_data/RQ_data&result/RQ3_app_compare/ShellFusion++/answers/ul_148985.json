@@ -1,0 +1,80 @@
+{
+  "Query": "How to get a response from any URL?",
+  "Answers": [
+    {
+      "Command": "curl",
+      "MP Summary": "transfer a URL",
+      "Most Similar TLDR Task": "Download a file, following [L]ocation redirects, and automatically [C]ontinuing (resuming) a previous file transfer",
+      "Most Similar TLDR Script": "curl -O -L -C - {{http://example.com/filename}}",
+      "Top-3 Similar Questions": [
+        "so_53144136: How do I get a string from a curl response for a variable in bash?",
+        "so_38732398: How do get the stream urls from kinox.to?",
+        "so_69346007: How to get original URL from the cURL output log entry?"
+      ],
+      "Top-3 Scripts": [
+        "so_53144136: code=$(curl ... | jq -r '.code')",
+        "so_38732398: $ sh -x curl_stream_ex.sh futurama 7 2\n++ curl -sL 'http://kinox.to/Search.html?q=futurama'\n++ pcregrep -M 'lng\\/2\\.png(\\n|.)+?class=\"Title\"'\ncurl_stream_ex.sh: line 8: pcregrep: command not found\n\n$ curl -sL 'http://kinox.to/aGET/Mirror/Futurama_Into_the_Wild_Green_Yonder&Hoster=52&Mirror=2'\n{\"Stream\":\"<a href=\\\"http:\\/\\/shared.sx\\/992ba73be8\\\" target=\\\"_blank\\\"><img src=\\\"\\/gr\\/sys\\/player\\/default.flash.png\\\" usemap=\\\"#Link\\\" width=\\\"752\\\" height=\\\"370\\\" border=\\\"52\\\" \\/><\\/a><map name=\\\"Link\\\"><area shape=\\\"rect\\\" coords=\\\"220,250,515,310\\\" target=\\\"_blank\\\" href=\\\"\\\" alt=\\\"Download This Movie\\\" title=\\\"Download This Movie\\\"><\\/map>\",\"Replacement\":\"<li id=\\\"Hoster_52\\\" class=\\\"MirBtn MirBtnA MirBaseStyleflv MirStyle52\\\" rel=\\\"Futurama_Into_the_Wild_Green_Yonder&amp;Hoster=52&amp;Mirror=3\\\">\\t<div class=\\\"Named\\\">Shared.sx<\\/div>\\t<div class=\\\"Data\\\"><b>Mirror<\\/b>: 3\\/3<br \\/><b>Vom<\\/b>: 25.10.2015<\\/div><\\/li>\",\"HosterName\":\"Shared.sx\",\"HosterHome\":\"http:\\/\\/shared.sx\"}",
+        "so_69346007: while read LINE ; do\n    print \"REQUESTED URL: $LINE\" >> output.txt;\n    curl $LINE >> output.txt 2>&1;\ndone < url-list.txt"
+      ],
+      "Explanations about Options": {
+        "-s": "Silent or quiet mode. Don't show progress meter or error messages. Makes Curl\n mute. It will still output the data you ask for, potentially even to the\n terminal/stdout unless you redirect it."
+      }
+    },
+    {
+      "Command": "echo",
+      "MP Summary": "display a line of text",
+      "Most Similar TLDR Task": "Print a text message. Note: quotes are optional",
+      "Most Similar TLDR Script": "echo \"{{Hello World}}\"",
+      "Top-3 Similar Questions": [
+        "ul_347732: Extracting substring from environment variable",
+        "au_887234: How to get the URL from a firefox tab from the terminal?",
+        "so_32744303: bash: extract URLs from a string"
+      ],
+      "Top-3 Scripts": [
+        "ul_347732: $ export FOO=http://unix.stackexchange.com/questions/ask\n$ tmp=\"${FOO#*//}\" # remove http://\n$ echo \"${tmp%%/*}\" # remove everything after the first /\nunix.stackexchange.com\n\n$ echo \"$FOO\" | python -c 'import urlparse; import sys;  print urlparse.urlparse(sys.stdin.read()).netloc' \nunix.stackexchange.com",
+        "au_887234: printf \"\\n# CurrentSession:\\n\"; \\\ncat $HOME/.mozilla/firefox/*.default/sessionstore-backups/recovery.js | \\\nsed \"s/\\\\_closedTabs/\\{\\\"url\\\":\\\"# ClosedTabs:\\\"attributes/g\" | \\\nsed \"s/\\\\lastSessionState/\\{\\\"url\\\":\\\"# LastSession:\\\"attributes/\" | \\\nsed \"s/{/\\n{/g\" | \\\negrep -o 'url\":\"*.*attributes*' | \\\ncut -d\\\" -f3 | \\\nsed \"s/#/\\n#/\" \\\n; echo\n\n; echo\n\nprintf \"\\n# CurrentSession:\\n\"; \\\ncat $HOME/.mozilla/firefox/*.default/sessionstore-backups/recovery.js | \\\nsed \"s/\\\\_closedTabs/\\{\\\"url\\\":\\\"# ClosedTabs:/g\" | \\\nsed \"s/\\\\lastSessionState/\\{\\\"url\\\":\\\"# LastSession:/\" | \\\nsed \"s/entries/url\\\":\\\"# TAB:/g\" | \\\nsed \"s/{/\\n{/g\" | \\\negrep 'url\":\"*' | \\\ncut -d\\\" -f4 | \\\nsed \"s/#/\\n#/\" \\\n; echo",
+        "so_32744303: #!/bin/bash\noutput='Array { Dict { Name = afp://or-fs-001/vol1 URL = afp://or-fs-001/vol1 } Dict { Name = smb://or-fs-001/vol1 URL = smb://or-fs-001/vol1 } Dict { Name = vnc://or-fs-001/vol1 URL = vnc://or-fs-001/vol1 } Dict { Name = ftp://or-fs-001/vol1 URL = ftp://or-fs-001/vol1 } }'\n\ncount=$(echo \"$output\" | grep -o 'Name =' | wc -l)\nnames=($(grep -o 'Name = [^ ]\\+' <<< \"$output\" | cut -f3- -d' '))\necho $count = ${#names[@]}\nfor name in \"${names[@]}\" ; do\n    echo \"$name\"\ndone"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "firefox",
+      "MP Summary": "a free and open source web browser from Mozilla",
+      "Most Similar TLDR Task": "Open a private (incognito) window",
+      "Most Similar TLDR Script": "firefox --private-window",
+      "Top-3 Similar Questions": [
+        "au_887234: How to get the URL from a firefox tab from the terminal?"
+      ],
+      "Top-3 Scripts": [
+        "au_887234: ~/.mozilla/firefox/*.default/sessionstore-backups/recovery.js\n\n~/.mozilla/firefox/*.default/sessionstore.js\n\n~/.mozilla/firefox/*.default/sessionstore-backups/previous.js\n\ncat $HOME/.mozilla/firefox/*.default/sessionstore-backups/recovery.js | \\\nsed \"s/\\\\_closedTabs.*//\" | \\\nsed \"s/{/\\n{/g\" | \\\negrep -o 'url.*attributes' | \\\ncut -d\\\" -f3\n\nprintf \"\\n# CurrentSession:\\n\"; \\\ncat $HOME/.mozilla/firefox/*.default/sessionstore-backups/recovery.js | \\\nsed \"s/\\\\_closedTabs/\\{\\\"url\\\":\\\"# ClosedTabs:\\\"attributes/g\" | \\\nsed \"s/\\\\lastSessionState/\\{\\\"url\\\":\\\"# LastSession:\\\"attributes/\" | \\\nsed \"s/{/\\n{/g\" | \\\negrep -o 'url\":\"*.*attributes*' | \\\ncut -d\\\" -f3 | \\\nsed \"s/#/\\n#/\" \\\n; echo\n\ncat $HOME/.mozilla/firefox/*.default/sessionstore-backups/recovery.js | sed \"s/\\\\_closedTabs.*//\" | sed \"s/{/\\n{/g\" | egrep 'url\":\"http*' | cut -d\\\" -f4\n\nhttps://askubuntu.com/\nhttps://www.google.bg/search?client=ubuntu&channel=fs&q=firefox&ie=utf-8&oe=utf-8&gfe_rd=cr&ei=pTKyWIitGqTs8wewj4KgDQ\nhttps://www.mozilla.org/bg/firefox/new/\nhttps://www.mozilla.org/en-US/\n\ncat $HOME/.mozilla/firefox/*.default/sessionstore-backups/recovery.js | \\\nsed \"s/\\\\_closedTabs.*//\" | \\\nsed \"s/{/\\n{/g\" | \\\nsed \"s/entries/url\\\":\\\"# TAB:/g\" | \\\negrep 'url\":\"*' | \\\ncut -d\\\" -f4 | \\\nsed \"s/#/\\n#/\"\n\n# TAB:\nabout:startpage\nhttps://askubuntu.com/\n\n# TAB:\nhttps://www.google.bg/search?client=ubuntu&channel=fs&q=firefox&ie=utf-8&oe=utf-8&gfe_rd=cr&ei=pTKyWIitGqTs8wewj4KgDQ\nhttps://www.mozilla.org/bg/firefox/new/\nhttps://www.mozilla.org/en-US/\n\nprintf \"\\n# CurrentSession:\\n\"; \\\ncat $HOME/.mozilla/firefox/*.default/sessionstore-backups/recovery.js | \\\nsed \"s/\\\\_closedTabs/\\{\\\"url\\\":\\\"# ClosedTabs:/g\" | \\\nsed \"s/\\\\lastSessionState/\\{\\\"url\\\":\\\"# LastSession:/\" | \\\nsed \"s/entries/url\\\":\\\"# TAB:/g\" | \\\nsed \"s/{/\\n{/g\" | \\\negrep 'url\":\"*' | \\\ncut -d\\\" -f4 | \\\nsed \"s/#/\\n#/\" \\\n; echo\n\ncat $HOME/.mozilla/firefox/*.default/sessionstore.js \\\n..."
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "nginx",
+      "MP Summary": "HTTP and reverse proxy server, mail proxy server",
+      "Most Similar TLDR Task": "Reload the configuration by sending a signal with no downtime",
+      "Most Similar TLDR Script": "nginx -s reload",
+      "Top-3 Similar Questions": [
+        "so_68687625: Docker: 8080 not getting a response from an nginx container"
+      ],
+      "Top-3 Scripts": [
+        "so_68687625: docker run --name mycontainer -p 8080:80 nginx\n\ndocker run --rm -p 8080:80 nginx"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "test",
+      "MP Summary": "check file types and compare values",
+      "Most Similar TLDR Task": "Test if given variable is empty",
+      "Most Similar TLDR Script": "test -z $GIT_BRANCH",
+      "Top-3 Similar Questions": [
+        "so_30060883: How to get git repo from url"
+      ],
+      "Top-3 Scripts": [
+        "so_30060883: "
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

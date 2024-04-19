@@ -1,0 +1,85 @@
+{
+  "Query": "Ubuntu refuses to output audio via HDMI",
+  "Answers": [
+    {
+      "Command": "pactl",
+      "MP Summary": "Control a running PulseAudio sound server",
+      "Most Similar TLDR Task": "List all sinks (or other types - sinks are outputs and sink-inputs are active audio streams)",
+      "Most Similar TLDR Script": "pactl list {{sinks}} short",
+      "Top-3 Similar Questions": [
+        "au_63599: Configuring HDMI Audio via command line",
+        "ul_458044: Route application's audio output to multiple playback devices",
+        "su_1349601: How can I \"record\" sound directly from an audio file?"
+      ],
+      "Top-3 Scripts": [
+        "au_63599: pactl set-card-profile 0 output:hdmi-audio",
+        "ul_458044: pactl load-module module-null-sink sink_name=recsink\npactl load-module module-loopback source=recsink.monitor sink=your_loadspeaker_sink\n\npactl list short sinks\n\npactl help",
+        "su_1349601: pactl load-module module-null-sink"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "ffmpeg",
+      "MP Summary": "ffmpeg video converter",
+      "Most Similar TLDR Task": "Remux MKV video to MP4 without re-encoding audio or video streams",
+      "Most Similar TLDR Script": "ffmpeg -i {{input_video}}.mkv -codec copy {{output_video}}.mp4",
+      "Top-3 Similar Questions": [
+        "so_19828236: How to record audio with ffmpeg on linux?",
+        "ul_651617: Write audio stream to an ALSA device with ffmpeg"
+      ],
+      "Top-3 Scripts": [
+        "so_19828236: ffmpeg -f alsa -ac 2 -i default -itsoffset 00:00:00.5 -f video4linux2 -s 320x240 -r 25 -i /dev/video0 out.mpg",
+        "ul_651617: ffmpeg -i myfile.ogg -f alsa hw:2,1,0"
+      ],
+      "Explanations about Options": {
+        "-itsoffset": "Set the input time offset.",
+        "-i": "input file url"
+      }
+    },
+    {
+      "Command": "aplay",
+      "MP Summary": "command-line sound recorder and player for ALSA soundcard driver",
+      "Most Similar TLDR Task": "Play a specific file (sampling rate, bit depth, etc. will be automatically determined for the file format)",
+      "Most Similar TLDR Script": "aplay {{path/to/file}}",
+      "Top-3 Similar Questions": [
+        "au_1257982: no HDMI audio output device in settings (Ubuntu 16.04)",
+        "ul_587002: How to pipe anything to the audio output?"
+      ],
+      "Top-3 Scripts": [
+        "au_1257982: aplay -l",
+        "ul_587002: journalctl | aplay\n\naplay(1)\n\naplay -c 1 -t raw -r 22050 -f mu_law foobar\n              will play the raw file \"foobar\" as a 22050-Hz, mono, 8-bit, Mu-Law .au file.\n\necho \"g(i,x,t,o){return((3&x&(i*((3&i>>16?\\\"BY}6YB6$\\\":\\\"Qj}6jQ6%\\\")[t%8]+51)>>o))<<4);};main(i,n,s){for(i=0;;i++)putchar(g(i,1,n=i>>14,12)+g(i,s=i>>17,n^i>>13,10)+g(i,s/3,n+((i>>11)%3),10)+g(i,s/5,8+n-((i>>10)%3),9));}\"|gcc -xc -&&./a.out|aplay"
+      ],
+      "Explanations about Options": {
+        "-l": "List all soundcards and digital audio devices"
+      }
+    },
+    {
+      "Command": "arecord",
+      "MP Summary": "command-line sound recorder and player for ALSA soundcard driver",
+      "Most Similar TLDR Task": "List all sound cards and digital audio devices",
+      "Most Similar TLDR Script": "arecord --list-devices",
+      "Top-3 Similar Questions": [
+        "ul_14889: Is it possible to record audio directly to a computer's optical drive?"
+      ],
+      "Top-3 Scripts": [
+        "ul_14889: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "tee",
+      "MP Summary": "read from standard input and write to standard output and files",
+      "Most Similar TLDR Task": "Print standard input to the terminal, and also pipe it into another program for further processing",
+      "Most Similar TLDR Script": "echo \"example\" | tee {{/dev/tty}} | {{xargs printf \"[%s]\"}}",
+      "Top-3 Similar Questions": [
+        "ul_523440: How do I set this HDMI output fix permanent?"
+      ],
+      "Top-3 Scripts": [
+        "ul_523440: make\nsudo make install\necho nvhda | sudo tee -a /etc/initramfs-tools/modules\necho \"options nvhda load_state=1\" | sudo tee /etc/modprobe.d/nvhda.conf\nsudo update-initramfs -u"
+      ],
+      "Explanations about Options": {
+        "-a": "append to the given FILEs, do not overwrite"
+      }
+    }
+  ]
+}

@@ -1,0 +1,97 @@
+
+
+Query:                How to check which process is using most memory
+
+
+########################################################################################################################
+
+
+Question Title:       Invisible processes using all of system memory
+Question Link:        https://askubuntu.com/questions/790106
+
+Accepted Answer:      You have only 500 MB of RAM installed. I would not be surprised that most of it is in use, given those little resources. 
+                      
+                      On the other hand, htop sums up both the really used memory (allocated by applications) and the cache (used by the system to cache disk access, but immediately available to applications if needed). Therefore the "non-free" memory amount looks much greater than it actually is.
+                      
+                      Check the output of free -h, it will give you more detail:
+                      
+                                  total        used        free      shared  buff/cache   available
+                      Mem:          11G        1,2G        9,2G         30M        1,2G         10G
+                      Swap:        7,5G          0B        7,5G
+                      
+                      
+                      While the used column shows you how much memory is in use in total (like htop), the available column shows you the amount of memory that is allocatable by applications. This is usually the number that is interesting to end-users.
+                      
+                      Alternative output format (copied from the link at the bottom):
+                      
+                                   total       used       free     shared    buffers     cached
+                      Mem:          1504       1491         13          0         91        764
+                      -/+ buffers/cache:        635        869
+                      Swap:         2047          6       2041
+                      
+                      
+                      In this format, the interesting number of allocatable RAM is located in the free column, but in the -/+ buffers/cache row.
+                      
+                      Related must-read website:  http://www.linuxatemyram.com/
+
+
+########################################################################################################################
+
+
+Question Title:       check if a memory page is loaded into memory
+Question Link:        https://stackoverflow.com/questions/33554714
+
+Accepted Answer:      You can use the mincore system call for this.
+                      
+                      
+                        mincore - determine whether pages are resident in memory
+                      
+                      
+                      It will tell you which pages in a range are in memory and will not require disk I/O upon access. Note that pages may be swapped out between mincore returning and you accessing them.
+
+
+########################################################################################################################
+
+
+Question Title:       debugging c using heap memory
+Question Link:        https://stackoverflow.com/questions/20904572
+
+Accepted Answer:      There is nothing wrong here.  The pointers are assigned by the malloc() function, which can and does assign fairly arbitrary values to the pointers.  A normal malloc() implementation will reserve a few bytes to mark the length of the allocated buffer, as well as taking advantage of existing buffer sizes on the free list.  So if you allocate two buffers, as you have done, there is nothing saying they have to be contiguous in heap space.  In fact, they will not be.
+                      
+                      I don't know what you are trying to do here, but the 'distance between' two malloc() pointers isn't going to be the exact length of the buffers, ever.
+
+
+########################################################################################################################
+
+
+Question Title:       Dumpout Process Memory Layout During Loading Time
+Question Link:        https://stackoverflow.com/questions/45537878
+
+Accepted Answer:      
+                        So here is my question: how to intercept the loading process and acquire the memory address of libapp.so?
+                      
+                      
+                      This can't work: my_app is loaded (mmapped into memory) by the kernel before the loader starts, and before it had a chance to look at LD_PRELOAD.
+                      
+                      Your best bet is to either run the application with ASLR disabled (setarch $whatever -R my_app), or to arrange may_app such that libapp.so can dynamically instrument my_app once it knows its own load address.
+
+
+########################################################################################################################
+
+
+Question Title:       How to find total available and used memory using df command
+Question Link:        https://stackoverflow.com/questions/46742031
+
+Accepted Answer:      
+                        to get the total available disk and used disk?
+                      
+                      
+                      df -lh --total /dev/sda*
+                      
+                      
+                      ----------
+                      
+                      To exclude only type tmpfs:
+                      
+                      df -lh --total -x tmpfs
+                      

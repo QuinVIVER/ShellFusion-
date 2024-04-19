@@ -1,0 +1,2246 @@
+{
+  "Query": "Using jq to extract values and format in CSV",
+  "Answers": [
+    {
+      "Command": "printf",
+      "MP Summary": "format and print data",
+      "Most Similar TLDR Task": "Store a formatted message in a variable (does not work on zsh)",
+      "Most Similar TLDR Script": "printf -v {{myvar}} {{\"This is %s = %d\\n\" \"a year\" 2016}}",
+      "Most Similar NL2Bash Task": "Output a CSV file as a formatted table",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "sed 's/^,/ ,/' test2.csv | tr -d \\\" | column -s, -t\n",
+          "command-options": {
+            "sed": {
+              "mpsum": "stream editor for filtering and transforming text"
+            },
+            "tr": {
+              "mpsum": "translate or delete characters",
+              "-d": "delete characters in SET1, do not translate"
+            },
+            "column": {
+              "mpsum": "columnate lists",
+              "-t": "Determine the number of columns the input contains and create a table. Columns are\n delimited with whitespace, by default, or with the characters supplied using the -s\n option. Useful for pretty-printing displays."
+            }
+          },
+          "TLDR_inform": {
+            "sed": {
+              "man1_sed_30692": "edit text scriptabl manner appli multipl find-replac express file delet line match line pattern print first 11 line file replac occurr string file overwrit file e\nin-plac replac occurr extend regular express file print result replac line match line pattern replac separ charact use find replac pattern e g replac first occurr regular express line file print result"
+            },
+            "tr": {
+              "man1_tr_34307": "translat charact : run replac base singl charact charact set compress seri ident charact singl charact delet occurr specifi set charact input map charact first set correspond charact second set replac occurr charact anoth command output replac occurr charact file print result strip non-print charact file translat content file upper-cas"
+            },
+            "column": {
+              "man1_column_4684": "format standard input file multipl column\nrow fill column default separ whitespac fill column fill row format output 30 charact wide display specifi column delimit charact -t option e g\ncsv default whitespac split column automat auto-align tabular format"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_14492590: using bash (sed/awk) to extract rows AND columns in CSV files?",
+        "so_27123624: How to convert a file with data in key = value format to a csv file in unix shell scripting?",
+        "ul_404699: Using multiple wildcards in jq to select objects in a JSON file"
+      ],
+      "Top-3 Scripts": [
+        "so_14492590: #!/bin/bash\ndeclare -a arr\nwhile read -r line; do\n    arr=(${line//,/ })\n    printf \"Rank\\t: %s\\nName\\t: %s\\nSchool\\t: %s\\nMajor\\t: %s\\nYear\\t: %s\\n\" ${arr[@]}\ndone < file.csv",
+        "so_27123624: awk -F'[=(),]' -v OFS=, 'NR==1{for (i=2; i<NF; i+=2) printf \"%s%s\", $i, (i<NF-2)?OFS:ORS}\n              {for (i=3; i<=NF; i+=2) printf \"%s%s\", $i, (i<NF-2)?OFS:ORS}' input\nkey1,key2,key3\nvalue1,value2,value3\nvalue4,value5,value6",
+        "ul_404699: jq -c 'select ...' file.json > out.json\nprintf '{\"nt\":%i}\\n' `wc -l < out.json` >> out.json"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "echo",
+      "MP Summary": "display a line of text",
+      "Most Similar TLDR Task": "Print a message with environment variables",
+      "Most Similar TLDR Script": "echo \"{{My path is $PATH}}\"",
+      "Most Similar NL2Bash Task": "Output a CSV file as a formatted table",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "sed 's/^,/ ,/' test2.csv | tr -d \\\" | column -s, -t\n",
+          "command-options": {
+            "sed": {
+              "mpsum": "stream editor for filtering and transforming text"
+            },
+            "tr": {
+              "mpsum": "translate or delete characters",
+              "-d": "delete characters in SET1, do not translate"
+            },
+            "column": {
+              "mpsum": "columnate lists",
+              "-t": "Determine the number of columns the input contains and create a table. Columns are\n delimited with whitespace, by default, or with the characters supplied using the -s\n option. Useful for pretty-printing displays."
+            }
+          },
+          "TLDR_inform": {
+            "sed": {
+              "man1_sed_30692": "edit text scriptabl manner appli multipl find-replac express file delet line match line pattern print first 11 line file replac occurr string file overwrit file e\nin-plac replac occurr extend regular express file print result replac line match line pattern replac separ charact use find replac pattern e g replac first occurr regular express line file print result"
+            },
+            "tr": {
+              "man1_tr_34307": "translat charact : run replac base singl charact charact set compress seri ident charact singl charact delet occurr specifi set charact input map charact first set correspond charact second set replac occurr charact anoth command output replac occurr charact file print result strip non-print charact file translat content file upper-cas"
+            },
+            "column": {
+              "man1_column_4684": "format standard input file multipl column\nrow fill column default separ whitespac fill column fill row format output 30 charact wide display specifi column delimit charact -t option e g\ncsv default whitespac split column automat auto-align tabular format"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_59551619: How to extract value from json contained in a variable using jq in bash",
+        "so_14492590: using bash (sed/awk) to extract rows AND columns in CSV files?",
+        "so_59491079: Extract json values as array with jq in bash"
+      ],
+      "Top-3 Scripts": [
+        "so_59551619: json_val='{\"code\":\"lyz1To6ZTWClDHSiaeXyxg\",\"redirect_to\":\"http://example.com/client-redirect-uri?code=lyz1To6ZTWClDHSiaeXyxg\"}'\ncode_val=$(jq -r '.code' <<< \"$json_val\")\necho \"$code_val\"",
+        "so_14492590: #!/bin/bash\nwhile IFS=',' read -r rank name school major year; do\n    echo -e \"Rank\\t: $rank\\nName\\t: $name\\nSchool\\t: $school\\nMajor\\t: $major\\nYear\\t: $year\\n\"\ndone < file.csv\nIFS=$' \\t\\n'",
+        "so_59491079: $ echo '{\n   \"a\" : 1,\n   \"b\" : 2\n}' | jq 'to_entries|map(.value)'\n[\n  1,\n  2\n]\n\n$ echo '{\n   \"a\" : 1,\n   \"b\" : 2\n}' | jq 'map(.)'\n[\n  1,\n  2\n]"
+      ],
+      "Explanations about Options": {
+        "-e": "enable interpretation of backslash escapes"
+      }
+    },
+    {
+      "Command": "read",
+      "MP Summary": "read a line from standard input",
+      "Most Similar TLDR Task": "Store each of the next lines you enter as values of an array",
+      "Most Similar TLDR Script": "read -a {{array}}",
+      "Most Similar NL2Bash Task": "Output a CSV file as a formatted table",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "sed 's/^,/ ,/' test2.csv | tr -d \\\" | column -s, -t\n",
+          "command-options": {
+            "sed": {
+              "mpsum": "stream editor for filtering and transforming text"
+            },
+            "tr": {
+              "mpsum": "translate or delete characters",
+              "-d": "delete characters in SET1, do not translate"
+            },
+            "column": {
+              "mpsum": "columnate lists",
+              "-t": "Determine the number of columns the input contains and create a table. Columns are\n delimited with whitespace, by default, or with the characters supplied using the -s\n option. Useful for pretty-printing displays."
+            }
+          },
+          "TLDR_inform": {
+            "sed": {
+              "man1_sed_30692": "edit text scriptabl manner appli multipl find-replac express file delet line match line pattern print first 11 line file replac occurr string file overwrit file e\nin-plac replac occurr extend regular express file print result replac line match line pattern replac separ charact use find replac pattern e g replac first occurr regular express line file print result"
+            },
+            "tr": {
+              "man1_tr_34307": "translat charact : run replac base singl charact charact set compress seri ident charact singl charact delet occurr specifi set charact input map charact first set correspond charact second set replac occurr charact anoth command output replac occurr charact file print result strip non-print charact file translat content file upper-cas"
+            },
+            "column": {
+              "man1_column_4684": "format standard input file multipl column\nrow fill column default separ whitespac fill column fill row format output 30 charact wide display specifi column delimit charact -t option e g\ncsv default whitespac split column automat auto-align tabular format"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_59551619: How to extract value from json contained in a variable using jq in bash",
+        "so_14492590: using bash (sed/awk) to extract rows AND columns in CSV files?",
+        "so_43982839: How can I use sed to extract a single value in command line?"
+      ],
+      "Top-3 Scripts": [
+        "so_59551619: read -r code_val redirect_to < <(curl ... | jq -r '.code + \"\\t\" + .redirect_to')",
+        "so_14492590: #!/bin/bash\nwhile IFS=',' read -r rank name school major year; do\n    echo -e \"Rank\\t: $rank\\nName\\t: $name\\nSchool\\t: $school\\nMajor\\t: $major\\nYear\\t: $year\\n\"\ndone < file.csv\nIFS=$' \\t\\n'\n\n#!/bin/bash\ndeclare -a arr\nwhile read -r line; do\n    arr=(${line//,/ })\n    printf \"Rank\\t: %s\\nName\\t: %s\\nSchool\\t: %s\\nMajor\\t: %s\\nYear\\t: %s\\n\" ${arr[@]}\ndone < file.csv",
+        "so_43982839: IFS=. read MAJOR_VERSION MINOR_VERSION PATCH_VERSION <<< \"$TRAVIS_TAG\"\n\nIFS=. read MAJOR_VERSION MINOR_VERSION PATCH_VERSION <<< \"${TRAVIS_TAG#v}\""
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "cat",
+      "MP Summary": "concatenate files and print on the standard output",
+      "Most Similar TLDR Task": "Append several files into the target file",
+      "Most Similar TLDR Script": "cat {{file1}} {{file2}} >> {{target_file}}",
+      "Most Similar NL2Bash Task": "Output a CSV file as a formatted table",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "sed 's/^,/ ,/' test2.csv | tr -d \\\" | column -s, -t\n",
+          "command-options": {
+            "sed": {
+              "mpsum": "stream editor for filtering and transforming text"
+            },
+            "tr": {
+              "mpsum": "translate or delete characters",
+              "-d": "delete characters in SET1, do not translate"
+            },
+            "column": {
+              "mpsum": "columnate lists",
+              "-t": "Determine the number of columns the input contains and create a table. Columns are\n delimited with whitespace, by default, or with the characters supplied using the -s\n option. Useful for pretty-printing displays."
+            }
+          },
+          "TLDR_inform": {
+            "sed": {
+              "man1_sed_30692": "edit text scriptabl manner appli multipl find-replac express file delet line match line pattern print first 11 line file replac occurr string file overwrit file e\nin-plac replac occurr extend regular express file print result replac line match line pattern replac separ charact use find replac pattern e g replac first occurr regular express line file print result"
+            },
+            "tr": {
+              "man1_tr_34307": "translat charact : run replac base singl charact charact set compress seri ident charact singl charact delet occurr specifi set charact input map charact first set correspond charact second set replac occurr charact anoth command output replac occurr charact file print result strip non-print charact file translat content file upper-cas"
+            },
+            "column": {
+              "man1_column_4684": "format standard input file multipl column\nrow fill column default separ whitespac fill column fill row format output 30 charact wide display specifi column delimit charact -t option e g\ncsv default whitespac split column automat auto-align tabular format"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_25378013: How to convert a JSON object to key=value format in jq?",
+        "so_63460766: Get JSON value from an file in a arranged format in linux without using JQ command",
+        "so_44780761: Converting CSV to JSON in bash"
+      ],
+      "Top-3 Scripts": [
+        "so_25378013: $ cat test.json\n{\n    \"var\": 1,\n    \"foo\": \"bar\",\n    \"x\": \"test\"\n}\n$ jq -r 'to_entries|map(\"\\(.key)=\\(.value|tostring)\")|.[]' test.json\nfoo=bar\nvar=1\nx=test",
+        "so_63460766: cat yourjsonfile.json | python3 -c 'import json; import sys; payload = json.load(sys.stdin); bits = [[value[\"name\"], value.get(\"mode\", \"NULLABLE\"), value[\"type\"]] for value in payload]; [print(\",\".join(bit))for bit in bits]'",
+        "so_44780761: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "jq",
+      "MP Summary": "Command-line JSON processor",
+      "Most Similar TLDR Task": "Read JSON objects from a file into an array, and output it (inverse of `jq .[]`)",
+      "Most Similar TLDR Script": "jq --slurp . {{file.json}}",
+      "Most Similar NL2Bash Task": "Output a CSV file as a formatted table",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "sed 's/^,/ ,/' test2.csv | tr -d \\\" | column -s, -t\n",
+          "command-options": {
+            "sed": {
+              "mpsum": "stream editor for filtering and transforming text"
+            },
+            "tr": {
+              "mpsum": "translate or delete characters",
+              "-d": "delete characters in SET1, do not translate"
+            },
+            "column": {
+              "mpsum": "columnate lists",
+              "-t": "Determine the number of columns the input contains and create a table. Columns are\n delimited with whitespace, by default, or with the characters supplied using the -s\n option. Useful for pretty-printing displays."
+            }
+          },
+          "TLDR_inform": {
+            "sed": {
+              "man1_sed_30692": "edit text scriptabl manner appli multipl find-replac express file delet line match line pattern print first 11 line file replac occurr string file overwrit file e\nin-plac replac occurr extend regular express file print result replac line match line pattern replac separ charact use find replac pattern e g replac first occurr regular express line file print result"
+            },
+            "tr": {
+              "man1_tr_34307": "translat charact : run replac base singl charact charact set compress seri ident charact singl charact delet occurr specifi set charact input map charact first set correspond charact second set replac occurr charact anoth command output replac occurr charact file print result strip non-print charact file translat content file upper-cas"
+            },
+            "column": {
+              "man1_column_4684": "format standard input file multipl column\nrow fill column default separ whitespac fill column fill row format output 30 charact wide display specifi column delimit charact -t option e g\ncsv default whitespac split column automat auto-align tabular format"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_59551619: How to extract value from json contained in a variable using jq in bash",
+        "ul_542185: Using jq to create comma separated list fields in JSON array",
+        "so_23598328: Using jq to parse JSON in launchd"
+      ],
+      "Top-3 Scripts": [
+        "so_59551619: json_val='{\"code\":\"lyz1To6ZTWClDHSiaeXyxg\",\"redirect_to\":\"http://example.com/client-redirect-uri?code=lyz1To6ZTWClDHSiaeXyxg\"}'\ncode_val=$(jq -r '.code' <<< \"$json_val\")\necho \"$code_val\"\n\nread -r code_val redirect_to < <(curl ... | jq -r '.code + \"\\t\" + .redirect_to')",
+        "ul_542185: jq -r '.hardware | join(\", \")'",
+        "so_23598328: JQ=/usr/local/bin/jq"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "awk",
+      "MP Summary": "pattern scanning and processing language",
+      "Most Similar TLDR Task": "Print different values based on conditions",
+      "Most Similar TLDR Script": "awk '{if ($1 == \"foo\") print \"Exact match foo\"; else if ($1 ~ \"bar\") print \"Partial match bar\"; else print \"Baz\"}' {{filename}}",
+      "Most Similar NL2Bash Task": "Output a CSV file as a formatted table",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "sed 's/^,/ ,/' test2.csv | tr -d \\\" | column -s, -t\n",
+          "command-options": {
+            "sed": {
+              "mpsum": "stream editor for filtering and transforming text"
+            },
+            "tr": {
+              "mpsum": "translate or delete characters",
+              "-d": "delete characters in SET1, do not translate"
+            },
+            "column": {
+              "mpsum": "columnate lists",
+              "-t": "Determine the number of columns the input contains and create a table. Columns are\n delimited with whitespace, by default, or with the characters supplied using the -s\n option. Useful for pretty-printing displays."
+            }
+          },
+          "TLDR_inform": {
+            "sed": {
+              "man1_sed_30692": "edit text scriptabl manner appli multipl find-replac express file delet line match line pattern print first 11 line file replac occurr string file overwrit file e\nin-plac replac occurr extend regular express file print result replac line match line pattern replac separ charact use find replac pattern e g replac first occurr regular express line file print result"
+            },
+            "tr": {
+              "man1_tr_34307": "translat charact : run replac base singl charact charact set compress seri ident charact singl charact delet occurr specifi set charact input map charact first set correspond charact second set replac occurr charact anoth command output replac occurr charact file print result strip non-print charact file translat content file upper-cas"
+            },
+            "column": {
+              "man1_column_4684": "format standard input file multipl column\nrow fill column default separ whitespac fill column fill row format output 30 charact wide display specifi column delimit charact -t option e g\ncsv default whitespac split column automat auto-align tabular format"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_14899706: use AWK to divide the values in a CSV file by a certain number",
+        "so_27123624: How to convert a file with data in key = value format to a csv file in unix shell scripting?",
+        "so_60557869: How to format CSV file using awk commands (Trying to avoid manual work around in the csv file) with out doing delimiter in the CSV file"
+      ],
+      "Top-3 Scripts": [
+        "so_14899706: awk 'BEGIN {FS=OFS=\",\"} {for (i=1; i<=NF; i++) $i/=10;}1' infile",
+        "so_27123624: awk -F'[=(),]' -v OFS=, 'NR==1{for (i=2; i<NF; i+=2) printf \"%s%s\", $i, (i<NF-2)?OFS:ORS}\n              {for (i=3; i<=NF; i+=2) printf \"%s%s\", $i, (i<NF-2)?OFS:ORS}' input\nkey1,key2,key3\nvalue1,value2,value3\nvalue4,value5,value6",
+        "so_60557869: awk 'BEGIN{OFS=\",\"} {$1=$1} 1' Input_file\n\nawk '{print $1\",\"$2}' Input_file\nOR\nawk 'BEGIN{OFS=\",\"} {print $1,$2}' Input_file"
+      ],
+      "Explanations about Options": {
+        "-v": "FS=sepstring"
+      }
+    },
+    {
+      "Command": "file",
+      "MP Summary": "determine file type",
+      "Most Similar TLDR Task": "Look inside a zipped file and determine the file type(s) inside",
+      "Most Similar TLDR Script": "file -z {{foo.zip}}",
+      "Most Similar NL2Bash Task": "Output a CSV file as a formatted table",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "sed 's/^,/ ,/' test2.csv | tr -d \\\" | column -s, -t\n",
+          "command-options": {
+            "sed": {
+              "mpsum": "stream editor for filtering and transforming text"
+            },
+            "tr": {
+              "mpsum": "translate or delete characters",
+              "-d": "delete characters in SET1, do not translate"
+            },
+            "column": {
+              "mpsum": "columnate lists",
+              "-t": "Determine the number of columns the input contains and create a table. Columns are\n delimited with whitespace, by default, or with the characters supplied using the -s\n option. Useful for pretty-printing displays."
+            }
+          },
+          "TLDR_inform": {
+            "sed": {
+              "man1_sed_30692": "edit text scriptabl manner appli multipl find-replac express file delet line match line pattern print first 11 line file replac occurr string file overwrit file e\nin-plac replac occurr extend regular express file print result replac line match line pattern replac separ charact use find replac pattern e g replac first occurr regular express line file print result"
+            },
+            "tr": {
+              "man1_tr_34307": "translat charact : run replac base singl charact charact set compress seri ident charact singl charact delet occurr specifi set charact input map charact first set correspond charact second set replac occurr charact anoth command output replac occurr charact file print result strip non-print charact file translat content file upper-cas"
+            },
+            "column": {
+              "man1_column_4684": "format standard input file multipl column\nrow fill column default separ whitespac fill column fill row format output 30 charact wide display specifi column delimit charact -t option e g\ncsv default whitespac split column automat auto-align tabular format"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_67806267: Test field against multiple values in select in JQ",
+        "so_36987166: How do I get the total number of distinct values in a column in a CSV?",
+        "so_18657411: How to change date format in .csv file in unix"
+      ],
+      "Top-3 Scripts": [
+        "so_67806267: var='a b c'\njq --arg ids \"$var\" '($ids / \" \") as $ids\n| .[] | select(.id | IN($ids[]))' file",
+        "so_36987166: awk -F, '!seen[$1]++{c++} END{print c}' file\n\n2",
+        "so_18657411: while IFS= read -r line\ndo\n  mydate=$(grep -Po '[0-9]+/[0-9]+/[0-9]+' <<< \"$line\") # gets 8/1/13\n  # perform the replacement in case there is date to process\n  if [[ ! -z \"$mydate\" ]]; then\n     newdate=$(date -d\"$mydate\" \"+%Y-%m-%d\") # converts to 2013-08-01\n     sed -i \"s#$mydate#$newdate#\" file       # replaces in the text (-i option)\n  fi\ndone < file"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "sed",
+      "MP Summary": "stream editor for filtering and transforming text",
+      "Most Similar TLDR Task": "Replace separator / by any other character not used in the find or replace patterns, e.g., #",
+      "Most Similar TLDR Script": "sed 's#{{find}}#{{replace}}#' {{filename}}",
+      "Most Similar NL2Bash Task": "Output a CSV file as a formatted table",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "sed 's/^,/ ,/' test2.csv | tr -d \\\" | column -s, -t\n",
+          "command-options": {
+            "sed": {
+              "mpsum": "stream editor for filtering and transforming text"
+            },
+            "tr": {
+              "mpsum": "translate or delete characters",
+              "-d": "delete characters in SET1, do not translate"
+            },
+            "column": {
+              "mpsum": "columnate lists",
+              "-t": "Determine the number of columns the input contains and create a table. Columns are\n delimited with whitespace, by default, or with the characters supplied using the -s\n option. Useful for pretty-printing displays."
+            }
+          },
+          "TLDR_inform": {
+            "sed": {
+              "man1_sed_30692": "edit text scriptabl manner appli multipl find-replac express file delet line match line pattern print first 11 line file replac occurr string file overwrit file e\nin-plac replac occurr extend regular express file print result replac line match line pattern replac separ charact use find replac pattern e g replac first occurr regular express line file print result"
+            },
+            "tr": {
+              "man1_tr_34307": "translat charact : run replac base singl charact charact set compress seri ident charact singl charact delet occurr specifi set charact input map charact first set correspond charact second set replac occurr charact anoth command output replac occurr charact file print result strip non-print charact file translat content file upper-cas"
+            },
+            "column": {
+              "man1_column_4684": "format standard input file multipl column\nrow fill column default separ whitespac fill column fill row format output 30 charact wide display specifi column delimit charact -t option e g\ncsv default whitespac split column automat auto-align tabular format"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_51642765: How to change date format ONLY in first column in .csv file using sed in shell",
+        "so_18657411: How to change date format in .csv file in unix",
+        "so_53872349: How to edit value in json using sed"
+      ],
+      "Top-3 Scripts": [
+        "so_51642765: sed 's/\\(....\\)-\\(..\\)-\\(..\\)/\\2\\/\\3\\/\\1/'\n\nsed -r 's_(....)-(..)-(..)_\\2/\\3/\\1_'",
+        "so_18657411: while IFS= read -r line\ndo\n  mydate=$(grep -Po '[0-9]+/[0-9]+/[0-9]+' <<< \"$line\") # gets 8/1/13\n  # perform the replacement in case there is date to process\n  if [[ ! -z \"$mydate\" ]]; then\n     newdate=$(date -d\"$mydate\" \"+%Y-%m-%d\") # converts to 2013-08-01\n     sed -i \"s#$mydate#$newdate#\" file       # replaces in the text (-i option)\n  fi\ndone < file",
+        "so_53872349: sed 's/Dspring.cloud.config.label=\\S*/Dspring.cloud.config.label=${Config_Label}/g' json"
+      ],
+      "Explanations about Options": {
+        "-r": "use extended regular expressions in the script (for portability use POSIX -E).",
+        "-i": "edit files in place (makes backup if SUFFIX supplied)"
+      }
+    },
+    {
+      "Command": "curl",
+      "MP Summary": "transfer a URL",
+      "Most Similar TLDR Task": "Send data in JSON format, specifying the appropriate content-type header",
+      "Most Similar TLDR Script": "curl -d {{'{\"name\":\"bob\"}'}} -H {{'Content-Type: application/json'}} {{http://example.com/users/1234}}",
+      "Most Similar NL2Bash Task": "Output a CSV file as a formatted table",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "sed 's/^,/ ,/' test2.csv | tr -d \\\" | column -s, -t\n",
+          "command-options": {
+            "sed": {
+              "mpsum": "stream editor for filtering and transforming text"
+            },
+            "tr": {
+              "mpsum": "translate or delete characters",
+              "-d": "delete characters in SET1, do not translate"
+            },
+            "column": {
+              "mpsum": "columnate lists",
+              "-t": "Determine the number of columns the input contains and create a table. Columns are\n delimited with whitespace, by default, or with the characters supplied using the -s\n option. Useful for pretty-printing displays."
+            }
+          },
+          "TLDR_inform": {
+            "sed": {
+              "man1_sed_30692": "edit text scriptabl manner appli multipl find-replac express file delet line match line pattern print first 11 line file replac occurr string file overwrit file e\nin-plac replac occurr extend regular express file print result replac line match line pattern replac separ charact use find replac pattern e g replac first occurr regular express line file print result"
+            },
+            "tr": {
+              "man1_tr_34307": "translat charact : run replac base singl charact charact set compress seri ident charact singl charact delet occurr specifi set charact input map charact first set correspond charact second set replac occurr charact anoth command output replac occurr charact file print result strip non-print charact file translat content file upper-cas"
+            },
+            "column": {
+              "man1_column_4684": "format standard input file multipl column\nrow fill column default separ whitespac fill column fill row format output 30 charact wide display specifi column delimit charact -t option e g\ncsv default whitespac split column automat auto-align tabular format"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_59551619: How to extract value from json contained in a variable using jq in bash",
+        "so_62200741: Extracting a json value to a variable in zsh shell script"
+      ],
+      "Top-3 Scripts": [
+        "so_59551619: read -r code_val redirect_to < <(curl ... | jq -r '.code + \"\\t\" + .redirect_to')",
+        "so_62200741: result = $(curl -s -X GET \"https://openexchangerates.org/api/latest.json?app_id=SOME_KEY\" | jq '.rates.GBP')\n\nresult=$(curl -s -X GET \"https://openexchangerates.org/api/latest.json?app_id=SOME_KEY\" | jq '.rates.GBP')"
+      ],
+      "Explanations about Options": {
+        "-X": "(HTTP) Specifies a custom request method to use when communicating with the HTTP\n server. The specified request method will be used instead of the method otherwise\n used (which defaults to GET). Read the HTTP 1.1 specification for details and\n explanations. Common additional HTTP requests include PUT and DELETE, but related\n technologies like WebDAV offers PROPFIND, COPY, MOVE and more.",
+        "-s": "Silent or quiet mode. Don't show progress meter or error messages. Makes Curl\n mute. It will still output the data you ask for, potentially even to the\n terminal/stdout unless you redirect it."
+      }
+    },
+    {
+      "Command": "dd",
+      "MP Summary": "convert and copy a file",
+      "Most Similar TLDR Task": "Check progress of an ongoing dd operation (Run this command from another shell)",
+      "Most Similar TLDR Script": "kill -USR1 $(pgrep ^dd)",
+      "Most Similar NL2Bash Task": "Output a CSV file as a formatted table",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "sed 's/^,/ ,/' test2.csv | tr -d \\\" | column -s, -t\n",
+          "command-options": {
+            "sed": {
+              "mpsum": "stream editor for filtering and transforming text"
+            },
+            "tr": {
+              "mpsum": "translate or delete characters",
+              "-d": "delete characters in SET1, do not translate"
+            },
+            "column": {
+              "mpsum": "columnate lists",
+              "-t": "Determine the number of columns the input contains and create a table. Columns are\n delimited with whitespace, by default, or with the characters supplied using the -s\n option. Useful for pretty-printing displays."
+            }
+          },
+          "TLDR_inform": {
+            "sed": {
+              "man1_sed_30692": "edit text scriptabl manner appli multipl find-replac express file delet line match line pattern print first 11 line file replac occurr string file overwrit file e\nin-plac replac occurr extend regular express file print result replac line match line pattern replac separ charact use find replac pattern e g replac first occurr regular express line file print result"
+            },
+            "tr": {
+              "man1_tr_34307": "translat charact : run replac base singl charact charact set compress seri ident charact singl charact delet occurr specifi set charact input map charact first set correspond charact second set replac occurr charact anoth command output replac occurr charact file print result strip non-print charact file translat content file upper-cas"
+            },
+            "column": {
+              "man1_column_4684": "format standard input file multipl column\nrow fill column default separ whitespac fill column fill row format output 30 charact wide display specifi column delimit charact -t option e g\ncsv default whitespac split column automat auto-align tabular format"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_21457897: Convert date format in CSV using PowerShell",
+        "so_25903894: Convert date format in csv by powershell"
+      ],
+      "Top-3 Scripts": [
+        "so_21457897: Import-Csv foo.csv |\n  ForEach-Object {\n    $_.Date = [datetime]::Parse($_.Date).ToString('MM/dd/yyyy HH:mm')\n  } |\n  Export-Csv -NoTypeInformation foo-new.csv",
+        "so_25903894: $dateTime = '09 17 2014 00:05:00'\n\"{0:MMM dd, yyyy HH:mm:ss tt}\" -f [DateTime]::ParseExact($dateTime, 'MM dd yyyy HH:mm:ss', $null)"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "as",
+      "MP Summary": "or  any situation  where  you want to make sure you're doing a clean install of your dependencies. It  can  be  significantly  faster  than  a  regular  npm  install  by  skipping   certain user-oriented  features.  It  is  also  more strict than a regular install, which can help catch errors or inconsistencies caused by the incrementally-installed  local  environments of most npm users. In short, the main differences between using npm install and npm ci are: \u00b7 The project must have an existing package-lock.json or npm-shrinkwrap.json. \u00b7 If dependencies in the package lock do not match those in package.json, npm ci will exit with an error, instead of updating the package lock. \u00b7 npm ci can only install entire projects at a time:  individual  dependencies  cannot  be added with this command. \u00b7 If  a  node_modules  is  already present, it will be automatically removed before npm ci begins its install. \u00b7 It will  never  write  to  package.json  or  any  of  the  package-locks:  installs  are essentially frozen. See Also \u00b7 npm help install \u00b7 npm help package-locks April 2020                                  NPM-CI(1)",
+      "Most Similar TLDR Task": "Generate output faster by skipping whitespace and comment preprocessing. (Should only be used for trusted compilers)",
+      "Most Similar TLDR Script": "as -f {{file.s}}",
+      "Most Similar NL2Bash Task": "Output a CSV file as a formatted table",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "sed 's/^,/ ,/' test2.csv | tr -d \\\" | column -s, -t\n",
+          "command-options": {
+            "sed": {
+              "mpsum": "stream editor for filtering and transforming text"
+            },
+            "tr": {
+              "mpsum": "translate or delete characters",
+              "-d": "delete characters in SET1, do not translate"
+            },
+            "column": {
+              "mpsum": "columnate lists",
+              "-t": "Determine the number of columns the input contains and create a table. Columns are\n delimited with whitespace, by default, or with the characters supplied using the -s\n option. Useful for pretty-printing displays."
+            }
+          },
+          "TLDR_inform": {
+            "sed": {
+              "man1_sed_30692": "edit text scriptabl manner appli multipl find-replac express file delet line match line pattern print first 11 line file replac occurr string file overwrit file e\nin-plac replac occurr extend regular express file print result replac line match line pattern replac separ charact use find replac pattern e g replac first occurr regular express line file print result"
+            },
+            "tr": {
+              "man1_tr_34307": "translat charact : run replac base singl charact charact set compress seri ident charact singl charact delet occurr specifi set charact input map charact first set correspond charact second set replac occurr charact anoth command output replac occurr charact file print result strip non-print charact file translat content file upper-cas"
+            },
+            "column": {
+              "man1_column_4684": "format standard input file multipl column\nrow fill column default separ whitespac fill column fill row format output 30 charact wide display specifi column delimit charact -t option e g\ncsv default whitespac split column automat auto-align tabular format"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_67806267: Test field against multiple values in select in JQ",
+        "so_45579569: Using $ variables in jq from PowerShell",
+        "so_44780761: Converting CSV to JSON in bash"
+      ],
+      "Top-3 Scripts": [
+        "so_67806267: var='a b c'\njq --arg ids \"$var\" '($ids / \" \") as $ids\n| .[] | select(.id | IN($ids[]))' file",
+        "so_45579569: jq -r '(map(keys) | add | unique) as $cols | \n       map(. as $row | $cols | map($row[.])) as $rows | \n         $cols, $rows[] | @csv' output2.json > output3.csv",
+        "so_44780761: jq -Rsn '\n  {\"occurrences\":\n    [inputs\n     | . / \"\\n\"\n     | (.[] | select(length > 0) | . / \";\") as $input\n     | {\"position\": [$input[0], $input[1]], \"taxo\": {\"espece\": $input[2]}}]}\n' <se.csv"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "grep",
+      "MP Summary": "print lines that match patterns",
+      "Most Similar TLDR Task": "Invert match for excluding specific strings",
+      "Most Similar TLDR Script": "grep -v {{search_pattern}}",
+      "Most Similar NL2Bash Task": "Output a CSV file as a formatted table",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "sed 's/^,/ ,/' test2.csv | tr -d \\\" | column -s, -t\n",
+          "command-options": {
+            "sed": {
+              "mpsum": "stream editor for filtering and transforming text"
+            },
+            "tr": {
+              "mpsum": "translate or delete characters",
+              "-d": "delete characters in SET1, do not translate"
+            },
+            "column": {
+              "mpsum": "columnate lists",
+              "-t": "Determine the number of columns the input contains and create a table. Columns are\n delimited with whitespace, by default, or with the characters supplied using the -s\n option. Useful for pretty-printing displays."
+            }
+          },
+          "TLDR_inform": {
+            "sed": {
+              "man1_sed_30692": "edit text scriptabl manner appli multipl find-replac express file delet line match line pattern print first 11 line file replac occurr string file overwrit file e\nin-plac replac occurr extend regular express file print result replac line match line pattern replac separ charact use find replac pattern e g replac first occurr regular express line file print result"
+            },
+            "tr": {
+              "man1_tr_34307": "translat charact : run replac base singl charact charact set compress seri ident charact singl charact delet occurr specifi set charact input map charact first set correspond charact second set replac occurr charact anoth command output replac occurr charact file print result strip non-print charact file translat content file upper-cas"
+            },
+            "column": {
+              "man1_column_4684": "format standard input file multipl column\nrow fill column default separ whitespac fill column fill row format output 30 charact wide display specifi column delimit charact -t option e g\ncsv default whitespac split column automat auto-align tabular format"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_18657411: How to change date format in .csv file in unix",
+        "so_69080258: extract rows with specific value in a specific column using bash"
+      ],
+      "Top-3 Scripts": [
+        "so_18657411: while IFS= read -r line\ndo\n  mydate=$(grep -Po '[0-9]+/[0-9]+/[0-9]+' <<< \"$line\") # gets 8/1/13\n  # perform the replacement in case there is date to process\n  if [[ ! -z \"$mydate\" ]]; then\n     newdate=$(date -d\"$mydate\" \"+%Y-%m-%d\") # converts to 2013-08-01\n     sed -i \"s#$mydate#$newdate#\" file       # replaces in the text (-i option)\n  fi\ndone < file",
+        "so_69080258: "
+      ],
+      "Explanations about Options": {
+        "-o": "Print only the matched (non-empty) parts of a matching line, with each such part on\n a separate output line.",
+        "-P": "Interpret PATTERNS as Perl-compatible regular expressions (PCREs). This option is\n experimental when combined with the -z (--null-data) option, and grep -P may warn\n of unimplemented features."
+      }
+    },
+    {
+      "Command": "line",
+      "MP Summary": "cache line size",
+      "Most Similar TLDR Task": "Read input",
+      "Most Similar TLDR Script": "line",
+      "Most Similar NL2Bash Task": "Output a CSV file as a formatted table",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "sed 's/^,/ ,/' test2.csv | tr -d \\\" | column -s, -t\n",
+          "command-options": {
+            "sed": {
+              "mpsum": "stream editor for filtering and transforming text"
+            },
+            "tr": {
+              "mpsum": "translate or delete characters",
+              "-d": "delete characters in SET1, do not translate"
+            },
+            "column": {
+              "mpsum": "columnate lists",
+              "-t": "Determine the number of columns the input contains and create a table. Columns are\n delimited with whitespace, by default, or with the characters supplied using the -s\n option. Useful for pretty-printing displays."
+            }
+          },
+          "TLDR_inform": {
+            "sed": {
+              "man1_sed_30692": "edit text scriptabl manner appli multipl find-replac express file delet line match line pattern print first 11 line file replac occurr string file overwrit file e\nin-plac replac occurr extend regular express file print result replac line match line pattern replac separ charact use find replac pattern e g replac first occurr regular express line file print result"
+            },
+            "tr": {
+              "man1_tr_34307": "translat charact : run replac base singl charact charact set compress seri ident charact singl charact delet occurr specifi set charact input map charact first set correspond charact second set replac occurr charact anoth command output replac occurr charact file print result strip non-print charact file translat content file upper-cas"
+            },
+            "column": {
+              "man1_column_4684": "format standard input file multipl column\nrow fill column default separ whitespac fill column fill row format output 30 charact wide display specifi column delimit charact -t option e g\ncsv default whitespac split column automat auto-align tabular format"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_14492590: using bash (sed/awk) to extract rows AND columns in CSV files?",
+        "so_45579569: Using $ variables in jq from PowerShell",
+        "so_18657411: How to change date format in .csv file in unix"
+      ],
+      "Top-3 Scripts": [
+        "so_14492590: #!/bin/bash\ndeclare -a arr\nwhile read -r line; do\n    arr=(${line//,/ })\n    printf \"Rank\\t: %s\\nName\\t: %s\\nSchool\\t: %s\\nMajor\\t: %s\\nYear\\t: %s\\n\" ${arr[@]}\ndone < file.csv",
+        "so_45579569: ",
+        "so_18657411: while IFS= read -r line\ndo\n  mydate=$(grep -Po '[0-9]+/[0-9]+/[0-9]+' <<< \"$line\") # gets 8/1/13\n  # perform the replacement in case there is date to process\n  if [[ ! -z \"$mydate\" ]]; then\n     newdate=$(date -d\"$mydate\" \"+%Y-%m-%d\") # converts to 2013-08-01\n     sed -i \"s#$mydate#$newdate#\" file       # replaces in the text (-i option)\n  fi\ndone < file"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "join",
+      "MP Summary": "join lines of two files on a common field",
+      "Most Similar TLDR Task": "Join two files using a comma (instead of a space) as the field separator",
+      "Most Similar TLDR Script": "join -t {{','}} {{file1}} {{file2}}",
+      "Most Similar NL2Bash Task": "Output a CSV file as a formatted table",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "sed 's/^,/ ,/' test2.csv | tr -d \\\" | column -s, -t\n",
+          "command-options": {
+            "sed": {
+              "mpsum": "stream editor for filtering and transforming text"
+            },
+            "tr": {
+              "mpsum": "translate or delete characters",
+              "-d": "delete characters in SET1, do not translate"
+            },
+            "column": {
+              "mpsum": "columnate lists",
+              "-t": "Determine the number of columns the input contains and create a table. Columns are\n delimited with whitespace, by default, or with the characters supplied using the -s\n option. Useful for pretty-printing displays."
+            }
+          },
+          "TLDR_inform": {
+            "sed": {
+              "man1_sed_30692": "edit text scriptabl manner appli multipl find-replac express file delet line match line pattern print first 11 line file replac occurr string file overwrit file e\nin-plac replac occurr extend regular express file print result replac line match line pattern replac separ charact use find replac pattern e g replac first occurr regular express line file print result"
+            },
+            "tr": {
+              "man1_tr_34307": "translat charact : run replac base singl charact charact set compress seri ident charact singl charact delet occurr specifi set charact input map charact first set correspond charact second set replac occurr charact anoth command output replac occurr charact file print result strip non-print charact file translat content file upper-cas"
+            },
+            "column": {
+              "man1_column_4684": "format standard input file multipl column\nrow fill column default separ whitespac fill column fill row format output 30 charact wide display specifi column delimit charact -t option e g\ncsv default whitespac split column automat auto-align tabular format"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_542185: Using jq to create comma separated list fields in JSON array",
+        "so_52256178: How to convert JSON to tsv using jq in unix?"
+      ],
+      "Top-3 Scripts": [
+        "ul_542185: jq -r '.hardware | join(\", \")'",
+        "so_52256178: .tags|join(\",\")\n\n[.event, .timestamp, (.tags | join(\",\"))]\n+ (.data|[._id, .msisdn, .method, .url, .timeTaken, .channelID])\n+ [.pid]\n| @tsv"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "print",
+      "MP Summary": "execute programs via entries in the mailcap file",
+      "Most Similar TLDR Task": "Print action can be used to print any file on default run-mailcap tool",
+      "Most Similar TLDR Script": "print {{filename}}",
+      "Most Similar NL2Bash Task": "Output a CSV file as a formatted table",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "sed 's/^,/ ,/' test2.csv | tr -d \\\" | column -s, -t\n",
+          "command-options": {
+            "sed": {
+              "mpsum": "stream editor for filtering and transforming text"
+            },
+            "tr": {
+              "mpsum": "translate or delete characters",
+              "-d": "delete characters in SET1, do not translate"
+            },
+            "column": {
+              "mpsum": "columnate lists",
+              "-t": "Determine the number of columns the input contains and create a table. Columns are\n delimited with whitespace, by default, or with the characters supplied using the -s\n option. Useful for pretty-printing displays."
+            }
+          },
+          "TLDR_inform": {
+            "sed": {
+              "man1_sed_30692": "edit text scriptabl manner appli multipl find-replac express file delet line match line pattern print first 11 line file replac occurr string file overwrit file e\nin-plac replac occurr extend regular express file print result replac line match line pattern replac separ charact use find replac pattern e g replac first occurr regular express line file print result"
+            },
+            "tr": {
+              "man1_tr_34307": "translat charact : run replac base singl charact charact set compress seri ident charact singl charact delet occurr specifi set charact input map charact first set correspond charact second set replac occurr charact anoth command output replac occurr charact file print result strip non-print charact file translat content file upper-cas"
+            },
+            "column": {
+              "man1_column_4684": "format standard input file multipl column\nrow fill column default separ whitespac fill column fill row format output 30 charact wide display specifi column delimit charact -t option e g\ncsv default whitespac split column automat auto-align tabular format"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_60557869: How to format CSV file using awk commands (Trying to avoid manual work around in the csv file) with out doing delimiter in the CSV file",
+        "so_25622621: How to use awk to get the result of computation of column1 value of the same column2 value in 2 csv files in Ubuntu?",
+        "so_24632524: Creating CSV of information extracted from filenames in a given format"
+      ],
+      "Top-3 Scripts": [
+        "so_60557869: awk '{print $1\",\"$2}' Input_file\nOR\nawk 'BEGIN{OFS=\",\"} {print $1,$2}' Input_file",
+        "so_25622621: $ awk 'BEGIN{FS=OFS=\",\"} FNR==NR {a[$1]=$2; next} {if ($1 in a) print $1,(a[$1]-$2)/(a[$1]+$2)}' f1 f2\na,-0.6\nb,-0.2\n\n{if ($1 in a) print $1,(a[$1]-$2)/(a[$1]+$2)}",
+        "so_24632524: #!/bin/sh\nfind . -type f | perl -n -e 'm{/(\\d{2})/(\\d{2})/(\\d+).*-([a-zA-Z]+)(?:_(\\d{1}))?} && print qq{\"0\";\"$1$2$3\";\"$4\";\"$5\";\"`readlink -f -n '\\''$_'\\''`\"}' > bss.csv"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "date",
+      "MP Summary": "print or set the system date and time",
+      "Most Similar TLDR Task": "Convert a specific date to the Unix timestamp format",
+      "Most Similar TLDR Script": "date -d \"{{2018-09-01 00:00}}\" +%s --utc",
+      "Most Similar NL2Bash Task": "Output a CSV file as a formatted table",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "sed 's/^,/ ,/' test2.csv | tr -d \\\" | column -s, -t\n",
+          "command-options": {
+            "sed": {
+              "mpsum": "stream editor for filtering and transforming text"
+            },
+            "tr": {
+              "mpsum": "translate or delete characters",
+              "-d": "delete characters in SET1, do not translate"
+            },
+            "column": {
+              "mpsum": "columnate lists",
+              "-t": "Determine the number of columns the input contains and create a table. Columns are\n delimited with whitespace, by default, or with the characters supplied using the -s\n option. Useful for pretty-printing displays."
+            }
+          },
+          "TLDR_inform": {
+            "sed": {
+              "man1_sed_30692": "edit text scriptabl manner appli multipl find-replac express file delet line match line pattern print first 11 line file replac occurr string file overwrit file e\nin-plac replac occurr extend regular express file print result replac line match line pattern replac separ charact use find replac pattern e g replac first occurr regular express line file print result"
+            },
+            "tr": {
+              "man1_tr_34307": "translat charact : run replac base singl charact charact set compress seri ident charact singl charact delet occurr specifi set charact input map charact first set correspond charact second set replac occurr charact anoth command output replac occurr charact file print result strip non-print charact file translat content file upper-cas"
+            },
+            "column": {
+              "man1_column_4684": "format standard input file multipl column\nrow fill column default separ whitespac fill column fill row format output 30 charact wide display specifi column delimit charact -t option e g\ncsv default whitespac split column automat auto-align tabular format"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_18657411: How to change date format in .csv file in unix"
+      ],
+      "Top-3 Scripts": [
+        "so_18657411: $ date -d\"8/10/13\" \"+%Y-%m-%d\"\n2013-08-10\n\nwhile IFS= read -r line\ndo\n  mydate=$(grep -Po '[0-9]+/[0-9]+/[0-9]+' <<< \"$line\") # gets 8/1/13\n  # perform the replacement in case there is date to process\n  if [[ ! -z \"$mydate\" ]]; then\n     newdate=$(date -d\"$mydate\" \"+%Y-%m-%d\") # converts to 2013-08-01\n     sed -i \"s#$mydate#$newdate#\" file       # replaces in the text (-i option)\n  fi\ndone < file"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "split",
+      "MP Summary": "split a file into pieces",
+      "Most Similar TLDR Task": "Split a file with 512 bytes in each split (except the last split; use 512k for kilobytes and 512m for megabytes)",
+      "Most Similar TLDR Script": "split -b {{512}} {{filename}}",
+      "Most Similar NL2Bash Task": "Output a CSV file as a formatted table",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "sed 's/^,/ ,/' test2.csv | tr -d \\\" | column -s, -t\n",
+          "command-options": {
+            "sed": {
+              "mpsum": "stream editor for filtering and transforming text"
+            },
+            "tr": {
+              "mpsum": "translate or delete characters",
+              "-d": "delete characters in SET1, do not translate"
+            },
+            "column": {
+              "mpsum": "columnate lists",
+              "-t": "Determine the number of columns the input contains and create a table. Columns are\n delimited with whitespace, by default, or with the characters supplied using the -s\n option. Useful for pretty-printing displays."
+            }
+          },
+          "TLDR_inform": {
+            "sed": {
+              "man1_sed_30692": "edit text scriptabl manner appli multipl find-replac express file delet line match line pattern print first 11 line file replac occurr string file overwrit file e\nin-plac replac occurr extend regular express file print result replac line match line pattern replac separ charact use find replac pattern e g replac first occurr regular express line file print result"
+            },
+            "tr": {
+              "man1_tr_34307": "translat charact : run replac base singl charact charact set compress seri ident charact singl charact delet occurr specifi set charact input map charact first set correspond charact second set replac occurr charact anoth command output replac occurr charact file print result strip non-print charact file translat content file upper-cas"
+            },
+            "column": {
+              "man1_column_4684": "format standard input file multipl column\nrow fill column default separ whitespac fill column fill row format output 30 charact wide display specifi column delimit charact -t option e g\ncsv default whitespac split column automat auto-align tabular format"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_51115902: Convert text file with key=value pair to specific json format in jq",
+        "so_40166441: How to convert space separated key value data into CSV format in bash?"
+      ],
+      "Top-3 Scripts": [
+        "so_51115902: jq -sR '{\"Environment\":\n            {\"Variables\": [split(\"\\n\")[:-1][] | rtrimstr(\"\\\\r\") \n                             | split(\"=\") | {(.[0]): .[1]}\n                          ]  | add\n            }\n        }' input.txt",
+        "so_40166441: $ awk -v header='Table,count,size' \\\n      'BEGIN{OFS=\",\"; n=split(header,h,OFS); print header} \n            {for(i=1; i<NF; i+=2) v[NR,$i]=$(i+1)} \n         END{for(i=1; i<=NR; i++) \n               {printf \"%s\", v[i,h[1]]; \n                for(j=2; j<=n; j++) printf \"%s\", OFS v[i,h[j]]; \n                print \"\"}}' file"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "test",
+      "MP Summary": "check file types and compare values",
+      "Most Similar TLDR Task": "Test if given variable is empty",
+      "Most Similar TLDR Script": "test -z $GIT_BRANCH",
+      "Most Similar NL2Bash Task": "Output a CSV file as a formatted table",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "sed 's/^,/ ,/' test2.csv | tr -d \\\" | column -s, -t\n",
+          "command-options": {
+            "sed": {
+              "mpsum": "stream editor for filtering and transforming text"
+            },
+            "tr": {
+              "mpsum": "translate or delete characters",
+              "-d": "delete characters in SET1, do not translate"
+            },
+            "column": {
+              "mpsum": "columnate lists",
+              "-t": "Determine the number of columns the input contains and create a table. Columns are\n delimited with whitespace, by default, or with the characters supplied using the -s\n option. Useful for pretty-printing displays."
+            }
+          },
+          "TLDR_inform": {
+            "sed": {
+              "man1_sed_30692": "edit text scriptabl manner appli multipl find-replac express file delet line match line pattern print first 11 line file replac occurr string file overwrit file e\nin-plac replac occurr extend regular express file print result replac line match line pattern replac separ charact use find replac pattern e g replac first occurr regular express line file print result"
+            },
+            "tr": {
+              "man1_tr_34307": "translat charact : run replac base singl charact charact set compress seri ident charact singl charact delet occurr specifi set charact input map charact first set correspond charact second set replac occurr charact anoth command output replac occurr charact file print result strip non-print charact file translat content file upper-cas"
+            },
+            "column": {
+              "man1_column_4684": "format standard input file multipl column\nrow fill column default separ whitespac fill column fill row format output 30 charact wide display specifi column delimit charact -t option e g\ncsv default whitespac split column automat auto-align tabular format"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_25378013: How to convert a JSON object to key=value format in jq?"
+      ],
+      "Top-3 Scripts": [
+        "so_25378013: $ cat test.json\n{\n    \"var\": 1,\n    \"foo\": \"bar\",\n    \"x\": \"test\"\n}\n$ jq -r 'to_entries|map(\"\\(.key)=\\(.value|tostring)\")|.[]' test.json\nfoo=bar\nvar=1\nx=test"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "bash",
+      "MP Summary": "GNU Bourne-Again SHell",
+      "Most Similar TLDR Task": "Print the version information of bash (use `echo $BASH_VERSION` to show just the version without license information)",
+      "Most Similar TLDR Script": "bash --version",
+      "Most Similar NL2Bash Task": "Output a CSV file as a formatted table",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "sed 's/^,/ ,/' test2.csv | tr -d \\\" | column -s, -t\n",
+          "command-options": {
+            "sed": {
+              "mpsum": "stream editor for filtering and transforming text"
+            },
+            "tr": {
+              "mpsum": "translate or delete characters",
+              "-d": "delete characters in SET1, do not translate"
+            },
+            "column": {
+              "mpsum": "columnate lists",
+              "-t": "Determine the number of columns the input contains and create a table. Columns are\n delimited with whitespace, by default, or with the characters supplied using the -s\n option. Useful for pretty-printing displays."
+            }
+          },
+          "TLDR_inform": {
+            "sed": {
+              "man1_sed_30692": "edit text scriptabl manner appli multipl find-replac express file delet line match line pattern print first 11 line file replac occurr string file overwrit file e\nin-plac replac occurr extend regular express file print result replac line match line pattern replac separ charact use find replac pattern e g replac first occurr regular express line file print result"
+            },
+            "tr": {
+              "man1_tr_34307": "translat charact : run replac base singl charact charact set compress seri ident charact singl charact delet occurr specifi set charact input map charact first set correspond charact second set replac occurr charact anoth command output replac occurr charact file print result strip non-print charact file translat content file upper-cas"
+            },
+            "column": {
+              "man1_column_4684": "format standard input file multipl column\nrow fill column default separ whitespac fill column fill row format output 30 charact wide display specifi column delimit charact -t option e g\ncsv default whitespac split column automat auto-align tabular format"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_666033: How to search and replace multiple values in an array using jq?"
+      ],
+      "Top-3 Scripts": [
+        "ul_666033: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "mv",
+      "MP Summary": "move (rename) files",
+      "Most Similar TLDR Task": "Move files in arbitrary locations",
+      "Most Similar TLDR Script": "mv {{source}} {{target}}",
+      "Most Similar NL2Bash Task": "Output a CSV file as a formatted table",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "sed 's/^,/ ,/' test2.csv | tr -d \\\" | column -s, -t\n",
+          "command-options": {
+            "sed": {
+              "mpsum": "stream editor for filtering and transforming text"
+            },
+            "tr": {
+              "mpsum": "translate or delete characters",
+              "-d": "delete characters in SET1, do not translate"
+            },
+            "column": {
+              "mpsum": "columnate lists",
+              "-t": "Determine the number of columns the input contains and create a table. Columns are\n delimited with whitespace, by default, or with the characters supplied using the -s\n option. Useful for pretty-printing displays."
+            }
+          },
+          "TLDR_inform": {
+            "sed": {
+              "man1_sed_30692": "edit text scriptabl manner appli multipl find-replac express file delet line match line pattern print first 11 line file replac occurr string file overwrit file e\nin-plac replac occurr extend regular express file print result replac line match line pattern replac separ charact use find replac pattern e g replac first occurr regular express line file print result"
+            },
+            "tr": {
+              "man1_tr_34307": "translat charact : run replac base singl charact charact set compress seri ident charact singl charact delet occurr specifi set charact input map charact first set correspond charact second set replac occurr charact anoth command output replac occurr charact file print result strip non-print charact file translat content file upper-cas"
+            },
+            "column": {
+              "man1_column_4684": "format standard input file multipl column\nrow fill column default separ whitespac fill column fill row format output 30 charact wide display specifi column delimit charact -t option e g\ncsv default whitespac split column automat auto-align tabular format"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_69080258: extract rows with specific value in a specific column using bash",
+        "ul_666033: How to search and replace multiple values in an array using jq?"
+      ],
+      "Top-3 Scripts": [
+        "so_69080258: tmp=$(mktemp)\nfor f in *; do\n    cmd \"$f\" > \"$tmp\" &&\n    mv -- \"$tmp\" \"out$f\"\ndone\n\ntmp=$(mktemp)\nfor f in *; do\n    cmd \"$f\" > \"$tmp\" &&\n    [[ -s \"$tmp\" ]] &&\n    mv -- \"$tmp\" \"out$f\"\ndone",
+        "ul_666033: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "export",
+      "MP Summary": "set the export attribute for variables",
+      "Most Similar TLDR Task": "Append something to the PATH variable",
+      "Most Similar TLDR Script": "export PATH=$PATH:{{path/to/append}}",
+      "Most Similar NL2Bash Task": "Output a CSV file as a formatted table",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "sed 's/^,/ ,/' test2.csv | tr -d \\\" | column -s, -t\n",
+          "command-options": {
+            "sed": {
+              "mpsum": "stream editor for filtering and transforming text"
+            },
+            "tr": {
+              "mpsum": "translate or delete characters",
+              "-d": "delete characters in SET1, do not translate"
+            },
+            "column": {
+              "mpsum": "columnate lists",
+              "-t": "Determine the number of columns the input contains and create a table. Columns are\n delimited with whitespace, by default, or with the characters supplied using the -s\n option. Useful for pretty-printing displays."
+            }
+          },
+          "TLDR_inform": {
+            "sed": {
+              "man1_sed_30692": "edit text scriptabl manner appli multipl find-replac express file delet line match line pattern print first 11 line file replac occurr string file overwrit file e\nin-plac replac occurr extend regular express file print result replac line match line pattern replac separ charact use find replac pattern e g replac first occurr regular express line file print result"
+            },
+            "tr": {
+              "man1_tr_34307": "translat charact : run replac base singl charact charact set compress seri ident charact singl charact delet occurr specifi set charact input map charact first set correspond charact second set replac occurr charact anoth command output replac occurr charact file print result strip non-print charact file translat content file upper-cas"
+            },
+            "column": {
+              "man1_column_4684": "format standard input file multipl column\nrow fill column default separ whitespac fill column fill row format output 30 charact wide display specifi column delimit charact -t option e g\ncsv default whitespac split column automat auto-align tabular format"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_70217481: How to replace values in a JSON dictionary with their respective shell variables in jq?"
+      ],
+      "Top-3 Scripts": [
+        "so_70217481: export PROJECT1=\"randomtext1\"\nexport PROJECT2=\"randomtext2\"\nexport PROJECT4=\"randomtext3\""
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "column",
+      "MP Summary": "columnate lists",
+      "Most Similar TLDR Task": "Split columns automatically and auto-align in a tabular format",
+      "Most Similar TLDR Script": "printf \"header1 header2\\nbar foo\\n\" | column -t",
+      "Most Similar NL2Bash Task": "Output a CSV file as a formatted table",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "sed 's/^,/ ,/' test2.csv | tr -d \\\" | column -s, -t\n",
+          "command-options": {
+            "sed": {
+              "mpsum": "stream editor for filtering and transforming text"
+            },
+            "tr": {
+              "mpsum": "translate or delete characters",
+              "-d": "delete characters in SET1, do not translate"
+            },
+            "column": {
+              "mpsum": "columnate lists",
+              "-t": "Determine the number of columns the input contains and create a table. Columns are\n delimited with whitespace, by default, or with the characters supplied using the -s\n option. Useful for pretty-printing displays."
+            }
+          },
+          "TLDR_inform": {
+            "sed": {
+              "man1_sed_30692": "edit text scriptabl manner appli multipl find-replac express file delet line match line pattern print first 11 line file replac occurr string file overwrit file e\nin-plac replac occurr extend regular express file print result replac line match line pattern replac separ charact use find replac pattern e g replac first occurr regular express line file print result"
+            },
+            "tr": {
+              "man1_tr_34307": "translat charact : run replac base singl charact charact set compress seri ident charact singl charact delet occurr specifi set charact input map charact first set correspond charact second set replac occurr charact anoth command output replac occurr charact file print result strip non-print charact file translat content file upper-cas"
+            },
+            "column": {
+              "man1_column_4684": "format standard input file multipl column\nrow fill column default separ whitespac fill column fill row format output 30 charact wide display specifi column delimit charact -t option e g\ncsv default whitespac split column automat auto-align tabular format"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_25622621: How to use awk to get the result of computation of column1 value of the same column2 value in 2 csv files in Ubuntu?"
+      ],
+      "Top-3 Scripts": [
+        "so_25622621: y=current second column"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "perl",
+      "MP Summary": "The Perl 5 language interpreter",
+      "Most Similar TLDR Task": "Run a multi-line find/replace expression on a file, and save the result in another file",
+      "Most Similar TLDR Script": "perl -p0e 's/{{foo\\nbar}}/{{foobar}}/g' {{input_file}} > {{output_file}}",
+      "Most Similar NL2Bash Task": "Output a CSV file as a formatted table",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "sed 's/^,/ ,/' test2.csv | tr -d \\\" | column -s, -t\n",
+          "command-options": {
+            "sed": {
+              "mpsum": "stream editor for filtering and transforming text"
+            },
+            "tr": {
+              "mpsum": "translate or delete characters",
+              "-d": "delete characters in SET1, do not translate"
+            },
+            "column": {
+              "mpsum": "columnate lists",
+              "-t": "Determine the number of columns the input contains and create a table. Columns are\n delimited with whitespace, by default, or with the characters supplied using the -s\n option. Useful for pretty-printing displays."
+            }
+          },
+          "TLDR_inform": {
+            "sed": {
+              "man1_sed_30692": "edit text scriptabl manner appli multipl find-replac express file delet line match line pattern print first 11 line file replac occurr string file overwrit file e\nin-plac replac occurr extend regular express file print result replac line match line pattern replac separ charact use find replac pattern e g replac first occurr regular express line file print result"
+            },
+            "tr": {
+              "man1_tr_34307": "translat charact : run replac base singl charact charact set compress seri ident charact singl charact delet occurr specifi set charact input map charact first set correspond charact second set replac occurr charact anoth command output replac occurr charact file print result strip non-print charact file translat content file upper-cas"
+            },
+            "column": {
+              "man1_column_4684": "format standard input file multipl column\nrow fill column default separ whitespac fill column fill row format output 30 charact wide display specifi column delimit charact -t option e g\ncsv default whitespac split column automat auto-align tabular format"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_24632524: Creating CSV of information extracted from filenames in a given format"
+      ],
+      "Top-3 Scripts": [
+        "so_24632524: #!/bin/sh\nfind . -type f | perl -n -e 'm{/(\\d{2})/(\\d{2})/(\\d+).*-([a-zA-Z]+)(?:_(\\d{1}))?} && print qq{\"0\";\"$1$2$3\";\"$4\";\"$5\";\"`readlink -f -n '\\''$_'\\''`\"}' > bss.csv"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "import",
+      "MP Summary": "saves any visible window on an X server and outputs it as an image file. You can capture a single window, the entire screen, or any rectangular portion of the screen.",
+      "Most Similar TLDR Task": "Capture contents of a remote X server screen in the PNG image format",
+      "Most Similar TLDR Script": "import -window root -display {{remote_host}}:{screen}.{display} {{output.png}}",
+      "Most Similar NL2Bash Task": "Output a CSV file as a formatted table",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "sed 's/^,/ ,/' test2.csv | tr -d \\\" | column -s, -t\n",
+          "command-options": {
+            "sed": {
+              "mpsum": "stream editor for filtering and transforming text"
+            },
+            "tr": {
+              "mpsum": "translate or delete characters",
+              "-d": "delete characters in SET1, do not translate"
+            },
+            "column": {
+              "mpsum": "columnate lists",
+              "-t": "Determine the number of columns the input contains and create a table. Columns are\n delimited with whitespace, by default, or with the characters supplied using the -s\n option. Useful for pretty-printing displays."
+            }
+          },
+          "TLDR_inform": {
+            "sed": {
+              "man1_sed_30692": "edit text scriptabl manner appli multipl find-replac express file delet line match line pattern print first 11 line file replac occurr string file overwrit file e\nin-plac replac occurr extend regular express file print result replac line match line pattern replac separ charact use find replac pattern e g replac first occurr regular express line file print result"
+            },
+            "tr": {
+              "man1_tr_34307": "translat charact : run replac base singl charact charact set compress seri ident charact singl charact delet occurr specifi set charact input map charact first set correspond charact second set replac occurr charact anoth command output replac occurr charact file print result strip non-print charact file translat content file upper-cas"
+            },
+            "column": {
+              "man1_column_4684": "format standard input file multipl column\nrow fill column default separ whitespac fill column fill row format output 30 charact wide display specifi column delimit charact -t option e g\ncsv default whitespac split column automat auto-align tabular format"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_63460766: Get JSON value from an file in a arranged format in linux without using JQ command"
+      ],
+      "Top-3 Scripts": [
+        "so_63460766: cat yourjsonfile.json | python3 -c 'import json; import sys; payload = json.load(sys.stdin); bits = [[value[\"name\"], value.get(\"mode\", \"NULLABLE\"), value[\"type\"]] for value in payload]; [print(\",\".join(bit))for bit in bits]'\n\nimport json\nimport sys\n\npayload = json.load(sys.stdin)\nbits = [[value[\"name\"], value.get(\"mode\", \"NULLABLE\"), value[\"type\"]] for value in payload]\n\n# Using a list comprehension to get a one line for loop, not sure how to do it otherwise.\n[print(\",\".join(bit))for bit in bits]"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "sort",
+      "MP Summary": "sort lines of text files",
+      "Most Similar TLDR Task": "Sort a file preserving only unique lines",
+      "Most Similar TLDR Script": "sort -u {{path/to/file}}",
+      "Most Similar NL2Bash Task": "Output a CSV file as a formatted table",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "sed 's/^,/ ,/' test2.csv | tr -d \\\" | column -s, -t\n",
+          "command-options": {
+            "sed": {
+              "mpsum": "stream editor for filtering and transforming text"
+            },
+            "tr": {
+              "mpsum": "translate or delete characters",
+              "-d": "delete characters in SET1, do not translate"
+            },
+            "column": {
+              "mpsum": "columnate lists",
+              "-t": "Determine the number of columns the input contains and create a table. Columns are\n delimited with whitespace, by default, or with the characters supplied using the -s\n option. Useful for pretty-printing displays."
+            }
+          },
+          "TLDR_inform": {
+            "sed": {
+              "man1_sed_30692": "edit text scriptabl manner appli multipl find-replac express file delet line match line pattern print first 11 line file replac occurr string file overwrit file e\nin-plac replac occurr extend regular express file print result replac line match line pattern replac separ charact use find replac pattern e g replac first occurr regular express line file print result"
+            },
+            "tr": {
+              "man1_tr_34307": "translat charact : run replac base singl charact charact set compress seri ident charact singl charact delet occurr specifi set charact input map charact first set correspond charact second set replac occurr charact anoth command output replac occurr charact file print result strip non-print charact file translat content file upper-cas"
+            },
+            "column": {
+              "man1_column_4684": "format standard input file multipl column\nrow fill column default separ whitespac fill column fill row format output 30 charact wide display specifi column delimit charact -t option e g\ncsv default whitespac split column automat auto-align tabular format"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_54363717: Formatting tables in PowerShell to export as CSV"
+      ],
+      "Top-3 Scripts": [
+        "so_54363717: Get-Service | sort Status | Export-Csv \"C:\\temp\\Test.csv\" -NoTypeInfo -Delim \";\"\n\nGet-Service | sort Status | Export-Csv \"C:\\temp\\Test.csv\" -NoTypeInfo -UseCulture"
+      ],
+      "Explanations about Options": {
+        "-s": "stabilize sort by disabling last-resort comparison",
+        "-T": "use DIR for temporaries, not $TMPDIR or /tmp; multiple options specify multiple\n directories",
+        "-u": "with -c, check for strict ordering; without -c, output only the first of an equal\n run",
+        "-r": "reverse the result of comparisons",
+        "-t": "use SEP instead of non-blank to blank transition",
+        "-o": "write result to FILE instead of standard output",
+        "-f": "fold lower case to upper case characters",
+        "-C": "like -c, but do not report first bad line",
+        "-n": "compare according to string numerical value"
+      }
+    },
+    {
+      "Command": "find",
+      "MP Summary": "search for files in a directory hierarchy",
+      "Most Similar TLDR Task": "Find files by matching multiple patterns",
+      "Most Similar TLDR Script": "find {{root_path}} -name '{{*pattern_1*}}' -or -name '{{*pattern_2*}}'",
+      "Most Similar NL2Bash Task": "Output a CSV file as a formatted table",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "sed 's/^,/ ,/' test2.csv | tr -d \\\" | column -s, -t\n",
+          "command-options": {
+            "sed": {
+              "mpsum": "stream editor for filtering and transforming text"
+            },
+            "tr": {
+              "mpsum": "translate or delete characters",
+              "-d": "delete characters in SET1, do not translate"
+            },
+            "column": {
+              "mpsum": "columnate lists",
+              "-t": "Determine the number of columns the input contains and create a table. Columns are\n delimited with whitespace, by default, or with the characters supplied using the -s\n option. Useful for pretty-printing displays."
+            }
+          },
+          "TLDR_inform": {
+            "sed": {
+              "man1_sed_30692": "edit text scriptabl manner appli multipl find-replac express file delet line match line pattern print first 11 line file replac occurr string file overwrit file e\nin-plac replac occurr extend regular express file print result replac line match line pattern replac separ charact use find replac pattern e g replac first occurr regular express line file print result"
+            },
+            "tr": {
+              "man1_tr_34307": "translat charact : run replac base singl charact charact set compress seri ident charact singl charact delet occurr specifi set charact input map charact first set correspond charact second set replac occurr charact anoth command output replac occurr charact file print result strip non-print charact file translat content file upper-cas"
+            },
+            "column": {
+              "man1_column_4684": "format standard input file multipl column\nrow fill column default separ whitespac fill column fill row format output 30 charact wide display specifi column delimit charact -t option e g\ncsv default whitespac split column automat auto-align tabular format"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_24632524: Creating CSV of information extracted from filenames in a given format"
+      ],
+      "Top-3 Scripts": [
+        "so_24632524: #!/bin/sh\nfind . -type f | perl -n -e 'm{/(\\d{2})/(\\d{2})/(\\d+).*-([a-zA-Z]+)(?:_(\\d{1}))?} && print qq{\"0\";\"$1$2$3\";\"$4\";\"$5\";\"`readlink -f -n '\\''$_'\\''`\"}' > bss.csv"
+      ],
+      "Explanations about Options": {
+        "-type": "File is of type c:"
+      }
+    },
+    {
+      "Command": "at",
+      "MP Summary": "queue, examine, or delete jobs for later execution",
+      "Most Similar TLDR Task": "Execute the commands and email the result using a local mailing program such as sendmail",
+      "Most Similar TLDR Script": "at {{hh:mm}} -m",
+      "Most Similar NL2Bash Task": "Output a CSV file as a formatted table",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "sed 's/^,/ ,/' test2.csv | tr -d \\\" | column -s, -t\n",
+          "command-options": {
+            "sed": {
+              "mpsum": "stream editor for filtering and transforming text"
+            },
+            "tr": {
+              "mpsum": "translate or delete characters",
+              "-d": "delete characters in SET1, do not translate"
+            },
+            "column": {
+              "mpsum": "columnate lists",
+              "-t": "Determine the number of columns the input contains and create a table. Columns are\n delimited with whitespace, by default, or with the characters supplied using the -s\n option. Useful for pretty-printing displays."
+            }
+          },
+          "TLDR_inform": {
+            "sed": {
+              "man1_sed_30692": "edit text scriptabl manner appli multipl find-replac express file delet line match line pattern print first 11 line file replac occurr string file overwrit file e\nin-plac replac occurr extend regular express file print result replac line match line pattern replac separ charact use find replac pattern e g replac first occurr regular express line file print result"
+            },
+            "tr": {
+              "man1_tr_34307": "translat charact : run replac base singl charact charact set compress seri ident charact singl charact delet occurr specifi set charact input map charact first set correspond charact second set replac occurr charact anoth command output replac occurr charact file print result strip non-print charact file translat content file upper-cas"
+            },
+            "column": {
+              "man1_column_4684": "format standard input file multipl column\nrow fill column default separ whitespac fill column fill row format output 30 charact wide display specifi column delimit charact -t option e g\ncsv default whitespac split column automat auto-align tabular format"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_45579569: Using $ variables in jq from PowerShell"
+      ],
+      "Top-3 Scripts": [
+        "so_45579569: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "readlink",
+      "MP Summary": "print resolved symbolic links or canonical file names",
+      "Most Similar TLDR Task": "Get the absolute path to a file",
+      "Most Similar TLDR Script": "readlink -f {{filename}}",
+      "Most Similar NL2Bash Task": "Output a CSV file as a formatted table",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "sed 's/^,/ ,/' test2.csv | tr -d \\\" | column -s, -t\n",
+          "command-options": {
+            "sed": {
+              "mpsum": "stream editor for filtering and transforming text"
+            },
+            "tr": {
+              "mpsum": "translate or delete characters",
+              "-d": "delete characters in SET1, do not translate"
+            },
+            "column": {
+              "mpsum": "columnate lists",
+              "-t": "Determine the number of columns the input contains and create a table. Columns are\n delimited with whitespace, by default, or with the characters supplied using the -s\n option. Useful for pretty-printing displays."
+            }
+          },
+          "TLDR_inform": {
+            "sed": {
+              "man1_sed_30692": "edit text scriptabl manner appli multipl find-replac express file delet line match line pattern print first 11 line file replac occurr string file overwrit file e\nin-plac replac occurr extend regular express file print result replac line match line pattern replac separ charact use find replac pattern e g replac first occurr regular express line file print result"
+            },
+            "tr": {
+              "man1_tr_34307": "translat charact : run replac base singl charact charact set compress seri ident charact singl charact delet occurr specifi set charact input map charact first set correspond charact second set replac occurr charact anoth command output replac occurr charact file print result strip non-print charact file translat content file upper-cas"
+            },
+            "column": {
+              "man1_column_4684": "format standard input file multipl column\nrow fill column default separ whitespac fill column fill row format output 30 charact wide display specifi column delimit charact -t option e g\ncsv default whitespac split column automat auto-align tabular format"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_24632524: Creating CSV of information extracted from filenames in a given format"
+      ],
+      "Top-3 Scripts": [
+        "so_24632524: readlink -f"
+      ],
+      "Explanations about Options": {
+        "-f": "canonicalize by following every symlink in every component of the given name\n recursively; all but the last component must exist"
+      }
+    },
+    {
+      "Command": "id",
+      "MP Summary": "print real and effective user and group IDs",
+      "Most Similar TLDR Task": "Display the current group identity as a number",
+      "Most Similar TLDR Script": "id -g",
+      "Most Similar NL2Bash Task": "Output a CSV file as a formatted table",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "sed 's/^,/ ,/' test2.csv | tr -d \\\" | column -s, -t\n",
+          "command-options": {
+            "sed": {
+              "mpsum": "stream editor for filtering and transforming text"
+            },
+            "tr": {
+              "mpsum": "translate or delete characters",
+              "-d": "delete characters in SET1, do not translate"
+            },
+            "column": {
+              "mpsum": "columnate lists",
+              "-t": "Determine the number of columns the input contains and create a table. Columns are\n delimited with whitespace, by default, or with the characters supplied using the -s\n option. Useful for pretty-printing displays."
+            }
+          },
+          "TLDR_inform": {
+            "sed": {
+              "man1_sed_30692": "edit text scriptabl manner appli multipl find-replac express file delet line match line pattern print first 11 line file replac occurr string file overwrit file e\nin-plac replac occurr extend regular express file print result replac line match line pattern replac separ charact use find replac pattern e g replac first occurr regular express line file print result"
+            },
+            "tr": {
+              "man1_tr_34307": "translat charact : run replac base singl charact charact set compress seri ident charact singl charact delet occurr specifi set charact input map charact first set correspond charact second set replac occurr charact anoth command output replac occurr charact file print result strip non-print charact file translat content file upper-cas"
+            },
+            "column": {
+              "man1_column_4684": "format standard input file multipl column\nrow fill column default separ whitespac fill column fill row format output 30 charact wide display specifi column delimit charact -t option e g\ncsv default whitespac split column automat auto-align tabular format"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_67806267: Test field against multiple values in select in JQ"
+      ],
+      "Top-3 Scripts": [
+        "so_67806267: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "error",
+      "MP Summary": "Postfix error/retry mail delivery agent",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "Output a CSV file as a formatted table",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "sed 's/^,/ ,/' test2.csv | tr -d \\\" | column -s, -t\n",
+          "command-options": {
+            "sed": {
+              "mpsum": "stream editor for filtering and transforming text"
+            },
+            "tr": {
+              "mpsum": "translate or delete characters",
+              "-d": "delete characters in SET1, do not translate"
+            },
+            "column": {
+              "mpsum": "columnate lists",
+              "-t": "Determine the number of columns the input contains and create a table. Columns are\n delimited with whitespace, by default, or with the characters supplied using the -s\n option. Useful for pretty-printing displays."
+            }
+          },
+          "TLDR_inform": {
+            "sed": {
+              "man1_sed_30692": "edit text scriptabl manner appli multipl find-replac express file delet line match line pattern print first 11 line file replac occurr string file overwrit file e\nin-plac replac occurr extend regular express file print result replac line match line pattern replac separ charact use find replac pattern e g replac first occurr regular express line file print result"
+            },
+            "tr": {
+              "man1_tr_34307": "translat charact : run replac base singl charact charact set compress seri ident charact singl charact delet occurr specifi set charact input map charact first set correspond charact second set replac occurr charact anoth command output replac occurr charact file print result strip non-print charact file translat content file upper-cas"
+            },
+            "column": {
+              "man1_column_4684": "format standard input file multipl column\nrow fill column default separ whitespac fill column fill row format output 30 charact wide display specifi column delimit charact -t option e g\ncsv default whitespac split column automat auto-align tabular format"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_67161075: Using jq to edit key:value in a .conf file from shell",
+        "so_45579569: Using $ variables in jq from PowerShell"
+      ],
+      "Top-3 Scripts": [
+        "so_67161075: invalid numeric literal error",
+        "so_45579569: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "scout",
+      "MP Summary": "Monitors the File Server process",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "Output a CSV file as a formatted table",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "sed 's/^,/ ,/' test2.csv | tr -d \\\" | column -s, -t\n",
+          "command-options": {
+            "sed": {
+              "mpsum": "stream editor for filtering and transforming text"
+            },
+            "tr": {
+              "mpsum": "translate or delete characters",
+              "-d": "delete characters in SET1, do not translate"
+            },
+            "column": {
+              "mpsum": "columnate lists",
+              "-t": "Determine the number of columns the input contains and create a table. Columns are\n delimited with whitespace, by default, or with the characters supplied using the -s\n option. Useful for pretty-printing displays."
+            }
+          },
+          "TLDR_inform": {
+            "sed": {
+              "man1_sed_30692": "edit text scriptabl manner appli multipl find-replac express file delet line match line pattern print first 11 line file replac occurr string file overwrit file e\nin-plac replac occurr extend regular express file print result replac line match line pattern replac separ charact use find replac pattern e g replac first occurr regular express line file print result"
+            },
+            "tr": {
+              "man1_tr_34307": "translat charact : run replac base singl charact charact set compress seri ident charact singl charact delet occurr specifi set charact input map charact first set correspond charact second set replac occurr charact anoth command output replac occurr charact file print result strip non-print charact file translat content file upper-cas"
+            },
+            "column": {
+              "man1_column_4684": "format standard input file multipl column\nrow fill column default separ whitespac fill column fill row format output 30 charact wide display specifi column delimit charact -t option e g\ncsv default whitespac split column automat auto-align tabular format"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_67161075: Using jq to edit key:value in a .conf file from shell"
+      ],
+      "Top-3 Scripts": [
+        "so_67161075: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "local",
+      "MP Summary": "Postfix local mail delivery",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "Output a CSV file as a formatted table",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "sed 's/^,/ ,/' test2.csv | tr -d \\\" | column -s, -t\n",
+          "command-options": {
+            "sed": {
+              "mpsum": "stream editor for filtering and transforming text"
+            },
+            "tr": {
+              "mpsum": "translate or delete characters",
+              "-d": "delete characters in SET1, do not translate"
+            },
+            "column": {
+              "mpsum": "columnate lists",
+              "-t": "Determine the number of columns the input contains and create a table. Columns are\n delimited with whitespace, by default, or with the characters supplied using the -s\n option. Useful for pretty-printing displays."
+            }
+          },
+          "TLDR_inform": {
+            "sed": {
+              "man1_sed_30692": "edit text scriptabl manner appli multipl find-replac express file delet line match line pattern print first 11 line file replac occurr string file overwrit file e\nin-plac replac occurr extend regular express file print result replac line match line pattern replac separ charact use find replac pattern e g replac first occurr regular express line file print result"
+            },
+            "tr": {
+              "man1_tr_34307": "translat charact : run replac base singl charact charact set compress seri ident charact singl charact delet occurr specifi set charact input map charact first set correspond charact second set replac occurr charact anoth command output replac occurr charact file print result strip non-print charact file translat content file upper-cas"
+            },
+            "column": {
+              "man1_column_4684": "format standard input file multipl column\nrow fill column default separ whitespac fill column fill row format output 30 charact wide display specifi column delimit charact -t option e g\ncsv default whitespac split column automat auto-align tabular format"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_23598328: Using jq to parse JSON in launchd",
+        "so_24632524: Creating CSV of information extracted from filenames in a given format"
+      ],
+      "Top-3 Scripts": [
+        "so_23598328: JQ=/usr/local/bin/jq",
+        "so_24632524: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "bin",
+      "MP Summary": "presumably creating or updating package.json and running any other initialization-related operations. The init command is transformed to a corresponding npx operation as follows: \u00b7 npm init foo -> npx create-foo \u00b7 npm init @usr/foo -> npx @usr/create-foo \u00b7 npm init @usr -> npx @usr/create Any  additional  options  will  be passed directly to the command, so npm init foo --hello will map to npx create-foo --hello. If the initializer is omitted (by just calling npm init), init will fall  back  to  legacy init  behavior.  It  will  ask you a bunch of questions, and then write a package.json for you. It will attempt to make reasonable guesses based on  existing  fields,  dependencies, and  options selected. It is strictly additive, so it will keep any fields and values that were already set. You can also use -y/--yes to skip the questionnaire altogether.  If  you pass --scope, it will create a scoped package. See Also \u00b7 https://github.com/isaacs/init-package-json \u00b7 npm help package.json \u00b7 npm help version \u00b7 npm help scope April 2020                                NPM-INIT(1)",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "Output a CSV file as a formatted table",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "sed 's/^,/ ,/' test2.csv | tr -d \\\" | column -s, -t\n",
+          "command-options": {
+            "sed": {
+              "mpsum": "stream editor for filtering and transforming text"
+            },
+            "tr": {
+              "mpsum": "translate or delete characters",
+              "-d": "delete characters in SET1, do not translate"
+            },
+            "column": {
+              "mpsum": "columnate lists",
+              "-t": "Determine the number of columns the input contains and create a table. Columns are\n delimited with whitespace, by default, or with the characters supplied using the -s\n option. Useful for pretty-printing displays."
+            }
+          },
+          "TLDR_inform": {
+            "sed": {
+              "man1_sed_30692": "edit text scriptabl manner appli multipl find-replac express file delet line match line pattern print first 11 line file replac occurr string file overwrit file e\nin-plac replac occurr extend regular express file print result replac line match line pattern replac separ charact use find replac pattern e g replac first occurr regular express line file print result"
+            },
+            "tr": {
+              "man1_tr_34307": "translat charact : run replac base singl charact charact set compress seri ident charact singl charact delet occurr specifi set charact input map charact first set correspond charact second set replac occurr charact anoth command output replac occurr charact file print result strip non-print charact file translat content file upper-cas"
+            },
+            "column": {
+              "man1_column_4684": "format standard input file multipl column\nrow fill column default separ whitespac fill column fill row format output 30 charact wide display specifi column delimit charact -t option e g\ncsv default whitespac split column automat auto-align tabular format"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_23598328: Using jq to parse JSON in launchd"
+      ],
+      "Top-3 Scripts": [
+        "so_23598328: JQ=/usr/local/bin/jq"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "utf8",
+      "MP Summary": "quickly change console font and console mode into UTF-8 encoding",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "Output a CSV file as a formatted table",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "sed 's/^,/ ,/' test2.csv | tr -d \\\" | column -s, -t\n",
+          "command-options": {
+            "sed": {
+              "mpsum": "stream editor for filtering and transforming text"
+            },
+            "tr": {
+              "mpsum": "translate or delete characters",
+              "-d": "delete characters in SET1, do not translate"
+            },
+            "column": {
+              "mpsum": "columnate lists",
+              "-t": "Determine the number of columns the input contains and create a table. Columns are\n delimited with whitespace, by default, or with the characters supplied using the -s\n option. Useful for pretty-printing displays."
+            }
+          },
+          "TLDR_inform": {
+            "sed": {
+              "man1_sed_30692": "edit text scriptabl manner appli multipl find-replac express file delet line match line pattern print first 11 line file replac occurr string file overwrit file e\nin-plac replac occurr extend regular express file print result replac line match line pattern replac separ charact use find replac pattern e g replac first occurr regular express line file print result"
+            },
+            "tr": {
+              "man1_tr_34307": "translat charact : run replac base singl charact charact set compress seri ident charact singl charact delet occurr specifi set charact input map charact first set correspond charact second set replac occurr charact anoth command output replac occurr charact file print result strip non-print charact file translat content file upper-cas"
+            },
+            "column": {
+              "man1_column_4684": "format standard input file multipl column\nrow fill column default separ whitespac fill column fill row format output 30 charact wide display specifi column delimit charact -t option e g\ncsv default whitespac split column automat auto-align tabular format"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_69056409: How to extract to single cell value in multiple columns in csv through powershell"
+      ],
+      "Top-3 Scripts": [
+        "so_69056409: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "input",
+      "MP Summary": "Yagi-Uda project antenna defining program",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "Output a CSV file as a formatted table",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "sed 's/^,/ ,/' test2.csv | tr -d \\\" | column -s, -t\n",
+          "command-options": {
+            "sed": {
+              "mpsum": "stream editor for filtering and transforming text"
+            },
+            "tr": {
+              "mpsum": "translate or delete characters",
+              "-d": "delete characters in SET1, do not translate"
+            },
+            "column": {
+              "mpsum": "columnate lists",
+              "-t": "Determine the number of columns the input contains and create a table. Columns are\n delimited with whitespace, by default, or with the characters supplied using the -s\n option. Useful for pretty-printing displays."
+            }
+          },
+          "TLDR_inform": {
+            "sed": {
+              "man1_sed_30692": "edit text scriptabl manner appli multipl find-replac express file delet line match line pattern print first 11 line file replac occurr string file overwrit file e\nin-plac replac occurr extend regular express file print result replac line match line pattern replac separ charact use find replac pattern e g replac first occurr regular express line file print result"
+            },
+            "tr": {
+              "man1_tr_34307": "translat charact : run replac base singl charact charact set compress seri ident charact singl charact delet occurr specifi set charact input map charact first set correspond charact second set replac occurr charact anoth command output replac occurr charact file print result strip non-print charact file translat content file upper-cas"
+            },
+            "column": {
+              "man1_column_4684": "format standard input file multipl column\nrow fill column default separ whitespac fill column fill row format output 30 charact wide display specifi column delimit charact -t option e g\ncsv default whitespac split column automat auto-align tabular format"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_27123624: How to convert a file with data in key = value format to a csv file in unix shell scripting?",
+        "so_44780761: Converting CSV to JSON in bash"
+      ],
+      "Top-3 Scripts": [
+        "so_27123624: awk -F'[=(),]' -v OFS=, 'NR==1{for (i=2; i<NF; i+=2) printf \"%s%s\", $i, (i<NF-2)?OFS:ORS}\n              {for (i=3; i<=NF; i+=2) printf \"%s%s\", $i, (i<NF-2)?OFS:ORS}' input\nkey1,key2,key3\nvalue1,value2,value3\nvalue4,value5,value6",
+        "so_44780761: jq -Rsn '\n  {\"occurrences\":\n    [inputs\n     | . / \"\\n\"\n     | (.[] | select(length > 0) | . / \";\") as $input\n     | {\"position\": [$input[0], $input[1]], \"taxo\": {\"espece\": $input[2]}}]}\n' <se.csv"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "req",
+      "MP Summary": "PKCS#10 certificate request and certificate generating utility",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "Output a CSV file as a formatted table",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "sed 's/^,/ ,/' test2.csv | tr -d \\\" | column -s, -t\n",
+          "command-options": {
+            "sed": {
+              "mpsum": "stream editor for filtering and transforming text"
+            },
+            "tr": {
+              "mpsum": "translate or delete characters",
+              "-d": "delete characters in SET1, do not translate"
+            },
+            "column": {
+              "mpsum": "columnate lists",
+              "-t": "Determine the number of columns the input contains and create a table. Columns are\n delimited with whitespace, by default, or with the characters supplied using the -s\n option. Useful for pretty-printing displays."
+            }
+          },
+          "TLDR_inform": {
+            "sed": {
+              "man1_sed_30692": "edit text scriptabl manner appli multipl find-replac express file delet line match line pattern print first 11 line file replac occurr string file overwrit file e\nin-plac replac occurr extend regular express file print result replac line match line pattern replac separ charact use find replac pattern e g replac first occurr regular express line file print result"
+            },
+            "tr": {
+              "man1_tr_34307": "translat charact : run replac base singl charact charact set compress seri ident charact singl charact delet occurr specifi set charact input map charact first set correspond charact second set replac occurr charact anoth command output replac occurr charact file print result strip non-print charact file translat content file upper-cas"
+            },
+            "column": {
+              "man1_column_4684": "format standard input file multipl column\nrow fill column default separ whitespac fill column fill row format output 30 charact wide display specifi column delimit charact -t option e g\ncsv default whitespac split column automat auto-align tabular format"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_66428156: Converting Invoke-Webrequest to string to use in a csv file, trouble with format"
+      ],
+      "Top-3 Scripts": [
+        "so_66428156: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "and",
+      "MP Summary": "auto nice daemon",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "Output a CSV file as a formatted table",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "sed 's/^,/ ,/' test2.csv | tr -d \\\" | column -s, -t\n",
+          "command-options": {
+            "sed": {
+              "mpsum": "stream editor for filtering and transforming text"
+            },
+            "tr": {
+              "mpsum": "translate or delete characters",
+              "-d": "delete characters in SET1, do not translate"
+            },
+            "column": {
+              "mpsum": "columnate lists",
+              "-t": "Determine the number of columns the input contains and create a table. Columns are\n delimited with whitespace, by default, or with the characters supplied using the -s\n option. Useful for pretty-printing displays."
+            }
+          },
+          "TLDR_inform": {
+            "sed": {
+              "man1_sed_30692": "edit text scriptabl manner appli multipl find-replac express file delet line match line pattern print first 11 line file replac occurr string file overwrit file e\nin-plac replac occurr extend regular express file print result replac line match line pattern replac separ charact use find replac pattern e g replac first occurr regular express line file print result"
+            },
+            "tr": {
+              "man1_tr_34307": "translat charact : run replac base singl charact charact set compress seri ident charact singl charact delet occurr specifi set charact input map charact first set correspond charact second set replac occurr charact anoth command output replac occurr charact file print result strip non-print charact file translat content file upper-cas"
+            },
+            "column": {
+              "man1_column_4684": "format standard input file multipl column\nrow fill column default separ whitespac fill column fill row format output 30 charact wide display specifi column delimit charact -t option e g\ncsv default whitespac split column automat auto-align tabular format"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_404699: Using multiple wildcards in jq to select objects in a JSON file"
+      ],
+      "Top-3 Scripts": [
+        "ul_404699: $ jq -c 'select(.st1 <= .st2 and \n                .st1 > 0 and .st2 > 0 and \n                .st1 < 2147483647 and .st2 < 2147483647)' file.json \n{\"in\":5,\"li\":[{\"st\":1508584161,\"abc\":128416626,\"ta\":33888}],\"usr\":{\"is\":\"222108923573880\",\"ie\":\"222108923573880\"},\"st2\":1508584161,\"ei\":{\"ev\":0,\"rt\":10},\"rn\":947794,\"st1\":1508584161}\n{\"in\":5,\"li\":[{\"st\":1508584145,\"abc\":279682,\"ta\":50000}],\"usr\":{\"is\":\"222108923573880\",\"ie\":\"222108923573880\"},\"st2\":1508584145,\"ei\":{\"ev\":0,\"rt\":18},\"rn\":947796,\"st1\":1508584145}"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "or",
+      "MP Summary": "A user friendly system monitoring program.",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "Output a CSV file as a formatted table",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "sed 's/^,/ ,/' test2.csv | tr -d \\\" | column -s, -t\n",
+          "command-options": {
+            "sed": {
+              "mpsum": "stream editor for filtering and transforming text"
+            },
+            "tr": {
+              "mpsum": "translate or delete characters",
+              "-d": "delete characters in SET1, do not translate"
+            },
+            "column": {
+              "mpsum": "columnate lists",
+              "-t": "Determine the number of columns the input contains and create a table. Columns are\n delimited with whitespace, by default, or with the characters supplied using the -s\n option. Useful for pretty-printing displays."
+            }
+          },
+          "TLDR_inform": {
+            "sed": {
+              "man1_sed_30692": "edit text scriptabl manner appli multipl find-replac express file delet line match line pattern print first 11 line file replac occurr string file overwrit file e\nin-plac replac occurr extend regular express file print result replac line match line pattern replac separ charact use find replac pattern e g replac first occurr regular express line file print result"
+            },
+            "tr": {
+              "man1_tr_34307": "translat charact : run replac base singl charact charact set compress seri ident charact singl charact delet occurr specifi set charact input map charact first set correspond charact second set replac occurr charact anoth command output replac occurr charact file print result strip non-print charact file translat content file upper-cas"
+            },
+            "column": {
+              "man1_column_4684": "format standard input file multipl column\nrow fill column default separ whitespac fill column fill row format output 30 charact wide display specifi column delimit charact -t option e g\ncsv default whitespac split column automat auto-align tabular format"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_404699: Using multiple wildcards in jq to select objects in a JSON file",
+        "so_45579569: Using $ variables in jq from PowerShell"
+      ],
+      "Top-3 Scripts": [
+        "ul_404699: ",
+        "so_45579569: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "bar",
+      "MP Summary": "show information about a data transfer",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "Output a CSV file as a formatted table",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "sed 's/^,/ ,/' test2.csv | tr -d \\\" | column -s, -t\n",
+          "command-options": {
+            "sed": {
+              "mpsum": "stream editor for filtering and transforming text"
+            },
+            "tr": {
+              "mpsum": "translate or delete characters",
+              "-d": "delete characters in SET1, do not translate"
+            },
+            "column": {
+              "mpsum": "columnate lists",
+              "-t": "Determine the number of columns the input contains and create a table. Columns are\n delimited with whitespace, by default, or with the characters supplied using the -s\n option. Useful for pretty-printing displays."
+            }
+          },
+          "TLDR_inform": {
+            "sed": {
+              "man1_sed_30692": "edit text scriptabl manner appli multipl find-replac express file delet line match line pattern print first 11 line file replac occurr string file overwrit file e\nin-plac replac occurr extend regular express file print result replac line match line pattern replac separ charact use find replac pattern e g replac first occurr regular express line file print result"
+            },
+            "tr": {
+              "man1_tr_34307": "translat charact : run replac base singl charact charact set compress seri ident charact singl charact delet occurr specifi set charact input map charact first set correspond charact second set replac occurr charact anoth command output replac occurr charact file print result strip non-print charact file translat content file upper-cas"
+            },
+            "column": {
+              "man1_column_4684": "format standard input file multipl column\nrow fill column default separ whitespac fill column fill row format output 30 charact wide display specifi column delimit charact -t option e g\ncsv default whitespac split column automat auto-align tabular format"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_25378013: How to convert a JSON object to key=value format in jq?"
+      ],
+      "Top-3 Scripts": [
+        "so_25378013: $ cat test.json\n{\n    \"var\": 1,\n    \"foo\": \"bar\",\n    \"x\": \"test\"\n}\n$ jq -r 'to_entries|map(\"\\(.key)=\\(.value|tostring)\")|.[]' test.json\nfoo=bar\nvar=1\nx=test"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "col",
+      "MP Summary": "filter reverse line feeds from input",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "Output a CSV file as a formatted table",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "sed 's/^,/ ,/' test2.csv | tr -d \\\" | column -s, -t\n",
+          "command-options": {
+            "sed": {
+              "mpsum": "stream editor for filtering and transforming text"
+            },
+            "tr": {
+              "mpsum": "translate or delete characters",
+              "-d": "delete characters in SET1, do not translate"
+            },
+            "column": {
+              "mpsum": "columnate lists",
+              "-t": "Determine the number of columns the input contains and create a table. Columns are\n delimited with whitespace, by default, or with the characters supplied using the -s\n option. Useful for pretty-printing displays."
+            }
+          },
+          "TLDR_inform": {
+            "sed": {
+              "man1_sed_30692": "edit text scriptabl manner appli multipl find-replac express file delet line match line pattern print first 11 line file replac occurr string file overwrit file e\nin-plac replac occurr extend regular express file print result replac line match line pattern replac separ charact use find replac pattern e g replac first occurr regular express line file print result"
+            },
+            "tr": {
+              "man1_tr_34307": "translat charact : run replac base singl charact charact set compress seri ident charact singl charact delet occurr specifi set charact input map charact first set correspond charact second set replac occurr charact anoth command output replac occurr charact file print result strip non-print charact file translat content file upper-cas"
+            },
+            "column": {
+              "man1_column_4684": "format standard input file multipl column\nrow fill column default separ whitespac fill column fill row format output 30 charact wide display specifi column delimit charact -t option e g\ncsv default whitespac split column automat auto-align tabular format"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_25622621: How to use awk to get the result of computation of column1 value of the same column2 value in 2 csv files in Ubuntu?"
+      ],
+      "Top-3 Scripts": [
+        "so_25622621: a[first col]=second col"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "return",
+      "MP Summary": "return from a function or dot script",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "Output a CSV file as a formatted table",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "sed 's/^,/ ,/' test2.csv | tr -d \\\" | column -s, -t\n",
+          "command-options": {
+            "sed": {
+              "mpsum": "stream editor for filtering and transforming text"
+            },
+            "tr": {
+              "mpsum": "translate or delete characters",
+              "-d": "delete characters in SET1, do not translate"
+            },
+            "column": {
+              "mpsum": "columnate lists",
+              "-t": "Determine the number of columns the input contains and create a table. Columns are\n delimited with whitespace, by default, or with the characters supplied using the -s\n option. Useful for pretty-printing displays."
+            }
+          },
+          "TLDR_inform": {
+            "sed": {
+              "man1_sed_30692": "edit text scriptabl manner appli multipl find-replac express file delet line match line pattern print first 11 line file replac occurr string file overwrit file e\nin-plac replac occurr extend regular express file print result replac line match line pattern replac separ charact use find replac pattern e g replac first occurr regular express line file print result"
+            },
+            "tr": {
+              "man1_tr_34307": "translat charact : run replac base singl charact charact set compress seri ident charact singl charact delet occurr specifi set charact input map charact first set correspond charact second set replac occurr charact anoth command output replac occurr charact file print result strip non-print charact file translat content file upper-cas"
+            },
+            "column": {
+              "man1_column_4684": "format standard input file multipl column\nrow fill column default separ whitespac fill column fill row format output 30 charact wide display specifi column delimit charact -t option e g\ncsv default whitespac split column automat auto-align tabular format"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_24632524: Creating CSV of information extracted from filenames in a given format"
+      ],
+      "Top-3 Scripts": [
+        "so_24632524: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "rows",
+      "MP Summary": "common, beautiful interface to tabular data, no matter the format",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "Output a CSV file as a formatted table",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "sed 's/^,/ ,/' test2.csv | tr -d \\\" | column -s, -t\n",
+          "command-options": {
+            "sed": {
+              "mpsum": "stream editor for filtering and transforming text"
+            },
+            "tr": {
+              "mpsum": "translate or delete characters",
+              "-d": "delete characters in SET1, do not translate"
+            },
+            "column": {
+              "mpsum": "columnate lists",
+              "-t": "Determine the number of columns the input contains and create a table. Columns are\n delimited with whitespace, by default, or with the characters supplied using the -s\n option. Useful for pretty-printing displays."
+            }
+          },
+          "TLDR_inform": {
+            "sed": {
+              "man1_sed_30692": "edit text scriptabl manner appli multipl find-replac express file delet line match line pattern print first 11 line file replac occurr string file overwrit file e\nin-plac replac occurr extend regular express file print result replac line match line pattern replac separ charact use find replac pattern e g replac first occurr regular express line file print result"
+            },
+            "tr": {
+              "man1_tr_34307": "translat charact : run replac base singl charact charact set compress seri ident charact singl charact delet occurr specifi set charact input map charact first set correspond charact second set replac occurr charact anoth command output replac occurr charact file print result strip non-print charact file translat content file upper-cas"
+            },
+            "column": {
+              "man1_column_4684": "format standard input file multipl column\nrow fill column default separ whitespac fill column fill row format output 30 charact wide display specifi column delimit charact -t option e g\ncsv default whitespac split column automat auto-align tabular format"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_45579569: Using $ variables in jq from PowerShell"
+      ],
+      "Top-3 Scripts": [
+        "so_45579569: jq -r '(map(keys) | add | unique) as $cols | \n       map(. as $row | $cols | map($row[.])) as $rows | \n         $cols, $rows[] | @csv' output2.json > output3.csv"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "sys",
+      "MP Summary": "Reports the compile-time CPU/operating system type",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "Output a CSV file as a formatted table",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "sed 's/^,/ ,/' test2.csv | tr -d \\\" | column -s, -t\n",
+          "command-options": {
+            "sed": {
+              "mpsum": "stream editor for filtering and transforming text"
+            },
+            "tr": {
+              "mpsum": "translate or delete characters",
+              "-d": "delete characters in SET1, do not translate"
+            },
+            "column": {
+              "mpsum": "columnate lists",
+              "-t": "Determine the number of columns the input contains and create a table. Columns are\n delimited with whitespace, by default, or with the characters supplied using the -s\n option. Useful for pretty-printing displays."
+            }
+          },
+          "TLDR_inform": {
+            "sed": {
+              "man1_sed_30692": "edit text scriptabl manner appli multipl find-replac express file delet line match line pattern print first 11 line file replac occurr string file overwrit file e\nin-plac replac occurr extend regular express file print result replac line match line pattern replac separ charact use find replac pattern e g replac first occurr regular express line file print result"
+            },
+            "tr": {
+              "man1_tr_34307": "translat charact : run replac base singl charact charact set compress seri ident charact singl charact delet occurr specifi set charact input map charact first set correspond charact second set replac occurr charact anoth command output replac occurr charact file print result strip non-print charact file translat content file upper-cas"
+            },
+            "column": {
+              "man1_column_4684": "format standard input file multipl column\nrow fill column default separ whitespac fill column fill row format output 30 charact wide display specifi column delimit charact -t option e g\ncsv default whitespac split column automat auto-align tabular format"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_63460766: Get JSON value from an file in a arranged format in linux without using JQ command"
+      ],
+      "Top-3 Scripts": [
+        "so_63460766: import json\nimport sys\n\npayload = json.load(sys.stdin)\nbits = [[value[\"name\"], value.get(\"mode\", \"NULLABLE\"), value[\"type\"]] for value in payload]\n\n# Using a list comprehension to get a one line for loop, not sure how to do it otherwise.\n[print(\",\".join(bit))for bit in bits]"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "then",
+      "MP Summary": "presumably creating or updating package.json and running any other initialization-related operations. The init command is transformed to a corresponding npx operation as follows: \u00b7 npm init foo -> npx create-foo \u00b7 npm init @usr/foo -> npx @usr/create-foo \u00b7 npm init @usr -> npx @usr/create Any  additional  options  will  be passed directly to the command, so npm init foo --hello will map to npx create-foo --hello. If the initializer is omitted (by just calling npm init), init will fall  back  to  legacy init  behavior.  It  will  ask you a bunch of questions, and then write a package.json for you. It will attempt to make reasonable guesses based on  existing  fields,  dependencies, and  options selected. It is strictly additive, so it will keep any fields and values that were already set. You can also use -y/--yes to skip the questionnaire altogether.  If  you pass --scope, it will create a scoped package. See Also \u00b7 https://github.com/isaacs/init-package-json \u00b7 npm help package.json \u00b7 npm help version \u00b7 npm help scope April 2020                                NPM-INIT(1)",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "Output a CSV file as a formatted table",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "sed 's/^,/ ,/' test2.csv | tr -d \\\" | column -s, -t\n",
+          "command-options": {
+            "sed": {
+              "mpsum": "stream editor for filtering and transforming text"
+            },
+            "tr": {
+              "mpsum": "translate or delete characters",
+              "-d": "delete characters in SET1, do not translate"
+            },
+            "column": {
+              "mpsum": "columnate lists",
+              "-t": "Determine the number of columns the input contains and create a table. Columns are\n delimited with whitespace, by default, or with the characters supplied using the -s\n option. Useful for pretty-printing displays."
+            }
+          },
+          "TLDR_inform": {
+            "sed": {
+              "man1_sed_30692": "edit text scriptabl manner appli multipl find-replac express file delet line match line pattern print first 11 line file replac occurr string file overwrit file e\nin-plac replac occurr extend regular express file print result replac line match line pattern replac separ charact use find replac pattern e g replac first occurr regular express line file print result"
+            },
+            "tr": {
+              "man1_tr_34307": "translat charact : run replac base singl charact charact set compress seri ident charact singl charact delet occurr specifi set charact input map charact first set correspond charact second set replac occurr charact anoth command output replac occurr charact file print result strip non-print charact file translat content file upper-cas"
+            },
+            "column": {
+              "man1_column_4684": "format standard input file multipl column\nrow fill column default separ whitespac fill column fill row format output 30 charact wide display specifi column delimit charact -t option e g\ncsv default whitespac split column automat auto-align tabular format"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_18657411: How to change date format in .csv file in unix"
+      ],
+      "Top-3 Scripts": [
+        "so_18657411: while IFS= read -r line\ndo\n  mydate=$(grep -Po '[0-9]+/[0-9]+/[0-9]+' <<< \"$line\") # gets 8/1/13\n  # perform the replacement in case there is date to process\n  if [[ ! -z \"$mydate\" ]]; then\n     newdate=$(date -d\"$mydate\" \"+%Y-%m-%d\") # converts to 2013-08-01\n     sed -i \"s#$mydate#$newdate#\" file       # replaces in the text (-i option)\n  fi\ndone < file"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "to",
+      "MP Summary": "as the filename. --logdir <name> Writes each synchronization log output in a new file in the specified directory. --logexpire <hours> Removes logs older than the value specified (in hours). This command is  used  with --logdir. --logflush Clears (flushes) the log file after each write action. --logdebug Also  output  debug-level  messages  in  the log (equivalent to setting the env var QT_LOGGING_RULES=\"qt.*=true;*.debug=true\"). ) --confdir <dirname> Uses the specified configuration directory. The ownCloud Client reads a configuration file.  You can locate this configuration file as follows: On Linux distributions: $HOME/.config/ownCloud/owncloud.cfg On Microsoft Windows systems: %APPDATA%\\ownCloud\\owncloud.cfg On MAC OS X systems: $HOME/Library/Preferences/ownCloud/owncloud.cfg The configuration file contains settings using the Microsoft Windows .ini file format. You can overwrite changes using the ownCloud configuration dialog. NOTE: Use caution when making changes to the ownCloud Client configuration  file.   Incorrect settings can produce unintended results. Some interesting values that can be set on the configuration file are: \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510 \u2502[ownCloud] section          \u2502         \u2502                          \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502Variable                    \u2502 Default \u2502 Meaning                  \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502remotePollInterval          \u2502 30000   \u2502 Specifies  the poll time \u2502 \u2502                            \u2502         \u2502 for      the      remote \u2502 \u2502                            \u2502         \u2502 repository            in \u2502 \u2502                            \u2502         \u2502 milliseconds.            \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502forceSyncInterval           \u2502 7200000 \u2502 The   duration   of   no \u2502 \u2502                            \u2502         \u2502 activity  after  which a \u2502 \u2502                            \u2502         \u2502 synchronization      run \u2502 \u2502                            \u2502         \u2502 shall    be    triggered \u2502 \u2502                            \u2502         \u2502 automatically.           \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502fullLocalDiscoveryInterval  \u2502 3600000 \u2502 The interval after which \u2502 \u2502                            \u2502         \u2502 the next synchronization \u2502 \u2502                            \u2502         \u2502 will   perform   a  full \u2502 \u2502                            \u2502         \u2502 local discovery.         \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502notificationRefreshInterval \u2502 300000  \u2502 Specifies   the  default \u2502 \u2502                            \u2502         \u2502 interval of checking for \u2502 \u2502                            \u2502         \u2502 new server notifications \u2502 \u2502                            \u2502         \u2502 in milliseconds.         \u2502 \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518 \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510 \u2502[General] section       \u2502         \u2502                          \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502Variable                \u2502 Default \u2502 Meaning                  \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502chunkSize               \u2502 5242880 \u2502 Specifies the chunk size \u2502 \u2502                        \u2502         \u2502 of   uploaded  files  in \u2502 \u2502                        \u2502         \u2502 bytes.                   \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502promptDeleteAllFiles    \u2502 true    \u2502 If a  UI  prompt  should \u2502 \u2502                        \u2502         \u2502 ask  for confirmation if \u2502 \u2502                        \u2502         \u2502 it was detected that all \u2502 \u2502                        \u2502         \u2502 files  and  folders were \u2502 \u2502                        \u2502         \u2502 deleted.                 \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502maxLogLines             \u2502 20000   \u2502 Specifies  the   maximum \u2502 \u2502                        \u2502         \u2502 number   of   log  lines \u2502 \u2502                        \u2502         \u2502 displayed  in  the   log \u2502 \u2502                        \u2502         \u2502 window.                  \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502timeout                 \u2502 300     \u2502 The  timeout for network \u2502 \u2502                        \u2502         \u2502 connections in seconds.  \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502moveToTrash             \u2502 false   \u2502 If  non-locally  deleted \u2502 \u2502                        \u2502         \u2502 files should be moved to \u2502 \u2502                        \u2502         \u2502 trash     instead     of \u2502 \u2502                        \u2502         \u2502 deleting            them \u2502 \u2502                        \u2502         \u2502 completely.  This option \u2502 \u2502                        \u2502         \u2502 only works on linux      \u2502 \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518 \u2502showExperimentalOptions \u2502 false   \u2502 Whether      to     show \u2502 \u2502                        \u2502         \u2502 experimental     options \u2502 \u2502                        \u2502         \u2502 that      are      still \u2502 \u2502                        \u2502         \u2502 undergoing  testing   in \u2502 \u2502                        \u2502         \u2502 the    user   interface. \u2502 \u2502                        \u2502         \u2502 Turning this on does not \u2502 \u2502                        \u2502         \u2502 enable      experimental \u2502 \u2502                        \u2502         \u2502 behavior on its own.  It \u2502 \u2502                        \u2502         \u2502 does     enable     user \u2502 \u2502                        \u2502         \u2502 inferface  options  that \u2502 \u2502                        \u2502         \u2502 can be used to opt in to \u2502 \u2502                        \u2502         \u2502 experimental features.   \u2502 \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518 \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510 \u2502[Proxy] section      \u2502           \u2502                          \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502Variable             \u2502 Default   \u2502 Meaning                  \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502host                 \u2502 127.0.0.1 \u2502 The address of the proxy \u2502 \u2502                     \u2502           \u2502 server.                  \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502port                 \u2502 8080      \u2502 The  port were the proxy \u2502 \u2502                     \u2502           \u2502 is listening.            \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502type                 \u2502 2         \u2502 0 for System Proxy.      \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u25021 for SOCKS5 Proxy.  \u2502           \u2502                          \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u25022 for No Proxy.      \u2502           \u2502                          \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u25023 for HTTP(S) Proxy. \u2502           \u2502                          \u2502 \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518 Please report bugs at https://github.com/owncloud/client/issues. owncloudcmd(1)",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "Output a CSV file as a formatted table",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "sed 's/^,/ ,/' test2.csv | tr -d \\\" | column -s, -t\n",
+          "command-options": {
+            "sed": {
+              "mpsum": "stream editor for filtering and transforming text"
+            },
+            "tr": {
+              "mpsum": "translate or delete characters",
+              "-d": "delete characters in SET1, do not translate"
+            },
+            "column": {
+              "mpsum": "columnate lists",
+              "-t": "Determine the number of columns the input contains and create a table. Columns are\n delimited with whitespace, by default, or with the characters supplied using the -s\n option. Useful for pretty-printing displays."
+            }
+          },
+          "TLDR_inform": {
+            "sed": {
+              "man1_sed_30692": "edit text scriptabl manner appli multipl find-replac express file delet line match line pattern print first 11 line file replac occurr string file overwrit file e\nin-plac replac occurr extend regular express file print result replac line match line pattern replac separ charact use find replac pattern e g replac first occurr regular express line file print result"
+            },
+            "tr": {
+              "man1_tr_34307": "translat charact : run replac base singl charact charact set compress seri ident charact singl charact delet occurr specifi set charact input map charact first set correspond charact second set replac occurr charact anoth command output replac occurr charact file print result strip non-print charact file translat content file upper-cas"
+            },
+            "column": {
+              "man1_column_4684": "format standard input file multipl column\nrow fill column default separ whitespac fill column fill row format output 30 charact wide display specifi column delimit charact -t option e g\ncsv default whitespac split column automat auto-align tabular format"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_18657411: How to change date format in .csv file in unix"
+      ],
+      "Top-3 Scripts": [
+        "so_18657411: while IFS= read -r line\ndo\n  mydate=$(grep -Po '[0-9]+/[0-9]+/[0-9]+' <<< \"$line\") # gets 8/1/13\n  # perform the replacement in case there is date to process\n  if [[ ! -z \"$mydate\" ]]; then\n     newdate=$(date -d\"$mydate\" \"+%Y-%m-%d\") # converts to 2013-08-01\n     sed -i \"s#$mydate#$newdate#\" file       # replaces in the text (-i option)\n  fi\ndone < file"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "items",
+      "MP Summary": "no, '1' - yes) and the third column is the tag name itself.",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "Output a CSV file as a formatted table",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "sed 's/^,/ ,/' test2.csv | tr -d \\\" | column -s, -t\n",
+          "command-options": {
+            "sed": {
+              "mpsum": "stream editor for filtering and transforming text"
+            },
+            "tr": {
+              "mpsum": "translate or delete characters",
+              "-d": "delete characters in SET1, do not translate"
+            },
+            "column": {
+              "mpsum": "columnate lists",
+              "-t": "Determine the number of columns the input contains and create a table. Columns are\n delimited with whitespace, by default, or with the characters supplied using the -s\n option. Useful for pretty-printing displays."
+            }
+          },
+          "TLDR_inform": {
+            "sed": {
+              "man1_sed_30692": "edit text scriptabl manner appli multipl find-replac express file delet line match line pattern print first 11 line file replac occurr string file overwrit file e\nin-plac replac occurr extend regular express file print result replac line match line pattern replac separ charact use find replac pattern e g replac first occurr regular express line file print result"
+            },
+            "tr": {
+              "man1_tr_34307": "translat charact : run replac base singl charact charact set compress seri ident charact singl charact delet occurr specifi set charact input map charact first set correspond charact second set replac occurr charact anoth command output replac occurr charact file print result strip non-print charact file translat content file upper-cas"
+            },
+            "column": {
+              "man1_column_4684": "format standard input file multipl column\nrow fill column default separ whitespac fill column fill row format output 30 charact wide display specifi column delimit charact -t option e g\ncsv default whitespac split column automat auto-align tabular format"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_44780761: Converting CSV to JSON in bash"
+      ],
+      "Top-3 Scripts": [
+        "so_44780761: #!/usr/bin/env bash\n\nitems=( )\nwhile IFS=';' read -r lat long pos _; do\n  printf -v item '{ \"position\": [%s, %s], \"taxo\": {\"espece\": \"%s\"}}' \"$lat\" \"$long\" \"$pos\"\n  items+=( \"$item\" )\ndone <se.csv\n\nIFS=','\nprintf '{\"occurrences\": [%s]}\\n' \"${items[*]}\""
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "gawk",
+      "MP Summary": "pattern scanning and processing language",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "Output a CSV file as a formatted table",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "sed 's/^,/ ,/' test2.csv | tr -d \\\" | column -s, -t\n",
+          "command-options": {
+            "sed": {
+              "mpsum": "stream editor for filtering and transforming text"
+            },
+            "tr": {
+              "mpsum": "translate or delete characters",
+              "-d": "delete characters in SET1, do not translate"
+            },
+            "column": {
+              "mpsum": "columnate lists",
+              "-t": "Determine the number of columns the input contains and create a table. Columns are\n delimited with whitespace, by default, or with the characters supplied using the -s\n option. Useful for pretty-printing displays."
+            }
+          },
+          "TLDR_inform": {
+            "sed": {
+              "man1_sed_30692": "edit text scriptabl manner appli multipl find-replac express file delet line match line pattern print first 11 line file replac occurr string file overwrit file e\nin-plac replac occurr extend regular express file print result replac line match line pattern replac separ charact use find replac pattern e g replac first occurr regular express line file print result"
+            },
+            "tr": {
+              "man1_tr_34307": "translat charact : run replac base singl charact charact set compress seri ident charact singl charact delet occurr specifi set charact input map charact first set correspond charact second set replac occurr charact anoth command output replac occurr charact file print result strip non-print charact file translat content file upper-cas"
+            },
+            "column": {
+              "man1_column_4684": "format standard input file multipl column\nrow fill column default separ whitespac fill column fill row format output 30 charact wide display specifi column delimit charact -t option e g\ncsv default whitespac split column automat auto-align tabular format"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_40166441: How to convert space separated key value data into CSV format in bash?"
+      ],
+      "Top-3 Scripts": [
+        "so_40166441: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "phone",
+      "MP Summary": "Phone utility for DECnet",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "Output a CSV file as a formatted table",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "sed 's/^,/ ,/' test2.csv | tr -d \\\" | column -s, -t\n",
+          "command-options": {
+            "sed": {
+              "mpsum": "stream editor for filtering and transforming text"
+            },
+            "tr": {
+              "mpsum": "translate or delete characters",
+              "-d": "delete characters in SET1, do not translate"
+            },
+            "column": {
+              "mpsum": "columnate lists",
+              "-t": "Determine the number of columns the input contains and create a table. Columns are\n delimited with whitespace, by default, or with the characters supplied using the -s\n option. Useful for pretty-printing displays."
+            }
+          },
+          "TLDR_inform": {
+            "sed": {
+              "man1_sed_30692": "edit text scriptabl manner appli multipl find-replac express file delet line match line pattern print first 11 line file replac occurr string file overwrit file e\nin-plac replac occurr extend regular express file print result replac line match line pattern replac separ charact use find replac pattern e g replac first occurr regular express line file print result"
+            },
+            "tr": {
+              "man1_tr_34307": "translat charact : run replac base singl charact charact set compress seri ident charact singl charact delet occurr specifi set charact input map charact first set correspond charact second set replac occurr charact anoth command output replac occurr charact file print result strip non-print charact file translat content file upper-cas"
+            },
+            "column": {
+              "man1_column_4684": "format standard input file multipl column\nrow fill column default separ whitespac fill column fill row format output 30 charact wide display specifi column delimit charact -t option e g\ncsv default whitespac split column automat auto-align tabular format"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_666033: How to search and replace multiple values in an array using jq?"
+      ],
+      "Top-3 Scripts": [
+        "ul_666033: jq --arg name John --arg phone 4321 \\\n    '( .contacts[] | select(.name == $name) ).phone |= $phone' file\n\ndeclare -A lookup\n\nlookup=( [John]=4321 [Jane]=4321 )\n\nfor name in \"${!lookup[@]}\"; do\n    phone=${lookup[$name]}\n\n    # jq as above\ndone"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "lookup",
+      "MP Summary": "interactive file search and display",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "Output a CSV file as a formatted table",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "sed 's/^,/ ,/' test2.csv | tr -d \\\" | column -s, -t\n",
+          "command-options": {
+            "sed": {
+              "mpsum": "stream editor for filtering and transforming text"
+            },
+            "tr": {
+              "mpsum": "translate or delete characters",
+              "-d": "delete characters in SET1, do not translate"
+            },
+            "column": {
+              "mpsum": "columnate lists",
+              "-t": "Determine the number of columns the input contains and create a table. Columns are\n delimited with whitespace, by default, or with the characters supplied using the -s\n option. Useful for pretty-printing displays."
+            }
+          },
+          "TLDR_inform": {
+            "sed": {
+              "man1_sed_30692": "edit text scriptabl manner appli multipl find-replac express file delet line match line pattern print first 11 line file replac occurr string file overwrit file e\nin-plac replac occurr extend regular express file print result replac line match line pattern replac separ charact use find replac pattern e g replac first occurr regular express line file print result"
+            },
+            "tr": {
+              "man1_tr_34307": "translat charact : run replac base singl charact charact set compress seri ident charact singl charact delet occurr specifi set charact input map charact first set correspond charact second set replac occurr charact anoth command output replac occurr charact file print result strip non-print charact file translat content file upper-cas"
+            },
+            "column": {
+              "man1_column_4684": "format standard input file multipl column\nrow fill column default separ whitespac fill column fill row format output 30 charact wide display specifi column delimit charact -t option e g\ncsv default whitespac split column automat auto-align tabular format"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_666033: How to search and replace multiple values in an array using jq?"
+      ],
+      "Top-3 Scripts": [
+        "ul_666033: declare -A lookup\n\nlookup=( [John]=4321 [Jane]=4321 )\n\nfor name in \"${!lookup[@]}\"; do\n    phone=${lookup[$name]}\n\n    # jq as above\ndone"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "jo",
+      "MP Summary": "JSON output from a shell",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "Output a CSV file as a formatted table",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "sed 's/^,/ ,/' test2.csv | tr -d \\\" | column -s, -t\n",
+          "command-options": {
+            "sed": {
+              "mpsum": "stream editor for filtering and transforming text"
+            },
+            "tr": {
+              "mpsum": "translate or delete characters",
+              "-d": "delete characters in SET1, do not translate"
+            },
+            "column": {
+              "mpsum": "columnate lists",
+              "-t": "Determine the number of columns the input contains and create a table. Columns are\n delimited with whitespace, by default, or with the characters supplied using the -s\n option. Useful for pretty-printing displays."
+            }
+          },
+          "TLDR_inform": {
+            "sed": {
+              "man1_sed_30692": "edit text scriptabl manner appli multipl find-replac express file delet line match line pattern print first 11 line file replac occurr string file overwrit file e\nin-plac replac occurr extend regular express file print result replac line match line pattern replac separ charact use find replac pattern e g replac first occurr regular express line file print result"
+            },
+            "tr": {
+              "man1_tr_34307": "translat charact : run replac base singl charact charact set compress seri ident charact singl charact delet occurr specifi set charact input map charact first set correspond charact second set replac occurr charact anoth command output replac occurr charact file print result strip non-print charact file translat content file upper-cas"
+            },
+            "column": {
+              "man1_column_4684": "format standard input file multipl column\nrow fill column default separ whitespac fill column fill row format output 30 charact wide display specifi column delimit charact -t option e g\ncsv default whitespac split column automat auto-align tabular format"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_666033: How to search and replace multiple values in an array using jq?"
+      ],
+      "Top-3 Scripts": [
+        "ul_666033: jo John=1234 Jane=5678\n\njo John=1234 Jane=5678 |\njq --slurpfile new /dev/stdin \\\n    '.contacts |= map(.phone = ($new[][.name] // .phone))' file"
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

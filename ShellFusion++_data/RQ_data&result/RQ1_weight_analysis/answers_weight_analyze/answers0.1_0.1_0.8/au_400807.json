@@ -1,0 +1,94 @@
+{
+  "Query": "Is there an easy command line command to check disk space?",
+  "Answers": [
+    {
+      "Command": "df",
+      "MP Summary": "report file system disk space usage",
+      "Most Similar TLDR Task": "Display all filesystems and their disk usage",
+      "Most Similar TLDR Script": "df",
+      "Top-3 Similar Questions": [
+        "so_61035374: Bash command to check available drive space (was \"to check value of a decimal number\")",
+        "su_71087: How to check the current disk space used by my linux?",
+        "so_39925394: check disk space while copying in shell script"
+      ],
+      "Top-3 Scripts": [
+        "so_61035374: declare -- drive='/'\ndeclare -i minsize=$((2*10**11)) # 200 GB\nif (($(df -B1 --output=avail \"$drive\" | tail -1)>=minsize))\nthen\n   printf 'There is more than 200 GB left on %s\\n' \"$drive\"\nelse\n   printf 'There is less than 200 GB left on %s\\n' \"$drive\"\nfi",
+        "su_71087: df -a\n\ndf -h",
+        "so_39925394: df /abc /pqr | awk 'NR>1 {gsub(/%/,\"\"); if ($5 > 80) {exit 1}}' || exit 1\n\ndf /abc /pgr"
+      ],
+      "Explanations about Options": {
+        "-h": "print sizes in powers of 1024 (e.g., 1023M)",
+        "--output": "use the output format defined by FIELD_LIST, or print all fields if FIELD_LIST is\n omitted."
+      }
+    },
+    {
+      "Command": "xargs",
+      "MP Summary": "build and execute command lines from standard input",
+      "Most Similar TLDR Task": "Run multiple chained commands on the input data",
+      "Most Similar TLDR Script": "{{arguments_source}} | xargs sh -c \"{{command1}} && {{command2}} | {{command3}}\"",
+      "Top-3 Similar Questions": [
+        "ul_110131: How does one determine the amount of space allocated to their command line?",
+        "ul_68498: Simple Shell script to log disk space"
+      ],
+      "Top-3 Scripts": [
+        "ul_110131: $ xargs --show-limits --no-run-if-empty < /dev/null \nYour environment variables take up 4791 bytes\nPOSIX upper limit on argument length (this system): 2090313\nPOSIX smallest allowable upper limit on argument length (all systems): 4096\nMaximum length of command we could actually use: 2085522\nSize of command buffer we are actually using: 131072",
+        "ul_68498: Groups=\"server1 server2\"\necho $Groups | xargs -n1 |  xargs  -I'{}' echo ssh '{}' df"
+      ],
+      "Explanations about Options": {
+        "--show-limits": "Display the limits on the command-line length which are imposed by the operating\n system, xargs' choice of buffer size and the -s option. Pipe the input from\n /dev/null (and perhaps specify --no-run-if-empty) if you don't want xargs to do\n anything.",
+        "--no-run-if-empty": "If the standard input does not contain any nonblanks, do not run the command.\n Normally, the command is run once even if there is no input. This option is a GNU\n extension."
+      }
+    },
+    {
+      "Command": "du",
+      "MP Summary": "estimate file space usage",
+      "Most Similar TLDR Task": "List the human-readable size of all .jpg files in subdirectories of the current directory, and show a cumulative total at the end",
+      "Most Similar TLDR Script": "du -ch */*.jpg",
+      "Top-3 Similar Questions": [
+        "su_1472429: Check disk usage of files returned with spaces",
+        "so_25482174: How to check free space on Unix using script",
+        "su_894142: Disk Space Changes with Command Used"
+      ],
+      "Top-3 Scripts": [
+        "su_1472429: find . -maxdepth 1 -iname '*syed*' -exec du -ch {} +",
+        "so_25482174: du -a <path> | sort -n -r | head -n 10",
+        "su_894142: andrew@ubuntu:~$ sudo du -sh --apparent-size /mnt/kvm_images/\n51G     /mnt/kvm_images/\nandrew@ubuntu:~$ sudo du -sh /mnt/kvm_images/\n6.2G    /mnt/kvm_images/"
+      ],
+      "Explanations about Options": {
+        "-a": "write counts for all files, not just directories",
+        "-c": "produce a grand total",
+        "-h": "print sizes in human readable format (e.g., 1K 234M 2G)",
+        "--apparent-size": "print apparent sizes, rather than disk usage; although the apparent size is usually\n smaller, it may be larger due to holes in ('sparse') files, internal fragmentation,\n indirect blocks, and the like",
+        "-s": "display only a total for each argument"
+      }
+    },
+    {
+      "Command": "fdisk",
+      "MP Summary": "manipulate disk partition table",
+      "Most Similar TLDR Task": "Start the partition manipulator",
+      "Most Similar TLDR Script": "fdisk {{/dev/sda}}",
+      "Top-3 Similar Questions": [
+        "ul_18586: CentOS - Check partition information from command line"
+      ],
+      "Top-3 Scripts": [
+        "ul_18586: fdisk -l"
+      ],
+      "Explanations about Options": {
+        "-l": "List the partition tables for the specified devices and then exit. If no devices\n are given, those mentioned in /proc/partitions (if that file exists) are used."
+      }
+    },
+    {
+      "Command": "cut",
+      "MP Summary": "remove sections from each line of files",
+      "Most Similar TLDR Task": "Cut out the fields 3 through to the end of each line, using a space as a delimiter",
+      "Most Similar TLDR Script": "cut -d'{{ }}' -f{{3-}}",
+      "Top-3 Similar Questions": [
+        "au_107470: How can I check how much space there is left on WUBI versus how much space it takes on my HDD?"
+      ],
+      "Top-3 Scripts": [
+        "au_107470: OLD=$(ls -tr /boot/vmlinuz-* | head -n -2 | cut -d- -f2- | awk '{print \"linux-image-\" $0}')"
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

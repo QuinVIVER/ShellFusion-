@@ -1,0 +1,70 @@
+{
+  "Query": "How do I get the parent process ID of a given child process?",
+  "Answers": [
+    {
+      "Command": "ps",
+      "Top-3 Similar Questions": [
+        "su_150117: How to get parent PID of a given process in GNU/Linux from command line?",
+        "so_27755420: Get child list of parent process in C",
+        "so_17922300: Getting the list of child process, called by a parent process in Linux"
+      ],
+      "Top-3 Scripts": [
+        "su_150117: ps -o ppid= -p 1111\n\nppid () { ps -p ${1:-$$} -o ppid=; }\n\n#!/bin/sh\npid=$1\nif [ -z $pid ]\nthen\n    read -p \"PID: \" pid\nfi\nps -p ${pid:-$$} -o ppid=",
+        "so_17922300: ps afx",
+        "ul_458973: ps -o ppid=\n\n#! /bin/bash -\npid=${1?Please give a pid}\nwhile\n  [ \"$pid\" -gt 0 ] &&\n    read -r ppid name < <(ps -o ppid= -o comm= -p \"$pid\")\ndo\n  printf '%s\\n' \"$pid $name\"\n  pid=$ppid\ndone"
+      ]
+    },
+    {
+      "Command": "pgrep",
+      "Top-3 Similar Questions": [
+        "so_52508561: Get pids of all child/grandchild processes created from parent process",
+        "au_1259111: Get process ids of all spawned processes from xargs",
+        "ul_189989: Get PID of process started by time"
+      ],
+      "Top-3 Scripts": [
+        "so_52508561: #!/usr/bin/env bash\n\nnode foo.js &\npid=$!\n\nsleep 5;\n\npgrep -P $pid | xargs kill -INT",
+        "au_1259111: pgrep -P {parent}",
+        "ul_189989: $ time sleep 50 & timepid=$!\n$ aoutpid=$(pgrep -P $timepid)\n$ ps -o ppid,pid,start,cmd w -p $$,$timepid,$aoutpid\n\nPPID   PID  STARTED CMD\n2065  2068 21:34:57 -bash\n2068  3297 22:16:05 -bash\n3297  3298 22:16:05 sleep 50"
+      ]
+    },
+    {
+      "Command": "print",
+      "Top-3 Similar Questions": [
+        "ul_458973: How can I get only the ancestry processes of a given process?",
+        "so_58078246: Get process id of the command of the command just after execution",
+        "so_11546765: How to get the PID of a process by giving the process name in Mac OS X ?"
+      ],
+      "Top-3 Scripts": [
+        "so_58078246: import subprocess\np = subprocess.Popen('grep')\nprint(p.pid)",
+        "so_11546765: ps -A | grep [f]irefox | awk '{print $1}'",
+        "so_54418376: ps -ef | grep 'your process' | awk '{print $2}' | xargs pwdx\n\npgrep 'your process' | awk '{print $1}' | xargs pwdx"
+      ]
+    },
+    {
+      "Command": "grep",
+      "Top-3 Similar Questions": [
+        "so_31676071: how to get process id of specific process?",
+        "so_11546765: How to get the PID of a process by giving the process name in Mac OS X ?",
+        "so_10509091: Getting `xprop` of child/client window given X ID of frame"
+      ],
+      "Top-3 Scripts": [
+        "so_31676071: ps -ef | grep -w abc | grep -v grep\n               ^\n               `--- match whole words only",
+        "so_11546765: ps -A | grep [f]irefox | awk '{print $1}'",
+        "so_10509091: xprop -id `xwininfo -children -id [frame_id] | grep -o '^ \\+0x[0-9a-f]\\+'`"
+      ]
+    },
+    {
+      "Command": "sleep",
+      "Top-3 Similar Questions": [
+        "so_52508561: Get pids of all child/grandchild processes created from parent process",
+        "ul_189989: Get PID of process started by time",
+        "so_20573621: Bash get process ID of a process started in subshell"
+      ],
+      "Top-3 Scripts": [
+        "so_52508561: #!/usr/bin/env bash\n\nnode foo.js &\npid=$!\n\nsleep 5;\n\npgrep -P $pid | xargs kill -INT",
+        "ul_189989: sleep 60\n\n$ time sleep 50 & timepid=$!\n$ aoutpid=$(pgrep -P $timepid)\n$ ps -o ppid,pid,start,cmd w -p $$,$timepid,$aoutpid\n\nPPID   PID  STARTED CMD\n2065  2068 21:34:57 -bash\n2068  3297 22:16:05 -bash\n3297  3298 22:16:05 sleep 50",
+        "so_20573621: (sleep & wait)\n(sleep & pid=$!; wait $pid)"
+      ]
+    }
+  ]
+}

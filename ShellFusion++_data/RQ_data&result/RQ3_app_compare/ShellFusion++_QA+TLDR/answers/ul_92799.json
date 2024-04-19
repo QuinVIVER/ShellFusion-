@@ -1,0 +1,98 @@
+{
+  "Query": "Connecting to wifi network through command line",
+  "Answers": [
+    {
+      "Command": "iw",
+      "MP Summary": "show / manipulate wireless devices and their configuration",
+      "Most Similar TLDR Task": "Join an open wireless network",
+      "Most Similar TLDR Script": "iw dev {{wlp}} connect {{SSID}}",
+      "Top-3 Similar Questions": [
+        "ul_283722: How to connect to wifi from command line?",
+        "au_138472: How do I connect to a WPA wifi network using the command line?",
+        "ul_400901: Connect to WEP/WPA without nmcli?"
+      ],
+      "Top-3 Scripts": [
+        "ul_283722: ",
+        "au_138472: ",
+        "ul_400901: touch /etc/wpa_supplicant/wpa_supplicant.conf\necho ctrl_interface=/run/wpa_supplicant > /etc/wpa_supplicant/wpa_supplicant.conf\necho update_config=1 >> /etc/wpa_supplicant/wpa_supplicant.conf\nwpa_passphrase \"Your_SSID\" Your_PASSWORD >> /etc/wpa_supplicant/wpa_supplicant.conf\ni=$(iw dev | grep Interface | awk '{ print $2}')\nkillall wpa_supplicant\nwpa_supplicant -i $i -c/etc/wpa_supplicant/wpa_supplicant.conf -B\ndhclient $i\n\ni=$(iw dev | grep Interface | awk '{ print $2}')\nkillall wpa_supplicant\nwpa_supplicant -i $i -c/etc/wpa_supplicant/wpa_supplicant.conf -B\ndhclient $i\n\niw dev <interface> connect \"Your_SSID\" key 0:WEP_KEY"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "iwctl",
+      "MP Summary": "Internet wireless control utility",
+      "Most Similar TLDR Task": "Display your wifi stations",
+      "Most Similar TLDR Script": "iwctl station list",
+      "Top-3 Similar Questions": [
+        "ul_283722: How to connect to wifi from command line?",
+        "ul_477488: Connect to wifi from command line on linux systems through the iwd (wireless daemon for linux)"
+      ],
+      "Top-3 Scripts": [
+        "ul_283722: ",
+        "ul_477488: iwctl station wlp8s0 scan\niwctl station wlp8s0 get-networks\n\niwctl station <INTERFACE> connect \"SSID\"\n\niwctl station wlp8s0 connect \"My SSID\"\ndhclient\n\n$ cat /usr/local/enable-wifi.sh\n\n#!/bin/bash\niwctl station wlan0 connect \"My SSID\" \ndhclient"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "wpa_supplicant",
+      "MP Summary": "Wi-Fi Protected Access client and IEEE 802.1X supplicant",
+      "Most Similar TLDR Task": "Join a protected wireless network and run it in a daemon",
+      "Most Similar TLDR Script": "wpa_supplicant -B -i {{interface}} -c {{path/to/wpa_supplicant_conf.conf}}",
+      "Top-3 Similar Questions": [
+        "ul_250562: Auto Connect to any Open WiFi network via CLI Command Line",
+        "ul_283722: How to connect to wifi from command line?",
+        "ul_263826: Is that possible for debian users to connect to network through systemd-networkd?"
+      ],
+      "Top-3 Scripts": [
+        "ul_250562: ##Wireless NIC\nallow-hotplug wlan0\niface wlan0 inet manual\nwpa-roam /etc/wpa_supplicant/wpa_supplicant.conf\niface open_wifi inet dhcp\n\nctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev\nupdate_config=1\n\n##Open_Wifi\nnetwork={\n    ssid=\"\"\n    key_mgmt=NONE\n    id_str=\"open_wifi\"\n}\n\nwpa_supplicant -d -i wlan0 -c /etc/wpa_supplicant/wpa_supplicant.conf -D wext",
+        "ul_283722: sudo ip link set wlan0 down\nsudo ip link set wlan0 up\nsudo wpa_supplicant -B -iwlan0 -c /etc/wpa_supplicant.conf -Dnl80211,wext\nsudo dhclient wlan0\n\nwpa_supplicant -B -i wlan0 -c <(wpa_passphrase \"Your_SSID\" Your_passphrase) && dhclient wlan0",
+        "ul_263826: sudo -i\necho \"ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=sudo\" > /etc/wpa_supplicant/wpa_supplicant-wlan0.conf\nwpa_passphrase SSID password >> /etc/wpa_supplicant/wpa_supplicant-wlan0.conf"
+      ],
+      "Explanations about Options": {
+        "-d": "Increase debugging verbosity (-dd even more).",
+        "-D": "Driver to use (can be multiple drivers: nl80211,wext). (Per interface, see the\n available options below.)",
+        "-B": "Run daemon in the background.",
+        "-i": "Interface to listen on. Multiple instances of this option can be present, one per\n interface, separated by -N option (see below).",
+        "-c": "Path to configuration file. (Per interface)"
+      }
+    },
+    {
+      "Command": "wpa_cli",
+      "MP Summary": "WPA command line client",
+      "Most Similar TLDR Task": "Add a network",
+      "Most Similar TLDR Script": "wpa_cli add_network {{number}}",
+      "Top-3 Similar Questions": [
+        "ul_250562: Auto Connect to any Open WiFi network via CLI Command Line",
+        "ul_283722: How to connect to wifi from command line?",
+        "ul_400901: Connect to WEP/WPA without nmcli?"
+      ],
+      "Top-3 Scripts": [
+        "ul_250562: sudo ifconfig wlan0 down && sudo ifconfig wlan0 up && sudo wpa_cli -i wlan0 status",
+        "ul_283722: ",
+        "ul_400901: wpa_cli -p/var/run/wpa_supplicant OPTION\n\nman wpa_cli\n\nwpa_cli --help"
+      ],
+      "Explanations about Options": {
+        "-i": "Specify the interface that is being configured. By default, choose the first\n interface found with a control socket in the socket path."
+      }
+    },
+    {
+      "Command": "ifconfig",
+      "MP Summary": "configure network interfaces",
+      "Most Similar TLDR Task": "View network settings of an ethernet adapter",
+      "Most Similar TLDR Script": "ifconfig eth0",
+      "Top-3 Similar Questions": [
+        "ul_250562: Auto Connect to any Open WiFi network via CLI Command Line",
+        "au_461825: How to connect to WiFi from the command line?",
+        "ul_295238: How to connect to device via SSH over direct ethernet connection"
+      ],
+      "Top-3 Scripts": [
+        "ul_250562: sudo ifconfig wlan0 down && sudo ifconfig wlan0 up && sudo wpa_cli -i wlan0 status",
+        "au_461825: ifconfig -a",
+        "ul_295238: sudo ifconfig eth2 192.168.9.1"
+      ],
+      "Explanations about Options": {
+        "-a": "Display all available interfaces."
+      }
+    }
+  ]
+}

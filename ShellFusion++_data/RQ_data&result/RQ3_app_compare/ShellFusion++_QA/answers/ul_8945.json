@@ -1,0 +1,70 @@
+{
+  "Query": "How can I increase open files limit for all processes?",
+  "Answers": [
+    {
+      "Command": "ulimit",
+      "Top-3 Similar Questions": [
+        "au_162229: How do I increase the open files limit for a non-root user?",
+        "so_17755433: How can I increase OpenFabrics memory limit for Torque jobs?",
+        "ul_161724: Daemon's open file limit is reached even though the system limits have been increased"
+      ],
+      "Top-3 Scripts": [
+        "au_162229: ulimit -S\n\nalias ulimit='ulimit -S'",
+        "so_17755433: ulimit -l\n\nulimit -c unlimited",
+        "ul_161724: ulimit -n"
+      ]
+    },
+    {
+      "Command": "echo",
+      "Top-3 Similar Questions": [
+        "so_30746009: How can I figure out which process is opening the certain tcp port?",
+        "so_47502044: Why is array size not increased while looping?",
+        "ul_463030: how can I increase the performance for below code"
+      ],
+      "Top-3 Scripts": [
+        "so_47502044: a=(1)\n# this only loops once since there is only one line...\nwhile read f; do    \n    a+=(\"$f\")\ndone < <(echo \"1 2 3 4\")    # < <(process substitution)\necho \"${a[@]}\"\n# 1 1 2 3 4\n\necho \"${a[@]}\"\n\n#!/bin/bash\nlines=(\"Top\")\necho \"Line 1\nLine 2\nLine 3\" | while read -r line; do\n    lines+=(\"$line\")\n    declare -p lines\ndone \ndeclare -p lines\n\nlines=(\"Top\")\nwhile read -r line; do\n    lines+=(\"$line\")\n    declare -p lines\ndone < <(echo \"Line 1\nLine 2\nLine 3\")\ndeclare -p lines",
+        "ul_463030: #!/usr/bin/ksh\n#\nwhile IFS='|' read n x\ndo\n    base62=\"$(echo \"obase=62; $x\" | bc | sed -re 's/ 0/ /g' -e 's/^ //')\"\n    printf \"%d|%s|%s\\n\" $n \"$x\" \"$base62\"\ndone <base62_while.txt >>base62_while.out",
+        "so_21752067: cd /proc\nfor pid in [0-9]*\ndo\n    echo \"PID = $pid with $(ls /proc/$pid/fd/ | wc -l) file descriptors\"\ndone\n\nfind /proc -maxdepth 1 -type d -name '[0-9]*' \\\n     -exec bash -c \"ls {}/fd/ | wc -l | tr '\\n' ' '\" \\; \\\n     -printf \"fds (PID = %P), command: \" \\\n     -exec bash -c \"tr '\\0' ' ' < {}/cmdline\" \\; \\\n     -exec echo \\; | sort -rn | head"
+      ]
+    },
+    {
+      "Command": "read",
+      "Top-3 Similar Questions": [
+        "so_30746009: How can I figure out which process is opening the certain tcp port?",
+        "so_47502044: Why is array size not increased while looping?",
+        "ul_463030: how can I increase the performance for below code"
+      ],
+      "Top-3 Scripts": [
+        "so_47502044: a=(1)\n# this only loops once since there is only one line...\nwhile read f; do    \n    a+=(\"$f\")\ndone < <(echo \"1 2 3 4\")    # < <(process substitution)\necho \"${a[@]}\"\n# 1 1 2 3 4\n\n#!/bin/bash\nlines=(\"Top\")\necho \"Line 1\nLine 2\nLine 3\" | while read -r line; do\n    lines+=(\"$line\")\n    declare -p lines\ndone \ndeclare -p lines\n\nlines=(\"Top\")\nwhile read -r line; do\n    lines+=(\"$line\")\n    declare -p lines\ndone < <(echo \"Line 1\nLine 2\nLine 3\")\ndeclare -p lines",
+        "ul_463030: #!/usr/bin/ksh\n#\nwhile IFS='|' read n x\ndo\n    base62=\"$(echo \"obase=62; $x\" | bc | sed -re 's/ 0/ /g' -e 's/^ //')\"\n    printf \"%d|%s|%s\\n\" $n \"$x\" \"$base62\"\ndone <base62_while.txt >>base62_while.out",
+        "so_21752067: ...\ndone | sort -rn -k5 | head | while read -r _ _ pid _ fdcount _\ndo\n  command=$(ps -o cmd -p \"$pid\" -hc)\n  printf \"pid = %5d with %4d fds: %s\\n\" \"$pid\" \"$fdcount\" \"$command\"\ndone"
+      ]
+    },
+    {
+      "Command": "fd",
+      "Top-3 Similar Questions": [
+        "ul_514070: How can you figure out which program/process is creating a file?",
+        "so_30746009: How can I figure out which process is opening the certain tcp port?",
+        "so_69521315: why open file descriptors are not getting reused instead they are increasing in number value"
+      ],
+      "Top-3 Scripts": [
+        "ul_514070: # sysdig fd.name=/tmp/example.txt\n567335 16:18:39.654437223 0 touch (5470) < openat fd=3(<f>/tmp/example.txt) dirfd=-100(AT_FDCWD) name=/tmp/example.txt flags=70(O_NONBLOCK|O_CREAT|O_WRONLY) mode=0666\n567336 16:18:39.654438248 0 touch (5470) > dup fd=3(<f>/tmp/example.txt)\n567337 16:18:39.654438592 0 touch (5470) < dup res=0(<f>/tmp/example.txt)\n567338 16:18:39.654439629 0 touch (5470) > close fd=3(<f>/tmp/example.txt)\n567339 16:18:39.654439764 0 touch (5470) < close res=0\n567342 16:18:39.654441958 0 touch (5470) > close fd=0(<f>/tmp/example.txt)\n567343 16:18:39.654442111 0 touch (5470) < close res=0",
+        "so_30746009: /proc/*/fd/\n\n/proc/*/fd/*",
+        "so_69521315: ls -la /proc/$$/fd"
+      ]
+    },
+    {
+      "Command": "dev",
+      "Top-3 Similar Questions": [
+        "au_728465: How can I increase Ubuntu's 143-byte file name limit for encrypted directories?",
+        "au_406438: How to increase space for installing programs",
+        "ul_229529: Increase FIFO size limit"
+      ],
+      "Top-3 Scripts": [
+        "au_728465: getconf NAME_MAX /dev/sda\n getconf PATH_MAX /dev/sda",
+        "au_406438: /dev/sda1\n\ndev/sda6\n\n/dev/sda5\n\ndev/sda5\n\n/dev/sda6",
+        "ul_229529: perl -MFcntl -e 'fcntl(STDIN, 1031, 1048576) or die $!' <> /dev/xconsole\n\n/dev/xconsole"
+      ]
+    }
+  ]
+}

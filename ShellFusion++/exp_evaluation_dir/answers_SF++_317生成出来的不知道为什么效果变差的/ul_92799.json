@@ -1,0 +1,864 @@
+{
+  "Query": "Connecting to wifi network through command line",
+  "Answers": [
+    {
+      "Command": "iw",
+      "MP Summary": "show / manipulate wireless devices and their configuration",
+      "Most Similar TLDR Task": "Join an open wireless network",
+      "Most Similar TLDR Script": "iw dev {{wlp}} connect {{SSID}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "ul_283722: How to connect to wifi from command line?",
+        "au_138472: How do I connect to a WPA wifi network using the command line?",
+        "ul_400901: Connect to WEP/WPA without nmcli?"
+      ],
+      "Top-3 Scripts": [
+        "ul_283722: ",
+        "au_138472: ",
+        "ul_400901: touch /etc/wpa_supplicant/wpa_supplicant.conf\necho ctrl_interface=/run/wpa_supplicant > /etc/wpa_supplicant/wpa_supplicant.conf\necho update_config=1 >> /etc/wpa_supplicant/wpa_supplicant.conf\nwpa_passphrase \"Your_SSID\" Your_PASSWORD >> /etc/wpa_supplicant/wpa_supplicant.conf\ni=$(iw dev | grep Interface | awk '{ print $2}')\nkillall wpa_supplicant\nwpa_supplicant -i $i -c/etc/wpa_supplicant/wpa_supplicant.conf -B\ndhclient $i\n\ni=$(iw dev | grep Interface | awk '{ print $2}')\nkillall wpa_supplicant\nwpa_supplicant -i $i -c/etc/wpa_supplicant/wpa_supplicant.conf -B\ndhclient $i\n\niw dev <interface> connect \"Your_SSID\" key 0:WEP_KEY"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "wpa_cli",
+      "MP Summary": "WPA command line client",
+      "Most Similar TLDR Task": "Add a network",
+      "Most Similar TLDR Script": "wpa_cli add_network {{number}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "ul_250562: Auto Connect to any Open WiFi network via CLI Command Line",
+        "ul_283722: How to connect to wifi from command line?",
+        "ul_400901: Connect to WEP/WPA without nmcli?"
+      ],
+      "Top-3 Scripts": [
+        "ul_250562: sudo ifconfig wlan0 down && sudo ifconfig wlan0 up && sudo wpa_cli -i wlan0 status",
+        "ul_283722: ",
+        "ul_400901: wpa_cli -p/var/run/wpa_supplicant OPTION\n\nman wpa_cli\n\nwpa_cli --help"
+      ],
+      "Explanations about Options": {
+        "-i": "Specify the interface that is being configured. By default, choose the first\n interface found with a control socket in the socket path."
+      }
+    },
+    {
+      "Command": "ifconfig",
+      "MP Summary": "configure network interfaces",
+      "Most Similar TLDR Task": "View network settings of an ethernet adapter",
+      "Most Similar TLDR Script": "ifconfig eth0",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "ul_250562: Auto Connect to any Open WiFi network via CLI Command Line",
+        "au_461825: How to connect to WiFi from the command line?",
+        "su_261818: How can I list all IPs in the connected network, through Terminal preferably?"
+      ],
+      "Top-3 Scripts": [
+        "ul_250562: sudo ifconfig wlan0 down && sudo ifconfig wlan0 up && sudo wpa_cli -i wlan0 status",
+        "au_461825: ifconfig -a",
+        "su_261818: "
+      ],
+      "Explanations about Options": {
+        "-a": "Display all available interfaces."
+      }
+    },
+    {
+      "Command": "wpa_supplicant",
+      "MP Summary": "Wi-Fi Protected Access client and IEEE 802.1X supplicant",
+      "Most Similar TLDR Task": "Join a protected wireless network and run it in a daemon",
+      "Most Similar TLDR Script": "wpa_supplicant -B -i {{interface}} -c {{path/to/wpa_supplicant_conf.conf}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "ul_250562: Auto Connect to any Open WiFi network via CLI Command Line",
+        "ul_283722: How to connect to wifi from command line?",
+        "ul_263826: Is that possible for debian users to connect to network through systemd-networkd?"
+      ],
+      "Top-3 Scripts": [
+        "ul_250562: ##Wireless NIC\nallow-hotplug wlan0\niface wlan0 inet manual\nwpa-roam /etc/wpa_supplicant/wpa_supplicant.conf\niface open_wifi inet dhcp\n\nctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev\nupdate_config=1\n\n##Open_Wifi\nnetwork={\n    ssid=\"\"\n    key_mgmt=NONE\n    id_str=\"open_wifi\"\n}\n\nwpa_supplicant -d -i wlan0 -c /etc/wpa_supplicant/wpa_supplicant.conf -D wext",
+        "ul_283722: sudo ip link set wlan0 down\nsudo ip link set wlan0 up\nsudo wpa_supplicant -B -iwlan0 -c /etc/wpa_supplicant.conf -Dnl80211,wext\nsudo dhclient wlan0\n\nwpa_supplicant -B -i wlan0 -c <(wpa_passphrase \"Your_SSID\" Your_passphrase) && dhclient wlan0",
+        "ul_263826: sudo -i\necho \"ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=sudo\" > /etc/wpa_supplicant/wpa_supplicant-wlan0.conf\nwpa_passphrase SSID password >> /etc/wpa_supplicant/wpa_supplicant-wlan0.conf"
+      ],
+      "Explanations about Options": {
+        "-d": "Increase debugging verbosity (-dd even more).",
+        "-D": "Driver to use (can be multiple drivers: nl80211,wext). (Per interface, see the\n available options below.)",
+        "-c": "Path to configuration file. (Per interface)",
+        "-B": "Run daemon in the background.",
+        "-i": "Interface to listen on. Multiple instances of this option can be present, one per\n interface, separated by -N option (see below)."
+      }
+    },
+    {
+      "Command": "iwctl",
+      "MP Summary": "Internet wireless control utility",
+      "Most Similar TLDR Task": "Display your wifi stations",
+      "Most Similar TLDR Script": "iwctl station list",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "ul_283722: How to connect to wifi from command line?",
+        "ul_477488: Connect to wifi from command line on linux systems through the iwd (wireless daemon for linux)"
+      ],
+      "Top-3 Scripts": [
+        "ul_283722: ",
+        "ul_477488: iwctl station wlp8s0 scan\niwctl station wlp8s0 get-networks\n\niwctl station <INTERFACE> connect \"SSID\"\n\niwctl station wlp8s0 connect \"My SSID\"\ndhclient\n\n$ cat /usr/local/enable-wifi.sh\n\n#!/bin/bash\niwctl station wlan0 connect \"My SSID\" \ndhclient"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "iwconfig",
+      "MP Summary": "configure a wireless network interface",
+      "Most Similar TLDR Task": "Set the ESSID (network name) of the specified interface (e.g., eth0 or wlp2s0)",
+      "Most Similar TLDR Script": "iwconfig {{interface}} {{new_network_name}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "ul_400901: Connect to WEP/WPA without nmcli?",
+        "au_1032804: Connecting to Wifi on terminal of Kubuntu 17.10"
+      ],
+      "Top-3 Scripts": [
+        "ul_400901: iwconfig <interface> essid \"Your_SSID\" key WEP_KEY",
+        "au_1032804: sudo iwconfig wlp7s0 essid \"ABCD1234\" key s:abcd1"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "dhclient",
+      "MP Summary": "Dynamic Host Configuration Protocol Client",
+      "Most Similar TLDR Task": "Get an IP address for the `eth0` interface",
+      "Most Similar TLDR Script": "sudo dhclient {{eth0}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "ul_250562: Auto Connect to any Open WiFi network via CLI Command Line",
+        "ul_283722: How to connect to wifi from command line?",
+        "ul_477488: Connect to wifi from command line on linux systems through the iwd (wireless daemon for linux)"
+      ],
+      "Top-3 Scripts": [
+        "ul_250562: dhclient wlan0",
+        "ul_283722: sudo ip link set wlan0 down\nsudo ip link set wlan0 up\nsudo wpa_supplicant -B -iwlan0 -c /etc/wpa_supplicant.conf -Dnl80211,wext\nsudo dhclient wlan0\n\nwpa_supplicant -B -i wlan0 -c <(wpa_passphrase \"Your_SSID\" Your_passphrase) && dhclient wlan0",
+        "ul_477488: iwctl station wlp8s0 connect \"My SSID\"\ndhclient\n\n$ cat /usr/local/enable-wifi.sh\n\n#!/bin/bash\niwctl station wlan0 connect \"My SSID\" \ndhclient"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "nmcli",
+      "MP Summary": "command-line tool for controlling NetworkManager",
+      "Most Similar TLDR Task": "Execute an `nmcli` command",
+      "Most Similar TLDR Script": "nmcli {{command}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "ul_283722: How to connect to wifi from command line?",
+        "au_461825: How to connect to WiFi from the command line?",
+        "au_362370: How to connect to a network from terminal"
+      ],
+      "Top-3 Scripts": [
+        "ul_283722: nmcli d wifi connect Your_SSID password Your_Psswd_here ifname Your_interface\n\nnmcli d wifi connect MYSSID password 12345678 ifname wlan0",
+        "au_461825: nmcli c\n\nnmcli d wifi list\n\n##disconnect\nnmcli d disconnect <WifiInterface>\n\n##connect\nnmcli d connect <WifiInterface>\n\n##disconnect\nnmcli c down <SavedWiFiConn>\n\n##connect\nnmcli c up <SavedWiFiConn>\n\n##disconnect\nnmcli d disconnect iface <WifiInterface>\n\n##connect\nnmcli d wifi connect <WiFiSSID> password <WiFiPassword> iface <WifiInterface>\n\n##disconnect:\nnmcli c down id <SavedWiFiConn>\n\n##connect:\nnmcli c up id <SavedWiFiConn>\n\nnmcli -a c up <SavedWiFiConn>\n\nman nmcli",
+        "au_362370: nmcli connection\n\nyjwong@yjwong-laptop:~/Documents/searchagram/build$ nmcli connection\nNAME       UUID                                   TYPE              TIMESTAMP-REAL                    \nWong       6944f99a-21d2-4dd9-8ac4-a140e1024970   802-11-wireless   Fri 27 Sep 2013 04:26:04 PM\nrpi        8084e8bd-c52c-4954-8721-0dac198604b7   802-11-wireless   Wed 01 May 2013 04:33:58 AM\nAndroidAP  bb3e5a13-98e5-46eb-bfb4-c294f8757070   802-11-wireless   Mon 04 Nov 2013 05:01:11 PM\n...\n\nnmcli connection up Wong\n\nnmcli connection up \"EVDO Connection\""
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "sudo",
+      "MP Summary": "execute a command as another user",
+      "Most Similar TLDR Task": "Run a command as another user and/or group",
+      "Most Similar TLDR Script": "sudo -u {{user}} -g {{group}} {{id -a}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "ul_250562: Auto Connect to any Open WiFi network via CLI Command Line",
+        "ul_283722: How to connect to wifi from command line?",
+        "au_461825: How to connect to WiFi from the command line?"
+      ],
+      "Top-3 Scripts": [
+        "ul_250562: sudo ifconfig wlan0 down && sudo ifconfig wlan0 up && sudo wpa_cli -i wlan0 status",
+        "ul_283722: sudo ip link set wlan0 down\nsudo ip link set wlan0 up\nsudo wpa_supplicant -B -iwlan0 -c /etc/wpa_supplicant.conf -Dnl80211,wext\nsudo dhclient wlan0",
+        "au_461825: sudo iwlist <WifiInterface> scanning"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "arp-scan",
+      "MP Summary": "The ARP scanner",
+      "Most Similar TLDR Task": "Scan the current local network",
+      "Most Similar TLDR Script": "arp-scan --localnet",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "su_261818: How can I list all IPs in the connected network, through Terminal preferably?",
+        "au_568818: How to get all mac addresses of the pcs connected to my wifi... from my wifi connected ubuntu?"
+      ],
+      "Top-3 Scripts": [
+        "su_261818: sudo apt-get install arp-scan\n\nsudo arp-scan --interface=eth0 --localnet",
+        "au_568818: sudo arp-scan --interface=wlan0 --localnet"
+      ],
+      "Explanations about Options": {
+        "--interface": "Use network interface <s>. If this option is not specified, arp-scan will search\n the system interface list for the lowest numbered, configured up interface\n (excluding loopback). The interface specified must support ARP."
+      }
+    },
+    {
+      "Command": "ip",
+      "MP Summary": "show / manipulate routing, network devices, interfaces and tunnels",
+      "Most Similar TLDR Task": "List interfaces with brief network layer info",
+      "Most Similar TLDR Script": "ip -brief address",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "ul_283722: How to connect to wifi from command line?",
+        "ul_7967: How to connect a KVM guest to the internet with wireless"
+      ],
+      "Top-3 Scripts": [
+        "ul_283722: sudo ip link set wlan0 down\nsudo ip link set wlan0 up\nsudo wpa_supplicant -B -iwlan0 -c /etc/wpa_supplicant.conf -Dnl80211,wext\nsudo dhclient wlan0\n\nip addr add IP-ADDRESSE/24 dev wlan0\nip route add default via ROUTE",
+        "ul_7967: ifconfig eth0 10.0.0.2 up\nip route add default via 10.0.0.1 dev eth0"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "ping",
+      "MP Summary": "send ICMP ECHO_REQUEST to network hosts",
+      "Most Similar TLDR Task": "Ping host",
+      "Most Similar TLDR Script": "ping {{host}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "au_704480: Can't connect to wifi with static IP on Ubuntu server"
+      ],
+      "Top-3 Scripts": [
+        "au_704480: ping -c3 10.1.1.1"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "echo",
+      "MP Summary": "display a line of text",
+      "Most Similar TLDR Task": "Append a message to the file",
+      "Most Similar TLDR Script": "echo \"{{Hello World}}\" >> {{file.txt}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "ul_394551: How to connect to the internet through another PC?",
+        "ul_263826: Is that possible for debian users to connect to network through systemd-networkd?",
+        "ul_400901: Connect to WEP/WPA without nmcli?"
+      ],
+      "Top-3 Scripts": [
+        "ul_394551: echo \"nameserver 8.8.8.8\" >> /etc/resolv.conf\n\niptables -P FORWARD ACCEPT\niptables --table nat -A POSTROUTING -o eth1 -j MASQUERADE\niptables --table nat --append POSTROUTING --jump MASQUERADE --source 192.168.10.10/24 \niptables-save > /root/clients.fw\necho \"/sbin/iptables-restore < /root/clients.fw\" >> /etc/rc.local",
+        "ul_263826: sudo -i\necho \"ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=sudo\" > /etc/wpa_supplicant/wpa_supplicant-wlan0.conf\nwpa_passphrase SSID password >> /etc/wpa_supplicant/wpa_supplicant-wlan0.conf",
+        "ul_400901: touch /etc/wpa_supplicant/wpa_supplicant.conf\necho ctrl_interface=/run/wpa_supplicant > /etc/wpa_supplicant/wpa_supplicant.conf\necho update_config=1 >> /etc/wpa_supplicant/wpa_supplicant.conf\nwpa_passphrase \"Your_SSID\" Your_PASSWORD >> /etc/wpa_supplicant/wpa_supplicant.conf\ni=$(iw dev | grep Interface | awk '{ print $2}')\nkillall wpa_supplicant\nwpa_supplicant -i $i -c/etc/wpa_supplicant/wpa_supplicant.conf -B\ndhclient $i"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "route",
+      "MP Summary": "show / manipulate the IP routing table",
+      "Most Similar TLDR Task": "Add route rule",
+      "Most Similar TLDR Script": "sudo route add -net {{ip_address}} netmask {{netmask_address}} gw {{gw_address}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "ul_283722: How to connect to wifi from command line?",
+        "au_935263: Connect to connected OpenVPN client from different subnet",
+        "ul_7967: How to connect a KVM guest to the internet with wireless"
+      ],
+      "Top-3 Scripts": [
+        "ul_283722: ip addr add IP-ADDRESSE/24 dev wlan0\nip route add default via ROUTE",
+        "au_935263: #!/bin/bash\nroute add -net 192.168.2.0 netmask 255.255.255.0 gw 192.168.1.1",
+        "ul_7967: ifconfig eth0 10.0.0.2 up\nip route add default via 10.0.0.1 dev eth0"
+      ],
+      "Explanations about Options": {
+        "-net": "the target is a network."
+      }
+    },
+    {
+      "Command": "apt-get",
+      "MP Summary": "APT package handling utility - command-line interface",
+      "Most Similar TLDR Task": "Update the list of available packages and versions (it's recommended to run this before other `apt-get` commands)",
+      "Most Similar TLDR Script": "apt-get update",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "au_138472: How do I connect to a WPA wifi network using the command line?",
+        "su_261818: How can I list all IPs in the connected network, through Terminal preferably?",
+        "au_553155: Unable to connect to mixed b/g/n wifi network on Ubuntu"
+      ],
+      "Top-3 Scripts": [
+        "au_138472: sudo apt-get install wpasupplicant",
+        "su_261818: sudo apt-get install arp-scan",
+        "au_553155: sudo apt-get purge bcmwl-kernel-source"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "apt",
+      "MP Summary": "command-line interface",
+      "Most Similar TLDR Task": "Update the list of available packages and versions (it's recommended to run this before other `apt` commands)",
+      "Most Similar TLDR Script": "sudo apt update",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "au_1340628: Wifi stopped connecting to some networks after upgrade to 20.04",
+        "ul_395161: Debian 8 (Jessie): Unable to connect to WIFI after update"
+      ],
+      "Top-3 Scripts": [
+        "au_1340628: sudo apt install --reinstall resolvconf network-manager libnss-resolve",
+        "ul_395161: /etc/apt/sources.list"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "rfkill",
+      "MP Summary": "tool for enabling and disabling wireless devices",
+      "Most Similar TLDR Task": "Unblock devices by type (e.g. bluetooth, wlan)",
+      "Most Similar TLDR Script": "rfkill unblock {{wlan}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "au_189836: Unable to connect to WiFi network after updates"
+      ],
+      "Top-3 Scripts": [
+        "au_189836: rfkill list wlan     (for wifi)\n\nrfkill list all             (for wifi and bluetooth)\n\nrfkill unblock wlan     (for wifi)\n\nrfkill unblock all             (for wifi and bluetooth)"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "wpa_passphrase",
+      "MP Summary": "Generate a WPA PSK from an ASCII passphrase for a SSID",
+      "Most Similar TLDR Task": "Compute and display the WPA-PSK key for a given SSID reading the passphrase from stdin",
+      "Most Similar TLDR Script": "wpa_passphrase {{SSID}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "ul_283722: How to connect to wifi from command line?",
+        "ul_263826: Is that possible for debian users to connect to network through systemd-networkd?",
+        "ul_400901: Connect to WEP/WPA without nmcli?"
+      ],
+      "Top-3 Scripts": [
+        "ul_283722: wpa_passphrase \"Your_SSID\" Your_passwd\n\nwpa_passphrase \"Your_SSID\" Your_passwd > /etc/wpa_supplicant.conf\n\nwpa_supplicant -B -i wlan0 -c <(wpa_passphrase \"Your_SSID\" Your_passphrase) && dhclient wlan0",
+        "ul_263826: sudo -i\necho \"ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=sudo\" > /etc/wpa_supplicant/wpa_supplicant-wlan0.conf\nwpa_passphrase SSID password >> /etc/wpa_supplicant/wpa_supplicant-wlan0.conf",
+        "ul_400901: touch /etc/wpa_supplicant/wpa_supplicant.conf\necho ctrl_interface=/run/wpa_supplicant > /etc/wpa_supplicant/wpa_supplicant.conf\necho update_config=1 >> /etc/wpa_supplicant/wpa_supplicant.conf\nwpa_passphrase \"Your_SSID\" Your_PASSWORD >> /etc/wpa_supplicant/wpa_supplicant.conf\ni=$(iw dev | grep Interface | awk '{ print $2}')\nkillall wpa_supplicant\nwpa_supplicant -i $i -c/etc/wpa_supplicant/wpa_supplicant.conf -B\ndhclient $i"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "man",
+      "MP Summary": "an interface to the system reference manuals",
+      "Most Similar TLDR Task": "Display the man page for a command from section 7",
+      "Most Similar TLDR Script": "man {{command}}.{{7}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "au_461825: How to connect to WiFi from the command line?",
+        "au_659868: Is there a way to access the WiFi connection through the shell?",
+        "ul_400901: Connect to WEP/WPA without nmcli?"
+      ],
+      "Top-3 Scripts": [
+        "au_461825: man nmcli",
+        "au_659868: man nmcli",
+        "ul_400901: man wpa_cli"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "service",
+      "MP Summary": "run a System V init script",
+      "Most Similar TLDR Task": "Do a full restart (runs script twice with start and stop)",
+      "Most Similar TLDR Script": "service {{service_name}} --full-restart",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "au_189836: Unable to connect to WiFi network after updates",
+        "au_935263: Connect to connected OpenVPN client from different subnet"
+      ],
+      "Top-3 Scripts": [
+        "au_189836: sudo service network-manager restart",
+        "au_935263: sudo service openvpn stop\n\nsudo service openvpn start"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "modprobe",
+      "MP Summary": "Add and remove modules from the Linux Kernel",
+      "Most Similar TLDR Task": "Load a module into the kernel",
+      "Most Similar TLDR Script": "sudo modprobe {{module_name}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "au_983107: Cannot connect to wireless after running command",
+        "au_842228: Problems connecting to wifi on Lubuntu 14.04",
+        "ul_108320: Unable to reconnect to a WiFi network on Fedora 20?"
+      ],
+      "Top-3 Scripts": [
+        "au_983107: sudo modprobe iwlwifi\nsudo modprobe iwldvm",
+        "au_842228: sudo mkdir /lib/firmware/b43\nsudo cp Desktop/b43/* /lib/firmware/b43\nsudo modprobe -rf b43\nsudo modprobe -rf ssb\nsudo modprobe b43",
+        "ul_108320: $ git clone http://github.com/lwfinger/rtlwifi_new.git\n$ cd rtlwifi_new\n$ make\n$ sudo modprobe -rv rtl8188ee\n$ sudo make install\n$ sudo modprobe -v rtl8188ee"
+      ],
+      "Explanations about Options": {
+        "-r": "This option causes modprobe to remove rather than insert a module. If the modules it\n depends on are also unused, modprobe will try to remove them too. Unlike insertion,\n more than one module can be specified on the command line (it does not make sense to\n specify module parameters when removing modules).",
+        "-f": "Try to strip any versioning information from the module which might otherwise stop it\n from loading: this is the same as using both --force-vermagic and --force-modversion.\n Naturally, these checks are there for your protection, so using this option is\n dangerous unless you know what you are doing.",
+        "-v": "Print messages about what the program is doing. Usually modprobe only prints messages\n if something goes wrong."
+      }
+    },
+    {
+      "Command": "openvpn",
+      "MP Summary": "secure IP tunnel daemon.",
+      "Most Similar TLDR Task": "Connect to server using a config file",
+      "Most Similar TLDR Script": "sudo openvpn {{path/to/client.conf}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "au_935263: Connect to connected OpenVPN client from different subnet"
+      ],
+      "Top-3 Scripts": [
+        "au_935263: sudo service openvpn stop\n\nsudo nano /etc/openvpn/up-route.sh\n\n/etc/openvpn/vpn.conf\n\nsudo service openvpn start"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "ssh",
+      "MP Summary": "OpenSSH SSH client (remote login program)",
+      "Most Similar TLDR Task": "Connect to a remote server",
+      "Most Similar TLDR Script": "ssh {{username}}@{{remote_host}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "ul_7967: How to connect a KVM guest to the internet with wireless"
+      ],
+      "Top-3 Scripts": [
+        "ul_7967: ssh 127.0.0.1 -p 2222\n\nssh 10.0.0.1"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "gedit",
+      "MP Summary": "text editor for the GNOME Desktop",
+      "Most Similar TLDR Task": "Open a text file",
+      "Most Similar TLDR Script": "gedit {{path/to/file}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "au_983107: Cannot connect to wireless after running command"
+      ],
+      "Top-3 Scripts": [
+        "au_983107: sudo gedit /etc/modprobe.d/iwlwifi.conf"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "systemctl",
+      "MP Summary": "Control the systemd system and service manager",
+      "Most Similar TLDR Task": "Start/Stop/Restart/Reload a service",
+      "Most Similar TLDR Script": "systemctl start/stop/restart/reload {{unit}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "ul_263826: Is that possible for debian users to connect to network through systemd-networkd?"
+      ],
+      "Top-3 Scripts": [
+        "ul_263826: sudo systemctl disable NetworkManager\n\nsudo systemctl enable systemd-networkd\n\nsudo systemctl enable systemd-resolved\nsudo systemctl start systemd-resolved\n\nsystemctl restart systemd-networkd\n\nroot@root:~# sudo systemctl status systemd-networkd"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "xargs",
+      "MP Summary": "build and execute command lines from standard input",
+      "Most Similar TLDR Task": "Run a command using the input data as arguments",
+      "Most Similar TLDR Script": "{{arguments_source}} | xargs {{command}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "au_142336: How do I connect to available networks from the command-line?"
+      ],
+      "Top-3 Scripts": [
+        "au_142336: ifconfig -a | grep --only-matching -i \"^\\w\\+\" | xargs -l1 sudo dhclient"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "id",
+      "MP Summary": "print real and effective user and group IDs",
+      "Most Similar TLDR Task": "Display current user's id (UID), group id (GID) and groups to which they belong",
+      "Most Similar TLDR Script": "id",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "au_461825: How to connect to WiFi from the command line?",
+        "au_59641: How to establish wireless connection from command line?",
+        "au_885896: Make sure Ubuntu is connected to right wifi or reconnect to right wifi using a script"
+      ],
+      "Top-3 Scripts": [
+        "au_461825: ##disconnect:\nnmcli c down id <SavedWiFiConn>\n\n##connect:\nnmcli c up id <SavedWiFiConn>",
+        "au_59641: nmcli con up id 'my.net.work'",
+        "au_885896: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "cat",
+      "MP Summary": "concatenate files and print on the standard output",
+      "Most Similar TLDR Task": "Number all output lines",
+      "Most Similar TLDR Script": "cat -n {{file}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "ul_320428: How can I share my WiFi connection through Bluetooth?",
+        "ul_477488: Connect to wifi from command line on linux systems through the iwd (wireless daemon for linux)",
+        "ul_125263: How to connect to wifi on a Gnome 2.24.1 system?"
+      ],
+      "Top-3 Scripts": [
+        "ul_320428: $ cat /etc/issue\nUbuntu 17.10 \\n \\l",
+        "ul_477488: $ cat My\\ SSID.psk\n[Security]\nPreSharedKey=8e1e64a6ecaf2b5e0aa29816547af300d7f3b0473bbfa56ddb5514ad4683804c\n\n$ cat /usr/local/enable-wifi.sh\n\n#!/bin/bash\niwctl station wlan0 connect \"My SSID\" \ndhclient",
+        "ul_125263: $ cat /etc/redhat-release \nFedora release 19 (Schr\u00f6dinger\u2019s Cat)"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "grep",
+      "MP Summary": "print lines that match patterns",
+      "Most Similar TLDR Task": "Print file name with the corresponding line number for each match",
+      "Most Similar TLDR Script": "grep -Hn {{search_pattern}} {{path/to/file}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "ul_400901: Connect to WEP/WPA without nmcli?",
+        "au_142336: How do I connect to available networks from the command-line?"
+      ],
+      "Top-3 Scripts": [
+        "ul_400901: touch /etc/wpa_supplicant/wpa_supplicant.conf\necho ctrl_interface=/run/wpa_supplicant > /etc/wpa_supplicant/wpa_supplicant.conf\necho update_config=1 >> /etc/wpa_supplicant/wpa_supplicant.conf\nwpa_passphrase \"Your_SSID\" Your_PASSWORD >> /etc/wpa_supplicant/wpa_supplicant.conf\ni=$(iw dev | grep Interface | awk '{ print $2}')\nkillall wpa_supplicant\nwpa_supplicant -i $i -c/etc/wpa_supplicant/wpa_supplicant.conf -B\ndhclient $i\n\ni=$(iw dev | grep Interface | awk '{ print $2}')\nkillall wpa_supplicant\nwpa_supplicant -i $i -c/etc/wpa_supplicant/wpa_supplicant.conf -B\ndhclient $i",
+        "au_142336: ifconfig -a | grep --only-matching -i \"^\\w\\+\" | xargs -l1 sudo dhclient"
+      ],
+      "Explanations about Options": {
+        "-i": "Ignore case distinctions in patterns and input data, so that characters that differ\n only in case match each other.",
+        "--only-matching": "Print only the matched (non-empty) parts of a matching line, with each such part on\n a separate output line."
+      }
+    },
+    {
+      "Command": "awk",
+      "MP Summary": "pattern scanning and processing language",
+      "Most Similar TLDR Task": "Print every third line starting from the first line",
+      "Most Similar TLDR Script": "awk 'NR%3==1' {{filename}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "ul_400901: Connect to WEP/WPA without nmcli?",
+        "au_885896: Make sure Ubuntu is connected to right wifi or reconnect to right wifi using a script"
+      ],
+      "Top-3 Scripts": [
+        "ul_400901: touch /etc/wpa_supplicant/wpa_supplicant.conf\necho ctrl_interface=/run/wpa_supplicant > /etc/wpa_supplicant/wpa_supplicant.conf\necho update_config=1 >> /etc/wpa_supplicant/wpa_supplicant.conf\nwpa_passphrase \"Your_SSID\" Your_PASSWORD >> /etc/wpa_supplicant/wpa_supplicant.conf\ni=$(iw dev | grep Interface | awk '{ print $2}')\nkillall wpa_supplicant\nwpa_supplicant -i $i -c/etc/wpa_supplicant/wpa_supplicant.conf -B\ndhclient $i\n\ni=$(iw dev | grep Interface | awk '{ print $2}')\nkillall wpa_supplicant\nwpa_supplicant -i $i -c/etc/wpa_supplicant/wpa_supplicant.conf -B\ndhclient $i",
+        "au_885896: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "link",
+      "MP Summary": "call the link function to create a link to a file",
+      "Most Similar TLDR Task": "Create a hard link from a new file to an existing file",
+      "Most Similar TLDR Script": "link {{path/to/existing_file}} {{path/to/new_file}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "ul_283722: How to connect to wifi from command line?"
+      ],
+      "Top-3 Scripts": [
+        "ul_283722: sudo ip link set wlan0 down\nsudo ip link set wlan0 up\nsudo wpa_supplicant -B -iwlan0 -c /etc/wpa_supplicant.conf -Dnl80211,wext\nsudo dhclient wlan0"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "host",
+      "MP Summary": "DNS lookup utility",
+      "Most Similar TLDR Task": "Lookup A, AAAA, and MX records of a domain",
+      "Most Similar TLDR Script": "host {{domain}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "ul_7967: How to connect a KVM guest to the internet with wireless"
+      ],
+      "Top-3 Scripts": [
+        "ul_7967: host=10.0.0.1"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "reboot",
+      "MP Summary": "Halt, power-off or reboot the machine",
+      "Most Similar TLDR Task": "Reboot immediately without gracefully shutting down",
+      "Most Similar TLDR Script": "reboot -f",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "ul_395161: Debian 8 (Jessie): Unable to connect to WIFI after update"
+      ],
+      "Top-3 Scripts": [
+        "ul_395161: sudo apt-get update\nsudo apt-get install linux-image-4.9.0-0.bpo.3-amd64\nsudo reboot\nsudo modprobe -r iwlwifi\nsudo modprobe iwlwifi"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "killall",
+      "MP Summary": "kill processes by name",
+      "Most Similar TLDR Task": "Force kill a process",
+      "Most Similar TLDR Script": "killall -KILL {{process_name}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "ul_400901: Connect to WEP/WPA without nmcli?"
+      ],
+      "Top-3 Scripts": [
+        "ul_400901: touch /etc/wpa_supplicant/wpa_supplicant.conf\necho ctrl_interface=/run/wpa_supplicant > /etc/wpa_supplicant/wpa_supplicant.conf\necho update_config=1 >> /etc/wpa_supplicant/wpa_supplicant.conf\nwpa_passphrase \"Your_SSID\" Your_PASSWORD >> /etc/wpa_supplicant/wpa_supplicant.conf\ni=$(iw dev | grep Interface | awk '{ print $2}')\nkillall wpa_supplicant\nwpa_supplicant -i $i -c/etc/wpa_supplicant/wpa_supplicant.conf -B\ndhclient $i\n\ni=$(iw dev | grep Interface | awk '{ print $2}')\nkillall wpa_supplicant\nwpa_supplicant -i $i -c/etc/wpa_supplicant/wpa_supplicant.conf -B\ndhclient $i\n\nkillall wpa_supplicant"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "install",
+      "MP Summary": "copy files and set attributes",
+      "Most Similar TLDR Task": "Copy files to destination, setting their group ownership",
+      "Most Similar TLDR Script": "install -g {{user}} {{path/to/source}} {{path/to/destination}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "au_138472: How do I connect to a WPA wifi network using the command line?",
+        "au_1340628: Wifi stopped connecting to some networks after upgrade to 20.04",
+        "ul_108320: Unable to reconnect to a WiFi network on Fedora 20?"
+      ],
+      "Top-3 Scripts": [
+        "au_138472: sudo apt-get install wpasupplicant",
+        "au_1340628: sudo apt install --reinstall resolvconf network-manager libnss-resolve",
+        "ul_108320: $ git clone http://github.com/lwfinger/rtlwifi_new.git\n$ cd rtlwifi_new\n$ make\n$ sudo modprobe -rv rtl8188ee\n$ sudo make install\n$ sudo modprobe -v rtl8188ee"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "type",
+      "MP Summary": "write a description of command type",
+      "Most Similar TLDR Task": "Display the name of the disk file that would be executed",
+      "Most Similar TLDR Script": "type -p {{command}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "so_35476428: How to connect to hidden wifi network using nmcli"
+      ],
+      "Top-3 Scripts": [
+        "so_35476428: nmcli c add type wifi con-name <connect name> ifname wlan0 ssid <ssid>\nnmcli con modify <connect name> wifi-sec.key-mgmt wpa-psk\nnmcli con modify <connect name> wifi-sec.psk <password>\nnmcli con up <connect name>"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "exit",
+      "MP Summary": "cause the shell to exit",
+      "Most Similar TLDR Task": "Exit the shell with the exit code of the last command executed",
+      "Most Similar TLDR Script": "exit",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "au_941237: Unable to connect to Wifi with Ubuntu 16.04",
+        "au_692956: Impossible to connect to wifi with intel link 5100"
+      ],
+      "Top-3 Scripts": [
+        "au_941237: sudo -i\necho \"options rtl8723be ant_sel=1\"  >  /etc/modprobe.d/rtl8723be.conf\nexit\n\nsudo -i\necho \"options rtl8723be ant_sel=2\"  >  /etc/modprobe.d/rtl8723be.conf\nexit",
+        "au_692956: sudo -i\necho \"blacklist acer-wmi\"  >>  /etc/modprobe.d/blacklist.conf\nexit"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "nano",
+      "MP Summary": "Nano's ANOther editor, inspired by Pico",
+      "Most Similar TLDR Task": "Open a file positioning the cursor at the specified line and column",
+      "Most Similar TLDR Script": "nano +{{line}},{{column}} {{path/to/file}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "ul_283722: How to connect to wifi from command line?",
+        "ul_263826: Is that possible for debian users to connect to network through systemd-networkd?",
+        "au_935263: Connect to connected OpenVPN client from different subnet"
+      ],
+      "Top-3 Scripts": [
+        "ul_283722: nano /etc/wpa_supplicant.conf",
+        "ul_263826: nano /etc/systemd/wireless.network\n\nnano /etc/systemd/network/wired.network",
+        "au_935263: sudo nano /etc/openvpn/up-route.sh\n\nsudo nano /etc/openvon/vpn.conf"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "arp",
+      "MP Summary": "manipulate the system ARP cache",
+      "Most Similar TLDR Task": "Show current arp table",
+      "Most Similar TLDR Script": "arp -a",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "au_568818: How to get all mac addresses of the pcs connected to my wifi... from my wifi connected ubuntu?"
+      ],
+      "Top-3 Scripts": [
+        "au_568818: sudo arp -a -i wlan0 --localnet"
+      ],
+      "Explanations about Options": {
+        "-a": "Use alternate BSD style output format (with no fixed columns)."
+      }
+    },
+    {
+      "Command": "tee",
+      "MP Summary": "read from standard input and write to standard output and files",
+      "Most Similar TLDR Task": "Print standard input to the terminal, and also pipe it into another program for further processing",
+      "Most Similar TLDR Script": "echo \"example\" | tee {{/dev/tty}} | {{xargs printf \"[%s]\"}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "au_804249: Wifi is connected but internet drops after some time"
+      ],
+      "Top-3 Scripts": [
+        "au_804249: echo \"options iwlwifi 11n_disable=8\" | sudo tee /etc/modprobe.d/iwlwifi.conf"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "git",
+      "MP Summary": "the stupid content tracker",
+      "Most Similar TLDR Task": "Execute a Git subcommand on a custom repository root path",
+      "Most Similar TLDR Script": "git -C {{path/to/repo}} {{subcommand}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "ul_108320: Unable to reconnect to a WiFi network on Fedora 20?"
+      ],
+      "Top-3 Scripts": [
+        "ul_108320: $ git clone http://github.com/lwfinger/rtlwifi_new.git\n$ cd rtlwifi_new\n$ make\n$ sudo modprobe -rv rtl8188ee\n$ sudo make install\n$ sudo modprobe -v rtl8188ee"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "dpkg",
+      "MP Summary": "package manager for Debian",
+      "Most Similar TLDR Task": "List contents of a local package file",
+      "Most Similar TLDR Script": "dpkg -c {{path/to/file.deb}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "au_172033: connect to server from command line"
+      ],
+      "Top-3 Scripts": [
+        "au_172033: dpkg -L gvfs-bin"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "cd",
+      "MP Summary": "change the working directory",
+      "Most Similar TLDR Task": "Go to home directory of current user",
+      "Most Similar TLDR Script": "cd",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "ul_108320: Unable to reconnect to a WiFi network on Fedora 20?"
+      ],
+      "Top-3 Scripts": [
+        "ul_108320: $ git clone http://github.com/lwfinger/rtlwifi_new.git\n$ cd rtlwifi_new\n$ make\n$ sudo modprobe -rv rtl8188ee\n$ sudo make install\n$ sudo modprobe -v rtl8188ee"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "set",
+      "MP Summary": "set or unset options and positional parameters",
+      "Most Similar TLDR Task": "Set various options, e.g. enable `vi` style line editing",
+      "Most Similar TLDR Script": "set -o {{vi}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "ul_283722: How to connect to wifi from command line?"
+      ],
+      "Top-3 Scripts": [
+        "ul_283722: sudo ip link set wlan0 down\nsudo ip link set wlan0 up\nsudo wpa_supplicant -B -iwlan0 -c /etc/wpa_supplicant.conf -Dnl80211,wext\nsudo dhclient wlan0"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "touch",
+      "MP Summary": "change file timestamps",
+      "Most Similar TLDR Task": "Use the times from a file to set the times on a second file",
+      "Most Similar TLDR Script": "touch -r {{filename}} {{filename2}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "ul_400901: Connect to WEP/WPA without nmcli?"
+      ],
+      "Top-3 Scripts": [
+        "ul_400901: touch /etc/wpa_supplicant/wpa_supplicant.conf\necho ctrl_interface=/run/wpa_supplicant > /etc/wpa_supplicant/wpa_supplicant.conf\necho update_config=1 >> /etc/wpa_supplicant/wpa_supplicant.conf\nwpa_passphrase \"Your_SSID\" Your_PASSWORD >> /etc/wpa_supplicant/wpa_supplicant.conf\ni=$(iw dev | grep Interface | awk '{ print $2}')\nkillall wpa_supplicant\nwpa_supplicant -i $i -c/etc/wpa_supplicant/wpa_supplicant.conf -B\ndhclient $i"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "print",
+      "MP Summary": "execute programs via entries in the mailcap file",
+      "Most Similar TLDR Task": "Print action can be used to print any file on default run-mailcap tool",
+      "Most Similar TLDR Script": "print {{filename}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "ul_400901: Connect to WEP/WPA without nmcli?"
+      ],
+      "Top-3 Scripts": [
+        "ul_400901: touch /etc/wpa_supplicant/wpa_supplicant.conf\necho ctrl_interface=/run/wpa_supplicant > /etc/wpa_supplicant/wpa_supplicant.conf\necho update_config=1 >> /etc/wpa_supplicant/wpa_supplicant.conf\nwpa_passphrase \"Your_SSID\" Your_PASSWORD >> /etc/wpa_supplicant/wpa_supplicant.conf\ni=$(iw dev | grep Interface | awk '{ print $2}')\nkillall wpa_supplicant\nwpa_supplicant -i $i -c/etc/wpa_supplicant/wpa_supplicant.conf -B\ndhclient $i\n\ni=$(iw dev | grep Interface | awk '{ print $2}')\nkillall wpa_supplicant\nwpa_supplicant -i $i -c/etc/wpa_supplicant/wpa_supplicant.conf -B\ndhclient $i"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "sed",
+      "MP Summary": "stream editor for filtering and transforming text",
+      "Most Similar TLDR Task": "Print the first 11 lines of a file",
+      "Most Similar TLDR Script": "sed 11q {{filename}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "au_885896: Make sure Ubuntu is connected to right wifi or reconnect to right wifi using a script"
+      ],
+      "Top-3 Scripts": [
+        "au_885896: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "make",
+      "MP Summary": "GNU make utility to maintain groups of programs",
+      "Most Similar TLDR Task": "Call a specific target, executing 4 jobs at a time in parallel",
+      "Most Similar TLDR Script": "make -j{{4}} {{target}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "ul_108320: Unable to reconnect to a WiFi network on Fedora 20?"
+      ],
+      "Top-3 Scripts": [
+        "ul_108320: $ git clone http://github.com/lwfinger/rtlwifi_new.git\n$ cd rtlwifi_new\n$ make\n$ sudo modprobe -rv rtl8188ee\n$ sudo make install\n$ sudo modprobe -v rtl8188ee"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "cp",
+      "MP Summary": "copy files and directories",
+      "Most Similar TLDR Task": "Copy text files to another location, in interactive mode (prompts user before overwriting)",
+      "Most Similar TLDR Script": "cp -i {{*.txt}} {{path/to/target_directory}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "au_842228: Problems connecting to wifi on Lubuntu 14.04"
+      ],
+      "Top-3 Scripts": [
+        "au_842228: sudo mkdir /lib/firmware/b43\nsudo cp Desktop/b43/* /lib/firmware/b43\nsudo modprobe -rf b43\nsudo modprobe -rf ssb\nsudo modprobe b43"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "ls",
+      "MP Summary": "list directory contents",
+      "Most Similar TLDR Task": "List files one per line",
+      "Most Similar TLDR Script": "ls -1",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "au_885896: Make sure Ubuntu is connected to right wifi or reconnect to right wifi using a script"
+      ],
+      "Top-3 Scripts": [
+        "au_885896: $ ls /etc/NetWorkManager/system-connections/"
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

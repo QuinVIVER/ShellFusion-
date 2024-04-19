@@ -1,0 +1,80 @@
+{
+  "Query": "How to use SSH to run a shell script on a remote machine?",
+  "Answers": [
+    {
+      "Command": "ssh",
+      "MP Summary": "OpenSSH SSH client (remote login program)",
+      "Most Similar TLDR Task": "Run a command on a remote server",
+      "Most Similar TLDR Script": "ssh {{remote_host}} {{command -with -flags}}",
+      "Top-3 Similar Questions": [
+        "so_31218577: Running part of bash script on a remote machine",
+        "so_69502479: bash: ssh : run command on remote machine with expanding variables",
+        "ul_390706: how to run script on remote machine with delay"
+      ],
+      "Top-3 Scripts": [
+        "so_31218577: ",
+        "so_69502479: act_url=\"https://someurl\"\nprintf -v rmt_cmd '%q ' somecommand \"$act_url\"\nurl=$(ssh user@xx.xx.xx.xx \"$rmt_cmd\")\necho \"$url\"",
+        "ul_390706: ssh root@IP 'echo /tmp/script | at now + 5 minutes'\n\nssh root@IP \"(sleep 5; /tmp/script) >/dev/null 2>/dev/null &\""
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "sshpass",
+      "MP Summary": "noninteractive ssh password provider",
+      "Most Similar TLDR Task": "Connect to a remote server using the first line of a file as the password, automatically accept unknown ssh keys, and launch a command",
+      "Most Similar TLDR Script": "sshpass -f {{file}} ssh -o StrictHostKeyChecking=no {{user}}@{{hostname}} \"{{command}}\"",
+      "Top-3 Similar Questions": [
+        "su_485667: Running script on multiple ubuntu computers automatically",
+        "so_65993341: how to run complex awk command on remote machine",
+        "so_44438622: executing method on remote machine with sshpass shell script"
+      ],
+      "Top-3 Scripts": [
+        "su_485667: #!/bin/bash\nmyscript=`cat /dev/stdin`\necho \"$myscript; exit;\" | sshpass -p $3 ssh -o StrictHostKeyChecking=no $2@$1",
+        "so_65993341: sshpass -p pasa123 ssh root@server01 \"/usr/bin/free | awk '/Mem/{printf(\\\"RAM Usage: %.2f%\\n\\\"), \\$3/\\$2*100}' \"",
+        "so_44438622: sshpass -p \"$serverpwd\" ssh \"$serveruser\"@\"$serverip\" << EOSSH\ncheckfunctioncall(){\ncd \"/home/user\"\nmkdir \"remotecalltest\"\n}\ncheckfunctioncall\nEOSSH"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "scp",
+      "MP Summary": "secure copy (remote file copy program)",
+      "Most Similar TLDR Task": "Use a specific ssh private key for authentication with the remote host",
+      "Most Similar TLDR Script": "scp -i {{~/.ssh/private_key}} {{local_file}} {{remote_host}}:{{/path/remote_file}}",
+      "Top-3 Similar Questions": [
+        "so_19039776: Triggering a shell script on remote machine"
+      ],
+      "Top-3 Scripts": [
+        "so_19039776: $ scp some_files remote_host:some_directory/\n$ ssh remote_host my_script"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "env",
+      "MP Summary": "run a program in a modified environment",
+      "Most Similar TLDR Task": "Set multiple variables and run a program",
+      "Most Similar TLDR Script": "env {{variable1}}={{value}} {{variable2}}={{value}} {{variable3}}={{value}} {{program}}",
+      "Top-3 Similar Questions": [
+        "ul_673638: Run a Local Shell Script on a Remote SSH Server, but the script requires env variables from another local file"
+      ],
+      "Top-3 Scripts": [
+        "ul_673638: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "sh",
+      "MP Summary": "MirBSD Korn shell",
+      "Most Similar TLDR Task": "Execute a command",
+      "Most Similar TLDR Script": "sh -c {{command}}",
+      "Top-3 Similar Questions": [
+        "ul_673638: Run a Local Shell Script on a Remote SSH Server, but the script requires env variables from another local file"
+      ],
+      "Top-3 Scripts": [
+        "ul_673638: ssh root@remotehost \"env $( jq -r 'to_entries | map(\"\\(.key)=\\(.value)\") | @sh' /home/project/env.json ) sh -s\" <dokku.sh\n\nsh -s"
+      ],
+      "Explanations about Options": {
+        "-s": "If used when the shell is invoked, commands are read from standard input. Set\n automatically if the shell is invoked with no arguments."
+      }
+    }
+  ]
+}

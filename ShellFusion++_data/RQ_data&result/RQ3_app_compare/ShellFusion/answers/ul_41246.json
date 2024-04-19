@@ -1,0 +1,90 @@
+{
+    "Answers": [
+        {
+            "Command": "tee",
+            "Explanations about Options": {},
+            "MP Summary": "read from standard input and write to standard output and files",
+            "Most Similar TLDR Script": "echo \"example\" | tee {{FILE}}",
+            "Most Similar TLDR Task": "Copy standard input to each FILE, and also to standard output",
+            "Top-3 Scripts": [
+                "so_18460186: echo \"Some console and log file message\" | tee /dev/fd/3\n\nexec 3>&1 1>>${LOG_FILE} 2>&1\n\necho \"This is stdout\"\necho \"This is stderr\" 1>&2\necho \"This is the console (fd 3)\" 1>&3\necho \"This is both the log and the console\" | tee /dev/fd/3",
+                "so_20355264: {  ssh host tail -f /some/file | \n     tee >(awk ...) >(grep ...) >/dev/null\n} > /some/file &\n\n{ echo foobar | tee >(sed 's/foo/FOO/') >(sed 's/bar/BAR/') > /dev/null; } > outputfile\ncat outputfile",
+                "so_12440164: ls | tee One Two Three > /dev/null"
+            ],
+            "Top-3 Similar Questions": [
+                "so_18460186: Writing outputs to log file and console",
+                "so_20355264: how to redirect output of multiple commands to one file",
+                "so_12440164: Redirecting Multiple stdouts"
+            ]
+        },
+        {
+            "Command": "cat",
+            "Explanations about Options": {},
+            "MP Summary": "concatenate files and print on the standard output",
+            "Most Similar TLDR Script": "cat {{file}}",
+            "Most Similar TLDR Task": "Print the contents of a file to the standard output",
+            "Top-3 Scripts": [
+                "so_20355264: { echo foobar | tee >(sed 's/foo/FOO/') >(sed 's/bar/BAR/') > /dev/null; } > outputfile\ncat outputfile",
+                "so_44552188: cat f1 f2 f3 | program",
+                "au_693536: xieerqi:$ xterm -e \"printf hello world > /home/xieerqi/REDIR \"\n\nxieerqi:$ cat REDIR\nhello\nxieerqi:$ xterm -e printf hello world two > /home/xieerqi/REDIR   \n\nxieerqi:$ cat REDIR\n\nxieerqi:$"
+            ],
+            "Top-3 Similar Questions": [
+                "so_20915326: Redirecting the output of my bash to a log file",
+                "so_20355264: how to redirect output of multiple commands to one file",
+                "so_44552188: Redirect multiple files to stdin"
+            ]
+        },
+        {
+            "Command": "script",
+            "Explanations about Options": {
+                "-t(M)": "Output timing data to standard error, or to file when given. This data contains\n two fields, separated by a space. The first field indicates how much time elapsed\n since the previous output. The second field indicates how many characters were\n output this time. This information can be used to replay typescripts with\n realistic typing and output delays."
+            },
+            "MP Summary": "make typescript of terminal session",
+            "Most Similar TLDR Script": "script -t 2> {{path/to/timingfile}}",
+            "Most Similar TLDR Task": "Record timing information (data is outputted to the standard error)",
+            "Top-3 Scripts": [
+                "so_48727018: script > file.log 2>&1\n\nscript &> file.log",
+                "au_216322: script capture.txt\n\nTERM=dump\nscript capture.txt"
+            ],
+            "Top-3 Similar Questions": [
+                "so_5317053: Redirecting all commands stdout/stderr to a log file from within a script",
+                "so_48727018: Not able to redirect entire output of a command to a log file using shell script",
+                "au_216322: How can I capture text from a specific terminal and redirect it to a log file while simultaneously working?"
+            ]
+        },
+        {
+            "Command": "xargs",
+            "Explanations about Options": {
+                "-0(M)": "Input items are terminated by a null character instead of by whitespace, and the\n quotes and backslash are not special (every character is taken literally).\n Disables the end of file string, which is treated like any other argument. Useful\n when input items might contain white space, quote marks, or backslashes. The GNU\n find -print0 option produces input suitable for this mode."
+            },
+            "MP Summary": "build and execute command lines from standard input",
+            "Most Similar TLDR Script": "{{arguments_source}} | xargs sh -c \"{{command1}} && {{command2}} | {{command3}}\"",
+            "Most Similar TLDR Task": "Run multiple chained commands on the input data",
+            "Top-3 Scripts": [
+                "su_398883: $ find . -type f -print0 | xargs -0 md5sum | sort",
+                "so_52318630: a_path=\"/path/to/files/*.csv\"\nb_path=\"/path/to/files/*.csv\"\nout_dir=\"/path/to/output/folder\"\n\njoin -z <(printf \"%s\\0\" $a_path) <(printf \"%s\\0\" $b_path) | xargs -0 -n2 sh -c 'paste -d, <(cut \"$1\" -d, -f1-6) <(cut \"$2\" -d, -f7-) > '\"$out_dir\"'/\"$(basename \"$1\")\"' --"
+            ],
+            "Top-3 Similar Questions": [
+                "su_398883: redirecting output from several piped commands",
+                "so_52318630: Redirecting bash script output to a folder"
+            ]
+        },
+        {
+            "Command": "rm",
+            "Explanations about Options": {
+                "-f(M)": "ignore nonexistent files and arguments, never prompt",
+                "-i(M)": "prompt before every removal"
+            },
+            "MP Summary": "remove files or directories",
+            "Most Similar TLDR Script": "rm -i {{file(s)}}",
+            "Most Similar TLDR Task": "Interactively remove multiple files, with a prompt before every removal",
+            "Top-3 Scripts": [
+                "so_20915326: logfile=\"output.txt\"\nrm -f $logfile\n\nfor file in ./cmd1 ./cmd2\ndo\n    $file trying to work >> $logfile 2>&1 \ndone\n\nlogfile=\"output.txt\"\nrm -f $logfile\n\nfor file in ./cmd1 ./cmd2\ndo\n    echo $file $(date +'%Y-%m-%d %H:%M:%S')\n    $file trying to work >> $logfile 2>&1 \ndone"
+            ],
+            "Top-3 Similar Questions": [
+                "so_20915326: Redirecting the output of my bash to a log file"
+            ]
+        }
+    ],
+    "Query": "how to redirect output to multiple log files"
+}

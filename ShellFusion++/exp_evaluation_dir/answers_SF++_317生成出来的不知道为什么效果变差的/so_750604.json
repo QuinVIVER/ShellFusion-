@@ -1,0 +1,1681 @@
+{
+  "Query": "Freeing up a TCP/IP port?",
+  "Answers": [
+    {
+      "Command": "netstat",
+      "MP Summary": "Print  network  connections,  routing tables, interface statistics, masquerade connections, and multicast memberships",
+      "Most Similar TLDR Task": "List listening TCP ports",
+      "Most Similar TLDR Script": "netstat -t",
+      "Most Similar NL2Bash Task": "Set up local port forwards in the background with no terminal or command execution from port 4431 to host \"www1\" port 443 and port 4432 to host \"www2\" port 443 via the host \"colocatedserver\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "ssh -fNT -L4431:www1:443 -L4432:www2:443 colocatedserver\n",
+          "command-options": {
+            "ssh": {
+              "mpsum": "OpenSSH SSH client (remote login program)",
+              "-N": "Do not execute a remote command. This is useful for just forwarding ports.",
+              "-T": "Disable pseudo-terminal allocation.",
+              "-f": "Requests ssh to go to background just before command execution. This is useful if\n ssh is going to ask for passwords or passphrases, but the user wants it in the\n background. This implies -n. The recommended way to start X11 programs at a remote\n site is with something like ssh -f host xterm."
+            }
+          },
+          "TLDR_inform": {
+            "ssh": {
+              "man1_ssh_32381": "secur shell protocol use secur log onto remot system\nuse log execut command remot server agent forward : forward authent inform remot machin see man ssh_config avail option connect remot server connect remot server use specif port connect remot server specif ident privat key run command remot server ssh jump : connect jumphost remot server multipl jump hop may specifi separ comma charact ssh tunnel : dynam port forward sock proxi localhost:9999 ssh tunnel : forward specif port localhost:9999 exampl org:80 along disabl pseudo- ty alloc executio n remot command"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_28989069: How to find a free TCP port",
+        "so_29636472: How to find process using TCP port?",
+        "su_899196: List all open sockets in /dev/tcp/localhost/"
+      ],
+      "Top-3 Scripts": [
+        "so_28989069: netstat -lntu",
+        "so_29636472: sudo netstat -nlp | grep 9000",
+        "su_899196: netstat -nlt"
+      ],
+      "Explanations about Options": {
+        "-p": "Show the PID and name of the program to which each socket belongs.",
+        "-l": "Show only listening sockets. (These are omitted by default.)",
+        "-n": "Show numerical addresses instead of trying to determine symbolic host, port or user names."
+      }
+    },
+    {
+      "Command": "nmap",
+      "MP Summary": "Network exploration tool and security / port scanner",
+      "Most Similar TLDR Task": "Perform TCP and UDP scanning (use -sU for UDP only, -sZ for SCTP, -sO for IP)",
+      "Most Similar TLDR Script": "nmap -sSU {{address_or_addresses}}",
+      "Most Similar NL2Bash Task": "Set up local port forwards in the background with no terminal or command execution from port 4431 to host \"www1\" port 443 and port 4432 to host \"www2\" port 443 via the host \"colocatedserver\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "ssh -fNT -L4431:www1:443 -L4432:www2:443 colocatedserver\n",
+          "command-options": {
+            "ssh": {
+              "mpsum": "OpenSSH SSH client (remote login program)",
+              "-N": "Do not execute a remote command. This is useful for just forwarding ports.",
+              "-T": "Disable pseudo-terminal allocation.",
+              "-f": "Requests ssh to go to background just before command execution. This is useful if\n ssh is going to ask for passwords or passphrases, but the user wants it in the\n background. This implies -n. The recommended way to start X11 programs at a remote\n site is with something like ssh -f host xterm."
+            }
+          },
+          "TLDR_inform": {
+            "ssh": {
+              "man1_ssh_32381": "secur shell protocol use secur log onto remot system\nuse log execut command remot server agent forward : forward authent inform remot machin see man ssh_config avail option connect remot server connect remot server use specif port connect remot server specif ident privat key run command remot server ssh jump : connect jumphost remot server multipl jump hop may specifi separ comma charact ssh tunnel : dynam port forward sock proxi localhost:9999 ssh tunnel : forward specif port localhost:9999 exampl org:80 along disabl pseudo- ty alloc executio n remot command"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_957429: How to find the ports of multiple ip's",
+        "ul_252517: Can nmap display only hosts with specific ports open?",
+        "ul_574810: How to scan range of tcp and udp ports at a time using nmap?"
+      ],
+      "Top-3 Scripts": [
+        "au_957429: script nmap.log\nIP1=\"\"\nIP2=\"\"\nIP3=\"\"\nIP4=\"\"\nIP5=\"\"\nsudo nmap -P0 -PS -n -sS -p1-65535 -r -T4 $IP1 $IP2 $IP3 $IP4 $IP5\nexit",
+        "ul_252517: nmap 192.168.1.1-254 -p22,80 --open -oG - | awk '/22\\/open.*80\\/open/{print $2}'",
+        "ul_574810: nmap --open -sT -sU -p T:22,25,53,80,111,443,465,587,953,993,995,3306,5666,8891,U:53,68,111,323,715 13.235.13.13"
+      ],
+      "Explanations about Options": {
+        "-sU": "While most popular services on the Internet run over the TCP protocol, UDP[6] services\n are widely deployed. DNS, SNMP, and DHCP (registered ports 53, 161/162, and 67/68) are\n three of the most common. Because UDP scanning is generally slower and more difficult\n than TCP, some security auditors ignore these ports. This is a mistake, as exploitable\n UDP services are quite common and attackers certainly don't ignore the whole protocol.\n Fortunately, Nmap can help inventory UDP ports.",
+        "-oG": "This output format is covered last because it is deprecated. The XML output format is\n far more powerful, and is nearly as convenient for experienced users. XML is a\n standard for which dozens of excellent parsers are available, while grepable output is\n my own simple hack. XML is extensible to support new Nmap features as they are\n released, while I often must omit those features from grepable output for lack of a\n place to put them.",
+        "-S": "IP_Address (Spoof source address)\n In some circumstances, Nmap may not be able to determine your source address (Nmap\n will tell you if this is the case). In this situation, use -S with the IP address of\n the interface you wish to send packets through.",
+        "-r": "(Don't randomize ports)\n By default, Nmap randomizes the scanned port order (except that certain commonly\n accessible ports are moved near the beginning for efficiency reasons). This\n randomization is normally desirable, but you can specify -r for sequential (sorted\n from lowest to highest) port scanning instead.",
+        "-n": "Tells Nmap to never do reverse DNS"
+      }
+    },
+    {
+      "Command": "nc",
+      "MP Summary": "arbitrary TCP and UDP connections and listens",
+      "Most Similar TLDR Task": "Act as proxy and forward data from a local TCP port to the given remote host",
+      "Most Similar TLDR Script": "nc -l {{local_port}} | nc {{hostname}} {{remote_port}}",
+      "Most Similar NL2Bash Task": "Set up local port forwards in the background with no terminal or command execution from port 4431 to host \"www1\" port 443 and port 4432 to host \"www2\" port 443 via the host \"colocatedserver\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "ssh -fNT -L4431:www1:443 -L4432:www2:443 colocatedserver\n",
+          "command-options": {
+            "ssh": {
+              "mpsum": "OpenSSH SSH client (remote login program)",
+              "-N": "Do not execute a remote command. This is useful for just forwarding ports.",
+              "-T": "Disable pseudo-terminal allocation.",
+              "-f": "Requests ssh to go to background just before command execution. This is useful if\n ssh is going to ask for passwords or passphrases, but the user wants it in the\n background. This implies -n. The recommended way to start X11 programs at a remote\n site is with something like ssh -f host xterm."
+            }
+          },
+          "TLDR_inform": {
+            "ssh": {
+              "man1_ssh_32381": "secur shell protocol use secur log onto remot system\nuse log execut command remot server agent forward : forward authent inform remot machin see man ssh_config avail option connect remot server connect remot server use specif port connect remot server specif ident privat key run command remot server ssh jump : connect jumphost remot server multipl jump hop may specifi separ comma charact ssh tunnel : dynam port forward sock proxi localhost:9999 ssh tunnel : forward specif port localhost:9999 exampl org:80 along disabl pseudo- ty alloc executio n remot command"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "su_307153: How can I open a TCP/UDP connection on Linux?",
+        "ul_180492: Is it possible to connect to TCP port 0?"
+      ],
+      "Top-3 Scripts": [
+        "su_307153: ",
+        "ul_180492: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "ss",
+      "MP Summary": "another utility to investigate sockets",
+      "Most Similar TLDR Task": "Show all TCP sockets listening on the local 8080 port",
+      "Most Similar TLDR Script": "ss -lt src :{{8080}}",
+      "Most Similar NL2Bash Task": "Set up local port forwards in the background with no terminal or command execution from port 4431 to host \"www1\" port 443 and port 4432 to host \"www2\" port 443 via the host \"colocatedserver\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "ssh -fNT -L4431:www1:443 -L4432:www2:443 colocatedserver\n",
+          "command-options": {
+            "ssh": {
+              "mpsum": "OpenSSH SSH client (remote login program)",
+              "-N": "Do not execute a remote command. This is useful for just forwarding ports.",
+              "-T": "Disable pseudo-terminal allocation.",
+              "-f": "Requests ssh to go to background just before command execution. This is useful if\n ssh is going to ask for passwords or passphrases, but the user wants it in the\n background. This implies -n. The recommended way to start X11 programs at a remote\n site is with something like ssh -f host xterm."
+            }
+          },
+          "TLDR_inform": {
+            "ssh": {
+              "man1_ssh_32381": "secur shell protocol use secur log onto remot system\nuse log execut command remot server agent forward : forward authent inform remot machin see man ssh_config avail option connect remot server connect remot server use specif port connect remot server specif ident privat key run command remot server ssh jump : connect jumphost remot server multipl jump hop may specifi separ comma charact ssh tunnel : dynam port forward sock proxi localhost:9999 ssh tunnel : forward specif port localhost:9999 exampl org:80 along disabl pseudo- ty alloc executio n remot command"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "tldr_5197: Show all TCP sockets listening on the local 8080 port",
+        "tldr_5196: Show all TCP sockets connected to the local HTTPS port (443)"
+      ],
+      "Top-3 Scripts": [
+        "tldr_5197: ss -lt src :{{8080}}",
+        "tldr_5196: ss -t src :{{443}}"
+      ],
+      "Explanations about Options": {
+        "-l": "Display only listening sockets (these are omitted by default).",
+        "-t": "Display TCP sockets."
+      }
+    },
+    {
+      "Command": "ip",
+      "MP Summary": "show / manipulate routing, network devices, interfaces and tunnels",
+      "Most Similar TLDR Task": "Add/Delete an ip address to an interface",
+      "Most Similar TLDR Script": "ip addr add/del {{ip}}/{{mask}} dev {{interface}}",
+      "Most Similar NL2Bash Task": "Set up local port forwards in the background with no terminal or command execution from port 4431 to host \"www1\" port 443 and port 4432 to host \"www2\" port 443 via the host \"colocatedserver\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "ssh -fNT -L4431:www1:443 -L4432:www2:443 colocatedserver\n",
+          "command-options": {
+            "ssh": {
+              "mpsum": "OpenSSH SSH client (remote login program)",
+              "-N": "Do not execute a remote command. This is useful for just forwarding ports.",
+              "-T": "Disable pseudo-terminal allocation.",
+              "-f": "Requests ssh to go to background just before command execution. This is useful if\n ssh is going to ask for passwords or passphrases, but the user wants it in the\n background. This implies -n. The recommended way to start X11 programs at a remote\n site is with something like ssh -f host xterm."
+            }
+          },
+          "TLDR_inform": {
+            "ssh": {
+              "man1_ssh_32381": "secur shell protocol use secur log onto remot system\nuse log execut command remot server agent forward : forward authent inform remot machin see man ssh_config avail option connect remot server connect remot server use specif port connect remot server specif ident privat key run command remot server ssh jump : connect jumphost remot server multipl jump hop may specifi separ comma charact ssh tunnel : dynam port forward sock proxi localhost:9999 ssh tunnel : forward specif port localhost:9999 exampl org:80 along disabl pseudo- ty alloc executio n remot command"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_130797: Can TCP provide more than 65535 ports?",
+        "ul_122468: How does one capture traffic on virtual interfaces?"
+      ],
+      "Top-3 Scripts": [
+        "ul_130797: $ sudo ip link set eth0 up\n$ sudo ip addr add 192.0.2.1/24 dev eth0\n$ sudo ip addr add 192.0.2.2/24 dev eth0\n$ ip addr show dev eth0\n2: eth0: <NO-CARRIER,BROADCAST,MULTICAST,UP> mtu 1500 qdisc\n      pfifo_fast state DOWN qlen 1000\n    link/ether 00:d0:b7:2d:ce:cf brd ff:ff:ff:ff:ff:ff\n    inet 192.0.2.1/24 brd 192.0.2.255 scope global eth1\n    inet 192.0.2.2/24 scope global secondary eth1",
+        "ul_122468: ip route show table local"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "ssh",
+      "MP Summary": "OpenSSH SSH client (remote login program)",
+      "Most Similar TLDR Task": "Connect to a remote server using a specific port",
+      "Most Similar TLDR Script": "ssh {{username}}@{{remote_host}} -p {{2222}}",
+      "Most Similar NL2Bash Task": "Set up local port forwards in the background with no terminal or command execution from port 4431 to host \"www1\" port 443 and port 4432 to host \"www2\" port 443 via the host \"colocatedserver\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "ssh -fNT -L4431:www1:443 -L4432:www2:443 colocatedserver\n",
+          "command-options": {
+            "ssh": {
+              "mpsum": "OpenSSH SSH client (remote login program)",
+              "-N": "Do not execute a remote command. This is useful for just forwarding ports.",
+              "-T": "Disable pseudo-terminal allocation.",
+              "-f": "Requests ssh to go to background just before command execution. This is useful if\n ssh is going to ask for passwords or passphrases, but the user wants it in the\n background. This implies -n. The recommended way to start X11 programs at a remote\n site is with something like ssh -f host xterm."
+            }
+          },
+          "TLDR_inform": {
+            "ssh": {
+              "man1_ssh_32381": "secur shell protocol use secur log onto remot system\nuse log execut command remot server agent forward : forward authent inform remot machin see man ssh_config avail option connect remot server connect remot server use specif port connect remot server specif ident privat key run command remot server ssh jump : connect jumphost remot server multipl jump hop may specifi separ comma charact ssh tunnel : dynam port forward sock proxi localhost:9999 ssh tunnel : forward specif port localhost:9999 exampl org:80 along disabl pseudo- ty alloc executio n remot command"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_957429: How to find the ports of multiple ip's",
+        "ul_138850: How to connect ssh from a specified port?"
+      ],
+      "Top-3 Scripts": [
+        "au_957429: ",
+        "ul_138850: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "hostname",
+      "MP Summary": "show or set the system's host name",
+      "Most Similar TLDR Task": "Show all network addresses of the host",
+      "Most Similar TLDR Script": "hostname -I",
+      "Most Similar NL2Bash Task": "Set up local port forwards in the background with no terminal or command execution from port 4431 to host \"www1\" port 443 and port 4432 to host \"www2\" port 443 via the host \"colocatedserver\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "ssh -fNT -L4431:www1:443 -L4432:www2:443 colocatedserver\n",
+          "command-options": {
+            "ssh": {
+              "mpsum": "OpenSSH SSH client (remote login program)",
+              "-N": "Do not execute a remote command. This is useful for just forwarding ports.",
+              "-T": "Disable pseudo-terminal allocation.",
+              "-f": "Requests ssh to go to background just before command execution. This is useful if\n ssh is going to ask for passwords or passphrases, but the user wants it in the\n background. This implies -n. The recommended way to start X11 programs at a remote\n site is with something like ssh -f host xterm."
+            }
+          },
+          "TLDR_inform": {
+            "ssh": {
+              "man1_ssh_32381": "secur shell protocol use secur log onto remot system\nuse log execut command remot server agent forward : forward authent inform remot machin see man ssh_config avail option connect remot server connect remot server use specif port connect remot server specif ident privat key run command remot server ssh jump : connect jumphost remot server multipl jump hop may specifi separ comma charact ssh tunnel : dynam port forward sock proxi localhost:9999 ssh tunnel : forward specif port localhost:9999 exampl org:80 along disabl pseudo- ty alloc executio n remot command"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_20789091: Get a random port for TCP connection",
+        "so_5548032: Find internal IP address with BASH"
+      ],
+      "Top-3 Scripts": [
+        "so_20789091: if (getsockname(sockfd, (struct sockaddr *)&serv_addr, &len_inet) < 0){\n    cout << \"failed to get hostname with errno: \"<< errno << endl;\n    exit(1);\n}",
+        "so_5548032: hostname -i"
+      ],
+      "Explanations about Options": {
+        "-i": "Display the network address(es) of the host name. Note that this works only if the\n host name can be resolved. Avoid using this option; use hostname --all-ip-addresses\n instead."
+      }
+    },
+    {
+      "Command": "tcpdump",
+      "MP Summary": "dump traffic on a network",
+      "Most Similar TLDR Task": "Capture all TCP traffic showing contents (ASCII) in console",
+      "Most Similar TLDR Script": "tcpdump -A tcp",
+      "Most Similar NL2Bash Task": "Set up local port forwards in the background with no terminal or command execution from port 4431 to host \"www1\" port 443 and port 4432 to host \"www2\" port 443 via the host \"colocatedserver\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "ssh -fNT -L4431:www1:443 -L4432:www2:443 colocatedserver\n",
+          "command-options": {
+            "ssh": {
+              "mpsum": "OpenSSH SSH client (remote login program)",
+              "-N": "Do not execute a remote command. This is useful for just forwarding ports.",
+              "-T": "Disable pseudo-terminal allocation.",
+              "-f": "Requests ssh to go to background just before command execution. This is useful if\n ssh is going to ask for passwords or passphrases, but the user wants it in the\n background. This implies -n. The recommended way to start X11 programs at a remote\n site is with something like ssh -f host xterm."
+            }
+          },
+          "TLDR_inform": {
+            "ssh": {
+              "man1_ssh_32381": "secur shell protocol use secur log onto remot system\nuse log execut command remot server agent forward : forward authent inform remot machin see man ssh_config avail option connect remot server connect remot server use specif port connect remot server specif ident privat key run command remot server ssh jump : connect jumphost remot server multipl jump hop may specifi separ comma charact ssh tunnel : dynam port forward sock proxi localhost:9999 ssh tunnel : forward specif port localhost:9999 exampl org:80 along disabl pseudo- ty alloc executio n remot command"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "su_604998: Monitor TCP Traffic on specific port"
+      ],
+      "Top-3 Scripts": [
+        "su_604998: tcpdump port 443 and '(tcp-syn|tcp-ack)!=0'"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "telnet",
+      "MP Summary": "user interface to the TELNET protocol",
+      "Most Similar TLDR Task": "Telnet to a specific port of a host",
+      "Most Similar TLDR Script": "telnet {{ip_address}} {{port}}",
+      "Most Similar NL2Bash Task": "Set up local port forwards in the background with no terminal or command execution from port 4431 to host \"www1\" port 443 and port 4432 to host \"www2\" port 443 via the host \"colocatedserver\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "ssh -fNT -L4431:www1:443 -L4432:www2:443 colocatedserver\n",
+          "command-options": {
+            "ssh": {
+              "mpsum": "OpenSSH SSH client (remote login program)",
+              "-N": "Do not execute a remote command. This is useful for just forwarding ports.",
+              "-T": "Disable pseudo-terminal allocation.",
+              "-f": "Requests ssh to go to background just before command execution. This is useful if\n ssh is going to ask for passwords or passphrases, but the user wants it in the\n background. This implies -n. The recommended way to start X11 programs at a remote\n site is with something like ssh -f host xterm."
+            }
+          },
+          "TLDR_inform": {
+            "ssh": {
+              "man1_ssh_32381": "secur shell protocol use secur log onto remot system\nuse log execut command remot server agent forward : forward authent inform remot machin see man ssh_config avail option connect remot server connect remot server use specif port connect remot server specif ident privat key run command remot server ssh jump : connect jumphost remot server multipl jump hop may specifi separ comma charact ssh tunnel : dynam port forward sock proxi localhost:9999 ssh tunnel : forward specif port localhost:9999 exampl org:80 along disabl pseudo- ty alloc executio n remot command"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_140021: How to close ports in Linux?"
+      ],
+      "Top-3 Scripts": [
+        "ul_140021: telnet 127.0.0.1"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "ufw",
+      "MP Summary": "program for managing a netfilter firewall",
+      "Most Similar TLDR Task": "Deny all UDP traffic to port 22",
+      "Most Similar TLDR Script": "ufw deny proto {{udp}} from {{any}} to {{any}} port {{22}}",
+      "Most Similar NL2Bash Task": "Set up local port forwards in the background with no terminal or command execution from port 4431 to host \"www1\" port 443 and port 4432 to host \"www2\" port 443 via the host \"colocatedserver\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "ssh -fNT -L4431:www1:443 -L4432:www2:443 colocatedserver\n",
+          "command-options": {
+            "ssh": {
+              "mpsum": "OpenSSH SSH client (remote login program)",
+              "-N": "Do not execute a remote command. This is useful for just forwarding ports.",
+              "-T": "Disable pseudo-terminal allocation.",
+              "-f": "Requests ssh to go to background just before command execution. This is useful if\n ssh is going to ask for passwords or passphrases, but the user wants it in the\n background. This implies -n. The recommended way to start X11 programs at a remote\n site is with something like ssh -f host xterm."
+            }
+          },
+          "TLDR_inform": {
+            "ssh": {
+              "man1_ssh_32381": "secur shell protocol use secur log onto remot system\nuse log execut command remot server agent forward : forward authent inform remot machin see man ssh_config avail option connect remot server connect remot server use specif port connect remot server specif ident privat key run command remot server ssh jump : connect jumphost remot server multipl jump hop may specifi separ comma charact ssh tunnel : dynam port forward sock proxi localhost:9999 ssh tunnel : forward specif port localhost:9999 exampl org:80 along disabl pseudo- ty alloc executio n remot command"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_479012: Restrict inbound access on localhost:TCP port"
+      ],
+      "Top-3 Scripts": [
+        "ul_479012: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "host",
+      "MP Summary": "DNS lookup utility",
+      "Most Similar TLDR Task": "Reverse lookup an IP",
+      "Most Similar TLDR Script": "host {{ip_address}}",
+      "Most Similar NL2Bash Task": "Set up local port forwards in the background with no terminal or command execution from port 4431 to host \"www1\" port 443 and port 4432 to host \"www2\" port 443 via the host \"colocatedserver\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "ssh -fNT -L4431:www1:443 -L4432:www2:443 colocatedserver\n",
+          "command-options": {
+            "ssh": {
+              "mpsum": "OpenSSH SSH client (remote login program)",
+              "-N": "Do not execute a remote command. This is useful for just forwarding ports.",
+              "-T": "Disable pseudo-terminal allocation.",
+              "-f": "Requests ssh to go to background just before command execution. This is useful if\n ssh is going to ask for passwords or passphrases, but the user wants it in the\n background. This implies -n. The recommended way to start X11 programs at a remote\n site is with something like ssh -f host xterm."
+            }
+          },
+          "TLDR_inform": {
+            "ssh": {
+              "man1_ssh_32381": "secur shell protocol use secur log onto remot system\nuse log execut command remot server agent forward : forward authent inform remot machin see man ssh_config avail option connect remot server connect remot server use specif port connect remot server specif ident privat key run command remot server ssh jump : connect jumphost remot server multipl jump hop may specifi separ comma charact ssh tunnel : dynam port forward sock proxi localhost:9999 ssh tunnel : forward specif port localhost:9999 exampl org:80 along disabl pseudo- ty alloc executio n remot command"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_957429: How to find the ports of multiple ip's",
+        "ul_122468: How does one capture traffic on virtual interfaces?"
+      ],
+      "Top-3 Scripts": [
+        "au_957429: ",
+        "ul_122468: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "adb",
+      "MP Summary": "Android Debug Bridge",
+      "Most Similar TLDR Task": "Terminate the adb server process",
+      "Most Similar TLDR Script": "adb kill-server",
+      "Most Similar NL2Bash Task": "Set up local port forwards in the background with no terminal or command execution from port 4431 to host \"www1\" port 443 and port 4432 to host \"www2\" port 443 via the host \"colocatedserver\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "ssh -fNT -L4431:www1:443 -L4432:www2:443 colocatedserver\n",
+          "command-options": {
+            "ssh": {
+              "mpsum": "OpenSSH SSH client (remote login program)",
+              "-N": "Do not execute a remote command. This is useful for just forwarding ports.",
+              "-T": "Disable pseudo-terminal allocation.",
+              "-f": "Requests ssh to go to background just before command execution. This is useful if\n ssh is going to ask for passwords or passphrases, but the user wants it in the\n background. This implies -n. The recommended way to start X11 programs at a remote\n site is with something like ssh -f host xterm."
+            }
+          },
+          "TLDR_inform": {
+            "ssh": {
+              "man1_ssh_32381": "secur shell protocol use secur log onto remot system\nuse log execut command remot server agent forward : forward authent inform remot machin see man ssh_config avail option connect remot server connect remot server use specif port connect remot server specif ident privat key run command remot server ssh jump : connect jumphost remot server multipl jump hop may specifi separ comma charact ssh tunnel : dynam port forward sock proxi localhost:9999 ssh tunnel : forward specif port localhost:9999 exampl org:80 along disabl pseudo- ty alloc executio n remot command"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "tldr_6309: Reverse a TCP port from an emulator or device to localhost"
+      ],
+      "Top-3 Scripts": [
+        "tldr_6309: adb reverse tcp:{{remote_port}} tcp:{{local_port}}"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "sysctl",
+      "MP Summary": "configure kernel parameters at runtime",
+      "Most Similar TLDR Task": "Set a changeable kernel state variable",
+      "Most Similar TLDR Script": "sysctl -w {{section.tunable}}={{value}}",
+      "Most Similar NL2Bash Task": "Set up local port forwards in the background with no terminal or command execution from port 4431 to host \"www1\" port 443 and port 4432 to host \"www2\" port 443 via the host \"colocatedserver\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "ssh -fNT -L4431:www1:443 -L4432:www2:443 colocatedserver\n",
+          "command-options": {
+            "ssh": {
+              "mpsum": "OpenSSH SSH client (remote login program)",
+              "-N": "Do not execute a remote command. This is useful for just forwarding ports.",
+              "-T": "Disable pseudo-terminal allocation.",
+              "-f": "Requests ssh to go to background just before command execution. This is useful if\n ssh is going to ask for passwords or passphrases, but the user wants it in the\n background. This implies -n. The recommended way to start X11 programs at a remote\n site is with something like ssh -f host xterm."
+            }
+          },
+          "TLDR_inform": {
+            "ssh": {
+              "man1_ssh_32381": "secur shell protocol use secur log onto remot system\nuse log execut command remot server agent forward : forward authent inform remot machin see man ssh_config avail option connect remot server connect remot server use specif port connect remot server specif ident privat key run command remot server ssh jump : connect jumphost remot server multipl jump hop may specifi separ comma charact ssh tunnel : dynam port forward sock proxi localhost:9999 ssh tunnel : forward specif port localhost:9999 exampl org:80 along disabl pseudo- ty alloc executio n remot command"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_667096: How to change the default TTL of TCP/IP packets?",
+        "su_823765: Which criteria is used by the linux kernel to pick udp source ports?"
+      ],
+      "Top-3 Scripts": [
+        "au_667096: sudo sysctl -w net.ipv4.ip_default_ttl=129",
+        "su_823765: sysctl net.ipv4.ip_local_port_range"
+      ],
+      "Explanations about Options": {
+        "-w": "Use this option when all arguments prescribe a key to be set."
+      }
+    },
+    {
+      "Command": "route",
+      "MP Summary": "show / manipulate the IP routing table",
+      "Most Similar TLDR Task": "Delete route rule",
+      "Most Similar TLDR Script": "sudo route del -net {{ip_address}} netmask {{netmask_address}} dev {{gw_address}}",
+      "Most Similar NL2Bash Task": "Set up local port forwards in the background with no terminal or command execution from port 4431 to host \"www1\" port 443 and port 4432 to host \"www2\" port 443 via the host \"colocatedserver\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "ssh -fNT -L4431:www1:443 -L4432:www2:443 colocatedserver\n",
+          "command-options": {
+            "ssh": {
+              "mpsum": "OpenSSH SSH client (remote login program)",
+              "-N": "Do not execute a remote command. This is useful for just forwarding ports.",
+              "-T": "Disable pseudo-terminal allocation.",
+              "-f": "Requests ssh to go to background just before command execution. This is useful if\n ssh is going to ask for passwords or passphrases, but the user wants it in the\n background. This implies -n. The recommended way to start X11 programs at a remote\n site is with something like ssh -f host xterm."
+            }
+          },
+          "TLDR_inform": {
+            "ssh": {
+              "man1_ssh_32381": "secur shell protocol use secur log onto remot system\nuse log execut command remot server agent forward : forward authent inform remot machin see man ssh_config avail option connect remot server connect remot server use specif port connect remot server specif ident privat key run command remot server ssh jump : connect jumphost remot server multipl jump hop may specifi separ comma charact ssh tunnel : dynam port forward sock proxi localhost:9999 ssh tunnel : forward specif port localhost:9999 exampl org:80 along disabl pseudo- ty alloc executio n remot command"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_122468: How does one capture traffic on virtual interfaces?"
+      ],
+      "Top-3 Scripts": [
+        "ul_122468: ip route show table local"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "kill",
+      "MP Summary": "send a signal to a process",
+      "Most Similar TLDR Task": "Signal the operating system to pause a program until a SIGCONT (\"continue\") signal is received",
+      "Most Similar TLDR Script": "kill -{{17|STOP}} {{process_id}}",
+      "Most Similar NL2Bash Task": "Set up local port forwards in the background with no terminal or command execution from port 4431 to host \"www1\" port 443 and port 4432 to host \"www2\" port 443 via the host \"colocatedserver\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "ssh -fNT -L4431:www1:443 -L4432:www2:443 colocatedserver\n",
+          "command-options": {
+            "ssh": {
+              "mpsum": "OpenSSH SSH client (remote login program)",
+              "-N": "Do not execute a remote command. This is useful for just forwarding ports.",
+              "-T": "Disable pseudo-terminal allocation.",
+              "-f": "Requests ssh to go to background just before command execution. This is useful if\n ssh is going to ask for passwords or passphrases, but the user wants it in the\n background. This implies -n. The recommended way to start X11 programs at a remote\n site is with something like ssh -f host xterm."
+            }
+          },
+          "TLDR_inform": {
+            "ssh": {
+              "man1_ssh_32381": "secur shell protocol use secur log onto remot system\nuse log execut command remot server agent forward : forward authent inform remot machin see man ssh_config avail option connect remot server connect remot server use specif port connect remot server specif ident privat key run command remot server ssh jump : connect jumphost remot server multipl jump hop may specifi separ comma charact ssh tunnel : dynam port forward sock proxi localhost:9999 ssh tunnel : forward specif port localhost:9999 exampl org:80 along disabl pseudo- ty alloc executio n remot command"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_9825698: How can I kill TCP port 16969 in Bash?"
+      ],
+      "Top-3 Scripts": [
+        "so_9825698: lsof -i tcp:22 | grep LISTEN | awk '{print $2}' | xargs kill\n\nlsof -i tcp:22 | grep LISTEN | awk '{print $2}' | xargs echo kill"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "sudo",
+      "MP Summary": "execute a command as another user",
+      "Most Similar TLDR Task": "Run a command as another user and/or group",
+      "Most Similar TLDR Script": "sudo -u {{user}} -g {{group}} {{id -a}}",
+      "Most Similar NL2Bash Task": "Set up local port forwards in the background with no terminal or command execution from port 4431 to host \"www1\" port 443 and port 4432 to host \"www2\" port 443 via the host \"colocatedserver\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "ssh -fNT -L4431:www1:443 -L4432:www2:443 colocatedserver\n",
+          "command-options": {
+            "ssh": {
+              "mpsum": "OpenSSH SSH client (remote login program)",
+              "-N": "Do not execute a remote command. This is useful for just forwarding ports.",
+              "-T": "Disable pseudo-terminal allocation.",
+              "-f": "Requests ssh to go to background just before command execution. This is useful if\n ssh is going to ask for passwords or passphrases, but the user wants it in the\n background. This implies -n. The recommended way to start X11 programs at a remote\n site is with something like ssh -f host xterm."
+            }
+          },
+          "TLDR_inform": {
+            "ssh": {
+              "man1_ssh_32381": "secur shell protocol use secur log onto remot system\nuse log execut command remot server agent forward : forward authent inform remot machin see man ssh_config avail option connect remot server connect remot server use specif port connect remot server specif ident privat key run command remot server ssh jump : connect jumphost remot server multipl jump hop may specifi separ comma charact ssh tunnel : dynam port forward sock proxi localhost:9999 ssh tunnel : forward specif port localhost:9999 exampl org:80 along disabl pseudo- ty alloc executio n remot command"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_5980: How do I free up disk space?",
+        "au_957429: How to find the ports of multiple ip's",
+        "so_29636472: How to find process using TCP port?"
+      ],
+      "Top-3 Scripts": [
+        "au_5980: sudo apt-get autoremove",
+        "au_957429: script nmap.log\nIP1=\"\"\nIP2=\"\"\nIP3=\"\"\nIP4=\"\"\nIP5=\"\"\nsudo nmap -P0 -PS -n -sS -p1-65535 -r -T4 $IP1 $IP2 $IP3 $IP4 $IP5\nexit",
+        "so_29636472: sudo netstat -nlp | grep 9000"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "yum",
+      "MP Summary": "Yellowdog Updater Modified",
+      "Most Similar TLDR Task": "Upgrade installed packages to newest available versions",
+      "Most Similar TLDR Script": "yum upgrade",
+      "Most Similar NL2Bash Task": "Set up local port forwards in the background with no terminal or command execution from port 4431 to host \"www1\" port 443 and port 4432 to host \"www2\" port 443 via the host \"colocatedserver\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "ssh -fNT -L4431:www1:443 -L4432:www2:443 colocatedserver\n",
+          "command-options": {
+            "ssh": {
+              "mpsum": "OpenSSH SSH client (remote login program)",
+              "-N": "Do not execute a remote command. This is useful for just forwarding ports.",
+              "-T": "Disable pseudo-terminal allocation.",
+              "-f": "Requests ssh to go to background just before command execution. This is useful if\n ssh is going to ask for passwords or passphrases, but the user wants it in the\n background. This implies -n. The recommended way to start X11 programs at a remote\n site is with something like ssh -f host xterm."
+            }
+          },
+          "TLDR_inform": {
+            "ssh": {
+              "man1_ssh_32381": "secur shell protocol use secur log onto remot system\nuse log execut command remot server agent forward : forward authent inform remot machin see man ssh_config avail option connect remot server connect remot server use specif port connect remot server specif ident privat key run command remot server ssh jump : connect jumphost remot server multipl jump hop may specifi separ comma charact ssh tunnel : dynam port forward sock proxi localhost:9999 ssh tunnel : forward specif port localhost:9999 exampl org:80 along disabl pseudo- ty alloc executio n remot command"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_99023: Redirect the default HTTP port to an application"
+      ],
+      "Top-3 Scripts": [
+        "ul_99023: yum install tinyproxy"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "apt-get",
+      "MP Summary": "APT package handling utility - command-line interface",
+      "Most Similar TLDR Task": "Install a package, or update it to the latest available version",
+      "Most Similar TLDR Script": "apt-get install {{package}}",
+      "Most Similar NL2Bash Task": "Set up local port forwards in the background with no terminal or command execution from port 4431 to host \"www1\" port 443 and port 4432 to host \"www2\" port 443 via the host \"colocatedserver\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "ssh -fNT -L4431:www1:443 -L4432:www2:443 colocatedserver\n",
+          "command-options": {
+            "ssh": {
+              "mpsum": "OpenSSH SSH client (remote login program)",
+              "-N": "Do not execute a remote command. This is useful for just forwarding ports.",
+              "-T": "Disable pseudo-terminal allocation.",
+              "-f": "Requests ssh to go to background just before command execution. This is useful if\n ssh is going to ask for passwords or passphrases, but the user wants it in the\n background. This implies -n. The recommended way to start X11 programs at a remote\n site is with something like ssh -f host xterm."
+            }
+          },
+          "TLDR_inform": {
+            "ssh": {
+              "man1_ssh_32381": "secur shell protocol use secur log onto remot system\nuse log execut command remot server agent forward : forward authent inform remot machin see man ssh_config avail option connect remot server connect remot server use specif port connect remot server specif ident privat key run command remot server ssh jump : connect jumphost remot server multipl jump hop may specifi separ comma charact ssh tunnel : dynam port forward sock proxi localhost:9999 ssh tunnel : forward specif port localhost:9999 exampl org:80 along disabl pseudo- ty alloc executio n remot command"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_5980: How do I free up disk space?"
+      ],
+      "Top-3 Scripts": [
+        "au_5980: sudo apt-get autoremove"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "docker",
+      "MP Summary": "Docker image and container command line interface",
+      "Most Similar TLDR Task": "Pull an image from a docker registry",
+      "Most Similar TLDR Script": "docker pull {{image}}",
+      "Most Similar NL2Bash Task": "Set up local port forwards in the background with no terminal or command execution from port 4431 to host \"www1\" port 443 and port 4432 to host \"www2\" port 443 via the host \"colocatedserver\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "ssh -fNT -L4431:www1:443 -L4432:www2:443 colocatedserver\n",
+          "command-options": {
+            "ssh": {
+              "mpsum": "OpenSSH SSH client (remote login program)",
+              "-N": "Do not execute a remote command. This is useful for just forwarding ports.",
+              "-T": "Disable pseudo-terminal allocation.",
+              "-f": "Requests ssh to go to background just before command execution. This is useful if\n ssh is going to ask for passwords or passphrases, but the user wants it in the\n background. This implies -n. The recommended way to start X11 programs at a remote\n site is with something like ssh -f host xterm."
+            }
+          },
+          "TLDR_inform": {
+            "ssh": {
+              "man1_ssh_32381": "secur shell protocol use secur log onto remot system\nuse log execut command remot server agent forward : forward authent inform remot machin see man ssh_config avail option connect remot server connect remot server use specif port connect remot server specif ident privat key run command remot server ssh jump : connect jumphost remot server multipl jump hop may specifi separ comma charact ssh tunnel : dynam port forward sock proxi localhost:9999 ssh tunnel : forward specif port localhost:9999 exampl org:80 along disabl pseudo- ty alloc executio n remot command"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_589474: Is the server running on host \"localhost\" (::1) and accepting TCP/IP connections on port 5432"
+      ],
+      "Top-3 Scripts": [
+        "ul_589474: docker-compose down\ndocker container stop $(docker container ls -aq)\ndocker network create x_middleware\ndocker network create foo\ndocker-compose build\ndocker-compose run app bin/rails db:setup profiles:build\ndocker-compose run app bin/rails profiles:build\ndocker-sync-stack start"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "echo",
+      "MP Summary": "display a line of text",
+      "Most Similar TLDR Task": "Append a message to the file",
+      "Most Similar TLDR Script": "echo \"{{Hello World}}\" >> {{file.txt}}",
+      "Most Similar NL2Bash Task": "Set up local port forwards in the background with no terminal or command execution from port 4431 to host \"www1\" port 443 and port 4432 to host \"www2\" port 443 via the host \"colocatedserver\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "ssh -fNT -L4431:www1:443 -L4432:www2:443 colocatedserver\n",
+          "command-options": {
+            "ssh": {
+              "mpsum": "OpenSSH SSH client (remote login program)",
+              "-N": "Do not execute a remote command. This is useful for just forwarding ports.",
+              "-T": "Disable pseudo-terminal allocation.",
+              "-f": "Requests ssh to go to background just before command execution. This is useful if\n ssh is going to ask for passwords or passphrases, but the user wants it in the\n background. This implies -n. The recommended way to start X11 programs at a remote\n site is with something like ssh -f host xterm."
+            }
+          },
+          "TLDR_inform": {
+            "ssh": {
+              "man1_ssh_32381": "secur shell protocol use secur log onto remot system\nuse log execut command remot server agent forward : forward authent inform remot machin see man ssh_config avail option connect remot server connect remot server use specif port connect remot server specif ident privat key run command remot server ssh jump : connect jumphost remot server multipl jump hop may specifi separ comma charact ssh tunnel : dynam port forward sock proxi localhost:9999 ssh tunnel : forward specif port localhost:9999 exampl org:80 along disabl pseudo- ty alloc executio n remot command"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_9825698: How can I kill TCP port 16969 in Bash?",
+        "ul_588446: How to remove \"Connection refused\" lines from \">/dev/tcp/ip/port\"",
+        "au_667096: How to change the default TTL of TCP/IP packets?"
+      ],
+      "Top-3 Scripts": [
+        "so_9825698: lsof -i tcp:22 | grep LISTEN | awk '{print $2}' | xargs echo kill",
+        "ul_588446: $ >/dev/tcp/127.0.0.1/8088 2>/dev/nul\nbash: connect: Connection refused\nbash: /dev/tcp/127.0.0.1/8088: Connection refused\n$ 2>/dev/null >/dev/tcp/127.0.0.1/8088 && echo open || echo closed\nclosed\n$",
+        "au_667096: echo 129 | sudo tee /proc/sys/net/ipv4/ip_default_ttl"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "du",
+      "MP Summary": "estimate file space usage",
+      "Most Similar TLDR Task": "Show the size of a single directory, in human readable units",
+      "Most Similar TLDR Script": "du -sh {{path/to/directory}}",
+      "Most Similar NL2Bash Task": "Set up local port forwards in the background with no terminal or command execution from port 4431 to host \"www1\" port 443 and port 4432 to host \"www2\" port 443 via the host \"colocatedserver\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "ssh -fNT -L4431:www1:443 -L4432:www2:443 colocatedserver\n",
+          "command-options": {
+            "ssh": {
+              "mpsum": "OpenSSH SSH client (remote login program)",
+              "-N": "Do not execute a remote command. This is useful for just forwarding ports.",
+              "-T": "Disable pseudo-terminal allocation.",
+              "-f": "Requests ssh to go to background just before command execution. This is useful if\n ssh is going to ask for passwords or passphrases, but the user wants it in the\n background. This implies -n. The recommended way to start X11 programs at a remote\n site is with something like ssh -f host xterm."
+            }
+          },
+          "TLDR_inform": {
+            "ssh": {
+              "man1_ssh_32381": "secur shell protocol use secur log onto remot system\nuse log execut command remot server agent forward : forward authent inform remot machin see man ssh_config avail option connect remot server connect remot server use specif port connect remot server specif ident privat key run command remot server ssh jump : connect jumphost remot server multipl jump hop may specifi separ comma charact ssh tunnel : dynam port forward sock proxi localhost:9999 ssh tunnel : forward specif port localhost:9999 exampl org:80 along disabl pseudo- ty alloc executio n remot command"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_69069: Centos freeing up disk space"
+      ],
+      "Top-3 Scripts": [
+        "ul_69069: du -sh"
+      ],
+      "Explanations about Options": {
+        "-h": "print sizes in human readable format (e.g., 1K 234M 2G)",
+        "-s": "display only a total for each argument"
+      }
+    },
+    {
+      "Command": "wall",
+      "MP Summary": "write a message to all users",
+      "Most Similar TLDR Task": "Send a message with timeout (default 300)",
+      "Most Similar TLDR Script": "wall -t {{seconds}} {{file}}",
+      "Most Similar NL2Bash Task": "Set up local port forwards in the background with no terminal or command execution from port 4431 to host \"www1\" port 443 and port 4432 to host \"www2\" port 443 via the host \"colocatedserver\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "ssh -fNT -L4431:www1:443 -L4432:www2:443 colocatedserver\n",
+          "command-options": {
+            "ssh": {
+              "mpsum": "OpenSSH SSH client (remote login program)",
+              "-N": "Do not execute a remote command. This is useful for just forwarding ports.",
+              "-T": "Disable pseudo-terminal allocation.",
+              "-f": "Requests ssh to go to background just before command execution. This is useful if\n ssh is going to ask for passwords or passphrases, but the user wants it in the\n background. This implies -n. The recommended way to start X11 programs at a remote\n site is with something like ssh -f host xterm."
+            }
+          },
+          "TLDR_inform": {
+            "ssh": {
+              "man1_ssh_32381": "secur shell protocol use secur log onto remot system\nuse log execut command remot server agent forward : forward authent inform remot machin see man ssh_config avail option connect remot server connect remot server use specif port connect remot server specif ident privat key run command remot server ssh jump : connect jumphost remot server multipl jump hop may specifi separ comma charact ssh tunnel : dynam port forward sock proxi localhost:9999 ssh tunnel : forward specif port localhost:9999 exampl org:80 along disabl pseudo- ty alloc executio n remot command"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_957429: How to find the ports of multiple ip's"
+      ],
+      "Top-3 Scripts": [
+        "au_957429: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "man",
+      "MP Summary": "an interface to the system reference manuals",
+      "Most Similar TLDR Task": "Display the location of a manpage rather than the manpage itself",
+      "Most Similar TLDR Script": "man -w {{command}}",
+      "Most Similar NL2Bash Task": "Set up local port forwards in the background with no terminal or command execution from port 4431 to host \"www1\" port 443 and port 4432 to host \"www2\" port 443 via the host \"colocatedserver\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "ssh -fNT -L4431:www1:443 -L4432:www2:443 colocatedserver\n",
+          "command-options": {
+            "ssh": {
+              "mpsum": "OpenSSH SSH client (remote login program)",
+              "-N": "Do not execute a remote command. This is useful for just forwarding ports.",
+              "-T": "Disable pseudo-terminal allocation.",
+              "-f": "Requests ssh to go to background just before command execution. This is useful if\n ssh is going to ask for passwords or passphrases, but the user wants it in the\n background. This implies -n. The recommended way to start X11 programs at a remote\n site is with something like ssh -f host xterm."
+            }
+          },
+          "TLDR_inform": {
+            "ssh": {
+              "man1_ssh_32381": "secur shell protocol use secur log onto remot system\nuse log execut command remot server agent forward : forward authent inform remot machin see man ssh_config avail option connect remot server connect remot server use specif port connect remot server specif ident privat key run command remot server ssh jump : connect jumphost remot server multipl jump hop may specifi separ comma charact ssh tunnel : dynam port forward sock proxi localhost:9999 ssh tunnel : forward specif port localhost:9999 exampl org:80 along disabl pseudo- ty alloc executio n remot command"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_668351: Get free/used ports in a specific range"
+      ],
+      "Top-3 Scripts": [
+        "ul_668351: man lsof"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "strace",
+      "MP Summary": "trace system calls and signals",
+      "Most Similar TLDR Task": "Start tracing a specific process by its PID",
+      "Most Similar TLDR Script": "strace -p {{pid}}",
+      "Most Similar NL2Bash Task": "Set up local port forwards in the background with no terminal or command execution from port 4431 to host \"www1\" port 443 and port 4432 to host \"www2\" port 443 via the host \"colocatedserver\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "ssh -fNT -L4431:www1:443 -L4432:www2:443 colocatedserver\n",
+          "command-options": {
+            "ssh": {
+              "mpsum": "OpenSSH SSH client (remote login program)",
+              "-N": "Do not execute a remote command. This is useful for just forwarding ports.",
+              "-T": "Disable pseudo-terminal allocation.",
+              "-f": "Requests ssh to go to background just before command execution. This is useful if\n ssh is going to ask for passwords or passphrases, but the user wants it in the\n background. This implies -n. The recommended way to start X11 programs at a remote\n site is with something like ssh -f host xterm."
+            }
+          },
+          "TLDR_inform": {
+            "ssh": {
+              "man1_ssh_32381": "secur shell protocol use secur log onto remot system\nuse log execut command remot server agent forward : forward authent inform remot machin see man ssh_config avail option connect remot server connect remot server use specif port connect remot server specif ident privat key run command remot server ssh jump : connect jumphost remot server multipl jump hop may specifi separ comma charact ssh tunnel : dynam port forward sock proxi localhost:9999 ssh tunnel : forward specif port localhost:9999 exampl org:80 along disabl pseudo- ty alloc executio n remot command"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_588446: How to remove \"Connection refused\" lines from \">/dev/tcp/ip/port\""
+      ],
+      "Top-3 Scripts": [
+        "ul_588446: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "bash",
+      "MP Summary": "GNU Bourne-Again SHell",
+      "Most Similar TLDR Task": "Run commands from a file, logging all commands executed to the terminal",
+      "Most Similar TLDR Script": "bash -x {{file.sh}}",
+      "Most Similar NL2Bash Task": "Set up local port forwards in the background with no terminal or command execution from port 4431 to host \"www1\" port 443 and port 4432 to host \"www2\" port 443 via the host \"colocatedserver\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "ssh -fNT -L4431:www1:443 -L4432:www2:443 colocatedserver\n",
+          "command-options": {
+            "ssh": {
+              "mpsum": "OpenSSH SSH client (remote login program)",
+              "-N": "Do not execute a remote command. This is useful for just forwarding ports.",
+              "-T": "Disable pseudo-terminal allocation.",
+              "-f": "Requests ssh to go to background just before command execution. This is useful if\n ssh is going to ask for passwords or passphrases, but the user wants it in the\n background. This implies -n. The recommended way to start X11 programs at a remote\n site is with something like ssh -f host xterm."
+            }
+          },
+          "TLDR_inform": {
+            "ssh": {
+              "man1_ssh_32381": "secur shell protocol use secur log onto remot system\nuse log execut command remot server agent forward : forward authent inform remot machin see man ssh_config avail option connect remot server connect remot server use specif port connect remot server specif ident privat key run command remot server ssh jump : connect jumphost remot server multipl jump hop may specifi separ comma charact ssh tunnel : dynam port forward sock proxi localhost:9999 ssh tunnel : forward specif port localhost:9999 exampl org:80 along disabl pseudo- ty alloc executio n remot command"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_588446: How to remove \"Connection refused\" lines from \">/dev/tcp/ip/port\"",
+        "au_667096: How to change the default TTL of TCP/IP packets?"
+      ],
+      "Top-3 Scripts": [
+        "ul_588446: ",
+        "au_667096: sudo bash -c 'echo 129 > /proc/sys/net/ipv4/ip_default_ttl'"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "print",
+      "MP Summary": "execute programs via entries in the mailcap file",
+      "Most Similar TLDR Task": "With `run-mailcap`",
+      "Most Similar TLDR Script": "run-mailcap --action=print {{filename}}",
+      "Most Similar NL2Bash Task": "Set up local port forwards in the background with no terminal or command execution from port 4431 to host \"www1\" port 443 and port 4432 to host \"www2\" port 443 via the host \"colocatedserver\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "ssh -fNT -L4431:www1:443 -L4432:www2:443 colocatedserver\n",
+          "command-options": {
+            "ssh": {
+              "mpsum": "OpenSSH SSH client (remote login program)",
+              "-N": "Do not execute a remote command. This is useful for just forwarding ports.",
+              "-T": "Disable pseudo-terminal allocation.",
+              "-f": "Requests ssh to go to background just before command execution. This is useful if\n ssh is going to ask for passwords or passphrases, but the user wants it in the\n background. This implies -n. The recommended way to start X11 programs at a remote\n site is with something like ssh -f host xterm."
+            }
+          },
+          "TLDR_inform": {
+            "ssh": {
+              "man1_ssh_32381": "secur shell protocol use secur log onto remot system\nuse log execut command remot server agent forward : forward authent inform remot machin see man ssh_config avail option connect remot server connect remot server use specif port connect remot server specif ident privat key run command remot server ssh jump : connect jumphost remot server multipl jump hop may specifi separ comma charact ssh tunnel : dynam port forward sock proxi localhost:9999 ssh tunnel : forward specif port localhost:9999 exampl org:80 along disabl pseudo- ty alloc executio n remot command"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_9825698: How can I kill TCP port 16969 in Bash?",
+        "ul_252517: Can nmap display only hosts with specific ports open?"
+      ],
+      "Top-3 Scripts": [
+        "so_9825698: lsof -i tcp:22 | grep LISTEN | awk '{print $2}' | xargs kill\n\nlsof -i tcp:22 | grep LISTEN | awk '{print $2}' | xargs echo kill",
+        "ul_252517: nmap 192.168.1.1-254 -p22,80 --open -oG - | awk '/22\\/open.*80\\/open/{print $2}'"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "at",
+      "MP Summary": "queue, examine, or delete jobs for later execution",
+      "Most Similar TLDR Task": "Execute the commands and email the result using a local mailing program such as sendmail",
+      "Most Similar TLDR Script": "at {{hh:mm}} -m",
+      "Most Similar NL2Bash Task": "Set up local port forwards in the background with no terminal or command execution from port 4431 to host \"www1\" port 443 and port 4432 to host \"www2\" port 443 via the host \"colocatedserver\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "ssh -fNT -L4431:www1:443 -L4432:www2:443 colocatedserver\n",
+          "command-options": {
+            "ssh": {
+              "mpsum": "OpenSSH SSH client (remote login program)",
+              "-N": "Do not execute a remote command. This is useful for just forwarding ports.",
+              "-T": "Disable pseudo-terminal allocation.",
+              "-f": "Requests ssh to go to background just before command execution. This is useful if\n ssh is going to ask for passwords or passphrases, but the user wants it in the\n background. This implies -n. The recommended way to start X11 programs at a remote\n site is with something like ssh -f host xterm."
+            }
+          },
+          "TLDR_inform": {
+            "ssh": {
+              "man1_ssh_32381": "secur shell protocol use secur log onto remot system\nuse log execut command remot server agent forward : forward authent inform remot machin see man ssh_config avail option connect remot server connect remot server use specif port connect remot server specif ident privat key run command remot server ssh jump : connect jumphost remot server multipl jump hop may specifi separ comma charact ssh tunnel : dynam port forward sock proxi localhost:9999 ssh tunnel : forward specif port localhost:9999 exampl org:80 along disabl pseudo- ty alloc executio n remot command"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_957429: How to find the ports of multiple ip's"
+      ],
+      "Top-3 Scripts": [
+        "au_957429: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "script",
+      "MP Summary": "make typescript of terminal session",
+      "Most Similar TLDR Task": "Record a new session to a file named `typescript` in the current directory",
+      "Most Similar TLDR Script": "script",
+      "Most Similar NL2Bash Task": "Set up local port forwards in the background with no terminal or command execution from port 4431 to host \"www1\" port 443 and port 4432 to host \"www2\" port 443 via the host \"colocatedserver\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "ssh -fNT -L4431:www1:443 -L4432:www2:443 colocatedserver\n",
+          "command-options": {
+            "ssh": {
+              "mpsum": "OpenSSH SSH client (remote login program)",
+              "-N": "Do not execute a remote command. This is useful for just forwarding ports.",
+              "-T": "Disable pseudo-terminal allocation.",
+              "-f": "Requests ssh to go to background just before command execution. This is useful if\n ssh is going to ask for passwords or passphrases, but the user wants it in the\n background. This implies -n. The recommended way to start X11 programs at a remote\n site is with something like ssh -f host xterm."
+            }
+          },
+          "TLDR_inform": {
+            "ssh": {
+              "man1_ssh_32381": "secur shell protocol use secur log onto remot system\nuse log execut command remot server agent forward : forward authent inform remot machin see man ssh_config avail option connect remot server connect remot server use specif port connect remot server specif ident privat key run command remot server ssh jump : connect jumphost remot server multipl jump hop may specifi separ comma charact ssh tunnel : dynam port forward sock proxi localhost:9999 ssh tunnel : forward specif port localhost:9999 exampl org:80 along disabl pseudo- ty alloc executio n remot command"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_957429: How to find the ports of multiple ip's"
+      ],
+      "Top-3 Scripts": [
+        "au_957429: script nmap.log\nIP1=\"\"\nIP2=\"\"\nIP3=\"\"\nIP4=\"\"\nIP5=\"\"\nsudo nmap -P0 -PS -n -sS -p1-65535 -r -T4 $IP1 $IP2 $IP3 $IP4 $IP5\nexit"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "fd",
+      "MP Summary": "find entries in the filesystem",
+      "Most Similar TLDR Task": "Find files in a specific directory",
+      "Most Similar TLDR Script": "fd {{pattern}} {{path/to/dir}}",
+      "Most Similar NL2Bash Task": "Set up local port forwards in the background with no terminal or command execution from port 4431 to host \"www1\" port 443 and port 4432 to host \"www2\" port 443 via the host \"colocatedserver\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "ssh -fNT -L4431:www1:443 -L4432:www2:443 colocatedserver\n",
+          "command-options": {
+            "ssh": {
+              "mpsum": "OpenSSH SSH client (remote login program)",
+              "-N": "Do not execute a remote command. This is useful for just forwarding ports.",
+              "-T": "Disable pseudo-terminal allocation.",
+              "-f": "Requests ssh to go to background just before command execution. This is useful if\n ssh is going to ask for passwords or passphrases, but the user wants it in the\n background. This implies -n. The recommended way to start X11 programs at a remote\n site is with something like ssh -f host xterm."
+            }
+          },
+          "TLDR_inform": {
+            "ssh": {
+              "man1_ssh_32381": "secur shell protocol use secur log onto remot system\nuse log execut command remot server agent forward : forward authent inform remot machin see man ssh_config avail option connect remot server connect remot server use specif port connect remot server specif ident privat key run command remot server ssh jump : connect jumphost remot server multipl jump hop may specifi separ comma charact ssh tunnel : dynam port forward sock proxi localhost:9999 ssh tunnel : forward specif port localhost:9999 exampl org:80 along disabl pseudo- ty alloc executio n remot command"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_180492: Is it possible to connect to TCP port 0?"
+      ],
+      "Top-3 Scripts": [
+        "ul_180492: int fd = socket(AF_INET, SOCK_STREAM, 0);\nstruct sockaddr_in addr;\naddr.sin_family = AF_INET;\naddr.sin_port = 0;\ninet_aton(\"127.0.0.1\", &addr.sin_addr);\nif (connect(fd, (const struct sockaddr*)&addr, sizeof(addr)) == -1) {\n    fprintf(stderr,\"%s\", strerror(errno));\n}"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "link",
+      "MP Summary": "call the link function to create a link to a file",
+      "Most Similar TLDR Task": "Create a hard link from a new file to an existing file",
+      "Most Similar TLDR Script": "link {{path/to/existing_file}} {{path/to/new_file}}",
+      "Most Similar NL2Bash Task": "Set up local port forwards in the background with no terminal or command execution from port 4431 to host \"www1\" port 443 and port 4432 to host \"www2\" port 443 via the host \"colocatedserver\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "ssh -fNT -L4431:www1:443 -L4432:www2:443 colocatedserver\n",
+          "command-options": {
+            "ssh": {
+              "mpsum": "OpenSSH SSH client (remote login program)",
+              "-N": "Do not execute a remote command. This is useful for just forwarding ports.",
+              "-T": "Disable pseudo-terminal allocation.",
+              "-f": "Requests ssh to go to background just before command execution. This is useful if\n ssh is going to ask for passwords or passphrases, but the user wants it in the\n background. This implies -n. The recommended way to start X11 programs at a remote\n site is with something like ssh -f host xterm."
+            }
+          },
+          "TLDR_inform": {
+            "ssh": {
+              "man1_ssh_32381": "secur shell protocol use secur log onto remot system\nuse log execut command remot server agent forward : forward authent inform remot machin see man ssh_config avail option connect remot server connect remot server use specif port connect remot server specif ident privat key run command remot server ssh jump : connect jumphost remot server multipl jump hop may specifi separ comma charact ssh tunnel : dynam port forward sock proxi localhost:9999 ssh tunnel : forward specif port localhost:9999 exampl org:80 along disabl pseudo- ty alloc executio n remot command"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_130797: Can TCP provide more than 65535 ports?",
+        "ul_122468: How does one capture traffic on virtual interfaces?"
+      ],
+      "Top-3 Scripts": [
+        "ul_130797: $ sudo ip link set eth0 up\n$ sudo ip addr add 192.0.2.1/24 dev eth0\n$ sudo ip addr add 192.0.2.2/24 dev eth0\n$ ip addr show dev eth0\n2: eth0: <NO-CARRIER,BROADCAST,MULTICAST,UP> mtu 1500 qdisc\n      pfifo_fast state DOWN qlen 1000\n    link/ether 00:d0:b7:2d:ce:cf brd ff:ff:ff:ff:ff:ff\n    inet 192.0.2.1/24 brd 192.0.2.255 scope global eth1\n    inet 192.0.2.2/24 scope global secondary eth1",
+        "ul_122468: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "docker-compose",
+      "MP Summary": "Define and run multi-container applications with Docker.",
+      "Most Similar TLDR Task": "Stop and remove all containers, networks, images, and volumes",
+      "Most Similar TLDR Script": "docker-compose down --rmi all --volumes",
+      "Most Similar NL2Bash Task": "Set up local port forwards in the background with no terminal or command execution from port 4431 to host \"www1\" port 443 and port 4432 to host \"www2\" port 443 via the host \"colocatedserver\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "ssh -fNT -L4431:www1:443 -L4432:www2:443 colocatedserver\n",
+          "command-options": {
+            "ssh": {
+              "mpsum": "OpenSSH SSH client (remote login program)",
+              "-N": "Do not execute a remote command. This is useful for just forwarding ports.",
+              "-T": "Disable pseudo-terminal allocation.",
+              "-f": "Requests ssh to go to background just before command execution. This is useful if\n ssh is going to ask for passwords or passphrases, but the user wants it in the\n background. This implies -n. The recommended way to start X11 programs at a remote\n site is with something like ssh -f host xterm."
+            }
+          },
+          "TLDR_inform": {
+            "ssh": {
+              "man1_ssh_32381": "secur shell protocol use secur log onto remot system\nuse log execut command remot server agent forward : forward authent inform remot machin see man ssh_config avail option connect remot server connect remot server use specif port connect remot server specif ident privat key run command remot server ssh jump : connect jumphost remot server multipl jump hop may specifi separ comma charact ssh tunnel : dynam port forward sock proxi localhost:9999 ssh tunnel : forward specif port localhost:9999 exampl org:80 along disabl pseudo- ty alloc executio n remot command"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_589474: Is the server running on host \"localhost\" (::1) and accepting TCP/IP connections on port 5432"
+      ],
+      "Top-3 Scripts": [
+        "ul_589474: docker-compose down\ndocker container stop $(docker container ls -aq)\ndocker network create x_middleware\ndocker network create foo\ndocker-compose build\ndocker-compose run app bin/rails db:setup profiles:build\ndocker-compose run app bin/rails profiles:build\ndocker-sync-stack start"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "read",
+      "MP Summary": "read a line from standard input",
+      "Most Similar TLDR Task": "Enable backspace and GNU readline hotkeys when entering input with read",
+      "Most Similar TLDR Script": "read -e {{variable}}",
+      "Most Similar NL2Bash Task": "Set up local port forwards in the background with no terminal or command execution from port 4431 to host \"www1\" port 443 and port 4432 to host \"www2\" port 443 via the host \"colocatedserver\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "ssh -fNT -L4431:www1:443 -L4432:www2:443 colocatedserver\n",
+          "command-options": {
+            "ssh": {
+              "mpsum": "OpenSSH SSH client (remote login program)",
+              "-N": "Do not execute a remote command. This is useful for just forwarding ports.",
+              "-T": "Disable pseudo-terminal allocation.",
+              "-f": "Requests ssh to go to background just before command execution. This is useful if\n ssh is going to ask for passwords or passphrases, but the user wants it in the\n background. This implies -n. The recommended way to start X11 programs at a remote\n site is with something like ssh -f host xterm."
+            }
+          },
+          "TLDR_inform": {
+            "ssh": {
+              "man1_ssh_32381": "secur shell protocol use secur log onto remot system\nuse log execut command remot server agent forward : forward authent inform remot machin see man ssh_config avail option connect remot server connect remot server use specif port connect remot server specif ident privat key run command remot server ssh jump : connect jumphost remot server multipl jump hop may specifi separ comma charact ssh tunnel : dynam port forward sock proxi localhost:9999 ssh tunnel : forward specif port localhost:9999 exampl org:80 along disabl pseudo- ty alloc executio n remot command"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_15600319: Sending multiple messages over a TCP port"
+      ],
+      "Top-3 Scripts": [
+        "so_15600319: n = read (newsockfd, buffer, 255);"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "awk",
+      "MP Summary": "pattern scanning and processing language",
+      "Most Similar TLDR Task": "Sum the values in the first column of a file and print the total",
+      "Most Similar TLDR Script": "awk '{s+=$1} END {print s}' {{filename}}",
+      "Most Similar NL2Bash Task": "Set up local port forwards in the background with no terminal or command execution from port 4431 to host \"www1\" port 443 and port 4432 to host \"www2\" port 443 via the host \"colocatedserver\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "ssh -fNT -L4431:www1:443 -L4432:www2:443 colocatedserver\n",
+          "command-options": {
+            "ssh": {
+              "mpsum": "OpenSSH SSH client (remote login program)",
+              "-N": "Do not execute a remote command. This is useful for just forwarding ports.",
+              "-T": "Disable pseudo-terminal allocation.",
+              "-f": "Requests ssh to go to background just before command execution. This is useful if\n ssh is going to ask for passwords or passphrases, but the user wants it in the\n background. This implies -n. The recommended way to start X11 programs at a remote\n site is with something like ssh -f host xterm."
+            }
+          },
+          "TLDR_inform": {
+            "ssh": {
+              "man1_ssh_32381": "secur shell protocol use secur log onto remot system\nuse log execut command remot server agent forward : forward authent inform remot machin see man ssh_config avail option connect remot server connect remot server use specif port connect remot server specif ident privat key run command remot server ssh jump : connect jumphost remot server multipl jump hop may specifi separ comma charact ssh tunnel : dynam port forward sock proxi localhost:9999 ssh tunnel : forward specif port localhost:9999 exampl org:80 along disabl pseudo- ty alloc executio n remot command"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_9825698: How can I kill TCP port 16969 in Bash?",
+        "ul_252517: Can nmap display only hosts with specific ports open?"
+      ],
+      "Top-3 Scripts": [
+        "so_9825698: lsof -i tcp:22 | grep LISTEN | awk '{print $2}' | xargs kill\n\nlsof -i tcp:22 | grep LISTEN | awk '{print $2}' | xargs echo kill",
+        "ul_252517: nmap 192.168.1.1-254 -p22,80 --open -oG - | awk '/22\\/open.*80\\/open/{print $2}'"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "install",
+      "MP Summary": "copy files and set attributes",
+      "Most Similar TLDR Task": "Copy files and apply access/modification times of source to destination",
+      "Most Similar TLDR Script": "install -p {{path/to/source}} {{path/to/destination}}",
+      "Most Similar NL2Bash Task": "Set up local port forwards in the background with no terminal or command execution from port 4431 to host \"www1\" port 443 and port 4432 to host \"www2\" port 443 via the host \"colocatedserver\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "ssh -fNT -L4431:www1:443 -L4432:www2:443 colocatedserver\n",
+          "command-options": {
+            "ssh": {
+              "mpsum": "OpenSSH SSH client (remote login program)",
+              "-N": "Do not execute a remote command. This is useful for just forwarding ports.",
+              "-T": "Disable pseudo-terminal allocation.",
+              "-f": "Requests ssh to go to background just before command execution. This is useful if\n ssh is going to ask for passwords or passphrases, but the user wants it in the\n background. This implies -n. The recommended way to start X11 programs at a remote\n site is with something like ssh -f host xterm."
+            }
+          },
+          "TLDR_inform": {
+            "ssh": {
+              "man1_ssh_32381": "secur shell protocol use secur log onto remot system\nuse log execut command remot server agent forward : forward authent inform remot machin see man ssh_config avail option connect remot server connect remot server use specif port connect remot server specif ident privat key run command remot server ssh jump : connect jumphost remot server multipl jump hop may specifi separ comma charact ssh tunnel : dynam port forward sock proxi localhost:9999 ssh tunnel : forward specif port localhost:9999 exampl org:80 along disabl pseudo- ty alloc executio n remot command"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_99023: Redirect the default HTTP port to an application"
+      ],
+      "Top-3 Scripts": [
+        "ul_99023: yum install tinyproxy"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "service",
+      "MP Summary": "run a System V init script",
+      "Most Similar TLDR Task": "List the name and status of all services",
+      "Most Similar TLDR Script": "service --status-all",
+      "Most Similar NL2Bash Task": "Set up local port forwards in the background with no terminal or command execution from port 4431 to host \"www1\" port 443 and port 4432 to host \"www2\" port 443 via the host \"colocatedserver\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "ssh -fNT -L4431:www1:443 -L4432:www2:443 colocatedserver\n",
+          "command-options": {
+            "ssh": {
+              "mpsum": "OpenSSH SSH client (remote login program)",
+              "-N": "Do not execute a remote command. This is useful for just forwarding ports.",
+              "-T": "Disable pseudo-terminal allocation.",
+              "-f": "Requests ssh to go to background just before command execution. This is useful if\n ssh is going to ask for passwords or passphrases, but the user wants it in the\n background. This implies -n. The recommended way to start X11 programs at a remote\n site is with something like ssh -f host xterm."
+            }
+          },
+          "TLDR_inform": {
+            "ssh": {
+              "man1_ssh_32381": "secur shell protocol use secur log onto remot system\nuse log execut command remot server agent forward : forward authent inform remot machin see man ssh_config avail option connect remot server connect remot server use specif port connect remot server specif ident privat key run command remot server ssh jump : connect jumphost remot server multipl jump hop may specifi separ comma charact ssh tunnel : dynam port forward sock proxi localhost:9999 ssh tunnel : forward specif port localhost:9999 exampl org:80 along disabl pseudo- ty alloc executio n remot command"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_99023: Redirect the default HTTP port to an application",
+        "ul_352717: How Do I enable port forwarding but only for some IPs and block others?"
+      ],
+      "Top-3 Scripts": [
+        "ul_99023: service iptables reload\n\nservice httpd stop\n\nservice tinyproxy start",
+        "ul_352717: iptables -P FORWARD DROP\niptables -I FORWARD -p tcp -s 192.168.0.2 -j ACCEPT\nservice iptables save"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "set",
+      "MP Summary": "set or unset options and positional parameters",
+      "Most Similar TLDR Task": "Notify of job termination immediately",
+      "Most Similar TLDR Script": "set -b",
+      "Most Similar NL2Bash Task": "Set up local port forwards in the background with no terminal or command execution from port 4431 to host \"www1\" port 443 and port 4432 to host \"www2\" port 443 via the host \"colocatedserver\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "ssh -fNT -L4431:www1:443 -L4432:www2:443 colocatedserver\n",
+          "command-options": {
+            "ssh": {
+              "mpsum": "OpenSSH SSH client (remote login program)",
+              "-N": "Do not execute a remote command. This is useful for just forwarding ports.",
+              "-T": "Disable pseudo-terminal allocation.",
+              "-f": "Requests ssh to go to background just before command execution. This is useful if\n ssh is going to ask for passwords or passphrases, but the user wants it in the\n background. This implies -n. The recommended way to start X11 programs at a remote\n site is with something like ssh -f host xterm."
+            }
+          },
+          "TLDR_inform": {
+            "ssh": {
+              "man1_ssh_32381": "secur shell protocol use secur log onto remot system\nuse log execut command remot server agent forward : forward authent inform remot machin see man ssh_config avail option connect remot server connect remot server use specif port connect remot server specif ident privat key run command remot server ssh jump : connect jumphost remot server multipl jump hop may specifi separ comma charact ssh tunnel : dynam port forward sock proxi localhost:9999 ssh tunnel : forward specif port localhost:9999 exampl org:80 along disabl pseudo- ty alloc executio n remot command"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_130797: Can TCP provide more than 65535 ports?",
+        "so_55297121: Change IP address on the port script"
+      ],
+      "Top-3 Scripts": [
+        "ul_130797: $ sudo ip link set eth0 up\n$ sudo ip addr add 192.0.2.1/24 dev eth0\n$ sudo ip addr add 192.0.2.2/24 dev eth0\n$ ip addr show dev eth0\n2: eth0: <NO-CARRIER,BROADCAST,MULTICAST,UP> mtu 1500 qdisc\n      pfifo_fast state DOWN qlen 1000\n    link/ether 00:d0:b7:2d:ce:cf brd ff:ff:ff:ff:ff:ff\n    inet 192.0.2.1/24 brd 192.0.2.255 scope global eth1\n    inet 192.0.2.2/24 scope global secondary eth1",
+        "so_55297121: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "git",
+      "MP Summary": "the stupid content tracker",
+      "Most Similar TLDR Task": "Execute a Git subcommand on a custom repository root path",
+      "Most Similar TLDR Script": "git -C {{path/to/repo}} {{subcommand}}",
+      "Most Similar NL2Bash Task": "Set up local port forwards in the background with no terminal or command execution from port 4431 to host \"www1\" port 443 and port 4432 to host \"www2\" port 443 via the host \"colocatedserver\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "ssh -fNT -L4431:www1:443 -L4432:www2:443 colocatedserver\n",
+          "command-options": {
+            "ssh": {
+              "mpsum": "OpenSSH SSH client (remote login program)",
+              "-N": "Do not execute a remote command. This is useful for just forwarding ports.",
+              "-T": "Disable pseudo-terminal allocation.",
+              "-f": "Requests ssh to go to background just before command execution. This is useful if\n ssh is going to ask for passwords or passphrases, but the user wants it in the\n background. This implies -n. The recommended way to start X11 programs at a remote\n site is with something like ssh -f host xterm."
+            }
+          },
+          "TLDR_inform": {
+            "ssh": {
+              "man1_ssh_32381": "secur shell protocol use secur log onto remot system\nuse log execut command remot server agent forward : forward authent inform remot machin see man ssh_config avail option connect remot server connect remot server use specif port connect remot server specif ident privat key run command remot server ssh jump : connect jumphost remot server multipl jump hop may specifi separ comma charact ssh tunnel : dynam port forward sock proxi localhost:9999 ssh tunnel : forward specif port localhost:9999 exampl org:80 along disabl pseudo- ty alloc executio n remot command"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_957429: How to find the ports of multiple ip's"
+      ],
+      "Top-3 Scripts": [
+        "au_957429: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "xargs",
+      "MP Summary": "build and execute command lines from standard input",
+      "Most Similar TLDR Task": "Parallel runs of up to `max-procs` processes at a time; the default is 1. If `max-procs` is 0, xargs will run as many processes as possible at a time",
+      "Most Similar TLDR Script": "{{arguments_source}} | xargs -P {{max-procs}} {{command}}",
+      "Most Similar NL2Bash Task": "Set up local port forwards in the background with no terminal or command execution from port 4431 to host \"www1\" port 443 and port 4432 to host \"www2\" port 443 via the host \"colocatedserver\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "ssh -fNT -L4431:www1:443 -L4432:www2:443 colocatedserver\n",
+          "command-options": {
+            "ssh": {
+              "mpsum": "OpenSSH SSH client (remote login program)",
+              "-N": "Do not execute a remote command. This is useful for just forwarding ports.",
+              "-T": "Disable pseudo-terminal allocation.",
+              "-f": "Requests ssh to go to background just before command execution. This is useful if\n ssh is going to ask for passwords or passphrases, but the user wants it in the\n background. This implies -n. The recommended way to start X11 programs at a remote\n site is with something like ssh -f host xterm."
+            }
+          },
+          "TLDR_inform": {
+            "ssh": {
+              "man1_ssh_32381": "secur shell protocol use secur log onto remot system\nuse log execut command remot server agent forward : forward authent inform remot machin see man ssh_config avail option connect remot server connect remot server use specif port connect remot server specif ident privat key run command remot server ssh jump : connect jumphost remot server multipl jump hop may specifi separ comma charact ssh tunnel : dynam port forward sock proxi localhost:9999 ssh tunnel : forward specif port localhost:9999 exampl org:80 along disabl pseudo- ty alloc executio n remot command"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_9825698: How can I kill TCP port 16969 in Bash?"
+      ],
+      "Top-3 Scripts": [
+        "so_9825698: lsof -i tcp:22 | grep LISTEN | awk '{print $2}' | xargs kill\n\nlsof -i tcp:22 | grep LISTEN | awk '{print $2}' | xargs echo kill"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "node",
+      "MP Summary": "server-side JavaScript runtime",
+      "Most Similar TLDR Task": "Activate inspector, pausing execution until a debugger is connected once source code is fully parsed",
+      "Most Similar TLDR Script": "node --no-lazy --inspect-brk {{path/to/file}}",
+      "Most Similar NL2Bash Task": "Set up local port forwards in the background with no terminal or command execution from port 4431 to host \"www1\" port 443 and port 4432 to host \"www2\" port 443 via the host \"colocatedserver\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "ssh -fNT -L4431:www1:443 -L4432:www2:443 colocatedserver\n",
+          "command-options": {
+            "ssh": {
+              "mpsum": "OpenSSH SSH client (remote login program)",
+              "-N": "Do not execute a remote command. This is useful for just forwarding ports.",
+              "-T": "Disable pseudo-terminal allocation.",
+              "-f": "Requests ssh to go to background just before command execution. This is useful if\n ssh is going to ask for passwords or passphrases, but the user wants it in the\n background. This implies -n. The recommended way to start X11 programs at a remote\n site is with something like ssh -f host xterm."
+            }
+          },
+          "TLDR_inform": {
+            "ssh": {
+              "man1_ssh_32381": "secur shell protocol use secur log onto remot system\nuse log execut command remot server agent forward : forward authent inform remot machin see man ssh_config avail option connect remot server connect remot server use specif port connect remot server specif ident privat key run command remot server ssh jump : connect jumphost remot server multipl jump hop may specifi separ comma charact ssh tunnel : dynam port forward sock proxi localhost:9999 ssh tunnel : forward specif port localhost:9999 exampl org:80 along disabl pseudo- ty alloc executio n remot command"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_34509: Trying to Open a Port using CentOS"
+      ],
+      "Top-3 Scripts": [
+        "ul_34509: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "tee",
+      "MP Summary": "read from standard input and write to standard output and files",
+      "Most Similar TLDR Task": "Create a directory called \"example\", count the number of characters in \"example\" and write \"example\" to the terminal",
+      "Most Similar TLDR Script": "echo \"example\" | tee >(xargs mkdir) >(wc -c)",
+      "Most Similar NL2Bash Task": "Set up local port forwards in the background with no terminal or command execution from port 4431 to host \"www1\" port 443 and port 4432 to host \"www2\" port 443 via the host \"colocatedserver\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "ssh -fNT -L4431:www1:443 -L4432:www2:443 colocatedserver\n",
+          "command-options": {
+            "ssh": {
+              "mpsum": "OpenSSH SSH client (remote login program)",
+              "-N": "Do not execute a remote command. This is useful for just forwarding ports.",
+              "-T": "Disable pseudo-terminal allocation.",
+              "-f": "Requests ssh to go to background just before command execution. This is useful if\n ssh is going to ask for passwords or passphrases, but the user wants it in the\n background. This implies -n. The recommended way to start X11 programs at a remote\n site is with something like ssh -f host xterm."
+            }
+          },
+          "TLDR_inform": {
+            "ssh": {
+              "man1_ssh_32381": "secur shell protocol use secur log onto remot system\nuse log execut command remot server agent forward : forward authent inform remot machin see man ssh_config avail option connect remot server connect remot server use specif port connect remot server specif ident privat key run command remot server ssh jump : connect jumphost remot server multipl jump hop may specifi separ comma charact ssh tunnel : dynam port forward sock proxi localhost:9999 ssh tunnel : forward specif port localhost:9999 exampl org:80 along disabl pseudo- ty alloc executio n remot command"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_667096: How to change the default TTL of TCP/IP packets?"
+      ],
+      "Top-3 Scripts": [
+        "au_667096: echo 129 | sudo tee /proc/sys/net/ipv4/ip_default_ttl"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "exit",
+      "MP Summary": "cause the shell to exit",
+      "Most Similar TLDR Task": "Exit the shell with the specified exit code",
+      "Most Similar TLDR Script": "exit {{exit_code}}",
+      "Most Similar NL2Bash Task": "Set up local port forwards in the background with no terminal or command execution from port 4431 to host \"www1\" port 443 and port 4432 to host \"www2\" port 443 via the host \"colocatedserver\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "ssh -fNT -L4431:www1:443 -L4432:www2:443 colocatedserver\n",
+          "command-options": {
+            "ssh": {
+              "mpsum": "OpenSSH SSH client (remote login program)",
+              "-N": "Do not execute a remote command. This is useful for just forwarding ports.",
+              "-T": "Disable pseudo-terminal allocation.",
+              "-f": "Requests ssh to go to background just before command execution. This is useful if\n ssh is going to ask for passwords or passphrases, but the user wants it in the\n background. This implies -n. The recommended way to start X11 programs at a remote\n site is with something like ssh -f host xterm."
+            }
+          },
+          "TLDR_inform": {
+            "ssh": {
+              "man1_ssh_32381": "secur shell protocol use secur log onto remot system\nuse log execut command remot server agent forward : forward authent inform remot machin see man ssh_config avail option connect remot server connect remot server use specif port connect remot server specif ident privat key run command remot server ssh jump : connect jumphost remot server multipl jump hop may specifi separ comma charact ssh tunnel : dynam port forward sock proxi localhost:9999 ssh tunnel : forward specif port localhost:9999 exampl org:80 along disabl pseudo- ty alloc executio n remot command"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_20789091: Get a random port for TCP connection",
+        "au_957429: How to find the ports of multiple ip's"
+      ],
+      "Top-3 Scripts": [
+        "so_20789091: if (getsockname(sockfd, (struct sockaddr *)&serv_addr, &len_inet) < 0){\n    cout << \"failed to get hostname with errno: \"<< errno << endl;\n    exit(1);\n}",
+        "au_957429: script nmap.log\nIP1=\"\"\nIP2=\"\"\nIP3=\"\"\nIP4=\"\"\nIP5=\"\"\nsudo nmap -P0 -PS -n -sS -p1-65535 -r -T4 $IP1 $IP2 $IP3 $IP4 $IP5\nexit"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "grep",
+      "MP Summary": "print lines that match patterns",
+      "Most Similar TLDR Task": "Use extended regular expressions (supporting `?`, `+`, `{}`, `()` and `|`), in case-insensitive mode",
+      "Most Similar TLDR Script": "grep -Ei {{search_pattern}} {{path/to/file}}",
+      "Most Similar NL2Bash Task": "Set up local port forwards in the background with no terminal or command execution from port 4431 to host \"www1\" port 443 and port 4432 to host \"www2\" port 443 via the host \"colocatedserver\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "ssh -fNT -L4431:www1:443 -L4432:www2:443 colocatedserver\n",
+          "command-options": {
+            "ssh": {
+              "mpsum": "OpenSSH SSH client (remote login program)",
+              "-N": "Do not execute a remote command. This is useful for just forwarding ports.",
+              "-T": "Disable pseudo-terminal allocation.",
+              "-f": "Requests ssh to go to background just before command execution. This is useful if\n ssh is going to ask for passwords or passphrases, but the user wants it in the\n background. This implies -n. The recommended way to start X11 programs at a remote\n site is with something like ssh -f host xterm."
+            }
+          },
+          "TLDR_inform": {
+            "ssh": {
+              "man1_ssh_32381": "secur shell protocol use secur log onto remot system\nuse log execut command remot server agent forward : forward authent inform remot machin see man ssh_config avail option connect remot server connect remot server use specif port connect remot server specif ident privat key run command remot server ssh jump : connect jumphost remot server multipl jump hop may specifi separ comma charact ssh tunnel : dynam port forward sock proxi localhost:9999 ssh tunnel : forward specif port localhost:9999 exampl org:80 along disabl pseudo- ty alloc executio n remot command"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_9825698: How can I kill TCP port 16969 in Bash?",
+        "so_29636472: How to find process using TCP port?"
+      ],
+      "Top-3 Scripts": [
+        "so_9825698: lsof -i tcp:22 | grep LISTEN | awk '{print $2}' | xargs kill\n\nlsof -i tcp:22 | grep LISTEN | awk '{print $2}' | xargs echo kill",
+        "so_29636472: sudo netstat -nlp | grep 9000\n\nlsof -n -i4TCP:$PORT | grep LISTEN"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "opt",
+      "MP Summary": "LLVM optimizer",
+      "Most Similar TLDR Task": "Optimize the program at level 2 and output the result to another file",
+      "Most Similar TLDR Script": "opt -O2 {{path/to/file.bc}} -S -o {{path/to/output_file.bc}}",
+      "Most Similar NL2Bash Task": "Set up local port forwards in the background with no terminal or command execution from port 4431 to host \"www1\" port 443 and port 4432 to host \"www2\" port 443 via the host \"colocatedserver\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "ssh -fNT -L4431:www1:443 -L4432:www2:443 colocatedserver\n",
+          "command-options": {
+            "ssh": {
+              "mpsum": "OpenSSH SSH client (remote login program)",
+              "-N": "Do not execute a remote command. This is useful for just forwarding ports.",
+              "-T": "Disable pseudo-terminal allocation.",
+              "-f": "Requests ssh to go to background just before command execution. This is useful if\n ssh is going to ask for passwords or passphrases, but the user wants it in the\n background. This implies -n. The recommended way to start X11 programs at a remote\n site is with something like ssh -f host xterm."
+            }
+          },
+          "TLDR_inform": {
+            "ssh": {
+              "man1_ssh_32381": "secur shell protocol use secur log onto remot system\nuse log execut command remot server agent forward : forward authent inform remot machin see man ssh_config avail option connect remot server connect remot server use specif port connect remot server specif ident privat key run command remot server ssh jump : connect jumphost remot server multipl jump hop may specifi separ comma charact ssh tunnel : dynam port forward sock proxi localhost:9999 ssh tunnel : forward specif port localhost:9999 exampl org:80 along disabl pseudo- ty alloc executio n remot command"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_11335431: Connect socket using secondary IP address"
+      ],
+      "Top-3 Scripts": [
+        "so_11335431: Chain POSTROUTING (policy ACCEPT 11 packets, 637 bytes)\n pkts bytes target     prot opt in     out     source               destination         \n    0     0 MASQUERADE  all  --  any    eth0.894  anywhere             anywhere"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "ls",
+      "MP Summary": "list directory contents",
+      "Most Similar TLDR Task": "Long format list (permissions, ownership, size and modification date) of all files",
+      "Most Similar TLDR Script": "ls -la",
+      "Most Similar NL2Bash Task": "Set up local port forwards in the background with no terminal or command execution from port 4431 to host \"www1\" port 443 and port 4432 to host \"www2\" port 443 via the host \"colocatedserver\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "ssh -fNT -L4431:www1:443 -L4432:www2:443 colocatedserver\n",
+          "command-options": {
+            "ssh": {
+              "mpsum": "OpenSSH SSH client (remote login program)",
+              "-N": "Do not execute a remote command. This is useful for just forwarding ports.",
+              "-T": "Disable pseudo-terminal allocation.",
+              "-f": "Requests ssh to go to background just before command execution. This is useful if\n ssh is going to ask for passwords or passphrases, but the user wants it in the\n background. This implies -n. The recommended way to start X11 programs at a remote\n site is with something like ssh -f host xterm."
+            }
+          },
+          "TLDR_inform": {
+            "ssh": {
+              "man1_ssh_32381": "secur shell protocol use secur log onto remot system\nuse log execut command remot server agent forward : forward authent inform remot machin see man ssh_config avail option connect remot server connect remot server use specif port connect remot server specif ident privat key run command remot server ssh jump : connect jumphost remot server multipl jump hop may specifi separ comma charact ssh tunnel : dynam port forward sock proxi localhost:9999 ssh tunnel : forward specif port localhost:9999 exampl org:80 along disabl pseudo- ty alloc executio n remot command"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_589474: Is the server running on host \"localhost\" (::1) and accepting TCP/IP connections on port 5432"
+      ],
+      "Top-3 Scripts": [
+        "ul_589474: docker-compose down\ndocker container stop $(docker container ls -aq)\ndocker network create x_middleware\ndocker network create foo\ndocker-compose build\ndocker-compose run app bin/rails db:setup profiles:build\ndocker-compose run app bin/rails profiles:build\ndocker-sync-stack start"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "time",
+      "MP Summary": "time a simple command",
+      "Most Similar TLDR Task": "Time \"ls\"",
+      "Most Similar TLDR Script": "time ls",
+      "Most Similar NL2Bash Task": "Set up local port forwards in the background with no terminal or command execution from port 4431 to host \"www1\" port 443 and port 4432 to host \"www2\" port 443 via the host \"colocatedserver\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "ssh -fNT -L4431:www1:443 -L4432:www2:443 colocatedserver\n",
+          "command-options": {
+            "ssh": {
+              "mpsum": "OpenSSH SSH client (remote login program)",
+              "-N": "Do not execute a remote command. This is useful for just forwarding ports.",
+              "-T": "Disable pseudo-terminal allocation.",
+              "-f": "Requests ssh to go to background just before command execution. This is useful if\n ssh is going to ask for passwords or passphrases, but the user wants it in the\n background. This implies -n. The recommended way to start X11 programs at a remote\n site is with something like ssh -f host xterm."
+            }
+          },
+          "TLDR_inform": {
+            "ssh": {
+              "man1_ssh_32381": "secur shell protocol use secur log onto remot system\nuse log execut command remot server agent forward : forward authent inform remot machin see man ssh_config avail option connect remot server connect remot server use specif port connect remot server specif ident privat key run command remot server ssh jump : connect jumphost remot server multipl jump hop may specifi separ comma charact ssh tunnel : dynam port forward sock proxi localhost:9999 ssh tunnel : forward specif port localhost:9999 exampl org:80 along disabl pseudo- ty alloc executio n remot command"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_957429: How to find the ports of multiple ip's"
+      ],
+      "Top-3 Scripts": [
+        "au_957429: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "sys",
+      "MP Summary": "Reports the compile-time CPU/operating system type",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "Set up local port forwards in the background with no terminal or command execution from port 4431 to host \"www1\" port 443 and port 4432 to host \"www2\" port 443 via the host \"colocatedserver\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "ssh -fNT -L4431:www1:443 -L4432:www2:443 colocatedserver\n",
+          "command-options": {
+            "ssh": {
+              "mpsum": "OpenSSH SSH client (remote login program)",
+              "-N": "Do not execute a remote command. This is useful for just forwarding ports.",
+              "-T": "Disable pseudo-terminal allocation.",
+              "-f": "Requests ssh to go to background just before command execution. This is useful if\n ssh is going to ask for passwords or passphrases, but the user wants it in the\n background. This implies -n. The recommended way to start X11 programs at a remote\n site is with something like ssh -f host xterm."
+            }
+          },
+          "TLDR_inform": {
+            "ssh": {
+              "man1_ssh_32381": "secur shell protocol use secur log onto remot system\nuse log execut command remot server agent forward : forward authent inform remot machin see man ssh_config avail option connect remot server connect remot server use specif port connect remot server specif ident privat key run command remot server ssh jump : connect jumphost remot server multipl jump hop may specifi separ comma charact ssh tunnel : dynam port forward sock proxi localhost:9999 ssh tunnel : forward specif port localhost:9999 exampl org:80 along disabl pseudo- ty alloc executio n remot command"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_4949858: How can you have a TCP connection back to the same port?",
+        "au_667096: How to change the default TTL of TCP/IP packets?"
+      ],
+      "Top-3 Scripts": [
+        "so_4949858: /proc/sys/net/ipv4/ip_local_port_range",
+        "au_667096: echo 129 | sudo tee /proc/sys/net/ipv4/ip_default_ttl\n\nsudo bash -c 'echo 129 > /proc/sys/net/ipv4/ip_default_ttl'"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "net",
+      "MP Summary": "Tool for administration of Samba and remote CIFS servers.",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "Set up local port forwards in the background with no terminal or command execution from port 4431 to host \"www1\" port 443 and port 4432 to host \"www2\" port 443 via the host \"colocatedserver\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "ssh -fNT -L4431:www1:443 -L4432:www2:443 colocatedserver\n",
+          "command-options": {
+            "ssh": {
+              "mpsum": "OpenSSH SSH client (remote login program)",
+              "-N": "Do not execute a remote command. This is useful for just forwarding ports.",
+              "-T": "Disable pseudo-terminal allocation.",
+              "-f": "Requests ssh to go to background just before command execution. This is useful if\n ssh is going to ask for passwords or passphrases, but the user wants it in the\n background. This implies -n. The recommended way to start X11 programs at a remote\n site is with something like ssh -f host xterm."
+            }
+          },
+          "TLDR_inform": {
+            "ssh": {
+              "man1_ssh_32381": "secur shell protocol use secur log onto remot system\nuse log execut command remot server agent forward : forward authent inform remot machin see man ssh_config avail option connect remot server connect remot server use specif port connect remot server specif ident privat key run command remot server ssh jump : connect jumphost remot server multipl jump hop may specifi separ comma charact ssh tunnel : dynam port forward sock proxi localhost:9999 ssh tunnel : forward specif port localhost:9999 exampl org:80 along disabl pseudo- ty alloc executio n remot command"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_4949858: How can you have a TCP connection back to the same port?",
+        "au_667096: How to change the default TTL of TCP/IP packets?",
+        "ul_180492: Is it possible to connect to TCP port 0?"
+      ],
+      "Top-3 Scripts": [
+        "so_4949858: /proc/sys/net/ipv4/ip_local_port_range",
+        "au_667096: echo 129 | sudo tee /proc/sys/net/ipv4/ip_default_ttl\n\nsudo bash -c 'echo 129 > /proc/sys/net/ipv4/ip_default_ttl'",
+        "ul_180492: [linux kernel source]/net/ipv4/inet_connection_sock.c"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "sockaddr",
+      "MP Summary": "list address resolution.",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "Set up local port forwards in the background with no terminal or command execution from port 4431 to host \"www1\" port 443 and port 4432 to host \"www2\" port 443 via the host \"colocatedserver\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "ssh -fNT -L4431:www1:443 -L4432:www2:443 colocatedserver\n",
+          "command-options": {
+            "ssh": {
+              "mpsum": "OpenSSH SSH client (remote login program)",
+              "-N": "Do not execute a remote command. This is useful for just forwarding ports.",
+              "-T": "Disable pseudo-terminal allocation.",
+              "-f": "Requests ssh to go to background just before command execution. This is useful if\n ssh is going to ask for passwords or passphrases, but the user wants it in the\n background. This implies -n. The recommended way to start X11 programs at a remote\n site is with something like ssh -f host xterm."
+            }
+          },
+          "TLDR_inform": {
+            "ssh": {
+              "man1_ssh_32381": "secur shell protocol use secur log onto remot system\nuse log execut command remot server agent forward : forward authent inform remot machin see man ssh_config avail option connect remot server connect remot server use specif port connect remot server specif ident privat key run command remot server ssh jump : connect jumphost remot server multipl jump hop may specifi separ comma charact ssh tunnel : dynam port forward sock proxi localhost:9999 ssh tunnel : forward specif port localhost:9999 exampl org:80 along disabl pseudo- ty alloc executio n remot command"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_20789091: Get a random port for TCP connection"
+      ],
+      "Top-3 Scripts": [
+        "so_20789091: if (getsockname(sockfd, (struct sockaddr *)&serv_addr, &len_inet) < 0){\n    cout << \"failed to get hostname with errno: \"<< errno << endl;\n    exit(1);\n}"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "to",
+      "MP Summary": "as the filename. --logdir <name> Writes each synchronization log output in a new file in the specified directory. --logexpire <hours> Removes logs older than the value specified (in hours). This command is  used  with --logdir. --logflush Clears (flushes) the log file after each write action. --logdebug Also  output  debug-level  messages  in  the log (equivalent to setting the env var QT_LOGGING_RULES=\"qt.*=true;*.debug=true\"). ) --confdir <dirname> Uses the specified configuration directory. The ownCloud Client reads a configuration file.  You can locate this configuration file as follows: On Linux distributions: $HOME/.config/ownCloud/owncloud.cfg On Microsoft Windows systems: %APPDATA%\\ownCloud\\owncloud.cfg On MAC OS X systems: $HOME/Library/Preferences/ownCloud/owncloud.cfg The configuration file contains settings using the Microsoft Windows .ini file format. You can overwrite changes using the ownCloud configuration dialog. NOTE: Use caution when making changes to the ownCloud Client configuration  file.   Incorrect settings can produce unintended results. Some interesting values that can be set on the configuration file are: \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510 \u2502[ownCloud] section          \u2502         \u2502                          \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502Variable                    \u2502 Default \u2502 Meaning                  \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502remotePollInterval          \u2502 30000   \u2502 Specifies  the poll time \u2502 \u2502                            \u2502         \u2502 for      the      remote \u2502 \u2502                            \u2502         \u2502 repository            in \u2502 \u2502                            \u2502         \u2502 milliseconds.            \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502forceSyncInterval           \u2502 7200000 \u2502 The   duration   of   no \u2502 \u2502                            \u2502         \u2502 activity  after  which a \u2502 \u2502                            \u2502         \u2502 synchronization      run \u2502 \u2502                            \u2502         \u2502 shall    be    triggered \u2502 \u2502                            \u2502         \u2502 automatically.           \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502fullLocalDiscoveryInterval  \u2502 3600000 \u2502 The interval after which \u2502 \u2502                            \u2502         \u2502 the next synchronization \u2502 \u2502                            \u2502         \u2502 will   perform   a  full \u2502 \u2502                            \u2502         \u2502 local discovery.         \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502notificationRefreshInterval \u2502 300000  \u2502 Specifies   the  default \u2502 \u2502                            \u2502         \u2502 interval of checking for \u2502 \u2502                            \u2502         \u2502 new server notifications \u2502 \u2502                            \u2502         \u2502 in milliseconds.         \u2502 \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518 \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510 \u2502[General] section       \u2502         \u2502                          \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502Variable                \u2502 Default \u2502 Meaning                  \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502chunkSize               \u2502 5242880 \u2502 Specifies the chunk size \u2502 \u2502                        \u2502         \u2502 of   uploaded  files  in \u2502 \u2502                        \u2502         \u2502 bytes.                   \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502promptDeleteAllFiles    \u2502 true    \u2502 If a  UI  prompt  should \u2502 \u2502                        \u2502         \u2502 ask  for confirmation if \u2502 \u2502                        \u2502         \u2502 it was detected that all \u2502 \u2502                        \u2502         \u2502 files  and  folders were \u2502 \u2502                        \u2502         \u2502 deleted.                 \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502maxLogLines             \u2502 20000   \u2502 Specifies  the   maximum \u2502 \u2502                        \u2502         \u2502 number   of   log  lines \u2502 \u2502                        \u2502         \u2502 displayed  in  the   log \u2502 \u2502                        \u2502         \u2502 window.                  \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502timeout                 \u2502 300     \u2502 The  timeout for network \u2502 \u2502                        \u2502         \u2502 connections in seconds.  \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502moveToTrash             \u2502 false   \u2502 If  non-locally  deleted \u2502 \u2502                        \u2502         \u2502 files should be moved to \u2502 \u2502                        \u2502         \u2502 trash     instead     of \u2502 \u2502                        \u2502         \u2502 deleting            them \u2502 \u2502                        \u2502         \u2502 completely.  This option \u2502 \u2502                        \u2502         \u2502 only works on linux      \u2502 \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518 \u2502showExperimentalOptions \u2502 false   \u2502 Whether      to     show \u2502 \u2502                        \u2502         \u2502 experimental     options \u2502 \u2502                        \u2502         \u2502 that      are      still \u2502 \u2502                        \u2502         \u2502 undergoing  testing   in \u2502 \u2502                        \u2502         \u2502 the    user   interface. \u2502 \u2502                        \u2502         \u2502 Turning this on does not \u2502 \u2502                        \u2502         \u2502 enable      experimental \u2502 \u2502                        \u2502         \u2502 behavior on its own.  It \u2502 \u2502                        \u2502         \u2502 does     enable     user \u2502 \u2502                        \u2502         \u2502 inferface  options  that \u2502 \u2502                        \u2502         \u2502 can be used to opt in to \u2502 \u2502                        \u2502         \u2502 experimental features.   \u2502 \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518 \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510 \u2502[Proxy] section      \u2502           \u2502                          \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502Variable             \u2502 Default   \u2502 Meaning                  \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502host                 \u2502 127.0.0.1 \u2502 The address of the proxy \u2502 \u2502                     \u2502           \u2502 server.                  \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502port                 \u2502 8080      \u2502 The  port were the proxy \u2502 \u2502                     \u2502           \u2502 is listening.            \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502type                 \u2502 2         \u2502 0 for System Proxy.      \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u25021 for SOCKS5 Proxy.  \u2502           \u2502                          \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u25022 for No Proxy.      \u2502           \u2502                          \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u25023 for HTTP(S) Proxy. \u2502           \u2502                          \u2502 \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518 Please report bugs at https://github.com/owncloud/client/issues. owncloudcmd(1)",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "Set up local port forwards in the background with no terminal or command execution from port 4431 to host \"www1\" port 443 and port 4432 to host \"www2\" port 443 via the host \"colocatedserver\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "ssh -fNT -L4431:www1:443 -L4432:www2:443 colocatedserver\n",
+          "command-options": {
+            "ssh": {
+              "mpsum": "OpenSSH SSH client (remote login program)",
+              "-N": "Do not execute a remote command. This is useful for just forwarding ports.",
+              "-T": "Disable pseudo-terminal allocation.",
+              "-f": "Requests ssh to go to background just before command execution. This is useful if\n ssh is going to ask for passwords or passphrases, but the user wants it in the\n background. This implies -n. The recommended way to start X11 programs at a remote\n site is with something like ssh -f host xterm."
+            }
+          },
+          "TLDR_inform": {
+            "ssh": {
+              "man1_ssh_32381": "secur shell protocol use secur log onto remot system\nuse log execut command remot server agent forward : forward authent inform remot machin see man ssh_config avail option connect remot server connect remot server use specif port connect remot server specif ident privat key run command remot server ssh jump : connect jumphost remot server multipl jump hop may specifi separ comma charact ssh tunnel : dynam port forward sock proxi localhost:9999 ssh tunnel : forward specif port localhost:9999 exampl org:80 along disabl pseudo- ty alloc executio n remot command"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_20789091: Get a random port for TCP connection",
+        "ul_180492: Is it possible to connect to TCP port 0?"
+      ],
+      "Top-3 Scripts": [
+        "so_20789091: if (getsockname(sockfd, (struct sockaddr *)&serv_addr, &len_inet) < 0){\n    cout << \"failed to get hostname with errno: \"<< errno << endl;\n    exit(1);\n}",
+        "ul_180492: /* Obtain a reference to a local port for the given sock,\n * if snum is zero it means select any available local port.\n */"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "get",
+      "MP Summary": "symbolic link to as_run command",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "Set up local port forwards in the background with no terminal or command execution from port 4431 to host \"www1\" port 443 and port 4432 to host \"www2\" port 443 via the host \"colocatedserver\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "ssh -fNT -L4431:www1:443 -L4432:www2:443 colocatedserver\n",
+          "command-options": {
+            "ssh": {
+              "mpsum": "OpenSSH SSH client (remote login program)",
+              "-N": "Do not execute a remote command. This is useful for just forwarding ports.",
+              "-T": "Disable pseudo-terminal allocation.",
+              "-f": "Requests ssh to go to background just before command execution. This is useful if\n ssh is going to ask for passwords or passphrases, but the user wants it in the\n background. This implies -n. The recommended way to start X11 programs at a remote\n site is with something like ssh -f host xterm."
+            }
+          },
+          "TLDR_inform": {
+            "ssh": {
+              "man1_ssh_32381": "secur shell protocol use secur log onto remot system\nuse log execut command remot server agent forward : forward authent inform remot machin see man ssh_config avail option connect remot server connect remot server use specif port connect remot server specif ident privat key run command remot server ssh jump : connect jumphost remot server multipl jump hop may specifi separ comma charact ssh tunnel : dynam port forward sock proxi localhost:9999 ssh tunnel : forward specif port localhost:9999 exampl org:80 along disabl pseudo- ty alloc executio n remot command"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_20789091: Get a random port for TCP connection",
+        "so_55297121: Change IP address on the port script"
+      ],
+      "Top-3 Scripts": [
+        "so_20789091: if (getsockname(sockfd, (struct sockaddr *)&serv_addr, &len_inet) < 0){\n    cout << \"failed to get hostname with errno: \"<< errno << endl;\n    exit(1);\n}",
+        "so_55297121: "
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

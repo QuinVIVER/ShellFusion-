@@ -1,0 +1,99 @@
+{
+  "Query": "Copy specific file type keeping the folder structure",
+  "Answers": [
+    {
+      "Command": "file",
+      "MP Summary": "determine file type",
+      "Most Similar TLDR Task": "Look inside a zipped file and determine the file type(s) inside",
+      "Most Similar TLDR Script": "file -z {{foo.zip}}",
+      "Top-3 Similar Questions": [
+        "so_40085308: Linux - How to copy recursive from each folder N files and keep same folder structure",
+        "so_19913855: Copying files while preserving directory structure",
+        "so_7893919: PowerShell: Copy/Move Files based on a regex value, retaining the folder structure, etc"
+      ],
+      "Top-3 Scripts": [
+        "so_40085308: #!/bin/bash\n\nfor subdir in $(find ~/foo -type d); do\n  subdir_relative=$(echo $subdir | sed 's:.*foo/::g')\n  mkdir \"$subdir_relative\"\n  for file in $(find \"$subdir\" -type f | head -n 10); do\n    cp \"$file\" \"~/bar/$subdir_relative/\"\n  done\ndone",
+        "so_19913855: $files = Get-Content C:\\script\\hname.txt\nforeach ($file in $files) {\n    $src = $file.Replace(\"\\\\nas001\\DATA\\IQC\",\"\\\\nas001\\IQC_restore\")\n    Copy-Item $src -Destination $file -Force\n}",
+        "so_7893919: "
+      ],
+      "Explanations about Options": {
+        "-F": "Use the specified string as the separator between the filename and the file result\n returned. Defaults to \u2018:\u2019.",
+        "-r": "Don't translate unprintable characters to \\ooo. Normally file translates\n unprintable characters to their octal representation.",
+        "-c": "Cause a checking printout of the parsed form of the magic file. This is usually\n used in conjunction with the -m flag to debug a new magic file before installing it.",
+        "-e": "Exclude the test named in testname from the list of tests made to determine the file\n type. Valid test names are:"
+      }
+    },
+    {
+      "Command": "cp",
+      "MP Summary": "copy files and directories",
+      "Most Similar TLDR Task": "Copy a file into another directory, keeping the filename",
+      "Most Similar TLDR Script": "cp {{path/to/source_file.ext}} {{path/to/target_parent_directory}}",
+      "Top-3 Similar Questions": [
+        "su_1305704: Find and copy folders recursively but keep the structure",
+        "so_36142838: Copy files from list while keeping subdirectory structure",
+        "so_40085308: Linux - How to copy recursive from each folder N files and keep same folder structure"
+      ],
+      "Top-3 Scripts": [
+        "su_1305704: find . -name .svn -type d -exec sh -c 'for arg do echo cp -R \"$arg\" ../bar/\"$arg\"; done' sh {} +\n\ncp -R ./subdir1/.svn ../bar/./subdir1/.svn\ncp -R ./subdir2/.svn ../bar/./subdir2/.svn\n\nfind . -name .svn -type d -exec sh -c 'for arg do cp -R \"$arg\" ../bar/\"$arg\"; done' sh {} +",
+        "so_36142838: cp --parents\n\ncat /path/to/files | xargs cp --parents -t new_directory\n\nwhile read -r file; do\n    new_dir=\"new_directory/$(dirname \"$file\")\"\n    #        ^ this is the new directory root\n    mkdir -p \"$new_dir\"\n    cp \"$file\" \"$new_dir/$file\"\ndone < <(cat /path/to/files.txt)",
+        "so_40085308: cp -r\n\n#!/bin/bash\n\nfor subdir in $(find ~/foo -type d); do\n  subdir_relative=$(echo $subdir | sed 's:.*foo/::g')\n  mkdir \"$subdir_relative\"\n  for file in $(find \"$subdir\" -type f | head -n 10); do\n    cp \"$file\" \"~/bar/$subdir_relative/\"\n  done\ndone"
+      ],
+      "Explanations about Options": {
+        "-R": "copy directories recursively"
+      }
+    },
+    {
+      "Command": "mv",
+      "MP Summary": "move (rename) files",
+      "Most Similar TLDR Task": "Move files in arbitrary locations",
+      "Most Similar TLDR Script": "mv {{source}} {{target}}",
+      "Top-3 Similar Questions": [
+        "so_45145055: Renaming files and keep specific pattern",
+        "so_61350931: Keep 9 characters intact and rename all files in a folder",
+        "so_41334214: Remove directory structure, but keep directory contents"
+      ],
+      "Top-3 Scripts": [
+        "so_45145055: mv \"$f\" \"$(echo \"$f\" | sed 's/.*[^0-9]\\([0-9]\\{1,3\\}\\.pdf\\)/number\\1/')\"",
+        "so_61350931: for file in *.jpg; do\n    echo mv \"$file\" \"$(echo \"$file\" | sed -E -e 's/(.{9}).*(\\.jpg)$/\\1\\2/')\"\ndone",
+        "so_41334214: mv dir_*/* ."
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "find",
+      "MP Summary": "search for files in a directory hierarchy",
+      "Most Similar TLDR Task": "Find files matching a given pattern, excluding specific paths",
+      "Most Similar TLDR Script": "find {{root_path}} -name '{{*.py}}' -not -path '{{*/site-packages/*}}'",
+      "Top-3 Similar Questions": [
+        "su_1305704: Find and copy folders recursively but keep the structure",
+        "so_40085308: Linux - How to copy recursive from each folder N files and keep same folder structure",
+        "so_54400775: Copy files based on regex to another folder but keep folder structure"
+      ],
+      "Top-3 Scripts": [
+        "su_1305704: find . -name .svn -type d -exec sh -c 'for arg do echo cp -R \"$arg\" ../bar/\"$arg\"; done' sh {} +\n\nfind . -name .svn -type d -exec sh -c 'for arg do cp -R \"$arg\" ../bar/\"$arg\"; done' sh {} +",
+        "so_40085308: #!/bin/bash\n\nfor subdir in $(find ~/foo -type d); do\n  subdir_relative=$(echo $subdir | sed 's:.*foo/::g')\n  mkdir \"$subdir_relative\"\n  for file in $(find \"$subdir\" -type f | head -n 10); do\n    cp \"$file\" \"~/bar/$subdir_relative/\"\n  done\ndone",
+        "so_54400775: find . -iregex \".*HeadersConstants\\.java\" |\\\nrsync -v --files-from=- ./ ${destination}/\n\nfind . -path ./destination -prune \\\n    -o -iregex \".*HeadersConstants\\.java\" -print |\\\nrsync -v --file-from=- ./ ./destination/"
+      ],
+      "Explanations about Options": {
+        "-prune": "True; if the file is a directory, do not descend into it. If -depth is given, then\n -prune has no effect. Because -delete implies -depth, you cannot usefully use\n -prune and -delete together.\n For example, to skip the directory `src/emacs' and all files and directories\n under it, and print the names of the other files found, do something like this:\n find . -path ./src/emacs -prune -o -print",
+        "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+        "-type": "File is of type c:"
+      }
+    },
+    {
+      "Command": "dirname",
+      "MP Summary": "strip last component from file name",
+      "Most Similar TLDR Task": "Calculate the parent directory of multiple paths",
+      "Most Similar TLDR Script": "dirname {{path/to/file_a}} {{path/to/directory_b}}",
+      "Top-3 Similar Questions": [
+        "so_36142838: Copy files from list while keeping subdirectory structure",
+        "au_1162361: how to merge many folders and keep theirs contents sorted?"
+      ],
+      "Top-3 Scripts": [
+        "so_36142838: while read -r file; do\n    new_dir=\"new_directory/$(dirname \"$file\")\"\n    #        ^ this is the new directory root\n    mkdir -p \"$new_dir\"\n    cp \"$file\" \"$new_dir/$file\"\ndone < <(cat /path/to/files.txt)",
+        "au_1162361: mkdir directory;\nfind folder* -type f -name \"*.jpg\" \\\n  -exec sh -c 'mv \"$1\" directory/$(dirname \"$1\")_$(basename \"$1\")' find-sh {} \\;"
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

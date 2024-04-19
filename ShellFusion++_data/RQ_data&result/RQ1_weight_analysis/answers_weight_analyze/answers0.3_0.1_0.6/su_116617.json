@@ -1,0 +1,78 @@
+{
+  "Query": "How to mount an LVM volume?",
+  "Answers": [
+    {
+      "Command": "mount",
+      "MP Summary": "mount a filesystem",
+      "Most Similar TLDR Task": "Mount a device to a directory",
+      "Most Similar TLDR Script": "mount -t {{filesystem_type}} {{path/to/device_file}} {{path/to/target_directory}}",
+      "Top-3 Similar Questions": [
+        "ul_339011: How do I mount an LVM partition?",
+        "au_1198329: Mounting a Luks partition",
+        "au_932318: mounted SSD not show in Logical Volume Management tool"
+      ],
+      "Top-3 Scripts": [
+        "ul_339011: sudo apt-get install lvm2   #This step may or may not be required.\nsudo pvscan                 #Use this to verify your LVM partition(s) is/are detected.\nsudo vgscan                 #Scans for LVM Volume Group(s)\nsudo vgchange -ay           #Activates LVM Volume Group(s)\nsudo lvscan                 #Scans for available Logical Volumes\nsudo mount /dev/YourVolGroup00/YourLogVol00 /YourMountPoint",
+        "au_1198329: sudo mount /dev/mapper/ubuntu--vg-root /mnt",
+        "au_932318: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "cryptsetup",
+      "MP Summary": "manage plain dm-crypt and LUKS encrypted volumes",
+      "Most Similar TLDR Task": "Initialize a LUKS volume (overwrites all data on the partition)",
+      "Most Similar TLDR Script": "cryptsetup luksFormat {{/dev/sda1}}",
+      "Top-3 Similar Questions": [
+        "au_835525: How to mount LUKS encrypted file?",
+        "ul_515422: How to mount a partition inside encrypted lvm inside a disk image?"
+      ],
+      "Top-3 Scripts": [
+        "au_835525: cryptsetup open --type luks /path/to/dump desired-name",
+        "ul_515422: cryptsetup luksOpen\n\ncryptsetup luksOpen /dev/mapper/loop0p3 mylvm"
+      ],
+      "Explanations about Options": {
+        "--type": "Specifies required device type, for more info read BASIC COMMANDS section."
+      }
+    },
+    {
+      "Command": "pvcreate",
+      "MP Summary": "Initialize physical volume(s) for use by LVM",
+      "Most Similar TLDR Task": "Initialize the `/dev/sda1` volume for use by LVM",
+      "Most Similar TLDR Script": "pvcreate {{/dev/sda1}}",
+      "Top-3 Similar Questions": [
+        "ul_561414: Mount a new partition to existing mount point"
+      ],
+      "Top-3 Scripts": [
+        "ul_561414: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "lvextend",
+      "MP Summary": "Add space to a logical volume",
+      "Most Similar TLDR Task": "Increase a volume's size to 120GB",
+      "Most Similar TLDR Script": "lvextend --size {{120G}} {{logical_volume}}",
+      "Top-3 Similar Questions": [
+        "ul_368695: Mounted logical volume size not matching actual volume size"
+      ],
+      "Top-3 Scripts": [
+        "ul_368695: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "vgcreate",
+      "MP Summary": "Create a volume group",
+      "Most Similar TLDR Task": "Create a new volume group called vg1 using multiple devices",
+      "Most Similar TLDR Script": "vgcreate {{vg1}} {{/dev/sda1}} {{/dev/sdb1}} {{/dev/sdc1}}",
+      "Top-3 Similar Questions": [
+        "ul_561414: Mount a new partition to existing mount point"
+      ],
+      "Top-3 Scripts": [
+        "ul_561414: "
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

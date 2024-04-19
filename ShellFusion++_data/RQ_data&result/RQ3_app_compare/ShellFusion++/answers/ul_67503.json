@@ -1,0 +1,94 @@
+{
+  "Query": "Move all files with a certain extension from multiple subdirectories into one directory",
+  "Answers": [
+    {
+      "Command": "mv",
+      "MP Summary": "move (rename) files",
+      "Most Similar TLDR Task": "Move files in arbitrary locations",
+      "Most Similar TLDR Script": "mv {{source}} {{target}}",
+      "Top-3 Similar Questions": [
+        "so_30307214: Move files from multiple folders to multiple folders in Linux",
+        "ul_74911: How to move all files with a certain file extension from subdirectories to a single directory",
+        "so_54560297: How to move files from one directory to another using an array"
+      ],
+      "Top-3 Scripts": [
+        "so_30307214: cd test\nfor dir in folder*; do\n    mv \"$dir/*\" \"/temp/$dir\"\ndone",
+        "ul_74911: mkdir ~/epubs\nmv -- **/*.epub ~/epubs/\n\nfind . -name '*.epub' -exec mv {} ~/epubs \\;",
+        "so_54560297: #!/bin/bash\ndeclare -a keyword=(\"*building*\")\ndeclare -a directory=(\"Building\")\n\nfor i in \"${!keyword[@]}\"\ndo\n    echo find /run/media/_Incoming/ -type f -name \"${keyword[$i]}\" \\\n        -exec echo mv -t /run/media/\"${directory[$i]}\"/ {} +\ndone\n\nfind /run/media/_Incoming/ -type f -name *building* -exec echo mv -t /run/media/Building/ {} +"
+      ],
+      "Explanations about Options": {
+        "-t": "move all SOURCE arguments into DIRECTORY"
+      }
+    },
+    {
+      "Command": "cp",
+      "MP Summary": "copy files and directories",
+      "Most Similar TLDR Task": "Copy a file into another directory, keeping the filename",
+      "Most Similar TLDR Script": "cp {{path/to/source_file.ext}} {{path/to/target_parent_directory}}",
+      "Top-3 Similar Questions": [
+        "so_59408504: move files with extension from a subdirectory of directory to another subdirectory with the same name of another directory",
+        "so_69354296: moving files with patron in directories to specific directory"
+      ],
+      "Top-3 Scripts": [
+        "so_59408504: find /dir1 -name '*.json' -exec cp --parents -t /dir2/ {} +\n\nman cp",
+        "so_69354296: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "dirname",
+      "MP Summary": "strip last component from file name",
+      "Most Similar TLDR Task": "Calculate the parent directory of multiple paths",
+      "Most Similar TLDR Script": "dirname {{path/to/file_a}} {{path/to/directory_b}}",
+      "Top-3 Similar Questions": [
+        "so_64690030: How to move certain files from one directory to another, while maintaining directory structure",
+        "so_44240683: Unable to rename and move files from one location to another",
+        "ul_559844: Move all files from subdirectories to parent directory"
+      ],
+      "Top-3 Scripts": [
+        "so_64690030: #!/bin/bash\n\nSOURCE_DIR=source\nDEST_DIR=destination\n\nfor txt_file in $(find \"${SOURCE_DIR}\" -type f -name \"*.txt\"); do\n        new_path=$(dirname \"$txt_file\" | sed \"s~${SOURCE_DIR}~${DEST_DIR}~\")\n        mkdir -p \"${new_path}\"\n        mv \"${txt_file}\" \"${new_path}\"\ndone",
+        "so_44240683: for tmpfile in /home/asmita/tmp\ndo\n    DIRPATH=$(dirname \"${tmpfile}\")\n    FILENAME=$(basename \"${tmpfile}\")\n    mv \"$tmpfile\" \"${DIRPATH}C_${FILENAME}\"\n    mv \"${DIRPATH}C_${FILENAME}\" /home/tgasmita\ndone",
+        "ul_559844: find -type f | while read; do mv \"$REPLY\" \"$(dirname $REPLY)/../../\"; done"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "find",
+      "MP Summary": "search for files in a directory hierarchy",
+      "Most Similar TLDR Task": "Find files by extension",
+      "Most Similar TLDR Script": "find {{root_path}} -name '{{*.ext}}'",
+      "Top-3 Similar Questions": [
+        "so_59408504: move files with extension from a subdirectory of directory to another subdirectory with the same name of another directory",
+        "ul_74911: How to move all files with a certain file extension from subdirectories to a single directory",
+        "so_54560297: How to move files from one directory to another using an array"
+      ],
+      "Top-3 Scripts": [
+        "so_59408504: find + gnu-cp\n\nfind /dir1 -name '*.json' -exec cp --parents -t /dir2/ {} +",
+        "ul_74911: find . -name '*.epub' -exec mv {} ~/epubs \\;",
+        "so_54560297: #!/bin/bash\ndeclare -a keyword=(\"*building*\")\ndeclare -a directory=(\"Building\")\n\nfor i in \"${!keyword[@]}\"\ndo\n    echo find /run/media/_Incoming/ -type f -name \"${keyword[$i]}\" \\\n        -exec echo mv -t /run/media/\"${directory[$i]}\"/ {} +\ndone\n\nfind /run/media/_Incoming/ -type f -name *building* -exec echo mv -t /run/media/Building/ {} +"
+      ],
+      "Explanations about Options": {
+        "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+      }
+    },
+    {
+      "Command": "mkdir",
+      "MP Summary": "make directories",
+      "Most Similar TLDR Task": "Create a directory in current directory or given path",
+      "Most Similar TLDR Script": "mkdir {{directory}}",
+      "Top-3 Similar Questions": [
+        "ul_74911: How to move all files with a certain file extension from subdirectories to a single directory",
+        "so_9082372: How to move all the files of a directory into multiple directories with a given number of files?",
+        "so_64690030: How to move certain files from one directory to another, while maintaining directory structure"
+      ],
+      "Top-3 Scripts": [
+        "ul_74911: mkdir ~/epubs\nmv -- **/*.epub ~/epubs/",
+        "so_9082372: ",
+        "so_64690030: mkdir -p\n\n#!/bin/bash\n\nSOURCE_DIR=source\nDEST_DIR=destination\n\nfor txt_file in $(find \"${SOURCE_DIR}\" -type f -name \"*.txt\"); do\n        new_path=$(dirname \"$txt_file\" | sed \"s~${SOURCE_DIR}~${DEST_DIR}~\")\n        mkdir -p \"${new_path}\"\n        mv \"${txt_file}\" \"${new_path}\"\ndone"
+      ],
+      "Explanations about Options": {
+        "-p": "no error if existing, make parent directories as needed"
+      }
+    }
+  ]
+}

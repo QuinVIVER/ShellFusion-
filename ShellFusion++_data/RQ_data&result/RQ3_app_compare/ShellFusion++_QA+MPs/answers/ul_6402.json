@@ -1,0 +1,75 @@
+{
+  "Query": "How to remove an audio track from an mp4 video file?",
+  "Answers": [
+    {
+      "Command": "ffmpeg",
+      "MP Summary": "ffmpeg video converter",
+      "Top-3 Similar Questions": [
+        "au_706933: Remove dead pixel from video material (not screen)",
+        "su_56093: Remove Audio stream from XVID files",
+        "au_977162: How to remove a few seconds from .mp4 file using ffmpeg?"
+      ],
+      "Top-3 Scripts": [
+        "au_706933: ffmpeg -i input.mp4 -vf \\\n\"delogo=x=10:y=120:w=1:h=1, \\\n delogo=x=862:y=438:w=1:h=1, \\\n delogo=x=56:y=207:w=1:h=1, \\\n delogo=x=1259:y=943:w=1:h=1\" \\\n-c:a copy cleaned-output.mp4\n\nffmpeg -i input -ss 5 -vframes 1 output.png",
+        "su_56093: ",
+        "au_977162: ffmpeg  -t 00:11:00 -i input.mp4 -map 0 -c copy segment1.mp4\nffmpeg -ss 00:11:10 -i input.mp4 -map 0 -c copy segment2.mp4\n\nffmpeg -f concat -i input.txt -map 0 -c copy output.mp4\n\nffmpeg -i input.mp4 -filter_complex \\\n  \"[0:v]trim=end=660,setpts=N/FRAME_RATE/TB[v0]; \\\n   [0:a]atrim=end=660,asetpts=N/SR/TB[a0]; \\\n   [0:v]trim=start=670,setpts=N/FRAME_RATE/TB[v1]; \\\n   [0:a]atrim=start=670,asetpts=N/SR/TB[a1]; \\\n   [v0][a0][v1][a1]concat=n=2:v=1:a=1[v][a]\" \\\n  -map \"[v]\" -map \"[a]\" output.mp4"
+      ],
+      "Explanations about Options": {
+        "-filter_complex": "Define a complex filtergraph, i.e. one with arbitrary number of inputs and/or outputs.\n For simple graphs - those with one input and one output of the same type - see the\n -filter options. filtergraph is a description of the filtergraph, as described in the\n ``Filtergraph syntax'' section of the ffmpeg-filters manual.",
+        "-i": "input file url"
+      }
+    },
+    {
+      "Command": "mplayer",
+      "MP Summary": "movie player",
+      "Top-3 Similar Questions": [
+        "su_56093: Remove Audio stream from XVID files",
+        "su_487372: How to extract the audo track from an m4a file?"
+      ],
+      "Top-3 Scripts": [
+        "su_56093: ",
+        "su_487372: mplayer video.m4a -ao pcm"
+      ],
+      "Explanations about Options": {
+        "-o": "Outputs to the given filename.\n If you want a default output filename, you can put this option in the MEncoder\n config file."
+      }
+    },
+    {
+      "Command": "mkvmerge",
+      "MP Summary": "Merge multimedia streams into a Matroska file",
+      "Top-3 Similar Questions": [
+        "ul_411526: How to remove arbitrary subtitles formats from mkv with a shell loop",
+        "au_939821: Script to merge Video and subs then delete the existing files (non recursive)",
+        "su_595177: How to retrieve video file information from command line under Linux?"
+      ],
+      "Top-3 Scripts": [
+        "ul_411526: ",
+        "au_939821: ",
+        "su_595177: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "winff",
+      "MP Summary": "video and audio batch converter using ffmpeg or avconv",
+      "Top-3 Similar Questions": [
+        "au_101885: Which software can I use to extract an audio track from a video?"
+      ],
+      "Top-3 Scripts": [
+        "au_101885: sudo apt-get install winff"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "srt",
+      "MP Summary": "Srt subtitle editor",
+      "Top-3 Similar Questions": [
+        "au_939821: Script to merge Video and subs then delete the existing files (non recursive)"
+      ],
+      "Top-3 Scripts": [
+        "au_939821: "
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

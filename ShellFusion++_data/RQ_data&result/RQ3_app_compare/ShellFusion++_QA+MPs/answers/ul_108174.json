@@ -1,0 +1,60 @@
+{
+  "Query": "How to persistently control maximum system resource consumption on Mac?",
+  "Answers": [
+    {
+      "Command": "dmesg",
+      "MP Summary": "print or control the kernel ring buffer",
+      "Top-3 Similar Questions": [
+        "au_1020710: What configuration files in Ubuntu control the graphics drivers in a dual GPU system?"
+      ],
+      "Top-3 Scripts": [
+        "au_1020710: dmesg | grep -i nvidia"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "systemctl",
+      "MP Summary": "Control the systemd system and service manager",
+      "Top-3 Similar Questions": [
+        "ul_351466: Set a default resource limit for all users with systemd cgroups"
+      ],
+      "Top-3 Scripts": [
+        "ul_351466: systemctl enable user-0.slice"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "cgroup",
+      "MP Summary": "control group based traffic control filter",
+      "Top-3 Similar Questions": [
+        "ul_351466: Set a default resource limit for all users with systemd cgroups"
+      ],
+      "Top-3 Scripts": [
+        "ul_351466: #!/bin/bash\nexec >>/var/tmp/log.txt 2>&1 # for logging\nset -x # for logging \nfor d in /sys/fs/cgroup /sys/fs/cgroup/user.slice /sys/fs/cgroup/user.slice/user-$1.slice; do\n  echo \"+memory\" >>${d}/cgroup.subtree_control\ndone\n/bin/echo \"24G\" >> /sys/fs/cgroup/user.slice/user-$1.slice/memory.high\n\ncat /sys/fs/cgroup/user.slice/user-${UID}.slice/memory.high"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "ulimit",
+      "MP Summary": "set or report file size limit",
+      "Top-3 Similar Questions": [
+        "ul_120642: What defines the maximum size for a command single argument?"
+      ],
+      "Top-3 Scripts": [
+        "ul_120642: $ echo $(( $(ulimit -s)*1024 / 4 ))  # ulimit output in KiB\n2097152\n$ getconf ARG_MAX\n2097152\n\n$ grep ARG_MAX /usr/include/linux/limits.h \n#define ARG_MAX       131072    /* # bytes of args + environ for exec() */\n$ ulimit -s 256\n$ echo $(( $(ulimit -s)*1024 / 4 ))\n65536\n$ getconf ARG_MAX\n131072"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "prlimit",
+      "MP Summary": "get and set process resource limits",
+      "Top-3 Similar Questions": [
+        "so_31546014: How to set resource limits for init on boot?"
+      ],
+      "Top-3 Scripts": [
+        "so_31546014: prlimit \u2014 get and set process resource limits\nprlimit [options] [ \u2212\u2212resource [=limits] ] [ \u2212\u2212pid PID ]\n\nint prlimit(pid_t pid, int resource, const struct rlimit *new_limit,\n            struct rlimit *old_limit);"
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

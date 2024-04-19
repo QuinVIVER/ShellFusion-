@@ -1,0 +1,1552 @@
+{
+  "Query": "How do I set up xrdp session that reuses an existing session?",
+  "Answers": [
+    {
+      "Command": "screen",
+      "MP Summary": "screen manager with VT100/ANSI terminal emulation",
+      "Most Similar TLDR Task": "Show open screen sessions",
+      "Most Similar TLDR Script": "screen -ls",
+      "Most Similar NL2Bash Task": "Attaches to 'test1' tmux session.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "tmux attach -t test1\n",
+          "command-options": {
+            "tmux": {
+              "mpsum": "terminal multiplexer"
+            }
+          },
+          "TLDR_inform": {
+            "tmux": {
+              "man1_tmux_33967": "termin multiplex\nallow multipl session window pane attach name session attach recent use session detach current session prefix ctrl-b kill session name kill current session prefix ctrl-b list exist session start new name session start new session"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_12811: Create a new window in an existing screen session and run a script",
+        "nl2bash_14514: List existing screen sessions",
+        "au_172062: SSH'ing to my machine attaches an existing screen session and detaching it ends my SSH session"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_12811: screen -S demo -p 1 -X screen '/home/aa/scripts/outputs.sh'",
+        "nl2bash_14514: screen -ls",
+        "au_172062: if [ $SSH_TTY ] && [ ! $WINDOW ]; then\n    SCREENLIST=`screen -ls | grep 'Attached'`\n    if [ $? -eq \"0\" ]; then\n        echo -e \"Screen is already running and attached:\\n ${SCREENLIST}\"\n    else\n        type -P byobu &>/dev/null && byobu -U -R || screen -U -R\n    fi\nfi"
+      ],
+      "Explanations about Options": {
+        "-X": "Send the specified command to a running screen session. You may use the -S option to\n specify the screen session if you have several screen sessions running. You can use\n the -d or -r option to tell screen to look only for attached or detached screen\n sessions. Note that this command doesn't work if the session is password protected.",
+        "-p": "number_or_name|-|=|+\n Preselect a window. This is useful when you want to reattach to a specific window or\n you want to send a command via the \"-X\" option to a specific window. As with screen's\n select command, \"-\" selects the blank window. As a special case for reattach, \"=\"\n brings up the windowlist on the blank window, while a \"+\" will create a new window.\n The command will not be executed if the specified window could not be found.",
+        "-s": "sets the default shell to the program specified, instead of the value in the\n environment variable $SHELL (or \"/bin/sh\" if not defined). This can also be defined\n through the \"shell\" .screenrc command. See also there.",
+        "-U": "Run screen in UTF-8 mode. This option tells screen that your terminal sends and\n understands UTF-8 encoded characters. It also sets the default encoding for new\n windows to `utf8'.",
+        "-l": "turns login mode on or off (for /run/utmp updating). This can also be defined\n through the \"deflogin\" .screenrc command.",
+        "-S": "When creating a new session, this option can be used to specify a meaningful name for\n the session. This name identifies the session for \"screen -list\" and \"screen -r\"\n actions. It substitutes the default [tty.host] suffix."
+      }
+    },
+    {
+      "Command": "tmux",
+      "MP Summary": "terminal multiplexer",
+      "Most Similar TLDR Task": "List existing sessions",
+      "Most Similar TLDR Script": "tmux ls",
+      "Most Similar NL2Bash Task": "Attaches to 'test1' tmux session.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "tmux attach -t test1\n",
+          "command-options": {
+            "tmux": {
+              "mpsum": "terminal multiplexer"
+            }
+          },
+          "TLDR_inform": {
+            "tmux": {
+              "man1_tmux_33967": "termin multiplex\nallow multipl session window pane attach name session attach recent use session detach current session prefix ctrl-b kill session name kill current session prefix ctrl-b list exist session start new name session start new session"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "tldr_646: List existing sessions",
+        "su_1410640: If named tmux session exists, make new session and group with it, else create that named tmux session",
+        "au_821724: recover ssh session connection"
+      ],
+      "Top-3 Scripts": [
+        "tldr_646: tmux ls",
+        "su_1410640: ",
+        "au_821724: $ tmux      /* starts new shell, with tmux status bar at the bottom of terminal window */\n$           /* do stuff */\n$ Ctrl-b d  /* key escape sequence to detach from tmux session */\n$ exit\n\n            /* ... time passes; much later you ssh back in ... */\n\n$ tmux attach\n\n            /* and you're back on the session you detached from */"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "script",
+      "MP Summary": "make typescript of terminal session",
+      "Most Similar TLDR Task": "Record a new session, appending to an existing file",
+      "Most Similar TLDR Script": "script -a {{path/to/session.out}}",
+      "Most Similar NL2Bash Task": "Attaches to 'test1' tmux session.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "tmux attach -t test1\n",
+          "command-options": {
+            "tmux": {
+              "mpsum": "terminal multiplexer"
+            }
+          },
+          "TLDR_inform": {
+            "tmux": {
+              "man1_tmux_33967": "termin multiplex\nallow multipl session window pane attach name session attach recent use session detach current session prefix ctrl-b kill session name kill current session prefix ctrl-b list exist session start new name session start new session"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_334242: SSH into server, start screen session, change directory?",
+        "au_579517: accessing ubuntu teminal sessions"
+      ],
+      "Top-3 Scripts": [
+        "ul_334242: ssh me@myserver.com \"screen -dm bash -c 'cd path/to/my/script/; pwd > ~/output.txt'\"\n\ndebug1: Sending command: screen -dm bash -c cd path/to/my/script/; pwd > ~/output.txt\n\nscreen -dm bash -c cd path/to/my/script/; pwd > ~/output.txt\n\ndebug1: Sending command: screen -dm bash -c 'cd path/to/my/script/; pwd > ~/output.txt'\n\nargv[0] = ssh\nargv[1] = me@myserver.com\nargv[2] = screen\nargv[3] = -dm\nargv[4] = bash\nargv[5] = -c\nargv[6] = cd path/to/my/script/; pwd > ~/output.txt\n\nargv[0] = ssh\nargv[1] = me@myserver.com\nargv[2] = screen -dm bash -c 'cd path/to/my/script/; pwd > ~/output.txt'",
+        "au_579517: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "ssh",
+      "MP Summary": "OpenSSH SSH client (remote login program)",
+      "Most Similar TLDR Task": "Connect to a remote server using a specific port",
+      "Most Similar TLDR Script": "ssh {{username}}@{{remote_host}} -p {{2222}}",
+      "Most Similar NL2Bash Task": "Attaches to 'test1' tmux session.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "tmux attach -t test1\n",
+          "command-options": {
+            "tmux": {
+              "mpsum": "terminal multiplexer"
+            }
+          },
+          "TLDR_inform": {
+            "tmux": {
+              "man1_tmux_33967": "termin multiplex\nallow multipl session window pane attach name session attach recent use session detach current session prefix ctrl-b kill session name kill current session prefix ctrl-b list exist session start new name session start new session"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_50508: Reusing ssh session for repeated rsync commands",
+        "au_821724: recover ssh session connection",
+        "au_172062: SSH'ing to my machine attaches an existing screen session and detaching it ends my SSH session"
+      ],
+      "Top-3 Scripts": [
+        "ul_50508: mkdir ~/.ssh/ctl\nssh -nNf -o ControlMaster=yes -o ControlPath=\"$HOME/.ssh/ctl/%L-%r@%h:%p\" user@host\n\nssh -O exit -o ControlPath=\"$HOME/.ssh/ctl/%L-%r@%h:%p\" user@host",
+        "au_821724: $ tmux      /* starts new shell, with tmux status bar at the bottom of terminal window */\n$           /* do stuff */\n$ Ctrl-b d  /* key escape sequence to detach from tmux session */\n$ exit\n\n            /* ... time passes; much later you ssh back in ... */\n\n$ tmux attach\n\n            /* and you're back on the session you detached from */",
+        "au_172062: ssh -X <strong><hostname></strong> firefox"
+      ],
+      "Explanations about Options": {
+        "-X": "Enables X11 forwarding. This can also be specified on a per-host basis in a\n configuration file.",
+        "-O": "Control an active connection multiplexing master process. When the -O option is\n specified, the ctl_cmd argument is interpreted and passed to the master process.\n Valid commands are: \u201ccheck\u201d (check that the master process is running), \u201cforward\u201d\n (request forwardings without command execution), \u201ccancel\u201d (cancel forwardings),\n \u201cexit\u201d (request the master to exit), and \u201cstop\u201d (request the master to stop\n accepting further multiplexing requests)."
+      }
+    },
+    {
+      "Command": "sudo",
+      "MP Summary": "execute a command as another user",
+      "Most Similar TLDR Task": "Run a command as another user and/or group",
+      "Most Similar TLDR Script": "sudo -u {{user}} -g {{group}} {{id -a}}",
+      "Most Similar NL2Bash Task": "Attaches to 'test1' tmux session.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "tmux attach -t test1\n",
+          "command-options": {
+            "tmux": {
+              "mpsum": "terminal multiplexer"
+            }
+          },
+          "TLDR_inform": {
+            "tmux": {
+              "man1_tmux_33967": "termin multiplex\nallow multipl session window pane attach name session attach recent use session detach current session prefix ctrl-b kill session name kill current session prefix ctrl-b list exist session start new name session start new session"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_821724: recover ssh session connection",
+        "au_1080744: Can't type in guest session terminal windows",
+        "so_6496847: Access another user's D-Bus session"
+      ],
+      "Top-3 Scripts": [
+        "au_821724: sudo apt install",
+        "au_1080744: sudo nano /etc/apparmor.d/lightdm-guest-session\n\nsudo systemctl restart apparmor",
+        "so_6496847: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "export",
+      "MP Summary": "set the export attribute for variables",
+      "Most Similar TLDR Task": "Set a new environment variable",
+      "Most Similar TLDR Script": "export {{VARIABLE}}={{value}}",
+      "Most Similar NL2Bash Task": "Attaches to 'test1' tmux session.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "tmux attach -t test1\n",
+          "command-options": {
+            "tmux": {
+              "mpsum": "terminal multiplexer"
+            }
+          },
+          "TLDR_inform": {
+            "tmux": {
+              "man1_tmux_33967": "termin multiplex\nallow multipl session window pane attach name session attach recent use session detach current session prefix ctrl-b kill session name kill current session prefix ctrl-b list exist session start new name session start new session"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_21598: How do I set a user environment variable? (permanently, not session)",
+        "au_56237: How can I have one screen session per user and set it as the login shell?",
+        "su_882127: Is there a way to make an SSH session act like a local terminal session?"
+      ],
+      "Top-3 Scripts": [
+        "ul_21598: ABC=\"123\"; export ABC",
+        "au_56237: if [ ${SHLVL} -eq 1 ]; then\n    ((SHLVL+=1)); export SHLVL\n    exec screen -xR\nfi",
+        "su_882127: $ export DISPLAY=0:0"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "kill",
+      "MP Summary": "send a signal to a process",
+      "Most Similar TLDR Task": "Terminate a program using the SIGHUP (hang up) signal. Many daemons will reload instead of terminating",
+      "Most Similar TLDR Script": "kill -{{1|HUP}} {{process_id}}",
+      "Most Similar NL2Bash Task": "Attaches to 'test1' tmux session.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "tmux attach -t test1\n",
+          "command-options": {
+            "tmux": {
+              "mpsum": "terminal multiplexer"
+            }
+          },
+          "TLDR_inform": {
+            "tmux": {
+              "man1_tmux_33967": "termin multiplex\nallow multipl session window pane attach name session attach recent use session detach current session prefix ctrl-b kill session name kill current session prefix ctrl-b list exist session start new name session start new session"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_389754: Telnet session already in use, Unable to create session",
+        "ul_127571: Terminate dropped SSH sessions"
+      ],
+      "Top-3 Scripts": [
+        "au_389754: ",
+        "ul_127571: ps -ef | grep sshd | grep -v -e grep -e root -e 12345 | awk '{print \"sudo kill -9\", $2}' | sh"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "bash",
+      "MP Summary": "GNU Bourne-Again SHell",
+      "Most Similar TLDR Task": "Run commands from a file, logging all commands executed to the terminal",
+      "Most Similar TLDR Script": "bash -x {{file.sh}}",
+      "Most Similar NL2Bash Task": "Attaches to 'test1' tmux session.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "tmux attach -t test1\n",
+          "command-options": {
+            "tmux": {
+              "mpsum": "terminal multiplexer"
+            }
+          },
+          "TLDR_inform": {
+            "tmux": {
+              "man1_tmux_33967": "termin multiplex\nallow multipl session window pane attach name session attach recent use session detach current session prefix ctrl-b kill session name kill current session prefix ctrl-b list exist session start new name session start new session"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_56237: How can I have one screen session per user and set it as the login shell?",
+        "ul_334242: SSH into server, start screen session, change directory?",
+        "so_11068965: How can I make TMUX be active whenever I start a new shell session?"
+      ],
+      "Top-3 Scripts": [
+        "au_56237: /bin/bash",
+        "ul_334242: ssh me@myserver.com \"screen -dm bash -c 'cd path/to/my/script/; pwd > ~/output.txt'\"\n\ndebug1: Sending command: screen -dm bash -c cd path/to/my/script/; pwd > ~/output.txt\n\nscreen -dm bash -c cd path/to/my/script/; pwd > ~/output.txt\n\ndebug1: Sending command: screen -dm bash -c 'cd path/to/my/script/; pwd > ~/output.txt'\n\nargv[0] = ssh\nargv[1] = me@myserver.com\nargv[2] = screen\nargv[3] = -dm\nargv[4] = bash\nargv[5] = -c\nargv[6] = cd path/to/my/script/; pwd > ~/output.txt\n\nargv[0] = ssh\nargv[1] = me@myserver.com\nargv[2] = screen -dm bash -c 'cd path/to/my/script/; pwd > ~/output.txt'",
+        "so_11068965: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "gnome-terminal",
+      "MP Summary": "is a terminal emulation application.",
+      "Most Similar TLDR Task": "Open a new GNOME terminal window",
+      "Most Similar TLDR Script": "gnome-terminal",
+      "Most Similar NL2Bash Task": "Attaches to 'test1' tmux session.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "tmux attach -t test1\n",
+          "command-options": {
+            "tmux": {
+              "mpsum": "terminal multiplexer"
+            }
+          },
+          "TLDR_inform": {
+            "tmux": {
+              "man1_tmux_33967": "termin multiplex\nallow multipl session window pane attach name session attach recent use session detach current session prefix ctrl-b kill session name kill current session prefix ctrl-b list exist session start new name session start new session"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_11068965: How can I make TMUX be active whenever I start a new shell session?",
+        "so_11500649: How to create a new terminal session and execute multiple commands"
+      ],
+      "Top-3 Scripts": [
+        "so_11068965: #!/bin/sh\nexec gnome-terminal -e tmux",
+        "so_11500649: gnome-terminal -x bash -c \"cmd1; cmd2\"\n\ngnome-terminal --title \"virtual_3: server\" -x bash -c \"ssh -t root@192.168.1.132 'echo 1'\""
+      ],
+      "Explanations about Options": {
+        "-e": "Execute the argument to this option inside the terminal.",
+        "-x": "Execute the remainder of the command line inside the terminal."
+      }
+    },
+    {
+      "Command": "yes",
+      "MP Summary": "output a string repeatedly until killed",
+      "Most Similar TLDR Task": "Accept everything prompted by the `apt-get` command",
+      "Most Similar TLDR Script": "yes | sudo apt-get install {{program}}",
+      "Most Similar NL2Bash Task": "Attaches to 'test1' tmux session.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "tmux attach -t test1\n",
+          "command-options": {
+            "tmux": {
+              "mpsum": "terminal multiplexer"
+            }
+          },
+          "TLDR_inform": {
+            "tmux": {
+              "man1_tmux_33967": "termin multiplex\nallow multipl session window pane attach name session attach recent use session detach current session prefix ctrl-b kill session name kill current session prefix ctrl-b list exist session start new name session start new session"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_50508: Reusing ssh session for repeated rsync commands",
+        "ul_552723: \"Store\" a remote SSH session?",
+        "su_891528: Non-interactive ssh sessions don't have PATH set on some systems"
+      ],
+      "Top-3 Scripts": [
+        "ul_50508: mkdir ~/.ssh/ctl\nssh -nNf -o ControlMaster=yes -o ControlPath=\"$HOME/.ssh/ctl/%L-%r@%h:%p\" user@host",
+        "ul_552723: ",
+        "su_891528: PermitUserEnvironment yes"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "tty",
+      "MP Summary": "return user's terminal name",
+      "Most Similar TLDR Task": "Print the file name of this terminal",
+      "Most Similar TLDR Script": "tty",
+      "Most Similar NL2Bash Task": "Attaches to 'test1' tmux session.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "tmux attach -t test1\n",
+          "command-options": {
+            "tmux": {
+              "mpsum": "terminal multiplexer"
+            }
+          },
+          "TLDR_inform": {
+            "tmux": {
+              "man1_tmux_33967": "termin multiplex\nallow multipl session window pane attach name session attach recent use session detach current session prefix ctrl-b kill session name kill current session prefix ctrl-b list exist session start new name session start new session"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "su_193168: How can I logout an open, remote SSH session?",
+        "so_11500649: How to create a new terminal session and execute multiple commands"
+      ],
+      "Top-3 Scripts": [
+        "su_193168: ",
+        "so_11500649: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "chsh",
+      "MP Summary": "change login shell",
+      "Most Similar TLDR Task": "Change shell",
+      "Most Similar TLDR Script": "chsh -s {{path/to/shell_binary}} {{username}}",
+      "Most Similar NL2Bash Task": "Attaches to 'test1' tmux session.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "tmux attach -t test1\n",
+          "command-options": {
+            "tmux": {
+              "mpsum": "terminal multiplexer"
+            }
+          },
+          "TLDR_inform": {
+            "tmux": {
+              "man1_tmux_33967": "termin multiplex\nallow multipl session window pane attach name session attach recent use session detach current session prefix ctrl-b kill session name kill current session prefix ctrl-b list exist session start new name session start new session"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_56237: How can I have one screen session per user and set it as the login shell?"
+      ],
+      "Top-3 Scripts": [
+        "au_56237: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "exec",
+      "MP Summary": "execute commands and open, close, or copy file descriptors",
+      "Most Similar TLDR Task": "Replace with the specified command and login using the default shell",
+      "Most Similar TLDR Script": "exec -l {{command -with -flags}}",
+      "Most Similar NL2Bash Task": "Attaches to 'test1' tmux session.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "tmux attach -t test1\n",
+          "command-options": {
+            "tmux": {
+              "mpsum": "terminal multiplexer"
+            }
+          },
+          "TLDR_inform": {
+            "tmux": {
+              "man1_tmux_33967": "termin multiplex\nallow multipl session window pane attach name session attach recent use session detach current session prefix ctrl-b kill session name kill current session prefix ctrl-b list exist session start new name session start new session"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_56237: How can I have one screen session per user and set it as the login shell?",
+        "so_11068965: How can I make TMUX be active whenever I start a new shell session?"
+      ],
+      "Top-3 Scripts": [
+        "au_56237: if [ ${SHLVL} -eq 1 ]; then\n    ((SHLVL+=1)); export SHLVL\n    exec screen -xR\nfi",
+        "so_11068965: alias g=\"grep\"\nalias ls=\"ls --color=auto\"\n\n# ...other stuff...\n\nif [[ ! $TERM =~ screen ]]; then\n    exec tmux\nfi\n\n#!/bin/sh\nexec gnome-terminal -e tmux"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "ps",
+      "MP Summary": "report a snapshot of the current processes.",
+      "Most Similar TLDR Task": "Sort processes by memory consumption",
+      "Most Similar TLDR Script": "ps --sort size",
+      "Most Similar NL2Bash Task": "Attaches to 'test1' tmux session.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "tmux attach -t test1\n",
+          "command-options": {
+            "tmux": {
+              "mpsum": "terminal multiplexer"
+            }
+          },
+          "TLDR_inform": {
+            "tmux": {
+              "man1_tmux_33967": "termin multiplex\nallow multipl session window pane attach name session attach recent use session detach current session prefix ctrl-b kill session name kill current session prefix ctrl-b list exist session start new name session start new session"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_389754: Telnet session already in use, Unable to create session",
+        "ul_127571: Terminate dropped SSH sessions",
+        "su_358835: Force logout a user"
+      ],
+      "Top-3 Scripts": [
+        "au_389754: ps aux | grep telnet",
+        "ul_127571: ps -ef | grep sshd | grep -v -e grep -e root -e 12345 | awk '{print \"sudo kill -9\", $2}' | sh",
+        "su_358835: ps -dN|grep pts/3"
+      ],
+      "Explanations about Options": {
+        "-e": "Select all processes. Identical to -A.",
+        "-d": "Select all processes except session leaders.",
+        "-f": "Do full-format listing. This option can be combined with many other UNIX-style\n options to add additional columns. It also causes the command arguments to be\n printed. When used with -L, the NLWP (number of threads) and LWP (thread ID)\n columns will be added. See the c option, the format keyword args, and the format\n keyword comm.",
+        "-N": "Select all processes except those that fulfill the specified conditions (negates\n the selection). Identical to --deselect."
+      }
+    },
+    {
+      "Command": "telnet",
+      "MP Summary": "user interface to the TELNET protocol",
+      "Most Similar TLDR Task": "Emit the default escape character combination for terminating the session",
+      "Most Similar TLDR Script": "Ctrl + ]",
+      "Most Similar NL2Bash Task": "Attaches to 'test1' tmux session.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "tmux attach -t test1\n",
+          "command-options": {
+            "tmux": {
+              "mpsum": "terminal multiplexer"
+            }
+          },
+          "TLDR_inform": {
+            "tmux": {
+              "man1_tmux_33967": "termin multiplex\nallow multipl session window pane attach name session attach recent use session detach current session prefix ctrl-b kill session name kill current session prefix ctrl-b list exist session start new name session start new session"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_389754: Telnet session already in use, Unable to create session"
+      ],
+      "Top-3 Scripts": [
+        "au_389754: ps aux | grep telnet\n\nkillall telnet"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "pkill",
+      "MP Summary": "look up or signal processes based on name and other attributes",
+      "Most Similar TLDR Task": "Send SIGUSR1 signal to processes which match",
+      "Most Similar TLDR Script": "pkill -USR1 {{process_name}}",
+      "Most Similar NL2Bash Task": "Attaches to 'test1' tmux session.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "tmux attach -t test1\n",
+          "command-options": {
+            "tmux": {
+              "mpsum": "terminal multiplexer"
+            }
+          },
+          "TLDR_inform": {
+            "tmux": {
+              "man1_tmux_33967": "termin multiplex\nallow multipl session window pane attach name session attach recent use session detach current session prefix ctrl-b kill session name kill current session prefix ctrl-b list exist session start new name session start new session"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_127571: Terminate dropped SSH sessions",
+        "su_193168: How can I logout an open, remote SSH session?"
+      ],
+      "Top-3 Scripts": [
+        "ul_127571: pkill -o -u $USER sshd",
+        "su_193168: pkill -9 -t pts/0"
+      ],
+      "Explanations about Options": {
+        "-u": "Only match processes whose effective user ID is listed. Either the numerical or\n symbolical value may be used.",
+        "-o": "Select only the oldest (least recently started) of the matching processes.",
+        "-t": "Only match processes whose controlling terminal is listed. The terminal name\n should be specified without the \"/dev/\" prefix."
+      }
+    },
+    {
+      "Command": "su",
+      "MP Summary": "run a command with substitute user and group ID",
+      "Most Similar TLDR Task": "Switch to a given user and simulate a full login shell",
+      "Most Similar TLDR Script": "su - {{username}}",
+      "Most Similar NL2Bash Task": "Attaches to 'test1' tmux session.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "tmux attach -t test1\n",
+          "command-options": {
+            "tmux": {
+              "mpsum": "terminal multiplexer"
+            }
+          },
+          "TLDR_inform": {
+            "tmux": {
+              "man1_tmux_33967": "termin multiplex\nallow multipl session window pane attach name session attach recent use session detach current session prefix ctrl-b kill session name kill current session prefix ctrl-b list exist session start new name session start new session"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_6496847: Access another user's D-Bus session"
+      ],
+      "Top-3 Scripts": [
+        "so_6496847: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "type",
+      "MP Summary": "write a description of command type",
+      "Most Similar TLDR Task": "Display all locations containing the specified executable",
+      "Most Similar TLDR Script": "type -a {{command}}",
+      "Most Similar NL2Bash Task": "Attaches to 'test1' tmux session.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "tmux attach -t test1\n",
+          "command-options": {
+            "tmux": {
+              "mpsum": "terminal multiplexer"
+            }
+          },
+          "TLDR_inform": {
+            "tmux": {
+              "man1_tmux_33967": "termin multiplex\nallow multipl session window pane attach name session attach recent use session detach current session prefix ctrl-b kill session name kill current session prefix ctrl-b list exist session start new name session start new session"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_172062: SSH'ing to my machine attaches an existing screen session and detaching it ends my SSH session",
+        "au_1080744: Can't type in guest session terminal windows"
+      ],
+      "Top-3 Scripts": [
+        "au_172062: if [ $SSH_TTY ] && [ ! $WINDOW ]; then\n    SCREENLIST=`screen -ls | grep 'Attached'`\n    if [ $? -eq \"0\" ]; then\n        echo -e \"Screen is already running and attached:\\n ${SCREENLIST}\"\n    else\n        type -P byobu &>/dev/null && byobu -U -R || screen -U -R\n    fi\nfi",
+        "au_1080744: # Allow gnome-terminal\nunix (send, receive, accept) type=stream addr=\"@/tmp/dbus*\","
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "exit",
+      "MP Summary": "cause the shell to exit",
+      "Most Similar TLDR Task": "Exit the shell with the specified exit code",
+      "Most Similar TLDR Script": "exit {{exit_code}}",
+      "Most Similar NL2Bash Task": "Attaches to 'test1' tmux session.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "tmux attach -t test1\n",
+          "command-options": {
+            "tmux": {
+              "mpsum": "terminal multiplexer"
+            }
+          },
+          "TLDR_inform": {
+            "tmux": {
+              "man1_tmux_33967": "termin multiplex\nallow multipl session window pane attach name session attach recent use session detach current session prefix ctrl-b kill session name kill current session prefix ctrl-b list exist session start new name session start new session"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "su_1410640: If named tmux session exists, make new session and group with it, else create that named tmux session",
+        "ul_50508: Reusing ssh session for repeated rsync commands",
+        "au_821724: recover ssh session connection"
+      ],
+      "Top-3 Scripts": [
+        "su_1410640: ",
+        "ul_50508: ssh -O exit -o ControlPath=\"$HOME/.ssh/ctl/%L-%r@%h:%p\" user@host",
+        "au_821724: $ tmux      /* starts new shell, with tmux status bar at the bottom of terminal window */\n$           /* do stuff */\n$ Ctrl-b d  /* key escape sequence to detach from tmux session */\n$ exit\n\n            /* ... time passes; much later you ssh back in ... */\n\n$ tmux attach\n\n            /* and you're back on the session you detached from */"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "man",
+      "MP Summary": "an interface to the system reference manuals",
+      "Most Similar TLDR Task": "Display the location of a manpage rather than the manpage itself",
+      "Most Similar TLDR Script": "man -w {{command}}",
+      "Most Similar NL2Bash Task": "Attaches to 'test1' tmux session.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "tmux attach -t test1\n",
+          "command-options": {
+            "tmux": {
+              "mpsum": "terminal multiplexer"
+            }
+          },
+          "TLDR_inform": {
+            "tmux": {
+              "man1_tmux_33967": "termin multiplex\nallow multipl session window pane attach name session attach recent use session detach current session prefix ctrl-b kill session name kill current session prefix ctrl-b list exist session start new name session start new session"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_28127: How to completely turn off session saving?",
+        "ul_127571: Terminate dropped SSH sessions",
+        "ul_543877: How does 'ssh <destination> exit' terminate the session?"
+      ],
+      "Top-3 Scripts": [
+        "au_28127: man gnome-session",
+        "ul_127571: man ssh_config",
+        "ul_543877: man ssh\n\nman ssh_config"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "sleep",
+      "MP Summary": "delay for a specified amount of time",
+      "Most Similar TLDR Task": "Delay in minutes",
+      "Most Similar TLDR Script": "sleep {{minutes}}m",
+      "Most Similar NL2Bash Task": "Attaches to 'test1' tmux session.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "tmux attach -t test1\n",
+          "command-options": {
+            "tmux": {
+              "mpsum": "terminal multiplexer"
+            }
+          },
+          "TLDR_inform": {
+            "tmux": {
+              "man1_tmux_33967": "termin multiplex\nallow multipl session window pane attach name session attach recent use session detach current session prefix ctrl-b kill session name kill current session prefix ctrl-b list exist session start new name session start new session"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "su_1410640: If named tmux session exists, make new session and group with it, else create that named tmux session",
+        "ul_435007: How to start an already named screen session?",
+        "ul_366998: Unable to initiate screen session"
+      ],
+      "Top-3 Scripts": [
+        "su_1410640: ",
+        "ul_435007: screen  -S my-new-session sleep 100",
+        "ul_366998: screen -d -m time sh -c 'python3 myscript.py; echo $?; sleep 999999999'"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "systemctl",
+      "MP Summary": "Control the systemd system and service manager",
+      "Most Similar TLDR Task": "Reload systemd, scanning for new or changed units",
+      "Most Similar TLDR Script": "systemctl daemon-reload",
+      "Most Similar NL2Bash Task": "Attaches to 'test1' tmux session.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "tmux attach -t test1\n",
+          "command-options": {
+            "tmux": {
+              "mpsum": "terminal multiplexer"
+            }
+          },
+          "TLDR_inform": {
+            "tmux": {
+              "man1_tmux_33967": "termin multiplex\nallow multipl session window pane attach name session attach recent use session detach current session prefix ctrl-b kill session name kill current session prefix ctrl-b list exist session start new name session start new session"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_1080744: Can't type in guest session terminal windows"
+      ],
+      "Top-3 Scripts": [
+        "au_1080744: sudo systemctl restart apparmor"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "firefox",
+      "MP Summary": "a free and open source web browser from Mozilla",
+      "Most Similar TLDR Task": "Open a private (incognito) window",
+      "Most Similar TLDR Script": "firefox --private-window",
+      "Most Similar NL2Bash Task": "Attaches to 'test1' tmux session.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "tmux attach -t test1\n",
+          "command-options": {
+            "tmux": {
+              "mpsum": "terminal multiplexer"
+            }
+          },
+          "TLDR_inform": {
+            "tmux": {
+              "man1_tmux_33967": "termin multiplex\nallow multipl session window pane attach name session attach recent use session detach current session prefix ctrl-b kill session name kill current session prefix ctrl-b list exist session start new name session start new session"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_172062: SSH'ing to my machine attaches an existing screen session and detaching it ends my SSH session"
+      ],
+      "Top-3 Scripts": [
+        "au_172062: ssh -X <strong><hostname></strong> firefox"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "php",
+      "MP Summary": "PHP Command Line Interface 'CLI'",
+      "Most Similar TLDR Task": "Parse and execute a php script",
+      "Most Similar TLDR Script": "php {{file}}",
+      "Most Similar NL2Bash Task": "Attaches to 'test1' tmux session.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "tmux attach -t test1\n",
+          "command-options": {
+            "tmux": {
+              "mpsum": "terminal multiplexer"
+            }
+          },
+          "TLDR_inform": {
+            "tmux": {
+              "man1_tmux_33967": "termin multiplex\nallow multipl session window pane attach name session attach recent use session detach current session prefix ctrl-b kill session name kill current session prefix ctrl-b list exist session start new name session start new session"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_46843592: How to allow backgrounding a process to survive a session termination?"
+      ],
+      "Top-3 Scripts": [
+        "so_46843592: nohup php /var/www/listingapp/public/index.php batch/GetPrefecture init &"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "sh",
+      "MP Summary": "MirBSD Korn shell",
+      "Most Similar TLDR Task": "Execute a command",
+      "Most Similar TLDR Script": "sh -c {{command}}",
+      "Most Similar NL2Bash Task": "Attaches to 'test1' tmux session.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "tmux attach -t test1\n",
+          "command-options": {
+            "tmux": {
+              "mpsum": "terminal multiplexer"
+            }
+          },
+          "TLDR_inform": {
+            "tmux": {
+              "man1_tmux_33967": "termin multiplex\nallow multipl session window pane attach name session attach recent use session detach current session prefix ctrl-b kill session name kill current session prefix ctrl-b list exist session start new name session start new session"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_127571: Terminate dropped SSH sessions",
+        "ul_366998: Unable to initiate screen session"
+      ],
+      "Top-3 Scripts": [
+        "ul_127571: ps -ef | grep sshd | grep -v -e grep -e root -e 12345 | awk '{print \"sudo kill -9\", $2}' | sh\n\n| sh",
+        "ul_366998: screen -d -m time sh -c 'python3 myscript.py; echo $?; sleep 999999999'"
+      ],
+      "Explanations about Options": {
+        "-c": "Impose a size limit of n blocks on the size of core dumps."
+      }
+    },
+    {
+      "Command": "alias",
+      "MP Summary": "define or display aliases",
+      "Most Similar TLDR Task": "View the command associated to a given alias",
+      "Most Similar TLDR Script": "alias {{word}}",
+      "Most Similar NL2Bash Task": "Attaches to 'test1' tmux session.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "tmux attach -t test1\n",
+          "command-options": {
+            "tmux": {
+              "mpsum": "terminal multiplexer"
+            }
+          },
+          "TLDR_inform": {
+            "tmux": {
+              "man1_tmux_33967": "termin multiplex\nallow multipl session window pane attach name session attach recent use session detach current session prefix ctrl-b kill session name kill current session prefix ctrl-b list exist session start new name session start new session"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_11068965: How can I make TMUX be active whenever I start a new shell session?"
+      ],
+      "Top-3 Scripts": [
+        "so_11068965: alias g=\"grep\"\nalias ls=\"ls --color=auto\"\n\n# ...other stuff...\n\nif [[ ! $TERM =~ screen ]]; then\n    exec tmux\nfi"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "rm",
+      "MP Summary": "remove files or directories",
+      "Most Similar TLDR Task": "Interactively remove multiple files, with a prompt before every removal",
+      "Most Similar TLDR Script": "rm -i {{file(s)}}",
+      "Most Similar NL2Bash Task": "Attaches to 'test1' tmux session.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "tmux attach -t test1\n",
+          "command-options": {
+            "tmux": {
+              "mpsum": "terminal multiplexer"
+            }
+          },
+          "TLDR_inform": {
+            "tmux": {
+              "man1_tmux_33967": "termin multiplex\nallow multipl session window pane attach name session attach recent use session detach current session prefix ctrl-b kill session name kill current session prefix ctrl-b list exist session start new name session start new session"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_28127: How to completely turn off session saving?",
+        "au_508666: How to delete a manually saved session"
+      ],
+      "Top-3 Scripts": [
+        "au_28127: rm ~/.config/gnome-session/saved-session/*",
+        "au_508666: rm ~/.kde4/share/config/ksmserverrc\n\nrm -r ~/.kde4/share/config/session/*"
+      ],
+      "Explanations about Options": {
+        "-r": "remove directories and their contents recursively"
+      }
+    },
+    {
+      "Command": "id",
+      "MP Summary": "print real and effective user and group IDs",
+      "Most Similar TLDR Task": "Display an arbitrary user's id (UID), group id (GID) and groups to which they belong",
+      "Most Similar TLDR Script": "id {{username}}",
+      "Most Similar NL2Bash Task": "Attaches to 'test1' tmux session.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "tmux attach -t test1\n",
+          "command-options": {
+            "tmux": {
+              "mpsum": "terminal multiplexer"
+            }
+          },
+          "TLDR_inform": {
+            "tmux": {
+              "man1_tmux_33967": "termin multiplex\nallow multipl session window pane attach name session attach recent use session detach current session prefix ctrl-b kill session name kill current session prefix ctrl-b list exist session start new name session start new session"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_210544: How To Logout and Apply New Group Settings"
+      ],
+      "Top-3 Scripts": [
+        "ul_210544: > id\nuid=1000(user) gid=100(users) groups=100(users),92(audio)\n> newgrp audio\n> id\nuid=1000(user) gid=92(audio) groups=92(audio),100(users)"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "echo",
+      "MP Summary": "display a line of text",
+      "Most Similar TLDR Task": "Append a message to the file",
+      "Most Similar TLDR Script": "echo \"{{Hello World}}\" >> {{file.txt}}",
+      "Most Similar NL2Bash Task": "Attaches to 'test1' tmux session.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "tmux attach -t test1\n",
+          "command-options": {
+            "tmux": {
+              "mpsum": "terminal multiplexer"
+            }
+          },
+          "TLDR_inform": {
+            "tmux": {
+              "man1_tmux_33967": "termin multiplex\nallow multipl session window pane attach name session attach recent use session detach current session prefix ctrl-b kill session name kill current session prefix ctrl-b list exist session start new name session start new session"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_172062: SSH'ing to my machine attaches an existing screen session and detaching it ends my SSH session",
+        "ul_366998: Unable to initiate screen session"
+      ],
+      "Top-3 Scripts": [
+        "au_172062: if [ $SSH_TTY ] && [ ! $WINDOW ]; then\n    SCREENLIST=`screen -ls | grep 'Attached'`\n    if [ $? -eq \"0\" ]; then\n        echo -e \"Screen is already running and attached:\\n ${SCREENLIST}\"\n    else\n        type -P byobu &>/dev/null && byobu -U -R || screen -U -R\n    fi\nfi",
+        "ul_366998: screen -d -m time sh -c 'python3 myscript.py; echo $?; sleep 999999999'"
+      ],
+      "Explanations about Options": {
+        "-e": "enable interpretation of backslash escapes"
+      }
+    },
+    {
+      "Command": "killall",
+      "MP Summary": "kill processes by name",
+      "Most Similar TLDR Task": "Terminate a process using the default SIGTERM (terminate) signal",
+      "Most Similar TLDR Script": "killall {{process_name}}",
+      "Most Similar NL2Bash Task": "Attaches to 'test1' tmux session.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "tmux attach -t test1\n",
+          "command-options": {
+            "tmux": {
+              "mpsum": "terminal multiplexer"
+            }
+          },
+          "TLDR_inform": {
+            "tmux": {
+              "man1_tmux_33967": "termin multiplex\nallow multipl session window pane attach name session attach recent use session detach current session prefix ctrl-b kill session name kill current session prefix ctrl-b list exist session start new name session start new session"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_389754: Telnet session already in use, Unable to create session"
+      ],
+      "Top-3 Scripts": [
+        "au_389754: killall telnet"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "install",
+      "MP Summary": "copy files and set attributes",
+      "Most Similar TLDR Task": "Copy files to destination, setting their `mode`",
+      "Most Similar TLDR Script": "install -m {{+x}} {{path/to/source}} {{path/to/destination}}",
+      "Most Similar NL2Bash Task": "Attaches to 'test1' tmux session.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "tmux attach -t test1\n",
+          "command-options": {
+            "tmux": {
+              "mpsum": "terminal multiplexer"
+            }
+          },
+          "TLDR_inform": {
+            "tmux": {
+              "man1_tmux_33967": "termin multiplex\nallow multipl session window pane attach name session attach recent use session detach current session prefix ctrl-b kill session name kill current session prefix ctrl-b list exist session start new name session start new session"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_821724: recover ssh session connection"
+      ],
+      "Top-3 Scripts": [
+        "au_821724: sudo apt install"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "newgrp",
+      "MP Summary": "log in to a new group",
+      "Most Similar TLDR Task": "Change user's primary group membership",
+      "Most Similar TLDR Script": "newgrp {{group_name}}",
+      "Most Similar NL2Bash Task": "Attaches to 'test1' tmux session.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "tmux attach -t test1\n",
+          "command-options": {
+            "tmux": {
+              "mpsum": "terminal multiplexer"
+            }
+          },
+          "TLDR_inform": {
+            "tmux": {
+              "man1_tmux_33967": "termin multiplex\nallow multipl session window pane attach name session attach recent use session detach current session prefix ctrl-b kill session name kill current session prefix ctrl-b list exist session start new name session start new session"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_210544: How To Logout and Apply New Group Settings"
+      ],
+      "Top-3 Scripts": [
+        "ul_210544: > id\nuid=1000(user) gid=100(users) groups=100(users),92(audio)\n> newgrp audio\n> id\nuid=1000(user) gid=92(audio) groups=92(audio),100(users)"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "command",
+      "MP Summary": "execute a simple command",
+      "Most Similar TLDR Task": "Execute the ls program literally, even if an ls alias exists",
+      "Most Similar TLDR Script": "command {{ls}}",
+      "Most Similar NL2Bash Task": "Attaches to 'test1' tmux session.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "tmux attach -t test1\n",
+          "command-options": {
+            "tmux": {
+              "mpsum": "terminal multiplexer"
+            }
+          },
+          "TLDR_inform": {
+            "tmux": {
+              "man1_tmux_33967": "termin multiplex\nallow multipl session window pane attach name session attach recent use session detach current session prefix ctrl-b kill session name kill current session prefix ctrl-b list exist session start new name session start new session"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_11500649: How to create a new terminal session and execute multiple commands"
+      ],
+      "Top-3 Scripts": [
+        "so_11500649: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "groups",
+      "MP Summary": "print the groups a user is in",
+      "Most Similar TLDR Task": "Print group memberships for a specific user",
+      "Most Similar TLDR Script": "groups {{username}}",
+      "Most Similar NL2Bash Task": "Attaches to 'test1' tmux session.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "tmux attach -t test1\n",
+          "command-options": {
+            "tmux": {
+              "mpsum": "terminal multiplexer"
+            }
+          },
+          "TLDR_inform": {
+            "tmux": {
+              "man1_tmux_33967": "termin multiplex\nallow multipl session window pane attach name session attach recent use session detach current session prefix ctrl-b kill session name kill current session prefix ctrl-b list exist session start new name session start new session"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_210544: How To Logout and Apply New Group Settings"
+      ],
+      "Top-3 Scripts": [
+        "ul_210544: > id\nuid=1000(user) gid=100(users) groups=100(users),92(audio)\n> newgrp audio\n> id\nuid=1000(user) gid=92(audio) groups=92(audio),100(users)"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "cd",
+      "MP Summary": "change the working directory",
+      "Most Similar TLDR Task": "Go to home directory of current user",
+      "Most Similar TLDR Script": "cd",
+      "Most Similar NL2Bash Task": "Attaches to 'test1' tmux session.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "tmux attach -t test1\n",
+          "command-options": {
+            "tmux": {
+              "mpsum": "terminal multiplexer"
+            }
+          },
+          "TLDR_inform": {
+            "tmux": {
+              "man1_tmux_33967": "termin multiplex\nallow multipl session window pane attach name session attach recent use session detach current session prefix ctrl-b kill session name kill current session prefix ctrl-b list exist session start new name session start new session"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_334242: SSH into server, start screen session, change directory?"
+      ],
+      "Top-3 Scripts": [
+        "ul_334242: debug1: Sending command: screen -dm bash -c cd path/to/my/script/; pwd > ~/output.txt\n\nscreen -dm bash -c cd path/to/my/script/; pwd > ~/output.txt\n\nargv[0] = ssh\nargv[1] = me@myserver.com\nargv[2] = screen\nargv[3] = -dm\nargv[4] = bash\nargv[5] = -c\nargv[6] = cd path/to/my/script/; pwd > ~/output.txt"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "nano",
+      "MP Summary": "Nano's ANOther editor, inspired by Pico",
+      "Most Similar TLDR Task": "Open a specific file",
+      "Most Similar TLDR Script": "nano {{path/to/file}}",
+      "Most Similar NL2Bash Task": "Attaches to 'test1' tmux session.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "tmux attach -t test1\n",
+          "command-options": {
+            "tmux": {
+              "mpsum": "terminal multiplexer"
+            }
+          },
+          "TLDR_inform": {
+            "tmux": {
+              "man1_tmux_33967": "termin multiplex\nallow multipl session window pane attach name session attach recent use session detach current session prefix ctrl-b kill session name kill current session prefix ctrl-b list exist session start new name session start new session"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_1080744: Can't type in guest session terminal windows",
+        "au_250630: How can I turn off Xfce session saving system-wide?"
+      ],
+      "Top-3 Scripts": [
+        "au_1080744: sudo nano /etc/apparmor.d/lightdm-guest-session",
+        "au_250630: sudo nano /etc/xdg/xfce4/kiosk/kioskrc"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "date",
+      "MP Summary": "print or set the system date and time",
+      "Most Similar TLDR Task": "Display a specific date (represented as a Unix timestamp) using the default format",
+      "Most Similar TLDR Script": "date -d @1473305798",
+      "Most Similar NL2Bash Task": "Attaches to 'test1' tmux session.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "tmux attach -t test1\n",
+          "command-options": {
+            "tmux": {
+              "mpsum": "terminal multiplexer"
+            }
+          },
+          "TLDR_inform": {
+            "tmux": {
+              "man1_tmux_33967": "termin multiplex\nallow multipl session window pane attach name session attach recent use session detach current session prefix ctrl-b kill session name kill current session prefix ctrl-b list exist session start new name session start new session"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "su_1410640: If named tmux session exists, make new session and group with it, else create that named tmux session"
+      ],
+      "Top-3 Scripts": [
+        "su_1410640: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "at",
+      "MP Summary": "queue, examine, or delete jobs for later execution",
+      "Most Similar TLDR Task": "Open an `at` prompt to create a new set of scheduled commands, press `Ctrl + D` to save and exit",
+      "Most Similar TLDR Script": "at {{hh:mm}}",
+      "Most Similar NL2Bash Task": "Attaches to 'test1' tmux session.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "tmux attach -t test1\n",
+          "command-options": {
+            "tmux": {
+              "mpsum": "terminal multiplexer"
+            }
+          },
+          "TLDR_inform": {
+            "tmux": {
+              "man1_tmux_33967": "termin multiplex\nallow multipl session window pane attach name session attach recent use session detach current session prefix ctrl-b kill session name kill current session prefix ctrl-b list exist session start new name session start new session"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_821724: recover ssh session connection"
+      ],
+      "Top-3 Scripts": [
+        "au_821724: $ tmux      /* starts new shell, with tmux status bar at the bottom of terminal window */\n$           /* do stuff */\n$ Ctrl-b d  /* key escape sequence to detach from tmux session */\n$ exit\n\n            /* ... time passes; much later you ssh back in ... */\n\n$ tmux attach\n\n            /* and you're back on the session you detached from */"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "zsh",
+      "MP Summary": "the Z shell",
+      "Most Similar TLDR Task": "Execute command passed as parameter",
+      "Most Similar TLDR Script": "zsh -c {{command}}",
+      "Most Similar NL2Bash Task": "Attaches to 'test1' tmux session.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "tmux attach -t test1\n",
+          "command-options": {
+            "tmux": {
+              "mpsum": "terminal multiplexer"
+            }
+          },
+          "TLDR_inform": {
+            "tmux": {
+              "man1_tmux_33967": "termin multiplex\nallow multipl session window pane attach name session attach recent use session detach current session prefix ctrl-b kill session name kill current session prefix ctrl-b list exist session start new name session start new session"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_56237: How can I have one screen session per user and set it as the login shell?"
+      ],
+      "Top-3 Scripts": [
+        "au_56237: shell /bin/zsh\nstartup_message off"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "timeout",
+      "MP Summary": "run a command with a time limit",
+      "Most Similar TLDR Task": "Specify the signal to be sent to the command after the time limit expires. (By default, TERM is sent)",
+      "Most Similar TLDR Script": "timeout --signal {{INT}} {{5s}} {{sleep 10}}",
+      "Most Similar NL2Bash Task": "Attaches to 'test1' tmux session.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "tmux attach -t test1\n",
+          "command-options": {
+            "tmux": {
+              "mpsum": "terminal multiplexer"
+            }
+          },
+          "TLDR_inform": {
+            "tmux": {
+              "man1_tmux_33967": "termin multiplex\nallow multipl session window pane attach name session attach recent use session detach current session prefix ctrl-b kill session name kill current session prefix ctrl-b list exist session start new name session start new session"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_552723: \"Store\" a remote SSH session?"
+      ],
+      "Top-3 Scripts": [
+        "ul_552723: Host host\n    User root\n    ControlMaster auto\n    ControlPath /tmp/ssh-control-%C\n    ControlPersist 30   # or some safe timeout"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "nohup",
+      "MP Summary": "run a command immune to hangups, with output to a non-tty",
+      "Most Similar TLDR Task": "Run process that can live beyond the terminal",
+      "Most Similar TLDR Script": "nohup {{command options}}",
+      "Most Similar NL2Bash Task": "Attaches to 'test1' tmux session.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "tmux attach -t test1\n",
+          "command-options": {
+            "tmux": {
+              "mpsum": "terminal multiplexer"
+            }
+          },
+          "TLDR_inform": {
+            "tmux": {
+              "man1_tmux_33967": "termin multiplex\nallow multipl session window pane attach name session attach recent use session detach current session prefix ctrl-b kill session name kill current session prefix ctrl-b list exist session start new name session start new session"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_46843592: How to allow backgrounding a process to survive a session termination?"
+      ],
+      "Top-3 Scripts": [
+        "so_46843592: nohup php /var/www/listingapp/public/index.php batch/GetPrefecture init &"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "rsync",
+      "MP Summary": "a fast, versatile, remote (and local) file-copying tool",
+      "Most Similar TLDR Task": "Transfer file over SSH and delete local files that do not exist on remote host",
+      "Most Similar TLDR Script": "rsync -e ssh --delete {{remote_host}}:{{path/to/remote_file}} {{path/to/local_file}}",
+      "Most Similar NL2Bash Task": "Attaches to 'test1' tmux session.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "tmux attach -t test1\n",
+          "command-options": {
+            "tmux": {
+              "mpsum": "terminal multiplexer"
+            }
+          },
+          "TLDR_inform": {
+            "tmux": {
+              "man1_tmux_33967": "termin multiplex\nallow multipl session window pane attach name session attach recent use session detach current session prefix ctrl-b kill session name kill current session prefix ctrl-b list exist session start new name session start new session"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_50508: Reusing ssh session for repeated rsync commands"
+      ],
+      "Top-3 Scripts": [
+        "ul_50508: rsync -e \"ssh -o 'ControlPath=$HOME/.ssh/ctl/%L-%r@%h:%p'\" ..."
+      ],
+      "Explanations about Options": {
+        "-e": "This option allows you to choose an alternative remote shell program to use for\n communication between the local and remote copies of rsync. Typically, rsync is\n configured to use ssh by default, but you may prefer to use rsh on a local network.",
+        "-o": "This option causes rsync to set the owner of the destination file to be the same as\n the source file, but only if the receiving rsync is being run as the super-user\n (see also the --super and --fake-super options). Without this option, the owner of\n new and/or transferred files are set to the invoking user on the receiving side."
+      }
+    },
+    {
+      "Command": "apt",
+      "MP Summary": "command-line interface",
+      "Most Similar TLDR Task": "Remove a package (using `purge` instead also removes its configuration files)",
+      "Most Similar TLDR Script": "sudo apt remove {{package}}",
+      "Most Similar NL2Bash Task": "Attaches to 'test1' tmux session.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "tmux attach -t test1\n",
+          "command-options": {
+            "tmux": {
+              "mpsum": "terminal multiplexer"
+            }
+          },
+          "TLDR_inform": {
+            "tmux": {
+              "man1_tmux_33967": "termin multiplex\nallow multipl session window pane attach name session attach recent use session detach current session prefix ctrl-b kill session name kill current session prefix ctrl-b list exist session start new name session start new session"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_821724: recover ssh session connection"
+      ],
+      "Top-3 Scripts": [
+        "au_821724: sudo apt install"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "print",
+      "MP Summary": "execute programs via entries in the mailcap file",
+      "Most Similar TLDR Task": "Print action can be used to print any file on default run-mailcap tool",
+      "Most Similar TLDR Script": "print {{filename}}",
+      "Most Similar NL2Bash Task": "Attaches to 'test1' tmux session.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "tmux attach -t test1\n",
+          "command-options": {
+            "tmux": {
+              "mpsum": "terminal multiplexer"
+            }
+          },
+          "TLDR_inform": {
+            "tmux": {
+              "man1_tmux_33967": "termin multiplex\nallow multipl session window pane attach name session attach recent use session detach current session prefix ctrl-b kill session name kill current session prefix ctrl-b list exist session start new name session start new session"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_127571: Terminate dropped SSH sessions"
+      ],
+      "Top-3 Scripts": [
+        "ul_127571: ps -ef | grep sshd | grep -v -e grep -e root -e 12345 | awk '{print \"sudo kill -9\", $2}' | sh"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "read",
+      "MP Summary": "read a line from standard input",
+      "Most Similar TLDR Task": "Enable backspace and GNU readline hotkeys when entering input with read",
+      "Most Similar TLDR Script": "read -e {{variable}}",
+      "Most Similar NL2Bash Task": "Attaches to 'test1' tmux session.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "tmux attach -t test1\n",
+          "command-options": {
+            "tmux": {
+              "mpsum": "terminal multiplexer"
+            }
+          },
+          "TLDR_inform": {
+            "tmux": {
+              "man1_tmux_33967": "termin multiplex\nallow multipl session window pane attach name session attach recent use session detach current session prefix ctrl-b kill session name kill current session prefix ctrl-b list exist session start new name session start new session"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_20070824: Session screen - how to get session list"
+      ],
+      "Top-3 Scripts": [
+        "so_20070824: screen -ls | grep $'^\\t' | while read name _rest ; do\n    # Process $name\ndone"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "pwd",
+      "MP Summary": "print name of current/working directory",
+      "Most Similar TLDR Task": "Print the current directory, and resolve all symlinks (i.e. show the \"physical\" path)",
+      "Most Similar TLDR Script": "pwd -P",
+      "Most Similar NL2Bash Task": "Attaches to 'test1' tmux session.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "tmux attach -t test1\n",
+          "command-options": {
+            "tmux": {
+              "mpsum": "terminal multiplexer"
+            }
+          },
+          "TLDR_inform": {
+            "tmux": {
+              "man1_tmux_33967": "termin multiplex\nallow multipl session window pane attach name session attach recent use session detach current session prefix ctrl-b kill session name kill current session prefix ctrl-b list exist session start new name session start new session"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_334242: SSH into server, start screen session, change directory?"
+      ],
+      "Top-3 Scripts": [
+        "ul_334242: ssh me@myserver.com \"screen -dm bash -c 'cd path/to/my/script/; pwd > ~/output.txt'\"\n\npwd > ~/output.txt\n\ndebug1: Sending command: screen -dm bash -c cd path/to/my/script/; pwd > ~/output.txt\n\nscreen -dm bash -c cd path/to/my/script/; pwd > ~/output.txt\n\ndebug1: Sending command: screen -dm bash -c 'cd path/to/my/script/; pwd > ~/output.txt'\n\nargv[0] = ssh\nargv[1] = me@myserver.com\nargv[2] = screen\nargv[3] = -dm\nargv[4] = bash\nargv[5] = -c\nargv[6] = cd path/to/my/script/; pwd > ~/output.txt\n\nargv[0] = ssh\nargv[1] = me@myserver.com\nargv[2] = screen -dm bash -c 'cd path/to/my/script/; pwd > ~/output.txt'"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "batch",
+      "MP Summary": "queue, examine, or delete jobs for later execution",
+      "Most Similar TLDR Task": "Execute commands from a given file",
+      "Most Similar TLDR Script": "batch -f {{path/to/file}}",
+      "Most Similar NL2Bash Task": "Attaches to 'test1' tmux session.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "tmux attach -t test1\n",
+          "command-options": {
+            "tmux": {
+              "mpsum": "terminal multiplexer"
+            }
+          },
+          "TLDR_inform": {
+            "tmux": {
+              "man1_tmux_33967": "termin multiplex\nallow multipl session window pane attach name session attach recent use session detach current session prefix ctrl-b kill session name kill current session prefix ctrl-b list exist session start new name session start new session"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_46843592: How to allow backgrounding a process to survive a session termination?"
+      ],
+      "Top-3 Scripts": [
+        "so_46843592: nohup php /var/www/listingapp/public/index.php batch/GetPrefecture init &"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "chmod",
+      "MP Summary": "change file mode bits",
+      "Most Similar TLDR Task": "Give [a]ll users rights to [r]ead and e[x]ecute",
+      "Most Similar TLDR Script": "chmod a+rx {{file}}",
+      "Most Similar NL2Bash Task": "Attaches to 'test1' tmux session.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "tmux attach -t test1\n",
+          "command-options": {
+            "tmux": {
+              "mpsum": "terminal multiplexer"
+            }
+          },
+          "TLDR_inform": {
+            "tmux": {
+              "man1_tmux_33967": "termin multiplex\nallow multipl session window pane attach name session attach recent use session detach current session prefix ctrl-b kill session name kill current session prefix ctrl-b list exist session start new name session start new session"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_25084288: Keep SSH session alive"
+      ],
+      "Top-3 Scripts": [
+        "so_25084288: chmod 600 ~/.ssh/config"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "free",
+      "MP Summary": "Display amount of free and used memory in the system",
+      "Most Similar TLDR Task": "Display system memory",
+      "Most Similar TLDR Script": "free",
+      "Most Similar NL2Bash Task": "Attaches to 'test1' tmux session.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "tmux attach -t test1\n",
+          "command-options": {
+            "tmux": {
+              "mpsum": "terminal multiplexer"
+            }
+          },
+          "TLDR_inform": {
+            "tmux": {
+              "man1_tmux_33967": "termin multiplex\nallow multipl session window pane attach name session attach recent use session detach current session prefix ctrl-b kill session name kill current session prefix ctrl-b list exist session start new name session start new session"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_177644: How can I reset tmux's automatic session name numbering?"
+      ],
+      "Top-3 Scripts": [
+        "ul_177644: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "host",
+      "MP Summary": "DNS lookup utility",
+      "Most Similar TLDR Task": "Specify an alternate DNS server to query",
+      "Most Similar TLDR Script": "host {{domain}} {{8.8.8.8}}",
+      "Most Similar NL2Bash Task": "Attaches to 'test1' tmux session.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "tmux attach -t test1\n",
+          "command-options": {
+            "tmux": {
+              "mpsum": "terminal multiplexer"
+            }
+          },
+          "TLDR_inform": {
+            "tmux": {
+              "man1_tmux_33967": "termin multiplex\nallow multipl session window pane attach name session attach recent use session detach current session prefix ctrl-b kill session name kill current session prefix ctrl-b list exist session start new name session start new session"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_552723: \"Store\" a remote SSH session?"
+      ],
+      "Top-3 Scripts": [
+        "ul_552723: Host host\n    User root\n    ControlMaster auto\n    ControlPath /tmp/ssh-control-%C\n    ControlPersist 30   # or some safe timeout"
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

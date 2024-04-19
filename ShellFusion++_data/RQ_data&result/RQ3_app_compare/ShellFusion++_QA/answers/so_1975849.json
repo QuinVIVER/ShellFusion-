@@ -1,0 +1,70 @@
+{
+  "Query": "How to split a line into words separated by one or more spaces in bash?",
+  "Answers": [
+    {
+      "Command": "echo",
+      "Top-3 Similar Questions": [
+        "so_10520623: How to split one string into multiple variables in bash shell?",
+        "so_1469849: How to split one string into multiple strings separated by at least one space in bash shell?",
+        "ul_129191: How to split a string into an array in bash"
+      ],
+      "Top-3 Scripts": [
+        "so_10520623: var1=$(echo $STR | cut -f1 -d-)\nvar2=$(echo $STR | cut -f2 -d-)",
+        "so_1469849: sentence=\"This is   a sentence.\"\nfor word in $sentence\ndo\n    echo $word\ndone",
+        "so_10586153: echo \"${array[0]}\"\n\nfor element in \"${array[@]}\"\ndo\n    echo \"$element\"\ndone\n\nfor index in \"${!array[@]}\"\ndo\n    echo \"$index ${array[index]}\"\ndone\n\necho \"${#array[@]}\"\n\necho \"${array[-1]}\"\n\necho \"${array[@]: -1:1}\""
+      ]
+    },
+    {
+      "Command": "read",
+      "Top-3 Similar Questions": [
+        "so_66473280: Split a file by lines into specific subfolders in bash",
+        "ul_129191: How to split a string into an array in bash",
+        "so_10586153: How to split a string into an array in Bash?"
+      ],
+      "Top-3 Scripts": [
+        "so_66473280: nr=1\nwhile IFS= read -r line; do\n   mkdir \"child$nr\"\n   printf \"%s\\n\" \"$line\" > \"child$nr/child$nr\"\n   nr=$((nr + 1))\ndone < parent.txt",
+        "so_10586153: IFS=', ' read -r -a array <<< \"$string\"",
+        "so_24015191: read -a arr\n\nwhile read -r -a arr\ndo\n    ip=\"${arr[0]}\"\n    if ! ping -q -c 1 \"$ip\" > /dev/null\n    then\n        mail -s \"$subject\" \"$email\" <<< \"Host $ip is down (ping failed) at $(date)\"\n    fi\ndone < b.txt"
+      ]
+    },
+    {
+      "Command": "awk",
+      "Top-3 Similar Questions": [
+        "so_66473280: Split a file by lines into specific subfolders in bash",
+        "ul_647409: awk: split datetime column into three separate columns in a csv",
+        "so_57045502: Bash: Split a single line of output with spaces into multiple lines of one word each"
+      ],
+      "Top-3 Scripts": [
+        "so_66473280: awk '{system(\"mkdir child\"NR); print > \"child\"NR\"/child\"NR}' parent.txt",
+        "ul_647409: awk -F, -v OFS=\",\" 'NR==1 { print $0,\"day,month,year\"; next }\n{ s = substr($5, 1, 2);\n  g = substr($5, 4, 2);\n  l = substr($5, 7, 4);\n  print $0, s, g, l}' file.csv\n\nawk -F, -v OFS=\",\" 'NR==1 { print $0,\"day,month,year\"; next }\n{ split($5,a,\"/\"); print $0, a[1], a[2], a[3] }' file.csv",
+        "so_57045502: echo 'foo bar baz are your words' | awk '{NF-=3; OFS=\"\\n\"; $1=$1}1' | sort"
+      ]
+    },
+    {
+      "Command": "print",
+      "Top-3 Similar Questions": [
+        "so_66473280: Split a file by lines into specific subfolders in bash",
+        "ul_647409: awk: split datetime column into three separate columns in a csv",
+        "so_62657224: Split a string on a word in Bash"
+      ],
+      "Top-3 Scripts": [
+        "so_66473280: awk '{system(\"mkdir child\"NR); print > \"child\"NR\"/child\"NR}' parent.txt",
+        "ul_647409: awk -F, -v OFS=\",\" 'NR==1 { print $0,\"day,month,year\"; next }\n{ s = substr($5, 1, 2);\n  g = substr($5, 4, 2);\n  l = substr($5, 7, 4);\n  print $0, s, g, l}' file.csv\n\nawk -F, -v OFS=\",\" 'NR==1 { print $0,\"day,month,year\"; next }\n{ split($5,a,\"/\"); print $0, a[1], a[2], a[3] }' file.csv",
+        "so_62657224: echo test-server-domain-name.com | awk -F 'domain' '{print $1}'"
+      ]
+    },
+    {
+      "Command": "file",
+      "Top-3 Similar Questions": [
+        "so_25883749: How to split a file into words keeping punctuation, in bash?",
+        "so_25396798: How to split one big text file into multiple files in powershell",
+        "so_68102153: Split one file into multiple files based on a pattern"
+      ],
+      "Top-3 Scripts": [
+        "so_25883749: grep -Eo '\\w+|[^\\w ]' file\nWord1\nword2\n,\nword3\n;\nword4\n.\nWord5\n\ngrep -Eo '\\w+|[^\\w ]' file | sort -f\n,\n.\n;\nWord1\nword2\nword3\nword4\nWord5",
+        "so_68102153: for f in *.faa; do \n  awk '/^>/ { file=substr($1,2,2) \".\" FILENAME  } \n       { print >> f; close(f); }' \"$f\"\ndone",
+        "so_24142836: awk '{ gsub(\",{\",\"\\n{\"); {print substr($0, 2, length($0) - 2)} }' file"
+      ]
+    }
+  ]
+}

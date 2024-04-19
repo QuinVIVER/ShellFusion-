@@ -1,0 +1,99 @@
+{
+  "Query": "Move files and folders recursively on Linux",
+  "Answers": [
+    {
+      "Command": "mv",
+      "MP Summary": "move (rename) files",
+      "Most Similar TLDR Task": "Move files in arbitrary locations",
+      "Most Similar TLDR Script": "mv {{source}} {{target}}",
+      "Top-3 Similar Questions": [
+        "so_39866136: Bash script to move folders based on filesize changes?",
+        "so_2022886: moving files recurisively on linux",
+        "so_43922514: Move folder depending on foldername"
+      ],
+      "Top-3 Scripts": [
+        "so_39866136: find /volume2/4TBScratch/Processing -type d -maxdepth 1 -size -10G -exec mv \"{}\"  \"/volume1/S/00 Landing\" \\;",
+        "so_2022886: find ./dir -type f -iname \"*.t[argz]*[bz2]\" -print0 | xargs --null mv --target-directory=dir",
+        "so_43922514: regex='/([^/]*).S[[:digit:]]{2}[^/]*/$'\n\nfor dir in /path/to/folders/*/; do\n    if [[ $dir =~ $regex ]]; then\n        mv \"$dir\" /path/to/TV/\"${BASH_REMATCH[1]}\"\n    fi\ndone\n\nmv /path/to/folders/show1.S01E14.blahblah/ /path/to/TV/show1\nmv /path/to/folders/show2.S11E01.text/ /path/to/TV/show2"
+      ],
+      "Explanations about Options": {
+        "--target-directory": "move all SOURCE arguments into DIRECTORY"
+      }
+    },
+    {
+      "Command": "rm",
+      "MP Summary": "remove files or directories",
+      "Most Similar TLDR Task": "Recursively remove a directory and all its subdirectories",
+      "Most Similar TLDR Script": "rm -r {{path/to/directory}}",
+      "Top-3 Similar Questions": [
+        "so_23508971: Recursively remove directories inside folder on same level Linux",
+        "so_14355279: How can I move all folders in a directory to subdirectories based on their value?"
+      ],
+      "Top-3 Scripts": [
+        "so_23508971: rm -ri */.git",
+        "so_14355279: "
+      ],
+      "Explanations about Options": {
+        "-i": "prompt before every removal",
+        "-r": "remove directories and their contents recursively"
+      }
+    },
+    {
+      "Command": "mkdir",
+      "MP Summary": "make directories",
+      "Most Similar TLDR Task": "Create directories recursively (useful for creating nested dirs)",
+      "Most Similar TLDR Script": "mkdir -p {{path/to/directory}}",
+      "Top-3 Similar Questions": [
+        "so_14355279: How can I move all folders in a directory to subdirectories based on their value?",
+        "ul_443125: Move all files with matching prefixes to folder based on a csv list",
+        "au_1219009: Moving files into sorted folder based on the filename"
+      ],
+      "Top-3 Scripts": [
+        "so_14355279: ",
+        "ul_443125: awk 'NR > 1 { print $1, $2 }' list.csv |\nwhile read -r prefix group; do\n    find . -type f -name \"$prefix*\" -exec sh -c '\n        group=\"$1\"; shift\n        mkdir -p \"$group\"\n        for name do echo mv \"$name\" \"$group\"; done' sh \"$group\" {} +\ndone\n\ngroup=\"$1\"\nshift\n\nmkdir -p \"$group\"\nfor name do\n    echo mv \"$name\" \"$group\"\ndone",
+        "au_1219009: #!/bin/bash\n\nfor i in movies/*; do\n    if [[ $i =~ \\(([0-9]{4})\\) ]]; then\n        mkdir -p year/${BASH_REMATCH[1]}\n           mv -t year/${BASH_REMATCH[1]} \"$i\"\n    else\n        echo \"Sort panic!\"\n    fi\ndone"
+      ],
+      "Explanations about Options": {
+        "-p": "no error if existing, make parent directories as needed"
+      }
+    },
+    {
+      "Command": "find",
+      "MP Summary": "search for files in a directory hierarchy",
+      "Most Similar TLDR Task": "Find files by extension",
+      "Most Similar TLDR Script": "find {{root_path}} -name '{{*.ext}}'",
+      "Top-3 Similar Questions": [
+        "so_39866136: Bash script to move folders based on filesize changes?",
+        "so_2022886: moving files recurisively on linux",
+        "so_19864664: Automatically move folders based on file name?"
+      ],
+      "Top-3 Scripts": [
+        "so_39866136: find /volume2/4TBScratch/Processing -type d -maxdepth 1 -size -10G -exec mv \"{}\"  \"/volume1/S/00 Landing\" \\;\n\nfind /volume2/4TBScratch/Processing -type d -maxdepth 1 -size -10G -exec rsync --remove-source-files \"{}\" \"/volume1/S/00 Landing\" \\;\n\nfind /volume2/4TBScratch/Processing -type d -maxdepth 1 -mmin -2 -size -10G",
+        "so_2022886: find ./dir -type f -iname \"*.t[argz]*[bz2]\" -print0 | xargs --null mv --target-directory=dir",
+        "so_19864664: find -type f -wholename '*/lib/file.php' | sed 's:/lib/file\\.php$::' | xargs -I dirs mv dirs /path/to/new/dir/"
+      ],
+      "Explanations about Options": {
+        "-wholename": "See -path. This alternative is less portable than -path.",
+        "-mmin": "File's data was last modified n minutes ago.",
+        "-size": "File uses n units of space, rounding up. The following suffixes can be used:",
+        "-type": "File is of type c:",
+        "-maxdepth": "Descend at most levels (a non-negative integer) levels of directories below the\n starting-points. -maxdepth 0 means only apply the tests and actions to the\n starting-points themselves."
+      }
+    },
+    {
+      "Command": "unzip",
+      "MP Summary": "list, test and extract compressed files in a ZIP archive",
+      "Most Similar TLDR Task": "Extract zip file(s) (for multiple files, separate file paths by spaces)",
+      "Most Similar TLDR Script": "unzip {{file(s)}}",
+      "Top-3 Similar Questions": [
+        "au_163268: Move all files in several folders"
+      ],
+      "Top-3 Scripts": [
+        "au_163268: unzip -j archive.zip"
+      ],
+      "Explanations about Options": {
+        "-j": "junk paths. The archive's directory structure is not recreated; all files are\n deposited in the extraction directory (by default, the current one)."
+      }
+    }
+  ]
+}

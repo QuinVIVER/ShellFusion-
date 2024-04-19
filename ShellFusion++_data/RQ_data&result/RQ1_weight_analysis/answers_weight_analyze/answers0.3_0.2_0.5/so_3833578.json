@@ -1,0 +1,90 @@
+{
+  "Query": "Linux command for extracting war file?",
+  "Answers": [
+    {
+      "Command": "unzip",
+      "MP Summary": "list, test and extract compressed files in a ZIP archive",
+      "Most Similar TLDR Task": "Extract zip file(s) (for multiple files, separate file paths by spaces)",
+      "Most Similar TLDR Script": "unzip {{file(s)}}",
+      "Top-3 Similar Questions": [
+        "ul_4367: Extracting nested zip files",
+        "au_1186367: I have a zip file. I extracted it and modified some files. How do I list them?",
+        "su_273874: Extract a zip file to your own directory"
+      ],
+      "Top-3 Scripts": [
+        "ul_4367: find . -type f -name '*.zip' -exec unzip -- '{}' -x '*.zip' \\;\n\nwhile [ \"`find . -type f -name '*.zip' | wc -l`\" -gt 0 ]\ndo\n    find . -type f -name \"*.zip\" -exec unzip -- '{}' \\; -exec rm -- '{}' \\;\ndone",
+        "au_1186367: ",
+        "su_273874: unzip -jd <some_path> test.zip"
+      ],
+      "Explanations about Options": {
+        "-j": "junk paths. The archive's directory structure is not recreated; all files are\n deposited in the extraction directory (by default, the current one).",
+        "-c": "extract files to stdout/screen (``CRT''). This option is similar to the -p option\n except that the name of each file is printed as it is extracted, the -a option is\n allowed, and ASCII-EBCDIC conversion is automatically performed if appropriate.\n This option is not listed in the unzip usage screen."
+      }
+    },
+    {
+      "Command": "unrar",
+      "MP Summary": "extract files from rar archives",
+      "Most Similar TLDR Task": "Extract files to a specified path with the original directory structure",
+      "Most Similar TLDR Script": "unrar x {{compressed.rar}} {{path/to/extract}}",
+      "Top-3 Similar Questions": [
+        "au_712452: Unable to extract extracting .rar file?"
+      ],
+      "Top-3 Scripts": [
+        "au_712452: unrar t html.rar"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "find",
+      "MP Summary": "search for files in a directory hierarchy",
+      "Most Similar TLDR Task": "Find files by extension",
+      "Most Similar TLDR Script": "find {{root_path}} -name '{{*.ext}}'",
+      "Top-3 Similar Questions": [
+        "ul_4367: Extracting nested zip files",
+        "so_12268454: Extracting txt files from a jar",
+        "so_60231073: How to extract all .tgz files in subdirectories?"
+      ],
+      "Top-3 Scripts": [
+        "ul_4367: find . -type f -name '*.zip' -exec unzip -- '{}' -x '*.zip' \\;\n\nfind . -type f -mindepth 2 -exec mv -- '{}' . \\;\n\nwhile [ \"`find . -type f -name '*.zip' | wc -l`\" -gt 0 ]\ndo\n    find . -type f -name \"*.zip\" -exec unzip -- '{}' \\; -exec rm -- '{}' \\;\ndone",
+        "so_12268454: searchdir='/home/username/'\noutputtxt='/home/username/out.txt'\n\nfor jar in $(find \"$searchdir\" -iname '*.jar'); do\n  for txt in $(unzip -l \"$jar\" | awk '/\\.txt$/ {print $NF}'); do\n    unzip -c \"$jar\" \"$txt\" | tail -n +3 >> \"$outputtxt\"\n  done\ndone",
+        "so_60231073: find . -type f -name 'output.tgz' -execdir tar xfz {} +"
+      ],
+      "Explanations about Options": {
+        "-d": "A synonym for -depth, for compatibility with FreeBSD, NetBSD, MacOS X and OpenBSD.",
+        "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+        "-iname": "Like -name, but the match is case insensitive. For example, the patterns `fo*' and\n `F??' match the file names `Foo', `FOO', `foo', `fOo', etc. The pattern `*foo*`\n will also match a file called '.foobar'.",
+        "-type": "File is of type c:"
+      }
+    },
+    {
+      "Command": "cat",
+      "MP Summary": "concatenate files and print on the standard output",
+      "Most Similar TLDR Task": "Append several files into the target file",
+      "Most Similar TLDR Script": "cat {{file1}} {{file2}} >> {{target_file}}",
+      "Top-3 Similar Questions": [
+        "so_53722844: Extract the count from a file linux",
+        "so_1123572: extract words from a file",
+        "so_69164947: Extracting text from a txt file"
+      ],
+      "Top-3 Scripts": [
+        "so_53722844: ",
+        "so_1123572: ",
+        "so_69164947: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "pax",
+      "MP Summary": "read and write file archives and copy directory hierarchies",
+      "Most Similar TLDR Task": "Extract an archive into the current directory",
+      "Most Similar TLDR Script": "pax -rf {{source.tar}}",
+      "Top-3 Similar Questions": [
+        "ul_276959: How do I securely extract an untrusted tar file?"
+      ],
+      "Top-3 Scripts": [
+        "ul_276959: "
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

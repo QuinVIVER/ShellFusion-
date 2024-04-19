@@ -1,0 +1,2201 @@
+{
+  "Query": "how do i find which process is leaking memory",
+  "Answers": [
+    {
+      "Command": "fuser",
+      "MP Summary": "identify processes using files or sockets",
+      "Most Similar TLDR Task": "Find which processes are accessing a file or directory",
+      "Most Similar TLDR Script": "fuser {{path/to/file_or_directory}}",
+      "Most Similar NL2Bash Task": "Print \"Shared Memory\" if shared memory mounted at /tmp or print \"Not Shared Memory\" otherwise.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "df /tmp | grep -q tmpfs && echo \"Shared Memory\" || echo \"Not Shared Memory\"\n",
+          "command-options": {
+            "df": {
+              "mpsum": "report file system disk space usage"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-q": "Quiet; do not write anything to standard output. Exit immediately with zero status\n if any match is found, even if an error was detected. Also see the -s or\n --no-messages option."
+            },
+            "echo": {
+              "mpsum": "display a line of text"
+            }
+          },
+          "TLDR_inform": {
+            "df": {
+              "man1_df_6450": "give overview filesystem disk space usag display filesystem disk usag display filesystem disk usag human readabl form display filesystem exclud specifi type display statist number free inod display filesystem disk usag contain given file directori"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            },
+            "echo": {
+              "man1_echo_8389": "print given argument append messag file enabl interpret backslash escap special charact print messag environ variabl print messag without trail newlin print text messag\nnote : quot option"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "tldr_5964: Find which processes are accessing a file or directory",
+        "so_64420766: How to find which process periodicitly write to a file?",
+        "tldr_5966: Find which processes are accessing the filesystem containing a specific file or directory"
+      ],
+      "Top-3 Scripts": [
+        "tldr_5964: fuser {{path/to/file_or_directory}}",
+        "so_64420766: ",
+        "tldr_5966: fuser --mount {{path/to/file_or_directory}}"
+      ],
+      "Explanations about Options": {
+        "--mount": "NAME specifies a file on a mounted file system or a block device that is mounted.\n All processes accessing files on that file system are listed. If a directory file\n is specified, it is automatically changed to NAME/. to use any file system that\n might be mounted on that directory."
+      }
+    },
+    {
+      "Command": "ps",
+      "MP Summary": "report a snapshot of the current processes.",
+      "Most Similar TLDR Task": "Sort processes by memory consumption",
+      "Most Similar TLDR Script": "ps --sort size",
+      "Most Similar NL2Bash Task": "Print \"Shared Memory\" if shared memory mounted at /tmp or print \"Not Shared Memory\" otherwise.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "df /tmp | grep -q tmpfs && echo \"Shared Memory\" || echo \"Not Shared Memory\"\n",
+          "command-options": {
+            "df": {
+              "mpsum": "report file system disk space usage"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-q": "Quiet; do not write anything to standard output. Exit immediately with zero status\n if any match is found, even if an error was detected. Also see the -s or\n --no-messages option."
+            },
+            "echo": {
+              "mpsum": "display a line of text"
+            }
+          },
+          "TLDR_inform": {
+            "df": {
+              "man1_df_6450": "give overview filesystem disk space usag display filesystem disk usag display filesystem disk usag human readabl form display filesystem exclud specifi type display statist number free inod display filesystem disk usag contain given file directori"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            },
+            "echo": {
+              "man1_echo_8389": "print given argument append messag file enabl interpret backslash escap special charact print messag environ variabl print messag without trail newlin print text messag\nnote : quot option"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_4999: How to find which processes are taking all the memory?",
+        "so_13850254: Way to find which process is spawining another process in linux?",
+        "au_867927: How can I find out which service started a process so I can disable that service?"
+      ],
+      "Top-3 Scripts": [
+        "ul_4999: $ ps -eo pmem,pcpu,vsize,pid,cmd | sort -k 1 -nr | head -5",
+        "so_13850254: $ ps -o pid,ppid 4708\n  PID  PPID\n 4708  4580\n\n$ ps -o ppid= 4708\n 4580",
+        "au_867927: ps -o unit -p <PID>\n\n$ ps -o pid,unit -p $(pgrep chrome -n) 561 \n  PID UNIT\n  320 session-c2.scope\n  561 sshd.service"
+      ],
+      "Explanations about Options": {
+        "-e": "Select all processes. Identical to -A.",
+        "-p": "Select by PID. This selects the processes whose process ID numbers appear in\n pidlist. Identical to p and --pid."
+      }
+    },
+    {
+      "Command": "top",
+      "MP Summary": "display Linux processes",
+      "Most Similar TLDR Task": "Show the individual threads of a given process",
+      "Most Similar TLDR Script": "top -Hp {{process_id}}",
+      "Most Similar NL2Bash Task": "Print \"Shared Memory\" if shared memory mounted at /tmp or print \"Not Shared Memory\" otherwise.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "df /tmp | grep -q tmpfs && echo \"Shared Memory\" || echo \"Not Shared Memory\"\n",
+          "command-options": {
+            "df": {
+              "mpsum": "report file system disk space usage"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-q": "Quiet; do not write anything to standard output. Exit immediately with zero status\n if any match is found, even if an error was detected. Also see the -s or\n --no-messages option."
+            },
+            "echo": {
+              "mpsum": "display a line of text"
+            }
+          },
+          "TLDR_inform": {
+            "df": {
+              "man1_df_6450": "give overview filesystem disk space usag display filesystem disk usag display filesystem disk usag human readabl form display filesystem exclud specifi type display statist number free inod display filesystem disk usag contain given file directori"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            },
+            "echo": {
+              "man1_echo_8389": "print given argument append messag file enabl interpret backslash escap special charact print messag environ variabl print messag without trail newlin print text messag\nnote : quot option"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_4999: How to find which processes are taking all the memory?",
+        "ul_20483: How to find which Process is causing High CPU usage",
+        "au_53264: How do you find out which program is using too much memory?"
+      ],
+      "Top-3 Scripts": [
+        "ul_4999: ",
+        "ul_20483: ",
+        "au_53264: top -c"
+      ],
+      "Explanations about Options": {
+        "-c": "Starts top with the last remembered `c' state reversed. Thus, if top was displaying\n command lines, now that field will show program names, and vice versa. See the `c'\n interactive command for additional information."
+      }
+    },
+    {
+      "Command": "free",
+      "MP Summary": "Display amount of free and used memory in the system",
+      "Most Similar TLDR Task": "Display system memory",
+      "Most Similar TLDR Script": "free",
+      "Most Similar NL2Bash Task": "Print \"Shared Memory\" if shared memory mounted at /tmp or print \"Not Shared Memory\" otherwise.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "df /tmp | grep -q tmpfs && echo \"Shared Memory\" || echo \"Not Shared Memory\"\n",
+          "command-options": {
+            "df": {
+              "mpsum": "report file system disk space usage"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-q": "Quiet; do not write anything to standard output. Exit immediately with zero status\n if any match is found, even if an error was detected. Also see the -s or\n --no-messages option."
+            },
+            "echo": {
+              "mpsum": "display a line of text"
+            }
+          },
+          "TLDR_inform": {
+            "df": {
+              "man1_df_6450": "give overview filesystem disk space usag display filesystem disk usag display filesystem disk usag human readabl form display filesystem exclud specifi type display statist number free inod display filesystem disk usag contain given file directori"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            },
+            "echo": {
+              "man1_echo_8389": "print given argument append messag file enabl interpret backslash escap special charact print messag environ variabl print messag without trail newlin print text messag\nnote : quot option"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_53264: How do you find out which program is using too much memory?",
+        "so_60779978: Memory leak - How do I allocate memory for a Typdef Struct passed within another struct as thread arguments?",
+        "su_649024: In span of some days, memory climbs up to 90%, then stays there. Is that a memory leak? How to detect what processes use cached memory?"
+      ],
+      "Top-3 Scripts": [
+        "au_53264: free -m\n             total       used       free     shared    buffers     cached\nMem:          7873       3916       3956          0        231       1117\n-/+ buffers/cache:       2567       5305\nSwap:        12401          0      12401",
+        "so_60779978: free(input)",
+        "su_649024: "
+      ],
+      "Explanations about Options": {
+        "-m": "Display the amount of memory in mebibytes."
+      }
+    },
+    {
+      "Command": "fd",
+      "MP Summary": "find entries in the filesystem",
+      "Most Similar TLDR Task": "Find files in a specific directory",
+      "Most Similar TLDR Script": "fd {{pattern}} {{path/to/dir}}",
+      "Most Similar NL2Bash Task": "Print \"Shared Memory\" if shared memory mounted at /tmp or print \"Not Shared Memory\" otherwise.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "df /tmp | grep -q tmpfs && echo \"Shared Memory\" || echo \"Not Shared Memory\"\n",
+          "command-options": {
+            "df": {
+              "mpsum": "report file system disk space usage"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-q": "Quiet; do not write anything to standard output. Exit immediately with zero status\n if any match is found, even if an error was detected. Also see the -s or\n --no-messages option."
+            },
+            "echo": {
+              "mpsum": "display a line of text"
+            }
+          },
+          "TLDR_inform": {
+            "df": {
+              "man1_df_6450": "give overview filesystem disk space usag display filesystem disk usag display filesystem disk usag human readabl form display filesystem exclud specifi type display statist number free inod display filesystem disk usag contain given file directori"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            },
+            "echo": {
+              "man1_echo_8389": "print given argument append messag file enabl interpret backslash escap special charact print messag environ variabl print messag without trail newlin print text messag\nnote : quot option"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_537533: How to find which mountpoint current working directory of a process correspond to?",
+        "so_55746691: How to monitor a file to find out which process will write or delete it in the future"
+      ],
+      "Top-3 Scripts": [
+        "ul_537533: /proc/PID/fd",
+        "so_55746691: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "write",
+      "MP Summary": "send a message to another user",
+      "Most Similar TLDR Task": "Send message to \"testuser\" on terminal \"/dev/tty/5\"",
+      "Most Similar TLDR Script": "write {{testuser}} {{tty/5}}",
+      "Most Similar NL2Bash Task": "Print \"Shared Memory\" if shared memory mounted at /tmp or print \"Not Shared Memory\" otherwise.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "df /tmp | grep -q tmpfs && echo \"Shared Memory\" || echo \"Not Shared Memory\"\n",
+          "command-options": {
+            "df": {
+              "mpsum": "report file system disk space usage"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-q": "Quiet; do not write anything to standard output. Exit immediately with zero status\n if any match is found, even if an error was detected. Also see the -s or\n --no-messages option."
+            },
+            "echo": {
+              "mpsum": "display a line of text"
+            }
+          },
+          "TLDR_inform": {
+            "df": {
+              "man1_df_6450": "give overview filesystem disk space usag display filesystem disk usag display filesystem disk usag human readabl form display filesystem exclud specifi type display statist number free inod display filesystem disk usag contain given file directori"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            },
+            "echo": {
+              "man1_echo_8389": "print given argument append messag file enabl interpret backslash escap special charact print messag environ variabl print messag without trail newlin print text messag\nnote : quot option"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_31367: How to find out which file is currently written by a process",
+        "so_55746691: How to monitor a file to find out which process will write or delete it in the future"
+      ],
+      "Top-3 Scripts": [
+        "ul_31367: ",
+        "so_55746691: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "htop",
+      "MP Summary": "interactive process viewer",
+      "Most Similar TLDR Task": "Start htop displaying only processes owned by given user",
+      "Most Similar TLDR Script": "htop -u {{username}}",
+      "Most Similar NL2Bash Task": "Print \"Shared Memory\" if shared memory mounted at /tmp or print \"Not Shared Memory\" otherwise.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "df /tmp | grep -q tmpfs && echo \"Shared Memory\" || echo \"Not Shared Memory\"\n",
+          "command-options": {
+            "df": {
+              "mpsum": "report file system disk space usage"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-q": "Quiet; do not write anything to standard output. Exit immediately with zero status\n if any match is found, even if an error was detected. Also see the -s or\n --no-messages option."
+            },
+            "echo": {
+              "mpsum": "display a line of text"
+            }
+          },
+          "TLDR_inform": {
+            "df": {
+              "man1_df_6450": "give overview filesystem disk space usag display filesystem disk usag display filesystem disk usag human readabl form display filesystem exclud specifi type display statist number free inod display filesystem disk usag contain given file directori"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            },
+            "echo": {
+              "man1_echo_8389": "print given argument append messag file enabl interpret backslash escap special charact print messag environ variabl print messag without trail newlin print text messag\nnote : quot option"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_20483: How to find which Process is causing High CPU usage",
+        "ul_486215: Find process source which executing python scripts"
+      ],
+      "Top-3 Scripts": [
+        "ul_20483: ",
+        "ul_486215: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "netstat",
+      "MP Summary": "Print  network  connections,  routing tables, interface statistics, masquerade connections, and multicast memberships",
+      "Most Similar TLDR Task": "Print the routing table",
+      "Most Similar TLDR Script": "netstat -nr",
+      "Most Similar NL2Bash Task": "Print \"Shared Memory\" if shared memory mounted at /tmp or print \"Not Shared Memory\" otherwise.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "df /tmp | grep -q tmpfs && echo \"Shared Memory\" || echo \"Not Shared Memory\"\n",
+          "command-options": {
+            "df": {
+              "mpsum": "report file system disk space usage"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-q": "Quiet; do not write anything to standard output. Exit immediately with zero status\n if any match is found, even if an error was detected. Also see the -s or\n --no-messages option."
+            },
+            "echo": {
+              "mpsum": "display a line of text"
+            }
+          },
+          "TLDR_inform": {
+            "df": {
+              "man1_df_6450": "give overview filesystem disk space usag display filesystem disk usag display filesystem disk usag human readabl form display filesystem exclud specifi type display statist number free inod display filesystem disk usag contain given file directori"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            },
+            "echo": {
+              "man1_echo_8389": "print given argument append messag file enabl interpret backslash escap special charact print messag environ variabl print messag without trail newlin print text messag\nnote : quot option"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "su_258277: How can I find out which process is listening on a port on linux?",
+        "au_227161: How can we find which process is using a particular port?",
+        "so_16995296: How to find out which process is using localhost:80?"
+      ],
+      "Top-3 Scripts": [
+        "su_258277: sudo lsof -i\nsudo netstat -lptu",
+        "au_227161: sudo netstat -nlp",
+        "so_16995296: netstat -anpt | grep :80"
+      ],
+      "Explanations about Options": {
+        "-p": "Show the PID and name of the program to which each socket belongs.",
+        "-a": "Show both listening and non-listening sockets. With the --interfaces option, show\n interfaces that are not up",
+        "-l": "Show only listening sockets. (These are omitted by default.)",
+        "-n": "Show numerical addresses instead of trying to determine symbolic host, port or user names."
+      }
+    },
+    {
+      "Command": "yum",
+      "MP Summary": "Yellowdog Updater Modified",
+      "Most Similar TLDR Task": "Find the package that provides a particular command",
+      "Most Similar TLDR Script": "yum provides {{command}}",
+      "Most Similar NL2Bash Task": "Print \"Shared Memory\" if shared memory mounted at /tmp or print \"Not Shared Memory\" otherwise.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "df /tmp | grep -q tmpfs && echo \"Shared Memory\" || echo \"Not Shared Memory\"\n",
+          "command-options": {
+            "df": {
+              "mpsum": "report file system disk space usage"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-q": "Quiet; do not write anything to standard output. Exit immediately with zero status\n if any match is found, even if an error was detected. Also see the -s or\n --no-messages option."
+            },
+            "echo": {
+              "mpsum": "display a line of text"
+            }
+          },
+          "TLDR_inform": {
+            "df": {
+              "man1_df_6450": "give overview filesystem disk space usag display filesystem disk usag display filesystem disk usag human readabl form display filesystem exclud specifi type display statist number free inod display filesystem disk usag contain given file directori"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            },
+            "echo": {
+              "man1_echo_8389": "print given argument append messag file enabl interpret backslash escap special charact print messag environ variabl print messag without trail newlin print text messag\nnote : quot option"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_61477637: How to find out which process is reading disk?"
+      ],
+      "Top-3 Scripts": [
+        "so_61477637: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "iotop",
+      "MP Summary": "simple top-like I/O monitor",
+      "Most Similar TLDR Task": "Show only I/O usage of processes(Default is to show all threads)",
+      "Most Similar TLDR Script": "iotop -P",
+      "Most Similar NL2Bash Task": "Print \"Shared Memory\" if shared memory mounted at /tmp or print \"Not Shared Memory\" otherwise.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "df /tmp | grep -q tmpfs && echo \"Shared Memory\" || echo \"Not Shared Memory\"\n",
+          "command-options": {
+            "df": {
+              "mpsum": "report file system disk space usage"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-q": "Quiet; do not write anything to standard output. Exit immediately with zero status\n if any match is found, even if an error was detected. Also see the -s or\n --no-messages option."
+            },
+            "echo": {
+              "mpsum": "display a line of text"
+            }
+          },
+          "TLDR_inform": {
+            "df": {
+              "man1_df_6450": "give overview filesystem disk space usag display filesystem disk usag display filesystem disk usag human readabl form display filesystem exclud specifi type display statist number free inod display filesystem disk usag contain given file directori"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            },
+            "echo": {
+              "man1_echo_8389": "print given argument append messag file enabl interpret backslash escap special charact print messag environ variabl print messag without trail newlin print text messag\nnote : quot option"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_191779: How to find which process is currently writing to the disk?",
+        "so_61477637: How to find out which process is reading disk?"
+      ],
+      "Top-3 Scripts": [
+        "ul_191779: iotop  watches  I/O  usage  information  output  by  the  Linux  kernel\n   (requires 2.6.20 or later) and displays a table of current I/O usage by\n   processes   or   threads   on   the   system.   At   least   the   CON\u2010\n   FIG_TASK_DELAY_ACCT,  CONFIG_TASK_IO_ACCOUNTING,  CONFIG_TASKSTATS  and\n   CONFIG_VM_EVENT_COUNTERS  options need to be enabled in your Linux ker\u2010\n   nel build configuration.",
+        "so_61477637: iotop --only\n\n* * * * * root iotop -botqqq --iter=3 >> /var/log/iotop\n\n/var/log/iotop"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "pgrep",
+      "MP Summary": "look up or signal processes based on name and other attributes",
+      "Most Similar TLDR Task": "Search for process run by a specific user",
+      "Most Similar TLDR Script": "pgrep -u root {{process_name}}",
+      "Most Similar NL2Bash Task": "Print \"Shared Memory\" if shared memory mounted at /tmp or print \"Not Shared Memory\" otherwise.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "df /tmp | grep -q tmpfs && echo \"Shared Memory\" || echo \"Not Shared Memory\"\n",
+          "command-options": {
+            "df": {
+              "mpsum": "report file system disk space usage"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-q": "Quiet; do not write anything to standard output. Exit immediately with zero status\n if any match is found, even if an error was detected. Also see the -s or\n --no-messages option."
+            },
+            "echo": {
+              "mpsum": "display a line of text"
+            }
+          },
+          "TLDR_inform": {
+            "df": {
+              "man1_df_6450": "give overview filesystem disk space usag display filesystem disk usag display filesystem disk usag human readabl form display filesystem exclud specifi type display statist number free inod display filesystem disk usag contain given file directori"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            },
+            "echo": {
+              "man1_echo_8389": "print given argument append messag file enabl interpret backslash escap special charact print messag environ variabl print messag without trail newlin print text messag\nnote : quot option"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_867927: How can I find out which service started a process so I can disable that service?"
+      ],
+      "Top-3 Scripts": [
+        "au_867927: $ systemctl status $(pgrep chrome -n)\n\u25cf session-c2.scope - Session c2 of user muru\n   Loaded: loaded (/run/systemd/transient/session-c2.scope; transient; vendor preset: disabled)\nTransient: yes\n   Active: active (running) since Wed 2017-01-04 15:46:30 JST; 7h ago\n    Tasks: 422\n   CGroup: /user.slice/user-1000.slice/session-c2.scope\n\n$ ps -o pid,unit -p $(pgrep chrome -n) 561 \n  PID UNIT\n  320 session-c2.scope\n  561 sshd.service"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "sudo",
+      "MP Summary": "execute a command as another user",
+      "Most Similar TLDR Task": "Run a command as another user and/or group",
+      "Most Similar TLDR Script": "sudo -u {{user}} -g {{group}} {{id -a}}",
+      "Most Similar NL2Bash Task": "Print \"Shared Memory\" if shared memory mounted at /tmp or print \"Not Shared Memory\" otherwise.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "df /tmp | grep -q tmpfs && echo \"Shared Memory\" || echo \"Not Shared Memory\"\n",
+          "command-options": {
+            "df": {
+              "mpsum": "report file system disk space usage"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-q": "Quiet; do not write anything to standard output. Exit immediately with zero status\n if any match is found, even if an error was detected. Also see the -s or\n --no-messages option."
+            },
+            "echo": {
+              "mpsum": "display a line of text"
+            }
+          },
+          "TLDR_inform": {
+            "df": {
+              "man1_df_6450": "give overview filesystem disk space usag display filesystem disk usag display filesystem disk usag human readabl form display filesystem exclud specifi type display statist number free inod display filesystem disk usag contain given file directori"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            },
+            "echo": {
+              "man1_echo_8389": "print given argument append messag file enabl interpret backslash escap special charact print messag environ variabl print messag without trail newlin print text messag\nnote : quot option"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_426166: How do I determine which process is using more physical memory?",
+        "ul_616125: Linux command to find which port a process is running?",
+        "su_258277: How can I find out which process is listening on a port on linux?"
+      ],
+      "Top-3 Scripts": [
+        "au_426166: sudo ps -e -orss=,args= | sort -b -k1,1n",
+        "ul_616125: sudo lsof -i -P -n | grep LISTEN | grep <your_process_name>",
+        "su_258277: sudo lsof -i\nsudo netstat -lptu"
+      ],
+      "Explanations about Options": {
+        "-P": "Preserve the invoking user's group vector unaltered. By default, the sudoers\n policy will initialize the group vector to the list of groups the target user is\n a member of. The real and effective group-IDs, however, are still set to match\n the target user.",
+        "-n": "Avoid prompting the user for input of any kind. If a password is required for\n the command to run, sudo will display an error message and exit."
+      }
+    },
+    {
+      "Command": "file",
+      "MP Summary": "determine file type",
+      "Most Similar TLDR Task": "Give a description of the type of the specified file. Works fine for files with no file extension",
+      "Most Similar TLDR Script": "file {{filename}}",
+      "Most Similar NL2Bash Task": "Print \"Shared Memory\" if shared memory mounted at /tmp or print \"Not Shared Memory\" otherwise.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "df /tmp | grep -q tmpfs && echo \"Shared Memory\" || echo \"Not Shared Memory\"\n",
+          "command-options": {
+            "df": {
+              "mpsum": "report file system disk space usage"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-q": "Quiet; do not write anything to standard output. Exit immediately with zero status\n if any match is found, even if an error was detected. Also see the -s or\n --no-messages option."
+            },
+            "echo": {
+              "mpsum": "display a line of text"
+            }
+          },
+          "TLDR_inform": {
+            "df": {
+              "man1_df_6450": "give overview filesystem disk space usag display filesystem disk usag display filesystem disk usag human readabl form display filesystem exclud specifi type display statist number free inod display filesystem disk usag contain given file directori"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            },
+            "echo": {
+              "man1_echo_8389": "print given argument append messag file enabl interpret backslash escap special charact print messag environ variabl print messag without trail newlin print text messag\nnote : quot option"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_99074: Find which process is modifying a file",
+        "so_60779978: Memory leak - How do I allocate memory for a Typdef Struct passed within another struct as thread arguments?",
+        "so_55746691: How to monitor a file to find out which process will write or delete it in the future"
+      ],
+      "Top-3 Scripts": [
+        "ul_99074: auditctl -w /path/to/that/file -p wa",
+        "so_60779978: ",
+        "so_55746691: "
+      ],
+      "Explanations about Options": {
+        "-p": "On systems that support utime(3) or utimes(2), attempt to preserve the access time\n of files analyzed, to pretend that file never read them."
+      }
+    },
+    {
+      "Command": "printf",
+      "MP Summary": "format and print data",
+      "Most Similar TLDR Task": "Store a formatted message in a variable (does not work on zsh)",
+      "Most Similar TLDR Script": "printf -v {{myvar}} {{\"This is %s = %d\\n\" \"a year\" 2016}}",
+      "Most Similar NL2Bash Task": "Print \"Shared Memory\" if shared memory mounted at /tmp or print \"Not Shared Memory\" otherwise.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "df /tmp | grep -q tmpfs && echo \"Shared Memory\" || echo \"Not Shared Memory\"\n",
+          "command-options": {
+            "df": {
+              "mpsum": "report file system disk space usage"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-q": "Quiet; do not write anything to standard output. Exit immediately with zero status\n if any match is found, even if an error was detected. Also see the -s or\n --no-messages option."
+            },
+            "echo": {
+              "mpsum": "display a line of text"
+            }
+          },
+          "TLDR_inform": {
+            "df": {
+              "man1_df_6450": "give overview filesystem disk space usag display filesystem disk usag display filesystem disk usag human readabl form display filesystem exclud specifi type display statist number free inod display filesystem disk usag contain given file directori"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            },
+            "echo": {
+              "man1_echo_8389": "print given argument append messag file enabl interpret backslash escap special charact print messag environ variabl print messag without trail newlin print text messag\nnote : quot option"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "su_1443306: Is there any way to find which process utilizing swap memory in Linux OS?",
+        "so_60779978: Memory leak - How do I allocate memory for a Typdef Struct passed within another struct as thread arguments?",
+        "so_55746691: How to monitor a file to find out which process will write or delete it in the future"
+      ],
+      "Top-3 Scripts": [
+        "su_1443306: grep '^VmSwap:' /proc/*/status \\\n    | grep -v '0 kB$' \\\n    | sed -re 's#^/proc/([0-9]+)/status:VmSwap:[ \\t]+([0-9]+) kB$#\\1 \\2#' \\\n    | sort -nrk2 \\\n    | while read pid swap; do \\\n        printf \"%10s kB    %-6s    \" ${swap} ${pid}; \\\n        cat /proc/${pid}/cmdline | xargs -0 | fold -sw160 | sed -re '/^$/d; 1!s/^/\\t\\t\\t\\t/;'; \\\n      done \\\n    | less -cRS\n\nprintf \"%10s kB    %-6s    \" ${swap} ${pid}",
+        "so_60779978: ",
+        "so_55746691: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "kill",
+      "MP Summary": "send a signal to a process",
+      "Most Similar TLDR Task": "Signal the operating system to immediately terminate a program (which gets no chance to capture the signal)",
+      "Most Similar TLDR Script": "kill -{{9|KILL}} {{process_id}}",
+      "Most Similar NL2Bash Task": "Print \"Shared Memory\" if shared memory mounted at /tmp or print \"Not Shared Memory\" otherwise.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "df /tmp | grep -q tmpfs && echo \"Shared Memory\" || echo \"Not Shared Memory\"\n",
+          "command-options": {
+            "df": {
+              "mpsum": "report file system disk space usage"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-q": "Quiet; do not write anything to standard output. Exit immediately with zero status\n if any match is found, even if an error was detected. Also see the -s or\n --no-messages option."
+            },
+            "echo": {
+              "mpsum": "display a line of text"
+            }
+          },
+          "TLDR_inform": {
+            "df": {
+              "man1_df_6450": "give overview filesystem disk space usag display filesystem disk usag display filesystem disk usag human readabl form display filesystem exclud specifi type display statist number free inod display filesystem disk usag contain given file directori"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            },
+            "echo": {
+              "man1_echo_8389": "print given argument append messag file enabl interpret backslash escap special charact print messag environ variabl print messag without trail newlin print text messag\nnote : quot option"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_11713: How do I find out which process is preventing a umount?"
+      ],
+      "Top-3 Scripts": [
+        "au_11713: sudo kill -9 3106 11086\nsudo umount /media/KINGSTON"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "read",
+      "MP Summary": "read a line from standard input",
+      "Most Similar TLDR Task": "Specify the number of maximum characters to be read",
+      "Most Similar TLDR Script": "read -n {{character_count}} {{variable}}",
+      "Most Similar NL2Bash Task": "Print \"Shared Memory\" if shared memory mounted at /tmp or print \"Not Shared Memory\" otherwise.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "df /tmp | grep -q tmpfs && echo \"Shared Memory\" || echo \"Not Shared Memory\"\n",
+          "command-options": {
+            "df": {
+              "mpsum": "report file system disk space usage"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-q": "Quiet; do not write anything to standard output. Exit immediately with zero status\n if any match is found, even if an error was detected. Also see the -s or\n --no-messages option."
+            },
+            "echo": {
+              "mpsum": "display a line of text"
+            }
+          },
+          "TLDR_inform": {
+            "df": {
+              "man1_df_6450": "give overview filesystem disk space usag display filesystem disk usag display filesystem disk usag human readabl form display filesystem exclud specifi type display statist number free inod display filesystem disk usag contain given file directori"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            },
+            "echo": {
+              "man1_echo_8389": "print given argument append messag file enabl interpret backslash escap special charact print messag environ variabl print messag without trail newlin print text messag\nnote : quot option"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "su_1443306: Is there any way to find which process utilizing swap memory in Linux OS?",
+        "au_227161: How can we find which process is using a particular port?",
+        "so_55746691: How to monitor a file to find out which process will write or delete it in the future"
+      ],
+      "Top-3 Scripts": [
+        "su_1443306: grep '^VmSwap:' /proc/*/status \\\n    | grep -v '0 kB$' \\\n    | sed -re 's#^/proc/([0-9]+)/status:VmSwap:[ \\t]+([0-9]+) kB$#\\1 \\2#' \\\n    | sort -nrk2 \\\n    | while read pid swap; do \\\n        printf \"%10s kB    %-6s    \" ${swap} ${pid}; \\\n        cat /proc/${pid}/cmdline | xargs -0 | fold -sw160 | sed -re '/^$/d; 1!s/^/\\t\\t\\t\\t/;'; \\\n      done \\\n    | less -cRS",
+        "au_227161: ",
+        "so_55746691: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "find",
+      "MP Summary": "search for files in a directory hierarchy",
+      "Most Similar TLDR Task": "Find files by extension",
+      "Most Similar TLDR Script": "find {{root_path}} -name '{{*.ext}}'",
+      "Most Similar NL2Bash Task": "Print \"Shared Memory\" if shared memory mounted at /tmp or print \"Not Shared Memory\" otherwise.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "df /tmp | grep -q tmpfs && echo \"Shared Memory\" || echo \"Not Shared Memory\"\n",
+          "command-options": {
+            "df": {
+              "mpsum": "report file system disk space usage"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-q": "Quiet; do not write anything to standard output. Exit immediately with zero status\n if any match is found, even if an error was detected. Also see the -s or\n --no-messages option."
+            },
+            "echo": {
+              "mpsum": "display a line of text"
+            }
+          },
+          "TLDR_inform": {
+            "df": {
+              "man1_df_6450": "give overview filesystem disk space usag display filesystem disk usag display filesystem disk usag human readabl form display filesystem exclud specifi type display statist number free inod display filesystem disk usag contain given file directori"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            },
+            "echo": {
+              "man1_echo_8389": "print given argument append messag file enabl interpret backslash escap special charact print messag environ variabl print messag without trail newlin print text messag\nnote : quot option"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_60779978: Memory leak - How do I allocate memory for a Typdef Struct passed within another struct as thread arguments?",
+        "ul_486215: Find process source which executing python scripts"
+      ],
+      "Top-3 Scripts": [
+        "so_60779978: ",
+        "ul_486215: find / -name x.py"
+      ],
+      "Explanations about Options": {
+        "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+      }
+    },
+    {
+      "Command": "stat",
+      "MP Summary": "display file or file system status",
+      "Most Similar TLDR Task": "Show file properties such as size, permissions, creation and access dates among others",
+      "Most Similar TLDR Script": "stat {{file}}",
+      "Most Similar NL2Bash Task": "Print \"Shared Memory\" if shared memory mounted at /tmp or print \"Not Shared Memory\" otherwise.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "df /tmp | grep -q tmpfs && echo \"Shared Memory\" || echo \"Not Shared Memory\"\n",
+          "command-options": {
+            "df": {
+              "mpsum": "report file system disk space usage"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-q": "Quiet; do not write anything to standard output. Exit immediately with zero status\n if any match is found, even if an error was detected. Also see the -s or\n --no-messages option."
+            },
+            "echo": {
+              "mpsum": "display a line of text"
+            }
+          },
+          "TLDR_inform": {
+            "df": {
+              "man1_df_6450": "give overview filesystem disk space usag display filesystem disk usag display filesystem disk usag human readabl form display filesystem exclud specifi type display statist number free inod display filesystem disk usag contain given file directori"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            },
+            "echo": {
+              "man1_echo_8389": "print given argument append messag file enabl interpret backslash escap special charact print messag environ variabl print messag without trail newlin print text messag\nnote : quot option"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_537533: How to find which mountpoint current working directory of a process correspond to?",
+        "so_60779978: Memory leak - How do I allocate memory for a Typdef Struct passed within another struct as thread arguments?"
+      ],
+      "Top-3 Scripts": [
+        "ul_537533: stat(2)\n\nstat(1)",
+        "so_60779978: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "sed",
+      "MP Summary": "stream editor for filtering and transforming text",
+      "Most Similar TLDR Task": "Replace separator / by any other character not used in the find or replace patterns, e.g., #",
+      "Most Similar TLDR Script": "sed 's#{{find}}#{{replace}}#' {{filename}}",
+      "Most Similar NL2Bash Task": "Print \"Shared Memory\" if shared memory mounted at /tmp or print \"Not Shared Memory\" otherwise.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "df /tmp | grep -q tmpfs && echo \"Shared Memory\" || echo \"Not Shared Memory\"\n",
+          "command-options": {
+            "df": {
+              "mpsum": "report file system disk space usage"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-q": "Quiet; do not write anything to standard output. Exit immediately with zero status\n if any match is found, even if an error was detected. Also see the -s or\n --no-messages option."
+            },
+            "echo": {
+              "mpsum": "display a line of text"
+            }
+          },
+          "TLDR_inform": {
+            "df": {
+              "man1_df_6450": "give overview filesystem disk space usag display filesystem disk usag display filesystem disk usag human readabl form display filesystem exclud specifi type display statist number free inod display filesystem disk usag contain given file directori"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            },
+            "echo": {
+              "man1_echo_8389": "print given argument append messag file enabl interpret backslash escap special charact print messag environ variabl print messag without trail newlin print text messag\nnote : quot option"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "su_1443306: Is there any way to find which process utilizing swap memory in Linux OS?",
+        "su_212714: How to find which Tmux session a process belongs to?"
+      ],
+      "Top-3 Scripts": [
+        "su_1443306: grep '^VmSwap:' /proc/*/status \\\n    | grep -v '0 kB$' \\\n    | sed -re 's#^/proc/([0-9]+)/status:VmSwap:[ \\t]+([0-9]+) kB$#\\1 \\2#' \\\n    | sort -nrk2 \\\n    | while read pid swap; do \\\n        printf \"%10s kB    %-6s    \" ${swap} ${pid}; \\\n        cat /proc/${pid}/cmdline | xargs -0 | fold -sw160 | sed -re '/^$/d; 1!s/^/\\t\\t\\t\\t/;'; \\\n      done \\\n    | less -cRS\n\nsed -re 's#^/proc/([0-9]+)/status:VmSwap:[ \\t]+([0-9]+) kB$#\\1 \\2#'\n\ncat /proc/${pid}/cmdline | xargs -0 | fold -sw160 | sed -re '/^$/d; 1!s/^/\\t\\t\\t\\t/;'",
+        "su_212714: $(</proc/$pid/environ grep -z '^TMUX=' | sed 's/.*,//')"
+      ],
+      "Explanations about Options": {
+        "-e": "add the script to the commands to be executed",
+        "-r": "use extended regular expressions in the script (for portability use POSIX -E)."
+      }
+    },
+    {
+      "Command": "man",
+      "MP Summary": "an interface to the system reference manuals",
+      "Most Similar TLDR Task": "Search for manpages containing a search string",
+      "Most Similar TLDR Script": "man -k \"{{search string}}\"",
+      "Most Similar NL2Bash Task": "Print \"Shared Memory\" if shared memory mounted at /tmp or print \"Not Shared Memory\" otherwise.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "df /tmp | grep -q tmpfs && echo \"Shared Memory\" || echo \"Not Shared Memory\"\n",
+          "command-options": {
+            "df": {
+              "mpsum": "report file system disk space usage"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-q": "Quiet; do not write anything to standard output. Exit immediately with zero status\n if any match is found, even if an error was detected. Also see the -s or\n --no-messages option."
+            },
+            "echo": {
+              "mpsum": "display a line of text"
+            }
+          },
+          "TLDR_inform": {
+            "df": {
+              "man1_df_6450": "give overview filesystem disk space usag display filesystem disk usag display filesystem disk usag human readabl form display filesystem exclud specifi type display statist number free inod display filesystem disk usag contain given file directori"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            },
+            "echo": {
+              "man1_echo_8389": "print given argument append messag file enabl interpret backslash escap special charact print messag environ variabl print messag without trail newlin print text messag\nnote : quot option"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_24554614: How find out which process is using a file in Linux?",
+        "so_60779978: Memory leak - How do I allocate memory for a Typdef Struct passed within another struct as thread arguments?",
+        "so_20505760: How to check the CPU and memory load in percentages of a process then output that to a file?"
+      ],
+      "Top-3 Scripts": [
+        "so_24554614: ",
+        "so_60779978: man pthreads",
+        "so_20505760: man ps"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "exec",
+      "MP Summary": "execute commands and open, close, or copy file descriptors",
+      "Most Similar TLDR Task": "Replace with the specified command and change the process name",
+      "Most Similar TLDR Script": "exec -a {{process_name}} {{command -with -flags}}",
+      "Most Similar NL2Bash Task": "Print \"Shared Memory\" if shared memory mounted at /tmp or print \"Not Shared Memory\" otherwise.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "df /tmp | grep -q tmpfs && echo \"Shared Memory\" || echo \"Not Shared Memory\"\n",
+          "command-options": {
+            "df": {
+              "mpsum": "report file system disk space usage"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-q": "Quiet; do not write anything to standard output. Exit immediately with zero status\n if any match is found, even if an error was detected. Also see the -s or\n --no-messages option."
+            },
+            "echo": {
+              "mpsum": "display a line of text"
+            }
+          },
+          "TLDR_inform": {
+            "df": {
+              "man1_df_6450": "give overview filesystem disk space usag display filesystem disk usag display filesystem disk usag human readabl form display filesystem exclud specifi type display statist number free inod display filesystem disk usag contain given file directori"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            },
+            "echo": {
+              "man1_echo_8389": "print given argument append messag file enabl interpret backslash escap special charact print messag environ variabl print messag without trail newlin print text messag\nnote : quot option"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_31367: How to find out which file is currently written by a process"
+      ],
+      "Top-3 Scripts": [
+        "ul_31367: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "print",
+      "MP Summary": "execute programs via entries in the mailcap file",
+      "Most Similar TLDR Task": "Print action can be used to print any file on default run-mailcap tool",
+      "Most Similar TLDR Script": "print {{filename}}",
+      "Most Similar NL2Bash Task": "Print \"Shared Memory\" if shared memory mounted at /tmp or print \"Not Shared Memory\" otherwise.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "df /tmp | grep -q tmpfs && echo \"Shared Memory\" || echo \"Not Shared Memory\"\n",
+          "command-options": {
+            "df": {
+              "mpsum": "report file system disk space usage"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-q": "Quiet; do not write anything to standard output. Exit immediately with zero status\n if any match is found, even if an error was detected. Also see the -s or\n --no-messages option."
+            },
+            "echo": {
+              "mpsum": "display a line of text"
+            }
+          },
+          "TLDR_inform": {
+            "df": {
+              "man1_df_6450": "give overview filesystem disk space usag display filesystem disk usag display filesystem disk usag human readabl form display filesystem exclud specifi type display statist number free inod display filesystem disk usag contain given file directori"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            },
+            "echo": {
+              "man1_echo_8389": "print given argument append messag file enabl interpret backslash escap special charact print messag environ variabl print messag without trail newlin print text messag\nnote : quot option"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_616125: Linux command to find which port a process is running?",
+        "so_55746691: How to monitor a file to find out which process will write or delete it in the future"
+      ],
+      "Top-3 Scripts": [
+        "ul_616125: $ magic httpd | awk -F: '{print $2}' | cut -d\\  -f1 | sort -un\n80\n443\n49383\n49384",
+        "so_55746691: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "dockerd",
+      "MP Summary": "Enable daemon mode",
+      "Most Similar TLDR Task": "Run with specific daemon PID file",
+      "Most Similar TLDR Script": "dockerd --pidfile {{path/to/pid_file}}",
+      "Most Similar NL2Bash Task": "Print \"Shared Memory\" if shared memory mounted at /tmp or print \"Not Shared Memory\" otherwise.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "df /tmp | grep -q tmpfs && echo \"Shared Memory\" || echo \"Not Shared Memory\"\n",
+          "command-options": {
+            "df": {
+              "mpsum": "report file system disk space usage"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-q": "Quiet; do not write anything to standard output. Exit immediately with zero status\n if any match is found, even if an error was detected. Also see the -s or\n --no-messages option."
+            },
+            "echo": {
+              "mpsum": "display a line of text"
+            }
+          },
+          "TLDR_inform": {
+            "df": {
+              "man1_df_6450": "give overview filesystem disk space usag display filesystem disk usag display filesystem disk usag human readabl form display filesystem exclud specifi type display statist number free inod display filesystem disk usag contain given file directori"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            },
+            "echo": {
+              "man1_echo_8389": "print given argument append messag file enabl interpret backslash escap special charact print messag environ variabl print messag without trail newlin print text messag\nnote : quot option"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "su_1443306: Is there any way to find which process utilizing swap memory in Linux OS?"
+      ],
+      "Top-3 Scripts": [
+        "su_1443306: 233256 kB    31326     mysqld\n 24968 kB    32424     /usr/local/bin/ruby bin/rails server -b 0.0.0.0\n 17232 kB    15256     /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock\n  8972 kB    15405     /usr/lib/virtualbox/VBoxHeadless --startvm acdb10c9-00fa-4514-a836-b9e3554214f3\n  8664 kB    14551     /usr/bin/containerd\n  5972 kB    22984     /usr/sbin/named -f -u bind -c /etc/bind/named.conf\n[...]"
+      ],
+      "Explanations about Options": {
+        "--containerd": "Path to containerd socket."
+      }
+    },
+    {
+      "Command": "strace",
+      "MP Summary": "trace system calls and signals",
+      "Most Similar TLDR Task": "Start tracing a specific process by its PID",
+      "Most Similar TLDR Script": "strace -p {{pid}}",
+      "Most Similar NL2Bash Task": "Print \"Shared Memory\" if shared memory mounted at /tmp or print \"Not Shared Memory\" otherwise.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "df /tmp | grep -q tmpfs && echo \"Shared Memory\" || echo \"Not Shared Memory\"\n",
+          "command-options": {
+            "df": {
+              "mpsum": "report file system disk space usage"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-q": "Quiet; do not write anything to standard output. Exit immediately with zero status\n if any match is found, even if an error was detected. Also see the -s or\n --no-messages option."
+            },
+            "echo": {
+              "mpsum": "display a line of text"
+            }
+          },
+          "TLDR_inform": {
+            "df": {
+              "man1_df_6450": "give overview filesystem disk space usag display filesystem disk usag display filesystem disk usag human readabl form display filesystem exclud specifi type display statist number free inod display filesystem disk usag contain given file directori"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            },
+            "echo": {
+              "man1_echo_8389": "print given argument append messag file enabl interpret backslash escap special charact print messag environ variabl print messag without trail newlin print text messag\nnote : quot option"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_31367: How to find out which file is currently written by a process"
+      ],
+      "Top-3 Scripts": [
+        "ul_31367: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "bash",
+      "MP Summary": "GNU Bourne-Again SHell",
+      "Most Similar TLDR Task": "Run commands from a file, logging all commands executed to the terminal",
+      "Most Similar TLDR Script": "bash -x {{file.sh}}",
+      "Most Similar NL2Bash Task": "Print \"Shared Memory\" if shared memory mounted at /tmp or print \"Not Shared Memory\" otherwise.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "df /tmp | grep -q tmpfs && echo \"Shared Memory\" || echo \"Not Shared Memory\"\n",
+          "command-options": {
+            "df": {
+              "mpsum": "report file system disk space usage"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-q": "Quiet; do not write anything to standard output. Exit immediately with zero status\n if any match is found, even if an error was detected. Also see the -s or\n --no-messages option."
+            },
+            "echo": {
+              "mpsum": "display a line of text"
+            }
+          },
+          "TLDR_inform": {
+            "df": {
+              "man1_df_6450": "give overview filesystem disk space usag display filesystem disk usag display filesystem disk usag human readabl form display filesystem exclud specifi type display statist number free inod display filesystem disk usag contain given file directori"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            },
+            "echo": {
+              "man1_echo_8389": "print given argument append messag file enabl interpret backslash escap special charact print messag environ variabl print messag without trail newlin print text messag\nnote : quot option"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_486215: Find process source which executing python scripts"
+      ],
+      "Top-3 Scripts": [
+        "ul_486215: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "pstree",
+      "MP Summary": "display a tree of processes",
+      "Most Similar TLDR Task": "Display all process trees rooted at processes owned by specified user",
+      "Most Similar TLDR Script": "pstree {{user}}",
+      "Most Similar NL2Bash Task": "Print \"Shared Memory\" if shared memory mounted at /tmp or print \"Not Shared Memory\" otherwise.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "df /tmp | grep -q tmpfs && echo \"Shared Memory\" || echo \"Not Shared Memory\"\n",
+          "command-options": {
+            "df": {
+              "mpsum": "report file system disk space usage"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-q": "Quiet; do not write anything to standard output. Exit immediately with zero status\n if any match is found, even if an error was detected. Also see the -s or\n --no-messages option."
+            },
+            "echo": {
+              "mpsum": "display a line of text"
+            }
+          },
+          "TLDR_inform": {
+            "df": {
+              "man1_df_6450": "give overview filesystem disk space usag display filesystem disk usag display filesystem disk usag human readabl form display filesystem exclud specifi type display statist number free inod display filesystem disk usag contain given file directori"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            },
+            "echo": {
+              "man1_echo_8389": "print given argument append messag file enabl interpret backslash escap special charact print messag environ variabl print messag without trail newlin print text messag\nnote : quot option"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_486215: Find process source which executing python scripts"
+      ],
+      "Top-3 Scripts": [
+        "ul_486215: pstree -p"
+      ],
+      "Explanations about Options": {
+        "-p": "Show PIDs. PIDs are shown as decimal numbers in parentheses after each process\n name. -p implicitly disables compaction."
+      }
+    },
+    {
+      "Command": "yes",
+      "MP Summary": "output a string repeatedly until killed",
+      "Most Similar TLDR Task": "Accept everything prompted by the `apt-get` command",
+      "Most Similar TLDR Script": "yes | sudo apt-get install {{program}}",
+      "Most Similar NL2Bash Task": "Print \"Shared Memory\" if shared memory mounted at /tmp or print \"Not Shared Memory\" otherwise.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "df /tmp | grep -q tmpfs && echo \"Shared Memory\" || echo \"Not Shared Memory\"\n",
+          "command-options": {
+            "df": {
+              "mpsum": "report file system disk space usage"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-q": "Quiet; do not write anything to standard output. Exit immediately with zero status\n if any match is found, even if an error was detected. Also see the -s or\n --no-messages option."
+            },
+            "echo": {
+              "mpsum": "display a line of text"
+            }
+          },
+          "TLDR_inform": {
+            "df": {
+              "man1_df_6450": "give overview filesystem disk space usag display filesystem disk usag display filesystem disk usag human readabl form display filesystem exclud specifi type display statist number free inod display filesystem disk usag contain given file directori"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            },
+            "echo": {
+              "man1_echo_8389": "print given argument append messag file enabl interpret backslash escap special charact print messag environ variabl print messag without trail newlin print text messag\nnote : quot option"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_867927: How can I find out which service started a process so I can disable that service?"
+      ],
+      "Top-3 Scripts": [
+        "au_867927: $ systemctl status $(pgrep chrome -n)\n\u25cf session-c2.scope - Session c2 of user muru\n   Loaded: loaded (/run/systemd/transient/session-c2.scope; transient; vendor preset: disabled)\nTransient: yes\n   Active: active (running) since Wed 2017-01-04 15:46:30 JST; 7h ago\n    Tasks: 422\n   CGroup: /user.slice/user-1000.slice/session-c2.scope"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "nethogs",
+      "MP Summary": "Net top tool grouping bandwidth per process",
+      "Most Similar TLDR Task": "Monitor bandwidth on specific device",
+      "Most Similar TLDR Script": "sudo nethogs {{device}}",
+      "Most Similar NL2Bash Task": "Print \"Shared Memory\" if shared memory mounted at /tmp or print \"Not Shared Memory\" otherwise.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "df /tmp | grep -q tmpfs && echo \"Shared Memory\" || echo \"Not Shared Memory\"\n",
+          "command-options": {
+            "df": {
+              "mpsum": "report file system disk space usage"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-q": "Quiet; do not write anything to standard output. Exit immediately with zero status\n if any match is found, even if an error was detected. Also see the -s or\n --no-messages option."
+            },
+            "echo": {
+              "mpsum": "display a line of text"
+            }
+          },
+          "TLDR_inform": {
+            "df": {
+              "man1_df_6450": "give overview filesystem disk space usag display filesystem disk usag display filesystem disk usag human readabl form display filesystem exclud specifi type display statist number free inod display filesystem disk usag contain given file directori"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            },
+            "echo": {
+              "man1_echo_8389": "print given argument append messag file enabl interpret backslash escap special charact print messag environ variabl print messag without trail newlin print text messag\nnote : quot option"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_2411: How do I find out which process is eating up my bandwidth?"
+      ],
+      "Top-3 Scripts": [
+        "au_2411: sudo apt-get install nethogs\n\nsudo nethogs wlan0"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "umount",
+      "MP Summary": "unmount file systems",
+      "Most Similar TLDR Task": "Unmount a filesystem, by passing the path to the source it is mounted from",
+      "Most Similar TLDR Script": "umount {{path/to/device_file}}",
+      "Most Similar NL2Bash Task": "Print \"Shared Memory\" if shared memory mounted at /tmp or print \"Not Shared Memory\" otherwise.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "df /tmp | grep -q tmpfs && echo \"Shared Memory\" || echo \"Not Shared Memory\"\n",
+          "command-options": {
+            "df": {
+              "mpsum": "report file system disk space usage"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-q": "Quiet; do not write anything to standard output. Exit immediately with zero status\n if any match is found, even if an error was detected. Also see the -s or\n --no-messages option."
+            },
+            "echo": {
+              "mpsum": "display a line of text"
+            }
+          },
+          "TLDR_inform": {
+            "df": {
+              "man1_df_6450": "give overview filesystem disk space usag display filesystem disk usag display filesystem disk usag human readabl form display filesystem exclud specifi type display statist number free inod display filesystem disk usag contain given file directori"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            },
+            "echo": {
+              "man1_echo_8389": "print given argument append messag file enabl interpret backslash escap special charact print messag environ variabl print messag without trail newlin print text messag\nnote : quot option"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_3109: How do I find out which processes are preventing unmounting of a device?",
+        "au_11713: How do I find out which process is preventing a umount?"
+      ],
+      "Top-3 Scripts": [
+        "ul_3109: umount -l",
+        "au_11713: sudo kill -9 3106 11086\nsudo umount /media/KINGSTON"
+      ],
+      "Explanations about Options": {
+        "-l": "Lazy unmount. Detach the filesystem from the file hierarchy now, and clean up all\n references to this filesystem as soon as it is not busy anymore."
+      }
+    },
+    {
+      "Command": "xargs",
+      "MP Summary": "build and execute command lines from standard input",
+      "Most Similar TLDR Task": "Parallel runs of up to `max-procs` processes at a time; the default is 1. If `max-procs` is 0, xargs will run as many processes as possible at a time",
+      "Most Similar TLDR Script": "{{arguments_source}} | xargs -P {{max-procs}} {{command}}",
+      "Most Similar NL2Bash Task": "Print \"Shared Memory\" if shared memory mounted at /tmp or print \"Not Shared Memory\" otherwise.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "df /tmp | grep -q tmpfs && echo \"Shared Memory\" || echo \"Not Shared Memory\"\n",
+          "command-options": {
+            "df": {
+              "mpsum": "report file system disk space usage"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-q": "Quiet; do not write anything to standard output. Exit immediately with zero status\n if any match is found, even if an error was detected. Also see the -s or\n --no-messages option."
+            },
+            "echo": {
+              "mpsum": "display a line of text"
+            }
+          },
+          "TLDR_inform": {
+            "df": {
+              "man1_df_6450": "give overview filesystem disk space usag display filesystem disk usag display filesystem disk usag human readabl form display filesystem exclud specifi type display statist number free inod display filesystem disk usag contain given file directori"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            },
+            "echo": {
+              "man1_echo_8389": "print given argument append messag file enabl interpret backslash escap special charact print messag environ variabl print messag without trail newlin print text messag\nnote : quot option"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "su_1443306: Is there any way to find which process utilizing swap memory in Linux OS?"
+      ],
+      "Top-3 Scripts": [
+        "su_1443306: grep '^VmSwap:' /proc/*/status \\\n    | grep -v '0 kB$' \\\n    | sed -re 's#^/proc/([0-9]+)/status:VmSwap:[ \\t]+([0-9]+) kB$#\\1 \\2#' \\\n    | sort -nrk2 \\\n    | while read pid swap; do \\\n        printf \"%10s kB    %-6s    \" ${swap} ${pid}; \\\n        cat /proc/${pid}/cmdline | xargs -0 | fold -sw160 | sed -re '/^$/d; 1!s/^/\\t\\t\\t\\t/;'; \\\n      done \\\n    | less -cRS\n\ncat /proc/${pid}/cmdline | xargs -0 | fold -sw160 | sed -re '/^$/d; 1!s/^/\\t\\t\\t\\t/;'"
+      ],
+      "Explanations about Options": {
+        "-0": "Input items are terminated by a null character instead of by whitespace, and the\n quotes and backslash are not special (every character is taken literally).\n Disables the end of file string, which is treated like any other argument. Useful\n when input items might contain white space, quote marks, or backslashes. The GNU\n find -print0 option produces input suitable for this mode."
+      }
+    },
+    {
+      "Command": "wait",
+      "MP Summary": "await process completion",
+      "Most Similar TLDR Task": "Wait for a process to finish given its process ID (PID) and return its exit status",
+      "Most Similar TLDR Script": "wait {{pid}}",
+      "Most Similar NL2Bash Task": "Print \"Shared Memory\" if shared memory mounted at /tmp or print \"Not Shared Memory\" otherwise.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "df /tmp | grep -q tmpfs && echo \"Shared Memory\" || echo \"Not Shared Memory\"\n",
+          "command-options": {
+            "df": {
+              "mpsum": "report file system disk space usage"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-q": "Quiet; do not write anything to standard output. Exit immediately with zero status\n if any match is found, even if an error was detected. Also see the -s or\n --no-messages option."
+            },
+            "echo": {
+              "mpsum": "display a line of text"
+            }
+          },
+          "TLDR_inform": {
+            "df": {
+              "man1_df_6450": "give overview filesystem disk space usag display filesystem disk usag display filesystem disk usag human readabl form display filesystem exclud specifi type display statist number free inod display filesystem disk usag contain given file directori"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            },
+            "echo": {
+              "man1_echo_8389": "print given argument append messag file enabl interpret backslash escap special charact print messag environ variabl print messag without trail newlin print text messag\nnote : quot option"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_55746691: How to monitor a file to find out which process will write or delete it in the future"
+      ],
+      "Top-3 Scripts": [
+        "so_55746691: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "at",
+      "MP Summary": "queue, examine, or delete jobs for later execution",
+      "Most Similar TLDR Task": "Execute a script at the given time",
+      "Most Similar TLDR Script": "at {{hh:mm}} -f {{path/to/file}}",
+      "Most Similar NL2Bash Task": "Print \"Shared Memory\" if shared memory mounted at /tmp or print \"Not Shared Memory\" otherwise.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "df /tmp | grep -q tmpfs && echo \"Shared Memory\" || echo \"Not Shared Memory\"\n",
+          "command-options": {
+            "df": {
+              "mpsum": "report file system disk space usage"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-q": "Quiet; do not write anything to standard output. Exit immediately with zero status\n if any match is found, even if an error was detected. Also see the -s or\n --no-messages option."
+            },
+            "echo": {
+              "mpsum": "display a line of text"
+            }
+          },
+          "TLDR_inform": {
+            "df": {
+              "man1_df_6450": "give overview filesystem disk space usag display filesystem disk usag display filesystem disk usag human readabl form display filesystem exclud specifi type display statist number free inod display filesystem disk usag contain given file directori"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            },
+            "echo": {
+              "man1_echo_8389": "print given argument append messag file enabl interpret backslash escap special charact print messag environ variabl print messag without trail newlin print text messag\nnote : quot option"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_28029947: how do you find out which partition maps to which memory device type on embedded linux?"
+      ],
+      "Top-3 Scripts": [
+        "so_28029947: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "systemctl",
+      "MP Summary": "Control the systemd system and service manager",
+      "Most Similar TLDR Task": "Check if a unit is enabled",
+      "Most Similar TLDR Script": "systemctl is-enabled {{unit}}",
+      "Most Similar NL2Bash Task": "Print \"Shared Memory\" if shared memory mounted at /tmp or print \"Not Shared Memory\" otherwise.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "df /tmp | grep -q tmpfs && echo \"Shared Memory\" || echo \"Not Shared Memory\"\n",
+          "command-options": {
+            "df": {
+              "mpsum": "report file system disk space usage"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-q": "Quiet; do not write anything to standard output. Exit immediately with zero status\n if any match is found, even if an error was detected. Also see the -s or\n --no-messages option."
+            },
+            "echo": {
+              "mpsum": "display a line of text"
+            }
+          },
+          "TLDR_inform": {
+            "df": {
+              "man1_df_6450": "give overview filesystem disk space usag display filesystem disk usag display filesystem disk usag human readabl form display filesystem exclud specifi type display statist number free inod display filesystem disk usag contain given file directori"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            },
+            "echo": {
+              "man1_echo_8389": "print given argument append messag file enabl interpret backslash escap special charact print messag environ variabl print messag without trail newlin print text messag\nnote : quot option"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_867927: How can I find out which service started a process so I can disable that service?"
+      ],
+      "Top-3 Scripts": [
+        "au_867927: systemctl status <PID>\n\n$ systemctl status 561\n\u25cf sshd.service - OpenSSH Daemon\n   Loaded: loaded (/usr/lib/systemd/system/sshd.service; enabled; vendor preset: disabled)\n   Active: active (running) since Wed 2017-01-04 15:38:01 JST; 7h ago\n Main PID: 561 (sshd)\n    Tasks: 1 (limit: 4915)\n   CGroup: /system.slice/sshd.service\n           \u2514\u2500561 /usr/bin/sshd -D\n\n$ systemctl status $(pgrep chrome -n)\n\u25cf session-c2.scope - Session c2 of user muru\n   Loaded: loaded (/run/systemd/transient/session-c2.scope; transient; vendor preset: disabled)\nTransient: yes\n   Active: active (running) since Wed 2017-01-04 15:46:30 JST; 7h ago\n    Tasks: 422\n   CGroup: /user.slice/user-1000.slice/session-c2.scope"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "modprobe",
+      "MP Summary": "Add and remove modules from the Linux Kernel",
+      "Most Similar TLDR Task": "Load a module into the kernel",
+      "Most Similar TLDR Script": "sudo modprobe {{module_name}}",
+      "Most Similar NL2Bash Task": "Print \"Shared Memory\" if shared memory mounted at /tmp or print \"Not Shared Memory\" otherwise.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "df /tmp | grep -q tmpfs && echo \"Shared Memory\" || echo \"Not Shared Memory\"\n",
+          "command-options": {
+            "df": {
+              "mpsum": "report file system disk space usage"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-q": "Quiet; do not write anything to standard output. Exit immediately with zero status\n if any match is found, even if an error was detected. Also see the -s or\n --no-messages option."
+            },
+            "echo": {
+              "mpsum": "display a line of text"
+            }
+          },
+          "TLDR_inform": {
+            "df": {
+              "man1_df_6450": "give overview filesystem disk space usag display filesystem disk usag display filesystem disk usag human readabl form display filesystem exclud specifi type display statist number free inod display filesystem disk usag contain given file directori"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            },
+            "echo": {
+              "man1_echo_8389": "print given argument append messag file enabl interpret backslash escap special charact print messag environ variabl print messag without trail newlin print text messag\nnote : quot option"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_65041694: How can I find which process is using my GPU?"
+      ],
+      "Top-3 Scripts": [
+        "so_65041694: modprobe -r nvidia_drm"
+      ],
+      "Explanations about Options": {
+        "-r": "This option causes modprobe to remove rather than insert a module. If the modules it\n depends on are also unused, modprobe will try to remove them too. Unlike insertion,\n more than one module can be specified on the command line (it does not make sense to\n specify module parameters when removing modules)."
+      }
+    },
+    {
+      "Command": "apt-get",
+      "MP Summary": "APT package handling utility - command-line interface",
+      "Most Similar TLDR Task": "Upgrade installed packages (like `upgrade`), but remove obsolete packages and install additional packages to meet new dependencies",
+      "Most Similar TLDR Script": "apt-get dist-upgrade",
+      "Most Similar NL2Bash Task": "Print \"Shared Memory\" if shared memory mounted at /tmp or print \"Not Shared Memory\" otherwise.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "df /tmp | grep -q tmpfs && echo \"Shared Memory\" || echo \"Not Shared Memory\"\n",
+          "command-options": {
+            "df": {
+              "mpsum": "report file system disk space usage"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-q": "Quiet; do not write anything to standard output. Exit immediately with zero status\n if any match is found, even if an error was detected. Also see the -s or\n --no-messages option."
+            },
+            "echo": {
+              "mpsum": "display a line of text"
+            }
+          },
+          "TLDR_inform": {
+            "df": {
+              "man1_df_6450": "give overview filesystem disk space usag display filesystem disk usag display filesystem disk usag human readabl form display filesystem exclud specifi type display statist number free inod display filesystem disk usag contain given file directori"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            },
+            "echo": {
+              "man1_echo_8389": "print given argument append messag file enabl interpret backslash escap special charact print messag environ variabl print messag without trail newlin print text messag\nnote : quot option"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_2411: How do I find out which process is eating up my bandwidth?"
+      ],
+      "Top-3 Scripts": [
+        "au_2411: sudo apt-get install nethogs"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "named",
+      "MP Summary": "Internet domain name server",
+      "Most Similar TLDR Task": "Use IPv4 or IPv6 only, even if the host machine is capable of utilising other protocols",
+      "Most Similar TLDR Script": "named {{-4|-6}}",
+      "Most Similar NL2Bash Task": "Print \"Shared Memory\" if shared memory mounted at /tmp or print \"Not Shared Memory\" otherwise.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "df /tmp | grep -q tmpfs && echo \"Shared Memory\" || echo \"Not Shared Memory\"\n",
+          "command-options": {
+            "df": {
+              "mpsum": "report file system disk space usage"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-q": "Quiet; do not write anything to standard output. Exit immediately with zero status\n if any match is found, even if an error was detected. Also see the -s or\n --no-messages option."
+            },
+            "echo": {
+              "mpsum": "display a line of text"
+            }
+          },
+          "TLDR_inform": {
+            "df": {
+              "man1_df_6450": "give overview filesystem disk space usag display filesystem disk usag display filesystem disk usag human readabl form display filesystem exclud specifi type display statist number free inod display filesystem disk usag contain given file directori"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            },
+            "echo": {
+              "man1_echo_8389": "print given argument append messag file enabl interpret backslash escap special charact print messag environ variabl print messag without trail newlin print text messag\nnote : quot option"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "su_1443306: Is there any way to find which process utilizing swap memory in Linux OS?"
+      ],
+      "Top-3 Scripts": [
+        "su_1443306: 233256 kB    31326     mysqld\n 24968 kB    32424     /usr/local/bin/ruby bin/rails server -b 0.0.0.0\n 17232 kB    15256     /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock\n  8972 kB    15405     /usr/lib/virtualbox/VBoxHeadless --startvm acdb10c9-00fa-4514-a836-b9e3554214f3\n  8664 kB    14551     /usr/bin/containerd\n  5972 kB    22984     /usr/sbin/named -f -u bind -c /etc/bind/named.conf\n[...]"
+      ],
+      "Explanations about Options": {
+        "-u": "Setuid to user after completing privileged operations, such as creating sockets that\n listen on privileged ports.",
+        "-c": "Use config-file as the configuration file instead of the default, /etc/named.conf. To\n ensure that reloading the configuration file continues to work after the server has\n changed its working directory due to to a possible directory option in the\n configuration file, config-file should be an absolute pathname.",
+        "-f": "Run the server in the foreground (i.e. do not daemonize)."
+      }
+    },
+    {
+      "Command": "id",
+      "MP Summary": "print real and effective user and group IDs",
+      "Most Similar TLDR Task": "Display an arbitrary user's id (UID), group id (GID) and groups to which they belong",
+      "Most Similar TLDR Script": "id {{username}}",
+      "Most Similar NL2Bash Task": "Print \"Shared Memory\" if shared memory mounted at /tmp or print \"Not Shared Memory\" otherwise.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "df /tmp | grep -q tmpfs && echo \"Shared Memory\" || echo \"Not Shared Memory\"\n",
+          "command-options": {
+            "df": {
+              "mpsum": "report file system disk space usage"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-q": "Quiet; do not write anything to standard output. Exit immediately with zero status\n if any match is found, even if an error was detected. Also see the -s or\n --no-messages option."
+            },
+            "echo": {
+              "mpsum": "display a line of text"
+            }
+          },
+          "TLDR_inform": {
+            "df": {
+              "man1_df_6450": "give overview filesystem disk space usag display filesystem disk usag display filesystem disk usag human readabl form display filesystem exclud specifi type display statist number free inod display filesystem disk usag contain given file directori"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            },
+            "echo": {
+              "man1_echo_8389": "print given argument append messag file enabl interpret backslash escap special charact print messag environ variabl print messag without trail newlin print text messag\nnote : quot option"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_56245533: How to find out what powershell script is creating so much memory consumption?"
+      ],
+      "Top-3 Scripts": [
+        "so_56245533: $id = (Get-Process powershell | sort WorkingSet -Descending | select -first 1).Id\nGet-WmiObject Win32_Process -Filter \"ProcessId = '$id'\" | Select CommandLine"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "install",
+      "MP Summary": "copy files and set attributes",
+      "Most Similar TLDR Task": "Copy files and apply access/modification times of source to destination",
+      "Most Similar TLDR Script": "install -p {{path/to/source}} {{path/to/destination}}",
+      "Most Similar NL2Bash Task": "Print \"Shared Memory\" if shared memory mounted at /tmp or print \"Not Shared Memory\" otherwise.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "df /tmp | grep -q tmpfs && echo \"Shared Memory\" || echo \"Not Shared Memory\"\n",
+          "command-options": {
+            "df": {
+              "mpsum": "report file system disk space usage"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-q": "Quiet; do not write anything to standard output. Exit immediately with zero status\n if any match is found, even if an error was detected. Also see the -s or\n --no-messages option."
+            },
+            "echo": {
+              "mpsum": "display a line of text"
+            }
+          },
+          "TLDR_inform": {
+            "df": {
+              "man1_df_6450": "give overview filesystem disk space usag display filesystem disk usag display filesystem disk usag human readabl form display filesystem exclud specifi type display statist number free inod display filesystem disk usag contain given file directori"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            },
+            "echo": {
+              "man1_echo_8389": "print given argument append messag file enabl interpret backslash escap special charact print messag environ variabl print messag without trail newlin print text messag\nnote : quot option"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_2411: How do I find out which process is eating up my bandwidth?"
+      ],
+      "Top-3 Scripts": [
+        "au_2411: sudo apt-get install nethogs"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "test",
+      "MP Summary": "check file types and compare values",
+      "Most Similar TLDR Task": "Test if directory not exists",
+      "Most Similar TLDR Script": "test ! -d {{path/to/directory}}",
+      "Most Similar NL2Bash Task": "Print \"Shared Memory\" if shared memory mounted at /tmp or print \"Not Shared Memory\" otherwise.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "df /tmp | grep -q tmpfs && echo \"Shared Memory\" || echo \"Not Shared Memory\"\n",
+          "command-options": {
+            "df": {
+              "mpsum": "report file system disk space usage"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-q": "Quiet; do not write anything to standard output. Exit immediately with zero status\n if any match is found, even if an error was detected. Also see the -s or\n --no-messages option."
+            },
+            "echo": {
+              "mpsum": "display a line of text"
+            }
+          },
+          "TLDR_inform": {
+            "df": {
+              "man1_df_6450": "give overview filesystem disk space usag display filesystem disk usag display filesystem disk usag human readabl form display filesystem exclud specifi type display statist number free inod display filesystem disk usag contain given file directori"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            },
+            "echo": {
+              "man1_echo_8389": "print given argument append messag file enabl interpret backslash escap special charact print messag environ variabl print messag without trail newlin print text messag\nnote : quot option"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_60779978: Memory leak - How do I allocate memory for a Typdef Struct passed within another struct as thread arguments?"
+      ],
+      "Top-3 Scripts": [
+        "so_60779978: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "fold",
+      "MP Summary": "wrap each input line to fit in specified width",
+      "Most Similar TLDR Task": "Wrap each line to width \"5\" and break the line at spaces (puts each space separated word in a new line, words with length > 5 are wrapped)",
+      "Most Similar TLDR Script": "fold -w5 -s {{file}}",
+      "Most Similar NL2Bash Task": "Print \"Shared Memory\" if shared memory mounted at /tmp or print \"Not Shared Memory\" otherwise.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "df /tmp | grep -q tmpfs && echo \"Shared Memory\" || echo \"Not Shared Memory\"\n",
+          "command-options": {
+            "df": {
+              "mpsum": "report file system disk space usage"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-q": "Quiet; do not write anything to standard output. Exit immediately with zero status\n if any match is found, even if an error was detected. Also see the -s or\n --no-messages option."
+            },
+            "echo": {
+              "mpsum": "display a line of text"
+            }
+          },
+          "TLDR_inform": {
+            "df": {
+              "man1_df_6450": "give overview filesystem disk space usag display filesystem disk usag display filesystem disk usag human readabl form display filesystem exclud specifi type display statist number free inod display filesystem disk usag contain given file directori"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            },
+            "echo": {
+              "man1_echo_8389": "print given argument append messag file enabl interpret backslash escap special charact print messag environ variabl print messag without trail newlin print text messag\nnote : quot option"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "su_1443306: Is there any way to find which process utilizing swap memory in Linux OS?"
+      ],
+      "Top-3 Scripts": [
+        "su_1443306: grep '^VmSwap:' /proc/*/status \\\n    | grep -v '0 kB$' \\\n    | sed -re 's#^/proc/([0-9]+)/status:VmSwap:[ \\t]+([0-9]+) kB$#\\1 \\2#' \\\n    | sort -nrk2 \\\n    | while read pid swap; do \\\n        printf \"%10s kB    %-6s    \" ${swap} ${pid}; \\\n        cat /proc/${pid}/cmdline | xargs -0 | fold -sw160 | sed -re '/^$/d; 1!s/^/\\t\\t\\t\\t/;'; \\\n      done \\\n    | less -cRS\n\ncat /proc/${pid}/cmdline | xargs -0 | fold -sw160 | sed -re '/^$/d; 1!s/^/\\t\\t\\t\\t/;'"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "tty",
+      "MP Summary": "return user's terminal name",
+      "Most Similar TLDR Task": "Print the file name of this terminal",
+      "Most Similar TLDR Script": "tty",
+      "Most Similar NL2Bash Task": "Print \"Shared Memory\" if shared memory mounted at /tmp or print \"Not Shared Memory\" otherwise.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "df /tmp | grep -q tmpfs && echo \"Shared Memory\" || echo \"Not Shared Memory\"\n",
+          "command-options": {
+            "df": {
+              "mpsum": "report file system disk space usage"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-q": "Quiet; do not write anything to standard output. Exit immediately with zero status\n if any match is found, even if an error was detected. Also see the -s or\n --no-messages option."
+            },
+            "echo": {
+              "mpsum": "display a line of text"
+            }
+          },
+          "TLDR_inform": {
+            "df": {
+              "man1_df_6450": "give overview filesystem disk space usag display filesystem disk usag display filesystem disk usag human readabl form display filesystem exclud specifi type display statist number free inod display filesystem disk usag contain given file directori"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            },
+            "echo": {
+              "man1_echo_8389": "print given argument append messag file enabl interpret backslash escap special charact print messag environ variabl print messag without trail newlin print text messag\nnote : quot option"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "su_212714: How to find which Tmux session a process belongs to?"
+      ],
+      "Top-3 Scripts": [
+        "su_212714: ps -o tty= -p $pid"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "mkfifo",
+      "MP Summary": "make FIFO special files",
+      "Most Similar TLDR Task": "Create a named pipe at a given path",
+      "Most Similar TLDR Script": "mkfifo {{path/to/pipe}}",
+      "Most Similar NL2Bash Task": "Print \"Shared Memory\" if shared memory mounted at /tmp or print \"Not Shared Memory\" otherwise.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "df /tmp | grep -q tmpfs && echo \"Shared Memory\" || echo \"Not Shared Memory\"\n",
+          "command-options": {
+            "df": {
+              "mpsum": "report file system disk space usage"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-q": "Quiet; do not write anything to standard output. Exit immediately with zero status\n if any match is found, even if an error was detected. Also see the -s or\n --no-messages option."
+            },
+            "echo": {
+              "mpsum": "display a line of text"
+            }
+          },
+          "TLDR_inform": {
+            "df": {
+              "man1_df_6450": "give overview filesystem disk space usag display filesystem disk usag display filesystem disk usag human readabl form display filesystem exclud specifi type display statist number free inod display filesystem disk usag contain given file directori"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            },
+            "echo": {
+              "man1_echo_8389": "print given argument append messag file enabl interpret backslash escap special charact print messag environ variabl print messag without trail newlin print text messag\nnote : quot option"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_31367: How to find out which file is currently written by a process"
+      ],
+      "Top-3 Scripts": [
+        "ul_31367: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "go",
+      "MP Summary": "tool for managing Go source code",
+      "Most Similar TLDR Task": "Compile and run a source file (it has to contain a `main` package)",
+      "Most Similar TLDR Script": "go run {{file}}.go",
+      "Most Similar NL2Bash Task": "Print \"Shared Memory\" if shared memory mounted at /tmp or print \"Not Shared Memory\" otherwise.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "df /tmp | grep -q tmpfs && echo \"Shared Memory\" || echo \"Not Shared Memory\"\n",
+          "command-options": {
+            "df": {
+              "mpsum": "report file system disk space usage"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-q": "Quiet; do not write anything to standard output. Exit immediately with zero status\n if any match is found, even if an error was detected. Also see the -s or\n --no-messages option."
+            },
+            "echo": {
+              "mpsum": "display a line of text"
+            }
+          },
+          "TLDR_inform": {
+            "df": {
+              "man1_df_6450": "give overview filesystem disk space usag display filesystem disk usag display filesystem disk usag human readabl form display filesystem exclud specifi type display statist number free inod display filesystem disk usag contain given file directori"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            },
+            "echo": {
+              "man1_echo_8389": "print given argument append messag file enabl interpret backslash escap special charact print messag environ variabl print messag without trail newlin print text messag\nnote : quot option"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_486215: Find process source which executing python scripts"
+      ],
+      "Top-3 Scripts": [
+        "ul_486215: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "cd",
+      "MP Summary": "change the working directory",
+      "Most Similar TLDR Task": "Go up to the parent of the current directory",
+      "Most Similar TLDR Script": "cd ..",
+      "Most Similar NL2Bash Task": "Print \"Shared Memory\" if shared memory mounted at /tmp or print \"Not Shared Memory\" otherwise.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "df /tmp | grep -q tmpfs && echo \"Shared Memory\" || echo \"Not Shared Memory\"\n",
+          "command-options": {
+            "df": {
+              "mpsum": "report file system disk space usage"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-q": "Quiet; do not write anything to standard output. Exit immediately with zero status\n if any match is found, even if an error was detected. Also see the -s or\n --no-messages option."
+            },
+            "echo": {
+              "mpsum": "display a line of text"
+            }
+          },
+          "TLDR_inform": {
+            "df": {
+              "man1_df_6450": "give overview filesystem disk space usag display filesystem disk usag display filesystem disk usag human readabl form display filesystem exclud specifi type display statist number free inod display filesystem disk usag contain given file directori"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            },
+            "echo": {
+              "man1_echo_8389": "print given argument append messag file enabl interpret backslash escap special charact print messag environ variabl print messag without trail newlin print text messag\nnote : quot option"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_537533: How to find which mountpoint current working directory of a process correspond to?"
+      ],
+      "Top-3 Scripts": [
+        "ul_537533: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "line",
+      "MP Summary": "cache line size",
+      "Most Similar TLDR Task": "Read input",
+      "Most Similar TLDR Script": "line",
+      "Most Similar NL2Bash Task": "Print \"Shared Memory\" if shared memory mounted at /tmp or print \"Not Shared Memory\" otherwise.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "df /tmp | grep -q tmpfs && echo \"Shared Memory\" || echo \"Not Shared Memory\"\n",
+          "command-options": {
+            "df": {
+              "mpsum": "report file system disk space usage"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-q": "Quiet; do not write anything to standard output. Exit immediately with zero status\n if any match is found, even if an error was detected. Also see the -s or\n --no-messages option."
+            },
+            "echo": {
+              "mpsum": "display a line of text"
+            }
+          },
+          "TLDR_inform": {
+            "df": {
+              "man1_df_6450": "give overview filesystem disk space usag display filesystem disk usag display filesystem disk usag human readabl form display filesystem exclud specifi type display statist number free inod display filesystem disk usag contain given file directori"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            },
+            "echo": {
+              "man1_echo_8389": "print given argument append messag file enabl interpret backslash escap special charact print messag environ variabl print messag without trail newlin print text messag\nnote : quot option"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_58451750: Why is my Powershell script checking if process is running giving error if it cannot find the process?"
+      ],
+      "Top-3 Scripts": [
+        "so_58451750: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "alias",
+      "MP Summary": "define or display aliases",
+      "Most Similar TLDR Task": "View the command associated to a given alias",
+      "Most Similar TLDR Script": "alias {{word}}",
+      "Most Similar NL2Bash Task": "Print \"Shared Memory\" if shared memory mounted at /tmp or print \"Not Shared Memory\" otherwise.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "df /tmp | grep -q tmpfs && echo \"Shared Memory\" || echo \"Not Shared Memory\"\n",
+          "command-options": {
+            "df": {
+              "mpsum": "report file system disk space usage"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-q": "Quiet; do not write anything to standard output. Exit immediately with zero status\n if any match is found, even if an error was detected. Also see the -s or\n --no-messages option."
+            },
+            "echo": {
+              "mpsum": "display a line of text"
+            }
+          },
+          "TLDR_inform": {
+            "df": {
+              "man1_df_6450": "give overview filesystem disk space usag display filesystem disk usag display filesystem disk usag human readabl form display filesystem exclud specifi type display statist number free inod display filesystem disk usag contain given file directori"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            },
+            "echo": {
+              "man1_echo_8389": "print given argument append messag file enabl interpret backslash escap special charact print messag environ variabl print messag without trail newlin print text messag\nnote : quot option"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_616125: Linux command to find which port a process is running?"
+      ],
+      "Top-3 Scripts": [
+        "ul_616125: alias magic=\"sudo lsof -i -P -n | grep LISTEN | grep \""
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "echo",
+      "MP Summary": "display a line of text",
+      "Most Similar TLDR Task": "Print a message with environment variables",
+      "Most Similar TLDR Script": "echo \"{{My path is $PATH}}\"",
+      "Most Similar NL2Bash Task": "Print \"Shared Memory\" if shared memory mounted at /tmp or print \"Not Shared Memory\" otherwise.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "df /tmp | grep -q tmpfs && echo \"Shared Memory\" || echo \"Not Shared Memory\"\n",
+          "command-options": {
+            "df": {
+              "mpsum": "report file system disk space usage"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-q": "Quiet; do not write anything to standard output. Exit immediately with zero status\n if any match is found, even if an error was detected. Also see the -s or\n --no-messages option."
+            },
+            "echo": {
+              "mpsum": "display a line of text"
+            }
+          },
+          "TLDR_inform": {
+            "df": {
+              "man1_df_6450": "give overview filesystem disk space usag display filesystem disk usag display filesystem disk usag human readabl form display filesystem exclud specifi type display statist number free inod display filesystem disk usag contain given file directori"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            },
+            "echo": {
+              "man1_echo_8389": "print given argument append messag file enabl interpret backslash escap special charact print messag environ variabl print messag without trail newlin print text messag\nnote : quot option"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_537533: How to find which mountpoint current working directory of a process correspond to?"
+      ],
+      "Top-3 Scripts": [
+        "ul_537533: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "exit",
+      "MP Summary": "cause the shell to exit",
+      "Most Similar TLDR Task": "Exit the shell with the specified exit code",
+      "Most Similar TLDR Script": "exit {{exit_code}}",
+      "Most Similar NL2Bash Task": "Print \"Shared Memory\" if shared memory mounted at /tmp or print \"Not Shared Memory\" otherwise.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "df /tmp | grep -q tmpfs && echo \"Shared Memory\" || echo \"Not Shared Memory\"\n",
+          "command-options": {
+            "df": {
+              "mpsum": "report file system disk space usage"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-q": "Quiet; do not write anything to standard output. Exit immediately with zero status\n if any match is found, even if an error was detected. Also see the -s or\n --no-messages option."
+            },
+            "echo": {
+              "mpsum": "display a line of text"
+            }
+          },
+          "TLDR_inform": {
+            "df": {
+              "man1_df_6450": "give overview filesystem disk space usag display filesystem disk usag display filesystem disk usag human readabl form display filesystem exclud specifi type display statist number free inod display filesystem disk usag contain given file directori"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            },
+            "echo": {
+              "man1_echo_8389": "print given argument append messag file enabl interpret backslash escap special charact print messag environ variabl print messag without trail newlin print text messag\nnote : quot option"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_55746691: How to monitor a file to find out which process will write or delete it in the future"
+      ],
+      "Top-3 Scripts": [
+        "so_55746691: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "mount",
+      "MP Summary": "mount a filesystem",
+      "Most Similar TLDR Task": "Mount a device to a directory",
+      "Most Similar TLDR Script": "mount -t {{filesystem_type}} {{path/to/device_file}} {{path/to/target_directory}}",
+      "Most Similar NL2Bash Task": "Print \"Shared Memory\" if shared memory mounted at /tmp or print \"Not Shared Memory\" otherwise.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "df /tmp | grep -q tmpfs && echo \"Shared Memory\" || echo \"Not Shared Memory\"\n",
+          "command-options": {
+            "df": {
+              "mpsum": "report file system disk space usage"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-q": "Quiet; do not write anything to standard output. Exit immediately with zero status\n if any match is found, even if an error was detected. Also see the -s or\n --no-messages option."
+            },
+            "echo": {
+              "mpsum": "display a line of text"
+            }
+          },
+          "TLDR_inform": {
+            "df": {
+              "man1_df_6450": "give overview filesystem disk space usag display filesystem disk usag display filesystem disk usag human readabl form display filesystem exclud specifi type display statist number free inod display filesystem disk usag contain given file directori"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            },
+            "echo": {
+              "man1_echo_8389": "print given argument append messag file enabl interpret backslash escap special charact print messag environ variabl print messag without trail newlin print text messag\nnote : quot option"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_55746691: How to monitor a file to find out which process will write or delete it in the future"
+      ],
+      "Top-3 Scripts": [
+        "so_55746691: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "perl",
+      "MP Summary": "The Perl 5 language interpreter",
+      "Most Similar TLDR Task": "Run a multi-line find/replace expression on a file, and save the result in another file",
+      "Most Similar TLDR Script": "perl -p0e 's/{{foo\\nbar}}/{{foobar}}/g' {{input_file}} > {{output_file}}",
+      "Most Similar NL2Bash Task": "Print \"Shared Memory\" if shared memory mounted at /tmp or print \"Not Shared Memory\" otherwise.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "df /tmp | grep -q tmpfs && echo \"Shared Memory\" || echo \"Not Shared Memory\"\n",
+          "command-options": {
+            "df": {
+              "mpsum": "report file system disk space usage"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-q": "Quiet; do not write anything to standard output. Exit immediately with zero status\n if any match is found, even if an error was detected. Also see the -s or\n --no-messages option."
+            },
+            "echo": {
+              "mpsum": "display a line of text"
+            }
+          },
+          "TLDR_inform": {
+            "df": {
+              "man1_df_6450": "give overview filesystem disk space usag display filesystem disk usag display filesystem disk usag human readabl form display filesystem exclud specifi type display statist number free inod display filesystem disk usag contain given file directori"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            },
+            "echo": {
+              "man1_echo_8389": "print given argument append messag file enabl interpret backslash escap special charact print messag environ variabl print messag without trail newlin print text messag\nnote : quot option"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_486215: Find process source which executing python scripts"
+      ],
+      "Top-3 Scripts": [
+        "ul_486215: "
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

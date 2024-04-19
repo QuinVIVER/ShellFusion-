@@ -1,0 +1,70 @@
+{
+  "Query": "How do I find out if I am sudoer?",
+  "Answers": [
+    {
+      "Command": "find",
+      "Top-3 Similar Questions": [
+        "ul_468674: Find directory, if match then don't recurse",
+        "ul_477412: Find command if filename doesn't exists in directory",
+        "so_60381320: \"find\" command but it stops going deep if it finds a directory starting with \".\""
+      ],
+      "Top-3 Scripts": [
+        "ul_468674: find . -type d -iname '*android*' -a \\( -prune  \\)\n\nfind . -type d -iname '*android*' -prune\n\nfind . -iname '*android*' -a \\( -prune  \\)",
+        "ul_477412: $ find projects -mindepth 1 -maxdepth 1 -type d \\\n    ! -exec test -f {}/README ';' \\\n    ! -exec test -f {}/readme ';' -print\nprojects/toolb\nprojects/toold\n\nfind projects -mindepth 1 -maxdepth 1 -type d \\\n    -exec [ ! -f {}/README ] ';' \\\n    -exec [ ! -f {}/readme ] ';' -print\n\nfind projects -mindepth 1 -maxdepth 1 -type d -exec sh -c '\n    for pathname do\n        if [ ! -f \"$pathname/README\" ] &&\n           [ ! -f \"$pathname/readme\" ]; then\n            printf \"%s\\n\" \"$pathname\"\n        fi\n    done' sh {} +",
+        "so_60381320: for path in $(find /home -type d -name \".*\" -prune -o -type f \\! -name \".*\" -print);do echo $path; done"
+      ]
+    },
+    {
+      "Command": "echo",
+      "Top-3 Similar Questions": [
+        "ul_330690: How do I find out if my sudoer privilege timed out?",
+        "so_60381320: \"find\" command but it stops going deep if it finds a directory starting with \".\"",
+        "so_9453654: Find out if file has changed"
+      ],
+      "Top-3 Scripts": [
+        "ul_330690: sudo -n true 2>/dev/null && echo Privileges active || echo Privileges inactive",
+        "so_60381320: for path in $(find /home -type d -name \".*\" -prune -o -type f \\! -name \".*\" -print);do echo $path; done",
+        "so_9453654: #!/bin/sh\ntouch file1\nsleep 1\ntouch file2\nif [ \"file1\" -nt \"file2\" ]; then\n  echo \"This will never be seen.\"\nelse\n  echo \"Sure enough, file1 is older.\"\nfi"
+      ]
+    },
+    {
+      "Command": "grep",
+      "Top-3 Similar Questions": [
+        "so_9453654: Find out if file has changed",
+        "so_63451128: Find all directories, that don't contain other directories",
+        "so_764440: Unable to find a directory when I know just its name by Find?"
+      ],
+      "Top-3 Scripts": [
+        "so_63451128: # find leaf directories\nfind -type d -links -3 -print0 | while read -d '' dir\ndo\n    # check if it contains some files\n    if ls -1qA \"$dir\" | grep -q .\n    then\n        echo \"$dir\"\n    fi\ndone",
+        "so_764440: find . | grep macports",
+        "so_62190904: find . -type d | grep -vE $(sep=; for f in `find . -type f -name hello`; do echo -n ${sep}${f%\\/hello}; sep='|'; done)"
+      ]
+    },
+    {
+      "Command": "sh",
+      "Top-3 Similar Questions": [
+        "ul_477412: Find command if filename doesn't exists in directory",
+        "ul_267934: find \"corrupt\" file, nesting an if inside a find command",
+        "so_52128614: Find creates a file when I use {}"
+      ],
+      "Top-3 Scripts": [
+        "ul_477412: find projects -mindepth 1 -maxdepth 1 -type d -exec sh -c '\n    for pathname do\n        if [ ! -f \"$pathname/README\" ] &&\n           [ ! -f \"$pathname/readme\" ]; then\n            printf \"%s\\n\" \"$pathname\"\n        fi\n    done' sh {} +",
+        "ul_267934: find . -type f -exec sh -c '\n  for file do\n    case $(file -b \"$file\") in\n      (data) printf \"%s is CORRUPT\\n\" \"$file\";;\n         (*) printf \"%s is DATA\\n\" \"$file\";;\n    esac\n  done' sh {} +",
+        "so_52128614: find . -type f -iname 'file' -exec sh -c 'echo >> \"{}\"' \\;"
+      ]
+    },
+    {
+      "Command": "to",
+      "Top-3 Similar Questions": [
+        "ul_468674: Find directory, if match then don't recurse",
+        "ul_301570: Why does find print a leading './' if no paths are given?",
+        "ul_254439: Finding files that have been modified using a script?"
+      ],
+      "Top-3 Scripts": [
+        "ul_468674: .             # Present directory\n-type d       # Only directories\n-iname        # Instead of `-name` to also match \"Android\" (ignore case).\n'*android*'   # Pattern of name to search\n-a            # Force the execution of next option on matching names.\n              # probably redundant as all options are evaluated with an\n              # implicit and in find\n              # but: makes the intent explicitly clear.\n\\( -prune  \\) # Remove the whole directory from further examination.\n              # braces also optional (as it is only one command).",
+        "ul_301570: +  /* If no paths are given, default to \".\".  */\n+  for (i = 1; i < argc && strchr (\"-!(),\", argv[i][0]) == NULL; i++)\n+    process_top_path (argv[i]);\n+  if (i == 1)\n+    process_top_path (\".\");\n+\n+  exit (exit_status);\n+}\n\nSat Dec 15 19:01:12 1990  David J. MacKenzie  (djm at egypt)\n\n        * find.c (main), util.c (usage): Make directory args optional,\n        defaulting to \".\"",
+        "ul_254439: find /path/to/dir"
+      ]
+    }
+  ]
+}

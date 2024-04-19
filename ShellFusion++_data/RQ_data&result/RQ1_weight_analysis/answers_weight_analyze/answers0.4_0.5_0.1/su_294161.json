@@ -1,0 +1,101 @@
+{
+  "Query": "Unix/Linux find and sort by date modified",
+  "Answers": [
+    {
+      "Command": "date",
+      "MP Summary": "print or set the system date and time",
+      "Most Similar TLDR Task": "Convert a specific date to the Unix timestamp format",
+      "Most Similar TLDR Script": "date -d \"{{2018-09-01 00:00}}\" +%s --utc",
+      "Top-3 Similar Questions": [
+        "su_1598430: Date, find out the number of days in a month",
+        "ul_596172: find a file based on date passed in parameter",
+        "so_69992241: Linux - Finding the max modified date of each set of files in each directory"
+      ],
+      "Top-3 Scripts": [
+        "su_1598430: month=$(date +%m)\nmaxDayThisMonth=$(( for d in {00..31}; do date -d \"+$d days\" +%m-%d ; done ; ) | grep -Po \"(?<=$month-)\\d+\" | sort -rn | head -1)\n\nnextMonth=$(printf \"%02d\" $(( ($month+1) % 12 )) )\nmaxDayNextMonth=$(( for d in {01..62}; do date -d \"+$d days\" +%m-%d ; done ; ) | grep -Po \"(?<=$nextMonth-)\\d+\" | sort -rn | head -1)",
+        "ul_596172: $ date +%Y%m%d -d \"(2020-06-24)+1 days\"\n20200702\n\n$ date +%Y%m%d -d \"2020-06-24 +1 days\"\n20200625\n\ndt=20200614; # or 2020-06-14, either way works\n\nfile=$(date +\"XYZ.ABC.M.%Y%m%d180200.batch\" -d \"$dt + 1 days\");\necho $file;\n\nXYZ.ABC.M.20200615180200.batch",
+        "so_69992241: now=$(date +%s)"
+      ],
+      "Explanations about Options": {
+        "-d": "display time described by STRING, not 'now'"
+      }
+    },
+    {
+      "Command": "sort",
+      "MP Summary": "sort lines of text files",
+      "Most Similar TLDR Task": "Sort a file preserving only unique lines",
+      "Most Similar TLDR Script": "sort -u {{path/to/file}}",
+      "Top-3 Similar Questions": [
+        "au_61179: Find the latest file by modified date",
+        "so_27189663: How to sort 'find' results in bash by size",
+        "so_16858013: sort files found by command 'find'"
+      ],
+      "Top-3 Scripts": [
+        "au_61179: find /path -printf '%T+ %p\\n' | sort -r | head",
+        "so_27189663: find . -type f -size +2G -printf \"%kKB %p\\n\" | sort -n\n\nsort -n\n\n$ find . -type f -size +1M -printf \"%p %kKB\\n\" | sort -n -k2\n./arrr.txt.gz 1664KB\n./brrr.gz 32388KB",
+        "so_16858013: find ... -print0 |\nsort -z -t_ -k6n -k3n |\nxargs -r0 ./myScript.py --takeFiles"
+      ],
+      "Explanations about Options": {
+        "-z": "line delimiter is NUL, not newline",
+        "-r": "reverse the result of comparisons",
+        "-n": "compare according to string numerical value"
+      }
+    },
+    {
+      "Command": "touch",
+      "MP Summary": "change file timestamps",
+      "Most Similar TLDR Task": "Set the times on a file to a specific date and time",
+      "Most Similar TLDR Script": "touch -t {{YYYYMMDDHHMM.SS}} {{filename}}",
+      "Top-3 Similar Questions": [
+        "so_29526886: unix find oldest file in directory by date in filename",
+        "so_60835418: Bash: find all files based on date range in file names",
+        "ul_196054: Find the files between two folder dates in linux?"
+      ],
+      "Top-3 Scripts": [
+        "so_29526886: ",
+        "so_60835418: touch 20200{1,2,3,4}2{3,4,5}0200COM{1,2,3}0.txt",
+        "ul_196054: touch -d\"April 13 3 AM\" file1\ntouch -d\"April 13 9 AM\" file2\nfind . -newer file1 ! -newer file2 -exec grep -l \"pcV6URY\" {} +\nrm file1 file2\n\ntouch -d\"April 13 3 AM\" file1; touch -d\"April 13 9 AM\" file2"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "find",
+      "MP Summary": "search for files in a directory hierarchy",
+      "Most Similar TLDR Task": "Find files modified in the last 7 days, and delete them",
+      "Most Similar TLDR Script": "find {{root_path}} -mtime {{-7}} -delete",
+      "Top-3 Similar Questions": [
+        "au_61179: Find the latest file by modified date",
+        "so_27189663: How to sort 'find' results in bash by size",
+        "so_12586584: Find file by -m not finding files modified within date"
+      ],
+      "Top-3 Scripts": [
+        "au_61179: find /path -printf '%T+ %p\\n' | sort -r | head",
+        "so_27189663: find . -type f -size +2G -printf \"%kKB %p\\n\" | sort -n\n\n$ find . -type f -size +1M -printf \"%p %kKB\\n\" | sort -n -k2\n./arrr.txt.gz 1664KB\n./brrr.gz 32388KB",
+        "so_12586584: find \"/path-to-file/pdfs/\" -mtime -56 -mtime +27"
+      ],
+      "Explanations about Options": {
+        "-printf": "True; print format on the standard output, interpreting `\\' escapes and `%'\n directives. Field widths and precisions can be specified as with the `printf' C\n function. Please note that many of the fields are printed as %s rather than %d,\n and this may mean that flags don't work as you might expect. This also means that\n the `-' flag does work (it forces fields to be left-aligned). Unlike -print,\n -printf does not add a newline at the end of the string. The escapes and\n directives are:",
+        "-mtime": "File's data was last modified n*24 hours ago. See the comments for -atime to\n understand how rounding affects the interpretation of file modification times.",
+        "-size": "File uses n units of space, rounding up. The following suffixes can be used:",
+        "-type": "File is of type c:"
+      }
+    },
+    {
+      "Command": "printf",
+      "MP Summary": "format and print data",
+      "Most Similar TLDR Task": "Print a text message composed with environment variables",
+      "Most Similar TLDR Script": "printf \"{{var1: %s\\tvar2: %s\\n}}\" \"{{$VAR1}}\" \"{{$VAR2}}\"",
+      "Top-3 Similar Questions": [
+        "so_16858013: sort files found by command 'find'",
+        "ul_545179: Finding files based on the date contained in their filenames",
+        "su_1598430: Date, find out the number of days in a month"
+      ],
+      "Top-3 Scripts": [
+        "so_16858013: ",
+        "ul_545179: ",
+        "su_1598430: month=$(date +%m)\nmaxDayThisMonth=$(( for d in {00..31}; do date -d \"+$d days\" +%m-%d ; done ; ) | grep -Po \"(?<=$month-)\\d+\" | sort -rn | head -1)\n\nnextMonth=$(printf \"%02d\" $(( ($month+1) % 12 )) )\nmaxDayNextMonth=$(( for d in {01..62}; do date -d \"+$d days\" +%m-%d ; done ; ) | grep -Po \"(?<=$nextMonth-)\\d+\" | sort -rn | head -1)"
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

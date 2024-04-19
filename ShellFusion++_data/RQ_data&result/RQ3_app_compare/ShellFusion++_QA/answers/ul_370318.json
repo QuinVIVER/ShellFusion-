@@ -1,0 +1,70 @@
+{
+  "Query": "How to connect to wifi in CentOS 7(CLI)(no GUI)?",
+  "Answers": [
+    {
+      "Command": "sudo",
+      "Top-3 Similar Questions": [
+        "au_523458: Unable to connect to any Wifi in Ubuntu 14.04",
+        "ul_48384: How to permanently connect to WPA2AES wifi with OpenBSD (through cli)",
+        "ul_427037: Authentication mechanism to connect to Windows AD in Linux?"
+      ],
+      "Top-3 Scripts": [
+        "au_523458: cd ~/Desktop\nsudo dpkg -i dkms*.deb\nsudo dpkg -i bcmwl*.deb\nsudo modprobe wl",
+        "ul_48384: sudo sh /etc/netstart iwn0",
+        "ul_427037: $ sudo yum install -y sssd realmd oddjob oddjob-mkhomedir adcli \\\n   samba-common samba-common-tools krb5-workstation openldap-clients \\\n   policycoreutils-python\n\n$ sudo vi /etc/resolv.conf\nsearch <domain>\nnameserver <ip>\n\n$ sudo realm join --user=<user with permissions to add users to the domain> <domain>\n$ sudo realm list\n\n$ sudo systemctl restart sssd\n\n$ sudo touch /etc/sudoers.d/sudoers\n$ sudo vi !$"
+      ]
+    },
+    {
+      "Command": "ssid",
+      "Top-3 Similar Questions": [
+        "au_943787: how to connect to WPA2 enterprise WiFi in Ubuntu Core Raspberry Pi 3",
+        "ul_250562: Auto Connect to any Open WiFi network via CLI Command Line",
+        "ul_283722: How to connect to wifi from command line?"
+      ],
+      "Top-3 Scripts": [
+        "ul_250562: ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev\nupdate_config=1\n\n##Open_Wifi\nnetwork={\n    ssid=\"\"\n    key_mgmt=NONE\n    id_str=\"open_wifi\"\n}",
+        "ul_283722: network={\n         ssid=\"wifi_name\"\n         psk=\"wifi_key\"\n}\n\nset_network 0 ssid \"SSID_here\"\nset_network 0 psk \"Passphrase_here\"",
+        "so_30190291: ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev\nupdate_config=1\n\nnetwork={\n    ssid=\"my-wireless-network\"\n    psk=\"secret-password-here\"\n    key_mgmt=WPA-PSK\n}"
+      ]
+    },
+    {
+      "Command": "nmcli",
+      "Top-3 Similar Questions": [
+        "au_943787: how to connect to WPA2 enterprise WiFi in Ubuntu Core Raspberry Pi 3",
+        "ul_91362: How to connect to Wi-Fi network in Arch Linux?",
+        "au_461384: How to connect to WiFi from Lubuntu?"
+      ],
+      "Top-3 Scripts": [
+        "ul_91362: nmcli dev wifi connect SSID password PASSWORD",
+        "au_461384: nmcli dev wifi connect <(B)SSID> [password <password>] [wep-key-type key|phrase] [iface <iface>] [bssid <BSSID>] [name <name>] [--private] [--nowait] [--timeout <timeout>]\n\nnmcli dev wifi connect mynetwork password my-password",
+        "au_461825: nmcli c\n\nnmcli d wifi list\n\n##disconnect\nnmcli d disconnect <WifiInterface>\n\n##connect\nnmcli d connect <WifiInterface>\n\n##disconnect\nnmcli c down <SavedWiFiConn>\n\n##connect\nnmcli c up <SavedWiFiConn>\n\n##disconnect\nnmcli d disconnect iface <WifiInterface>\n\n##connect\nnmcli d wifi connect <WiFiSSID> password <WiFiPassword> iface <WifiInterface>\n\n##disconnect:\nnmcli c down id <SavedWiFiConn>\n\n##connect:\nnmcli c up id <SavedWiFiConn>\n\nnmcli -a c up <SavedWiFiConn>\n\nman nmcli"
+      ]
+    },
+    {
+      "Command": "install",
+      "Top-3 Similar Questions": [
+        "ul_427037: Authentication mechanism to connect to Windows AD in Linux?",
+        "ul_395161: Debian 8 (Jessie): Unable to connect to WIFI after update",
+        "au_1105683: How to connect to Cisco AnyConnect VPN via GUI in Ubuntu 18.04"
+      ],
+      "Top-3 Scripts": [
+        "ul_427037: $ sudo yum install -y sssd realmd oddjob oddjob-mkhomedir adcli \\\n   samba-common samba-common-tools krb5-workstation openldap-clients \\\n   policycoreutils-python",
+        "ul_395161: sudo apt-get update\nsudo apt-get install linux-image-4.9.0-0.bpo.3-amd64\nsudo reboot\nsudo modprobe -r iwlwifi\nsudo modprobe iwlwifi\n\napt-get install -t jessie-backports package-name",
+        "au_1105683: $ sudo apt install network-manager-openconnect-gnome"
+      ]
+    },
+    {
+      "Command": "wpa_supplicant",
+      "Top-3 Similar Questions": [
+        "ul_91362: How to connect to Wi-Fi network in Arch Linux?",
+        "ul_250562: Auto Connect to any Open WiFi network via CLI Command Line",
+        "ul_283722: How to connect to wifi from command line?"
+      ],
+      "Top-3 Scripts": [
+        "ul_250562: ##Wireless NIC\nallow-hotplug wlan0\niface wlan0 inet manual\nwpa-roam /etc/wpa_supplicant/wpa_supplicant.conf\niface open_wifi inet dhcp\n\nctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev\nupdate_config=1\n\n##Open_Wifi\nnetwork={\n    ssid=\"\"\n    key_mgmt=NONE\n    id_str=\"open_wifi\"\n}\n\nwpa_supplicant -d -i wlan0 -c /etc/wpa_supplicant/wpa_supplicant.conf -D wext",
+        "ul_283722: sudo ip link set wlan0 down\nsudo ip link set wlan0 up\nsudo wpa_supplicant -B -iwlan0 -c /etc/wpa_supplicant.conf -Dnl80211,wext\nsudo dhclient wlan0\n\nwpa_supplicant -B -i wlan0 -c <(wpa_passphrase \"Your_SSID\" Your_passphrase) && dhclient wlan0",
+        "so_30190291: auto wlan0\n\nallow-hotplug wlan0\niface wlan0 inet manual\nwpa-roam /etc/wpa_supplicant/wpa_supplicant.conf\niface default inet dhcp\n\nctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev\nupdate_config=1\n\nnetwork={\n    ssid=\"my-wireless-network\"\n    psk=\"secret-password-here\"\n    key_mgmt=WPA-PSK\n}"
+      ]
+    }
+  ]
+}

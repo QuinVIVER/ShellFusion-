@@ -1,0 +1,84 @@
+{
+  "Query": "Using jq to extract values and format in CSV",
+  "Answers": [
+    {
+      "Command": "printf",
+      "MP Summary": "format and print data",
+      "Most Similar TLDR Task": "Store a formatted message in a variable (does not work on zsh)",
+      "Most Similar TLDR Script": "printf -v {{myvar}} {{\"This is %s = %d\\n\" \"a year\" 2016}}",
+      "Top-3 Similar Questions": [
+        "so_14492590: using bash (sed/awk) to extract rows AND columns in CSV files?",
+        "ul_404699: Using multiple wildcards in jq to select objects in a JSON file",
+        "so_27123624: How to convert a file with data in key = value format to a csv file in unix shell scripting?"
+      ],
+      "Top-3 Scripts": [
+        "so_14492590: #!/bin/bash\ndeclare -a arr\nwhile read -r line; do\n    arr=(${line//,/ })\n    printf \"Rank\\t: %s\\nName\\t: %s\\nSchool\\t: %s\\nMajor\\t: %s\\nYear\\t: %s\\n\" ${arr[@]}\ndone < file.csv",
+        "ul_404699: jq -c 'select ...' file.json > out.json\nprintf '{\"nt\":%i}\\n' `wc -l < out.json` >> out.json",
+        "so_27123624: awk -F'[=(),]' -v OFS=, 'NR==1{for (i=2; i<NF; i+=2) printf \"%s%s\", $i, (i<NF-2)?OFS:ORS}\n              {for (i=3; i<=NF; i+=2) printf \"%s%s\", $i, (i<NF-2)?OFS:ORS}' input\nkey1,key2,key3\nvalue1,value2,value3\nvalue4,value5,value6"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "echo",
+      "MP Summary": "display a line of text",
+      "Most Similar TLDR Task": "Print a message with environment variables",
+      "Most Similar TLDR Script": "echo \"{{My path is $PATH}}\"",
+      "Top-3 Similar Questions": [
+        "so_14492590: using bash (sed/awk) to extract rows AND columns in CSV files?",
+        "so_59551619: How to extract value from json contained in a variable using jq in bash",
+        "so_56392038: Use data from a CSV file as values of a variable in a loop in Bash"
+      ],
+      "Top-3 Scripts": [
+        "so_14492590: #!/bin/bash\nwhile IFS=',' read -r rank name school major year; do\n    echo -e \"Rank\\t: $rank\\nName\\t: $name\\nSchool\\t: $school\\nMajor\\t: $major\\nYear\\t: $year\\n\"\ndone < file.csv\nIFS=$' \\t\\n'",
+        "so_59551619: json_val='{\"code\":\"lyz1To6ZTWClDHSiaeXyxg\",\"redirect_to\":\"http://example.com/client-redirect-uri?code=lyz1To6ZTWClDHSiaeXyxg\"}'\ncode_val=$(jq -r '.code' <<< \"$json_val\")\necho \"$code_val\"",
+        "so_56392038: #!/bin/bash\n\nwhile IFS=', ' read -r NAME IP TYPE\ndo\n    #You can do your processing here, e.g.\n    echo \"name=$NAME ip=$IP type=$TYPE\"\ndone < data.csv\n\nexit 0"
+      ],
+      "Explanations about Options": {
+        "-e": "enable interpretation of backslash escapes"
+      }
+    },
+    {
+      "Command": "jq",
+      "MP Summary": "Command-line JSON processor",
+      "Most Similar TLDR Task": "Read JSON objects from a file into an array, and output it (inverse of `jq .[]`)",
+      "Most Similar TLDR Script": "jq --slurp . {{file.json}}",
+      "Top-3 Similar Questions": [
+        "ul_542185: Using jq to create comma separated list fields in JSON array",
+        "so_23598328: Using jq to parse JSON in launchd",
+        "ul_404699: Using multiple wildcards in jq to select objects in a JSON file"
+      ],
+      "Top-3 Scripts": [
+        "ul_542185: jq -r '.hardware | join(\", \")'",
+        "so_23598328: JQ=/usr/local/bin/jq",
+        "ul_404699: $ jq -c 'select(.st1 <= .st2 and \n                .st1 > 0 and .st2 > 0 and \n                .st1 < 2147483647 and .st2 < 2147483647)' file.json \n{\"in\":5,\"li\":[{\"st\":1508584161,\"abc\":128416626,\"ta\":33888}],\"usr\":{\"is\":\"222108923573880\",\"ie\":\"222108923573880\"},\"st2\":1508584161,\"ei\":{\"ev\":0,\"rt\":10},\"rn\":947794,\"st1\":1508584161}\n{\"in\":5,\"li\":[{\"st\":1508584145,\"abc\":279682,\"ta\":50000}],\"usr\":{\"is\":\"222108923573880\",\"ie\":\"222108923573880\"},\"st2\":1508584145,\"ei\":{\"ev\":0,\"rt\":18},\"rn\":947796,\"st1\":1508584145}\n\njq -c 'select ...' file.json > out.json\nprintf '{\"nt\":%i}\\n' `wc -l < out.json` >> out.json"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "date",
+      "MP Summary": "print or set the system date and time",
+      "Most Similar TLDR Task": "Convert a specific date to the Unix timestamp format",
+      "Most Similar TLDR Script": "date -d \"{{2018-09-01 00:00}}\" +%s --utc",
+      "Top-3 Similar Questions": [
+        "so_18657411: How to change date format in .csv file in unix"
+      ],
+      "Top-3 Scripts": [
+        "so_18657411: $ date -d\"8/10/13\" \"+%Y-%m-%d\"\n2013-08-10\n\nwhile IFS= read -r line\ndo\n  mydate=$(grep -Po '[0-9]+/[0-9]+/[0-9]+' <<< \"$line\") # gets 8/1/13\n  # perform the replacement in case there is date to process\n  if [[ ! -z \"$mydate\" ]]; then\n     newdate=$(date -d\"$mydate\" \"+%Y-%m-%d\") # converts to 2013-08-01\n     sed -i \"s#$mydate#$newdate#\" file       # replaces in the text (-i option)\n  fi\ndone < file"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "dd",
+      "MP Summary": "convert and copy a file",
+      "Most Similar TLDR Task": "Check progress of an ongoing dd operation (Run this command from another shell)",
+      "Most Similar TLDR Script": "kill -USR1 $(pgrep ^dd)",
+      "Top-3 Similar Questions": [
+        "so_21457897: Convert date format in CSV using PowerShell"
+      ],
+      "Top-3 Scripts": [
+        "so_21457897: Import-Csv foo.csv |\n  ForEach-Object {\n    $_.Date = [datetime]::Parse($_.Date).ToString('MM/dd/yyyy HH:mm')\n  } |\n  Export-Csv -NoTypeInformation foo-new.csv"
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

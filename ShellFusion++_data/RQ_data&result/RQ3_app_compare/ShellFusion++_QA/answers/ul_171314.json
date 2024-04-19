@@ -1,0 +1,70 @@
+{
+  "Query": "How to grep for same string but multiple files at the same time?",
+  "Answers": [
+    {
+      "Command": "grep",
+      "Top-3 Similar Questions": [
+        "ul_168813: How do I grep for multiple patterns on multiple lines?",
+        "ul_669247: grep for exact multiple strings from a file",
+        "so_69731339: How to grep for multiple strings in the same line inside a file with similar pattern?"
+      ],
+      "Top-3 Scripts": [
+        "ul_168813: grep -zoP  '(?ms)^begin$.*?^end$'",
+        "ul_669247: grep -Ev '^(Part Number|Board Revision|PCB Fab Part Number|PCA Assembly Number|PCA Revision Number) *:' file",
+        "so_69731339: sed -r '/^\\s*#/d' my.txt | grep \"$f_name\" | grep \"$p_name\""
+      ]
+    },
+    {
+      "Command": "awk",
+      "Top-3 Similar Questions": [
+        "ul_168813: How do I grep for multiple patterns on multiple lines?",
+        "so_26567419: GREP for multiple strings",
+        "au_1026259: How to grep for two patterns in multiple files"
+      ],
+      "Top-3 Scripts": [
+        "so_26567419: while read -r domain\ndo\n    get -q \"$domain\" -O - | awk -F= -v RS='[\"#]' -v \"d=$domain\" -v web=zero -v net=zero -v office=zero '$1==\"web\"{web=$2} $1==\"net\" {net=$2} $1==\"office\"{office=$2} END{printf \"%s: %s,%s,%s\\n\",d,web,net,office}'\ndone <urls.txt\n\nawk -F= -v RS='[\"#]' -v \"d=$domain\" -v web=zero -v net=zero -v office=zero '$1==\"web\"{web=$2} $1==\"net\" {net=$2} $1==\"office\"{office=$2} END{printf \"%s: %s,%s,%s\\n\",d,web,net,office}'\n\n$ domain=www.domain.com\n$ echo 'abc \"web=pattern1\" def \"net=pattern2\" hij \"office=pattern3\" <end>'| awk -F= -v RS='[\"#]' -v \"d=$domain\" -v web=zero -v net=zero -v office=zero '$1==\"web\"{web=$2} $1==\"net\" {net=$2} $1==\"office\"{office=$2} END{printf \"%s: %s,%s,%s\\n\",d,web,net,office}'\nwww.domain.com: pattern1,pattern2,pattern3\n\n$ domain=www.domain.com\n$ echo 'abc \"web=pattern1\" def \"office=pattern3\" <end>'| awk -F= -v RS='[\"#]' -v \"d=$domain\" -v web=zero -v net=zero -v office=zero '$1==\"web\"{web=$2} $1==\"net\" {net=$2} $1==\"office\"{office=$2} END{printf \"%s: %s,%s,%s\\n\",d,web,net,office}'\nwww.domain.com: pattern1,zero,pattern3",
+        "au_1026259: find . -type f -exec awk 'FNR == 1 {a=0; r=0} /AccessToken/{a=1} /Registrationrequest/{r=1} a && r {print FILENAME; nextfile}' {} +",
+        "so_54754995: awk '/pattern I want/ && !/pattern I do not want/' file"
+      ]
+    },
+    {
+      "Command": "echo",
+      "Top-3 Similar Questions": [
+        "ul_168813: How do I grep for multiple patterns on multiple lines?",
+        "so_26567419: GREP for multiple strings",
+        "ul_372258: grep for string without another string before it"
+      ],
+      "Top-3 Scripts": [
+        "ul_168813: (seq 12091; echo begin; seq 4315; echo end; seq 10) |\n   pcregrep -M '(?s)^begin$.*?^end$'\n\n(seq 12091; echo begin; seq 4316; echo end; seq 10) |\n   pcregrep -M '(?s)^begin$.*?^end$'",
+        "so_26567419: $ domain=www.domain.com\n$ echo 'abc \"web=pattern1\" def \"net=pattern2\" hij \"office=pattern3\" <end>'| awk -F= -v RS='[\"#]' -v \"d=$domain\" -v web=zero -v net=zero -v office=zero '$1==\"web\"{web=$2} $1==\"net\" {net=$2} $1==\"office\"{office=$2} END{printf \"%s: %s,%s,%s\\n\",d,web,net,office}'\nwww.domain.com: pattern1,pattern2,pattern3\n\n$ domain=www.domain.com\n$ echo 'abc \"web=pattern1\" def \"office=pattern3\" <end>'| awk -F= -v RS='[\"#]' -v \"d=$domain\" -v web=zero -v net=zero -v office=zero '$1==\"web\"{web=$2} $1==\"net\" {net=$2} $1==\"office\"{office=$2} END{printf \"%s: %s,%s,%s\\n\",d,web,net,office}'\nwww.domain.com: pattern1,zero,pattern3",
+        "ul_372258: if grep -rl -- '^[^#]*Indexes' \"$DIR1/httpd.conf\" \"$DIR2/http\"; then\n    echo \"The above-listed files use an 'Indexes' directive.\"\nfi"
+      ]
+    },
+    {
+      "Command": "cat",
+      "Top-3 Similar Questions": [
+        "ul_669247: grep for exact multiple strings from a file",
+        "so_44456396: grep for multiple patterns with end of line as a string",
+        "so_48492422: How to grep for case insensitive string in a file?"
+      ],
+      "Top-3 Scripts": [
+        "so_44456396: cat input_file.txt | tr '\\n' ':' | sed 's/---:/---;/' | tr ';' '\\n'",
+        "so_56365528: cat my_log.log | grep -E \"Completed 200 OK in [0-9]{4}ms\"\n\ncat my_log.log | grep -E \"Completed 200 OK in [0-9]{4,}ms\"",
+        "so_32761627: cat lines | grep 'xz.*xz'"
+      ]
+    },
+    {
+      "Command": "sed",
+      "Top-3 Similar Questions": [
+        "ul_168813: How do I grep for multiple patterns on multiple lines?",
+        "so_69731339: How to grep for multiple strings in the same line inside a file with similar pattern?",
+        "so_44456396: grep for multiple patterns with end of line as a string"
+      ],
+      "Top-3 Scripts": [
+        "ul_168813: sed '/^begin$/,/^end$/!d'",
+        "so_69731339: sed -r '/^\\s*#/d' my.txt | grep \"$f_name\" | grep \"$p_name\"",
+        "so_44456396: cat input_file.txt | tr '\\n' ':' | sed 's/---:/---;/' | tr ';' '\\n'"
+      ]
+    }
+  ]
+}

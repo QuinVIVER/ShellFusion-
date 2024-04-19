@@ -1,0 +1,70 @@
+{
+  "Query": "How can I extract a page range / a part of a PDF?",
+  "Answers": [
+    {
+      "Command": "echo",
+      "Top-3 Similar Questions": [
+        "so_12588884: Extract part of file name with multiple sections",
+        "so_10275818: Extract part of filename",
+        "au_1195340: Extract a specific pdf from a zip file with lots of pdfs"
+      ],
+      "Top-3 Scripts": [
+        "so_12588884: file=EMDEON.270.60054.1234567890123456789.70949996.20120925.014606403\ntransitId=$(echo $file | cut -d. -f4)\n\nfile=EMDEON.270.60054.1234567890123456789.70949996.20120925.014606403\ntransitId=$(echo $file | awk -F. '{print $4}')",
+        "so_10275818: name=$(echo \"$file\" | sed 's/^.*\\.\\([^.][^.]*\\)\\(_[-.0-9][-.0-9]*_arm\\)*\\.deb$/\\1/')",
+        "ul_111876: TAG1=( $(basename \"${FILES[0]}\" | sed 's/_/ /g') )\nTAG2=( $(basename \"${FILES[$N-1]}\" | sed 's/_/ /g') )\n\nrange=\"${TAG1[1]}_${TAG1[2]}${TAG1[3]}_${TAG1[4]}${TAG1[5]}_to_${TAG2[4]}${TAG2[5]}\"\n\necho \"$range\"\n#mergecap -w /mnt/md0/capture/DCN/\"$range\"_utc.pcap ${FILES[@]}"
+      ]
+    },
+    {
+      "Command": "sed",
+      "Top-3 Similar Questions": [
+        "so_10275818: Extract part of filename",
+        "au_687331: Extracting part of a specific column in text file",
+        "ul_589620: How can I extract specific part of a file?"
+      ],
+      "Top-3 Scripts": [
+        "so_10275818: name=$(echo \"$file\" | sed 's/^.*\\.\\([^.][^.]*\\)\\(_[-.0-9][-.0-9]*_arm\\)*\\.deb$/\\1/')",
+        "au_687331: sed 's/.*:\\(.\\{4\\}\\).*/\\1/' in > out\n\n% cat in\nffmj0010.09o:FFMJ MARKER NAME\nffmj0020.09o:BRMU MARKER NAME\n% sed 's/.*:\\(.\\{4\\}\\).*/\\1/' in > out\n% cat out\nFFMJ\nBRMU",
+        "ul_589620: grep -oHnE \":[^,]*:\" files* | awk 'BEGIN{FS=\":\"} {x=$1$2; a[x]=a[x]\",\"$4} END{for(x in a) print a[x]}' | sed 's/^,//'\n\nsed 's/^,//'"
+      ]
+    },
+    {
+      "Command": "awk",
+      "Top-3 Similar Questions": [
+        "so_12588884: Extract part of file name with multiple sections",
+        "so_34625953: Is there any way to get the page numbers in a PDF of a search pattern?",
+        "ul_589620: How can I extract specific part of a file?"
+      ],
+      "Top-3 Scripts": [
+        "so_12588884: file=EMDEON.270.60054.1234567890123456789.70949996.20120925.014606403\ntransitId=$(echo $file | awk -F. '{print $4}')",
+        "so_34625953: pdftotext test.pdf - |\nawk -vRS=$'\\f' -vNAME=\"My name\" \\\n    'index($0,NAME){printf \"%d: %s\\n\", NR, NAME;}'\n\npdftotext test.pdf - |\ngrep -F -o -e $'\\f' -e 'My name' |\nawk 'BEGIN{page=1} /\\f/{++page;next} 1{printf \"%d: %s\\n\", page, $0;}'\n\npdftotext test.pdf - |\nawk -vRS=$'\\f' \\\n    '/My[[:space:]]+Name/{printf \"%d: %s\\n\", NR, \"My Name\";}'",
+        "ul_589620: grep -oHnE \":[^,]*:\" files* | awk 'BEGIN{FS=\":\"} {x=$1$2; a[x]=a[x]\",\"$4} END{for(x in a) print a[x]}' | sed 's/^,//'\n\nawk 'BEGIN{FS=\":\"} {x=$1$2;a[x]=a[x]\",\"$4} END{for(x in a) print a[x]}'"
+      ]
+    },
+    {
+      "Command": "print",
+      "Top-3 Similar Questions": [
+        "so_12588884: Extract part of file name with multiple sections",
+        "ul_589620: How can I extract specific part of a file?",
+        "so_3658382: Extracting multiple parts of a string using bash"
+      ],
+      "Top-3 Scripts": [
+        "so_12588884: file=EMDEON.270.60054.1234567890123456789.70949996.20120925.014606403\ntransitId=$(echo $file | awk -F. '{print $4}')",
+        "ul_589620: grep -oHnE \":[^,]*:\" files* | awk 'BEGIN{FS=\":\"} {x=$1$2; a[x]=a[x]\",\"$4} END{for(x in a) print a[x]}' | sed 's/^,//'\n\nfor(x in a) print a[x]\n\nawk 'BEGIN{FS=\":\"} {x=$1$2;a[x]=a[x]\",\"$4} END{for(x in a) print a[x]}'",
+        "so_3658382: echo '1=A00^35=D^150=1^33=1\n      1=a00^35=d^157=11^33=11\n      ' | awk -vLST=1,33 -F^ '{s=\"\";split(LST,k,\",\");for(i=1;i<=NF;i++){for(j in k){split($i,arr,\"=\");if(arr[1]==k[j]){printf s\"\"arr[1]\"=\"arr[2];s=\"^\";}}}if(s!=\"\"){print s;}}'"
+      ]
+    },
+    {
+      "Command": "printf",
+      "Top-3 Similar Questions": [
+        "so_34625953: Is there any way to get the page numbers in a PDF of a search pattern?",
+        "so_3658382: Extracting multiple parts of a string using bash",
+        "ul_248237: How to extract first part of filenames with same suffix?"
+      ],
+      "Top-3 Scripts": [
+        "so_34625953: pdftotext test.pdf - |\nawk -vRS=$'\\f' -vNAME=\"My name\" \\\n    'index($0,NAME){printf \"%d: %s\\n\", NR, NAME;}'\n\npdftotext test.pdf - |\ngrep -F -o -e $'\\f' -e 'My name' |\nawk 'BEGIN{page=1} /\\f/{++page;next} 1{printf \"%d: %s\\n\", page, $0;}'\n\npdftotext test.pdf - |\nawk -vRS=$'\\f' \\\n    '/My[[:space:]]+Name/{printf \"%d: %s\\n\", NR, \"My Name\";}'",
+        "so_3658382: echo '1=A00^35=D^150=1^33=1\n      1=a00^35=d^157=11^33=11\n      ' | awk -vLST=1,33 -F^ '{s=\"\";split(LST,k,\",\");for(i=1;i<=NF;i++){for(j in k){split($i,arr,\"=\");if(arr[1]==k[j]){printf s\"\"arr[1]\"=\"arr[2];s=\"^\";}}}if(s!=\"\"){print s;}}'",
+        "ul_248237: for f in ./*-uniq.tar.gz\ndo\nprintf %s\\\\n \"${f%-*}\"   \ndone\n\nfor f in ./*-uniq.tar.gz\ndo\nprintf %s\\\\n \"${f:0:-12}\"\ndone"
+      ]
+    }
+  ]
+}

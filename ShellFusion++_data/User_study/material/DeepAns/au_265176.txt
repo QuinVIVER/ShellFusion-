@@ -1,0 +1,125 @@
+
+
+Query:                How to convert a video from mp4/flv to mpeg/mpg
+
+
+########################################################################################################################
+
+
+Question Title:       ffmpeg to convert .avi, .mp4, .mp3, .flv, .mkv to mp4
+Question Link:        https://stackoverflow.com/questions/25774595
+
+Accepted Answer:      For all extensions:
+                      
+                      for file in *.{flv,avi,mp3,mkv}; do
+                              target="${file%.*}.mp4"
+                              [[ -f "$target" ]] &amp;&amp; { echo "skipping $file - $target exists" ; continue; }
+                              echo ffmpeg -r 15  -i "$file"  -b 296k -s 640x320 -vcodec mpeg4 -acodec aac "$target"
+                      done
+                      
+                      
+                      remove the echo before ffmpeg if satisfied
+
+
+########################################################################################################################
+
+
+Question Title:       Convert mp3 -> Video with static image ( ffmpeg/libav & BASH )
+Question Link:        https://stackoverflow.com/questions/25382231
+
+Accepted Answer:      First of all, I would highly recommend you to update ffmpeg to a newer version. You are currently using v1.2.6-7, but as we speak, the current version is 2.3.3.
+                      
+                      Here is a working command (see ffmpeg wiki):
+                      
+                      ffmpeg -loop 1 -i image.jpg -i audio.mp3 -c:a copy -c:v libx264 -shortest out.mp4
+                      
+                      
+                      Also, you could optimize overall weight by reencoding audio if you're using raw sound (aiff or wave) as input:
+                      
+                      ffmpeg -loop 1 -i image.jpg -i audio.wav -c:a aac -ab 112k -c:v libx264 -shortest -strict -2 out.mp4
+                      
+                      
+                      For further reading, see this related stackoverflow post.
+
+
+########################################################################################################################
+
+
+Question Title:       Converting video to WebM with ffmpeg/avconv
+Question Link:        https://superuser.com/questions/556677
+
+Accepted Answer:      
+                        Note: This information is based on the FFmpeg Wiki on VP9 encoding. Please refer to that article for more information – it will be continuously maintained and extended. For the best results you should use the a recent version of ffmpeg by downloading it from their website (a static build will suffice; it contains the libvps-vp9 encoder).
+                      
+                      
+                      Variable Bit Rate
+                      
+                      VBR encoding gives you the optimal overall quality, since the encoder can freely choose how many bits to assign to a frame. Choose this mode unless you are preparing videos for constant-bitrate streaming.
+                      
+                      Option 1: Constant quality encoding
+                      
+                      Typically, if you do not want to target a specific file size, you should let the bitrate vary freely, as that will lead to the highest quality. You can do this by setting the bitrate to 0 and the constant rate factor (CRF) to the target quality level:
+                      
+                      ffmpeg -i input.mp4 -c:v libvpx-vp9 -crf 30 -b:v 0 output.webm
+                      
+                      
+                      CRF value can be from 0–63. Lower values mean better quality. Recommended values range from 15–35, with 31 being recommended for 1080p HD video. Google has a guide with more info on that.
+                      
+                      Option 2: Two-pass encoding with a target bitrate
+                      
+                      If you want your file to have a specific target bitrate or file size, you need to specify the rate and use two-pass encoding (which will ensure an optimal quality distribution). Here we're choosing 5 MBit/s, which should be enough for 1080p content.
+                      
+                      ffmpeg -i input.mp4 -c:v libvpx-vp9 -b:v 5M -pass 1 -f webm /dev/null &amp;&amp; \
+                      ffmpeg -i input.mp4 -c:v libvpx-vp9 -b:v 5M -pass 2 output.webm
+                      
+                      
+                      Windows users need to use NUL instead of /dev/null, and a ^ instead of \.
+                      
+                      Constant Bit Rate
+                      
+                      First of all, libvpx offers constant bitrate and variable bitrate encoding modes. Constant bitrate should be avoided whenever possible (unless you target a specific file size or streaming scenario), since the average quality per file size will be worse. Still, you could try setting a constant bitrate if nothing else works for you, e.g. with 1 MBit/s:
+                      
+                      ffmpeg -i input.mp4 -c:v libvpx-vp9 -minrate 5M -maxrate 5M -b:v 5M output.webm
+                      
+                      
+                      Look at the output and increase or decrease the bit rate to your liking (or file size constraints). For example, you can use 500K or 5M, et cetera.
+                      
+                      You have to specify -minrate, -maxrate and the bitrate -b:v in order for the encoder to use CBR. They all have to have the same value—otherwise it'll choose a different target bitrate instead and do VBR encoding, but with bad quality.
+                      
+                      Audio
+                      
+                      The current audio codec of choice for VP9 encoding is Opus. FFmpeg will choose the necessary encoder and its options by default. If you want to explicitly set -c:a libopus, you can do that as well. Refer to the libopus documentation for more options.
+
+
+########################################################################################################################
+
+
+Question Title:       Convert yuv video to png frames using ffmpeg
+Question Link:        https://stackoverflow.com/questions/32188371
+
+Accepted Answer:      In your case the rawvideo demuxer needs additional information. Since there appears to be no header in your inputs specifying the video parameters you must specify them in order to be able to decode the data correctly. Example:
+                      
+                      ffmpeg -pixel_format yuv420p -video_size 720x576 -framerate 25 -i …
+                      
+                      
+                      Also, yuv420p is incompatible for the PNG encoder, so you can remove that as an output option and an appropriate pixel format will be auto-selected.
+
+
+########################################################################################################################
+
+
+Question Title:       FFMpeg convert jpeg images to video
+Question Link:        https://superuser.com/questions/559996
+
+Accepted Answer:      [mjpeg @ 0x233aea0] overread 8 is an error that is thrown when ffmpeg tries to read a JPEG image (or a frame from an MJPEG stream) block-by-block, but there are still leftover bits.
+                      
+                      In that case, even though your images might be showing fine in other viewers, it's something FFmpeg can't (or won't) handle. To fix this you need to re-save the images, either as PNGs as you tried before, or as JPEGs. You can do that kind of batch conversion with ImageMagick, for example:
+                      
+                      for f in *.JPG; do mogrify "$f"; done
+                      
+                      
+                      This would re-save the JPEG files under the same name. Note that you'll lose quality in that process, so it's not ideal and I'd go with PNGs as intermediates as they're lossless.
+                      
+                      By the way: It's always a good idea to use the latest version of FFmpeg, which you can download as a static build (just download, extract, use), or compile yourself. The packages that come with Ubuntu are always outdated, and – depending on your Ubuntu version – not even the "real" FFmpeg, but the Libav fork (which is fine to use, but one should know the difference).
+                      
+                      Don't forget that the images need to have sequential names when you use the %07d.jpg syntax for ffmpeg, without missing numbers. See also the documentation on the image2 muxer for more options.

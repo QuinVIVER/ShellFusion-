@@ -1,0 +1,135 @@
+
+
+Query:                How to grep for same string but multiple files at the same time?
+
+
+########################################################################################################################
+
+
+Question Title:       Grep multiple strings and output to multiple files
+Question Link:        https://stackoverflow.com/questions/53804544
+
+Accepted Answer:      Agree with the commenter that this does not seem to be possible with grep.
+                      
+                      What about something like the following, which iterates over the regular expressions to generate an awk program that appends each line of the datafile to its appropriate output file:
+                      
+                      #!/usr/bin/env bash
+                      
+                      mkdir -p output
+                      rm -f output/*
+                      rm -f pattern.awk
+                      
+                      readarray -t patterns &lt; patterns
+                      
+                      echo "BEGIN{IGNORECASE=1}" &gt; pattern.awk
+                      
+                      for pattern in "${patterns[@]}"; do
+                          echo "/$pattern/{print \$0 &gt;&gt; \"output/$pattern\"}" &gt;&gt; pattern.awk
+                      done
+                      
+                      awk -f pattern.awk data
+                      
+                      
+                      Result:
+                      
+                      $ cat data
+                      1Abfoo
+                      1whfoo
+                      1wifoo
+                      1wjfoo
+                      43hfoo
+                      1wkfoo
+                      1abfoo
+                      
+                      
+                      $ cat patterns
+                      ^1wh
+                      ^1wi
+                      ^1wj
+                      ^1wk
+                      ^1ab
+                      
+                      $ ./parse.sh
+                      
+                      $ head output/*
+                      ==&gt; output/^1ab &lt;==
+                      1Abfoo
+                      1abfoo
+                      
+                      ==&gt; output/^1wh &lt;==
+                      1whfoo
+                      
+                      ==&gt; output/^1wi &lt;==
+                      1wifoo
+                      
+                      ==&gt; output/^1wj &lt;==
+                      1wjfoo
+                      
+                      ==&gt; output/^1wk &lt;==
+                      1wkfoo
+                      
+
+
+########################################################################################################################
+
+
+Question Title:       grep multiple patterns single file argument list too long
+Question Link:        https://stackoverflow.com/questions/31480006
+
+Accepted Answer:      You can avoid the problem by putting the patterns in a file, and using the -f command line option to grep.
+                      
+                      The most convenient is to put each alternative in a separate line of the file:
+                      
+                      patterns.txt
+                      
+                      ^.\{6\}0000000012345
+                      ^.\{6\}0000000012543
+                      
+                      
+                      invocation
+                      
+                      grep -f patterns.txt somelargeFile.txt &gt; outputFile.txt
+                      
+
+
+########################################################################################################################
+
+
+Question Title:       Replace multiple strings in multiple files
+Question Link:        https://stackoverflow.com/questions/52748367
+
+Accepted Answer:      Use word boundaries (\b) in your search strings to ensure that you're replacing only complete words. And you don't need a nested loop. The replacement operators can be used directly on lists.
+                      
+                      Get-ChildItem $FilePath | ForEach-Object {
+                          (Get-Content $_.FullName) -creplace '\bRUN\b', 'Run' `
+                                  -creplace '\bRUNMODAL\b', 'RunModal' `
+                                  -creplace '\bFIELD\b', 'NewField' |
+                              Set-Content  $_.FullName
+                      }
+                      
+
+
+########################################################################################################################
+
+
+Question Title:       Replace string between words multiple times in a file
+Question Link:        https://stackoverflow.com/questions/52214011
+
+Accepted Answer:      Regular expressions are greedy - they match the longest possible string, so everything from the first 'word1' to the last 'word2'. Not sure if any version of sed supports non-greedy regexps... you could just use perl, though, which does:
+                      
+                      perl -pe 's/word1.*?word2/word1/g' 1.txt
+                      
+                      
+                      should do the trick. That ? changes the meaning of the prior * from 'match as many times as possible as long as the rest of the pattern matches' to 'match as few times as possible as long as the rest of the pattern matches'.
+
+
+########################################################################################################################
+
+
+Question Title:       Replace log files time stamp with empty string
+Question Link:        https://stackoverflow.com/questions/26429444
+
+Accepted Answer:      Your regex is incorrect. You can use this sed:
+                      
+                      sed 's/^2014.*2014: //' logFile
+                      

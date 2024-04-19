@@ -1,0 +1,90 @@
+{
+  "Query": "How to grep, excluding some patterns?",
+  "Answers": [
+    {
+      "Command": "sed",
+      "MP Summary": "stream editor for filtering and transforming text",
+      "Most Similar TLDR Task": "Delete lines matching the line pattern",
+      "Most Similar TLDR Script": "sed '/{{line_pattern}}/d' {{filename}}",
+      "Top-3 Similar Questions": [
+        "so_51743995: grep to exclude pattern and exclude 2 preceding lines",
+        "so_28021351: Sed. remove multiline patterns. RegExp",
+        "ul_205478: How to grep whitespace exclude new-line character?"
+      ],
+      "Top-3 Scripts": [
+        "so_51743995: GNU sed\n\nsed -E 'N;N; /[acgt]{3}cc[acgt][acgt]{3}/d' ip.txt",
+        "so_28021351: sed '/^@H/ { N; /\\n+$/ { N; d } }' filename",
+        "ul_205478: sed -n '/[\\t ]$/p' file \n    perl -ne 'print if /[\\t ]$/' file"
+      ],
+      "Explanations about Options": {
+        "-E": "use extended regular expressions in the script (for portability use POSIX -E)."
+      }
+    },
+    {
+      "Command": "find",
+      "MP Summary": "search for files in a directory hierarchy",
+      "Most Similar TLDR Task": "Find files matching a given pattern, excluding specific paths",
+      "Most Similar TLDR Script": "find {{root_path}} -name '{{*.py}}' -not -path '{{*/site-packages/*}}'",
+      "Top-3 Similar Questions": [
+        "so_37561162: Shell globbing exclude directory patterns",
+        "so_62627416: Globbing pattern: exclude a directory",
+        "so_62651044: Deleting files not containing double digit number and pattern in grep"
+      ],
+      "Top-3 Scripts": [
+        "so_37561162: ",
+        "so_62627416: find /vol ! -path '*/form/*' -type f -name '*.txt'\n\nfind -regex*",
+        "so_62651044: find . -maxdepth 1 -type f -name '[0-9]*' -not -name '1_*' -delete\n\nfind . -maxdepth 1 -type f -name '[0-9]*' -not -name '1_*' -exec rm {} +"
+      ],
+      "Explanations about Options": {
+        "-not": "Same as ! expr, but not POSIX compliant.",
+        "-type": "File is of type c:",
+        "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+        "-maxdepth": "Descend at most levels (a non-negative integer) levels of directories below the\n starting-points. -maxdepth 0 means only apply the tests and actions to the\n starting-points themselves."
+      }
+    },
+    {
+      "Command": "rm",
+      "MP Summary": "remove files or directories",
+      "Most Similar TLDR Task": "Recursively remove a directory and all its subdirectories",
+      "Most Similar TLDR Script": "rm -r {{path/to/directory}}",
+      "Top-3 Similar Questions": [
+        "su_168130: Unix - delete files and folders excluding PATTERN",
+        "so_62651044: Deleting files not containing double digit number and pattern in grep"
+      ],
+      "Top-3 Scripts": [
+        "su_168130: rm -rf\n\nrm -ri\n\n# ksh\necho rm -rf !(*foo*)\n\n# bash\nshopt -s extglob\necho rm -rf !(*foo*)\n\n# zsh\nsetopt extended_glob\necho rm -rf ^*foo*\n\n# zsh: ksh-style glob syntax\nsetopt ksh_glob no_bare_glob_qual\necho rm -rf !(*foo*)\n\n# zsh: ksh-style glob syntax, adapted for the default bare_glob_qual option\nsetopt ksh_glob bare_glob_qual\necho rm -rf (!(*foo*))",
+        "so_62651044: find . -maxdepth 1 -type f -name '[0-9]*' -not -name '1_*' -exec rm {} +"
+      ],
+      "Explanations about Options": {
+        "-r": "remove directories and their contents recursively",
+        "-f": "ignore nonexistent files and arguments, never prompt"
+      }
+    },
+    {
+      "Command": "cp",
+      "MP Summary": "copy files and directories",
+      "Most Similar TLDR Task": "Recursively copy a directory's contents to another location (if the destination exists, the directory is copied inside it)",
+      "Most Similar TLDR Script": "cp -r {{path/to/source_directory}} {{path/to/target_directory}}",
+      "Top-3 Similar Questions": [
+        "so_20871845: grep a keyword in all .h and .c files under current directory but exclude two directories"
+      ],
+      "Top-3 Scripts": [
+        "so_20871845: mkdir a b c d\nfor d in a b c d\ndo\n    for file in abc def pqr zyz\n    do\n        for ext in c h\n        do cp /dev/null $d/$file.$ext\n        done\n    done\ndone"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "mkdir",
+      "MP Summary": "make directories",
+      "Most Similar TLDR Task": "Create directories recursively (useful for creating nested dirs)",
+      "Most Similar TLDR Script": "mkdir -p {{path/to/directory}}",
+      "Top-3 Similar Questions": [
+        "so_20871845: grep a keyword in all .h and .c files under current directory but exclude two directories"
+      ],
+      "Top-3 Scripts": [
+        "so_20871845: mkdir a b c d\nfor d in a b c d\ndo\n    for file in abc def pqr zyz\n    do\n        for ext in c h\n        do cp /dev/null $d/$file.$ext\n        done\n    done\ndone"
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

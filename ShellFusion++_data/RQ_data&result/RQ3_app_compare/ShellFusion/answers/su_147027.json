@@ -1,0 +1,109 @@
+{
+    "Answers": [
+        {
+            "Command": "sort",
+            "Explanations about Options": {
+                "-k(M)": "sort via a key; KEYDEF gives location and type",
+                "-n(M)": "compare according to string numerical value",
+                "-r(M)": "reverse the result of comparisons",
+                "-s(M)": "stabilize sort by disabling last-resort comparison",
+                "-u(M)": "with -c, check for strict ordering; without -c, output only the first of an equal\n run"
+            },
+            "MP Summary": "sort lines of text files",
+            "Most Similar TLDR Script": "sort -u {{path/to/file}}",
+            "Most Similar TLDR Task": "Sort a file preserving only unique lines",
+            "Top-3 Scripts": [
+                "ul_20460: stat -c '%W %n' * | sort -k1n",
+                "so_34474016: find . -type f -print0 | xargs -0 stat -f\"%m %Sm %N\" | sort -rn",
+                "ul_617378: ls -1t | sort -nst '_' -k 1,1\n\nls -lt | sort -nsk 9.2"
+            ],
+            "Top-3 Similar Questions": [
+                "ul_20460: How do I do a ls and then sort the results by date created?",
+                "so_34474016: Find and sort files by date modified",
+                "ul_617378: How to list files - sorted by both filename and modified date?"
+            ]
+        },
+        {
+            "Command": "head",
+            "Explanations about Options": {
+                "-n(M)": "print the first NUM lines instead of the first 10; with the leading '-', print all\n but the last NUM lines of each file"
+            },
+            "MP Summary": "output the first part of files",
+            "Most Similar TLDR Script": "head -n -{{count_of_lines}} {{filename}}",
+            "Most Similar TLDR Task": "Output everything but the last few lines of a file",
+            "Top-3 Scripts": [
+                "ul_407850: open -- \"$(ls -t | head -n 1)\"\n\nls -zt | head -zn1 | xargs -r0 open --",
+                "au_743628: find backup -type f -iname '*.tar.gz' | sort -r | head -1\n\nnewest_file=$(find backup -type f -iname '*.tar.gz' | sort -r | head -1)"
+            ],
+            "Top-3 Similar Questions": [
+                "ul_407850: How to use the output of ls to open the last modified file?",
+                "au_743628: Sort files by name as if they were dates"
+            ]
+        },
+        {
+            "Command": "ls",
+            "Explanations about Options": {
+                "--group-directories-first(M)": "group directories before files;",
+                "-c(C)": "The \"stat\" utility can show the creation time, called “birth time” in GNU utilities, so under Cygwin you can show files sorted by birth time with \"stat -c '%W %n' * | sort -k1n\".",
+                "-c(M)": "with -lt: sort by , and show , ctime (time of last modification of file status\n information); with -l: show ctime and sort by name; otherwise: sort by ctime,\n newest first",
+                "-l(M)": "use a long listing format",
+                "-r(M)": "reverse order while sorting",
+                "-t(M)": "sort by modification time , newest first"
+            },
+            "MP Summary": "list directory contents",
+            "Most Similar TLDR Script": "ls -ltr",
+            "Most Similar TLDR Task": "Long format list of all files, sorted by modification date (oldest first)",
+            "Top-3 Scripts": [
+                "ul_86330: ls -ltr --group-directories-first",
+                "ul_20460: ls -tU\n\nls -lc",
+                "ul_617378: ls -1t | sort -nst '_' -k 1,1\n\nls -lt | sort -nsk 9.2"
+            ],
+            "Top-3 Similar Questions": [
+                "ul_86330: How to sort results from ls command by modification date (directories first)?",
+                "ul_20460: How do I do a ls and then sort the results by date created?",
+                "so_34474016: Find and sort files by date modified"
+            ]
+        },
+        {
+            "Command": "date",
+            "Explanations about Options": {
+                "--utc(M)": "print or set Coordinated Universal Time (UTC)",
+                "-d(M)": "display time described by STRING, not 'now'"
+            },
+            "MP Summary": "print or set the system date and time",
+            "Most Similar TLDR Script": "date -d \"{{2018-09-01 00:00}}\" +%s --utc",
+            "Most Similar TLDR Task": "Convert a specific date to the Unix timestamp format",
+            "Top-3 Scripts": [
+                "so_35148479: Creation date",
+                "so_53407977: date -d \"last monday\"",
+                "ul_532014: for file in ??-??-????' '*.xml; do\n  date=${file%% *}\n  year=${date##*-}\n  day=${date%%-*}\n  month=${date%-*}\n  month=${month#*-}\n  touch -d \"$year-$month-$day 00:00:00\" -- \"$file\"\ndone"
+            ],
+            "Top-3 Similar Questions": [
+                "so_35148479: How can I replace date modified with date last saved?",
+                "so_53407977: How can I output the date of the last \"day\"?",
+                "ul_532014: Change file modified date using date from file name"
+            ]
+        },
+        {
+            "Command": "touch",
+            "Explanations about Options": {
+                "-d(M)": "parse STRING and use it instead of current time",
+                "-t(M)": "STAMP\n use [[CC]YY]MMDDhhmm[.ss] instead of current time"
+            },
+            "MP Summary": "change file timestamps",
+            "Most Similar TLDR Script": "touch -t {{YYYYMMDDHHMM.SS}} {{filename}}",
+            "Most Similar TLDR Task": "Set the times on a file to a specific date and time",
+            "Top-3 Scripts": [
+                "ul_477012: $ touch d; sleep 1; touch b c; sleep 1; touch a;\n$ ls -tr\nd  c  b  a\n$ stat --printf \"%Y %n\\0\" * | sort -z -k1,1n -k2 | sed 's/^[0-9]* //;s/$/\\n/;s/\\x0[0-9]* /  /g'\nd  b  c  a",
+                "ul_276805: touch -d '2016-01-15 22:41:18' file\n\ntouch -d '3 months ago' file\n\nman touch",
+                "ul_532014: for file in ??-??-????' '*.xml; do\n  date=${file%% *}\n  year=${date##*-}\n  day=${date%%-*}\n  month=${date%-*}\n  month=${month#*-}\n  touch -d \"$year-$month-$day 00:00:00\" -- \"$file\"\ndone\n\nfor f (??-??-????' '*.xml(N))\n  touch -d \"$f[7,10]-$f[4,5]-$f[1,2] 00:00:00\" -- $f"
+            ],
+            "Top-3 Similar Questions": [
+                "ul_477012: ls: ordering by timestamp (reversed) and if the timestamp is the same order by name (not reversed)",
+                "ul_276805: Change last edited date",
+                "ul_532014: Change file modified date using date from file name"
+            ]
+        }
+    ],
+    "Query": "How can I sort the output of 'ls' by last modified date?"
+}

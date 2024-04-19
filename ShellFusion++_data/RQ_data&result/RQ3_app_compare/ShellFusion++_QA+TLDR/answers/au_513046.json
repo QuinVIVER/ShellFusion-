@@ -1,0 +1,93 @@
+{
+  "Query": "How to search strings inside files like in Windows without search monkey?",
+  "Answers": [
+    {
+      "Command": "unzip",
+      "MP Summary": "list, test and extract compressed files in a ZIP archive",
+      "Most Similar TLDR Task": "Extract a zip file created in windows, containing files with non-ascii (chinese) filenames",
+      "Most Similar TLDR Script": "unzip -O {{gbk}} {{file.zip}}",
+      "Top-3 Similar Questions": [
+        "so_9831880: Search inside a file inside a JAR",
+        "au_655426: Is there a way to search files considering content of archives as well?"
+      ],
+      "Top-3 Scripts": [
+        "so_9831880: $ echo hello > a\n$ echo world > b\n$ jar cf qq.jar a b\n$ jar tf qq.jar\nMETA-INF/\nMETA-INF/MANIFEST.MF\na\nb\n$ unzip -p qq.jar|grep hello\nhello",
+        "au_655426: cd /dir/where/you/want/to/start/search\nfind . -iname '*.zip' -exec unzip -l {} \\; | grep 'file_pattern'\nfind . -iname '*.tar.gz' -exec tar tvf {} \\; | grep 'file_pattern'\nfind . -iname '*.7z' -exec 7z l {} \\; | grep 'file_pattern'\n\nfind . -iname $1\nfind . -iname '*.zip' -exec unzip -l {} \\; | grep $1\nfind . -iname '*.tar.gz' -exec tar tvf {} \\; | grep $1\nfind . -iname '*.7z' -exec 7z l {} \\; | grep $1"
+      ],
+      "Explanations about Options": {
+        "-p": "extract files to pipe (stdout). Nothing but the file data is sent to stdout , and\n the files are always extracted in binary format, just as they are stored (no\n conversions)."
+      }
+    },
+    {
+      "Command": "file",
+      "MP Summary": "determine file type",
+      "Most Similar TLDR Task": "Look inside a zipped file and determine the file type(s) inside",
+      "Most Similar TLDR Script": "file -z {{foo.zip}}",
+      "Top-3 Similar Questions": [
+        "ul_574246: How do I find all sqlite databases inside a bunch of files without file endings?",
+        "su_360733: How can I find a particular file without extension in Linux?",
+        "ul_202222: Search a String in a directory- Get output without filename"
+      ],
+      "Top-3 Scripts": [
+        "ul_574246: find . -print0 | xargs -0 file",
+        "su_360733: find -exec file {} \\; | grep ASCII",
+        "ul_202222: -h, --no-filename\n             Suppress  the  prefixing  of file names on output.  This is    \n  the default when there is only one file (or only standard input) to\n          search."
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "sed",
+      "MP Summary": "stream editor for filtering and transforming text",
+      "Most Similar TLDR Task": "Replace separator / by any other character not used in the find or replace patterns, e.g., #",
+      "Most Similar TLDR Script": "sed 's#{{find}}#{{replace}}#' {{filename}}",
+      "Top-3 Similar Questions": [
+        "so_37612886: Searching a string using grep in a range of multiple files",
+        "so_55802702: Case insensitive search between two strings in file"
+      ],
+      "Top-3 Scripts": [
+        "so_37612886: ls * | sed \"/2015-06-01/,/2016-06-03/p\" -n | xargs grep \"Live message\"\n\nsed \"/<BEGIN_REGEX>/,/<END_REGEX>/p\" -n",
+        "so_55802702: #!/usr/bin/env bash\n\npattern=$(IFS='|'; printf '%s' \"$*\")\nsed -En \"/^#.*($pattern)/I,/^$/p\""
+      ],
+      "Explanations about Options": {
+        "-E": "use extended regular expressions in the script (for portability use POSIX -E)."
+      }
+    },
+    {
+      "Command": "grep",
+      "MP Summary": "print lines that match patterns",
+      "Most Similar TLDR Task": "Search for a pattern within a file",
+      "Most Similar TLDR Script": "grep {{search_pattern}} {{path/to/file}}",
+      "Top-3 Similar Questions": [
+        "so_39015974: Grep search for a string by pattern and then find part of this string inside of another file",
+        "so_30991630: shell script : find a string by searching inside all the files in a folder?",
+        "so_24563763: search a word inside a pdf in terminal linux without any app"
+      ],
+      "Top-3 Scripts": [
+        "so_39015974: grep `tail -n 1000 -f logfile.log | grep -i \"host\" | grep -o \"[a-f0-9][a-f0-9][a-f0-9][a-f0-9]\\.[a-f0-9][a-f0-9][a-f0-9][a-f0-9]\\.[a-f0-9][a-f0-9][a-f0-9][a-f0-9]\"` anotherfile",
+        "so_30991630: grep -Hnr PATTERN .\n\ngrep -d skip -Hn PATTERN {,.[!.]}*{,/{,.[!.]}*}",
+        "so_24563763: pdftotext myfile.pdf - | grep 'pattern'"
+      ],
+      "Explanations about Options": {
+        "-n": "Prefix each line of output with the 1-based line number within its input file.",
+        "-d": "If an input file is a directory, use ACTION to process it. By default, ACTION is\n read, i.e., read directories just as if they were ordinary files. If ACTION is\n skip, silently skip directories. If ACTION is recurse, read all files under each\n directory, recursively, following symbolic links only if they are on the command\n line. This is equivalent to the -r option.",
+        "-f": "Obtain patterns from FILE, one per line. If this option is used multiple times or\n is combined with the -e (--regexp) option, search for all patterns given. The\n empty file contains zero patterns, and therefore matches nothing.",
+        "-o": "Print only the matched (non-empty) parts of a matching line, with each such part on\n a separate output line.",
+        "-H": "Print the file name for each match. This is the default when there is more than\n one file to search.",
+        "-i": "Ignore case distinctions in patterns and input data, so that characters that differ\n only in case match each other."
+      }
+    },
+    {
+      "Command": "tar",
+      "MP Summary": "an archiving utility",
+      "Most Similar TLDR Task": "Extract a specific file without preserving the folder structure",
+      "Most Similar TLDR Script": "tar xf {{source.tar}} {{source.tar/path/to/extract}} --strip-components={{depth_to_strip}}",
+      "Top-3 Similar Questions": [
+        "au_655426: Is there a way to search files considering content of archives as well?"
+      ],
+      "Top-3 Scripts": [
+        "au_655426: cd /dir/where/you/want/to/start/search\nfind . -iname '*.zip' -exec unzip -l {} \\; | grep 'file_pattern'\nfind . -iname '*.tar.gz' -exec tar tvf {} \\; | grep 'file_pattern'\nfind . -iname '*.7z' -exec 7z l {} \\; | grep 'file_pattern'\n\nfind . -iname $1\nfind . -iname '*.zip' -exec unzip -l {} \\; | grep $1\nfind . -iname '*.tar.gz' -exec tar tvf {} \\; | grep $1\nfind . -iname '*.7z' -exec 7z l {} \\; | grep $1"
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

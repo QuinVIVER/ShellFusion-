@@ -1,0 +1,86 @@
+
+
+Query:                How to copy a file from remote server to local machine?
+
+
+########################################################################################################################
+
+
+Question Title:       Copy file to remote dv server shell script
+Question Link:        https://stackoverflow.com/questions/11145918
+
+Accepted Answer:      try this if your using Linux / UNIX / OS X SSH scp Client 
+                      
+                      rsync -avz -e ssh user@server1:/var/www/html /var/www/html/
+                      
+                      or this
+                      
+                      scp -r user@server1:/var/www/html/ /var/www/html/
+
+
+########################################################################################################################
+
+
+Question Title:       Rsyncing files from server to local machine automatically
+Question Link:        https://unix.stackexchange.com/questions/193138
+
+Accepted Answer:      After your last backup using the old disk, create a timestamp and then backup files after that timestamp.  You'll use find and the --newer flag to list files newer than the timestamp, then the --file-from flag to rsync to specify that list of files for copying.
+                      
+                      Here's how:
+                      
+                      Step 1:  Before you swap to the new drive: touch /someplace/timestamp.txt
+                      
+                      Step 2:  Change to the new disk.
+                      
+                      Step 3: Modify the cronjob script to do something like:
+                      
+                      
+                      find BLAH BLAH BLAH -newer /someplace/timestamp.txt -type f -print0 &gt;/tmp/list
+                      rsync -avP --inplace --file-from=/tmp/list --from0 desthost:/dest/place
+                      
+                      
+                      NEVER change, touch, or modify the /someplace/timestamp.txt file.
+
+
+########################################################################################################################
+
+
+Question Title:       How to copy files from remote server to local machine?
+Question Link:        https://askubuntu.com/questions/84667
+
+Accepted Answer:      I agree eith Engels Peralta, this is the simplest way.
+                      
+                      From Nautilus go to File -&gt; Connect to Server...
+                      
+                      Change type to SSH, then enter your SSH details and credentials. 
+                      
+                      Now it should show up in your file system pane on the left. 
+                      
+                      You can then browse, copy or whatever. Note that you do not need to have an ssh session active before connecting, this will initiate the SSH session. Be sure to create a bookmark so you can access from the bookmark menu. I use the same method to connect to a test webserver.
+
+
+########################################################################################################################
+
+
+Question Title:       How to copy file contents from remote server to local machine location?
+Question Link:        https://stackoverflow.com/questions/47389222
+
+Accepted Answer:      You should use scp to to this : 
+                      
+                      https://en.wikipedia.org/wiki/Secure_copy
+                      
+                      in your case : 
+                      
+                      scp ru@9.122.145.169:/&lt;pathtofile&gt;/index.php /home/remo/remo/php
+                      
+                      
+                      you will be prompted to enter your password in the same way of ssh does
+
+
+########################################################################################################################
+
+
+Question Title:       Powershell script to copy files to remote server
+Question Link:        https://stackoverflow.com/questions/5792823
+
+Accepted Answer:      Look at BitsTransfer module, might help you - http://technet.microsoft.com/en-us/library/dd819420.aspx

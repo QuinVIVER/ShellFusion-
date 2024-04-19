@@ -1,0 +1,70 @@
+{
+  "Query": "How to get details of RAID devices both soft and hard?",
+  "Answers": [
+    {
+      "Command": "dev",
+      "Top-3 Similar Questions": [
+        "au_942439: Get physical hard drive of encrypted partition",
+        "su_686570: How to get total running time of a hard disk",
+        "ul_298430: How to get a snapshot of few bytes at various point of a device?"
+      ],
+      "Top-3 Scripts": [
+        "au_942439: /dev/sdb5\n\n/dev/sdb1",
+        "su_686570: smartctl --all /dev/sdc\n\nsmartctl --all /dev/sdc | grep Power_On_Hours",
+        "ul_298430: dd if=/dev/device of=output-file bs=1 count=10 skip=<offset of data>\n\n2>/dev/null"
+      ]
+    },
+    {
+      "Command": "grep",
+      "Top-3 Similar Questions": [
+        "su_686570: How to get total running time of a hard disk",
+        "su_351251: Get total size of my hard drive in Linux, using the command line, without root permissions?",
+        "so_15767458: How to get the detail information of one Linux thread"
+      ],
+      "Top-3 Scripts": [
+        "su_686570: smartctl --all /dev/sdc | grep Power_On_Hours",
+        "su_351251: dmesg | grep blocks",
+        "ul_566682: find_by_id(){\n    v=${1%:*}; p=${1#*:}  # split vid:pid into 2 vars\n    v=${v#${v%%[!0]*}}; p=${p#${p%%[!0]*}}  # strip leading zeros\n    grep -il \"^PRODUCT=$v/$p\" /sys/bus/usb/devices/*:*/uevent |\n    sed s,uevent,, |\n    xargs -r grep -r '^DEVNAME=' --include uevent\n}\nfind_by_id 04f2:b573"
+      ]
+    },
+    {
+      "Command": "sys",
+      "Top-3 Similar Questions": [
+        "ul_566682: Get the device path of USB given device ID",
+        "ul_271878: Is it possible to get the devtype of a USB wifi device?",
+        "so_57011675: Getting the permanent address of an ethernet device"
+      ],
+      "Top-3 Scripts": [
+        "ul_566682: find_by_id(){\n    v=${1%:*}; p=${1#*:}  # split vid:pid into 2 vars\n    v=${v#${v%%[!0]*}}; p=${p#${p%%[!0]*}}  # strip leading zeros\n    grep -il \"^PRODUCT=$v/$p\" /sys/bus/usb/devices/*:*/uevent |\n    sed s,uevent,, |\n    xargs -r grep -r '^DEVNAME=' --include uevent\n}\nfind_by_id 04f2:b573\n\n$ find_by_id 12d1:\n/sys/bus/usb/devices/3-1:1.0/ttyUSB0/tty/ttyUSB0/uevent:DEVNAME=ttyUSB0\n/sys/bus/usb/devices/3-1:1.1/ttyUSB1/tty/ttyUSB1/uevent:DEVNAME=ttyUSB1\n\n$ find_by_id 0e8d:\n/sys/bus/usb/devices/1-6.2.3:1.0/net/usb0/uevent-INTERFACE=usb0\n/sys/bus/usb/devices/1-6.2.3:1.0/net/usb0/uevent:IFINDEX=10\n\n$ find_by_id 03f0:\n/sys/bus/usb/devices/1-6.3:1.1/usbmisc/lp1/uevent-MAJOR=180\n/sys/bus/usb/devices/1-6.3:1.1/usbmisc/lp1/uevent-MINOR=1\n/sys/bus/usb/devices/1-6.3:1.1/usbmisc/lp1/uevent:DEVNAME=usb/lp1",
+        "ul_271878: udevadm info /sys/class/net/{name of interface}",
+        "so_57011675: /sys/class/net/<iface>/address\n\n/sys/class/net/<iface>/addr_assign_type"
+      ]
+    },
+    {
+      "Command": "sudo",
+      "Top-3 Similar Questions": [
+        "su_351251: Get total size of my hard drive in Linux, using the command line, without root permissions?",
+        "su_46604: In Linux: How to get the device name of a USB port after a thumb drive has been inserted into it?",
+        "au_607983: get mac address of device"
+      ],
+      "Top-3 Scripts": [
+        "su_46604: sudo lshw",
+        "au_607983: sudo nmap -sP 192.168.1.0/24\n\nsudo nmap -sP 192.168.1.50",
+        "au_431181: sudo apt-get install tree\ntree -fi /path/to/the/directory >~/file.txt"
+      ]
+    },
+    {
+      "Command": "ls",
+      "Top-3 Similar Questions": [
+        "au_91072: How do you get details from the output of the locate command?",
+        "so_13314246: How can I get the devnode of a device using its file descriptor",
+        "so_28518928: How can i get the list of all initialized device drivers in a running Linux kernel?"
+      ],
+      "Top-3 Scripts": [
+        "au_91072: lsloc() {\n  locate \"$@\" | \n    while read -r name; do\n      ls -ld \"$name\"\n    done\n}\nlsloc pattern",
+        "so_13314246: $ ls -l /proc/self/fd\ntotal 0\nlrwx------ 1 user user 64 Nov  9 23:21 0 -> /dev/pts/10\nl-wx------ 1 user user 64 Nov  9 23:21 1 -> /dev/pts/10\nlrwx------ 1 user user 64 Nov  9 23:21 2 -> /dev/pts/10\nlr-x------ 1 user user 64 Nov  9 23:21 3 -> /proc/16437/fd/",
+        "so_28518928: cd /sys/bus; for bus in $(ls); do echo $bus; ls -1 $bus/drivers; echo; done"
+      ]
+    }
+  ]
+}

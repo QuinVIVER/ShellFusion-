@@ -1,0 +1,83 @@
+{
+  "Query": "Re-encoding video library in x265 (HEVC) with no quality loss",
+  "Answers": [
+    {
+      "Command": "ffmpeg",
+      "MP Summary": "ffmpeg video converter",
+      "Most Similar TLDR Task": "Remux MKV video to MP4 without re-encoding audio or video streams",
+      "Most Similar TLDR Script": "ffmpeg -i {{input_video}}.mkv -codec copy {{output_video}}.mp4",
+      "Top-3 Similar Questions": [
+        "au_752014: How can I determine if a video can be encoded successfully with HEVC (x265) encoding",
+        "au_1172233: Batch Compress Videos with ffmpeg",
+        "au_1034776: Re-encoding internet radio to a lower bitrate?"
+      ],
+      "Top-3 Scripts": [
+        "au_752014: ffmpeg -i <input> \\\n       -c:a copy \\\n       -c:v libx265 -preset medium -x265-params crf=28 \\\n       -vf scale=\"trunc(iw/8)*8:-8\" \\\n       <output>",
+        "au_1172233: for f in videos/*mp4; do ffmpeg -i \"$f\" \"compressed/${f##*/}\"; done\n\nfor f in videos/*; do ffmpeg -i \"$f\" \"compressed/$(basename \"${f%.*}\").mkv\"; done",
+        "au_1034776: sudo apt install ffmpeg\n\nffmpeg -re -i http://origin.example.com/stream.mp3 -c:a opus -b:a 32k -application audio -vbr on -content_type application/ogg icecast://source:bar@yourserver.example.org:8000/test.opus"
+      ],
+      "Explanations about Options": {
+        "-re": "Read input at native frame rate. Mainly used to simulate a grab device, or live input\n stream (e.g. when reading from a file). Should not be used with actual grab devices or\n live input streams (where it can cause packet loss). By default ffmpeg attempts to\n read the input(s) as fast as possible. This option will slow down the reading of the\n input(s) to the native frame rate of the input(s). It is useful for real-time output\n (e.g. live streaming).",
+        "-t": "When used as an input option (before \"-i\"), limit the duration of data read from the\n input file.",
+        "-i": "input file url",
+        "-n": "Do not overwrite output files, and exit immediately if a specified output file already\n exists."
+      }
+    },
+    {
+      "Command": "vlc",
+      "MP Summary": "the VLC media player",
+      "Most Similar TLDR Task": "Play video from a URL",
+      "Most Similar TLDR Script": "vlc {{https://www.youtube.com/watch?v=oHg5SJYRHA0}}",
+      "Top-3 Similar Questions": [
+        "au_27863: Fast video stream encoder",
+        "su_411015: Stream video file in debian?"
+      ],
+      "Top-3 Scripts": [
+        "au_27863: vlc -v v4l2:///dev/video0:width=320:height=240 --v4l2-chroma=UYVY --v4l2-fps=5 --sout \"#transcode{vcodec=theo,vb=256,scale=1,acodec=none,fps=25}:standard{access=http,mux=ogg,dst=:8081/stream.ogg}\"\n\nvlc http://localhost:8081/stream.ogg ----network-caching=100",
+        "su_411015: apt-get build-dep vlc"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "youtube-dl",
+      "MP Summary": "download videos from youtube.com or other video platforms",
+      "Most Similar TLDR Task": "Download a video or playlist at a specific quality",
+      "Most Similar TLDR Script": "youtube-dl --format \"{{best[height<=480]}}\" '{{https://www.youtube.com/watch?v=oHg5SJYRHA0}}'",
+      "Top-3 Similar Questions": [
+        "au_373538: How can I pause/resume download in youtube video?"
+      ],
+      "Top-3 Scripts": [
+        "au_373538: youtube-dl <some_youtube_URL>\n\nyoutube-dl -c <some_youtube_URL>"
+      ],
+      "Explanations about Options": {
+        "-c": "Force resume of partially downloaded files. By default, youtube-dl will resume\n downloads if possible."
+      }
+    },
+    {
+      "Command": "mpv",
+      "MP Summary": "a media player",
+      "Most Similar TLDR Task": "Display the output of webcam or other video input device",
+      "Most Similar TLDR Script": "mpv /dev/{{video0}}",
+      "Top-3 Similar Questions": [
+        "au_698152: HEVC/H265 videos not playing in SM Player"
+      ],
+      "Top-3 Scripts": [
+        "au_698152: sudo apt-get install mpv\n\n/usr/bin/mpv"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "import",
+      "MP Summary": "saves any visible window on an X server and outputs it as an image file. You can capture a single window, the entire screen, or any rectangular portion of the screen.",
+      "Most Similar TLDR Task": "Capture contents of a remote X server screen in the PNG image format",
+      "Most Similar TLDR Script": "import -window root -display {{remote_host}}:{screen}.{display} {{output.png}}",
+      "Top-3 Similar Questions": [
+        "so_4365058: Python video converter packages"
+      ],
+      "Top-3 Scripts": [
+        "so_4365058: >>> import subprocess\n>>> command = ['ffmpeg']\n>>> subprocess.call(command)"
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

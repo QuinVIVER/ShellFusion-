@@ -1,0 +1,86 @@
+{
+  "Query": "How to fix wrong system time and date?",
+  "Answers": [
+    {
+      "Command": "date",
+      "MP Summary": "print or set the system date and time",
+      "Most Similar TLDR Task": "Convert a specific date to the Unix timestamp format",
+      "Most Similar TLDR Script": "date -d \"{{2018-09-01 00:00}}\" +%s --utc",
+      "Top-3 Similar Questions": [
+        "so_16311688: Bash convert epoch to date, showing wrong time",
+        "ul_84133: How to set system time from Unix timestamp",
+        "ul_289176: Converting date/time to current JDN"
+      ],
+      "Top-3 Scripts": [
+        "so_16311688: $ date -d @1361234760.790\nMon Feb 18 17:46:00 MST 2013",
+        "ul_84133: date +%s -s @1371729865",
+        "ul_289176: OLD_JULIAN_VAR=$(date -u -d 1840-12-31 +%s)\n\nTODAY_DATE=`date --date=\"$odate\" +\"%Y-%m-%d\"`\nTODAY_DATE_VAR=`date -u -d \"$TODAY_DATE\" +\"%s\"`\nexport JULIAN_DATE=$((((TODAY_DATE_VAR - OLD_JULIAN_VAR))/86400))\necho $JULIAN_DATE\n\n[(date in sec)-(1840-12-31 in sec)]/86400"
+      ],
+      "Explanations about Options": {
+        "-s": "set time described by STRING",
+        "-d": "display time described by STRING, not 'now'"
+      }
+    },
+    {
+      "Command": "timedatectl",
+      "MP Summary": "Control the system time and date",
+      "Most Similar TLDR Task": "Check the current system clock time",
+      "Most Similar TLDR Script": "timedatectl",
+      "Top-3 Similar Questions": [
+        "ul_336566: How to fix time in Arch Linux"
+      ],
+      "Top-3 Scripts": [
+        "ul_336566: $ timedatectl status\n      Local time: Wed 2017-01-11 13:45:07 GMT\n  Universal time: Wed 2017-01-11 13:45:07 UTC\n        RTC time: Wed 2017-01-11 13:45:07\n       Time zone: Europe/London (GMT, +0000)\n Network time on: yes\nNTP synchronized: yes\n RTC in local TZ: yes"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "time",
+      "MP Summary": "time a simple command",
+      "Most Similar TLDR Task": "Time \"ls\"",
+      "Most Similar TLDR Script": "time ls",
+      "Top-3 Similar Questions": [
+        "ul_336566: How to fix time in Arch Linux",
+        "au_492471: Adjust Time & Date settings via teminal",
+        "so_48293046: Add seconds to current time in Bash"
+      ],
+      "Top-3 Scripts": [
+        "ul_336566: $ timedatectl status\n      Local time: Wed 2017-01-11 13:45:07 GMT\n  Universal time: Wed 2017-01-11 13:45:07 UTC\n        RTC time: Wed 2017-01-11 13:45:07\n       Time zone: Europe/London (GMT, +0000)\n Network time on: yes\nNTP synchronized: yes\n RTC in local TZ: yes",
+        "au_492471: man time",
+        "so_48293046: time=$('$time + 10 seconds')\n\ntime=$(date -d \"$time + 10 seconds\")"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "hwclock",
+      "MP Summary": "time clocks utility",
+      "Most Similar TLDR Task": "Display the current time as reported by the hardware clock",
+      "Most Similar TLDR Script": "hwclock",
+      "Top-3 Similar Questions": [
+        "ul_205229: set my system date & time via terminal",
+        "au_27528: How can I display the current time & date setting?"
+      ],
+      "Top-3 Scripts": [
+        "ul_205229: root@debian:/home/mohsen# date -s \"Sat May 23 18:56:59 IRDT 2015\"\nroot@debian:/home/mohsen# hwclock -w\n\nhwclock -w",
+        "au_27528: cat /etc/timezone\ngrep UTC /etc/default/rcS\ndate\n# hardware clock\nsudo hwclock --show"
+      ],
+      "Explanations about Options": {
+        "-w": "Set the Hardware Clock from the System Clock, and update the timestamps in\n /etc/adjtime. With the --update-drift option also (re)calculate the drift factor.\n Try it without the option if --systohc fails. See --update-drift below.",
+        "--show": "Read the Hardware Clock and print its time to standard output in the ISO 8601\n format. The time shown is always in local time, even if you keep your Hardware\n Clock in UTC. See the --localtime option."
+      }
+    },
+    {
+      "Command": "sleep",
+      "MP Summary": "delay for a specified amount of time",
+      "Most Similar TLDR Task": "Delay in hours",
+      "Most Similar TLDR Script": "sleep {{hours}}h",
+      "Top-3 Similar Questions": [
+        "so_8662254: How to add two time outputs in bash"
+      ],
+      "Top-3 Scripts": [
+        "so_8662254: TIMEFORMAT='%0R'; time sleep 1\n1\n\nTIMEFORMAT='%0R'; time1=$( { time sleep 1; } 2>&1 )\n\n#!/bin/bash\n\nTIMEFORMAT='%0R'\ntime1=$( { time sleep 1; } 2>&1 )\ntime2=$( { time sleep 4; } 2>&1 )\nave=$(( (time1 + time2) / 2))\n\necho \"time1 is $time1 | time2 is $time2 | average is $ave\"\n\n#!/bin/bash\n\nTIMEFORMAT='%3R'\ntime1=$( { time sleep 1; } 2>&1 )\ntime2=$( { time sleep 4; } 2>&1 )\nave=$( bc <<<\"scale=3; ($time1 + $time2)/2\" )\n\necho \"time1 is $time1 | time2 is $time2 | average is $ave\""
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

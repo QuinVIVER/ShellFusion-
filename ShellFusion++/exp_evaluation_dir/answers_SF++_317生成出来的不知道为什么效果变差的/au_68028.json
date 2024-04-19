@@ -1,0 +1,830 @@
+{
+  "Query": "How do I check if Ubuntu is using my NVIDIA graphics card?",
+  "Answers": [
+    {
+      "Command": "lshw",
+      "MP Summary": "list hardware",
+      "Most Similar TLDR Task": "Launch the GUI",
+      "Most Similar TLDR Script": "sudo lshw -X",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "au_841040: How can I check if my laptop's wireless card supports 802.11AC wifi?",
+        "au_296152: How to check what is my network card on Ubuntu?",
+        "au_23238: How can I find what video driver is in use on my system?"
+      ],
+      "Top-3 Scripts": [
+        "au_841040: lshw -c network",
+        "au_296152: sudo lshw -c network",
+        "au_23238: lshw -c video"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "lspci",
+      "MP Summary": "list all PCI devices",
+      "Most Similar TLDR Task": "Display drivers and modules handling each device",
+      "Most Similar TLDR Script": "lspci -k",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "au_802758: Can I install nvidia drivers if I boot as nomodeset?",
+        "au_12780: How to find out what Graphics Card is present in your system?",
+        "au_296152: How to check what is my network card on Ubuntu?"
+      ],
+      "Top-3 Scripts": [
+        "au_802758: lspci -vnn | grep -i VGA -A12",
+        "au_12780: lspci | grep VGA",
+        "au_296152: $ lspci | awk '/[Nn]et/ {print $1}' | xargs -i% lspci -ks %\n09:00.0 Ethernet controller: Realtek Semiconductor Co., Ltd. RTL8111/8168 PCI Express Gigabit Ethernet controller (rev 03)\n    Subsystem: Gigabyte Technology Co., Ltd Motherboard\n    Kernel driver in use: r8169\n0a:00.0 Ethernet controller: Realtek Semiconductor Co., Ltd. RTL8111/8168 PCI Express Gigabit Ethernet controller (rev 03)\n    Subsystem: Gigabyte Technology Co., Ltd Motherboard\n    Kernel driver in use: r8169"
+      ],
+      "Explanations about Options": {
+        "-k": "Show kernel drivers handling each device and also kernel modules capable of\n handling it. Turned on by default when -v is given in the normal mode of output.\n (Currently works only on Linux with kernel 2.6 or newer.)"
+      }
+    },
+    {
+      "Command": "apt-get",
+      "MP Summary": "APT package handling utility - command-line interface",
+      "Most Similar TLDR Task": "Update the list of available packages and versions (it's recommended to run this before other `apt-get` commands)",
+      "Most Similar TLDR Script": "apt-get update",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "au_114247: Is there any need to install nvidia graphics drivers if I am running Ubuntu Server?",
+        "au_904765: How do they work when you have two graphic cards on Ubuntu?",
+        "au_652721: Ubuntu 14.04 couldn't detect nvidia graphic card (not even detect the model of card)"
+      ],
+      "Top-3 Scripts": [
+        "au_114247: apt-get install",
+        "au_904765: sudo add-apt-repository universe\nsudo add-apt-repository multiverse\nsudo apt-get update\n\nsudo apt-get install bumblebee bumblebee-nvidia linux-headers-generic primus \nreboot",
+        "au_652721: sudo add-apt-repository ppa:xorg-edgers/ppa\nsudo apt-get update\nsudo apt-get install nvidia-352 nvidia-prime\nsudo add-apt-repository -r ppa:xorg-edgers/ppa"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "module",
+      "MP Summary": "command interface to the Modules package",
+      "Most Similar TLDR Task": "Unload a specific loaded module",
+      "Most Similar TLDR Script": "module {{module_name}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "ul_247981: Determine which graphics driver Xorg uses",
+        "au_1256013: How do you install nvidia divers if it is not shown in additional drivers and and when installed how to get it to work?",
+        "au_760780: NVIDIA proprietary driver does not load when using shimx64 since xenial"
+      ],
+      "Top-3 Scripts": [
+        "ul_247981: ",
+        "au_1256013: WARNING: nvidia-installer was forced to guess the X library path '/usr/lib' and X module path '/usr/lib/xorg/modules'; these paths were not queryable from the system.  If X fails to find the NVIDIA X driver module, please install the `pkg-config` utility and the X.Org SDK/development package for your distribution and reinstall the driver.",
+        "au_760780: kernel: nvidia: module verification failed: signature and/or required key missing - tainting kernel"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "modprobe",
+      "MP Summary": "Add and remove modules from the Linux Kernel",
+      "Most Similar TLDR Task": "Show a kernel module's dependencies",
+      "Most Similar TLDR Script": "sudo modprobe --show-depends {{module_name}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "au_23238: How can I find what video driver is in use on my system?",
+        "so_65041694: How can I find which process is using my GPU?"
+      ],
+      "Top-3 Scripts": [
+        "au_23238: modprobe --resolve-alias nvidia\n\nmodinfo $(modprobe --resolve-alias nvidia)",
+        "so_65041694: modprobe -r nvidia_drm"
+      ],
+      "Explanations about Options": {
+        "--resolve-alias": "Print all module names matching an alias. This can be useful for debugging module\n alias problems.",
+        "-r": "This option causes modprobe to remove rather than insert a module. If the modules it\n depends on are also unused, modprobe will try to remove them too. Unlike insertion,\n more than one module can be specified on the command line (it does not make sense to\n specify module parameters when removing modules)."
+      }
+    },
+    {
+      "Command": "iw",
+      "MP Summary": "show / manipulate wireless devices and their configuration",
+      "Most Similar TLDR Task": "Scan for available wireless networks",
+      "Most Similar TLDR Script": "iw dev {{wlp}} scan",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "au_829977: How to check if you cards supports monitor mode"
+      ],
+      "Top-3 Scripts": [
+        "au_829977: iw list"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "adb",
+      "MP Summary": "Android Debug Bridge",
+      "Most Similar TLDR Task": "Check whether the adb server process is running and start it",
+      "Most Similar TLDR Script": "adb start-server",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "so_7078130: Check if directory exists on Android SD card with Bash"
+      ],
+      "Top-3 Scripts": [
+        "so_7078130: adb shell\n\nadb push foo.sh /sdcard/\nadb shell sh /sdcard/foo.sh"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "dpkg",
+      "MP Summary": "package manager for Debian",
+      "Most Similar TLDR Task": "Find out which package owns a file",
+      "Most Similar TLDR Script": "dpkg -S {{filename}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "au_402900: How to check if Nvidia Optimus drivers are install",
+        "so_27614574: How can I check if mysql is installed on ubuntu?"
+      ],
+      "Top-3 Scripts": [
+        "au_402900: sudo dpkg --get-selections | grep nvidia",
+        "so_27614574: dpkg --get-selections | grep mysql"
+      ],
+      "Explanations about Options": {
+        "--get-selections": "Get list of package selections, and write it to stdout. Without a pattern, non-\n installed packages (i.e. those which have been previously purged) will not be\n shown."
+      }
+    },
+    {
+      "Command": "sudo",
+      "MP Summary": "execute a command as another user",
+      "Most Similar TLDR Task": "Run a command as another user and/or group",
+      "Most Similar TLDR Script": "sudo -u {{user}} -g {{group}} {{id -a}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "au_402900: How to check if Nvidia Optimus drivers are install",
+        "au_1021154: Check which graphics cards is being used by Ubuntu 16.04",
+        "au_904765: How do they work when you have two graphic cards on Ubuntu?"
+      ],
+      "Top-3 Scripts": [
+        "au_402900: sudo dpkg --get-selections | grep nvidia",
+        "au_1021154: sudo -i\ncat /sys/kernel/debug/vgaswitcheroo/switch",
+        "au_904765: sudo add-apt-repository universe\nsudo add-apt-repository multiverse\nsudo apt-get update\n\nsudo apt-get install bumblebee bumblebee-nvidia linux-headers-generic primus \nreboot"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "apt",
+      "MP Summary": "command-line interface",
+      "Most Similar TLDR Task": "Update the list of available packages and versions (it's recommended to run this before other `apt` commands)",
+      "Most Similar TLDR Script": "sudo apt update",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "au_1284508: Not able to install Nvidia drivers even if PPA is setup",
+        "au_877541: How to install updates of Nvidia drivers if there is one"
+      ],
+      "Top-3 Scripts": [
+        "au_1284508: sudo apt remove nvidia-driver-450\nsudo apt install nvidia-driver-455",
+        "au_877541: sudo add-apt-repository ppa:graphics-drivers/ppa\nsudo apt update\nsudo apt install nvidia-xxx"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "add-apt-repository",
+      "MP Summary": "Adds   a   repository   into   the   /etc/apt/sources.list   or /etc/apt/sources.list.d or removes an existing one",
+      "Most Similar TLDR Task": "Add a new apt repository",
+      "Most Similar TLDR Script": "add-apt-repository {{repository_spec}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "au_904765: How do they work when you have two graphic cards on Ubuntu?",
+        "au_652721: Ubuntu 14.04 couldn't detect nvidia graphic card (not even detect the model of card)",
+        "au_877541: How to install updates of Nvidia drivers if there is one"
+      ],
+      "Top-3 Scripts": [
+        "au_904765: sudo add-apt-repository universe\nsudo add-apt-repository multiverse\nsudo apt-get update",
+        "au_652721: sudo add-apt-repository ppa:xorg-edgers/ppa\nsudo apt-get update\nsudo apt-get install nvidia-352 nvidia-prime\nsudo add-apt-repository -r ppa:xorg-edgers/ppa",
+        "au_877541: sudo add-apt-repository ppa:graphics-drivers/ppa\nsudo apt update\nsudo apt install nvidia-xxx"
+      ],
+      "Explanations about Options": {
+        "-r": "Remove the specified repository"
+      }
+    },
+    {
+      "Command": "install",
+      "MP Summary": "copy files and set attributes",
+      "Most Similar TLDR Task": "Copy files to destination, setting their `mode`",
+      "Most Similar TLDR Script": "install -m {{+x}} {{path/to/source}} {{path/to/destination}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "au_114247: Is there any need to install nvidia graphics drivers if I am running Ubuntu Server?",
+        "au_904765: How do they work when you have two graphic cards on Ubuntu?",
+        "au_652721: Ubuntu 14.04 couldn't detect nvidia graphic card (not even detect the model of card)"
+      ],
+      "Top-3 Scripts": [
+        "au_114247: apt-get install",
+        "au_904765: sudo apt-get install bumblebee bumblebee-nvidia linux-headers-generic primus \nreboot",
+        "au_652721: sudo add-apt-repository ppa:xorg-edgers/ppa\nsudo apt-get update\nsudo apt-get install nvidia-352 nvidia-prime\nsudo add-apt-repository -r ppa:xorg-edgers/ppa"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "nvidia-smi",
+      "MP Summary": "NVIDIA System Management Interface program",
+      "Most Similar TLDR Task": "Display information on all available GPUs and processes using them",
+      "Most Similar TLDR Script": "nvidia-smi",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "au_1256013: How do you install nvidia divers if it is not shown in additional drivers and and when installed how to get it to work?"
+      ],
+      "Top-3 Scripts": [
+        "au_1256013: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "blender",
+      "MP Summary": "a full-featured 3D application",
+      "Most Similar TLDR Task": "Start an interactive Blender session in the terminal with a python console (do `import bpy` after starting)",
+      "Most Similar TLDR Script": "blender -b --python-console",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "au_904765: How do they work when you have two graphic cards on Ubuntu?"
+      ],
+      "Top-3 Scripts": [
+        "au_904765: optirun blender\noptirun nvidia-settings\n..."
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "ip",
+      "MP Summary": "show / manipulate routing, network devices, interfaces and tunnels",
+      "Most Similar TLDR Task": "Add/Delete an ip address to an interface",
+      "Most Similar TLDR Script": "ip addr add/del {{ip}}/{{mask}} dev {{interface}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "au_841040: How can I check if my laptop's wireless card supports 802.11AC wifi?"
+      ],
+      "Top-3 Scripts": [
+        "au_841040: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "reboot",
+      "MP Summary": "Halt, power-off or reboot the machine",
+      "Most Similar TLDR Task": "Reboot immediately",
+      "Most Similar TLDR Script": "reboot",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "au_904765: How do they work when you have two graphic cards on Ubuntu?"
+      ],
+      "Top-3 Scripts": [
+        "au_904765: sudo apt-get install bumblebee bumblebee-nvidia linux-headers-generic primus \nreboot"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "cat",
+      "MP Summary": "concatenate files and print on the standard output",
+      "Most Similar TLDR Task": "Append several files into the target file",
+      "Most Similar TLDR Script": "cat {{file1}} {{file2}} >> {{target_file}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "au_1021154: Check which graphics cards is being used by Ubuntu 16.04",
+        "ul_29331: How to find out which X11 driver system is using?",
+        "ul_522143: How to limit frame-rate for all games on Linux?"
+      ],
+      "Top-3 Scripts": [
+        "au_1021154: sudo -i\ncat /sys/kernel/debug/vgaswitcheroo/switch",
+        "ul_29331: ## outdated distro's might not support this command    \nlsb_release -a\n\n## Most Distro's will display release, in an /etc file.\ncat /etc/*release",
+        "ul_522143: sudo cat /sys/module/nvidia_drm/parameters/modeset"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "systemctl",
+      "MP Summary": "Control the systemd system and service manager",
+      "Most Similar TLDR Task": "Check if a unit is enabled",
+      "Most Similar TLDR Script": "systemctl is-enabled {{unit}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "au_1256013: How do you install nvidia divers if it is not shown in additional drivers and and when installed how to get it to work?"
+      ],
+      "Top-3 Scripts": [
+        "au_1256013: sudo systemctl stop lightdm"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "modinfo",
+      "MP Summary": "Show information about a Linux Kernel module",
+      "Most Similar TLDR Task": "List all attributes of a kernel module",
+      "Most Similar TLDR Script": "modinfo {{kernel_module}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "au_23238: How can I find what video driver is in use on my system?"
+      ],
+      "Top-3 Scripts": [
+        "au_23238: modinfo i915\n\nmodinfo -F filename `lshw -c video | awk '/configuration: driver/{print $2}' | cut -d= -f2`\n\nmodinfo nvidia\n\nmodinfo $(modprobe --resolve-alias nvidia)"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "free",
+      "MP Summary": "Display amount of free and used memory in the system",
+      "Most Similar TLDR Task": "Display system memory",
+      "Most Similar TLDR Script": "free",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "so_56975246: how to check if tensorflow uses the whole memory ram"
+      ],
+      "Top-3 Scripts": [
+        "so_56975246: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "lsmod",
+      "MP Summary": "Show the status of modules in the Linux Kernel",
+      "Most Similar TLDR Task": "List all currently loaded kernel modules",
+      "Most Similar TLDR Script": "lsmod",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "au_23238: How can I find what video driver is in use on my system?"
+      ],
+      "Top-3 Scripts": [
+        "au_23238: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "inxi",
+      "MP Summary": "Command line system information script for console and IRC",
+      "Most Similar TLDR Task": "Print a full description of CPU, memory, disk, network and process information",
+      "Most Similar TLDR Script": "inxi -Fz",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "au_831893: How to check which graphic card is used by the system?"
+      ],
+      "Top-3 Scripts": [
+        "au_831893: sudo apt-get install inxi\n\ninxi -G\n\n$ inxi -G\nGraphics:  Card-1: Intel Sky Lake Integrated Graphics\n           Card-2: NVIDIA GM108M [GeForce 940M]\n           Display Server: X.Org 1.18.3 driver: nvidia Resolution: 1920x1080@60.03hz\n           GLX Renderer: GeForce 940M/PCIe/SSE2 GLX Version: 4.5.0 NVIDIA 367.44"
+      ],
+      "Explanations about Options": {
+        "-G": "Show Graphic card(s) information, including details of card and card driver,\n display protocol (if available), display server (vendor and version number), e.g.:"
+      }
+    },
+    {
+      "Command": "test",
+      "MP Summary": "check file types and compare values",
+      "Most Similar TLDR Task": "Test if given variable is empty",
+      "Most Similar TLDR Script": "test -z $GIT_BRANCH",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "so_61738967: Check if file is executable using PowerShell on Ubuntu"
+      ],
+      "Top-3 Scripts": [
+        "so_61738967: /usr/bin/test\n\n$isExecutable = $(test -x '/path/to/some/file'; 0 -eq $LASTEXITCODE)"
+      ],
+      "Explanations about Options": {
+        "-x": "FILE\n FILE exists and execute (or search) permission is granted"
+      }
+    },
+    {
+      "Command": "find",
+      "MP Summary": "search for files in a directory hierarchy",
+      "Most Similar TLDR Task": "Find files by extension",
+      "Most Similar TLDR Script": "find {{root_path}} -name '{{*.ext}}'",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "au_31488: How to test if my video card has 3D support?",
+        "au_1256013: How do you install nvidia divers if it is not shown in additional drivers and and when installed how to get it to work?"
+      ],
+      "Top-3 Scripts": [
+        "au_31488: direct rendering: No (If you want to find out why, try setting LIBGL_DEBUG=verbose)",
+        "au_1256013: WARNING: nvidia-installer was forced to guess the X library path '/usr/lib' and X module path '/usr/lib/xorg/modules'; these paths were not queryable from the system.  If X fails to find the NVIDIA X driver module, please install the `pkg-config` utility and the X.Org SDK/development package for your distribution and reinstall the driver."
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "man",
+      "MP Summary": "an interface to the system reference manuals",
+      "Most Similar TLDR Task": "Display the location of a manpage rather than the manpage itself",
+      "Most Similar TLDR Script": "man -w {{command}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "au_631034: 15.04 How to check if Nvidia SLI is enabled w/ proprietary drivers?"
+      ],
+      "Top-3 Scripts": [
+        "au_631034: man nvidia-xconfig"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "mysql",
+      "MP Summary": "the MySQL command-line client",
+      "Most Similar TLDR Task": "Connect to a database on another host",
+      "Most Similar TLDR Script": "mysql -h {{database_host}} {{database_name}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "so_27614574: How can I check if mysql is installed on ubuntu?"
+      ],
+      "Top-3 Scripts": [
+        "so_27614574: dpkg --get-selections | grep mysql"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "pgrep",
+      "MP Summary": "look up or signal processes based on name and other attributes",
+      "Most Similar TLDR Task": "Search for process run by a specific user",
+      "Most Similar TLDR Script": "pgrep -u root {{process_name}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "ul_496818: How do I check if I am in a graphical environment on a Mac using bash?"
+      ],
+      "Top-3 Scripts": [
+        "ul_496818: if pgrep -qx Finder; then\n    echo 'Finder is running'\nelse\n    echo 'Finder is not running'\nfi"
+      ],
+      "Explanations about Options": {
+        "-x": "Only match processes whose names (or command line if -f is specified) exactly match\n the pattern."
+      }
+    },
+    {
+      "Command": "print",
+      "MP Summary": "execute programs via entries in the mailcap file",
+      "Most Similar TLDR Task": "Print action can be used to print any file on default run-mailcap tool",
+      "Most Similar TLDR Script": "print {{filename}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "au_296152: How to check what is my network card on Ubuntu?",
+        "au_23238: How can I find what video driver is in use on my system?"
+      ],
+      "Top-3 Scripts": [
+        "au_296152: $ lspci | awk '/[Nn]et/ {print $1}' | xargs -i% lspci -ks %\n09:00.0 Ethernet controller: Realtek Semiconductor Co., Ltd. RTL8111/8168 PCI Express Gigabit Ethernet controller (rev 03)\n    Subsystem: Gigabyte Technology Co., Ltd Motherboard\n    Kernel driver in use: r8169\n0a:00.0 Ethernet controller: Realtek Semiconductor Co., Ltd. RTL8111/8168 PCI Express Gigabit Ethernet controller (rev 03)\n    Subsystem: Gigabyte Technology Co., Ltd Motherboard\n    Kernel driver in use: r8169",
+        "au_23238: modinfo -F filename `lshw -c video | awk '/configuration: driver/{print $2}' | cut -d= -f2`"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "as",
+      "MP Summary": "or  any situation  where  you want to make sure you're doing a clean install of your dependencies. It  can  be  significantly  faster  than  a  regular  npm  install  by  skipping   certain user-oriented  features.  It  is  also  more strict than a regular install, which can help catch errors or inconsistencies caused by the incrementally-installed  local  environments of most npm users. In short, the main differences between using npm install and npm ci are: \u00b7 The project must have an existing package-lock.json or npm-shrinkwrap.json. \u00b7 If dependencies in the package lock do not match those in package.json, npm ci will exit with an error, instead of updating the package lock. \u00b7 npm ci can only install entire projects at a time:  individual  dependencies  cannot  be added with this command. \u00b7 If  a  node_modules  is  already present, it will be automatically removed before npm ci begins its install. \u00b7 It will  never  write  to  package.json  or  any  of  the  package-locks:  installs  are essentially frozen. See Also \u00b7 npm help install \u00b7 npm help package-locks April 2020                                  NPM-CI(1)",
+      "Most Similar TLDR Task": "Generate output faster by skipping whitespace and comment preprocessing. (Should only be used for trusted compilers)",
+      "Most Similar TLDR Script": "as -f {{file.s}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "au_841040: How can I check if my laptop's wireless card supports 802.11AC wifi?"
+      ],
+      "Top-3 Scripts": [
+        "au_841040: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "at",
+      "MP Summary": "queue, examine, or delete jobs for later execution",
+      "Most Similar TLDR Task": "Open an `at` prompt to create a new set of scheduled commands, press `Ctrl + D` to save and exit",
+      "Most Similar TLDR Script": "at {{hh:mm}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "au_321334: How to see what technologies a video card supports",
+        "au_20256: How can I determine which GPU card is running at PCI Express 2.0 x16 & which is using x8?"
+      ],
+      "Top-3 Scripts": [
+        "au_321334: Accelerated 2d canvas is unstable in Linux at the moment\nStage3D is not supported on Linux: 129848\nAccelerated video decode is unavailable on Mac and Linux: 137247, 133828\nNVIDIA linux drivers are unstable when using multiple Open GL contexts and with low memory: 145600",
+        "au_20256: 20.502] (II) NVIDIA(0): NVIDIA GPU GeForce 9500 GT (G96) at PCI:1:0:0 (GPU-0)<br>\n[    20.502] (--) NVIDIA(0): Memory: 1048576 kBytes<br>\n[    20.502] (--) NVIDIA(0): VideoBIOS: 62.94.1f.00.8a<br>\n[    20.502] (II) NVIDIA(0): Detected PCI Express Link width: 16X<br>\n[    20.502] (--) NVIDIA(0): Interlaced video modes are supported on this GPU<br>\n[    20.502] (--) NVIDIA(0): Connected display device(s) on GeForce 9500 GT at PCI:1:0:0<br>\n[    20.502] (--) NVIDIA(0):     Samsung SyncMaster (CRT-1)<br>\n[    20.502] (--) NVIDIA(0): Samsung SyncMaster (CRT-1): 400.0 MHz maximum pixel clock"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "chmod",
+      "MP Summary": "change file mode bits",
+      "Most Similar TLDR Task": "Give [a]ll users rights to [r]ead and e[x]ecute",
+      "Most Similar TLDR Script": "chmod a+rx {{file}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "au_1256013: How do you install nvidia divers if it is not shown in additional drivers and and when installed how to get it to work?"
+      ],
+      "Top-3 Scripts": [
+        "au_1256013: cd ~\nchmod +x NVIDIA-Linux-x86_64-384.69.run\nsudo ./NVIDIA-Linux-x86_64-384.69.run --dkms -s"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "useradd",
+      "MP Summary": "create a new user or update default new user information",
+      "Most Similar TLDR Task": "Create new system user without a home directory",
+      "Most Similar TLDR Script": "useradd --no-create-home --system {{name}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "au_1303674: Ubuntu installation crashes when using different username"
+      ],
+      "Top-3 Scripts": [
+        "au_1303674: sudo useradd rajeevalochana"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "link",
+      "MP Summary": "call the link function to create a link to a file",
+      "Most Similar TLDR Task": "Create a hard link from a new file to an existing file",
+      "Most Similar TLDR Script": "link {{path/to/existing_file}} {{path/to/new_file}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "au_841040: How can I check if my laptop's wireless card supports 802.11AC wifi?"
+      ],
+      "Top-3 Scripts": [
+        "au_841040: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "cd",
+      "MP Summary": "change the working directory",
+      "Most Similar TLDR Task": "Go to home directory of current user",
+      "Most Similar TLDR Script": "cd",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "au_1256013: How do you install nvidia divers if it is not shown in additional drivers and and when installed how to get it to work?"
+      ],
+      "Top-3 Scripts": [
+        "au_1256013: cd ~\nchmod +x NVIDIA-Linux-x86_64-384.69.run\nsudo ./NVIDIA-Linux-x86_64-384.69.run --dkms -s"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "grep",
+      "MP Summary": "print lines that match patterns",
+      "Most Similar TLDR Task": "Use extended regular expressions (supporting `?`, `+`, `{}`, `()` and `|`), in case-insensitive mode",
+      "Most Similar TLDR Script": "grep -Ei {{search_pattern}} {{path/to/file}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "au_402900: How to check if Nvidia Optimus drivers are install",
+        "so_27614574: How can I check if mysql is installed on ubuntu?",
+        "au_802758: Can I install nvidia drivers if I boot as nomodeset?"
+      ],
+      "Top-3 Scripts": [
+        "au_402900: sudo dpkg --get-selections | grep nvidia",
+        "so_27614574: dpkg --get-selections | grep mysql",
+        "au_802758: lspci -vnn | grep -i VGA -A12"
+      ],
+      "Explanations about Options": {
+        "-i": "Ignore case distinctions in patterns and input data, so that characters that differ\n only in case match each other."
+      }
+    },
+    {
+      "Command": "service",
+      "MP Summary": "run a System V init script",
+      "Most Similar TLDR Task": "Start/Stop/Restart/Reload service (start/stop should always be available)",
+      "Most Similar TLDR Script": "service {{service_name}} {{start|stop|restart|reload}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "au_1256013: How do you install nvidia divers if it is not shown in additional drivers and and when installed how to get it to work?"
+      ],
+      "Top-3 Scripts": [
+        "au_1256013: sudo service lightdm sto"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "exec",
+      "MP Summary": "execute commands and open, close, or copy file descriptors",
+      "Most Similar TLDR Task": "Replace with the specified command and login using the default shell",
+      "Most Similar TLDR Script": "exec -l {{command -with -flags}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "so_19580181: how to check if R is running using ps aux on Ubuntu/Mac?"
+      ],
+      "Top-3 Scripts": [
+        "so_19580181: ps aux | grep /exec/R"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "lsb_release",
+      "MP Summary": "print distribution-specific information",
+      "Most Similar TLDR Task": "Print a description (usually the full name) of the operating system",
+      "Most Similar TLDR Script": "lsb_release -d",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "ul_29331: How to find out which X11 driver system is using?"
+      ],
+      "Top-3 Scripts": [
+        "ul_29331: ## outdated distro's might not support this command    \nlsb_release -a\n\n## Most Distro's will display release, in an /etc file.\ncat /etc/*release"
+      ],
+      "Explanations about Options": {
+        "-a": "Display all of the above information."
+      }
+    },
+    {
+      "Command": "awk",
+      "MP Summary": "pattern scanning and processing language",
+      "Most Similar TLDR Task": "Print the second column of the lines containing \"something\" in a space-separated file",
+      "Most Similar TLDR Script": "awk '/{{something}}/ {print $2}' {{filename}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "au_296152: How to check what is my network card on Ubuntu?",
+        "au_23238: How can I find what video driver is in use on my system?"
+      ],
+      "Top-3 Scripts": [
+        "au_296152: $ lspci | awk '/[Nn]et/ {print $1}' | xargs -i% lspci -ks %\n09:00.0 Ethernet controller: Realtek Semiconductor Co., Ltd. RTL8111/8168 PCI Express Gigabit Ethernet controller (rev 03)\n    Subsystem: Gigabyte Technology Co., Ltd Motherboard\n    Kernel driver in use: r8169\n0a:00.0 Ethernet controller: Realtek Semiconductor Co., Ltd. RTL8111/8168 PCI Express Gigabit Ethernet controller (rev 03)\n    Subsystem: Gigabyte Technology Co., Ltd Motherboard\n    Kernel driver in use: r8169",
+        "au_23238: modinfo -F filename `lshw -c video | awk '/configuration: driver/{print $2}' | cut -d= -f2`"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "ps",
+      "MP Summary": "report a snapshot of the current processes.",
+      "Most Similar TLDR Task": "Sort processes by memory consumption",
+      "Most Similar TLDR Script": "ps --sort size",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "so_19580181: how to check if R is running using ps aux on Ubuntu/Mac?"
+      ],
+      "Top-3 Scripts": [
+        "so_19580181: ps aux | grep /exec/R"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "diff",
+      "MP Summary": "compare two files",
+      "Most Similar TLDR Task": "Compare files, showing the differences in unified format (as used by `git diff`)",
+      "Most Similar TLDR Script": "diff -u {{old_file}} {{new_file}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "so_47151394: How to tell which version of OpenGL my graphics card supports on Linux"
+      ],
+      "Top-3 Scripts": [
+        "so_47151394: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "echo",
+      "MP Summary": "display a line of text",
+      "Most Similar TLDR Task": "Append a message to the file",
+      "Most Similar TLDR Script": "echo \"{{Hello World}}\" >> {{file.txt}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "ul_496818: How do I check if I am in a graphical environment on a Mac using bash?"
+      ],
+      "Top-3 Scripts": [
+        "ul_496818: if pgrep -qx Finder; then\n    echo 'Finder is running'\nelse\n    echo 'Finder is not running'\nfi\n\nif [ -n \"$DISPLAY\" ]; then\n    echo 'In X'\nelse\n    echo 'Not in X'\nfi"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "rev",
+      "MP Summary": "reverse lines characterwise",
+      "Most Similar TLDR Task": "Reverse an entire file and print to `stdout`",
+      "Most Similar TLDR Script": "rev {{file}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "ul_247981: Determine which graphics driver Xorg uses",
+        "au_296152: How to check what is my network card on Ubuntu?",
+        "au_460660: How do I find out what Intel Integrated Graphics Controller I'm using?"
+      ],
+      "Top-3 Scripts": [
+        "ul_247981: ",
+        "au_296152: $ lspci | awk '/[Nn]et/ {print $1}' | xargs -i% lspci -ks %\n09:00.0 Ethernet controller: Realtek Semiconductor Co., Ltd. RTL8111/8168 PCI Express Gigabit Ethernet controller (rev 03)\n    Subsystem: Gigabyte Technology Co., Ltd Motherboard\n    Kernel driver in use: r8169\n0a:00.0 Ethernet controller: Realtek Semiconductor Co., Ltd. RTL8111/8168 PCI Express Gigabit Ethernet controller (rev 03)\n    Subsystem: Gigabyte Technology Co., Ltd Motherboard\n    Kernel driver in use: r8169",
+        "au_460660: 00:02.0 VGA compatible controller [0300]: Intel Corporation System Controller Hub (SCH Poulsbo) Graphics Controller [8086:8108] (rev 07)\n    Subsystem: Dell Device [1028:02c6]\n    Kernel driver in use: gma500"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "yes",
+      "MP Summary": "output a string repeatedly until killed",
+      "Most Similar TLDR Task": "Accept everything prompted by the `apt-get` command",
+      "Most Similar TLDR Script": "yes | sudo apt-get install {{program}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "au_841040: How can I check if my laptop's wireless card supports 802.11AC wifi?"
+      ],
+      "Top-3 Scripts": [
+        "au_841040: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "xargs",
+      "MP Summary": "build and execute command lines from standard input",
+      "Most Similar TLDR Task": "Parallel runs of up to `max-procs` processes at a time; the default is 1. If `max-procs` is 0, xargs will run as many processes as possible at a time",
+      "Most Similar TLDR Script": "{{arguments_source}} | xargs -P {{max-procs}} {{command}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "au_296152: How to check what is my network card on Ubuntu?"
+      ],
+      "Top-3 Scripts": [
+        "au_296152: $ lspci | awk '/[Nn]et/ {print $1}' | xargs -i% lspci -ks %\n09:00.0 Ethernet controller: Realtek Semiconductor Co., Ltd. RTL8111/8168 PCI Express Gigabit Ethernet controller (rev 03)\n    Subsystem: Gigabyte Technology Co., Ltd Motherboard\n    Kernel driver in use: r8169\n0a:00.0 Ethernet controller: Realtek Semiconductor Co., Ltd. RTL8111/8168 PCI Express Gigabit Ethernet controller (rev 03)\n    Subsystem: Gigabyte Technology Co., Ltd Motherboard\n    Kernel driver in use: r8169"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "type",
+      "MP Summary": "write a description of command type",
+      "Most Similar TLDR Task": "Display the name of the disk file that would be executed",
+      "Most Similar TLDR Script": "type -p {{command}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "ul_270083: Using aplay and choose which output on card to use"
+      ],
+      "Top-3 Scripts": [
+        "ul_270083: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "python",
+      "MP Summary": "an interpreted, interactive, object-oriented programming language",
+      "Most Similar TLDR Task": "Run library module as a script (terminates option list)",
+      "Most Similar TLDR Script": "python -m {{module}} {{arguments}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "au_1280832: Steam doesn't open when using CUDA Driver Ubuntu 20.04"
+      ],
+      "Top-3 Scripts": [
+        "au_1280832: conda create -n environment_name\nconda activate environment_name\nconda install cudatoolkit=11   \nconda install python=3.7"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "dash",
+      "MP Summary": "command interpreter (shell)",
+      "Most Similar TLDR Task": "Run commands from a file, logging all commands executed to the terminal",
+      "Most Similar TLDR Script": "dash -x {{file.sh}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "au_1303674: Ubuntu installation crashes when using different username"
+      ],
+      "Top-3 Scripts": [
+        "au_1303674: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "cut",
+      "MP Summary": "remove sections from each line of files",
+      "Most Similar TLDR Task": "Cut out everything from the 3rd character to the end of each line",
+      "Most Similar TLDR Script": "cut -c {{3-}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "au_23238: How can I find what video driver is in use on my system?"
+      ],
+      "Top-3 Scripts": [
+        "au_23238: modinfo -F filename `lshw -c video | awk '/configuration: driver/{print $2}' | cut -d= -f2`"
+      ],
+      "Explanations about Options": {
+        "-d": "use DELIM instead of TAB for field delimiter"
+      }
+    },
+    {
+      "Command": "sh",
+      "MP Summary": "MirBSD Korn shell",
+      "Most Similar TLDR Task": "Start interactive shell",
+      "Most Similar TLDR Script": "sh",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "so_7078130: Check if directory exists on Android SD card with Bash"
+      ],
+      "Top-3 Scripts": [
+        "so_7078130: adb push foo.sh /sdcard/\nadb shell sh /sdcard/foo.sh"
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

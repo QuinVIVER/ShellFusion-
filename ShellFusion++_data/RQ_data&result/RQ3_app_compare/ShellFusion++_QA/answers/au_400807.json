@@ -1,0 +1,70 @@
+{
+  "Query": "Is there an easy command line command to check disk space?",
+  "Answers": [
+    {
+      "Command": "df",
+      "Top-3 Similar Questions": [
+        "so_61035374: Bash command to check available drive space (was \"to check value of a decimal number\")",
+        "su_71087: How to check the current disk space used by my linux?",
+        "so_8110530: Check free disk space for current partition in bash"
+      ],
+      "Top-3 Scripts": [
+        "so_61035374: declare -- drive='/'\ndeclare -i minsize=$((2*10**11)) # 200 GB\nif (($(df -B1 --output=avail \"$drive\" | tail -1)>=minsize))\nthen\n   printf 'There is more than 200 GB left on %s\\n' \"$drive\"\nelse\n   printf 'There is less than 200 GB left on %s\\n' \"$drive\"\nfi",
+        "su_71087: df -a\n\ndf -h",
+        "so_8110530: df -k .\n\ndf -k /some/dir"
+      ]
+    },
+    {
+      "Command": "grep",
+      "Top-3 Similar Questions": [
+        "nl2bash_14153: Compare \"current.log\" and \"previous.log\" line by line and print lines containing regex pattern \">\\|<\"",
+        "so_43760138: Constantly Checking The Output From A Bash Command",
+        "au_623325: How to check all S.M.A.R.T. logs location"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_14153: diff current.log previous.log | grep \">\\|<\" #comparring users lists",
+        "so_43760138: until command-name | grep -q \"Success!\"; do\n   :\ndone",
+        "au_623325: grep \"smartd\" /var/log/syslog*\n\ngrep \"smartd.*/dev/sda\" /var/log/syslog*"
+      ]
+    },
+    {
+      "Command": "dev",
+      "Top-3 Similar Questions": [
+        "au_87035: How to check hard disk performance",
+        "au_623325: How to check all S.M.A.R.T. logs location",
+        "so_23004784: Mac command - check free space on USB?"
+      ],
+      "Top-3 Scripts": [
+        "au_87035: sudo hdparm -Tt /dev/sda\n\n/dev/sda:\nTiming cached reads:   12540 MB in  2.00 seconds = 6277.67 MB/sec\nTiming buffered disk reads: 234 MB in  3.00 seconds =  77.98 MB/sec\n\nsudo hdparm -v /dev/sda\n\nof=/dev/sda\n\ndd if=/dev/zero of=/tmp/output bs=8k count=10k; rm -f /tmp/output\n\n10240+0 records in\n10240+0 records out\n83886080 bytes (84 MB) copied, 1.08009 s, 77.7 MB/s",
+        "au_623325: /dev/sda\n\ngrep \"smartd.*/dev/sda\" /var/log/syslog*",
+        "so_23004784: if diff -qr /Volumes/Label /template/directory > /dev/null\nthen\n    # directories are the same\nelse\n    # contents differ\nfi"
+      ]
+    },
+    {
+      "Command": "print",
+      "Top-3 Similar Questions": [
+        "ul_438292: Check disk image file system type",
+        "ul_652817: Command To Check If Users In /etc/passwd Exist In A Different File",
+        "so_23004784: Mac command - check free space on USB?"
+      ],
+      "Top-3 Scripts": [
+        "ul_438292: parted -m <image> print | tail -n +3 | awk -F \":\" '{print $(NF-2)}'\n\nawk -F \":\" '{print $(NF-2)}'",
+        "ul_652817: diff -I \"^#\" --new-line-format=\"\" --unchanged-line-format=\"\" <(awk -F: '$3 < 200  {print $1}' /etc/passwd) /etc/ftpusers\n\nfor u in $(awk -F\":\" '$3 < 200 {print $1}' /etc/passwd); do\n        count=$(grep -scx \"$u\" /etc/ftpusers)\n        [ \"$count\" -gt 0 ] || echo \"$u\"\ndone",
+        "so_23004784: df -k /Volumes/label | tail -n +2 | awk '{ print $4 }'\n\nFREE=$(df -k /Volumes/Label | tail -n +2 | awk '{ print $4 }')"
+      ]
+    },
+    {
+      "Command": "awk",
+      "Top-3 Similar Questions": [
+        "ul_438292: Check disk image file system type",
+        "ul_652817: Command To Check If Users In /etc/passwd Exist In A Different File",
+        "so_23004784: Mac command - check free space on USB?"
+      ],
+      "Top-3 Scripts": [
+        "ul_438292: parted -m <image> print | tail -n +3 | awk -F \":\" '{print $(NF-2)}'\n\nawk -F \":\" '{print $(NF-2)}'",
+        "ul_652817: diff -I \"^#\" --new-line-format=\"\" --unchanged-line-format=\"\" <(awk -F: '$3 < 200  {print $1}' /etc/passwd) /etc/ftpusers\n\nfor u in $(awk -F\":\" '$3 < 200 {print $1}' /etc/passwd); do\n        count=$(grep -scx \"$u\" /etc/ftpusers)\n        [ \"$count\" -gt 0 ] || echo \"$u\"\ndone",
+        "so_23004784: df -k /Volumes/label | tail -n +2 | awk '{ print $4 }'\n\nFREE=$(df -k /Volumes/Label | tail -n +2 | awk '{ print $4 }')"
+      ]
+    }
+  ]
+}

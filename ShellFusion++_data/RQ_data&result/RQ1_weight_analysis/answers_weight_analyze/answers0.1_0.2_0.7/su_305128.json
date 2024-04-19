@@ -1,0 +1,88 @@
+{
+  "Query": "How to specify level of compression when using tar -zcvf?",
+  "Answers": [
+    {
+      "Command": "pigz",
+      "MP Summary": "compress or expand files",
+      "Most Similar TLDR Task": "Compress a directory using tar",
+      "Most Similar TLDR Script": "tar cf - {{path/to/directory}} | pigz > {{filename}}.tar.gz",
+      "Top-3 Similar Questions": [
+        "ul_444263: Is it possible to change the zlib-flate compression level?",
+        "ul_284353: Compressing a folder but do not compress specific file types but include them in the gz file"
+      ],
+      "Top-3 Scripts": [
+        "ul_444263: pigz -z# < FileToCompress > CompressedFile",
+        "ul_284353: tar | pigz > <file>"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "xz",
+      "MP Summary": "Compress or decompress .xz and .lzma files",
+      "Most Similar TLDR Task": "Compress a file, but don't delete the original",
+      "Most Similar TLDR Script": "xz -k {{file}}",
+      "Top-3 Similar Questions": [
+        "ul_265391: Unable to use tar to run an archive through bzip2 compression",
+        "ul_319694: Is there any way to check the compression ratio of a xz compressed file?"
+      ],
+      "Top-3 Scripts": [
+        "ul_265391: ",
+        "ul_319694: xz -l *.xz"
+      ],
+      "Explanations about Options": {
+        "-l": "Print information about compressed files. No uncompressed output is produced, and\n no files are created or removed. In list mode, the program cannot read the\n compressed data from standard input or from other unseekable sources."
+      }
+    },
+    {
+      "Command": "tar",
+      "MP Summary": "an archiving utility",
+      "Most Similar TLDR Task": "Create a compressed archive, using archive suffix to determine the compression program",
+      "Most Similar TLDR Script": "tar caf {{target.tar.xz}} {{file1}} {{file2}} {{file3}}",
+      "Top-3 Similar Questions": [
+        "so_15818433: Do we need to specify compression level when extracting a compressed tar file?",
+        "so_66653122: Tar ignores compression level, what to do?",
+        "au_166733: How do I set ubuntu to compress a series of folders , deleting the original after its been compressed?"
+      ],
+      "Top-3 Scripts": [
+        "so_15818433: tar -xf",
+        "so_66653122: tar cf - directory | gzip -9 > test9\n\ntar cf test9 -I 'gzip -9' directory\n``",
+        "au_166733: #!/bin/bash\nfor folder in \"$@\"\ndo\n    tar czf $folder.tgz $folder\n    rm -R $folder\ndone"
+      ],
+      "Explanations about Options": {
+        "-I": "Filter data through COMMAND. It must accept the -d option, for decompression. The\n argument can contain command line options.",
+        "-x": "Extract files from an archive. Arguments are optional. When given, they specify\n names of the archive members to be extracted."
+      }
+    },
+    {
+      "Command": "zip",
+      "MP Summary": "package and compress (archive) files",
+      "Most Similar TLDR Task": "Package and compress multiple directories and files",
+      "Most Similar TLDR Script": "zip -r {{compressed.zip}} {{/path/to/dir1 /path/to/dir2 /path/to/file}}",
+      "Top-3 Similar Questions": [
+        "so_48836836: How to compress separately with password hundreds of files in tar.gz?"
+      ],
+      "Top-3 Scripts": [
+        "so_48836836: for i in *.mkv; do \n  zip --password \"thepassword\" \"$i.zip\" \"$i\" \ndone"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "cpio",
+      "MP Summary": "copy files to and from archives",
+      "Most Similar TLDR Task": "Take a list of file names from standard input and add them [o]nto an archive in cpio's binary format",
+      "Most Similar TLDR Script": "echo \"{{file1}} {{file2}} {{file3}}\" | cpio -o > {{archive.cpio}}",
+      "Top-3 Similar Questions": [
+        "nl2bash_13126: create a backup of all the files which have been modified in the last 48 hours"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_13126: find source/directory -ctime -2 | cpio -pvdm /my/dest/directory"
+      ],
+      "Explanations about Options": {
+        "-v": "Print the name of each file to stderr as it is processed. With -t, provide a\n detailed listing of each file.",
+        "-m": "(i and p modes) Set file modification time on created files to match those in the\n source.",
+        "-d": "(i and p modes) Create directories as necessary.",
+        "-p": "Pass-through mode. See above for description."
+      }
+    }
+  ]
+}

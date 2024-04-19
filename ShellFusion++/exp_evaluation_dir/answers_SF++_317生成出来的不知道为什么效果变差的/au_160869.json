@@ -1,0 +1,1853 @@
+{
+  "Query": "Need to downsample video to a lower resolution",
+  "Answers": [
+    {
+      "Command": "ffmpeg",
+      "MP Summary": "ffmpeg video converter",
+      "Most Similar TLDR Task": "Convert frames from a video or GIF into individual numbered images",
+      "Most Similar TLDR Script": "ffmpeg -i {{video.mpg|video.gif}} {{frame_%d.png}}",
+      "Most Similar NL2Bash Task": "Rename uppercase file or folder name $1 to lower case name",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mv $1 `echo $1 | tr '[:upper:]' '[:lower:]'`\n",
+          "command-options": {
+            "mv": {
+              "mpsum": "move (rename) files"
+            },
+            "tr": {
+              "mpsum": "translate or delete characters"
+            }
+          },
+          "TLDR_inform": {
+            "mv": {
+              "man1_mv_21808": "move renam file directori overwrit exist file target prompt confirm overwrit exist file move file arbitrari locat move file verbos mode show file move prompt confirm overwrit exist file regardless file permiss"
+            },
+            "tr": {
+              "man1_tr_34307": "translat charact : run replac base singl charact charact set compress seri ident charact singl charact delet occurr specifi set charact input map charact first set correspond charact second set replac occurr charact anoth command output replac occurr charact file print result strip non-print charact file translat content file upper-cas"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_310094: convert and rotate video from MOV (iphone) to WMV (windows)",
+        "su_1571126: How to add audio to video using ffmpeg on Linux?",
+        "su_1621058: How can I stream video from a webcam to a file on a Beaglebone Black?"
+      ],
+      "Top-3 Scripts": [
+        "au_310094: sudo apt-get install ffmpeg\n\nffmpeg -i input.mov -vf transpose=1 output.wmv\n\nffmpeg -i input.mov -vf transpose=2 output.wmv\n\nffmpeg -i input.mov -vf transpose=1,transpose=1 output.wmv",
+        "su_1571126: ",
+        "su_1621058: ffmpeg -f v4l2 -input_format yuyv422 -i /dev/video0 -c copy -t 60 output.yuv\n\nffmpeg -f v4l2 -input_format mjpeg -i /dev/video0 -c copy -t 60 output.mjpeg\n\nffmpeg -muxers\n\nffmpeg -h muxer=rawvideo\n\nffmpeg -h muxer=mjpeg"
+      ],
+      "Explanations about Options": {
+        "-h": "Show help. An optional parameter may be specified to print help about a specific item.\n If no argument is specified, only basic (non advanced) tool options are shown.",
+        "-vf": "Create the filtergraph specified by filtergraph and use it to filter the stream.",
+        "-i": "input file url"
+      }
+    },
+    {
+      "Command": "ffprobe",
+      "MP Summary": "ffprobe media prober",
+      "Most Similar TLDR Task": "Display the average bit rate of a video",
+      "Most Similar TLDR Script": "ffprobe -v error -select_streams v:0 -show_entries stream=bit_rate -of default=noprint_wrappers=1:nokey=1 {{input.mp4}}",
+      "Most Similar NL2Bash Task": "Rename uppercase file or folder name $1 to lower case name",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mv $1 `echo $1 | tr '[:upper:]' '[:lower:]'`\n",
+          "command-options": {
+            "mv": {
+              "mpsum": "move (rename) files"
+            },
+            "tr": {
+              "mpsum": "translate or delete characters"
+            }
+          },
+          "TLDR_inform": {
+            "mv": {
+              "man1_mv_21808": "move renam file directori overwrit exist file target prompt confirm overwrit exist file move file arbitrari locat move file verbos mode show file move prompt confirm overwrit exist file regardless file permiss"
+            },
+            "tr": {
+              "man1_tr_34307": "translat charact : run replac base singl charact charact set compress seri ident charact singl charact delet occurr specifi set charact input map charact first set correspond charact second set replac occurr charact anoth command output replac occurr charact file print result strip non-print charact file translat content file upper-cas"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_1145071: Get video length in hours:minutes:seconds round result to second",
+        "ul_170961: Get total duration of video files in a directory",
+        "so_14782077: Expand (extend) a video to an specific duration"
+      ],
+      "Top-3 Scripts": [
+        "au_1145071: $ ffprobe -v error -show_entries format=duration -of default=noprint_wrappers=1:nokey=1 -sexagesimal 'video file.mp4' | awk -F: '{printf \"%02d:%02d:%02d\\n\",$1,$2,$3}'\n00:33:29",
+        "ul_170961: ffprobe -v quiet -of csv=p=0 -show_entries format=duration Inception.mp4 \n275.690000\n\nfind . -maxdepth 1 -iname '*.mp4' -exec ffprobe -v quiet -of csv=p=0 -show_entries format=duration {} \\;\n149.233333\n130.146667\n275.690000\n\nfind . -maxdepth 1 -iname '*.mp4' -exec ffprobe -v quiet -of csv=p=0 -show_entries format=duration {} \\; | paste -sd+ -| bc\n555.070000\n\nfind . -maxdepth 1 -iname '*.ts' -exec ffprobe -v quiet -of csv=p=0 -show_entries format=duration {} \\; | paste -sd+ -| bc",
+        "so_14782077: ffprobe -v error -show_entries format=duration -of default=noprint_wrappers=1:nokey=1 audio.wav\n ffprobe -v error -show_entries format=duration -of default=noprint_wrappers=1:nokey=1 video.mp4\n\nffprobe -v error -show_entries format=duration -of default=noprint_wrappers=1:nokey=1 input.mp4"
+      ],
+      "Explanations about Options": {
+        "-of": "Set the output printing format.",
+        "-show_entries": "Set list of entries to show."
+      }
+    },
+    {
+      "Command": "xrandr",
+      "MP Summary": "primitive command line interface to RandR extension",
+      "Most Similar TLDR Task": "Change the resolution and update frequency of DisplayPort 1 to 1920x1080, 60Hz",
+      "Most Similar TLDR Script": "xrandr --output {{DP1}} --mode {{1920x1080}} --rate {{60}}",
+      "Most Similar NL2Bash Task": "Rename uppercase file or folder name $1 to lower case name",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mv $1 `echo $1 | tr '[:upper:]' '[:lower:]'`\n",
+          "command-options": {
+            "mv": {
+              "mpsum": "move (rename) files"
+            },
+            "tr": {
+              "mpsum": "translate or delete characters"
+            }
+          },
+          "TLDR_inform": {
+            "mv": {
+              "man1_mv_21808": "move renam file directori overwrit exist file target prompt confirm overwrit exist file move file arbitrari locat move file verbos mode show file move prompt confirm overwrit exist file regardless file permiss"
+            },
+            "tr": {
+              "man1_tr_34307": "translat charact : run replac base singl charact charact set compress seri ident charact singl charact delet occurr specifi set charact input map charact first set correspond charact second set replac occurr charact anoth command output replac occurr charact file print result strip non-print charact file translat content file upper-cas"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "tldr_7229: Change the resolution and update frequency of DisplayPort 1 to 1920x1080, 60Hz",
+        "tldr_2077: Set the resolution of HDMI2 to 1280x1024 and put it on the right of DP1",
+        "au_585302: Set display to a higher resolution than 720p?"
+      ],
+      "Top-3 Scripts": [
+        "tldr_7229: xrandr --output {{DP1}} --mode {{1920x1080}} --rate {{60}}",
+        "tldr_2077: xrandr --output {{HDMI2}} --mode {{1280x1024}} --right-of {{DP1}}",
+        "au_585302: xrandr --prop | grep connected"
+      ],
+      "Explanations about Options": {
+        "--mode": "This selects a mode. Use either the name or the XID for mode",
+        "--prop": "This option causes xrandr to display the contents of properties for each output.\n --verbose also enables --prop.",
+        "--rate": "This sets the refresh rate closest to the specified value.",
+        "--output": "Selects an output to reconfigure. Use either the name of the output or the XID."
+      }
+    },
+    {
+      "Command": "youtube-dl",
+      "MP Summary": "download videos from youtube.com or other video platforms",
+      "Most Similar TLDR Task": "Download the best quality audio and video and merge them",
+      "Most Similar TLDR Script": "youtube-dl -f bestvideo+bestaudio '{{url}}'",
+      "Most Similar NL2Bash Task": "Rename uppercase file or folder name $1 to lower case name",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mv $1 `echo $1 | tr '[:upper:]' '[:lower:]'`\n",
+          "command-options": {
+            "mv": {
+              "mpsum": "move (rename) files"
+            },
+            "tr": {
+              "mpsum": "translate or delete characters"
+            }
+          },
+          "TLDR_inform": {
+            "mv": {
+              "man1_mv_21808": "move renam file directori overwrit exist file target prompt confirm overwrit exist file move file arbitrari locat move file verbos mode show file move prompt confirm overwrit exist file regardless file permiss"
+            },
+            "tr": {
+              "man1_tr_34307": "translat charact : run replac base singl charact charact set compress seri ident charact singl charact delet occurr specifi set charact input map charact first set correspond charact second set replac occurr charact anoth command output replac occurr charact file print result strip non-print charact file translat content file upper-cas"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_266568: Downloading videos to an external drive with youtube-dl"
+      ],
+      "Top-3 Scripts": [
+        "au_266568: cd '/media/New Volume/Youtube Downloads'\nyoutube-dl URL1...\nyoutube-dl URL2...\n\n..."
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "apt-get",
+      "MP Summary": "APT package handling utility - command-line interface",
+      "Most Similar TLDR Task": "Remove all packages that are no longer needed",
+      "Most Similar TLDR Script": "apt-get autoremove",
+      "Most Similar NL2Bash Task": "Rename uppercase file or folder name $1 to lower case name",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mv $1 `echo $1 | tr '[:upper:]' '[:lower:]'`\n",
+          "command-options": {
+            "mv": {
+              "mpsum": "move (rename) files"
+            },
+            "tr": {
+              "mpsum": "translate or delete characters"
+            }
+          },
+          "TLDR_inform": {
+            "mv": {
+              "man1_mv_21808": "move renam file directori overwrit exist file target prompt confirm overwrit exist file move file arbitrari locat move file verbos mode show file move prompt confirm overwrit exist file regardless file permiss"
+            },
+            "tr": {
+              "man1_tr_34307": "translat charact : run replac base singl charact charact set compress seri ident charact singl charact delet occurr specifi set charact input map charact first set correspond charact second set replac occurr charact anoth command output replac occurr charact file print result strip non-print charact file translat content file upper-cas"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_310094: convert and rotate video from MOV (iphone) to WMV (windows)",
+        "au_106501: video gets corrupt after converting ogv to any format using ffmpeg",
+        "au_680436: Unable to play videos after converting from Netbook 10.04 to Lubuntu 14.04"
+      ],
+      "Top-3 Scripts": [
+        "au_310094: sudo apt-get install ffmpeg",
+        "au_106501: sudo add-apt-repository ppa:kazam-team/unstable-series\nsudo apt-get update\nsudo apt-get install kazam",
+        "au_680436: sudo apt-get install --reinstall vlc\nsudo apt-get remove ubuntu-restricted-extras\nsudo apt-get install ubuntu-restricted-extras"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "echo",
+      "MP Summary": "display a line of text",
+      "Most Similar TLDR Task": "Print a message with environment variables",
+      "Most Similar TLDR Script": "echo \"{{My path is $PATH}}\"",
+      "Most Similar NL2Bash Task": "Rename uppercase file or folder name $1 to lower case name",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mv $1 `echo $1 | tr '[:upper:]' '[:lower:]'`\n",
+          "command-options": {
+            "mv": {
+              "mpsum": "move (rename) files"
+            },
+            "tr": {
+              "mpsum": "translate or delete characters"
+            }
+          },
+          "TLDR_inform": {
+            "mv": {
+              "man1_mv_21808": "move renam file directori overwrit exist file target prompt confirm overwrit exist file move file arbitrari locat move file verbos mode show file move prompt confirm overwrit exist file regardless file permiss"
+            },
+            "tr": {
+              "man1_tr_34307": "translat charact : run replac base singl charact charact set compress seri ident charact singl charact delet occurr specifi set charact input map charact first set correspond charact second set replac occurr charact anoth command output replac occurr charact file print result strip non-print charact file translat content file upper-cas"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_1095474: How can I change lower to upper using (three) parameters?",
+        "au_282201: Setting a display's backlight brightness to be lower than is possible via the normal brightness controls",
+        "so_5402800: Convert vowels from upper case to lower case and lower case to upper case using sed"
+      ],
+      "Top-3 Scripts": [
+        "au_1095474: ",
+        "au_282201: echo 7 | sudo tee /sys/class/backlight/acpi_video0/brightness",
+        "so_5402800: $ echo \"This Is a lOng String\" | sed 'y/aeiouAEIOU/AEIOUaeiou/'\nThIs is A long StrIng"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "sed",
+      "MP Summary": "stream editor for filtering and transforming text",
+      "Most Similar TLDR Task": "Apply multiple find-replace expressions to a file",
+      "Most Similar TLDR Script": "sed -e 's/{{find}}/{{replace}}/' -e 's/{{find}}/{{replace}}/' {{filename}}",
+      "Most Similar NL2Bash Task": "Rename uppercase file or folder name $1 to lower case name",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mv $1 `echo $1 | tr '[:upper:]' '[:lower:]'`\n",
+          "command-options": {
+            "mv": {
+              "mpsum": "move (rename) files"
+            },
+            "tr": {
+              "mpsum": "translate or delete characters"
+            }
+          },
+          "TLDR_inform": {
+            "mv": {
+              "man1_mv_21808": "move renam file directori overwrit exist file target prompt confirm overwrit exist file move file arbitrari locat move file verbos mode show file move prompt confirm overwrit exist file regardless file permiss"
+            },
+            "tr": {
+              "man1_tr_34307": "translat charact : run replac base singl charact charact set compress seri ident charact singl charact delet occurr specifi set charact input map charact first set correspond charact second set replac occurr charact anoth command output replac occurr charact file print result strip non-print charact file translat content file upper-cas"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_12284: Convert all characters in \"$a\" to lower case and save to variable \"b\"",
+        "nl2bash_12288: Convert all characters in standard input to lower case",
+        "so_5402800: Convert vowels from upper case to lower case and lower case to upper case using sed"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_12284: b=`echo \"$a\" | sed 's/./\\L&/g'`",
+        "nl2bash_12288: sed 's/.*/\\L&/'",
+        "so_5402800: sed 'y/aeiouAEIOU/AEIOUaeiou/'\n\n$ echo \"This Is a lOng String\" | sed 'y/aeiouAEIOU/AEIOUaeiou/'\nThIs is A long StrIng"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "install",
+      "MP Summary": "copy files and set attributes",
+      "Most Similar TLDR Task": "Copy files and apply access/modification times of source to destination",
+      "Most Similar TLDR Script": "install -p {{path/to/source}} {{path/to/destination}}",
+      "Most Similar NL2Bash Task": "Rename uppercase file or folder name $1 to lower case name",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mv $1 `echo $1 | tr '[:upper:]' '[:lower:]'`\n",
+          "command-options": {
+            "mv": {
+              "mpsum": "move (rename) files"
+            },
+            "tr": {
+              "mpsum": "translate or delete characters"
+            }
+          },
+          "TLDR_inform": {
+            "mv": {
+              "man1_mv_21808": "move renam file directori overwrit exist file target prompt confirm overwrit exist file move file arbitrari locat move file verbos mode show file move prompt confirm overwrit exist file regardless file permiss"
+            },
+            "tr": {
+              "man1_tr_34307": "translat charact : run replac base singl charact charact set compress seri ident charact singl charact delet occurr specifi set charact input map charact first set correspond charact second set replac occurr charact anoth command output replac occurr charact file print result strip non-print charact file translat content file upper-cas"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_310094: convert and rotate video from MOV (iphone) to WMV (windows)",
+        "au_778137: How to convert a video file from mkv to a format supported by the TV set?",
+        "au_106501: video gets corrupt after converting ogv to any format using ffmpeg"
+      ],
+      "Top-3 Scripts": [
+        "au_310094: sudo apt-get install ffmpeg",
+        "au_778137: apt install ffmpeg",
+        "au_106501: sudo add-apt-repository ppa:kazam-team/unstable-series\nsudo apt-get update\nsudo apt-get install kazam"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "tr",
+      "MP Summary": "translate or delete characters",
+      "Most Similar TLDR Task": "Compress a series of identical characters to a single character",
+      "Most Similar TLDR Script": "tr -s '{{input_characters}}' < {{filename}}",
+      "Most Similar NL2Bash Task": "Rename uppercase file or folder name $1 to lower case name",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mv $1 `echo $1 | tr '[:upper:]' '[:lower:]'`\n",
+          "command-options": {
+            "mv": {
+              "mpsum": "move (rename) files"
+            },
+            "tr": {
+              "mpsum": "translate or delete characters"
+            }
+          },
+          "TLDR_inform": {
+            "mv": {
+              "man1_mv_21808": "move renam file directori overwrit exist file target prompt confirm overwrit exist file move file arbitrari locat move file verbos mode show file move prompt confirm overwrit exist file regardless file permiss"
+            },
+            "tr": {
+              "man1_tr_34307": "translat charact : run replac base singl charact charact set compress seri ident charact singl charact delet occurr specifi set charact input map charact first set correspond charact second set replac occurr charact anoth command output replac occurr charact file print result strip non-print charact file translat content file upper-cas"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_23178769: Unix tr command to convert lower case to upper AND upper to lower case",
+        "au_1095474: How can I change lower to upper using (three) parameters?",
+        "so_2264428: How to convert a string to lower case in Bash?"
+      ],
+      "Top-3 Scripts": [
+        "so_23178769: tr '[:upper:][:lower:]' '[:lower:][:upper:]'",
+        "au_1095474: ",
+        "so_2264428: $ echo \"$a\" | tr '[:upper:]' '[:lower:]'\nhi all"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "printf",
+      "MP Summary": "format and print data",
+      "Most Similar TLDR Task": "Print a text message composed with environment variables",
+      "Most Similar TLDR Script": "printf \"{{var1: %s\\tvar2: %s\\n}}\" \"{{$VAR1}}\" \"{{$VAR2}}\"",
+      "Most Similar NL2Bash Task": "Rename uppercase file or folder name $1 to lower case name",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mv $1 `echo $1 | tr '[:upper:]' '[:lower:]'`\n",
+          "command-options": {
+            "mv": {
+              "mpsum": "move (rename) files"
+            },
+            "tr": {
+              "mpsum": "translate or delete characters"
+            }
+          },
+          "TLDR_inform": {
+            "mv": {
+              "man1_mv_21808": "move renam file directori overwrit exist file target prompt confirm overwrit exist file move file arbitrari locat move file verbos mode show file move prompt confirm overwrit exist file regardless file permiss"
+            },
+            "tr": {
+              "man1_tr_34307": "translat charact : run replac base singl charact charact set compress seri ident charact singl charact delet occurr specifi set charact input map charact first set correspond charact second set replac occurr charact anoth command output replac occurr charact file print result strip non-print charact file translat content file upper-cas"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_44508743: Unable to route webcam video to virtual video device on Linux (via OpenCV)",
+        "au_1145071: Get video length in hours:minutes:seconds round result to second",
+        "so_2264428: How to convert a string to lower case in Bash?"
+      ],
+      "Top-3 Scripts": [
+        "so_44508743: ",
+        "au_1145071: awk -F: '{printf \"%02d:%02d:%02d\\n\",$1,$2,$3}'\n\nawk -F: '/^[0-9]+:[0-9]+:[0-9]+/ {printf \"%02d:%02d:%02d\\n\",$1,$2,$3}'\n\n$ ffprobe -v error -show_entries format=duration -of default=noprint_wrappers=1:nokey=1 -sexagesimal 'video file.mp4' | awk -F: '{printf \"%02d:%02d:%02d\\n\",$1,$2,$3}'\n00:33:29",
+        "so_2264428: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "add-apt-repository",
+      "MP Summary": "Adds   a   repository   into   the   /etc/apt/sources.list   or /etc/apt/sources.list.d or removes an existing one",
+      "Most Similar TLDR Task": "Enable source packages",
+      "Most Similar TLDR Script": "add-apt-repository --enable-source {{repository_spec}}",
+      "Most Similar NL2Bash Task": "Rename uppercase file or folder name $1 to lower case name",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mv $1 `echo $1 | tr '[:upper:]' '[:lower:]'`\n",
+          "command-options": {
+            "mv": {
+              "mpsum": "move (rename) files"
+            },
+            "tr": {
+              "mpsum": "translate or delete characters"
+            }
+          },
+          "TLDR_inform": {
+            "mv": {
+              "man1_mv_21808": "move renam file directori overwrit exist file target prompt confirm overwrit exist file move file arbitrari locat move file verbos mode show file move prompt confirm overwrit exist file regardless file permiss"
+            },
+            "tr": {
+              "man1_tr_34307": "translat charact : run replac base singl charact charact set compress seri ident charact singl charact delet occurr specifi set charact input map charact first set correspond charact second set replac occurr charact anoth command output replac occurr charact file print result strip non-print charact file translat content file upper-cas"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_778137: How to convert a video file from mkv to a format supported by the TV set?",
+        "au_106501: video gets corrupt after converting ogv to any format using ffmpeg",
+        "au_785508: How to merge subtitle to video?"
+      ],
+      "Top-3 Scripts": [
+        "au_778137: add-apt-repository ppa:mc3man/trusty-media",
+        "au_106501: sudo add-apt-repository ppa:kazam-team/unstable-series\nsudo apt-get update\nsudo apt-get install kazam",
+        "au_785508: sudo add-apt-repository ppa:stebbins/handbrake-releases\nsudo apt-get update \nsudo apt-get install handbrake"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "vlc",
+      "MP Summary": "the VLC media player",
+      "Most Similar TLDR Task": "Play repeatedly",
+      "Most Similar TLDR Script": "vlc --loop {{path/to/file}}",
+      "Most Similar NL2Bash Task": "Rename uppercase file or folder name $1 to lower case name",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mv $1 `echo $1 | tr '[:upper:]' '[:lower:]'`\n",
+          "command-options": {
+            "mv": {
+              "mpsum": "move (rename) files"
+            },
+            "tr": {
+              "mpsum": "translate or delete characters"
+            }
+          },
+          "TLDR_inform": {
+            "mv": {
+              "man1_mv_21808": "move renam file directori overwrit exist file target prompt confirm overwrit exist file move file arbitrari locat move file verbos mode show file move prompt confirm overwrit exist file regardless file permiss"
+            },
+            "tr": {
+              "man1_tr_34307": "translat charact : run replac base singl charact charact set compress seri ident charact singl charact delet occurr specifi set charact input map charact first set correspond charact second set replac occurr charact anoth command output replac occurr charact file print result strip non-print charact file translat content file upper-cas"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_680436: Unable to play videos after converting from Netbook 10.04 to Lubuntu 14.04"
+      ],
+      "Top-3 Scripts": [
+        "au_680436: sudo apt-get install --reinstall vlc\nsudo apt-get remove ubuntu-restricted-extras\nsudo apt-get install ubuntu-restricted-extras"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "convert",
+      "MP Summary": "convert between image formats as well as resize an image, blur, crop, despeckle, dither, draw on, flip, join, re-sample, and much more.",
+      "Most Similar TLDR Task": "Create a gif from a series of images with 100ms delay between them",
+      "Most Similar TLDR Script": "convert {{image1.png}} {{image2.png}} {{image3.png}} -delay {{10}} {{animation.gif}}",
+      "Most Similar NL2Bash Task": "Rename uppercase file or folder name $1 to lower case name",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mv $1 `echo $1 | tr '[:upper:]' '[:lower:]'`\n",
+          "command-options": {
+            "mv": {
+              "mpsum": "move (rename) files"
+            },
+            "tr": {
+              "mpsum": "translate or delete characters"
+            }
+          },
+          "TLDR_inform": {
+            "mv": {
+              "man1_mv_21808": "move renam file directori overwrit exist file target prompt confirm overwrit exist file move file arbitrari locat move file verbos mode show file move prompt confirm overwrit exist file regardless file permiss"
+            },
+            "tr": {
+              "man1_tr_34307": "translat charact : run replac base singl charact charact set compress seri ident charact singl charact delet occurr specifi set charact input map charact first set correspond charact second set replac occurr charact anoth command output replac occurr charact file print result strip non-print charact file translat content file upper-cas"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_44508743: Unable to route webcam video to virtual video device on Linux (via OpenCV)"
+      ],
+      "Top-3 Scripts": [
+        "so_44508743: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "sudo",
+      "MP Summary": "execute a command as another user",
+      "Most Similar TLDR Task": "Launch the default shell with superuser privileges",
+      "Most Similar TLDR Script": "sudo -i",
+      "Most Similar NL2Bash Task": "Rename uppercase file or folder name $1 to lower case name",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mv $1 `echo $1 | tr '[:upper:]' '[:lower:]'`\n",
+          "command-options": {
+            "mv": {
+              "mpsum": "move (rename) files"
+            },
+            "tr": {
+              "mpsum": "translate or delete characters"
+            }
+          },
+          "TLDR_inform": {
+            "mv": {
+              "man1_mv_21808": "move renam file directori overwrit exist file target prompt confirm overwrit exist file move file arbitrari locat move file verbos mode show file move prompt confirm overwrit exist file regardless file permiss"
+            },
+            "tr": {
+              "man1_tr_34307": "translat charact : run replac base singl charact charact set compress seri ident charact singl charact delet occurr specifi set charact input map charact first set correspond charact second set replac occurr charact anoth command output replac occurr charact file print result strip non-print charact file translat content file upper-cas"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_310094: convert and rotate video from MOV (iphone) to WMV (windows)",
+        "au_106501: video gets corrupt after converting ogv to any format using ffmpeg",
+        "au_680436: Unable to play videos after converting from Netbook 10.04 to Lubuntu 14.04"
+      ],
+      "Top-3 Scripts": [
+        "au_310094: sudo apt-get install ffmpeg",
+        "au_106501: sudo add-apt-repository ppa:kazam-team/unstable-series\nsudo apt-get update\nsudo apt-get install kazam",
+        "au_680436: sudo apt-get install --reinstall vlc\nsudo apt-get remove ubuntu-restricted-extras\nsudo apt-get install ubuntu-restricted-extras"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "find",
+      "MP Summary": "search for files in a directory hierarchy",
+      "Most Similar TLDR Task": "Find files matching a given size range",
+      "Most Similar TLDR Script": "find {{root_path}} -size {{+500k}} -size {{-10M}}",
+      "Most Similar NL2Bash Task": "Rename uppercase file or folder name $1 to lower case name",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mv $1 `echo $1 | tr '[:upper:]' '[:lower:]'`\n",
+          "command-options": {
+            "mv": {
+              "mpsum": "move (rename) files"
+            },
+            "tr": {
+              "mpsum": "translate or delete characters"
+            }
+          },
+          "TLDR_inform": {
+            "mv": {
+              "man1_mv_21808": "move renam file directori overwrit exist file target prompt confirm overwrit exist file move file arbitrari locat move file verbos mode show file move prompt confirm overwrit exist file regardless file permiss"
+            },
+            "tr": {
+              "man1_tr_34307": "translat charact : run replac base singl charact charact set compress seri ident charact singl charact delet occurr specifi set charact input map charact first set correspond charact second set replac occurr charact anoth command output replac occurr charact file print result strip non-print charact file translat content file upper-cas"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_534480: How to change uppercase letters of my file name to lower case?",
+        "ul_170961: Get total duration of video files in a directory",
+        "so_46238941: Calculate total runtime of videos in folder using command line"
+      ],
+      "Top-3 Scripts": [
+        "ul_534480: find . -depth -name '*[[:upper:]]*' -exec rename '\n  s:[^/]+\\Z:\\L$&:' {} +\n\nfind . -depth -name '*[[:upper:]]*' -exec sh -c '\n  for f do\n    dir=${f%/*}\n    name=${f##*/}\n    newname=$(awk \"BEGIN{print tolower(ARGV[1])}\" \"$name\")\n    mv -i -- \"$f\" \"$dir/$newname\"\n  done' sh {} +",
+        "ul_170961: find . -maxdepth 1 -iname '*.mp4' -exec ffprobe -v quiet -of csv=p=0 -show_entries format=duration {} \\;\n149.233333\n130.146667\n275.690000\n\nfind . -maxdepth 1 -iname '*.mp4' -exec ffprobe -v quiet -of csv=p=0 -show_entries format=duration {} \\; | paste -sd+ -| bc\n555.070000\n\nfind . -maxdepth 1 -iname '*.ts' -exec ffprobe -v quiet -of csv=p=0 -show_entries format=duration {} \\; | paste -sd+ -| bc",
+        "so_46238941: find . -iname \"*.mp4\" -exec ffprobe -v error -print_format json -show_format {} \\; | jq -r '.[].duration' | awk '{total+=$0}END{printf \"%.6f\",total}'"
+      ],
+      "Explanations about Options": {
+        "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+        "-maxdepth": "Descend at most levels (a non-negative integer) levels of directories below the\n starting-points. -maxdepth 0 means only apply the tests and actions to the\n starting-points themselves.",
+        "-depth": "Process each directory's contents before the directory itself. The -delete action\n also implies -depth.",
+        "-iname": "Like -name, but the match is case insensitive. For example, the patterns `fo*' and\n `F??' match the file names `Foo', `FOO', `foo', `fOo', etc. The pattern `*foo*`\n will also match a file called '.foobar'."
+      }
+    },
+    {
+      "Command": "awk",
+      "MP Summary": "pattern scanning and processing language",
+      "Most Similar TLDR Task": "Print different values based on conditions",
+      "Most Similar TLDR Script": "awk '{if ($1 == \"foo\") print \"Exact match foo\"; else if ($1 ~ \"bar\") print \"Partial match bar\"; else print \"Baz\"}' {{filename}}",
+      "Most Similar NL2Bash Task": "Rename uppercase file or folder name $1 to lower case name",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mv $1 `echo $1 | tr '[:upper:]' '[:lower:]'`\n",
+          "command-options": {
+            "mv": {
+              "mpsum": "move (rename) files"
+            },
+            "tr": {
+              "mpsum": "translate or delete characters"
+            }
+          },
+          "TLDR_inform": {
+            "mv": {
+              "man1_mv_21808": "move renam file directori overwrit exist file target prompt confirm overwrit exist file move file arbitrari locat move file verbos mode show file move prompt confirm overwrit exist file regardless file permiss"
+            },
+            "tr": {
+              "man1_tr_34307": "translat charact : run replac base singl charact charact set compress seri ident charact singl charact delet occurr specifi set charact input map charact first set correspond charact second set replac occurr charact anoth command output replac occurr charact file print result strip non-print charact file translat content file upper-cas"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_1145071: Get video length in hours:minutes:seconds round result to second",
+        "ul_534480: How to change uppercase letters of my file name to lower case?",
+        "so_13559389: Convert a specific column to lower case in a CSV file"
+      ],
+      "Top-3 Scripts": [
+        "au_1145071: awk -F: '{printf \"%02d:%02d:%02d\\n\",$1,$2,$3}'\n\nawk -F: '/^[0-9]+:[0-9]+:[0-9]+/ {printf \"%02d:%02d:%02d\\n\",$1,$2,$3}'\n\n$ ffprobe -v error -show_entries format=duration -of default=noprint_wrappers=1:nokey=1 -sexagesimal 'video file.mp4' | awk -F: '{printf \"%02d:%02d:%02d\\n\",$1,$2,$3}'\n00:33:29",
+        "ul_534480: tolower() {\n  awk 'BEGIN{print tolower(ARGV[1])}' \"$1\"\n}\nfor f in *[[:upper:]]*; do\n  # [ -f \"$f\" ] || continue # uncomment to skip non-regular files if needed\n  # [ -L \"$f\" ] && continue # uncomment to also skip symlinks even\n                            # if they resolve to regular files\n  mv -i -- \"$f\" \"$(tolower \"$f\")\"\ndone\n\nfind . -depth -name '*[[:upper:]]*' -exec sh -c '\n  for f do\n    dir=${f%/*}\n    name=${f##*/}\n    newname=$(awk \"BEGIN{print tolower(ARGV[1])}\" \"$name\")\n    mv -i -- \"$f\" \"$dir/$newname\"\n  done' sh {} +",
+        "so_13559389: awk -F\",\" 'BEGIN{OFS=\",\"} {$5 = tolower($5); print}' file\n\nawk -F, -v OFS=, '{$5 = tolower($5); print}' file"
+      ],
+      "Explanations about Options": {
+        "-v": "FS=sepstring"
+      }
+    },
+    {
+      "Command": "import",
+      "MP Summary": "saves any visible window on an X server and outputs it as an image file. You can capture a single window, the entire screen, or any rectangular portion of the screen.",
+      "Most Similar TLDR Task": "Capture contents of a remote X server screen in the PNG image format",
+      "Most Similar TLDR Script": "import -window root -display {{remote_host}}:{screen}.{display} {{output.png}}",
+      "Most Similar NL2Bash Task": "Rename uppercase file or folder name $1 to lower case name",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mv $1 `echo $1 | tr '[:upper:]' '[:lower:]'`\n",
+          "command-options": {
+            "mv": {
+              "mpsum": "move (rename) files"
+            },
+            "tr": {
+              "mpsum": "translate or delete characters"
+            }
+          },
+          "TLDR_inform": {
+            "mv": {
+              "man1_mv_21808": "move renam file directori overwrit exist file target prompt confirm overwrit exist file move file arbitrari locat move file verbos mode show file move prompt confirm overwrit exist file regardless file permiss"
+            },
+            "tr": {
+              "man1_tr_34307": "translat charact : run replac base singl charact charact set compress seri ident charact singl charact delet occurr specifi set charact input map charact first set correspond charact second set replac occurr charact anoth command output replac occurr charact file print result strip non-print charact file translat content file upper-cas"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_971119: Convert a sequence of ppm images to avi video"
+      ],
+      "Top-3 Scripts": [
+        "au_971119: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "tee",
+      "MP Summary": "read from standard input and write to standard output and files",
+      "Most Similar TLDR Task": "Create a directory called \"example\", count the number of characters in \"example\" and write \"example\" to the terminal",
+      "Most Similar TLDR Script": "echo \"example\" | tee >(xargs mkdir) >(wc -c)",
+      "Most Similar NL2Bash Task": "Rename uppercase file or folder name $1 to lower case name",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mv $1 `echo $1 | tr '[:upper:]' '[:lower:]'`\n",
+          "command-options": {
+            "mv": {
+              "mpsum": "move (rename) files"
+            },
+            "tr": {
+              "mpsum": "translate or delete characters"
+            }
+          },
+          "TLDR_inform": {
+            "mv": {
+              "man1_mv_21808": "move renam file directori overwrit exist file target prompt confirm overwrit exist file move file arbitrari locat move file verbos mode show file move prompt confirm overwrit exist file regardless file permiss"
+            },
+            "tr": {
+              "man1_tr_34307": "translat charact : run replac base singl charact charact set compress seri ident charact singl charact delet occurr specifi set charact input map charact first set correspond charact second set replac occurr charact anoth command output replac occurr charact file print result strip non-print charact file translat content file upper-cas"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_282201: Setting a display's backlight brightness to be lower than is possible via the normal brightness controls",
+        "au_585302: Set display to a higher resolution than 720p?"
+      ],
+      "Top-3 Scripts": [
+        "au_282201: echo 7 | sudo tee /sys/class/backlight/acpi_video0/brightness",
+        "au_585302: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "chmod",
+      "MP Summary": "change file mode bits",
+      "Most Similar TLDR Task": "Change permissions recursively giving [g]roup and [o]thers the ability to [w]rite",
+      "Most Similar TLDR Script": "chmod -R g+w,o+w {{directory}}",
+      "Most Similar NL2Bash Task": "Rename uppercase file or folder name $1 to lower case name",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mv $1 `echo $1 | tr '[:upper:]' '[:lower:]'`\n",
+          "command-options": {
+            "mv": {
+              "mpsum": "move (rename) files"
+            },
+            "tr": {
+              "mpsum": "translate or delete characters"
+            }
+          },
+          "TLDR_inform": {
+            "mv": {
+              "man1_mv_21808": "move renam file directori overwrit exist file target prompt confirm overwrit exist file move file arbitrari locat move file verbos mode show file move prompt confirm overwrit exist file regardless file permiss"
+            },
+            "tr": {
+              "man1_tr_34307": "translat charact : run replac base singl charact charact set compress seri ident charact singl charact delet occurr specifi set charact input map charact first set correspond charact second set replac occurr charact anoth command output replac occurr charact file print result strip non-print charact file translat content file upper-cas"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_585302: Set display to a higher resolution than 720p?",
+        "su_311378: How to get a higher resolution on Ubuntu 11.04 using an intel chipset"
+      ],
+      "Top-3 Scripts": [
+        "au_585302: chmod +x ~/bin/nxrez",
+        "su_311378: cp fix-resolution.sh /usr/local/bin\nchmod +x /usr/local/bin/fix-resolution.sh\ncp fix-resolution.desktop /etc/xdg/autostart"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "pi",
+      "MP Summary": "compute decimal Archimedes' constant Pi to arbitrary accuracy.",
+      "Most Similar TLDR Task": "Display a specified number of decimal digits of Archimedes' constant Pi",
+      "Most Similar TLDR Script": "pi {{number}}",
+      "Most Similar NL2Bash Task": "Rename uppercase file or folder name $1 to lower case name",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mv $1 `echo $1 | tr '[:upper:]' '[:lower:]'`\n",
+          "command-options": {
+            "mv": {
+              "mpsum": "move (rename) files"
+            },
+            "tr": {
+              "mpsum": "translate or delete characters"
+            }
+          },
+          "TLDR_inform": {
+            "mv": {
+              "man1_mv_21808": "move renam file directori overwrit exist file target prompt confirm overwrit exist file move file arbitrari locat move file verbos mode show file move prompt confirm overwrit exist file regardless file permiss"
+            },
+            "tr": {
+              "man1_tr_34307": "translat charact : run replac base singl charact charact set compress seri ident charact singl charact delet occurr specifi set charact input map charact first set correspond charact second set replac occurr charact anoth command output replac occurr charact file print result strip non-print charact file translat content file upper-cas"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_501732: How to stream videos over local network to TV from PC"
+      ],
+      "Top-3 Scripts": [
+        "au_501732: sudo usermod -aG fuse pi"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "print",
+      "MP Summary": "execute programs via entries in the mailcap file",
+      "Most Similar TLDR Task": "Print action can be used to print any file on default run-mailcap tool",
+      "Most Similar TLDR Script": "print {{filename}}",
+      "Most Similar NL2Bash Task": "Rename uppercase file or folder name $1 to lower case name",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mv $1 `echo $1 | tr '[:upper:]' '[:lower:]'`\n",
+          "command-options": {
+            "mv": {
+              "mpsum": "move (rename) files"
+            },
+            "tr": {
+              "mpsum": "translate or delete characters"
+            }
+          },
+          "TLDR_inform": {
+            "mv": {
+              "man1_mv_21808": "move renam file directori overwrit exist file target prompt confirm overwrit exist file move file arbitrari locat move file verbos mode show file move prompt confirm overwrit exist file regardless file permiss"
+            },
+            "tr": {
+              "man1_tr_34307": "translat charact : run replac base singl charact charact set compress seri ident charact singl charact delet occurr specifi set charact input map charact first set correspond charact second set replac occurr charact anoth command output replac occurr charact file print result strip non-print charact file translat content file upper-cas"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_534480: How to change uppercase letters of my file name to lower case?",
+        "so_2264428: How to convert a string to lower case in Bash?",
+        "ul_170961: Get total duration of video files in a directory"
+      ],
+      "Top-3 Scripts": [
+        "ul_534480: tolower() {\n  awk 'BEGIN{print tolower(ARGV[1])}' \"$1\"\n}\nfor f in *[[:upper:]]*; do\n  # [ -f \"$f\" ] || continue # uncomment to skip non-regular files if needed\n  # [ -L \"$f\" ] && continue # uncomment to also skip symlinks even\n                            # if they resolve to regular files\n  mv -i -- \"$f\" \"$(tolower \"$f\")\"\ndone\n\nfind . -depth -name '*[[:upper:]]*' -exec sh -c '\n  for f do\n    dir=${f%/*}\n    name=${f##*/}\n    newname=$(awk \"BEGIN{print tolower(ARGV[1])}\" \"$name\")\n    mv -i -- \"$f\" \"$dir/$newname\"\n  done' sh {} +",
+        "so_2264428: $ echo \"$a\" | awk '{print tolower($0)}'\nhi all",
+        "ul_170961: exiftool -S -n ./*.mp4 | awk '/^Duration/ {print $2}' | paste -sd+ -| bc\n555.070000000000\nexiftool -q -p '$Duration#' ./*.mp4 | awk '{sum += $0}; END{print sum}'\n555.070000000000"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "file",
+      "MP Summary": "determine file type",
+      "Most Similar TLDR Task": "Allow file to work with special or device files",
+      "Most Similar TLDR Script": "file -s {{filename}}",
+      "Most Similar NL2Bash Task": "Rename uppercase file or folder name $1 to lower case name",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mv $1 `echo $1 | tr '[:upper:]' '[:lower:]'`\n",
+          "command-options": {
+            "mv": {
+              "mpsum": "move (rename) files"
+            },
+            "tr": {
+              "mpsum": "translate or delete characters"
+            }
+          },
+          "TLDR_inform": {
+            "mv": {
+              "man1_mv_21808": "move renam file directori overwrit exist file target prompt confirm overwrit exist file move file arbitrari locat move file verbos mode show file move prompt confirm overwrit exist file regardless file permiss"
+            },
+            "tr": {
+              "man1_tr_34307": "translat charact : run replac base singl charact charact set compress seri ident charact singl charact delet occurr specifi set charact input map charact first set correspond charact second set replac occurr charact anoth command output replac occurr charact file print result strip non-print charact file translat content file upper-cas"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_13559389: Convert a specific column to lower case in a CSV file",
+        "ul_659002: convert only the first column in a file to lower case"
+      ],
+      "Top-3 Scripts": [
+        "so_13559389: awk -F\",\" 'BEGIN{OFS=\",\"} {$5 = tolower($5); print}' file\n\nawk -F, -v OFS=, '{$5 = tolower($5); print}' file",
+        "ul_659002: $ awk -F'[ ]' '{$1=tolower($1)}1' file\nmumdfw2as123v USER=wladmin                                                MOUNTPOINT=/apps\nmumfw2as97v.mrshmc.com USER=wladmin                                      MOUNTPOINT=/apps\nmumfw3as65v USER=user                                                    MOUNTPOINT=DR-/u\nmumdfw3as66v USER=oracle                                                  MOUNTPOINT=/u\nmumdfw3as69v_oracle ansible_host=mumdfw3as69v USER=oracle                 MOUNTPOINT=/web\n\n$ awk '{$1=tolower($1)}1' file\nmumdfw2as123v USER=wladmin MOUNTPOINT=/apps\nmumfw2as97v.mrshmc.com USER=wladmin MOUNTPOINT=/apps\nmumfw3as65v USER=user MOUNTPOINT=DR-/u\nmumdfw3as66v USER=oracle MOUNTPOINT=/u\nmumdfw3as69v_oracle ansible_host=mumdfw3as69v USER=oracle MOUNTPOINT=/web\n\n$ gawk -F'[ ]' -i inplace '{$1=tolower($1)}1' file\n$ cat file\nmumdfw2as123v USER=wladmin                                                MOUNTPOINT=/apps\nmumfw2as97v.mrshmc.com USER=wladmin                                      MOUNTPOINT=/apps\nmumfw3as65v USER=user                                                    MOUNTPOINT=DR-/u\nmumdfw3as66v USER=oracle                                                  MOUNTPOINT=/u\nmumdfw3as69v_oracle ansible_host=mumdfw3as69v USER=oracle                 MOUNTPOINT=/web"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "mv",
+      "MP Summary": "move (rename) files",
+      "Most Similar TLDR Task": "Move files in arbitrary locations",
+      "Most Similar TLDR Script": "mv {{source}} {{target}}",
+      "Most Similar NL2Bash Task": "Rename uppercase file or folder name $1 to lower case name",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mv $1 `echo $1 | tr '[:upper:]' '[:lower:]'`\n",
+          "command-options": {
+            "mv": {
+              "mpsum": "move (rename) files"
+            },
+            "tr": {
+              "mpsum": "translate or delete characters"
+            }
+          },
+          "TLDR_inform": {
+            "mv": {
+              "man1_mv_21808": "move renam file directori overwrit exist file target prompt confirm overwrit exist file move file arbitrari locat move file verbos mode show file move prompt confirm overwrit exist file regardless file permiss"
+            },
+            "tr": {
+              "man1_tr_34307": "translat charact : run replac base singl charact charact set compress seri ident charact singl charact delet occurr specifi set charact input map charact first set correspond charact second set replac occurr charact anoth command output replac occurr charact file print result strip non-print charact file translat content file upper-cas"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_1095474: How can I change lower to upper using (three) parameters?",
+        "ul_534480: How to change uppercase letters of my file name to lower case?"
+      ],
+      "Top-3 Scripts": [
+        "au_1095474: ",
+        "ul_534480: for f in *[[:upper:]]*; do\n  # [ -f \"$f\" ] || continue # uncomment to skip non-regular files if needed\n  # [ -L \"$f\" ] && continue # uncomment to also skip symlinks even\n                            # if they resolve to regular files\n  mv -i -- \"$f\" \"${f,,}\"\ndone\n\nmv FOO foo\n\ntypeset -l f\nfor F in *[[:upper:]]*; do\n  # [ -f \"$f\" ] || continue # uncomment to skip non-regular files if needed\n  # [ -L \"$f\" ] && continue # uncomment to also skip symlinks even\n                            # if they resolve to regular files\n  f=$F\n  mv -i -- \"$F\" \"$f\"\ndone\n\ntolower() {\n  awk 'BEGIN{print tolower(ARGV[1])}' \"$1\"\n}\nfor f in *[[:upper:]]*; do\n  # [ -f \"$f\" ] || continue # uncomment to skip non-regular files if needed\n  # [ -L \"$f\" ] && continue # uncomment to also skip symlinks even\n                            # if they resolve to regular files\n  mv -i -- \"$f\" \"$(tolower \"$f\")\"\ndone\n\nfind . -depth -name '*[[:upper:]]*' -exec sh -c '\n  for f do\n    dir=${f%/*}\n    name=${f##*/}\n    newname=$(awk \"BEGIN{print tolower(ARGV[1])}\" \"$name\")\n    mv -i -- \"$f\" \"$dir/$newname\"\n  done' sh {} +"
+      ],
+      "Explanations about Options": {
+        "-i": "prompt before overwrite"
+      }
+    },
+    {
+      "Command": "iw",
+      "MP Summary": "show / manipulate wireless devices and their configuration",
+      "Most Similar TLDR Task": "Scan for available wireless networks",
+      "Most Similar TLDR Script": "iw dev {{wlp}} scan",
+      "Most Similar NL2Bash Task": "Rename uppercase file or folder name $1 to lower case name",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mv $1 `echo $1 | tr '[:upper:]' '[:lower:]'`\n",
+          "command-options": {
+            "mv": {
+              "mpsum": "move (rename) files"
+            },
+            "tr": {
+              "mpsum": "translate or delete characters"
+            }
+          },
+          "TLDR_inform": {
+            "mv": {
+              "man1_mv_21808": "move renam file directori overwrit exist file target prompt confirm overwrit exist file move file arbitrari locat move file verbos mode show file move prompt confirm overwrit exist file regardless file permiss"
+            },
+            "tr": {
+              "man1_tr_34307": "translat charact : run replac base singl charact charact set compress seri ident charact singl charact delet occurr specifi set charact input map charact first set correspond charact second set replac occurr charact anoth command output replac occurr charact file print result strip non-print charact file translat content file upper-cas"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_50300907: Auto resize video with ffmpeg based on input video resolution"
+      ],
+      "Top-3 Scripts": [
+        "so_50300907: ffmpeg -i in -vf scale=iw/2:-2 out"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "perl",
+      "MP Summary": "The Perl 5 language interpreter",
+      "Most Similar TLDR Task": "Run a find/replace expression on a file, saving the original file with a given extension",
+      "Most Similar TLDR Script": "perl -p -i'.old' -e 's/{{find}}/{{replace}}/g' {{filename}}",
+      "Most Similar NL2Bash Task": "Rename uppercase file or folder name $1 to lower case name",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mv $1 `echo $1 | tr '[:upper:]' '[:lower:]'`\n",
+          "command-options": {
+            "mv": {
+              "mpsum": "move (rename) files"
+            },
+            "tr": {
+              "mpsum": "translate or delete characters"
+            }
+          },
+          "TLDR_inform": {
+            "mv": {
+              "man1_mv_21808": "move renam file directori overwrit exist file target prompt confirm overwrit exist file move file arbitrari locat move file verbos mode show file move prompt confirm overwrit exist file regardless file permiss"
+            },
+            "tr": {
+              "man1_tr_34307": "translat charact : run replac base singl charact charact set compress seri ident charact singl charact delet occurr specifi set charact input map charact first set correspond charact second set replac occurr charact anoth command output replac occurr charact file print result strip non-print charact file translat content file upper-cas"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_534480: How to change uppercase letters of my file name to lower case?",
+        "so_2264428: How to convert a string to lower case in Bash?"
+      ],
+      "Top-3 Scripts": [
+        "ul_534480: ",
+        "so_2264428: $ echo \"$a\" | perl -ne 'print lc'\nhi all"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "modprobe",
+      "MP Summary": "Add and remove modules from the Linux Kernel",
+      "Most Similar TLDR Task": "Remove a module from the kernel",
+      "Most Similar TLDR Script": "sudo modprobe --remove {{module_name}}",
+      "Most Similar NL2Bash Task": "Rename uppercase file or folder name $1 to lower case name",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mv $1 `echo $1 | tr '[:upper:]' '[:lower:]'`\n",
+          "command-options": {
+            "mv": {
+              "mpsum": "move (rename) files"
+            },
+            "tr": {
+              "mpsum": "translate or delete characters"
+            }
+          },
+          "TLDR_inform": {
+            "mv": {
+              "man1_mv_21808": "move renam file directori overwrit exist file target prompt confirm overwrit exist file move file arbitrari locat move file verbos mode show file move prompt confirm overwrit exist file regardless file permiss"
+            },
+            "tr": {
+              "man1_tr_34307": "translat charact : run replac base singl charact charact set compress seri ident charact singl charact delet occurr specifi set charact input map charact first set correspond charact second set replac occurr charact anoth command output replac occurr charact file print result strip non-print charact file translat content file upper-cas"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_44508743: Unable to route webcam video to virtual video device on Linux (via OpenCV)"
+      ],
+      "Top-3 Scripts": [
+        "so_44508743: make\nsudo make install\nsudo depmod -a\nsudo modprobe v4l2loopback\n\nsudo modprobe v4l2loopback exclusive_caps=1\n\nsudo modprobe v4l2loopback exclusive_caps=1,1,1,1,1,1,1,1"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "modinfo",
+      "MP Summary": "Show information about a Linux Kernel module",
+      "Most Similar TLDR Task": "List the specified attribute only",
+      "Most Similar TLDR Script": "modinfo -F {{author|description|license|parm|filename}} {{kernel_module}}",
+      "Most Similar NL2Bash Task": "Rename uppercase file or folder name $1 to lower case name",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mv $1 `echo $1 | tr '[:upper:]' '[:lower:]'`\n",
+          "command-options": {
+            "mv": {
+              "mpsum": "move (rename) files"
+            },
+            "tr": {
+              "mpsum": "translate or delete characters"
+            }
+          },
+          "TLDR_inform": {
+            "mv": {
+              "man1_mv_21808": "move renam file directori overwrit exist file target prompt confirm overwrit exist file move file arbitrari locat move file verbos mode show file move prompt confirm overwrit exist file regardless file permiss"
+            },
+            "tr": {
+              "man1_tr_34307": "translat charact : run replac base singl charact charact set compress seri ident charact singl charact delet occurr specifi set charact input map charact first set correspond charact second set replac occurr charact anoth command output replac occurr charact file print result strip non-print charact file translat content file upper-cas"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_44508743: Unable to route webcam video to virtual video device on Linux (via OpenCV)"
+      ],
+      "Top-3 Scripts": [
+        "so_44508743: modinfo v4l2loopback"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "screen",
+      "MP Summary": "screen manager with VT100/ANSI terminal emulation",
+      "Most Similar TLDR Task": "Detach from inside a screen",
+      "Most Similar TLDR Script": "Ctrl + A, D",
+      "Most Similar NL2Bash Task": "Rename uppercase file or folder name $1 to lower case name",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mv $1 `echo $1 | tr '[:upper:]' '[:lower:]'`\n",
+          "command-options": {
+            "mv": {
+              "mpsum": "move (rename) files"
+            },
+            "tr": {
+              "mpsum": "translate or delete characters"
+            }
+          },
+          "TLDR_inform": {
+            "mv": {
+              "man1_mv_21808": "move renam file directori overwrit exist file target prompt confirm overwrit exist file move file arbitrari locat move file verbos mode show file move prompt confirm overwrit exist file regardless file permiss"
+            },
+            "tr": {
+              "man1_tr_34307": "translat charact : run replac base singl charact charact set compress seri ident charact singl charact delet occurr specifi set charact input map charact first set correspond charact second set replac occurr charact anoth command output replac occurr charact file print result strip non-print charact file translat content file upper-cas"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_585302: Set display to a higher resolution than 720p?"
+      ],
+      "Top-3 Scripts": [
+        "au_585302: [Desktop Entry]\nName=A little bigger screen\nComment=Change screen resolution for a large/smaller desktop\nExec= ./bin/nxrez\nIcon=preferences-desktop-theme.png\nTerminal=false\nType=Application\nCategories=Settings;"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "make",
+      "MP Summary": "GNU make utility to maintain groups of programs",
+      "Most Similar TLDR Task": "Force making of a target, even if source files are unchanged",
+      "Most Similar TLDR Script": "make --always-make {{target}}",
+      "Most Similar NL2Bash Task": "Rename uppercase file or folder name $1 to lower case name",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mv $1 `echo $1 | tr '[:upper:]' '[:lower:]'`\n",
+          "command-options": {
+            "mv": {
+              "mpsum": "move (rename) files"
+            },
+            "tr": {
+              "mpsum": "translate or delete characters"
+            }
+          },
+          "TLDR_inform": {
+            "mv": {
+              "man1_mv_21808": "move renam file directori overwrit exist file target prompt confirm overwrit exist file move file arbitrari locat move file verbos mode show file move prompt confirm overwrit exist file regardless file permiss"
+            },
+            "tr": {
+              "man1_tr_34307": "translat charact : run replac base singl charact charact set compress seri ident charact singl charact delet occurr specifi set charact input map charact first set correspond charact second set replac occurr charact anoth command output replac occurr charact file print result strip non-print charact file translat content file upper-cas"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_44508743: Unable to route webcam video to virtual video device on Linux (via OpenCV)"
+      ],
+      "Top-3 Scripts": [
+        "so_44508743: make\nsudo make install\nsudo depmod -a\nsudo modprobe v4l2loopback"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "apt",
+      "MP Summary": "command-line interface",
+      "Most Similar TLDR Task": "Remove a package (using `purge` instead also removes its configuration files)",
+      "Most Similar TLDR Script": "sudo apt remove {{package}}",
+      "Most Similar NL2Bash Task": "Rename uppercase file or folder name $1 to lower case name",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mv $1 `echo $1 | tr '[:upper:]' '[:lower:]'`\n",
+          "command-options": {
+            "mv": {
+              "mpsum": "move (rename) files"
+            },
+            "tr": {
+              "mpsum": "translate or delete characters"
+            }
+          },
+          "TLDR_inform": {
+            "mv": {
+              "man1_mv_21808": "move renam file directori overwrit exist file target prompt confirm overwrit exist file move file arbitrari locat move file verbos mode show file move prompt confirm overwrit exist file regardless file permiss"
+            },
+            "tr": {
+              "man1_tr_34307": "translat charact : run replac base singl charact charact set compress seri ident charact singl charact delet occurr specifi set charact input map charact first set correspond charact second set replac occurr charact anoth command output replac occurr charact file print result strip non-print charact file translat content file upper-cas"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_310094: convert and rotate video from MOV (iphone) to WMV (windows)",
+        "au_778137: How to convert a video file from mkv to a format supported by the TV set?"
+      ],
+      "Top-3 Scripts": [
+        "au_310094: ",
+        "au_778137: apt update\n\napt install ffmpeg"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "bc",
+      "MP Summary": "An arbitrary precision calculator language",
+      "Most Similar TLDR Task": "Calculate expression and force number of decimal places to 10",
+      "Most Similar TLDR Script": "bc <<< \"scale=10; 5 / 3\"",
+      "Most Similar NL2Bash Task": "Rename uppercase file or folder name $1 to lower case name",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mv $1 `echo $1 | tr '[:upper:]' '[:lower:]'`\n",
+          "command-options": {
+            "mv": {
+              "mpsum": "move (rename) files"
+            },
+            "tr": {
+              "mpsum": "translate or delete characters"
+            }
+          },
+          "TLDR_inform": {
+            "mv": {
+              "man1_mv_21808": "move renam file directori overwrit exist file target prompt confirm overwrit exist file move file arbitrari locat move file verbos mode show file move prompt confirm overwrit exist file regardless file permiss"
+            },
+            "tr": {
+              "man1_tr_34307": "translat charact : run replac base singl charact charact set compress seri ident charact singl charact delet occurr specifi set charact input map charact first set correspond charact second set replac occurr charact anoth command output replac occurr charact file print result strip non-print charact file translat content file upper-cas"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_170961: Get total duration of video files in a directory"
+      ],
+      "Top-3 Scripts": [
+        "ul_170961: find . -maxdepth 1 -iname '*.mp4' -exec ffprobe -v quiet -of csv=p=0 -show_entries format=duration {} \\; | paste -sd+ -| bc\n555.070000\n\nfind . -maxdepth 1 -iname '*.ts' -exec ffprobe -v quiet -of csv=p=0 -show_entries format=duration {} \\; | paste -sd+ -| bc\n\nexiftool -S -n ./*.mp4 | awk '/^Duration/ {print $2}' | paste -sd+ -| bc\n555.070000000000\nexiftool -q -p '$Duration#' ./*.mp4 | awk '{sum += $0}; END{print sum}'\n555.070000000000"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "tail",
+      "MP Summary": "output the last part of files",
+      "Most Similar TLDR Task": "Keep reading file until `Ctrl + C`, even if the file is rotated",
+      "Most Similar TLDR Script": "tail -F {{file}}",
+      "Most Similar NL2Bash Task": "Rename uppercase file or folder name $1 to lower case name",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mv $1 `echo $1 | tr '[:upper:]' '[:lower:]'`\n",
+          "command-options": {
+            "mv": {
+              "mpsum": "move (rename) files"
+            },
+            "tr": {
+              "mpsum": "translate or delete characters"
+            }
+          },
+          "TLDR_inform": {
+            "mv": {
+              "man1_mv_21808": "move renam file directori overwrit exist file target prompt confirm overwrit exist file move file arbitrari locat move file verbos mode show file move prompt confirm overwrit exist file regardless file permiss"
+            },
+            "tr": {
+              "man1_tr_34307": "translat charact : run replac base singl charact charact set compress seri ident charact singl charact delet occurr specifi set charact input map charact first set correspond charact second set replac occurr charact anoth command output replac occurr charact file print result strip non-print charact file translat content file upper-cas"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_170961: Get total duration of video files in a directory",
+        "au_585302: Set display to a higher resolution than 720p?"
+      ],
+      "Top-3 Scripts": [
+        "ul_170961: exiftool -n -q -p '${Duration;our $sum;$_=ConvertDuration($sum+=$_)\n                    }' ./*.mp4| tail -n1\n0:09:15",
+        "au_585302: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "umask",
+      "MP Summary": "get or set the file mode creation mask",
+      "Most Similar TLDR Task": "Set the mask (using octal) to restrict no permissions for the file's owner, and restrict all permissions for everyone else",
+      "Most Similar TLDR Script": "umask {{077}}",
+      "Most Similar NL2Bash Task": "Rename uppercase file or folder name $1 to lower case name",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mv $1 `echo $1 | tr '[:upper:]' '[:lower:]'`\n",
+          "command-options": {
+            "mv": {
+              "mpsum": "move (rename) files"
+            },
+            "tr": {
+              "mpsum": "translate or delete characters"
+            }
+          },
+          "TLDR_inform": {
+            "mv": {
+              "man1_mv_21808": "move renam file directori overwrit exist file target prompt confirm overwrit exist file move file arbitrari locat move file verbos mode show file move prompt confirm overwrit exist file regardless file permiss"
+            },
+            "tr": {
+              "man1_tr_34307": "translat charact : run replac base singl charact charact set compress seri ident charact singl charact delet occurr specifi set charact input map charact first set correspond charact second set replac occurr charact anoth command output replac occurr charact file print result strip non-print charact file translat content file upper-cas"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_585302: Set display to a higher resolution than 720p?"
+      ],
+      "Top-3 Scripts": [
+        "au_585302: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "fd",
+      "MP Summary": "find entries in the filesystem",
+      "Most Similar TLDR Task": "Find files with a specific extension",
+      "Most Similar TLDR Script": "fd --extension {{txt}}",
+      "Most Similar NL2Bash Task": "Rename uppercase file or folder name $1 to lower case name",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mv $1 `echo $1 | tr '[:upper:]' '[:lower:]'`\n",
+          "command-options": {
+            "mv": {
+              "mpsum": "move (rename) files"
+            },
+            "tr": {
+              "mpsum": "translate or delete characters"
+            }
+          },
+          "TLDR_inform": {
+            "mv": {
+              "man1_mv_21808": "move renam file directori overwrit exist file target prompt confirm overwrit exist file move file arbitrari locat move file verbos mode show file move prompt confirm overwrit exist file regardless file permiss"
+            },
+            "tr": {
+              "man1_tr_34307": "translat charact : run replac base singl charact charact set compress seri ident charact singl charact delet occurr specifi set charact input map charact first set correspond charact second set replac occurr charact anoth command output replac occurr charact file print result strip non-print charact file translat content file upper-cas"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_44508743: Unable to route webcam video to virtual video device on Linux (via OpenCV)"
+      ],
+      "Top-3 Scripts": [
+        "so_44508743: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "bash",
+      "MP Summary": "GNU Bourne-Again SHell",
+      "Most Similar TLDR Task": "Run commands from a file, logging all commands executed to the terminal",
+      "Most Similar TLDR Script": "bash -x {{file.sh}}",
+      "Most Similar NL2Bash Task": "Rename uppercase file or folder name $1 to lower case name",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mv $1 `echo $1 | tr '[:upper:]' '[:lower:]'`\n",
+          "command-options": {
+            "mv": {
+              "mpsum": "move (rename) files"
+            },
+            "tr": {
+              "mpsum": "translate or delete characters"
+            }
+          },
+          "TLDR_inform": {
+            "mv": {
+              "man1_mv_21808": "move renam file directori overwrit exist file target prompt confirm overwrit exist file move file arbitrari locat move file verbos mode show file move prompt confirm overwrit exist file regardless file permiss"
+            },
+            "tr": {
+              "man1_tr_34307": "translat charact : run replac base singl charact charact set compress seri ident charact singl charact delet occurr specifi set charact input map charact first set correspond charact second set replac occurr charact anoth command output replac occurr charact file print result strip non-print charact file translat content file upper-cas"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_534480: How to change uppercase letters of my file name to lower case?"
+      ],
+      "Top-3 Scripts": [
+        "ul_534480: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "gedit",
+      "MP Summary": "text editor for the GNOME Desktop",
+      "Most Similar TLDR Task": "Open a text file with a specific encoding",
+      "Most Similar TLDR Script": "gedit --encoding={{UTF-8}} {{path/to/file}}",
+      "Most Similar NL2Bash Task": "Rename uppercase file or folder name $1 to lower case name",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mv $1 `echo $1 | tr '[:upper:]' '[:lower:]'`\n",
+          "command-options": {
+            "mv": {
+              "mpsum": "move (rename) files"
+            },
+            "tr": {
+              "mpsum": "translate or delete characters"
+            }
+          },
+          "TLDR_inform": {
+            "mv": {
+              "man1_mv_21808": "move renam file directori overwrit exist file target prompt confirm overwrit exist file move file arbitrari locat move file verbos mode show file move prompt confirm overwrit exist file regardless file permiss"
+            },
+            "tr": {
+              "man1_tr_34307": "translat charact : run replac base singl charact charact set compress seri ident charact singl charact delet occurr specifi set charact input map charact first set correspond charact second set replac occurr charact anoth command output replac occurr charact file print result strip non-print charact file translat content file upper-cas"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_585302: Set display to a higher resolution than 720p?"
+      ],
+      "Top-3 Scripts": [
+        "au_585302: gedit ~/bin/nxrez\n\ngedit ~/.local/share/applications/alilbigger.desktop"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "write",
+      "MP Summary": "send a message to another user",
+      "Most Similar TLDR Task": "Send message to \"testuser\" on terminal \"/dev/tty/5\"",
+      "Most Similar TLDR Script": "write {{testuser}} {{tty/5}}",
+      "Most Similar NL2Bash Task": "Rename uppercase file or folder name $1 to lower case name",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mv $1 `echo $1 | tr '[:upper:]' '[:lower:]'`\n",
+          "command-options": {
+            "mv": {
+              "mpsum": "move (rename) files"
+            },
+            "tr": {
+              "mpsum": "translate or delete characters"
+            }
+          },
+          "TLDR_inform": {
+            "mv": {
+              "man1_mv_21808": "move renam file directori overwrit exist file target prompt confirm overwrit exist file move file arbitrari locat move file verbos mode show file move prompt confirm overwrit exist file regardless file permiss"
+            },
+            "tr": {
+              "man1_tr_34307": "translat charact : run replac base singl charact charact set compress seri ident charact singl charact delet occurr specifi set charact input map charact first set correspond charact second set replac occurr charact anoth command output replac occurr charact file print result strip non-print charact file translat content file upper-cas"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_44508743: Unable to route webcam video to virtual video device on Linux (via OpenCV)"
+      ],
+      "Top-3 Scripts": [
+        "so_44508743: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "set",
+      "MP Summary": "set or unset options and positional parameters",
+      "Most Similar TLDR Task": "Notify of job termination immediately",
+      "Most Similar TLDR Script": "set -b",
+      "Most Similar NL2Bash Task": "Rename uppercase file or folder name $1 to lower case name",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mv $1 `echo $1 | tr '[:upper:]' '[:lower:]'`\n",
+          "command-options": {
+            "mv": {
+              "mpsum": "move (rename) files"
+            },
+            "tr": {
+              "mpsum": "translate or delete characters"
+            }
+          },
+          "TLDR_inform": {
+            "mv": {
+              "man1_mv_21808": "move renam file directori overwrit exist file target prompt confirm overwrit exist file move file arbitrari locat move file verbos mode show file move prompt confirm overwrit exist file regardless file permiss"
+            },
+            "tr": {
+              "man1_tr_34307": "translat charact : run replac base singl charact charact set compress seri ident charact singl charact delet occurr specifi set charact input map charact first set correspond charact second set replac occurr charact anoth command output replac occurr charact file print result strip non-print charact file translat content file upper-cas"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_44508743: Unable to route webcam video to virtual video device on Linux (via OpenCV)"
+      ],
+      "Top-3 Scripts": [
+        "so_44508743: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "jq",
+      "MP Summary": "Command-line JSON processor",
+      "Most Similar TLDR Task": "Combine multiple filters",
+      "Most Similar TLDR Script": "cat {{file.json}} | jq 'unique | sort | reverse'",
+      "Most Similar NL2Bash Task": "Rename uppercase file or folder name $1 to lower case name",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mv $1 `echo $1 | tr '[:upper:]' '[:lower:]'`\n",
+          "command-options": {
+            "mv": {
+              "mpsum": "move (rename) files"
+            },
+            "tr": {
+              "mpsum": "translate or delete characters"
+            }
+          },
+          "TLDR_inform": {
+            "mv": {
+              "man1_mv_21808": "move renam file directori overwrit exist file target prompt confirm overwrit exist file move file arbitrari locat move file verbos mode show file move prompt confirm overwrit exist file regardless file permiss"
+            },
+            "tr": {
+              "man1_tr_34307": "translat charact : run replac base singl charact charact set compress seri ident charact singl charact delet occurr specifi set charact input map charact first set correspond charact second set replac occurr charact anoth command output replac occurr charact file print result strip non-print charact file translat content file upper-cas"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_46238941: Calculate total runtime of videos in folder using command line"
+      ],
+      "Top-3 Scripts": [
+        "so_46238941: find . -iname \"*.mp4\" -exec ffprobe -v error -print_format json -show_format {} \\; | jq -r '.[].duration' | awk '{total+=$0}END{printf \"%.6f\",total}'\n\nffprobe -v error -print_format json -show_format file.mp4  | jq -r '.[].duration'"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "cp",
+      "MP Summary": "copy files and directories",
+      "Most Similar TLDR Task": "Recursively copy a directory's contents to another location (if the destination exists, the directory is copied inside it)",
+      "Most Similar TLDR Script": "cp -r {{path/to/source_directory}} {{path/to/target_directory}}",
+      "Most Similar NL2Bash Task": "Rename uppercase file or folder name $1 to lower case name",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mv $1 `echo $1 | tr '[:upper:]' '[:lower:]'`\n",
+          "command-options": {
+            "mv": {
+              "mpsum": "move (rename) files"
+            },
+            "tr": {
+              "mpsum": "translate or delete characters"
+            }
+          },
+          "TLDR_inform": {
+            "mv": {
+              "man1_mv_21808": "move renam file directori overwrit exist file target prompt confirm overwrit exist file move file arbitrari locat move file verbos mode show file move prompt confirm overwrit exist file regardless file permiss"
+            },
+            "tr": {
+              "man1_tr_34307": "translat charact : run replac base singl charact charact set compress seri ident charact singl charact delet occurr specifi set charact input map charact first set correspond charact second set replac occurr charact anoth command output replac occurr charact file print result strip non-print charact file translat content file upper-cas"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "su_311378: How to get a higher resolution on Ubuntu 11.04 using an intel chipset"
+      ],
+      "Top-3 Scripts": [
+        "su_311378: cp fix-resolution.sh /usr/local/bin\nchmod +x /usr/local/bin/fix-resolution.sh\ncp fix-resolution.desktop /etc/xdg/autostart"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "exiftool",
+      "MP Summary": "Read and write meta information in files",
+      "Most Similar TLDR Task": "Recursively rename all JPEG photos in a directory based on the `DateTimeOriginal` field",
+      "Most Similar TLDR Script": "exiftool '-filename<DateTimeOriginal' -d %Y-%m-%d_%H-%M-%S%%lc.%%e {{path/to/directory}} -r -ext jpg",
+      "Most Similar NL2Bash Task": "Rename uppercase file or folder name $1 to lower case name",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mv $1 `echo $1 | tr '[:upper:]' '[:lower:]'`\n",
+          "command-options": {
+            "mv": {
+              "mpsum": "move (rename) files"
+            },
+            "tr": {
+              "mpsum": "translate or delete characters"
+            }
+          },
+          "TLDR_inform": {
+            "mv": {
+              "man1_mv_21808": "move renam file directori overwrit exist file target prompt confirm overwrit exist file move file arbitrari locat move file verbos mode show file move prompt confirm overwrit exist file regardless file permiss"
+            },
+            "tr": {
+              "man1_tr_34307": "translat charact : run replac base singl charact charact set compress seri ident charact singl charact delet occurr specifi set charact input map charact first set correspond charact second set replac occurr charact anoth command output replac occurr charact file print result strip non-print charact file translat content file upper-cas"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_170961: Get total duration of video files in a directory"
+      ],
+      "Top-3 Scripts": [
+        "ul_170961: exiftool -S -n Inception.mp4 | grep ^Duration\nDuration: 275.69\nexiftool -q -p '$Duration#' Inception.mp4\n275.69\n\nexiftool -S -n ./*.mp4 | awk '/^Duration/ {print $2}' | paste -sd+ -| bc\n555.070000000000\nexiftool -q -p '$Duration#' ./*.mp4 | awk '{sum += $0}; END{print sum}'\n555.070000000000\n\nexiftool -n -q -p '${Duration;our $sum;$_=ConvertDuration($sum+=$_)\n                    }' ./*.mp4| tail -n1\n0:09:15"
+      ],
+      "Explanations about Options": {
+        "-q": "Quiet processing. One -q suppresses normal informational messages, and a second -q\n suppresses warnings as well. Error messages can not be suppressed, although minor\n errors may be downgraded to warnings with the -m option, which may then be suppressed\n with \"-q -q\".",
+        "-p": "Print output in the format specified by the given file or string. The argument is\n interpreted as a string unless a file of that name exists, in which case the string\n is loaded from the contents of the file. Tag names in the format file or string\n begin with a \"$\" symbol and may contain a leading group names and/or a trailing \"#\".\n Case is not significant. Braces \"{}\" may be used around the tag name to separate it\n from subsequent text. Use $$ to represent a \"$\" symbol, and $/ for a newline.",
+        "-n": "Disable print conversion for all tags. By default, extracted values are converted to\n a more human-readable format, but the -n option disables this conversion, revealing\n the machine-readable values. For example:"
+      }
+    },
+    {
+      "Command": "mmv",
+      "MP Summary": "move/copy/append/link multiple files by wildcard patterns",
+      "Most Similar TLDR Task": "Rename all files with a certain extension to a different extension",
+      "Most Similar TLDR Script": "mmv \"*{{.old_extension}}\" \"#1{{.new_extension}}\"",
+      "Most Similar NL2Bash Task": "Rename uppercase file or folder name $1 to lower case name",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mv $1 `echo $1 | tr '[:upper:]' '[:lower:]'`\n",
+          "command-options": {
+            "mv": {
+              "mpsum": "move (rename) files"
+            },
+            "tr": {
+              "mpsum": "translate or delete characters"
+            }
+          },
+          "TLDR_inform": {
+            "mv": {
+              "man1_mv_21808": "move renam file directori overwrit exist file target prompt confirm overwrit exist file move file arbitrari locat move file verbos mode show file move prompt confirm overwrit exist file regardless file permiss"
+            },
+            "tr": {
+              "man1_tr_34307": "translat charact : run replac base singl charact charact set compress seri ident charact singl charact delet occurr specifi set charact input map charact first set correspond charact second set replac occurr charact anoth command output replac occurr charact file print result strip non-print charact file translat content file upper-cas"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_534480: How to change uppercase letters of my file name to lower case?"
+      ],
+      "Top-3 Scripts": [
+        "ul_534480: mmv '*' '#l1'\n\nmmv ';*' '#1#l2'"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "sum",
+      "MP Summary": "checksum and count the blocks in a file",
+      "Most Similar TLDR Task": "Compute a checksum with BSD-compatible algorithm and 1024-byte blocks",
+      "Most Similar TLDR Script": "sum {{file}}",
+      "Most Similar NL2Bash Task": "Rename uppercase file or folder name $1 to lower case name",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mv $1 `echo $1 | tr '[:upper:]' '[:lower:]'`\n",
+          "command-options": {
+            "mv": {
+              "mpsum": "move (rename) files"
+            },
+            "tr": {
+              "mpsum": "translate or delete characters"
+            }
+          },
+          "TLDR_inform": {
+            "mv": {
+              "man1_mv_21808": "move renam file directori overwrit exist file target prompt confirm overwrit exist file move file arbitrari locat move file verbos mode show file move prompt confirm overwrit exist file regardless file permiss"
+            },
+            "tr": {
+              "man1_tr_34307": "translat charact : run replac base singl charact charact set compress seri ident charact singl charact delet occurr specifi set charact input map charact first set correspond charact second set replac occurr charact anoth command output replac occurr charact file print result strip non-print charact file translat content file upper-cas"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_170961: Get total duration of video files in a directory"
+      ],
+      "Top-3 Scripts": [
+        "ul_170961: exiftool -S -n ./*.mp4 | awk '/^Duration/ {print $2}' | paste -sd+ -| bc\n555.070000000000\nexiftool -q -p '$Duration#' ./*.mp4 | awk '{sum += $0}; END{print sum}'\n555.070000000000"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "cat",
+      "MP Summary": "concatenate files and print on the standard output",
+      "Most Similar TLDR Task": "Concatenate several files into the target file",
+      "Most Similar TLDR Script": "cat {{file1}} {{file2}} > {{target_file}}",
+      "Most Similar NL2Bash Task": "Rename uppercase file or folder name $1 to lower case name",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mv $1 `echo $1 | tr '[:upper:]' '[:lower:]'`\n",
+          "command-options": {
+            "mv": {
+              "mpsum": "move (rename) files"
+            },
+            "tr": {
+              "mpsum": "translate or delete characters"
+            }
+          },
+          "TLDR_inform": {
+            "mv": {
+              "man1_mv_21808": "move renam file directori overwrit exist file target prompt confirm overwrit exist file move file arbitrari locat move file verbos mode show file move prompt confirm overwrit exist file regardless file permiss"
+            },
+            "tr": {
+              "man1_tr_34307": "translat charact : run replac base singl charact charact set compress seri ident charact singl charact delet occurr specifi set charact input map charact first set correspond charact second set replac occurr charact anoth command output replac occurr charact file print result strip non-print charact file translat content file upper-cas"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_659002: convert only the first column in a file to lower case"
+      ],
+      "Top-3 Scripts": [
+        "ul_659002: $ gawk -F'[ ]' -i inplace '{$1=tolower($1)}1' file\n$ cat file\nmumdfw2as123v USER=wladmin                                                MOUNTPOINT=/apps\nmumfw2as97v.mrshmc.com USER=wladmin                                      MOUNTPOINT=/apps\nmumfw3as65v USER=user                                                    MOUNTPOINT=DR-/u\nmumdfw3as66v USER=oracle                                                  MOUNTPOINT=/u\nmumdfw3as69v_oracle ansible_host=mumdfw3as69v USER=oracle                 MOUNTPOINT=/web"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "cd",
+      "MP Summary": "change the working directory",
+      "Most Similar TLDR Task": "Go to the given directory",
+      "Most Similar TLDR Script": "cd {{path/to/directory}}",
+      "Most Similar NL2Bash Task": "Rename uppercase file or folder name $1 to lower case name",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mv $1 `echo $1 | tr '[:upper:]' '[:lower:]'`\n",
+          "command-options": {
+            "mv": {
+              "mpsum": "move (rename) files"
+            },
+            "tr": {
+              "mpsum": "translate or delete characters"
+            }
+          },
+          "TLDR_inform": {
+            "mv": {
+              "man1_mv_21808": "move renam file directori overwrit exist file target prompt confirm overwrit exist file move file arbitrari locat move file verbos mode show file move prompt confirm overwrit exist file regardless file permiss"
+            },
+            "tr": {
+              "man1_tr_34307": "translat charact : run replac base singl charact charact set compress seri ident charact singl charact delet occurr specifi set charact input map charact first set correspond charact second set replac occurr charact anoth command output replac occurr charact file print result strip non-print charact file translat content file upper-cas"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_266568: Downloading videos to an external drive with youtube-dl"
+      ],
+      "Top-3 Scripts": [
+        "au_266568: cd '/media/New Volume/Youtube Downloads'\nyoutube-dl URL1...\nyoutube-dl URL2...\n\n..."
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "zenity",
+      "MP Summary": "display GTK+ dialogs",
+      "Most Similar TLDR Task": "Display a progress bar which updates its message every second and show a progress percent",
+      "Most Similar TLDR Script": "{{(echo \"#1\"; sleep 1; echo \"50\"; echo \"#2\"; sleep 1; echo \"100\")}} | zenity --progress",
+      "Most Similar NL2Bash Task": "Rename uppercase file or folder name $1 to lower case name",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mv $1 `echo $1 | tr '[:upper:]' '[:lower:]'`\n",
+          "command-options": {
+            "mv": {
+              "mpsum": "move (rename) files"
+            },
+            "tr": {
+              "mpsum": "translate or delete characters"
+            }
+          },
+          "TLDR_inform": {
+            "mv": {
+              "man1_mv_21808": "move renam file directori overwrit exist file target prompt confirm overwrit exist file move file arbitrari locat move file verbos mode show file move prompt confirm overwrit exist file regardless file permiss"
+            },
+            "tr": {
+              "man1_tr_34307": "translat charact : run replac base singl charact charact set compress seri ident charact singl charact delet occurr specifi set charact input map charact first set correspond charact second set replac occurr charact anoth command output replac occurr charact file print result strip non-print charact file translat content file upper-cas"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_585302: Set display to a higher resolution than 720p?"
+      ],
+      "Top-3 Scripts": [
+        "au_585302: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "usermod",
+      "MP Summary": "modify a user account",
+      "Most Similar TLDR Task": "Create a new home directory for a user and move their files to it",
+      "Most Similar TLDR Script": "usermod -m -d {{/path/to/home}} {{user}}",
+      "Most Similar NL2Bash Task": "Rename uppercase file or folder name $1 to lower case name",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mv $1 `echo $1 | tr '[:upper:]' '[:lower:]'`\n",
+          "command-options": {
+            "mv": {
+              "mpsum": "move (rename) files"
+            },
+            "tr": {
+              "mpsum": "translate or delete characters"
+            }
+          },
+          "TLDR_inform": {
+            "mv": {
+              "man1_mv_21808": "move renam file directori overwrit exist file target prompt confirm overwrit exist file move file arbitrari locat move file verbos mode show file move prompt confirm overwrit exist file regardless file permiss"
+            },
+            "tr": {
+              "man1_tr_34307": "translat charact : run replac base singl charact charact set compress seri ident charact singl charact delet occurr specifi set charact input map charact first set correspond charact second set replac occurr charact anoth command output replac occurr charact file print result strip non-print charact file translat content file upper-cas"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_501732: How to stream videos over local network to TV from PC"
+      ],
+      "Top-3 Scripts": [
+        "au_501732: sudo usermod -aG fuse pi"
+      ],
+      "Explanations about Options": {
+        "-a": "Add the user to the supplementary group(s). Use only with the -G option.",
+        "-G": "GROUP1[,GROUP2,...[,GROUPN]]]\n A list of supplementary groups which the user is also a member of. Each group is\n separated from the next by a comma, with no intervening whitespace. The groups are\n subject to the same restrictions as the group given with the -g option."
+      }
+    },
+    {
+      "Command": "rm",
+      "MP Summary": "remove files or directories",
+      "Most Similar TLDR Task": "Remove files from arbitrary locations",
+      "Most Similar TLDR Script": "rm {{path/to/file}} {{path/to/another/file}}",
+      "Most Similar NL2Bash Task": "Rename uppercase file or folder name $1 to lower case name",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mv $1 `echo $1 | tr '[:upper:]' '[:lower:]'`\n",
+          "command-options": {
+            "mv": {
+              "mpsum": "move (rename) files"
+            },
+            "tr": {
+              "mpsum": "translate or delete characters"
+            }
+          },
+          "TLDR_inform": {
+            "mv": {
+              "man1_mv_21808": "move renam file directori overwrit exist file target prompt confirm overwrit exist file move file arbitrari locat move file verbos mode show file move prompt confirm overwrit exist file regardless file permiss"
+            },
+            "tr": {
+              "man1_tr_34307": "translat charact : run replac base singl charact charact set compress seri ident charact singl charact delet occurr specifi set charact input map charact first set correspond charact second set replac occurr charact anoth command output replac occurr charact file print result strip non-print charact file translat content file upper-cas"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_585302: Set display to a higher resolution than 720p?"
+      ],
+      "Top-3 Scripts": [
+        "au_585302: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "paste",
+      "MP Summary": "merge lines of files",
+      "Most Similar TLDR Task": "Merge two files, with lines added alternatively",
+      "Most Similar TLDR Script": "paste -d '\\n' {{file1}} {{file2}}",
+      "Most Similar NL2Bash Task": "Rename uppercase file or folder name $1 to lower case name",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mv $1 `echo $1 | tr '[:upper:]' '[:lower:]'`\n",
+          "command-options": {
+            "mv": {
+              "mpsum": "move (rename) files"
+            },
+            "tr": {
+              "mpsum": "translate or delete characters"
+            }
+          },
+          "TLDR_inform": {
+            "mv": {
+              "man1_mv_21808": "move renam file directori overwrit exist file target prompt confirm overwrit exist file move file arbitrari locat move file verbos mode show file move prompt confirm overwrit exist file regardless file permiss"
+            },
+            "tr": {
+              "man1_tr_34307": "translat charact : run replac base singl charact charact set compress seri ident charact singl charact delet occurr specifi set charact input map charact first set correspond charact second set replac occurr charact anoth command output replac occurr charact file print result strip non-print charact file translat content file upper-cas"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_170961: Get total duration of video files in a directory"
+      ],
+      "Top-3 Scripts": [
+        "ul_170961: find . -maxdepth 1 -iname '*.mp4' -exec ffprobe -v quiet -of csv=p=0 -show_entries format=duration {} \\; | paste -sd+ -| bc\n555.070000\n\nfind . -maxdepth 1 -iname '*.ts' -exec ffprobe -v quiet -of csv=p=0 -show_entries format=duration {} \\; | paste -sd+ -| bc\n\nexiftool -S -n ./*.mp4 | awk '/^Duration/ {print $2}' | paste -sd+ -| bc\n555.070000000000\nexiftool -q -p '$Duration#' ./*.mp4 | awk '{sum += $0}; END{print sum}'\n555.070000000000"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "cut",
+      "MP Summary": "remove sections from each line of files",
+      "Most Similar TLDR Task": "Cut out everything from the 3rd character to the end of each line",
+      "Most Similar TLDR Script": "cut -c {{3-}}",
+      "Most Similar NL2Bash Task": "Rename uppercase file or folder name $1 to lower case name",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "mv $1 `echo $1 | tr '[:upper:]' '[:lower:]'`\n",
+          "command-options": {
+            "mv": {
+              "mpsum": "move (rename) files"
+            },
+            "tr": {
+              "mpsum": "translate or delete characters"
+            }
+          },
+          "TLDR_inform": {
+            "mv": {
+              "man1_mv_21808": "move renam file directori overwrit exist file target prompt confirm overwrit exist file move file arbitrari locat move file verbos mode show file move prompt confirm overwrit exist file regardless file permiss"
+            },
+            "tr": {
+              "man1_tr_34307": "translat charact : run replac base singl charact charact set compress seri ident charact singl charact delet occurr specifi set charact input map charact first set correspond charact second set replac occurr charact anoth command output replac occurr charact file print result strip non-print charact file translat content file upper-cas"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_585302: Set display to a higher resolution than 720p?"
+      ],
+      "Top-3 Scripts": [
+        "au_585302: "
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

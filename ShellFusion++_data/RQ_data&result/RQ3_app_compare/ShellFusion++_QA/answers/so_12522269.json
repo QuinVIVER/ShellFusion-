@@ -1,0 +1,69 @@
+{
+  "Query": "Bash How to find the largest file in a directory and its subdirectories?",
+  "Answers": [
+    {
+      "Command": "find",
+      "Top-3 Similar Questions": [
+        "ul_467283: Find largest files in a directory in a specific date range",
+        "ul_359611: I would like to find the largest file in each directory recursively",
+        "su_699135: Find the largest file in directory without size in output"
+      ],
+      "Top-3 Scripts": [
+        "ul_467283: find . -newer /tmp/point.start ! -newer /tmp/point.end  ! -path . | xargs ls -ltr | sort -nk5 | tail -20",
+        "ul_359611: find . -type f -printf '%s %h/%f\\0'|awk 'BEGIN { RS=\"\\0\" } { SIZE=$1; for (i = 1; i <= NF - 1; i++) $i = $(i + 1); NF = NF - 1; DIR=$0; gsub(\"/[^/]+$\", \"\", DIR); FILE=substr($0, length(DIR) + 2); SUMSIZES[DIR] += SIZE; NBFILES[DIR]++; if (SIZE > MAXSIZE[DIR] || !BIGGESTFILE[DIR]) { MAXSIZE[DIR] = SIZE; BIGGESTFILE[DIR] = FILE } }; END { for (DIR in SUMSIZES) { printf \"%s: average %f, biggest file %s %d\\n\", DIR, SUMSIZES[DIR] / NBFILES[DIR], BIGGESTFILE[DIR], MAXSIZE[DIR] } }'",
+        "su_699135: find \"$PARAM\" -type f -printf \"%s\\t%p\\n\" | sort -n | tail -n 1 | cut -f 2-"
+      ]
+    },
+    {
+      "Command": "sort",
+      "Top-3 Similar Questions": [
+        "ul_467283: Find largest files in a directory in a specific date range",
+        "ul_359611: I would like to find the largest file in each directory recursively",
+        "so_798040: How do I find the 10 largest files in a directory structure"
+      ],
+      "Top-3 Scripts": [
+        "ul_467283: find . -newer /tmp/point.start ! -newer /tmp/point.end  ! -path . | xargs ls -ltr | sort -nk5 | tail -20",
+        "ul_359611: sort -k3",
+        "so_798040: Get-ChildItem -re -in * |\n  ?{ -not $_.PSIsContainer } |\n  sort Length -descending |\n  select -first 10"
+      ]
+    },
+    {
+      "Command": "ls",
+      "Top-3 Similar Questions": [
+        "ul_467283: Find largest files in a directory in a specific date range",
+        "su_699135: Find the largest file in directory without size in output",
+        "so_38895490: bash finding files in directories recursively"
+      ],
+      "Top-3 Scripts": [
+        "ul_467283: find . -newer /tmp/point.start ! -newer /tmp/point.end  ! -path . | xargs ls -ltr | sort -nk5 | tail -20",
+        "ul_207317: ls -l --time-style=+%s \\\n| awk '{$6 = int($6/86400); print}' \\\n| sort -nk6,6 -nrk5,5 \\\n| sort -sunk6,6",
+        "so_36293162: ls -tU | head -n1"
+      ]
+    },
+    {
+      "Command": "awk",
+      "Top-3 Similar Questions": [
+        "ul_359611: I would like to find the largest file in each directory recursively",
+        "su_699135: Find the largest file in directory without size in output",
+        "so_8696292: How do I find the largest 10 files in a given directory?"
+      ],
+      "Top-3 Scripts": [
+        "ul_359611: find . -type f -printf '%s %h/%f\\0'|awk 'BEGIN { RS=\"\\0\" } { SIZE=$1; for (i = 1; i <= NF - 1; i++) $i = $(i + 1); NF = NF - 1; DIR=$0; gsub(\"/[^/]+$\", \"\", DIR); FILE=substr($0, length(DIR) + 2); SUMSIZES[DIR] += SIZE; NBFILES[DIR]++; if (SIZE > MAXSIZE[DIR] || !BIGGESTFILE[DIR]) { MAXSIZE[DIR] = SIZE; BIGGESTFILE[DIR] = FILE } }; END { for (DIR in SUMSIZES) { printf \"%s: average %f, biggest file %s %d\\n\", DIR, SUMSIZES[DIR] / NBFILES[DIR], BIGGESTFILE[DIR], MAXSIZE[DIR] } }'",
+        "su_699135: shopt -s globstar nullglob\nstat -c $'%s\\t%F\\t%n' ** \\\n| awk -F'\\t' '$2 == \"regular file\"' \\\n| sort -n \\\n| tail -n 1 \\\n| cut -f 3-",
+        "so_8696292: find . -type f -printf \"%s %p\\n\" | sort -nr | awk '{print $2}' | head -10"
+      ]
+    },
+    {
+      "Command": "then",
+      "Top-3 Similar Questions": [
+        "so_52437199: Find file with largest number of lines in single directory",
+        "so_46901269: Finding the maximum number of files in a subdirectory",
+        "so_38895490: bash finding files in directories recursively"
+      ],
+      "Top-3 Scripts": [
+        "so_38895490: rec() {\n    for path; do\n        echo \"$path\"\n        if [[ -d \"$path\" ]]; then\n            rec \"$path\"/*\n        fi\n    done\n}",
+        "nl2bash_4706: find -type l | while read f; do if [ ! -e \"$f\" ]; then ls -l \"$f\"; fi; done"
+      ]
+    }
+  ]
+}

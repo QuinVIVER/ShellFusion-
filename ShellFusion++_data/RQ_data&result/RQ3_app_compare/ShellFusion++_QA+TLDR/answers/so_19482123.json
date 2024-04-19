@@ -1,0 +1,89 @@
+{
+  "Query": "extract part of a string using bash/cut/split",
+  "Answers": [
+    {
+      "Command": "cut",
+      "MP Summary": "remove sections from each line of files",
+      "Most Similar TLDR Task": "Cut out the fields 3 through to the end of each line, using a space as a delimiter",
+      "Most Similar TLDR Script": "cut -d'{{ }}' -f{{3-}}",
+      "Top-3 Similar Questions": [
+        "ul_461543: Need to extract part of string using shell",
+        "so_49032516: how to extract a string from a list of strings from a parameter using bash",
+        "so_12426659: How to extract last part of string in bash?"
+      ],
+      "Top-3 Scripts": [
+        "ul_461543: LATESTBUILD=echo $LASTBUILD | cut -d ' ' -f 3\n\nLATESTBUILD=$(cut -d ' ' -f5 <<<\"$LASTBUILD\")\n\n#!/bin/bash\n\nLASTBUILD='174254491   2018-08-08T11:04:40Z  gs://abc/kishor/5.4.0.61/xyz-5.4.0-61.tgz TOTAL: 46 objects, 7325896651 bytes (6.82 GiB)'\n\necho \"this is the LASTBUILD ============== $LASTBUILD\"\n\nLATESTBUILD=$(cut -d ' ' -f5 <<<\"$LASTBUILD\")\n\necho \"this is the LATESTBUILD ############### $LATESTBUILD\"",
+        "so_49032516: cut -d '\"' -f10",
+        "so_12426659: B=$(echo $A | cut -d ' ' -f 5-)"
+      ],
+      "Explanations about Options": {
+        "-d": "use DELIM instead of TAB for field delimiter",
+        "-f": "select only these fields; also print any line that contains no delimiter\n character, unless the -s option is specified"
+      }
+    },
+    {
+      "Command": "split",
+      "MP Summary": "split a file into pieces",
+      "Most Similar TLDR Task": "Split a file, each split having 10 lines (except the last split)",
+      "Most Similar TLDR Script": "split -l {{10}} {{filename}}",
+      "Top-3 Similar Questions": [
+        "so_3658382: Extracting multiple parts of a string using bash",
+        "so_70185533: sed extract part of string from a file",
+        "so_23722113: Extracting content of a file in bash"
+      ],
+      "Top-3 Scripts": [
+        "so_3658382: echo '1=A00^35=D^150=1^33=1\n      1=a00^35=d^157=11^33=11\n      ' | awk -vLST=1,33 -F^ '{s=\"\";split(LST,k,\",\");for(i=1;i<=NF;i++){for(j in k){split($i,arr,\"=\");if(arr[1]==k[j]){printf s\"\"arr[1]\"=\"arr[2];s=\"^\";}}}if(s!=\"\"){print s;}}'",
+        "so_70185533: awk 'match($0,/^str3=.*-/){split(substr($0,RSTART,RLENGTH),arr,\"-\");print arr[2]}'  Input_file",
+        "so_23722113: $ awk -v RS= -F'\\n' '{n=split($1,a,/ /); sub(/\\| */,\"\",$7); print a[n], $7}' file\nx.x.x.x var1:var2\ny.y.y.y var3:var4\nz.z.z.z No valid accounts found\n\n$ awk -v RS= -F'\\n' '$7~/:/{n=split($1,a,/ /); sub(/\\| */,\"\",$7); print a[n], $7}' file\nx.x.x.x var1:var2\ny.y.y.y var3:var4"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "awk",
+      "MP Summary": "pattern scanning and processing language",
+      "Most Similar TLDR Task": "Print the last column of each line in a file, using a comma (instead of space) as a field separator",
+      "Most Similar TLDR Script": "awk -F ',' '{print $NF}' {{filename}}",
+      "Top-3 Similar Questions": [
+        "so_3658382: Extracting multiple parts of a string using bash",
+        "so_45382242: Extract part of string using shell script",
+        "so_40207923: extract part of a file path between pattern using awk"
+      ],
+      "Top-3 Scripts": [
+        "so_3658382: echo '1=A00^35=D^150=1^33=1\n      1=a00^35=d^157=11^33=11\n      ' | awk -vLST=1,33 -F^ '{s=\"\";split(LST,k,\",\");for(i=1;i<=NF;i++){for(j in k){split($i,arr,\"=\");if(arr[1]==k[j]){printf s\"\"arr[1]\"=\"arr[2];s=\"^\";}}}if(s!=\"\"){print s;}}'",
+        "so_45382242: awk '{for (i=1;i<=NF;++i) {if($i~/^[v]/){print $i}}}' yourfile.txt",
+        "so_40207923: awk -F/ '{print $4,$7}' test.txt\n\nawk -F/ '{a=\"???\";b=\"???\";for (i=0;i<NF;i++) {if (tolower($i)==\"system\") a= $(i+1); if (($i==\"data\") && (tolower($(i+2))==\"sales\")) b = $(i+1)}; print a,b}' test.txt"
+      ],
+      "Explanations about Options": {
+        "-v": "FS=sepstring"
+      }
+    },
+    {
+      "Command": "xargs",
+      "MP Summary": "build and execute command lines from standard input",
+      "Most Similar TLDR Task": "Run a command using the input data as arguments",
+      "Most Similar TLDR Script": "{{arguments_source}} | xargs {{command}}",
+      "Top-3 Similar Questions": [
+        "ul_80793: extract part of string using sed"
+      ],
+      "Top-3 Scripts": [
+        "ul_80793: ls lib/oracle-11.2.0.3.0.txt | xargs -I{} basename {} .txt"
+      ],
+      "Explanations about Options": {
+        "-I": "Replace occurrences of replace-str in the initial-arguments with names read from\n standard input. Also, unquoted blanks do not terminate input items; instead the\n separator is the newline character. Implies -x and -L 1."
+      }
+    },
+    {
+      "Command": "paste",
+      "MP Summary": "merge lines of files",
+      "Most Similar TLDR Task": "Join all the lines into a single line, using TAB as delimiter",
+      "Most Similar TLDR Script": "paste -s {{file}}",
+      "Top-3 Similar Questions": [
+        "so_29618127: Extracting specific strings from a file using bash script"
+      ],
+      "Top-3 Scripts": [
+        "so_29618127: grep -o '\\b\\(key\\|number\\)=[^&]*' file | paste - -\n\nawk -F'&' '{for(i=1;i<=NF;i++)if($i~/^key|number/) print $i}' file | paste - -"
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

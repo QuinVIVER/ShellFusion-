@@ -1,0 +1,97 @@
+{
+  "Query": "Speed up rsync with Simultaneous/Concurrent File Transfers?",
+  "Answers": [
+    {
+      "Command": "scp",
+      "MP Summary": "secure copy (remote file copy program)",
+      "Most Similar TLDR Task": "Copy a file between two remote hosts transferring through the local host",
+      "Most Similar TLDR Script": "scp -3 {{host1}}:{{path/to/remote_file}} {{host2}}:{{path/to/remote_directory}}",
+      "Top-3 Similar Questions": [
+        "ul_20713: Asking rsync to transfer files without connecting to the remote rsync server?",
+        "so_28025147: How to copy multiple files simultaneously using scp",
+        "ul_557120: Why does transfer files to another computer by `sudo rsync` require the destination computer's root's password?"
+      ],
+      "Top-3 Scripts": [
+        "ul_20713: ",
+        "so_28025147: for file in file1 file2 file3 ; do \n     scp $file server:/tmp/ & \ndone",
+        "ul_557120: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "tar",
+      "MP Summary": "an archiving utility",
+      "Most Similar TLDR Task": "Create a compressed archive, using archive suffix to determine the compression program",
+      "Most Similar TLDR Script": "tar caf {{target.tar.xz}} {{file1}} {{file2}} {{file3}}",
+      "Top-3 Similar Questions": [
+        "ul_120300: Rsync auto detect directories with small files and compress them together for transfer",
+        "au_1326158: How can I simultaneously extract files from .tar files and send them to the same directory?",
+        "ul_297249: Does linux tar block write access to files"
+      ],
+      "Top-3 Scripts": [
+        "ul_120300: $ tar zcvf - SOURCEDIR | ssh user1@remotehost 'cd DESTDIR; tar zxvf - '\n\n$ tar zcvf - SOURCEDIR | ssh user1@remotehost \"(cd DESTDIR; tar zxvf -)\"\n\n$ tar zcvf - SOURCEDIR | ssh -l user1 remotehost 'cd DESTDIR ; tar zxvf -'\n\n$ ssh remotehost 'tar zcvf - SOURCEDIR' | tar zxvf -\n\n$ ssh -n remotehost 'tar zcvf - SOURCEDIR' | tar zxvf -\n\n$ ssh remotehost \"( cd SOURCEDIR ; tar zcvf - SOURCEFILES ) \" | tar zxvf -",
+        "au_1326158: cat *.tar | tar -xvf - -i",
+        "ul_297249: "
+      ],
+      "Explanations about Options": {
+        "-x": "Extract files from an archive. Arguments are optional. When given, they specify\n names of the archive members to be extracted.",
+        "-v": "Verbosely list files processed.",
+        "-i": "Ignore zeroed blocks in archive. Normally two consecutive 512-blocks filled with\n zeroes mean EOF and tar stops reading after encountering them. This option\n instructs it to read further and is useful when reading archives created with the\n -A option."
+      }
+    },
+    {
+      "Command": "rsync",
+      "MP Summary": "a fast, versatile, remote (and local) file-copying tool",
+      "Most Similar TLDR Task": "Transfer file from local to remote host",
+      "Most Similar TLDR Script": "rsync {{path/to/local_file}} {{remote_host}}:{{path/to/remote_directory}}",
+      "Top-3 Similar Questions": [
+        "ul_2445: Resume transfer of a single file by rsync",
+        "ul_78375: Move files and delete directories with rsync?",
+        "au_251693: Copy a files with defined transfer rate"
+      ],
+      "Top-3 Scripts": [
+        "ul_2445: rsync --append",
+        "ul_78375: $ rsync -av --ignore-existing --remove-source-files source/ destination/ && \\\n  rsync -av --delete `mktemp -d`/ source/ && rmdir source/\n\n$ rsync -axvvES --remove-source-files source_directory /destination/ && \\\n  rm -rf source_directory",
+        "au_251693: rsync /path/to/source /path/to/dest --bwlimit 2000 --progress"
+      ],
+      "Explanations about Options": {
+        "-a": "This is equivalent to -rlptgoD. It is a quick way of saying you want recursion and\n want to preserve almost everything (with -H being a notable omission). The only\n exception to the above equivalence is when --files-from is specified, in which case\n -r is not implied.",
+        "-x": "This tells rsync to avoid crossing a filesystem boundary when recursing. This does\n not limit the user\u2019s ability to specify items to copy from multiple filesystems,\n just rsync\u2019s recursion through the hierarchy of each directory that the user\n specified, and also the analogous recursion on the receiving side during deletion.\n Also keep in mind that rsync treats a \"bind\" mount to the same device as being on\n the same filesystem.",
+        "-v": "This option increases the amount of information you are given during the transfer.\n By default, rsync works silently. A single -v will give you information about what\n files are being transferred and a brief summary at the end. Two -v options will\n give you information on what files are being skipped and slightly more information\n at the end. More than two -v options should only be used if you are debugging\n rsync.",
+        "-E": "This option causes rsync to preserve the executability (or non-executability) of\n regular files when --perms is not enabled. A regular file is considered to be\n executable if at least one \u2019x\u2019 is turned on in its permissions. When an existing\n destination file\u2019s executability differs from that of the corresponding source\n file, rsync modifies the destination file\u2019s permissions as follows:",
+        "-S": "Try to handle sparse files efficiently so they take up less space on the\n destination. If combined with --inplace the file created might not end up with\n sparse blocks with some combinations of kernel version and/or filesystem type. If\n --whole-file is in effect (e.g. for a local copy) then it will always work because\n rsync truncates the file prior to writing out the updated version.",
+        "--remove-source-files": "This tells rsync to remove from the sending side the files (meaning\n non-directories) that are a part of the transfer and have been successfully\n duplicated on the receiving side."
+      }
+    },
+    {
+      "Command": "install",
+      "MP Summary": "copy files and set attributes",
+      "Most Similar TLDR Task": "Copy files and apply access/modification times of source to destination",
+      "Most Similar TLDR Script": "install -p {{path/to/source}} {{path/to/destination}}",
+      "Top-3 Similar Questions": [
+        "ul_12197: Syncing directories in both directions with rsync",
+        "au_646443: copy files over ssh"
+      ],
+      "Top-3 Scripts": [
+        "ul_12197: $ sudo apt-get install unison\n$ unison MAC/ LINUX/",
+        "au_646443: sudo apt-get install openssh-server\n\nsudo apt-get install filezilla"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "xz",
+      "MP Summary": "Compress or decompress .xz and .lzma files",
+      "Most Similar TLDR Task": "Compress a file, but don't delete the original",
+      "Most Similar TLDR Script": "xz -k {{file}}",
+      "Top-3 Similar Questions": [
+        "ul_298170: Why isn't rsync using delta transfers for a single file across a network?"
+      ],
+      "Top-3 Scripts": [
+        "ul_298170: xz --best"
+      ],
+      "Explanations about Options": {
+        "--best": "These are somewhat misleading aliases for -0 and -9, respectively. These are\n provided only for backwards compatibility with LZMA Utils. Avoid using these\n options."
+      }
+    }
+  ]
+}

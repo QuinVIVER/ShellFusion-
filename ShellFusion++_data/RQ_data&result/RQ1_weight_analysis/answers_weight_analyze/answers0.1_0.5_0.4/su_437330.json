@@ -1,0 +1,77 @@
+{
+  "Query": "How do you add a certificate authority (CA) to Ubuntu?",
+  "Answers": [
+    {
+      "Command": "openssl",
+      "MP Summary": "OpenSSL command line tool",
+      "Most Similar TLDR Task": "Generate a certificate signing request to be sent to a certificate authority",
+      "Most Similar TLDR Script": "openssl req -new -sha256 -key {{filename.key}} -out {{filename.csr}}",
+      "Top-3 Similar Questions": [
+        "su_1430089: How to add a self-signed SSL certificate to Linux (Ubuntu/Alpine) trust store?",
+        "ul_612594: Add custom CA certificate to Ubuntu 20.04 works fine, but fails on Debian"
+      ],
+      "Top-3 Scripts": [
+        "su_1430089: $ openssl req -x509 -days 365 -newkey rsa:1024 -keyout bar.pem -nodes -out foo.crt -config openssl_conf",
+        "ul_612594: openssl x509 -in /usr/local/share/ca-certificates/nexus-custom-ca-chain.pem -noout -text\n\n# FROM ubuntu:20:04\nFROM debian:10\nRUN apt update &&  DEBIAN_FRONTEND=noninteractive apt install -y curl openssl ca-certificates\nCOPY root.pem /usr/local/share/ca-certificates/root.pem\nCOPY intermediate.pem /usr/local/share/ca-certificates/intermediate.pem\nRUN chmod 644 /usr/local/share/ca-certificates/root.pem /usr/local/share/ca-certificates/intermediate.pem\nRUN update-ca-certificates\nRUN curl https://nexus-using-custom-cert.custom.org\n\nopenssl x509 -noout\n\nopenssl x509 -in mycert.crt -noout -text\n\nopenssl x509 -in mycert.crt  -inform der -outform PEM -out mycert.crt\n\nopenssl x509 -in mycert.pem -outform der -out mycert.der"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "curl",
+      "MP Summary": "transfer a URL",
+      "Most Similar TLDR Task": "Pass client certificate and key for a resource, skipping certificate validation",
+      "Most Similar TLDR Script": "curl --cert {{client.pem}} --key {{key.pem}} --insecure {{https://example.com}}",
+      "Top-3 Similar Questions": [
+        "ul_90450: Adding a self-signed certificate to the \"trusted list\"",
+        "ul_612594: Add custom CA certificate to Ubuntu 20.04 works fine, but fails on Debian"
+      ],
+      "Top-3 Scripts": [
+        "ul_90450: curl --cacert  /path/to/CA/cert.file https://...\n\ncurl --insecure https://...",
+        "ul_612594: # FROM ubuntu:20:04\nFROM debian:10\nRUN apt update &&  DEBIAN_FRONTEND=noninteractive apt install -y curl openssl ca-certificates\nCOPY root.pem /usr/local/share/ca-certificates/root.pem\nCOPY intermediate.pem /usr/local/share/ca-certificates/intermediate.pem\nRUN chmod 644 /usr/local/share/ca-certificates/root.pem /usr/local/share/ca-certificates/intermediate.pem\nRUN update-ca-certificates\nRUN curl https://nexus-using-custom-cert.custom.org\n\ncurl -v"
+      ],
+      "Explanations about Options": {
+        "--insecure": "(TLS) By default, every SSL connection curl makes is verified to be secure. This\n option allows curl to proceed and operate even for server connections otherwise\n considered insecure.",
+        "-v": "Makes curl verbose during the operation. Useful for debugging and seeing what's\n going on \"under the hood\". A line starting with '>' means \"header data\" sent by\n curl, '<' means \"header data\" received by curl that is hidden in normal cases, and\n a line starting with '*' means additional info provided by curl."
+      }
+    },
+    {
+      "Command": "usermod",
+      "MP Summary": "modify a user account",
+      "Most Similar TLDR Task": "Create a new home directory for a user and move their files to it",
+      "Most Similar TLDR Script": "usermod -m -d {{/path/to/home}} {{user}}",
+      "Top-3 Similar Questions": [
+        "su_487296: How do I add users to another users group?"
+      ],
+      "Top-3 Scripts": [
+        "su_487296: usermod -a -G grouptoadd username\n\nman usermod"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "adduser",
+      "MP Summary": "add a user or group to the system",
+      "Most Similar TLDR Task": "Add an existing user to the specified group",
+      "Most Similar TLDR Script": "adduser {{username}} {{group}}",
+      "Top-3 Similar Questions": [
+        "so_27701930: How to add users to Docker container?"
+      ],
+      "Top-3 Scripts": [
+        "so_27701930: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "add-apt-repository",
+      "MP Summary": "Adds   a   repository   into   the   /etc/apt/sources.list   or /etc/apt/sources.list.d or removes an existing one",
+      "Most Similar TLDR Task": "Add a new apt repository",
+      "Most Similar TLDR Script": "add-apt-repository {{repository_spec}}",
+      "Top-3 Similar Questions": [
+        "au_980688: Add software to Ubuntu live usb"
+      ],
+      "Top-3 Scripts": [
+        "au_980688: sudo add-apt-repository universe"
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

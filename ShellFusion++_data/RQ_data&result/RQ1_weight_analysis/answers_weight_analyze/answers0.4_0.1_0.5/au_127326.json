@@ -1,0 +1,86 @@
+{
+  "Query": "How to fix missing GPG keys?",
+  "Answers": [
+    {
+      "Command": "apt-key",
+      "MP Summary": "APT key management utility",
+      "Most Similar TLDR Task": "Add a key from keyserver with only key id",
+      "Most Similar TLDR Script": "apt-key adv --keyserver {{pgp.mit.edu}} --recv {{KEYID}}",
+      "Top-3 Similar Questions": [
+        "au_719865: How to fix missing gpg key even though it should have been imported?",
+        "au_235880: How to fix GPG in updater",
+        "ul_655335: How to update expired Skype signing key"
+      ],
+      "Top-3 Scripts": [
+        "au_719865: apt-key list\n\nrm /etc/apt/trusted.gpg\napt-key update",
+        "au_235880: sudo apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 40976EAF437D05B5\nsudo apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 3B4FE6ACC0B21F32",
+        "ul_655335: curl -s https://repo.skype.com/data/SKYPE-GPG-KEY | sudo apt-key add -"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "gpg",
+      "MP Summary": "OpenPGP encryption and signing tool",
+      "Most Similar TLDR Task": "Import a public key",
+      "Most Similar TLDR Script": "gpg2 --import {{path/to/public_key.gpg}}",
+      "Top-3 Similar Questions": [
+        "au_719865: How to fix missing gpg key even though it should have been imported?",
+        "ul_639514: Unknown validity despite having signed the key myself",
+        "ul_91913: GPG installation got messed up, can't fix"
+      ],
+      "Top-3 Scripts": [
+        "au_719865: Executing: gpg [...] \\\n  --keyring /etc/apt/trusted.gpg \\\n  --primary-keyring /etc/apt/trusted.gpg \\\n  --keyring /etc/apt/trusted.gpg.d/atareao-telegram.gpg \\\n  --keyring /etc/apt/trusted.gpg.d/neovim-ppa-unstable.gpg \\\n  --keyring /etc/apt/trusted.gpg.d/nilarimogard-webupd8.gpg \\\n  [...]",
+        "ul_639514: gpg --check-trustdb\n\ngpg --update-trustdb",
+        "ul_91913: martin@martin ~ % LANG=C gpg\ngpg: Go ahead and type your message ...\ngpg: processing message failed: eof\n\ngpg --encrypt --armor -r <your GPG email adress>"
+      ],
+      "Explanations about Options": {
+        "--encrypt": "Encrypt data. This option may be combined with --sign (for a signed and encrypted\n message), --symmetric (for a message that may be decrypted via a secret key or a\n passphrase), or --sign and --symmetric together (for a signed message that may be\n decrypted via a secret key or a passphrase).",
+        "--update-trustdb": "Do trust database maintenance. This command iterates over all keys and builds the\n Web of Trust. This is an interactive command because it may have to ask for the\n \"ownertrust\" values for keys. The user has to give an estimation of how far she\n trusts the owner of the displayed key to correctly certify (sign) other keys. GnuPG\n only asks for the ownertrust value if it has not yet been assigned to a key. Using\n the --edit-key menu, the assigned value can be changed at any time.",
+        "--armor": "Create ASCII armored output. The default is to create the binary OpenPGP format."
+      }
+    },
+    {
+      "Command": "ssh-keygen",
+      "MP Summary": "authentication key generation, management and conversion",
+      "Most Similar TLDR Task": "Change the password of a key",
+      "Most Similar TLDR Script": "ssh-keygen -p -f ~/.ssh/{{filename}}",
+      "Top-3 Similar Questions": [
+        "su_421004: How to fix warning about ECDSA host key"
+      ],
+      "Top-3 Scripts": [
+        "su_421004: ssh-keygen -R 192.168.1.123"
+      ],
+      "Explanations about Options": {
+        "-R": "Removes all keys belonging to hostname from a known_hosts file. This option is\n useful to delete hashed hosts (see the -H option above)."
+      }
+    },
+    {
+      "Command": "ssh-copy-id",
+      "MP Summary": "use locally available keys to authorise logins on a remote machine",
+      "Most Similar TLDR Task": "Copy the given public key to the remote",
+      "Most Similar TLDR Script": "ssh-copy-id -i {{path/to/certificate}} {{username}}@{{remote_host}}",
+      "Top-3 Similar Questions": [
+        "au_337757: How to fix Permission Denied (Public key) error?"
+      ],
+      "Top-3 Scripts": [
+        "au_337757: $ ssh-copy-id fedora_box"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "add-apt-repository",
+      "MP Summary": "Adds   a   repository   into   the   /etc/apt/sources.list   or /etc/apt/sources.list.d or removes an existing one",
+      "Most Similar TLDR Task": "Remove an apt repository",
+      "Most Similar TLDR Script": "add-apt-repository --remove {{repository_spec}}",
+      "Top-3 Similar Questions": [
+        "au_13065: How do I fix the GPG error \"NO_PUBKEY\"?",
+        "au_645658: How to repair missing GPG public keys for packages"
+      ],
+      "Top-3 Scripts": [
+        "au_13065: sudo add-apt-repository ppa:webupd8team/y-ppa-manager",
+        "au_645658: sudo add-apt-repository ppa:webupd8team/y-ppa-manager\nsudo apt-get update\nsudo apt-get install y-ppa-manager"
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

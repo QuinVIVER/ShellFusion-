@@ -1,0 +1,70 @@
+{
+  "Query": "compare two columns of different files and print if it matches",
+  "Answers": [
+    {
+      "Command": "awk",
+      "Top-3 Similar Questions": [
+        "ul_648855: Compare first column of a file with value if matched get the record",
+        "so_46185033: AWK Compare 2 columns in 2 files, print if one is equal while other is not",
+        "ul_438192: Matching columns of different csv files, not working when column value is different length"
+      ],
+      "Top-3 Scripts": [
+        "ul_648855: #!/bin/bash\nm=$1\nawk -F \"|\" -v m=\"$m\" '$1 == m{print $2}' filename",
+        "so_46185033: $ awk 'NR==FNR{a[$1]=$3; next} ($1 in a) && (a[$1] != $3){print $0, a[$1]}' file2 file1\nJohn 12 Mango Grape\nJack 14 Orange Apple",
+        "ul_438192: awk -F, 'NR==FNR{c[$1+0,$2,$3]++;next};c[$120002+0,$120003,$120004] > 0' small.csv large.csv > output.csv"
+      ]
+    },
+    {
+      "Command": "print",
+      "Top-3 Similar Questions": [
+        "ul_648855: Compare first column of a file with value if matched get the record",
+        "so_46185033: AWK Compare 2 columns in 2 files, print if one is equal while other is not",
+        "so_29400114: compare single column of two files line by line"
+      ],
+      "Top-3 Scripts": [
+        "ul_648855: #!/bin/bash\nm=$1\nawk -F \"|\" -v m=\"$m\" '$1 == m{print $2}' filename",
+        "so_46185033: $ awk 'NR==FNR{a[$1]=$3; next} ($1 in a) && (a[$1] != $3){print $0, a[$1]}' file2 file1\nJohn 12 Mango Grape\nJack 14 Orange Apple",
+        "so_29400114: awk 'NR==FNR {a[$2]=$0;next} $2 in a{del[$2];next} 1;\n     END{for (i in a) if (!(i in del)) print a[i]}' fileA fileB\n3 XX\n4 XX\n7 XX\n10 XX\n11 XX\n5 EE"
+      ]
+    },
+    {
+      "Command": "file2",
+      "Top-3 Similar Questions": [
+        "so_46185033: AWK Compare 2 columns in 2 files, print if one is equal while other is not",
+        "so_25204791: How to check number of common values betweeon two columns from different files",
+        "so_18592736: awk compare columns from two files, impute values of another column"
+      ],
+      "Top-3 Scripts": [
+        "so_46185033: $ awk 'NR==FNR{a[$1]=$3; next} ($1 in a) && (a[$1] != $3){print $0, a[$1]}' file2 file1\nJohn 12 Mango Grape\nJack 14 Orange Apple",
+        "so_25204791: awk 'FNR==1{next}NR==FNR{a[$1]=$b;next}$1 in a{count++}END{print count}' file1 file2\n2",
+        "so_18592736: awk 'FNR==NR{a[$2]=$3;next}{print $0,a[$2]?a[$2]:\"NA\"}' file2 file1"
+      ]
+    },
+    {
+      "Command": "next",
+      "Top-3 Similar Questions": [
+        "so_68286106: AWK comparing two columns in each of two files that have headers",
+        "so_25024427: How to match a list of strings in two different files using a loop structure?",
+        "ul_341452: How to compare columns of one line in same file?"
+      ],
+      "Top-3 Scripts": [
+        "so_68286106: awk -v nheader=$nheader '\n    /^#/ { next }\n    NR==FNR { rec[NR]=$0; k[NR]=$9; val[NR]=$10; next }\n    ($1 == k[NR]) && (abs(val[NR] - $3) <= 0.0001) { print rec[NR], $0 }\n    function abs(x) { return (x<0 ? -x : x) }\n' temp_bandstructure.dat mf_pband.dat > temp_copying_cache.dat\n\nawk -v d=0.00001 -v CONVFMT=%.5f '\n  /^#/ { next }\n  NR==FNR { a[$1,$3]=a[$1,$3+d]=a[$1,$3-d]=$0; next }\n  ($9 SUBSEP $10 in a) { print $0, a[$9,$10] }\n' mf_pband.dat temp_bandstructure.dat",
+        "so_25024427: BEGIN { grab_flag = 0 }\n# grab_flag will be used when we are reading the sequences file\n# (not absolutely necessary to set here, though, because we expect the file will start with '>')\n\nFNR == NR { hits[$1] = 1 ; next } # command executed for all lines of the first file: record IDs stored in multiple_hits.list\n# otherwise we are reading the second file, containing the sequences:\n/^>/ { if (hits[$2] == 1) grab_flag = 0 ; else grab_flag = 1 } # sets the flag indicating whether we have to output the sequence or not\ngrab_flag == 1 { print }",
+        "ul_341452: awk '{ for (i = 2; i <= NF; i++) { if ($i != $1) { print \"multi\"; next } }; print $1 }'"
+      ]
+    },
+    {
+      "Command": "join",
+      "Top-3 Similar Questions": [
+        "ul_454678: compare first column of 2 file : while second have 2 column but first have one column",
+        "so_54485639: How to compare parts of lines of two txt files?",
+        "so_49958479: compare two columns in two different files in shell script"
+      ],
+      "Top-3 Scripts": [
+        "so_54485639: $ cat a\naaaa   bbbb\ncccc   dddd\n$ cat b\naaaa   eeee\nffff   gggg\n$ join a b\naaaa bbbb eeee\n\njoin <(sort a) <(sort b)",
+        "so_49958479: join -t',' -a 1 -a 2 -j 2 file1 file2\n2018042100,21,45\n2018042101,22\n2018042102,87,86\n2018042103,98,87\n\njoin -t',' -a 1 -a 2 -e \"0\" -j 2 file1 file2  | sed -r 's/^[^,]+,[^,]+$/&,0/'\n2018042100,21,45\n2018042101,22,0\n2018042102,87,86\n2018042103,98,87",
+        "ul_419239: join --nocheck-order -j 1 A B | \nwhile read a b c d ; do \n    [[ ( b -le d && b -ge c ) || ( b -le c && b -ge d ) ]] && echo $a $b\ndone"
+      ]
+    }
+  ]
+}

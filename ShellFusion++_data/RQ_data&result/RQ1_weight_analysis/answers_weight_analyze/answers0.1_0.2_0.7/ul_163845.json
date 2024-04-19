@@ -1,0 +1,84 @@
+{
+  "Query": "Using jq to extract values and format in CSV",
+  "Answers": [
+    {
+      "Command": "printf",
+      "MP Summary": "format and print data",
+      "Most Similar TLDR Task": "Store a formatted message in a variable (does not work on zsh)",
+      "Most Similar TLDR Script": "printf -v {{myvar}} {{\"This is %s = %d\\n\" \"a year\" 2016}}",
+      "Top-3 Similar Questions": [
+        "so_14492590: using bash (sed/awk) to extract rows AND columns in CSV files?",
+        "ul_404699: Using multiple wildcards in jq to select objects in a JSON file",
+        "so_69407077: jq format when running from a bash script with variable expansion"
+      ],
+      "Top-3 Scripts": [
+        "so_14492590: #!/bin/bash\ndeclare -a arr\nwhile read -r line; do\n    arr=(${line//,/ })\n    printf \"Rank\\t: %s\\nName\\t: %s\\nSchool\\t: %s\\nMajor\\t: %s\\nYear\\t: %s\\n\" ${arr[@]}\ndone < file.csv",
+        "ul_404699: jq -c 'select ...' file.json > out.json\nprintf '{\"nt\":%i}\\n' `wc -l < out.json` >> out.json",
+        "so_69407077: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "echo",
+      "MP Summary": "display a line of text",
+      "Most Similar TLDR Task": "Print a message with environment variables",
+      "Most Similar TLDR Script": "echo \"{{My path is $PATH}}\"",
+      "Top-3 Similar Questions": [
+        "so_14492590: using bash (sed/awk) to extract rows AND columns in CSV files?",
+        "so_59551619: How to extract value from json contained in a variable using jq in bash",
+        "so_59127004: Use variable in jq read query"
+      ],
+      "Top-3 Scripts": [
+        "so_14492590: #!/bin/bash\nwhile IFS=',' read -r rank name school major year; do\n    echo -e \"Rank\\t: $rank\\nName\\t: $name\\nSchool\\t: $school\\nMajor\\t: $major\\nYear\\t: $year\\n\"\ndone < file.csv\nIFS=$' \\t\\n'",
+        "so_59551619: json_val='{\"code\":\"lyz1To6ZTWClDHSiaeXyxg\",\"redirect_to\":\"http://example.com/client-redirect-uri?code=lyz1To6ZTWClDHSiaeXyxg\"}'\ncode_val=$(jq -r '.code' <<< \"$json_val\")\necho \"$code_val\"",
+        "so_59127004: for user in $(jq -r 'keys[]' permissions.json)\ndo\n  echo ${user}\n  for role in $(jq --arg u \"$user\" -r '.[$u][]' permissions.json)\n  do\n    echo \"User ${user} has role ${role}\"\n  done\ndone\n\nwhile IFS= read -r user; do\n  echo \"$user\"\n  while IFS= read -r role; do\n    echo \"User $user has role $role\"\n  done < <(jq --arg u \"$user\" -r '.[$u][]' permissions.json\ndone < <(jq -r 'keys[]' permissions.json)"
+      ],
+      "Explanations about Options": {
+        "-e": "enable interpretation of backslash escapes"
+      }
+    },
+    {
+      "Command": "jq",
+      "MP Summary": "Command-line JSON processor",
+      "Most Similar TLDR Task": "Read JSON objects from a file into an array, and output it (inverse of `jq .[]`)",
+      "Most Similar TLDR Script": "jq --slurp . {{file.json}}",
+      "Top-3 Similar Questions": [
+        "so_45579569: Using $ variables in jq from PowerShell",
+        "ul_542185: Using jq to create comma separated list fields in JSON array",
+        "so_45486380: Using jq to store part of JSON in variable"
+      ],
+      "Top-3 Scripts": [
+        "so_45579569: jq -r '(map(keys) | add | unique) as $cols | \n       map(. as $row | $cols | map($row[.])) as $rows | \n         $cols, $rows[] | @csv' output2.json > output3.csv",
+        "ul_542185: jq -r '.hardware | join(\", \")'",
+        "so_45486380: variable=\"$file\" | jq -j \".rows[].example\"\n\nvariable=$(cat \"$file\" | jq -j \".rows[].example\")"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "column",
+      "MP Summary": "columnate lists",
+      "Most Similar TLDR Task": "Split columns automatically and auto-align in a tabular format",
+      "Most Similar TLDR Script": "printf \"header1 header2\\nbar foo\\n\" | column -t",
+      "Top-3 Similar Questions": [
+        "so_25622621: How to use awk to get the result of computation of column1 value of the same column2 value in 2 csv files in Ubuntu?"
+      ],
+      "Top-3 Scripts": [
+        "so_25622621: y=current second column"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "dd",
+      "MP Summary": "convert and copy a file",
+      "Most Similar TLDR Task": "Check progress of an ongoing dd operation (Run this command from another shell)",
+      "Most Similar TLDR Script": "kill -USR1 $(pgrep ^dd)",
+      "Top-3 Similar Questions": [
+        "so_21457897: Convert date format in CSV using PowerShell"
+      ],
+      "Top-3 Scripts": [
+        "so_21457897: Import-Csv foo.csv |\n  ForEach-Object {\n    $_.Date = [datetime]::Parse($_.Date).ToString('MM/dd/yyyy HH:mm')\n  } |\n  Export-Csv -NoTypeInformation foo-new.csv"
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

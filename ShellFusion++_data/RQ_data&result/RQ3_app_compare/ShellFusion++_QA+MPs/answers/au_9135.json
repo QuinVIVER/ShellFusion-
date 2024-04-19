@@ -1,0 +1,68 @@
+{
+  "Query": "How to backup settings and list of installed packages",
+  "Answers": [
+    {
+      "Command": "install",
+      "MP Summary": "copy files and set attributes",
+      "Top-3 Similar Questions": [
+        "ul_654369: Where does Debian store the list of installed packages?",
+        "au_143642: How to backup programs without using apt cache?",
+        "au_576306: Backup of Flashdrive"
+      ],
+      "Top-3 Scripts": [
+        "ul_654369: Status: install ok installed\n\nawk '/^Package:/ { package = $2 }\n     /^Status: install ok installed/ { print package }' /path/to/status\n\nawk '/^Package:/ { p = $2; i = 0 }\n     /^Status: install ok installed/ { i = 1 }\n     i && /^Architecture: all/ { print p; next }\n     i && /^Architecture/ { printf \"%s:%s\\n\", p, $2 }' /path/to/status\n\nawk 'FNR == NR && /^Package:/ { p = $2 }\n     /^Status: install ok installed/ { i = 1 }\n     FNR == NR && i && /^Architecture: all/ { ps[p] = 1; next }\n     FNR == NR && i && /^Architecture/ { ps[p \":\" $2] = 1}\n     FNR != NR && /^Package:/ { p = $2 }\n     FNR != NR && /^Architecture:/ { a = $2 }\n     /^Auto-Installed: 1/ { delete ps[p \":\" a] }\n     END { for (p in ps) print p }' /path/to/status /path/to/extended_states",
+        "au_143642: dpkg --get-selections | grep install | cut -f1\n\nsudo apt-get install -f",
+        "au_576306: sudo apt-get install gnome-disks"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "backup",
+      "MP Summary": "Introduction to the backup command suite",
+      "Top-3 Similar Questions": [
+        "au_480887: Backup of multiple server with snapshot",
+        "au_158052: Is there a way to backup your package configuration?",
+        "su_1204638: How to backup linux"
+      ],
+      "Top-3 Scripts": [
+        "au_480887: # Server 1 backup\nbackup  user1@server1:/etc/ server1/\n\n# Server 2 backup\nbackup  user2@server2:/etc/ server2/\n\n# Server 3 backup\nbackup  user3@server3:/etc/ server3/",
+        "au_158052: dpkg --get-selections > /path/to/backup/file\n\ndpkg --set-selections < /path/to/backup/file && sudo apt-get install",
+        "su_1204638: rsync -aAXv --exclude={\"/dev/*\",\"/proc/*\",\"/sys/*\",\"/tmp/*\",\"/run/*\",\"/mnt/*\",\"/media/*\",\"/lost+found\"} / /path/to/backup/folder"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "deja-dup",
+      "MP Summary": "a desktop backup tool",
+      "Top-3 Similar Questions": [
+        "au_1213752: Is a Ubuntu backup accessible from Win 10?"
+      ],
+      "Top-3 Scripts": [
+        "au_1213752: /media/<username>/BackupDrive/<laptopname>/<username>/deja-dup"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "rdiff-backup",
+      "MP Summary": "local/remote mirror and incremental backup",
+      "Top-3 Similar Questions": [
+        "su_188117: Which backup software use?"
+      ],
+      "Top-3 Scripts": [
+        "su_188117: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "duplicity",
+      "MP Summary": "Encrypted incremental backup to local or remote storage.",
+      "Top-3 Similar Questions": [
+        "au_1213752: Is a Ubuntu backup accessible from Win 10?"
+      ],
+      "Top-3 Scripts": [
+        "au_1213752: "
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

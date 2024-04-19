@@ -1,0 +1,101 @@
+{
+  "Query": "Ubuntu refuses to output audio via HDMI",
+  "Answers": [
+    {
+      "Command": "pactl",
+      "MP Summary": "Control a running PulseAudio sound server",
+      "Most Similar TLDR Task": "List all sinks (or other types - sinks are outputs and sink-inputs are active audio streams)",
+      "Most Similar TLDR Script": "pactl list {{sinks}} short",
+      "Top-3 Similar Questions": [
+        "su_1349601: How can I \"record\" sound directly from an audio file?",
+        "ul_458044: Route application's audio output to multiple playback devices",
+        "su_769249: How to record both input and output audio simultaneously?"
+      ],
+      "Top-3 Scripts": [
+        "su_1349601: pactl load-module module-null-sink",
+        "ul_458044: pactl load-module module-null-sink sink_name=recsink\npactl load-module module-loopback source=recsink.monitor sink=your_loadspeaker_sink\n\npactl list short sinks\n\npactl help",
+        "su_769249: pactl load-module module-loopback"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "ffmpeg",
+      "MP Summary": "ffmpeg video converter",
+      "Most Similar TLDR Task": "Remux MKV video to MP4 without re-encoding audio or video streams",
+      "Most Similar TLDR Script": "ffmpeg -i {{input_video}}.mkv -codec copy {{output_video}}.mp4",
+      "Top-3 Similar Questions": [
+        "so_19828236: How to record audio with ffmpeg on linux?",
+        "ul_651617: Write audio stream to an ALSA device with ffmpeg",
+        "ul_146747: Record from the microphone indefinitely"
+      ],
+      "Top-3 Scripts": [
+        "so_19828236: ffmpeg -f alsa -ac 2 -i default -itsoffset 00:00:00.5 -f video4linux2 -s 320x240 -r 25 -i /dev/video0 out.mpg",
+        "ul_651617: ffmpeg -i myfile.ogg -f alsa hw:2,1,0",
+        "ul_146747: ffmpeg -i rec.wav -acodec mp3 rec.mp3"
+      ],
+      "Explanations about Options": {
+        "-itsoffset": "Set the input time offset.",
+        "-acodec": "Set the audio codec. This is an alias for \"-codec:a\".",
+        "-i": "input file url"
+      }
+    },
+    {
+      "Command": "arecord",
+      "MP Summary": "command-line sound recorder and player for ALSA soundcard driver",
+      "Most Similar TLDR Task": "List all sound cards and digital audio devices",
+      "Most Similar TLDR Script": "arecord --list-devices",
+      "Top-3 Similar Questions": [
+        "ul_14889: Is it possible to record audio directly to a computer's optical drive?",
+        "su_1194750: How to record the audio output on Raspbian?",
+        "ul_146747: Record from the microphone indefinitely"
+      ],
+      "Top-3 Scripts": [
+        "ul_14889: ",
+        "su_1194750: arecord -l\n\narecord -vv -D hw:1,1,0 -f S16_LE -r 44100 -c 2 /dev/null",
+        "ul_146747: arecord --device=\"hw:1,0\" --format=S16_LE --rate=48 rec_$(date \"+%F_%H-%M-%S\").wav"
+      ],
+      "Explanations about Options": {
+        "-v": "Show PCM structure and setup. This option is accumulative. The VU meter is\n displayed when this is given twice or three times.",
+        "-c": " The number of channels. The default is one channel. Valid values are 1 through\n 32.",
+        "--device": " Select PCM by name",
+        "-D": " Select PCM by name",
+        "--rate": "Sampling rate in Hertz. The default rate is 8000 Hertz. If the value specified is\n less than 300, it is taken as the rate in kilohertz. Valid values are 2000 through\n 192000 Hertz.",
+        "-r": "Sampling rate in Hertz. The default rate is 8000 Hertz. If the value specified is\n less than 300, it is taken as the rate in kilohertz. Valid values are 2000 through\n 192000 Hertz."
+      }
+    },
+    {
+      "Command": "aplay",
+      "MP Summary": "command-line sound recorder and player for ALSA soundcard driver",
+      "Most Similar TLDR Task": "Play a specific file (sampling rate, bit depth, etc. will be automatically determined for the file format)",
+      "Most Similar TLDR Script": "aplay {{path/to/file}}",
+      "Top-3 Similar Questions": [
+        "au_1257982: no HDMI audio output device in settings (Ubuntu 16.04)",
+        "su_1194750: How to record the audio output on Raspbian?"
+      ],
+      "Top-3 Scripts": [
+        "au_1257982: aplay -l",
+        "su_1194750: aplay -l\n\naplay -vv -D hw:1,0,0 music.wav"
+      ],
+      "Explanations about Options": {
+        "-l": "List all soundcards and digital audio devices",
+        "-v": "Show PCM structure and setup. This option is accumulative. The VU meter is\n displayed when this is given twice or three times.",
+        "-D": " Select PCM by name"
+      }
+    },
+    {
+      "Command": "yes",
+      "MP Summary": "output a string repeatedly until killed",
+      "Most Similar TLDR Task": "Repeatedly output \"message\"",
+      "Most Similar TLDR Script": "yes {{message}}",
+      "Top-3 Similar Questions": [
+        "su_1312163: \"Dummy Output\" instead of audio device on Debian 9",
+        "so_49699891: Ubuntu: unknown users trying to log via ssh"
+      ],
+      "Top-3 Scripts": [
+        "su_1312163: Aug  7 11:37:34 zeta pulseaudio[22178]: D: [pulseaudio] module-udev-detect.c: /devices/pci0000:00/0000:00:1f.3/sound/card0 is busy: yes",
+        "so_49699891: PermitRootLogin yes"
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

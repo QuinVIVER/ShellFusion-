@@ -1,0 +1,78 @@
+{
+    "Answers": [
+        {
+            "Command": "resize2fs",
+            "Explanations about Options": {
+                "-f(C)": "Boot to a Ubuntu Live USB/DVD and \"sudo fsck -f /dev/sdc1\" then \"resize2fs -f /dev/sdc1\". Do a resize2fs -p on the new home partition size just to make sure it has the correct block size. 4.2 Use lvextend on the ROOT partition and then do \"resize2fs PARTITION SIZE\" or \"resize2fs -f PARTITION SIZE\" on it. Do \"resize2fs PARTITION SIZE\" or \"resize2fs -f PARTITION SIZE\" to the HOME partition before you use lvreduce on it. First do \"e2fsck -f PARTITION\" Since we want to remove space from /home and give it to root we do: 4.1.",
+                "-f(M)": "Forces resize2fs to proceed with the filesystem resize operation, overriding some\n safety checks which resize2fs normally enforces.",
+                "-p(C)": "UPDATE : I actually replaced points 6) and 7) with the followings in order to not have to specify the \"root\" size exactly, but to extend to all the free space \"lvextend -l +100%FREE /dev/mapper/APP05-root\" \"resize2fs -p /dev/mapper/APP05-root\". So, based on @wurtel's answer and the research I've done, here's the script and the steps I came up with. .  1) Unmount the \"home\" partition \"umount /dev/mapper/APP05-home\" .  2) Resize the \"home\" filesystem to a size of 2G \"resize2fs -p /dev/mapper/APP05-home 2G\" .  3) Reduce the size of the \"home\" logical volume to 2,1G (the volume needs to be a little bit bigger due to filesystem overhead) \"lvresize --size 2,1G /dev/mapper/APP05-home\" .  4) Resize the filesystem to match the logical volume's size \"resize2fs -p /dev/mapper/APP05-home\" .  5) Mount back the \"home\" partition \"mount /dev/mapper/APP05-home /home\" .  6) Increase the size of the \"root\" logical volume to 17.2G \"lvresize --size 17.2G /dev/mapper/APP05-root\" .  7) Increase the \"root\" filesystem to a size of 17.2G \"resize2fs -p /dev/mapper/APP05-root 17.2G\". And do again a resize2fs -p on it to make sure it has the correct block size.",
+                "-p(M)": "Prints out a percentage completion bars for each resize2fs operation during an\n offline resize, so that the user can keep track of what the program is doing."
+            },
+            "MP Summary": "ext2/ext3/ext4 file system resizer",
+            "Most Similar TLDR Script": "resize2fs {{/dev/sdXN}}",
+            "Most Similar TLDR Task": "Automatically resize a filesystem",
+            "Top-3 Scripts": [
+                "au_1309009: resize2fs -f /dev/sdc1",
+                "ul_163969: resize2fs -p /dev/mapper/APP05-home 2G\n\nresize2fs -p /dev/mapper/APP05-root 17.2G",
+                "au_33593: resize2fs PARTITION SIZE\n\nresize2fs -f PARTITION SIZE"
+            ],
+            "Top-3 Similar Questions": [
+                "au_1309009: Cannot resize root partition not even from live environment!",
+                "ul_163969: Resize root LVM and FS in Debian 7",
+                "au_33593: How can I either free up enough space on root or resize my partitions?"
+            ]
+        },
+        {
+            "Command": "mount",
+            "Explanations about Options": {},
+            "MP Summary": "mount a filesystem",
+            "Most Similar TLDR Script": "mount {{/my_drive}}",
+            "Most Similar TLDR Task": "Mount a specific filesystem described in /etc/fstab (e.g. \"/dev/sda1 /my_drive ext2 defaults 0 2\")",
+            "Top-3 Scripts": [
+                "ul_163969: mount /dev/mapper/APP05-home /home"
+            ],
+            "Top-3 Similar Questions": [
+                "su_630411: Why is it not possible to resize/move mounted (non logical) partitions at runtime?",
+                "ul_163969: Resize root LVM and FS in Debian 7"
+            ]
+        },
+        {
+            "Command": "swapon",
+            "Explanations about Options": {},
+            "MP Summary": "enable/disable devices and files for paging and swapping",
+            "Most Similar TLDR Script": "swapon {{/dev/sdb7}}",
+            "Most Similar TLDR Task": "Enable a given swap partition",
+            "Top-3 Scripts": [],
+            "Top-3 Similar Questions": [
+                "au_1040986: Resizing Home partition",
+                "au_1194610: How to resize my root partition with unallocated space with Home and Swap directory in between"
+            ]
+        },
+        {
+            "Command": "swapoff",
+            "Explanations about Options": {},
+            "MP Summary": "enable/disable devices and files for paging and swapping",
+            "Most Similar TLDR Script": "swapoff {{/dev/sdb7}}",
+            "Most Similar TLDR Task": "Disable a given swap partition",
+            "Top-3 Scripts": [],
+            "Top-3 Similar Questions": [
+                "au_1040986: Resizing Home partition",
+                "au_1194610: How to resize my root partition with unallocated space with Home and Swap directory in between"
+            ]
+        },
+        {
+            "Command": "pvcreate",
+            "Explanations about Options": {},
+            "MP Summary": "Initialize physical volume(s) for use by LVM",
+            "Most Similar TLDR Script": "pvcreate {{/dev/sda1}}",
+            "Most Similar TLDR Task": "Initialize the `/dev/sda1` volume for use by LVM",
+            "Top-3 Scripts": [
+                "ul_505752: pvcreate /dev/nvme0n1p7"
+            ],
+            "Top-3 Similar Questions": [
+                "ul_505752: How can I resize my fedora lvm partition to be larger with the root partition in the way?"
+            ]
+        }
+    ],
+    "Query": "How can I resize an ext root partition at runtime?"
+}

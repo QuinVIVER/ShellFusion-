@@ -1,0 +1,82 @@
+{
+  "Query": "How to parse XML in Bash?",
+  "Answers": [
+    {
+      "Command": "echo",
+      "MP Summary": "display a line of text",
+      "Most Similar TLDR Task": "Print a message with environment variables",
+      "Most Similar TLDR Script": "echo \"{{My path is $PATH}}\"",
+      "Top-3 Similar Questions": [
+        "so_35630494: Simple file parsing in shell",
+        "so_27373548: Why is the 3rd argument not parsed in getopts bash",
+        "so_61042296: Parsing XML attributes with bash"
+      ],
+      "Top-3 Scripts": [
+        "so_35630494: source ./version; echo $major.$minor.$patch",
+        "so_27373548: ",
+        "so_61042296: #/usr/bin/env bash\n\nid='\\bid=\"([^\"]+)\"'\nusername='\\busername=\"([^\"]+)\"'\nwhile IFS= read -r line; do\n    [[ $line =~ $id       ]] && idv=\"${BASH_REMATCH[1]}\"\n    [[ $line =~ $username ]] && echo \"$idv=${BASH_REMATCH[1]}\"\ndone < data.xml\nexit 0"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "sed",
+      "MP Summary": "stream editor for filtering and transforming text",
+      "Most Similar TLDR Task": "Replace separator / by any other character not used in the find or replace patterns, e.g., #",
+      "Most Similar TLDR Script": "sed 's#{{find}}#{{replace}}#' {{filename}}",
+      "Top-3 Similar Questions": [
+        "so_17424225: Should I parse this XML with BASH?",
+        "au_1167287: parse json with default bash only"
+      ],
+      "Top-3 Scripts": [
+        "so_17424225: #!/bin/bash\n\nName=\"InvalidName\"\nwhile read line; do\n        case \"$line\" in\n                Name=*) eval \"$line\" ;; # assuming $line is always bash-friendly Name=\"Value\"\n                *) echo \"$Name;$line\" ;;\n        esac\ndone < <(egrep -o 'Name=\".*\"|<!\\[CDATA\\[.*?\\]\\]>' file.xml | sed -r 's/<!\\[CDATA\\[\"(.*)\"\\]\\]>/\\1/')\n\n#!/bin/bash\n\nName=\"InvalidName\"\nwhile read line; do\n        case \"$line\" in\n                Name=*) export -n \"$line\" ;; # assuming $line is always bash-friendly Name=Value\n                *) echo \"$Name;$line\" ;;\n        esac\ndone < <(egrep -o 'Name=\".*\"|<!\\[CDATA\\[.*?\\]\\]>' file.xml | sed -r 's/<!\\[CDATA\\[\"(.*?)\"\\]\\]>/\\1/; s/Name=\"(.*)\"/Name=\\1/')",
+        "au_1167287: function jsonValue() {\nKEY=$1\nnum=$2\nawk -F\"[,:}]\" '{for(i=1;i<=NF;i++){if($i~/'$KEY'\\042/){print $(i+1)}}}' | tr -d '\"' | sed -n ${num}p\n}"
+      ],
+      "Explanations about Options": {
+        "-r": "use extended regular expressions in the script (for portability use POSIX -E)."
+      }
+    },
+    {
+      "Command": "xmllint",
+      "MP Summary": "command line XML tool",
+      "Most Similar TLDR Task": "Check that a XML file meets the requirements of its DOCTYPE declaration",
+      "Most Similar TLDR Script": "xmllint --valid {{source_file.xml}}",
+      "Top-3 Similar Questions": [
+        "so_16711592: parsing xml file in unix"
+      ],
+      "Top-3 Scripts": [
+        "so_16711592: xmllint --xpath '//Read[@IsIndexedRead = \"Y\"]/@NumCycles' RunInfo.xml | grep -o '[0-9]\\+'\n\nxmllint --xpath '//Read[@IsIndexedRead = \"N\"]/@NumCycles' RunInfo.xml | grep -o '[0-9]\\+'"
+      ],
+      "Explanations about Options": {
+        "--xpath": "Run an XPath expression given as argument and print the result. In case of a nodeset\n result, each node in the node set is serialized in full in the output. In case of an\n empty node set the \"XPath set is empty\" result will be shown and an error exit code\n will be returned."
+      }
+    },
+    {
+      "Command": "printf",
+      "MP Summary": "format and print data",
+      "Most Similar TLDR Task": "Print a text message composed with environment variables",
+      "Most Similar TLDR Script": "printf \"{{var1: %s\\tvar2: %s\\n}}\" \"{{$VAR1}}\" \"{{$VAR2}}\"",
+      "Top-3 Similar Questions": [
+        "so_13457319: Bash: parsing XML block into an array",
+        "so_46565306: Parsing a path in bash"
+      ],
+      "Top-3 Scripts": [
+        "so_13457319: (\n    IFS=$'\\n'\n    ARRAY=($(grep -A 3 '<AA>' test.xml | awk '{printf \"%s\",$0} $0~\"</AA>\" {print}'))\n\n    for MATCH in \"${ARRAY[@]}\"; do\n        echo \"$MATCH\"\n    done\n)\n\n{printf \"%s\",$0}",
+        "so_46565306: cat script.ksh\nvar=$1\nPWD=`pwd`\necho \"$PWD\" | awk -v VAR=\"$var\" -F\"/\" '{for(i=2;i<=(NF-VAR);i++){if($i){printf(\"%s%s\",i==2?\"/\"$i:$i,i==(NF-VAR)?RS:\"/\")}}}'"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "perl",
+      "MP Summary": "The Perl 5 language interpreter",
+      "Most Similar TLDR Task": "Parse and execute a Perl script",
+      "Most Similar TLDR Script": "perl {{script.pl}}",
+      "Top-3 Similar Questions": [
+        "so_22808621: Parsing XML via a shell script"
+      ],
+      "Top-3 Scripts": [
+        "so_22808621: find /tmp/ -name \"testq.xml\" -exec perl -p -e \"s;name=\\\"text_$i\\\".*</string>;name=\\\"text_$i\\\">$my_var</string>;g\" '{}' \\;"
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

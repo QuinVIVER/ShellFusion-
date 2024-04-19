@@ -1,0 +1,848 @@
+{
+  "Query": "GRUB rescue problem after deleting Ubuntu partition!",
+  "Answers": [
+    {
+      "Command": "fdisk",
+      "MP Summary": "manipulate disk partition table",
+      "Most Similar TLDR Task": "Start the partition manipulator",
+      "Most Similar TLDR Script": "fdisk {{/dev/sda}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "au_143667: Boot error > no such device: grub rescue",
+        "au_697370: Grub rescue no such device",
+        "ul_67904: How to get grub Ubuntu 12.04 to boot from secondary boot partition and use new separate root"
+      ],
+      "Top-3 Scripts": [
+        "au_143667: sudo fdisk -l",
+        "au_697370: sudo fdisk -l",
+        "ul_67904: using fdisk to switch off bootable flag for /dev/sda1\npartprobe so the kernel knows about changes\nremounted everything again on top of root at /mnt/root and performed:\ngrub-install /dev/sda  (from the chroot)\nupdate-grub"
+      ],
+      "Explanations about Options": {
+        "-l": "List the partition tables for the specified devices and then exit. If no devices\n are given, those mentioned in /proc/partitions (if that file exists) are used."
+      }
+    },
+    {
+      "Command": "mount",
+      "MP Summary": "mount a filesystem",
+      "Most Similar TLDR Task": "Mount a directory to another directory",
+      "Most Similar TLDR Script": "mount --bind {{path/to/old_dir}} {{path/to/new_dir}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "ul_118768: how to change partitioning?",
+        "au_692500: Boot problem after deleting Windows",
+        "au_143667: Boot error > no such device: grub rescue"
+      ],
+      "Top-3 Scripts": [
+        "ul_118768: mkdir -p /mnt/newroot\nmkdir /mnt/newroot/boot\nmkdir /mnt/newroot/home\nmount /dev/sdb2 /mnt/newroot\nmount /dev/sdb1 /mnt/newroot/boot\nmount /dev/sdb3 /mnt/newroot/home\n\nmkdir /mnt/var\nmount /dev/sd?? /mnt/var\n\nmount /var",
+        "au_692500: sudo mount /dev/sdb2 /mnt/\nsudo mount /dev/sdb1 /mnt/boot/efi\n\nsudo mount --bind /dev /mnt/dev\nsudo mount --bind /dev/pts /mnt/dev/pts\nsudo mount --bind /proc /mnt/proc\nsudo mount --bind /sys /mnt/sys\n\nsudo chroot /mnt",
+        "au_143667: sudo mount /dev/sda5 /home/ubuntu/temp"
+      ],
+      "Explanations about Options": {
+        "--bind": "Remount a subtree somewhere else (so that its contents are available in both\n places). See above, under Bind mounts."
+      }
+    },
+    {
+      "Command": "reboot",
+      "MP Summary": "Halt, power-off or reboot the machine",
+      "Most Similar TLDR Task": "Reboot immediately",
+      "Most Similar TLDR Script": "reboot",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "au_980217: How to exit grub rescue?",
+        "au_409170: Create a bootable ubuntu backup partition"
+      ],
+      "Top-3 Scripts": [
+        "au_980217: ",
+        "au_409170: sudo umount /dev/sda5\nsudo umount /dev/sda6\nsudo reboot"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "blkid",
+      "MP Summary": "locate/print block device attributes",
+      "Most Similar TLDR Task": "List all partitions",
+      "Most Similar TLDR Script": "sudo blkid",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "au_409170: Create a bootable ubuntu backup partition",
+        "ul_595960: Deleted system reserved partition, EFI partition, and can't boot Ubuntu now"
+      ],
+      "Top-3 Scripts": [
+        "au_409170: sudo blkid /dev/sda6",
+        "ul_595960: /sbin/blkid /dev/sda1"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "apt-get",
+      "MP Summary": "APT package handling utility - command-line interface",
+      "Most Similar TLDR Task": "Remove a package and its configuration files",
+      "Most Similar TLDR Script": "apt-get purge {{package}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "au_290894: Problem when I try to install ubuntu",
+        "au_473410: Accidentally deleted grub partition",
+        "au_731027: Remove GRUB and keep a Linux system"
+      ],
+      "Top-3 Scripts": [
+        "au_290894: sudo apt-get install gparted",
+        "au_473410: sudo apt-get install gparted",
+        "au_731027: sudo add-apt-repository ppa:danielrichter2007/grub-customizer \n\nsudo apt-get update\n\nsudo apt-get install grub-customizer"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "ddrescue",
+      "MP Summary": "data recovery tool",
+      "Most Similar TLDR Task": "Take an image of a device, creating a log file",
+      "Most Similar TLDR Script": "sudo ddrescue {{/dev/sdb}} {{path/to/image.dd}} {{path/to/log.txt}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "au_571712: How to restore GRUB and Ubuntu 14.04 after choosing a wrong partition?"
+      ],
+      "Top-3 Scripts": [
+        "au_571712: ddrescue --binary-prefixes --cluster-size=64 --timeout=20s /dev/sdX /dev/sdY /media/ubuntu/PathToUSB/CrashRecovery.log"
+      ],
+      "Explanations about Options": {
+        "--binary-prefixes": "show binary multipliers in numbers [SI]",
+        "--timeout": "maximum time since last successful read",
+        "--cluster-size": "sectors to copy at a time [128]"
+      }
+    },
+    {
+      "Command": "add-apt-repository",
+      "MP Summary": "Adds   a   repository   into   the   /etc/apt/sources.list   or /etc/apt/sources.list.d or removes an existing one",
+      "Most Similar TLDR Task": "Remove an apt repository",
+      "Most Similar TLDR Script": "add-apt-repository --remove {{repository_spec}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "au_731027: Remove GRUB and keep a Linux system"
+      ],
+      "Top-3 Scripts": [
+        "au_731027: sudo add-apt-repository ppa:danielrichter2007/grub-customizer \n\nsudo apt-get update\n\nsudo apt-get install grub-customizer"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "rm",
+      "MP Summary": "remove files or directories",
+      "Most Similar TLDR Task": "Recursively remove a directory and all its subdirectories",
+      "Most Similar TLDR Script": "rm -r {{path/to/directory}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "ul_118768: how to change partitioning?",
+        "au_384793: Ubuntu Software update Problem"
+      ],
+      "Top-3 Scripts": [
+        "ul_118768: rm -rf /var\nmkdir /var",
+        "au_384793: sudo rm -Rf /var/lib/apt/lists/*\nsudo apt-get update"
+      ],
+      "Explanations about Options": {
+        "-R": "remove directories and their contents recursively",
+        "-r": "remove directories and their contents recursively",
+        "-f": "ignore nonexistent files and arguments, never prompt"
+      }
+    },
+    {
+      "Command": "cp",
+      "MP Summary": "copy files and directories",
+      "Most Similar TLDR Task": "Copy a file to another location",
+      "Most Similar TLDR Script": "cp {{path/to/source_file.ext}} {{path/to/target_file.ext}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "ul_118768: how to change partitioning?",
+        "au_409170: Create a bootable ubuntu backup partition"
+      ],
+      "Top-3 Scripts": [
+        "ul_118768: cp -ax --sparse=always / /mnt/newroot\ncp -ax --sparse=always /home /mnt/newroot /home\n\ncp -av --sparse=always /var /mnt/var",
+        "au_409170: sudo mkdir /media/old_partition\nsudo mkdir /media/new_partition\nsudo mount /dev/sda5 /media/old_partition\nsudo mount /dev/sda6 /media/new_partition\nsudo cp -ax /media/old_partition /media/new_partition"
+      ],
+      "Explanations about Options": {
+        "-a": "same as -dR --preserve=all",
+        "--sparse": "control creation of sparse files. See below",
+        "-x": "stay on this file system",
+        "-v": "explain what is being done"
+      }
+    },
+    {
+      "Command": "cryptsetup",
+      "MP Summary": "manage plain dm-crypt and LUKS encrypted volumes",
+      "Most Similar TLDR Task": "Initialize a LUKS volume (overwrites all data on the partition)",
+      "Most Similar TLDR Script": "cryptsetup luksFormat {{/dev/sda1}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "ul_364229: Recover deleted LUKS partition"
+      ],
+      "Top-3 Scripts": [
+        "ul_364229: sudo cryptsetup luksOpen /dev/loop1 luksrecover"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "shutdown",
+      "MP Summary": "Halt, power-off or reboot the machine",
+      "Most Similar TLDR Task": "Reboot immediately",
+      "Most Similar TLDR Script": "shutdown -r now",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "au_571712: How to restore GRUB and Ubuntu 14.04 after choosing a wrong partition?"
+      ],
+      "Top-3 Scripts": [
+        "au_571712: shutdown -h now"
+      ],
+      "Explanations about Options": {
+        "-h": "Equivalent to --poweroff, unless --halt is specified."
+      }
+    },
+    {
+      "Command": "install",
+      "MP Summary": "copy files and set attributes",
+      "Most Similar TLDR Task": "Copy files to destination",
+      "Most Similar TLDR Script": "install {{path/to/source}} {{path/to/destination}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "au_290894: Problem when I try to install ubuntu",
+        "au_473410: Accidentally deleted grub partition",
+        "au_731027: Remove GRUB and keep a Linux system"
+      ],
+      "Top-3 Scripts": [
+        "au_290894: sudo apt-get install gparted",
+        "au_473410: sudo apt-get install gparted",
+        "au_731027: sudo add-apt-repository ppa:danielrichter2007/grub-customizer \n\nsudo apt-get update\n\nsudo apt-get install grub-customizer"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "df",
+      "MP Summary": "report file system disk space usage",
+      "Most Similar TLDR Task": "Display filesystems but exclude the specified type",
+      "Most Similar TLDR Script": "df -x {{squashfs}} -x {{tmpfs}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "au_409170: Create a bootable ubuntu backup partition"
+      ],
+      "Top-3 Scripts": [
+        "au_409170: df -h"
+      ],
+      "Explanations about Options": {
+        "-h": "print sizes in powers of 1024 (e.g., 1023M)"
+      }
+    },
+    {
+      "Command": "umount",
+      "MP Summary": "unmount file systems",
+      "Most Similar TLDR Task": "Unmount a filesystem, by passing the path to the source it is mounted from",
+      "Most Similar TLDR Script": "umount {{path/to/device_file}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "ul_118768: how to change partitioning?",
+        "au_409170: Create a bootable ubuntu backup partition"
+      ],
+      "Top-3 Scripts": [
+        "ul_118768: umount /mnt/newroot/home\numount /mnt/newroot/boot\numount /mnt/newroot\n\numount /mnt/var",
+        "au_409170: sudo umount /dev/sda5\nsudo umount /dev/sda6\nsudo reboot"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "rsync",
+      "MP Summary": "a fast, versatile, remote (and local) file-copying tool",
+      "Most Similar TLDR Task": "Transfer directory contents (but not the directory itself) from a remote to local",
+      "Most Similar TLDR Script": "rsync -r {{remote_host}}:{{path/to/remote_directory}}/ {{path/to/local_directory}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "ul_118768: how to change partitioning?",
+        "ul_5113: Problems moving home partition"
+      ],
+      "Top-3 Scripts": [
+        "ul_118768: rsync -avSx / /mnt/newroot\nrsync -avSx /home /mnt/newroot/home",
+        "ul_5113: rsync -avxS --exclude='/*/.gvfs' /home/. /media/home/.\n\nrsync -avxS --exclude='/*/.gvfs' /home/ /media/home/"
+      ],
+      "Explanations about Options": {
+        "-a": "This is equivalent to -rlptgoD. It is a quick way of saying you want recursion and\n want to preserve almost everything (with -H being a notable omission). The only\n exception to the above equivalence is when --files-from is specified, in which case\n -r is not implied.",
+        "-v": "This option increases the amount of information you are given during the transfer.\n By default, rsync works silently. A single -v will give you information about what\n files are being transferred and a brief summary at the end. Two -v options will\n give you information on what files are being skipped and slightly more information\n at the end. More than two -v options should only be used if you are debugging\n rsync.",
+        "--exclude": "This option is a simplified form of the --filter option that defaults to an exclude\n rule and does not allow the full rule-parsing syntax of normal filter rules.",
+        "-S": "Try to handle sparse files efficiently so they take up less space on the\n destination. If combined with --inplace the file created might not end up with\n sparse blocks with some combinations of kernel version and/or filesystem type. If\n --whole-file is in effect (e.g. for a local copy) then it will always work because\n rsync truncates the file prior to writing out the updated version.",
+        "-x": "This tells rsync to avoid crossing a filesystem boundary when recursing. This does\n not limit the user\u2019s ability to specify items to copy from multiple filesystems,\n just rsync\u2019s recursion through the hierarchy of each directory that the user\n specified, and also the analogous recursion on the receiving side during deletion.\n Also keep in mind that rsync treats a \"bind\" mount to the same device as being on\n the same filesystem."
+      }
+    },
+    {
+      "Command": "set",
+      "MP Summary": "set or unset options and positional parameters",
+      "Most Similar TLDR Task": "Notify of job termination immediately",
+      "Most Similar TLDR Script": "set -b",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "au_651468: Grub rescue trouble after moving a partition",
+        "ul_289272: Grub menu on reboot after removing another distro partition",
+        "au_409170: Create a bootable ubuntu backup partition"
+      ],
+      "Top-3 Scripts": [
+        "au_651468: set prefix=(hd0,msdos4)/boot/grub",
+        "ul_289272: $ cat /boot/efi/EFI/ubuntu/grub.cfg \nsearch.fs_uuid 17441147-6b9d-45fe-bccd-bed2451f43f8 root hd0,gpt5 \nset prefix=($root)'/boot/grub'\nconfigfile $prefix/grub.cfg",
+        "au_409170: menuentry \"Boot backup Ubuntu\" {\n    set root=UUID=XXXX-YYYY\n        linux /vmlinuz root=UUID=XXXX-YYYY ro quiet splash\n            initrd /initrd.img\n    }"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "chroot",
+      "MP Summary": "run command or interactive shell with special root directory",
+      "Most Similar TLDR Task": "Run command as new root directory",
+      "Most Similar TLDR Script": "chroot {{/path/to/new/root}} {{command}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "au_692500: Boot problem after deleting Windows",
+        "au_199571: GRUB not recognising copied partition"
+      ],
+      "Top-3 Scripts": [
+        "au_692500: sudo mount /dev/sdb2 /mnt/\nsudo mount /dev/sdb1 /mnt/boot/efi\n\nsudo mount --bind /dev /mnt/dev\nsudo mount --bind /dev/pts /mnt/dev/pts\nsudo mount --bind /proc /mnt/proc\nsudo mount --bind /sys /mnt/sys\n\nsudo chroot /mnt",
+        "au_199571: sudo chroot /mnt"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "at",
+      "MP Summary": "queue, examine, or delete jobs for later execution",
+      "Most Similar TLDR Task": "Open an `at` prompt to create a new set of scheduled commands, press `Ctrl + D` to save and exit",
+      "Most Similar TLDR Script": "at {{hh:mm}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "ul_364229: Recover deleted LUKS partition",
+        "au_540723: Locating the GRUB partition",
+        "ul_67904: How to get grub Ubuntu 12.04 to boot from secondary boot partition and use new separate root"
+      ],
+      "Top-3 Scripts": [
+        "ul_364229: INFO: Found [.Private/].\nTry to recover this directory? [Y/n]: Y\nINFO: Found your wrapped-passphrase\nDo you know your LOGIN passphrase? [Y/n] Y\nINFO: Enter your LOGIN passphrase...\nPassphrase: \nInserted auth tok with sig [8c5d84b9d7f0cc5b] into the user session keyring\nINFO: Success!  Private data mounted at [/tmp/ecryptfs.mxsowbiD].",
+        "au_540723: => Grub2 (v1.99) is installed in the MBR of /dev/sda and looks at sector 1 of \n    the same hard drive for core.img. core.img is at this location and looks \n    for (,msdos5)/boot/grub on this drive.",
+        "ul_67904: using fdisk to switch off bootable flag for /dev/sda1\npartprobe so the kernel knows about changes\nremounted everything again on top of root at /mnt/root and performed:\ngrub-install /dev/sda  (from the chroot)\nupdate-grub"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "gedit",
+      "MP Summary": "text editor for the GNOME Desktop",
+      "Most Similar TLDR Task": "Open a text file with a specific encoding",
+      "Most Similar TLDR Script": "gedit --encoding={{UTF-8}} {{path/to/file}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "au_731027: Remove GRUB and keep a Linux system",
+        "au_409170: Create a bootable ubuntu backup partition"
+      ],
+      "Top-3 Scripts": [
+        "au_731027: gksudo gedit /etc/default/grub",
+        "au_409170: sudo gedit /media/new_partition/etc/fstab"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "dd",
+      "MP Summary": "convert and copy a file",
+      "Most Similar TLDR Task": "Check progress of an ongoing dd operation (Run this command from another shell)",
+      "Most Similar TLDR Script": "kill -USR1 $(pgrep ^dd)",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "ul_118768: how to change partitioning?",
+        "su_685018: boot error: unknow filesystem. GRUB rescue"
+      ],
+      "Top-3 Scripts": [
+        "ul_118768: ",
+        "su_685018: sudo dd if=/dev/zero of=<hard disk device>"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "nano",
+      "MP Summary": "Nano's ANOther editor, inspired by Pico",
+      "Most Similar TLDR Task": "Before modification, backup separately as `{{current_file_name}}~`",
+      "Most Similar TLDR Script": "nano -B {{filename}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "ul_595960: Deleted system reserved partition, EFI partition, and can't boot Ubuntu now"
+      ],
+      "Top-3 Scripts": [
+        "ul_595960: nano /etc/fstab"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "apt",
+      "MP Summary": "command-line interface",
+      "Most Similar TLDR Task": "Install a package, or update it to the latest available version",
+      "Most Similar TLDR Script": "sudo apt install {{package}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "au_384793: Ubuntu Software update Problem"
+      ],
+      "Top-3 Scripts": [
+        "au_384793: sudo rm -Rf /var/lib/apt/lists/*\nsudo apt-get update"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "sudo",
+      "MP Summary": "execute a command as another user",
+      "Most Similar TLDR Task": "Launch the default shell with superuser privileges",
+      "Most Similar TLDR Script": "sudo -i",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "au_651468: Grub rescue trouble after moving a partition",
+        "au_290894: Problem when I try to install ubuntu",
+        "au_692500: Boot problem after deleting Windows"
+      ],
+      "Top-3 Scripts": [
+        "au_651468: sudo dpkg-reconfigure grub-pc",
+        "au_290894: sudo apt-get install gparted\n\nsudo gparted",
+        "au_692500: sudo mount /dev/sdb2 /mnt/\nsudo mount /dev/sdb1 /mnt/boot/efi\n\nsudo mount --bind /dev /mnt/dev\nsudo mount --bind /dev/pts /mnt/dev/pts\nsudo mount --bind /proc /mnt/proc\nsudo mount --bind /sys /mnt/sys\n\nsudo chroot /mnt"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "lsblk",
+      "MP Summary": "list block devices",
+      "Most Similar TLDR Task": "Also list empty devices",
+      "Most Similar TLDR Script": "lsblk -a",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "au_980217: How to exit grub rescue?"
+      ],
+      "Top-3 Scripts": [
+        "au_980217: lsblk -o +UUID"
+      ],
+      "Explanations about Options": {
+        "-o": "Specify which output columns to print. Use --help to get a list of all supported\n columns. The columns may affect tree-like output. The default is to use tree for\n the column 'NAME' (see also --tree)."
+      }
+    },
+    {
+      "Command": "gnome-terminal",
+      "MP Summary": "is a terminal emulation application.",
+      "Most Similar TLDR Task": "Run a specific command in a new terminal window",
+      "Most Similar TLDR Script": "gnome-terminal -- {{command}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "au_409170: Create a bootable ubuntu backup partition"
+      ],
+      "Top-3 Scripts": [
+        "au_409170: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "make",
+      "MP Summary": "GNU make utility to maintain groups of programs",
+      "Most Similar TLDR Task": "Execute make from another directory",
+      "Most Similar TLDR Script": "make --directory {{directory}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "au_199571: GRUB not recognising copied partition"
+      ],
+      "Top-3 Scripts": [
+        "au_199571: sudo mount /dev/sda2 /mnt  # make sure that sda2 is correct!"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "mkdir",
+      "MP Summary": "make directories",
+      "Most Similar TLDR Task": "Create directories recursively (useful for creating nested dirs)",
+      "Most Similar TLDR Script": "mkdir -p {{path/to/directory}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "ul_118768: how to change partitioning?",
+        "au_409170: Create a bootable ubuntu backup partition"
+      ],
+      "Top-3 Scripts": [
+        "ul_118768: mkdir -p /mnt/newroot\nmkdir /mnt/newroot/boot\nmkdir /mnt/newroot/home\nmount /dev/sdb2 /mnt/newroot\nmount /dev/sdb1 /mnt/newroot/boot\nmount /dev/sdb3 /mnt/newroot/home\n\nmkdir /mnt/var\nmount /dev/sd?? /mnt/var\n\nrm -rf /var\nmkdir /var",
+        "au_409170: sudo mkdir /media/old_partition\nsudo mkdir /media/new_partition\nsudo mount /dev/sda5 /media/old_partition\nsudo mount /dev/sda6 /media/new_partition\nsudo cp -ax /media/old_partition /media/new_partition"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "losetup",
+      "MP Summary": "set up and control loop devices",
+      "Most Similar TLDR Task": "Attach a file to a read-only loop device",
+      "Most Similar TLDR Script": "sudo losetup --read-only /dev/{{loop}} /{{path/to/file}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "ul_364229: Recover deleted LUKS partition"
+      ],
+      "Top-3 Scripts": [
+        "ul_364229: sudo losetup -o <offset> -r -f /dev/nvme0n1\n\nlosetup -a"
+      ],
+      "Explanations about Options": {
+        "-a": "Show the status of all loop devices. Note that not all information is accessible\n for non-root users. See also --list. The old output format (as printed without\n --list) is deprecated."
+      }
+    },
+    {
+      "Command": "umask",
+      "MP Summary": "get or set the file mode creation mask",
+      "Most Similar TLDR Task": "Set the mask (using octal) to restrict no permissions for the file's owner, and restrict all permissions for everyone else",
+      "Most Similar TLDR Script": "umask {{077}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "ul_595960: Deleted system reserved partition, EFI partition, and can't boot Ubuntu now"
+      ],
+      "Top-3 Scripts": [
+        "ul_595960: UUID=\"XXXX-XXXX\"    /boot/efi    vfat    umask=0077,shortname=winnt,flush,tz=UTC,codepage=437,iocharset=iso8859-1 0 2"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "echo",
+      "MP Summary": "display a line of text",
+      "Most Similar TLDR Task": "Print a message with environment variables",
+      "Most Similar TLDR Script": "echo \"{{My path is $PATH}}\"",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "au_731027: Remove GRUB and keep a Linux system"
+      ],
+      "Top-3 Scripts": [
+        "au_731027: GRUB_DEFAULT=0\n#GRUB_HIDDEN_TIMEOUT=0\n#GRUB_HIDDEN_TIMEOUT_QUIET=true\nGRUB_TIMEOUT=10\nGRUB_DISTRIBUTOR=\u201d`lsb_release -i -s 2> /dev/null || echo Debian`\u201d\nGRUB_CMDLINE_LINUX_DEFAULT=\u201dquiet splash\u201d\nGRUB_CMDLINE_LINUX=\u201d\""
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "find",
+      "MP Summary": "search for files in a directory hierarchy",
+      "Most Similar TLDR Task": "Find files modified in the last 7 days, and delete them",
+      "Most Similar TLDR Script": "find {{root_path}} -mtime {{-7}} -delete",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "su_70745: Linux partition deleted, GRUB no longer boots"
+      ],
+      "Top-3 Scripts": [
+        "su_70745: find /boot/grub/stage1"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "cd",
+      "MP Summary": "change the working directory",
+      "Most Similar TLDR Task": "Go to home directory of current user",
+      "Most Similar TLDR Script": "cd",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "ul_364229: Recover deleted LUKS partition"
+      ],
+      "Top-3 Scripts": [
+        "ul_364229: cd /home/<yourusername>\n\n sudo ecryptfs-recover-private .Private/"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "opt",
+      "MP Summary": "LLVM optimizer",
+      "Most Similar TLDR Task": "Optimize the program at level 2 and output the result to another file",
+      "Most Similar TLDR Script": "opt -O2 {{path/to/file.bc}} -S -o {{path/to/output_file.bc}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "ul_364229: Recover deleted LUKS partition"
+      ],
+      "Top-3 Scripts": [
+        "ul_364229: /opt"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "efibootmgr",
+      "MP Summary": "manipulate the UEFI Boot Manager",
+      "Most Similar TLDR Task": "Delete a boot option",
+      "Most Similar TLDR Script": "sudo efibootmgr -b {{0008}} --delete-bootnum",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "ul_595960: Deleted system reserved partition, EFI partition, and can't boot Ubuntu now"
+      ],
+      "Top-3 Scripts": [
+        "ul_595960: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "top",
+      "MP Summary": "display Linux processes",
+      "Most Similar TLDR Task": "Do not show any idle or zombie processes",
+      "Most Similar TLDR Script": "top -i",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "ul_67904: How to get grub Ubuntu 12.04 to boot from secondary boot partition and use new separate root"
+      ],
+      "Top-3 Scripts": [
+        "ul_67904: using fdisk to switch off bootable flag for /dev/sda1\npartprobe so the kernel knows about changes\nremounted everything again on top of root at /mnt/root and performed:\ngrub-install /dev/sda  (from the chroot)\nupdate-grub"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "cat",
+      "MP Summary": "concatenate files and print on the standard output",
+      "Most Similar TLDR Task": "Concatenate several files into the target file",
+      "Most Similar TLDR Script": "cat {{file1}} {{file2}} > {{target_file}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "ul_289272: Grub menu on reboot after removing another distro partition"
+      ],
+      "Top-3 Scripts": [
+        "ul_289272: $ cat /boot/efi/EFI/ubuntu/grub.cfg \nsearch.fs_uuid 17441147-6b9d-45fe-bccd-bed2451f43f8 root hd0,gpt5 \nset prefix=($root)'/boot/grub'\nconfigfile $prefix/grub.cfg"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "hexdump",
+      "MP Summary": "ASCII, decimal, hexadecimal, octal dump",
+      "Most Similar TLDR Task": "Print the hexadecimal representation of a file",
+      "Most Similar TLDR Script": "hexdump {{file}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "ul_364229: Recover deleted LUKS partition"
+      ],
+      "Top-3 Scripts": [
+        "ul_364229: sudo hexdump -C /dev/<the disk>  | grep LUKS"
+      ],
+      "Explanations about Options": {
+        "-C": "Canonical hex+ASCII display. Display the input offset in hexadecimal , followed by\n sixteen space-separated, two column, hexadecimal bytes, followed by the same sixteen\n bytes in %_p format enclosed in ``|'' characters."
+      }
+    },
+    {
+      "Command": "grep",
+      "MP Summary": "print lines that match patterns",
+      "Most Similar TLDR Task": "Invert match for excluding specific strings",
+      "Most Similar TLDR Script": "grep -v {{search_pattern}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "ul_364229: Recover deleted LUKS partition"
+      ],
+      "Top-3 Scripts": [
+        "ul_364229: sudo hexdump -C /dev/<the disk>  | grep LUKS"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "exit",
+      "MP Summary": "cause the shell to exit",
+      "Most Similar TLDR Task": "Exit the shell with the specified exit code",
+      "Most Similar TLDR Script": "exit {{exit_code}}",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "su_1092714: Grub rescue mode after deleting kali linux",
+        "ul_595960: Deleted system reserved partition, EFI partition, and can't boot Ubuntu now"
+      ],
+      "Top-3 Scripts": [
+        "su_1092714: Create partition efi size=100\nFormat fs=fat32 label=\u201dSYSTEM\u201d quick\nAssign letter=S\nCreate partition msr size=128\nExit\n\nbcdedit C:\\Windows /s S:\n\nexit\n\nSel part 1\ndel part override\nCreate partition primary size=300\nFormat fs=ntfs label=\u201dSYSTEM\u201d quick\nAssign Letter=S\nactive\nexit\n\nbcdboot C:\\Windows /s S:\nexit",
+        "ul_595960: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "such",
+      "MP Summary": "or  any situation  where  you want to make sure you're doing a clean install of your dependencies. It  can  be  significantly  faster  than  a  regular  npm  install  by  skipping   certain user-oriented  features.  It  is  also  more strict than a regular install, which can help catch errors or inconsistencies caused by the incrementally-installed  local  environments of most npm users. In short, the main differences between using npm install and npm ci are: \u00b7 The project must have an existing package-lock.json or npm-shrinkwrap.json. \u00b7 If dependencies in the package lock do not match those in package.json, npm ci will exit with an error, instead of updating the package lock. \u00b7 npm ci can only install entire projects at a time:  individual  dependencies  cannot  be added with this command. \u00b7 If  a  node_modules  is  already present, it will be automatically removed before npm ci begins its install. \u00b7 It will  never  write  to  package.json  or  any  of  the  package-locks:  installs  are essentially frozen. See Also \u00b7 npm help install \u00b7 npm help package-locks April 2020                                  NPM-CI(1)",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "ul_415026: System not booting, grub rescue failing. Partition restoring?"
+      ],
+      "Top-3 Scripts": [
+        "ul_415026: error: no such partition. entering rescue mode."
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "gdisk",
+      "MP Summary": "Interactive GUID partition table (GPT) manipulator",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "au_309413: Ubuntu won't boot after deleting a partition"
+      ],
+      "Top-3 Scripts": [
+        "au_309413: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "sgdisk",
+      "MP Summary": "Command-line GUID partition table (GPT) manipulator for Linux and Unix",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "au_309413: Ubuntu won't boot after deleting a partition"
+      ],
+      "Top-3 Scripts": [
+        "au_309413: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "cgdisk",
+      "MP Summary": "Curses-based GUID partition table (GPT) manipulator",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "au_309413: Ubuntu won't boot after deleting a partition"
+      ],
+      "Top-3 Scripts": [
+        "au_309413: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "parted",
+      "MP Summary": "a partition manipulation program",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "au_309413: Ubuntu won't boot after deleting a partition"
+      ],
+      "Top-3 Scripts": [
+        "au_309413: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "prefix",
+      "MP Summary": "Script  that  allows  you  to  reconfigure  environment  variables for multiple installations of a set of software installed on the same machine",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "au_651468: Grub rescue trouble after moving a partition",
+        "ul_289272: Grub menu on reboot after removing another distro partition"
+      ],
+      "Top-3 Scripts": [
+        "au_651468: set prefix=(hd0,msdos4)/boot/grub",
+        "ul_289272: $ cat /boot/efi/EFI/ubuntu/grub.cfg \nsearch.fs_uuid 17441147-6b9d-45fe-bccd-bed2451f43f8 root hd0,gpt5 \nset prefix=($root)'/boot/grub'\nconfigfile $prefix/grub.cfg"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "insmod",
+      "MP Summary": "Simple program to insert a module into the Linux Kernel",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "au_651468: Grub rescue trouble after moving a partition"
+      ],
+      "Top-3 Scripts": [
+        "au_651468: insmod normal"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "dpkg-reconfigure",
+      "MP Summary": "reconfigure an already installed package",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "au_651468: Grub rescue trouble after moving a partition"
+      ],
+      "Top-3 Scripts": [
+        "au_651468: sudo dpkg-reconfigure grub-pc"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "gparted",
+      "MP Summary": "GNOME Partition Editor for manipulating disk partitions.",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "au_290894: Problem when I try to install ubuntu",
+        "ul_123214: GRUB doesn't see ext4 partitions (error: no such partition)",
+        "au_473410: Accidentally deleted grub partition"
+      ],
+      "Top-3 Scripts": [
+        "au_290894: sudo apt-get install gparted\n\nsudo gparted",
+        "ul_123214: ",
+        "au_473410: sudo apt-get install gparted"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "dev",
+      "MP Summary": "release candidate LaTeX testing",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "ul_118768: how to change partitioning?",
+        "au_692500: Boot problem after deleting Windows",
+        "au_571295: How to solve Grub rescue and/or mounting hard drive problem"
+      ],
+      "Top-3 Scripts": [
+        "ul_118768: mkdir -p /mnt/newroot\nmkdir /mnt/newroot/boot\nmkdir /mnt/newroot/home\nmount /dev/sdb2 /mnt/newroot\nmount /dev/sdb1 /mnt/newroot/boot\nmount /dev/sdb3 /mnt/newroot/home\n\nmkdir /mnt/var\nmount /dev/sd?? /mnt/var",
+        "au_692500: sudo mount /dev/sdb2 /mnt/\nsudo mount /dev/sdb1 /mnt/boot/efi\n\nsudo mount --bind /dev /mnt/dev\nsudo mount --bind /dev/pts /mnt/dev/pts\nsudo mount --bind /proc /mnt/proc\nsudo mount --bind /sys /mnt/sys\n\nsudo chroot /mnt",
+        "au_571295: Disk /dev/sda: 160.0 GB, 160041885696 bytes\n255 heads, 63 sectors/track, 19457 cylinders, total 312581808 sectors\nUnits = sectors of 1 * 512 = 512 bytes\nSector size (logical/physical): 512 bytes / 512 bytes\nI/O size (minimum/optimal): 512 bytes / 512 bytes\nDisk identifier: 0x000285b2\n\n   Device Boot      Start         End      Blocks   Id  System"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "init",
+      "MP Summary": "a UNIX process no 1",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "None",
+      "Most Similar NL2Bash Script": "None",
+      "Top-3 Similar Questions": [
+        "ul_118768: how to change partitioning?"
+      ],
+      "Top-3 Scripts": [
+        "ul_118768: init 1"
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

@@ -1,0 +1,2597 @@
+{
+  "Query": "How do I get the parent process ID of a given child process?",
+  "Answers": [
+    {
+      "Command": "pgrep",
+      "MP Summary": "look up or signal processes based on name and other attributes",
+      "Most Similar TLDR Task": "Return PIDs of any running processes with a matching command string",
+      "Most Similar TLDR Script": "pgrep {{process_name}}",
+      "Most Similar NL2Bash Task": "Calculates process depth of process with id $processid, and stores it in a 'depth' variable.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "depth=$(pstree -sA $processid | head -n1 | sed -e 's#-+-.*#---foobar#' -e 's#---*#\\n#g' -eq | wc -l)\n",
+          "command-options": {
+            "pstree": {
+              "mpsum": "display a tree of processes",
+              "-s": "Show parent processes of the specified process.",
+              "-A": "Use ASCII characters to draw the tree."
+            },
+            "head": {
+              "mpsum": "output the first part of files"
+            },
+            "sed": {
+              "mpsum": "stream editor for filtering and transforming text",
+              "-e": "add the script to the commands to be executed"
+            },
+            "wc": {
+              "mpsum": "print newline, word, and byte counts for each file"
+            }
+          },
+          "TLDR_inform": {
+            "pstree": {
+              "man1_pstree_27524": "conveni tool show run process tree display tree process display tree process pid display process tree root process own specifi user"
+            },
+            "head": {
+              "man1_head_14119": "output first part file output everyth last byte file output everyth last line file output first byte file output first line file"
+            },
+            "sed": {
+              "man1_sed_30692": "edit text scriptabl manner appli multipl find-replac express file delet line match line pattern print first 11 line file replac occurr string file overwrit file e\nin-plac replac occurr extend regular express file print result replac line match line pattern replac separ charact use find replac pattern e g replac first occurr regular express line file print result"
+            },
+            "wc": {
+              "man1_wc_36412": "count line word byte count charact byte file count charact file take multi-byt charact set account count line file count word file use standard input count line word charact byte order"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_52508561: Get pids of all child/grandchild processes created from parent process",
+        "au_1259111: Get process ids of all spawned processes from xargs",
+        "ul_189989: Get PID of process started by time"
+      ],
+      "Top-3 Scripts": [
+        "so_52508561: #!/usr/bin/env bash\n\nnode foo.js &\npid=$!\n\nsleep 5;\n\npgrep -P $pid | xargs kill -INT",
+        "au_1259111: pgrep -P {parent}",
+        "ul_189989: $ time sleep 50 & timepid=$!\n$ aoutpid=$(pgrep -P $timepid)\n$ ps -o ppid,pid,start,cmd w -p $$,$timepid,$aoutpid\n\nPPID   PID  STARTED CMD\n2065  2068 21:34:57 -bash\n2068  3297 22:16:05 -bash\n3297  3298 22:16:05 sleep 50"
+      ],
+      "Explanations about Options": {
+        "-P": "Only match processes whose parent process ID is listed."
+      }
+    },
+    {
+      "Command": "ps",
+      "MP Summary": "report a snapshot of the current processes.",
+      "Most Similar TLDR Task": "Get the parent pid of a process",
+      "Most Similar TLDR Script": "ps -o ppid= -p {{pid}}",
+      "Most Similar NL2Bash Task": "Calculates process depth of process with id $processid, and stores it in a 'depth' variable.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "depth=$(pstree -sA $processid | head -n1 | sed -e 's#-+-.*#---foobar#' -e 's#---*#\\n#g' -eq | wc -l)\n",
+          "command-options": {
+            "pstree": {
+              "mpsum": "display a tree of processes",
+              "-s": "Show parent processes of the specified process.",
+              "-A": "Use ASCII characters to draw the tree."
+            },
+            "head": {
+              "mpsum": "output the first part of files"
+            },
+            "sed": {
+              "mpsum": "stream editor for filtering and transforming text",
+              "-e": "add the script to the commands to be executed"
+            },
+            "wc": {
+              "mpsum": "print newline, word, and byte counts for each file"
+            }
+          },
+          "TLDR_inform": {
+            "pstree": {
+              "man1_pstree_27524": "conveni tool show run process tree display tree process display tree process pid display process tree root process own specifi user"
+            },
+            "head": {
+              "man1_head_14119": "output first part file output everyth last byte file output everyth last line file output first byte file output first line file"
+            },
+            "sed": {
+              "man1_sed_30692": "edit text scriptabl manner appli multipl find-replac express file delet line match line pattern print first 11 line file replac occurr string file overwrit file e\nin-plac replac occurr extend regular express file print result replac line match line pattern replac separ charact use find replac pattern e g replac first occurr regular express line file print result"
+            },
+            "wc": {
+              "man1_wc_36412": "count line word byte count charact byte file count charact file take multi-byt charact set account count line file count word file use standard input count line word charact byte order"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_273760: Finding number of child processes of a particular process",
+        "su_150117: How to get parent PID of a given process in GNU/Linux from command line?",
+        "so_27755420: Get child list of parent process in C"
+      ],
+      "Top-3 Scripts": [
+        "ul_273760: ps -eo ppid= | grep -Fwc $pid\n\nps -eo ppid= | tr -d '[:blank:]' | grep -Fxc $pid\n\nps -eo ppid= | awk '$1==ppid {++i} END {print i+0}' ppid=$pid\n\nset $(ps -eo ppid=); echo $#",
+        "su_150117: ps -o ppid= -p 1111\n\nppid () { ps -p ${1:-$$} -o ppid=; }\n\n#!/bin/sh\npid=$1\nif [ -z $pid ]\nthen\n    read -p \"PID: \" pid\nfi\nps -p ${pid:-$$} -o ppid=",
+        "so_27755420: "
+      ],
+      "Explanations about Options": {
+        "-e": "Select all processes. Identical to -A.",
+        "-p": "Select by PID. This selects the processes whose process ID numbers appear in\n pidlist. Identical to p and --pid."
+      }
+    },
+    {
+      "Command": "pstree",
+      "MP Summary": "display a tree of processes",
+      "Most Similar TLDR Task": "Display a tree of processes with PIDs",
+      "Most Similar TLDR Script": "pstree -p",
+      "Most Similar NL2Bash Task": "Calculates process depth of process with id $processid, and stores it in a 'depth' variable.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "depth=$(pstree -sA $processid | head -n1 | sed -e 's#-+-.*#---foobar#' -e 's#---*#\\n#g' -eq | wc -l)\n",
+          "command-options": {
+            "pstree": {
+              "mpsum": "display a tree of processes",
+              "-s": "Show parent processes of the specified process.",
+              "-A": "Use ASCII characters to draw the tree."
+            },
+            "head": {
+              "mpsum": "output the first part of files"
+            },
+            "sed": {
+              "mpsum": "stream editor for filtering and transforming text",
+              "-e": "add the script to the commands to be executed"
+            },
+            "wc": {
+              "mpsum": "print newline, word, and byte counts for each file"
+            }
+          },
+          "TLDR_inform": {
+            "pstree": {
+              "man1_pstree_27524": "conveni tool show run process tree display tree process display tree process pid display process tree root process own specifi user"
+            },
+            "head": {
+              "man1_head_14119": "output first part file output everyth last byte file output everyth last line file output first byte file output first line file"
+            },
+            "sed": {
+              "man1_sed_30692": "edit text scriptabl manner appli multipl find-replac express file delet line match line pattern print first 11 line file replac occurr string file overwrit file e\nin-plac replac occurr extend regular express file print result replac line match line pattern replac separ charact use find replac pattern e g replac first occurr regular express line file print result"
+            },
+            "wc": {
+              "man1_wc_36412": "count line word byte count charact byte file count charact file take multi-byt charact set account count line file count word file use standard input count line word charact byte order"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_1361: Prints process tree of a process having id $ID with parent processes.",
+        "nl2bash_1347: Displays process tree of a process with id 'PID', showing parent process and processes id.",
+        "nl2bash_1357: Prints process tree of a current process with id numbers and parent processes."
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_1361: pstree -s $ID",
+        "nl2bash_1347: pstree -p -s PID",
+        "nl2bash_1357: pstree -sp $$"
+      ],
+      "Explanations about Options": {
+        "-p": "Show PIDs. PIDs are shown as decimal numbers in parentheses after each process\n name. -p implicitly disables compaction.",
+        "-s": "Show parent processes of the specified process."
+      }
+    },
+    {
+      "Command": "kill",
+      "MP Summary": "send a signal to a process",
+      "Most Similar TLDR Task": "Send a `SIGUSR1` signal to all processes with the given GID (group id)",
+      "Most Similar TLDR Script": "kill -{{SIGUSR1}} -{{group_id}}",
+      "Most Similar NL2Bash Task": "Calculates process depth of process with id $processid, and stores it in a 'depth' variable.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "depth=$(pstree -sA $processid | head -n1 | sed -e 's#-+-.*#---foobar#' -e 's#---*#\\n#g' -eq | wc -l)\n",
+          "command-options": {
+            "pstree": {
+              "mpsum": "display a tree of processes",
+              "-s": "Show parent processes of the specified process.",
+              "-A": "Use ASCII characters to draw the tree."
+            },
+            "head": {
+              "mpsum": "output the first part of files"
+            },
+            "sed": {
+              "mpsum": "stream editor for filtering and transforming text",
+              "-e": "add the script to the commands to be executed"
+            },
+            "wc": {
+              "mpsum": "print newline, word, and byte counts for each file"
+            }
+          },
+          "TLDR_inform": {
+            "pstree": {
+              "man1_pstree_27524": "conveni tool show run process tree display tree process display tree process pid display process tree root process own specifi user"
+            },
+            "head": {
+              "man1_head_14119": "output first part file output everyth last byte file output everyth last line file output first byte file output first line file"
+            },
+            "sed": {
+              "man1_sed_30692": "edit text scriptabl manner appli multipl find-replac express file delet line match line pattern print first 11 line file replac occurr string file overwrit file e\nin-plac replac occurr extend regular express file print result replac line match line pattern replac separ charact use find replac pattern e g replac first occurr regular express line file print result"
+            },
+            "wc": {
+              "man1_wc_36412": "count line word byte count charact byte file count charact file take multi-byt charact set account count line file count word file use standard input count line word charact byte order"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_52508561: Get pids of all child/grandchild processes created from parent process",
+        "so_21602689: C/C++ program to kill all child processes of a parent process in UNIX?"
+      ],
+      "Top-3 Scripts": [
+        "so_52508561: #!/usr/bin/env bash\n\nnode foo.js &\npid=$!\n\nsleep 5;\n\npgrep -P $pid | xargs kill -INT",
+        "so_21602689: kill(-pgid, signal_number)"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "wait",
+      "MP Summary": "await process completion",
+      "Most Similar TLDR Task": "Wait for a process to finish given its process ID (PID) and return its exit status",
+      "Most Similar TLDR Script": "wait {{pid}}",
+      "Most Similar NL2Bash Task": "Calculates process depth of process with id $processid, and stores it in a 'depth' variable.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "depth=$(pstree -sA $processid | head -n1 | sed -e 's#-+-.*#---foobar#' -e 's#---*#\\n#g' -eq | wc -l)\n",
+          "command-options": {
+            "pstree": {
+              "mpsum": "display a tree of processes",
+              "-s": "Show parent processes of the specified process.",
+              "-A": "Use ASCII characters to draw the tree."
+            },
+            "head": {
+              "mpsum": "output the first part of files"
+            },
+            "sed": {
+              "mpsum": "stream editor for filtering and transforming text",
+              "-e": "add the script to the commands to be executed"
+            },
+            "wc": {
+              "mpsum": "print newline, word, and byte counts for each file"
+            }
+          },
+          "TLDR_inform": {
+            "pstree": {
+              "man1_pstree_27524": "conveni tool show run process tree display tree process display tree process pid display process tree root process own specifi user"
+            },
+            "head": {
+              "man1_head_14119": "output first part file output everyth last byte file output everyth last line file output first byte file output first line file"
+            },
+            "sed": {
+              "man1_sed_30692": "edit text scriptabl manner appli multipl find-replac express file delet line match line pattern print first 11 line file replac occurr string file overwrit file e\nin-plac replac occurr extend regular express file print result replac line match line pattern replac separ charact use find replac pattern e g replac first occurr regular express line file print result"
+            },
+            "wc": {
+              "man1_wc_36412": "count line word byte count charact byte file count charact file take multi-byt charact set account count line file count word file use standard input count line word charact byte order"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_27755420: Get child list of parent process in C",
+        "so_20573621: Bash get process ID of a process started in subshell",
+        "so_41658406: When a child process is created with fork, the parent ID is not as the same as the parent ID"
+      ],
+      "Top-3 Scripts": [
+        "so_27755420: ",
+        "so_20573621: (sleep & wait)\n(sleep & pid=$!; wait $pid)",
+        "so_41658406: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "exit",
+      "MP Summary": "cause the shell to exit",
+      "Most Similar TLDR Task": "Exit the shell with the exit code of the last command executed",
+      "Most Similar TLDR Script": "exit",
+      "Most Similar NL2Bash Task": "Calculates process depth of process with id $processid, and stores it in a 'depth' variable.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "depth=$(pstree -sA $processid | head -n1 | sed -e 's#-+-.*#---foobar#' -e 's#---*#\\n#g' -eq | wc -l)\n",
+          "command-options": {
+            "pstree": {
+              "mpsum": "display a tree of processes",
+              "-s": "Show parent processes of the specified process.",
+              "-A": "Use ASCII characters to draw the tree."
+            },
+            "head": {
+              "mpsum": "output the first part of files"
+            },
+            "sed": {
+              "mpsum": "stream editor for filtering and transforming text",
+              "-e": "add the script to the commands to be executed"
+            },
+            "wc": {
+              "mpsum": "print newline, word, and byte counts for each file"
+            }
+          },
+          "TLDR_inform": {
+            "pstree": {
+              "man1_pstree_27524": "conveni tool show run process tree display tree process display tree process pid display process tree root process own specifi user"
+            },
+            "head": {
+              "man1_head_14119": "output first part file output everyth last byte file output everyth last line file output first byte file output first line file"
+            },
+            "sed": {
+              "man1_sed_30692": "edit text scriptabl manner appli multipl find-replac express file delet line match line pattern print first 11 line file replac occurr string file overwrit file e\nin-plac replac occurr extend regular express file print result replac line match line pattern replac separ charact use find replac pattern e g replac first occurr regular express line file print result"
+            },
+            "wc": {
+              "man1_wc_36412": "count line word byte count charact byte file count charact file take multi-byt charact set account count line file count word file use standard input count line word charact byte order"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_1259111: Get process ids of all spawned processes from xargs",
+        "ul_83088: How to get the id of a very short child process if the parent is known?",
+        "so_28259459: Displaying output of subshell in parent process"
+      ],
+      "Top-3 Scripts": [
+        "au_1259111: some_initialization_code\nthe_command and the command args\nexit $?",
+        "ul_83088: type=SYSCALL msg=audit(1373986729.977:377): arch=c000003e syscall=59 success=yes exit=0 a0=7ff000e4b188 a1=7ff000e4b1b0 a2=7fff928d47e8 a3=7fff928caac0 items=2 ppid=7502 pid=691 auid=10031 uid=10031 gid=10031 euid=10031 suid=10031 fsuid=10031 egid=10031 sgid=10031 fsgid=10031 ses=1 tty=pts5 comm=\"echo\" exe=\"/bin/echo\" key=(null)\ntype=EXECVE msg=audit(1373986729.977:377): argc=2 a0=\"/bin/echo\" a1=\"test\"\ntype=CWD msg=audit(1373986729.977:377):  cwd=\"/tmp\"\ntype=PATH msg=audit(1373986729.977:377): item=0 name=\"/bin/echo\" inode=131750 dev=fe:00 mode=0100755 ouid=0 ogid=0 rdev=00:00",
+        "so_28259459: $ ./test.sh \necho in parent process\n$ exit\necho in subshell"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "sleep",
+      "MP Summary": "delay for a specified amount of time",
+      "Most Similar TLDR Task": "Delay in seconds",
+      "Most Similar TLDR Script": "sleep {{seconds}}",
+      "Most Similar NL2Bash Task": "Calculates process depth of process with id $processid, and stores it in a 'depth' variable.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "depth=$(pstree -sA $processid | head -n1 | sed -e 's#-+-.*#---foobar#' -e 's#---*#\\n#g' -eq | wc -l)\n",
+          "command-options": {
+            "pstree": {
+              "mpsum": "display a tree of processes",
+              "-s": "Show parent processes of the specified process.",
+              "-A": "Use ASCII characters to draw the tree."
+            },
+            "head": {
+              "mpsum": "output the first part of files"
+            },
+            "sed": {
+              "mpsum": "stream editor for filtering and transforming text",
+              "-e": "add the script to the commands to be executed"
+            },
+            "wc": {
+              "mpsum": "print newline, word, and byte counts for each file"
+            }
+          },
+          "TLDR_inform": {
+            "pstree": {
+              "man1_pstree_27524": "conveni tool show run process tree display tree process display tree process pid display process tree root process own specifi user"
+            },
+            "head": {
+              "man1_head_14119": "output first part file output everyth last byte file output everyth last line file output first byte file output first line file"
+            },
+            "sed": {
+              "man1_sed_30692": "edit text scriptabl manner appli multipl find-replac express file delet line match line pattern print first 11 line file replac occurr string file overwrit file e\nin-plac replac occurr extend regular express file print result replac line match line pattern replac separ charact use find replac pattern e g replac first occurr regular express line file print result"
+            },
+            "wc": {
+              "man1_wc_36412": "count line word byte count charact byte file count charact file take multi-byt charact set account count line file count word file use standard input count line word charact byte order"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_52508561: Get pids of all child/grandchild processes created from parent process",
+        "ul_189989: Get PID of process started by time",
+        "so_20573621: Bash get process ID of a process started in subshell"
+      ],
+      "Top-3 Scripts": [
+        "so_52508561: #!/usr/bin/env bash\n\nnode foo.js &\npid=$!\n\nsleep 5;\n\npgrep -P $pid | xargs kill -INT",
+        "ul_189989: sleep 60\n\n$ time sleep 50 & timepid=$!\n$ aoutpid=$(pgrep -P $timepid)\n$ ps -o ppid,pid,start,cmd w -p $$,$timepid,$aoutpid\n\nPPID   PID  STARTED CMD\n2065  2068 21:34:57 -bash\n2068  3297 22:16:05 -bash\n3297  3298 22:16:05 sleep 50",
+        "so_20573621: (sleep & wait)\n(sleep & pid=$!; wait $pid)"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "jobs",
+      "MP Summary": "display status of jobs in the current session",
+      "Most Similar TLDR Task": "List jobs and their process ids",
+      "Most Similar TLDR Script": "jobs -l",
+      "Most Similar NL2Bash Task": "Calculates process depth of process with id $processid, and stores it in a 'depth' variable.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "depth=$(pstree -sA $processid | head -n1 | sed -e 's#-+-.*#---foobar#' -e 's#---*#\\n#g' -eq | wc -l)\n",
+          "command-options": {
+            "pstree": {
+              "mpsum": "display a tree of processes",
+              "-s": "Show parent processes of the specified process.",
+              "-A": "Use ASCII characters to draw the tree."
+            },
+            "head": {
+              "mpsum": "output the first part of files"
+            },
+            "sed": {
+              "mpsum": "stream editor for filtering and transforming text",
+              "-e": "add the script to the commands to be executed"
+            },
+            "wc": {
+              "mpsum": "print newline, word, and byte counts for each file"
+            }
+          },
+          "TLDR_inform": {
+            "pstree": {
+              "man1_pstree_27524": "conveni tool show run process tree display tree process display tree process pid display process tree root process own specifi user"
+            },
+            "head": {
+              "man1_head_14119": "output first part file output everyth last byte file output everyth last line file output first byte file output first line file"
+            },
+            "sed": {
+              "man1_sed_30692": "edit text scriptabl manner appli multipl find-replac express file delet line match line pattern print first 11 line file replac occurr string file overwrit file e\nin-plac replac occurr extend regular express file print result replac line match line pattern replac separ charact use find replac pattern e g replac first occurr regular express line file print result"
+            },
+            "wc": {
+              "man1_wc_36412": "count line word byte count charact byte file count charact file take multi-byt charact set account count line file count word file use standard input count line word charact byte order"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "tldr_4571: Show process IDs of all jobs"
+      ],
+      "Top-3 Scripts": [
+        "tldr_4571: jobs -p"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "import",
+      "MP Summary": "saves any visible window on an X server and outputs it as an image file. You can capture a single window, the entire screen, or any rectangular portion of the screen.",
+      "Most Similar TLDR Task": "Capture a specific window, given its ID as displayed by `xwininfo`, into the JPEG format",
+      "Most Similar TLDR Script": "import -window {{window_id}} {{output.jpg}}",
+      "Most Similar NL2Bash Task": "Calculates process depth of process with id $processid, and stores it in a 'depth' variable.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "depth=$(pstree -sA $processid | head -n1 | sed -e 's#-+-.*#---foobar#' -e 's#---*#\\n#g' -eq | wc -l)\n",
+          "command-options": {
+            "pstree": {
+              "mpsum": "display a tree of processes",
+              "-s": "Show parent processes of the specified process.",
+              "-A": "Use ASCII characters to draw the tree."
+            },
+            "head": {
+              "mpsum": "output the first part of files"
+            },
+            "sed": {
+              "mpsum": "stream editor for filtering and transforming text",
+              "-e": "add the script to the commands to be executed"
+            },
+            "wc": {
+              "mpsum": "print newline, word, and byte counts for each file"
+            }
+          },
+          "TLDR_inform": {
+            "pstree": {
+              "man1_pstree_27524": "conveni tool show run process tree display tree process display tree process pid display process tree root process own specifi user"
+            },
+            "head": {
+              "man1_head_14119": "output first part file output everyth last byte file output everyth last line file output first byte file output first line file"
+            },
+            "sed": {
+              "man1_sed_30692": "edit text scriptabl manner appli multipl find-replac express file delet line match line pattern print first 11 line file replac occurr string file overwrit file e\nin-plac replac occurr extend regular express file print result replac line match line pattern replac separ charact use find replac pattern e g replac first occurr regular express line file print result"
+            },
+            "wc": {
+              "man1_wc_36412": "count line word byte count charact byte file count charact file take multi-byt charact set account count line file count word file use standard input count line word charact byte order"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_20599728: How can you make a parent process display PID of child instead of value variable?",
+        "so_56563992: Get Parent process id from child process id using Golang",
+        "so_58078246: Get process id of the command of the command just after execution"
+      ],
+      "Top-3 Scripts": [
+        "so_20599728: import os\n\nchild_pid = os.fork()\nif child_pid == 0:\n    print \"This is the child, my pid is\", os.getpid()\nelse:\n    print \"This is the parent, my child pid is\", child_pid",
+        "so_56563992: import ps \"github.com/mitchellh/go-ps\"\n...\n\nlist, err := ps.Processes()\nif err != nil {\n  panic(err)\n}\nfor _, p := range list {\n  log.Printf(\"Process %s with PID %d and PPID %d\", p.Executable(), p.Pid(), p.PPid())\n}",
+        "so_58078246: import subprocess\np = subprocess.Popen('grep')\nprint(p.pid)"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "bash",
+      "MP Summary": "GNU Bourne-Again SHell",
+      "Most Similar TLDR Task": "Run commands from `stdin`",
+      "Most Similar TLDR Script": "bash -s",
+      "Most Similar NL2Bash Task": "Calculates process depth of process with id $processid, and stores it in a 'depth' variable.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "depth=$(pstree -sA $processid | head -n1 | sed -e 's#-+-.*#---foobar#' -e 's#---*#\\n#g' -eq | wc -l)\n",
+          "command-options": {
+            "pstree": {
+              "mpsum": "display a tree of processes",
+              "-s": "Show parent processes of the specified process.",
+              "-A": "Use ASCII characters to draw the tree."
+            },
+            "head": {
+              "mpsum": "output the first part of files"
+            },
+            "sed": {
+              "mpsum": "stream editor for filtering and transforming text",
+              "-e": "add the script to the commands to be executed"
+            },
+            "wc": {
+              "mpsum": "print newline, word, and byte counts for each file"
+            }
+          },
+          "TLDR_inform": {
+            "pstree": {
+              "man1_pstree_27524": "conveni tool show run process tree display tree process display tree process pid display process tree root process own specifi user"
+            },
+            "head": {
+              "man1_head_14119": "output first part file output everyth last byte file output everyth last line file output first byte file output first line file"
+            },
+            "sed": {
+              "man1_sed_30692": "edit text scriptabl manner appli multipl find-replac express file delet line match line pattern print first 11 line file replac occurr string file overwrit file e\nin-plac replac occurr extend regular express file print result replac line match line pattern replac separ charact use find replac pattern e g replac first occurr regular express line file print result"
+            },
+            "wc": {
+              "man1_wc_36412": "count line word byte count charact byte file count charact file take multi-byt charact set account count line file count word file use standard input count line word charact byte order"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_466747: Is the PID of a child process always greater than the PID of its parent on Linux?",
+        "ul_189989: Get PID of process started by time",
+        "so_9119885: How to get the process id of a bash subprocess on command line"
+      ],
+      "Top-3 Scripts": [
+        "ul_466747: $ echo $$\n27468\n$ bash -c 'echo $$'\n1296\n$ bash -c 'echo $$'\n1297",
+        "ul_189989: ",
+        "so_9119885: echo $$; ( F='/tmp/myps'; [ ! -f $F ] && echo 'echo $PPID' > $F; bash $F; ps; )\n\necho $$; ( bash -c 'echo $PPID'; )"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "print",
+      "MP Summary": "execute programs via entries in the mailcap file",
+      "Most Similar TLDR Task": "Print action can be used to print any file on default run-mailcap tool",
+      "Most Similar TLDR Script": "print {{filename}}",
+      "Most Similar NL2Bash Task": "Calculates process depth of process with id $processid, and stores it in a 'depth' variable.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "depth=$(pstree -sA $processid | head -n1 | sed -e 's#-+-.*#---foobar#' -e 's#---*#\\n#g' -eq | wc -l)\n",
+          "command-options": {
+            "pstree": {
+              "mpsum": "display a tree of processes",
+              "-s": "Show parent processes of the specified process.",
+              "-A": "Use ASCII characters to draw the tree."
+            },
+            "head": {
+              "mpsum": "output the first part of files"
+            },
+            "sed": {
+              "mpsum": "stream editor for filtering and transforming text",
+              "-e": "add the script to the commands to be executed"
+            },
+            "wc": {
+              "mpsum": "print newline, word, and byte counts for each file"
+            }
+          },
+          "TLDR_inform": {
+            "pstree": {
+              "man1_pstree_27524": "conveni tool show run process tree display tree process display tree process pid display process tree root process own specifi user"
+            },
+            "head": {
+              "man1_head_14119": "output first part file output everyth last byte file output everyth last line file output first byte file output first line file"
+            },
+            "sed": {
+              "man1_sed_30692": "edit text scriptabl manner appli multipl find-replac express file delet line match line pattern print first 11 line file replac occurr string file overwrit file e\nin-plac replac occurr extend regular express file print result replac line match line pattern replac separ charact use find replac pattern e g replac first occurr regular express line file print result"
+            },
+            "wc": {
+              "man1_wc_36412": "count line word byte count charact byte file count charact file take multi-byt charact set account count line file count word file use standard input count line word charact byte order"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_273760: Finding number of child processes of a particular process",
+        "so_20599728: How can you make a parent process display PID of child instead of value variable?",
+        "so_58078246: Get process id of the command of the command just after execution"
+      ],
+      "Top-3 Scripts": [
+        "ul_273760: ps -eo ppid= | awk '$1==ppid {++i} END {print i+0}' ppid=$pid",
+        "so_20599728: import os\n\nchild_pid = os.fork()\nif child_pid == 0:\n    print \"This is the child, my pid is\", os.getpid()\nelse:\n    print \"This is the parent, my child pid is\", child_pid",
+        "so_58078246: import subprocess\np = subprocess.Popen('grep')\nprint(p.pid)"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "type",
+      "MP Summary": "write a description of command type",
+      "Most Similar TLDR Task": "Display the name of the disk file that would be executed",
+      "Most Similar TLDR Script": "type -p {{command}}",
+      "Most Similar NL2Bash Task": "Calculates process depth of process with id $processid, and stores it in a 'depth' variable.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "depth=$(pstree -sA $processid | head -n1 | sed -e 's#-+-.*#---foobar#' -e 's#---*#\\n#g' -eq | wc -l)\n",
+          "command-options": {
+            "pstree": {
+              "mpsum": "display a tree of processes",
+              "-s": "Show parent processes of the specified process.",
+              "-A": "Use ASCII characters to draw the tree."
+            },
+            "head": {
+              "mpsum": "output the first part of files"
+            },
+            "sed": {
+              "mpsum": "stream editor for filtering and transforming text",
+              "-e": "add the script to the commands to be executed"
+            },
+            "wc": {
+              "mpsum": "print newline, word, and byte counts for each file"
+            }
+          },
+          "TLDR_inform": {
+            "pstree": {
+              "man1_pstree_27524": "conveni tool show run process tree display tree process display tree process pid display process tree root process own specifi user"
+            },
+            "head": {
+              "man1_head_14119": "output first part file output everyth last byte file output everyth last line file output first byte file output first line file"
+            },
+            "sed": {
+              "man1_sed_30692": "edit text scriptabl manner appli multipl find-replac express file delet line match line pattern print first 11 line file replac occurr string file overwrit file e\nin-plac replac occurr extend regular express file print result replac line match line pattern replac separ charact use find replac pattern e g replac first occurr regular express line file print result"
+            },
+            "wc": {
+              "man1_wc_36412": "count line word byte count charact byte file count charact file take multi-byt charact set account count line file count word file use standard input count line word charact byte order"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_83088: How to get the id of a very short child process if the parent is known?",
+        "so_38648740: How to get all the parents of a child XML Node in powershell"
+      ],
+      "Top-3 Scripts": [
+        "ul_83088: type=SYSCALL msg=audit(1373986729.977:377): arch=c000003e syscall=59 success=yes exit=0 a0=7ff000e4b188 a1=7ff000e4b1b0 a2=7fff928d47e8 a3=7fff928caac0 items=2 ppid=7502 pid=691 auid=10031 uid=10031 gid=10031 euid=10031 suid=10031 fsuid=10031 egid=10031 sgid=10031 fsgid=10031 ses=1 tty=pts5 comm=\"echo\" exe=\"/bin/echo\" key=(null)\ntype=EXECVE msg=audit(1373986729.977:377): argc=2 a0=\"/bin/echo\" a1=\"test\"\ntype=CWD msg=audit(1373986729.977:377):  cwd=\"/tmp\"\ntype=PATH msg=audit(1373986729.977:377): item=0 name=\"/bin/echo\" inode=131750 dev=fe:00 mode=0100755 ouid=0 ogid=0 rdev=00:00",
+        "so_38648740: type=root"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "cd",
+      "MP Summary": "change the working directory",
+      "Most Similar TLDR Task": "Go up to the parent of the current directory",
+      "Most Similar TLDR Script": "cd ..",
+      "Most Similar NL2Bash Task": "Calculates process depth of process with id $processid, and stores it in a 'depth' variable.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "depth=$(pstree -sA $processid | head -n1 | sed -e 's#-+-.*#---foobar#' -e 's#---*#\\n#g' -eq | wc -l)\n",
+          "command-options": {
+            "pstree": {
+              "mpsum": "display a tree of processes",
+              "-s": "Show parent processes of the specified process.",
+              "-A": "Use ASCII characters to draw the tree."
+            },
+            "head": {
+              "mpsum": "output the first part of files"
+            },
+            "sed": {
+              "mpsum": "stream editor for filtering and transforming text",
+              "-e": "add the script to the commands to be executed"
+            },
+            "wc": {
+              "mpsum": "print newline, word, and byte counts for each file"
+            }
+          },
+          "TLDR_inform": {
+            "pstree": {
+              "man1_pstree_27524": "conveni tool show run process tree display tree process display tree process pid display process tree root process own specifi user"
+            },
+            "head": {
+              "man1_head_14119": "output first part file output everyth last byte file output everyth last line file output first byte file output first line file"
+            },
+            "sed": {
+              "man1_sed_30692": "edit text scriptabl manner appli multipl find-replac express file delet line match line pattern print first 11 line file replac occurr string file overwrit file e\nin-plac replac occurr extend regular express file print result replac line match line pattern replac separ charact use find replac pattern e g replac first occurr regular express line file print result"
+            },
+            "wc": {
+              "man1_wc_36412": "count line word byte count charact byte file count charact file take multi-byt charact set account count line file count word file use standard input count line word charact byte order"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_28997125: Change directory of a parent process from a child process"
+      ],
+      "Top-3 Scripts": [
+        "so_28997125: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "echo",
+      "MP Summary": "display a line of text",
+      "Most Similar TLDR Task": "Append a message to the file",
+      "Most Similar TLDR Script": "echo \"{{Hello World}}\" >> {{file.txt}}",
+      "Most Similar NL2Bash Task": "Calculates process depth of process with id $processid, and stores it in a 'depth' variable.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "depth=$(pstree -sA $processid | head -n1 | sed -e 's#-+-.*#---foobar#' -e 's#---*#\\n#g' -eq | wc -l)\n",
+          "command-options": {
+            "pstree": {
+              "mpsum": "display a tree of processes",
+              "-s": "Show parent processes of the specified process.",
+              "-A": "Use ASCII characters to draw the tree."
+            },
+            "head": {
+              "mpsum": "output the first part of files"
+            },
+            "sed": {
+              "mpsum": "stream editor for filtering and transforming text",
+              "-e": "add the script to the commands to be executed"
+            },
+            "wc": {
+              "mpsum": "print newline, word, and byte counts for each file"
+            }
+          },
+          "TLDR_inform": {
+            "pstree": {
+              "man1_pstree_27524": "conveni tool show run process tree display tree process display tree process pid display process tree root process own specifi user"
+            },
+            "head": {
+              "man1_head_14119": "output first part file output everyth last byte file output everyth last line file output first byte file output first line file"
+            },
+            "sed": {
+              "man1_sed_30692": "edit text scriptabl manner appli multipl find-replac express file delet line match line pattern print first 11 line file replac occurr string file overwrit file e\nin-plac replac occurr extend regular express file print result replac line match line pattern replac separ charact use find replac pattern e g replac first occurr regular express line file print result"
+            },
+            "wc": {
+              "man1_wc_36412": "count line word byte count charact byte file count charact file take multi-byt charact set account count line file count word file use standard input count line word charact byte order"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_3586888: How do I find the top-level parent PID of a given process using bash?",
+        "ul_273760: Finding number of child processes of a particular process",
+        "ul_510598: Accessing memory of parent process from child process"
+      ],
+      "Top-3 Scripts": [
+        "so_3586888: ",
+        "ul_273760: set $(ps -eo ppid=); echo $#",
+        "ul_510598: x=foo\nexport x\n\ndash\necho $x"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "xargs",
+      "MP Summary": "build and execute command lines from standard input",
+      "Most Similar TLDR Task": "Run a command using the input data as arguments",
+      "Most Similar TLDR Script": "{{arguments_source}} | xargs {{command}}",
+      "Most Similar NL2Bash Task": "Calculates process depth of process with id $processid, and stores it in a 'depth' variable.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "depth=$(pstree -sA $processid | head -n1 | sed -e 's#-+-.*#---foobar#' -e 's#---*#\\n#g' -eq | wc -l)\n",
+          "command-options": {
+            "pstree": {
+              "mpsum": "display a tree of processes",
+              "-s": "Show parent processes of the specified process.",
+              "-A": "Use ASCII characters to draw the tree."
+            },
+            "head": {
+              "mpsum": "output the first part of files"
+            },
+            "sed": {
+              "mpsum": "stream editor for filtering and transforming text",
+              "-e": "add the script to the commands to be executed"
+            },
+            "wc": {
+              "mpsum": "print newline, word, and byte counts for each file"
+            }
+          },
+          "TLDR_inform": {
+            "pstree": {
+              "man1_pstree_27524": "conveni tool show run process tree display tree process display tree process pid display process tree root process own specifi user"
+            },
+            "head": {
+              "man1_head_14119": "output first part file output everyth last byte file output everyth last line file output first byte file output first line file"
+            },
+            "sed": {
+              "man1_sed_30692": "edit text scriptabl manner appli multipl find-replac express file delet line match line pattern print first 11 line file replac occurr string file overwrit file e\nin-plac replac occurr extend regular express file print result replac line match line pattern replac separ charact use find replac pattern e g replac first occurr regular express line file print result"
+            },
+            "wc": {
+              "man1_wc_36412": "count line word byte count charact byte file count charact file take multi-byt charact set account count line file count word file use standard input count line word charact byte order"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_52508561: Get pids of all child/grandchild processes created from parent process",
+        "au_1259111: Get process ids of all spawned processes from xargs"
+      ],
+      "Top-3 Scripts": [
+        "so_52508561: #!/usr/bin/env bash\n\nnode foo.js &\npid=$!\n\nsleep 5;\n\npgrep -P $pid | xargs kill -INT",
+        "au_1259111: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "nsenter",
+      "MP Summary": "run program with namespaces of other processes",
+      "Most Similar TLDR Task": "Run a new command in an existing processes ps-table namespace",
+      "Most Similar TLDR Script": "nsenter -t {{pid}} -p {{command}} {{command_arguments}}",
+      "Most Similar NL2Bash Task": "Calculates process depth of process with id $processid, and stores it in a 'depth' variable.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "depth=$(pstree -sA $processid | head -n1 | sed -e 's#-+-.*#---foobar#' -e 's#---*#\\n#g' -eq | wc -l)\n",
+          "command-options": {
+            "pstree": {
+              "mpsum": "display a tree of processes",
+              "-s": "Show parent processes of the specified process.",
+              "-A": "Use ASCII characters to draw the tree."
+            },
+            "head": {
+              "mpsum": "output the first part of files"
+            },
+            "sed": {
+              "mpsum": "stream editor for filtering and transforming text",
+              "-e": "add the script to the commands to be executed"
+            },
+            "wc": {
+              "mpsum": "print newline, word, and byte counts for each file"
+            }
+          },
+          "TLDR_inform": {
+            "pstree": {
+              "man1_pstree_27524": "conveni tool show run process tree display tree process display tree process pid display process tree root process own specifi user"
+            },
+            "head": {
+              "man1_head_14119": "output first part file output everyth last byte file output everyth last line file output first byte file output first line file"
+            },
+            "sed": {
+              "man1_sed_30692": "edit text scriptabl manner appli multipl find-replac express file delet line match line pattern print first 11 line file replac occurr string file overwrit file e\nin-plac replac occurr extend regular express file print result replac line match line pattern replac separ charact use find replac pattern e g replac first occurr regular express line file print result"
+            },
+            "wc": {
+              "man1_wc_36412": "count line word byte count charact byte file count charact file take multi-byt charact set account count line file count word file use standard input count line word charact byte order"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_625520: Is it possible to check the process id of child in different pid namespace?"
+      ],
+      "Top-3 Scripts": [
+        "ul_625520: nsenter(1)"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "pwd",
+      "MP Summary": "print name of current/working directory",
+      "Most Similar TLDR Task": "Print the current directory",
+      "Most Similar TLDR Script": "pwd",
+      "Most Similar NL2Bash Task": "Calculates process depth of process with id $processid, and stores it in a 'depth' variable.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "depth=$(pstree -sA $processid | head -n1 | sed -e 's#-+-.*#---foobar#' -e 's#---*#\\n#g' -eq | wc -l)\n",
+          "command-options": {
+            "pstree": {
+              "mpsum": "display a tree of processes",
+              "-s": "Show parent processes of the specified process.",
+              "-A": "Use ASCII characters to draw the tree."
+            },
+            "head": {
+              "mpsum": "output the first part of files"
+            },
+            "sed": {
+              "mpsum": "stream editor for filtering and transforming text",
+              "-e": "add the script to the commands to be executed"
+            },
+            "wc": {
+              "mpsum": "print newline, word, and byte counts for each file"
+            }
+          },
+          "TLDR_inform": {
+            "pstree": {
+              "man1_pstree_27524": "conveni tool show run process tree display tree process display tree process pid display process tree root process own specifi user"
+            },
+            "head": {
+              "man1_head_14119": "output first part file output everyth last byte file output everyth last line file output first byte file output first line file"
+            },
+            "sed": {
+              "man1_sed_30692": "edit text scriptabl manner appli multipl find-replac express file delet line match line pattern print first 11 line file replac occurr string file overwrit file e\nin-plac replac occurr extend regular express file print result replac line match line pattern replac separ charact use find replac pattern e g replac first occurr regular express line file print result"
+            },
+            "wc": {
+              "man1_wc_36412": "count line word byte count charact byte file count charact file take multi-byt charact set account count line file count word file use standard input count line word charact byte order"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_36415942: Get working directory of the parent shell from a child process"
+      ],
+      "Top-3 Scripts": [
+        "so_36415942: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "comm",
+      "MP Summary": "select or reject lines common to two files",
+      "Most Similar TLDR Task": "Get lines only found in first file, saving the result to a third file",
+      "Most Similar TLDR Script": "comm -23 {{file1}} {{file2}} > {{file1_only}}",
+      "Most Similar NL2Bash Task": "Calculates process depth of process with id $processid, and stores it in a 'depth' variable.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "depth=$(pstree -sA $processid | head -n1 | sed -e 's#-+-.*#---foobar#' -e 's#---*#\\n#g' -eq | wc -l)\n",
+          "command-options": {
+            "pstree": {
+              "mpsum": "display a tree of processes",
+              "-s": "Show parent processes of the specified process.",
+              "-A": "Use ASCII characters to draw the tree."
+            },
+            "head": {
+              "mpsum": "output the first part of files"
+            },
+            "sed": {
+              "mpsum": "stream editor for filtering and transforming text",
+              "-e": "add the script to the commands to be executed"
+            },
+            "wc": {
+              "mpsum": "print newline, word, and byte counts for each file"
+            }
+          },
+          "TLDR_inform": {
+            "pstree": {
+              "man1_pstree_27524": "conveni tool show run process tree display tree process display tree process pid display process tree root process own specifi user"
+            },
+            "head": {
+              "man1_head_14119": "output first part file output everyth last byte file output everyth last line file output first byte file output first line file"
+            },
+            "sed": {
+              "man1_sed_30692": "edit text scriptabl manner appli multipl find-replac express file delet line match line pattern print first 11 line file replac occurr string file overwrit file e\nin-plac replac occurr extend regular express file print result replac line match line pattern replac separ charact use find replac pattern e g replac first occurr regular express line file print result"
+            },
+            "wc": {
+              "man1_wc_36412": "count line word byte count charact byte file count charact file take multi-byt charact set account count line file count word file use standard input count line word charact byte order"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_83088: How to get the id of a very short child process if the parent is known?",
+        "nl2bash_81: Get a path name of a process id"
+      ],
+      "Top-3 Scripts": [
+        "ul_83088: type=SYSCALL msg=audit(1373986729.977:377): arch=c000003e syscall=59 success=yes exit=0 a0=7ff000e4b188 a1=7ff000e4b1b0 a2=7fff928d47e8 a3=7fff928caac0 items=2 ppid=7502 pid=691 auid=10031 uid=10031 gid=10031 euid=10031 suid=10031 fsuid=10031 egid=10031 sgid=10031 fsgid=10031 ses=1 tty=pts5 comm=\"echo\" exe=\"/bin/echo\" key=(null)\ntype=EXECVE msg=audit(1373986729.977:377): argc=2 a0=\"/bin/echo\" a1=\"test\"\ntype=CWD msg=audit(1373986729.977:377):  cwd=\"/tmp\"\ntype=PATH msg=audit(1373986729.977:377): item=0 name=\"/bin/echo\" inode=131750 dev=fe:00 mode=0100755 ouid=0 ogid=0 rdev=00:00",
+        "nl2bash_81: ps -p 24297 -o comm --no-heading"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "grep",
+      "MP Summary": "print lines that match patterns",
+      "Most Similar TLDR Task": "Print file name with the corresponding line number for each match",
+      "Most Similar TLDR Script": "grep -Hn {{search_pattern}} {{path/to/file}}",
+      "Most Similar NL2Bash Task": "Calculates process depth of process with id $processid, and stores it in a 'depth' variable.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "depth=$(pstree -sA $processid | head -n1 | sed -e 's#-+-.*#---foobar#' -e 's#---*#\\n#g' -eq | wc -l)\n",
+          "command-options": {
+            "pstree": {
+              "mpsum": "display a tree of processes",
+              "-s": "Show parent processes of the specified process.",
+              "-A": "Use ASCII characters to draw the tree."
+            },
+            "head": {
+              "mpsum": "output the first part of files"
+            },
+            "sed": {
+              "mpsum": "stream editor for filtering and transforming text",
+              "-e": "add the script to the commands to be executed"
+            },
+            "wc": {
+              "mpsum": "print newline, word, and byte counts for each file"
+            }
+          },
+          "TLDR_inform": {
+            "pstree": {
+              "man1_pstree_27524": "conveni tool show run process tree display tree process display tree process pid display process tree root process own specifi user"
+            },
+            "head": {
+              "man1_head_14119": "output first part file output everyth last byte file output everyth last line file output first byte file output first line file"
+            },
+            "sed": {
+              "man1_sed_30692": "edit text scriptabl manner appli multipl find-replac express file delet line match line pattern print first 11 line file replac occurr string file overwrit file e\nin-plac replac occurr extend regular express file print result replac line match line pattern replac separ charact use find replac pattern e g replac first occurr regular express line file print result"
+            },
+            "wc": {
+              "man1_wc_36412": "count line word byte count charact byte file count charact file take multi-byt charact set account count line file count word file use standard input count line word charact byte order"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_273760: Finding number of child processes of a particular process",
+        "nl2bash_10053: Prints all child processes of a process with id 20238.",
+        "so_11542243: Finding number of child processes"
+      ],
+      "Top-3 Scripts": [
+        "ul_273760: ps -eo ppid= | grep -Fwc $pid\n\nps -eo ppid= | tr -d '[:blank:]' | grep -Fxc $pid",
+        "nl2bash_10053: pstree -p 20238 | sed 's/(/\\n(/g' | grep '(' | sed 's/(\\(.*\\)).*/\\1/'",
+        "so_11542243: bash_pid=$$\nchildren=`ps -eo ppid | grep -w $bash_pid`"
+      ],
+      "Explanations about Options": {
+        "-F": "Interpret PATTERNS as fixed strings, not regular expressions.",
+        "-w": "Select only those lines containing matches that form whole words. The test is that\n the matching substring must either be at the beginning of the line, or preceded by\n a non-word constituent character. Similarly, it must be either at the end of the\n line or followed by a non-word constituent character. Word-constituent characters\n are letters, digits, and the underscore. This option has no effect if -x is also\n specified.",
+        "-x": "Select only those matches that exactly match the whole line. For a regular\n expression pattern, this is like parenthesizing the pattern and then surrounding it\n with ^ and $."
+      }
+    },
+    {
+      "Command": "export",
+      "MP Summary": "set the export attribute for variables",
+      "Most Similar TLDR Task": "Mark a shell function for export",
+      "Most Similar TLDR Script": "export -f {{FUNCTION_NAME}}",
+      "Most Similar NL2Bash Task": "Calculates process depth of process with id $processid, and stores it in a 'depth' variable.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "depth=$(pstree -sA $processid | head -n1 | sed -e 's#-+-.*#---foobar#' -e 's#---*#\\n#g' -eq | wc -l)\n",
+          "command-options": {
+            "pstree": {
+              "mpsum": "display a tree of processes",
+              "-s": "Show parent processes of the specified process.",
+              "-A": "Use ASCII characters to draw the tree."
+            },
+            "head": {
+              "mpsum": "output the first part of files"
+            },
+            "sed": {
+              "mpsum": "stream editor for filtering and transforming text",
+              "-e": "add the script to the commands to be executed"
+            },
+            "wc": {
+              "mpsum": "print newline, word, and byte counts for each file"
+            }
+          },
+          "TLDR_inform": {
+            "pstree": {
+              "man1_pstree_27524": "conveni tool show run process tree display tree process display tree process pid display process tree root process own specifi user"
+            },
+            "head": {
+              "man1_head_14119": "output first part file output everyth last byte file output everyth last line file output first byte file output first line file"
+            },
+            "sed": {
+              "man1_sed_30692": "edit text scriptabl manner appli multipl find-replac express file delet line match line pattern print first 11 line file replac occurr string file overwrit file e\nin-plac replac occurr extend regular express file print result replac line match line pattern replac separ charact use find replac pattern e g replac first occurr regular express line file print result"
+            },
+            "wc": {
+              "man1_wc_36412": "count line word byte count charact byte file count charact file take multi-byt charact set account count line file count word file use standard input count line word charact byte order"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_510598: Accessing memory of parent process from child process"
+      ],
+      "Top-3 Scripts": [
+        "ul_510598: x=foo\nexport x\n\ndash\necho $x"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "head",
+      "MP Summary": "output the first part of files",
+      "Most Similar TLDR Task": "Output the first few lines of a file",
+      "Most Similar TLDR Script": "head -n {{count_of_lines}} {{filename}}",
+      "Most Similar NL2Bash Task": "Calculates process depth of process with id $processid, and stores it in a 'depth' variable.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "depth=$(pstree -sA $processid | head -n1 | sed -e 's#-+-.*#---foobar#' -e 's#---*#\\n#g' -eq | wc -l)\n",
+          "command-options": {
+            "pstree": {
+              "mpsum": "display a tree of processes",
+              "-s": "Show parent processes of the specified process.",
+              "-A": "Use ASCII characters to draw the tree."
+            },
+            "head": {
+              "mpsum": "output the first part of files"
+            },
+            "sed": {
+              "mpsum": "stream editor for filtering and transforming text",
+              "-e": "add the script to the commands to be executed"
+            },
+            "wc": {
+              "mpsum": "print newline, word, and byte counts for each file"
+            }
+          },
+          "TLDR_inform": {
+            "pstree": {
+              "man1_pstree_27524": "conveni tool show run process tree display tree process display tree process pid display process tree root process own specifi user"
+            },
+            "head": {
+              "man1_head_14119": "output first part file output everyth last byte file output everyth last line file output first byte file output first line file"
+            },
+            "sed": {
+              "man1_sed_30692": "edit text scriptabl manner appli multipl find-replac express file delet line match line pattern print first 11 line file replac occurr string file overwrit file e\nin-plac replac occurr extend regular express file print result replac line match line pattern replac separ charact use find replac pattern e g replac first occurr regular express line file print result"
+            },
+            "wc": {
+              "man1_wc_36412": "count line word byte count charact byte file count charact file take multi-byt charact set account count line file count word file use standard input count line word charact byte order"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_1359: Prints process tree of a current process with parents processes and id numbers.",
+        "su_731223: What process is the parent of the init process in Linux?"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_1359: pstree --show-parents -p $$ | head -n 1 | sed 's/\\(.*\\)+.*/\\1/' | less",
+        "su_731223: $ ps -ef | head -4\nUID        PID  PPID  C STIME TTY          TIME CMD\nroot         1     0  0 Mar14 ?        00:00:03 init [2]  \nroot         2     0  0 Mar14 ?        00:00:00 [kthreadd]\nroot         3     2  0 Mar14 ?        00:00:17 [ksoftirqd/0]"
+      ],
+      "Explanations about Options": {
+        "-n": "print the first NUM lines instead of the first 10; with the leading '-', print all\n but the last NUM lines of each file"
+      }
+    },
+    {
+      "Command": "strace",
+      "MP Summary": "trace system calls and signals",
+      "Most Similar TLDR Task": "Start tracing a specific process by its PID",
+      "Most Similar TLDR Script": "strace -p {{pid}}",
+      "Most Similar NL2Bash Task": "Calculates process depth of process with id $processid, and stores it in a 'depth' variable.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "depth=$(pstree -sA $processid | head -n1 | sed -e 's#-+-.*#---foobar#' -e 's#---*#\\n#g' -eq | wc -l)\n",
+          "command-options": {
+            "pstree": {
+              "mpsum": "display a tree of processes",
+              "-s": "Show parent processes of the specified process.",
+              "-A": "Use ASCII characters to draw the tree."
+            },
+            "head": {
+              "mpsum": "output the first part of files"
+            },
+            "sed": {
+              "mpsum": "stream editor for filtering and transforming text",
+              "-e": "add the script to the commands to be executed"
+            },
+            "wc": {
+              "mpsum": "print newline, word, and byte counts for each file"
+            }
+          },
+          "TLDR_inform": {
+            "pstree": {
+              "man1_pstree_27524": "conveni tool show run process tree display tree process display tree process pid display process tree root process own specifi user"
+            },
+            "head": {
+              "man1_head_14119": "output first part file output everyth last byte file output everyth last line file output first byte file output first line file"
+            },
+            "sed": {
+              "man1_sed_30692": "edit text scriptabl manner appli multipl find-replac express file delet line match line pattern print first 11 line file replac occurr string file overwrit file e\nin-plac replac occurr extend regular express file print result replac line match line pattern replac separ charact use find replac pattern e g replac first occurr regular express line file print result"
+            },
+            "wc": {
+              "man1_wc_36412": "count line word byte count charact byte file count charact file take multi-byt charact set account count line file count word file use standard input count line word charact byte order"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_4757433: can we get thread id of thread in strace output of the multithreaded process?"
+      ],
+      "Top-3 Scripts": [
+        "so_4757433: strace -f"
+      ],
+      "Explanations about Options": {
+        "-f": "Trace child processes as they are created by currently traced processes as a\n result of the fork(2), vfork(2) and clone(2) system calls. Note that -p PID\n -f will attach all threads of process PID if it is multi-threaded, not only\n thread with thread_id = PID."
+      }
+    },
+    {
+      "Command": "stat",
+      "MP Summary": "display file or file system status",
+      "Most Similar TLDR Task": "Show owner and group of the file",
+      "Most Similar TLDR Script": "stat -c \"%U %G\" {{file}}",
+      "Most Similar NL2Bash Task": "Calculates process depth of process with id $processid, and stores it in a 'depth' variable.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "depth=$(pstree -sA $processid | head -n1 | sed -e 's#-+-.*#---foobar#' -e 's#---*#\\n#g' -eq | wc -l)\n",
+          "command-options": {
+            "pstree": {
+              "mpsum": "display a tree of processes",
+              "-s": "Show parent processes of the specified process.",
+              "-A": "Use ASCII characters to draw the tree."
+            },
+            "head": {
+              "mpsum": "output the first part of files"
+            },
+            "sed": {
+              "mpsum": "stream editor for filtering and transforming text",
+              "-e": "add the script to the commands to be executed"
+            },
+            "wc": {
+              "mpsum": "print newline, word, and byte counts for each file"
+            }
+          },
+          "TLDR_inform": {
+            "pstree": {
+              "man1_pstree_27524": "conveni tool show run process tree display tree process display tree process pid display process tree root process own specifi user"
+            },
+            "head": {
+              "man1_head_14119": "output first part file output everyth last byte file output everyth last line file output first byte file output first line file"
+            },
+            "sed": {
+              "man1_sed_30692": "edit text scriptabl manner appli multipl find-replac express file delet line match line pattern print first 11 line file replac occurr string file overwrit file e\nin-plac replac occurr extend regular express file print result replac line match line pattern replac separ charact use find replac pattern e g replac first occurr regular express line file print result"
+            },
+            "wc": {
+              "man1_wc_36412": "count line word byte count charact byte file count charact file take multi-byt charact set account count line file count word file use standard input count line word charact byte order"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_3586888: How do I find the top-level parent PID of a given process using bash?"
+      ],
+      "Top-3 Scripts": [
+        "so_3586888: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "awk",
+      "MP Summary": "pattern scanning and processing language",
+      "Most Similar TLDR Task": "Sum the values in the first column of a file and print the total",
+      "Most Similar TLDR Script": "awk '{s+=$1} END {print s}' {{filename}}",
+      "Most Similar NL2Bash Task": "Calculates process depth of process with id $processid, and stores it in a 'depth' variable.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "depth=$(pstree -sA $processid | head -n1 | sed -e 's#-+-.*#---foobar#' -e 's#---*#\\n#g' -eq | wc -l)\n",
+          "command-options": {
+            "pstree": {
+              "mpsum": "display a tree of processes",
+              "-s": "Show parent processes of the specified process.",
+              "-A": "Use ASCII characters to draw the tree."
+            },
+            "head": {
+              "mpsum": "output the first part of files"
+            },
+            "sed": {
+              "mpsum": "stream editor for filtering and transforming text",
+              "-e": "add the script to the commands to be executed"
+            },
+            "wc": {
+              "mpsum": "print newline, word, and byte counts for each file"
+            }
+          },
+          "TLDR_inform": {
+            "pstree": {
+              "man1_pstree_27524": "conveni tool show run process tree display tree process display tree process pid display process tree root process own specifi user"
+            },
+            "head": {
+              "man1_head_14119": "output first part file output everyth last byte file output everyth last line file output first byte file output first line file"
+            },
+            "sed": {
+              "man1_sed_30692": "edit text scriptabl manner appli multipl find-replac express file delet line match line pattern print first 11 line file replac occurr string file overwrit file e\nin-plac replac occurr extend regular express file print result replac line match line pattern replac separ charact use find replac pattern e g replac first occurr regular express line file print result"
+            },
+            "wc": {
+              "man1_wc_36412": "count line word byte count charact byte file count charact file take multi-byt charact set account count line file count word file use standard input count line word charact byte order"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_273760: Finding number of child processes of a particular process",
+        "nl2bash_1362: Prints process tree of a process having id $mypid, with command options and process id number."
+      ],
+      "Top-3 Scripts": [
+        "ul_273760: ps -eo ppid= | awk '$1==ppid {++i} END {print i+0}' ppid=$pid",
+        "nl2bash_1362: pstree -aAp $(ps -ejH | awk -v v1=$mypid '$1==v1 {print $3}')"
+      ],
+      "Explanations about Options": {
+        "-v": "FS=sepstring"
+      }
+    },
+    {
+      "Command": "tty",
+      "MP Summary": "return user's terminal name",
+      "Most Similar TLDR Task": "Print the file name of this terminal",
+      "Most Similar TLDR Script": "tty",
+      "Most Similar NL2Bash Task": "Calculates process depth of process with id $processid, and stores it in a 'depth' variable.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "depth=$(pstree -sA $processid | head -n1 | sed -e 's#-+-.*#---foobar#' -e 's#---*#\\n#g' -eq | wc -l)\n",
+          "command-options": {
+            "pstree": {
+              "mpsum": "display a tree of processes",
+              "-s": "Show parent processes of the specified process.",
+              "-A": "Use ASCII characters to draw the tree."
+            },
+            "head": {
+              "mpsum": "output the first part of files"
+            },
+            "sed": {
+              "mpsum": "stream editor for filtering and transforming text",
+              "-e": "add the script to the commands to be executed"
+            },
+            "wc": {
+              "mpsum": "print newline, word, and byte counts for each file"
+            }
+          },
+          "TLDR_inform": {
+            "pstree": {
+              "man1_pstree_27524": "conveni tool show run process tree display tree process display tree process pid display process tree root process own specifi user"
+            },
+            "head": {
+              "man1_head_14119": "output first part file output everyth last byte file output everyth last line file output first byte file output first line file"
+            },
+            "sed": {
+              "man1_sed_30692": "edit text scriptabl manner appli multipl find-replac express file delet line match line pattern print first 11 line file replac occurr string file overwrit file e\nin-plac replac occurr extend regular express file print result replac line match line pattern replac separ charact use find replac pattern e g replac first occurr regular express line file print result"
+            },
+            "wc": {
+              "man1_wc_36412": "count line word byte count charact byte file count charact file take multi-byt charact set account count line file count word file use standard input count line word charact byte order"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_83088: How to get the id of a very short child process if the parent is known?"
+      ],
+      "Top-3 Scripts": [
+        "ul_83088: type=SYSCALL msg=audit(1373986729.977:377): arch=c000003e syscall=59 success=yes exit=0 a0=7ff000e4b188 a1=7ff000e4b1b0 a2=7fff928d47e8 a3=7fff928caac0 items=2 ppid=7502 pid=691 auid=10031 uid=10031 gid=10031 euid=10031 suid=10031 fsuid=10031 egid=10031 sgid=10031 fsgid=10031 ses=1 tty=pts5 comm=\"echo\" exe=\"/bin/echo\" key=(null)\ntype=EXECVE msg=audit(1373986729.977:377): argc=2 a0=\"/bin/echo\" a1=\"test\"\ntype=CWD msg=audit(1373986729.977:377):  cwd=\"/tmp\"\ntype=PATH msg=audit(1373986729.977:377): item=0 name=\"/bin/echo\" inode=131750 dev=fe:00 mode=0100755 ouid=0 ogid=0 rdev=00:00"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "exec",
+      "MP Summary": "execute commands and open, close, or copy file descriptors",
+      "Most Similar TLDR Task": "Replace with the specified command and change the process name",
+      "Most Similar TLDR Script": "exec -a {{process_name}} {{command -with -flags}}",
+      "Most Similar NL2Bash Task": "Calculates process depth of process with id $processid, and stores it in a 'depth' variable.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "depth=$(pstree -sA $processid | head -n1 | sed -e 's#-+-.*#---foobar#' -e 's#---*#\\n#g' -eq | wc -l)\n",
+          "command-options": {
+            "pstree": {
+              "mpsum": "display a tree of processes",
+              "-s": "Show parent processes of the specified process.",
+              "-A": "Use ASCII characters to draw the tree."
+            },
+            "head": {
+              "mpsum": "output the first part of files"
+            },
+            "sed": {
+              "mpsum": "stream editor for filtering and transforming text",
+              "-e": "add the script to the commands to be executed"
+            },
+            "wc": {
+              "mpsum": "print newline, word, and byte counts for each file"
+            }
+          },
+          "TLDR_inform": {
+            "pstree": {
+              "man1_pstree_27524": "conveni tool show run process tree display tree process display tree process pid display process tree root process own specifi user"
+            },
+            "head": {
+              "man1_head_14119": "output first part file output everyth last byte file output everyth last line file output first byte file output first line file"
+            },
+            "sed": {
+              "man1_sed_30692": "edit text scriptabl manner appli multipl find-replac express file delet line match line pattern print first 11 line file replac occurr string file overwrit file e\nin-plac replac occurr extend regular express file print result replac line match line pattern replac separ charact use find replac pattern e g replac first occurr regular express line file print result"
+            },
+            "wc": {
+              "man1_wc_36412": "count line word byte count charact byte file count charact file take multi-byt charact set account count line file count word file use standard input count line word charact byte order"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_1259111: Get process ids of all spawned processes from xargs"
+      ],
+      "Top-3 Scripts": [
+        "au_1259111: some_initialization_code\nexec the_command and the command args"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "printf",
+      "MP Summary": "format and print data",
+      "Most Similar TLDR Task": "Store a formatted message in a variable (does not work on zsh)",
+      "Most Similar TLDR Script": "printf -v {{myvar}} {{\"This is %s = %d\\n\" \"a year\" 2016}}",
+      "Most Similar NL2Bash Task": "Calculates process depth of process with id $processid, and stores it in a 'depth' variable.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "depth=$(pstree -sA $processid | head -n1 | sed -e 's#-+-.*#---foobar#' -e 's#---*#\\n#g' -eq | wc -l)\n",
+          "command-options": {
+            "pstree": {
+              "mpsum": "display a tree of processes",
+              "-s": "Show parent processes of the specified process.",
+              "-A": "Use ASCII characters to draw the tree."
+            },
+            "head": {
+              "mpsum": "output the first part of files"
+            },
+            "sed": {
+              "mpsum": "stream editor for filtering and transforming text",
+              "-e": "add the script to the commands to be executed"
+            },
+            "wc": {
+              "mpsum": "print newline, word, and byte counts for each file"
+            }
+          },
+          "TLDR_inform": {
+            "pstree": {
+              "man1_pstree_27524": "conveni tool show run process tree display tree process display tree process pid display process tree root process own specifi user"
+            },
+            "head": {
+              "man1_head_14119": "output first part file output everyth last byte file output everyth last line file output first byte file output first line file"
+            },
+            "sed": {
+              "man1_sed_30692": "edit text scriptabl manner appli multipl find-replac express file delet line match line pattern print first 11 line file replac occurr string file overwrit file e\nin-plac replac occurr extend regular express file print result replac line match line pattern replac separ charact use find replac pattern e g replac first occurr regular express line file print result"
+            },
+            "wc": {
+              "man1_wc_36412": "count line word byte count charact byte file count charact file take multi-byt charact set account count line file count word file use standard input count line word charact byte order"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_20599728: How can you make a parent process display PID of child instead of value variable?",
+        "so_41658406: When a child process is created with fork, the parent ID is not as the same as the parent ID"
+      ],
+      "Top-3 Scripts": [
+        "so_20599728: pid_t child_pid = fork();\nif (child_pid == 0) {\n    printf(\"This is the child, my pid is %d\\n\", getpid());\n}\nelse {\n    printf(\"This is the parent, my child pid is %d\\n\", child_pid);\n}",
+        "so_41658406: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "test",
+      "MP Summary": "check file types and compare values",
+      "Most Similar TLDR Task": "Test if given variable is equal to given string",
+      "Most Similar TLDR Script": "test $MY_VAR == '/bin/zsh'",
+      "Most Similar NL2Bash Task": "Calculates process depth of process with id $processid, and stores it in a 'depth' variable.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "depth=$(pstree -sA $processid | head -n1 | sed -e 's#-+-.*#---foobar#' -e 's#---*#\\n#g' -eq | wc -l)\n",
+          "command-options": {
+            "pstree": {
+              "mpsum": "display a tree of processes",
+              "-s": "Show parent processes of the specified process.",
+              "-A": "Use ASCII characters to draw the tree."
+            },
+            "head": {
+              "mpsum": "output the first part of files"
+            },
+            "sed": {
+              "mpsum": "stream editor for filtering and transforming text",
+              "-e": "add the script to the commands to be executed"
+            },
+            "wc": {
+              "mpsum": "print newline, word, and byte counts for each file"
+            }
+          },
+          "TLDR_inform": {
+            "pstree": {
+              "man1_pstree_27524": "conveni tool show run process tree display tree process display tree process pid display process tree root process own specifi user"
+            },
+            "head": {
+              "man1_head_14119": "output first part file output everyth last byte file output everyth last line file output first byte file output first line file"
+            },
+            "sed": {
+              "man1_sed_30692": "edit text scriptabl manner appli multipl find-replac express file delet line match line pattern print first 11 line file replac occurr string file overwrit file e\nin-plac replac occurr extend regular express file print result replac line match line pattern replac separ charact use find replac pattern e g replac first occurr regular express line file print result"
+            },
+            "wc": {
+              "man1_wc_36412": "count line word byte count charact byte file count charact file take multi-byt charact set account count line file count word file use standard input count line word charact byte order"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_28997125: Change directory of a parent process from a child process"
+      ],
+      "Top-3 Scripts": [
+        "so_28997125: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "alias",
+      "MP Summary": "define or display aliases",
+      "Most Similar TLDR Task": "View the command associated to a given alias",
+      "Most Similar TLDR Script": "alias {{word}}",
+      "Most Similar NL2Bash Task": "Calculates process depth of process with id $processid, and stores it in a 'depth' variable.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "depth=$(pstree -sA $processid | head -n1 | sed -e 's#-+-.*#---foobar#' -e 's#---*#\\n#g' -eq | wc -l)\n",
+          "command-options": {
+            "pstree": {
+              "mpsum": "display a tree of processes",
+              "-s": "Show parent processes of the specified process.",
+              "-A": "Use ASCII characters to draw the tree."
+            },
+            "head": {
+              "mpsum": "output the first part of files"
+            },
+            "sed": {
+              "mpsum": "stream editor for filtering and transforming text",
+              "-e": "add the script to the commands to be executed"
+            },
+            "wc": {
+              "mpsum": "print newline, word, and byte counts for each file"
+            }
+          },
+          "TLDR_inform": {
+            "pstree": {
+              "man1_pstree_27524": "conveni tool show run process tree display tree process display tree process pid display process tree root process own specifi user"
+            },
+            "head": {
+              "man1_head_14119": "output first part file output everyth last byte file output everyth last line file output first byte file output first line file"
+            },
+            "sed": {
+              "man1_sed_30692": "edit text scriptabl manner appli multipl find-replac express file delet line match line pattern print first 11 line file replac occurr string file overwrit file e\nin-plac replac occurr extend regular express file print result replac line match line pattern replac separ charact use find replac pattern e g replac first occurr regular express line file print result"
+            },
+            "wc": {
+              "man1_wc_36412": "count line word byte count charact byte file count charact file take multi-byt charact set account count line file count word file use standard input count line word charact byte order"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "su_150117: How to get parent PID of a given process in GNU/Linux from command line?",
+        "so_28997125: Change directory of a parent process from a child process"
+      ],
+      "Top-3 Scripts": [
+        "su_150117: alias ppid='ps -o ppid= -p'",
+        "so_28997125: alias mc=\". /usr/lib/mc/bin/mc-wrapper.sh\"'"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "sed",
+      "MP Summary": "stream editor for filtering and transforming text",
+      "Most Similar TLDR Task": "Print the first 11 lines of a file",
+      "Most Similar TLDR Script": "sed 11q {{filename}}",
+      "Most Similar NL2Bash Task": "Calculates process depth of process with id $processid, and stores it in a 'depth' variable.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "depth=$(pstree -sA $processid | head -n1 | sed -e 's#-+-.*#---foobar#' -e 's#---*#\\n#g' -eq | wc -l)\n",
+          "command-options": {
+            "pstree": {
+              "mpsum": "display a tree of processes",
+              "-s": "Show parent processes of the specified process.",
+              "-A": "Use ASCII characters to draw the tree."
+            },
+            "head": {
+              "mpsum": "output the first part of files"
+            },
+            "sed": {
+              "mpsum": "stream editor for filtering and transforming text",
+              "-e": "add the script to the commands to be executed"
+            },
+            "wc": {
+              "mpsum": "print newline, word, and byte counts for each file"
+            }
+          },
+          "TLDR_inform": {
+            "pstree": {
+              "man1_pstree_27524": "conveni tool show run process tree display tree process display tree process pid display process tree root process own specifi user"
+            },
+            "head": {
+              "man1_head_14119": "output first part file output everyth last byte file output everyth last line file output first byte file output first line file"
+            },
+            "sed": {
+              "man1_sed_30692": "edit text scriptabl manner appli multipl find-replac express file delet line match line pattern print first 11 line file replac occurr string file overwrit file e\nin-plac replac occurr extend regular express file print result replac line match line pattern replac separ charact use find replac pattern e g replac first occurr regular express line file print result"
+            },
+            "wc": {
+              "man1_wc_36412": "count line word byte count charact byte file count charact file take multi-byt charact set account count line file count word file use standard input count line word charact byte order"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_1359: Prints process tree of a current process with parents processes and id numbers.",
+        "nl2bash_10053: Prints all child processes of a process with id 20238.",
+        "nl2bash_14631: Lists the pids of all processes that have process '1782' as their parent."
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_1359: pstree --show-parents -p $$ | head -n 1 | sed 's/\\(.*\\)+.*/\\1/' | less",
+        "nl2bash_10053: pstree -p 20238 | sed 's/(/\\n(/g' | grep '(' | sed 's/(\\(.*\\)).*/\\1/'",
+        "nl2bash_14631: pstree -p 1782 | sed 's/-/\\n/g' | sed -n -e 's/.*(\\([0-9]\\+\\)).*/\\1/p'"
+      ],
+      "Explanations about Options": {
+        "-e": "add the script to the commands to be executed"
+      }
+    },
+    {
+      "Command": "time",
+      "MP Summary": "time a simple command",
+      "Most Similar TLDR Task": "Time \"ls\"",
+      "Most Similar TLDR Script": "time ls",
+      "Most Similar NL2Bash Task": "Calculates process depth of process with id $processid, and stores it in a 'depth' variable.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "depth=$(pstree -sA $processid | head -n1 | sed -e 's#-+-.*#---foobar#' -e 's#---*#\\n#g' -eq | wc -l)\n",
+          "command-options": {
+            "pstree": {
+              "mpsum": "display a tree of processes",
+              "-s": "Show parent processes of the specified process.",
+              "-A": "Use ASCII characters to draw the tree."
+            },
+            "head": {
+              "mpsum": "output the first part of files"
+            },
+            "sed": {
+              "mpsum": "stream editor for filtering and transforming text",
+              "-e": "add the script to the commands to be executed"
+            },
+            "wc": {
+              "mpsum": "print newline, word, and byte counts for each file"
+            }
+          },
+          "TLDR_inform": {
+            "pstree": {
+              "man1_pstree_27524": "conveni tool show run process tree display tree process display tree process pid display process tree root process own specifi user"
+            },
+            "head": {
+              "man1_head_14119": "output first part file output everyth last byte file output everyth last line file output first byte file output first line file"
+            },
+            "sed": {
+              "man1_sed_30692": "edit text scriptabl manner appli multipl find-replac express file delet line match line pattern print first 11 line file replac occurr string file overwrit file e\nin-plac replac occurr extend regular express file print result replac line match line pattern replac separ charact use find replac pattern e g replac first occurr regular express line file print result"
+            },
+            "wc": {
+              "man1_wc_36412": "count line word byte count charact byte file count charact file take multi-byt charact set account count line file count word file use standard input count line word charact byte order"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_189989: Get PID of process started by time"
+      ],
+      "Top-3 Scripts": [
+        "ul_189989: $ time sleep 50 & timepid=$!\n$ aoutpid=$(pgrep -P $timepid)\n$ ps -o ppid,pid,start,cmd w -p $$,$timepid,$aoutpid\n\nPPID   PID  STARTED CMD\n2065  2068 21:34:57 -bash\n2068  3297 22:16:05 -bash\n3297  3298 22:16:05 sleep 50"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "make",
+      "MP Summary": "GNU make utility to maintain groups of programs",
+      "Most Similar TLDR Task": "Call a specific target, executing 4 jobs at a time in parallel",
+      "Most Similar TLDR Script": "make -j{{4}} {{target}}",
+      "Most Similar NL2Bash Task": "Calculates process depth of process with id $processid, and stores it in a 'depth' variable.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "depth=$(pstree -sA $processid | head -n1 | sed -e 's#-+-.*#---foobar#' -e 's#---*#\\n#g' -eq | wc -l)\n",
+          "command-options": {
+            "pstree": {
+              "mpsum": "display a tree of processes",
+              "-s": "Show parent processes of the specified process.",
+              "-A": "Use ASCII characters to draw the tree."
+            },
+            "head": {
+              "mpsum": "output the first part of files"
+            },
+            "sed": {
+              "mpsum": "stream editor for filtering and transforming text",
+              "-e": "add the script to the commands to be executed"
+            },
+            "wc": {
+              "mpsum": "print newline, word, and byte counts for each file"
+            }
+          },
+          "TLDR_inform": {
+            "pstree": {
+              "man1_pstree_27524": "conveni tool show run process tree display tree process display tree process pid display process tree root process own specifi user"
+            },
+            "head": {
+              "man1_head_14119": "output first part file output everyth last byte file output everyth last line file output first byte file output first line file"
+            },
+            "sed": {
+              "man1_sed_30692": "edit text scriptabl manner appli multipl find-replac express file delet line match line pattern print first 11 line file replac occurr string file overwrit file e\nin-plac replac occurr extend regular express file print result replac line match line pattern replac separ charact use find replac pattern e g replac first occurr regular express line file print result"
+            },
+            "wc": {
+              "man1_wc_36412": "count line word byte count charact byte file count charact file take multi-byt charact set account count line file count word file use standard input count line word charact byte order"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_23071549: How to redirect output of a spawned child process in Linux?"
+      ],
+      "Top-3 Scripts": [
+        "so_23071549: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "sudo",
+      "MP Summary": "execute a command as another user",
+      "Most Similar TLDR Task": "Run a command as another user and/or group",
+      "Most Similar TLDR Script": "sudo -u {{user}} -g {{group}} {{id -a}}",
+      "Most Similar NL2Bash Task": "Calculates process depth of process with id $processid, and stores it in a 'depth' variable.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "depth=$(pstree -sA $processid | head -n1 | sed -e 's#-+-.*#---foobar#' -e 's#---*#\\n#g' -eq | wc -l)\n",
+          "command-options": {
+            "pstree": {
+              "mpsum": "display a tree of processes",
+              "-s": "Show parent processes of the specified process.",
+              "-A": "Use ASCII characters to draw the tree."
+            },
+            "head": {
+              "mpsum": "output the first part of files"
+            },
+            "sed": {
+              "mpsum": "stream editor for filtering and transforming text",
+              "-e": "add the script to the commands to be executed"
+            },
+            "wc": {
+              "mpsum": "print newline, word, and byte counts for each file"
+            }
+          },
+          "TLDR_inform": {
+            "pstree": {
+              "man1_pstree_27524": "conveni tool show run process tree display tree process display tree process pid display process tree root process own specifi user"
+            },
+            "head": {
+              "man1_head_14119": "output first part file output everyth last byte file output everyth last line file output first byte file output first line file"
+            },
+            "sed": {
+              "man1_sed_30692": "edit text scriptabl manner appli multipl find-replac express file delet line match line pattern print first 11 line file replac occurr string file overwrit file e\nin-plac replac occurr extend regular express file print result replac line match line pattern replac separ charact use find replac pattern e g replac first occurr regular express line file print result"
+            },
+            "wc": {
+              "man1_wc_36412": "count line word byte count charact byte file count charact file take multi-byt charact set account count line file count word file use standard input count line word charact byte order"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_83088: How to get the id of a very short child process if the parent is known?"
+      ],
+      "Top-3 Scripts": [
+        "ul_83088: sudo auditctl -a exit,always -S execve -F ppid=\"$pid\""
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "read",
+      "MP Summary": "read a line from standard input",
+      "Most Similar TLDR Task": "Store data that you type from the keyboard",
+      "Most Similar TLDR Script": "read {{variable}}",
+      "Most Similar NL2Bash Task": "Calculates process depth of process with id $processid, and stores it in a 'depth' variable.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "depth=$(pstree -sA $processid | head -n1 | sed -e 's#-+-.*#---foobar#' -e 's#---*#\\n#g' -eq | wc -l)\n",
+          "command-options": {
+            "pstree": {
+              "mpsum": "display a tree of processes",
+              "-s": "Show parent processes of the specified process.",
+              "-A": "Use ASCII characters to draw the tree."
+            },
+            "head": {
+              "mpsum": "output the first part of files"
+            },
+            "sed": {
+              "mpsum": "stream editor for filtering and transforming text",
+              "-e": "add the script to the commands to be executed"
+            },
+            "wc": {
+              "mpsum": "print newline, word, and byte counts for each file"
+            }
+          },
+          "TLDR_inform": {
+            "pstree": {
+              "man1_pstree_27524": "conveni tool show run process tree display tree process display tree process pid display process tree root process own specifi user"
+            },
+            "head": {
+              "man1_head_14119": "output first part file output everyth last byte file output everyth last line file output first byte file output first line file"
+            },
+            "sed": {
+              "man1_sed_30692": "edit text scriptabl manner appli multipl find-replac express file delet line match line pattern print first 11 line file replac occurr string file overwrit file e\nin-plac replac occurr extend regular express file print result replac line match line pattern replac separ charact use find replac pattern e g replac first occurr regular express line file print result"
+            },
+            "wc": {
+              "man1_wc_36412": "count line word byte count charact byte file count charact file take multi-byt charact set account count line file count word file use standard input count line word charact byte order"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "su_150117: How to get parent PID of a given process in GNU/Linux from command line?"
+      ],
+      "Top-3 Scripts": [
+        "su_150117: #!/bin/sh\npid=$1\nif [ -z $pid ]\nthen\n    read -p \"PID: \" pid\nfi\nps -p ${pid:-$$} -o ppid="
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "command",
+      "MP Summary": "execute a simple command",
+      "Most Similar TLDR Task": "Execute the ls program literally, even if an ls alias exists",
+      "Most Similar TLDR Script": "command {{ls}}",
+      "Most Similar NL2Bash Task": "Calculates process depth of process with id $processid, and stores it in a 'depth' variable.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "depth=$(pstree -sA $processid | head -n1 | sed -e 's#-+-.*#---foobar#' -e 's#---*#\\n#g' -eq | wc -l)\n",
+          "command-options": {
+            "pstree": {
+              "mpsum": "display a tree of processes",
+              "-s": "Show parent processes of the specified process.",
+              "-A": "Use ASCII characters to draw the tree."
+            },
+            "head": {
+              "mpsum": "output the first part of files"
+            },
+            "sed": {
+              "mpsum": "stream editor for filtering and transforming text",
+              "-e": "add the script to the commands to be executed"
+            },
+            "wc": {
+              "mpsum": "print newline, word, and byte counts for each file"
+            }
+          },
+          "TLDR_inform": {
+            "pstree": {
+              "man1_pstree_27524": "conveni tool show run process tree display tree process display tree process pid display process tree root process own specifi user"
+            },
+            "head": {
+              "man1_head_14119": "output first part file output everyth last byte file output everyth last line file output first byte file output first line file"
+            },
+            "sed": {
+              "man1_sed_30692": "edit text scriptabl manner appli multipl find-replac express file delet line match line pattern print first 11 line file replac occurr string file overwrit file e\nin-plac replac occurr extend regular express file print result replac line match line pattern replac separ charact use find replac pattern e g replac first occurr regular express line file print result"
+            },
+            "wc": {
+              "man1_wc_36412": "count line word byte count charact byte file count charact file take multi-byt charact set account count line file count word file use standard input count line word charact byte order"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_1259111: Get process ids of all spawned processes from xargs"
+      ],
+      "Top-3 Scripts": [
+        "au_1259111: some_initialization_code\nthe_command and the command args\nexit $?\n\nsome_initialization_code\nexec the_command and the command args"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "wc",
+      "MP Summary": "print newline, word, and byte counts for each file",
+      "Most Similar TLDR Task": "Count lines in file",
+      "Most Similar TLDR Script": "wc -l {{file}}",
+      "Most Similar NL2Bash Task": "Calculates process depth of process with id $processid, and stores it in a 'depth' variable.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "depth=$(pstree -sA $processid | head -n1 | sed -e 's#-+-.*#---foobar#' -e 's#---*#\\n#g' -eq | wc -l)\n",
+          "command-options": {
+            "pstree": {
+              "mpsum": "display a tree of processes",
+              "-s": "Show parent processes of the specified process.",
+              "-A": "Use ASCII characters to draw the tree."
+            },
+            "head": {
+              "mpsum": "output the first part of files"
+            },
+            "sed": {
+              "mpsum": "stream editor for filtering and transforming text",
+              "-e": "add the script to the commands to be executed"
+            },
+            "wc": {
+              "mpsum": "print newline, word, and byte counts for each file"
+            }
+          },
+          "TLDR_inform": {
+            "pstree": {
+              "man1_pstree_27524": "conveni tool show run process tree display tree process display tree process pid display process tree root process own specifi user"
+            },
+            "head": {
+              "man1_head_14119": "output first part file output everyth last byte file output everyth last line file output first byte file output first line file"
+            },
+            "sed": {
+              "man1_sed_30692": "edit text scriptabl manner appli multipl find-replac express file delet line match line pattern print first 11 line file replac occurr string file overwrit file e\nin-plac replac occurr extend regular express file print result replac line match line pattern replac separ charact use find replac pattern e g replac first occurr regular express line file print result"
+            },
+            "wc": {
+              "man1_wc_36412": "count line word byte count charact byte file count charact file take multi-byt charact set account count line file count word file use standard input count line word charact byte order"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_11542243: Finding number of child processes"
+      ],
+      "Top-3 Scripts": [
+        "so_11542243: num_children=`echo $children | wc -w`\n\nnum_children=`ps --no-headers -o pid --ppid=$$ | wc -w`"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "less",
+      "MP Summary": "opposite of more",
+      "Most Similar TLDR Task": "Follow the output of the currently opened file",
+      "Most Similar TLDR Script": "F",
+      "Most Similar NL2Bash Task": "Calculates process depth of process with id $processid, and stores it in a 'depth' variable.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "depth=$(pstree -sA $processid | head -n1 | sed -e 's#-+-.*#---foobar#' -e 's#---*#\\n#g' -eq | wc -l)\n",
+          "command-options": {
+            "pstree": {
+              "mpsum": "display a tree of processes",
+              "-s": "Show parent processes of the specified process.",
+              "-A": "Use ASCII characters to draw the tree."
+            },
+            "head": {
+              "mpsum": "output the first part of files"
+            },
+            "sed": {
+              "mpsum": "stream editor for filtering and transforming text",
+              "-e": "add the script to the commands to be executed"
+            },
+            "wc": {
+              "mpsum": "print newline, word, and byte counts for each file"
+            }
+          },
+          "TLDR_inform": {
+            "pstree": {
+              "man1_pstree_27524": "conveni tool show run process tree display tree process display tree process pid display process tree root process own specifi user"
+            },
+            "head": {
+              "man1_head_14119": "output first part file output everyth last byte file output everyth last line file output first byte file output first line file"
+            },
+            "sed": {
+              "man1_sed_30692": "edit text scriptabl manner appli multipl find-replac express file delet line match line pattern print first 11 line file replac occurr string file overwrit file e\nin-plac replac occurr extend regular express file print result replac line match line pattern replac separ charact use find replac pattern e g replac first occurr regular express line file print result"
+            },
+            "wc": {
+              "man1_wc_36412": "count line word byte count charact byte file count charact file take multi-byt charact set account count line file count word file use standard input count line word charact byte order"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_1359: Prints process tree of a current process with parents processes and id numbers."
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_1359: pstree --show-parents -p $$ | head -n 1 | sed 's/\\(.*\\)+.*/\\1/' | less"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "arch",
+      "MP Summary": "print machine hardware name (same as uname -m)",
+      "Most Similar TLDR Task": "Display the system's architecture",
+      "Most Similar TLDR Script": "arch",
+      "Most Similar NL2Bash Task": "Calculates process depth of process with id $processid, and stores it in a 'depth' variable.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "depth=$(pstree -sA $processid | head -n1 | sed -e 's#-+-.*#---foobar#' -e 's#---*#\\n#g' -eq | wc -l)\n",
+          "command-options": {
+            "pstree": {
+              "mpsum": "display a tree of processes",
+              "-s": "Show parent processes of the specified process.",
+              "-A": "Use ASCII characters to draw the tree."
+            },
+            "head": {
+              "mpsum": "output the first part of files"
+            },
+            "sed": {
+              "mpsum": "stream editor for filtering and transforming text",
+              "-e": "add the script to the commands to be executed"
+            },
+            "wc": {
+              "mpsum": "print newline, word, and byte counts for each file"
+            }
+          },
+          "TLDR_inform": {
+            "pstree": {
+              "man1_pstree_27524": "conveni tool show run process tree display tree process display tree process pid display process tree root process own specifi user"
+            },
+            "head": {
+              "man1_head_14119": "output first part file output everyth last byte file output everyth last line file output first byte file output first line file"
+            },
+            "sed": {
+              "man1_sed_30692": "edit text scriptabl manner appli multipl find-replac express file delet line match line pattern print first 11 line file replac occurr string file overwrit file e\nin-plac replac occurr extend regular express file print result replac line match line pattern replac separ charact use find replac pattern e g replac first occurr regular express line file print result"
+            },
+            "wc": {
+              "man1_wc_36412": "count line word byte count charact byte file count charact file take multi-byt charact set account count line file count word file use standard input count line word charact byte order"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_83088: How to get the id of a very short child process if the parent is known?"
+      ],
+      "Top-3 Scripts": [
+        "ul_83088: type=SYSCALL msg=audit(1373986729.977:377): arch=c000003e syscall=59 success=yes exit=0 a0=7ff000e4b188 a1=7ff000e4b1b0 a2=7fff928d47e8 a3=7fff928caac0 items=2 ppid=7502 pid=691 auid=10031 uid=10031 gid=10031 euid=10031 suid=10031 fsuid=10031 egid=10031 sgid=10031 fsgid=10031 ses=1 tty=pts5 comm=\"echo\" exe=\"/bin/echo\" key=(null)\ntype=EXECVE msg=audit(1373986729.977:377): argc=2 a0=\"/bin/echo\" a1=\"test\"\ntype=CWD msg=audit(1373986729.977:377):  cwd=\"/tmp\"\ntype=PATH msg=audit(1373986729.977:377): item=0 name=\"/bin/echo\" inode=131750 dev=fe:00 mode=0100755 ouid=0 ogid=0 rdev=00:00"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "set",
+      "MP Summary": "set or unset options and positional parameters",
+      "Most Similar TLDR Task": "Display the names and values of shell variables",
+      "Most Similar TLDR Script": "set",
+      "Most Similar NL2Bash Task": "Calculates process depth of process with id $processid, and stores it in a 'depth' variable.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "depth=$(pstree -sA $processid | head -n1 | sed -e 's#-+-.*#---foobar#' -e 's#---*#\\n#g' -eq | wc -l)\n",
+          "command-options": {
+            "pstree": {
+              "mpsum": "display a tree of processes",
+              "-s": "Show parent processes of the specified process.",
+              "-A": "Use ASCII characters to draw the tree."
+            },
+            "head": {
+              "mpsum": "output the first part of files"
+            },
+            "sed": {
+              "mpsum": "stream editor for filtering and transforming text",
+              "-e": "add the script to the commands to be executed"
+            },
+            "wc": {
+              "mpsum": "print newline, word, and byte counts for each file"
+            }
+          },
+          "TLDR_inform": {
+            "pstree": {
+              "man1_pstree_27524": "conveni tool show run process tree display tree process display tree process pid display process tree root process own specifi user"
+            },
+            "head": {
+              "man1_head_14119": "output first part file output everyth last byte file output everyth last line file output first byte file output first line file"
+            },
+            "sed": {
+              "man1_sed_30692": "edit text scriptabl manner appli multipl find-replac express file delet line match line pattern print first 11 line file replac occurr string file overwrit file e\nin-plac replac occurr extend regular express file print result replac line match line pattern replac separ charact use find replac pattern e g replac first occurr regular express line file print result"
+            },
+            "wc": {
+              "man1_wc_36412": "count line word byte count charact byte file count charact file take multi-byt charact set account count line file count word file use standard input count line word charact byte order"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_273760: Finding number of child processes of a particular process"
+      ],
+      "Top-3 Scripts": [
+        "ul_273760: set $(ps -eo ppid=); echo $#"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "unset",
+      "MP Summary": "unset values and attributes of variables and functions",
+      "Most Similar TLDR Task": "Remove the function my_func",
+      "Most Similar TLDR Script": "unset -f {{my_func}}",
+      "Most Similar NL2Bash Task": "Calculates process depth of process with id $processid, and stores it in a 'depth' variable.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "depth=$(pstree -sA $processid | head -n1 | sed -e 's#-+-.*#---foobar#' -e 's#---*#\\n#g' -eq | wc -l)\n",
+          "command-options": {
+            "pstree": {
+              "mpsum": "display a tree of processes",
+              "-s": "Show parent processes of the specified process.",
+              "-A": "Use ASCII characters to draw the tree."
+            },
+            "head": {
+              "mpsum": "output the first part of files"
+            },
+            "sed": {
+              "mpsum": "stream editor for filtering and transforming text",
+              "-e": "add the script to the commands to be executed"
+            },
+            "wc": {
+              "mpsum": "print newline, word, and byte counts for each file"
+            }
+          },
+          "TLDR_inform": {
+            "pstree": {
+              "man1_pstree_27524": "conveni tool show run process tree display tree process display tree process pid display process tree root process own specifi user"
+            },
+            "head": {
+              "man1_head_14119": "output first part file output everyth last byte file output everyth last line file output first byte file output first line file"
+            },
+            "sed": {
+              "man1_sed_30692": "edit text scriptabl manner appli multipl find-replac express file delet line match line pattern print first 11 line file replac occurr string file overwrit file e\nin-plac replac occurr extend regular express file print result replac line match line pattern replac separ charact use find replac pattern e g replac first occurr regular express line file print result"
+            },
+            "wc": {
+              "man1_wc_36412": "count line word byte count charact byte file count charact file take multi-byt charact set account count line file count word file use standard input count line word charact byte order"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_28997125: Change directory of a parent process from a child process"
+      ],
+      "Top-3 Scripts": [
+        "so_28997125: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "yes",
+      "MP Summary": "output a string repeatedly until killed",
+      "Most Similar TLDR Task": "Accept everything prompted by the `apt-get` command",
+      "Most Similar TLDR Script": "yes | sudo apt-get install {{program}}",
+      "Most Similar NL2Bash Task": "Calculates process depth of process with id $processid, and stores it in a 'depth' variable.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "depth=$(pstree -sA $processid | head -n1 | sed -e 's#-+-.*#---foobar#' -e 's#---*#\\n#g' -eq | wc -l)\n",
+          "command-options": {
+            "pstree": {
+              "mpsum": "display a tree of processes",
+              "-s": "Show parent processes of the specified process.",
+              "-A": "Use ASCII characters to draw the tree."
+            },
+            "head": {
+              "mpsum": "output the first part of files"
+            },
+            "sed": {
+              "mpsum": "stream editor for filtering and transforming text",
+              "-e": "add the script to the commands to be executed"
+            },
+            "wc": {
+              "mpsum": "print newline, word, and byte counts for each file"
+            }
+          },
+          "TLDR_inform": {
+            "pstree": {
+              "man1_pstree_27524": "conveni tool show run process tree display tree process display tree process pid display process tree root process own specifi user"
+            },
+            "head": {
+              "man1_head_14119": "output first part file output everyth last byte file output everyth last line file output first byte file output first line file"
+            },
+            "sed": {
+              "man1_sed_30692": "edit text scriptabl manner appli multipl find-replac express file delet line match line pattern print first 11 line file replac occurr string file overwrit file e\nin-plac replac occurr extend regular express file print result replac line match line pattern replac separ charact use find replac pattern e g replac first occurr regular express line file print result"
+            },
+            "wc": {
+              "man1_wc_36412": "count line word byte count charact byte file count charact file take multi-byt charact set account count line file count word file use standard input count line word charact byte order"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_83088: How to get the id of a very short child process if the parent is known?"
+      ],
+      "Top-3 Scripts": [
+        "ul_83088: type=SYSCALL msg=audit(1373986729.977:377): arch=c000003e syscall=59 success=yes exit=0 a0=7ff000e4b188 a1=7ff000e4b1b0 a2=7fff928d47e8 a3=7fff928caac0 items=2 ppid=7502 pid=691 auid=10031 uid=10031 gid=10031 euid=10031 suid=10031 fsuid=10031 egid=10031 sgid=10031 fsgid=10031 ses=1 tty=pts5 comm=\"echo\" exe=\"/bin/echo\" key=(null)\ntype=EXECVE msg=audit(1373986729.977:377): argc=2 a0=\"/bin/echo\" a1=\"test\"\ntype=CWD msg=audit(1373986729.977:377):  cwd=\"/tmp\"\ntype=PATH msg=audit(1373986729.977:377): item=0 name=\"/bin/echo\" inode=131750 dev=fe:00 mode=0100755 ouid=0 ogid=0 rdev=00:00"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "go",
+      "MP Summary": "tool for managing Go source code",
+      "Most Similar TLDR Task": "Execute all test cases of the current package (files have to end with `_test.go`)",
+      "Most Similar TLDR Script": "go test",
+      "Most Similar NL2Bash Task": "Calculates process depth of process with id $processid, and stores it in a 'depth' variable.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "depth=$(pstree -sA $processid | head -n1 | sed -e 's#-+-.*#---foobar#' -e 's#---*#\\n#g' -eq | wc -l)\n",
+          "command-options": {
+            "pstree": {
+              "mpsum": "display a tree of processes",
+              "-s": "Show parent processes of the specified process.",
+              "-A": "Use ASCII characters to draw the tree."
+            },
+            "head": {
+              "mpsum": "output the first part of files"
+            },
+            "sed": {
+              "mpsum": "stream editor for filtering and transforming text",
+              "-e": "add the script to the commands to be executed"
+            },
+            "wc": {
+              "mpsum": "print newline, word, and byte counts for each file"
+            }
+          },
+          "TLDR_inform": {
+            "pstree": {
+              "man1_pstree_27524": "conveni tool show run process tree display tree process display tree process pid display process tree root process own specifi user"
+            },
+            "head": {
+              "man1_head_14119": "output first part file output everyth last byte file output everyth last line file output first byte file output first line file"
+            },
+            "sed": {
+              "man1_sed_30692": "edit text scriptabl manner appli multipl find-replac express file delet line match line pattern print first 11 line file replac occurr string file overwrit file e\nin-plac replac occurr extend regular express file print result replac line match line pattern replac separ charact use find replac pattern e g replac first occurr regular express line file print result"
+            },
+            "wc": {
+              "man1_wc_36412": "count line word byte count charact byte file count charact file take multi-byt charact set account count line file count word file use standard input count line word charact byte order"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_23071549: How to redirect output of a spawned child process in Linux?"
+      ],
+      "Top-3 Scripts": [
+        "so_23071549: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "tr",
+      "MP Summary": "translate or delete characters",
+      "Most Similar TLDR Task": "Map each character of the first set to the corresponding character of the second set",
+      "Most Similar TLDR Script": "tr '{{abcd}}' '{{jkmn}}' < {{filename}}",
+      "Most Similar NL2Bash Task": "Calculates process depth of process with id $processid, and stores it in a 'depth' variable.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "depth=$(pstree -sA $processid | head -n1 | sed -e 's#-+-.*#---foobar#' -e 's#---*#\\n#g' -eq | wc -l)\n",
+          "command-options": {
+            "pstree": {
+              "mpsum": "display a tree of processes",
+              "-s": "Show parent processes of the specified process.",
+              "-A": "Use ASCII characters to draw the tree."
+            },
+            "head": {
+              "mpsum": "output the first part of files"
+            },
+            "sed": {
+              "mpsum": "stream editor for filtering and transforming text",
+              "-e": "add the script to the commands to be executed"
+            },
+            "wc": {
+              "mpsum": "print newline, word, and byte counts for each file"
+            }
+          },
+          "TLDR_inform": {
+            "pstree": {
+              "man1_pstree_27524": "conveni tool show run process tree display tree process display tree process pid display process tree root process own specifi user"
+            },
+            "head": {
+              "man1_head_14119": "output first part file output everyth last byte file output everyth last line file output first byte file output first line file"
+            },
+            "sed": {
+              "man1_sed_30692": "edit text scriptabl manner appli multipl find-replac express file delet line match line pattern print first 11 line file replac occurr string file overwrit file e\nin-plac replac occurr extend regular express file print result replac line match line pattern replac separ charact use find replac pattern e g replac first occurr regular express line file print result"
+            },
+            "wc": {
+              "man1_wc_36412": "count line word byte count charact byte file count charact file take multi-byt charact set account count line file count word file use standard input count line word charact byte order"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_273760: Finding number of child processes of a particular process"
+      ],
+      "Top-3 Scripts": [
+        "ul_273760: ps -eo ppid= | tr -d '[:blank:]' | grep -Fxc $pid"
+      ],
+      "Explanations about Options": {
+        "-d": "delete characters in SET1, do not translate"
+      }
+    },
+    {
+      "Command": "man",
+      "MP Summary": "an interface to the system reference manuals",
+      "Most Similar TLDR Task": "Display the man page for a command",
+      "Most Similar TLDR Script": "man {{command}}",
+      "Most Similar NL2Bash Task": "Calculates process depth of process with id $processid, and stores it in a 'depth' variable.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "depth=$(pstree -sA $processid | head -n1 | sed -e 's#-+-.*#---foobar#' -e 's#---*#\\n#g' -eq | wc -l)\n",
+          "command-options": {
+            "pstree": {
+              "mpsum": "display a tree of processes",
+              "-s": "Show parent processes of the specified process.",
+              "-A": "Use ASCII characters to draw the tree."
+            },
+            "head": {
+              "mpsum": "output the first part of files"
+            },
+            "sed": {
+              "mpsum": "stream editor for filtering and transforming text",
+              "-e": "add the script to the commands to be executed"
+            },
+            "wc": {
+              "mpsum": "print newline, word, and byte counts for each file"
+            }
+          },
+          "TLDR_inform": {
+            "pstree": {
+              "man1_pstree_27524": "conveni tool show run process tree display tree process display tree process pid display process tree root process own specifi user"
+            },
+            "head": {
+              "man1_head_14119": "output first part file output everyth last byte file output everyth last line file output first byte file output first line file"
+            },
+            "sed": {
+              "man1_sed_30692": "edit text scriptabl manner appli multipl find-replac express file delet line match line pattern print first 11 line file replac occurr string file overwrit file e\nin-plac replac occurr extend regular express file print result replac line match line pattern replac separ charact use find replac pattern e g replac first occurr regular express line file print result"
+            },
+            "wc": {
+              "man1_wc_36412": "count line word byte count charact byte file count charact file take multi-byt charact set account count line file count word file use standard input count line word charact byte order"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_625520: Is it possible to check the process id of child in different pid namespace?"
+      ],
+      "Top-3 Scripts": [
+        "ul_625520: man proc"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "dash",
+      "MP Summary": "command interpreter (shell)",
+      "Most Similar TLDR Task": "Run commands from a file",
+      "Most Similar TLDR Script": "dash {{file.sh}}",
+      "Most Similar NL2Bash Task": "Calculates process depth of process with id $processid, and stores it in a 'depth' variable.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "depth=$(pstree -sA $processid | head -n1 | sed -e 's#-+-.*#---foobar#' -e 's#---*#\\n#g' -eq | wc -l)\n",
+          "command-options": {
+            "pstree": {
+              "mpsum": "display a tree of processes",
+              "-s": "Show parent processes of the specified process.",
+              "-A": "Use ASCII characters to draw the tree."
+            },
+            "head": {
+              "mpsum": "output the first part of files"
+            },
+            "sed": {
+              "mpsum": "stream editor for filtering and transforming text",
+              "-e": "add the script to the commands to be executed"
+            },
+            "wc": {
+              "mpsum": "print newline, word, and byte counts for each file"
+            }
+          },
+          "TLDR_inform": {
+            "pstree": {
+              "man1_pstree_27524": "conveni tool show run process tree display tree process display tree process pid display process tree root process own specifi user"
+            },
+            "head": {
+              "man1_head_14119": "output first part file output everyth last byte file output everyth last line file output first byte file output first line file"
+            },
+            "sed": {
+              "man1_sed_30692": "edit text scriptabl manner appli multipl find-replac express file delet line match line pattern print first 11 line file replac occurr string file overwrit file e\nin-plac replac occurr extend regular express file print result replac line match line pattern replac separ charact use find replac pattern e g replac first occurr regular express line file print result"
+            },
+            "wc": {
+              "man1_wc_36412": "count line word byte count charact byte file count charact file take multi-byt charact set account count line file count word file use standard input count line word charact byte order"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_510598: Accessing memory of parent process from child process"
+      ],
+      "Top-3 Scripts": [
+        "ul_510598: x=foo\nexport x\n\ndash\necho $x"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "node",
+      "MP Summary": "server-side JavaScript runtime",
+      "Most Similar TLDR Task": "Evaluate and print result, useful to see node's dependencies versions",
+      "Most Similar TLDR Script": "node -p \"{{process.versions}}\"",
+      "Most Similar NL2Bash Task": "Calculates process depth of process with id $processid, and stores it in a 'depth' variable.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "depth=$(pstree -sA $processid | head -n1 | sed -e 's#-+-.*#---foobar#' -e 's#---*#\\n#g' -eq | wc -l)\n",
+          "command-options": {
+            "pstree": {
+              "mpsum": "display a tree of processes",
+              "-s": "Show parent processes of the specified process.",
+              "-A": "Use ASCII characters to draw the tree."
+            },
+            "head": {
+              "mpsum": "output the first part of files"
+            },
+            "sed": {
+              "mpsum": "stream editor for filtering and transforming text",
+              "-e": "add the script to the commands to be executed"
+            },
+            "wc": {
+              "mpsum": "print newline, word, and byte counts for each file"
+            }
+          },
+          "TLDR_inform": {
+            "pstree": {
+              "man1_pstree_27524": "conveni tool show run process tree display tree process display tree process pid display process tree root process own specifi user"
+            },
+            "head": {
+              "man1_head_14119": "output first part file output everyth last byte file output everyth last line file output first byte file output first line file"
+            },
+            "sed": {
+              "man1_sed_30692": "edit text scriptabl manner appli multipl find-replac express file delet line match line pattern print first 11 line file replac occurr string file overwrit file e\nin-plac replac occurr extend regular express file print result replac line match line pattern replac separ charact use find replac pattern e g replac first occurr regular express line file print result"
+            },
+            "wc": {
+              "man1_wc_36412": "count line word byte count charact byte file count charact file take multi-byt charact set account count line file count word file use standard input count line word charact byte order"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_52508561: Get pids of all child/grandchild processes created from parent process",
+        "so_38648740: How to get all the parents of a child XML Node in powershell"
+      ],
+      "Top-3 Scripts": [
+        "so_52508561: #!/usr/bin/env bash\n\nnode foo.js &\npid=$!\n\nsleep 5;\n\npgrep -P $pid | xargs kill -INT",
+        "so_38648740: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "rm",
+      "MP Summary": "remove files or directories",
+      "Most Similar TLDR Task": "Forcibly remove a directory, without prompting for confirmation or showing error messages",
+      "Most Similar TLDR Script": "rm -rf {{path/to/directory}}",
+      "Most Similar NL2Bash Task": "Calculates process depth of process with id $processid, and stores it in a 'depth' variable.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "depth=$(pstree -sA $processid | head -n1 | sed -e 's#-+-.*#---foobar#' -e 's#---*#\\n#g' -eq | wc -l)\n",
+          "command-options": {
+            "pstree": {
+              "mpsum": "display a tree of processes",
+              "-s": "Show parent processes of the specified process.",
+              "-A": "Use ASCII characters to draw the tree."
+            },
+            "head": {
+              "mpsum": "output the first part of files"
+            },
+            "sed": {
+              "mpsum": "stream editor for filtering and transforming text",
+              "-e": "add the script to the commands to be executed"
+            },
+            "wc": {
+              "mpsum": "print newline, word, and byte counts for each file"
+            }
+          },
+          "TLDR_inform": {
+            "pstree": {
+              "man1_pstree_27524": "conveni tool show run process tree display tree process display tree process pid display process tree root process own specifi user"
+            },
+            "head": {
+              "man1_head_14119": "output first part file output everyth last byte file output everyth last line file output first byte file output first line file"
+            },
+            "sed": {
+              "man1_sed_30692": "edit text scriptabl manner appli multipl find-replac express file delet line match line pattern print first 11 line file replac occurr string file overwrit file e\nin-plac replac occurr extend regular express file print result replac line match line pattern replac separ charact use find replac pattern e g replac first occurr regular express line file print result"
+            },
+            "wc": {
+              "man1_wc_36412": "count line word byte count charact byte file count charact file take multi-byt charact set account count line file count word file use standard input count line word charact byte order"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_28997125: Change directory of a parent process from a child process"
+      ],
+      "Top-3 Scripts": [
+        "so_28997125: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "mc",
+      "MP Summary": "Visual shell for Unix-like systems.",
+      "Most Similar TLDR Task": "Start in black and white",
+      "Most Similar TLDR Script": "mc -b",
+      "Most Similar NL2Bash Task": "Calculates process depth of process with id $processid, and stores it in a 'depth' variable.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "depth=$(pstree -sA $processid | head -n1 | sed -e 's#-+-.*#---foobar#' -e 's#---*#\\n#g' -eq | wc -l)\n",
+          "command-options": {
+            "pstree": {
+              "mpsum": "display a tree of processes",
+              "-s": "Show parent processes of the specified process.",
+              "-A": "Use ASCII characters to draw the tree."
+            },
+            "head": {
+              "mpsum": "output the first part of files"
+            },
+            "sed": {
+              "mpsum": "stream editor for filtering and transforming text",
+              "-e": "add the script to the commands to be executed"
+            },
+            "wc": {
+              "mpsum": "print newline, word, and byte counts for each file"
+            }
+          },
+          "TLDR_inform": {
+            "pstree": {
+              "man1_pstree_27524": "conveni tool show run process tree display tree process display tree process pid display process tree root process own specifi user"
+            },
+            "head": {
+              "man1_head_14119": "output first part file output everyth last byte file output everyth last line file output first byte file output first line file"
+            },
+            "sed": {
+              "man1_sed_30692": "edit text scriptabl manner appli multipl find-replac express file delet line match line pattern print first 11 line file replac occurr string file overwrit file e\nin-plac replac occurr extend regular express file print result replac line match line pattern replac separ charact use find replac pattern e g replac first occurr regular express line file print result"
+            },
+            "wc": {
+              "man1_wc_36412": "count line word byte count charact byte file count charact file take multi-byt charact set account count line file count word file use standard input count line word charact byte order"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_28997125: Change directory of a parent process from a child process"
+      ],
+      "Top-3 Scripts": [
+        "so_28997125: alias mc=\". /usr/lib/mc/bin/mc-wrapper.sh\"'"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "opt",
+      "MP Summary": "LLVM optimizer",
+      "Most Similar TLDR Task": "Output the Control Flow Graph of a function to a \"dot\" file",
+      "Most Similar TLDR Script": "opt {{-dot-cfg}} -S {{path/to/file.bc}} -disable-output",
+      "Most Similar NL2Bash Task": "Calculates process depth of process with id $processid, and stores it in a 'depth' variable.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "depth=$(pstree -sA $processid | head -n1 | sed -e 's#-+-.*#---foobar#' -e 's#---*#\\n#g' -eq | wc -l)\n",
+          "command-options": {
+            "pstree": {
+              "mpsum": "display a tree of processes",
+              "-s": "Show parent processes of the specified process.",
+              "-A": "Use ASCII characters to draw the tree."
+            },
+            "head": {
+              "mpsum": "output the first part of files"
+            },
+            "sed": {
+              "mpsum": "stream editor for filtering and transforming text",
+              "-e": "add the script to the commands to be executed"
+            },
+            "wc": {
+              "mpsum": "print newline, word, and byte counts for each file"
+            }
+          },
+          "TLDR_inform": {
+            "pstree": {
+              "man1_pstree_27524": "conveni tool show run process tree display tree process display tree process pid display process tree root process own specifi user"
+            },
+            "head": {
+              "man1_head_14119": "output first part file output everyth last byte file output everyth last line file output first byte file output first line file"
+            },
+            "sed": {
+              "man1_sed_30692": "edit text scriptabl manner appli multipl find-replac express file delet line match line pattern print first 11 line file replac occurr string file overwrit file e\nin-plac replac occurr extend regular express file print result replac line match line pattern replac separ charact use find replac pattern e g replac first occurr regular express line file print result"
+            },
+            "wc": {
+              "man1_wc_36412": "count line word byte count charact byte file count charact file take multi-byt charact set account count line file count word file use standard input count line word charact byte order"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_23071549: How to redirect output of a spawned child process in Linux?"
+      ],
+      "Top-3 Scripts": [
+        "so_23071549: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "then",
+      "MP Summary": "presumably creating or updating package.json and running any other initialization-related operations. The init command is transformed to a corresponding npx operation as follows: \u00b7 npm init foo -> npx create-foo \u00b7 npm init @usr/foo -> npx @usr/create-foo \u00b7 npm init @usr -> npx @usr/create Any  additional  options  will  be passed directly to the command, so npm init foo --hello will map to npx create-foo --hello. If the initializer is omitted (by just calling npm init), init will fall  back  to  legacy init  behavior.  It  will  ask you a bunch of questions, and then write a package.json for you. It will attempt to make reasonable guesses based on  existing  fields,  dependencies, and  options selected. It is strictly additive, so it will keep any fields and values that were already set. You can also use -y/--yes to skip the questionnaire altogether.  If  you pass --scope, it will create a scoped package. See Also \u00b7 https://github.com/isaacs/init-package-json \u00b7 npm help package.json \u00b7 npm help version \u00b7 npm help scope April 2020                                NPM-INIT(1)",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "Calculates process depth of process with id $processid, and stores it in a 'depth' variable.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "depth=$(pstree -sA $processid | head -n1 | sed -e 's#-+-.*#---foobar#' -e 's#---*#\\n#g' -eq | wc -l)\n",
+          "command-options": {
+            "pstree": {
+              "mpsum": "display a tree of processes",
+              "-s": "Show parent processes of the specified process.",
+              "-A": "Use ASCII characters to draw the tree."
+            },
+            "head": {
+              "mpsum": "output the first part of files"
+            },
+            "sed": {
+              "mpsum": "stream editor for filtering and transforming text",
+              "-e": "add the script to the commands to be executed"
+            },
+            "wc": {
+              "mpsum": "print newline, word, and byte counts for each file"
+            }
+          },
+          "TLDR_inform": {
+            "pstree": {
+              "man1_pstree_27524": "conveni tool show run process tree display tree process display tree process pid display process tree root process own specifi user"
+            },
+            "head": {
+              "man1_head_14119": "output first part file output everyth last byte file output everyth last line file output first byte file output first line file"
+            },
+            "sed": {
+              "man1_sed_30692": "edit text scriptabl manner appli multipl find-replac express file delet line match line pattern print first 11 line file replac occurr string file overwrit file e\nin-plac replac occurr extend regular express file print result replac line match line pattern replac separ charact use find replac pattern e g replac first occurr regular express line file print result"
+            },
+            "wc": {
+              "man1_wc_36412": "count line word byte count charact byte file count charact file take multi-byt charact set account count line file count word file use standard input count line word charact byte order"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_3586888: How do I find the top-level parent PID of a given process using bash?",
+        "su_150117: How to get parent PID of a given process in GNU/Linux from command line?",
+        "so_28997125: Change directory of a parent process from a child process"
+      ],
+      "Top-3 Scripts": [
+        "so_3586888: ",
+        "su_150117: #!/bin/sh\npid=$1\nif [ -z $pid ]\nthen\n    read -p \"PID: \" pid\nfi\nps -p ${pid:-$$} -o ppid=",
+        "so_28997125: "
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

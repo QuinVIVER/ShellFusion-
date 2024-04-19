@@ -1,0 +1,87 @@
+{
+  "Query": "How to recursively find and list the latest modified files in a directory with subdirectories and times?",
+  "Answers": [
+    {
+      "Command": "find",
+      "MP Summary": "search for files in a directory hierarchy",
+      "Most Similar TLDR Task": "Find files by extension",
+      "Most Similar TLDR Script": "find {{root_path}} -name '{{*.ext}}'",
+      "Top-3 Similar Questions": [
+        "ul_173771: Find files older than x amount of time in specific directory with ignoring subdirectories",
+        "nl2bash_5159: Find grub.conf files in entire file system discarding errors in csh or tcsh shell",
+        "ul_371885: Find all files in all subdirectories with name ExampleDir"
+      ],
+      "Top-3 Scripts": [
+        "ul_173771: find \"$dir\" \\! -name \"$(basename -- \"$dir\")\" -type d -prune -o -mmin +3 -type f -print",
+        "nl2bash_5159: find / -name grub.conf >& /dev/null",
+        "ul_371885: find . -type f -path \"*/ExampleDir/*\""
+      ],
+      "Explanations about Options": {
+        "-type": "File is of type c:",
+        "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+      }
+    },
+    {
+      "Command": "cp",
+      "MP Summary": "copy files and directories",
+      "Most Similar TLDR Task": "Recursively copy a directory's contents to another location (if the destination exists, the directory is copied inside it)",
+      "Most Similar TLDR Script": "cp -r {{path/to/source_directory}} {{path/to/target_directory}}",
+      "Top-3 Similar Questions": [
+        "nl2bash_4331: Find all regular files under $DIR/tmp/daily/, sort them in reverse numerical order and copy the first two files to $DIR/tmp/weekly/",
+        "so_25821119: Find files in multiple directories taken from list in a file?"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_4331: find $DIR/tmp/daily/ -type f -printf \"%p\\n\" | sort -rn | head -n 2 | xargs -I{} cp {} $DIR/tmp/weekly/",
+        "so_25821119: for line in \"`cat fromDirs.txt`\"; do find \"$line\" -type f \\( -name '*good*' -o -exec grep -F \"(NODES_'TASK')\" {} \\; \\) -exec cp {} /tmp/ \\;; done"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "rm",
+      "MP Summary": "remove files or directories",
+      "Most Similar TLDR Task": "Recursively remove a directory and all its subdirectories",
+      "Most Similar TLDR Script": "rm -r {{path/to/directory}}",
+      "Top-3 Similar Questions": [
+        "so_23562236: find in list of directories saved to a file"
+      ],
+      "Top-3 Scripts": [
+        "so_23562236: FILE_LIST=`mktemp --suffix=.list`\nfind ~/udit65_backup/ -maxdepth 1 -iname \"$PREFIX-*\" -type d -mtime +$NDAYS -print0 > $FILE_LIST\n# Make unwritable files... writable\nxargs -I {} -0r -a $FILE_LIST find {} ! -perm -u+w -print0 | xargs -0r chmod -R 700 -v\nxargs -0r -a $FILE_LIST rm -rf -v\nrm -f $FILE_LIST"
+      ],
+      "Explanations about Options": {
+        "-r": "remove directories and their contents recursively",
+        "-f": "ignore nonexistent files and arguments, never prompt",
+        "-v": "explain what is being done"
+      }
+    },
+    {
+      "Command": "ls",
+      "MP Summary": "list directory contents",
+      "Most Similar TLDR Task": "List all files, with trailing `/` added to directory names",
+      "Most Similar TLDR Script": "ls -F",
+      "Top-3 Similar Questions": [
+        "so_58643334: Finding the oldest folder in a directory in linux even when files inside are modified",
+        "so_15066286: Finding the latest file from directory with creation date as suffix"
+      ],
+      "Top-3 Scripts": [
+        "so_58643334: ls -i",
+        "so_15066286: ls dir/file.* | sort -n -t . -k 2 | tail -1"
+      ],
+      "Explanations about Options": {
+        "-i": "print the index number of each file"
+      }
+    },
+    {
+      "Command": "pwd",
+      "MP Summary": "print name of current/working directory",
+      "Most Similar TLDR Task": "Print the current directory",
+      "Most Similar TLDR Script": "pwd",
+      "Top-3 Similar Questions": [
+        "ul_6463: find searching in parent directories instead of subdirectories"
+      ],
+      "Top-3 Scripts": [
+        "ul_6463: find_up.sh some_dir -iname \"foo*bar\" -execdir pwd \\;"
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

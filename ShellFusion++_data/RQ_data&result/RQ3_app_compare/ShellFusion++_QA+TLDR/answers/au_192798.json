@@ -1,0 +1,88 @@
+{
+  "Query": "Is it possible to read the output from any process using its PID?",
+  "Answers": [
+    {
+      "Command": "line",
+      "MP Summary": "cache line size",
+      "Most Similar TLDR Task": "Read input",
+      "Most Similar TLDR Script": "line",
+      "Top-3 Similar Questions": [
+        "so_1154846: Continuously read from STDOUT of external process in Ruby",
+        "so_42635451: How to read input from Stdin with fork()",
+        "so_44016803: Reading input using fgets returns duplicate lines in C"
+      ],
+      "Top-3 Scripts": [
+        "so_1154846: IO.popen( \"ruby random.rb\") do |random|\n  random.each { |line| puts line }\nend",
+        "so_42635451: ",
+        "so_44016803: > strace -f ./a.out < temp 2>&1 | less\n....\nwrite(2, \"pid: 29487 -- getcmd buf =======\"..., 45pid: 29487 -- getcmd buf ======= --> line 1\nclone(child_stack=0,flags=CLONE_CHILD_CLEARTID|CLONE_CHILD_SETTID|SIGCHLD,child_tidptr=0x7f34940f19d0) = 29488\nProcess 29488 attached\n[pid 29487] wait4(-1,  <unfinished ...>\n[pid 29488] lseek(0, -14, SEEK_CUR)     = 7\n[pid 29488] exit_group(0)               = ?\n[pid 29488] +++ exited with 0 +++\n<... wait4 resumed> [{WIFEXITED(s) && WEXITSTATUS(s) == 0}], 0, NULL) = 29488"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "wait",
+      "MP Summary": "await process completion",
+      "Most Similar TLDR Task": "Wait for a process to finish given its process ID (PID) and return its exit status",
+      "Most Similar TLDR Script": "wait {{pid}}",
+      "Top-3 Similar Questions": [
+        "so_42635451: How to read input from Stdin with fork()",
+        "ul_6301: How do I read from /proc/$pid/mem under Linux?",
+        "so_21793755: Child process cannot read after the exiting of parent process"
+      ],
+      "Top-3 Scripts": [
+        "so_42635451: ",
+        "ul_6301: ",
+        "so_21793755: wait()"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "ps",
+      "MP Summary": "report a snapshot of the current processes.",
+      "Most Similar TLDR Task": "Get the parent pid of a process",
+      "Most Similar TLDR Script": "ps -o ppid= -p {{pid}}",
+      "Top-3 Similar Questions": [
+        "ul_29128: How to read environment variables of a process",
+        "so_55840170: Getting the PID and read the limits file for each PID"
+      ],
+      "Top-3 Scripts": [
+        "ul_29128: ",
+        "so_55840170: for pid in $(ps h -o pid -C sleep); do\n    echo \"PID=$pid\\t\\t$(grep 'Max open files' /proc/$pid/limits)\"\ndone"
+      ],
+      "Explanations about Options": {
+        "-C": "Select by command name. This selects the processes whose executable name is given\n in cmdlist. NOTE: The command name is not the same as the command line. Previous\n versions of procps and the kernel truncated this command name to 15 characters.\n This limitation is no longer present in both. If you depended on matching only 15\n characters, you may no longer get a match."
+      }
+    },
+    {
+      "Command": "strace",
+      "MP Summary": "trace system calls and signals",
+      "Most Similar TLDR Task": "Start tracing a specific process by its PID",
+      "Most Similar TLDR Script": "strace -p {{pid}}",
+      "Top-3 Similar Questions": [
+        "so_28438074: Executed C binary from java and reading from output stream of the process",
+        "so_44016803: Reading input using fgets returns duplicate lines in C",
+        "so_29250948: Reading the console output of a process through SSH, linux"
+      ],
+      "Top-3 Scripts": [
+        "so_28438074: ",
+        "so_44016803: > strace -f ./a.out < temp 2>&1 | less\n....\nwrite(2, \"pid: 29487 -- getcmd buf =======\"..., 45pid: 29487 -- getcmd buf ======= --> line 1\nclone(child_stack=0,flags=CLONE_CHILD_CLEARTID|CLONE_CHILD_SETTID|SIGCHLD,child_tidptr=0x7f34940f19d0) = 29488\nProcess 29488 attached\n[pid 29487] wait4(-1,  <unfinished ...>\n[pid 29488] lseek(0, -14, SEEK_CUR)     = 7\n[pid 29488] exit_group(0)               = ?\n[pid 29488] +++ exited with 0 +++\n<... wait4 resumed> [{WIFEXITED(s) && WEXITSTATUS(s) == 0}], 0, NULL) = 29488",
+        "so_29250948: "
+      ],
+      "Explanations about Options": {
+        "-f": "Trace child processes as they are created by currently traced processes as a\n result of the fork(2), vfork(2) and clone(2) system calls. Note that -p PID\n -f will attach all threads of process PID if it is multi-threaded, not only\n thread with thread_id = PID."
+      }
+    },
+    {
+      "Command": "kill",
+      "MP Summary": "send a signal to a process",
+      "Most Similar TLDR Task": "Terminate a program using the default SIGTERM (terminate) signal",
+      "Most Similar TLDR Script": "kill {{process_id}}",
+      "Top-3 Similar Questions": [
+        "so_61770892: Is it possible for bash to \"interactively\" alternate between reading from and writing to a child process via stdin/stdout?"
+      ],
+      "Top-3 Scripts": [
+        "so_61770892: kill \"$COPROC_PID\""
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

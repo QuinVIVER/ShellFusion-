@@ -1,0 +1,80 @@
+{
+  "Query": "How to resize partitions?",
+  "Answers": [
+    {
+      "Command": "fdisk",
+      "MP Summary": "manipulate disk partition table",
+      "Most Similar TLDR Task": "List partitions",
+      "Most Similar TLDR Script": "fdisk -l",
+      "Top-3 Similar Questions": [
+        "su_305507: Unable to resize (enlarge) Linux partition",
+        "au_498709: How can I resize an active LVM partition?"
+      ],
+      "Top-3 Scripts": [
+        "su_305507: sudo fdisk -l",
+        "au_498709: "
+      ],
+      "Explanations about Options": {
+        "-l": "List the partition tables for the specified devices and then exit. If no devices\n are given, those mentioned in /proc/partitions (if that file exists) are used."
+      }
+    },
+    {
+      "Command": "lvextend",
+      "MP Summary": "Add space to a logical volume",
+      "Most Similar TLDR Task": "Increase a volume's size to 120GB",
+      "Most Similar TLDR Script": "lvextend --size {{120G}} {{logical_volume}}",
+      "Top-3 Similar Questions": [
+        "au_401503: Resized partition with gparted size with df -h",
+        "ul_210645: How do I resize the active partition (in Ubuntu 15.04)?"
+      ],
+      "Top-3 Scripts": [
+        "au_401503: lvextend -L +1G /dev/mapper/kvg-root",
+        "ul_210645: lvextend -L +10G /dev/mapper/magento--db--vg-root\n\nlvextend -L +[...]"
+      ],
+      "Explanations about Options": {
+        "-L": "Specifies the new size of the LV. The --size and --extents options are alternate\n methods of specifying size. The total number of physical extents used will be\n greater when redundant data is needed for RAID levels. When the plus + or minus -\n prefix is used, the value is not an absolute size, but is relative and added or\n subtracted from the current size."
+      }
+    },
+    {
+      "Command": "pvcreate",
+      "MP Summary": "Initialize physical volume(s) for use by LVM",
+      "Most Similar TLDR Task": "Initialize the `/dev/sda1` volume for use by LVM",
+      "Most Similar TLDR Script": "pvcreate {{/dev/sda1}}",
+      "Top-3 Similar Questions": [
+        "ul_83196: Resize partitions with gparted"
+      ],
+      "Top-3 Scripts": [
+        "ul_83196: pvcreate /dev/sda6\nvgextend mygroup /dev/sda6\n\npvcreate /dev/sda5\nvgextend mygroup /dev/sda5"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "mke2fs",
+      "MP Summary": "create an ext2/ext3/ext4 filesystem",
+      "Most Similar TLDR Task": "Create an ext2 filesystem in partition 1 of device b (`sdb1`)",
+      "Most Similar TLDR Script": "mkfs.ext2 {{/dev/sdb1}}",
+      "Top-3 Similar Questions": [
+        "su_1164222: gparted refuses to resize partition"
+      ],
+      "Top-3 Scripts": [
+        "su_1164222: sudo mke2fs -n /dev/sdaX"
+      ],
+      "Explanations about Options": {
+        "-n": "Causes mke2fs to not actually create a filesystem, but display what it would do if\n it were to create a filesystem. This can be used to determine the location of the\n backup superblocks for a particular filesystem, so long as the mke2fs parameters\n that were passed when the filesystem was originally created are used again. (With\n the -n option added, of course!)"
+      }
+    },
+    {
+      "Command": "e2label",
+      "MP Summary": "Change the label on an ext2/ext3/ext4 filesystem",
+      "Most Similar TLDR Task": "Change the volume label on a specific ext partition",
+      "Most Similar TLDR Script": "e2label {{/dev/sda1}} \"{{label_name}}\"",
+      "Top-3 Similar Questions": [
+        "au_732839: How to rename a partition"
+      ],
+      "Top-3 Scripts": [
+        "au_732839: sudo e2label <DEVICE> <NEW_LABEL>"
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

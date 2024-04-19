@@ -1,0 +1,85 @@
+{
+  "Query": "How to change the Home directory of the currently logged In user",
+  "Answers": [
+    {
+      "Command": "users",
+      "MP Summary": "print the user names of users currently logged in to the current host",
+      "Top-3 Similar Questions": [
+        "au_18103: How can I change the default location of content directories (eg Pictures, Templates, Music)  in my home folder?"
+      ],
+      "Top-3 Scripts": [
+        "au_18103: chown nobody:users /home/common\nchmod 2775 /home/common\nusermod -a -G users user1"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "passwd",
+      "MP Summary": "change user password",
+      "Top-3 Similar Questions": [
+        "su_1132626: Changing home directory of user on Windows Subsystem for Linux",
+        "ul_267904: What is a good way to change a group of users UIDs without usermod executing a time consuming chown on the user home directory?",
+        "ul_598794: How to dynamically change owner of directory using awk output?"
+      ],
+      "Top-3 Scripts": [
+        "su_1132626: sudo vim /etc/passwd",
+        "ul_267904: # mkdir -p /tmp/home/jsmith  ## uncomment if required.\nhomedir=$(getent passwd jsmith | awk -F: '{print $6}')\nusermod -d /tmp/home/jsmith jsmith\nusermod -u fixedUID jsmith -o\nusermod -d \"$homedir\" jsmith",
+        "ul_598794: awk -F\\: '/^#/{next}''{system(\"chown \" $1\" \" $6)}' /etc/passwd"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "usermod",
+      "MP Summary": "modify a user account",
+      "Top-3 Similar Questions": [
+        "ul_267904: What is a good way to change a group of users UIDs without usermod executing a time consuming chown on the user home directory?",
+        "au_18103: How can I change the default location of content directories (eg Pictures, Templates, Music)  in my home folder?",
+        "su_40450: How does one change user's home directory in Ubuntu 9.04?"
+      ],
+      "Top-3 Scripts": [
+        "ul_267904: # mkdir -p /tmp/home/jsmith  ## uncomment if required.\nusermod -d /tmp/home/jsmith jsmith\nusermod -u fixedUID jsmith -o\nusermod -d /home/jsmith jsmith\n\n# mkdir -p /tmp/home/jsmith  ## uncomment if required.\nhomedir=$(getent passwd jsmith | awk -F: '{print $6}')\nusermod -d /tmp/home/jsmith jsmith\nusermod -u fixedUID jsmith -o\nusermod -d \"$homedir\" jsmith",
+        "au_18103: chown nobody:users /home/common\nchmod 2775 /home/common\nusermod -a -G users user1",
+        "su_40450: sudo usermod\u00a0 -d <i>new_home_dir</i>\u00a0 <i>username</i>\n\nsudo usermod  -d <i>new_home_dir</i>  -m\u00a0 <i>username</i>"
+      ],
+      "Explanations about Options": {
+        "-a": "Add the user to the supplementary group(s). Use only with the -G option.",
+        "-o": "When used with the -u option, this option allows to change the user ID to a non-unique\n value.",
+        "-d": "The user's new login directory.",
+        "-G": "GROUP1[,GROUP2,...[,GROUPN]]]\n A list of supplementary groups which the user is also a member of. Each group is\n separated from the next by a comma, with no intervening whitespace. The groups are\n subject to the same restrictions as the group given with the -g option.",
+        "-m": "Move the content of the user's home directory to the new location.",
+        "-u": "The new numerical value of the user's ID."
+      }
+    },
+    {
+      "Command": "sudo",
+      "MP Summary": "execute a command as another user",
+      "Top-3 Similar Questions": [
+        "au_364482: How to change the UID of a user with an encrypted home directory",
+        "au_829537: How to change owner of folder to current user recursively?",
+        "su_1132626: Changing home directory of user on Windows Subsystem for Linux"
+      ],
+      "Top-3 Scripts": [
+        "au_364482: $ sudo su\n# passwd",
+        "au_829537: sudo nautilus\n\nsudo find ~ -type d -user root\n\nsudo find ~ -type d -user root -exec sudo chown -R $USER: {} +\n\nsudo chown -R\n\nsudo find ~ -user root -exec sudo chown $USER: {} +",
+        "su_1132626: sudo vim /etc/passwd"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "su",
+      "MP Summary": "run a command with substitute user and group ID",
+      "Top-3 Similar Questions": [
+        "au_364482: How to change the UID of a user with an encrypted home directory",
+        "ul_145298: What do I need in my script to be able to change ownership of a directory structure that belongs to root to the current user running the bash script?",
+        "ul_156962: How to change to normal user in the command line when logged in as the root user?"
+      ],
+      "Top-3 Scripts": [
+        "au_364482: $ sudo su\n# passwd",
+        "ul_145298: su -c 'chown -R smithb:other /export/home/smithb/workspace/rootownsit/' root",
+        "ul_156962: su - username\n\nsu username"
+      ],
+      "Explanations about Options": {
+        "-c": "Pass command to the shell with the -c option."
+      }
+    }
+  ]
+}

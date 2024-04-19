@@ -1,0 +1,87 @@
+{
+  "Query": "Delete files older than 15 days using PowerShell",
+  "Answers": [
+    {
+      "Command": "find",
+      "MP Summary": "search for files in a directory hierarchy",
+      "Most Similar TLDR Task": "Find files modified in the last 7 days, and delete them",
+      "Most Similar TLDR Script": "find {{root_path}} -mtime {{-7}} -delete",
+      "Top-3 Similar Questions": [
+        "so_18636572: Delete all folders older than X days using Shell",
+        "su_662302: How to delete all files inside public_ftp folder\u2014and its sub folders\u2014which are older than X days using cron job?",
+        "so_5375409: deleting old files using crontab"
+      ],
+      "Top-3 Scripts": [
+        "so_18636572: find \"$FILEDIR\" -mtime +14 -exec rm -ir {} \\;\n\nfind \"$FILEDIR\" -mtime +14 -delete\n\n[[ $FILEDIR == /home/abc/* ]] && find \"$FILEDIR\" -mtime +14 -delete",
+        "su_662302: #!/bin/sh\n\nfind /path/to/folder/toclean -mtime +5 -type f -maxdepth 3 -exec rm -f {} \\;",
+        "so_5375409: 0 3 * * * find $HOME/db_backups -name \"db_name*.sql\" -mtime +30 -exec rm {} \\; >> $HOME/db_backups/purge.log 2>&1"
+      ],
+      "Explanations about Options": {
+        "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+        "-mtime": "File's data was last modified n*24 hours ago. See the comments for -atime to\n understand how rounding affects the interpretation of file modification times.",
+        "-d": "A synonym for -depth, for compatibility with FreeBSD, NetBSD, MacOS X and OpenBSD."
+      }
+    },
+    {
+      "Command": "touch",
+      "MP Summary": "change file timestamps",
+      "Most Similar TLDR Task": "Set the times on a file to a specific date and time",
+      "Most Similar TLDR Script": "touch -t {{YYYYMMDDHHMM.SS}} {{filename}}",
+      "Top-3 Similar Questions": [
+        "so_47808338: Remove files older than x days in a loop without using find unix"
+      ],
+      "Top-3 Scripts": [
+        "so_47808338: n=60 # number of days\nref=\"/tmp/$$.tmp\" # temporary filename\n\ntouch -t $(date -d \"-$n days\" '+%Y%m%d%H%M.%S') \"$ref\"\n\nfor f in /path/tomy/directory/*.rpt; do\n   [[ -f $f && $ref -nt $f ]] && echo rm \"$f\"\ndone\n\nrm \"$ref\""
+      ],
+      "Explanations about Options": {
+        "-t": "STAMP\n use [[CC]YY]MMDDhhmm[.ss] instead of current time"
+      }
+    },
+    {
+      "Command": "date",
+      "MP Summary": "print or set the system date and time",
+      "Most Similar TLDR Task": "Display a specific date (represented as a Unix timestamp) using the default format",
+      "Most Similar TLDR Script": "date -d @1473305798",
+      "Top-3 Similar Questions": [
+        "su_1674564: Deleting files automatically using bash",
+        "ul_516735: Get Next working day using variable",
+        "so_15431587: How to delete files older than 7 days in Linux using the shell"
+      ],
+      "Top-3 Scripts": [
+        "su_1674564: a=$(date \"+%Y%m%d\")\necho $a\n20210906\nb=$(($a-8))\necho $b\n20210898\n\nb=$(date \"+%Y%m%d\" --date='8 days ago')\necho $b\n20210829",
+        "ul_516735: last_day=20190426\n date -d \"$last_day +$( if [ `date -d $last_day +%w` == 5 ]; then echo 3; elif [ `date -d $last_day +%w` == 6 ]; then echo 2; else echo 1; fi ) days\" +\"%Y%m%d\"",
+        "so_15431587: "
+      ],
+      "Explanations about Options": {
+        "-d": "display time described by STRING, not 'now'",
+        "--date": "display time described by STRING, not 'now'"
+      }
+    },
+    {
+      "Command": "install",
+      "MP Summary": "copy files and set attributes",
+      "Most Similar TLDR Task": "Copy files and apply access/modification times of source to destination",
+      "Most Similar TLDR Script": "install -p {{path/to/source}} {{path/to/destination}}",
+      "Top-3 Similar Questions": [
+        "au_798839: How do I delete files using the Gutmann Process?"
+      ],
+      "Top-3 Scripts": [
+        "au_798839: sudo apt-get install scrub\n\nsudo apt-get install secure-delete"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "pax",
+      "MP Summary": "read and write file archives and copy directory hierarchies",
+      "Most Similar TLDR Task": "Create an archive from files, using output redirection",
+      "Most Similar TLDR Script": "pax -w {{path/to/file1}} {{path/to/file2}} {{path/to/file3}} > {{target.tar}}",
+      "Top-3 Similar Questions": [
+        "so_2152977: how to delete 3 days old files using ftp in a shell script (Solaris OS)"
+      ],
+      "Top-3 Scripts": [
+        "so_2152977: "
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

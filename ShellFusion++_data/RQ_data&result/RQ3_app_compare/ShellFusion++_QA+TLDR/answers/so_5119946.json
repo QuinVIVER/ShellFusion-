@@ -1,0 +1,87 @@
+{
+  "Query": "find -exec with multiple commands",
+  "Answers": [
+    {
+      "Command": "find",
+      "MP Summary": "search for files in a directory hierarchy",
+      "Most Similar TLDR Task": "Find files by matching multiple patterns",
+      "Most Similar TLDR Script": "find {{root_path}} -name '{{*pattern_1*}}' -or -name '{{*pattern_2*}}'",
+      "Top-3 Similar Questions": [
+        "ul_212957: find: multiple `-exec`s with conditions",
+        "nl2bash_7944: find file end with  '.txt' in current directory.",
+        "ul_663444: find command with multiple directories"
+      ],
+      "Top-3 Scripts": [
+        "ul_212957: find . -type f -exec grep -qF <i>SOME_STRING</i> {} \\; -exec sed '<i>COMMAND</i>' {} \\;\n\nfind . -type f -exec grep -qF <i>SOME_STRING</i> {} \\; -print\n\nfind . -type f -exec grep -qF <i>THIS</i> {} \\; ! -exec grep -qF <i>THAT</i> {} \\; -print\n\nfind . -type f -exec grep -lFZ <i>SOME_STRING</i> {} + | xargs -0 gsed -s -i '<i>COMMAND</i>'",
+        "nl2bash_7944: find . -name \"*.txt\"",
+        "ul_663444: find dir1 dir2 dir3 -type f\n\ndirs=( dir1 dir2 dir3 )\n\nfind \"${dirs[@]}\" -type f"
+      ],
+      "Explanations about Options": {
+        "-type": "File is of type c:",
+        "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+      }
+    },
+    {
+      "Command": "exec",
+      "MP Summary": "execute commands and open, close, or copy file descriptors",
+      "Most Similar TLDR Task": "Replace with the specified command using the current environment variables",
+      "Most Similar TLDR Script": "exec {{command -with -flags}}",
+      "Top-3 Similar Questions": [
+        "so_55343812: find: combining multiple \"-exec\" statements not working with toybox / Android?",
+        "ul_481159: How does the find command know how many arguments to feed with \"-exec ... {} +\"?"
+      ],
+      "Top-3 Scripts": [
+        "so_55343812: ",
+        "ul_481159: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "rm",
+      "MP Summary": "remove files or directories",
+      "Most Similar TLDR Task": "Interactively remove multiple files, with a prompt before every removal",
+      "Most Similar TLDR Script": "rm -i {{file(s)}}",
+      "Top-3 Similar Questions": [
+        "so_8296585: Find subdirectories with find command",
+        "so_27532452: Multiple find -exec commands in one bash script doesn't work?",
+        "ul_426728: Not found argument in -exec"
+      ],
+      "Top-3 Scripts": [
+        "so_8296585: find <directory_name> -type d -exec sh -c \"cd {} && [ -d live ] && [ -d test ] && echo \\\"Deleting test from {}\\\" && rm -rvi test \" {} \\;\n\nfind <directory_name> -type d -exec sh -c \"cd {} && [ -d live ] && [ -d test ] && cd ../ && echo \\\"Deleting {}\\\" && rm -rvi {} \" {} \\;",
+        "so_27532452: find /path/to/file1 /path/to/file2 -name 'abc*' -o -name 'def*.gz' -type f -mtime +7 -exec rm {} \\;",
+        "ul_426728: $ find . \\( -name \"*.avi\" -o -name \"*.mkv\" \\) -exec basename {} \\; > ~/Bash/test/rm/films.txt"
+      ],
+      "Explanations about Options": {
+        "-r": "remove directories and their contents recursively",
+        "-i": "prompt before every removal",
+        "-v": "explain what is being done"
+      }
+    },
+    {
+      "Command": "command",
+      "MP Summary": "execute a simple command",
+      "Most Similar TLDR Task": "Display the path to the executable or the alias definition of a specific command",
+      "Most Similar TLDR Script": "command -v {{command_name}}",
+      "Top-3 Similar Questions": [
+        "so_63264155: python subprocess remote find -exec filename with space"
+      ],
+      "Top-3 Scripts": [
+        "so_63264155: command = \"find \\\"\"+to_directory+'''\\\"* -type f -exec sh -c \\\"stat -c \\'%y:%n\\' \\'{}\\'\\\" \\;'''\n\nscp_process_ = subprocess.run(\n    [\"ssh\", to_user+\"@\"+to_host, command],\n    capture_output=False, text=True)\n\ncommand = 'find \"' + to_directory + '\" -type f -exec stat -c \"%y:%n\" {} +'"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "dirname",
+      "MP Summary": "strip last component from file name",
+      "Most Similar TLDR Task": "Delimit output with a NUL character instead of a newline (useful when combining with `xargs`)",
+      "Most Similar TLDR Script": "dirname --zero {{path/to/directory_a}} {{path/to/file_b}}",
+      "Top-3 Similar Questions": [
+        "so_8106405: Bash find: changing matched name for use in -exec"
+      ],
+      "Top-3 Scripts": [
+        "so_8106405: find . -name \"*.less\" -exec sh -c \"plessc \\$0 \\$(dirname \\$0)/\\$(basename \\$0 less)css\" {} \\;"
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

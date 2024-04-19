@@ -1,0 +1,80 @@
+{
+  "Query": "Bash How to find the largest file in a directory and its subdirectories?",
+  "Answers": [
+    {
+      "Command": "find",
+      "MP Summary": "search for files in a directory hierarchy",
+      "Most Similar TLDR Task": "Find files matching a given pattern, excluding specific paths",
+      "Most Similar TLDR Script": "find {{root_path}} -name '{{*.py}}' -not -path '{{*/site-packages/*}}'",
+      "Top-3 Similar Questions": [
+        "ul_467283: Find largest files in a directory in a specific date range",
+        "ul_359611: I would like to find the largest file in each directory recursively",
+        "su_699135: Find the largest file in directory without size in output"
+      ],
+      "Top-3 Scripts": [
+        "ul_467283: find . -newer /tmp/point.start ! -newer /tmp/point.end  ! -path . | xargs ls -ltr | sort -nk5 | tail -20",
+        "ul_359611: find . -type f -printf '%s %h/%f\\0'|awk 'BEGIN { RS=\"\\0\" } { SIZE=$1; for (i = 1; i <= NF - 1; i++) $i = $(i + 1); NF = NF - 1; DIR=$0; gsub(\"/[^/]+$\", \"\", DIR); FILE=substr($0, length(DIR) + 2); SUMSIZES[DIR] += SIZE; NBFILES[DIR]++; if (SIZE > MAXSIZE[DIR] || !BIGGESTFILE[DIR]) { MAXSIZE[DIR] = SIZE; BIGGESTFILE[DIR] = FILE } }; END { for (DIR in SUMSIZES) { printf \"%s: average %f, biggest file %s %d\\n\", DIR, SUMSIZES[DIR] / NBFILES[DIR], BIGGESTFILE[DIR], MAXSIZE[DIR] } }'",
+        "su_699135: find \"$PARAM\" -type f -printf \"%s\\t%p\\n\" | sort -n | tail -n 1 | cut -f 2-"
+      ],
+      "Explanations about Options": {
+        "-newer": "Time of the last data modification of the current file is more recent than that of\n the last data modification of the reference file. If reference is a symbolic link\n and the -H option or the -L option is in effect, then the time of the last data\n modification of the file it points to is always used.",
+        "-printf": "True; print format on the standard output, interpreting `\\' escapes and `%'\n directives. Field widths and precisions can be specified as with the `printf' C\n function. Please note that many of the fields are printed as %s rather than %d,\n and this may mean that flags don't work as you might expect. This also means that\n the `-' flag does work (it forces fields to be left-aligned). Unlike -print,\n -printf does not add a newline at the end of the string. The escapes and\n directives are:",
+        "-type": "File is of type c:"
+      }
+    },
+    {
+      "Command": "rm",
+      "MP Summary": "remove files or directories",
+      "Most Similar TLDR Task": "Recursively remove a directory and all its subdirectories",
+      "Most Similar TLDR Script": "rm -r {{path/to/directory}}",
+      "Top-3 Similar Questions": [
+        "so_27031814: Find a file in directory by date...then rename it"
+      ],
+      "Top-3 Scripts": [
+        "so_27031814: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "dirname",
+      "MP Summary": "strip last component from file name",
+      "Most Similar TLDR Task": "Delimit output with a NUL character instead of a newline (useful when combining with `xargs`)",
+      "Most Similar TLDR Script": "dirname --zero {{path/to/directory_a}} {{path/to/file_b}}",
+      "Top-3 Similar Questions": [
+        "so_48412838: Find directory of a command in bash"
+      ],
+      "Top-3 Scripts": [
+        "so_48412838: dirname /bin/cat"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "pwd",
+      "MP Summary": "print name of current/working directory",
+      "Most Similar TLDR Task": "Print the current directory",
+      "Most Similar TLDR Script": "pwd",
+      "Top-3 Similar Questions": [
+        "ul_6463: find searching in parent directories instead of subdirectories"
+      ],
+      "Top-3 Scripts": [
+        "ul_6463: find_up.sh some_dir -iname \"foo*bar\" -execdir pwd \\;"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "du",
+      "MP Summary": "estimate file space usage",
+      "Most Similar TLDR Task": "List the human-readable size of all .jpg files in subdirectories of the current directory, and show a cumulative total at the end",
+      "Most Similar TLDR Script": "du -ch */*.jpg",
+      "Top-3 Similar Questions": [
+        "so_70150536: Command to find N Largest files in macOS directory excluding specific directories"
+      ],
+      "Top-3 Scripts": [
+        "so_70150536: find . -path ./.target -prune -o -type f -exec du -h {} + | sort -hr | head -n 10"
+      ],
+      "Explanations about Options": {
+        "-h": "print sizes in human readable format (e.g., 1K 234M 2G)"
+      }
+    }
+  ]
+}

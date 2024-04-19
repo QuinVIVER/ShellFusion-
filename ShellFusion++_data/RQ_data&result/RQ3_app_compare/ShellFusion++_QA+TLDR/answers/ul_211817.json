@@ -1,0 +1,93 @@
+{
+  "Query": "Copy the contents of a file into the clipboard without displaying its contents",
+  "Answers": [
+    {
+      "Command": "cp",
+      "MP Summary": "copy files and directories",
+      "Most Similar TLDR Task": "Recursively copy a directory's contents to another location (if the destination exists, the directory is copied inside it)",
+      "Most Similar TLDR Script": "cp -r {{path/to/source_directory}} {{path/to/target_directory}}",
+      "Top-3 Similar Questions": [
+        "so_13019839: Unix - copy contents of one directory to another",
+        "so_35298740: copy content of folder to multiple folders bash",
+        "so_32069144: Copy the content of one file to another excluding a few files"
+      ],
+      "Top-3 Scripts": [
+        "so_13019839: cp Folder1/* Folder2/",
+        "so_35298740: for dest in dest1 dest2 dest3 ; do\n    cp -r source/* \"$dest\"\ndone\n\necho dest1 dest2 dest3 | xargs -n1 cp -r source/*",
+        "so_32069144: gci 'C:\\new folder1' | ? { Test-Path (Join-Path 'C:\\new folder2' $_.Name) } | % { cp $_.FullName 'C:\\new folder3' }"
+      ],
+      "Explanations about Options": {
+        "-r": "copy directories recursively"
+      }
+    },
+    {
+      "Command": "xclip",
+      "MP Summary": "command line interface to X selections (clipboard)",
+      "Most Similar TLDR Task": "Copy the contents of a file into the system clipboard",
+      "Most Similar TLDR Script": "xclip -sel clip {{input_file.txt}}",
+      "Top-3 Similar Questions": [
+        "ul_425583: Is there any way to copy file's content in clipboard without opening the file?",
+        "so_5130968: How can I copy the output of a command directly into my clipboard?",
+        "au_759651: How to copy an image to the clipboard from a file using command line?"
+      ],
+      "Top-3 Scripts": [
+        "ul_425583: xclip -selection clipboard -i <file>",
+        "so_5130968: sudo apt-get install xclip\n\ncat file | xclip\n\nxclip -o\n\nalias \"c=xclip\"\nalias \"v=xclip -o\"\n\ncat file | xclip -selection clipboard",
+        "au_759651: xclip -selection clipboard -t image/png -i example.png"
+      ],
+      "Explanations about Options": {
+        "-t": "specify a particular data format using the given target atom. With -o the special\n target atom name \"TARGETS\" can be used to get a list of valid target atoms for this\n selection. For more information about target atoms refer to ICCCM section 2.6.2",
+        "-selection": "specify which X selection to use, options are \"primary\" to use XA_PRIMARY\n (default), \"secondary\" for XA_SECONDARY or \"clipboard\" for XA_CLIPBOARD",
+        "-i": "read text into X selection from standard input or files (default)"
+      }
+    },
+    {
+      "Command": "xsel",
+      "MP Summary": "manipulate the X selection.",
+      "Most Similar TLDR Task": "Output the clipboard's contents into a file",
+      "Most Similar TLDR Script": "xsel -ob > {{file}}",
+      "Top-3 Similar Questions": [
+        "au_692600: How to copy an entire command line to my clipboard, without the mouse?",
+        "ul_229900: Copy a large (over 4k) selection of text from the screen scrollback buffer into the system clipboard"
+      ],
+      "Top-3 Scripts": [
+        "au_692600: sudo apt-get install xsel\n\nxsel -ib <<<!!:q\n\nman xsel\n\necho !!:q | xsel -ib\n\nalias copylastcommand='history -p \\!\\! | xsel -ib'",
+        "ul_229900: C-a : writebuf filename\n$ xsel -bi < filename"
+      ],
+      "Explanations about Options": {
+        "-b": "operate on the CLIPBOARD selection.",
+        "-i": "read standard input into the selection."
+      }
+    },
+    {
+      "Command": "rm",
+      "MP Summary": "remove files or directories",
+      "Most Similar TLDR Task": "Remove files in verbose mode, printing a message for each removed file",
+      "Most Similar TLDR Script": "rm -v {{path/to/directory/*}}",
+      "Top-3 Similar Questions": [
+        "so_64082838: copy the content of the file to other location"
+      ],
+      "Top-3 Scripts": [
+        "so_64082838: for name in \"${!filetemp[@]}\"\ndo\n    tempfile=\"${filetemp[$name]}\"\n    paste -d ' ' \"$name\" \"$tempfile\" > \"${name}.tmp\"\n    mv -f \"${name}.tmp\" \"$name\"\n    rm -f \"$tempfile\"\ndone"
+      ],
+      "Explanations about Options": {
+        "-f": "ignore nonexistent files and arguments, never prompt"
+      }
+    },
+    {
+      "Command": "tar",
+      "MP Summary": "an archiving utility",
+      "Most Similar TLDR Task": "Extract a specific file without preserving the folder structure",
+      "Most Similar TLDR Script": "tar xf {{source.tar}} {{source.tar/path/to/extract}} --strip-components={{depth_to_strip}}",
+      "Top-3 Similar Questions": [
+        "au_50464: Cannot copy the contents of virtual hard-drive to my physical disk"
+      ],
+      "Top-3 Scripts": [
+        "au_50464: cd /media/partitionimage\nsudo tar cvpzf /home/somewhere/backup.tgz\n\nsudo mount /dev/sda1 /media/backup\nsudo tar xvpfz /home/somewhere/backup.tgz -C /media/backup/"
+      ],
+      "Explanations about Options": {
+        "-C": "Change to DIR before performing any operations. This option is order-sensitive,\n i.e. it affects all options that follow."
+      }
+    }
+  ]
+}

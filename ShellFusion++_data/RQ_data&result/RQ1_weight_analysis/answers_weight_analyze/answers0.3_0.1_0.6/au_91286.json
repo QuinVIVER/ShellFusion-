@@ -1,0 +1,78 @@
+{
+  "Query": "How to see log to find a boot problem",
+  "Answers": [
+    {
+      "Command": "findmnt",
+      "MP Summary": "find a filesystem",
+      "Most Similar TLDR Task": "Find filesystems in specific type",
+      "Most Similar TLDR Script": "findmnt -t {{ext4}}",
+      "Top-3 Similar Questions": [
+        "ul_34718: Is there a command to see where a disk is mounted?"
+      ],
+      "Top-3 Scripts": [
+        "ul_34718: $\u00a0findmnt -S /dev/VG_SC/home\nTARGET SOURCE                 FSTYPE OPTIONS\n/home  /dev/mapper/VG_SC-home ext4   rw,relatime,errors=remount-ro,data=ordered\n\n$ findmnt -nr -o target -S /dev/storage/home\n/home\n$\u00a0lsblk -o MOUNTPOINT -nr /dev/storage/home\n/home\n\nif mountpoint=$(findmnt -nr -o target -S \"$device\"); then\n  printf '\"%s\" is mounted on \"%s\"\\n' \"$device\" \"$mountpoint\"\nelse\n  printf '\"%s\" does not appear to be directly mounted\\n' \"$device\"\nfi"
+      ],
+      "Explanations about Options": {
+        "-S": "Explicitly define the mount source. Supported specifications are device, maj:min,\n LABEL=label, UUID=uuid, PARTLABEL=label and PARTUUID=uuid.",
+        "-r": "Use raw output format. All potentially unsafe characters are hex-escaped\n (\\x<code>).",
+        "-n": "Do not print a header line.",
+        "-o": "Define output columns. See the --help output to get a list of the currently\n supported columns. The TARGET column contains tree formatting if the --list or\n --raw options are not specified."
+      }
+    },
+    {
+      "Command": "who",
+      "MP Summary": "show who is logged on",
+      "Most Similar TLDR Task": "Display the username, line, and time of all currently logged-in sessions",
+      "Most Similar TLDR Script": "who",
+      "Top-3 Similar Questions": [
+        "ul_77954: How to see Current users on the system"
+      ],
+      "Top-3 Scripts": [
+        "ul_77954: who | cut -d ' ' -f 1 | sort | uniq | \n  while read user; do ps -u $user -o %u%c%a; done"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "fsck",
+      "MP Summary": "check and repair a Linux filesystem",
+      "Most Similar TLDR Task": "Check filesystem /dev/sda, reporting any damaged blocks and automatically repairing them",
+      "Most Similar TLDR Script": "fsck -a {{/dev/sda}}",
+      "Top-3 Similar Questions": [
+        "au_1202999: dual-boot, windows 10 can see Ubuntu ext4 partition"
+      ],
+      "Top-3 Scripts": [
+        "au_1202999: sudo fsck -f /dev/sdXX\n\nsudo fsck -f /dev/sda6\n\nsudo fsck -f /dev/sda7"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "last",
+      "MP Summary": "show a listing of last logged in users",
+      "Most Similar TLDR Task": "View all recorded reboots (i.e., the last logins of the pseudo user \"reboot\")",
+      "Most Similar TLDR Script": "last reboot",
+      "Top-3 Similar Questions": [
+        "au_694674: How to view bootups extending 1 month"
+      ],
+      "Top-3 Scripts": [
+        "au_694674: last -x -f /var/log/wtmp.1 | grep shutdown"
+      ],
+      "Explanations about Options": {
+        "-x": "Display the system shutdown entries and run level changes.",
+        "-f": "Tell last to use a specific file instead of /var/log/wtmp. The --file option can\n be given multiple times, and all of the specified files will be processed."
+      }
+    },
+    {
+      "Command": "mountpoint",
+      "MP Summary": "see if a directory or file is a mountpoint",
+      "Most Similar TLDR Task": "Check if a directory is a mountpoint without showing any output",
+      "Most Similar TLDR Script": "mountpoint -q {{path/to/directory}}",
+      "Top-3 Similar Questions": [
+        "ul_34718: Is there a command to see where a disk is mounted?"
+      ],
+      "Top-3 Scripts": [
+        "ul_34718: if mountpoint=$(findmnt -nr -o target -S \"$device\"); then\n  printf '\"%s\" is mounted on \"%s\"\\n' \"$device\" \"$mountpoint\"\nelse\n  printf '\"%s\" does not appear to be directly mounted\\n' \"$device\"\nfi"
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

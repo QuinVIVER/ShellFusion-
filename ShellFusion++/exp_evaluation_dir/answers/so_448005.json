@@ -1,0 +1,777 @@
+{
+  "Query": "What's an easy way to read random line from a file in Unix command line?",
+  "Answers": [
+    {
+      "Command": "find",
+      "MP Summary": "search for files in a directory hierarchy",
+      "Most Similar TLDR Task": "Find files by matching multiple patterns",
+      "Most Similar TLDR Script": "find {{root_path}} -name '{{*pattern_1*}}' -or -name '{{*pattern_2*}}'",
+      "Most Similar NL2Bash Task": "Remove sess_* files that were modified more than 2 days ago",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find sess_* -mtime +2 -exec rm {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-mtime": "File's data was last modified n*24 hours ago. See the comments for -atime to\n understand how rounding affects the interpretation of file modification times."
+            },
+            "rm": {
+              "mpsum": "remove files or directories"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "rm": {
+              "man1_rm_29530": "remov file directori forcibl remov directori without prompt confirm show error messag interact remov multipl file prompt everi remov recurs remov directori subdirectori remov file arbitrari locat remov file verbos mode print messag remov file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_12839: Create a symbolic link in the current directory for each .jpg file under \"dir\"",
+        "nl2bash_12840: Create a symbolic link in the current directory for each file .dbf under the directories matching \"/home/michael/foxpro/mount/A[1FV]/[12][0-9][0-9][0-9]\"",
+        "nl2bash_12799: Create a copy of the current working directory structure in the usr/project directory,"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_12839: ln -s \"$(find dir -name '*.jpg')\" .",
+        "nl2bash_12840: find /home/michael/foxpro/mount/A[1FV]/[12][0-9][0-9][0-9] -name '*.dbf' -type f -exec ln -s {} \\;",
+        "nl2bash_12799: find . -type d -print|sed 's@^@/usr/project/@'|xargs mkdir\n\n\nfind . -type d -print|sed 's@^@/usr/project/@'|xargs mkdir -p"
+      ],
+      "Explanations about Options": {
+        "-print": "Quoting is handled in the same way as for -printf and -fprintf. If you are using\n find in a script or in a situation where the matched files might have arbitrary\n names, you should consider using -print0 instead of -print.",
+        "-type": "File is of type c:"
+      }
+    },
+    {
+      "Command": "sed",
+      "MP Summary": "stream editor for filtering and transforming text",
+      "Most Similar TLDR Task": "Delete lines matching the line pattern",
+      "Most Similar TLDR Script": "sed '/{{line_pattern}}/d' {{filename}}",
+      "Most Similar NL2Bash Task": "Remove sess_* files that were modified more than 2 days ago",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find sess_* -mtime +2 -exec rm {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-mtime": "File's data was last modified n*24 hours ago. See the comments for -atime to\n understand how rounding affects the interpretation of file modification times."
+            },
+            "rm": {
+              "mpsum": "remove files or directories"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "rm": {
+              "man1_rm_29530": "remov file directori forcibl remov directori without prompt confirm show error messag interact remov multipl file prompt everi remov recurs remov directori subdirectori remov file arbitrari locat remov file verbos mode print messag remov file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_12799: Create a copy of the current working directory structure in the usr/project directory,",
+        "nl2bash_11651: Remove trailing whitespaces in .txt files from the current directory tree",
+        "nl2bash_10525: Copies all files like \"*foo*\" under the current directory to the '/your/dest' directory."
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_12799: find . -type d -print|sed 's@^@/usr/project/@'|xargs mkdir\n\n\nfind . -type d -print|sed 's@^@/usr/project/@'|xargs mkdir -p",
+        "nl2bash_11651: find . -type f -name \"*.txt\" -exec sh -c 'for i;do sed 's/[[:space:]]*$//' \"$i\">/tmp/.$$ && cat /tmp/.$$ > \"$i\";done' arg0 {} +\n\n\nfind . -type f -name \"*.txt\" -exec sh -c 'for i;do sed 's/[[:space:]]*$//' \"$i\">/tmp/.$$ && mv /tmp/.$$ \"$i\";done' arg0 {} +\n\n\nfind . -type f -name '*.txt' -exec sed --in-place 's/[[:space:]]\\+$//' {} \\+",
+        "nl2bash_10525: find . -name \"*foo*\" | sed -e \"s/'/\\\\\\'/g\" -e 's/\"/\\\\\"/g' -e 's/ /\\\\ /g' | xargs cp /your/dest"
+      ],
+      "Explanations about Options": {
+        "--in-place": "edit files in place (makes backup if SUFFIX supplied)",
+        "-e": "add the script to the commands to be executed"
+      }
+    },
+    {
+      "Command": "xargs",
+      "MP Summary": "build and execute command lines from standard input",
+      "Most Similar TLDR Task": "Execute the command once for each input line, replacing any occurrences of the placeholder (here marked as `_`) with the input line",
+      "Most Similar TLDR Script": "{{arguments_source}} | xargs -I _ {{command}} _ {{optional_extra_arguments}}",
+      "Most Similar NL2Bash Task": "Remove sess_* files that were modified more than 2 days ago",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find sess_* -mtime +2 -exec rm {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-mtime": "File's data was last modified n*24 hours ago. See the comments for -atime to\n understand how rounding affects the interpretation of file modification times."
+            },
+            "rm": {
+              "mpsum": "remove files or directories"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "rm": {
+              "man1_rm_29530": "remov file directori forcibl remov directori without prompt confirm show error messag interact remov multipl file prompt everi remov recurs remov directori subdirectori remov file arbitrari locat remov file verbos mode print messag remov file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_12799: Create a copy of the current working directory structure in the usr/project directory,",
+        "nl2bash_10525: Copies all files like \"*foo*\" under the current directory to the '/your/dest' directory."
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_12799: find . -type d -print|sed 's@^@/usr/project/@'|xargs mkdir\n\n\nfind . -type d -print|sed 's@^@/usr/project/@'|xargs mkdir -p",
+        "nl2bash_10525: find . -name \"*foo*\" | sed -e \"s/'/\\\\\\'/g\" -e 's/\"/\\\\\"/g' -e 's/ /\\\\ /g' | xargs cp /your/dest"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "ln",
+      "MP Summary": "make links between files",
+      "Most Similar TLDR Task": "Create a symbolic link to a file or directory",
+      "Most Similar TLDR Script": "ln -s {{path/to/file_or_directory}} {{path/to/symlink}}",
+      "Most Similar NL2Bash Task": "Remove sess_* files that were modified more than 2 days ago",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find sess_* -mtime +2 -exec rm {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-mtime": "File's data was last modified n*24 hours ago. See the comments for -atime to\n understand how rounding affects the interpretation of file modification times."
+            },
+            "rm": {
+              "mpsum": "remove files or directories"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "rm": {
+              "man1_rm_29530": "remov file directori forcibl remov directori without prompt confirm show error messag interact remov multipl file prompt everi remov recurs remov directori subdirectori remov file arbitrari locat remov file verbos mode print messag remov file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_12839: Create a symbolic link in the current directory for each .jpg file under \"dir\"",
+        "nl2bash_12840: Create a symbolic link in the current directory for each file .dbf under the directories matching \"/home/michael/foxpro/mount/A[1FV]/[12][0-9][0-9][0-9]\"",
+        "nl2bash_12831: Create a symbolc link named \"public_html\" to \"current/app/webroot\" under the current working directory"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_12839: ln -s \"$(find dir -name '*.jpg')\" .",
+        "nl2bash_12840: find /home/michael/foxpro/mount/A[1FV]/[12][0-9][0-9][0-9] -name '*.dbf' -type f -exec ln -s {} \\;",
+        "nl2bash_12831: ln -s `pwd`/current/app/webroot public_html"
+      ],
+      "Explanations about Options": {
+        "-s": "make symbolic links instead of hard links"
+      }
+    },
+    {
+      "Command": "awk",
+      "MP Summary": "pattern scanning and processing language",
+      "Most Similar TLDR Task": "Print the last column of each line in a file, using a comma (instead of space) as a field separator",
+      "Most Similar TLDR Script": "awk -F ',' '{print $NF}' {{filename}}",
+      "Most Similar NL2Bash Task": "Remove sess_* files that were modified more than 2 days ago",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find sess_* -mtime +2 -exec rm {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-mtime": "File's data was last modified n*24 hours ago. See the comments for -atime to\n understand how rounding affects the interpretation of file modification times."
+            },
+            "rm": {
+              "mpsum": "remove files or directories"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "rm": {
+              "man1_rm_29530": "remov file directori forcibl remov directori without prompt confirm show error messag interact remov multipl file prompt everi remov recurs remov directori subdirectori remov file arbitrari locat remov file verbos mode print messag remov file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_14264: List all directories in current directory, works even if they have weird names or names starting with a dash.",
+        "ul_247465: Command line tool to extract lines from a text file"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_14264: find -maxdepth 1 -type d | awk -F\"./\" '{print $2}'",
+        "ul_247465: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "rm",
+      "MP Summary": "remove files or directories",
+      "Most Similar TLDR Task": "Remove files from arbitrary locations",
+      "Most Similar TLDR Script": "rm {{path/to/file}} {{path/to/another/file}}",
+      "Most Similar NL2Bash Task": "Remove sess_* files that were modified more than 2 days ago",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find sess_* -mtime +2 -exec rm {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-mtime": "File's data was last modified n*24 hours ago. See the comments for -atime to\n understand how rounding affects the interpretation of file modification times."
+            },
+            "rm": {
+              "mpsum": "remove files or directories"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "rm": {
+              "man1_rm_29530": "remov file directori forcibl remov directori without prompt confirm show error messag interact remov multipl file prompt everi remov recurs remov directori subdirectori remov file arbitrari locat remov file verbos mode print messag remov file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_11580: Remove sequence like '\\xEF\\xBB\\xBF' from first string of every file in a current folder and subfolders, creating backup file with .bak extension for every changed file, and removing backup on success.",
+        "nl2bash_11581: Remove sess_* files that were modified more than 2 days ago",
+        "nl2bash_11092: Delete all files under '/home/backups' directory tree with '.tgz' or '.gz' extension (case insensitive) that were modified more thant 60 days ago"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_11580: find . -type f -exec sed '1s/^\\xEF\\xBB\\xBF//' -i.bak {} \\; -exec rm {}.bak \\;",
+        "nl2bash_11581: find sess_* -mtime +2 -exec rm {} \\;",
+        "nl2bash_11092: find /home/backups -type f -iregex '.*\\.t?gz$' -mtime +60 -exec rm {} \\;"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "print",
+      "MP Summary": "execute programs via entries in the mailcap file",
+      "Most Similar TLDR Task": "Print action can be used to print any file on default run-mailcap tool",
+      "Most Similar TLDR Script": "print {{filename}}",
+      "Most Similar NL2Bash Task": "Remove sess_* files that were modified more than 2 days ago",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find sess_* -mtime +2 -exec rm {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-mtime": "File's data was last modified n*24 hours ago. See the comments for -atime to\n understand how rounding affects the interpretation of file modification times."
+            },
+            "rm": {
+              "mpsum": "remove files or directories"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "rm": {
+              "man1_rm_29530": "remov file directori forcibl remov directori without prompt confirm show error messag interact remov multipl file prompt everi remov recurs remov directori subdirectori remov file arbitrari locat remov file verbos mode print messag remov file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_14264: List all directories in current directory, works even if they have weird names or names starting with a dash.",
+        "ul_247465: Command line tool to extract lines from a text file"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_14264: find -maxdepth 1 -type d | awk -F\"./\" '{print $2}'",
+        "ul_247465: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "cat",
+      "MP Summary": "concatenate files and print on the standard output",
+      "Most Similar TLDR Task": "Append several files into the target file",
+      "Most Similar TLDR Script": "cat {{file1}} {{file2}} >> {{target_file}}",
+      "Most Similar NL2Bash Task": "Remove sess_* files that were modified more than 2 days ago",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find sess_* -mtime +2 -exec rm {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-mtime": "File's data was last modified n*24 hours ago. See the comments for -atime to\n understand how rounding affects the interpretation of file modification times."
+            },
+            "rm": {
+              "mpsum": "remove files or directories"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "rm": {
+              "man1_rm_29530": "remov file directori forcibl remov directori without prompt confirm show error messag interact remov multipl file prompt everi remov recurs remov directori subdirectori remov file arbitrari locat remov file verbos mode print messag remov file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_11651: Remove trailing whitespaces in .txt files from the current directory tree"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_11651: find . -type f -name \"*.txt\" -exec sh -c 'for i;do sed 's/[[:space:]]*$//' \"$i\">/tmp/.$$ && cat /tmp/.$$ > \"$i\";done' arg0 {} +"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "mv",
+      "MP Summary": "move (rename) files",
+      "Most Similar TLDR Task": "Move files in arbitrary locations",
+      "Most Similar TLDR Script": "mv {{source}} {{target}}",
+      "Most Similar NL2Bash Task": "Remove sess_* files that were modified more than 2 days ago",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find sess_* -mtime +2 -exec rm {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-mtime": "File's data was last modified n*24 hours ago. See the comments for -atime to\n understand how rounding affects the interpretation of file modification times."
+            },
+            "rm": {
+              "mpsum": "remove files or directories"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "rm": {
+              "man1_rm_29530": "remov file directori forcibl remov directori without prompt confirm show error messag interact remov multipl file prompt everi remov recurs remov directori subdirectori remov file arbitrari locat remov file verbos mode print messag remov file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_11651: Remove trailing whitespaces in .txt files from the current directory tree"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_11651: find . -type f -name \"*.txt\" -exec sh -c 'for i;do sed 's/[[:space:]]*$//' \"$i\">/tmp/.$$ && mv /tmp/.$$ \"$i\";done' arg0 {} +"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "sh",
+      "MP Summary": "MirBSD Korn shell",
+      "Most Similar TLDR Task": "Execute a command",
+      "Most Similar TLDR Script": "sh -c {{command}}",
+      "Most Similar NL2Bash Task": "Remove sess_* files that were modified more than 2 days ago",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find sess_* -mtime +2 -exec rm {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-mtime": "File's data was last modified n*24 hours ago. See the comments for -atime to\n understand how rounding affects the interpretation of file modification times."
+            },
+            "rm": {
+              "mpsum": "remove files or directories"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "rm": {
+              "man1_rm_29530": "remov file directori forcibl remov directori without prompt confirm show error messag interact remov multipl file prompt everi remov recurs remov directori subdirectori remov file arbitrari locat remov file verbos mode print messag remov file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_11651: Remove trailing whitespaces in .txt files from the current directory tree"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_11651: find . -type f -name \"*.txt\" -exec sh -c 'for i;do sed 's/[[:space:]]*$//' \"$i\">/tmp/.$$ && cat /tmp/.$$ > \"$i\";done' arg0 {} +\n\n\nfind . -type f -name \"*.txt\" -exec sh -c 'for i;do sed 's/[[:space:]]*$//' \"$i\">/tmp/.$$ && mv /tmp/.$$ \"$i\";done' arg0 {} +"
+      ],
+      "Explanations about Options": {
+        "-c": "Impose a size limit of n blocks on the size of core dumps."
+      }
+    },
+    {
+      "Command": "tr",
+      "MP Summary": "translate or delete characters",
+      "Most Similar TLDR Task": "Replace all occurrences of a character from another command's output",
+      "Most Similar TLDR Script": "echo {{text}} | tr {{find_character}} {{replace_character}}",
+      "Most Similar NL2Bash Task": "Remove sess_* files that were modified more than 2 days ago",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find sess_* -mtime +2 -exec rm {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-mtime": "File's data was last modified n*24 hours ago. See the comments for -atime to\n understand how rounding affects the interpretation of file modification times."
+            },
+            "rm": {
+              "mpsum": "remove files or directories"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "rm": {
+              "man1_rm_29530": "remov file directori forcibl remov directori without prompt confirm show error messag interact remov multipl file prompt everi remov recurs remov directori subdirectori remov file arbitrari locat remov file verbos mode print messag remov file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_11010: Delete \"\\n\\r\" from \"yourfile.txt\""
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_11010: tr -d \"\\n\\r\" < yourfile.txt"
+      ],
+      "Explanations about Options": {
+        "-d": "delete characters in SET1, do not translate"
+      }
+    },
+    {
+      "Command": "cp",
+      "MP Summary": "copy files and directories",
+      "Most Similar TLDR Task": "Copy a file to another location",
+      "Most Similar TLDR Script": "cp {{path/to/source_file.ext}} {{path/to/target_file.ext}}",
+      "Most Similar NL2Bash Task": "Remove sess_* files that were modified more than 2 days ago",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find sess_* -mtime +2 -exec rm {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-mtime": "File's data was last modified n*24 hours ago. See the comments for -atime to\n understand how rounding affects the interpretation of file modification times."
+            },
+            "rm": {
+              "mpsum": "remove files or directories"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "rm": {
+              "man1_rm_29530": "remov file directori forcibl remov directori without prompt confirm show error messag interact remov multipl file prompt everi remov recurs remov directori subdirectori remov file arbitrari locat remov file verbos mode print messag remov file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_10525: Copies all files like \"*foo*\" under the current directory to the '/your/dest' directory."
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_10525: find . -name \"*foo*\" | sed -e \"s/'/\\\\\\'/g\" -e 's/\"/\\\\\"/g' -e 's/ /\\\\ /g' | xargs cp /your/dest"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "mkdir",
+      "MP Summary": "make directories",
+      "Most Similar TLDR Task": "Create a directory in current directory or given path",
+      "Most Similar TLDR Script": "mkdir {{directory}}",
+      "Most Similar NL2Bash Task": "Remove sess_* files that were modified more than 2 days ago",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find sess_* -mtime +2 -exec rm {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-mtime": "File's data was last modified n*24 hours ago. See the comments for -atime to\n understand how rounding affects the interpretation of file modification times."
+            },
+            "rm": {
+              "mpsum": "remove files or directories"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "rm": {
+              "man1_rm_29530": "remov file directori forcibl remov directori without prompt confirm show error messag interact remov multipl file prompt everi remov recurs remov directori subdirectori remov file arbitrari locat remov file verbos mode print messag remov file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_12799: Create a copy of the current working directory structure in the usr/project directory,",
+        "nl2bash_12914: Create intermediate directories \"b and \"c\" as required and directory \"c\""
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_12799: find . -type d -print|sed 's@^@/usr/project/@'|xargs mkdir\n\n\nfind . -type d -print|sed 's@^@/usr/project/@'|xargs mkdir -p",
+        "nl2bash_12914: mkdir -p a/b/c"
+      ],
+      "Explanations about Options": {
+        "-p": "no error if existing, make parent directories as needed"
+      }
+    },
+    {
+      "Command": "mount",
+      "MP Summary": "mount a filesystem",
+      "Most Similar TLDR Task": "Mount a specific filesystem described in /etc/fstab (e.g. \"/dev/sda1 /my_drive ext2 defaults 0 2\")",
+      "Most Similar TLDR Script": "mount {{/my_drive}}",
+      "Most Similar NL2Bash Task": "Remove sess_* files that were modified more than 2 days ago",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find sess_* -mtime +2 -exec rm {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-mtime": "File's data was last modified n*24 hours ago. See the comments for -atime to\n understand how rounding affects the interpretation of file modification times."
+            },
+            "rm": {
+              "mpsum": "remove files or directories"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "rm": {
+              "man1_rm_29530": "remov file directori forcibl remov directori without prompt confirm show error messag interact remov multipl file prompt everi remov recurs remov directori subdirectori remov file arbitrari locat remov file verbos mode print messag remov file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_12840: Create a symbolic link in the current directory for each file .dbf under the directories matching \"/home/michael/foxpro/mount/A[1FV]/[12][0-9][0-9][0-9]\""
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_12840: find /home/michael/foxpro/mount/A[1FV]/[12][0-9][0-9][0-9] -name '*.dbf' -type f -exec ln -s {} \\;"
+      ],
+      "Explanations about Options": {
+        "-c": "Don't canonicalize paths. The mount command canonicalizes all paths (from command\n line or fstab) by default. This option can be used together with the -f flag for\n already canonicalized absolute paths. The option is designed for mount helpers\n which call mount -i. It is strongly recommended to not use this command-line\n option for normal mount operations.",
+        "-t": "The argument following the -t is used to indicate the filesystem type. The\n filesystem types which are currently supported depend on the running kernel. See\n /proc/filesystems and /lib/modules/$(uname -r)/kernel/fs for a complete list of the\n filesystems. The most common are ext2, ext3, ext4, xfs, btrfs, vfat, sysfs, proc,\n nfs and cifs.",
+        "-n": "Mount without writing in /etc/mtab. This is necessary for example when /etc is on\n a read-only filesystem.",
+        "-a": "Mount all filesystems (of the given types) mentioned in fstab (except for those\n whose line contains the noauto keyword). The filesystems are mounted following\n their order in fstab. The mount command compares filesystem source, target (and fs\n root for bind mount or btrfs) to detect already mounted filesystems. The kernel\n table with already mounted filesystems is cached during mount --all. It means that\n all duplicated fstab entries will be mounted."
+      }
+    },
+    {
+      "Command": "tail",
+      "MP Summary": "output the last part of files",
+      "Most Similar TLDR Task": "Keep reading file until `Ctrl + C`, even if the file is rotated",
+      "Most Similar TLDR Script": "tail -F {{file}}",
+      "Most Similar NL2Bash Task": "Remove sess_* files that were modified more than 2 days ago",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find sess_* -mtime +2 -exec rm {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-mtime": "File's data was last modified n*24 hours ago. See the comments for -atime to\n understand how rounding affects the interpretation of file modification times."
+            },
+            "rm": {
+              "mpsum": "remove files or directories"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "rm": {
+              "man1_rm_29530": "remov file directori forcibl remov directori without prompt confirm show error messag interact remov multipl file prompt everi remov recurs remov directori subdirectori remov file arbitrari locat remov file verbos mode print messag remov file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_12830: Create a symbolc link named \"latest\" to the last modified file or directory in \"target-directory\""
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_12830: ln -s target-directory/`ls -rt target-directory | tail -n1` latest"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "chown",
+      "MP Summary": "change file owner and group",
+      "Most Similar TLDR Task": "Change the owner of a file/directory to match a reference file",
+      "Most Similar TLDR Script": "chown --reference={{path/to/reference_file}} {{path/to/file_or_directory}}",
+      "Most Similar NL2Bash Task": "Remove sess_* files that were modified more than 2 days ago",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find sess_* -mtime +2 -exec rm {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-mtime": "File's data was last modified n*24 hours ago. See the comments for -atime to\n understand how rounding affects the interpretation of file modification times."
+            },
+            "rm": {
+              "mpsum": "remove files or directories"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "rm": {
+              "man1_rm_29530": "remov file directori forcibl remov directori without prompt confirm show error messag interact remov multipl file prompt everi remov recurs remov directori subdirectori remov file arbitrari locat remov file verbos mode print messag remov file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_12730: recursively change owner and group of the directory and all files into it to user \"user\" and group \"www-data\""
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_12730: chown -R user:www-data yourprojectfoldername"
+      ],
+      "Explanations about Options": {
+        "-R": "operate on files and directories recursively"
+      }
+    },
+    {
+      "Command": "ssh",
+      "MP Summary": "OpenSSH SSH client (remote login program)",
+      "Most Similar TLDR Task": "Run a command on a remote server",
+      "Most Similar TLDR Script": "ssh {{remote_host}} {{command -with -flags}}",
+      "Most Similar NL2Bash Task": "Remove sess_* files that were modified more than 2 days ago",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find sess_* -mtime +2 -exec rm {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-mtime": "File's data was last modified n*24 hours ago. See the comments for -atime to\n understand how rounding affects the interpretation of file modification times."
+            },
+            "rm": {
+              "mpsum": "remove files or directories"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "rm": {
+              "man1_rm_29530": "remov file directori forcibl remov directori without prompt confirm show error messag interact remov multipl file prompt everi remov recurs remov directori subdirectori remov file arbitrari locat remov file verbos mode print messag remov file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_10940: Allocate a pseudo-terminal and execute \"screen -r -X ls\" which executes \"ls\" within the screen session on host \"example.com\""
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_10940: ssh -t example.com \"screen -r -X ls\""
+      ],
+      "Explanations about Options": {
+        "-X": "Enables X11 forwarding. This can also be specified on a per-host basis in a\n configuration file.",
+        "-t": "Force pseudo-terminal allocation. This can be used to execute arbitrary screen-\n based programs on a remote machine, which can be very useful, e.g. when implementing\n menu services. Multiple -t options force tty allocation, even if ssh has no local\n tty."
+      }
+    },
+    {
+      "Command": "set",
+      "MP Summary": "set or unset options and positional parameters",
+      "Most Similar TLDR Task": "Set various options, e.g. enable `vi` style line editing",
+      "Most Similar TLDR Script": "set -o {{vi}}",
+      "Most Similar NL2Bash Task": "Remove sess_* files that were modified more than 2 days ago",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find sess_* -mtime +2 -exec rm {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-mtime": "File's data was last modified n*24 hours ago. See the comments for -atime to\n understand how rounding affects the interpretation of file modification times."
+            },
+            "rm": {
+              "mpsum": "remove files or directories"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "rm": {
+              "man1_rm_29530": "remov file directori forcibl remov directori without prompt confirm show error messag interact remov multipl file prompt everi remov recurs remov directori subdirectori remov file arbitrari locat remov file verbos mode print messag remov file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_10799: Mark variables and function which are modified or created for export to the environment of subsequent commands"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_10799: set -a"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "dir",
+      "MP Summary": "list directory contents",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "Remove sess_* files that were modified more than 2 days ago",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find sess_* -mtime +2 -exec rm {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-mtime": "File's data was last modified n*24 hours ago. See the comments for -atime to\n understand how rounding affects the interpretation of file modification times."
+            },
+            "rm": {
+              "mpsum": "remove files or directories"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "rm": {
+              "man1_rm_29530": "remov file directori forcibl remov directori without prompt confirm show error messag interact remov multipl file prompt everi remov recurs remov directori subdirectori remov file arbitrari locat remov file verbos mode print messag remov file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_12839: Create a symbolic link in the current directory for each .jpg file under \"dir\""
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_12839: ln -s \"$(find dir -name '*.jpg')\" ."
+      ],
+      "Explanations about Options": {
+        "-n": "like -l, but list numeric user and group IDs",
+        "-a": "do not ignore entries starting with .",
+        "-m": "fill width with a comma separated list of entries"
+      }
+    },
+    {
+      "Command": "project",
+      "MP Summary": "Project  table data onto lines or great circles, generate tracks, or translate coordinates",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "Remove sess_* files that were modified more than 2 days ago",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find sess_* -mtime +2 -exec rm {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-mtime": "File's data was last modified n*24 hours ago. See the comments for -atime to\n understand how rounding affects the interpretation of file modification times."
+            },
+            "rm": {
+              "mpsum": "remove files or directories"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "rm": {
+              "man1_rm_29530": "remov file directori forcibl remov directori without prompt confirm show error messag interact remov multipl file prompt everi remov recurs remov directori subdirectori remov file arbitrari locat remov file verbos mode print messag remov file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_12799: Create a copy of the current working directory structure in the usr/project directory,"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_12799: find . -type d -print|sed 's@^@/usr/project/@'|xargs mkdir\n\n\nfind . -type d -print|sed 's@^@/usr/project/@'|xargs mkdir -p"
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

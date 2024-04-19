@@ -1,0 +1,87 @@
+{
+  "Query": "How do I find out if I am sudoer?",
+  "Answers": [
+    {
+      "Command": "sudo",
+      "MP Summary": "execute a command as another user",
+      "Most Similar TLDR Task": "Run a command as the superuser",
+      "Most Similar TLDR Script": "sudo {{less /var/log/syslog}}",
+      "Top-3 Similar Questions": [
+        "ul_330690: How do I find out if my sudoer privilege timed out?",
+        "su_350694: \"no valid sudoers sources found, quitting\" error while chmodding /var/www",
+        "su_443704: Find out where $PATH is defined"
+      ],
+      "Top-3 Scripts": [
+        "ul_330690: man sudo\n\nsudo -n true 2>/dev/null && echo Privileges active || echo Privileges inactive\n\nsudo -n command...",
+        "su_350694: sudo chmod 077 /var/www/\n\nsudo addgroup www-users\nsudo adduser <your-username> www-users\n\nsudo adduser www-data www-users\n\nsudo chgrp www-users /var/www\nsudo chmod \u2013R 775 /var/www\nsudo chmod g+s /var/www",
+        "su_443704: sudo grep -r \"/home/user/dir\" /\n\nsudo grep -r \"PATH=\" /"
+      ],
+      "Explanations about Options": {
+        "-n": "Avoid prompting the user for input of any kind. If a password is required for\n the command to run, sudo will display an error message and exit."
+      }
+    },
+    {
+      "Command": "fd",
+      "MP Summary": "find entries in the filesystem",
+      "Most Similar TLDR Task": "Find files that begin with \"foo\"",
+      "Most Similar TLDR Script": "fd {{'^foo'}}",
+      "Top-3 Similar Questions": [
+        "au_392798: Find out where the directory is in Linux?"
+      ],
+      "Top-3 Scripts": [
+        "au_392798: /proc/1615/fd"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "chgrp",
+      "MP Summary": "change group ownership",
+      "Most Similar TLDR Task": "Change the owner group of a file/directory to match a reference file",
+      "Most Similar TLDR Script": "chgrp --reference={{path/to/reference_file}} {{path/to/file_or_directory}}",
+      "Top-3 Similar Questions": [
+        "su_350694: \"no valid sudoers sources found, quitting\" error while chmodding /var/www"
+      ],
+      "Top-3 Scripts": [
+        "su_350694: sudo chgrp www-users /var/www\nsudo chmod \u2013R 775 /var/www\nsudo chmod g+s /var/www"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "find",
+      "MP Summary": "search for files in a directory hierarchy",
+      "Most Similar TLDR Task": "Find files matching a given size range",
+      "Most Similar TLDR Script": "find {{root_path}} -size {{+500k}} -size {{-10M}}",
+      "Top-3 Similar Questions": [
+        "ul_468674: Find directory, if match then don't recurse",
+        "ul_477412: Find command if filename doesn't exists in directory",
+        "so_60381320: \"find\" command but it stops going deep if it finds a directory starting with \".\""
+      ],
+      "Top-3 Scripts": [
+        "ul_468674: find . -type d -iname '*android*' -a \\( -prune  \\)\n\nfind . -type d -iname '*android*' -prune\n\nfind . -iname '*android*' -a \\( -prune  \\)",
+        "ul_477412: $ find projects -mindepth 1 -maxdepth 1 -type d \\\n    ! -exec test -f {}/README ';' \\\n    ! -exec test -f {}/readme ';' -print\nprojects/toolb\nprojects/toold\n\nfind projects -mindepth 1 -maxdepth 1 -type d \\\n    -exec [ ! -f {}/README ] ';' \\\n    -exec [ ! -f {}/readme ] ';' -print\n\nfind projects -mindepth 1 -maxdepth 1 -type d -exec sh -c '\n    for pathname do\n        if [ ! -f \"$pathname/README\" ] &&\n           [ ! -f \"$pathname/readme\" ]; then\n            printf \"%s\\n\" \"$pathname\"\n        fi\n    done' sh {} +",
+        "so_60381320: for path in $(find /home -type d -name \".*\" -prune -o -type f \\! -name \".*\" -print);do echo $path; done"
+      ],
+      "Explanations about Options": {
+        "-mindepth": "Do not apply any tests or actions at levels less than levels (a non-negative\n integer). -mindepth 1 means process all files except the starting-points.",
+        "-prune": "True; if the file is a directory, do not descend into it. If -depth is given, then\n -prune has no effect. Because -delete implies -depth, you cannot usefully use\n -prune and -delete together.\n For example, to skip the directory `src/emacs' and all files and directories\n under it, and print the names of the other files found, do something like this:\n find . -path ./src/emacs -prune -o -print",
+        "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+        "-maxdepth": "Descend at most levels (a non-negative integer) levels of directories below the\n starting-points. -maxdepth 0 means only apply the tests and actions to the\n starting-points themselves.",
+        "-type": "File is of type c:",
+        "-iname": "Like -name, but the match is case insensitive. For example, the patterns `fo*' and\n `F??' match the file names `Foo', `FOO', `foo', `fOo', etc. The pattern `*foo*`\n will also match a file called '.foobar'."
+      }
+    },
+    {
+      "Command": "adduser",
+      "MP Summary": "add a user or group to the system",
+      "Most Similar TLDR Task": "Add an existing user to the specified group",
+      "Most Similar TLDR Script": "adduser {{username}} {{group}}",
+      "Top-3 Similar Questions": [
+        "su_350694: \"no valid sudoers sources found, quitting\" error while chmodding /var/www"
+      ],
+      "Top-3 Scripts": [
+        "su_350694: sudo addgroup www-users\nsudo adduser <your-username> www-users\n\nsudo adduser www-data www-users"
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

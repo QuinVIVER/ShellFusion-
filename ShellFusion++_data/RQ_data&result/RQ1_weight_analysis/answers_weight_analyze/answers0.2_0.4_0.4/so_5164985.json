@@ -1,0 +1,84 @@
+{
+  "Query": "How can I use nohup to run process as a background process in linux?",
+  "Answers": [
+    {
+      "Command": "kill",
+      "MP Summary": "send a signal to a process",
+      "Most Similar TLDR Task": "Terminate a background job",
+      "Most Similar TLDR Script": "kill %{{job_id}}",
+      "Top-3 Similar Questions": [
+        "so_709793: How to run two processes as though they were one in bash?",
+        "so_2970937: How to run a linux app in background process?",
+        "so_24843614: Execute process in background, without printing \"Done\", and get PID"
+      ],
+      "Top-3 Scripts": [
+        "so_709793: kill -9",
+        "so_2970937: ",
+        "so_24843614: $ function x { for A in {1..100}; do echo \"$A\"; sleep 1s; done }\n$ read pid < <(x & echo $!)\n$ kill -s 0 \"$pid\" &>/dev/null && echo \"Process active.\" || echo \"Process died.\"\nProcess died.\n$ read pid < <(x > /dev/null & echo $!)\n$ kill -s 0 \"$pid\" &>/dev/null && echo \"Process active.\" || echo \"Process died.\"\nProcess active."
+      ],
+      "Explanations about Options": {
+        "-s": " Specify the signal to be sent. The signal can be specified by using name or\n number. The behavior of signals is explained in signal(7) manual page."
+      }
+    },
+    {
+      "Command": "daemonize",
+      "MP Summary": "run a program as a Unix daemon",
+      "Most Similar TLDR Task": "Run a command as a daemon",
+      "Most Similar TLDR Script": "daemonize {{command}} {{command_arguments}}",
+      "Top-3 Similar Questions": [
+        "so_10037357: Running a script from a script in android"
+      ],
+      "Top-3 Scripts": [
+        "so_10037357: Usage: daemonize [-f logfile] [-a] [-d delay] <program>"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "jobs",
+      "MP Summary": "display status of jobs in the current session",
+      "Most Similar TLDR Task": "Display running processes",
+      "Most Similar TLDR Script": "jobs -r",
+      "Top-3 Similar Questions": [
+        "so_58566781: How to use nohup on a process already running in background",
+        "so_709793: How to run two processes as though they were one in bash?"
+      ],
+      "Top-3 Scripts": [
+        "so_58566781: ",
+        "so_709793: trap 'kill $(jobs -p)' EXIT\nfoo &\nbar &\nwait"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "wait",
+      "MP Summary": "await process completion",
+      "Most Similar TLDR Task": "Wait for a process to finish given its process ID (PID) and return its exit status",
+      "Most Similar TLDR Script": "wait {{pid}}",
+      "Top-3 Similar Questions": [
+        "so_18916656: running a process in background in c",
+        "so_19144869: Running unix process in background from php",
+        "so_709793: How to run two processes as though they were one in bash?"
+      ],
+      "Top-3 Scripts": [
+        "so_18916656: ",
+        "so_19144869: ",
+        "so_709793: trap 'kill $fooPid $barPid' EXIT\nfoo & fooPid=$!\nbar & barPid=$!\nwait\n\ntrap 'kill $(jobs -p)' EXIT\nfoo &\nbar &\nwait"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "autossh",
+      "MP Summary": "monitor and restart ssh sessions",
+      "Most Similar TLDR Task": "Fork before executing ssh (runs in the background) and don't open a remote shell",
+      "Most Similar TLDR Script": "autossh -f -M {{monitor_port}} -N {{ssh_command}}",
+      "Top-3 Similar Questions": [
+        "ul_60366: run a remote process via autossh in background"
+      ],
+      "Top-3 Scripts": [
+        "ul_60366: autossh -M 18080 -o \"ServerAliveInterval 60\" -o \"ServerAliveCountMax 3\" -D 8080 root@server -p 22"
+      ],
+      "Explanations about Options": {
+        "-M": "port[:echo_port]\n specifies the base monitoring port to use. Without the echo port, this port and the\n port immediately above it ( port + 1) should be something nothing else is using.\n autossh will send test data on the base monitoring port, and receive it back on the\n port above. For example, if you specify \u201c-M 20000\u201d, autossh will set up forwards so\n that it can send data on port 20000 and receive it back on 20001."
+      }
+    }
+  ]
+}

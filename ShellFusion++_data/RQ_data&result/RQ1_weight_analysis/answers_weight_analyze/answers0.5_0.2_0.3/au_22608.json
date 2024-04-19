@@ -1,0 +1,85 @@
+{
+  "Query": "How to play .mp4 movies?",
+  "Answers": [
+    {
+      "Command": "vlc",
+      "MP Summary": "the VLC media player",
+      "Most Similar TLDR Task": "Play repeatedly",
+      "Most Similar TLDR Script": "vlc --loop {{path/to/file}}",
+      "Top-3 Similar Questions": [
+        "au_199506: Is there any video player that plays Youtube playlists?",
+        "au_568987: VLC unable to play wmv",
+        "au_160230: VLC does not play any video or mp3 file, closes when a file is opened"
+      ],
+      "Top-3 Scripts": [
+        "au_199506: ~/.local/share/vlc/lua/playlist/\n\n/usr/share/vlc/lua/playlist/\n\nsudo rm /usr/lib/vlc/lua/playlist/youtube.*\n\nsudo curl \"http://git.videolan.org/p=vlc.git;a=blob_plain;f=share/lua/playlist/youtube.lua;hb=HEAD\" -o /usr/lib/vlc/lua/playlist/youtube.lua",
+        "au_568987: ",
+        "au_160230: sudo apt-get purge vlc\nsudo apt-get autoremove\nsudo apt-get clean\n\nrm -rf ~/.cache/vlc\nrm -rf ~/.config/vlc\nrm -rf ~/.local/share/vlc\n\nsudo apt-get update  \nsudo apt-get install vlc"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "youtube-dl",
+      "MP Summary": "download videos from youtube.com or other video platforms",
+      "Most Similar TLDR Task": "Download video(s) as MP4 files with custom filenames",
+      "Most Similar TLDR Script": "youtube-dl --format {{mp4}} -o \"{{%(title)s by %(uploader)s on %(upload_date)s in %(playlist)s.%(ext)s}}\" '{{url}}'",
+      "Top-3 Similar Questions": [
+        "au_469845: how to play video downloaded from terminal"
+      ],
+      "Top-3 Scripts": [
+        "au_469845: totem \"$(youtube-dl youtube.com/watch?v=ES6OyV-RfHU |& grep -oP 'Destination:\\s\\K.*')\""
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "ffmpeg",
+      "MP Summary": "ffmpeg video converter",
+      "Most Similar TLDR Task": "Remux MKV video to MP4 without re-encoding audio or video streams",
+      "Most Similar TLDR Script": "ffmpeg -i {{input_video}}.mkv -codec copy {{output_video}}.mp4",
+      "Top-3 Similar Questions": [
+        "ul_134852: How to play a G2M4 encoded .wmv file (Ubuntu)?",
+        "au_568987: VLC unable to play wmv",
+        "ul_624437: Clementine with GStreamer can't play OGG files"
+      ],
+      "Top-3 Scripts": [
+        "ul_134852: ffmpeg -i input.wmv -c:v libx264 -crf 23 -c:a ac3 -q:a 100 output.mp4",
+        "au_568987: ",
+        "ul_624437: ffmpeg -i file.ogg -acodec copy newfile.ogg"
+      ],
+      "Explanations about Options": {
+        "-acodec": "Set the audio codec. This is an alias for \"-codec:a\".",
+        "-i": "input file url"
+      }
+    },
+    {
+      "Command": "mpv",
+      "MP Summary": "a media player",
+      "Most Similar TLDR Task": "Play a video or audio file",
+      "Most Similar TLDR Script": "mpv {{file}}",
+      "Top-3 Similar Questions": [
+        "ul_656396: How to play a playlist continously?"
+      ],
+      "Top-3 Scripts": [
+        "ul_656396: mpv --gapless-audio=yes --loop-playlist=inf video_file_*\n\nfind -type f -name 'video_file_*' -print0 | sort -V -z | xargs -0 -- sh -c 'exec mpv </dev/tty --gapless-audio=yes --loop-playlist=inf -- \"$@\"'\n\nmpv --wid=0xdeadbeef ..."
+      ],
+      "Explanations about Options": {
+        "--wid": "This tells mpv to attach to an existing window. If a VO is selected that supports\n this option, it will use that window for video output. mpv will scale the video to\n the size of this window, and will add black bars to compensate if the aspect ratio\n of the video is different."
+      }
+    },
+    {
+      "Command": "jp2a",
+      "MP Summary": "convert JPEG images to ASCII",
+      "Most Similar TLDR Task": "Read JPEG image from a file and print in ASCII",
+      "Most Similar TLDR Script": "jp2a {{path/to/image.jpeg}}",
+      "Top-3 Similar Questions": [
+        "so_45604517: How to play video INSIDE bash"
+      ],
+      "Top-3 Scripts": [
+        "so_45604517: apt-get install jp2a\n\njp2a --width=150 myimagename.jpg"
+      ],
+      "Explanations about Options": {
+        "--width": "Set output width. If you only specify the width, the height will be calculated\n automatically."
+      }
+    }
+  ]
+}

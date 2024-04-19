@@ -1,0 +1,86 @@
+{
+  "Query": "How do I set up xrdp session that reuses an existing session?",
+  "Answers": [
+    {
+      "Command": "screen",
+      "MP Summary": "screen manager with VT100/ANSI terminal emulation",
+      "Most Similar TLDR Task": "Show open screen sessions",
+      "Most Similar TLDR Script": "screen -ls",
+      "Top-3 Similar Questions": [
+        "au_368004: Setting Screen session name in the middle of the session",
+        "so_13279016: How do I control a screen session inside a screen session?",
+        "so_32447089: create screen session that doesn't terminate with the program"
+      ],
+      "Top-3 Scripts": [
+        "au_368004: screen -list",
+        "so_13279016: ",
+        "so_32447089: screen -dmS session_name sh -c 'my-prog; exec bash'"
+      ],
+      "Explanations about Options": {
+        "-t": "sets the title (a.k.a.) for the default shell or specified program. See also the\n \"shelltitle\" .screenrc command.",
+        "-d": "does not start screen, but detaches the elsewhere running screen session. It has the\n same effect as typing \"C-a d\" from screen's controlling terminal. -D is the\n equivalent to the power detach key. If no session can be detached, this option is\n ignored. In combination with the -r/-R option more powerful effects can be achieved:",
+        "-m": "causes screen to ignore the $STY environment variable. With \"screen -m\" creation of a\n new session is enforced, regardless whether screen is called from within another\n screen session or not. This flag has a special meaning in connection with the `-d'\n option:",
+        "-l": "turns login mode on or off (for /run/utmp updating). This can also be defined\n through the \"deflogin\" .screenrc command.",
+        "-S": "When creating a new session, this option can be used to specify a meaningful name for\n the session. This name identifies the session for \"screen -list\" and \"screen -r\"\n actions. It substitutes the default [tty.host] suffix.",
+        "-i": "will cause the interrupt key (usually C-c) to interrupt the display immediately when\n flow-control is on. See the \"defflow\" .screenrc command for details. The use of\n this option is discouraged.",
+        "-s": "sets the default shell to the program specified, instead of the value in the\n environment variable $SHELL (or \"/bin/sh\" if not defined). This can also be defined\n through the \"shell\" .screenrc command. See also there."
+      }
+    },
+    {
+      "Command": "tmux",
+      "MP Summary": "terminal multiplexer",
+      "Most Similar TLDR Task": "List existing sessions",
+      "Most Similar TLDR Script": "tmux ls",
+      "Top-3 Similar Questions": [
+        "ul_229503: Run an existent tmux session at SSH login or create if not exist",
+        "su_704748: How can I manage a tmux session using supervisord?",
+        "ul_82153: How can I set up byobu to use a second screen session on login?"
+      ],
+      "Top-3 Scripts": [
+        "ul_229503: tmux attach\n\ntmux attach || tmux\n\nif shopt -q login_shell && [ -n \"$SSH_CLIENT\" ]; then\n    tmux attach || tmux\nfi",
+        "su_704748: tmux kill-session\n\ntmux kill-server\n\nkill-server\n         Kill the tmux server and clients and destroy all sessions.",
+        "ul_82153: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "chsh",
+      "MP Summary": "change login shell",
+      "Most Similar TLDR Task": "Change shell",
+      "Most Similar TLDR Script": "chsh -s {{path/to/shell_binary}} {{username}}",
+      "Top-3 Similar Questions": [
+        "ul_290072: specify shell for ssh session"
+      ],
+      "Top-3 Scripts": [
+        "ul_290072: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "script",
+      "MP Summary": "make typescript of terminal session",
+      "Most Similar TLDR Task": "Record a new session, appending to an existing file",
+      "Most Similar TLDR Script": "script -a {{path/to/session.out}}",
+      "Top-3 Similar Questions": [
+        "so_45697800: $global: is set in a PowerShell session but not in the System.Management.Automation.PowerShell instance"
+      ],
+      "Top-3 Scripts": [
+        "so_45697800: using (PowerShell PowerShellInstance = PowerShell.Create())\n{\n    // use \"AddScript\" to add the contents of a script file to the end of the execution pipeline.\n    // use \"AddCommand\" to add individual commands/cmdlets to the end of the execution pipeline.\n    PowerShellInstance.AddScript(\"param($param1) $d = get-date; $s = 'test string value'; \" +\n            \"$d; $s; $param1; get-service\");\n\n    // use \"AddParameter\" to add a single parameter to the last command/script on the pipeline.\n    PowerShellInstance.AddParameter(\"param1\", \"parameter 1 value!\");\n}"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "ssh-agent",
+      "MP Summary": "OpenSSH authentication agent",
+      "Most Similar TLDR Task": "Start an SSH Agent for the current shell",
+      "Most Similar TLDR Script": "eval $(ssh-agent)",
+      "Top-3 Similar Questions": [
+        "ul_446091: Open new ssh session via existing ssh -N session"
+      ],
+      "Top-3 Scripts": [
+        "ul_446091: "
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

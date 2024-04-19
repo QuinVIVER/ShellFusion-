@@ -1,0 +1,84 @@
+{
+  "Query": "How to send many commands to shell and wait for the command behind ends",
+  "Answers": [
+    {
+      "Command": "exec",
+      "MP Summary": "execute commands and open, close, or copy file descriptors",
+      "Most Similar TLDR Task": "Replace with the specified command using the current environment variables",
+      "Most Similar TLDR Script": "exec {{command -with -flags}}",
+      "Top-3 Similar Questions": [
+        "so_44021118: How can I send multiple commands' output to a single shell pipeline?",
+        "so_67437273: How to send a command to container to change a file without running the container?"
+      ],
+      "Top-3 Scripts": [
+        "so_44021118: writelogs() {\n  exec 4>\"${1}.json\"\n  flock -x 4\n  tee -a \"$1\" | jq -sRf json_log_s2o.jq >&4\n}\nexec 3> >(writelogs \"$logfilename\")\n\nexec 3>&-\nflock -s \"$logfilename.json\" -c :\n\nexec 3> >(tee -a \"$logfilename\" | jq -sRf json_log_s2o.jq >>\"$logfilename.json\"); log_pid=$!",
+        "so_67437273: # docker-entrypoint-custom.sh\n#!/bin/sh\n# do the modification\nsed -i 's/exec \"$@\"//g' /docker-entrypoint.sh\n# Just run it\n/docker-entrypoint.sh \"$@\"\n\n# Dockefile....\nFROM postgres\nRUN sed -i 's/exec \"$@\"//g' /docker-entrypoint.sh"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "wait",
+      "MP Summary": "await process completion",
+      "Most Similar TLDR Task": "Wait for all processes known to the invoking shell to finish",
+      "Most Similar TLDR Script": "wait",
+      "Top-3 Similar Questions": [
+        "so_65374164: How can I send a signal without the shell waiting for the currently running program to finish?",
+        "so_68497109: Sending commands to \"application's shell\" using \"bash script\"",
+        "so_38592192: How can I send an ssh command to the background in bash"
+      ],
+      "Top-3 Scripts": [
+        "so_65374164: sleep 1000 &\n    p=$!\n    wait \"$p\"",
+        "so_68497109: catch wait result",
+        "so_38592192: if wait \"$ssh_pid\"; then\n  echo \"Remote command exited with a successful exit status\" >&2\nelse\n  echo \"Remote command exited with a failed exit status\" >&2\nfi\noutput=$(<enroller.log)"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "exit",
+      "MP Summary": "cause the shell to exit",
+      "Most Similar TLDR Task": "Exit the shell with the exit code of the last command executed",
+      "Most Similar TLDR Script": "exit",
+      "Top-3 Similar Questions": [
+        "so_68497109: Sending commands to \"application's shell\" using \"bash script\"",
+        "so_33239959: Send signal to process from command line",
+        "so_38592192: How can I send an ssh command to the background in bash"
+      ],
+      "Top-3 Scripts": [
+        "so_68497109: exit [lindex \\$result 3]",
+        "so_33239959: exit(0)",
+        "so_38592192: if wait \"$ssh_pid\"; then\n  echo \"Remote command exited with a successful exit status\" >&2\nelse\n  echo \"Remote command exited with a failed exit status\" >&2\nfi\noutput=$(<enroller.log)"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "command",
+      "MP Summary": "execute a simple command",
+      "Most Similar TLDR Task": "Display the path to the executable or the alias definition of a specific command",
+      "Most Similar TLDR Script": "command -v {{command_name}}",
+      "Top-3 Similar Questions": [
+        "ul_196271: how to use ssh command to connect to multiple computers and send different commands to each computers at same time",
+        "so_24587007: send EXIT code as variable to next command in a pipeline [bash]",
+        "so_46631920: Silently send command to comint without printing prompt"
+      ],
+      "Top-3 Scripts": [
+        "ul_196271: ssh -f user@host '<your command here>'\n\n-f      Requests ssh to go to background just before command execution.\n             This is useful if ssh is going to ask for passwords or\n             passphrases, but the user wants it in the background.",
+        "so_24587007: while read line; do\n    stdout=$(command $line)\n    case $? in\n        0) awk -v l=\"$line\" -f horsepower <<< \"$stdout\" ;;\n        # other cases, as needed\n    esac\ndone",
+        "so_46631920: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "write",
+      "MP Summary": "send a message to another user",
+      "Most Similar TLDR Task": "Send message to \"testuser\" on terminal \"/dev/tty/5\"",
+      "Most Similar TLDR Script": "write {{testuser}} {{tty/5}}",
+      "Top-3 Similar Questions": [
+        "so_44021118: How can I send multiple commands' output to a single shell pipeline?"
+      ],
+      "Top-3 Scripts": [
+        "so_44021118: "
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

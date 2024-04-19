@@ -1,0 +1,87 @@
+{
+  "Query": "Starting OpenVPN client automatically at boot",
+  "Answers": [
+    {
+      "Command": "ssh",
+      "MP Summary": "OpenSSH SSH client (remote login program)",
+      "Most Similar TLDR Task": "Run a command on a remote server",
+      "Most Similar TLDR Script": "ssh {{remote_host}} {{command -with -flags}}",
+      "Top-3 Similar Questions": [
+        "au_892447: Start SSH automatically on boot",
+        "ul_144992: Starting SSH server after VPN starts",
+        "su_460018: Is there a server/client like VNC that a user can start to then login to a terminal?"
+      ],
+      "Top-3 Scripts": [
+        "au_892447: sudo systemctl enable ssh",
+        "ul_144992: #!/bin/sh\nlogger VPN is UP\nservice ssh restart",
+        "su_460018: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "deluged",
+      "MP Summary": "A BitTorrent client daemon",
+      "Most Similar TLDR Task": "Start the Deluge daemon using a specific configuration file",
+      "Most Similar TLDR Script": "deluged -c {{path/to/configuration_file}}",
+      "Top-3 Similar Questions": [
+        "au_657160: Automatically Run a Command/script at startup"
+      ],
+      "Top-3 Scripts": [
+        "au_657160: # By default this script does nothing.\n\n/root/script.sh\n(or)\nsudo service deluged restart\n\nexit 0"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "mysql",
+      "MP Summary": "the MySQL command-line client",
+      "Most Similar TLDR Task": "Connect to a database on another host",
+      "Most Similar TLDR Script": "mysql -h {{database_host}} {{database_name}}",
+      "Top-3 Similar Questions": [
+        "au_815339: mysql service can not start automatically at boot up",
+        "au_118802: mysql server fails to start automatically at boot",
+        "ul_21314: start mysql server at boot for debian"
+      ],
+      "Top-3 Scripts": [
+        "au_815339: sudo service mysql stop\nsudo /etc/init.d/mysql stop\nsudo killall -KILL mysql mysqld_safe mysqld\nsudo /etc/init.d/mysql start\nsudo service mysql start",
+        "au_118802: /usr/bin/mysqld_safe --defaults-extra-file=/etc/mysqld-cluster.cf --user=mysql --datadir=/var/lib/mysql --basedir=/usr/local/mysql-cluster\n\n/etc/mysql\n\n/etc/default/mysql\n\nsudo service mysql start",
+        "ul_21314: /etc/init.d/mysql"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "openvpn",
+      "MP Summary": "secure IP tunnel daemon.",
+      "Most Similar TLDR Task": "Try to set up an insecure peer-to-peer tunnel on bob.example.com host",
+      "Most Similar TLDR Script": "sudo openvpn --remote {{alice.example.com}} --dev {{tun1}} --ifconfig {{10.4.0.1}} {{10.4.0.2}}",
+      "Top-3 Similar Questions": [
+        "au_229800: How to auto start openvpn (client) on Ubuntu CLI?",
+        "au_639855: How to start the OpenVPN client service on Ubuntu 15.04",
+        "au_742973: Start / Stop OpenVPN client on machine with OpenVPN server running (command line)"
+      ],
+      "Top-3 Scripts": [
+        "au_229800: /etc/openvpn\n\ncd /etc/openvpn\n\nsudo nano /etc/default/openvpn\n\nsudo service openvpn start",
+        "au_639855: /etc/openvpn/myvpn.conf",
+        "au_742973: openvpn --config openvpn.ovpn --auth-user-pass auth --auth-nocache --nobind > /dev/null & pid=$!"
+      ],
+      "Explanations about Options": {
+        "--auth-user-pass": "Authenticate with server using username/password. up is a file containing\n username/password on 2 lines. If the password line is missing, OpenVPN will prompt\n for one.",
+        "--auth-nocache": "Don't cache --askpass or --auth-user-pass username/passwords in virtual memory.",
+        "--nobind": "Do not bind to local address and port. The IP stack will allocate a dynamic port\n for returning packets. Since the value of the dynamic port could not be known in\n advance by a peer, this option is only suitable for peers which will be initiating\n connections by using the --remote option.",
+        "--config": "Load additional config options from file where each line corresponds to one command\n line option, but with the leading '--' removed."
+      }
+    },
+    {
+      "Command": "a2ensite",
+      "MP Summary": "enable or disable an apache2 site / virtual host",
+      "Most Similar TLDR Task": "Enable a virtual host",
+      "Most Similar TLDR Script": "sudo a2ensite {{virtual_host}}",
+      "Top-3 Similar Questions": [
+        "so_49764989: Cannot start apache automatically with docker"
+      ],
+      "Top-3 Scripts": [
+        "so_49764989: FROM ubuntu:latest\nRUN apt-get update && apt-get install -y apache2 php libapache2-mod-php php-mcrypt php-mysql php-cli php-curl php-xml php-intl php-mbstring git vim composer curl\n\nCOPY . /var/www/example\nCOPY vhost.conf /etc/apache2/sites-available/example.conf\n\nRUN a2ensite example\nRUN chown -R www-data:www-data /var/www/example/logs\nCMD [\"/usr/sbin/apachectl\", \"-D\", \"FOREGROUND\"]"
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

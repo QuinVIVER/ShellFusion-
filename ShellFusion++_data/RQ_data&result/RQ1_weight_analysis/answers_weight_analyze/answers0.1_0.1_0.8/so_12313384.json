@@ -1,0 +1,91 @@
+{
+  "Query": "How to view unallocated free space on a hard disk through terminal",
+  "Answers": [
+    {
+      "Command": "fdisk",
+      "MP Summary": "manipulate disk partition table",
+      "Most Similar TLDR Task": "List partitions",
+      "Most Similar TLDR Script": "fdisk -l",
+      "Top-3 Similar Questions": [
+        "au_852712: Can't see hard disks",
+        "ul_506007: fdisk shows \"No free sectors available\" while there is enough space"
+      ],
+      "Top-3 Scripts": [
+        "au_852712: ",
+        "ul_506007: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "df",
+      "MP Summary": "report file system disk space usage",
+      "Most Similar TLDR Task": "Display all filesystems and their disk usage",
+      "Most Similar TLDR Script": "df",
+      "Top-3 Similar Questions": [
+        "ul_26348: How to see free disk space on SunOS?",
+        "au_852712: Can't see hard disks",
+        "so_13399882: Bash: Detect all disks and show the free space"
+      ],
+      "Top-3 Scripts": [
+        "ul_26348: ",
+        "au_852712: ",
+        "so_13399882: df -h | tail -n+2 | while read fs size used rest ; do\n    if [[ $used ]] ; then\n        echo $fs $used\n    fi\ndone"
+      ],
+      "Explanations about Options": {
+        "-h": "print sizes in powers of 1024 (e.g., 1023M)"
+      }
+    },
+    {
+      "Command": "free",
+      "MP Summary": "Display amount of free and used memory in the system",
+      "Most Similar TLDR Task": "Display system memory",
+      "Most Similar TLDR Script": "free",
+      "Top-3 Similar Questions": [
+        "so_3992171: How do I programmatically get the free disk space for a directory in Linux",
+        "au_647299: why does free command show more memory usage than other tools",
+        "ul_412271: Linux Mint RAM Memory - Showing different usage and free space"
+      ],
+      "Top-3 Scripts": [
+        "so_3992171: ",
+        "au_647299: ",
+        "ul_412271: free -m"
+      ],
+      "Explanations about Options": {
+        "-m": "Display the amount of memory in mebibytes."
+      }
+    },
+    {
+      "Command": "lvextend",
+      "MP Summary": "Add space to a logical volume",
+      "Most Similar TLDR Task": "Increase a volume's size to 100% of the free phyiscal volume space",
+      "Most Similar TLDR Script": "lvextend --size {{100}}%FREE {{logical_volume}}",
+      "Top-3 Similar Questions": [
+        "ul_363559: How can I merge unallocated hard disk space to my linux partition?",
+        "ul_137433: Wrong amount of free disk space seen after using Gparted",
+        "au_159112: disk space wrongly displayed after installing LVM disk"
+      ],
+      "Top-3 Scripts": [
+        "ul_363559: pvcreate /dev/sda8\nvgextend mint /dev/sda8\nlvextend mint/root /dev/sda8\nresize2fs /dev/mapper/mint-root",
+        "ul_137433: sudo lvextend -r -l +100%FREE /dev/sda<number>",
+        "au_159112: sudo lvextend -L 20g system/root\nsudo resize2fs /dev/mapper/system-root"
+      ],
+      "Explanations about Options": {
+        "-L": "Specifies the new size of the LV. The --size and --extents options are alternate\n methods of specifying size. The total number of physical extents used will be\n greater when redundant data is needed for RAID levels. When the plus + or minus -\n prefix is used, the value is not an absolute size, but is relative and added or\n subtracted from the current size.",
+        "-r": "Resize underlying filesystem together with the LV using fsadm(8)."
+      }
+    },
+    {
+      "Command": "pvcreate",
+      "MP Summary": "Initialize physical volume(s) for use by LVM",
+      "Most Similar TLDR Task": "Initialize the `/dev/sda1` volume for use by LVM",
+      "Most Similar TLDR Script": "pvcreate {{/dev/sda1}}",
+      "Top-3 Similar Questions": [
+        "ul_363559: How can I merge unallocated hard disk space to my linux partition?"
+      ],
+      "Top-3 Scripts": [
+        "ul_363559: pvcreate /dev/sda8\nvgextend mint /dev/sda8\nlvextend mint/root /dev/sda8\nresize2fs /dev/mapper/mint-root"
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

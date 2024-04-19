@@ -1,0 +1,83 @@
+{
+  "Query": "How to recursively find and list the latest modified files in a directory with subdirectories and times?",
+  "Answers": [
+    {
+      "Command": "find",
+      "MP Summary": "search for files in a directory hierarchy",
+      "Most Similar TLDR Task": "Find files by extension",
+      "Most Similar TLDR Script": "find {{root_path}} -name '{{*.ext}}'",
+      "Top-3 Similar Questions": [
+        "ul_371885: Find all files in all subdirectories with name ExampleDir",
+        "so_10707145: Find last modified file in a directory with white space",
+        "nl2bash_5159: Find grub.conf files in entire file system discarding errors in csh or tcsh shell"
+      ],
+      "Top-3 Scripts": [
+        "ul_371885: find . -type f -path \"*/ExampleDir/*\"",
+        "so_10707145: find \"$i\" -type f\n\nfind $i -type f | perl -lne 'chomp(@files = <>); my $p = 9; foreach my $f (sort { (stat($b))[$p] <=> (stat($a))[$p] } @files) { print scalar localtime((stat($f))[$p]), \"\\t\", $f; exit }'\n\nfind  -type f | perl -lne 'chomp(@files = <>); my $p = 9; @files = sort { (stat($b))[$p] <=> (stat($a))[$p] } @files; print scalar localtime((stat($files[0]))[$p]), \"\\t\", $files[0]'",
+        "nl2bash_5159: find / -name grub.conf >& /dev/null"
+      ],
+      "Explanations about Options": {
+        "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+        "-type": "File is of type c:"
+      }
+    },
+    {
+      "Command": "cp",
+      "MP Summary": "copy files and directories",
+      "Most Similar TLDR Task": "Recursively copy a directory's contents to another location (if the destination exists, the directory is copied inside it)",
+      "Most Similar TLDR Script": "cp -r {{path/to/source_directory}} {{path/to/target_directory}}",
+      "Top-3 Similar Questions": [
+        "nl2bash_4331: Find all regular files under $DIR/tmp/daily/, sort them in reverse numerical order and copy the first two files to $DIR/tmp/weekly/",
+        "so_25821119: Find files in multiple directories taken from list in a file?"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_4331: find $DIR/tmp/daily/ -type f -printf \"%p\\n\" | sort -rn | head -n 2 | xargs -I{} cp {} $DIR/tmp/weekly/",
+        "so_25821119: for line in \"`cat fromDirs.txt`\"; do find \"$line\" -type f \\( -name '*good*' -o -exec grep -F \"(NODES_'TASK')\" {} \\; \\) -exec cp {} /tmp/ \\;; done"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "ls",
+      "MP Summary": "list directory contents",
+      "Most Similar TLDR Task": "List all files, with trailing `/` added to directory names",
+      "Most Similar TLDR Script": "ls -F",
+      "Top-3 Similar Questions": [
+        "so_58643334: Finding the oldest folder in a directory in linux even when files inside are modified",
+        "so_15066286: Finding the latest file from directory with creation date as suffix"
+      ],
+      "Top-3 Scripts": [
+        "so_58643334: ls -i",
+        "so_15066286: ls dir/file.* | sort -n -t . -k 2 | tail -1"
+      ],
+      "Explanations about Options": {
+        "-i": "print the index number of each file"
+      }
+    },
+    {
+      "Command": "mv",
+      "MP Summary": "move (rename) files",
+      "Most Similar TLDR Task": "Move files in arbitrary locations",
+      "Most Similar TLDR Script": "mv {{source}} {{target}}",
+      "Top-3 Similar Questions": [
+        "nl2bash_4412: Find all regular files with '.what_to_find' extension in the entire filesystem and move them to directory '/new_directory'"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_4412: find / -iname \"*.what_to_find\" -type f -exec mv {} /new_directory \\;"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "pwd",
+      "MP Summary": "print name of current/working directory",
+      "Most Similar TLDR Task": "Print the current directory",
+      "Most Similar TLDR Script": "pwd",
+      "Top-3 Similar Questions": [
+        "ul_6463: find searching in parent directories instead of subdirectories"
+      ],
+      "Top-3 Scripts": [
+        "ul_6463: find_up.sh some_dir -iname \"foo*bar\" -execdir pwd \\;"
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

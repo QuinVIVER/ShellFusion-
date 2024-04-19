@@ -1,0 +1,89 @@
+{
+    "Answers": [
+        {
+            "Command": "ffmpeg",
+            "Explanations about Options": {
+                "-i(M)": "input file url",
+                "-re(M)": "Read input at native frame rate. Mainly used to simulate a grab device, or live input\n stream (e.g. when reading from a file). Should not be used with actual grab devices or\n live input streams (where it can cause packet loss). By default ffmpeg attempts to\n read the input(s) as fast as possible. This option will slow down the reading of the\n input(s) to the native frame rate of the input(s). It is useful for real-time output\n (e.g. live streaming)."
+            },
+            "MP Summary": "ffmpeg video converter",
+            "Most Similar TLDR Script": "ffmpeg -i {{input_video}}.mkv -codec copy {{output_video}}.mp4",
+            "Most Similar TLDR Task": "Remux MKV video to MP4 without re-encoding audio or video streams",
+            "Top-3 Scripts": [
+                "au_1250376: ffmpeg -re -f lavfi -i \"movie=sample.mkv\" -f v4l2 /dev/video0",
+                "su_655378: ffmpeg -f v4l2 -i /dev/video0 -c:v libx264 -c:a mp2 -f tee -map 0:v -map 0:a \\\n\"archive-20121107.mkv|[f=mpegts]udp://10.0.1.255:1234/\"",
+                "so_55883206: ffmpeg -rtsp_transport tcp -i \"rtsp://***.***.***.***:554/****/****/****.smil\" -c copy \"`TZ=UTC+8 date \"+%Y-%m-%d.%H-%M-%S\"`.avi\""
+            ],
+            "Top-3 Similar Questions": [
+                "au_1250376: Transmit recorded video as it was captured from webcam",
+                "su_655378: pipe webcam video stream data for processing",
+                "so_55883206: Why ffmpeg -rtsp_transport tcp -i can not copy the rtsp stream with service_provider: Harmonic?"
+            ]
+        },
+        {
+            "Command": "ip",
+            "Explanations about Options": {},
+            "MP Summary": "show / manipulate routing, network devices, interfaces and tunnels",
+            "Most Similar TLDR Script": "ip addr add/del {{ip}}/{{mask}} dev {{interface}}",
+            "Most Similar TLDR Task": "Add/Delete an ip address to an interface",
+            "Top-3 Scripts": [
+                "so_25643235: gst-launch-1.0 rtspsrc location=rtsp://ip/url ! rtph264depay ! h264parse ! mp4mux ! filesink location=file.mp4",
+                "su_602674: ip=$(ping -c 1 www.google.com | gawk -F'[()]' '/PING/{print $2}')\necho $ip\n173.194.34.19\n\n$ip\n\nip=$(COMMAND)"
+            ],
+            "Top-3 Similar Questions": [
+                "so_25643235: Gstreamer 1.0 saving rtsp stream to file",
+                "su_602674: Ping server/domain and capture its IP on Linux"
+            ]
+        },
+        {
+            "Command": "ufw",
+            "Explanations about Options": {},
+            "MP Summary": "program for managing a netfilter firewall",
+            "Most Similar TLDR Script": "ufw allow proto {{tcp}} from {{192.168.0.4}} to {{any}} port {{22}}",
+            "Most Similar TLDR Task": "Allow only TCP traffic from 192.168.0.4 to any address on this host, on port 22",
+            "Top-3 Scripts": [
+                "au_591473: ufw allow to any port 9000 proto tcp from 192.168.1.1/24",
+                "so_44935252: service ufw stop"
+            ],
+            "Top-3 Similar Questions": [
+                "au_591473: Access webcam on server",
+                "so_44935252: ffmpeg is reading SDP from RTSP stream but unable to save a screenshot. is it network or utility issue?"
+            ]
+        },
+        {
+            "Command": "rtmpdump",
+            "Explanations about Options": {
+                "--app(M)": "Name of application to connect to on the RTMP server. Overrides the app in the RTMP\n URL. Sometimes the rtmpdump URL parser cannot determine the app name automatically,\n so it must be given explicitly using this option.",
+                "--playpath(M)": "Overrides the playpath parsed from the RTMP URL. Sometimes the rtmpdump URL parser\n cannot determine the correct playpath automatically, so it must be given explicitly\n using this option.",
+                "--rtmp(M)": "URL of the server and media content."
+            },
+            "MP Summary": "RTMP streaming media client",
+            "Most Similar TLDR Script": "rtmpdump --rtmp {{rtmp://example.com/path/to/video}} --app {{app_name}} --playpath {{path/to/video}} -o {{file.ext}}",
+            "Most Similar TLDR Task": "Specify connection parameters if they are not detected correctly",
+            "Top-3 Scripts": [
+                "au_262248: sudo apt-get install rtmpdump\n\nrtmpdump -r \"rtmp://livestream.someaddress.com/live/\" -a \"live/\" -f \"LNX 11,6,602,171\" -W \"https://www.someaddress.org/live/player.swf\" -p \"http://live.tv/\" -y \"nnnnnn.sdp\" -o nnnnnn.flv"
+            ],
+            "Top-3 Similar Questions": [
+                "au_262248: Record Live stream"
+            ]
+        },
+        {
+            "Command": "ping",
+            "Explanations about Options": {
+                "-a(M)": "Audible ping.",
+                "-c(C)": "First the output of the \"ping\" command being parsed: .   \"ip=$(COMMAND)\" : assign the output of \"COMMAND\" to the variable \"$ip\".  \"ping -c 1 www.google.com\" : ping google, once. \"gawk\" is a powerful scripting language that processes input line by line and fields by field.  \"-F'[()]'\" : \"-F\" sets \"gawk\"'s field delimiter(s).",
+                "-c(M)": "Stop after sending count ECHO_REQUEST packets. With deadline option, ping waits for\n count ECHO_REPLY packets, until the timeout expires."
+            },
+            "MP Summary": "send ICMP ECHO_REQUEST to network hosts",
+            "Most Similar TLDR Script": "ping -a {{host}}",
+            "Most Similar TLDR Task": "Ping host and ring the bell when a packet is received (if your terminal supports it)",
+            "Top-3 Scripts": [
+                "su_602674: ip=$(ping -c 1 www.google.com | gawk -F'[()]' '/PING/{print $2}')\necho $ip\n173.194.34.19\n\n$ ping -c 1 www.google.com\nPING www.google.com (173.194.40.209) 56(84) bytes of data.\n64 bytes from par10s12-in-f17.1e100.net (173.194.40.209): icmp_req=1 ttl=52 time=49.8 ms\n\n--- www.google.com ping statistics ---\n1 packets transmitted, 1 received, 0% packet loss, time 0ms\nrtt min/avg/max/mdev = 49.874/49.874/49.874/0.000 ms"
+            ],
+            "Top-3 Similar Questions": [
+                "su_602674: Ping server/domain and capture its IP on Linux"
+            ]
+        }
+    ],
+    "Query": "Capture RTSP stream from IP Camera and store"
+}

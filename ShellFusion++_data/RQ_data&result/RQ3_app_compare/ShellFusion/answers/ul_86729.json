@@ -1,0 +1,80 @@
+{
+    "Answers": [
+        {
+            "Command": "curl",
+            "Explanations about Options": {
+                "--data-urlencode(M)": "(HTTP) This posts data, similar to the other -d, --data options with the exception\n that this performs URL-encoding.",
+                "-d(M)": "(HTTP) Sends the specified data in a POST request to the HTTP server, in the same\n way that a browser does when a user has filled in an HTML form and presses the\n submit button. This will cause curl to pass the data to the server using the\n content-type application/x-www-form-urlencoded. Compare to -F, --form.",
+                "-o(M)": "Write output to <file> instead of stdout. If you are using {} or [] to fetch\n multiple documents, you can use '#' followed by a number in the <file> specifier.\n That variable will be replaced with the current string for the URL being fetched.\n Like in:",
+                "-v(M)": "Makes curl verbose during the operation. Useful for debugging and seeing what's\n going on \"under the hood\". A line starting with '>' means \"header data\" sent by\n curl, '<' means \"header data\" received by curl that is hidden in normal cases, and\n a line starting with '*' means additional info provided by curl."
+            },
+            "MP Summary": "transfer a URL",
+            "Most Similar TLDR Script": "curl {{http://example.com}} -o {{filename}}",
+            "Most Similar TLDR Task": "Download the contents of an URL to a file",
+            "Top-3 Scripts": [
+                "so_34887130: # create a temporary file, and arrange for it to be deleted on exit\ntempfile=$(mktemp \"${TMPDIR:-/tmp}/curldata.XXXXXX\")\ntrap 'rm -rf \"$tempfile\"' 0 ERR\n\n# put the data you want to POST in that file\n# this doesn't have the same error because printf is a bash builtin\nprintf '%s' \"text=${long_text}&input_format=html&output=json\" >\"$tempfile\"\n\n# ...and pass the filename, prefixed with an @, to curl\ncurl --data \"@$tempfile\" http://example.com/annotate\n\ncurl --data \"@-\" http://example.com/annotate \\\n  <<<\"text=${long_text}&input_format=html&output=json\"\n\ncurl --data-urlencode text@htmlfile -d input_format=html -d output=json \\\n  http://example.com/annotate",
+                "so_34831830: curl -L http://imdb.com/title/tt0070948 | grep \"Zardoz\"",
+                "ul_129257: for ((i=1;i<=100;i++)); do   curl -v --header \"Connection: keep-alive\" \"localhost:8080/user?uuid=52010&model_id=20&attr=0\"; done"
+            ],
+            "Top-3 Similar Questions": [
+                "so_34887130: Passing a large text to bash curl url",
+                "so_34831830: grep and curl commands",
+                "ul_129257: curl url call in for loop?"
+            ]
+        },
+        {
+            "Command": "iconv",
+            "Explanations about Options": {
+                "-f(M)": "Use from-encoding for input characters.",
+                "-t(M)": "Use to-encoding for output characters."
+            },
+            "MP Summary": "convert text from one character encoding to another",
+            "Most Similar TLDR Script": "iconv -f {{from_encoding}} {{input_file}} > {{output_file}}",
+            "Most Similar TLDR Task": "Convert file to the current locale's encoding, and output to a file",
+            "Top-3 Scripts": [
+                "so_20288719: echo -n \"válue to éncôde\" | \\\n   iconv -f UTF-8 -t iso-8859-1 | \\\n      perl -MURI::Escape -pe'$_ = uri_escape($_)'"
+            ],
+            "Top-3 Similar Questions": [
+                "so_20288719: bash: encode URL to ISO-8859"
+            ]
+        },
+        {
+            "Command": "base64",
+            "Explanations about Options": {},
+            "MP Summary": "base64 encode/decode data and print to standard output",
+            "Most Similar TLDR Script": "base64 {{filename}}",
+            "Most Similar TLDR Task": "Encode a file",
+            "Top-3 Scripts": [
+                "so_45553841: for i in \"${arr[@]}\"; do\n   curl -s \"$i\" | base64\ndone > output.txt"
+            ],
+            "Top-3 Similar Questions": [
+                "so_45553841: How to use base64 command with CURL?"
+            ]
+        },
+        {
+            "Command": "php",
+            "Explanations about Options": {},
+            "MP Summary": "PHP Command Line Interface 'CLI'",
+            "Most Similar TLDR Script": "php {{file}}",
+            "Most Similar TLDR Task": "Parse and execute a php script",
+            "Top-3 Scripts": [
+                "so_11876353: ENCODEDMESSAGE=$(php -r \"echo urlencode(\\\"$MESSAGE\\\");\")"
+            ],
+            "Top-3 Similar Questions": [
+                "so_11876353: URL encoding a string in bash script"
+            ]
+        },
+        {
+            "Command": "dos2unix",
+            "Explanations about Options": {},
+            "MP Summary": "DOS/Mac to Unix and vice versa text file format converter",
+            "Most Similar TLDR Script": "dos2unix {{filename}}",
+            "Most Similar TLDR Task": "Change the line endings of a file",
+            "Top-3 Scripts": [],
+            "Top-3 Similar Questions": [
+                "so_19308933: curl error when using url string from string"
+            ]
+        }
+    ],
+    "Query": "Any way to encode the url in curl command?"
+}

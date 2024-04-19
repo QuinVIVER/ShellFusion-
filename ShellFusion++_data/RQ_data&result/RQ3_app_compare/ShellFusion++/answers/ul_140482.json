@@ -1,0 +1,81 @@
+{
+  "Query": "Kill any service running at a specific port",
+  "Answers": [
+    {
+      "Command": "killall",
+      "MP Summary": "kill processes by name",
+      "Most Similar TLDR Task": "Force kill a process",
+      "Most Similar TLDR Script": "killall -KILL {{process_name}}",
+      "Top-3 Similar Questions": [
+        "so_13952269: Stop ssh service at specific port",
+        "ul_296250: How to stop an ssh server on arch linux",
+        "so_56037706: How to kill a running script from another script?"
+      ],
+      "Top-3 Scripts": [
+        "so_13952269: killall sshd",
+        "ul_296250: killall sshd",
+        "so_56037706: killproc (8)         - Send signals to processes by full path name\ndocker-container-kill (1) - Kill one or more running containers\ndocker-kill (1)      - Kill one or more running containers\nkill (1)             - terminate a process\nkillall (1)          - kill processes by name\nkillall5 (8)         - send a signal to all processes.\npkill (1)            - look up or signal processes based on name and other attributes\nskill (1)            - send a signal or report process status"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "nc",
+      "MP Summary": "arbitrary TCP and UDP connections and listens",
+      "Most Similar TLDR Task": "Listen on a specified port and print any data received",
+      "Most Similar TLDR Script": "nc -l {{port}}",
+      "Top-3 Similar Questions": [
+        "ul_246903: Kill process on specific port"
+      ],
+      "Top-3 Scripts": [
+        "ul_246903: # Start a process (nc) that listens on port 8080\n$ nc -l 8080 & bg\n[1] 17454\n[1] nc -l 8080\n\n# Get the process listening on port 8080:\n$ fstat | grep :8080\ncmihai   nc         17454    3* internet stream tcp 0x0 *:8080\n\n$ kill $(portpid 8080)\n[1] + Terminated           nc -l 8080"
+      ],
+      "Explanations about Options": {
+        "-l": "Listen for an incoming connection rather than initiating a connection to a remote\n host. The destination and port to listen on can be specified either as non-optional\n arguments, or with options -s and -p respectively. Cannot be used together with -x\n or -z. Additionally, any timeouts specified with the -w option are ignored."
+      }
+    },
+    {
+      "Command": "autossh",
+      "MP Summary": "monitor and restart ssh sessions",
+      "Most Similar TLDR Task": "Fork before executing ssh (runs in the background) and don't open a remote shell",
+      "Most Similar TLDR Script": "autossh -f -M {{monitor_port}} -N {{ssh_command}}",
+      "Top-3 Similar Questions": [
+        "su_1283597: SSH disable port forward remotely instead of killing process on the server"
+      ],
+      "Top-3 Scripts": [
+        "su_1283597: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "ssh",
+      "MP Summary": "OpenSSH SSH client (remote login program)",
+      "Most Similar TLDR Task": "Connect to a remote server",
+      "Most Similar TLDR Script": "ssh {{username}}@{{remote_host}}",
+      "Top-3 Similar Questions": [
+        "su_1283597: SSH disable port forward remotely instead of killing process on the server"
+      ],
+      "Top-3 Scripts": [
+        "su_1283597: ssh -f \u2026\n\n#!/bin/sh\nport=12345\naddress=user@server\nwhile :; do\n  ssh $address '[ -f ~/.tunnel.pid ] && kill `cat ~/.tunnel.pid` && rm ~/.tunnel.pid'\n  ssh -o ExitOnForwardFailure=yes -R ${port}:localhost:22 $address 'echo $PPID > ~/.tunnel.pid; exec sleep infinity'\n  sleep 60\ndone"
+      ],
+      "Explanations about Options": {
+        "-f": "Requests ssh to go to background just before command execution. This is useful if\n ssh is going to ask for passwords or passphrases, but the user wants it in the\n background. This implies -n. The recommended way to start X11 programs at a remote\n site is with something like ssh -f host xterm.",
+        "-o": "Can be used to give options in the format used in the configuration file. This is\n useful for specifying options for which there is no separate command-line flag. For\n full details of the options listed below, and their possible values, see\n ssh_config(5)."
+      }
+    },
+    {
+      "Command": "firewall-cmd",
+      "MP Summary": "firewalld command line client",
+      "Most Similar TLDR Task": "Reload firewalld to force rule changes to take effect",
+      "Most Similar TLDR Script": "firewall-cmd --reload",
+      "Top-3 Similar Questions": [
+        "ul_508696: Firewalld: block outgoing connections on specific port"
+      ],
+      "Top-3 Scripts": [
+        "ul_508696: firewall-cmd --permanent --direct --add-rule ipv4 filter OUTPUT 0 -p tcp -m tcp --dport=9000 -j DROP\nfirewall-cmd --permanent --direct --add-rule ipv4 filter OUTPUT 1 -j ACCEPT\n\nfirewall-cmd --reload"
+      ],
+      "Explanations about Options": {
+        "--reload": "Reload firewall rules and keep state information. Current permanent configuration will\n become new runtime configuration, i.e. all runtime only changes done until reload are\n lost with reload if they have not been also in permanent configuration."
+      }
+    }
+  ]
+}

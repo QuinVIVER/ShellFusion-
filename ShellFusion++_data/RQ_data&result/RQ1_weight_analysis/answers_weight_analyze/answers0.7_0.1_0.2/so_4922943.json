@@ -1,0 +1,85 @@
+{
+  "Query": "Test if remote TCP port is open from a shell script",
+  "Answers": [
+    {
+      "Command": "nc",
+      "MP Summary": "arbitrary TCP and UDP connections and listens",
+      "Most Similar TLDR Task": "Scan the open ports of a specified host",
+      "Most Similar TLDR Script": "nc -v -z {{ip_address}} {{port}}",
+      "Top-3 Similar Questions": [
+        "su_307153: How can I open a TCP/UDP connection on Linux?",
+        "so_62499366: Bash: Serve a file through tcp"
+      ],
+      "Top-3 Scripts": [
+        "su_307153: ",
+        "so_62499366: #!/bin/bash\nnc -l $2 < $1\n\nman nc"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "ss",
+      "MP Summary": "another utility to investigate sockets",
+      "Most Similar TLDR Task": "Show all TCP sockets along with processes connected to a remote ssh port",
+      "Most Similar TLDR Script": "ss -pt dst :{{ssh}}",
+      "Top-3 Similar Questions": [
+        "so_19261962: with root, open other process socket and get tcp_info with python?",
+        "au_1265361: How to open ports not only locally?"
+      ],
+      "Top-3 Scripts": [
+        "so_19261962: #!/usr/bin/python\nfrom subprocess import check_output as co\n\nco(\"ss -tp > ss.out\", shell=True)\nrtts = co(\"cat ss.out | grep ESTAB | awk '{print $4}' | xargs -I {} ss -i 'src {}' | grep \\\"rtt:\\\" | awk '{print $4}' | cut -d : -f 2 | cut -d / -f 1\", shell=True)\npids = co(\"cat ss.out | grep ESTAB | awk '{print $6}' | cut -d , -f 2\", shell=True)\n\nprint zip(rtts.split('\\n'), pids.split('\\n'))",
+        "au_1265361: ss -ltn | grep 2794"
+      ],
+      "Explanations about Options": {
+        "-l": "Display only listening sockets (these are omitted by default).",
+        "-i": "Show internal TCP information. Below fields may appear:",
+        "-t": "Display TCP sockets.",
+        "-n": "Do not try to resolve service names. Show exact bandwidth values, instead of human-\n readable."
+      }
+    },
+    {
+      "Command": "ssh",
+      "MP Summary": "OpenSSH SSH client (remote login program)",
+      "Most Similar TLDR Task": "Connect to a remote server using a specific port",
+      "Most Similar TLDR Script": "ssh {{username}}@{{remote_host}} -p {{2222}}",
+      "Top-3 Similar Questions": [
+        "so_38938709: Shell Script to open SSH connection execute a command",
+        "au_405916: Open a window in a remote machine"
+      ],
+      "Top-3 Scripts": [
+        "so_38938709: #!/usr/bin/expect -f\n\nspawn ssh $username@$host bash script_to_run_on_server \"$directory_path\"\nsleep 2\nexpect \"password:\" {\n    send \"${$password}\\r\"\n}\ninteract",
+        "au_405916: eddie@local$ ssh eddie@remote\neddie@remote$ export DISPLAY=:0\neddie@remote$ eog"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "netstat",
+      "MP Summary": "Print  network  connections,  routing tables, interface statistics, masquerade connections, and multicast memberships",
+      "Most Similar TLDR Task": "List listening TCP ports",
+      "Most Similar TLDR Script": "netstat -t",
+      "Top-3 Similar Questions": [
+        "ul_34509: Trying to Open a Port using CentOS",
+        "au_408506: How to open a port?",
+        "au_566331: How can I open port 80?"
+      ],
+      "Top-3 Scripts": [
+        "ul_34509: ",
+        "au_408506: ",
+        "au_566331: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "telnet",
+      "MP Summary": "user interface to the TELNET protocol",
+      "Most Similar TLDR Task": "Telnet to a specific port of a host",
+      "Most Similar TLDR Script": "telnet {{ip_address}} {{port}}",
+      "Top-3 Similar Questions": [
+        "so_66811514: Could not open ssl 443 port server"
+      ],
+      "Top-3 Scripts": [
+        "so_66811514: $ telnet 127.0.0.1 443\nTrying 127.0.0.1...\ntelnet: Unable to connect to remote host: Connection refused\n\n$ telnet 127.0.0.1 443\nTrying 127.0.0.1...\nConnected to 127.0.0.1.\nEscape character is '^]'.\n^]\ntelnet> quit\nConnection closed."
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

@@ -1,0 +1,94 @@
+{
+  "Query": "how to start a video from the terminal?",
+  "Answers": [
+    {
+      "Command": "youtube-dl",
+      "MP Summary": "download videos from youtube.com or other video platforms",
+      "Most Similar TLDR Task": "Download a video or playlist at a specific quality",
+      "Most Similar TLDR Script": "youtube-dl --format \"{{best[height<=480]}}\" '{{https://www.youtube.com/watch?v=oHg5SJYRHA0}}'",
+      "Top-3 Similar Questions": [
+        "au_469845: how to play video downloaded from terminal",
+        "au_401550: How can i download youtube videos one after another automatically from terminal",
+        "au_486297: How to select video quality from youtube-dl?"
+      ],
+      "Top-3 Scripts": [
+        "au_469845: totem \"$(youtube-dl youtube.com/watch?v=ES6OyV-RfHU |& grep -oP 'Destination:\\s\\K.*')\"",
+        "au_401550: youtube-dl http://www.youtube.com/watch?v=CP8CNp-vksc http://www.youtube.com/watch?v=JmOXHH3DTwg",
+        "au_486297: youtube-dl 'http://www.youtube.com/watch?v=P9pzm5b6FFY'\n\nyoutube-dl -F 'http://www.youtube.com/watch?v=P9pzm5b6FFY'\n\nyoutube-dl -f 22 'http://www.youtube.com/watch?v=P9pzm5b6FFY'\n\nyoutube-dl -f best 'http://www.youtube.com/watch?v=P9pzm5b6FFY'\n\nyoutube-dl -f 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/bestvideo+bestaudio' --merge-output-format mp4 'http://www.youtube.com/watch?v=P9pzm5b6FFY'"
+      ],
+      "Explanations about Options": {
+        "--merge-output-format": "If a merge is required (e.g. bestvideo+bestaudio), output to given container\n format. One of mkv, mp4, ogg, webm, flv. Ignored if no merge is required"
+      }
+    },
+    {
+      "Command": "ffmpeg",
+      "MP Summary": "ffmpeg video converter",
+      "Most Similar TLDR Task": "Convert frames from a video or GIF into individual numbered images",
+      "Most Similar TLDR Script": "ffmpeg -i {{video.mpg|video.gif}} {{frame_%d.png}}",
+      "Top-3 Similar Questions": [
+        "so_56088966: Quickly extract multiple frames from multiple videos",
+        "au_376012: ffmpeg how to output images from a video",
+        "ul_647645: How to extract every 10th frame from a video?"
+      ],
+      "Top-3 Scripts": [
+        "so_56088966: ffmpeg -nostdin -loglevel fatal\n       -ss 15     -i \"${filename}\"\n       -sseof -15 -i \"${filename}\"\n       -ss 15     -i \"${filename2}\"\n       -sseof -15 -i \"${filename2}\"\n       -map 0:v:0 -frames:v 1 \"${file1-head}\"\n       -map 1:v:0 -frames:v 1 \"${file1-tail}\"\n       -map 2:v:0 -frames:v 1 \"${file2-head}\"\n       -map 3:v:0 -frames:v 1 \"${file2-tail}\"\n...",
+        "au_376012: ffmpeg -i input_movie.mp4 -ss 00:00:05 -f image2 -vframes 1 imagename.png",
+        "ul_647645: ffmpeg -i out1.avi -r 0.1 -f image2 image-%3d.jpeg\n\nffmpeg -i out1.mp4 -vf \"select=not(mod(n\\,10))\" -vsync vfr image_%03d.jpg"
+      ],
+      "Explanations about Options": {
+        "-ss": "When used as an input option (before \"-i\"), seeks in this input file to position. Note\n that in most formats it is not possible to seek exactly, so ffmpeg will seek to the\n closest seek point before position. When transcoding and -accurate_seek is enabled\n (the default), this extra segment between the seek point and position will be decoded\n and discarded. When doing stream copy or when -noaccurate_seek is used, it will be\n preserved.",
+        "-t": "When used as an input option (before \"-i\"), limit the duration of data read from the\n input file.",
+        "-vf": "Create the filtergraph specified by filtergraph and use it to filter the stream.",
+        "-vsync": "Video sync method. For compatibility reasons old values can be specified as numbers.\n Newly added values will have to be specified as strings always.",
+        "-loglevel": "Set logging level and flags used by the library.",
+        "-i": "input file url",
+        "-n": "Do not overwrite output files, and exit immediately if a specified output file already\n exists."
+      }
+    },
+    {
+      "Command": "vlc",
+      "MP Summary": "the VLC media player",
+      "Most Similar TLDR Task": "Play video from a URL",
+      "Most Similar TLDR Script": "vlc {{https://www.youtube.com/watch?v=oHg5SJYRHA0}}",
+      "Top-3 Similar Questions": [
+        "au_206824: How to watch Apple keynote videos from the website",
+        "au_809981: Set the default video player from the command line"
+      ],
+      "Top-3 Scripts": [
+        "au_206824: vlc --ffmpeg-threads=1 'http://qthttp.apple.com.edgesuite.net/1210pibasdfvoihbadsv/sl_vod_mvp.m3u8'",
+        "au_809981: % sed -n '\n1i[Default Applications]\n/^video/{\ns/Totem/vlc/\ns/org\\.gnome\\.//p\n}' /usr/share/applications/defaults.list > ~/.local/share/applications/defaults.list"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "screen",
+      "MP Summary": "screen manager with VT100/ANSI terminal emulation",
+      "Most Similar TLDR Task": "Detach from inside a screen",
+      "Most Similar TLDR Script": "Ctrl + A, D",
+      "Top-3 Similar Questions": [
+        "au_1147535: Start the first terminal from tmux",
+        "so_13785244: Start GDB from shell script"
+      ],
+      "Top-3 Scripts": [
+        "au_1147535: ",
+        "so_13785244: #!/bin/bash\nscreen -S gdb_program gdb /path/to/program <<EOF\nhandle SIGPIPE nostop noprint pass\nEOF"
+      ],
+      "Explanations about Options": {
+        "-S": "When creating a new session, this option can be used to specify a meaningful name for\n the session. This name identifies the session for \"screen -list\" and \"screen -r\"\n actions. It substitutes the default [tty.host] suffix."
+      }
+    },
+    {
+      "Command": "firefox",
+      "MP Summary": "a free and open source web browser from Mozilla",
+      "Most Similar TLDR Task": "Use a specific profile to allow multiple separate instances of Firefox to run at once",
+      "Most Similar TLDR Script": "firefox --profile {{path/to/directory}} {{https://example.com/}}",
+      "Top-3 Similar Questions": [
+        "so_9589371: How not to close process, started from ubuntu terminal, and continue to execute another commands from terminal?"
+      ],
+      "Top-3 Scripts": [
+        "so_9589371: "
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

@@ -1,0 +1,2324 @@
+{
+  "Query": "Simulate delayed and dropped packets on Linux",
+  "Answers": [
+    {
+      "Command": "sleep",
+      "MP Summary": "delay for a specified amount of time",
+      "Most Similar TLDR Task": "Delay in minutes",
+      "Most Similar TLDR Script": "sleep {{minutes}}m",
+      "Most Similar NL2Bash Task": "Save the percentage of packets lost of the 5 packets sent to \"$host\" in variable \"packet_loss\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "packet_loss=$(ping -c 5 -q $host | grep -oP '\\d+(?=% packet loss)')\n",
+          "command-options": {
+            "ping": {
+              "mpsum": "send ICMP ECHO_REQUEST to network hosts",
+              "-q": "Quiet output. Nothing is displayed except the summary lines at startup time and when\n finished.",
+              "-c": "Stop after sending count ECHO_REQUEST packets. With deadline option, ping waits for\n count ECHO_REPLY packets, until the timeout expires."
+            },
+            "host": {
+              "mpsum": "DNS lookup utility"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-P": "Interpret PATTERNS as Perl-compatible regular expressions (PCREs). This option is\n experimental when combined with the -z (--null-data) option, and grep -P may warn\n of unimplemented features.",
+              "-o": "Print only the matched (non-empty) parts of a matching line, with each such part on\n a separate output line."
+            }
+          },
+          "TLDR_inform": {
+            "ping": {
+              "man8_ping_3750": "send icmp echo_request packet network host also display messag respons receiv ping host specif number time ping host ping host ring bell packet receiv termin support ping host without tri lookup symbol name address ping host specifi interv second request default 1 second"
+            },
+            "host": {
+              "man1_host_14420": "lookup domain name server lookup aaaa mx record domain lookup field cname txt domain revers lookup ip specifi altern dn server queri"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "su_318390: BASH: run commands asynchronously at a delay",
+        "so_1463113: Read data from pipe and write to standard out with a delay in between. Must handle binary files too",
+        "so_44430700: Delaying not preventing Bash function from simultaneous execution"
+      ],
+      "Top-3 Scripts": [
+        "su_318390: cmd1 &\ncmd1_pid=$!\nsleep 10\ncmd2\nsleep 10\ncmd2\nwait $cmd1_pid\n\nsleep 10",
+        "so_1463113: while [ -z \"$byte_copied\" ] || [ \"$byte_copied\" -ne 0 ]; do \n    sleep $X; \n    byte_copied=$(dd bs=$Y count=1 2>&1 >&4 | awk '$2 == \"byte\"{print $1}'); \ndone 4>&1",
+        "so_44430700: #!/bin/sh\n\nexec 9>/var/lock/myexclusivelock\n\nflock 9\necho start\nsleep 10\necho stop"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "tcpdump",
+      "MP Summary": "dump traffic on a network",
+      "Most Similar TLDR Task": "Capture the traffic of a network",
+      "Most Similar TLDR Script": "tcpdump net {{192.168.1.0/24}}",
+      "Most Similar NL2Bash Task": "Save the percentage of packets lost of the 5 packets sent to \"$host\" in variable \"packet_loss\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "packet_loss=$(ping -c 5 -q $host | grep -oP '\\d+(?=% packet loss)')\n",
+          "command-options": {
+            "ping": {
+              "mpsum": "send ICMP ECHO_REQUEST to network hosts",
+              "-q": "Quiet output. Nothing is displayed except the summary lines at startup time and when\n finished.",
+              "-c": "Stop after sending count ECHO_REQUEST packets. With deadline option, ping waits for\n count ECHO_REPLY packets, until the timeout expires."
+            },
+            "host": {
+              "mpsum": "DNS lookup utility"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-P": "Interpret PATTERNS as Perl-compatible regular expressions (PCREs). This option is\n experimental when combined with the -z (--null-data) option, and grep -P may warn\n of unimplemented features.",
+              "-o": "Print only the matched (non-empty) parts of a matching line, with each such part on\n a separate output line."
+            }
+          },
+          "TLDR_inform": {
+            "ping": {
+              "man8_ping_3750": "send icmp echo_request packet network host also display messag respons receiv ping host specif number time ping host ping host ring bell packet receiv termin support ping host without tri lookup symbol name address ping host specifi interv second request default 1 second"
+            },
+            "host": {
+              "man1_host_14420": "lookup domain name server lookup aaaa mx record domain lookup field cname txt domain revers lookup ip specifi altern dn server queri"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_357928: How to capture all incoming packets to NIC even those packets are not belonging to me",
+        "ul_549998: How can I capture all the UDP packets using tcpdump?",
+        "ul_29367: tcpdump: \"packets captured\" vs \"packets received by filter\""
+      ],
+      "Top-3 Scripts": [
+        "ul_357928: ",
+        "ul_549998: sudo tcpdump -i eth0 -s 0  -w tcpdump.pcap host hostA and udp",
+        "ul_29367: tcpdump -r capture.cap | wc -l"
+      ],
+      "Explanations about Options": {
+        "-i": " Listen on interface. If unspecified, tcpdump searches the system interface list\n for the lowest numbered, configured up interface (excluding loopback), which may\n turn out to be, for example, ``eth0''.",
+        "-w": "Write the raw packets to file rather than parsing and printing them out. They can\n later be printed with the -r option. Standard output is used if file is ``-''.",
+        "-r": "Read packets from file (which was created with the -w option or by other tools that\n write pcap or pcap-ng files). Standard input is used if file is ``-''."
+      }
+    },
+    {
+      "Command": "ip",
+      "MP Summary": "show / manipulate routing, network devices, interfaces and tunnels",
+      "Most Similar TLDR Task": "Add/Delete an ip address to an interface",
+      "Most Similar TLDR Script": "ip addr add/del {{ip}}/{{mask}} dev {{interface}}",
+      "Most Similar NL2Bash Task": "Save the percentage of packets lost of the 5 packets sent to \"$host\" in variable \"packet_loss\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "packet_loss=$(ping -c 5 -q $host | grep -oP '\\d+(?=% packet loss)')\n",
+          "command-options": {
+            "ping": {
+              "mpsum": "send ICMP ECHO_REQUEST to network hosts",
+              "-q": "Quiet output. Nothing is displayed except the summary lines at startup time and when\n finished.",
+              "-c": "Stop after sending count ECHO_REQUEST packets. With deadline option, ping waits for\n count ECHO_REPLY packets, until the timeout expires."
+            },
+            "host": {
+              "mpsum": "DNS lookup utility"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-P": "Interpret PATTERNS as Perl-compatible regular expressions (PCREs). This option is\n experimental when combined with the -z (--null-data) option, and grep -P may warn\n of unimplemented features.",
+              "-o": "Print only the matched (non-empty) parts of a matching line, with each such part on\n a separate output line."
+            }
+          },
+          "TLDR_inform": {
+            "ping": {
+              "man8_ping_3750": "send icmp echo_request packet network host also display messag respons receiv ping host specif number time ping host ping host ring bell packet receiv termin support ping host without tri lookup symbol name address ping host specifi interv second request default 1 second"
+            },
+            "host": {
+              "man1_host_14420": "lookup domain name server lookup aaaa mx record domain lookup field cname txt domain revers lookup ip specifi altern dn server queri"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_37994131: Send TCP SYN packet with payload",
+        "ul_655403: How to setup veth with 9000 MTU to simulate sending and receiving large UDP multicast packets on the same host?"
+      ],
+      "Top-3 Scripts": [
+        "so_37994131: ",
+        "ul_655403: ip link\n\nip link set ... mtu 9000\n\nip link set veth0 mtu 9000\n\nip netns add experiment\nip link set veth1 peer netns experiment\nip -n experiment link set veth1 mtu 9000"
+      ],
+      "Explanations about Options": {
+        "-n": "switches ip to the specified network namespace NETNS. Actually it just simplifies\n executing of:"
+      }
+    },
+    {
+      "Command": "import",
+      "MP Summary": "saves any visible window on an X server and outputs it as an image file. You can capture a single window, the entire screen, or any rectangular portion of the screen.",
+      "Most Similar TLDR Task": "Capture contents of a remote X server screen in the PNG image format",
+      "Most Similar TLDR Script": "import -window root -display {{remote_host}}:{screen}.{display} {{output.png}}",
+      "Most Similar NL2Bash Task": "Save the percentage of packets lost of the 5 packets sent to \"$host\" in variable \"packet_loss\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "packet_loss=$(ping -c 5 -q $host | grep -oP '\\d+(?=% packet loss)')\n",
+          "command-options": {
+            "ping": {
+              "mpsum": "send ICMP ECHO_REQUEST to network hosts",
+              "-q": "Quiet output. Nothing is displayed except the summary lines at startup time and when\n finished.",
+              "-c": "Stop after sending count ECHO_REQUEST packets. With deadline option, ping waits for\n count ECHO_REPLY packets, until the timeout expires."
+            },
+            "host": {
+              "mpsum": "DNS lookup utility"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-P": "Interpret PATTERNS as Perl-compatible regular expressions (PCREs). This option is\n experimental when combined with the -z (--null-data) option, and grep -P may warn\n of unimplemented features.",
+              "-o": "Print only the matched (non-empty) parts of a matching line, with each such part on\n a separate output line."
+            }
+          },
+          "TLDR_inform": {
+            "ping": {
+              "man8_ping_3750": "send icmp echo_request packet network host also display messag respons receiv ping host specif number time ping host ping host ring bell packet receiv termin support ping host without tri lookup symbol name address ping host specifi interv second request default 1 second"
+            },
+            "host": {
+              "man1_host_14420": "lookup domain name server lookup aaaa mx record domain lookup field cname txt domain revers lookup ip specifi altern dn server queri"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "su_789420: How do I delay tcp traffic on a socket?",
+        "so_37994131: Send TCP SYN packet with payload",
+        "so_13040834: Writing raw IP data to an interface (linux)"
+      ],
+      "Top-3 Scripts": [
+        "su_789420: ",
+        "so_37994131: ",
+        "so_13040834: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "sudo",
+      "MP Summary": "execute a command as another user",
+      "Most Similar TLDR Task": "Run a command as the superuser",
+      "Most Similar TLDR Script": "sudo {{less /var/log/syslog}}",
+      "Most Similar NL2Bash Task": "Save the percentage of packets lost of the 5 packets sent to \"$host\" in variable \"packet_loss\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "packet_loss=$(ping -c 5 -q $host | grep -oP '\\d+(?=% packet loss)')\n",
+          "command-options": {
+            "ping": {
+              "mpsum": "send ICMP ECHO_REQUEST to network hosts",
+              "-q": "Quiet output. Nothing is displayed except the summary lines at startup time and when\n finished.",
+              "-c": "Stop after sending count ECHO_REQUEST packets. With deadline option, ping waits for\n count ECHO_REPLY packets, until the timeout expires."
+            },
+            "host": {
+              "mpsum": "DNS lookup utility"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-P": "Interpret PATTERNS as Perl-compatible regular expressions (PCREs). This option is\n experimental when combined with the -z (--null-data) option, and grep -P may warn\n of unimplemented features.",
+              "-o": "Print only the matched (non-empty) parts of a matching line, with each such part on\n a separate output line."
+            }
+          },
+          "TLDR_inform": {
+            "ping": {
+              "man8_ping_3750": "send icmp echo_request packet network host also display messag respons receiv ping host specif number time ping host ping host ring bell packet receiv termin support ping host without tri lookup symbol name address ping host specifi interv second request default 1 second"
+            },
+            "host": {
+              "man1_host_14420": "lookup domain name server lookup aaaa mx record domain lookup field cname txt domain revers lookup ip specifi altern dn server queri"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_384880: How to get metrics about dropped traffic via iptables?",
+        "au_983006: How to make a network interface drop a defined percentage of packets",
+        "so_15617363: What's the best way to dump and drop network packets of a specific application?"
+      ],
+      "Top-3 Scripts": [
+        "ul_384880: $ sudo iptables -L -n -v -x\nChain INPUT (policy DROP 0 packets, 0 bytes)\n pkts bytes target prot opt in out source    destination \n   39 22221 ACCEPT udp  --  *  *   0.0.0.0/0  0.0.0.0/0 udp spts:67:68 dpts:67:68\n ...\n  182 43862 LOG    all  --  *  *   0.0.0.0/0  0.0.0.0/0 LOG flags 0 level 4 prefix \"input_drop: \"\n  182 43862 REJECT all  --  *  *   0.0.0.0/0  0.0.0.0/0 reject-with icmp-host-prohibited",
+        "au_983006: $ sudo iptables -A INPUT -m statistic --mode random --probability 0.1 -j DROP\n\n$ sudo iptables -A OUTPUT -m statistic --mode random --probability 0.1 -j DROP\n\n$ sudo iptables -A INPUT -m statistic --mode random --probability 0.005 -j DROP\n$ sudo iptables -A OUTPUT -m statistic --mode random --probability 0.005 -j DROP",
+        "so_15617363: # Setup: Add a user and give him some rules\nadduser --shell /bin/false --no-create-home tempuser\niptables -A OUTPUT -m owner --uid-owner tempuser -j ACCEPT\n# Run your app\nsudo -u tempuser your_application"
+      ],
+      "Explanations about Options": {
+        "-n": "Avoid prompting the user for input of any kind. If a password is required for\n the command to run, sudo will display an error message and exit.",
+        "-v": "Update the user's cached credentials, authenticating the user if necessary. For\n the sudoers plugin, this extends the sudo timeout for another 15 minutes by\n default, but does not run a command. Not all security policies support cached\n credentials.",
+        "-A": "Normally, if sudo requires a password, it will read it from the user's terminal.\n If the -A (askpass) option is specified, a (possibly graphical) helper program\n is executed to read the user's password and output the password to the standard\n output. If the SUDO_ASKPASS environment variable is set, it specifies the path\n to the helper program. Otherwise, if sudo.conf(5) contains a line specifying\n the askpass program, that value will be used. For example:"
+      }
+    },
+    {
+      "Command": "tshark",
+      "MP Summary": "Dump and analyze network traffic",
+      "Most Similar TLDR Task": "Write captured packet to a file",
+      "Most Similar TLDR Script": "tshark -w {{path/to/file}}",
+      "Most Similar NL2Bash Task": "Save the percentage of packets lost of the 5 packets sent to \"$host\" in variable \"packet_loss\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "packet_loss=$(ping -c 5 -q $host | grep -oP '\\d+(?=% packet loss)')\n",
+          "command-options": {
+            "ping": {
+              "mpsum": "send ICMP ECHO_REQUEST to network hosts",
+              "-q": "Quiet output. Nothing is displayed except the summary lines at startup time and when\n finished.",
+              "-c": "Stop after sending count ECHO_REQUEST packets. With deadline option, ping waits for\n count ECHO_REPLY packets, until the timeout expires."
+            },
+            "host": {
+              "mpsum": "DNS lookup utility"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-P": "Interpret PATTERNS as Perl-compatible regular expressions (PCREs). This option is\n experimental when combined with the -z (--null-data) option, and grep -P may warn\n of unimplemented features.",
+              "-o": "Print only the matched (non-empty) parts of a matching line, with each such part on\n a separate output line."
+            }
+          },
+          "TLDR_inform": {
+            "ping": {
+              "man8_ping_3750": "send icmp echo_request packet network host also display messag respons receiv ping host specif number time ping host ping host ring bell packet receiv termin support ping host without tri lookup symbol name address ping host specifi interv second request default 1 second"
+            },
+            "host": {
+              "man1_host_14420": "lookup domain name server lookup aaaa mx record domain lookup field cname txt domain revers lookup ip specifi altern dn server queri"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "tldr_4235: Write captured packet to a file"
+      ],
+      "Top-3 Scripts": [
+        "tldr_4235: tshark -w {{path/to/file}}"
+      ],
+      "Explanations about Options": {
+        "-w": "Write raw packet data to outfile or to the standard output if outfile is '-'."
+      }
+    },
+    {
+      "Command": "ping",
+      "MP Summary": "send ICMP ECHO_REQUEST to network hosts",
+      "Most Similar TLDR Task": "Ping host and ring the bell when a packet is received (if your terminal supports it)",
+      "Most Similar TLDR Script": "ping -a {{host}}",
+      "Most Similar NL2Bash Task": "Save the percentage of packets lost of the 5 packets sent to \"$host\" in variable \"packet_loss\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "packet_loss=$(ping -c 5 -q $host | grep -oP '\\d+(?=% packet loss)')\n",
+          "command-options": {
+            "ping": {
+              "mpsum": "send ICMP ECHO_REQUEST to network hosts",
+              "-q": "Quiet output. Nothing is displayed except the summary lines at startup time and when\n finished.",
+              "-c": "Stop after sending count ECHO_REQUEST packets. With deadline option, ping waits for\n count ECHO_REPLY packets, until the timeout expires."
+            },
+            "host": {
+              "mpsum": "DNS lookup utility"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-P": "Interpret PATTERNS as Perl-compatible regular expressions (PCREs). This option is\n experimental when combined with the -z (--null-data) option, and grep -P may warn\n of unimplemented features.",
+              "-o": "Print only the matched (non-empty) parts of a matching line, with each such part on\n a separate output line."
+            }
+          },
+          "TLDR_inform": {
+            "ping": {
+              "man8_ping_3750": "send icmp echo_request packet network host also display messag respons receiv ping host specif number time ping host ping host ring bell packet receiv termin support ping host without tri lookup symbol name address ping host specifi interv second request default 1 second"
+            },
+            "host": {
+              "man1_host_14420": "lookup domain name server lookup aaaa mx record domain lookup field cname txt domain revers lookup ip specifi altern dn server queri"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_983006: How to make a network interface drop a defined percentage of packets"
+      ],
+      "Top-3 Scripts": [
+        "au_983006: --- rpi01-wifi.smythies.com ping statistics ---\n247 packets transmitted, 217 received, 12% packet loss, time 246752ms\nrtt min/avg/max/mdev = 0.958/4.933/169.588/17.884 ms\n\n--- rpi01-wifi.smythies.com ping statistics ---\n1006 packets transmitted, 871 received, 13% packet loss, time 305146ms\nrtt min/avg/max/mdev = 0.892/7.363/476.902/35.397 ms, pipe 2\n\n--- rpi01-wifi.smythies.com ping statistics ---\n1000 packets transmitted, 967 received, 3% packet loss, time 253840ms\nrtt min/avg/max/mdev = 0.876/7.583/536.867/36.065 ms, pipe 3"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "read",
+      "MP Summary": "read a line from standard input",
+      "Most Similar TLDR Task": "Enable backspace and GNU readline hotkeys when entering input with read",
+      "Most Similar TLDR Script": "read -e {{variable}}",
+      "Most Similar NL2Bash Task": "Save the percentage of packets lost of the 5 packets sent to \"$host\" in variable \"packet_loss\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "packet_loss=$(ping -c 5 -q $host | grep -oP '\\d+(?=% packet loss)')\n",
+          "command-options": {
+            "ping": {
+              "mpsum": "send ICMP ECHO_REQUEST to network hosts",
+              "-q": "Quiet output. Nothing is displayed except the summary lines at startup time and when\n finished.",
+              "-c": "Stop after sending count ECHO_REQUEST packets. With deadline option, ping waits for\n count ECHO_REPLY packets, until the timeout expires."
+            },
+            "host": {
+              "mpsum": "DNS lookup utility"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-P": "Interpret PATTERNS as Perl-compatible regular expressions (PCREs). This option is\n experimental when combined with the -z (--null-data) option, and grep -P may warn\n of unimplemented features.",
+              "-o": "Print only the matched (non-empty) parts of a matching line, with each such part on\n a separate output line."
+            }
+          },
+          "TLDR_inform": {
+            "ping": {
+              "man8_ping_3750": "send icmp echo_request packet network host also display messag respons receiv ping host specif number time ping host ping host ring bell packet receiv termin support ping host without tri lookup symbol name address ping host specifi interv second request default 1 second"
+            },
+            "host": {
+              "man1_host_14420": "lookup domain name server lookup aaaa mx record domain lookup field cname txt domain revers lookup ip specifi altern dn server queri"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_28163776: read() from UDP socket drops data and blocks unexpectedly in C",
+        "so_26595419: Trying to simulate constant byte rate. Confusion with time.sleep results"
+      ],
+      "Top-3 Scripts": [
+        "so_28163776: read()",
+        "so_26595419: def read(self):\n    self.deadline += 0.020  \n    delay = self.deadline - time.perf_counter()\n    if delay > 0:\n        time.sleep(delay)\n    return self._read()"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "wc",
+      "MP Summary": "print newline, word, and byte counts for each file",
+      "Most Similar TLDR Task": "Count characters (bytes) in file",
+      "Most Similar TLDR Script": "wc -c {{file}}",
+      "Most Similar NL2Bash Task": "Save the percentage of packets lost of the 5 packets sent to \"$host\" in variable \"packet_loss\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "packet_loss=$(ping -c 5 -q $host | grep -oP '\\d+(?=% packet loss)')\n",
+          "command-options": {
+            "ping": {
+              "mpsum": "send ICMP ECHO_REQUEST to network hosts",
+              "-q": "Quiet output. Nothing is displayed except the summary lines at startup time and when\n finished.",
+              "-c": "Stop after sending count ECHO_REQUEST packets. With deadline option, ping waits for\n count ECHO_REPLY packets, until the timeout expires."
+            },
+            "host": {
+              "mpsum": "DNS lookup utility"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-P": "Interpret PATTERNS as Perl-compatible regular expressions (PCREs). This option is\n experimental when combined with the -z (--null-data) option, and grep -P may warn\n of unimplemented features.",
+              "-o": "Print only the matched (non-empty) parts of a matching line, with each such part on\n a separate output line."
+            }
+          },
+          "TLDR_inform": {
+            "ping": {
+              "man8_ping_3750": "send icmp echo_request packet network host also display messag respons receiv ping host specif number time ping host ping host ring bell packet receiv termin support ping host without tri lookup symbol name address ping host specifi interv second request default 1 second"
+            },
+            "host": {
+              "man1_host_14420": "lookup domain name server lookup aaaa mx record domain lookup field cname txt domain revers lookup ip specifi altern dn server queri"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_61767478: bash: how to keep some delay between multiple instances of a script",
+        "ul_29367: tcpdump: \"packets captured\" vs \"packets received by filter\""
+      ],
+      "Top-3 Scripts": [
+        "so_61767478: lines=$(find ... | wc -l)",
+        "ul_29367: tcpdump -r capture.cap | wc -l"
+      ],
+      "Explanations about Options": {
+        "-l": "print the newline counts"
+      }
+    },
+    {
+      "Command": "route",
+      "MP Summary": "show / manipulate the IP routing table",
+      "Most Similar TLDR Task": "Add route rule",
+      "Most Similar TLDR Script": "sudo route add -net {{ip_address}} netmask {{netmask_address}} gw {{gw_address}}",
+      "Most Similar NL2Bash Task": "Save the percentage of packets lost of the 5 packets sent to \"$host\" in variable \"packet_loss\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "packet_loss=$(ping -c 5 -q $host | grep -oP '\\d+(?=% packet loss)')\n",
+          "command-options": {
+            "ping": {
+              "mpsum": "send ICMP ECHO_REQUEST to network hosts",
+              "-q": "Quiet output. Nothing is displayed except the summary lines at startup time and when\n finished.",
+              "-c": "Stop after sending count ECHO_REQUEST packets. With deadline option, ping waits for\n count ECHO_REPLY packets, until the timeout expires."
+            },
+            "host": {
+              "mpsum": "DNS lookup utility"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-P": "Interpret PATTERNS as Perl-compatible regular expressions (PCREs). This option is\n experimental when combined with the -z (--null-data) option, and grep -P may warn\n of unimplemented features.",
+              "-o": "Print only the matched (non-empty) parts of a matching line, with each such part on\n a separate output line."
+            }
+          },
+          "TLDR_inform": {
+            "ping": {
+              "man8_ping_3750": "send icmp echo_request packet network host also display messag respons receiv ping host specif number time ping host ping host ring bell packet receiv termin support ping host without tri lookup symbol name address ping host specifi interv second request default 1 second"
+            },
+            "host": {
+              "man1_host_14420": "lookup domain name server lookup aaaa mx record domain lookup field cname txt domain revers lookup ip specifi altern dn server queri"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_384880: How to get metrics about dropped traffic via iptables?"
+      ],
+      "Top-3 Scripts": [
+        "ul_384880: $ netstat -s | grep -i drop\n27 outgoing packets dropped\n16 dropped because of missing route\n2 ICMP packets dropped because socket was locked"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "echo",
+      "MP Summary": "display a line of text",
+      "Most Similar TLDR Task": "Append a message to the file",
+      "Most Similar TLDR Script": "echo \"{{Hello World}}\" >> {{file.txt}}",
+      "Most Similar NL2Bash Task": "Save the percentage of packets lost of the 5 packets sent to \"$host\" in variable \"packet_loss\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "packet_loss=$(ping -c 5 -q $host | grep -oP '\\d+(?=% packet loss)')\n",
+          "command-options": {
+            "ping": {
+              "mpsum": "send ICMP ECHO_REQUEST to network hosts",
+              "-q": "Quiet output. Nothing is displayed except the summary lines at startup time and when\n finished.",
+              "-c": "Stop after sending count ECHO_REQUEST packets. With deadline option, ping waits for\n count ECHO_REPLY packets, until the timeout expires."
+            },
+            "host": {
+              "mpsum": "DNS lookup utility"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-P": "Interpret PATTERNS as Perl-compatible regular expressions (PCREs). This option is\n experimental when combined with the -z (--null-data) option, and grep -P may warn\n of unimplemented features.",
+              "-o": "Print only the matched (non-empty) parts of a matching line, with each such part on\n a separate output line."
+            }
+          },
+          "TLDR_inform": {
+            "ping": {
+              "man8_ping_3750": "send icmp echo_request packet network host also display messag respons receiv ping host specif number time ping host ping host ring bell packet receiv termin support ping host without tri lookup symbol name address ping host specifi interv second request default 1 second"
+            },
+            "host": {
+              "man1_host_14420": "lookup domain name server lookup aaaa mx record domain lookup field cname txt domain revers lookup ip specifi altern dn server queri"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_44430700: Delaying not preventing Bash function from simultaneous execution",
+        "so_6264596: Simulating ENTER keypress in bash script"
+      ],
+      "Top-3 Scripts": [
+        "so_44430700: #!/bin/sh\n\nexec 9>/var/lock/myexclusivelock\n\nflock 9\necho start\nsleep 10\necho stop",
+        "so_6264596: echo -ne '\\n' | <yourfinecommandhere>\n\necho | <yourfinecommandhere>"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "type",
+      "MP Summary": "write a description of command type",
+      "Most Similar TLDR Task": "Display all locations containing the specified executable",
+      "Most Similar TLDR Script": "type -a {{command}}",
+      "Most Similar NL2Bash Task": "Save the percentage of packets lost of the 5 packets sent to \"$host\" in variable \"packet_loss\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "packet_loss=$(ping -c 5 -q $host | grep -oP '\\d+(?=% packet loss)')\n",
+          "command-options": {
+            "ping": {
+              "mpsum": "send ICMP ECHO_REQUEST to network hosts",
+              "-q": "Quiet output. Nothing is displayed except the summary lines at startup time and when\n finished.",
+              "-c": "Stop after sending count ECHO_REQUEST packets. With deadline option, ping waits for\n count ECHO_REPLY packets, until the timeout expires."
+            },
+            "host": {
+              "mpsum": "DNS lookup utility"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-P": "Interpret PATTERNS as Perl-compatible regular expressions (PCREs). This option is\n experimental when combined with the -z (--null-data) option, and grep -P may warn\n of unimplemented features.",
+              "-o": "Print only the matched (non-empty) parts of a matching line, with each such part on\n a separate output line."
+            }
+          },
+          "TLDR_inform": {
+            "ping": {
+              "man8_ping_3750": "send icmp echo_request packet network host also display messag respons receiv ping host specif number time ping host ping host ring bell packet receiv termin support ping host without tri lookup symbol name address ping host specifi interv second request default 1 second"
+            },
+            "host": {
+              "man1_host_14420": "lookup domain name server lookup aaaa mx record domain lookup field cname txt domain revers lookup ip specifi altern dn server queri"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "su_789420: How do I delay tcp traffic on a socket?",
+        "so_37994131: Send TCP SYN packet with payload"
+      ],
+      "Top-3 Scripts": [
+        "su_789420: ",
+        "so_37994131: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "time",
+      "MP Summary": "time a simple command",
+      "Most Similar TLDR Task": "Time \"ls\"",
+      "Most Similar TLDR Script": "time ls",
+      "Most Similar NL2Bash Task": "Save the percentage of packets lost of the 5 packets sent to \"$host\" in variable \"packet_loss\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "packet_loss=$(ping -c 5 -q $host | grep -oP '\\d+(?=% packet loss)')\n",
+          "command-options": {
+            "ping": {
+              "mpsum": "send ICMP ECHO_REQUEST to network hosts",
+              "-q": "Quiet output. Nothing is displayed except the summary lines at startup time and when\n finished.",
+              "-c": "Stop after sending count ECHO_REQUEST packets. With deadline option, ping waits for\n count ECHO_REPLY packets, until the timeout expires."
+            },
+            "host": {
+              "mpsum": "DNS lookup utility"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-P": "Interpret PATTERNS as Perl-compatible regular expressions (PCREs). This option is\n experimental when combined with the -z (--null-data) option, and grep -P may warn\n of unimplemented features.",
+              "-o": "Print only the matched (non-empty) parts of a matching line, with each such part on\n a separate output line."
+            }
+          },
+          "TLDR_inform": {
+            "ping": {
+              "man8_ping_3750": "send icmp echo_request packet network host also display messag respons receiv ping host specif number time ping host ping host ring bell packet receiv termin support ping host without tri lookup symbol name address ping host specifi interv second request default 1 second"
+            },
+            "host": {
+              "man1_host_14420": "lookup domain name server lookup aaaa mx record domain lookup field cname txt domain revers lookup ip specifi altern dn server queri"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_983006: How to make a network interface drop a defined percentage of packets",
+        "so_25814844: how to find scheduling delay for a process in c"
+      ],
+      "Top-3 Scripts": [
+        "au_983006: --- rpi01-wifi.smythies.com ping statistics ---\n247 packets transmitted, 217 received, 12% packet loss, time 246752ms\nrtt min/avg/max/mdev = 0.958/4.933/169.588/17.884 ms\n\n--- rpi01-wifi.smythies.com ping statistics ---\n1006 packets transmitted, 871 received, 13% packet loss, time 305146ms\nrtt min/avg/max/mdev = 0.892/7.363/476.902/35.397 ms, pipe 2\n\n--- rpi01-wifi.smythies.com ping statistics ---\n1000 packets transmitted, 967 received, 3% packet loss, time 253840ms\nrtt min/avg/max/mdev = 0.876/7.583/536.867/36.065 ms, pipe 3",
+        "so_25814844: time()"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "netstat",
+      "MP Summary": "Print  network  connections,  routing tables, interface statistics, masquerade connections, and multicast memberships",
+      "Most Similar TLDR Task": "List routes and do not resolve IP to hostname",
+      "Most Similar TLDR Script": "netstat -rn",
+      "Most Similar NL2Bash Task": "Save the percentage of packets lost of the 5 packets sent to \"$host\" in variable \"packet_loss\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "packet_loss=$(ping -c 5 -q $host | grep -oP '\\d+(?=% packet loss)')\n",
+          "command-options": {
+            "ping": {
+              "mpsum": "send ICMP ECHO_REQUEST to network hosts",
+              "-q": "Quiet output. Nothing is displayed except the summary lines at startup time and when\n finished.",
+              "-c": "Stop after sending count ECHO_REQUEST packets. With deadline option, ping waits for\n count ECHO_REPLY packets, until the timeout expires."
+            },
+            "host": {
+              "mpsum": "DNS lookup utility"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-P": "Interpret PATTERNS as Perl-compatible regular expressions (PCREs). This option is\n experimental when combined with the -z (--null-data) option, and grep -P may warn\n of unimplemented features.",
+              "-o": "Print only the matched (non-empty) parts of a matching line, with each such part on\n a separate output line."
+            }
+          },
+          "TLDR_inform": {
+            "ping": {
+              "man8_ping_3750": "send icmp echo_request packet network host also display messag respons receiv ping host specif number time ping host ping host ring bell packet receiv termin support ping host without tri lookup symbol name address ping host specifi interv second request default 1 second"
+            },
+            "host": {
+              "man1_host_14420": "lookup domain name server lookup aaaa mx record domain lookup field cname txt domain revers lookup ip specifi altern dn server queri"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_384880: How to get metrics about dropped traffic via iptables?"
+      ],
+      "Top-3 Scripts": [
+        "ul_384880: $ netstat -i \nIface      MTU    RX-OK RX-ERR RX-DRP RX-OVR    TX-OK TX-ERR TX-DRP TX-OVR \nenp5s0    1500  1097107      0     38 0       2049166      0      0      0\n\n$ netstat -s | grep -i drop\n27 outgoing packets dropped\n16 dropped because of missing route\n2 ICMP packets dropped because socket was locked"
+      ],
+      "Explanations about Options": {
+        "-s": "Display summary statistics for each protocol."
+      }
+    },
+    {
+      "Command": "mail",
+      "MP Summary": "send and receive mail",
+      "Most Similar TLDR Task": "Send a typed email message. The commandline below continues after pressing Enter key. Input CC email-id (optional) press Enter key. Input message text (can be multi-line). Press \"Ctrl-D\" key to complete the message text",
+      "Most Similar TLDR Script": "mail --subject=\"{{subject line}}\" {{to_user@example.com}}",
+      "Most Similar NL2Bash Task": "Save the percentage of packets lost of the 5 packets sent to \"$host\" in variable \"packet_loss\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "packet_loss=$(ping -c 5 -q $host | grep -oP '\\d+(?=% packet loss)')\n",
+          "command-options": {
+            "ping": {
+              "mpsum": "send ICMP ECHO_REQUEST to network hosts",
+              "-q": "Quiet output. Nothing is displayed except the summary lines at startup time and when\n finished.",
+              "-c": "Stop after sending count ECHO_REQUEST packets. With deadline option, ping waits for\n count ECHO_REPLY packets, until the timeout expires."
+            },
+            "host": {
+              "mpsum": "DNS lookup utility"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-P": "Interpret PATTERNS as Perl-compatible regular expressions (PCREs). This option is\n experimental when combined with the -z (--null-data) option, and grep -P may warn\n of unimplemented features.",
+              "-o": "Print only the matched (non-empty) parts of a matching line, with each such part on\n a separate output line."
+            }
+          },
+          "TLDR_inform": {
+            "ping": {
+              "man8_ping_3750": "send icmp echo_request packet network host also display messag respons receiv ping host specif number time ping host ping host ring bell packet receiv termin support ping host without tri lookup symbol name address ping host specifi interv second request default 1 second"
+            },
+            "host": {
+              "man1_host_14420": "lookup domain name server lookup aaaa mx record domain lookup field cname txt domain revers lookup ip specifi altern dn server queri"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_16316346: Php delay sending data for 5 minutes"
+      ],
+      "Top-3 Scripts": [
+        "so_16316346: Put record in queue with timestamp eg a database\nWrite server process to monitor queue and see if 5 mins has passed\nSend mail if 5 mins have passed.\nWrite monitoring system to monitor server process and ensure it is working."
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "print",
+      "MP Summary": "execute programs via entries in the mailcap file",
+      "Most Similar TLDR Task": "Print action can be used to print any file on default run-mailcap tool",
+      "Most Similar TLDR Script": "print {{filename}}",
+      "Most Similar NL2Bash Task": "Save the percentage of packets lost of the 5 packets sent to \"$host\" in variable \"packet_loss\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "packet_loss=$(ping -c 5 -q $host | grep -oP '\\d+(?=% packet loss)')\n",
+          "command-options": {
+            "ping": {
+              "mpsum": "send ICMP ECHO_REQUEST to network hosts",
+              "-q": "Quiet output. Nothing is displayed except the summary lines at startup time and when\n finished.",
+              "-c": "Stop after sending count ECHO_REQUEST packets. With deadline option, ping waits for\n count ECHO_REPLY packets, until the timeout expires."
+            },
+            "host": {
+              "mpsum": "DNS lookup utility"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-P": "Interpret PATTERNS as Perl-compatible regular expressions (PCREs). This option is\n experimental when combined with the -z (--null-data) option, and grep -P may warn\n of unimplemented features.",
+              "-o": "Print only the matched (non-empty) parts of a matching line, with each such part on\n a separate output line."
+            }
+          },
+          "TLDR_inform": {
+            "ping": {
+              "man8_ping_3750": "send icmp echo_request packet network host also display messag respons receiv ping host specif number time ping host ping host ring bell packet receiv termin support ping host without tri lookup symbol name address ping host specifi interv second request default 1 second"
+            },
+            "host": {
+              "man1_host_14420": "lookup domain name server lookup aaaa mx record domain lookup field cname txt domain revers lookup ip specifi altern dn server queri"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_1463113: Read data from pipe and write to standard out with a delay in between. Must handle binary files too",
+        "so_37994131: Send TCP SYN packet with payload"
+      ],
+      "Top-3 Scripts": [
+        "so_1463113: while [ -z \"$byte_copied\" ] || [ \"$byte_copied\" -ne 0 ]; do \n    sleep $X; \n    byte_copied=$(dd bs=$Y count=1 2>&1 >&4 | awk '$2 == \"byte\"{print $1}'); \ndone 4>&1",
+        "so_37994131: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "dd",
+      "MP Summary": "convert and copy a file",
+      "Most Similar TLDR Task": "Generate a file of 100 random bytes by using kernel random driver",
+      "Most Similar TLDR Script": "dd if=/dev/urandom of={{random_file}} bs=100 count=1",
+      "Most Similar NL2Bash Task": "Save the percentage of packets lost of the 5 packets sent to \"$host\" in variable \"packet_loss\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "packet_loss=$(ping -c 5 -q $host | grep -oP '\\d+(?=% packet loss)')\n",
+          "command-options": {
+            "ping": {
+              "mpsum": "send ICMP ECHO_REQUEST to network hosts",
+              "-q": "Quiet output. Nothing is displayed except the summary lines at startup time and when\n finished.",
+              "-c": "Stop after sending count ECHO_REQUEST packets. With deadline option, ping waits for\n count ECHO_REPLY packets, until the timeout expires."
+            },
+            "host": {
+              "mpsum": "DNS lookup utility"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-P": "Interpret PATTERNS as Perl-compatible regular expressions (PCREs). This option is\n experimental when combined with the -z (--null-data) option, and grep -P may warn\n of unimplemented features.",
+              "-o": "Print only the matched (non-empty) parts of a matching line, with each such part on\n a separate output line."
+            }
+          },
+          "TLDR_inform": {
+            "ping": {
+              "man8_ping_3750": "send icmp echo_request packet network host also display messag respons receiv ping host specif number time ping host ping host ring bell packet receiv termin support ping host without tri lookup symbol name address ping host specifi interv second request default 1 second"
+            },
+            "host": {
+              "man1_host_14420": "lookup domain name server lookup aaaa mx record domain lookup field cname txt domain revers lookup ip specifi altern dn server queri"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_1463113: Read data from pipe and write to standard out with a delay in between. Must handle binary files too"
+      ],
+      "Top-3 Scripts": [
+        "so_1463113: while [ -z \"$byte_copied\" ] || [ \"$byte_copied\" -ne 0 ]; do \n    sleep $X; \n    byte_copied=$(dd bs=$Y count=1 2>&1 >&4 | awk '$2 == \"byte\"{print $1}'); \ndone 4>&1"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "sysctl",
+      "MP Summary": "configure kernel parameters at runtime",
+      "Most Similar TLDR Task": "Get limit for simultaneous open files",
+      "Most Similar TLDR Script": "sysctl fs.file-max",
+      "Most Similar NL2Bash Task": "Save the percentage of packets lost of the 5 packets sent to \"$host\" in variable \"packet_loss\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "packet_loss=$(ping -c 5 -q $host | grep -oP '\\d+(?=% packet loss)')\n",
+          "command-options": {
+            "ping": {
+              "mpsum": "send ICMP ECHO_REQUEST to network hosts",
+              "-q": "Quiet output. Nothing is displayed except the summary lines at startup time and when\n finished.",
+              "-c": "Stop after sending count ECHO_REQUEST packets. With deadline option, ping waits for\n count ECHO_REPLY packets, until the timeout expires."
+            },
+            "host": {
+              "mpsum": "DNS lookup utility"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-P": "Interpret PATTERNS as Perl-compatible regular expressions (PCREs). This option is\n experimental when combined with the -z (--null-data) option, and grep -P may warn\n of unimplemented features.",
+              "-o": "Print only the matched (non-empty) parts of a matching line, with each such part on\n a separate output line."
+            }
+          },
+          "TLDR_inform": {
+            "ping": {
+              "man8_ping_3750": "send icmp echo_request packet network host also display messag respons receiv ping host specif number time ping host ping host ring bell packet receiv termin support ping host without tri lookup symbol name address ping host specifi interv second request default 1 second"
+            },
+            "host": {
+              "man1_host_14420": "lookup domain name server lookup aaaa mx record domain lookup field cname txt domain revers lookup ip specifi altern dn server queri"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_500784: NATed traffic being dropped by rule on INPUT chain"
+      ],
+      "Top-3 Scripts": [
+        "ul_500784: sysctl net.ipv4.ip_forward=1"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "man",
+      "MP Summary": "an interface to the system reference manuals",
+      "Most Similar TLDR Task": "Search for manpages containing a search string",
+      "Most Similar TLDR Script": "man -k \"{{search string}}\"",
+      "Most Similar NL2Bash Task": "Save the percentage of packets lost of the 5 packets sent to \"$host\" in variable \"packet_loss\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "packet_loss=$(ping -c 5 -q $host | grep -oP '\\d+(?=% packet loss)')\n",
+          "command-options": {
+            "ping": {
+              "mpsum": "send ICMP ECHO_REQUEST to network hosts",
+              "-q": "Quiet output. Nothing is displayed except the summary lines at startup time and when\n finished.",
+              "-c": "Stop after sending count ECHO_REQUEST packets. With deadline option, ping waits for\n count ECHO_REPLY packets, until the timeout expires."
+            },
+            "host": {
+              "mpsum": "DNS lookup utility"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-P": "Interpret PATTERNS as Perl-compatible regular expressions (PCREs). This option is\n experimental when combined with the -z (--null-data) option, and grep -P may warn\n of unimplemented features.",
+              "-o": "Print only the matched (non-empty) parts of a matching line, with each such part on\n a separate output line."
+            }
+          },
+          "TLDR_inform": {
+            "ping": {
+              "man8_ping_3750": "send icmp echo_request packet network host also display messag respons receiv ping host specif number time ping host ping host ring bell packet receiv termin support ping host without tri lookup symbol name address ping host specifi interv second request default 1 second"
+            },
+            "host": {
+              "man1_host_14420": "lookup domain name server lookup aaaa mx record domain lookup field cname txt domain revers lookup ip specifi altern dn server queri"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_7911174: Capability to drop IP packets in Linux",
+        "ul_310351: Syscall to delay execution of a signal handler?"
+      ],
+      "Top-3 Scripts": [
+        "so_7911174: man iptables",
+        "ul_310351: man 7 signal"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "adduser",
+      "MP Summary": "add a user or group to the system",
+      "Most Similar TLDR Task": "Add an existing user to the specified group",
+      "Most Similar TLDR Script": "adduser {{username}} {{group}}",
+      "Most Similar NL2Bash Task": "Save the percentage of packets lost of the 5 packets sent to \"$host\" in variable \"packet_loss\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "packet_loss=$(ping -c 5 -q $host | grep -oP '\\d+(?=% packet loss)')\n",
+          "command-options": {
+            "ping": {
+              "mpsum": "send ICMP ECHO_REQUEST to network hosts",
+              "-q": "Quiet output. Nothing is displayed except the summary lines at startup time and when\n finished.",
+              "-c": "Stop after sending count ECHO_REQUEST packets. With deadline option, ping waits for\n count ECHO_REPLY packets, until the timeout expires."
+            },
+            "host": {
+              "mpsum": "DNS lookup utility"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-P": "Interpret PATTERNS as Perl-compatible regular expressions (PCREs). This option is\n experimental when combined with the -z (--null-data) option, and grep -P may warn\n of unimplemented features.",
+              "-o": "Print only the matched (non-empty) parts of a matching line, with each such part on\n a separate output line."
+            }
+          },
+          "TLDR_inform": {
+            "ping": {
+              "man8_ping_3750": "send icmp echo_request packet network host also display messag respons receiv ping host specif number time ping host ping host ring bell packet receiv termin support ping host without tri lookup symbol name address ping host specifi interv second request default 1 second"
+            },
+            "host": {
+              "man1_host_14420": "lookup domain name server lookup aaaa mx record domain lookup field cname txt domain revers lookup ip specifi altern dn server queri"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_15617363: What's the best way to dump and drop network packets of a specific application?"
+      ],
+      "Top-3 Scripts": [
+        "so_15617363: # Setup: Add a user and give him some rules\nadduser --shell /bin/false --no-create-home tempuser\niptables -A OUTPUT -m owner --uid-owner tempuser -j ACCEPT\n# Run your app\nsudo -u tempuser your_application"
+      ],
+      "Explanations about Options": {
+        "--shell": "SHELL\n Use SHELL as the user's login shell, rather than the default specified by the\n configuration file."
+      }
+    },
+    {
+      "Command": "exec",
+      "MP Summary": "execute commands and open, close, or copy file descriptors",
+      "Most Similar TLDR Task": "Replace with the specified command and change the process name",
+      "Most Similar TLDR Script": "exec -a {{process_name}} {{command -with -flags}}",
+      "Most Similar NL2Bash Task": "Save the percentage of packets lost of the 5 packets sent to \"$host\" in variable \"packet_loss\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "packet_loss=$(ping -c 5 -q $host | grep -oP '\\d+(?=% packet loss)')\n",
+          "command-options": {
+            "ping": {
+              "mpsum": "send ICMP ECHO_REQUEST to network hosts",
+              "-q": "Quiet output. Nothing is displayed except the summary lines at startup time and when\n finished.",
+              "-c": "Stop after sending count ECHO_REQUEST packets. With deadline option, ping waits for\n count ECHO_REPLY packets, until the timeout expires."
+            },
+            "host": {
+              "mpsum": "DNS lookup utility"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-P": "Interpret PATTERNS as Perl-compatible regular expressions (PCREs). This option is\n experimental when combined with the -z (--null-data) option, and grep -P may warn\n of unimplemented features.",
+              "-o": "Print only the matched (non-empty) parts of a matching line, with each such part on\n a separate output line."
+            }
+          },
+          "TLDR_inform": {
+            "ping": {
+              "man8_ping_3750": "send icmp echo_request packet network host also display messag respons receiv ping host specif number time ping host ping host ring bell packet receiv termin support ping host without tri lookup symbol name address ping host specifi interv second request default 1 second"
+            },
+            "host": {
+              "man1_host_14420": "lookup domain name server lookup aaaa mx record domain lookup field cname txt domain revers lookup ip specifi altern dn server queri"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_44430700: Delaying not preventing Bash function from simultaneous execution"
+      ],
+      "Top-3 Scripts": [
+        "so_44430700: #!/bin/sh\n\nexec 9>/var/lock/myexclusivelock\n\nflock 9\necho start\nsleep 10\necho stop"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "seq",
+      "MP Summary": "print a sequence of numbers",
+      "Most Similar TLDR Task": "Separate the output with a space instead of a newline",
+      "Most Similar TLDR Script": "seq -s \" \" 5 3 20",
+      "Most Similar NL2Bash Task": "Save the percentage of packets lost of the 5 packets sent to \"$host\" in variable \"packet_loss\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "packet_loss=$(ping -c 5 -q $host | grep -oP '\\d+(?=% packet loss)')\n",
+          "command-options": {
+            "ping": {
+              "mpsum": "send ICMP ECHO_REQUEST to network hosts",
+              "-q": "Quiet output. Nothing is displayed except the summary lines at startup time and when\n finished.",
+              "-c": "Stop after sending count ECHO_REQUEST packets. With deadline option, ping waits for\n count ECHO_REPLY packets, until the timeout expires."
+            },
+            "host": {
+              "mpsum": "DNS lookup utility"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-P": "Interpret PATTERNS as Perl-compatible regular expressions (PCREs). This option is\n experimental when combined with the -z (--null-data) option, and grep -P may warn\n of unimplemented features.",
+              "-o": "Print only the matched (non-empty) parts of a matching line, with each such part on\n a separate output line."
+            }
+          },
+          "TLDR_inform": {
+            "ping": {
+              "man8_ping_3750": "send icmp echo_request packet network host also display messag respons receiv ping host specif number time ping host ping host ring bell packet receiv termin support ping host without tri lookup symbol name address ping host specifi interv second request default 1 second"
+            },
+            "host": {
+              "man1_host_14420": "lookup domain name server lookup aaaa mx record domain lookup field cname txt domain revers lookup ip specifi altern dn server queri"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_37994131: Send TCP SYN packet with payload"
+      ],
+      "Top-3 Scripts": [
+        "so_37994131: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "as",
+      "MP Summary": "or  any situation  where  you want to make sure you're doing a clean install of your dependencies. It  can  be  significantly  faster  than  a  regular  npm  install  by  skipping   certain user-oriented  features.  It  is  also  more strict than a regular install, which can help catch errors or inconsistencies caused by the incrementally-installed  local  environments of most npm users. In short, the main differences between using npm install and npm ci are: \u00b7 The project must have an existing package-lock.json or npm-shrinkwrap.json. \u00b7 If dependencies in the package lock do not match those in package.json, npm ci will exit with an error, instead of updating the package lock. \u00b7 npm ci can only install entire projects at a time:  individual  dependencies  cannot  be added with this command. \u00b7 If  a  node_modules  is  already present, it will be automatically removed before npm ci begins its install. \u00b7 It will  never  write  to  package.json  or  any  of  the  package-locks:  installs  are essentially frozen. See Also \u00b7 npm help install \u00b7 npm help package-locks April 2020                                  NPM-CI(1)",
+      "Most Similar TLDR Task": "Assemble a file, writing the output to a.out",
+      "Most Similar TLDR Script": "as {{file.s}}",
+      "Most Similar NL2Bash Task": "Save the percentage of packets lost of the 5 packets sent to \"$host\" in variable \"packet_loss\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "packet_loss=$(ping -c 5 -q $host | grep -oP '\\d+(?=% packet loss)')\n",
+          "command-options": {
+            "ping": {
+              "mpsum": "send ICMP ECHO_REQUEST to network hosts",
+              "-q": "Quiet output. Nothing is displayed except the summary lines at startup time and when\n finished.",
+              "-c": "Stop after sending count ECHO_REQUEST packets. With deadline option, ping waits for\n count ECHO_REPLY packets, until the timeout expires."
+            },
+            "host": {
+              "mpsum": "DNS lookup utility"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-P": "Interpret PATTERNS as Perl-compatible regular expressions (PCREs). This option is\n experimental when combined with the -z (--null-data) option, and grep -P may warn\n of unimplemented features.",
+              "-o": "Print only the matched (non-empty) parts of a matching line, with each such part on\n a separate output line."
+            }
+          },
+          "TLDR_inform": {
+            "ping": {
+              "man8_ping_3750": "send icmp echo_request packet network host also display messag respons receiv ping host specif number time ping host ping host ring bell packet receiv termin support ping host without tri lookup symbol name address ping host specifi interv second request default 1 second"
+            },
+            "host": {
+              "man1_host_14420": "lookup domain name server lookup aaaa mx record domain lookup field cname txt domain revers lookup ip specifi altern dn server queri"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_13040834: Writing raw IP data to an interface (linux)"
+      ],
+      "Top-3 Scripts": [
+        "so_13040834: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "wait",
+      "MP Summary": "await process completion",
+      "Most Similar TLDR Task": "Wait for all processes known to the invoking shell to finish",
+      "Most Similar TLDR Script": "wait",
+      "Most Similar NL2Bash Task": "Save the percentage of packets lost of the 5 packets sent to \"$host\" in variable \"packet_loss\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "packet_loss=$(ping -c 5 -q $host | grep -oP '\\d+(?=% packet loss)')\n",
+          "command-options": {
+            "ping": {
+              "mpsum": "send ICMP ECHO_REQUEST to network hosts",
+              "-q": "Quiet output. Nothing is displayed except the summary lines at startup time and when\n finished.",
+              "-c": "Stop after sending count ECHO_REQUEST packets. With deadline option, ping waits for\n count ECHO_REPLY packets, until the timeout expires."
+            },
+            "host": {
+              "mpsum": "DNS lookup utility"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-P": "Interpret PATTERNS as Perl-compatible regular expressions (PCREs). This option is\n experimental when combined with the -z (--null-data) option, and grep -P may warn\n of unimplemented features.",
+              "-o": "Print only the matched (non-empty) parts of a matching line, with each such part on\n a separate output line."
+            }
+          },
+          "TLDR_inform": {
+            "ping": {
+              "man8_ping_3750": "send icmp echo_request packet network host also display messag respons receiv ping host specif number time ping host ping host ring bell packet receiv termin support ping host without tri lookup symbol name address ping host specifi interv second request default 1 second"
+            },
+            "host": {
+              "man1_host_14420": "lookup domain name server lookup aaaa mx record domain lookup field cname txt domain revers lookup ip specifi altern dn server queri"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "su_318390: BASH: run commands asynchronously at a delay"
+      ],
+      "Top-3 Scripts": [
+        "su_318390: cmd1 &\ncmd1_pid=$!\nsleep 10\ncmd2\nsleep 10\ncmd2\nwait $cmd1_pid\n\nwait $cmd1_pid"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "xdotool",
+      "MP Summary": "command-line X11 automation tool",
+      "Most Similar TLDR Task": "Type a message, with a 500ms delay for each letter",
+      "Most Similar TLDR Script": "xdotool type --delay {{500}} \"Hello world\"",
+      "Most Similar NL2Bash Task": "Save the percentage of packets lost of the 5 packets sent to \"$host\" in variable \"packet_loss\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "packet_loss=$(ping -c 5 -q $host | grep -oP '\\d+(?=% packet loss)')\n",
+          "command-options": {
+            "ping": {
+              "mpsum": "send ICMP ECHO_REQUEST to network hosts",
+              "-q": "Quiet output. Nothing is displayed except the summary lines at startup time and when\n finished.",
+              "-c": "Stop after sending count ECHO_REQUEST packets. With deadline option, ping waits for\n count ECHO_REPLY packets, until the timeout expires."
+            },
+            "host": {
+              "mpsum": "DNS lookup utility"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-P": "Interpret PATTERNS as Perl-compatible regular expressions (PCREs). This option is\n experimental when combined with the -z (--null-data) option, and grep -P may warn\n of unimplemented features.",
+              "-o": "Print only the matched (non-empty) parts of a matching line, with each such part on\n a separate output line."
+            }
+          },
+          "TLDR_inform": {
+            "ping": {
+              "man8_ping_3750": "send icmp echo_request packet network host also display messag respons receiv ping host specif number time ping host ping host ring bell packet receiv termin support ping host without tri lookup symbol name address ping host specifi interv second request default 1 second"
+            },
+            "host": {
+              "man1_host_14420": "lookup domain name server lookup aaaa mx record domain lookup field cname txt domain revers lookup ip specifi altern dn server queri"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_14181488: Simulating key press using bash"
+      ],
+      "Top-3 Scripts": [
+        "so_14181488: xdotool key k\n\ngedit & sleep 2; xdotool key k;"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "set",
+      "MP Summary": "set or unset options and positional parameters",
+      "Most Similar TLDR Task": "Notify of job termination immediately",
+      "Most Similar TLDR Script": "set -b",
+      "Most Similar NL2Bash Task": "Save the percentage of packets lost of the 5 packets sent to \"$host\" in variable \"packet_loss\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "packet_loss=$(ping -c 5 -q $host | grep -oP '\\d+(?=% packet loss)')\n",
+          "command-options": {
+            "ping": {
+              "mpsum": "send ICMP ECHO_REQUEST to network hosts",
+              "-q": "Quiet output. Nothing is displayed except the summary lines at startup time and when\n finished.",
+              "-c": "Stop after sending count ECHO_REQUEST packets. With deadline option, ping waits for\n count ECHO_REPLY packets, until the timeout expires."
+            },
+            "host": {
+              "mpsum": "DNS lookup utility"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-P": "Interpret PATTERNS as Perl-compatible regular expressions (PCREs). This option is\n experimental when combined with the -z (--null-data) option, and grep -P may warn\n of unimplemented features.",
+              "-o": "Print only the matched (non-empty) parts of a matching line, with each such part on\n a separate output line."
+            }
+          },
+          "TLDR_inform": {
+            "ping": {
+              "man8_ping_3750": "send icmp echo_request packet network host also display messag respons receiv ping host specif number time ping host ping host ring bell packet receiv termin support ping host without tri lookup symbol name address ping host specifi interv second request default 1 second"
+            },
+            "host": {
+              "man1_host_14420": "lookup domain name server lookup aaaa mx record domain lookup field cname txt domain revers lookup ip specifi altern dn server queri"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_655403: How to setup veth with 9000 MTU to simulate sending and receiving large UDP multicast packets on the same host?"
+      ],
+      "Top-3 Scripts": [
+        "ul_655403: ip link set ... mtu 9000\n\nip link set veth0 mtu 9000\n\nip netns add experiment\nip link set veth1 peer netns experiment\nip -n experiment link set veth1 mtu 9000"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "systemctl",
+      "MP Summary": "Control the systemd system and service manager",
+      "Most Similar TLDR Task": "Enable/Disable a unit to be started on bootup",
+      "Most Similar TLDR Script": "systemctl enable/disable {{unit}}",
+      "Most Similar NL2Bash Task": "Save the percentage of packets lost of the 5 packets sent to \"$host\" in variable \"packet_loss\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "packet_loss=$(ping -c 5 -q $host | grep -oP '\\d+(?=% packet loss)')\n",
+          "command-options": {
+            "ping": {
+              "mpsum": "send ICMP ECHO_REQUEST to network hosts",
+              "-q": "Quiet output. Nothing is displayed except the summary lines at startup time and when\n finished.",
+              "-c": "Stop after sending count ECHO_REQUEST packets. With deadline option, ping waits for\n count ECHO_REPLY packets, until the timeout expires."
+            },
+            "host": {
+              "mpsum": "DNS lookup utility"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-P": "Interpret PATTERNS as Perl-compatible regular expressions (PCREs). This option is\n experimental when combined with the -z (--null-data) option, and grep -P may warn\n of unimplemented features.",
+              "-o": "Print only the matched (non-empty) parts of a matching line, with each such part on\n a separate output line."
+            }
+          },
+          "TLDR_inform": {
+            "ping": {
+              "man8_ping_3750": "send icmp echo_request packet network host also display messag respons receiv ping host specif number time ping host ping host ring bell packet receiv termin support ping host without tri lookup symbol name address ping host specifi interv second request default 1 second"
+            },
+            "host": {
+              "man1_host_14420": "lookup domain name server lookup aaaa mx record domain lookup field cname txt domain revers lookup ip specifi altern dn server queri"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_625860: Add a delay in git post-merge"
+      ],
+      "Top-3 Scripts": [
+        "ul_625860: #!/bin/sh\n( sleep 10 ; /usr/bin/sudo systemctl restart tempcollect  ) &"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "export",
+      "MP Summary": "set the export attribute for variables",
+      "Most Similar TLDR Task": "Append something to the PATH variable",
+      "Most Similar TLDR Script": "export PATH=$PATH:{{path/to/append}}",
+      "Most Similar NL2Bash Task": "Save the percentage of packets lost of the 5 packets sent to \"$host\" in variable \"packet_loss\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "packet_loss=$(ping -c 5 -q $host | grep -oP '\\d+(?=% packet loss)')\n",
+          "command-options": {
+            "ping": {
+              "mpsum": "send ICMP ECHO_REQUEST to network hosts",
+              "-q": "Quiet output. Nothing is displayed except the summary lines at startup time and when\n finished.",
+              "-c": "Stop after sending count ECHO_REQUEST packets. With deadline option, ping waits for\n count ECHO_REPLY packets, until the timeout expires."
+            },
+            "host": {
+              "mpsum": "DNS lookup utility"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-P": "Interpret PATTERNS as Perl-compatible regular expressions (PCREs). This option is\n experimental when combined with the -z (--null-data) option, and grep -P may warn\n of unimplemented features.",
+              "-o": "Print only the matched (non-empty) parts of a matching line, with each such part on\n a separate output line."
+            }
+          },
+          "TLDR_inform": {
+            "ping": {
+              "man8_ping_3750": "send icmp echo_request packet network host also display messag respons receiv ping host specif number time ping host ping host ring bell packet receiv termin support ping host without tri lookup symbol name address ping host specifi interv second request default 1 second"
+            },
+            "host": {
+              "man1_host_14420": "lookup domain name server lookup aaaa mx record domain lookup field cname txt domain revers lookup ip specifi altern dn server queri"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_61767478: bash: how to keep some delay between multiple instances of a script"
+      ],
+      "Top-3 Scripts": [
+        "so_61767478: #! /usr/bin/env bash\n\nmain() {\n  # put your code for downloading here\n}\nexport -f main\nsem --id downloadlimit -j4 main"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "awk",
+      "MP Summary": "pattern scanning and processing language",
+      "Most Similar TLDR Task": "Print the second column of the lines containing \"something\" in a space-separated file",
+      "Most Similar TLDR Script": "awk '/{{something}}/ {print $2}' {{filename}}",
+      "Most Similar NL2Bash Task": "Save the percentage of packets lost of the 5 packets sent to \"$host\" in variable \"packet_loss\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "packet_loss=$(ping -c 5 -q $host | grep -oP '\\d+(?=% packet loss)')\n",
+          "command-options": {
+            "ping": {
+              "mpsum": "send ICMP ECHO_REQUEST to network hosts",
+              "-q": "Quiet output. Nothing is displayed except the summary lines at startup time and when\n finished.",
+              "-c": "Stop after sending count ECHO_REQUEST packets. With deadline option, ping waits for\n count ECHO_REPLY packets, until the timeout expires."
+            },
+            "host": {
+              "mpsum": "DNS lookup utility"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-P": "Interpret PATTERNS as Perl-compatible regular expressions (PCREs). This option is\n experimental when combined with the -z (--null-data) option, and grep -P may warn\n of unimplemented features.",
+              "-o": "Print only the matched (non-empty) parts of a matching line, with each such part on\n a separate output line."
+            }
+          },
+          "TLDR_inform": {
+            "ping": {
+              "man8_ping_3750": "send icmp echo_request packet network host also display messag respons receiv ping host specif number time ping host ping host ring bell packet receiv termin support ping host without tri lookup symbol name address ping host specifi interv second request default 1 second"
+            },
+            "host": {
+              "man1_host_14420": "lookup domain name server lookup aaaa mx record domain lookup field cname txt domain revers lookup ip specifi altern dn server queri"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_1463113: Read data from pipe and write to standard out with a delay in between. Must handle binary files too"
+      ],
+      "Top-3 Scripts": [
+        "so_1463113: while [ -z \"$byte_copied\" ] || [ \"$byte_copied\" -ne 0 ]; do \n    sleep $X; \n    byte_copied=$(dd bs=$Y count=1 2>&1 >&4 | awk '$2 == \"byte\"{print $1}'); \ndone 4>&1"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "see",
+      "MP Summary": "execute programs via entries in the mailcap file",
+      "Most Similar TLDR Task": "See action can be used to view any file (usually image) on default mailcap explorer",
+      "Most Similar TLDR Script": "see {{filename}}",
+      "Most Similar NL2Bash Task": "Save the percentage of packets lost of the 5 packets sent to \"$host\" in variable \"packet_loss\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "packet_loss=$(ping -c 5 -q $host | grep -oP '\\d+(?=% packet loss)')\n",
+          "command-options": {
+            "ping": {
+              "mpsum": "send ICMP ECHO_REQUEST to network hosts",
+              "-q": "Quiet output. Nothing is displayed except the summary lines at startup time and when\n finished.",
+              "-c": "Stop after sending count ECHO_REQUEST packets. With deadline option, ping waits for\n count ECHO_REPLY packets, until the timeout expires."
+            },
+            "host": {
+              "mpsum": "DNS lookup utility"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-P": "Interpret PATTERNS as Perl-compatible regular expressions (PCREs). This option is\n experimental when combined with the -z (--null-data) option, and grep -P may warn\n of unimplemented features.",
+              "-o": "Print only the matched (non-empty) parts of a matching line, with each such part on\n a separate output line."
+            }
+          },
+          "TLDR_inform": {
+            "ping": {
+              "man8_ping_3750": "send icmp echo_request packet network host also display messag respons receiv ping host specif number time ping host ping host ring bell packet receiv termin support ping host without tri lookup symbol name address ping host specifi interv second request default 1 second"
+            },
+            "host": {
+              "man1_host_14420": "lookup domain name server lookup aaaa mx record domain lookup field cname txt domain revers lookup ip specifi altern dn server queri"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_16316346: Php delay sending data for 5 minutes"
+      ],
+      "Top-3 Scripts": [
+        "so_16316346: Put record in queue with timestamp eg a database\nWrite server process to monitor queue and see if 5 mins has passed\nSend mail if 5 mins have passed.\nWrite monitoring system to monitor server process and ensure it is working."
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "find",
+      "MP Summary": "search for files in a directory hierarchy",
+      "Most Similar TLDR Task": "Find files modified in the last 7 days, and delete them",
+      "Most Similar TLDR Script": "find {{root_path}} -mtime {{-7}} -delete",
+      "Most Similar NL2Bash Task": "Save the percentage of packets lost of the 5 packets sent to \"$host\" in variable \"packet_loss\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "packet_loss=$(ping -c 5 -q $host | grep -oP '\\d+(?=% packet loss)')\n",
+          "command-options": {
+            "ping": {
+              "mpsum": "send ICMP ECHO_REQUEST to network hosts",
+              "-q": "Quiet output. Nothing is displayed except the summary lines at startup time and when\n finished.",
+              "-c": "Stop after sending count ECHO_REQUEST packets. With deadline option, ping waits for\n count ECHO_REPLY packets, until the timeout expires."
+            },
+            "host": {
+              "mpsum": "DNS lookup utility"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-P": "Interpret PATTERNS as Perl-compatible regular expressions (PCREs). This option is\n experimental when combined with the -z (--null-data) option, and grep -P may warn\n of unimplemented features.",
+              "-o": "Print only the matched (non-empty) parts of a matching line, with each such part on\n a separate output line."
+            }
+          },
+          "TLDR_inform": {
+            "ping": {
+              "man8_ping_3750": "send icmp echo_request packet network host also display messag respons receiv ping host specif number time ping host ping host ring bell packet receiv termin support ping host without tri lookup symbol name address ping host specifi interv second request default 1 second"
+            },
+            "host": {
+              "man1_host_14420": "lookup domain name server lookup aaaa mx record domain lookup field cname txt domain revers lookup ip specifi altern dn server queri"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_61767478: bash: how to keep some delay between multiple instances of a script"
+      ],
+      "Top-3 Scripts": [
+        "so_61767478: lines=$(find ... | wc -l)"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "link",
+      "MP Summary": "call the link function to create a link to a file",
+      "Most Similar TLDR Task": "Create a hard link from a new file to an existing file",
+      "Most Similar TLDR Script": "link {{path/to/existing_file}} {{path/to/new_file}}",
+      "Most Similar NL2Bash Task": "Save the percentage of packets lost of the 5 packets sent to \"$host\" in variable \"packet_loss\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "packet_loss=$(ping -c 5 -q $host | grep -oP '\\d+(?=% packet loss)')\n",
+          "command-options": {
+            "ping": {
+              "mpsum": "send ICMP ECHO_REQUEST to network hosts",
+              "-q": "Quiet output. Nothing is displayed except the summary lines at startup time and when\n finished.",
+              "-c": "Stop after sending count ECHO_REQUEST packets. With deadline option, ping waits for\n count ECHO_REPLY packets, until the timeout expires."
+            },
+            "host": {
+              "mpsum": "DNS lookup utility"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-P": "Interpret PATTERNS as Perl-compatible regular expressions (PCREs). This option is\n experimental when combined with the -z (--null-data) option, and grep -P may warn\n of unimplemented features.",
+              "-o": "Print only the matched (non-empty) parts of a matching line, with each such part on\n a separate output line."
+            }
+          },
+          "TLDR_inform": {
+            "ping": {
+              "man8_ping_3750": "send icmp echo_request packet network host also display messag respons receiv ping host specif number time ping host ping host ring bell packet receiv termin support ping host without tri lookup symbol name address ping host specifi interv second request default 1 second"
+            },
+            "host": {
+              "man1_host_14420": "lookup domain name server lookup aaaa mx record domain lookup field cname txt domain revers lookup ip specifi altern dn server queri"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_655403: How to setup veth with 9000 MTU to simulate sending and receiving large UDP multicast packets on the same host?"
+      ],
+      "Top-3 Scripts": [
+        "ul_655403: ip link\n\nip link set ... mtu 9000\n\nip link set veth0 mtu 9000\n\n# ip -details link show veth0\n68: veth0@veth1: <BROADCAST,MULTICAST,M-DOWN> mtu 9000 qdisc noop state DOWN mode DEFAULT group default qlen 1000\n    link/ether 2a:93:f8:8e:bc:b6 brd ff:ff:ff:ff:ff:ff promiscuity 0 minmtu 68 maxmtu 65535 \n    veth addrgenmode eui64 numtxqueues 1 numrxqueues 1 gso_max_size 65536 gso_max_segs 65535\n\nip netns add experiment\nip link set veth1 peer netns experiment\nip -n experiment link set veth1 mtu 9000"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "grep",
+      "MP Summary": "print lines that match patterns",
+      "Most Similar TLDR Task": "Invert match for excluding specific strings",
+      "Most Similar TLDR Script": "grep -v {{search_pattern}}",
+      "Most Similar NL2Bash Task": "Save the percentage of packets lost of the 5 packets sent to \"$host\" in variable \"packet_loss\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "packet_loss=$(ping -c 5 -q $host | grep -oP '\\d+(?=% packet loss)')\n",
+          "command-options": {
+            "ping": {
+              "mpsum": "send ICMP ECHO_REQUEST to network hosts",
+              "-q": "Quiet output. Nothing is displayed except the summary lines at startup time and when\n finished.",
+              "-c": "Stop after sending count ECHO_REQUEST packets. With deadline option, ping waits for\n count ECHO_REPLY packets, until the timeout expires."
+            },
+            "host": {
+              "mpsum": "DNS lookup utility"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-P": "Interpret PATTERNS as Perl-compatible regular expressions (PCREs). This option is\n experimental when combined with the -z (--null-data) option, and grep -P may warn\n of unimplemented features.",
+              "-o": "Print only the matched (non-empty) parts of a matching line, with each such part on\n a separate output line."
+            }
+          },
+          "TLDR_inform": {
+            "ping": {
+              "man8_ping_3750": "send icmp echo_request packet network host also display messag respons receiv ping host specif number time ping host ping host ring bell packet receiv termin support ping host without tri lookup symbol name address ping host specifi interv second request default 1 second"
+            },
+            "host": {
+              "man1_host_14420": "lookup domain name server lookup aaaa mx record domain lookup field cname txt domain revers lookup ip specifi altern dn server queri"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_384880: How to get metrics about dropped traffic via iptables?"
+      ],
+      "Top-3 Scripts": [
+        "ul_384880: $ netstat -s | grep -i drop\n27 outgoing packets dropped\n16 dropped because of missing route\n2 ICMP packets dropped because socket was locked"
+      ],
+      "Explanations about Options": {
+        "-i": "Ignore case distinctions in patterns and input data, so that characters that differ\n only in case match each other."
+      }
+    },
+    {
+      "Command": "host",
+      "MP Summary": "DNS lookup utility",
+      "Most Similar TLDR Task": "Specify an alternate DNS server to query",
+      "Most Similar TLDR Script": "host {{domain}} {{8.8.8.8}}",
+      "Most Similar NL2Bash Task": "Save the percentage of packets lost of the 5 packets sent to \"$host\" in variable \"packet_loss\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "packet_loss=$(ping -c 5 -q $host | grep -oP '\\d+(?=% packet loss)')\n",
+          "command-options": {
+            "ping": {
+              "mpsum": "send ICMP ECHO_REQUEST to network hosts",
+              "-q": "Quiet output. Nothing is displayed except the summary lines at startup time and when\n finished.",
+              "-c": "Stop after sending count ECHO_REQUEST packets. With deadline option, ping waits for\n count ECHO_REPLY packets, until the timeout expires."
+            },
+            "host": {
+              "mpsum": "DNS lookup utility"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-P": "Interpret PATTERNS as Perl-compatible regular expressions (PCREs). This option is\n experimental when combined with the -z (--null-data) option, and grep -P may warn\n of unimplemented features.",
+              "-o": "Print only the matched (non-empty) parts of a matching line, with each such part on\n a separate output line."
+            }
+          },
+          "TLDR_inform": {
+            "ping": {
+              "man8_ping_3750": "send icmp echo_request packet network host also display messag respons receiv ping host specif number time ping host ping host ring bell packet receiv termin support ping host without tri lookup symbol name address ping host specifi interv second request default 1 second"
+            },
+            "host": {
+              "man1_host_14420": "lookup domain name server lookup aaaa mx record domain lookup field cname txt domain revers lookup ip specifi altern dn server queri"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_549998: How can I capture all the UDP packets using tcpdump?"
+      ],
+      "Top-3 Scripts": [
+        "ul_549998: sudo tcpdump -i eth0 -s 0  -w tcpdump.pcap host hostA and udp"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "opt",
+      "MP Summary": "LLVM optimizer",
+      "Most Similar TLDR Task": "Run an optimization or analysis on a bitcode file",
+      "Most Similar TLDR Script": "opt -{{passname}} {{path/to/file.bc}} -S -o {{file_opt.bc}}",
+      "Most Similar NL2Bash Task": "Save the percentage of packets lost of the 5 packets sent to \"$host\" in variable \"packet_loss\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "packet_loss=$(ping -c 5 -q $host | grep -oP '\\d+(?=% packet loss)')\n",
+          "command-options": {
+            "ping": {
+              "mpsum": "send ICMP ECHO_REQUEST to network hosts",
+              "-q": "Quiet output. Nothing is displayed except the summary lines at startup time and when\n finished.",
+              "-c": "Stop after sending count ECHO_REQUEST packets. With deadline option, ping waits for\n count ECHO_REPLY packets, until the timeout expires."
+            },
+            "host": {
+              "mpsum": "DNS lookup utility"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-P": "Interpret PATTERNS as Perl-compatible regular expressions (PCREs). This option is\n experimental when combined with the -z (--null-data) option, and grep -P may warn\n of unimplemented features.",
+              "-o": "Print only the matched (non-empty) parts of a matching line, with each such part on\n a separate output line."
+            }
+          },
+          "TLDR_inform": {
+            "ping": {
+              "man8_ping_3750": "send icmp echo_request packet network host also display messag respons receiv ping host specif number time ping host ping host ring bell packet receiv termin support ping host without tri lookup symbol name address ping host specifi interv second request default 1 second"
+            },
+            "host": {
+              "man1_host_14420": "lookup domain name server lookup aaaa mx record domain lookup field cname txt domain revers lookup ip specifi altern dn server queri"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_384880: How to get metrics about dropped traffic via iptables?"
+      ],
+      "Top-3 Scripts": [
+        "ul_384880: $ sudo iptables -L -n -v -x\nChain INPUT (policy DROP 0 packets, 0 bytes)\n pkts bytes target prot opt in out source    destination \n   39 22221 ACCEPT udp  --  *  *   0.0.0.0/0  0.0.0.0/0 udp spts:67:68 dpts:67:68\n ...\n  182 43862 LOG    all  --  *  *   0.0.0.0/0  0.0.0.0/0 LOG flags 0 level 4 prefix \"input_drop: \"\n  182 43862 REJECT all  --  *  *   0.0.0.0/0  0.0.0.0/0 reject-with icmp-host-prohibited"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "false",
+      "MP Summary": "return false value",
+      "Most Similar TLDR Task": "Return an exit code of 1",
+      "Most Similar TLDR Script": "false",
+      "Most Similar NL2Bash Task": "Save the percentage of packets lost of the 5 packets sent to \"$host\" in variable \"packet_loss\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "packet_loss=$(ping -c 5 -q $host | grep -oP '\\d+(?=% packet loss)')\n",
+          "command-options": {
+            "ping": {
+              "mpsum": "send ICMP ECHO_REQUEST to network hosts",
+              "-q": "Quiet output. Nothing is displayed except the summary lines at startup time and when\n finished.",
+              "-c": "Stop after sending count ECHO_REQUEST packets. With deadline option, ping waits for\n count ECHO_REPLY packets, until the timeout expires."
+            },
+            "host": {
+              "mpsum": "DNS lookup utility"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-P": "Interpret PATTERNS as Perl-compatible regular expressions (PCREs). This option is\n experimental when combined with the -z (--null-data) option, and grep -P may warn\n of unimplemented features.",
+              "-o": "Print only the matched (non-empty) parts of a matching line, with each such part on\n a separate output line."
+            }
+          },
+          "TLDR_inform": {
+            "ping": {
+              "man8_ping_3750": "send icmp echo_request packet network host also display messag respons receiv ping host specif number time ping host ping host ring bell packet receiv termin support ping host without tri lookup symbol name address ping host specifi interv second request default 1 second"
+            },
+            "host": {
+              "man1_host_14420": "lookup domain name server lookup aaaa mx record domain lookup field cname txt domain revers lookup ip specifi altern dn server queri"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_15617363: What's the best way to dump and drop network packets of a specific application?"
+      ],
+      "Top-3 Scripts": [
+        "so_15617363: # Setup: Add a user and give him some rules\nadduser --shell /bin/false --no-create-home tempuser\niptables -A OUTPUT -m owner --uid-owner tempuser -j ACCEPT\n# Run your app\nsudo -u tempuser your_application"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "gedit",
+      "MP Summary": "text editor for the GNOME Desktop",
+      "Most Similar TLDR Task": "Open a text file with a specific encoding",
+      "Most Similar TLDR Script": "gedit --encoding={{UTF-8}} {{path/to/file}}",
+      "Most Similar NL2Bash Task": "Save the percentage of packets lost of the 5 packets sent to \"$host\" in variable \"packet_loss\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "packet_loss=$(ping -c 5 -q $host | grep -oP '\\d+(?=% packet loss)')\n",
+          "command-options": {
+            "ping": {
+              "mpsum": "send ICMP ECHO_REQUEST to network hosts",
+              "-q": "Quiet output. Nothing is displayed except the summary lines at startup time and when\n finished.",
+              "-c": "Stop after sending count ECHO_REQUEST packets. With deadline option, ping waits for\n count ECHO_REPLY packets, until the timeout expires."
+            },
+            "host": {
+              "mpsum": "DNS lookup utility"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-P": "Interpret PATTERNS as Perl-compatible regular expressions (PCREs). This option is\n experimental when combined with the -z (--null-data) option, and grep -P may warn\n of unimplemented features.",
+              "-o": "Print only the matched (non-empty) parts of a matching line, with each such part on\n a separate output line."
+            }
+          },
+          "TLDR_inform": {
+            "ping": {
+              "man8_ping_3750": "send icmp echo_request packet network host also display messag respons receiv ping host specif number time ping host ping host ring bell packet receiv termin support ping host without tri lookup symbol name address ping host specifi interv second request default 1 second"
+            },
+            "host": {
+              "man1_host_14420": "lookup domain name server lookup aaaa mx record domain lookup field cname txt domain revers lookup ip specifi altern dn server queri"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_14181488: Simulating key press using bash"
+      ],
+      "Top-3 Scripts": [
+        "so_14181488: gedit & sleep 2; xdotool key k;"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "up",
+      "MP Summary": "Recursively copy directories, preserving AFS metadata",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "Save the percentage of packets lost of the 5 packets sent to \"$host\" in variable \"packet_loss\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "packet_loss=$(ping -c 5 -q $host | grep -oP '\\d+(?=% packet loss)')\n",
+          "command-options": {
+            "ping": {
+              "mpsum": "send ICMP ECHO_REQUEST to network hosts",
+              "-q": "Quiet output. Nothing is displayed except the summary lines at startup time and when\n finished.",
+              "-c": "Stop after sending count ECHO_REQUEST packets. With deadline option, ping waits for\n count ECHO_REPLY packets, until the timeout expires."
+            },
+            "host": {
+              "mpsum": "DNS lookup utility"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-P": "Interpret PATTERNS as Perl-compatible regular expressions (PCREs). This option is\n experimental when combined with the -z (--null-data) option, and grep -P may warn\n of unimplemented features.",
+              "-o": "Print only the matched (non-empty) parts of a matching line, with each such part on\n a separate output line."
+            }
+          },
+          "TLDR_inform": {
+            "ping": {
+              "man8_ping_3750": "send icmp echo_request packet network host also display messag respons receiv ping host specif number time ping host ping host ring bell packet receiv termin support ping host without tri lookup symbol name address ping host specifi interv second request default 1 second"
+            },
+            "host": {
+              "man1_host_14420": "lookup domain name server lookup aaaa mx record domain lookup field cname txt domain revers lookup ip specifi altern dn server queri"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_11856727: select and accept delay in Linux"
+      ],
+      "Top-3 Scripts": [
+        "so_11856727: fd_set *rfds = malloc(128+sizeof *foo); /* can hold fds up to FD_SETSIZE+128*8-1 */"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "to",
+      "MP Summary": "as the filename. --logdir <name> Writes each synchronization log output in a new file in the specified directory. --logexpire <hours> Removes logs older than the value specified (in hours). This command is  used  with --logdir. --logflush Clears (flushes) the log file after each write action. --logdebug Also  output  debug-level  messages  in  the log (equivalent to setting the env var QT_LOGGING_RULES=\"qt.*=true;*.debug=true\"). ) --confdir <dirname> Uses the specified configuration directory. The ownCloud Client reads a configuration file.  You can locate this configuration file as follows: On Linux distributions: $HOME/.config/ownCloud/owncloud.cfg On Microsoft Windows systems: %APPDATA%\\ownCloud\\owncloud.cfg On MAC OS X systems: $HOME/Library/Preferences/ownCloud/owncloud.cfg The configuration file contains settings using the Microsoft Windows .ini file format. You can overwrite changes using the ownCloud configuration dialog. NOTE: Use caution when making changes to the ownCloud Client configuration  file.   Incorrect settings can produce unintended results. Some interesting values that can be set on the configuration file are: \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510 \u2502[ownCloud] section          \u2502         \u2502                          \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502Variable                    \u2502 Default \u2502 Meaning                  \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502remotePollInterval          \u2502 30000   \u2502 Specifies  the poll time \u2502 \u2502                            \u2502         \u2502 for      the      remote \u2502 \u2502                            \u2502         \u2502 repository            in \u2502 \u2502                            \u2502         \u2502 milliseconds.            \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502forceSyncInterval           \u2502 7200000 \u2502 The   duration   of   no \u2502 \u2502                            \u2502         \u2502 activity  after  which a \u2502 \u2502                            \u2502         \u2502 synchronization      run \u2502 \u2502                            \u2502         \u2502 shall    be    triggered \u2502 \u2502                            \u2502         \u2502 automatically.           \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502fullLocalDiscoveryInterval  \u2502 3600000 \u2502 The interval after which \u2502 \u2502                            \u2502         \u2502 the next synchronization \u2502 \u2502                            \u2502         \u2502 will   perform   a  full \u2502 \u2502                            \u2502         \u2502 local discovery.         \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502notificationRefreshInterval \u2502 300000  \u2502 Specifies   the  default \u2502 \u2502                            \u2502         \u2502 interval of checking for \u2502 \u2502                            \u2502         \u2502 new server notifications \u2502 \u2502                            \u2502         \u2502 in milliseconds.         \u2502 \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518 \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510 \u2502[General] section       \u2502         \u2502                          \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502Variable                \u2502 Default \u2502 Meaning                  \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502chunkSize               \u2502 5242880 \u2502 Specifies the chunk size \u2502 \u2502                        \u2502         \u2502 of   uploaded  files  in \u2502 \u2502                        \u2502         \u2502 bytes.                   \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502promptDeleteAllFiles    \u2502 true    \u2502 If a  UI  prompt  should \u2502 \u2502                        \u2502         \u2502 ask  for confirmation if \u2502 \u2502                        \u2502         \u2502 it was detected that all \u2502 \u2502                        \u2502         \u2502 files  and  folders were \u2502 \u2502                        \u2502         \u2502 deleted.                 \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502maxLogLines             \u2502 20000   \u2502 Specifies  the   maximum \u2502 \u2502                        \u2502         \u2502 number   of   log  lines \u2502 \u2502                        \u2502         \u2502 displayed  in  the   log \u2502 \u2502                        \u2502         \u2502 window.                  \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502timeout                 \u2502 300     \u2502 The  timeout for network \u2502 \u2502                        \u2502         \u2502 connections in seconds.  \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502moveToTrash             \u2502 false   \u2502 If  non-locally  deleted \u2502 \u2502                        \u2502         \u2502 files should be moved to \u2502 \u2502                        \u2502         \u2502 trash     instead     of \u2502 \u2502                        \u2502         \u2502 deleting            them \u2502 \u2502                        \u2502         \u2502 completely.  This option \u2502 \u2502                        \u2502         \u2502 only works on linux      \u2502 \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518 \u2502showExperimentalOptions \u2502 false   \u2502 Whether      to     show \u2502 \u2502                        \u2502         \u2502 experimental     options \u2502 \u2502                        \u2502         \u2502 that      are      still \u2502 \u2502                        \u2502         \u2502 undergoing  testing   in \u2502 \u2502                        \u2502         \u2502 the    user   interface. \u2502 \u2502                        \u2502         \u2502 Turning this on does not \u2502 \u2502                        \u2502         \u2502 enable      experimental \u2502 \u2502                        \u2502         \u2502 behavior on its own.  It \u2502 \u2502                        \u2502         \u2502 does     enable     user \u2502 \u2502                        \u2502         \u2502 inferface  options  that \u2502 \u2502                        \u2502         \u2502 can be used to opt in to \u2502 \u2502                        \u2502         \u2502 experimental features.   \u2502 \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518 \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510 \u2502[Proxy] section      \u2502           \u2502                          \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502Variable             \u2502 Default   \u2502 Meaning                  \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502host                 \u2502 127.0.0.1 \u2502 The address of the proxy \u2502 \u2502                     \u2502           \u2502 server.                  \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502port                 \u2502 8080      \u2502 The  port were the proxy \u2502 \u2502                     \u2502           \u2502 is listening.            \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502type                 \u2502 2         \u2502 0 for System Proxy.      \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u25021 for SOCKS5 Proxy.  \u2502           \u2502                          \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u25022 for No Proxy.      \u2502           \u2502                          \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u25023 for HTTP(S) Proxy. \u2502           \u2502                          \u2502 \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518 Please report bugs at https://github.com/owncloud/client/issues. owncloudcmd(1)",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "Save the percentage of packets lost of the 5 packets sent to \"$host\" in variable \"packet_loss\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "packet_loss=$(ping -c 5 -q $host | grep -oP '\\d+(?=% packet loss)')\n",
+          "command-options": {
+            "ping": {
+              "mpsum": "send ICMP ECHO_REQUEST to network hosts",
+              "-q": "Quiet output. Nothing is displayed except the summary lines at startup time and when\n finished.",
+              "-c": "Stop after sending count ECHO_REQUEST packets. With deadline option, ping waits for\n count ECHO_REPLY packets, until the timeout expires."
+            },
+            "host": {
+              "mpsum": "DNS lookup utility"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-P": "Interpret PATTERNS as Perl-compatible regular expressions (PCREs). This option is\n experimental when combined with the -z (--null-data) option, and grep -P may warn\n of unimplemented features.",
+              "-o": "Print only the matched (non-empty) parts of a matching line, with each such part on\n a separate output line."
+            }
+          },
+          "TLDR_inform": {
+            "ping": {
+              "man8_ping_3750": "send icmp echo_request packet network host also display messag respons receiv ping host specif number time ping host ping host ring bell packet receiv termin support ping host without tri lookup symbol name address ping host specifi interv second request default 1 second"
+            },
+            "host": {
+              "man1_host_14420": "lookup domain name server lookup aaaa mx record domain lookup field cname txt domain revers lookup ip specifi altern dn server queri"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_11856727: select and accept delay in Linux",
+        "tldr_4235: Write captured packet to a file",
+        "su_789420: How do I delay tcp traffic on a socket?"
+      ],
+      "Top-3 Scripts": [
+        "so_11856727: fd_set *rfds = malloc(128+sizeof *foo); /* can hold fds up to FD_SETSIZE+128*8-1 */",
+        "tldr_4235: tshark -w {{path/to/file}}",
+        "su_789420: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "socket",
+      "MP Summary": "create a TCP or a UNIX domain socket and connect to stdin/out",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "Save the percentage of packets lost of the 5 packets sent to \"$host\" in variable \"packet_loss\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "packet_loss=$(ping -c 5 -q $host | grep -oP '\\d+(?=% packet loss)')\n",
+          "command-options": {
+            "ping": {
+              "mpsum": "send ICMP ECHO_REQUEST to network hosts",
+              "-q": "Quiet output. Nothing is displayed except the summary lines at startup time and when\n finished.",
+              "-c": "Stop after sending count ECHO_REQUEST packets. With deadline option, ping waits for\n count ECHO_REPLY packets, until the timeout expires."
+            },
+            "host": {
+              "mpsum": "DNS lookup utility"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-P": "Interpret PATTERNS as Perl-compatible regular expressions (PCREs). This option is\n experimental when combined with the -z (--null-data) option, and grep -P may warn\n of unimplemented features.",
+              "-o": "Print only the matched (non-empty) parts of a matching line, with each such part on\n a separate output line."
+            }
+          },
+          "TLDR_inform": {
+            "ping": {
+              "man8_ping_3750": "send icmp echo_request packet network host also display messag respons receiv ping host specif number time ping host ping host ring bell packet receiv termin support ping host without tri lookup symbol name address ping host specifi interv second request default 1 second"
+            },
+            "host": {
+              "man1_host_14420": "lookup domain name server lookup aaaa mx record domain lookup field cname txt domain revers lookup ip specifi altern dn server queri"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_384880: How to get metrics about dropped traffic via iptables?",
+        "so_4711608: Linux: how to send TCP packet from specific port?",
+        "so_13040834: Writing raw IP data to an interface (linux)"
+      ],
+      "Top-3 Scripts": [
+        "ul_384880: $ netstat -s | grep -i drop\n27 outgoing packets dropped\n16 dropped because of missing route\n2 ICMP packets dropped because socket was locked",
+        "so_4711608: socket()",
+        "so_13040834: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "prefix",
+      "MP Summary": "Script  that  allows  you  to  reconfigure  environment  variables for multiple installations of a set of software installed on the same machine",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "Save the percentage of packets lost of the 5 packets sent to \"$host\" in variable \"packet_loss\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "packet_loss=$(ping -c 5 -q $host | grep -oP '\\d+(?=% packet loss)')\n",
+          "command-options": {
+            "ping": {
+              "mpsum": "send ICMP ECHO_REQUEST to network hosts",
+              "-q": "Quiet output. Nothing is displayed except the summary lines at startup time and when\n finished.",
+              "-c": "Stop after sending count ECHO_REQUEST packets. With deadline option, ping waits for\n count ECHO_REPLY packets, until the timeout expires."
+            },
+            "host": {
+              "mpsum": "DNS lookup utility"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-P": "Interpret PATTERNS as Perl-compatible regular expressions (PCREs). This option is\n experimental when combined with the -z (--null-data) option, and grep -P may warn\n of unimplemented features.",
+              "-o": "Print only the matched (non-empty) parts of a matching line, with each such part on\n a separate output line."
+            }
+          },
+          "TLDR_inform": {
+            "ping": {
+              "man8_ping_3750": "send icmp echo_request packet network host also display messag respons receiv ping host specif number time ping host ping host ring bell packet receiv termin support ping host without tri lookup symbol name address ping host specifi interv second request default 1 second"
+            },
+            "host": {
+              "man1_host_14420": "lookup domain name server lookup aaaa mx record domain lookup field cname txt domain revers lookup ip specifi altern dn server queri"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_384880: How to get metrics about dropped traffic via iptables?"
+      ],
+      "Top-3 Scripts": [
+        "ul_384880: $ sudo iptables -L -n -v -x\nChain INPUT (policy DROP 0 packets, 0 bytes)\n pkts bytes target prot opt in out source    destination \n   39 22221 ACCEPT udp  --  *  *   0.0.0.0/0  0.0.0.0/0 udp spts:67:68 dpts:67:68\n ...\n  182 43862 LOG    all  --  *  *   0.0.0.0/0  0.0.0.0/0 LOG flags 0 level 4 prefix \"input_drop: \"\n  182 43862 REJECT all  --  *  *   0.0.0.0/0  0.0.0.0/0 reject-with icmp-host-prohibited"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "statistics",
+      "MP Summary": "Image statistics",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "Save the percentage of packets lost of the 5 packets sent to \"$host\" in variable \"packet_loss\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "packet_loss=$(ping -c 5 -q $host | grep -oP '\\d+(?=% packet loss)')\n",
+          "command-options": {
+            "ping": {
+              "mpsum": "send ICMP ECHO_REQUEST to network hosts",
+              "-q": "Quiet output. Nothing is displayed except the summary lines at startup time and when\n finished.",
+              "-c": "Stop after sending count ECHO_REQUEST packets. With deadline option, ping waits for\n count ECHO_REPLY packets, until the timeout expires."
+            },
+            "host": {
+              "mpsum": "DNS lookup utility"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-P": "Interpret PATTERNS as Perl-compatible regular expressions (PCREs). This option is\n experimental when combined with the -z (--null-data) option, and grep -P may warn\n of unimplemented features.",
+              "-o": "Print only the matched (non-empty) parts of a matching line, with each such part on\n a separate output line."
+            }
+          },
+          "TLDR_inform": {
+            "ping": {
+              "man8_ping_3750": "send icmp echo_request packet network host also display messag respons receiv ping host specif number time ping host ping host ring bell packet receiv termin support ping host without tri lookup symbol name address ping host specifi interv second request default 1 second"
+            },
+            "host": {
+              "man1_host_14420": "lookup domain name server lookup aaaa mx record domain lookup field cname txt domain revers lookup ip specifi altern dn server queri"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_983006: How to make a network interface drop a defined percentage of packets"
+      ],
+      "Top-3 Scripts": [
+        "au_983006: --- rpi01-wifi.smythies.com ping statistics ---\n247 packets transmitted, 217 received, 12% packet loss, time 246752ms\nrtt min/avg/max/mdev = 0.958/4.933/169.588/17.884 ms\n\n--- rpi01-wifi.smythies.com ping statistics ---\n1006 packets transmitted, 871 received, 13% packet loss, time 305146ms\nrtt min/avg/max/mdev = 0.892/7.363/476.902/35.397 ms, pipe 2\n\n--- rpi01-wifi.smythies.com ping statistics ---\n1000 packets transmitted, 967 received, 3% packet loss, time 253840ms\nrtt min/avg/max/mdev = 0.876/7.583/536.867/36.065 ms, pipe 3"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "pipe",
+      "MP Summary": "Postfix delivery to external command",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "Save the percentage of packets lost of the 5 packets sent to \"$host\" in variable \"packet_loss\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "packet_loss=$(ping -c 5 -q $host | grep -oP '\\d+(?=% packet loss)')\n",
+          "command-options": {
+            "ping": {
+              "mpsum": "send ICMP ECHO_REQUEST to network hosts",
+              "-q": "Quiet output. Nothing is displayed except the summary lines at startup time and when\n finished.",
+              "-c": "Stop after sending count ECHO_REQUEST packets. With deadline option, ping waits for\n count ECHO_REPLY packets, until the timeout expires."
+            },
+            "host": {
+              "mpsum": "DNS lookup utility"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-P": "Interpret PATTERNS as Perl-compatible regular expressions (PCREs). This option is\n experimental when combined with the -z (--null-data) option, and grep -P may warn\n of unimplemented features.",
+              "-o": "Print only the matched (non-empty) parts of a matching line, with each such part on\n a separate output line."
+            }
+          },
+          "TLDR_inform": {
+            "ping": {
+              "man8_ping_3750": "send icmp echo_request packet network host also display messag respons receiv ping host specif number time ping host ping host ring bell packet receiv termin support ping host without tri lookup symbol name address ping host specifi interv second request default 1 second"
+            },
+            "host": {
+              "man1_host_14420": "lookup domain name server lookup aaaa mx record domain lookup field cname txt domain revers lookup ip specifi altern dn server queri"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_983006: How to make a network interface drop a defined percentage of packets"
+      ],
+      "Top-3 Scripts": [
+        "au_983006: --- rpi01-wifi.smythies.com ping statistics ---\n1006 packets transmitted, 871 received, 13% packet loss, time 305146ms\nrtt min/avg/max/mdev = 0.892/7.363/476.902/35.397 ms, pipe 2\n\n--- rpi01-wifi.smythies.com ping statistics ---\n1000 packets transmitted, 967 received, 3% packet loss, time 253840ms\nrtt min/avg/max/mdev = 0.876/7.583/536.867/36.065 ms, pipe 3"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "bin",
+      "MP Summary": "presumably creating or updating package.json and running any other initialization-related operations. The init command is transformed to a corresponding npx operation as follows: \u00b7 npm init foo -> npx create-foo \u00b7 npm init @usr/foo -> npx @usr/create-foo \u00b7 npm init @usr -> npx @usr/create Any  additional  options  will  be passed directly to the command, so npm init foo --hello will map to npx create-foo --hello. If the initializer is omitted (by just calling npm init), init will fall  back  to  legacy init  behavior.  It  will  ask you a bunch of questions, and then write a package.json for you. It will attempt to make reasonable guesses based on  existing  fields,  dependencies, and  options selected. It is strictly additive, so it will keep any fields and values that were already set. You can also use -y/--yes to skip the questionnaire altogether.  If  you pass --scope, it will create a scoped package. See Also \u00b7 https://github.com/isaacs/init-package-json \u00b7 npm help package.json \u00b7 npm help version \u00b7 npm help scope April 2020                                NPM-INIT(1)",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "Save the percentage of packets lost of the 5 packets sent to \"$host\" in variable \"packet_loss\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "packet_loss=$(ping -c 5 -q $host | grep -oP '\\d+(?=% packet loss)')\n",
+          "command-options": {
+            "ping": {
+              "mpsum": "send ICMP ECHO_REQUEST to network hosts",
+              "-q": "Quiet output. Nothing is displayed except the summary lines at startup time and when\n finished.",
+              "-c": "Stop after sending count ECHO_REQUEST packets. With deadline option, ping waits for\n count ECHO_REPLY packets, until the timeout expires."
+            },
+            "host": {
+              "mpsum": "DNS lookup utility"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-P": "Interpret PATTERNS as Perl-compatible regular expressions (PCREs). This option is\n experimental when combined with the -z (--null-data) option, and grep -P may warn\n of unimplemented features.",
+              "-o": "Print only the matched (non-empty) parts of a matching line, with each such part on\n a separate output line."
+            }
+          },
+          "TLDR_inform": {
+            "ping": {
+              "man8_ping_3750": "send icmp echo_request packet network host also display messag respons receiv ping host specif number time ping host ping host ring bell packet receiv termin support ping host without tri lookup symbol name address ping host specifi interv second request default 1 second"
+            },
+            "host": {
+              "man1_host_14420": "lookup domain name server lookup aaaa mx record domain lookup field cname txt domain revers lookup ip specifi altern dn server queri"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_15617363: What's the best way to dump and drop network packets of a specific application?",
+        "ul_625860: Add a delay in git post-merge"
+      ],
+      "Top-3 Scripts": [
+        "so_15617363: /usr/bin/lxc-execute -n app_container -f my_net_lxc.conf your_application\n\n# Setup: Add a user and give him some rules\nadduser --shell /bin/false --no-create-home tempuser\niptables -A OUTPUT -m owner --uid-owner tempuser -j ACCEPT\n# Run your app\nsudo -u tempuser your_application",
+        "ul_625860: #!/bin/sh\n( sleep 10 ; /usr/bin/sudo systemctl restart tempcollect  ) &"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "lxc-execute",
+      "MP Summary": "run an application inside a container.",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "Save the percentage of packets lost of the 5 packets sent to \"$host\" in variable \"packet_loss\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "packet_loss=$(ping -c 5 -q $host | grep -oP '\\d+(?=% packet loss)')\n",
+          "command-options": {
+            "ping": {
+              "mpsum": "send ICMP ECHO_REQUEST to network hosts",
+              "-q": "Quiet output. Nothing is displayed except the summary lines at startup time and when\n finished.",
+              "-c": "Stop after sending count ECHO_REQUEST packets. With deadline option, ping waits for\n count ECHO_REPLY packets, until the timeout expires."
+            },
+            "host": {
+              "mpsum": "DNS lookup utility"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-P": "Interpret PATTERNS as Perl-compatible regular expressions (PCREs). This option is\n experimental when combined with the -z (--null-data) option, and grep -P may warn\n of unimplemented features.",
+              "-o": "Print only the matched (non-empty) parts of a matching line, with each such part on\n a separate output line."
+            }
+          },
+          "TLDR_inform": {
+            "ping": {
+              "man8_ping_3750": "send icmp echo_request packet network host also display messag respons receiv ping host specif number time ping host ping host ring bell packet receiv termin support ping host without tri lookup symbol name address ping host specifi interv second request default 1 second"
+            },
+            "host": {
+              "man1_host_14420": "lookup domain name server lookup aaaa mx record domain lookup field cname txt domain revers lookup ip specifi altern dn server queri"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_15617363: What's the best way to dump and drop network packets of a specific application?"
+      ],
+      "Top-3 Scripts": [
+        "so_15617363: /usr/bin/lxc-execute -n app_container -f my_net_lxc.conf your_application"
+      ],
+      "Explanations about Options": {
+        "-f": "Specify the configuration file to configure the virtualization and isolation\n functionalities for the container.",
+        "-n": "Use container identifier NAME. The container identifier format is an alphanumeric\n string."
+      }
+    },
+    {
+      "Command": "match",
+      "MP Summary": "Match strings against glob patterns",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "Save the percentage of packets lost of the 5 packets sent to \"$host\" in variable \"packet_loss\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "packet_loss=$(ping -c 5 -q $host | grep -oP '\\d+(?=% packet loss)')\n",
+          "command-options": {
+            "ping": {
+              "mpsum": "send ICMP ECHO_REQUEST to network hosts",
+              "-q": "Quiet output. Nothing is displayed except the summary lines at startup time and when\n finished.",
+              "-c": "Stop after sending count ECHO_REQUEST packets. With deadline option, ping waits for\n count ECHO_REPLY packets, until the timeout expires."
+            },
+            "host": {
+              "mpsum": "DNS lookup utility"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-P": "Interpret PATTERNS as Perl-compatible regular expressions (PCREs). This option is\n experimental when combined with the -z (--null-data) option, and grep -P may warn\n of unimplemented features.",
+              "-o": "Print only the matched (non-empty) parts of a matching line, with each such part on\n a separate output line."
+            }
+          },
+          "TLDR_inform": {
+            "ping": {
+              "man8_ping_3750": "send icmp echo_request packet network host also display messag respons receiv ping host specif number time ping host ping host ring bell packet receiv termin support ping host without tri lookup symbol name address ping host specifi interv second request default 1 second"
+            },
+            "host": {
+              "man1_host_14420": "lookup domain name server lookup aaaa mx record domain lookup field cname txt domain revers lookup ip specifi altern dn server queri"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "su_1114230: Ubuntu Firewall: How to drop all TCP reply packets from an IP address"
+      ],
+      "Top-3 Scripts": [
+        "su_1114230: iptables -A FORWARD -p tcp --tcp-flags SYN,ACK,FIN,RST SYN\n\nwill only match packets with the SYN flag set, and the ACK, FIN and RST flags unset."
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "flag",
+      "MP Summary": "command language",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "Save the percentage of packets lost of the 5 packets sent to \"$host\" in variable \"packet_loss\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "packet_loss=$(ping -c 5 -q $host | grep -oP '\\d+(?=% packet loss)')\n",
+          "command-options": {
+            "ping": {
+              "mpsum": "send ICMP ECHO_REQUEST to network hosts",
+              "-q": "Quiet output. Nothing is displayed except the summary lines at startup time and when\n finished.",
+              "-c": "Stop after sending count ECHO_REQUEST packets. With deadline option, ping waits for\n count ECHO_REPLY packets, until the timeout expires."
+            },
+            "host": {
+              "mpsum": "DNS lookup utility"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-P": "Interpret PATTERNS as Perl-compatible regular expressions (PCREs). This option is\n experimental when combined with the -z (--null-data) option, and grep -P may warn\n of unimplemented features.",
+              "-o": "Print only the matched (non-empty) parts of a matching line, with each such part on\n a separate output line."
+            }
+          },
+          "TLDR_inform": {
+            "ping": {
+              "man8_ping_3750": "send icmp echo_request packet network host also display messag respons receiv ping host specif number time ping host ping host ring bell packet receiv termin support ping host without tri lookup symbol name address ping host specifi interv second request default 1 second"
+            },
+            "host": {
+              "man1_host_14420": "lookup domain name server lookup aaaa mx record domain lookup field cname txt domain revers lookup ip specifi altern dn server queri"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "su_1114230: Ubuntu Firewall: How to drop all TCP reply packets from an IP address"
+      ],
+      "Top-3 Scripts": [
+        "su_1114230: iptables -A FORWARD -p tcp --tcp-flags SYN,ACK,FIN,RST SYN\n\nwill only match packets with the SYN flag set, and the ACK, FIN and RST flags unset."
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "and",
+      "MP Summary": "auto nice daemon",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "Save the percentage of packets lost of the 5 packets sent to \"$host\" in variable \"packet_loss\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "packet_loss=$(ping -c 5 -q $host | grep -oP '\\d+(?=% packet loss)')\n",
+          "command-options": {
+            "ping": {
+              "mpsum": "send ICMP ECHO_REQUEST to network hosts",
+              "-q": "Quiet output. Nothing is displayed except the summary lines at startup time and when\n finished.",
+              "-c": "Stop after sending count ECHO_REQUEST packets. With deadline option, ping waits for\n count ECHO_REPLY packets, until the timeout expires."
+            },
+            "host": {
+              "mpsum": "DNS lookup utility"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-P": "Interpret PATTERNS as Perl-compatible regular expressions (PCREs). This option is\n experimental when combined with the -z (--null-data) option, and grep -P may warn\n of unimplemented features.",
+              "-o": "Print only the matched (non-empty) parts of a matching line, with each such part on\n a separate output line."
+            }
+          },
+          "TLDR_inform": {
+            "ping": {
+              "man8_ping_3750": "send icmp echo_request packet network host also display messag respons receiv ping host specif number time ping host ping host ring bell packet receiv termin support ping host without tri lookup symbol name address ping host specifi interv second request default 1 second"
+            },
+            "host": {
+              "man1_host_14420": "lookup domain name server lookup aaaa mx record domain lookup field cname txt domain revers lookup ip specifi altern dn server queri"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "su_1114230: Ubuntu Firewall: How to drop all TCP reply packets from an IP address",
+        "so_16316346: Php delay sending data for 5 minutes",
+        "ul_549998: How can I capture all the UDP packets using tcpdump?"
+      ],
+      "Top-3 Scripts": [
+        "su_1114230: iptables -A FORWARD -p tcp --tcp-flags SYN,ACK,FIN,RST SYN\n\nwill only match packets with the SYN flag set, and the ACK, FIN and RST flags unset.",
+        "so_16316346: Put record in queue with timestamp eg a database\nWrite server process to monitor queue and see if 5 mins has passed\nSend mail if 5 mins have passed.\nWrite monitoring system to monitor server process and ensure it is working.",
+        "ul_549998: sudo tcpdump -i eth0 -s 0  -w tcpdump.pcap host hostA and udp"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "wireshark",
+      "MP Summary": "Interactively dump and analyze network traffic",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "Save the percentage of packets lost of the 5 packets sent to \"$host\" in variable \"packet_loss\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "packet_loss=$(ping -c 5 -q $host | grep -oP '\\d+(?=% packet loss)')\n",
+          "command-options": {
+            "ping": {
+              "mpsum": "send ICMP ECHO_REQUEST to network hosts",
+              "-q": "Quiet output. Nothing is displayed except the summary lines at startup time and when\n finished.",
+              "-c": "Stop after sending count ECHO_REQUEST packets. With deadline option, ping waits for\n count ECHO_REPLY packets, until the timeout expires."
+            },
+            "host": {
+              "mpsum": "DNS lookup utility"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-P": "Interpret PATTERNS as Perl-compatible regular expressions (PCREs). This option is\n experimental when combined with the -z (--null-data) option, and grep -P may warn\n of unimplemented features.",
+              "-o": "Print only the matched (non-empty) parts of a matching line, with each such part on\n a separate output line."
+            }
+          },
+          "TLDR_inform": {
+            "ping": {
+              "man8_ping_3750": "send icmp echo_request packet network host also display messag respons receiv ping host specif number time ping host ping host ring bell packet receiv termin support ping host without tri lookup symbol name address ping host specifi interv second request default 1 second"
+            },
+            "host": {
+              "man1_host_14420": "lookup domain name server lookup aaaa mx record domain lookup field cname txt domain revers lookup ip specifi altern dn server queri"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_602505: Wireshark can't see the dropped packets by iptables"
+      ],
+      "Top-3 Scripts": [
+        "ul_602505: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "xset",
+      "MP Summary": "user preference utility for X",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "Save the percentage of packets lost of the 5 packets sent to \"$host\" in variable \"packet_loss\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "packet_loss=$(ping -c 5 -q $host | grep -oP '\\d+(?=% packet loss)')\n",
+          "command-options": {
+            "ping": {
+              "mpsum": "send ICMP ECHO_REQUEST to network hosts",
+              "-q": "Quiet output. Nothing is displayed except the summary lines at startup time and when\n finished.",
+              "-c": "Stop after sending count ECHO_REQUEST packets. With deadline option, ping waits for\n count ECHO_REPLY packets, until the timeout expires."
+            },
+            "host": {
+              "mpsum": "DNS lookup utility"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns",
+              "-P": "Interpret PATTERNS as Perl-compatible regular expressions (PCREs). This option is\n experimental when combined with the -z (--null-data) option, and grep -P may warn\n of unimplemented features.",
+              "-o": "Print only the matched (non-empty) parts of a matching line, with each such part on\n a separate output line."
+            }
+          },
+          "TLDR_inform": {
+            "ping": {
+              "man8_ping_3750": "send icmp echo_request packet network host also display messag respons receiv ping host specif number time ping host ping host ring bell packet receiv termin support ping host without tri lookup symbol name address ping host specifi interv second request default 1 second"
+            },
+            "host": {
+              "man1_host_14420": "lookup domain name server lookup aaaa mx record domain lookup field cname txt domain revers lookup ip specifi altern dn server queri"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_239556: Adjusting keyboard delay in a TTY?"
+      ],
+      "Top-3 Scripts": [
+        "ul_239556: xset r rate 810 30"
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

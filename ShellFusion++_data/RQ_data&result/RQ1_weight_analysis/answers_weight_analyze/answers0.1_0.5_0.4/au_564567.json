@@ -1,0 +1,99 @@
+{
+  "Query": "How to download playlist to mp3 format with youtube-dl?",
+  "Answers": [
+    {
+      "Command": "youtube-dl",
+      "MP Summary": "download videos from youtube.com or other video platforms",
+      "Most Similar TLDR Task": "Download a playlist and extract mp3 from it",
+      "Most Similar TLDR Script": "youtube-dl -i --extract-audio --audio-format mp3 -o \"%(title)s.%(ext)s\" '{{url to playlist}}'",
+      "Top-3 Similar Questions": [
+        "au_673442: Downloading youtube playlist with youtube-dl, skipping existing files",
+        "au_694848: How to download a youtube playlist with numbered prefix via youtube-dl?",
+        "au_948516: How do I download with youtube-dl to get video title as filename?"
+      ],
+      "Top-3 Scripts": [
+        "au_673442: youtube-dl --download-archive downloaded.txt --no-post-overwrites -ciwx --audio-format mp3 -o \"%(title)s.%(ext)s\" <em>[path here]</em>",
+        "au_694848: youtube-dl -o \"%(playlist_index)s-%(title)s.%(ext)s\" <playlist_link>",
+        "au_948516: man youtube-dl\n\nyoutube-dl -o '%(title)s.%(ext)s' <URL-of-video>"
+      ],
+      "Explanations about Options": {
+        "-w": "Do not overwrite files",
+        "--audio-format": "Specify audio format: \"best\", \"aac\", \"flac\", \"mp3\", \"m4a\", \"opus\", \"vorbis\", or\n \"wav\"; \"best\" by default; No effect without -x",
+        "-o": "Output filename template, see the \"OUTPUT TEMPLATE\" for all the info",
+        "-c": "Force resume of partially downloaded files. By default, youtube-dl will resume\n downloads if possible.",
+        "--download-archive": "Download only videos not listed in the archive file. Record the IDs of all\n downloaded videos in it.",
+        "--no-post-overwrites": "Do not overwrite post-processed files; the post-processed files are overwritten by\n default",
+        "-i": "Continue on download errors, for example to skip unavailable videos in a playlist"
+      }
+    },
+    {
+      "Command": "ffmpeg",
+      "MP Summary": "ffmpeg video converter",
+      "Most Similar TLDR Task": "Extract the sound from a video and save it as MP3",
+      "Most Similar TLDR Script": "ffmpeg -i {{video.mp4}} -vn {{sound}}.mp3",
+      "Top-3 Similar Questions": [
+        "au_634584: How to download youtube videos as a best quality audio mp3 using youtube-dl",
+        "so_41310196: Bash: bash script to download trimmed mp3 from youtube url"
+      ],
+      "Top-3 Scripts": [
+        "au_634584: -x, --extract-audio                  Convert video files to audio-only files (requires ffmpeg or avconv and ffprobe or avprobe)\n    --audio-format FORMAT            Specify audio format: \"best\", \"aac\", \"vorbis\", \"mp3\", \"m4a\", \"opus\", or \"wav\"; \"best\" by default\n    --audio-quality QUALITY          Specify ffmpeg/avconv audio quality, insert a value between 0 (better) and 9 (worse) for VBR or a specific bitrate like 128K (default",
+        "so_41310196: mytrim() {\n    local downloaded_file\n    youtube-dl --extract-audio --embed-thumbnail --audio-format mp3 -o \"%(title)s.%(ext)s\" $1\n    downloaded_file=$(youtube-dl --get-filename --extract-audio --embed-thumbnail --audio-format mp3 -o \"%(title)s.%(ext)s\" $1)\n    ffmpeg -ss $2 -i \"${downloaded_file}\" -acodec copy -y temp.mp3\n    mv temp.mp3 \"${downloaded_file}\"\n}"
+      ],
+      "Explanations about Options": {
+        "-acodec": "Set the audio codec. This is an alias for \"-codec:a\".",
+        "-ss": "When used as an input option (before \"-i\"), seeks in this input file to position. Note\n that in most formats it is not possible to seek exactly, so ffmpeg will seek to the\n closest seek point before position. When transcoding and -accurate_seek is enabled\n (the default), this extra segment between the seek point and position will be decoded\n and discarded. When doing stream copy or when -noaccurate_seek is used, it will be\n preserved.",
+        "-i": "input file url",
+        "-y": "Overwrite output files without asking."
+      }
+    },
+    {
+      "Command": "curl",
+      "MP Summary": "transfer a URL",
+      "Most Similar TLDR Task": "Download the contents of an URL to a file",
+      "Most Similar TLDR Script": "curl {{http://example.com}} -o {{filename}}",
+      "Top-3 Similar Questions": [
+        "ul_462646: A file on AkamaiGlobalHost downloads with a browser but not with curl",
+        "au_285976: Download ZIP file with curl command",
+        "ul_198326: Download an article with cURL given a dynamic download link"
+      ],
+      "Top-3 Scripts": [
+        "ul_462646: ",
+        "au_285976: curl -LO",
+        "ul_198326: curl -L --referer \";auto\" -o test.pdf URL-for-direct-download"
+      ],
+      "Explanations about Options": {
+        "--referer": "(HTTP) Sends the \"Referrer Page\" information to the HTTP server. This can also be\n set with the -H, --header flag of course. When used with -L, --location you can\n append \";auto\" to the -e, --referer URL to make curl automatically set the previous\n URL when it follows a Location: header. The \";auto\" string can be used alone, even\n if you don't set an initial -e, --referer.",
+        "-O": "Write output to a local file named like the remote file we get. (Only the file part\n of the remote file is used, the path is cut off.)",
+        "-o": "Write output to <file> instead of stdout. If you are using {} or [] to fetch\n multiple documents, you can use '#' followed by a number in the <file> specifier.\n That variable will be replaced with the current string for the URL being fetched.\n Like in:"
+      }
+    },
+    {
+      "Command": "vlc",
+      "MP Summary": "the VLC media player",
+      "Most Similar TLDR Task": "Play video from a URL",
+      "Most Similar TLDR Script": "vlc {{https://www.youtube.com/watch?v=oHg5SJYRHA0}}",
+      "Top-3 Similar Questions": [
+        "au_460825: How to open youtube video with youtube-dl"
+      ],
+      "Top-3 Scripts": [
+        "au_460825: cd /path/videos\nvlc \"Videoname.avi\"\n\nsudo add-apt-repository ppa:videolan/stable-daily\nsudo apt-get update\nsudo apt-get install vlc"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "aria2c",
+      "MP Summary": "The ultra fast download utility",
+      "Most Similar TLDR Task": "Download the contents of an URL to a file",
+      "Most Similar TLDR Script": "aria2c -o {{filename}} {{url}}",
+      "Top-3 Similar Questions": [
+        "so_22114610: Downloading a file with wget using multiple connections"
+      ],
+      "Top-3 Scripts": [
+        "so_22114610: aria2c -x 16 [url] #where 16 is the number of connections"
+      ],
+      "Explanations about Options": {
+        "-x": "The maximum number of connections to one server for each download. Default: 1"
+      }
+    }
+  ]
+}

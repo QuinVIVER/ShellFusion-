@@ -1,0 +1,96 @@
+{
+  "Query": "Alias for directory listing sorted by time modified in reverse order",
+  "Answers": [
+    {
+      "Command": "sort",
+      "MP Summary": "sort lines of text files",
+      "Most Similar TLDR Task": "Sort a file using numeric rather than alphabetic order",
+      "Most Similar TLDR Script": "sort -n {{path/to/file}}",
+      "Top-3 Similar Questions": [
+        "ul_203169: How to list all leaf files under a directory in reverse time order?",
+        "su_643704: List of files under a directory in name order",
+        "ul_332348: How to sort file names in numerical order AND modified time order?"
+      ],
+      "Top-3 Scripts": [
+        "ul_203169: find . ! -type d -printf '%T@\\t%f\\0' | sort -zn |\n  tr '\\n\\0' '\\0\\n' | cut -f2- | tr '\\0' '\\n'",
+        "su_643704: find \"$PHOTODIR\" -iname \"*.jpg\" | sort\n\nfind \"$PHOTODIR\" -iname \"*.jpg\" -print0 | sort -z | xargs -0 <command>",
+        "ul_332348: { for f (*)\nprintf '%s %s\\n' ${(l:6::0:)${f%%.*}}$(zstat -F '%s' +mtime -- $f) $f\n} | sort -k1,1n"
+      ],
+      "Explanations about Options": {
+        "-z": "line delimiter is NUL, not newline",
+        "-n": "compare according to string numerical value"
+      }
+    },
+    {
+      "Command": "ls",
+      "MP Summary": "list directory contents",
+      "Most Similar TLDR Task": "List all files, with trailing `/` added to directory names",
+      "Most Similar TLDR Script": "ls -F",
+      "Top-3 Similar Questions": [
+        "au_1182473: How to list all pdf files in a directory, sorted in reverse alphabetical order, with bash?",
+        "ul_645954: Sort directory list in reverse order",
+        "ul_117293: How to sort a list of files by time, given only the filenames"
+      ],
+      "Top-3 Scripts": [
+        "au_1182473: ls -r all_files/*.pdf\n\n(cd all_files && ls -r -- *.pdf)\n\nls -1r all_files/*.pdf\n\n(cd all_files && ls -1r -- *.pdf)\n\nls --reverse\n\nls -1 --reverse all_files/*.pdf\n\nls -r all_files/!(*.docx)\n\n(cd all_files && ls -r -- !(*.docx))\n\n(shopt -s extglob; ls -r all_files/!(*.docx))\n\n(shopt -s extglob; cd all_files && ls -r -- !(*.docx))",
+        "ul_645954: ls -l /usr/bin/ | sort -k9 -r",
+        "ul_117293: ls -dt $(cat files)\n\nls -t"
+      ],
+      "Explanations about Options": {
+        "-l": "use a long listing format",
+        "-t": "sort by modification time , newest first",
+        "-r": "reverse order while sorting"
+      }
+    },
+    {
+      "Command": "find",
+      "MP Summary": "search for files in a directory hierarchy",
+      "Most Similar TLDR Task": "Find files modified in the last 7 days, and delete them",
+      "Most Similar TLDR Script": "find {{root_path}} -mtime {{-7}} -delete",
+      "Top-3 Similar Questions": [
+        "ul_203169: How to list all leaf files under a directory in reverse time order?",
+        "su_643704: List of files under a directory in name order",
+        "so_15746687: Sorting Files (including files in all subdirectories) by modification time"
+      ],
+      "Top-3 Scripts": [
+        "ul_203169: find . ! -type d -printf '%T@\\t%f\\0' | sort -zn |\n  tr '\\n\\0' '\\0\\n' | cut -f2- | tr '\\0' '\\n'",
+        "su_643704: find \"$PHOTODIR\" -iname \"*.jpg\" | sort\n\nfind \"$PHOTODIR\" -iname \"*.jpg\" -print0 | sort -z | xargs -0 <command>",
+        "so_15746687: find . -type f -printf '%TY%Tm%Td%TH%TM%TS %p\\n'|sort"
+      ],
+      "Explanations about Options": {
+        "-printf": "True; print format on the standard output, interpreting `\\' escapes and `%'\n directives. Field widths and precisions can be specified as with the `printf' C\n function. Please note that many of the fields are printed as %s rather than %d,\n and this may mean that flags don't work as you might expect. This also means that\n the `-' flag does work (it forces fields to be left-aligned). Unlike -print,\n -printf does not add a newline at the end of the string. The escapes and\n directives are:",
+        "-print0": "Always print the exact filename, unchanged, even if the output is going to a\n terminal.",
+        "-iname": "Like -name, but the match is case insensitive. For example, the patterns `fo*' and\n `F??' match the file names `Foo', `FOO', `foo', `fOo', etc. The pattern `*foo*`\n will also match a file called '.foobar'.",
+        "-type": "File is of type c:"
+      }
+    },
+    {
+      "Command": "date",
+      "MP Summary": "print or set the system date and time",
+      "Most Similar TLDR Task": "Convert a specific date to the Unix timestamp format",
+      "Most Similar TLDR Script": "date -d \"{{2018-09-01 00:00}}\" +%s --utc",
+      "Top-3 Similar Questions": [
+        "so_5289420: UNIX / BASH: Listing files modified in specific month"
+      ],
+      "Top-3 Scripts": [
+        "so_5289420: date -d \"01-Mar-2011 -1 sec\" # last second of Feb-2011"
+      ],
+      "Explanations about Options": {
+        "-d": "display time described by STRING, not 'now'"
+      }
+    },
+    {
+      "Command": "as",
+      "MP Summary": "or  any situation  where  you want to make sure you're doing a clean install of your dependencies. It  can  be  significantly  faster  than  a  regular  npm  install  by  skipping   certain user-oriented  features.  It  is  also  more strict than a regular install, which can help catch errors or inconsistencies caused by the incrementally-installed  local  environments of most npm users. In short, the main differences between using npm install and npm ci are: \u00b7 The project must have an existing package-lock.json or npm-shrinkwrap.json. \u00b7 If dependencies in the package lock do not match those in package.json, npm ci will exit with an error, instead of updating the package lock. \u00b7 npm ci can only install entire projects at a time:  individual  dependencies  cannot  be added with this command. \u00b7 If  a  node_modules  is  already present, it will be automatically removed before npm ci begins its install. \u00b7 It will  never  write  to  package.json  or  any  of  the  package-locks:  installs  are essentially frozen. See Also \u00b7 npm help install \u00b7 npm help package-locks April 2020                                  NPM-CI(1)",
+      "Most Similar TLDR Task": "Include a given path to the list of directories to search for files specified in .include directives",
+      "Most Similar TLDR Script": "as -I {{path/to/directory}} {{file.s}}",
+      "Top-3 Similar Questions": [
+        "so_66795950: sorting an output in numeric order bash"
+      ],
+      "Top-3 Scripts": [
+        "so_66795950: "
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

@@ -1,0 +1,89 @@
+{
+    "Answers": [
+        {
+            "Command": "jq",
+            "Explanations about Options": {},
+            "MP Summary": "Command-line JSON processor",
+            "Most Similar TLDR Script": "jq '.[]' {{file.json}}",
+            "Most Similar TLDR Task": "Output all elements from arrays (or all the values from objects) in a JSON file",
+            "Top-3 Scripts": [
+                "so_60311790: jq -r '.[] | [.urlString, .imageUrl] | @csv'",
+                "so_47715234: jq --raw-output '.users[] | [.username, .email, .\"total running apps\", .\"api-mock-app\", .\"flogo\", .\"ipaas\", .\"nodejs-app\"] | @csv'",
+                "so_59551619: json_val='{\"code\":\"lyz1To6ZTWClDHSiaeXyxg\",\"redirect_to\":\"http://example.com/client-redirect-uri?code=lyz1To6ZTWClDHSiaeXyxg\"}'\ncode_val=$(jq -r '.code' <<< \"$json_val\")\necho \"$code_val\"\n\nread -r code_val redirect_to < <(curl ... | jq -r '.code + \"\\t\" + .redirect_to')"
+            ],
+            "Top-3 Similar Questions": [
+                "so_60311790: Convert JSON format to CSV Bash using jq",
+                "so_47715234: Convert a JSON into CSV using jq",
+                "so_59551619: How to extract value from json contained in a variable using jq in bash"
+            ]
+        },
+        {
+            "Command": "join",
+            "Explanations about Options": {
+                "-t(M)": "CHAR\n use CHAR as input and output field separator"
+            },
+            "MP Summary": "join lines of two files on a common field",
+            "Most Similar TLDR Script": "join -t {{','}} {{file1}} {{file2}}",
+            "Most Similar TLDR Task": "Join two files using a comma (instead of a space) as the field separator",
+            "Top-3 Scripts": [
+                "so_42414365: .data[]|{\n    \"sids\":(.meta.sids[0]|split(\" \")[0]),\n    \"ll\":(.meta.ll|map(tostring)|join(\",\")),\n    \"state\":.meta.state,\n    \"name\":.meta.name,\n    \"smry\":(.smry[]|join(\",\"))\n}|join(\",\")\n# or, for robust csv output\n# } | @csv",
+                "ul_570548: [.metadata.author[].name]|join(\";\")\n\n[.metadata.author[].\"@type\"]|join(\";\")",
+                "so_52256178: .tags|join(\",\")\n\n[.event, .timestamp, (.tags | join(\",\"))]\n+ (.data|[._id, .msisdn, .method, .url, .timeTaken, .channelID])\n+ [.pid]\n| @tsv"
+            ],
+            "Top-3 Similar Questions": [
+                "so_42414365: Convert JSON to CSV with jq",
+                "ul_570548: Convert JSON array into CSV",
+                "so_25558456: How can I convert my JSON to CSV using jq?"
+            ]
+        },
+        {
+            "Command": "printf",
+            "Explanations about Options": {},
+            "MP Summary": "format and print data",
+            "Most Similar TLDR Script": "printf -v {{myvar}} {{\"This is %s = %d\\n\" \"a year\" 2016}}",
+            "Most Similar TLDR Task": "Store a formatted message in a variable (does not work on zsh)",
+            "Top-3 Scripts": [
+                "so_44981265: $ printf '==%s==\\n' \"${x[@]}\"\n==/var/a b.txt==\n==/dev/c\nd.txt==\n==*==",
+                "so_44780761: #!/usr/bin/env bash\n\nitems=( )\nwhile IFS=';' read -r lat long pos _; do\n  printf -v item '{ \"position\": [%s, %s], \"taxo\": {\"espece\": \"%s\"}}' \"$lat\" \"$long\" \"$pos\"\n  items+=( \"$item\" )\ndone <se.csv\n\nIFS=','\nprintf '{\"occurrences\": [%s]}\\n' \"${items[*]}\"",
+                "so_50770638: $ cat myscript\ndata='[{\"id\":1,\"notes\":\"Demo1\\nDemo2\"}]'\nvalue=($(printf '%s' \"$data\" | jq -r '.[].notes'))\necho \"The first value was ${value[0]} and the second ${value[1]}\"\n\n$ bash myscript\nThe first value was Demo1 and the second Demo2\n\n$ cat myscript2\ndata='[{\"id\":1,\"notes\":\"Demo1\\nDemo2\"}]'\nvalue=$(printf '%s' \"$data\" | jq -r '.[].notes')\necho \"$value\"\n\n$ bash myscript2\nDemo1\nDemo2"
+            ],
+            "Top-3 Similar Questions": [
+                "so_44981265: Extract JSON value to shell variable using jq",
+                "so_52667218: extract data in csv format",
+                "so_39139107: How to format a JSON string as a table using jq?"
+            ]
+        },
+        {
+            "Command": "date",
+            "Explanations about Options": {
+                "--utc(M)": "print or set Coordinated Universal Time (UTC)",
+                "-d(M)": "display time described by STRING, not 'now'"
+            },
+            "MP Summary": "print or set the system date and time",
+            "Most Similar TLDR Script": "date -d \"{{2018-09-01 00:00}}\" +%s --utc",
+            "Most Similar TLDR Task": "Convert a specific date to the Unix timestamp format",
+            "Top-3 Scripts": [],
+            "Top-3 Similar Questions": [
+                "so_52667218: extract data in csv format",
+                "so_45700109: jq: extract value based on different (calculated) value"
+            ]
+        },
+        {
+            "Command": "paste",
+            "Explanations about Options": {
+                "-d(M)": "reuse characters from LIST instead of TABs",
+                "-s(M)": "paste one file at a time instead of in parallel"
+            },
+            "MP Summary": "merge lines of files",
+            "Most Similar TLDR Script": "paste -s -d {{delimiter}} {{file}}",
+            "Most Similar TLDR Task": "Join all the lines into a single line, using the specified delimiter",
+            "Top-3 Scripts": [
+                "so_52188321: paste -d, <(jq ...) <(jq ...) <(jq ...)"
+            ],
+            "Top-3 Similar Questions": [
+                "so_52188321: Printing all keys and values in a JSON in a CSV format"
+            ]
+        }
+    ],
+    "Query": "Using jq to extract values and format in CSV"
+}

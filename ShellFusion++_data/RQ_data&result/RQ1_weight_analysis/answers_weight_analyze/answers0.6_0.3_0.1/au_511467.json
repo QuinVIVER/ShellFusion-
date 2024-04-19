@@ -1,0 +1,79 @@
+{
+  "Query": "How can I completely erase all data on a (micro) SD card?",
+  "Answers": [
+    {
+      "Command": "fdisk",
+      "MP Summary": "manipulate disk partition table",
+      "Most Similar TLDR Task": "Start the partition manipulator",
+      "Most Similar TLDR Script": "fdisk {{/dev/sda}}",
+      "Top-3 Similar Questions": [
+        "au_818843: First time installing (erasing Windows) from usb, did everything just so, Boot Device Not Found"
+      ],
+      "Top-3 Scripts": [
+        "au_818843: fdisk -l"
+      ],
+      "Explanations about Options": {
+        "-l": "List the partition tables for the specified devices and then exit. If no devices\n are given, those mentioned in /proc/partitions (if that file exists) are used."
+      }
+    },
+    {
+      "Command": "sync",
+      "MP Summary": "Synchronize cached writes to persistent storage",
+      "Most Similar TLDR Task": "Flush all pending write operations on a single file to disk",
+      "Most Similar TLDR Script": "sync {{path/to/file}}",
+      "Top-3 Similar Questions": [
+        "au_722859: Is there a faster way to erase a pen (USB) drive using dd command?"
+      ],
+      "Top-3 Scripts": [
+        "au_722859: sudo dd if=/dev/zero of=/dev/sdd bs=1M && sync"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "mount",
+      "MP Summary": "mount a filesystem",
+      "Most Similar TLDR Task": "Mount a directory to another directory",
+      "Most Similar TLDR Script": "mount --bind {{path/to/old_dir}} {{path/to/new_dir}}",
+      "Top-3 Similar Questions": [
+        "au_1162907: Erase /home/<user> from casper-rw overlay on shutdown (systemd service)",
+        "au_818843: First time installing (erasing Windows) from usb, did everything just so, Boot Device Not Found"
+      ],
+      "Top-3 Scripts": [
+        "au_1162907: mount /media/overlay",
+        "au_818843: 1) sudo mount /dev/sda1 /mnt # (If your Linux were on a different partition substitute /sda1 for the partition of your Linux install.)\n2) for i in /sys /proc /run /dev; do sudo mount --bind \"$i\" \"/mnt/$i\"; done\n3) sudo chroot /mnt\n4) update-grub\n5) grub-install /dev/sda # (/dev/sda is the hard drive that has linux installed (i.e. /dev/sda or /dev/sdb ... etc.)\n    update-grub"
+      ],
+      "Explanations about Options": {
+        "--bind": "Remount a subtree somewhere else (so that its contents are available in both\n places). See above, under Bind mounts."
+      }
+    },
+    {
+      "Command": "hdparm",
+      "MP Summary": "get/set SATA/IDE device parameters",
+      "Most Similar TLDR Task": "Force a drive to immediately enter standby mode (usually causes a drive to spin down)",
+      "Most Similar TLDR Script": "sudo hdparm -y /dev/{{device}}",
+      "Top-3 Similar Questions": [
+        "au_652093: How to securely erase hard drive with ubuntu live cd?"
+      ],
+      "Top-3 Scripts": [
+        "au_652093: sudo hdparm -I /dev/sda\n\nsudo hdparm --user-master u --security-set-pass password /dev/sda\n\nsudo hdparm --user-master u --security-erase password /dev/sda\n\nsudo hdparm --user-master u --security-erase-enhanced password /dev/sda"
+      ],
+      "Explanations about Options": {
+        "--user-master": "Specifies which password (user/master) to select. Defaults to user password. Only\n useful in combination with --security-unlock, --security-set-pass, --security-\n disable, --security-erase or --security-erase-enhanced.\n u user password\n m master password",
+        "--security-erase-enhanced": "Enhanced erase (locked) drive, using password PWD (DANGEROUS). Password is given\n as an ASCII string and is padded with NULs to reach 32 bytes. The applicable drive\n password is selected with the --user-master switch (default is \"user\" password).\n No other options are permitted on the command line with this one."
+      }
+    },
+    {
+      "Command": "lsblk",
+      "MP Summary": "list block devices",
+      "Most Similar TLDR Task": "Exclude the devices specified by the comma-separated list of major device numbers",
+      "Most Similar TLDR Script": "lsblk -e {{1,7}}",
+      "Top-3 Similar Questions": [
+        "au_652093: How to securely erase hard drive with ubuntu live cd?"
+      ],
+      "Top-3 Scripts": [
+        "au_652093: "
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

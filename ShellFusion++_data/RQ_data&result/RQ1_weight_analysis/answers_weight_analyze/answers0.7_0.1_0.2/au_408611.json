@@ -1,0 +1,84 @@
+{
+  "Query": "How to remove or delete single cron job using linux command?",
+  "Answers": [
+    {
+      "Command": "atrm",
+      "MP Summary": "queue, examine, or delete jobs for later execution",
+      "Most Similar TLDR Task": "Remove many jobs, separated by spaces",
+      "Most Similar TLDR Script": "atrm {{15}} {{17}} {{22}}",
+      "Top-3 Similar Questions": [
+        "ul_53144: Remove all `at` jobs"
+      ],
+      "Top-3 Scripts": [
+        "ul_53144: for i in `atq | awk '{print $1}'`;do atrm $i;done"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "crontab",
+      "MP Summary": "maintain crontab files for individual users (Vixie Cron)",
+      "Most Similar TLDR Task": "Remove all cron jobs for the current user",
+      "Most Similar TLDR Script": "crontab -r",
+      "Top-3 Similar Questions": [
+        "so_22462716: Remove log files using cron job",
+        "so_33255249: How to delete a cron job with Ansible?",
+        "au_146384: Deleting a file owned by root"
+      ],
+      "Top-3 Scripts": [
+        "so_22462716: crontab -e",
+        "so_33255249: /var/spool/cron/crontab/$USER\n\ncrontab -l\n\ncrontab -r\n\ncrontab -e\n\nhosts : all\ntasks :\n  - name : add crontab test entry\n    cron :\n      name  : crontab test\n      job   : echo 'Testing!' > /var/log/crontest.log\n      state : present\n\nhosts : all\ntasks :\n  - name  : remove user's crontab\n    shell : crontab -r",
+        "au_146384: sudo crontab -l\n\nsudo crontab -e"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "exec",
+      "MP Summary": "execute commands and open, close, or copy file descriptors",
+      "Most Similar TLDR Task": "Replace with the specified command and change the process name",
+      "Most Similar TLDR Script": "exec -a {{process_name}} {{command -with -flags}}",
+      "Top-3 Similar Questions": [
+        "so_45275631: How delete all the empty files in linux irrespective of their directory using rm command"
+      ],
+      "Top-3 Scripts": [
+        "so_45275631: exec(2)"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "xargs",
+      "MP Summary": "build and execute command lines from standard input",
+      "Most Similar TLDR Task": "Execute the command once for each input line, replacing any occurrences of the placeholder (here marked as `_`) with the input line",
+      "Most Similar TLDR Script": "{{arguments_source}} | xargs -I _ {{command}} _ {{optional_extra_arguments}}",
+      "Top-3 Similar Questions": [
+        "so_22527048: remove duplicate files using fdupes command",
+        "au_990678: Delete old backup folders from directory using cron",
+        "ul_583326: Script which should remove supplied number of files deletes only a single file"
+      ],
+      "Top-3 Scripts": [
+        "so_22527048: ls | grep -v '-' | xargs rm",
+        "au_990678: find /BACKUPDIR/ -mindepth 1 -maxdepth 1 -type d -print0 | sort -z | head -zn-6 | xargs -0 echo rm -rf\n\n00 18 * * 0 find /BACKUPDIR/ -mindepth 1 -maxdepth 1 -type d -print0 | sort -z | head -zn-6 | xargs -0 rm -rf",
+        "ul_583326: #!/bin/bash\nfor i in $(eval echo {0..$2})\ndo\n    find \"$1\" -type f | head -1 | xargs rm\ndone\n\n#!/bin/bash\nfor((i=0;i<=$2;i++))\ndo\n    find \"$1\" -type f | head -1 | xargs rm --\ndone"
+      ],
+      "Explanations about Options": {
+        "-0": "Input items are terminated by a null character instead of by whitespace, and the\n quotes and backslash are not special (every character is taken literally).\n Disables the end of file string, which is treated like any other argument. Useful\n when input items might contain white space, quote marks, or backslashes. The GNU\n find -print0 option produces input suitable for this mode."
+      }
+    },
+    {
+      "Command": "apt-get",
+      "MP Summary": "APT package handling utility - command-line interface",
+      "Most Similar TLDR Task": "Remove a package and its configuration files",
+      "Most Similar TLDR Script": "apt-get purge {{package}}",
+      "Top-3 Similar Questions": [
+        "au_938359: apt-get install + remove + update + upgrade via cron job"
+      ],
+      "Top-3 Scripts": [
+        "au_938359: DEBIAN_FRONTEND=noninteractive DEBIAN_PRIORITY=critical PATH='/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin' /usr/bin/apt-get -q --yes -o Dpkg::Options::=\"--force-confdef\" -o Dpkg::Options::=\"--force-confold\" remove nginx\nDEBIAN_FRONTEND=noninteractive DEBIAN_PRIORITY=critical PATH='/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin' /usr/bin/apt-get -q --yes -o Dpkg::Options::=\"--force-confdef\" -o Dpkg::Options::=\"--force-confold\" update\nDEBIAN_FRONTEND=noninteractive DEBIAN_PRIORITY=critical PATH='/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin' /usr/bin/apt-get -q --yes -o Dpkg::Options::=\"--force-confdef\" -o Dpkg::Options::=\"--force-confold\" add-apt-repository ppa:nginx/development\nDEBIAN_FRONTEND=noninteractive DEBIAN_PRIORITY=critical PATH='/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin' /usr/bin/apt-get -q --yes -o Dpkg::Options::=\"--force-confdef\" -o Dpkg::Options::=\"--force-confold\" update\nDEBIAN_FRONTEND=noninteractive DEBIAN_PRIORITY=critical PATH='/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin' /usr/bin/apt-get -q --yes -o Dpkg::Options::=\"--force-confdef\" -o Dpkg::Options::=\"--force-confold\" install nginx-extras\nDEBIAN_FRONTEND=noninteractive DEBIAN_PRIORITY=critical PATH='/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin' /usr/bin/apt-get -q --yes -o Dpkg::Options::=\"--force-confdef\" -o Dpkg::Options::=\"--force-confold\" update\nDEBIAN_FRONTEND=noninteractive DEBIAN_PRIORITY=critical PATH='/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin' /usr/bin/apt-get -q --yes -o Dpkg::Options::=\"--force-confdef\" -o Dpkg::Options::=\"--force-confold\" upgrade"
+      ],
+      "Explanations about Options": {
+        "-q": "Quiet; produces output suitable for logging, omitting progress indicators. More q's\n will produce more quiet up to a maximum of 2. You can also use -q=# to set the quiet\n level, overriding the configuration file. Note that quiet level 2 implies -y; you\n should never use -qq without a no-action modifier such as -d, --print-uris or -s as\n APT may decide to do something you did not expect. Configuration Item: quiet.",
+        "--yes": "Automatic yes to prompts; assume \"yes\" as answer to all prompts and run\n non-interactively. If an undesirable situation, such as changing a held package,\n trying to install an unauthenticated package or removing an essential package occurs\n then apt-get will abort. Configuration Item: APT::Get::Assume-Yes.",
+        "-o": "Set a Configuration Option; This will set an arbitrary configuration option. The\n syntax is -o Foo::Bar=bar. -o and --option can be used multiple times to set\n different options."
+      }
+    }
+  ]
+}

@@ -1,0 +1,90 @@
+{
+  "Query": "How do I find all the files that were created today in Unix/Linux?",
+  "Answers": [
+    {
+      "Command": "find",
+      "MP Summary": "search for files in a directory hierarchy",
+      "Most Similar TLDR Task": "Find files modified in the last 7 days, and delete them",
+      "Most Similar TLDR Script": "find {{root_path}} -mtime {{-7}} -delete",
+      "Top-3 Similar Questions": [
+        "su_187138: Find files that have been accessed after they were created",
+        "so_56148429: finding files that were modified before a certain file",
+        "so_22582760: How do we find a file that is located some where in directory tree"
+      ],
+      "Top-3 Scripts": [
+        "su_187138: find -type f -print0 | xargs -0 -I % find -path % -anewer %",
+        "so_56148429: find [directory] -type f \\! -newer [certain_file]",
+        "so_22582760: find /osting -iname \"*.txt\" -mtime -60 -print\n\n-mtime +60 means you are looking for a file modified 60 days ago.\n-mtime -60 means less than 60 days.\n-mtime 60 If you skip + or - it means exactly 60 days."
+      ],
+      "Explanations about Options": {
+        "-anewer": "Time of the last access of the current file is more recent than that of the last\n data modification of the reference file. If reference is a symbolic link and the\n -H option or the -L option is in effect, then the time of the last data\n modification of the file it points to is always used.",
+        "-newer": "Time of the last data modification of the current file is more recent than that of\n the last data modification of the reference file. If reference is a symbolic link\n and the -H option or the -L option is in effect, then the time of the last data\n modification of the file it points to is always used.",
+        "-mtime": "File's data was last modified n*24 hours ago. See the comments for -atime to\n understand how rounding affects the interpretation of file modification times.",
+        "-print": "Quoting is handled in the same way as for -printf and -fprintf. If you are using\n find in a script or in a situation where the matched files might have arbitrary\n names, you should consider using -print0 instead of -print.",
+        "-print0": "Always print the exact filename, unchanged, even if the output is going to a\n terminal.",
+        "-type": "File is of type c:",
+        "-iname": "Like -name, but the match is case insensitive. For example, the patterns `fo*' and\n `F??' match the file names `Foo', `FOO', `foo', `fOo', etc. The pattern `*foo*`\n will also match a file called '.foobar'."
+      }
+    },
+    {
+      "Command": "rm",
+      "MP Summary": "remove files or directories",
+      "Most Similar TLDR Task": "Interactively remove multiple files, with a prompt before every removal",
+      "Most Similar TLDR Script": "rm -i {{file(s)}}",
+      "Top-3 Similar Questions": [
+        "so_35636925: find files that are older than 15 minutes",
+        "so_16757326: Linux Find: How to find .PDF files created after a specific year?",
+        "so_1882189: Unix Find Replace Special Characters in Multiple Files"
+      ],
+      "Top-3 Scripts": [
+        "so_35636925: find /PATH/TO/FILES -type f -mmin +15 -exec rm -f {} +",
+        "so_16757326: tmp=$(mktemp /tmp/time-XXXXXXXX)\ntouch -t 200801010000 \"$tmp\"\nfind . -type f -iname '*.pdf' -newer \"$tmp\"\nrm \"$tmp\"",
+        "so_1882189: find . -type f -a -name \\*.bak | xargs rm"
+      ],
+      "Explanations about Options": {
+        "-f": "ignore nonexistent files and arguments, never prompt"
+      }
+    },
+    {
+      "Command": "cp",
+      "MP Summary": "copy files and directories",
+      "Most Similar TLDR Task": "Copy a file into another directory, keeping the filename",
+      "Most Similar TLDR Script": "cp {{path/to/source_file.ext}} {{path/to/target_parent_directory}}",
+      "Top-3 Similar Questions": [
+        "so_47339376: Find Command with multiple file extensions"
+      ],
+      "Top-3 Scripts": [
+        "so_47339376: find /root/TEST/Images \\( -name  '*.png' -o  -name '*.jpg' -o -name '*.JPG' \\) -exec cp -t /root/TEST/CopiedImages {} +\n\nfind /root/TEST/Images \\( -name  '*.png' -o  -iname '*.jpg' \\) -exec cp -t /root/TEST/CopiedImages {} +"
+      ],
+      "Explanations about Options": {
+        "-t": "copy all SOURCE arguments into DIRECTORY"
+      }
+    },
+    {
+      "Command": "mkdir",
+      "MP Summary": "make directories",
+      "Most Similar TLDR Task": "Create directories recursively (useful for creating nested dirs)",
+      "Most Similar TLDR Script": "mkdir -p {{path/to/directory}}",
+      "Top-3 Similar Questions": [
+        "so_14132210: Use find command but exclude files in two directories"
+      ],
+      "Top-3 Scripts": [
+        "so_14132210: $ mkdir a b c d e\n$ touch a/1 b/2 c/3 d/4 e/5 e/a e/b\n$ find . -type f ! -path \"./a/*\" ! -path \"./b/*\"\n\n./d/4\n./c/3\n./e/a\n./e/b\n./e/5"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "mktemp",
+      "MP Summary": "create a temporary file or directory",
+      "Most Similar TLDR Task": "Create an empty temporary file and return the absolute path to it",
+      "Most Similar TLDR Script": "mktemp",
+      "Top-3 Similar Questions": [
+        "so_16757326: Linux Find: How to find .PDF files created after a specific year?"
+      ],
+      "Top-3 Scripts": [
+        "so_16757326: tmp=$(mktemp /tmp/time-XXXXXXXX)\ntouch -t 200801010000 \"$tmp\"\nfind . -type f -iname '*.pdf' -newer \"$tmp\"\nrm \"$tmp\""
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

@@ -1,0 +1,96 @@
+{
+    "Answers": [
+        {
+            "Command": "grep",
+            "Explanations about Options": {
+                "--exclude(M)": "Skip any command-line file with a name suffix that matches the pattern GLOB, using\n wildcard matching; a name suffix is either the whole name, or a trailing part that\n starts with a non-slash character immediately after a slash (/) in the name. When\n searching recursively, skip any subfile whose base name matches GLOB; the base name\n is the part after the last slash. A pattern can use *, ?, and [...] as wildcards,\n and \\ to quote a wildcard or backslash character literally.",
+                "-A(C)": "Try to invert and place the grep with the -A 10 argument in the end.",
+                "-F(M)": "Interpret PATTERNS as fixed strings, not regular expressions.",
+                "-I(M)": "Process a binary file as if it did not contain matching data; this is equivalent to\n the --binary-files=without-match option.",
+                "-r(M)": "Read all files under each directory, recursively, following symbolic links only if\n they are on the command line. Note that if no file operand is given, grep searches\n the working directory. This is equivalent to the -d recurse option.",
+                "-v(M)": "Invert the sense of matching, to select non-matching lines."
+            },
+            "MP Summary": "print lines that match patterns",
+            "Most Similar TLDR Script": "grep -v {{search_pattern}}",
+            "Most Similar TLDR Task": "Invert match for excluding specific strings",
+            "Top-3 Scripts": [
+                "ul_240470: grep -v -e 90.192.142.138 -e PIX -e Intrusion cisco.log-20151103.log\n\ngrep -vF '90.192.142.138\nPIX\nIntrusion\n' cisco.log-20151103.log",
+                "so_24134530: grep -rI \"PatternToSearch\" ./path --exclude={*log*,tags}",
+                "so_32993085: grep -v 'anotherString' | grep -A 10 'myString'"
+            ],
+            "Top-3 Similar Questions": [
+                "ul_240470: Excluding multiple patterns with one grep command",
+                "so_24134530: how to exclude multiple pattern using grep",
+                "so_32993085: How do I grep for a string excluding some other string"
+            ]
+        },
+        {
+            "Command": "find",
+            "Explanations about Options": {
+                "-n(M)": "for less than n ,",
+                "-name(M)": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+                "-not(M)": "Same as ! expr, but not POSIX compliant.",
+                "-type(M)": "File is of type c:"
+            },
+            "MP Summary": "search for files in a directory hierarchy",
+            "Most Similar TLDR Script": "find {{root_path}} -name '{{*.py}}' -not -path '{{*/site-packages/*}}'",
+            "Most Similar TLDR Task": "Find files matching a given pattern, excluding specific paths",
+            "Top-3 Scripts": [
+                "so_31309531: find . -exec grep -i -n -w 'search text' /dev/null {} \\; | grep -v '/\\*'",
+                "ul_85808: find /var/www/http -type f -exec grep -iE 'STRING1|STRING2' /dev/null {} +\n\nfind /var/www/http -type f -exec grep -i -e 'STRING' -e 'STRING2' /dev/null {} +\n\nfind /var/www/http -type f -exec grep -i 'STRING1\\|STRING2' /dev/null {} +",
+                "ul_550936: find -name\n\nfind location -type f -name '*some*' -name '*name*'\n\nfind location -type f -name '*some*name*'\n\nfind location -type f -name 'some*name*'"
+            ],
+            "Top-3 Similar Questions": [
+                "so_31309531: Exclude a pattern from grep result",
+                "ul_85808: How to find multiple strings in files?",
+                "ul_550936: How to find file with multiple strings"
+            ]
+        },
+        {
+            "Command": "cut",
+            "Explanations about Options": {},
+            "MP Summary": "remove sections from each line of files",
+            "Most Similar TLDR Script": "cut -d'{{ }}' -f{{3-}}",
+            "Most Similar TLDR Task": "Cut out the fields 3 through to the end of each line, using a space as a delimiter",
+            "Top-3 Scripts": [
+                "so_65456882: cut -f1 file1 | grep -Ff - file2  | grep -Ff - file3  | grep -Ff - file3  ...",
+                "ul_113497: grep -r pattern . | cut -c1-\"$COLUMNS\""
+            ],
+            "Top-3 Similar Questions": [
+                "so_65456882: How do I grep a string on multiple files only if the string is present in all of all the files?",
+                "ul_113497: Exclude files that have very long lines of text from grep output"
+            ]
+        },
+        {
+            "Command": "xargs",
+            "Explanations about Options": {
+                "-0(M)": "Input items are terminated by a null character instead of by whitespace, and the\n quotes and backslash are not special (every character is taken literally).\n Disables the end of file string, which is treated like any other argument. Useful\n when input items might contain white space, quote marks, or backslashes. The GNU\n find -print0 option produces input suitable for this mode."
+            },
+            "MP Summary": "build and execute command lines from standard input",
+            "Most Similar TLDR Script": "{{arguments_source}} | xargs sh -c \"{{command1}} && {{command2}} | {{command3}}\"",
+            "Most Similar TLDR Task": "Run multiple chained commands on the input data",
+            "Top-3 Scripts": [
+                "ul_113497: grep -rLZE '.{200}' . | xargs -r0 grep pattern",
+                "ul_194807: grep -Erli --include='*.php' 'return base64_decode' . | xargs grep -l 'isset'\n\ngrep -ZErli --include='*.php' 'return base64_decode' . | xargs -0 grep -l 'isset'",
+                "so_39850672: find . -type f -exec grep -l 'string1' {} \\; | xargs grep -l 'string2'"
+            ],
+            "Top-3 Similar Questions": [
+                "ul_113497: Exclude files that have very long lines of text from grep output",
+                "ul_194807: Finding files that contain multiple strings",
+                "so_39850672: Find files containing multiple strings"
+            ]
+        },
+        {
+            "Command": "fgrep",
+            "Explanations about Options": {},
+            "MP Summary": "print lines that match patterns",
+            "Most Similar TLDR Script": "fgrep -c {{search_string}} {{path/to/file}}",
+            "Most Similar TLDR Task": "Count the number of lines that match the given string in a file",
+            "Top-3 Scripts": [],
+            "Top-3 Similar Questions": [
+                "ul_194807: Finding files that contain multiple strings"
+            ]
+        }
+    ],
+    "Query": "grep exclude multiple strings"
+}

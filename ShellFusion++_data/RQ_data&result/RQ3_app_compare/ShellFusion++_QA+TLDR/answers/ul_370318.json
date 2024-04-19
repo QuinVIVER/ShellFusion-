@@ -1,0 +1,90 @@
+{
+  "Query": "How to connect to wifi in CentOS 7(CLI)(no GUI)?",
+  "Answers": [
+    {
+      "Command": "iw",
+      "MP Summary": "show / manipulate wireless devices and their configuration",
+      "Most Similar TLDR Task": "Scan for available wireless networks",
+      "Most Similar TLDR Script": "iw dev {{wlp}} scan",
+      "Top-3 Similar Questions": [
+        "ul_283722: How to connect to wifi from command line?",
+        "ul_400901: Connect to WEP/WPA without nmcli?"
+      ],
+      "Top-3 Scripts": [
+        "ul_283722: ",
+        "ul_400901: touch /etc/wpa_supplicant/wpa_supplicant.conf\necho ctrl_interface=/run/wpa_supplicant > /etc/wpa_supplicant/wpa_supplicant.conf\necho update_config=1 >> /etc/wpa_supplicant/wpa_supplicant.conf\nwpa_passphrase \"Your_SSID\" Your_PASSWORD >> /etc/wpa_supplicant/wpa_supplicant.conf\ni=$(iw dev | grep Interface | awk '{ print $2}')\nkillall wpa_supplicant\nwpa_supplicant -i $i -c/etc/wpa_supplicant/wpa_supplicant.conf -B\ndhclient $i\n\ni=$(iw dev | grep Interface | awk '{ print $2}')\nkillall wpa_supplicant\nwpa_supplicant -i $i -c/etc/wpa_supplicant/wpa_supplicant.conf -B\ndhclient $i\n\niw dev <interface> connect \"Your_SSID\" key 0:WEP_KEY"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "wpa_supplicant",
+      "MP Summary": "Wi-Fi Protected Access client and IEEE 802.1X supplicant",
+      "Most Similar TLDR Task": "Join a protected wireless network and run it in a daemon",
+      "Most Similar TLDR Script": "wpa_supplicant -B -i {{interface}} -c {{path/to/wpa_supplicant_conf.conf}}",
+      "Top-3 Similar Questions": [
+        "ul_91362: How to connect to Wi-Fi network in Arch Linux?",
+        "ul_250562: Auto Connect to any Open WiFi network via CLI Command Line",
+        "ul_283722: How to connect to wifi from command line?"
+      ],
+      "Top-3 Scripts": [
+        "ul_91362: ",
+        "ul_250562: ##Wireless NIC\nallow-hotplug wlan0\niface wlan0 inet manual\nwpa-roam /etc/wpa_supplicant/wpa_supplicant.conf\niface open_wifi inet dhcp\n\nctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev\nupdate_config=1\n\n##Open_Wifi\nnetwork={\n    ssid=\"\"\n    key_mgmt=NONE\n    id_str=\"open_wifi\"\n}\n\nwpa_supplicant -d -i wlan0 -c /etc/wpa_supplicant/wpa_supplicant.conf -D wext",
+        "ul_283722: sudo ip link set wlan0 down\nsudo ip link set wlan0 up\nsudo wpa_supplicant -B -iwlan0 -c /etc/wpa_supplicant.conf -Dnl80211,wext\nsudo dhclient wlan0\n\nwpa_supplicant -B -i wlan0 -c <(wpa_passphrase \"Your_SSID\" Your_passphrase) && dhclient wlan0"
+      ],
+      "Explanations about Options": {
+        "-d": "Increase debugging verbosity (-dd even more).",
+        "-D": "Driver to use (can be multiple drivers: nl80211,wext). (Per interface, see the\n available options below.)",
+        "-B": "Run daemon in the background.",
+        "-i": "Interface to listen on. Multiple instances of this option can be present, one per\n interface, separated by -N option (see below).",
+        "-c": "Path to configuration file. (Per interface)"
+      }
+    },
+    {
+      "Command": "ifconfig",
+      "MP Summary": "configure network interfaces",
+      "Most Similar TLDR Task": "Disable eth0 interface",
+      "Most Similar TLDR Script": "ifconfig eth0 down",
+      "Top-3 Similar Questions": [
+        "ul_48384: How to permanently connect to WPA2AES wifi with OpenBSD (through cli)",
+        "ul_250562: Auto Connect to any Open WiFi network via CLI Command Line",
+        "ul_49004: Easily connecting to the internet with FreeBSD"
+      ],
+      "Top-3 Scripts": [
+        "ul_48384: ",
+        "ul_250562: sudo ifconfig wlan0 down && sudo ifconfig wlan0 up && sudo wpa_cli -i wlan0 status",
+        "ul_49004: ifconfig -a"
+      ],
+      "Explanations about Options": {
+        "-a": "Display all available interfaces."
+      }
+    },
+    {
+      "Command": "iwconfig",
+      "MP Summary": "configure a wireless network interface",
+      "Most Similar TLDR Task": "Set the operating mode of the specified interface",
+      "Most Similar TLDR Script": "iwconfig {{interface}} mode {{ad hoc|Managed|Master|Repeater|Secondary|Monitor|Auto}}",
+      "Top-3 Similar Questions": [
+        "au_1032804: Connecting to Wifi on terminal of Kubuntu 17.10",
+        "ul_400901: Connect to WEP/WPA without nmcli?"
+      ],
+      "Top-3 Scripts": [
+        "au_1032804: sudo iwconfig wlp7s0 essid \"ABCD1234\" key s:abcd1",
+        "ul_400901: iwconfig <interface> essid \"Your_SSID\" key WEP_KEY"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "iwctl",
+      "MP Summary": "Internet wireless control utility",
+      "Most Similar TLDR Task": "Connect to a network with a station, if credentials are needed they will be asked",
+      "Most Similar TLDR Script": "iwctl station {{station}} connect {{network_name}}",
+      "Top-3 Similar Questions": [
+        "ul_283722: How to connect to wifi from command line?"
+      ],
+      "Top-3 Scripts": [
+        "ul_283722: "
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

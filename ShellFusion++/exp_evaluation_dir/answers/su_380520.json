@@ -1,0 +1,602 @@
+{
+  "Query": "How to find uptime of a linux process",
+  "Answers": [
+    {
+      "Command": "find",
+      "MP Summary": "search for files in a directory hierarchy",
+      "Most Similar TLDR Task": "Find files by matching multiple patterns",
+      "Most Similar TLDR Script": "find {{root_path}} -name '{{*pattern_1*}}' -or -name '{{*pattern_2*}}'",
+      "Most Similar NL2Bash Task": "Execute \"1\" and write standard output and error to standard output and file \"${LOG_FILE}\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "exec 1 2>&1 | tee ${LOG_FILE}\n",
+          "command-options": {
+            "exec": {
+              "mpsum": "execute commands and open, close, or copy file descriptors"
+            },
+            "tee": {
+              "mpsum": "read from standard input and write to standard output and files"
+            }
+          },
+          "TLDR_inform": {
+            "exec": {
+              "man1_exec_9258": "replac current process anoth process replac specifi command chang process name replac specifi command login use default shell replac specifi command use current environ variabl replac specifi command clear environ variabl"
+            },
+            "tee": {
+              "man1_tee_33494": "read standard input write standard output file command append given file overwrit copi standard input file also standard output creat directori call exampl count number charact exampl write exampl termin print standard input termin also pipe anoth program process"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_3117: Find all files in current directory excluding hidden files and put the output into full_backup_dir variable",
+        "nl2bash_3118: Find all files in current directory excluding hidden files, archive them and put the output into variable  full_backup_dir",
+        "so_54698135: Linux Find command- exclude find based on file name"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_3117: full_backup_dir=$(find . -depth '(' -wholename './.*' ')' -prune -o -print)",
+        "nl2bash_3118: full_backup_dir=\"$(find . -depth \\( -wholename \\./\\.\\* \\) -prune -o -print | cpio -oav)\"",
+        "so_54698135: find . -type d \\( -name Foo-o -name 2Foo -o -name 2_Foo \\) -prune -o -type f ! -size 0 ! -name 'FooInfo.cs' ! -name '*.Foo.cs'   \\( -name \"*.java\" -o -name \"*.cs\" -o -name \"*.cpp\" -o -name \"*.cxx\" -o -name \"*.cc\" -o -name \"*.c\" -o -name \"*.h\" -o -name \"*.scala\" -o -name \"*.css\" -o -name \"*.html\" -o -name \"*.bat\" -o -name \"*.js\" \\) -exec realpath {} \\;| xargs grep -L CUSTOMERINFO  | sed -e 's/$/\\r/g' >> ../output.txt"
+      ],
+      "Explanations about Options": {
+        "-prune": "True; if the file is a directory, do not descend into it. If -depth is given, then\n -prune has no effect. Because -delete implies -depth, you cannot usefully use\n -prune and -delete together.\n For example, to skip the directory `src/emacs' and all files and directories\n under it, and print the names of the other files found, do something like this:\n find . -path ./src/emacs -prune -o -print",
+        "-size": "File uses n units of space, rounding up. The following suffixes can be used:",
+        "-type": "File is of type c:",
+        "-wholename": "See -path. This alternative is less portable than -path.",
+        "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+        "-print": "Quoting is handled in the same way as for -printf and -fprintf. If you are using\n find in a script or in a situation where the matched files might have arbitrary\n names, you should consider using -print0 instead of -print.",
+        "-depth": "Process each directory's contents before the directory itself. The -delete action\n also implies -depth."
+      }
+    },
+    {
+      "Command": "exec",
+      "MP Summary": "execute commands and open, close, or copy file descriptors",
+      "Most Similar TLDR Task": "Replace with the specified command and change the process name",
+      "Most Similar TLDR Script": "exec -a {{process_name}} {{command -with -flags}}",
+      "Most Similar NL2Bash Task": "Execute \"1\" and write standard output and error to standard output and file \"${LOG_FILE}\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "exec 1 2>&1 | tee ${LOG_FILE}\n",
+          "command-options": {
+            "exec": {
+              "mpsum": "execute commands and open, close, or copy file descriptors"
+            },
+            "tee": {
+              "mpsum": "read from standard input and write to standard output and files"
+            }
+          },
+          "TLDR_inform": {
+            "exec": {
+              "man1_exec_9258": "replac current process anoth process replac specifi command chang process name replac specifi command login use default shell replac specifi command use current environ variabl replac specifi command clear environ variabl"
+            },
+            "tee": {
+              "man1_tee_33494": "read standard input write standard output file command append given file overwrit copi standard input file also standard output creat directori call exampl count number charact exampl write exampl termin print standard input termin also pipe anoth program process"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_1397: Execute \"1\" and write standard output and error to standard output and file \"${LOG_FILE}\"",
+        "nl2bash_1396: Execute \"1\" and write output to standard output and file \"${LOG_FILE}\"",
+        "nl2bash_1401: Execute \"2\" and write output to standard output and file \"${LOG_FILE}\""
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_1397: exec 1 2>&1 | tee ${LOG_FILE}",
+        "nl2bash_1396: exec 1 | tee ${LOG_FILE}",
+        "nl2bash_1401: exec 2 | tee ${LOG_FILE}"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "tee",
+      "MP Summary": "read from standard input and write to standard output and files",
+      "Most Similar TLDR Task": "Print standard input to the terminal, and also pipe it into another program for further processing",
+      "Most Similar TLDR Script": "echo \"example\" | tee {{/dev/tty}} | {{xargs printf \"[%s]\"}}",
+      "Most Similar NL2Bash Task": "Execute \"1\" and write standard output and error to standard output and file \"${LOG_FILE}\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "exec 1 2>&1 | tee ${LOG_FILE}\n",
+          "command-options": {
+            "exec": {
+              "mpsum": "execute commands and open, close, or copy file descriptors"
+            },
+            "tee": {
+              "mpsum": "read from standard input and write to standard output and files"
+            }
+          },
+          "TLDR_inform": {
+            "exec": {
+              "man1_exec_9258": "replac current process anoth process replac specifi command chang process name replac specifi command login use default shell replac specifi command use current environ variabl replac specifi command clear environ variabl"
+            },
+            "tee": {
+              "man1_tee_33494": "read standard input write standard output file command append given file overwrit copi standard input file also standard output creat directori call exampl count number charact exampl write exampl termin print standard input termin also pipe anoth program process"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_1397: Execute \"1\" and write standard output and error to standard output and file \"${LOG_FILE}\"",
+        "nl2bash_1396: Execute \"1\" and write output to standard output and file \"${LOG_FILE}\"",
+        "nl2bash_1401: Execute \"2\" and write output to standard output and file \"${LOG_FILE}\""
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_1397: exec 1 2>&1 | tee ${LOG_FILE}",
+        "nl2bash_1396: exec 1 | tee ${LOG_FILE}",
+        "nl2bash_1401: exec 2 | tee ${LOG_FILE}"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "sed",
+      "MP Summary": "stream editor for filtering and transforming text",
+      "Most Similar TLDR Task": "Replace separator / by any other character not used in the find or replace patterns, e.g., #",
+      "Most Similar TLDR Script": "sed 's#{{find}}#{{replace}}#' {{filename}}",
+      "Most Similar NL2Bash Task": "Execute \"1\" and write standard output and error to standard output and file \"${LOG_FILE}\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "exec 1 2>&1 | tee ${LOG_FILE}\n",
+          "command-options": {
+            "exec": {
+              "mpsum": "execute commands and open, close, or copy file descriptors"
+            },
+            "tee": {
+              "mpsum": "read from standard input and write to standard output and files"
+            }
+          },
+          "TLDR_inform": {
+            "exec": {
+              "man1_exec_9258": "replac current process anoth process replac specifi command chang process name replac specifi command login use default shell replac specifi command use current environ variabl replac specifi command clear environ variabl"
+            },
+            "tee": {
+              "man1_tee_33494": "read standard input write standard output file command append given file overwrit copi standard input file also standard output creat directori call exampl count number charact exampl write exampl termin print standard input termin also pipe anoth program process"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_12277: Convert Unix `cal` output to latex table code.",
+        "so_54698135: Linux Find command- exclude find based on file name"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_12277: cal -h 02 2012| cut -c4-17 | sed -r 's/(..)\\s/\\0\\t\\&/g' | sed 's/$/\\t\\\\\\\\/' | head -n-1 | tail -n +2\n\n\ncal | sed '1d;2{h;s/./ /g;x};/^\\s*$/b;G;s/\\n/ /;s/^...\\(.\\{15\\}\\).*/\\1/;s/.../ &\\t\\&/g;s/\\&$/\\\\\\\\/'",
+        "so_54698135: find . -type d \\( -name Foo-o -name 2Foo -o -name 2_Foo \\) -prune -o -type f ! -size 0 ! -name 'FooInfo.cs' ! -name '*.Foo.cs'   \\( -name \"*.java\" -o -name \"*.cs\" -o -name \"*.cpp\" -o -name \"*.cxx\" -o -name \"*.cc\" -o -name \"*.c\" -o -name \"*.h\" -o -name \"*.scala\" -o -name \"*.css\" -o -name \"*.html\" -o -name \"*.bat\" -o -name \"*.js\" \\) -exec realpath {} \\;| xargs grep -L CUSTOMERINFO  | sed -e 's/$/\\r/g' >> ../output.txt"
+      ],
+      "Explanations about Options": {
+        "-e": "add the script to the commands to be executed"
+      }
+    },
+    {
+      "Command": "grep",
+      "MP Summary": "print lines that match patterns",
+      "Most Similar TLDR Task": "Invert match for excluding specific strings",
+      "Most Similar TLDR Script": "grep -v {{search_pattern}}",
+      "Most Similar NL2Bash Task": "Execute \"1\" and write standard output and error to standard output and file \"${LOG_FILE}\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "exec 1 2>&1 | tee ${LOG_FILE}\n",
+          "command-options": {
+            "exec": {
+              "mpsum": "execute commands and open, close, or copy file descriptors"
+            },
+            "tee": {
+              "mpsum": "read from standard input and write to standard output and files"
+            }
+          },
+          "TLDR_inform": {
+            "exec": {
+              "man1_exec_9258": "replac current process anoth process replac specifi command chang process name replac specifi command login use default shell replac specifi command use current environ variabl replac specifi command clear environ variabl"
+            },
+            "tee": {
+              "man1_tee_33494": "read standard input write standard output file command append given file overwrit copi standard input file also standard output creat directori call exampl count number charact exampl write exampl termin print standard input termin also pipe anoth program process"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_54698135: Linux Find command- exclude find based on file name",
+        "nl2bash_3478: Find all files under and below the current working directory with the word California in the file (case insensitive), and count the number of lines in the output",
+        "nl2bash_3477: Find all files under and below the current working directory with the word California in the file"
+      ],
+      "Top-3 Scripts": [
+        "so_54698135: find . -type d \\( -name Foo-o -name 2Foo -o -name 2_Foo \\) -prune -o -type f ! -size 0 ! -name 'FooInfo.cs' ! -name '*.Foo.cs'   \\( -name \"*.java\" -o -name \"*.cs\" -o -name \"*.cpp\" -o -name \"*.cxx\" -o -name \"*.cc\" -o -name \"*.c\" -o -name \"*.h\" -o -name \"*.scala\" -o -name \"*.css\" -o -name \"*.html\" -o -name \"*.bat\" -o -name \"*.js\" \\) -exec realpath {} \\;| xargs grep -L CUSTOMERINFO  | sed -e 's/$/\\r/g' >> ../output.txt",
+        "nl2bash_3478: find . -type f -exec grep -i California {} \\; -print | wc -l",
+        "nl2bash_3477: find . -type f -exec grep California {} \\; -print"
+      ],
+      "Explanations about Options": {
+        "-n": "Prefix each line of output with the 1-based line number within its input file.",
+        "-L": "Suppress normal output; instead print the name of each input file from which no\n output would normally have been printed. The scanning will stop on the first\n match.",
+        "-r": "Read all files under each directory, recursively, following symbolic links only if\n they are on the command line. Note that if no file operand is given, grep searches\n the working directory. This is equivalent to the -d recurse option.",
+        "-i": "Ignore case distinctions in patterns and input data, so that characters that differ\n only in case match each other."
+      }
+    },
+    {
+      "Command": "perl",
+      "MP Summary": "The Perl 5 language interpreter",
+      "Most Similar TLDR Task": "Run a multi-line find/replace expression on a file, and save the result in another file",
+      "Most Similar TLDR Script": "perl -p0e 's/{{foo\\nbar}}/{{foobar}}/g' {{input_file}} > {{output_file}}",
+      "Most Similar NL2Bash Task": "Execute \"1\" and write standard output and error to standard output and file \"${LOG_FILE}\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "exec 1 2>&1 | tee ${LOG_FILE}\n",
+          "command-options": {
+            "exec": {
+              "mpsum": "execute commands and open, close, or copy file descriptors"
+            },
+            "tee": {
+              "mpsum": "read from standard input and write to standard output and files"
+            }
+          },
+          "TLDR_inform": {
+            "exec": {
+              "man1_exec_9258": "replac current process anoth process replac specifi command chang process name replac specifi command login use default shell replac specifi command use current environ variabl replac specifi command clear environ variabl"
+            },
+            "tee": {
+              "man1_tee_33494": "read standard input write standard output file command append given file overwrit copi standard input file also standard output creat directori call exampl count number charact exampl write exampl termin print standard input termin also pipe anoth program process"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_12277: Convert Unix `cal` output to latex table code."
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_12277: cal 02 2012|perl -F'(.{1,3})' -anE'BEGIN{$,=\"\\t&\";$\\=\"\\t\\\\\\\\\\n\"}$.==1||eof||do{$i//=@F;print@F[map{$_*2-1}(1..$i/2)]}'\n\n\ncal 02 2012|perl -lnE'$.==1||eof||do{$,=\"\\t&\";$\\=\"\\t\\\\\\\\\\n\";$l=$_;print map{substr($l,$_*3,3)}(1..5)}'"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "xargs",
+      "MP Summary": "build and execute command lines from standard input",
+      "Most Similar TLDR Task": "Parallel runs of up to `max-procs` processes at a time; the default is 1. If `max-procs` is 0, xargs will run as many processes as possible at a time",
+      "Most Similar TLDR Script": "{{arguments_source}} | xargs -P {{max-procs}} {{command}}",
+      "Most Similar NL2Bash Task": "Execute \"1\" and write standard output and error to standard output and file \"${LOG_FILE}\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "exec 1 2>&1 | tee ${LOG_FILE}\n",
+          "command-options": {
+            "exec": {
+              "mpsum": "execute commands and open, close, or copy file descriptors"
+            },
+            "tee": {
+              "mpsum": "read from standard input and write to standard output and files"
+            }
+          },
+          "TLDR_inform": {
+            "exec": {
+              "man1_exec_9258": "replac current process anoth process replac specifi command chang process name replac specifi command login use default shell replac specifi command use current environ variabl replac specifi command clear environ variabl"
+            },
+            "tee": {
+              "man1_tee_33494": "read standard input write standard output file command append given file overwrit copi standard input file also standard output creat directori call exampl count number charact exampl write exampl termin print standard input termin also pipe anoth program process"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_54698135: Linux Find command- exclude find based on file name"
+      ],
+      "Top-3 Scripts": [
+        "so_54698135: find . -type d \\( -name Foo-o -name 2Foo -o -name 2_Foo \\) -prune -o -type f ! -size 0 ! -name 'FooInfo.cs' ! -name '*.Foo.cs'   \\( -name \"*.java\" -o -name \"*.cs\" -o -name \"*.cpp\" -o -name \"*.cxx\" -o -name \"*.cc\" -o -name \"*.c\" -o -name \"*.h\" -o -name \"*.scala\" -o -name \"*.css\" -o -name \"*.html\" -o -name \"*.bat\" -o -name \"*.js\" \\) -exec realpath {} \\;| xargs grep -L CUSTOMERINFO  | sed -e 's/$/\\r/g' >> ../output.txt"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "type",
+      "MP Summary": "write a description of command type",
+      "Most Similar TLDR Task": "Display all locations containing the specified executable",
+      "Most Similar TLDR Script": "type -a {{command}}",
+      "Most Similar NL2Bash Task": "Execute \"1\" and write standard output and error to standard output and file \"${LOG_FILE}\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "exec 1 2>&1 | tee ${LOG_FILE}\n",
+          "command-options": {
+            "exec": {
+              "mpsum": "execute commands and open, close, or copy file descriptors"
+            },
+            "tee": {
+              "mpsum": "read from standard input and write to standard output and files"
+            }
+          },
+          "TLDR_inform": {
+            "exec": {
+              "man1_exec_9258": "replac current process anoth process replac specifi command chang process name replac specifi command login use default shell replac specifi command use current environ variabl replac specifi command clear environ variabl"
+            },
+            "tee": {
+              "man1_tee_33494": "read standard input write standard output file command append given file overwrit copi standard input file also standard output creat directori call exampl count number charact exampl write exampl termin print standard input termin also pipe anoth program process"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_54698135: Linux Find command- exclude find based on file name"
+      ],
+      "Top-3 Scripts": [
+        "so_54698135: type -f"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "cal",
+      "MP Summary": "displays a calendar and the date of Easter",
+      "Most Similar TLDR Task": "Display previous, current and next month",
+      "Most Similar TLDR Script": "cal -3",
+      "Most Similar NL2Bash Task": "Execute \"1\" and write standard output and error to standard output and file \"${LOG_FILE}\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "exec 1 2>&1 | tee ${LOG_FILE}\n",
+          "command-options": {
+            "exec": {
+              "mpsum": "execute commands and open, close, or copy file descriptors"
+            },
+            "tee": {
+              "mpsum": "read from standard input and write to standard output and files"
+            }
+          },
+          "TLDR_inform": {
+            "exec": {
+              "man1_exec_9258": "replac current process anoth process replac specifi command chang process name replac specifi command login use default shell replac specifi command use current environ variabl replac specifi command clear environ variabl"
+            },
+            "tee": {
+              "man1_tee_33494": "read standard input write standard output file command append given file overwrit copi standard input file also standard output creat directori call exampl count number charact exampl write exampl termin print standard input termin also pipe anoth program process"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_12277: Convert Unix `cal` output to latex table code."
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_12277: cal -h 02 2012| cut -c4-17 | sed -r 's/(..)\\s/\\0\\t\\&/g' | sed 's/$/\\t\\\\\\\\/' | head -n-1 | tail -n +2\n\n\ncal 02 2012|perl -F'(.{1,3})' -anE'BEGIN{$,=\"\\t&\";$\\=\"\\t\\\\\\\\\\n\"}$.==1||eof||do{$i//=@F;print@F[map{$_*2-1}(1..$i/2)]}'\n\n\ncal 02 2012|perl -lnE'$.==1||eof||do{$,=\"\\t&\";$\\=\"\\t\\\\\\\\\\n\";$l=$_;print map{substr($l,$_*3,3)}(1..5)}'\n\n\ncal | sed '1d;2{h;s/./ /g;x};/^\\s*$/b;G;s/\\n/ /;s/^...\\(.\\{15\\}\\).*/\\1/;s/.../ &\\t\\&/g;s/\\&$/\\\\\\\\/'"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "chown",
+      "MP Summary": "change file owner and group",
+      "Most Similar TLDR Task": "Change the owner of a file/directory to match a reference file",
+      "Most Similar TLDR Script": "chown --reference={{path/to/reference_file}} {{path/to/file_or_directory}}",
+      "Most Similar NL2Bash Task": "Execute \"1\" and write standard output and error to standard output and file \"${LOG_FILE}\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "exec 1 2>&1 | tee ${LOG_FILE}\n",
+          "command-options": {
+            "exec": {
+              "mpsum": "execute commands and open, close, or copy file descriptors"
+            },
+            "tee": {
+              "mpsum": "read from standard input and write to standard output and files"
+            }
+          },
+          "TLDR_inform": {
+            "exec": {
+              "man1_exec_9258": "replac current process anoth process replac specifi command chang process name replac specifi command login use default shell replac specifi command use current environ variabl replac specifi command clear environ variabl"
+            },
+            "tee": {
+              "man1_tee_33494": "read standard input write standard output file command append given file overwrit copi standard input file also standard output creat directori call exampl count number charact exampl write exampl termin print standard input termin also pipe anoth program process"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_3630: Find all files which belong to user lal and change their ownership to ravi"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_3630: find / -user lal -exec chown ravi {} \\;"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "tail",
+      "MP Summary": "output the last part of files",
+      "Most Similar TLDR Task": "Show all file since line 'num'",
+      "Most Similar TLDR Script": "tail -n +{{num}} {{file}}",
+      "Most Similar NL2Bash Task": "Execute \"1\" and write standard output and error to standard output and file \"${LOG_FILE}\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "exec 1 2>&1 | tee ${LOG_FILE}\n",
+          "command-options": {
+            "exec": {
+              "mpsum": "execute commands and open, close, or copy file descriptors"
+            },
+            "tee": {
+              "mpsum": "read from standard input and write to standard output and files"
+            }
+          },
+          "TLDR_inform": {
+            "exec": {
+              "man1_exec_9258": "replac current process anoth process replac specifi command chang process name replac specifi command login use default shell replac specifi command use current environ variabl replac specifi command clear environ variabl"
+            },
+            "tee": {
+              "man1_tee_33494": "read standard input write standard output file command append given file overwrit copi standard input file also standard output creat directori call exampl count number charact exampl write exampl termin print standard input termin also pipe anoth program process"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_12277: Convert Unix `cal` output to latex table code."
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_12277: cal -h 02 2012| cut -c4-17 | sed -r 's/(..)\\s/\\0\\t\\&/g' | sed 's/$/\\t\\\\\\\\/' | head -n-1 | tail -n +2"
+      ],
+      "Explanations about Options": {
+        "-n": "output the last NUM lines, instead of the last 10; or use -n +NUM to output\n starting with line NUM"
+      }
+    },
+    {
+      "Command": "realpath",
+      "MP Summary": "print the resolved path",
+      "Most Similar TLDR Task": "Require all path components to exist",
+      "Most Similar TLDR Script": "realpath --canonicalize-existing {{path/to/file_or_directory}}",
+      "Most Similar NL2Bash Task": "Execute \"1\" and write standard output and error to standard output and file \"${LOG_FILE}\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "exec 1 2>&1 | tee ${LOG_FILE}\n",
+          "command-options": {
+            "exec": {
+              "mpsum": "execute commands and open, close, or copy file descriptors"
+            },
+            "tee": {
+              "mpsum": "read from standard input and write to standard output and files"
+            }
+          },
+          "TLDR_inform": {
+            "exec": {
+              "man1_exec_9258": "replac current process anoth process replac specifi command chang process name replac specifi command login use default shell replac specifi command use current environ variabl replac specifi command clear environ variabl"
+            },
+            "tee": {
+              "man1_tee_33494": "read standard input write standard output file command append given file overwrit copi standard input file also standard output creat directori call exampl count number charact exampl write exampl termin print standard input termin also pipe anoth program process"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_54698135: Linux Find command- exclude find based on file name"
+      ],
+      "Top-3 Scripts": [
+        "so_54698135: find . -type d \\( -name Foo-o -name 2Foo -o -name 2_Foo \\) -prune -o -type f ! -size 0 ! -name 'FooInfo.cs' ! -name '*.Foo.cs'   \\( -name \"*.java\" -o -name \"*.cs\" -o -name \"*.cpp\" -o -name \"*.cxx\" -o -name \"*.cc\" -o -name \"*.c\" -o -name \"*.h\" -o -name \"*.scala\" -o -name \"*.css\" -o -name \"*.html\" -o -name \"*.bat\" -o -name \"*.js\" \\) -exec realpath {} \\;| xargs grep -L CUSTOMERINFO  | sed -e 's/$/\\r/g' >> ../output.txt"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "wc",
+      "MP Summary": "print newline, word, and byte counts for each file",
+      "Most Similar TLDR Task": "Count characters in file (taking multi-byte character sets into account)",
+      "Most Similar TLDR Script": "wc -m {{file}}",
+      "Most Similar NL2Bash Task": "Execute \"1\" and write standard output and error to standard output and file \"${LOG_FILE}\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "exec 1 2>&1 | tee ${LOG_FILE}\n",
+          "command-options": {
+            "exec": {
+              "mpsum": "execute commands and open, close, or copy file descriptors"
+            },
+            "tee": {
+              "mpsum": "read from standard input and write to standard output and files"
+            }
+          },
+          "TLDR_inform": {
+            "exec": {
+              "man1_exec_9258": "replac current process anoth process replac specifi command chang process name replac specifi command login use default shell replac specifi command use current environ variabl replac specifi command clear environ variabl"
+            },
+            "tee": {
+              "man1_tee_33494": "read standard input write standard output file command append given file overwrit copi standard input file also standard output creat directori call exampl count number charact exampl write exampl termin print standard input termin also pipe anoth program process"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_3478: Find all files under and below the current working directory with the word California in the file (case insensitive), and count the number of lines in the output"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_3478: find . -type f -exec grep -i California {} \\; -print | wc -l"
+      ],
+      "Explanations about Options": {
+        "-l": "print the newline counts"
+      }
+    },
+    {
+      "Command": "cpio",
+      "MP Summary": "copy files to and from archives",
+      "Most Similar TLDR Task": "Copy all files and directories in a directory and add them [o]nto an archive, in [v]erbose mode",
+      "Most Similar TLDR Script": "find {{path/to/directory}} | cpio -ov > {{archive.cpio}}",
+      "Most Similar NL2Bash Task": "Execute \"1\" and write standard output and error to standard output and file \"${LOG_FILE}\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "exec 1 2>&1 | tee ${LOG_FILE}\n",
+          "command-options": {
+            "exec": {
+              "mpsum": "execute commands and open, close, or copy file descriptors"
+            },
+            "tee": {
+              "mpsum": "read from standard input and write to standard output and files"
+            }
+          },
+          "TLDR_inform": {
+            "exec": {
+              "man1_exec_9258": "replac current process anoth process replac specifi command chang process name replac specifi command login use default shell replac specifi command use current environ variabl replac specifi command clear environ variabl"
+            },
+            "tee": {
+              "man1_tee_33494": "read standard input write standard output file command append given file overwrit copi standard input file also standard output creat directori call exampl count number charact exampl write exampl termin print standard input termin also pipe anoth program process"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_3118: Find all files in current directory excluding hidden files, archive them and put the output into variable  full_backup_dir"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_3118: full_backup_dir=\"$(find . -depth \\( -wholename \\./\\.\\* \\) -prune -o -print | cpio -oav)\""
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "head",
+      "MP Summary": "output the first part of files",
+      "Most Similar TLDR Task": "Output everything but the last few lines of a file",
+      "Most Similar TLDR Script": "head -n -{{count_of_lines}} {{filename}}",
+      "Most Similar NL2Bash Task": "Execute \"1\" and write standard output and error to standard output and file \"${LOG_FILE}\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "exec 1 2>&1 | tee ${LOG_FILE}\n",
+          "command-options": {
+            "exec": {
+              "mpsum": "execute commands and open, close, or copy file descriptors"
+            },
+            "tee": {
+              "mpsum": "read from standard input and write to standard output and files"
+            }
+          },
+          "TLDR_inform": {
+            "exec": {
+              "man1_exec_9258": "replac current process anoth process replac specifi command chang process name replac specifi command login use default shell replac specifi command use current environ variabl replac specifi command clear environ variabl"
+            },
+            "tee": {
+              "man1_tee_33494": "read standard input write standard output file command append given file overwrit copi standard input file also standard output creat directori call exampl count number charact exampl write exampl termin print standard input termin also pipe anoth program process"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_12277: Convert Unix `cal` output to latex table code."
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_12277: cal -h 02 2012| cut -c4-17 | sed -r 's/(..)\\s/\\0\\t\\&/g' | sed 's/$/\\t\\\\\\\\/' | head -n-1 | tail -n +2"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "cut",
+      "MP Summary": "remove sections from each line of files",
+      "Most Similar TLDR Task": "Cut out the first sixteen characters of each line of `stdin`",
+      "Most Similar TLDR Script": "cut -c {{1-16}}",
+      "Most Similar NL2Bash Task": "Execute \"1\" and write standard output and error to standard output and file \"${LOG_FILE}\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "exec 1 2>&1 | tee ${LOG_FILE}\n",
+          "command-options": {
+            "exec": {
+              "mpsum": "execute commands and open, close, or copy file descriptors"
+            },
+            "tee": {
+              "mpsum": "read from standard input and write to standard output and files"
+            }
+          },
+          "TLDR_inform": {
+            "exec": {
+              "man1_exec_9258": "replac current process anoth process replac specifi command chang process name replac specifi command login use default shell replac specifi command use current environ variabl replac specifi command clear environ variabl"
+            },
+            "tee": {
+              "man1_tee_33494": "read standard input write standard output file command append given file overwrit copi standard input file also standard output creat directori call exampl count number charact exampl write exampl termin print standard input termin also pipe anoth program process"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_12277: Convert Unix `cal` output to latex table code."
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_12277: cal -h 02 2012| cut -c4-17 | sed -r 's/(..)\\s/\\0\\t\\&/g' | sed 's/$/\\t\\\\\\\\/' | head -n-1 | tail -n +2"
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

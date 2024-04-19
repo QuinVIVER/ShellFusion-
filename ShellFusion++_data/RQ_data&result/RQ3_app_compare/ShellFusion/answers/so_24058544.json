@@ -1,0 +1,105 @@
+{
+    "Answers": [
+        {
+            "Command": "rsync",
+            "Explanations about Options": {
+                "--delete-during(M)": "Request that the file-deletions on the receiving side be done incrementally as the\n transfer happens. The per-directory delete scan is done right before each\n directory is checked for updates, so it behaves like a more efficient\n --delete-before, including doing the deletions prior to any per-directory filter\n files being updated. This option was first added in rsync version 2.6.4. See\n --delete (which is implied) for more details on file-deletion.",
+                "--quiet(M)": "This option decreases the amount of information you are given during the transfer,\n notably suppressing information messages from the remote server. This option is\n useful when invoking rsync from cron.",
+                "-A(M)": "This option causes rsync to update the destination ACLs to be the same as the\n source ACLs. The option also implies --perms.",
+                "-X(M)": "This option causes rsync to update the destination extended attributes to be the\n same as the source ones.",
+                "-a(M)": "This is equivalent to -rlptgoD. It is a quick way of saying you want recursion and\n want to preserve almost everything (with -H being a notable omission). The only\n exception to the above equivalence is when --files-from is specified, in which case\n -r is not implied.",
+                "-e(M)": "This option allows you to choose an alternative remote shell program to use for\n communication between the local and remote copies of rsync. Typically, rsync is\n configured to use ssh by default, but you may prefer to use rsh on a local network.",
+                "-h(M)": "Output numbers in a more human-readable format. There are 3 possible levels: (1)\n output numbers with a separator between each set of 3 digits (either a comma or a\n period, depending on if the decimal point is represented by a period or a comma);\n (2) output numbers in units of 1000 (with a character suffix for larger units --\n see below); (3) output numbers in units of 1024.",
+                "-i(M)": "Requests a simple itemized list of the changes that are being made to each file,\n including attribute changes. This is exactly the same as specifying\n --out-format='%i %n%L'. If you repeat the option, unchanged files will also be\n output, but only if the receiving rsync is at least version 2.6.7 (you can use -vv\n with older versions of rsync, but that also turns on the output of other verbose\n messages).",
+                "-r(M)": "This tells rsync to copy directories recursively. See also --dirs (-d).",
+                "-v(M)": "This option increases the amount of information you are given during the transfer.\n By default, rsync works silently. A single -v will give you information about what\n files are being transferred and a brief summary at the end. Two -v options will\n give you information on what files are being skipped and slightly more information\n at the end. More than two -v options should only be used if you are debugging\n rsync."
+            },
+            "MP Summary": "a fast, versatile, remote (and local) file-copying tool",
+            "Most Similar TLDR Script": "rsync -r {{remote_host}}:{{path/to/remote_directory}}/ {{path/to/local_directory}}",
+            "Most Similar TLDR Task": "Transfer directory contents (but not the directory itself) from a remote to local",
+            "Top-3 Scripts": [
+                "ul_274243: rsync -haAXi --quiet --delete --delete-during /mnt/ROUTER_WD_2TB/ /mnt/BACKUP_HITACHI_2TB/\n\nfor d in /mnt/ROUTER_WD_2TB/*\ndo\n    rsync -haAXi --quiet --delete --delete-during \"$d\" /mnt/BACKUP_HITACHI_2TB/ >\"/tmp/rsync.${d/*\\/}.log\" 2>&1 &\ndone\nwait\ncat /tmp/rsync.*.log\nrm -f /tmp/rsync.*.log",
+                "so_32091250: rsync -ave \"ssh\" /tools/packageA/release.txt user@server.com:/tools/packageA/release.txt",
+                "ul_2445: rsync --append"
+            ],
+            "Top-3 Similar Questions": [
+                "ul_90245: Is using rsync while source is being updated safe?",
+                "ul_274243: Speed up / avoid calculation of rsync file lists",
+                "so_32091250: Rsync not transferring the changes"
+            ]
+        },
+        {
+            "Command": "scp",
+            "Explanations about Options": {
+                "-3(M)": "Copies between two remote hosts are transferred through the local host. Without\n this option the data is copied directly between the two remote hosts. Note that\n this option disables the progress meter.",
+                "-C(M)": "Compression enable. Passes the -C flag to ssh(1) to enable compression.",
+                "-r(M)": "Recursively copy entire directories. Note that scp follows symbolic links\n encountered in the tree traversal."
+            },
+            "MP Summary": "secure copy (remote file copy program)",
+            "Most Similar TLDR Script": "scp -3 {{host1}}:{{path/to/remote_file}} {{host2}}:{{path/to/remote_directory}}",
+            "Most Similar TLDR Task": "Copy a file between two remote hosts transferring through the local host",
+            "Top-3 Scripts": [
+                "so_28025147: for file in file1 file2 file3 ; do \n     scp $file server:/tmp/ & \ndone",
+                "ul_30953: scp -Cr srcdir user@server:destdir"
+            ],
+            "Top-3 Similar Questions": [
+                "so_28025147: How to copy multiple files simultaneously using scp",
+                "ul_20713: Asking rsync to transfer files without connecting to the remote rsync server?",
+                "ul_30953: tar + rsync + untar. Any speed benefit over just rsync?"
+            ]
+        },
+        {
+            "Command": "parallel",
+            "Explanations about Options": {},
+            "MP Summary": "run programs in parallel",
+            "Most Similar TLDR Script": "parallel gzip ::: {{file1}} {{file2}} {{file3}}",
+            "Most Similar TLDR Task": "Gzip several files at once, using all cores",
+            "Top-3 Scripts": [
+                "so_17382802: find . -type f -print0 | parallel -0 -P 3 ./myscript {1}",
+                "so_24843570: parallel \"docker build -t crackerz/nodejs:{} $DIR/dist/{} 2>&1 | tee ./logs/{}.log\" ::: wheezy jessie sid precise saucy trusty\n\ndocker push crackerz/nodejs 2>&1 | tee ./logs/push.log"
+            ],
+            "Top-3 Similar Questions": [
+                "so_17382802: How to process files concurrently with bash?",
+                "so_24843570: Concurrency in Shell Scripts"
+            ]
+        },
+        {
+            "Command": "cp",
+            "Explanations about Options": {
+                "--parents(M)": "use full source file name under DIRECTORY",
+                "-a(M)": "same as -dR --preserve=all",
+                "-r(M)": "copy directories recursively",
+                "-u(M)": "copy only when the SOURCE file is newer than the destination file or when the\n destination file is missing"
+            },
+            "MP Summary": "copy files and directories",
+            "Most Similar TLDR Script": "cp -r {{path/to/source_directory}} {{path/to/target_directory}}",
+            "Most Similar TLDR Task": "Recursively copy a directory's contents to another location (if the destination exists, the directory is copied inside it)",
+            "Top-3 Scripts": [
+                "ul_274243: cp -au /mnt/ROUTER_WD_2TB/. /mnt/BACKUP_HITACHI_2TB/",
+                "ul_333144: cp --parents",
+                "su_1559408: cp -a"
+            ],
+            "Top-3 Similar Questions": [
+                "ul_274243: Speed up / avoid calculation of rsync file lists",
+                "ul_333144: How can I slow down rsync?",
+                "ul_116280: cannot create regular file 'filename': File exists"
+            ]
+        },
+        {
+            "Command": "tar",
+            "Explanations about Options": {
+                "-C(M)": "Change to DIR before performing any operations. This option is order-sensitive,\n i.e. it affects all options that follow."
+            },
+            "MP Summary": "an archiving utility",
+            "Most Similar TLDR Script": "tar caf {{target.tar.xz}} {{file1}} {{file2}} {{file3}}",
+            "Most Similar TLDR Task": "Create a compressed archive, using archive suffix to determine the compression program",
+            "Top-3 Scripts": [
+                "ul_30953: tar + rsync + untar\n\ntar -C /src/dir -jcf - ./ | ssh user@server 'tar -C /dest/dir -jxf -'"
+            ],
+            "Top-3 Similar Questions": [
+                "ul_30953: tar + rsync + untar. Any speed benefit over just rsync?"
+            ]
+        }
+    ],
+    "Query": "Speed up rsync with Simultaneous/Concurrent File Transfers?"
+}

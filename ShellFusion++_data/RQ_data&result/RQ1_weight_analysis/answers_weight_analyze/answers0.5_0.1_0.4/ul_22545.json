@@ -1,0 +1,80 @@
+{
+  "Query": "How to connect to a serial port as simple as using SSH?",
+  "Answers": [
+    {
+      "Command": "telnet",
+      "MP Summary": "user interface to the TELNET protocol",
+      "Most Similar TLDR Task": "Telnet to a specific port of a host",
+      "Most Similar TLDR Script": "telnet {{ip_address}} {{port}}",
+      "Top-3 Similar Questions": [
+        "au_603911: Unable to connect to my Ubuntu machine using Putty remotely?",
+        "so_27458960: how to connect to my university unix server using mac terminal"
+      ],
+      "Top-3 Scripts": [
+        "au_603911: telnet <ip-adress> 22",
+        "so_27458960: telnet something.something.ac.il 23\n\ntelnet -l username something.something.ac.il 23"
+      ],
+      "Explanations about Options": {
+        "-l": "Specify user as the user to log in as on the remote system. This is accomplished by\n sending the specified name as the USER environment variable, so it requires that the\n remote system support the TELNET NEW-ENVIRON option. This option implies the -a\n option, and may also be used with the open command."
+      }
+    },
+    {
+      "Command": "ssh",
+      "MP Summary": "OpenSSH SSH client (remote login program)",
+      "Most Similar TLDR Task": "Connect to a remote server using a specific port",
+      "Most Similar TLDR Script": "ssh {{username}}@{{remote_host}} -p {{2222}}",
+      "Top-3 Similar Questions": [
+        "au_603911: Unable to connect to my Ubuntu machine using Putty remotely?",
+        "su_748297: Unable to connect to server using Putty",
+        "ul_138850: How to connect ssh from a specified port?"
+      ],
+      "Top-3 Scripts": [
+        "au_603911: [simmel]@[mars]$ service ssh status\nssh start/running, process 1279\n\n[simmel]@[mars]$ ssh -p22 simmel@localhost\nEnter passphrase for key '/home/simmel/.ssh/id_rsa':\n\nnmap -sS 10.128.225.177\n\nStarting Nmap 6.40 ( http://nmap.org ) at 2015-04-01 14:33 CEST\nNmap scan report for 10.128.225.177\nHost is up (0.00075s latency).\nNot shown: 995 closed ports\nPORT STATE SERVICE\n22/tcp open ssh\n\nNmap done: 1 IP address (1 host up) scanned in 8.45 seconds",
+        "su_748297: sudo ufw allow ssh\n\n/etc/ssh/sshd_config",
+        "ul_138850: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "autossh",
+      "MP Summary": "monitor and restart ssh sessions",
+      "Most Similar TLDR Task": "Open an SSH session which forwards a local port to a remote one, restarting if necessary",
+      "Most Similar TLDR Script": "autossh -M {{monitor_port}} -L {{local_port}}:localhost:{{remote_port}} {{user}}@{{host}}",
+      "Top-3 Similar Questions": [
+        "su_1244456: Connect to port over working ssh tunnel from IntelliJ?"
+      ],
+      "Top-3 Scripts": [
+        "su_1244456: autossh -f -N -L 0.0.0.0:8000:localhost:8000 username@remotebox"
+      ],
+      "Explanations about Options": {
+        "-f": "causes autossh to drop to the background before running ssh. The -f flag is stripped\n from arguments passed to ssh. Note that there is a crucial difference between -f\n with autossh, and -f with ssh: when used with autossh ssh will be unable to ask for\n passwords or passphrases. When -f is used, the \"starting gate\" time (see\n AUTOSSH_GATETIME) is set to 0."
+      }
+    },
+    {
+      "Command": "sshpass",
+      "MP Summary": "noninteractive ssh password provider",
+      "Most Similar TLDR Task": "Connect to a remote server with the password supplied as an option, and automatically accept unknown ssh keys",
+      "Most Similar TLDR Script": "sshpass -p {{password}} ssh -o StrictHostKeyChecking=no {{user}}@{{hostname}}",
+      "Top-3 Similar Questions": [
+        "so_25643637: Connect to multiple ssh connections through scripts"
+      ],
+      "Top-3 Scripts": [
+        "so_25643637: #!/bin/bash\n\nsshpass -p \"MY_PASSWORD2\" ssh -o StrictHostKeyChecking=no \\\n    -o ProxyCommand='sshpass -p \"MY_PASSWORD1\" ssh m_hostname_1 netcat -w 1 %h %p' \\\n    my_hostname_2"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "nc",
+      "MP Summary": "arbitrary TCP and UDP connections and listens",
+      "Most Similar TLDR Task": "Connect to a certain port (you can then write to this port)",
+      "Most Similar TLDR Script": "nc {{ip_address}} {{port}}",
+      "Top-3 Similar Questions": [
+        "ul_2028: How do I connect to a pc through another pc using ssh"
+      ],
+      "Top-3 Scripts": [
+        "ul_2028: Host PC1\nHostName 192.168.0.2\nUser user\nProxyCommand ssh user@192.168.123.101 nc %h %p"
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

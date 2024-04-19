@@ -1,0 +1,1135 @@
+{
+  "Query": "How to specify level of compression when using tar -zcvf?",
+  "Answers": [
+    {
+      "Command": "tar",
+      "MP Summary": "an archiving utility",
+      "Most Similar TLDR Task": "Create a compressed archive, using archive suffix to determine the compression program",
+      "Most Similar TLDR Script": "tar caf {{target.tar.xz}} {{file1}} {{file2}} {{file3}}",
+      "Most Similar NL2Bash Task": "Compress $file file using gzip",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "gzip \"$file\"\n",
+          "command-options": {},
+          "TLDR_inform": {}
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_545883: List contents of a tgz archive inside a gz archive",
+        "so_1748916: Unix command to create a tar of a specified number of files",
+        "so_15818433: Do we need to specify compression level when extracting a compressed tar file?"
+      ],
+      "Top-3 Scripts": [
+        "ul_545883: gunzip < /path/to/gz | tar tzf -\n\n| tar tz",
+        "so_1748916: tar cf path_of_tar.tar $(ls | head -10)",
+        "so_15818433: tar -xf"
+      ],
+      "Explanations about Options": {
+        "-x": "Extract files from an archive. Arguments are optional. When given, they specify\n names of the archive members to be extracted."
+      }
+    },
+    {
+      "Command": "bzip2",
+      "MP Summary": "a block-sorting file compressor, v1.0.8",
+      "Most Similar TLDR Task": "Compress a file",
+      "Most Similar TLDR Script": "bzip2 {{path/to/file_to_compress}}",
+      "Most Similar NL2Bash Task": "Compress $file file using gzip",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "gzip \"$file\"\n",
+          "command-options": {},
+          "TLDR_inform": {}
+        }
+      },
+      "Top-3 Similar Questions": [
+        "su_703143: How to convert a file of format tar.gz to tar.bz2?",
+        "ul_558790: Create archive of complete drive with tar",
+        "ul_553185: How do I demonstrate the type of kernel compression in practice?"
+      ],
+      "Top-3 Scripts": [
+        "su_703143: gunzip < file.gz | bzip2 > file.bz2",
+        "ul_558790: dd if=/dev/nvme0n1 | bzip2 > /mnt/some_other_drive/copy_of_the_first_drive.bz2",
+        "ul_553185: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "file",
+      "MP Summary": "determine file type",
+      "Most Similar TLDR Task": "Look inside a zipped file and determine the file type(s) inside",
+      "Most Similar TLDR Script": "file -z {{foo.zip}}",
+      "Most Similar NL2Bash Task": "Compress $file file using gzip",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "gzip \"$file\"\n",
+          "command-options": {},
+          "TLDR_inform": {}
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_613490: Tar command saves file in working directory instead of specified directory",
+        "au_1151941: How to compress 3000 images in batches of 50",
+        "so_3511896: Split big compressed log files into compressed chunks of X lines while doing inline compression"
+      ],
+      "Top-3 Scripts": [
+        "ul_613490: Common options:\n       -C, --directory=DIR\n              change to directory DIR\n\n       -f, --file=ARCHIVE\n              use archive file or device ARCHIVE",
+        "au_1151941: ",
+        "so_3511896: $ unrar p $file | ( while :; do i=$[$i+1]; head -n 10000 | gzip > split.$i.gz; done )\n\n$ unrar p $file |\n       ( while :; do\n           i=$[$i+1];\n           head -n 10000 | gzip > split.$i.gz;\n           if [ `stat -c %s split.$i.gz` -lt 30 ]; then rm split.$i.gz; break; fi;\n       done )"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "zstd",
+      "MP Summary": "zstd, zstdmt, unzstd, zstdcat - Compress or decompress .zst files",
+      "Most Similar TLDR Task": "Unlock higher compression levels (up to 22) using more memory (both for compression and decompression)",
+      "Most Similar TLDR Script": "zstd --ultra -{{level}} {{file}}",
+      "Most Similar NL2Bash Task": "Compress $file file using gzip",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "gzip \"$file\"\n",
+          "command-options": {},
+          "TLDR_inform": {}
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_553185: How do I demonstrate the type of kernel compression in practice?"
+      ],
+      "Top-3 Scripts": [
+        "ul_553185: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "find",
+      "MP Summary": "search for files in a directory hierarchy",
+      "Most Similar TLDR Task": "Find files matching a given pattern, excluding specific paths",
+      "Most Similar TLDR Script": "find {{root_path}} -name '{{*.py}}' -not -path '{{*/site-packages/*}}'",
+      "Most Similar NL2Bash Task": "Compress $file file using gzip",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "gzip \"$file\"\n",
+          "command-options": {},
+          "TLDR_inform": {}
+        }
+      },
+      "Top-3 Similar Questions": [
+        "su_642073: How make a compressed tar when there are too many filenames for the shell to expand on a single line?",
+        "ul_255056: How to make tar to ignore last-modified-time of files/directories",
+        "nl2bash_13169: create a tar.gz compress file with all the jpg files in the entire file system"
+      ],
+      "Top-3 Scripts": [
+        "su_642073: find . -maxdepth 1 -name '*.csv' -print0 |\ntar -czf archive.tgz --null -T -",
+        "ul_255056: find build -print0 | LC_ALL=C sort -z\n  | tar --no-recursion --null -T - -cf product.tar",
+        "nl2bash_13169: find / -name *.jpg -type f -print | xargs tar -cvzf images.tar.gz"
+      ],
+      "Explanations about Options": {
+        "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+        "-maxdepth": "Descend at most levels (a non-negative integer) levels of directories below the\n starting-points. -maxdepth 0 means only apply the tests and actions to the\n starting-points themselves.",
+        "-type": "File is of type c:",
+        "-print": "Quoting is handled in the same way as for -printf and -fprintf. If you are using\n find in a script or in a situation where the matched files might have arbitrary\n names, you should consider using -print0 instead of -print.",
+        "-print0": "Always print the exact filename, unchanged, even if the output is going to a\n terminal."
+      }
+    },
+    {
+      "Command": "dd",
+      "MP Summary": "convert and copy a file",
+      "Most Similar TLDR Task": "Check progress of an ongoing dd operation (Run this command from another shell)",
+      "Most Similar TLDR Script": "kill -USR1 $(pgrep ^dd)",
+      "Most Similar NL2Bash Task": "Compress $file file using gzip",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "gzip \"$file\"\n",
+          "command-options": {},
+          "TLDR_inform": {}
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_558790: Create archive of complete drive with tar",
+        "ul_232254: Get compressed size of piped output with gzip?"
+      ],
+      "Top-3 Scripts": [
+        "ul_558790: dd if=/dev/nvme0n1 of=/mnt/some_other_drive/copy_of_the_first_drive\n\ndd if=/dev/nvme0n1 | bzip2 > /mnt/some_other_drive/copy_of_the_first_drive.bz2",
+        "ul_232254: gzip -fc testfile | dd of=testfile.gz\n0+1 records in\n0+1 records out\n42 bytes (42 B) copied, 0.00018711 s, 224 kB/s\n\ngzip -fc testfile | dd | ssh serverip \"cat > file.gz\"\n0+1 records in\n0+1 records out\n42 bytes (42 B) copied, 0.00018711 s, 224 kB/s"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "zip",
+      "MP Summary": "package and compress (archive) files",
+      "Most Similar TLDR Task": "Package and compress multiple directories and files",
+      "Most Similar TLDR Script": "zip -r {{compressed.zip}} {{/path/to/dir1 /path/to/dir2 /path/to/file}}",
+      "Most Similar NL2Bash Task": "Compress $file file using gzip",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "gzip \"$file\"\n",
+          "command-options": {},
+          "TLDR_inform": {}
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_48836836: How to compress separately with password hundreds of files in tar.gz?"
+      ],
+      "Top-3 Scripts": [
+        "so_48836836: for i in *.mkv; do \n  zip --password \"thepassword\" \"$i.zip\" \"$i\" \ndone"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "xz",
+      "MP Summary": "Compress or decompress .xz and .lzma files",
+      "Most Similar TLDR Task": "Compress a file, but don't delete the original",
+      "Most Similar TLDR Script": "xz -k {{file}}",
+      "Most Similar NL2Bash Task": "Compress $file file using gzip",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "gzip \"$file\"\n",
+          "command-options": {},
+          "TLDR_inform": {}
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_553185: How do I demonstrate the type of kernel compression in practice?"
+      ],
+      "Top-3 Scripts": [
+        "ul_553185: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "rm",
+      "MP Summary": "remove files or directories",
+      "Most Similar TLDR Task": "Remove files in verbose mode, printing a message for each removed file",
+      "Most Similar TLDR Script": "rm -v {{path/to/directory/*}}",
+      "Most Similar NL2Bash Task": "Compress $file file using gzip",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "gzip \"$file\"\n",
+          "command-options": {},
+          "TLDR_inform": {}
+        }
+      },
+      "Top-3 Similar Questions": [
+        "su_703143: How to convert a file of format tar.gz to tar.bz2?",
+        "so_3511896: Split big compressed log files into compressed chunks of X lines while doing inline compression"
+      ],
+      "Top-3 Scripts": [
+        "su_703143: rm file.gz",
+        "so_3511896: $ unrar p $file |\n       ( while :; do\n           i=$[$i+1];\n           head -n 10000 | gzip > split.$i.gz;\n           if [ `stat -c %s split.$i.gz` -lt 30 ]; then rm split.$i.gz; break; fi;\n       done )"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "unrar",
+      "MP Summary": "extract files from rar archives",
+      "Most Similar TLDR Task": "List files inside the archive file without decompressing it",
+      "Most Similar TLDR Script": "unrar l {{compressed.rar}}",
+      "Most Similar NL2Bash Task": "Compress $file file using gzip",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "gzip \"$file\"\n",
+          "command-options": {},
+          "TLDR_inform": {}
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_3511896: Split big compressed log files into compressed chunks of X lines while doing inline compression"
+      ],
+      "Top-3 Scripts": [
+        "so_3511896: $ unrar p $file | ( while :; do i=$[$i+1]; head -n 10000 | gzip > split.$i.gz; done )\n\n$ unrar p $file |\n       ( while :; do\n           i=$[$i+1];\n           head -n 10000 | gzip > split.$i.gz;\n           if [ `stat -c %s split.$i.gz` -lt 30 ]; then rm split.$i.gz; break; fi;\n       done )"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "lz4",
+      "MP Summary": "lz4, unlz4, lz4cat - Compress or decompress .lz4 files",
+      "Most Similar TLDR Task": "Package and compress a directory and its contents",
+      "Most Similar TLDR Script": "tar cvf - {{path/to/dir}} | lz4 - {{dir.tar.lz4}}",
+      "Most Similar NL2Bash Task": "Compress $file file using gzip",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "gzip \"$file\"\n",
+          "command-options": {},
+          "TLDR_inform": {}
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_553185: How do I demonstrate the type of kernel compression in practice?"
+      ],
+      "Top-3 Scripts": [
+        "ul_553185: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "7z",
+      "MP Summary": "A file archiver with high compression ratio format",
+      "Most Similar TLDR Task": "Archive using a specific archive type",
+      "Most Similar TLDR Script": "7z a -t{{zip|gzip|bzip2|tar}} {{archived.7z}} {{path/to/file_or_directory}}",
+      "Most Similar NL2Bash Task": "Compress $file file using gzip",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "gzip \"$file\"\n",
+          "command-options": {},
+          "TLDR_inform": {}
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_930469: Does anyone know when Tar will Compress to .7z in the future? (It does xz compression, but when will it do 7zip -mx=9 compression?)"
+      ],
+      "Top-3 Scripts": [
+        "au_930469: tar cf - directory | 7z a -si directory.tar.7z"
+      ],
+      "Explanations about Options": {
+        "-si": "Read data from stdin (e.g. tar cf - directory | 7z a -si directory.tar.7z)"
+      }
+    },
+    {
+      "Command": "7za",
+      "MP Summary": "A file archiver with high compression ratio format",
+      "Most Similar TLDR Task": "Archive using a specific archive type",
+      "Most Similar TLDR Script": "7za a -t{{zip|gzip|bzip2|tar}} {{archived}} {{path/to/file_or_directory}}",
+      "Most Similar NL2Bash Task": "Compress $file file using gzip",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "gzip \"$file\"\n",
+          "command-options": {},
+          "TLDR_inform": {}
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_930469: Does anyone know when Tar will Compress to .7z in the future? (It does xz compression, but when will it do 7zip -mx=9 compression?)"
+      ],
+      "Top-3 Scripts": [
+        "au_930469: On Linux/Unix, in order to backup directories you must use tar :\n    - to backup a directory  : tar cf - directory | 7za a -si directory.tar.7z\n    - to restore your backup : 7za x -so directory.tar.7z | tar xf -"
+      ],
+      "Explanations about Options": {
+        "-so": "Write data to stdout (e.g. 7za x -so directory.tar.7z | tar xf -)",
+        "-si": "Read data from stdin (e.g. tar cf - directory | 7za a -si directory.tar.7z)"
+      }
+    },
+    {
+      "Command": "cd",
+      "MP Summary": "change the working directory",
+      "Most Similar TLDR Task": "Go to the given directory",
+      "Most Similar TLDR Script": "cd {{path/to/directory}}",
+      "Most Similar NL2Bash Task": "Compress $file file using gzip",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "gzip \"$file\"\n",
+          "command-options": {},
+          "TLDR_inform": {}
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_12018: Go to top level of git tree using relative path",
+        "au_553158: Compressing a folder (tar) without its containing directory in the folder name"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_12018: cd $(git rev-parse --show-cdup)",
+        "au_553158: cd /path/to/containing/folder && tar -zcvf tarfile.tar.gz foldername_tocompress"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "sort",
+      "MP Summary": "sort lines of text files",
+      "Most Similar TLDR Task": "Sort a file preserving only unique lines",
+      "Most Similar TLDR Script": "sort -u {{path/to/file}}",
+      "Most Similar NL2Bash Task": "Compress $file file using gzip",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "gzip \"$file\"\n",
+          "command-options": {},
+          "TLDR_inform": {}
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_9980: Print the sorted uniqe list of folders in compressed archive nginx-1.0.0.tar.gz",
+        "ul_255056: How to make tar to ignore last-modified-time of files/directories"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_9980: tar tf nginx-1.0.0.tar.gz | xargs dirname | sort | uniq",
+        "ul_255056: find build -print0 | LC_ALL=C sort -z\n  | tar --no-recursion --null -T - -cf product.tar"
+      ],
+      "Explanations about Options": {
+        "-z": "line delimiter is NUL, not newline"
+      }
+    },
+    {
+      "Command": "xargs",
+      "MP Summary": "build and execute command lines from standard input",
+      "Most Similar TLDR Task": "Delete all files with a `.backup` extension (`-print0` uses a null character to split file names, and `-0` uses it as delimiter)",
+      "Most Similar TLDR Script": "find . -name {{'*.backup'}} -print0 | xargs -0 rm -v",
+      "Most Similar NL2Bash Task": "Compress $file file using gzip",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "gzip \"$file\"\n",
+          "command-options": {},
+          "TLDR_inform": {}
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_9980: Print the sorted uniqe list of folders in compressed archive nginx-1.0.0.tar.gz",
+        "nl2bash_13169: create a tar.gz compress file with all the jpg files in the entire file system"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_9980: tar tf nginx-1.0.0.tar.gz | xargs dirname | sort | uniq",
+        "nl2bash_13169: find / -name *.jpg -type f -print | xargs tar -cvzf images.tar.gz"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "chmod",
+      "MP Summary": "change file mode bits",
+      "Most Similar TLDR Task": "Change permissions recursively giving [g]roup and [o]thers the ability to [w]rite",
+      "Most Similar TLDR Script": "chmod -R g+w,o+w {{directory}}",
+      "Most Similar NL2Bash Task": "Compress $file file using gzip",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "gzip \"$file\"\n",
+          "command-options": {},
+          "TLDR_inform": {}
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_1151941: How to compress 3000 images in batches of 50",
+        "ul_255056: How to make tar to ignore last-modified-time of files/directories"
+      ],
+      "Top-3 Scripts": [
+        "au_1151941: chmod a+x ~/CompressImages",
+        "ul_255056: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "ls",
+      "MP Summary": "list directory contents",
+      "Most Similar TLDR Task": "List all files, including hidden files",
+      "Most Similar TLDR Script": "ls -a",
+      "Most Similar NL2Bash Task": "Compress $file file using gzip",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "gzip \"$file\"\n",
+          "command-options": {},
+          "TLDR_inform": {}
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_1748916: Unix command to create a tar of a specified number of files",
+        "su_642073: How make a compressed tar when there are too many filenames for the shell to expand on a single line?"
+      ],
+      "Top-3 Scripts": [
+        "so_1748916: tar cf path_of_tar.tar $(ls | head -10)",
+        "su_642073: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "curl",
+      "MP Summary": "transfer a URL",
+      "Most Similar TLDR Task": "Send data in JSON format, specifying the appropriate content-type header",
+      "Most Similar TLDR Script": "curl -d {{'{\"name\":\"bob\"}'}} -H {{'Content-Type: application/json'}} {{http://example.com/users/1234}}",
+      "Most Similar NL2Bash Task": "Compress $file file using gzip",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "gzip \"$file\"\n",
+          "command-options": {},
+          "TLDR_inform": {}
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_68182870: How to pipe the results of the curl command into tar using Powershell?"
+      ],
+      "Top-3 Scripts": [
+        "so_68182870: # Make sure that the target dir. exists and get its full path.\n# (If the target dir. doesn't exist, tar's -C option will fail.)\n$targetDir = (New-Item -Force -ErrorAction Stop -Type Directory $HOME/tomcat-8.6.65).FullName\n\n# Invoke cmd.exe's binary pipeline, passing the target dir.\n# As an aside: tar.exe on Windows does NOT know that ~ refers to the \n#              user's home dir.\ncmd /c @\"\ncurl https://archive.apache.org/dist/tomcat/tomcat-8/v8.5.65/bin/apache-tomcat-8.5.65.tar.gz | tar xvz --strip-components=1 -f - -C \"$targetDir\"\n\"@"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "install",
+      "MP Summary": "copy files and set attributes",
+      "Most Similar TLDR Task": "Copy files and apply access/modification times of source to destination",
+      "Most Similar TLDR Script": "install -p {{path/to/source}} {{path/to/destination}}",
+      "Most Similar NL2Bash Task": "Compress $file file using gzip",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "gzip \"$file\"\n",
+          "command-options": {},
+          "TLDR_inform": {}
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_224835: How can I filter the contents of a tar file, producing another tar file in the pipe?"
+      ],
+      "Top-3 Scripts": [
+        "ul_224835: sudo apt-get install bsdtar   # or aptitude, if you have it.\n\n# example from the man page:\nbsdtar -c -f new.tar --include='*foo*' @old.tgz\n#create new.tar containing only entries from old.tgz containing the string \u2018foo\u2019\nbsdtar -czf - --include='*foo*' @-  # filter stdin to stdout, with gzip compression of output."
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "bash",
+      "MP Summary": "GNU Bourne-Again SHell",
+      "Most Similar TLDR Task": "Run commands from a file, logging all commands executed to the terminal",
+      "Most Similar TLDR Script": "bash -x {{file.sh}}",
+      "Most Similar NL2Bash Task": "Compress $file file using gzip",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "gzip \"$file\"\n",
+          "command-options": {},
+          "TLDR_inform": {}
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_668029: How to suppress tar error messages in when piping"
+      ],
+      "Top-3 Scripts": [
+        "au_668029: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "dirname",
+      "MP Summary": "strip last component from file name",
+      "Most Similar TLDR Task": "Calculate the parent directory of multiple paths",
+      "Most Similar TLDR Script": "dirname {{path/to/file_a}} {{path/to/directory_b}}",
+      "Most Similar NL2Bash Task": "Compress $file file using gzip",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "gzip \"$file\"\n",
+          "command-options": {},
+          "TLDR_inform": {}
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_9980: Print the sorted uniqe list of folders in compressed archive nginx-1.0.0.tar.gz"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_9980: tar tf nginx-1.0.0.tar.gz | xargs dirname | sort | uniq"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "head",
+      "MP Summary": "output the first part of files",
+      "Most Similar TLDR Task": "Output everything but the last few bytes of a file",
+      "Most Similar TLDR Script": "head -c -{{size_in_bytes}} {{filename}}",
+      "Most Similar NL2Bash Task": "Compress $file file using gzip",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "gzip \"$file\"\n",
+          "command-options": {},
+          "TLDR_inform": {}
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_1748916: Unix command to create a tar of a specified number of files",
+        "ul_471133: Is there an efficient command for listing the header of a particular file in tar.bz2 without uncompressing/extracting?",
+        "so_3511896: Split big compressed log files into compressed chunks of X lines while doing inline compression"
+      ],
+      "Top-3 Scripts": [
+        "so_1748916: tar cf path_of_tar.tar $(ls | head -10)",
+        "ul_471133: tar -xOf data.tar.bz2 file-of-interest | head -n1",
+        "so_3511896: $ unrar p $file | ( while :; do i=$[$i+1]; head -n 10000 | gzip > split.$i.gz; done )\n\n$ unrar p $file |\n       ( while :; do\n           i=$[$i+1];\n           head -n 10000 | gzip > split.$i.gz;\n           if [ `stat -c %s split.$i.gz` -lt 30 ]; then rm split.$i.gz; break; fi;\n       done )"
+      ],
+      "Explanations about Options": {
+        "-n": "print the first NUM lines instead of the first 10; with the leading '-', print all\n but the last NUM lines of each file"
+      }
+    },
+    {
+      "Command": "ssh",
+      "MP Summary": "OpenSSH SSH client (remote login program)",
+      "Most Similar TLDR Task": "Connect to a remote server with a specific identity (private key)",
+      "Most Similar TLDR Script": "ssh -i {{path/to/key_file}} {{username}}@{{remote_host}}",
+      "Most Similar NL2Bash Task": "Compress $file file using gzip",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "gzip \"$file\"\n",
+          "command-options": {},
+          "TLDR_inform": {}
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_558790: Create archive of complete drive with tar",
+        "ul_232254: Get compressed size of piped output with gzip?"
+      ],
+      "Top-3 Scripts": [
+        "ul_558790: ",
+        "ul_232254: gzip -fc testfile | dd | ssh serverip \"cat > file.gz\"\n0+1 records in\n0+1 records out\n42 bytes (42 B) copied, 0.00018711 s, 224 kB/s"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "apt-get",
+      "MP Summary": "APT package handling utility - command-line interface",
+      "Most Similar TLDR Task": "Remove a package and its configuration files",
+      "Most Similar TLDR Script": "apt-get purge {{package}}",
+      "Most Similar NL2Bash Task": "Compress $file file using gzip",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "gzip \"$file\"\n",
+          "command-options": {},
+          "TLDR_inform": {}
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_224835: How can I filter the contents of a tar file, producing another tar file in the pipe?"
+      ],
+      "Top-3 Scripts": [
+        "ul_224835: sudo apt-get install bsdtar   # or aptitude, if you have it.\n\n# example from the man page:\nbsdtar -c -f new.tar --include='*foo*' @old.tgz\n#create new.tar containing only entries from old.tgz containing the string \u2018foo\u2019\nbsdtar -czf - --include='*foo*' @-  # filter stdin to stdout, with gzip compression of output."
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "mkdir",
+      "MP Summary": "make directories",
+      "Most Similar TLDR Task": "Create directories recursively (useful for creating nested dirs)",
+      "Most Similar TLDR Script": "mkdir -p {{path/to/directory}}",
+      "Most Similar NL2Bash Task": "Compress $file file using gzip",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "gzip \"$file\"\n",
+          "command-options": {},
+          "TLDR_inform": {}
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_45349: How to extract files to another directory using 'tar' command?"
+      ],
+      "Top-3 Scripts": [
+        "au_45349: mkdir /target/directory"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "touch",
+      "MP Summary": "change file timestamps",
+      "Most Similar TLDR Task": "Create a new empty file(s) or change the times for existing file(s) to current time",
+      "Most Similar TLDR Script": "touch {{filename}}",
+      "Most Similar NL2Bash Task": "Compress $file file using gzip",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "gzip \"$file\"\n",
+          "command-options": {},
+          "TLDR_inform": {}
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_255056: How to make tar to ignore last-modified-time of files/directories"
+      ],
+      "Top-3 Scripts": [
+        "ul_255056: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "du",
+      "MP Summary": "estimate file space usage",
+      "Most Similar TLDR Task": "List the human-readable sizes of a directory and any subdirectories, up to N levels deep",
+      "Most Similar TLDR Script": "du -h --max-depth=N {{path/to/directory}}",
+      "Most Similar NL2Bash Task": "Compress $file file using gzip",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "gzip \"$file\"\n",
+          "command-options": {},
+          "TLDR_inform": {}
+        }
+      },
+      "Top-3 Similar Questions": [
+        "su_1105244: Uncompress using tar -xvzf results in a folder with less size than compressed file"
+      ],
+      "Top-3 Scripts": [
+        "su_1105244: du -skh /path/to/dir"
+      ],
+      "Explanations about Options": {
+        "-h": "print sizes in human readable format (e.g., 1K 234M 2G)",
+        "-s": "display only a total for each argument"
+      }
+    },
+    {
+      "Command": "rsync",
+      "MP Summary": "a fast, versatile, remote (and local) file-copying tool",
+      "Most Similar TLDR Task": "Transfer file in [a]rchive (to preserve attributes) and compressed ([z]ipped) mode with [v]erbose and [h]uman-readable [P]rogress",
+      "Most Similar TLDR Script": "rsync -azvhP {{path/to/local_file}} {{remote_host}}:{{path/to/remote_directory}}",
+      "Most Similar NL2Bash Task": "Compress $file file using gzip",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "gzip \"$file\"\n",
+          "command-options": {},
+          "TLDR_inform": {}
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_558790: Create archive of complete drive with tar"
+      ],
+      "Top-3 Scripts": [
+        "ul_558790: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "fallocate",
+      "MP Summary": "preallocate or deallocate space to a file",
+      "Most Similar TLDR Task": "Shrink an already allocated file by 200MB",
+      "Most Similar TLDR Script": "fallocate --collapse-range --length {{200M}} {{path/to/file}}",
+      "Most Similar NL2Bash Task": "Compress $file file using gzip",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "gzip \"$file\"\n",
+          "command-options": {},
+          "TLDR_inform": {}
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_14104832: Way to delete the already decompressed portion of a file as it is being decompressed?"
+      ],
+      "Top-3 Scripts": [
+        "so_14104832: fallocate()"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "sudo",
+      "MP Summary": "execute a command as another user",
+      "Most Similar TLDR Task": "Run a command as another user and/or group",
+      "Most Similar TLDR Script": "sudo -u {{user}} -g {{group}} {{id -a}}",
+      "Most Similar NL2Bash Task": "Compress $file file using gzip",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "gzip \"$file\"\n",
+          "command-options": {},
+          "TLDR_inform": {}
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_224835: How can I filter the contents of a tar file, producing another tar file in the pipe?"
+      ],
+      "Top-3 Scripts": [
+        "ul_224835: sudo apt-get install bsdtar   # or aptitude, if you have it.\n\n# example from the man page:\nbsdtar -c -f new.tar --include='*foo*' @old.tgz\n#create new.tar containing only entries from old.tgz containing the string \u2018foo\u2019\nbsdtar -czf - --include='*foo*' @-  # filter stdin to stdout, with gzip compression of output."
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "snap",
+      "MP Summary": "Tool to interact with snaps",
+      "Most Similar TLDR Task": "Install a package",
+      "Most Similar TLDR Script": "snap install {{package_name}}",
+      "Most Similar NL2Bash Task": "Compress $file file using gzip",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "gzip \"$file\"\n",
+          "command-options": {},
+          "TLDR_inform": {}
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_613490: Tar command saves file in working directory instead of specified directory"
+      ],
+      "Top-3 Scripts": [
+        "ul_613490: tar -czvg /home/user/BackupArchiv/snapshots/$snap -f /home/user/BackupArchiv/$buweek.tar.gz"
+      ],
+      "Explanations about Options": {
+        "-f": "Wait for new lines and print them as they come in."
+      }
+    },
+    {
+      "Command": "split",
+      "MP Summary": "split a file into pieces",
+      "Most Similar TLDR Task": "Split a file with 512 bytes in each split (except the last split; use 512k for kilobytes and 512m for megabytes)",
+      "Most Similar TLDR Script": "split -b {{512}} {{filename}}",
+      "Most Similar NL2Bash Task": "Compress $file file using gzip",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "gzip \"$file\"\n",
+          "command-options": {},
+          "TLDR_inform": {}
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_12791: Create a compressed archive from \"www\" and split the contents into files of at most 1073741824 bytes and use prefix \"www-backup.tar.\""
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_12791: tar czf - www|split -b 1073741824 - www-backup.tar."
+      ],
+      "Explanations about Options": {
+        "-b": "put SIZE bytes per output file"
+      }
+    },
+    {
+      "Command": "nc",
+      "MP Summary": "arbitrary TCP and UDP connections and listens",
+      "Most Similar TLDR Task": "Listen on a specified port and print any data received",
+      "Most Similar TLDR Script": "nc -l {{port}}",
+      "Most Similar NL2Bash Task": "Compress $file file using gzip",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "gzip \"$file\"\n",
+          "command-options": {},
+          "TLDR_inform": {}
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_558790: Create archive of complete drive with tar"
+      ],
+      "Top-3 Scripts": [
+        "ul_558790: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "uniq",
+      "MP Summary": "report or omit repeated lines",
+      "Most Similar TLDR Task": "Display only duplicate lines",
+      "Most Similar TLDR Script": "sort {{file}} | uniq -d",
+      "Most Similar NL2Bash Task": "Compress $file file using gzip",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "gzip \"$file\"\n",
+          "command-options": {},
+          "TLDR_inform": {}
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_9980: Print the sorted uniqe list of folders in compressed archive nginx-1.0.0.tar.gz"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_9980: tar tf nginx-1.0.0.tar.gz | xargs dirname | sort | uniq"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "man",
+      "MP Summary": "an interface to the system reference manuals",
+      "Most Similar TLDR Task": "Display the location of a manpage rather than the manpage itself",
+      "Most Similar TLDR Script": "man -w {{command}}",
+      "Most Similar NL2Bash Task": "Compress $file file using gzip",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "gzip \"$file\"\n",
+          "command-options": {},
+          "TLDR_inform": {}
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_613490: Tar command saves file in working directory instead of specified directory",
+        "ul_398095: Extract specific directories with all subdirectories from a tar file",
+        "au_45349: How to extract files to another directory using 'tar' command?"
+      ],
+      "Top-3 Scripts": [
+        "ul_613490: man tar",
+        "ul_398095: man page",
+        "au_45349: man tar"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "sed",
+      "MP Summary": "stream editor for filtering and transforming text",
+      "Most Similar TLDR Task": "Replace separator / by any other character not used in the find or replace patterns, e.g., #",
+      "Most Similar TLDR Script": "sed 's#{{find}}#{{replace}}#' {{filename}}",
+      "Most Similar NL2Bash Task": "Compress $file file using gzip",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "gzip \"$file\"\n",
+          "command-options": {},
+          "TLDR_inform": {}
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_52183847: How to prepend all the output of tar -tf"
+      ],
+      "Top-3 Scripts": [
+        "so_52183847: tar -tf example.tar | sed -e 's!^!/rootdir/!'"
+      ],
+      "Explanations about Options": {
+        "-e": "add the script to the commands to be executed"
+      }
+    },
+    {
+      "Command": "wc",
+      "MP Summary": "print newline, word, and byte counts for each file",
+      "Most Similar TLDR Task": "Count characters in file (taking multi-byte character sets into account)",
+      "Most Similar TLDR Script": "wc -m {{file}}",
+      "Most Similar NL2Bash Task": "Compress $file file using gzip",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "gzip \"$file\"\n",
+          "command-options": {},
+          "TLDR_inform": {}
+        }
+      },
+      "Top-3 Similar Questions": [
+        "su_498750: Is there a command to determine the compression ratio of a tar.bz2 file?"
+      ],
+      "Top-3 Scripts": [
+        "su_498750: bzip2 -dc file.tar.bz2 | wc -c"
+      ],
+      "Explanations about Options": {
+        "-c": "print the byte counts"
+      }
+    },
+    {
+      "Command": "grep",
+      "MP Summary": "print lines that match patterns",
+      "Most Similar TLDR Task": "Invert match for excluding specific strings",
+      "Most Similar TLDR Script": "grep -v {{search_pattern}}",
+      "Most Similar NL2Bash Task": "Compress $file file using gzip",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "gzip \"$file\"\n",
+          "command-options": {},
+          "TLDR_inform": {}
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_668029: How to suppress tar error messages in when piping"
+      ],
+      "Top-3 Scripts": [
+        "au_668029: { tar -xvf file.tar.bz2 | grep \"something\" ;} 2>/dev/null\n\n( tar -xvf file.tar.bz2 | grep \"something\" ) 2>/dev/null\n\ntar -xvf file.tar.bz2 |& grep \"something\"\n\ntar -xvf file.tar.bz2 2>&1 | grep \"something\""
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "cut",
+      "MP Summary": "remove sections from each line of files",
+      "Most Similar TLDR Task": "Cut out everything from the 3rd character to the end of each line",
+      "Most Similar TLDR Script": "cut -c {{3-}}",
+      "Most Similar NL2Bash Task": "Compress $file file using gzip",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "gzip \"$file\"\n",
+          "command-options": {},
+          "TLDR_inform": {}
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_8944: Set variable \"extract_dir\" to list of top-level directories and files contained in tar archive specified by variable FILE."
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_8944: extract_dir=$(tar -tf $FILE | cut -d/ -f1 | uniq)"
+      ],
+      "Explanations about Options": {
+        "-d": "use DELIM instead of TAB for field delimiter"
+      }
+    },
+    {
+      "Command": "git",
+      "MP Summary": "the stupid content tracker",
+      "Most Similar TLDR Task": "Execute a Git subcommand with a given configuration set",
+      "Most Similar TLDR Script": "git -c '{{config.key}}={{value}}' {{subcommand}}",
+      "Most Similar NL2Bash Task": "Compress $file file using gzip",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "gzip \"$file\"\n",
+          "command-options": {},
+          "TLDR_inform": {}
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_12018: Go to top level of git tree using relative path"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_12018: cd $(git rev-parse --show-cdup)"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "get",
+      "MP Summary": "symbolic link to as_run command",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "Compress $file file using gzip",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "gzip \"$file\"\n",
+          "command-options": {},
+          "TLDR_inform": {}
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_225798: How to use tar to compress a group of files in a .txt file?"
+      ],
+      "Top-3 Scripts": [
+        "ul_225798: -T, --files-from FILE\n       get names to extract or create from FILE"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "to",
+      "MP Summary": "as the filename. --logdir <name> Writes each synchronization log output in a new file in the specified directory. --logexpire <hours> Removes logs older than the value specified (in hours). This command is  used  with --logdir. --logflush Clears (flushes) the log file after each write action. --logdebug Also  output  debug-level  messages  in  the log (equivalent to setting the env var QT_LOGGING_RULES=\"qt.*=true;*.debug=true\"). ) --confdir <dirname> Uses the specified configuration directory. The ownCloud Client reads a configuration file.  You can locate this configuration file as follows: On Linux distributions: $HOME/.config/ownCloud/owncloud.cfg On Microsoft Windows systems: %APPDATA%\\ownCloud\\owncloud.cfg On MAC OS X systems: $HOME/Library/Preferences/ownCloud/owncloud.cfg The configuration file contains settings using the Microsoft Windows .ini file format. You can overwrite changes using the ownCloud configuration dialog. NOTE: Use caution when making changes to the ownCloud Client configuration  file.   Incorrect settings can produce unintended results. Some interesting values that can be set on the configuration file are: \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510 \u2502[ownCloud] section          \u2502         \u2502                          \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502Variable                    \u2502 Default \u2502 Meaning                  \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502remotePollInterval          \u2502 30000   \u2502 Specifies  the poll time \u2502 \u2502                            \u2502         \u2502 for      the      remote \u2502 \u2502                            \u2502         \u2502 repository            in \u2502 \u2502                            \u2502         \u2502 milliseconds.            \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502forceSyncInterval           \u2502 7200000 \u2502 The   duration   of   no \u2502 \u2502                            \u2502         \u2502 activity  after  which a \u2502 \u2502                            \u2502         \u2502 synchronization      run \u2502 \u2502                            \u2502         \u2502 shall    be    triggered \u2502 \u2502                            \u2502         \u2502 automatically.           \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502fullLocalDiscoveryInterval  \u2502 3600000 \u2502 The interval after which \u2502 \u2502                            \u2502         \u2502 the next synchronization \u2502 \u2502                            \u2502         \u2502 will   perform   a  full \u2502 \u2502                            \u2502         \u2502 local discovery.         \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502notificationRefreshInterval \u2502 300000  \u2502 Specifies   the  default \u2502 \u2502                            \u2502         \u2502 interval of checking for \u2502 \u2502                            \u2502         \u2502 new server notifications \u2502 \u2502                            \u2502         \u2502 in milliseconds.         \u2502 \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518 \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510 \u2502[General] section       \u2502         \u2502                          \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502Variable                \u2502 Default \u2502 Meaning                  \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502chunkSize               \u2502 5242880 \u2502 Specifies the chunk size \u2502 \u2502                        \u2502         \u2502 of   uploaded  files  in \u2502 \u2502                        \u2502         \u2502 bytes.                   \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502promptDeleteAllFiles    \u2502 true    \u2502 If a  UI  prompt  should \u2502 \u2502                        \u2502         \u2502 ask  for confirmation if \u2502 \u2502                        \u2502         \u2502 it was detected that all \u2502 \u2502                        \u2502         \u2502 files  and  folders were \u2502 \u2502                        \u2502         \u2502 deleted.                 \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502maxLogLines             \u2502 20000   \u2502 Specifies  the   maximum \u2502 \u2502                        \u2502         \u2502 number   of   log  lines \u2502 \u2502                        \u2502         \u2502 displayed  in  the   log \u2502 \u2502                        \u2502         \u2502 window.                  \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502timeout                 \u2502 300     \u2502 The  timeout for network \u2502 \u2502                        \u2502         \u2502 connections in seconds.  \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502moveToTrash             \u2502 false   \u2502 If  non-locally  deleted \u2502 \u2502                        \u2502         \u2502 files should be moved to \u2502 \u2502                        \u2502         \u2502 trash     instead     of \u2502 \u2502                        \u2502         \u2502 deleting            them \u2502 \u2502                        \u2502         \u2502 completely.  This option \u2502 \u2502                        \u2502         \u2502 only works on linux      \u2502 \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518 \u2502showExperimentalOptions \u2502 false   \u2502 Whether      to     show \u2502 \u2502                        \u2502         \u2502 experimental     options \u2502 \u2502                        \u2502         \u2502 that      are      still \u2502 \u2502                        \u2502         \u2502 undergoing  testing   in \u2502 \u2502                        \u2502         \u2502 the    user   interface. \u2502 \u2502                        \u2502         \u2502 Turning this on does not \u2502 \u2502                        \u2502         \u2502 enable      experimental \u2502 \u2502                        \u2502         \u2502 behavior on its own.  It \u2502 \u2502                        \u2502         \u2502 does     enable     user \u2502 \u2502                        \u2502         \u2502 inferface  options  that \u2502 \u2502                        \u2502         \u2502 can be used to opt in to \u2502 \u2502                        \u2502         \u2502 experimental features.   \u2502 \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518 \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510 \u2502[Proxy] section      \u2502           \u2502                          \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502Variable             \u2502 Default   \u2502 Meaning                  \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502host                 \u2502 127.0.0.1 \u2502 The address of the proxy \u2502 \u2502                     \u2502           \u2502 server.                  \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502port                 \u2502 8080      \u2502 The  port were the proxy \u2502 \u2502                     \u2502           \u2502 is listening.            \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502type                 \u2502 2         \u2502 0 for System Proxy.      \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u25021 for SOCKS5 Proxy.  \u2502           \u2502                          \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u25022 for No Proxy.      \u2502           \u2502                          \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u25023 for HTTP(S) Proxy. \u2502           \u2502                          \u2502 \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518 Please report bugs at https://github.com/owncloud/client/issues. owncloudcmd(1)",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "Compress $file file using gzip",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "gzip \"$file\"\n",
+          "command-options": {},
+          "TLDR_inform": {}
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_225798: How to use tar to compress a group of files in a .txt file?",
+        "ul_545883: List contents of a tgz archive inside a gz archive",
+        "ul_613490: Tar command saves file in working directory instead of specified directory"
+      ],
+      "Top-3 Scripts": [
+        "ul_225798: -T, --files-from FILE\n       get names to extract or create from FILE",
+        "ul_545883: gunzip < /path/to/gz | tar tzf -",
+        "ul_613490: Common options:\n       -C, --directory=DIR\n              change to directory DIR\n\n       -f, --file=ARCHIVE\n              use archive file or device ARCHIVE"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "extract",
+      "MP Summary": "determine meta-information about a file",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "Compress $file file using gzip",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "gzip \"$file\"\n",
+          "command-options": {},
+          "TLDR_inform": {}
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_225798: How to use tar to compress a group of files in a .txt file?"
+      ],
+      "Top-3 Scripts": [
+        "ul_225798: -T, --files-from FILE\n       get names to extract or create from FILE"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "or",
+      "MP Summary": "A user friendly system monitoring program.",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "Compress $file file using gzip",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "gzip \"$file\"\n",
+          "command-options": {},
+          "TLDR_inform": {}
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_225798: How to use tar to compress a group of files in a .txt file?",
+        "ul_613490: Tar command saves file in working directory instead of specified directory",
+        "ul_224835: How can I filter the contents of a tar file, producing another tar file in the pipe?"
+      ],
+      "Top-3 Scripts": [
+        "ul_225798: -T, --files-from FILE\n       get names to extract or create from FILE",
+        "ul_613490: Common options:\n       -C, --directory=DIR\n              change to directory DIR\n\n       -f, --file=ARCHIVE\n              use archive file or device ARCHIVE",
+        "ul_224835: sudo apt-get install bsdtar   # or aptitude, if you have it.\n\n# example from the man page:\nbsdtar -c -f new.tar --include='*foo*' @old.tgz\n#create new.tar containing only entries from old.tgz containing the string \u2018foo\u2019\nbsdtar -czf - --include='*foo*' @-  # filter stdin to stdout, with gzip compression of output."
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "from",
+      "MP Summary": "print names of those who have sent mail",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "Compress $file file using gzip",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "gzip \"$file\"\n",
+          "command-options": {},
+          "TLDR_inform": {}
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_225798: How to use tar to compress a group of files in a .txt file?"
+      ],
+      "Top-3 Scripts": [
+        "ul_225798: -T, --files-from FILE\n       get names to extract or create from FILE"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "gz",
+      "MP Summary": "Gazebo command line tool for control and analysis.",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "Compress $file file using gzip",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "gzip \"$file\"\n",
+          "command-options": {},
+          "TLDR_inform": {}
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_545883: List contents of a tgz archive inside a gz archive"
+      ],
+      "Top-3 Scripts": [
+        "ul_545883: gunzip < /path/to/gz | tar tzf -"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "dev",
+      "MP Summary": "release candidate LaTeX testing",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "Compress $file file using gzip",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "gzip \"$file\"\n",
+          "command-options": {},
+          "TLDR_inform": {}
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_558790: Create archive of complete drive with tar",
+        "au_668029: How to suppress tar error messages in when piping"
+      ],
+      "Top-3 Scripts": [
+        "ul_558790: dd if=/dev/nvme0n1 of=/mnt/some_other_drive/copy_of_the_first_drive\n\ndd if=/dev/nvme0n1 | bzip2 > /mnt/some_other_drive/copy_of_the_first_drive.bz2",
+        "au_668029: { tar -xvf file.tar.bz2 | grep \"something\" ;} 2>/dev/null\n\n( tar -xvf file.tar.bz2 | grep \"something\" ) 2>/dev/null"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "archive",
+      "MP Summary": "Usenet article archiver",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "Compress $file file using gzip",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "gzip \"$file\"\n",
+          "command-options": {},
+          "TLDR_inform": {}
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_613490: Tar command saves file in working directory instead of specified directory"
+      ],
+      "Top-3 Scripts": [
+        "ul_613490: Common options:\n       -C, --directory=DIR\n              change to directory DIR\n\n       -f, --file=ARCHIVE\n              use archive file or device ARCHIVE"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "new",
+      "MP Summary": "report on nmh folders with new messages",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "Compress $file file using gzip",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "gzip \"$file\"\n",
+          "command-options": {},
+          "TLDR_inform": {}
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_224835: How can I filter the contents of a tar file, producing another tar file in the pipe?"
+      ],
+      "Top-3 Scripts": [
+        "ul_224835: s/old/new/"
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

@@ -1,0 +1,127 @@
+
+
+Query:              	Bash How to find the largest file in a directory and its subdirectories?
+
+
+########################################################################################################################
+
+
+Cmd:                	find                
+
+MP Summary:         	search for files in a directory hierarchy
+
+TLDR Task:          	Find files matching a given pattern, excluding specific paths
+TLDR Script:        	find {{root_path}} -name '{{*.py}}' -not -path '{{*/site-packages/*}}'
+
+>>> Top-3 Similar Questions with Accepted Scripts: =====================================================================
+
+Question Title:     	Find largest files in a directory in a specific date range
+Question Link:      	https://unix.stackexchange.com/questions/467283: Find largest files in a directory in a specific date range
+Accepted Script:    	find . -newer /tmp/point.start ! -newer /tmp/point.end  ! -path . | xargs ls -ltr | sort -nk5 | tail -20
+
+Question Title:     	I would like to find the largest file in each directory recursively
+Question Link:      	https://unix.stackexchange.com/questions/359611: I would like to find the largest file in each directory recursively
+Accepted Script:    	find . -type f -printf '%s %h/%f\0'|awk 'BEGIN { RS="\0" } { SIZE=$1; for (i = 1; i <= NF - 1; i++) $i = $(i + 1); NF = NF - 1; DIR=$0; gsub("/[^/]+$", "", DIR); FILE=substr($0, length(DIR) + 2); SUMSIZES[DIR] += SIZE; NBFILES[DIR]++; if (SIZE > MAXSIZE[DIR] || !BIGGESTFILE[DIR]) { MAXSIZE[DIR] = SIZE; BIGGESTFILE[DIR] = FILE } }; END { for (DIR in SUMSIZES) { printf "%s
+
+Question Title:     	Find the largest file in directory without size in output
+Question Link:      	https://superuser.com//questions/699135: Find the largest file in directory without size in output
+Accepted Script:    	find "$PARAM" -type f -printf "%s\t%p\n" | sort -n | tail -n 1 | cut -f 2-
+
+>>> Explanations about Options: ========================================================================================
+
+-newer:             	Time of the last data modification of the current file is more recent than that of
+ the last data modification of the reference file. If reference is a symbolic link
+ and the -H option or the -L option is in effect, then the time of the last data
+ modification of the file it points to is always used.
+-printf:            	True; print format on the standard output, interpreting `\' escapes and `%'
+ directives. Field widths and precisions can be specified as with the `printf' C
+ function. Please note that many of the fields are printed as %s rather than %d,
+ and this may mean that flags don't work as you might expect. This also means that
+ the `-' flag does work (it forces fields to be left-aligned). Unlike -print,
+ -printf does not add a newline at the end of the string. The escapes and
+ directives are:
+-type:              	File is of type c:  
+
+
+########################################################################################################################
+
+
+Cmd:                	rm                  
+
+MP Summary:         	remove files or directories
+
+TLDR Task:          	Recursively remove a directory and all its subdirectories
+TLDR Script:        	rm -r {{path/to/directory}}
+
+>>> Top-3 Similar Questions with Accepted Scripts: =====================================================================
+
+Question Title:     	Find a file in directory by date...then rename it
+Question Link:      	https://stackoverflow.com/questions/27031814: Find a file in directory by date...then rename it
+Accepted Script:    	                    
+
+>>> Explanations about Options: ========================================================================================
+
+
+
+########################################################################################################################
+
+
+Cmd:                	dirname             
+
+MP Summary:         	strip last component from file name
+
+TLDR Task:          	Delimit output with a NUL character instead of a newline (useful when combining with `xargs`)
+TLDR Script:        	dirname --zero {{path/to/directory_a}} {{path/to/file_b}}
+
+>>> Top-3 Similar Questions with Accepted Scripts: =====================================================================
+
+Question Title:     	Find directory of a command in bash
+Question Link:      	https://stackoverflow.com/questions/48412838: Find directory of a command in bash
+Accepted Script:    	dirname /bin/cat    
+
+>>> Explanations about Options: ========================================================================================
+
+
+
+########################################################################################################################
+
+
+Cmd:                	pwd                 
+
+MP Summary:         	print name of current/working directory
+
+TLDR Task:          	Print the current directory
+TLDR Script:        	pwd                 
+
+>>> Top-3 Similar Questions with Accepted Scripts: =====================================================================
+
+Question Title:     	find searching in parent directories instead of subdirectories
+Question Link:      	https://unix.stackexchange.com/questions/6463: find searching in parent directories instead of subdirectories
+Accepted Script:    	find_up.sh some_dir -iname "foo*bar" -execdir pwd \;
+
+>>> Explanations about Options: ========================================================================================
+
+
+
+########################################################################################################################
+
+
+Cmd:                	du                  
+
+MP Summary:         	estimate file space usage
+
+TLDR Task:          	List the human-readable size of all .jpg files in subdirectories of the current directory, and show a cumulative total at the end
+TLDR Script:        	du -ch */*.jpg      
+
+>>> Top-3 Similar Questions with Accepted Scripts: =====================================================================
+
+Question Title:     	Command to find N Largest files in macOS directory excluding specific directories
+Question Link:      	https://stackoverflow.com/questions/70150536: Command to find N Largest files in macOS directory excluding specific directories
+Accepted Script:    	find . -path ./.target -prune -o -type f -exec du -h {} + | sort -hr | head -n 10
+
+>>> Explanations about Options: ========================================================================================
+
+-h:                 	print sizes in human readable format (e.g., 1K 234M 2G)
+
+
+########################################################################################################################

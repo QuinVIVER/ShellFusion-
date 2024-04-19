@@ -1,0 +1,74 @@
+{
+  "Query": "How to persistently control maximum system resource consumption on Mac?",
+  "Answers": [
+    {
+      "Command": "ulimit",
+      "MP Summary": "set or report file size limit",
+      "Most Similar TLDR Task": "Get the properties of all the user limits",
+      "Most Similar TLDR Script": "ulimit -a",
+      "Top-3 Similar Questions": [
+        "ul_176671: How to add persist shell ulimit settings on Mac?",
+        "ul_120642: What defines the maximum size for a command single argument?"
+      ],
+      "Top-3 Scripts": [
+        "ul_176671: $ launchctl limit core\n    core        unlimited      unlimited \n$ ulimit -a core\ncore file size          (blocks, -c) unlimited\n...\n<output snipped>\n...",
+        "ul_120642: $ echo $(( $(ulimit -s)*1024 / 4 ))  # ulimit output in KiB\n2097152\n$ getconf ARG_MAX\n2097152\n\n$ grep ARG_MAX /usr/include/linux/limits.h \n#define ARG_MAX       131072    /* # bytes of args + environ for exec() */\n$ ulimit -s 256\n$ echo $(( $(ulimit -s)*1024 / 4 ))\n65536\n$ getconf ARG_MAX\n131072"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "systemctl",
+      "MP Summary": "Control the systemd system and service manager",
+      "Most Similar TLDR Task": "Show the status of a unit",
+      "Most Similar TLDR Script": "systemctl status {{unit}}",
+      "Top-3 Similar Questions": [
+        "ul_351466: Set a default resource limit for all users with systemd cgroups"
+      ],
+      "Top-3 Scripts": [
+        "ul_351466: systemctl enable user-0.slice"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "free",
+      "MP Summary": "Display amount of free and used memory in the system",
+      "Most Similar TLDR Task": "Display system memory",
+      "Most Similar TLDR Script": "free",
+      "Top-3 Similar Questions": [
+        "su_88323: How can I record system resource utilization over time on Ubuntu?"
+      ],
+      "Top-3 Scripts": [
+        "su_88323: [john@awesome]$vmstat -n 1\nprocs -----------memory---------- ---swap-- -----io---- --system-- -----cpu------\n r  b   swpd   free   buff  cache   si   so    bi    bo   in   cs us sy id wa st\n 1  0      0 14234008 438580 1195172    0    0     6    35    1    1  2  5 93  0  0\n 1  0      0 14233824 438592 1195176    0    0     4   100 1035 2170  0 50 49  0  0\n 1  0      0 14233824 438592 1195176    0    0     0    32 1030 2139  3 48 50  0  0"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "dmesg",
+      "MP Summary": "print or control the kernel ring buffer",
+      "Most Similar TLDR Task": "Show how much physical memory is available on this system",
+      "Most Similar TLDR Script": "dmesg | grep -i memory",
+      "Top-3 Similar Questions": [
+        "au_1020710: What configuration files in Ubuntu control the graphics drivers in a dual GPU system?"
+      ],
+      "Top-3 Scripts": [
+        "au_1020710: dmesg | grep -i nvidia"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "vmstat",
+      "MP Summary": "Report virtual memory statistics",
+      "Most Similar TLDR Task": "Display virtual memory statistics",
+      "Most Similar TLDR Script": "vmstat",
+      "Top-3 Similar Questions": [
+        "su_88323: How can I record system resource utilization over time on Ubuntu?"
+      ],
+      "Top-3 Scripts": [
+        "su_88323: [john@awesome]$vmstat -n 1\nprocs -----------memory---------- ---swap-- -----io---- --system-- -----cpu------\n r  b   swpd   free   buff  cache   si   so    bi    bo   in   cs us sy id wa st\n 1  0      0 14234008 438580 1195172    0    0     6    35    1    1  2  5 93  0  0\n 1  0      0 14233824 438592 1195176    0    0     4   100 1035 2170  0 50 49  0  0\n 1  0      0 14233824 438592 1195176    0    0     0    32 1030 2139  3 48 50  0  0"
+      ],
+      "Explanations about Options": {
+        "-n": "Display the header only once rather than periodically."
+      }
+    }
+  ]
+}

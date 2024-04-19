@@ -1,0 +1,96 @@
+{
+  "Query": "How to download an MP3 track from a YouTube video",
+  "Answers": [
+    {
+      "Command": "youtube-dl",
+      "MP Summary": "download videos from youtube.com or other video platforms",
+      "Most Similar TLDR Task": "Download the audio from a video and convert it to an MP3",
+      "Most Similar TLDR Script": "youtube-dl -x --audio-format {{mp3}} '{{url}}'",
+      "Top-3 Similar Questions": [
+        "au_401550: How can i download youtube videos one after another automatically from terminal",
+        "au_964835: How to download newly uploaded videos from a youtube channel?",
+        "au_705166: How can I download an entire playlist from youtube even it exceeds 25 videos?"
+      ],
+      "Top-3 Scripts": [
+        "au_401550: youtube-dl http://www.youtube.com/watch?v=CP8CNp-vksc http://www.youtube.com/watch?v=JmOXHH3DTwg",
+        "au_964835: sudo apt remove youtube-dl # uninstall the repo version\nsudo wget https://yt-dl.org/latest/youtube-dl -O /usr/local/bin/youtube-dl # download\nsudo chmod a+x /usr/local/bin/youtube-dl # make it executable\nhash -r # hash\n\nsudo youtube-dl -U\n\nyoutube-dl --date now -- 'PLFs4vir_WsTyXrrpFstD64Qj95vpy-yo1'\n\nyoutube-dl --dateafter now-7days -a file\n\nyoutube-dl --dateafter now-1month -a file -w\n\nman youtube-dl",
+        "au_705166: sudo apt-get purge youtube-dl\n\nsudo rm /usr/local/bin/youtube-dl\n\nsudo wget https://yt-dl.org/downloads/2015.11.27.1/youtube-dl -O /usr/local/bin/youtube-dl\n\nsudo chmod a+rx /usr/local/bin/youtube-dl\n\nyoutube-dl https://www.youtube.com/playlist?list=PLKopOf5__2tjZ3oHnreRYjxGW_7yXV0OS\n\nyoutube-dl -U\n\nyoutube-dl --help"
+      ],
+      "Explanations about Options": {
+        "--help": "Print this help text and exit"
+      }
+    },
+    {
+      "Command": "ffmpeg",
+      "MP Summary": "ffmpeg video converter",
+      "Most Similar TLDR Task": "Extract the sound from a video and save it as MP3",
+      "Most Similar TLDR Script": "ffmpeg -i {{video.mp4}} -vn {{sound}}.mp3",
+      "Top-3 Similar Questions": [
+        "so_41310196: Bash: bash script to download trimmed mp3 from youtube url",
+        "au_928583: extract a segment from some mp3 file",
+        "so_56088966: Quickly extract multiple frames from multiple videos"
+      ],
+      "Top-3 Scripts": [
+        "so_41310196: mytrim() {\n    local downloaded_file\n    youtube-dl --extract-audio --embed-thumbnail --audio-format mp3 -o \"%(title)s.%(ext)s\" $1\n    downloaded_file=$(youtube-dl --get-filename --extract-audio --embed-thumbnail --audio-format mp3 -o \"%(title)s.%(ext)s\" $1)\n    ffmpeg -ss $2 -i \"${downloaded_file}\" -acodec copy -y temp.mp3\n    mv temp.mp3 \"${downloaded_file}\"\n}",
+        "au_928583: ffmpeg -ss 00:01:20 -t 00:01:20 -acodec copy -i /path/to/input.mp3 /path/to/output.mp3",
+        "so_56088966: ffmpeg -nostdin -loglevel fatal\n       -ss 15     -i \"${filename}\"\n       -sseof -15 -i \"${filename}\"\n       -ss 15     -i \"${filename2}\"\n       -sseof -15 -i \"${filename2}\"\n       -map 0:v:0 -frames:v 1 \"${file1-head}\"\n       -map 1:v:0 -frames:v 1 \"${file1-tail}\"\n       -map 2:v:0 -frames:v 1 \"${file2-head}\"\n       -map 3:v:0 -frames:v 1 \"${file2-tail}\"\n..."
+      ],
+      "Explanations about Options": {
+        "-t": "When used as an input option (before \"-i\"), limit the duration of data read from the\n input file.",
+        "-acodec": "Set the audio codec. This is an alias for \"-codec:a\".",
+        "-ss": "When used as an input option (before \"-i\"), seeks in this input file to position. Note\n that in most formats it is not possible to seek exactly, so ffmpeg will seek to the\n closest seek point before position. When transcoding and -accurate_seek is enabled\n (the default), this extra segment between the seek point and position will be decoded\n and discarded. When doing stream copy or when -noaccurate_seek is used, it will be\n preserved.",
+        "-y": "Overwrite output files without asking.",
+        "-loglevel": "Set logging level and flags used by the library.",
+        "-i": "input file url",
+        "-n": "Do not overwrite output files, and exit immediately if a specified output file already\n exists."
+      }
+    },
+    {
+      "Command": "eyeD3",
+      "MP Summary": "displays and manipulates id3-tags on mp3 files",
+      "Most Similar TLDR Task": "Set the title of an MP3 file",
+      "Most Similar TLDR Script": "eyeD3 --title \"{{A Title}}\" {{filename.mp3}}",
+      "Top-3 Similar Questions": [
+        "ul_41287: How to Extract Album Cover Image from MP3 file?"
+      ],
+      "Top-3 Scripts": [
+        "ul_41287: eyeD3 --write-images=DIR mp3_file"
+      ],
+      "Explanations about Options": {
+        "--write-images": "Causes all attached images (APIC frames) to be written to the specified directory."
+      }
+    },
+    {
+      "Command": "ffprobe",
+      "MP Summary": "ffprobe media prober",
+      "Most Similar TLDR Task": "Display the frame rate of a video",
+      "Most Similar TLDR Script": "ffprobe -v error -select_streams v:0 -show_entries stream=avg_frame_rate -of default=noprint_wrappers=1:nokey=1 {{input.mp4}}",
+      "Top-3 Similar Questions": [
+        "su_361329: How can I get the length of a video file from the console?",
+        "au_634584: How to download youtube videos as a best quality audio mp3 using youtube-dl"
+      ],
+      "Top-3 Scripts": [
+        "su_361329: ffprobe -i some_video -show_entries format=duration -v quiet -of csv=\"p=0\"",
+        "au_634584: -x, --extract-audio                  Convert video files to audio-only files (requires ffmpeg or avconv and ffprobe or avprobe)\n    --audio-format FORMAT            Specify audio format: \"best\", \"aac\", \"vorbis\", \"mp3\", \"m4a\", \"opus\", or \"wav\"; \"best\" by default\n    --audio-quality QUALITY          Specify ffmpeg/avconv audio quality, insert a value between 0 (better) and 9 (worse) for VBR or a specific bitrate like 128K (default"
+      ],
+      "Explanations about Options": {
+        "-show_entries": "Set list of entries to show.",
+        "-i": "Read input_url.",
+        "-of": "Set the output printing format."
+      }
+    },
+    {
+      "Command": "convert",
+      "MP Summary": "convert between image formats as well as resize an image, blur, crop, despeckle, dither, draw on, flip, join, re-sample, and much more.",
+      "Most Similar TLDR Task": "Convert an image from JPG to PNG",
+      "Most Similar TLDR Script": "convert {{image.jpg}} {{image.png}}",
+      "Top-3 Similar Questions": [
+        "su_594008: Bash script to extract audio from video"
+      ],
+      "Top-3 Scripts": [
+        "su_594008: #!/bin/bash\nFOLDER_SRC=\"/home/J/Music/TestBatchConv\"\nfind \"$FOLDER_SRC\" -type f -print0 | while IFS= read -r -d '' myvid; do\n  echo \"Trying to convert $myvid\"\n  avconv -i \"$myvid\" -c:a libmp3lame -q:a 4 \"${myvid%.*}.mp3\" 2>/dev/null || echo \"$myvid is not a valid file.\"\ndone"
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

@@ -1,0 +1,92 @@
+{
+    "Answers": [
+        {
+            "Command": "scp",
+            "Explanations about Options": {
+                "-i(M)": "Selects the file from which the identity (private key) for public key authentication\n is read. This option is directly passed to ssh(1)."
+            },
+            "MP Summary": "secure copy (remote file copy program)",
+            "Most Similar TLDR Script": "scp -i {{~/.ssh/private_key}} {{local_file}} {{remote_host}}:{{/path/remote_file}}",
+            "Most Similar TLDR Task": "Use a specific ssh private key for authentication with the remote host",
+            "Top-3 Scripts": [
+                "so_33163300: scp audit_executable_commands.sh $bigsql_user@$mgmt_node:/home/$bigsql_user\r\nscp audit_record_loading_00.parm $bigsql_user@$mgmt_node:/home/$bigsql_user\r\nssh $mgmt_node bash < audit_executable_commands.sh",
+                "so_34415266: scp property.config user@remote_machine:/usr/property.config\nssh user@remote_machine \"bash -s\" < /usr/test.sh",
+                "so_11680956: scp /export/home/uname/aa.txt user@windowsmachine.com:/homedir"
+            ],
+            "Top-3 Similar Questions": [
+                "so_33163300: execute a shell script in remote machine from a shell script in local machine",
+                "so_34415266: Execute shell script in remote machine using ssh command with config file",
+                "so_11680956: ssh to run shell script on remote machine and then copy the output to local machine"
+            ]
+        },
+        {
+            "Command": "ssh",
+            "Explanations about Options": {
+                "-D(C)": "If you wish to monitor its progress, you can use \"screen\", if you wish to do that then something similar to this will help: .  \"ssh user@example.com -t 'screen -D -RR -S this /bin/sleep 300'\".",
+                "-S(M)": "Specifies the location of a control socket for connection sharing, or the string\n “none” to disable connection sharing. Refer to the description of ControlPath and\n ControlMaster in ssh_config(5) for details.",
+                "-l(M)": "Specifies the user to log in as on the remote machine. This also may be specified\n on a per-host basis in the configuration file.",
+                "-o(M)": "Can be used to give options in the format used in the configuration file. This is\n useful for specifying options for which there is no separate command-line flag. For\n full details of the options listed below, and their possible values, see\n ssh_config(5).",
+                "-t(M)": "Force pseudo-terminal allocation. This can be used to execute arbitrary screen-\n based programs on a remote machine, which can be very useful, e.g. when implementing\n menu services. Multiple -t options force tty allocation, even if ssh has no local\n tty.",
+                "-w(M)": "Requests tunnel device forwarding with the specified tun(4) devices between the\n client (local_tun) and the server (remote_tun)."
+            },
+            "MP Summary": "OpenSSH SSH client (remote login program)",
+            "Most Similar TLDR Script": "ssh {{remote_host}} {{command -with -flags}}",
+            "Most Similar TLDR Task": "Run a command on a remote server",
+            "Top-3 Scripts": [
+                "ul_345832: ssh user@example.com 'nohup sleep 300 >/dev/null 2>/dev/null </dev/null &'\n\nssh user@example.com -t 'screen -D -RR -S this /bin/sleep 300'",
+                "so_13928116: #!/bin/bash\nUSERNAME=someUser\nHOSTS=\"host1 host2 host3\"\nSCRIPT=\"pwd; ls\"\nfor HOSTNAME in ${HOSTS} ; do\n    ssh -l ${USERNAME} ${HOSTNAME} \"${SCRIPT}\"\ndone\n\nssh -o StrictHostKeyChecking=no -l username hostname \"pwd; ls\"",
+                "so_33163300: scp audit_executable_commands.sh $bigsql_user@$mgmt_node:/home/$bigsql_user\r\nscp audit_record_loading_00.parm $bigsql_user@$mgmt_node:/home/$bigsql_user\r\nssh $mgmt_node bash < audit_executable_commands.sh"
+            ],
+            "Top-3 Similar Questions": [
+                "ul_345832: How can I start a remote process on a remote machine via ssh?",
+                "so_13928116: write a shell script to ssh to a remote machine and execute commands",
+                "so_33163300: execute a shell script in remote machine from a shell script in local machine"
+            ]
+        },
+        {
+            "Command": "sshpass",
+            "Explanations about Options": {},
+            "MP Summary": "noninteractive ssh password provider",
+            "Most Similar TLDR Script": "sshpass -f {{file}} ssh -o StrictHostKeyChecking=no {{user}}@{{hostname}} \"{{command}}\"",
+            "Most Similar TLDR Task": "Connect to a remote server using the first line of a file as the password, automatically accept unknown ssh keys, and launch a command",
+            "Top-3 Scripts": [
+                "so_44672830: $ for ip in 192.168.138.22{1,2,3}; do sshpass -p PASSWORD ssh ${ip} -o StrictHostKeyChecking=no \"free -h\"; done\n              total        used        free      shared  buff/cache   available\nMem:           7.8G        782M        5.2G        152M        1.8G        6.4G\nSwap:          7.9G          0B        7.9G\n              total        used        free      shared  buff/cache   available\nMem:           7.8G        1.3G        4.1G        169M        2.5G        5.8G\nSwap:          7.9G          0B        7.9G\n              total        used        free      shared  buff/cache   available\nMem:           7.8G        563M        5.9G        118M        1.4G        6.6G\nSwap:          7.9G          0B        7.9G",
+                "au_735363: #!/bin/bash\nsshpass -p PASSWORD ssh -o StrictHostKeyChecking=no USERNAME@1.1.1.1 \\\n bash -s < \"$1\""
+            ],
+            "Top-3 Similar Questions": [
+                "so_44672830: How to execute linux commands in a remote machine with shell script",
+                "au_735363: Execute commands on a remote servers by 2 scripts"
+            ]
+        },
+        {
+            "Command": "screen",
+            "Explanations about Options": {
+                "-S(M)": "When creating a new session, this option can be used to specify a meaningful name for\n the session. This name identifies the session for \"screen -list\" and \"screen -r\"\n actions. It substitutes the default [tty.host] suffix.",
+                "-d(M)": "does not start screen, but detaches the elsewhere running screen session. It has the\n same effect as typing \"C-a d\" from screen's controlling terminal. -D is the\n equivalent to the power detach key. If no session can be detached, this option is\n ignored. In combination with the -r/-R option more powerful effects can be achieved:",
+                "-r(M)": " resumes a detached screen session. No other options (except combinations with -d/-D)\n may be specified, though an optional prefix of [pid.]tty.host may be needed to\n distinguish between multiple detached screen sessions. The second form is used to\n connect to another user's screen session which runs in multiuser mode. This indicates\n that screen should look for sessions in another user's directory. This requires\n setuid-root."
+            },
+            "MP Summary": "screen manager with VT100/ANSI terminal emulation",
+            "Most Similar TLDR Script": "Ctrl + A, K",
+            "Most Similar TLDR Task": "Kill the current screen session",
+            "Top-3 Scripts": [
+                "ul_388856: ssh -T MACHINEB screen -S somename -dm myprogram\n\nssh MACHINEB screen -S somename -dr"
+            ],
+            "Top-3 Similar Questions": [
+                "ul_345832: How can I start a remote process on a remote machine via ssh?",
+                "ul_388856: ssh command from another machine"
+            ]
+        },
+        {
+            "Command": "exit",
+            "Explanations about Options": {},
+            "MP Summary": "cause the shell to exit",
+            "Most Similar TLDR Script": "exit",
+            "Most Similar TLDR Task": "Exit the shell with the exit code of the last command executed",
+            "Top-3 Scripts": [],
+            "Top-3 Similar Questions": [
+                "so_31218577: Running part of bash script on a remote machine"
+            ]
+        }
+    ],
+    "Query": "How to use SSH to run a shell script on a remote machine?"
+}

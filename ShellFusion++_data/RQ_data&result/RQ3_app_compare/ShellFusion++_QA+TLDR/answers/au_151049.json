@@ -1,0 +1,90 @@
+{
+  "Query": "How to deal with a frozen screen?",
+  "Answers": [
+    {
+      "Command": "screen",
+      "MP Summary": "screen manager with VT100/ANSI terminal emulation",
+      "Most Similar TLDR Task": "Start a new screen session",
+      "Most Similar TLDR Script": "screen",
+      "Top-3 Similar Questions": [
+        "ul_293279: Scrolling with mouse wheel inside screen",
+        "so_22102473: Start a screen then run a command from the screen",
+        "su_485884: Can a process be frozen temporarily in linux?"
+      ],
+      "Top-3 Scripts": [
+        "ul_293279: ",
+        "so_22102473: screen -x\n\nscreen -X 'cd /ftb; java -Xms2048m -Xmx2048m -jar mcpc.jar'\nscreen -x",
+        "su_485884: #!/bin/bash\n#This is the process you want to suspend.\nscreen -mdS child bash -c \"cat /dev/urandom | base64\"\n#This is the process ID of the child process\nTHEPID=$(screen -list | grep child | cut -f1 -d'.' | sed 's/\\W//g')\n#Send SIGSTOP to the child process.\nkill -SIGSTOP ${THEPID}\n#Now it is suspended. This process will sleep for 10 seconds asynchronously, then resume the process.\nscreen -mdS monitor bash -c \"sleep 10; kill -SIGCONT ${THEPID}\"\n\nscreen -rS child"
+      ],
+      "Explanations about Options": {
+        "-a": "include all capabilities (with some minor exceptions) in each window's termcap , even\n if screen must redraw parts of the display in order to implement a function.",
+        "-r": " resumes a detached screen session. No other options (except combinations with -d/-D)\n may be specified, though an optional prefix of [pid.]tty.host may be needed to\n distinguish between multiple detached screen sessions. The second form is used to\n connect to another user's screen session which runs in multiuser mode. This indicates\n that screen should look for sessions in another user's directory. This requires\n setuid-root.",
+        "-x": "Attach to a not detached screen session. (Multi display mode). Screen refuses to\n attach from within itself. But when cascading multiple screens, loops are not\n detected; take care.",
+        "-X": "Send the specified command to a running screen session. You may use the -S option to\n specify the screen session if you have several screen sessions running. You can use\n the -d or -r option to tell screen to look only for attached or detached screen\n sessions. Note that this command doesn't work if the session is password protected.",
+        "-S": "When creating a new session, this option can be used to specify a meaningful name for\n the session. This name identifies the session for \"screen -list\" and \"screen -r\"\n actions. It substitutes the default [tty.host] suffix."
+      }
+    },
+    {
+      "Command": "xrandr",
+      "MP Summary": "primitive command line interface to RandR extension",
+      "Most Similar TLDR Task": "Display the current state of the system (known screens, resolutions, ...)",
+      "Most Similar TLDR Script": "xrandr --query",
+      "Top-3 Similar Questions": [
+        "ul_115311: Cannot rotate screen with xrandr",
+        "au_551109: How to black out screen when watching video/playing game on other screen?",
+        "so_44097176: Linux, use the keyboard with the screen turned off"
+      ],
+      "Top-3 Scripts": [
+        "ul_115311: $ xrandr --output LVDS1 --rotate left\n$ xrandr --output LVDS1 --rotate right\n$ xrandr --output LVDS1 --rotate normal",
+        "au_551109: $ xrandr | awk '/ connected [^p]/{print $1}'\nHDMI2\n\nxrandr --output HDMI2 --brightness 0\n\nxrandr --output HDMI2 --brightness 1",
+        "so_44097176: xrandr --output eDP-1-1 --brightness 0.0"
+      ],
+      "Explanations about Options": {
+        "--output": "Selects an output to reconfigure. Use either the name of the output or the XID.",
+        "--brightness": "Multiply the gamma values on the crtc currently attached to the output to specified\n floating value. Useful for overly bright or overly dim outputs. However, this is a\n software only modification, if your hardware has support to actually change the\n brightness, you will probably prefer to use xbacklight.",
+        "--rotate": "Rotation can be one of 'normal', 'left', 'right' or 'inverted'. This causes the\n output contents to be rotated in the specified direction. 'right' specifies a\n clockwise rotation of the picture and 'left' specifies a counter-clockwise\n rotation."
+      }
+    },
+    {
+      "Command": "clear",
+      "MP Summary": "clear the terminal screen",
+      "Most Similar TLDR Task": "Clear the screen but keep the terminal's scrollback buffer",
+      "Most Similar TLDR Script": "clear -x",
+      "Top-3 Similar Questions": [
+        "so_18937058: Clear screen in shell"
+      ],
+      "Top-3 Scripts": [
+        "so_18937058: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "xbacklight",
+      "MP Summary": "adjust backlight brightness using RandR extension",
+      "Most Similar TLDR Task": "Set the screen brightness to 40%",
+      "Most Similar TLDR Script": "xbacklight -set {{40}}",
+      "Top-3 Similar Questions": [
+        "au_490725: set the screen brightness on startup"
+      ],
+      "Top-3 Scripts": [
+        "au_490725: xbacklight -set 50%"
+      ],
+      "Explanations about Options": {
+        "-set": "Sets each backlight brightness to the specified level."
+      }
+    },
+    {
+      "Command": "import",
+      "MP Summary": "saves any visible window on an X server and outputs it as an image file. You can capture a single window, the entire screen, or any rectangular portion of the screen.",
+      "Most Similar TLDR Task": "Capture the entire X server screen in the PostScript image format",
+      "Most Similar TLDR Script": "import -window root {{output.postscript}}",
+      "Top-3 Similar Questions": [
+        "so_18937058: Clear screen in shell"
+      ],
+      "Top-3 Scripts": [
+        "so_18937058: import subprocess as sp\nsp.call('cls', shell=True)"
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

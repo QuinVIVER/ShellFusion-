@@ -1,0 +1,95 @@
+{
+  "Query": "Recursively look for files with a specific extension",
+  "Answers": [
+    {
+      "Command": "find",
+      "MP Summary": "search for files in a directory hierarchy",
+      "Most Similar TLDR Task": "Find files by extension",
+      "Most Similar TLDR Script": "find {{root_path}} -name '{{*.ext}}'",
+      "Top-3 Similar Questions": [
+        "ul_632185: Find recursively all files whose content match a specific regular expression",
+        "so_25693638: Recursively find files with a specific extension",
+        "ul_196633: Converting `for file in` to `find` so that my script can apply recursively"
+      ],
+      "Top-3 Scripts": [
+        "ul_632185: find . -type f \\( -name '*.php' -o -name '*.txt' \\) -exec grep -EH '\\$[a-zA-Z0-9]{5,8}\\s=\\s.{30,50}\\;\\$[a-zA-Z0-9]{5,8}\\s=\\s[a-zA-Z0-9]{5}\\(\\)' {} \\;",
+        "so_25693638: find . -name '*.jpg' -o -name '*.png' -print | grep Robert",
+        "ul_196633: find . \\( -name '*.mkv' -o -name '*avi' -o -name '*mp4' -o -name '*flv' -o -name '*ogg' -o -name '*mov' \\) -print\n\nfind . \\( -name '*.mkv' -o -name '*avi' -o -name '*mp4' -o -name '*flv' -o -name '*ogg' -o -name '*mov' \\) -print |\n    while IFS= read file    ## IFS= prevents \"read\" stripping whitespace\n        do\n            target=\"${file%.*}.mkv\"\n            echo ffmpeg -i \"$file\" \"$target\" && echo rm -rf \"$file\"\n        done"
+      ],
+      "Explanations about Options": {
+        "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+        "-print": "Quoting is handled in the same way as for -printf and -fprintf. If you are using\n find in a script or in a situation where the matched files might have arbitrary\n names, you should consider using -print0 instead of -print.",
+        "-type": "File is of type c:"
+      }
+    },
+    {
+      "Command": "mv",
+      "MP Summary": "move (rename) files",
+      "Most Similar TLDR Task": "Move files in arbitrary locations",
+      "Most Similar TLDR Script": "mv {{source}} {{target}}",
+      "Top-3 Similar Questions": [
+        "au_766644: Find a file beginning with a string but having a specific extension",
+        "so_16701618: How to find files differing only by extension",
+        "so_61044889: Bash: Find all files with specific extension and rename them according to first line of content within each file"
+      ],
+      "Top-3 Scripts": [
+        "au_766644: find . -type f -name 'start*.ext' -exec mv -i {} foobar.txt \\;\n\nfind . -maxdepth 1 -type f -name 'start*.ext' -exec mv -i {} foobar.txt \\;",
+        "so_16701618: $ mv `ls *.sql|sed s/.sql$/.txt/g` dir\n\n$ ls\na.sql b.sql a.txt b.txt c.txt\n$ echo mv `ls *.sql|sed s/.sql/.txt/g` dir\nmv a.txt b.txt dir\n\n$ for f in *.sql; do mv \"$(echo $f|sed s/.sql$/txt/)\" dir; done\n\n$ for f in *.sql; do mv \"$f\" \"$(echo $f|sed s/.sql$/txt/)\" dir; done",
+        "so_61044889: find . -type f -name '*.txt' -exec sh -c '\n  for file; do\n    if newname=$(grep -m1 \"specific text\" \"$file\"); then\n       echo mv -i \"$file\" \"${file%/*}/${newname}.txt\" \n    fi\n  done\n' sh {} +"
+      ],
+      "Explanations about Options": {
+        "-i": "prompt before overwrite"
+      }
+    },
+    {
+      "Command": "rm",
+      "MP Summary": "remove files or directories",
+      "Most Similar TLDR Task": "Recursively remove a directory and all its subdirectories",
+      "Most Similar TLDR Script": "rm -r {{path/to/directory}}",
+      "Top-3 Similar Questions": [
+        "ul_196633: Converting `for file in` to `find` so that my script can apply recursively",
+        "nl2bash_5188: Find recursively all Emacs backup files in the current directory and remove them",
+        "ul_247854: Find files recursively, but choose largest from among those with duplicate names"
+      ],
+      "Top-3 Scripts": [
+        "ul_196633: for file in *.mkv *avi *mp4 *flv *ogg *mov; do\ntarget=\"${file%.*}.mkv\"\n    ffmpeg -i \"$file\" \"$target\" && rm -rf \"$file\"\ndone\n\nwhile IFS= read file    ## IFS= prevents \"read\" stripping whitespace\ndo\n    target=\"${file%.*}.mkv\"\n    ffmpeg -i \"$file\" \"$target\" && rm -rf \"$file\"\ndone\n\nfind . \\( -name '*.mkv' -o -name '*avi' -o -name '*mp4' -o -name '*flv' -o -name '*ogg' -o -name '*mov' \\) -print |\n    while IFS= read file    ## IFS= prevents \"read\" stripping whitespace\n        do\n            target=\"${file%.*}.mkv\"\n            echo ffmpeg -i \"$file\" \"$target\" && echo rm -rf \"$file\"\n        done",
+        "nl2bash_5188: find . -name '*~' | xargs rm",
+        "ul_247854: allfiles=(**/*(D.oL))\ntypeset -A best\nfor f ($allfiles) best[$f:t]=$f\nbestfiles=($best)\ndups=(${allfiles:|bestfiles})\nrm -rf -- $dups"
+      ],
+      "Explanations about Options": {
+        "-r": "remove directories and their contents recursively",
+        "-f": "ignore nonexistent files and arguments, never prompt"
+      }
+    },
+    {
+      "Command": "file",
+      "MP Summary": "determine file type",
+      "Most Similar TLDR Task": "Look inside a zipped file and determine the file type(s) inside",
+      "Most Similar TLDR Script": "file -z {{foo.zip}}",
+      "Top-3 Similar Questions": [
+        "so_25650411: Powershell - Test-path looking for 3 files",
+        "so_55920777: BASH - look for file in for loop issue",
+        "ul_196359: using `for file in` to select multiple extension names then get the basename of \"file\" then concatenate an extension name"
+      ],
+      "Top-3 Scripts": [
+        "so_25650411: $files = @('os.wim','data.wim','backup.wim')\n\nif (($files | foreach {test-path $imagepath\\$_}) -contains $false)\n { \n   Echo \"WIM file(s) not located.  Script Aborting\"\n   exit\n }",
+        "so_55920777: ",
+        "ul_196359: $ shopt -s nullglob \n$ shopt nullglob ## just to demonstrate that it is on\nnullglob        on\n$ for file in *.{jpg,jpeg,test,avi}; do      \n    echo \"$file size is $(stat -c '%s' \"$file\")\"\n done\ntest1.jpg size is 0\ntest1.jpeg size is 0\ntest1.test size is 0\n\n$ for file in *jpg *jpeg *test *avi; do\n    [ -e \"$file\" ] &&  echo \"$file size is $(stat -c '%s' \"$file\")\" \n  done\ntest1.jpg size is 0\ntest1.jpeg size is 0\ntest1.test size is 0"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "dirname",
+      "MP Summary": "strip last component from file name",
+      "Most Similar TLDR Task": "Calculate the parent directory of multiple paths",
+      "Most Similar TLDR Script": "dirname {{path/to/file_a}} {{path/to/directory_b}}",
+      "Top-3 Similar Questions": [
+        "nl2bash_5429: Finds all folders that contain 'ssh' file and have 'bin' in path."
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_5429: dirname `find / -name ssh | grep bin`\n\n\nfind / -name ssh|grep bin|xargs dirname"
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

@@ -1,0 +1,87 @@
+{
+  "Query": "Get file created/creation time?",
+  "Answers": [
+    {
+      "Command": "stat",
+      "MP Summary": "display file or file system status",
+      "Most Similar TLDR Task": "Show file properties such as size, permissions, creation and access dates among others",
+      "Most Similar TLDR Script": "stat {{file}}",
+      "Top-3 Similar Questions": [
+        "so_25781784: Recursive file list of all files, list containing path+name, type, size, creation data, modification date",
+        "so_25310066: Getting the last created (modified) file",
+        "ul_439857: Get last time timedatectl synchronized its time/force synchronization now"
+      ],
+      "Top-3 Scripts": [
+        "so_25781784: ",
+        "so_25310066: ",
+        "ul_439857: $ stat /var/lib/systemd/clock\n  File: /var/lib/systemd/clock\n  Size: 0           Blocks: 0          IO Block: 4096   regular empty file\nDevice: b302h/45826d    Inode: 18750       Links: 1\nAccess: (0644/-rw-r--r--)  Uid: (  100/systemd-timesync)   Gid: (  103/systemd-timesync)\nAccess: 2018-08-05 10:22:13.838262405 -0400\nModify: 2018-08-05 10:22:13.838262405 -0400\nChange: 2018-08-05 10:22:13.838262405 -0400\n Birth: -"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "date",
+      "MP Summary": "print or set the system date and time",
+      "Most Similar TLDR Task": "Convert a specific date to the Unix timestamp format",
+      "Most Similar TLDR Script": "date -d \"{{2018-09-01 00:00}}\" +%s --utc",
+      "Top-3 Similar Questions": [
+        "so_32885545: How to get formatted date twice, ensuring it's the same time?",
+        "so_39594419: From difference between two date time get the another time back",
+        "so_48114627: Why am I getting date: illegal time format?"
+      ],
+      "Top-3 Scripts": [
+        "so_32885545: date=\"$(date +%s)\"\nthe_date=\"$(date +'%Y-%m-%d-%H%M%S' -d \"@${date}\")\"\nreport_date=\"$(date +'%Y-%m-%d %H:%M:%S' -d \"@${date}\")\"",
+        "so_39594419: ",
+        "so_48114627: PARSE_DATE_AND_FORMAT=$(date '%F %TZ' -v+$((10**9))S -u \"$DATE_SET_TO_MIDNIGHT\")"
+      ],
+      "Explanations about Options": {
+        "-u": "print or set Coordinated Universal Time (UTC)",
+        "-d": "display time described by STRING, not 'now'"
+      }
+    },
+    {
+      "Command": "find",
+      "MP Summary": "search for files in a directory hierarchy",
+      "Most Similar TLDR Task": "Find files modified in the last 7 days, and delete them",
+      "Most Similar TLDR Script": "find {{root_path}} -mtime {{-7}} -delete",
+      "Top-3 Similar Questions": [
+        "so_25781784: Recursive file list of all files, list containing path+name, type, size, creation data, modification date",
+        "su_1263510: How to extract EXIF creation date and set file creation date"
+      ],
+      "Top-3 Scripts": [
+        "so_25781784: ",
+        "su_1263510: find . -type f -iname \"*.jpg\" -print0 | xargs -0 -n1 -I % sh -c 'touch % -d \"$(file %|grep -oP \"datetime=\\K[^,]*\"|sed -e \"s/:/-/\"|sed -e \"s/:/-/\")\"'"
+      ],
+      "Explanations about Options": {
+        "-iname": "Like -name, but the match is case insensitive. For example, the patterns `fo*' and\n `F??' match the file names `Foo', `FOO', `foo', `fOo', etc. The pattern `*foo*`\n will also match a file called '.foobar'.",
+        "-type": "File is of type c:",
+        "-print0": "Always print the exact filename, unchanged, even if the output is going to a\n terminal."
+      }
+    },
+    {
+      "Command": "unzip",
+      "MP Summary": "list, test and extract compressed files in a ZIP archive",
+      "Most Similar TLDR Task": "Extract zip file(s) (for multiple files, separate file paths by spaces)",
+      "Most Similar TLDR Script": "unzip {{file(s)}}",
+      "Top-3 Similar Questions": [
+        "ul_43905: Possible to get \"old\" time stamp behaviour?"
+      ],
+      "Top-3 Scripts": [
+        "ul_43905: man unzip"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "sleep",
+      "MP Summary": "delay for a specified amount of time",
+      "Most Similar TLDR Task": "Delay in minutes",
+      "Most Similar TLDR Script": "sleep {{minutes}}m",
+      "Top-3 Similar Questions": [
+        "so_48531129: Getting script exec time"
+      ],
+      "Top-3 Scripts": [
+        "so_48531129: $ a=$(date +%s.%N); sleep .4; b=$(date +%s.%N)\n$ diff=$(echo \"$b - $a\" | bc -l)\n$ printf \"runtime: %0.3f seconds\\n\" \"$diff\"\nruntime: 0.403 seconds\n\n$ zsh -c 'a=$(date +%s.%N); sleep .4; b=$(date +%s.%N); echo \"runtime: $(( b - a ))\" seconds'\nruntime: 0.40290713310241699 seconds"
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

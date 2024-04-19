@@ -1,0 +1,83 @@
+{
+  "Query": "How can I extract a page range / a part of a PDF?",
+  "Answers": [
+    {
+      "Command": "unzip",
+      "MP Summary": "list, test and extract compressed files in a ZIP archive",
+      "Most Similar TLDR Task": "Extract zip file(s) (for multiple files, separate file paths by spaces)",
+      "Most Similar TLDR Script": "unzip {{file(s)}}",
+      "Top-3 Similar Questions": [
+        "au_1195340: Extract a specific pdf from a zip file with lots of pdfs",
+        "so_51449715: Extract range of lines using sed"
+      ],
+      "Top-3 Scripts": [
+        "au_1195340: unzip -j \"myarchive.zip\" \"in/archive/file.pdf\" -d \"/destination/path/\"",
+        "so_51449715: unzip -c ./*.zip | sed -n \"$var1,$var2 p\""
+      ],
+      "Explanations about Options": {
+        "-j": "junk paths. The archive's directory structure is not recreated; all files are\n deposited in the extraction directory (by default, the current one).",
+        "-c": "extract files to stdout/screen (``CRT''). This option is similar to the -p option\n except that the name of each file is printed as it is extracted, the -a option is\n allowed, and ASCII-EBCDIC conversion is automatically performed if appropriate.\n This option is not listed in the unzip usage screen."
+      }
+    },
+    {
+      "Command": "pdftotext",
+      "MP Summary": "Portable Document Format (PDF) to text converter (version 3.03)",
+      "Most Similar TLDR Task": "Convert filename.pdf to plain text and preserve the layout",
+      "Most Similar TLDR Script": "pdftotext -layout {{filename.pdf}}",
+      "Top-3 Similar Questions": [
+        "so_34625953: Is there any way to get the page numbers in a PDF of a search pattern?",
+        "au_1195340: Extract a specific pdf from a zip file with lots of pdfs"
+      ],
+      "Top-3 Scripts": [
+        "so_34625953: pdftotext test.pdf - |\nawk -vRS=$'\\f' -vNAME=\"My name\" \\\n    'index($0,NAME){printf \"%d: %s\\n\", NR, NAME;}'\n\npdftotext test.pdf - |\ngrep -F -o -e $'\\f' -e 'My name' |\nawk 'BEGIN{page=1} /\\f/{++page;next} 1{printf \"%d: %s\\n\", page, $0;}'\n\npdftotext test.pdf - |\nawk -vRS=$'\\f' \\\n    '/My[[:space:]]+Name/{printf \"%d: %s\\n\", NR, \"My Name\";}'",
+        "au_1195340: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "echo",
+      "MP Summary": "display a line of text",
+      "Most Similar TLDR Task": "Print a text message. Note: quotes are optional",
+      "Most Similar TLDR Script": "echo \"{{Hello World}}\"",
+      "Top-3 Similar Questions": [
+        "ul_29859: Extract part of the first line of a file",
+        "so_12588884: Extract part of file name with multiple sections",
+        "au_1195340: Extract a specific pdf from a zip file with lots of pdfs"
+      ],
+      "Top-3 Scripts": [
+        "ul_29859: #!/bin/bash\n\nfor file in *.tex; do\n  read _ _ mainfile < \"$file\"\n  echo \"$file : $mainfile\"\ndone",
+        "so_12588884: file=EMDEON.270.60054.1234567890123456789.70949996.20120925.014606403\ntransitId=$(echo $file | cut -d. -f4)\n\nfile=EMDEON.270.60054.1234567890123456789.70949996.20120925.014606403\ntransitId=$(echo $file | awk -F. '{print $4}')",
+        "au_1195340: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "pdftk",
+      "MP Summary": "A handy tool for manipulating PDF",
+      "Most Similar TLDR Task": "Merge (concatenate) a list of PDF files and save the result as another one",
+      "Most Similar TLDR Script": "pdftk {{file1.pdf file2.pdf ...}} cat output {{output.pdf}}",
+      "Top-3 Similar Questions": [
+        "su_625565: How to extract and/or remove the last page of a bunch of PDFs?",
+        "su_372061: How to extract all pages of one big pdf file?"
+      ],
+      "Top-3 Scripts": [
+        "su_625565: pdftk input.pdf cat end-1 output temp.pdf\npdftk temp.pdf  cat end-2 output output.pdf\nrm temp.pdf\n\npdftk input.pdf cat 1-$((last-1)) output output.pdf",
+        "su_372061: $ sudo apt-get install pdftk\n\n$ pdftk file.pdf burst"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "pdfinfo",
+      "MP Summary": "Portable Document Format (PDF) document information extractor (version 3.03)",
+      "Most Similar TLDR Task": "Print PDF file information",
+      "Most Similar TLDR Script": "pdfinfo {{path/to/file.pdf}}",
+      "Top-3 Similar Questions": [
+        "au_112192: Getting the \"Created\" timestamp of a PDF file in the CLI"
+      ],
+      "Top-3 Scripts": [
+        "au_112192: "
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

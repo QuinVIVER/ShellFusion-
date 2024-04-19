@@ -1,0 +1,93 @@
+{
+  "Query": "find -exec with multiple commands",
+  "Answers": [
+    {
+      "Command": "xargs",
+      "MP Summary": "build and execute command lines from standard input",
+      "Most Similar TLDR Task": "Parallel runs of up to `max-procs` processes at a time; the default is 1. If `max-procs` is 0, xargs will run as many processes as possible at a time",
+      "Most Similar TLDR Script": "{{arguments_source}} | xargs -P {{max-procs}} {{command}}",
+      "Top-3 Similar Questions": [
+        "ul_212957: find: multiple `-exec`s with conditions",
+        "ul_84265: linux shell: find -exec in find -exec",
+        "ul_320157: Widespread support for find with \"-exec \u2026 +\"?"
+      ],
+      "Top-3 Scripts": [
+        "ul_212957: find . -type f -exec grep -lFZ <i>SOME_STRING</i> {} + | xargs -0 gsed -s -i '<i>COMMAND</i>'\n\ngfind /tmp/ -type f \\( -name \"*.h\" -o -name \"*.cpp\" \\) \\\n-exec ggrep -lFZ LARGE_INTEGER {} + | \\\nxargs -0 gsed -s -i '1s/^/#include <stdint.h>\\n/'",
+        "ul_84265: xargs -r0a <(\n    find ~/.config/google-chrome -type d -name test -print0\n  ) sh -c 'exec find \"$@\" -exec chmod 555 {} +' sh",
+        "ul_320157: find -print0 | xargs -0"
+      ],
+      "Explanations about Options": {
+        "-i": "This option is a synonym for -Ireplace-str if replace-str is specified. If the\n replace-str argument is missing, the effect is the same as -I{}. This option is\n deprecated; use -I instead.",
+        "-0": "Input items are terminated by a null character instead of by whitespace, and the\n quotes and backslash are not special (every character is taken literally).\n Disables the end of file string, which is treated like any other argument. Useful\n when input items might contain white space, quote marks, or backslashes. The GNU\n find -print0 option produces input suitable for this mode."
+      }
+    },
+    {
+      "Command": "exec",
+      "MP Summary": "execute commands and open, close, or copy file descriptors",
+      "Most Similar TLDR Task": "Replace with the specified command using the current environment variables",
+      "Most Similar TLDR Script": "exec {{command -with -flags}}",
+      "Top-3 Similar Questions": [
+        "so_49083961: Find with multiple rename",
+        "au_523815: What the -exec in `find ... -exec ...` do?"
+      ],
+      "Top-3 Scripts": [
+        "so_49083961: ",
+        "au_523815: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "find",
+      "MP Summary": "search for files in a directory hierarchy",
+      "Most Similar TLDR Task": "Find files by matching multiple patterns",
+      "Most Similar TLDR Script": "find {{root_path}} -name '{{*pattern_1*}}' -or -name '{{*pattern_2*}}'",
+      "Top-3 Similar Questions": [
+        "ul_102191: `find` with multiple `-name` and `-exec` executes only the last matches of `-name`",
+        "so_16104421: find with -execdir does not execute command",
+        "so_49083961: Find with multiple rename"
+      ],
+      "Top-3 Scripts": [
+        "ul_102191: find . -type f '(' -name \"*.htm*\" -o -name \"*.js*\" -o -name \"*.txt\" ')' \\\n  -exec sh -c 'echo \"$0\"' {} \\;\n\nfind . -type f '(' -name \"*.htm*\" -o -name \"*.js*\" -o -name \"*.txt\" ')' -exec sh -c '\n   for i do\n     echo \"$i\"\n   done' sh {} +",
+        "so_16104421: find $source \\( -name '*.c' \\) -or \\( -name '*.cpp' -execdir gcc {} -o $output \\; \\)\n\nfind $source \\( -name '*.c' -or -name '*.cpp' \\) -execdir gcc {} -o $output \\;",
+        "so_49083961: find ... -exec rename 's/a/b/g; s/c/d/g; s/e/f/g' {} \\;"
+      ],
+      "Explanations about Options": {
+        "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+        "-type": "File is of type c:",
+        "-d": "A synonym for -depth, for compatibility with FreeBSD, NetBSD, MacOS X and OpenBSD."
+      }
+    },
+    {
+      "Command": "sh",
+      "MP Summary": "MirBSD Korn shell",
+      "Most Similar TLDR Task": "Execute a command",
+      "Most Similar TLDR Script": "sh -c {{command}}",
+      "Top-3 Similar Questions": [
+        "ul_102191: `find` with multiple `-name` and `-exec` executes only the last matches of `-name`",
+        "ul_84265: linux shell: find -exec in find -exec",
+        "so_8106405: Bash find: changing matched name for use in -exec"
+      ],
+      "Top-3 Scripts": [
+        "ul_102191: <b>find . -type f -name \"*.htm*\" -o -name \"*.js*\" -o -name \"*.txt\" \\\n  -exec sh -c 'echo \"$0\"' {} \\;\n</b>\n\n<b>find .</b> '(' <b>-type f</b> -a <b>-name \"*.htm*\"</b> ')' <b>-o</b> \\\n       '(' <b>-name \"*.js*\"</b> ')' <b>-o</b> \\\n       '(' <b>-name \"*.txt\"</b> -a <b>-exec sh -c 'echo \"$0\"' {} \\;</b> ')'\n\nfind . -type f '(' -name \"*.htm*\" -o -name \"*.js*\" -o -name \"*.txt\" ')' \\\n  -exec sh -c 'echo \"$0\"' {} \\;\n\nfind . -type f '(' -name \"*.htm*\" -o -name \"*.js*\" -o -name \"*.txt\" ')' -exec sh -c '\n   for i do\n     echo \"$i\"\n   done' sh {} +",
+        "ul_84265: find ~/.config/google-chrome -type d -name test -exec sh -c '\n  for i do\n    find \"$i\" -exec chmod 555 {\\} +\n  done' sh {} +\n\nxargs -r0a <(\n    find ~/.config/google-chrome -type d -name test -print0\n  ) sh -c 'exec find \"$@\" -exec chmod 555 {} +' sh",
+        "so_8106405: find . -name \"*.less\" -exec sh -c \"plessc \\$0 \\$(dirname \\$0)/\\$(basename \\$0 less)css\" {} \\;\n\nsh -c"
+      ],
+      "Explanations about Options": {
+        "-c": "Impose a size limit of n blocks on the size of core dumps."
+      }
+    },
+    {
+      "Command": "dirname",
+      "MP Summary": "strip last component from file name",
+      "Most Similar TLDR Task": "Delimit output with a NUL character instead of a newline (useful when combining with `xargs`)",
+      "Most Similar TLDR Script": "dirname --zero {{path/to/directory_a}} {{path/to/file_b}}",
+      "Top-3 Similar Questions": [
+        "so_8106405: Bash find: changing matched name for use in -exec"
+      ],
+      "Top-3 Scripts": [
+        "so_8106405: find . -name \"*.less\" -exec sh -c \"plessc \\$0 \\$(dirname \\$0)/\\$(basename \\$0 less)css\" {} \\;"
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

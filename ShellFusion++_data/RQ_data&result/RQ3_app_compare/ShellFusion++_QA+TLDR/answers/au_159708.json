@@ -1,0 +1,87 @@
+{
+  "Query": "Convert mkv to mp4 with ffmpeg",
+  "Answers": [
+    {
+      "Command": "ffmpeg",
+      "MP Summary": "ffmpeg video converter",
+      "Most Similar TLDR Task": "Remux MKV video to MP4 without re-encoding audio or video streams",
+      "Most Similar TLDR Script": "ffmpeg -i {{input_video}}.mkv -codec copy {{output_video}}.mp4",
+      "Top-3 Similar Questions": [
+        "so_59256447: Converting mkv to mp4 with ffmpeg sometimes loses video",
+        "ul_114908: Bash script to convert all *flac to *.mp3 with FFmpeg?",
+        "au_707397: Batch convert H.265 mkv to H.264 with ffmpeg to make files compatible for re-encoding"
+      ],
+      "Top-3 Scripts": [
+        "so_59256447: ",
+        "ul_114908: for i in *.flac ; do \n    ffmpeg -i \"$i\" -acodec libmp3lame \"$(basename \"${i/.flac}\")\".mp3\n    sleep 60\ndone",
+        "au_707397: INPUT=\"$1\"\nfor i in *.mkv ; do\n    ffmpeg -i \"$i\" -bsf:v h264_mp4toannexb -sn -map 0:0 -map 0:1 -vcodec libx264 \"$i.ts\"\n    mv \"$i.ts\" \"$i.mpg\"\n    sleep 3\ndone\n\nffmpeg -i \"$i\""
+      ],
+      "Explanations about Options": {
+        "-acodec": "Set the audio codec. This is an alias for \"-codec:a\".",
+        "-i": "input file url"
+      }
+    },
+    {
+      "Command": "flac",
+      "MP Summary": "Free Lossless Audio Codec",
+      "Most Similar TLDR Task": "Encode a wav file to flac (this will create a flac file in the same location as the wav file)",
+      "Most Similar TLDR Script": "flac {{path/to/file.wav}}",
+      "Top-3 Similar Questions": [
+        "ul_487024: Batch convert (decode) audio into multiple formats with ffmpeg"
+      ],
+      "Top-3 Scripts": [
+        "ul_487024: mkdir mp3 ogg flac; for i in *.wav; do ffmpeg -i \"$i\" -b:a 320000 \"./mp3/${i%.*}.mp3\" -b:a 320000 \"./ogg/${i%.*}.ogg\" \"./flac/${i%.*}.flac\"; done"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "vlc",
+      "MP Summary": "the VLC media player",
+      "Most Similar TLDR Task": "Play video from a URL",
+      "Most Similar TLDR Script": "vlc {{https://www.youtube.com/watch?v=oHg5SJYRHA0}}",
+      "Top-3 Similar Questions": [
+        "ul_278365: FFMpeg : Converting a video file to a gif with multiple images from video"
+      ],
+      "Top-3 Scripts": [
+        "ul_278365: apt-get install vlc"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "ffprobe",
+      "MP Summary": "ffprobe media prober",
+      "Most Similar TLDR Task": "Display the frame rate of a video",
+      "Most Similar TLDR Script": "ffprobe -v error -select_streams v:0 -show_entries stream=avg_frame_rate -of default=noprint_wrappers=1:nokey=1 {{input.mp4}}",
+      "Top-3 Similar Questions": [
+        "so_59256447: Converting mkv to mp4 with ffmpeg sometimes loses video",
+        "au_707397: Batch convert H.265 mkv to H.264 with ffmpeg to make files compatible for re-encoding",
+        "au_1214782: Ffmpeg: can TS video be converted directly to MP4 video without re-coding?"
+      ],
+      "Top-3 Scripts": [
+        "so_59256447: $ ffprobe -loglevel error -select_streams a:0 -show_entries stream=codec_name -of default=nw=1 input.mp4\ncodec_name=aac",
+        "au_707397: ",
+        "au_1214782: "
+      ],
+      "Explanations about Options": {
+        "-loglevel": "Set logging level and flags used by the library."
+      }
+    },
+    {
+      "Command": "file",
+      "MP Summary": "determine file type",
+      "Most Similar TLDR Task": "Look inside a zipped file and determine the file type(s) inside",
+      "Most Similar TLDR Script": "file -z {{foo.zip}}",
+      "Top-3 Similar Questions": [
+        "ul_200586: FFMPEG batch convert quits before processing all files"
+      ],
+      "Top-3 Scripts": [
+        "ul_200586: < /dev/null  ffmpeg -i $file -loglevel error -acodec libmp3lame ${outdir}/Chapter${chapter}_Verse${verse}.mp3"
+      ],
+      "Explanations about Options": {
+        "-e": "Exclude the test named in testname from the list of tests made to determine the file\n type. Valid test names are:",
+        "-l": "Shows a list of patterns and their strength sorted descending by magic(5) strength\n which is used for the matching (see also the -k option).",
+        "-v": "Print the version of the program and exit."
+      }
+    }
+  ]
+}

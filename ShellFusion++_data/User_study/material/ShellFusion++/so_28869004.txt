@@ -1,0 +1,163 @@
+
+
+Query:              	How to copy a file from remote server to local machine?
+
+
+########################################################################################################################
+
+
+Cmd:                	scp                 
+
+MP Summary:         	secure copy (remote file copy program)
+
+TLDR Task:          	Copy a local file to a remote host
+TLDR Script:        	scp {{path/to/local_file}} {{remote_host}}:{{path/to/remote_file}}
+
+>>> Top-3 Similar Questions with Accepted Scripts: =====================================================================
+
+Question Title:     	How to copy file contents from remote server to local machine location?
+Question Link:      	https://stackoverflow.com/questions/47389152: How to copy file contents from remote server to local machine location?
+Accepted Script:    	scp ru@9.122.145.169:/<pathtofile>/index.php /home/remo/remo/php
+
+Question Title:     	Unable to copy a file from remote server to local machine
+Question Link:      	https://unix.stackexchange.com/questions/611968: Unable to copy a file from remote server to local machine
+Accepted Script:    	scp root@servername:filename.json ~/Desktop/\n\nscp ~root/filename.json myUser@myLocal:Desktop/    # Might need sudo to read ~root files
+
+Question Title:     	How to copy a file from a remote server to a local machine?
+Question Link:      	https://unix.stackexchange.com/questions/188285: How to copy a file from a remote server to a local machine?
+Accepted Script:    	scp /file/to/send username@remote:/where/to/put\n\nscp username@remote:/file/to/send /where/to/put\n\nscp username@remote_1:/file/to/send username@remote_2:/where/to/put\n\nscp username@source:/location/to/file username@destination:/where/to/put\n\nman scp
+
+>>> Explanations about Options: ========================================================================================
+
+
+
+########################################################################################################################
+
+
+Cmd:                	sftp                
+
+MP Summary:         	OpenSSH secure file transfer
+
+TLDR Task:          	Transfer remote file to the local system
+TLDR Script:        	get {{/path/remote_file}}
+
+>>> Top-3 Similar Questions with Accepted Scripts: =====================================================================
+
+Question Title:     	How to copy the files from remote unix server to local windows?
+Question Link:      	https://unix.stackexchange.com/questions/367845: How to copy the files from remote unix server to local windows?
+Accepted Script:    	                    
+
+Question Title:     	How can I copy files from a Google Cloud Compute Server to my local machine?
+Question Link:      	https://superuser.com//questions/787009: How can I copy files from a Google Cloud Compute Server to my local machine?
+Accepted Script:    	sftp -o IdentityFile ~/.ssh/google_compute_engine user@host
+
+Question Title:     	Copy file from remote to local with Windows 10 Bash
+Question Link:      	https://askubuntu.com/questions/828783: Copy file from remote to local with Windows 10 Bash
+Accepted Script:    	sftp windows.user.name@my.ip.address
+
+>>> Explanations about Options: ========================================================================================
+
+-o:                 	Can be used to pass options to ssh in the format used in ssh_config(5). This is
+ useful for specifying options for which there is no separate sftp command-line flag.
+ For example, to specify an alternate port use: sftp -oPort=24. For full details of
+ the options listed below, and their possible values, see ssh_config(5).
+
+
+########################################################################################################################
+
+
+Cmd:                	ssh                 
+
+MP Summary:         	OpenSSH SSH client (remote login program)
+
+TLDR Task:          	Connect to a remote server
+TLDR Script:        	ssh {{username}}@{{remote_host}}
+
+>>> Top-3 Similar Questions with Accepted Scripts: =====================================================================
+
+Question Title:     	Copy file from remote host to local host
+Question Link:      	https://stackoverflow.com/questions/32450665: Copy file from remote host to local host
+Accepted Script:    	rsync -avz -e ssh remoteuser@remotehost:/remote/dir /this/dir/
+
+Question Title:     	How to copy (or move) files from remote machine to local machine?
+Question Link:      	https://askubuntu.com/questions/903038: How to copy (or move) files from remote machine to local machine?
+Accepted Script:    	ssh ComputerBUser@ComputerB -R 2222:localhost:22
+
+Question Title:     	Need to copy log files daily from remote to local server Linux
+Question Link:      	https://stackoverflow.com/questions/64387264: Need to copy log files daily from remote to local server Linux
+Accepted Script:    	#!/bin/bash\nrsync -aue ssh phma@server.example.com:/home/phma/dump.*.gz /home/phma/dback/
+
+>>> Explanations about Options: ========================================================================================
+
+
+
+########################################################################################################################
+
+
+Cmd:                	rsync               
+
+MP Summary:         	a fast, versatile, remote (and local) file-copying tool
+
+TLDR Task:          	Transfer file over SSH and delete local files that do not exist on remote host
+TLDR Script:        	rsync -e ssh --delete {{remote_host}}:{{path/to/remote_file}} {{path/to/local_file}}
+
+>>> Top-3 Similar Questions with Accepted Scripts: =====================================================================
+
+Question Title:     	Copy file from remote host to local host
+Question Link:      	https://stackoverflow.com/questions/32450665: Copy file from remote host to local host
+Accepted Script:    	rsync -avz -e ssh remoteuser@remotehost:/remote/dir /this/dir/
+
+Question Title:     	Need to copy log files daily from remote to local server Linux
+Question Link:      	https://stackoverflow.com/questions/64387264: Need to copy log files daily from remote to local server Linux
+Accepted Script:    	#!/bin/bash\nrsync -aue ssh phma@server.example.com:/home/phma/dump.*.gz /home/phma/dback/
+
+Question Title:     	Copy file from local host to remote host
+Question Link:      	https://superuser.com//questions/719042: Copy file from local host to remote host
+Accepted Script:    	rsync -avz /path/to/local/file username@host:/destination/path
+
+>>> Explanations about Options: ========================================================================================
+
+-v:                 	This option increases the amount of information you are given during the transfer.
+ By default, rsync works silently. A single -v will give you information about what
+ files are being transferred and a brief summary at the end. Two -v options will
+ give you information on what files are being skipped and slightly more information
+ at the end. More than two -v options should only be used if you are debugging
+ rsync.
+-a:                 	This is equivalent to -rlptgoD. It is a quick way of saying you want recursion and
+ want to preserve almost everything (with -H being a notable omission). The only
+ exception to the above equivalence is when --files-from is specified, in which case
+ -r is not implied.
+-z:                 	With this option, rsync compresses the file data as it is sent to the destination
+ machine, which reduces the amount of data being transmitted - something that is
+ useful over a slow connection.
+-u:                 	This forces rsync to skip any files which exist on the destination and have a
+ modified time that is newer than the source file. (If an existing destination file
+ has a modification time equal to the source file¡¯s, it will be updated if the sizes
+ are different.)
+-e:                 	This option allows you to choose an alternative remote shell program to use for
+ communication between the local and remote copies of rsync. Typically, rsync is
+ configured to use ssh by default, but you may prefer to use rsh on a local network.
+
+
+########################################################################################################################
+
+
+Cmd:                	zip                 
+
+MP Summary:         	package and compress (archive) files
+
+TLDR Task:          	Package and compress multiple directories and files
+TLDR Script:        	zip -r {{compressed.zip}} {{/path/to/dir1 /path/to/dir2 /path/to/file}}
+
+>>> Top-3 Similar Questions with Accepted Scripts: =====================================================================
+
+Question Title:     	How to copy a directory from linux(remote system) to windows(local system)
+Question Link:      	https://stackoverflow.com/questions/17083935: How to copy a directory from linux(remote system) to windows(local system)
+Accepted Script:    	zip -r temp.zip /home/tmp
+
+>>> Explanations about Options: ========================================================================================
+
+-r:                 	Travel the directory structure recursively; for example:
+
+
+########################################################################################################################

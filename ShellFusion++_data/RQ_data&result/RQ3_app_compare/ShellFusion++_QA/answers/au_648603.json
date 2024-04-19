@@ -1,0 +1,70 @@
+{
+  "Query": "How to create an animated GIF from MP4 video via command line?",
+  "Answers": [
+    {
+      "Command": "ffmpeg",
+      "Top-3 Similar Questions": [
+        "au_648603: How to create an animated GIF from MP4 video via command line?",
+        "ul_24014: Creating a GIF animation from PNG files",
+        "au_1127603: How can I create a 30 second GIF from a long random video?"
+      ],
+      "Top-3 Scripts": [
+        "au_648603: sudo apt install ffmpeg\nwget -O opengl-rotating-triangle.mp4 https://github.com/cirosantilli/media/blob/master/opengl-rotating-triangle.mp4?raw=true\nffmpeg \\\n  -i opengl-rotating-triangle.mp4 \\\n  -r 15 \\\n  -vf scale=512:-1 \\\n  -ss 00:00:03 -to 00:00:06 \\\n  opengl-rotating-triangle.gif\n\nffmpeg \\\n  -i opengl-rotating-triangle.mp4 \\\n  -r 15 \\\n  -vf \"scale=512:-1,split[s0][s1];[s0]palettegen[p];[s1][p]paletteuse\" \\\n  -ss 00:00:03 -to 00:00:06 \\\n  opengl-rotating-triangle-palettegen.gif\n\nwget https://upload.wikimedia.org/wikipedia/commons/f/f9/STS-132_Liftoff_Space_Shuttle_Atlantis.ogv\nffmpeg -i STS-132_Liftoff_Space_Shuttle_Atlantis.ogv -r 15 -vf scale=512:-1 \\\n  -ss 00:00:17 -to 00:00:22 STS-132_Liftoff_Space_Shuttle_Atlantis.gif\n\nsudo apt-get install ffmpeg\nffmpeg -i in.mp4 out.gif\n\nsudo apt-get install ffmpeg imagemagick\nffmpeg -i opengl-rotating-triangle.mp4 -r 15 -vf scale=512:-1 \\\n  -ss 00:00:03 -to 00:00:06 -f image2pipe -vcodec ppm - |\n  convert -deconstruct -delay 5 -loop 0 - opengl-rotating-triangle-image-magick.gif\n\nffmpeg -i STS-132_Liftoff_Space_Shuttle_Atlantis.ogv -r 15 -vf scale=512:-1 \\\n  -ss 00:00:17 -to 00:00:22 -f image2pipe -vcodec ppm - |\n  convert -deconstruct -delay 5 -loop 0 - STS-132_Liftoff_Space_Shuttle_Atlantis_512x.gif\n\nsudo snap install gifski\nmkdir -p frames\nffmpeg \\\n  -i opengl-rotating-triangle.mp4 \\\n  -r 15 \\\n  -vf scale=512:-1 \\\n  -ss 00:00:03 -to 00:00:06 \\\n  frames/%04d.png\ngifski -o opengl-rotating-triangle-gifski.gif frames/*.png",
+        "ul_24014: ffmpeg -i %03d.png output.gif\n\n# cf. http://pages.uoregon.edu/noeckel/MakeMovie.html\n\n# first convert an image sequence to a movie\nffmpeg -sameq -i %03d.jpg output.mp4\n\n# ... and then convert the movie to a GIF animation\nffmpeg -i output.mp4 -pix_fmt rgb24 -s qcif -loop_output 0 output.gif",
+        "au_1127603: #!/bin/bash\nmkdir 30gif\nfor f in *.mp4; do\n  duration=$(ffprobe -loglevel error -show_entries format=duration -of default=nk=1:nw=1 \"$f\")\n  ffmpeg -i \"$f\" -filter_complex \"[0:v]select='lt(mod(t,${duration}/10),3)',setpts=N/(FRAME_RATE*TB),scale=560:340:force_original_aspect_ratio=decrease,pad=560:340:(ow-iw)/2:(oh-ih)/2,setsar=1,split[v0][v1];[v0]palettegen[p];[v1][p]paletteuse[v]\" -map \"[v]\" \"30gif/${f%.mp4}.gif\"\ndone"
+      ]
+    },
+    {
+      "Command": "sudo",
+      "Top-3 Similar Questions": [
+        "au_648603: How to create an animated GIF from MP4 video via command line?",
+        "au_321633: How to create DVD from a video file?",
+        "ul_143669: Create animated WebP file from WebP files?"
+      ],
+      "Top-3 Scripts": [
+        "au_648603: sudo apt install ffmpeg\nwget -O opengl-rotating-triangle.mp4 https://github.com/cirosantilli/media/blob/master/opengl-rotating-triangle.mp4?raw=true\nffmpeg \\\n  -i opengl-rotating-triangle.mp4 \\\n  -r 15 \\\n  -vf scale=512:-1 \\\n  -ss 00:00:03 -to 00:00:06 \\\n  opengl-rotating-triangle.gif\n\nsudo apt-get install ffmpeg\nffmpeg -i in.mp4 out.gif\n\nsudo apt-get install ffmpeg imagemagick\nffmpeg -i opengl-rotating-triangle.mp4 -r 15 -vf scale=512:-1 \\\n  -ss 00:00:03 -to 00:00:06 -f image2pipe -vcodec ppm - |\n  convert -deconstruct -delay 5 -loop 0 - opengl-rotating-triangle-image-magick.gif\n\nsudo snap install gifski\nmkdir -p frames\nffmpeg \\\n  -i opengl-rotating-triangle.mp4 \\\n  -r 15 \\\n  -vf scale=512:-1 \\\n  -ss 00:00:03 -to 00:00:06 \\\n  frames/%04d.png\ngifski -o opengl-rotating-triangle-gifski.gif frames/*.png",
+        "au_321633: sudo apt-get install dvdstyler",
+        "ul_143669: sudo apt-get install libwebp"
+      ]
+    },
+    {
+      "Command": "install",
+      "Top-3 Similar Questions": [
+        "au_648603: How to create an animated GIF from MP4 video via command line?",
+        "au_321633: How to create DVD from a video file?",
+        "ul_143669: Create animated WebP file from WebP files?"
+      ],
+      "Top-3 Scripts": [
+        "au_648603: sudo apt install ffmpeg\nwget -O opengl-rotating-triangle.mp4 https://github.com/cirosantilli/media/blob/master/opengl-rotating-triangle.mp4?raw=true\nffmpeg \\\n  -i opengl-rotating-triangle.mp4 \\\n  -r 15 \\\n  -vf scale=512:-1 \\\n  -ss 00:00:03 -to 00:00:06 \\\n  opengl-rotating-triangle.gif\n\nsudo apt-get install ffmpeg\nffmpeg -i in.mp4 out.gif\n\nsudo apt-get install ffmpeg imagemagick\nffmpeg -i opengl-rotating-triangle.mp4 -r 15 -vf scale=512:-1 \\\n  -ss 00:00:03 -to 00:00:06 -f image2pipe -vcodec ppm - |\n  convert -deconstruct -delay 5 -loop 0 - opengl-rotating-triangle-image-magick.gif\n\nsudo snap install gifski\nmkdir -p frames\nffmpeg \\\n  -i opengl-rotating-triangle.mp4 \\\n  -r 15 \\\n  -vf scale=512:-1 \\\n  -ss 00:00:03 -to 00:00:06 \\\n  frames/%04d.png\ngifski -o opengl-rotating-triangle-gifski.gif frames/*.png",
+        "au_321633: sudo apt-get install dvdstyler",
+        "ul_143669: ./configure\nmake\nmake install\n\nsudo apt-get install libwebp"
+      ]
+    },
+    {
+      "Command": "to",
+      "Top-3 Similar Questions": [
+        "au_21556: How to create an empty file from command line",
+        "au_28052: How do I create a video DVD from vob files?",
+        "ul_144924: How can I create a message box from the command line?"
+      ],
+      "Top-3 Scripts": [
+        "au_21556: The touch utility sets the modification and access times of files to the\ncurrent time of day. If the file doesn't exist, it is created with\ndefault permissions.",
+        "au_28052: genisoimage: No such file or directory. Failed to open VIDEO_TS.IFO\ngenisoimage: Can't open VMG info for 'dvd/'.\ngenisoimage: Unable to parse DVD-Video structures.\ngenisoimage: Could not find correct 'VIDEO_TS' directory.\ngenisoimage: Unable to make a DVD-Video image.\n- VIDEO_TS subdirectory was not found on specified location\n- VIDEO_TS has invalid contents",
+        "ul_144924: zenity --question --text=\"Do you wish to continue/?\"\n\nwhiptail --title \"Example Dialog\" --msgbox \"This is an example of a message box. You must hit OK to continue.\" 8 78"
+      ]
+    },
+    {
+      "Command": "convert",
+      "Top-3 Similar Questions": [
+        "au_648603: How to create an animated GIF from MP4 video via command line?",
+        "su_546842: Creating a movie from pdf images",
+        "ul_277892: How do I create a blank PDF from the command line?"
+      ],
+      "Top-3 Scripts": [
+        "au_648603: sudo apt-get install ffmpeg imagemagick\nffmpeg -i opengl-rotating-triangle.mp4 -r 15 -vf scale=512:-1 \\\n  -ss 00:00:03 -to 00:00:06 -f image2pipe -vcodec ppm - |\n  convert -deconstruct -delay 5 -loop 0 - opengl-rotating-triangle-image-magick.gif\n\nffmpeg -i STS-132_Liftoff_Space_Shuttle_Atlantis.ogv -r 15 -vf scale=512:-1 \\\n  -ss 00:00:17 -to 00:00:22 -f image2pipe -vcodec ppm - |\n  convert -deconstruct -delay 5 -loop 0 - STS-132_Liftoff_Space_Shuttle_Atlantis_512x.gif\n\nconvert input.mp4 rpi2-bare-metal-blink.gif",
+        "su_546842: for i in {2..9087}\ndo \n   sips -z 1024 -s format png fig${i}.pdf --out png/fig${i}.png\n   convert png/fig${i}.png -background=white -flatten +matte aa.png && \n   mv aa.png png/fig${i}.png\ndone",
+        "ul_277892: convert xc:none -page Letter a.pdf\n\nconvert xc:none -page A4 a.pdf\n\nconvert xc:none -page 842x595 a.pdf"
+      ]
+    }
+  ]
+}

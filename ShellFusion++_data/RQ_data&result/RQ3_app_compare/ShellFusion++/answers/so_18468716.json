@@ -1,0 +1,98 @@
+{
+  "Query": "How to grep, excluding some patterns?",
+  "Answers": [
+    {
+      "Command": "grep",
+      "MP Summary": "print lines that match patterns",
+      "Most Similar TLDR Task": "Invert match for excluding specific strings",
+      "Most Similar TLDR Script": "grep -v {{search_pattern}}",
+      "Top-3 Similar Questions": [
+        "so_24837635: grep excluding file name pattern",
+        "so_25781642: How to search for a pattern using grep and exclude another pattern",
+        "so_49521913: Exclude subdirectories"
+      ],
+      "Top-3 Scripts": [
+        "so_24837635: grep -r --exclude=\"*.cmd\"  \"ckim\" ./",
+        "so_25781642: grep -P 'http://\\S*tt(?!p:)' file\n\ngrep -cP 'http://\\S*tt(?!p:)' file\n\ngrep -P '(<=http://)?\\S*tt(?!p:)' file\n\ngrep -oP '.*?\\K(http:/)?/\\S*tt(?!p:)\\S*' file\n\ngrep -oP '.*?\\Khttp://\\S*tt(?!p:)\\S*' file\n\nhttp://example.com/redirect?http://some/anyttany.html\nhttp://example.com/http.html\nhttp://example.com/tt.html\nhttp://example.com/somett.html\nhttp://example.com/somettsome.html",
+        "so_49521913: grep \"^${myPath}/[^/]*$\""
+      ],
+      "Explanations about Options": {
+        "-r": "Read all files under each directory, recursively, following symbolic links only if\n they are on the command line. Note that if no file operand is given, grep searches\n the working directory. This is equivalent to the -d recurse option.",
+        "-o": "Print only the matched (non-empty) parts of a matching line, with each such part on\n a separate output line.",
+        "-P": "Interpret PATTERNS as Perl-compatible regular expressions (PCREs). This option is\n experimental when combined with the -z (--null-data) option, and grep -P may warn\n of unimplemented features.",
+        "--exclude": "Skip any command-line file with a name suffix that matches the pattern GLOB, using\n wildcard matching; a name suffix is either the whole name, or a trailing part that\n starts with a non-slash character immediately after a slash (/) in the name. When\n searching recursively, skip any subfile whose base name matches GLOB; the base name\n is the part after the last slash. A pattern can use *, ?, and [...] as wildcards,\n and \\ to quote a wildcard or backslash character literally."
+      }
+    },
+    {
+      "Command": "find",
+      "MP Summary": "search for files in a directory hierarchy",
+      "Most Similar TLDR Task": "Find files matching a given pattern, excluding specific paths",
+      "Most Similar TLDR Script": "find {{root_path}} -name '{{*.py}}' -not -path '{{*/site-packages/*}}'",
+      "Top-3 Similar Questions": [
+        "so_37561162: Shell globbing exclude directory patterns",
+        "so_62627416: Globbing pattern: exclude a directory",
+        "so_62651044: Deleting files not containing double digit number and pattern in grep"
+      ],
+      "Top-3 Scripts": [
+        "so_37561162: ",
+        "so_62627416: find /vol ! -path '*/form/*' -type f -name '*.txt'\n\nfind -regex*",
+        "so_62651044: find . -maxdepth 1 -type f -name '[0-9]*' -not -name '1_*' -delete\n\nfind . -maxdepth 1 -type f -name '[0-9]*' -not -name '1_*' -exec rm {} +"
+      ],
+      "Explanations about Options": {
+        "-type": "File is of type c:",
+        "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+        "-maxdepth": "Descend at most levels (a non-negative integer) levels of directories below the\n starting-points. -maxdepth 0 means only apply the tests and actions to the\n starting-points themselves.",
+        "-not": "Same as ! expr, but not POSIX compliant."
+      }
+    },
+    {
+      "Command": "awk",
+      "MP Summary": "pattern scanning and processing language",
+      "Most Similar TLDR Task": "Print different values based on conditions",
+      "Most Similar TLDR Script": "awk '{if ($1 == \"foo\") print \"Exact match foo\"; else if ($1 ~ \"bar\") print \"Partial match bar\"; else print \"Baz\"}' {{filename}}",
+      "Top-3 Similar Questions": [
+        "so_39463714: Need grep statement to exclude lines",
+        "so_63968526: AWK / Grep - Exclude lines containing file paths",
+        "so_30528416: awk to exclude range patterns but include the start pattern"
+      ],
+      "Top-3 Scripts": [
+        "so_39463714: awk '/IN=eth0/ && !/SRC=0\\.0\\.0\\.0/ && !/SRC=10\\.0\\.1\\.15/' uwf.log",
+        "so_63968526: awk '!/[cC]:\\\\[wW][iI][nN][dD][[oO][wW][sS]\\\\[sS][yY][sS][tT][eE][mM]32/' Input_file\n\nawk 'tolower($0) !~ /c:\\\\windows\\\\system32/' Input_file",
+        "so_30528416: $ awk '!flag; /ss/ {flag=1} /gg/ {flag=0}' file\n11\n12\nss\n32\nss"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "sed",
+      "MP Summary": "stream editor for filtering and transforming text",
+      "Most Similar TLDR Task": "Delete lines matching the line pattern",
+      "Most Similar TLDR Script": "sed '/{{line_pattern}}/d' {{filename}}",
+      "Top-3 Similar Questions": [
+        "so_51743995: grep to exclude pattern and exclude 2 preceding lines",
+        "so_28021351: Sed. remove multiline patterns. RegExp",
+        "ul_205478: How to grep whitespace exclude new-line character?"
+      ],
+      "Top-3 Scripts": [
+        "so_51743995: GNU sed\n\nsed -E 'N;N; /[acgt]{3}cc[acgt][acgt]{3}/d' ip.txt",
+        "so_28021351: sed '/^@H/ { N; /\\n+$/ { N; d } }' filename",
+        "ul_205478: sed -n '/[\\t ]$/p' file \n    perl -ne 'print if /[\\t ]$/' file"
+      ],
+      "Explanations about Options": {
+        "-E": "use extended regular expressions in the script (for portability use POSIX -E)."
+      }
+    },
+    {
+      "Command": "expr",
+      "MP Summary": "evaluate arguments as an expression",
+      "Most Similar TLDR Task": "Get string length",
+      "Most Similar TLDR Script": "expr length {{string}}",
+      "Top-3 Similar Questions": [
+        "so_24190198: Process grep with pipe returns itself. How do I exclude it?"
+      ],
+      "Top-3 Scripts": [
+        "so_24190198: grep -v expr"
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

@@ -1,0 +1,77 @@
+{
+  "Query": "How can I completely erase all data on a (micro) SD card?",
+  "Answers": [
+    {
+      "Command": "fdisk",
+      "MP Summary": "manipulate disk partition table",
+      "Most Similar TLDR Task": "Start the partition manipulator",
+      "Most Similar TLDR Script": "fdisk {{/dev/sda}}",
+      "Top-3 Similar Questions": [
+        "au_818843: First time installing (erasing Windows) from usb, did everything just so, Boot Device Not Found",
+        "au_17640: How can I securely erase a hard drive?"
+      ],
+      "Top-3 Scripts": [
+        "au_818843: fdisk -l",
+        "au_17640: sudo fdisk -l"
+      ],
+      "Explanations about Options": {
+        "-l": "List the partition tables for the specified devices and then exit. If no devices\n are given, those mentioned in /proc/partitions (if that file exists) are used."
+      }
+    },
+    {
+      "Command": "badblocks",
+      "MP Summary": "search a device for bad blocks",
+      "Most Similar TLDR Task": "Search a disk for bad blocks by using a non-destructive read-only test",
+      "Most Similar TLDR Script": "sudo badblocks {{/dev/sda}}",
+      "Top-3 Similar Questions": [
+        "ul_308009: Can't delete from SD card, 'Read-only file system'"
+      ],
+      "Top-3 Scripts": [
+        "ul_308009: badblocks -w -o ~/badblocksList /dev/sda\nmkfs.vfat -l ~/badblocksList /dev/sda"
+      ],
+      "Explanations about Options": {
+        "-w": "Use write-mode test. With this option, badblocks scans for bad blocks by writing\n some patterns (0xaa, 0x55, 0xff, 0x00) on every block of the device, reading every\n block and comparing the contents. This option may not be combined with the -n\n option, as they are mutually exclusive.",
+        "-o": "Write the list of bad blocks to the specified file. Without this option, badblocks\n displays the list on its standard output. The format of this file is suitable for\n use by the -l option in e2fsck(8) or mke2fs(8)."
+      }
+    },
+    {
+      "Command": "sync",
+      "MP Summary": "Synchronize cached writes to persistent storage",
+      "Most Similar TLDR Task": "Flush all pending write operations on a single file to disk",
+      "Most Similar TLDR Script": "sync {{path/to/file}}",
+      "Top-3 Similar Questions": [
+        "au_722859: Is there a faster way to erase a pen (USB) drive using dd command?"
+      ],
+      "Top-3 Scripts": [
+        "au_722859: sudo dd if=/dev/zero of=/dev/sdd bs=1M && sync"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "chattr",
+      "MP Summary": "change file attributes on a Linux file system",
+      "Most Similar TLDR Task": "Make a file or directory immutable to changes and deletion, even by superuser",
+      "Most Similar TLDR Script": "chattr +i {{path/to/file_or_directory}}",
+      "Top-3 Similar Questions": [
+        "ul_369958: Cannot erase file in $HOME"
+      ],
+      "Top-3 Scripts": [
+        "ul_369958: chattr -a /media/alex/.../.rsync.log"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "lsattr",
+      "MP Summary": "list file attributes on a Linux second extended file system",
+      "Most Similar TLDR Task": "List file attributes recursively in the current and subsequent directories",
+      "Most Similar TLDR Script": "lsattr -R",
+      "Top-3 Similar Questions": [
+        "ul_369958: Cannot erase file in $HOME"
+      ],
+      "Top-3 Scripts": [
+        "ul_369958: $ lsattr /media/alex/.../.rsync.log \n-----a-------e-- /media/alex/.../.rsync.log"
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

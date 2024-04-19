@@ -1,0 +1,83 @@
+{
+  "Query": "How do you add a certificate authority (CA) to Ubuntu?",
+  "Answers": [
+    {
+      "Command": "a2enmod",
+      "MP Summary": "enable or disable an apache2 module",
+      "Most Similar TLDR Task": "Enable a module",
+      "Most Similar TLDR Script": "sudo a2enmod {{module}}",
+      "Top-3 Similar Questions": [
+        "au_596392: how to add a user directory in apache on ubuntu",
+        "ul_479391: Unable to install Let's Encrypt certificate on CentOS 7"
+      ],
+      "Top-3 Scripts": [
+        "au_596392: sudo a2enmod userdir",
+        "ul_479391: sudo yum install mod_ssl\n\nsudo a2enmod ssl"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "openssl",
+      "MP Summary": "OpenSSL command line tool",
+      "Most Similar TLDR Task": "Generate a certificate signing request to be sent to a certificate authority",
+      "Most Similar TLDR Script": "openssl req -new -sha256 -key {{filename.key}} -out {{filename.csr}}",
+      "Top-3 Similar Questions": [
+        "ul_612594: Add custom CA certificate to Ubuntu 20.04 works fine, but fails on Debian",
+        "su_1430089: How to add a self-signed SSL certificate to Linux (Ubuntu/Alpine) trust store?",
+        "ul_73873: Firefox error message when adding client certificate signed by CA"
+      ],
+      "Top-3 Scripts": [
+        "ul_612594: openssl x509 -in /usr/local/share/ca-certificates/nexus-custom-ca-chain.pem -noout -text\n\n# FROM ubuntu:20:04\nFROM debian:10\nRUN apt update &&  DEBIAN_FRONTEND=noninteractive apt install -y curl openssl ca-certificates\nCOPY root.pem /usr/local/share/ca-certificates/root.pem\nCOPY intermediate.pem /usr/local/share/ca-certificates/intermediate.pem\nRUN chmod 644 /usr/local/share/ca-certificates/root.pem /usr/local/share/ca-certificates/intermediate.pem\nRUN update-ca-certificates\nRUN curl https://nexus-using-custom-cert.custom.org\n\nopenssl x509 -noout\n\nopenssl x509 -in mycert.crt -noout -text\n\nopenssl x509 -in mycert.crt  -inform der -outform PEM -out mycert.crt\n\nopenssl x509 -in mycert.pem -outform der -out mycert.der",
+        "su_1430089: $ openssl req -x509 -days 365 -newkey rsa:1024 -keyout bar.pem -nodes -out foo.crt -config openssl_conf",
+        "ul_73873: openssl pkcs12 -info -in keyStore.p12\n\nopenssl pkcs12 -export -in certificate.cer -inkey privateKey.key \\\n      -out certificate.pfx -certfile CACert.cer\n\nsudo openssl pkcs12 -export -in certs/device.crt -inkey private/device.key -out safaa.pfx -certfile certs/myca.crt"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "curl",
+      "MP Summary": "transfer a URL",
+      "Most Similar TLDR Task": "Pass client certificate and key for a resource, skipping certificate validation",
+      "Most Similar TLDR Script": "curl --cert {{client.pem}} --key {{key.pem}} --insecure {{https://example.com}}",
+      "Top-3 Similar Questions": [
+        "ul_612594: Add custom CA certificate to Ubuntu 20.04 works fine, but fails on Debian",
+        "ul_90450: Adding a self-signed certificate to the \"trusted list\""
+      ],
+      "Top-3 Scripts": [
+        "ul_612594: # FROM ubuntu:20:04\nFROM debian:10\nRUN apt update &&  DEBIAN_FRONTEND=noninteractive apt install -y curl openssl ca-certificates\nCOPY root.pem /usr/local/share/ca-certificates/root.pem\nCOPY intermediate.pem /usr/local/share/ca-certificates/intermediate.pem\nRUN chmod 644 /usr/local/share/ca-certificates/root.pem /usr/local/share/ca-certificates/intermediate.pem\nRUN update-ca-certificates\nRUN curl https://nexus-using-custom-cert.custom.org\n\ncurl -v",
+        "ul_90450: curl --cacert  /path/to/CA/cert.file https://...\n\ncurl --insecure https://..."
+      ],
+      "Explanations about Options": {
+        "--insecure": "(TLS) By default, every SSL connection curl makes is verified to be secure. This\n option allows curl to proceed and operate even for server connections otherwise\n considered insecure.",
+        "-v": "Makes curl verbose during the operation. Useful for debugging and seeing what's\n going on \"under the hood\". A line starting with '>' means \"header data\" sent by\n curl, '<' means \"header data\" received by curl that is hidden in normal cases, and\n a line starting with '*' means additional info provided by curl."
+      }
+    },
+    {
+      "Command": "apt-get",
+      "MP Summary": "APT package handling utility - command-line interface",
+      "Most Similar TLDR Task": "Install a package, or update it to the latest available version",
+      "Most Similar TLDR Script": "apt-get install {{package}}",
+      "Top-3 Similar Questions": [
+        "ul_90450: Adding a self-signed certificate to the \"trusted list\"",
+        "au_507707: How to add Linuxmint repositories to Ubuntu?"
+      ],
+      "Top-3 Scripts": [
+        "ul_90450: apt-get install ca-certificates",
+        "au_507707: sudo apt-get update\n\nsudo apt-get install linuxmint-keyring"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "firefox",
+      "MP Summary": "a free and open source web browser from Mozilla",
+      "Most Similar TLDR Task": "Use a specific profile to allow multiple separate instances of Firefox to run at once",
+      "Most Similar TLDR Script": "firefox --profile {{path/to/directory}} {{https://example.com/}}",
+      "Top-3 Similar Questions": [
+        "so_60375325: Ubuntu18 firefox Add trust to a exsisting certificate"
+      ],
+      "Top-3 Scripts": [
+        "so_60375325: /usr/lib/firefox/distribution/\n\ntouch policies.json"
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

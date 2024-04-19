@@ -1,0 +1,77 @@
+{
+  "Query": "How to persistently control maximum system resource consumption on Mac?",
+  "Answers": [
+    {
+      "Command": "ulimit",
+      "MP Summary": "set or report file size limit",
+      "Most Similar TLDR Task": "Get the properties of all the user limits",
+      "Most Similar TLDR Script": "ulimit -a",
+      "Top-3 Similar Questions": [
+        "ul_176671: How to add persist shell ulimit settings on Mac?",
+        "ul_120642: What defines the maximum size for a command single argument?"
+      ],
+      "Top-3 Scripts": [
+        "ul_176671: $ launchctl limit core\n    core        unlimited      unlimited \n$ ulimit -a core\ncore file size          (blocks, -c) unlimited\n...\n<output snipped>\n...",
+        "ul_120642: $ echo $(( $(ulimit -s)*1024 / 4 ))  # ulimit output in KiB\n2097152\n$ getconf ARG_MAX\n2097152\n\n$ grep ARG_MAX /usr/include/linux/limits.h \n#define ARG_MAX       131072    /* # bytes of args + environ for exec() */\n$ ulimit -s 256\n$ echo $(( $(ulimit -s)*1024 / 4 ))\n65536\n$ getconf ARG_MAX\n131072"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "systemctl",
+      "MP Summary": "Control the systemd system and service manager",
+      "Most Similar TLDR Task": "Show the status of a unit",
+      "Most Similar TLDR Script": "systemctl status {{unit}}",
+      "Top-3 Similar Questions": [
+        "ul_351466: Set a default resource limit for all users with systemd cgroups"
+      ],
+      "Top-3 Scripts": [
+        "ul_351466: systemctl enable user-0.slice"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "cpulimit",
+      "MP Summary": "limits the CPU usage of a process",
+      "Most Similar TLDR Task": "Limit an existing program by its executable name",
+      "Most Similar TLDR Script": "cpulimit --exe {{program}} --limit {{25}}",
+      "Top-3 Similar Questions": [
+        "ul_19203: Is there a way to limit overall CPU consumption?"
+      ],
+      "Top-3 Scripts": [
+        "ul_19203: #! /bin/bash\ncpulimit --limit 70 /usr/bin/google-chrome-bin"
+      ],
+      "Explanations about Options": {
+        "--limit": "percentage of CPU allowed from 1 up. Usually 1 - 100, but can be higher on multi-\n core CPUs. (mandatory)"
+      }
+    },
+    {
+      "Command": "route",
+      "MP Summary": "show / manipulate the IP routing table",
+      "Most Similar TLDR Task": "Display the information of route table",
+      "Most Similar TLDR Script": "route -n",
+      "Top-3 Similar Questions": [
+        "ul_84552: Set persistent routing table on Debian"
+      ],
+      "Top-3 Scripts": [
+        "ul_84552: auto eth1\niface eth1 inet dhcp\n  post-up route del -net 10.1.2.0 netmask 255.255.255.0\n  post-up route add -host 10.1.2.51 eth1\n  post-up route add -host 10.1.2.52 eth1\n  pre-down route add -net 10.1.2.0 netmask 255.255.255.0\n  pre-down route add -host 10.1.2.51 eth1\n  pre-down route add -host 10.1.2.52 eth1"
+      ],
+      "Explanations about Options": {
+        "-host": "the target is a host.",
+        "-net": "the target is a network."
+      }
+    },
+    {
+      "Command": "service",
+      "MP Summary": "run a System V init script",
+      "Most Similar TLDR Task": "Show the current status of a service",
+      "Most Similar TLDR Script": "service {{service_name}} status",
+      "Top-3 Similar Questions": [
+        "ul_71850: Configure remote control Zydacron"
+      ],
+      "Top-3 Scripts": [
+        "ul_71850: sudo service udev restart"
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

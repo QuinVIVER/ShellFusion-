@@ -1,0 +1,86 @@
+{
+  "Query": "Freeing up a TCP/IP port?",
+  "Answers": [
+    {
+      "Command": "netstat",
+      "MP Summary": "Print  network  connections,  routing tables, interface statistics, masquerade connections, and multicast memberships",
+      "Most Similar TLDR Task": "List listening TCP ports",
+      "Most Similar TLDR Script": "netstat -t",
+      "Top-3 Similar Questions": [
+        "ul_140021: How to close ports in Linux?",
+        "so_59571862: Bash script to close open TCP connections on a specific port"
+      ],
+      "Top-3 Scripts": [
+        "ul_140021: me@myhost:~$ sudo netstat -tlnp\nActive Internet connections (only servers)\nProto Recv-Q Send-Q Local Address   Foreign Address   State    PID/Program name\ntcp        0      0 127.0.0.1:53    0.0.0.0:*         LISTEN   1004/dnsmasq    \ntcp        0      0 0.0.0.0:22      0.0.0.0:*         LISTEN   380/sshd        \ntcp        0      0 127.0.0.1:631   0.0.0.0:*         LISTEN   822/cupsd       \ntcp6       0      0 :::22           :::*              LISTEN   380/sshd        \ntcp6       0      0 ::1:631         :::*              LISTEN   822/cupsd\n\nnetstat -anb",
+        "so_59571862: netstat -ano | awk '$1 == \"TCP\" && $2 ~ /:8080/ { print $5 }'"
+      ],
+      "Explanations about Options": {
+        "-a": "Show both listening and non-listening sockets. With the --interfaces option, show\n interfaces that are not up",
+        "-o": "Include information related to networking timers.",
+        "-n": "Show numerical addresses instead of trying to determine symbolic host, port or user names."
+      }
+    },
+    {
+      "Command": "nc",
+      "MP Summary": "arbitrary TCP and UDP connections and listens",
+      "Most Similar TLDR Task": "Connect to a certain port (you can then write to this port)",
+      "Most Similar TLDR Script": "nc {{ip_address}} {{port}}",
+      "Top-3 Similar Questions": [
+        "ul_483646: How to close nc port in Debian 9?"
+      ],
+      "Top-3 Scripts": [
+        "ul_483646: nc -l -p 45454 -e /usr/sbin/link\n\n/bin/sh -c nc -l -p 45454 -e /usr/sbin/link"
+      ],
+      "Explanations about Options": {
+        "-l": "Listen for an incoming connection rather than initiating a connection to a remote\n host. The destination and port to listen on can be specified either as non-optional\n arguments, or with options -s and -p respectively. Cannot be used together with -x\n or -z. Additionally, any timeouts specified with the -w option are ignored.",
+        "-p": "Specify the source port nc should use, subject to privilege restrictions and\n availability."
+      }
+    },
+    {
+      "Command": "telnet",
+      "MP Summary": "user interface to the TELNET protocol",
+      "Most Similar TLDR Task": "Telnet to a specific port of a host",
+      "Most Similar TLDR Script": "telnet {{ip_address}} {{port}}",
+      "Top-3 Similar Questions": [
+        "ul_140021: How to close ports in Linux?",
+        "ul_599688: what are the options to close manual the port correctly or release the port on rhel machines?"
+      ],
+      "Top-3 Scripts": [
+        "ul_140021: telnet 127.0.0.1",
+        "ul_599688: telnet localhost 50070"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "ss",
+      "MP Summary": "another utility to investigate sockets",
+      "Most Similar TLDR Task": "Show all TCP sockets listening on the local 8080 port",
+      "Most Similar TLDR Script": "ss -lt src :{{8080}}",
+      "Top-3 Similar Questions": [
+        "ul_599688: what are the options to close manual the port correctly or release the port on rhel machines?"
+      ],
+      "Top-3 Scripts": [
+        "ul_599688: sudo ss -tulp"
+      ],
+      "Explanations about Options": {
+        "-l": "Display only listening sockets (these are omitted by default).",
+        "-p": "Show process using socket.",
+        "-t": "Display TCP sockets.",
+        "-u": "Display UDP sockets."
+      }
+    },
+    {
+      "Command": "firewall-cmd",
+      "MP Summary": "firewalld command line client",
+      "Most Similar TLDR Task": "Permanently open the port for a service in the specified zone (like port `443` when in the `public` zone)",
+      "Most Similar TLDR Script": "firewall-cmd --permanent --zone={{public}} --add-service={{https}}",
+      "Top-3 Similar Questions": [
+        "ul_599157: how to close a port on CentOS 7 server?"
+      ],
+      "Top-3 Scripts": [
+        "ul_599157: firewall-cmd --zone=public --remove-port=3000/tcp --permanent\n\nman firewall-cmd"
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

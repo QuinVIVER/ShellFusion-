@@ -1,0 +1,82 @@
+{
+  "Query": "How to find uptime of a linux process",
+  "Answers": [
+    {
+      "Command": "kill",
+      "MP Summary": "send a signal to a process",
+      "Most Similar TLDR Task": "Signal the operating system to immediately terminate a program (which gets no chance to capture the signal)",
+      "Most Similar TLDR Script": "kill -{{9|KILL}} {{process_id}}",
+      "Top-3 Similar Questions": [
+        "so_11785936: How to find if a process is running in C?",
+        "au_180336: How to find the Process ID (PID) of a running terminal program?",
+        "so_42118992: Find process by port"
+      ],
+      "Top-3 Scripts": [
+        "so_11785936: kill(2)\n\n#include <sys/types.h>\n #include <signal.h>\n\n int kill(pid_t pid, int sig);\n\nkill(pid, 0)",
+        "au_180336: kill pid\n\nkill -HUP pid\n\nkill -KILL pid\n\nkill -9 pid",
+        "so_42118992: for i in $(pgrep -f \"server.php\"); do\n    pidtime=$(stat -c '%Y' /proc/$i)\n    now=$(date +%s)\n    ((now - pidtime >= 6)) && {\n      kill $i;\n      sleep 1;\n      kill &>/dev/null -9 $i;\n    }\ndone"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "pgrep",
+      "MP Summary": "look up or signal processes based on name and other attributes",
+      "Most Similar TLDR Task": "Search for process run by a specific user",
+      "Most Similar TLDR Script": "pgrep -u root {{process_name}}",
+      "Top-3 Similar Questions": [
+        "ul_14565: Finding out with which parameters a program was started",
+        "so_42118992: Find process by port",
+        "so_38368927: finding the process numbers of a multithread application"
+      ],
+      "Top-3 Scripts": [
+        "ul_14565: [~]> pgrep -l pdnsd\n1373 pdnsd\n[~]> cat /proc/1373/cmdline \n/usr/sbin/pdnsd--daemon-p/var/run/pdnsd.pid[~]>",
+        "so_42118992: for i in $(pgrep -f \"server.php\"); do\n    pidtime=$(stat -c '%Y' /proc/$i)\n    now=$(date +%s)\n    ((now - pidtime >= 6)) && {\n      kill $i;\n      sleep 1;\n      kill &>/dev/null -9 $i;\n    }\ndone",
+        "so_38368927: pgrep -P $$"
+      ],
+      "Explanations about Options": {
+        "-l": "List the process name as well as the process ID. (pgrep only.)",
+        "-f": "The pattern is normally only matched against the process name. When -f is set, the\n full command line is used.",
+        "-P": "Only match processes whose parent process ID is listed."
+      }
+    },
+    {
+      "Command": "top",
+      "MP Summary": "display Linux processes",
+      "Most Similar TLDR Task": "Do not show any idle or zombie processes",
+      "Most Similar TLDR Script": "top -i",
+      "Top-3 Similar Questions": [
+        "au_180336: How to find the Process ID (PID) of a running terminal program?"
+      ],
+      "Top-3 Scripts": [
+        "au_180336: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "pidof",
+      "MP Summary": "find the process ID of a running program.",
+      "Most Similar TLDR Task": "List a single process ID with given name",
+      "Most Similar TLDR Script": "pidof -s {{bash}}",
+      "Top-3 Similar Questions": [
+        "au_7203: What's the terminal command for finding out a process's id"
+      ],
+      "Top-3 Scripts": [
+        "au_7203: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "fuser",
+      "MP Summary": "identify processes using files or sockets",
+      "Most Similar TLDR Task": "Find which processes are accessing a file or directory",
+      "Most Similar TLDR Script": "fuser {{path/to/file_or_directory}}",
+      "Top-3 Similar Questions": [
+        "so_64420766: How to find which process periodicitly write to a file?"
+      ],
+      "Top-3 Scripts": [
+        "so_64420766: "
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

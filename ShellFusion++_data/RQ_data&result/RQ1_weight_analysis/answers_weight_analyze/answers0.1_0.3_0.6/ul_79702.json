@@ -1,0 +1,88 @@
+{
+  "Query": "How to test whether a file uses CRLF or LF without modifying it?",
+  "Answers": [
+    {
+      "Command": "test",
+      "MP Summary": "check file types and compare values",
+      "Most Similar TLDR Task": "Test if given variable is empty",
+      "Most Similar TLDR Script": "test -z $GIT_BRANCH",
+      "Top-3 Similar Questions": [
+        "so_29975609: Unix shell - file test operator without argument",
+        "so_552724: how do I check in bash whether a file was created more than x time ago?",
+        "au_1269329: Comparing the output of 2 commands using test without temporary variables"
+      ],
+      "Top-3 Scripts": [
+        "so_29975609: ",
+        "so_552724: if test `find \"text.txt\" -mmin +120`\nthen\n    echo old enough\nfi",
+        "au_1269329: test \"$(wc -l file|awk '{print $1}')\" -eq \"$(uniq file|wc -l)\"\n\n$ echo test `wc -l file` -eq `uniq file|wc -l`\ntest 19 file -eq 17\n\n$ echo test \"$(wc -l file|awk '{print $1}')\" -eq \"$(uniq file|wc -l)\"\ntest 19 -eq 17"
+      ],
+      "Explanations about Options": {
+        "-n": "STRING\n the length of STRING is nonzero",
+        "-e": "FILE\n FILE exists"
+      }
+    },
+    {
+      "Command": "echo",
+      "MP Summary": "display a line of text",
+      "Most Similar TLDR Task": "Print a message without the trailing newline",
+      "Most Similar TLDR Script": "echo -n \"{{Hello World}}\"",
+      "Top-3 Similar Questions": [
+        "so_3006189: test remote file if directory",
+        "so_29975609: Unix shell - file test operator without argument",
+        "so_20763629: Test whether a directory exists inside a makefile"
+      ],
+      "Top-3 Scripts": [
+        "so_3006189: isdir=`remsh $HOSTNAME \"if [ -d $i ]; then echo dir; else echo file; fi\"`",
+        "so_29975609: if [ -f \"$1\" ]; then echo true; fi",
+        "so_20763629: foo.bak: foo.bar\n    echo \"foo\"\n    if [ -d \"~/Dropbox\" ]; then echo \"Dir exists\"; fi\n\nfoo.bak: foo.bar\n    echo \"foo\"\n    if [ -d \"~/Dropbox\" ]; then \\\n        echo \"Dir exists\"; \\\n    fi"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "sed",
+      "MP Summary": "stream editor for filtering and transforming text",
+      "Most Similar TLDR Task": "Replace separator / by any other character not used in the find or replace patterns, e.g., #",
+      "Most Similar TLDR Script": "sed 's#{{find}}#{{replace}}#' {{filename}}",
+      "Top-3 Similar Questions": [
+        "ul_194157: Bracket expression (without ranges) matching unexpected character in bash",
+        "au_851574: Test whether Ubuntu is vulnerable to (CVE-2016-4484)"
+      ],
+      "Top-3 Scripts": [
+        "ul_194157: ",
+        "au_851574: sudo sed -i 's/GRUB_CMDLINE_LINUX_DEFAULT=\"/GRUB_CMDLINE_LINUX_DEFAULT=\"panic=5 /' /etc/default/grub grub-install\nsudo grub-install"
+      ],
+      "Explanations about Options": {
+        "-i": "edit files in place (makes backup if SUFFIX supplied)"
+      }
+    },
+    {
+      "Command": "dirname",
+      "MP Summary": "strip last component from file name",
+      "Most Similar TLDR Task": "Delimit output with a NUL character instead of a newline (useful when combining with `xargs`)",
+      "Most Similar TLDR Script": "dirname --zero {{path/to/directory_a}} {{path/to/file_b}}",
+      "Top-3 Similar Questions": [
+        "so_57384674: Problem with testing specific set of files"
+      ],
+      "Top-3 Scripts": [
+        "so_57384674: #!/bin/bash\nwhile read -r line; do\n   dirname=$(dirname \"$line\")\n   basename=$(basename \"$line\")\n   if [[ -f \"$dirname/1_$basename\" &&  -f \"$dirname/2_$basename\" && -f \"$dirname/3_$basename\" ]]; then\n      echo \"3 thumbnails exists, you can remove $line!\"\n   fi   \ndone < <(find . -maxdepth 3 -type f -name \"*.jpg\" -not -name \"[1-3]_*.jpg\")"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "tr",
+      "MP Summary": "translate or delete characters",
+      "Most Similar TLDR Task": "Delete all occurrences of the specified set of characters from the input",
+      "Most Similar TLDR Script": "tr -d '{{input_characters}}' < {{filename}}",
+      "Top-3 Similar Questions": [
+        "ul_458571: GNU grep check if input contains a LF character"
+      ],
+      "Top-3 Scripts": [
+        "ul_458571: $ echo -n foo | tr -d -c $'\\n' | cmp /dev/null - \n# no output and exits with status 0\n\n$ echo foo | tr -d -c $'\\n' | cmp /dev/null -\ncmp: EOF on /dev/null which is empty\n# exits with status 1"
+      ],
+      "Explanations about Options": {
+        "-d": "delete characters in SET1, do not translate",
+        "-c": "use the complement of SET1"
+      }
+    }
+  ]
+}

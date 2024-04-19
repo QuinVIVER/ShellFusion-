@@ -1,0 +1,403 @@
+{
+  "Query": "How do you make Ubuntu accept files sent over bluetooth",
+  "Answers": [
+    {
+      "Command": "find",
+      "MP Summary": "search for files in a directory hierarchy",
+      "Most Similar TLDR Task": "Find files matching a given pattern, excluding specific paths",
+      "Most Similar TLDR Script": "find {{root_path}} -name '{{*.py}}' -not -path '{{*/site-packages/*}}'",
+      "Most Similar NL2Bash Task": "Recursively change the owner and group of \"/workspace\" and \"775\" to \"your_user_name\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "chown -R your_user_name.your_user_name 775 /workspace\n",
+          "command-options": {
+            "chown": {
+              "mpsum": "change file owner and group",
+              "-R": "operate on files and directories recursively"
+            }
+          },
+          "TLDR_inform": {
+            "chown": {
+              "man1_chown_3998": "chang user group ownership file directori chang owner file directori match refer file chang owner symbol link chang owner user group file directori chang owner user file directori recurs chang owner directori content"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_6513: Search the current directory tree for regular files omitting directory `omit-directory'",
+        "nl2bash_6514: Search the current directory tree for regular files owned by user \"www\"",
+        "nl2bash_11528: Remove files in the current directory tree modified more than 31 days ago recursively"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_6513: find . -name omit-directory -prune -o -type f\n\n\nfind . -name omit-directory -prune -o -type f  -print\n\n\nfind . \\( -name omit-directory -prune -o -type f \\) -print\n\n\nfind . \\( -name omit-directory -prune \\) -o \\( -type f -print \\)",
+        "nl2bash_6514: find -type f -user www",
+        "nl2bash_11528: find . -type f -mtime +31 -print0 | xargs -0 -r rm -f"
+      ],
+      "Explanations about Options": {
+        "-prune": "True; if the file is a directory, do not descend into it. If -depth is given, then\n -prune has no effect. Because -delete implies -depth, you cannot usefully use\n -prune and -delete together.\n For example, to skip the directory `src/emacs' and all files and directories\n under it, and print the names of the other files found, do something like this:\n find . -path ./src/emacs -prune -o -print",
+        "-mtime": "File's data was last modified n*24 hours ago. See the comments for -atime to\n understand how rounding affects the interpretation of file modification times.",
+        "-print0": "Always print the exact filename, unchanged, even if the output is going to a\n terminal.",
+        "-type": "File is of type c:",
+        "-user": "File is owned by user uname (numeric user ID allowed).",
+        "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+        "-print": "Quoting is handled in the same way as for -printf and -fprintf. If you are using\n find in a script or in a situation where the matched files might have arbitrary\n names, you should consider using -print0 instead of -print."
+      }
+    },
+    {
+      "Command": "xargs",
+      "MP Summary": "build and execute command lines from standard input",
+      "Most Similar TLDR Task": "Run a command using the input data as arguments",
+      "Most Similar TLDR Script": "{{arguments_source}} | xargs {{command}}",
+      "Most Similar NL2Bash Task": "Recursively change the owner and group of \"/workspace\" and \"775\" to \"your_user_name\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "chown -R your_user_name.your_user_name 775 /workspace\n",
+          "command-options": {
+            "chown": {
+              "mpsum": "change file owner and group",
+              "-R": "operate on files and directories recursively"
+            }
+          },
+          "TLDR_inform": {
+            "chown": {
+              "man1_chown_3998": "chang user group ownership file directori chang owner file directori match refer file chang owner symbol link chang owner user group file directori chang owner user file directori recurs chang owner directori content"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_11528: Remove files in the current directory tree modified more than 31 days ago recursively",
+        "nl2bash_2492: Find all .rb and .yml files in the /some/path directory tree and replace \"some_phrase\" with \"replacement_phrase\" in them",
+        "so_7179653: Pipe to command that does not accept piping"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_11528: find . -type f -mtime +31 -print0 | xargs -0 -r rm -f",
+        "nl2bash_2492: find /some/path -name \"*rb\" -o -name \"*yml\" | xargs grep -sl \"some_phrase\" | xargs sed -i -e 's/some_phrase/replacement_phrase/g'",
+        "so_7179653: ll | grep \"pattern\" | sed 's/this/that/' | xargs mpc"
+      ],
+      "Explanations about Options": {
+        "-0": "Input items are terminated by a null character instead of by whitespace, and the\n quotes and backslash are not special (every character is taken literally).\n Disables the end of file string, which is treated like any other argument. Useful\n when input items might contain white space, quote marks, or backslashes. The GNU\n find -print0 option produces input suitable for this mode.",
+        "-r": "If the standard input does not contain any nonblanks, do not run the command.\n Normally, the command is run once even if there is no input. This option is a GNU\n extension."
+      }
+    },
+    {
+      "Command": "chown",
+      "MP Summary": "change file owner and group",
+      "Most Similar TLDR Task": "Change the owner of a file/directory to match a reference file",
+      "Most Similar TLDR Script": "chown --reference={{path/to/reference_file}} {{path/to/file_or_directory}}",
+      "Most Similar NL2Bash Task": "Recursively change the owner and group of \"/workspace\" and \"775\" to \"your_user_name\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "chown -R your_user_name.your_user_name 775 /workspace\n",
+          "command-options": {
+            "chown": {
+              "mpsum": "change file owner and group",
+              "-R": "operate on files and directories recursively"
+            }
+          },
+          "TLDR_inform": {
+            "chown": {
+              "man1_chown_3998": "chang user group ownership file directori chang owner file directori match refer file chang owner symbol link chang owner user group file directori chang owner user file directori recurs chang owner directori content"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_12417: Recursively change owner and group to \"$JBOSS_AS_USER\" of \"$JBOSS_AS_DIR\"",
+        "nl2bash_12451: Recursively change the owner and group of \"/workspace\" and \"775\" to \"your_user_name\""
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_12417: chown -R $JBOSS_AS_USER:$JBOSS_AS_USER $JBOSS_AS_DIR",
+        "nl2bash_12451: chown -R your_user_name.your_user_name 775 /workspace"
+      ],
+      "Explanations about Options": {
+        "-R": "operate on files and directories recursively"
+      }
+    },
+    {
+      "Command": "grep",
+      "MP Summary": "print lines that match patterns",
+      "Most Similar TLDR Task": "Use the standard input instead of a file",
+      "Most Similar TLDR Script": "cat {{path/to/file}} | grep {{search_pattern}}",
+      "Most Similar NL2Bash Task": "Recursively change the owner and group of \"/workspace\" and \"775\" to \"your_user_name\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "chown -R your_user_name.your_user_name 775 /workspace\n",
+          "command-options": {
+            "chown": {
+              "mpsum": "change file owner and group",
+              "-R": "operate on files and directories recursively"
+            }
+          },
+          "TLDR_inform": {
+            "chown": {
+              "man1_chown_3998": "chang user group ownership file directori chang owner file directori match refer file chang owner symbol link chang owner user group file directori chang owner user file directori recurs chang owner directori content"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_2492: Find all .rb and .yml files in the /some/path directory tree and replace \"some_phrase\" with \"replacement_phrase\" in them",
+        "so_7179653: Pipe to command that does not accept piping"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_2492: find /some/path -name \"*rb\" -o -name \"*yml\" | xargs grep -sl \"some_phrase\" | xargs sed -i -e 's/some_phrase/replacement_phrase/g'",
+        "so_7179653: ll | grep \"pattern\" | sed 's/this/that/' | xargs mpc"
+      ],
+      "Explanations about Options": {
+        "-l": "Suppress normal output; instead print the name of each input file from which output\n would normally have been printed. The scanning will stop on the first match.",
+        "-s": "Suppress error messages about nonexistent or unreadable files."
+      }
+    },
+    {
+      "Command": "sed",
+      "MP Summary": "stream editor for filtering and transforming text",
+      "Most Similar TLDR Task": "Replace separator / by any other character not used in the find or replace patterns, e.g., #",
+      "Most Similar TLDR Script": "sed 's#{{find}}#{{replace}}#' {{filename}}",
+      "Most Similar NL2Bash Task": "Recursively change the owner and group of \"/workspace\" and \"775\" to \"your_user_name\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "chown -R your_user_name.your_user_name 775 /workspace\n",
+          "command-options": {
+            "chown": {
+              "mpsum": "change file owner and group",
+              "-R": "operate on files and directories recursively"
+            }
+          },
+          "TLDR_inform": {
+            "chown": {
+              "man1_chown_3998": "chang user group ownership file directori chang owner file directori match refer file chang owner symbol link chang owner user group file directori chang owner user file directori recurs chang owner directori content"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_2492: Find all .rb and .yml files in the /some/path directory tree and replace \"some_phrase\" with \"replacement_phrase\" in them",
+        "so_7179653: Pipe to command that does not accept piping"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_2492: find /some/path -name \"*rb\" -o -name \"*yml\" | xargs grep -sl \"some_phrase\" | xargs sed -i -e 's/some_phrase/replacement_phrase/g'",
+        "so_7179653: ll | grep \"pattern\" | sed 's/this/that/' | xargs mpc"
+      ],
+      "Explanations about Options": {
+        "-i": "edit files in place (makes backup if SUFFIX supplied)",
+        "-e": "add the script to the commands to be executed"
+      }
+    },
+    {
+      "Command": "rm",
+      "MP Summary": "remove files or directories",
+      "Most Similar TLDR Task": "Remove files in verbose mode, printing a message for each removed file",
+      "Most Similar TLDR Script": "rm -v {{path/to/directory/*}}",
+      "Most Similar NL2Bash Task": "Recursively change the owner and group of \"/workspace\" and \"775\" to \"your_user_name\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "chown -R your_user_name.your_user_name 775 /workspace\n",
+          "command-options": {
+            "chown": {
+              "mpsum": "change file owner and group",
+              "-R": "operate on files and directories recursively"
+            }
+          },
+          "TLDR_inform": {
+            "chown": {
+              "man1_chown_3998": "chang user group ownership file directori chang owner file directori match refer file chang owner symbol link chang owner user group file directori chang owner user file directori recurs chang owner directori content"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_11528: Remove files in the current directory tree modified more than 31 days ago recursively"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_11528: find . -type f -mtime +31 -print0 | xargs -0 -r rm -f"
+      ],
+      "Explanations about Options": {
+        "-f": "ignore nonexistent files and arguments, never prompt"
+      }
+    },
+    {
+      "Command": "php",
+      "MP Summary": "PHP Command Line Interface 'CLI'",
+      "Most Similar TLDR Task": "Get a list of installed PHP extensions",
+      "Most Similar TLDR Script": "php -m",
+      "Most Similar NL2Bash Task": "Recursively change the owner and group of \"/workspace\" and \"775\" to \"your_user_name\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "chown -R your_user_name.your_user_name 775 /workspace\n",
+          "command-options": {
+            "chown": {
+              "mpsum": "change file owner and group",
+              "-R": "operate on files and directories recursively"
+            }
+          },
+          "TLDR_inform": {
+            "chown": {
+              "man1_chown_3998": "chang user group ownership file directori chang owner file directori match refer file chang owner symbol link chang owner user group file directori chang owner user file directori recurs chang owner directori content"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_10184: Use the PHP interpreter to output an endless stream of \"a\" characters to \"nohup.out\" in the current directory, or in the home directory if that is not possible. The PHP process will not receive or respond to SIGHUP (signal 1) which are sent to it."
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_10184: nohup php -r 'while (true) { echo \"a\";}' &"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "echo",
+      "MP Summary": "display a line of text",
+      "Most Similar TLDR Task": "Append a message to the file",
+      "Most Similar TLDR Script": "echo \"{{Hello World}}\" >> {{file.txt}}",
+      "Most Similar NL2Bash Task": "Recursively change the owner and group of \"/workspace\" and \"775\" to \"your_user_name\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "chown -R your_user_name.your_user_name 775 /workspace\n",
+          "command-options": {
+            "chown": {
+              "mpsum": "change file owner and group",
+              "-R": "operate on files and directories recursively"
+            }
+          },
+          "TLDR_inform": {
+            "chown": {
+              "man1_chown_3998": "chang user group ownership file directori chang owner file directori match refer file chang owner symbol link chang owner user group file directori chang owner user file directori recurs chang owner directori content"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_10184: Use the PHP interpreter to output an endless stream of \"a\" characters to \"nohup.out\" in the current directory, or in the home directory if that is not possible. The PHP process will not receive or respond to SIGHUP (signal 1) which are sent to it."
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_10184: nohup php -r 'while (true) { echo \"a\";}' &"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "nohup",
+      "MP Summary": "run a command immune to hangups, with output to a non-tty",
+      "Most Similar TLDR Task": "Run process that can live beyond the terminal",
+      "Most Similar TLDR Script": "nohup {{command options}}",
+      "Most Similar NL2Bash Task": "Recursively change the owner and group of \"/workspace\" and \"775\" to \"your_user_name\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "chown -R your_user_name.your_user_name 775 /workspace\n",
+          "command-options": {
+            "chown": {
+              "mpsum": "change file owner and group",
+              "-R": "operate on files and directories recursively"
+            }
+          },
+          "TLDR_inform": {
+            "chown": {
+              "man1_chown_3998": "chang user group ownership file directori chang owner file directori match refer file chang owner symbol link chang owner user group file directori chang owner user file directori recurs chang owner directori content"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_10184: Use the PHP interpreter to output an endless stream of \"a\" characters to \"nohup.out\" in the current directory, or in the home directory if that is not possible. The PHP process will not receive or respond to SIGHUP (signal 1) which are sent to it."
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_10184: nohup php -r 'while (true) { echo \"a\";}' &"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "mkdir",
+      "MP Summary": "make directories",
+      "Most Similar TLDR Task": "Create directories recursively (useful for creating nested dirs)",
+      "Most Similar TLDR Script": "mkdir -p {{path/to/directory}}",
+      "Most Similar NL2Bash Task": "Recursively change the owner and group of \"/workspace\" and \"775\" to \"your_user_name\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "chown -R your_user_name.your_user_name 775 /workspace\n",
+          "command-options": {
+            "chown": {
+              "mpsum": "change file owner and group",
+              "-R": "operate on files and directories recursively"
+            }
+          },
+          "TLDR_inform": {
+            "chown": {
+              "man1_chown_3998": "chang user group ownership file directori chang owner file directori match refer file chang owner symbol link chang owner user group file directori chang owner user file directori recurs chang owner directori content"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_10640: Copy entire directory structure from dir1 as a subdirectory of dir2, omitting any file or directory named \"exclude\"."
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_10640: mkdir dir2; tar cvf - dir1/ --exclude \"*/exclude\" | tar xvf - -C dir2"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "mpc",
+      "MP Summary": "mpc Documentation",
+      "Most Similar TLDR Task": "Show information about the currently playing song",
+      "Most Similar TLDR Script": "mpc status",
+      "Most Similar NL2Bash Task": "Recursively change the owner and group of \"/workspace\" and \"775\" to \"your_user_name\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "chown -R your_user_name.your_user_name 775 /workspace\n",
+          "command-options": {
+            "chown": {
+              "mpsum": "change file owner and group",
+              "-R": "operate on files and directories recursively"
+            }
+          },
+          "TLDR_inform": {
+            "chown": {
+              "man1_chown_3998": "chang user group ownership file directori chang owner file directori match refer file chang owner symbol link chang owner user group file directori chang owner user file directori recurs chang owner directori content"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_7179653: Pipe to command that does not accept piping"
+      ],
+      "Top-3 Scripts": [
+        "so_7179653: ll | grep \"pattern\" | sed 's/this/that/' | xargs mpc"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "tar",
+      "MP Summary": "an archiving utility",
+      "Most Similar TLDR Task": "Create a compressed archive, using archive suffix to determine the compression program",
+      "Most Similar TLDR Script": "tar caf {{target.tar.xz}} {{file1}} {{file2}} {{file3}}",
+      "Most Similar NL2Bash Task": "Recursively change the owner and group of \"/workspace\" and \"775\" to \"your_user_name\"",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "chown -R your_user_name.your_user_name 775 /workspace\n",
+          "command-options": {
+            "chown": {
+              "mpsum": "change file owner and group",
+              "-R": "operate on files and directories recursively"
+            }
+          },
+          "TLDR_inform": {
+            "chown": {
+              "man1_chown_3998": "chang user group ownership file directori chang owner file directori match refer file chang owner symbol link chang owner user group file directori chang owner user file directori recurs chang owner directori content"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_10640: Copy entire directory structure from dir1 as a subdirectory of dir2, omitting any file or directory named \"exclude\"."
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_10640: mkdir dir2; tar cvf - dir1/ --exclude \"*/exclude\" | tar xvf - -C dir2"
+      ],
+      "Explanations about Options": {
+        "-C": "Change to DIR before performing any operations. This option is order-sensitive,\n i.e. it affects all options that follow.",
+        "--exclude": "Exclude files matching PATTERN, a glob(3)-style wildcard pattern."
+      }
+    }
+  ]
+}

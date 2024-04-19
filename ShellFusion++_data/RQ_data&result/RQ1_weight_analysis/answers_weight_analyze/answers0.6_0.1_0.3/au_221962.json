@@ -1,0 +1,87 @@
+{
+  "Query": "How can I extract a page range / a part of a PDF?",
+  "Answers": [
+    {
+      "Command": "unzip",
+      "MP Summary": "list, test and extract compressed files in a ZIP archive",
+      "Most Similar TLDR Task": "Extract zip file(s) (for multiple files, separate file paths by spaces)",
+      "Most Similar TLDR Script": "unzip {{file(s)}}",
+      "Top-3 Similar Questions": [
+        "au_1195340: Extract a specific pdf from a zip file with lots of pdfs",
+        "so_51449715: Extract range of lines using sed"
+      ],
+      "Top-3 Scripts": [
+        "au_1195340: unzip -j \"myarchive.zip\" \"in/archive/file.pdf\" -d \"/destination/path/\"",
+        "so_51449715: unzip -c ./*.zip | sed -n \"$var1,$var2 p\""
+      ],
+      "Explanations about Options": {
+        "-j": "junk paths. The archive's directory structure is not recreated; all files are\n deposited in the extraction directory (by default, the current one).",
+        "-c": "extract files to stdout/screen (``CRT''). This option is similar to the -p option\n except that the name of each file is printed as it is extracted, the -a option is\n allowed, and ASCII-EBCDIC conversion is automatically performed if appropriate.\n This option is not listed in the unzip usage screen."
+      }
+    },
+    {
+      "Command": "pdfimages",
+      "MP Summary": "Portable Document Format (PDF) image extractor (version 3.03)",
+      "Most Similar TLDR Task": "Extract images from a PDF file and include the page number in the output filenames",
+      "Most Similar TLDR Script": "pdfimages -p {{path/to/file.pdf}} {{filename_prefix}}",
+      "Top-3 Similar Questions": [
+        "ul_590821: Unable to extract images from a pdf with pdfimages"
+      ],
+      "Top-3 Scripts": [
+        "ul_590821: pdfimages [options] PDF-file image-root\n\npdfimages archive.pdf ."
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "pdftotext",
+      "MP Summary": "Portable Document Format (PDF) to text converter (version 3.03)",
+      "Most Similar TLDR Task": "Convert filename.pdf to plain text and save it as filename.txt",
+      "Most Similar TLDR Script": "pdftotext {{filename.pdf}}",
+      "Top-3 Similar Questions": [
+        "au_1195340: Extract a specific pdf from a zip file with lots of pdfs",
+        "so_34625953: Is there any way to get the page numbers in a PDF of a search pattern?",
+        "so_22416090: How to extract text from PDF according to its location?"
+      ],
+      "Top-3 Scripts": [
+        "au_1195340: ",
+        "so_34625953: pdftotext test.pdf - |\nawk -vRS=$'\\f' -vNAME=\"My name\" \\\n    'index($0,NAME){printf \"%d: %s\\n\", NR, NAME;}'\n\npdftotext test.pdf - |\ngrep -F -o -e $'\\f' -e 'My name' |\nawk 'BEGIN{page=1} /\\f/{++page;next} 1{printf \"%d: %s\\n\", page, $0;}'\n\npdftotext test.pdf - |\nawk -vRS=$'\\f' \\\n    '/My[[:space:]]+Name/{printf \"%d: %s\\n\", NR, \"My Name\";}'",
+        "so_22416090: pdftotext    \\\n  -f 5       \\\n  -l 7       \\\n  -x 200     \\\n  -y 700     \\\n  -W 144     \\\n  -H 80      \\\n   input.pdf \\\n   output.txt"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "echo",
+      "MP Summary": "display a line of text",
+      "Most Similar TLDR Task": "Append a message to the file",
+      "Most Similar TLDR Script": "echo \"{{Hello World}}\" >> {{file.txt}}",
+      "Top-3 Similar Questions": [
+        "au_1195340: Extract a specific pdf from a zip file with lots of pdfs",
+        "so_12588884: Extract part of file name with multiple sections",
+        "so_3658382: Extracting multiple parts of a string using bash"
+      ],
+      "Top-3 Scripts": [
+        "au_1195340: ",
+        "so_12588884: file=EMDEON.270.60054.1234567890123456789.70949996.20120925.014606403\ntransitId=$(echo $file | cut -d. -f4)\n\nfile=EMDEON.270.60054.1234567890123456789.70949996.20120925.014606403\ntransitId=$(echo $file | awk -F. '{print $4}')",
+        "so_3658382: $ echo $(echo \"1=A00^35=D^150=1^33=1\"|egrep -o \"35=[^/^]*\\^|150=[^/^]*\\^\")\n35=D^ 150=1^\n\necho '1=A00^35=D^150=1^33=1\n      1=a00^35=d^157=11^33=11\n      ' | awk -vLST=1,33 -F^ '{s=\"\";split(LST,k,\",\");for(i=1;i<=NF;i++){for(j in k){split($i,arr,\"=\");if(arr[1]==k[j]){printf s\"\"arr[1]\"=\"arr[2];s=\"^\";}}}if(s!=\"\"){print s;}}'"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "pdftk",
+      "MP Summary": "A handy tool for manipulating PDF",
+      "Most Similar TLDR Task": "Split each page of a PDF file into a separate file, with a given filename output pattern",
+      "Most Similar TLDR Script": "pdftk {{input.pdf}} burst output {{out_%d.pdf}}",
+      "Top-3 Similar Questions": [
+        "su_625565: How to extract and/or remove the last page of a bunch of PDFs?",
+        "su_372061: How to extract all pages of one big pdf file?",
+        "so_11834869: Is there a Linux CLI Tool for extracting a Page Range to make smaller PDFs?"
+      ],
+      "Top-3 Scripts": [
+        "su_625565: pdftk input.pdf cat end-1 output temp.pdf\npdftk temp.pdf  cat end-2 output output.pdf\nrm temp.pdf\n\npdftk input.pdf cat 1-$((last-1)) output output.pdf",
+        "su_372061: $ sudo apt-get install pdftk\n\n$ pdftk file.pdf burst",
+        "so_11834869: pdftk thefile.pdf cat 4-10 output pages_4-10_from_thefile.pdf"
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

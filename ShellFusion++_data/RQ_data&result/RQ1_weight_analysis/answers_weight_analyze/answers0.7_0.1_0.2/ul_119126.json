@@ -1,0 +1,94 @@
+{
+  "Query": "Command to display Memory usage, Disk Usage and CPU Load",
+  "Answers": [
+    {
+      "Command": "df",
+      "MP Summary": "report file system disk space usage",
+      "Most Similar TLDR Task": "Display all filesystems and their disk usage",
+      "Most Similar TLDR Script": "df",
+      "Top-3 Similar Questions": [
+        "au_634005: conky RAM usage - does not show large file in ram disk (tmpfs)",
+        "au_1265654: Show disk usage in Nautilus/Thunar",
+        "so_68100415: Monitoring host disk usage inside a docker"
+      ],
+      "Top-3 Scripts": [
+        "au_634005: mkdir -pv /mnt/ramdisk/.ramdisk\n\nDF_RESULTS_FILE=/mnt/ramdisk/.ramdisk/df_ramdisk_results.txt\ndf -h | grep -e /mnt/ramdisk > $DF_RESULTS_FILE \n\nDF_RESULTS_STRING=$(cat $DF_RESULTS_FILE)\nDF_RESULTS_details=($DF_RESULTS_STRING)\n\nprintf \"RAM Disk Usage: %s /%s\\n\" ${DF_RESULTS_details[2]} ${DF_RESULTS_details[1]}",
+        "au_1265654: df -h",
+        "so_68100415: "
+      ],
+      "Explanations about Options": {
+        "-h": "print sizes in powers of 1024 (e.g., 1023M)"
+      }
+    },
+    {
+      "Command": "lscpu",
+      "MP Summary": "display information about the CPU architecture",
+      "Most Similar TLDR Task": "Display information about all CPUs",
+      "Most Similar TLDR Script": "lscpu",
+      "Top-3 Similar Questions": [
+        "ul_120570: How can I monitor CPU usage by user?"
+      ],
+      "Top-3 Scripts": [
+        "ul_120570: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "free",
+      "MP Summary": "Display amount of free and used memory in the system",
+      "Most Similar TLDR Task": "Display system memory",
+      "Most Similar TLDR Script": "free",
+      "Top-3 Similar Questions": [
+        "ul_477638: Memory usage shown with `free` command does not match the utilization from System Monitor",
+        "ul_491433: Command to display free memory in percentage",
+        "so_32340315: Linux - Displaying Memory Usage Live"
+      ],
+      "Top-3 Scripts": [
+        "ul_477638: ",
+        "ul_491433: free | awk '/^Mem/ { a=(($3-$7)/$2 * 100); print a\"% of Memory used\"  }'\n3.43143% of Memory used\n\nfree | awk '/^Mem/ { a=(($4+$7)/$2 * 100); print a\"% of Memory free\"  }'\n96.5662% of Memory free\n\nfree | awk '/^Mem/ { a=(($7)/$2 * 100); print a\"% of Memory cached\"  }'\n80.4204% of Memory cached",
+        "so_32340315: watch free -m"
+      ],
+      "Explanations about Options": {
+        "-m": "Display the amount of memory in mebibytes."
+      }
+    },
+    {
+      "Command": "top",
+      "MP Summary": "display Linux processes",
+      "Most Similar TLDR Task": "Do not show any idle or zombie processes",
+      "Most Similar TLDR Script": "top -i",
+      "Top-3 Similar Questions": [
+        "ul_120570: How can I monitor CPU usage by user?",
+        "so_13180451: Show cpu usage with bash script and print in txt file",
+        "ul_554: How to monitor CPU/memory usage of a single process?"
+      ],
+      "Top-3 Scripts": [
+        "ul_120570: ",
+        "so_13180451: $ top -bn 1 | sed -n '3p'\n%Cpu(s): 16.4 us,  3.1 sy,  0.0 ni, 79.0 id,  1.3 wa,  0.0 hi,  0.2 si,  0.0 st",
+        "ul_554: top -p PID\n\ntop -pid PID"
+      ],
+      "Explanations about Options": {
+        "-p": ":Monitor-PIDs mode as: -pN1 -pN2 ... or -pN1 , N2 , N3 ...\n Monitor only processes with specified process IDs. This option can be given up to 20\n times, or you can provide a comma delimited list with up to 20 pids. Co-mingling\n both approaches is permitted.",
+        "-d": ":Delay-time interval as: -d ss.t (secs.tenths)\n Specifies the delay between screen updates, and overrides the corresponding value in\n one's personal configuration file or the startup default. Later this can be changed\n with the `d' or `s' interactive commands.",
+        "-b": "Starts top in Batch mode, which could be useful for sending output from top to other\n programs or to a file. In this mode, top will not accept input and runs until the\n iterations limit you've set with the `-n' command-line option or until killed.",
+        "-i": "Starts top with the last remembered `i' state reversed. When this toggle is Off,\n tasks that have not used any CPU since the last update will not be displayed. For\n additional information regarding this toggle see topic 4c. TASK AREA Commands, SIZE.",
+        "-n": ":Number-of-iterations limit as: -n number\n Specifies the maximum number of iterations, or frames, top should produce before\n ending."
+      }
+    },
+    {
+      "Command": "iotop",
+      "MP Summary": "simple top-like I/O monitor",
+      "Most Similar TLDR Task": "Show I/O usage of a given user",
+      "Most Similar TLDR Script": "iotop -u {{user}}",
+      "Top-3 Similar Questions": [
+        "au_116648: How do I monitor disk usage by processes over time?"
+      ],
+      "Top-3 Scripts": [
+        "au_116648: sudo iotop -a"
+      ],
+      "Explanations about Options": {
+        "-a": "Show accumulated I/O instead of bandwidth. In this mode, iotop shows the amount of\n I/O processes have done since iotop started."
+      }
+    }
+  ]
+}

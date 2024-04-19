@@ -1,0 +1,83 @@
+{
+    "Answers": [
+        {
+            "Command": "pdfimages",
+            "Explanations about Options": {
+                "-j(M)": "Write images in JPEG format as JPEG files instead of the default format. The JPEG\n file is identical to the JPEG data stored in the PDF.",
+                "-p(M)": "Include page numbers in output file names.",
+                "-png(M)": "Change the default output format to PNG."
+            },
+            "MP Summary": "Portable Document Format (PDF) image extractor (version 3.03)",
+            "Most Similar TLDR Script": "pdfimages -png {{path/to/file.pdf}} {{filename_prefix}}",
+            "Most Similar TLDR Task": "Extract all images from a PDF file and save them as PNGs",
+            "Top-3 Scripts": [
+                "au_959551: pdfimages -j file.pdf ./"
+            ],
+            "Top-3 Similar Questions": [
+                "au_959551: How to extract a JPEG from a PDF"
+            ]
+        },
+        {
+            "Command": "gs",
+            "Explanations about Options": {
+                "-P(M)": "Makes Ghostscript to look first in the current directory for library files. By\n default, Ghostscript no longer looks in the current directory, unless, of course,\n the first explicitly supplied directory is \".\" in -I. See also the INITIALIZATION\n FILES section below, and bundled Use.htm for detailed discussion on search paths\n and how Ghostcript finds files.",
+                "-dNOPAUSE(M)": "Disables the prompt and pause at the end of each page. This may be desirable for\n applications where another program is driving Ghostscript.",
+                "-q(M)": "Quiet startup: suppress normal startup messages, and also do the equivalent of\n -dQUIET.",
+                "-sDEVICE(M)": "Selects an alternate initial output device, as described above.",
+                "-sOutputFile(M)": "Selects an alternate output file (or pipe) for the initial output device, as\n described above.",
+                "-sPAPERSIZE(M)": "or\n -sPAPERSIZE=legal"
+            },
+            "MP Summary": "Ghostscript (PostScript and PDF language interpreter and previewer)",
+            "Most Similar TLDR Script": "gs -dQUIET -dBATCH -dNOPAUSE -sDEVICE=pdfwrite -sOutputFile={{output.pdf}} {{input.ps}}",
+            "Most Similar TLDR Task": "Convert from PostScript file to PDF file",
+            "Top-3 Scripts": [
+                "so_624678: gs -q -sDEVICE=jpeg -dBATCH -dNOPAUSE -dFirstPage=1 -dLastPage=1 -r<OUTPUT RESOLUTION> -sOutputFile=<OUTPUT>.jpg <INPUT>.pdf 2>&1",
+                "au_942727: gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -dPDFSETTINGS=/prepress -sOutputFile=merged-output.pdf $(ls -1 *.pdf)\n\n#!/bin/sh\nTARGET_SITE=\"$1\"\nwget --spider --force-html -r -l2 \"$TARGET_SITE\" 2>&1 | grep '^--' | awk '{ print $3 }' | grep -v '\\.\\(css\\|js\\|png\\|gif\\|jpg\\|txt\\)$' > url-list.txt\nwhile read i; do wkhtmltopdf \"$i\" \"$(echo \"$i\" | sed -e 's/https\\?:\\/\\///' -e 's/\\//-/g' ).pdf\"; done < url-list.txt\ngs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -dPDFSETTINGS=/prepress -sOutputFile=merged-output.pdf $(ls -1 *.pdf)",
+                "so_2507766: gs -q -sPAPERSIZE=letter -dNOPAUSE -dBATCH -sDEVICE=pdfwrite -sOutputFile=output.pdf file1.pdf file2.pdf file3.pdf ..."
+            ],
+            "Top-3 Similar Questions": [
+                "so_624678: Problems with linux Imagemagick converting PDFs to JPGs",
+                "au_942727: Convert Website to PDF (recursively)",
+                "so_2507766: Merge / convert multiple PDF files into one PDF"
+            ]
+        },
+        {
+            "Command": "pdfunite",
+            "Explanations about Options": {},
+            "MP Summary": "Portable Document Format (PDF) page merger",
+            "Most Similar TLDR Script": "pdfunite {{path/to/directory/*.pdf}} {{path/to/merged_output.pdf}}",
+            "Most Similar TLDR Task": "Merge a directory of PDFs into a single PDF",
+            "Top-3 Scripts": [
+                "au_1042329: # create a directory in /tmp\nmkdir /tmp/output\n# find all the images and convert them to single standing PDF files\n# then move them to the output directory\nfind path/ -type f -name '[xy]\\.jpg' -exec convert {} {}\\.pdf \\; -exec mv {}\\.pdf /tmp/output/ \\;\n# now join them all together to a single file\npdfunite /tmp/output/* ~/output.pdf\n# normally the system clean up /tmp on restart, but we clean up ourselves\nrm -r /tmp/output\n\n#!/bin/bash\n# create a directory in /tmp\ntmpdir=\"$(mktemp -d)\"\n# find all the images and convert them to single standing PDF files\n# then move them to the output directory\nfind \"$1\" -type f -name \"$2\" -exec convert {} {}\\.pdf \\; -exec mv {}\\.pdf \"$tmpdir\" \\;\n# now join them all together to a single file\npdfunite \"$tmpdir\"/* \"$3\"\n# normally the system clean up /tmp on restart, but we clean up ourselves\nrm -r \"$tmpdir\"\n\n#!/bin/bash\n# create a directory in /tmp\ntmpdir=\"$(mktemp -d)\"\n# find all the images and convert them to single standing PDF files\n# then move them to the output directory\nfind \"$1\" -type f -name \"$2\" -exec sh -c 'convert \"$1\" \"$0/${1##*/}.pdf\"' $tempdir \"{}\" \\;\n# now join them all together to a single file\npdfunite \"$tmpdir\"/* \"$3\"\n# normally the system clean up /tmp on restart, but we clean up ourselves\nrm -r \"$tmpdir\""
+            ],
+            "Top-3 Similar Questions": [
+                "au_1042329: Find two images and convert them to .pdf"
+            ]
+        },
+        {
+            "Command": "pdftotext",
+            "Explanations about Options": {},
+            "MP Summary": "Portable Document Format (PDF) to text converter (version 3.03)",
+            "Most Similar TLDR Script": "pdftotext {{filename.pdf}}",
+            "Most Similar TLDR Task": "Convert filename.pdf to plain text and save it as filename.txt",
+            "Top-3 Scripts": [
+                "au_211870: for file in *.pdf; do pdftotext \"$file\" \"$file.txt\"; done"
+            ],
+            "Top-3 Similar Questions": [
+                "au_211870: How to convert all pdf files to text (within a folder) with one command?"
+            ]
+        },
+        {
+            "Command": "pdfinfo",
+            "Explanations about Options": {},
+            "MP Summary": "Portable Document Format (PDF) document information extractor (version 3.03)",
+            "Most Similar TLDR Script": "pdfinfo {{path/to/file.pdf}}",
+            "Most Similar TLDR Task": "Print PDF file information",
+            "Top-3 Scripts": [],
+            "Top-3 Similar Questions": [
+                "ul_66931: Split PDF into documents with several pages each"
+            ]
+        }
+    ],
+    "Query": "Convert a directory of JPEG files to a single PDF document"
+}

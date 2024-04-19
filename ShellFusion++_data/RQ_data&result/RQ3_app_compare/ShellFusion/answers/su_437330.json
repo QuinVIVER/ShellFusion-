@@ -1,0 +1,90 @@
+{
+    "Answers": [
+        {
+            "Command": "openssl",
+            "Explanations about Options": {},
+            "MP Summary": "OpenSSL command line tool",
+            "Most Similar TLDR Script": "openssl req -new -sha256 -key {{filename.key}} -out {{filename.csr}}",
+            "Most Similar TLDR Task": "Generate a certificate signing request to be sent to a certificate authority",
+            "Top-3 Scripts": [
+                "ul_612594: openssl x509 -in /usr/local/share/ca-certificates/nexus-custom-ca-chain.pem -noout -text\n\n# FROM ubuntu:20:04\nFROM debian:10\nRUN apt update &&  DEBIAN_FRONTEND=noninteractive apt install -y curl openssl ca-certificates\nCOPY root.pem /usr/local/share/ca-certificates/root.pem\nCOPY intermediate.pem /usr/local/share/ca-certificates/intermediate.pem\nRUN chmod 644 /usr/local/share/ca-certificates/root.pem /usr/local/share/ca-certificates/intermediate.pem\nRUN update-ca-certificates\nRUN curl https://nexus-using-custom-cert.custom.org\n\nopenssl x509 -noout\n\nopenssl x509 -in mycert.crt -noout -text\n\nopenssl x509 -in mycert.crt  -inform der -outform PEM -out mycert.crt\n\nopenssl x509 -in mycert.pem -outform der -out mycert.der",
+                "su_1201552: $ echo QUIT | openssl s_client -connect $DOMAIN_TO_FETCH_FROM:443 | sed -ne '/BEGIN CERT/,/END CERT/p' > my-cert",
+                "au_1007233: openssl x509 -inform DER -in yourdownloaded.crt -out outcert.pem -text"
+            ],
+            "Top-3 Similar Questions": [
+                "su_935797: How can I get the list of the currently installed certificate authority on my ubuntu?",
+                "ul_612594: Add custom CA certificate to Ubuntu 20.04 works fine, but fails on Debian",
+                "su_1201552: 'Not a Certification Authority' while importing self-signed certificate"
+            ]
+        },
+        {
+            "Command": "curl",
+            "Explanations about Options": {
+                "--cert(M)": "(TLS) Tells curl to use the specified client certificate file when getting a file\n with HTTPS, FTPS or another SSL-based protocol. The certificate must be in PKCS#12\n format if using Secure Transport, or PEM format if using any other engine. If the\n optional password isn't specified, it will be queried for on the terminal. Note\n that this option assumes a \"certificate\" file that is the private key and the\n client certificate concatenated! See -E, --cert and --key to specify them\n independently.",
+                "--insecure(M)": "(TLS) By default, every SSL connection curl makes is verified to be secure. This\n option allows curl to proceed and operate even for server connections otherwise\n considered insecure.",
+                "--key(M)": "(TLS SSH) Private key file name. Allows you to provide your private key in this\n separate file. For SSH, if not specified, curl tries the following candidates in\n order: '~/.ssh/id_rsa', '~/.ssh/id_dsa', './id_rsa', './id_dsa'.",
+                "-2(M)": " (SSL) Forces curl to use SSL version 2 when negotiating with a remote SSL server.\n Sometimes curl is built without SSLv2 support. SSLv2 is widely considered insecure\n (see RFC 6176).",
+                "-v(M)": "Makes curl verbose during the operation. Useful for debugging and seeing what's\n going on \"under the hood\". A line starting with '>' means \"header data\" sent by\n curl, '<' means \"header data\" received by curl that is hidden in normal cases, and\n a line starting with '*' means additional info provided by curl."
+            },
+            "MP Summary": "transfer a URL",
+            "Most Similar TLDR Script": "curl --cert {{client.pem}} --key {{key.pem}} --insecure {{https://example.com}}",
+            "Most Similar TLDR Task": "Pass client certificate and key for a resource, skipping certificate validation",
+            "Top-3 Scripts": [
+                "ul_612594: # FROM ubuntu:20:04\nFROM debian:10\nRUN apt update &&  DEBIAN_FRONTEND=noninteractive apt install -y curl openssl ca-certificates\nCOPY root.pem /usr/local/share/ca-certificates/root.pem\nCOPY intermediate.pem /usr/local/share/ca-certificates/intermediate.pem\nRUN chmod 644 /usr/local/share/ca-certificates/root.pem /usr/local/share/ca-certificates/intermediate.pem\nRUN update-ca-certificates\nRUN curl https://nexus-using-custom-cert.custom.org\n\ncurl -v",
+                "au_708306: man curl\n\ncurl -E ~/cert.pem https://api.the-newshub.com/api/1/topics/trending/top\n\ncurl -2 https://api.the-newshub.com/api/1/topics/trending/top",
+                "ul_90450: curl --cacert  /path/to/CA/cert.file https://...\n\ncurl --insecure https://..."
+            ],
+            "Top-3 Similar Questions": [
+                "ul_612594: Add custom CA certificate to Ubuntu 20.04 works fine, but fails on Debian",
+                "ul_484871: CA certificates location in Ubuntu 18.04",
+                "au_708306: .What to do when Ubuntu 14.04 LTS curl doesn't support a CA certificate, even though it's valid"
+            ]
+        },
+        {
+            "Command": "pki",
+            "Explanations about Options": {},
+            "MP Summary": "Simple public key infrastructure (PKI) management tool",
+            "Most Similar TLDR Script": "",
+            "Most Similar TLDR Task": "",
+            "Top-3 Scripts": [
+                "so_42771933: /etc/pki/ca-trust/extracted/pem/tls-ca-bundle.pem\n\nnpm config set cafile \"/etc/pki/ca-trust/extracted/pem/tls-ca-bundle.pem\" -g\n\n/etc/pki/ca-trust/source/anchors/",
+                "ul_363308: /etc/pki/ca-trust/source/anchors/",
+                "ul_456475: $ sudo cp <cert file> /etc/pki/ca-trust/source/anchors/\n\n/etc/pki\n\n$ ll /etc/pki/java/cacerts\nlrwxrwxrwx. 1 root root 40 May  2 10:41 /etc/pki/java/cacerts -> /etc/pki/ca-trust/extracted/java/cacerts"
+            ],
+            "Top-3 Similar Questions": [
+                "so_42771933: How do I configure NPM to use the system certificate authorities in CentOS/RHEL?",
+                "ul_363308: How do I list all available SSL CA certificates on CentOS 6?",
+                "ul_456475: Adding a root certification authority to a java application"
+            ]
+        },
+        {
+            "Command": "apt-get",
+            "Explanations about Options": {},
+            "MP Summary": "APT package handling utility - command-line interface",
+            "Most Similar TLDR Script": "apt-get dist-upgrade",
+            "Most Similar TLDR Task": "Upgrade installed packages (like `upgrade`), but remove obsolete packages and install additional packages to meet new dependencies",
+            "Top-3 Scripts": [
+                "au_420860: sudo apt-get install --reinstall ca-certificates\n\nsudo apt-get -f install\n# stop if you saw any errors\n\nsudo dpkg --purge --force-depends ca-certificates\nsudo apt-get -f install",
+                "ul_90450: apt-get install ca-certificates"
+            ],
+            "Top-3 Similar Questions": [
+                "au_420860: Problem with certificates",
+                "ul_90450: Adding a self-signed certificate to the \"trusted list\""
+            ]
+        },
+        {
+            "Command": "npm",
+            "Explanations about Options": {},
+            "MP Summary": "javascript package manager Synopsis npm <command> [args] Version 6.14.4 Description npm  is the package manager for the Node JavaScript platform.  It puts modules in place so that node can find them, and manages dependency conflicts intelligently. It is extremely configurable to support a wide variety of use cases.  Most commonly, it is used to publish, discover, install, and develop node programs. Run npm help to get a list of available commands. Important npm  is  configured  to  use  npm, Inc.'s public registry at https://registry.npmjs.org by default. Use of the  npm  public  registry  is  subject  to  terms  of  use  available  at https://www.npmjs.com/policies/terms. You  can  configure  npm  to  use  any compatible registry you like, and even run your own registry. Use of someone else's registry may be governed by their terms of use. Introduction You probably got npm because you want to install stuff. Use npm install blerg to install the latest  version  of  \"blerg\".   Check  out  npm  help install for more info.  It can do a lot of stuff. Use  the  npm  search  command  to  show  everything that's available.  Use npm ls to show everything you've installed. Dependencies If a package references to another package with a git URL, npm depends on  a  preinstalled git. If one of the packages npm tries to install is a native node module and requires compiling of C++ Code, npm will use node-gyp https://github.com/TooTallNate/node-gyp for that  task. For a Unix system, node-gyp https://github.com/TooTallNate/node-gyp needs Python, make and a buildchain like GCC. On Windows, Python and Microsoft  Visual  Studio  C++  are  needed. Python  3  is not supported by node-gyp https://github.com/TooTallNate/node-gyp.  For more information visit the node-gyp repository https://github.com/TooTallNate/node-gyp and  the node-gyp Wiki https://github.com/TooTallNate/node-gyp/wiki. Directories See npm help folders to learn about where npm puts stuff. In particular, npm has two modes of operation: · global  mode:  npm  installs packages into the install prefix at prefix/lib/node_modules and bins are installed in prefix/bin. · local mode: npm installs packages into the current project directory, which defaults  to the  current  working directory.  Packages are installed to ./node_modules, and bins are installed to ./node_modules/.bin. Local mode is the default.  Use -g or --global on any command to operate  in  global  mode instead. Developer Usage If you're using npm to develop and publish your code, check out the following help topics: · json: Make a package.json file.  See npm help package.json. · link:  For linking your current working code into Node's path, so that you don't have to reinstall every time you make a change.  Use npm link to do this. · install: It's a good idea to install  things  if  you  don't  need  the  symbolic  link. Especially, installing other peoples code from the registry is done via npm install · adduser: Create an account or log in.  Credentials are stored in the user config file. · publish: Use the npm publish command to upload your code to the registry. Configuration npm is extremely configurable.  It reads its configuration options from 5 places. · Command line switches: Set a config with --key val.  All keys take a value, even if they are booleans (the config parser doesn't know  what  the  options  are  at  the  time  of parsing).  If no value is provided, then the option is set to boolean true. · Environment  Variables:  Set any config by prefixing the name in an environment variable with npm_config_.  For example, export npm_config_key=val. · User Configs: The file at $HOME/.npmrc is an ini-formatted list of configs.  If present, it is parsed.  If the userconfig option is set in the cli or env, then that will be used instead. · Global Configs: The file found at ../etc/npmrc (from the  node  executable,  by  default this  resolves  to  /usr/local/etc/npmrc)  will  be  parsed  if  it  is  found.   If the globalconfig option is set in the cli, env, or user config, then  that  file  is  parsed instead. · Defaults:  npm's  default configuration options are defined in lib/utils/config-defs.js. These must not be changed. See npm help config for much much more information. Contributions Patches welcome! If you would like to contribute, but don't know what to work  on,  read  the  contributing guidelines and check the issues list. · CONTRIBUTING.md https://github.com/npm/cli/blob/latest/CONTRIBUTING.md · Bug tracker https://github.com/npm/cli/issues Bugs When you find issues, please report them: · web: https://npm.community/c/bugs Be  sure to follow the template and bug reporting guidelines. You can also ask for help in the support forum https://npm.community/c/support if you're unsure if it's actually a  bug or are having trouble coming up with a detailed reproduction to report. Author Isaac  Z.  Schlueter  http://blog.izs.me/  ::  isaacs  https://github.com/isaacs/  :: @izs https://twitter.com/izs :: i@izs.me See Also · npm help help · npm help package.json · npm help install · npm help config · npm help npmrc April 2020                                     NPM(1)",
+            "Most Similar TLDR Script": "npm install {{module_name}}@{{version}}",
+            "Most Similar TLDR Task": "Download a specific version of a package and add it to the list of dependencies in package.json",
+            "Top-3 Scripts": [
+                "so_42771933: npm config set cafile \"/etc/pki/ca-trust/extracted/pem/tls-ca-bundle.pem\" -g"
+            ],
+            "Top-3 Similar Questions": [
+                "so_42771933: How do I configure NPM to use the system certificate authorities in CentOS/RHEL?"
+            ]
+        }
+    ],
+    "Query": "How do you add a certificate authority (CA) to Ubuntu?"
+}

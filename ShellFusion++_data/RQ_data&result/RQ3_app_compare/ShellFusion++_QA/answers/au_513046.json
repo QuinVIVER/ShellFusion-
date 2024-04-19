@@ -1,0 +1,70 @@
+{
+  "Query": "How to search strings inside files like in Windows without search monkey?",
+  "Answers": [
+    {
+      "Command": "grep",
+      "Top-3 Similar Questions": [
+        "so_30991630: shell script : find a string by searching inside all the files in a folder?",
+        "so_24563763: search a word inside a pdf in terminal linux without any app",
+        "so_39015974: Grep search for a string by pattern and then find part of this string inside of another file"
+      ],
+      "Top-3 Scripts": [
+        "so_30991630: grep -Hnr PATTERN .\n\ngrep -d skip -Hn PATTERN {,.[!.]}*{,/{,.[!.]}*}",
+        "so_24563763: pdftotext myfile.pdf - | grep 'pattern'",
+        "so_39015974: grep `tail -n 1000 -f logfile.log | grep -i \"host\" | grep -o \"[a-f0-9][a-f0-9][a-f0-9][a-f0-9]\\.[a-f0-9][a-f0-9][a-f0-9][a-f0-9]\\.[a-f0-9][a-f0-9][a-f0-9][a-f0-9]\"` anotherfile"
+      ]
+    },
+    {
+      "Command": "find",
+      "Top-3 Similar Questions": [
+        "so_34153172: Finding all usages of a filename string in other files",
+        "so_37612886: Searching a string using grep in a range of multiple files",
+        "su_360733: How can I find a particular file without extension in Linux?"
+      ],
+      "Top-3 Scripts": [
+        "so_34153172: cd /base/dir/to/check/presence/of/image/files\n\nwhile IFS= read -d '' -r f; do\n   img=\"${f##*/}\" # get the filename\n   grep -qFr \"$img\" --include=*.html --include=*.php --include=*.css . ||\n      echo \"$img not found\"\ndone < <(find /img-dir -type f -print0) > imgNotFound.txt",
+        "so_37612886: find -type f -name ...",
+        "su_360733: find -exec file {} \\; | grep ASCII"
+      ]
+    },
+    {
+      "Command": "awk",
+      "Top-3 Similar Questions": [
+        "so_23535923: How to get a pattern from a file and search in another file in unix",
+        "ul_263385: Search a string in files in the current directory, omit duplicates",
+        "so_10696997: How to search pattern in a file by Linux CLI?"
+      ],
+      "Top-3 Scripts": [
+        "so_23535923: awk -F'|' 'NR==FNR{a[$2]=$1;next} $1 in a { print a[$1],$1,$2 }' OFS=\"|\" file1 file2 > file3\n\nawk  'BEGIN{ OFS=FS=\"|\";} NR==FNR{a[$2]=$1;next} $1 in a { print a[$1],$1,$2 }' file1 file2 > file3\n\nawk  'BEGIN{ OFS=FS=\"|\";} NR==FNR{a[$2]=$1;next} $1 in a { print a[$1],$0 }' file1 file2 > file3",
+        "ul_263385: find . ! -name . -prune -type f -exec cat {} + | awk '\n  /mystring/ && !seen[$0]++'\n\nfind . -type f -exec cat {} + | awk '\n  /mystring/ && !seen[$0]++'",
+        "so_10696997: awk -F '|' '{print $7}'\n\n$ echo '07:44:24||||234.234.234.234|123.123.123.123|www.website.pl/some,site.html|a:0:{}' | awk -F '|' '{print $7}'\nwww.website.pl/some,site.html"
+      ]
+    },
+    {
+      "Command": "echo",
+      "Top-3 Similar Questions": [
+        "so_34153172: Finding all usages of a filename string in other files",
+        "ul_531424: How to find character locations of a string in a file?",
+        "ul_586237: Search text in files with accent characters"
+      ],
+      "Top-3 Scripts": [
+        "so_34153172: cd /base/dir/to/check/presence/of/image/files\n\nwhile IFS= read -d '' -r f; do\n   img=\"${f##*/}\" # get the filename\n   grep -qFr \"$img\" --include=*.html --include=*.php --include=*.css . ||\n      echo \"$img not found\"\ndone < <(find /img-dir -type f -print0) > imgNotFound.txt",
+        "ul_531424: $ echo 'a\u00f6\u00e6a\u00e6a\u00e6a' | perl -CSDLA -ne 'BEGIN { $pattern = shift }; printf \"%d\\n\", $-[0] while $_ =~ m/$pattern/g;'  \u00e6a\n2\n4\n6\n\n$ echo 'a\u00f6\u00e6a\u00e6a\u00e6a' | perl match.pl \u00e6a -\n2\n4\n6",
+        "ul_586237: $ echo 'KORONAV\u00cdRUS, obmedzen\u00e1.' >orig\n$ grep -ran \"$(cat orig | iconv -t CP1252)\""
+      ]
+    },
+    {
+      "Command": "file",
+      "Top-3 Similar Questions": [
+        "su_360733: How can I find a particular file without extension in Linux?",
+        "ul_202222: Search a String in a directory- Get output without filename",
+        "ul_449039: Searching match of multi-line regex in files (without pcregrep)"
+      ],
+      "Top-3 Scripts": [
+        "su_360733: find -exec file {} \\; | grep ASCII",
+        "ul_202222: -h, --no-filename\n             Suppress  the  prefixing  of file names on output.  This is    \n  the default when there is only one file (or only standard input) to\n          search.",
+        "ul_449039: $ sed -n '/^Text/{N;/^Text\\nLine/=;D;}' file\n10"
+      ]
+    }
+  ]
+}

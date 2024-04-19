@@ -1,0 +1,90 @@
+{
+  "Query": "How do I change file system in recovery mode to read-write mode?",
+  "Answers": [
+    {
+      "Command": "chmod",
+      "MP Summary": "change file mode bits",
+      "Most Similar TLDR Task": "Change permissions recursively giving [g]roup and [o]thers the ability to [w]rite",
+      "Most Similar TLDR Script": "chmod -R g+w,o+w {{directory}}",
+      "Top-3 Similar Questions": [
+        "nl2bash_12675: change the permissions of all the regular/normal files in the folder \"/path/to/someDirectory\" to 644",
+        "au_792401: How to change directory permission from read-write to read-only",
+        "nl2bash_12676: change the permissions of all the regular/normal files to 644 in the folder /home/nobody/public_html"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_12675: sudo find /path/to/someDirectory -type f -print0 | xargs -0 sudo chmod 644",
+        "au_792401: chmod 755 -R /opt/lampp/phpmyadmin",
+        "nl2bash_12676: find /home/nobody/public_html -type f -exec chmod 644 {} \\;"
+      ],
+      "Explanations about Options": {
+        "-R": "change files and directories recursively"
+      }
+    },
+    {
+      "Command": "install",
+      "MP Summary": "copy files and set attributes",
+      "Most Similar TLDR Task": "Copy files to destination, setting their `mode`",
+      "Most Similar TLDR Script": "install -m {{+x}} {{path/to/source}} {{path/to/destination}}",
+      "Top-3 Similar Questions": [
+        "au_1305595: How to change GRUB 2.04 to a GRUB version with recovery mode?",
+        "au_432096: How to turn off proprietary ATI drivers using Recovery Mode?"
+      ],
+      "Top-3 Scripts": [
+        "au_1305595: sudo chroot dpkg --configure -a\nsudo chroot apt-get install -fy\nsudo chroot apt-get purge -y grub*-common shim-signed",
+        "au_432096: sudo apt-get remove --purge xserver-xorg-video-ati xserver-xorg-video-radeon\nsudo apt-get install xserver-xorg-video-ati\nsudo apt-get install --reinstall libgl1-mesa-glx libgl1-mesa-dri xserver-xorg-core\nsudo mv /etc/X11/xorg.conf /etc/X11/xorg.conf.backup\nsudo rm -f /etc/ati"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "rm",
+      "MP Summary": "remove files or directories",
+      "Most Similar TLDR Task": "Remove files in verbose mode, printing a message for each removed file",
+      "Most Similar TLDR Script": "rm -v {{path/to/directory/*}}",
+      "Top-3 Similar Questions": [
+        "au_485290: How can I switch a folder to read-only mode so I can backup, but letting the server to write transparently to a journal file",
+        "au_432096: How to turn off proprietary ATI drivers using Recovery Mode?"
+      ],
+      "Top-3 Scripts": [
+        "au_485290: rsync /path/to/changes /path/to/serverRoot\nrm -rf /path/to/changes",
+        "au_432096: sudo apt-get remove --purge xserver-xorg-video-ati xserver-xorg-video-radeon\nsudo apt-get install xserver-xorg-video-ati\nsudo apt-get install --reinstall libgl1-mesa-glx libgl1-mesa-dri xserver-xorg-core\nsudo mv /etc/X11/xorg.conf /etc/X11/xorg.conf.backup\nsudo rm -f /etc/ati"
+      ],
+      "Explanations about Options": {
+        "-r": "remove directories and their contents recursively",
+        "-f": "ignore nonexistent files and arguments, never prompt"
+      }
+    },
+    {
+      "Command": "mount",
+      "MP Summary": "mount a filesystem",
+      "Most Similar TLDR Task": "Mount a device to a directory",
+      "Most Similar TLDR Script": "mount -t {{filesystem_type}} {{path/to/device_file}} {{path/to/target_directory}}",
+      "Top-3 Similar Questions": [
+        "au_485290: How can I switch a folder to read-only mode so I can backup, but letting the server to write transparently to a journal file",
+        "au_123370: Changing the permissions in root files without sudo from recovery",
+        "au_677852: Trying to change file in recovery mode and getting \"E138 can't write viminfo file\""
+      ],
+      "Top-3 Scripts": [
+        "au_485290: sudo mount -t overlayfs overlayfs /path/to/serverRoot -o rw,uppderdir=/path/to/changes,lowerdir=/path/to/serverRoot\n\nmount -t unionfs -o dirs=/branch_rw=rw:/branch_ro=rounionfs/union\n\nmkdir /tmp/dir1\nmkdir /tmp/aufs-root\nmount -t aufs -o br=/tmp/dir1:/tmp/dir2 none /tmp/aufs-root/",
+        "au_123370: mount -o remount,rw /",
+        "au_677852: mount -o remount,rw /"
+      ],
+      "Explanations about Options": {
+        "-t": "The argument following the -t is used to indicate the filesystem type. The\n filesystem types which are currently supported depend on the running kernel. See\n /proc/filesystems and /lib/modules/$(uname -r)/kernel/fs for a complete list of the\n filesystems. The most common are ext2, ext3, ext4, xfs, btrfs, vfat, sysfs, proc,\n nfs and cifs.",
+        "-o": "Use the specified mount options. The opts argument is a comma-separated list. For\n example:"
+      }
+    },
+    {
+      "Command": "blkid",
+      "MP Summary": "locate/print block device attributes",
+      "Most Similar TLDR Task": "List all partitions in a table, including current mountpoints",
+      "Most Similar TLDR Script": "sudo blkid -o list",
+      "Top-3 Similar Questions": [
+        "au_993340: Changed /etc/fstab Boot freezing in startup, before login. Working in recovery mode"
+      ],
+      "Top-3 Scripts": [
+        "au_993340: sudo blkid"
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

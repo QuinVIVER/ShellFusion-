@@ -1,0 +1,88 @@
+{
+  "Query": "Rename all files in a folder with a prefix in a single unix command",
+  "Answers": [
+    {
+      "Command": "basename",
+      "MP Summary": "strip directory and suffix from filenames",
+      "Most Similar TLDR Task": "Show only the file name from a path, with a suffix removed",
+      "Most Similar TLDR Script": "basename {{path/to/file}} {{suffix}}",
+      "Top-3 Similar Questions": [
+        "so_13583583: command line bulk rename",
+        "so_55691719: copy files in local folder to gcs with renaming"
+      ],
+      "Top-3 Scripts": [
+        "so_13583583: ",
+        "so_55691719: filename=$(basename $dictionary)    # e.g. factories.json\nfile_prefix=${filename%%.*}         # e.g. factories (remove everything after first period)\nTARGET=\"gs://fixed_path/${file_prefix}/${file_prefix}_${DATE}.json\" # change this as per your need"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "find",
+      "MP Summary": "search for files in a directory hierarchy",
+      "Most Similar TLDR Task": "Find files matching a given pattern, excluding specific paths",
+      "Most Similar TLDR Script": "find {{root_path}} -name '{{*.py}}' -not -path '{{*/site-packages/*}}'",
+      "Top-3 Similar Questions": [
+        "ul_604480: Rename all files with specific format which are in folder with specific name",
+        "so_69539388: Linux:Renaming files in a folder to sequential numbers",
+        "ul_537163: Copying files from specific subsubdirectories based on subdirectory name into single directory then renaming"
+      ],
+      "Top-3 Scripts": [
+        "ul_604480: find . -type f -path '*__tests__*.ts' -exec sh -c '\n  for f; do\n    mv -- \"$f\" \"${f%ts}test.ts\"\n  done\n' findsh {} +",
+        "so_69539388: find directory -maxdepth 1 -type f | wc -l\n\nfind . | sort -n\n\nfind .  | grep 'file'\n\nfind -type f",
+        "ul_537163: find . -type f -path \"./*.a/processed/*\" -exec sh -c '\nfor path; do\n  prefix=${path%%.a/processed*}\n  cp \"$path\" \"test/${prefix##*/}_${path##*processed/}\"\ndone\n' sh {} +"
+      ],
+      "Explanations about Options": {
+        "-type": "File is of type c:"
+      }
+    },
+    {
+      "Command": "cp",
+      "MP Summary": "copy files and directories",
+      "Most Similar TLDR Task": "Dereference symbolic links before copying",
+      "Most Similar TLDR Script": "cp -L {{link}} {{path/to/target_directory}}",
+      "Top-3 Similar Questions": [
+        "so_8618853: Rename all the files in the folder with increasing numbers",
+        "ul_537163: Copying files from specific subsubdirectories based on subdirectory name into single directory then renaming",
+        "so_20457139: Bash batch file rename"
+      ],
+      "Top-3 Scripts": [
+        "so_8618853: index=0;\nfor name in *.txt\ndo\n    cp \"${name}\" \"${index}.txt\"\n    index=$((index+1))\ndone",
+        "ul_537163: find . -type f -path \"./*.a/processed/*\" -exec sh -c '\nfor path; do\n  prefix=${path%%.a/processed*}\n  cp \"$path\" \"test/${prefix##*/}_${path##*processed/}\"\ndone\n' sh {} +",
+        "so_20457139: cp \"${file}\" \"../rename/SV${num}${side}.png\""
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "mkdir",
+      "MP Summary": "make directories",
+      "Most Similar TLDR Task": "Create directories recursively (useful for creating nested dirs)",
+      "Most Similar TLDR Script": "mkdir -p {{path/to/directory}}",
+      "Top-3 Similar Questions": [
+        "so_34470002: Unix: C-shell:Rename the duplicate files",
+        "so_36393927: Rename all files found by extension in for loop"
+      ],
+      "Top-3 Scripts": [
+        "so_34470002: ",
+        "so_36393927: mkdir so\ncd so\ntouch f1 f2.old f3 f4.old\nfind . -mindepth 1 ! -name '*.old' -exec mv {} {}.old \\;\nls"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "mv",
+      "MP Summary": "move (rename) files",
+      "Most Similar TLDR Task": "Move files in arbitrary locations",
+      "Most Similar TLDR Script": "mv {{source}} {{target}}",
+      "Top-3 Similar Questions": [
+        "so_16306877: Rename all files in a folder",
+        "so_45688086: Unix Renaming Files",
+        "ul_604480: Rename all files with specific format which are in folder with specific name"
+      ],
+      "Top-3 Scripts": [
+        "so_16306877: counter=1\ncd /my/image/directory\nfor f in $(ls -1)\ndo\n  new_filename=$(printf \"%04d\" ${counter})     \n  echo \"renaming ${f} ..to.. ${new_filename}\"\n  mv ${f} ${new_filename}\n  (( counter=${counter}+1 ))\ndone",
+        "so_45688086: for filename in *; do mv \"$filename\" \"${filename//.temp/}\"; done",
+        "ul_604480: find . -type f -path '*__tests__*.ts' -exec sh -c '\n  for f; do\n    mv -- \"$f\" \"${f%ts}test.ts\"\n  done\n' findsh {} +\n\nfor f; do mv -- \"$f\" \"${f%ts}test.ts\"; done"
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

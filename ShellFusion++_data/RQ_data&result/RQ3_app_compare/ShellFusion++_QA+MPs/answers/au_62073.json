@@ -1,0 +1,67 @@
+{
+  "Query": "How to decide on Swap size",
+  "Answers": [
+    {
+      "Command": "mkswap",
+      "MP Summary": "set up a Linux swap area",
+      "Top-3 Similar Questions": [
+        "ul_502258: bash how to check size of the swap"
+      ],
+      "Top-3 Scripts": [
+        "ul_502258: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "free",
+      "MP Summary": "Display amount of free and used memory in the system",
+      "Top-3 Similar Questions": [
+        "ul_502258: bash how to check size of the swap",
+        "au_898941: How to check RAM size?",
+        "au_597687: How to check if there is already a swap area?"
+      ],
+      "Top-3 Scripts": [
+        "ul_502258: # Check if we want to shrink the swap file i.e. it is bigger than 2 GiB\n# (or if we have no swap file)\nif  [ \"$(free | awk '/^Swap:/ { print $2 }')\" = \"0\" ] ||\n    [ \"$(free --bytes | awk '/^Swap:/ { print $2 }')\" -gt 2147483648 ]; then\n\n    # Create/replace the swap file\n    # Same as above...\n\nfi\n\nman free(1)\n\n# Do we have no swap or more swap than 2GB?\n# If yes, do we have more available memory than used swap?\nif  ( [ \"$(free | awk '/^Swap:/ { print $2 }')\" = \"0\" ] ||\n      [ \"$(free --bytes | awk '/^Swap:/ { print $2 }')\" -gt 2147483648 ]\n    ) &&\n    [ \"$(awk '/MemAvailable:/ { print $2 }' /proc/meminfo)\" -gt \"$(free | awk '/Swap:/ { print $3 }')\" ];\nthen\n    # Create/replace the swap file\n    # Same as above...\nfi",
+        "au_898941: free -m",
+        "au_597687: "
+      ],
+      "Explanations about Options": {
+        "--bytes": "Display the amount of memory in bytes.",
+        "-m": "Display the amount of memory in mebibytes."
+      }
+    },
+    {
+      "Command": "size",
+      "MP Summary": "list section sizes and total size of binary files",
+      "Top-3 Similar Questions": [
+        "su_656895: Grid Engine / multithreading / multi-core / multi-cpu: How to decide optimum number of threads?"
+      ],
+      "Top-3 Scripts": [
+        "su_656895: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "df",
+      "MP Summary": "report file system disk space usage",
+      "Top-3 Similar Questions": [
+        "ul_337062: how to compare filesystem sizes with -h human-readable suffixes in unix"
+      ],
+      "Top-3 Scripts": [
+        "ul_337062: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "blkid",
+      "MP Summary": "locate/print block device attributes",
+      "Top-3 Similar Questions": [
+        "au_890150: Ubuntu blkid check encryption of swap partition"
+      ],
+      "Top-3 Scripts": [
+        "au_890150: "
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

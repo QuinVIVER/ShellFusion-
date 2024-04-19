@@ -1,0 +1,90 @@
+{
+  "Query": "Calculating the number of lines in a file?",
+  "Answers": [
+    {
+      "Command": "bc",
+      "MP Summary": "An arbitrary precision calculator language",
+      "Most Similar TLDR Task": "Calculate expression and force number of decimal places to 10",
+      "Most Similar TLDR Script": "bc <<< \"scale=10; 5 / 3\"",
+      "Top-3 Similar Questions": [
+        "so_2401997: Calculate difference of numbers in two files",
+        "so_40508787: Calculating a sum of numbers in C shell",
+        "so_39241974: count the number of words between two lines in a text file"
+      ],
+      "Top-3 Scripts": [
+        "so_2401997: exec 4<\"file1\"\nwhile read -r line\ndo\n    read -r s <&4\n    echo \"${line}-${s}\" | bc\ndone <\"file2\"\nexec >&4-",
+        "so_40508787: your-command | sed '2~1 s/^/+/' | xargs | bc",
+        "so_39241974: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "cat",
+      "MP Summary": "concatenate files and print on the standard output",
+      "Most Similar TLDR Task": "Number all output lines",
+      "Most Similar TLDR Script": "cat -n {{file}}",
+      "Top-3 Similar Questions": [
+        "so_46264356: Count the number of lines in a large number (100k+) of files",
+        "so_39241974: count the number of words between two lines in a text file",
+        "su_306660: How can I count the number of lines in my all my files in this directory?"
+      ],
+      "Top-3 Scripts": [
+        "so_46264356: find /dir -exec cat {} + | wc -l",
+        "so_39241974: ",
+        "su_306660: find . -type f |grep -v \"^./public\" |grep -v \"^./modules\"|grep -v \"^./templates\"|xargs cat |wc -l"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "wc",
+      "MP Summary": "print newline, word, and byte counts for each file",
+      "Most Similar TLDR Task": "Count lines in file",
+      "Most Similar TLDR Script": "wc -l {{file}}",
+      "Top-3 Similar Questions": [
+        "so_55635446: calculate the number of a word in a txt file at linux terminal",
+        "so_46264356: Count the number of lines in a large number (100k+) of files",
+        "so_12457457: count number of lines in terminal output"
+      ],
+      "Top-3 Scripts": [
+        "so_55635446: count=\"$(grep -ow WORD1 FileName | wc -l)\"",
+        "so_46264356: find /dir -exec wc -l {} +\n\nfind /dir -exec cat {} + | wc -l",
+        "so_12457457: grep -Rl \"curl\" ./ | wc -l"
+      ],
+      "Explanations about Options": {
+        "-l": "print the newline counts"
+      }
+    },
+    {
+      "Command": "awk",
+      "MP Summary": "pattern scanning and processing language",
+      "Most Similar TLDR Task": "Print the last column of each line in a file, using a comma (instead of space) as a field separator",
+      "Most Similar TLDR Script": "awk -F ',' '{print $NF}' {{filename}}",
+      "Top-3 Similar Questions": [
+        "so_9209773: Calculating the sum of negative numbers in a column?",
+        "so_2401997: Calculate difference of numbers in two files",
+        "so_599027: Calculate size of files in shell"
+      ],
+      "Top-3 Scripts": [
+        "so_9209773: awk 'NR == 1 {cols = NF-7; for (i=7;i<=NF;i++) {header[i-7]=$i; x[i-7]=0;} } \n     NR>1 {for (i=7;i<=NF;i++) if ($i ~ /^-/) x[i-7]+=$i }\n     END{for(i=0; i<=cols; i++) print header[i], x[i]}' <file",
+        "so_2401997: awk '{getline t<\"file1\"; print $0-t}' file2  #file2-file1",
+        "so_599027: find . -name \"*.undo\" -ls | awk '{total += $7} END {print total}'"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "uniq",
+      "MP Summary": "report or omit repeated lines",
+      "Most Similar TLDR Task": "Display number of occurrences of each line along with that line",
+      "Most Similar TLDR Script": "sort {{file}} | uniq -c",
+      "Top-3 Similar Questions": [
+        "so_8627014: Count number of similar lines in a file"
+      ],
+      "Top-3 Scripts": [
+        "so_8627014: tr '[A-Z]' '[a-z]' < input | \\\n     egrep -v \"^ *(join date|age|posts|location|re):\" | \\\n     sort | \\\n     uniq -c"
+      ],
+      "Explanations about Options": {
+        "-c": "prefix lines by the number of occurrences"
+      }
+    }
+  ]
+}

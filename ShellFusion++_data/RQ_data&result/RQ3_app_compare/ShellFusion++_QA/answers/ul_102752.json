@@ -1,0 +1,70 @@
+{
+  "Query": "Remove all files created before a certain date",
+  "Answers": [
+    {
+      "Command": "rm",
+      "Top-3 Similar Questions": [
+        "su_47356: How do I delete files greater than a certain date on linux",
+        "so_41935440: How to remove files without certain extension?",
+        "so_9548836: How to remove all files NOT ending with certain formats?"
+      ],
+      "Top-3 Scripts": [
+        "su_47356: $ find . -newer whoops-timestamp -print0 | xargs -0 rm -v\n\n$ tar tfz whoops.tar.gz | xargs rm -v",
+        "so_41935440: find . -type f ! -name \"*.exe\" ! -name \"*.txt\" -exec rm {} \\;",
+        "so_9548836: ls | grep -v '\\.lnx$' | xargs rm"
+      ]
+    },
+    {
+      "Command": "find",
+      "Top-3 Similar Questions": [
+        "su_47356: How do I delete files greater than a certain date on linux",
+        "au_57032: How to remove files modified between particular dates?",
+        "ul_468510: How to delete files created between two times?"
+      ],
+      "Top-3 Scripts": [
+        "su_47356: $ tar xzf whoops.tar.gz\n$ touch -t 200909261925.30 whoops-timestamp\n$ find . -newer whoops-timestamp\n\n$ find . -newer whoops-timestamp -print0 | xargs -0 rm -v",
+        "au_57032: GNU find\n\nfind . -maxdepth 1 -type f -newermt 2011-08-01 ! -newermt 2011-08-06 -delete\n\nfind . -maxdepth 1 -type f -newermt '2011-08-01 10:01:59' \\\n                         ! -newermt '2011-08-06 23:01:00' -delete",
+        "ul_468510: find . -type f -exec sh -c '\n  h=$(date -d @$(stat -c %Y \"$1\") +%-H); [ \"$h\" -ge 11 ] && [ \"$h\" -lt 15 ]' \\\n  sh {} \\; -ls\n\nfind . -type f -exec sh -c '\n  h=$(date -d @$(stat -c %Y \"$1\") +%-H); [ \"$h\" -ge 11 ] && [ \"$h\" -lt 15 ]' \\\n  sh {} \\; -delete\n\n$ touch -d 'Wed Sep 12 11:00:01 EDT 2018' 11am\n$ touch -d 'Wed Sep 12 12:00:02 EDT 2018' 12pm\n$ touch -d 'Wed Sep 12 15:00:03 EDT 2018' 303pm\n$ find . -type f -exec sh -c 'h=$(date -d @$(stat -c %Y \"$1\") +%-H); [ \"$h\" -ge 11 ] && [ \"$h\" -lt 15 ]' sh {} \\; -ls\n1705096    0 -rw-r--r--   1 user group 0 Sep 12  2018 ./11am\n1705097    0 -rw-r--r--   1 user group 0 Sep 12  2018 ./12pm"
+      ]
+    },
+    {
+      "Command": "echo",
+      "Top-3 Similar Questions": [
+        "ul_318191: Remove white spaces before certain characters",
+        "ul_361649: How can I remove certain string from file name?",
+        "so_36229171: Remove certain lines in string? Shell"
+      ],
+      "Top-3 Scripts": [
+        "ul_318191: $ echo $'Ala ma kota ,psa i kanarka\\n, chyba . . .' | sed -zE 's/[[:space:]]([,.?!])/\\1/g'\nAla ma kota,psa i kanarka, chyba...\n\n$ echo $'Ala ma kota   ,psa i kanarka  \\n, chyba . . .' | sed -zE 's/[[:space:]]+([,.?!])/\\1/g'\nAla ma kota,psa i kanarka, chyba...",
+        "ul_361649: cd /var/lib/jenkins/bin\nfor file in *; do echo mv \"$file\" \"$(echo \"$file\" | cut -c4-)\"; done\n\ncd /var/lib/jenkins/bin\nfor file in *; do echo mv \"$file\" \"${file#????}\"; done",
+        "so_36229171: echo \"$variable\" | grep -Ev \":($(echo \"$names\" | sed 's/ /|/g'))$\""
+      ]
+    },
+    {
+      "Command": "file",
+      "Top-3 Similar Questions": [
+        "su_47356: How do I delete files greater than a certain date on linux",
+        "ul_361649: How can I remove certain string from file name?",
+        "au_1165525: How to remove decimal date from a text file?"
+      ],
+      "Top-3 Scripts": [
+        "ul_361649: cd /var/lib/jenkins/bin\nfor file in *; do echo mv \"$file\" \"$(echo \"$file\" | cut -c4-)\"; done\n\ncd /var/lib/jenkins/bin\nfor file in *; do echo mv \"$file\" \"${file#????}\"; done",
+        "au_1165525: sed -E 's/[0-9]{2}\\.[0-9]{2}\\.[0-9]{2,4}//g' file",
+        "su_1296170: anlag@jansson:~/Downloads/img$ file lena_gray.bmp \nlena_gray.bmp: PC bitmap, Windows 3.x format, 512 x 512 x 8\nanlag@jansson:~/Downloads/img$ file photo.jpg \nphoto.jpg: JPEG image data, JFIF standard 1.01, resolution ..."
+      ]
+    },
+    {
+      "Command": "sed",
+      "Top-3 Similar Questions": [
+        "ul_318191: Remove white spaces before certain characters",
+        "so_8399493: Is there a way to delete all log entries in a file older than a certain date? (BASH)",
+        "au_1165525: How to remove decimal date from a text file?"
+      ],
+      "Top-3 Scripts": [
+        "ul_318191: $ echo $'Ala ma kota ,psa i kanarka\\n, chyba . . .' | sed -zE 's/[[:space:]]([,.?!])/\\1/g'\nAla ma kota,psa i kanarka, chyba...\n\n$ echo $'Ala ma kota   ,psa i kanarka  \\n, chyba . . .' | sed -zE 's/[[:space:]]+([,.?!])/\\1/g'\nAla ma kota,psa i kanarka, chyba...",
+        "so_8399493: #!/bin/bash\n\n# requirements for script script\n\nCOUNTER=$((7+1))\nDATE=$(date -d \"-${COUNTER} days\" +%s)\nDATE=$(date -d -@${DATE} \"+%Y-%m-%d\")\n\nsed -i \"1,/$DATE/d\" test.txt",
+        "au_1165525: sed -E 's/[0-9]{2}\\.[0-9]{2}\\.[0-9]{2,4}//g' file"
+      ]
+    }
+  ]
+}

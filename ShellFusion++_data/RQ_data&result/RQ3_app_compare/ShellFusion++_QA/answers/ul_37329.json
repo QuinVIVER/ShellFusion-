@@ -1,0 +1,70 @@
+{
+  "Query": "Efficiently delete large directory containing thousands of files",
+  "Answers": [
+    {
+      "Command": "rm",
+      "Top-3 Similar Questions": [
+        "so_35615581: How to delete X number of files in a directory",
+        "so_37710667: How to delete one set of files in a directory containing similarly named files?",
+        "au_663389: Delete a list of directories stored in a file"
+      ],
+      "Top-3 Scripts": [
+        "so_35615581: ls -U | head -40000 | xargs rm -rf\n\nfind . -maxdepth 1 -print0 | xargs -0 rm -rf",
+        "so_37710667: ls text_*.txt | { read first; rm *\"${first:4:4}\"*; };\n\nrm *\"\"*\n\nrm *_xx.*\n\nls text_??.txt | { read first; rm *_\"${first:5:2}\".*; };",
+        "au_663389: rm -r"
+      ]
+    },
+    {
+      "Command": "find",
+      "Top-3 Similar Questions": [
+        "so_35615581: How to delete X number of files in a directory",
+        "au_574667: How can I delete all folders of a specific name without deleting Contents in it?",
+        "ul_414516: Best way to delete large amount of files by date"
+      ],
+      "Top-3 Scripts": [
+        "so_35615581: find . -maxdepth 1 -print0 | xargs -0 rm -rf",
+        "au_574667: #!/bin/bash\n\nwhile IFS= read -r -d '' n; \ndo   \n   dir=$(dirname \"$n\") ; \n   mv \"${n}\"/* \"${dir}\"\n   rmdir \"${n}\"\ndone < <(find -type d -name \"128Kbps_Songs\" -print0)",
+        "ul_414516: find /path/to/folder -mtime +90 -delete\n\nfind /path/to/folder -mtime +90 -exec rm {} +\n\nfind /path/to/folder -mtime +90 -print"
+      ]
+    },
+    {
+      "Command": "file",
+      "Top-3 Similar Questions": [
+        "so_26726565: how to delete a large number of lines from a file",
+        "so_26400118: delete first n characters of a very large file in unix shell",
+        "su_127786: Efficiently remove the last two lines of an extremely large text file"
+      ],
+      "Top-3 Scripts": [
+        "so_26726565: perl -MPath::Class -e '\n  %del = map {$_ => 1} file(\"lines_file\")->slurp(chomp => 1);\n  $f = file(\"data_file\")->openr();\n  while (<$f>) {\n    print unless $del{$.};\n  }\n'",
+        "so_26400118: sed -i.bak -r '1s/^.{10}//' file",
+        "so_34926470: -name \"file\" : file name.\n-exec rm -f {} \\; : delete the files that match.\n-type f : specify the type of file, directory are excluded."
+      ]
+    },
+    {
+      "Command": "sed",
+      "Top-3 Similar Questions": [
+        "so_38777554: Deleting hundreds of thousands of lines in a CSV file",
+        "so_26726565: how to delete a large number of lines from a file",
+        "so_26400118: delete first n characters of a very large file in unix shell"
+      ],
+      "Top-3 Scripts": [
+        "so_38777554: sed -i '2,809600 d' extract.csv\n\nsed -i.bak '2,809600 d' extract.csv",
+        "so_26726565: sed <(sed 's/$/d/' lines_file) data_file",
+        "so_26400118: sed -i.bak -r '1s/^.{10}//' file\n\n$ sed -i.bak -r '1s/^.{10}//' a\n$ cat a\nsome bad data and here we are\nblablabla\nyeah\n$ cat a.bak \n1234567890some bad data and here we are\nblablabla\nyeah"
+      ]
+    },
+    {
+      "Command": "xargs",
+      "Top-3 Similar Questions": [
+        "so_35615581: How to delete X number of files in a directory",
+        "ul_515982: Command to Delete Millions of Files From Directory",
+        "so_46344416: Linux: How to delete all of the files (not directories) inside a directory itself (not childs)"
+      ],
+      "Top-3 Scripts": [
+        "so_35615581: ls -U | head -40000 | xargs rm -rf\n\nxargs echo\n\nfind . -maxdepth 1 -print0 | xargs -0 rm -rf",
+        "so_46344416: find [dir_path] -maxdepth 1 -type f  | xargs rm -rf\n\nfind ./ -maxdepth 1 -type f  | awk -F '/' '{printf \"'\\''%s'\\''\\n\",$2}' | xargs rm -rf",
+        "ul_96935: find ./cache -mtime +0.5 -print0 | xargs -0 rm -f"
+      ]
+    }
+  ]
+}

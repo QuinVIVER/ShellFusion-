@@ -1,0 +1,62 @@
+{
+  "Query": "How to detect an USB device?",
+  "Answers": [
+    {
+      "Command": "bluetooth",
+      "MP Summary": "enable/disable internal bluetooth device",
+      "Top-3 Similar Questions": [
+        "au_602906: Bluetooth won't detect devices 14.10"
+      ],
+      "Top-3 Scripts": [
+        "au_602906: wget https://www.dropbox.com/s/76c9nfyeb01eki6/bluetooth-3.13-48.tar.gz\ntar -zxf bluetooth-3.13-48.tar.gz\ncd bluetooth\ncp /boot/config-$(uname -r) .config\ncp /usr/src/linux-headers-$(uname -r)/Module.symvers Module.symvers\nmake -C /lib/modules/$(uname -r)/build M=$PWD modules\nsudo cp btusb.ko /lib/modules/$(uname -r)/kernel/drivers/bluetooth/\nsudo cp ath3k.ko /lib/modules/$(uname -r)/kernel/drivers/bluetooth/\n\ncd bluetooth\nmake clean\ncp /boot/config-$(uname -r) .config\ncp /usr/src/linux-headers-$(uname -r)/Module.symvers Module.symvers\nmake -C /lib/modules/$(uname -r)/build M=$PWD modules\nsudo cp btusb.ko /lib/modules/$(uname -r)/kernel/drivers/bluetooth/\nsudo cp ath3k.ko /lib/modules/$(uname -r)/kernel/drivers/bluetooth/\n\nsudo apt-get install build-essential linux-headers-generic git linux-firmware\ngit clone <a href=\"https://github.com/jeremyb31/bluetooth-3.13.0-37.git\" rel=\"nofollow\">https://github.com/jeremyb31/bluetooth-3.13.0-37.git</a>\ncd bluetooth-3.13.0-37/bluetooth\ncp /boot/config-$(uname -r) .config\ncp /usr/src/linux-headers-$(uname -r)/Module.symvers Module.symvers\nmake -C /lib/modules/$(uname -r)/build M=$PWD modules\nsudo modprobe -r btusb && sudo cp *.ko /lib/modules/$(uname -r)/kernel/drivers/bluetooth/\necho btusb | sudo tee -a /etc/modules\necho ath3k | sudo tee -a /etc/modules"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "hciconfig",
+      "MP Summary": "configure Bluetooth devices",
+      "Top-3 Similar Questions": [
+        "au_1291606: how to detect bluetooth device type?"
+      ],
+      "Top-3 Scripts": [
+        "au_1291606: hciconfig -a    # Comes with bluez\nlsmod | grep bt # If not even rfkill list it maybe you need to modprobe btusb\ndmesg | grep tooth"
+      ],
+      "Explanations about Options": {
+        "-a": "Other than the basic info, print features, packet type, link policy, link mode,\n name, class, version."
+      }
+    },
+    {
+      "Command": "fsck",
+      "MP Summary": "check and repair a Linux filesystem",
+      "Top-3 Similar Questions": [
+        "ul_127276: How to detect imminent MTD device failure"
+      ],
+      "Top-3 Scripts": [
+        "ul_127276: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "btmon",
+      "MP Summary": "Bluetooth monitor",
+      "Top-3 Similar Questions": [
+        "au_835084: bluetoothctl can't detect device but hcitool can?"
+      ],
+      "Top-3 Scripts": [
+        "au_835084: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "Version",
+      "MP Summary": "daemon for ''lcd'' display devices",
+      "Top-3 Similar Questions": [
+        "so_23067320: no CUDA-capable device is detected (using ubuntu 12.04.4 server)"
+      ],
+      "Top-3 Scripts": [
+        "so_23067320: "
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

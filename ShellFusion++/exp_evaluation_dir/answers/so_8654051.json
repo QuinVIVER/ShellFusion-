@@ -1,0 +1,945 @@
+{
+  "Query": "How to compare two floating point numbers in Bash?",
+  "Answers": [
+    {
+      "Command": "find",
+      "MP Summary": "search for files in a directory hierarchy",
+      "Most Similar TLDR Task": "Find files matching a given size range",
+      "Most Similar TLDR Script": "find {{root_path}} -size {{+500k}} -size {{-10M}}",
+      "Most Similar NL2Bash Task": "find all jar files in current folder and search for a file in all these jar's and display the jar names along with searched file",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -name \"*.jar\" -exec unzip -l {} \\;|grep -E \"Archive:|message_track.properties\"\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "unzip": {
+              "mpsum": "list, test and extract compressed files in a ZIP archive"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "unzip": {
+              "man1_unzip_35375": "extract compress file zip archiv extract zip file creat window contain file non-ascii chines filenam extract content file stdout alongsid extract file name extract zip file multipl file separ file path space extract zip file given path list content zip file without extract"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        },
+        "1": {
+          "script": "find . -name \"*.jar\" -print -exec jar -tf {} \\; | awk '{if($1~/jar$/)jar=$1;else if($1~/message_track/)arr[jar]=$1;}END{for(i in arr){print i \" contains \" arr[i]}}'\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-print": "Quoting is handled in the same way as for -printf and -fprintf. If you are using\n find in a script or in a situation where the matched files might have arbitrary\n names, you should consider using -print0 instead of -print."
+            },
+            "awk": {
+              "mpsum": "pattern scanning and processing language"
+            },
+            "print": {
+              "mpsum": "execute programs via entries in the mailcap file"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "awk": {
+              "man1_awk_1998": "versatil program languag work file print valu start third column print differ valu base condit print everi third line start first line print fifth column k\nfield space-separ file print last column line file use comma instead space field separ print second column line contain someth space-separ file sum valu first column pretty-print valu total sum valu first column file print total"
+            },
+            "print": {
+              "man1_print_27217": "alia run-mailcap action print\norigin run-mailcap use process mime-typ file print action use print file default run-mailcap tool run-mailcap"
+            }
+          }
+        },
+        "2": {
+          "script": "find . -name \"*.jar\" -print -exec jar -tf {} \\;|egrep  \"jar$|message_track.properties\"\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-print": "Quoting is handled in the same way as for -printf and -fprintf. If you are using\n find in a script or in a situation where the matched files might have arbitrary\n names, you should consider using -print0 instead of -print."
+            },
+            "egrep": {
+              "mpsum": "print lines that match patterns"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "egrep": {
+              "man1_egrep_13356": "",
+              "man1_egrep_29281": "",
+              "man1_egrep_8522": "",
+              "man1_egrep_9973": ""
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_7038: find all jpg files in the current folder",
+        "nl2bash_7017: find all instances of a file in current folder and save the errors to a file",
+        "nl2bash_4367: Find all regular files under and below /home/admin/public_html/, and change their permissions to 644"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_7038: find . -name \"*.jpg\"",
+        "nl2bash_7017: find . -name \"my.txt\" 2> find_error.txt",
+        "nl2bash_4367: find . /home/admin/public_html/ -type f -exec chmod 644 {} \\;"
+      ],
+      "Explanations about Options": {
+        "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+      }
+    },
+    {
+      "Command": "chmod",
+      "MP Summary": "change file mode bits",
+      "Most Similar TLDR Task": "Remove e[x]ecutable rights from the [g]roup",
+      "Most Similar TLDR Script": "chmod g-x {{file}}",
+      "Most Similar NL2Bash Task": "find all jar files in current folder and search for a file in all these jar's and display the jar names along with searched file",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -name \"*.jar\" -exec unzip -l {} \\;|grep -E \"Archive:|message_track.properties\"\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "unzip": {
+              "mpsum": "list, test and extract compressed files in a ZIP archive"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "unzip": {
+              "man1_unzip_35375": "extract compress file zip archiv extract zip file creat window contain file non-ascii chines filenam extract content file stdout alongsid extract file name extract zip file multipl file separ file path space extract zip file given path list content zip file without extract"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        },
+        "1": {
+          "script": "find . -name \"*.jar\" -print -exec jar -tf {} \\; | awk '{if($1~/jar$/)jar=$1;else if($1~/message_track/)arr[jar]=$1;}END{for(i in arr){print i \" contains \" arr[i]}}'\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-print": "Quoting is handled in the same way as for -printf and -fprintf. If you are using\n find in a script or in a situation where the matched files might have arbitrary\n names, you should consider using -print0 instead of -print."
+            },
+            "awk": {
+              "mpsum": "pattern scanning and processing language"
+            },
+            "print": {
+              "mpsum": "execute programs via entries in the mailcap file"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "awk": {
+              "man1_awk_1998": "versatil program languag work file print valu start third column print differ valu base condit print everi third line start first line print fifth column k\nfield space-separ file print last column line file use comma instead space field separ print second column line contain someth space-separ file sum valu first column pretty-print valu total sum valu first column file print total"
+            },
+            "print": {
+              "man1_print_27217": "alia run-mailcap action print\norigin run-mailcap use process mime-typ file print action use print file default run-mailcap tool run-mailcap"
+            }
+          }
+        },
+        "2": {
+          "script": "find . -name \"*.jar\" -print -exec jar -tf {} \\;|egrep  \"jar$|message_track.properties\"\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-print": "Quoting is handled in the same way as for -printf and -fprintf. If you are using\n find in a script or in a situation where the matched files might have arbitrary\n names, you should consider using -print0 instead of -print."
+            },
+            "egrep": {
+              "mpsum": "print lines that match patterns"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "egrep": {
+              "man1_egrep_13356": "",
+              "man1_egrep_29281": "",
+              "man1_egrep_8522": "",
+              "man1_egrep_9973": ""
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_4367: Find all regular files under and below /home/admin/public_html/, and change their permissions to 644",
+        "nl2bash_4366: Find all regular files under and below /home/admin/public_html/, and change their permissions to 644"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_4367: find . /home/admin/public_html/ -type f -exec chmod 644 {} \\;",
+        "nl2bash_4366: find . /home/admin/public_html/ -type f -exec chmod 644 {} \\;"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "awk",
+      "MP Summary": "pattern scanning and processing language",
+      "Most Similar TLDR Task": "Sum the values in the first column of a file and print the total",
+      "Most Similar TLDR Script": "awk '{s+=$1} END {print s}' {{filename}}",
+      "Most Similar NL2Bash Task": "find all jar files in current folder and search for a file in all these jar's and display the jar names along with searched file",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -name \"*.jar\" -exec unzip -l {} \\;|grep -E \"Archive:|message_track.properties\"\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "unzip": {
+              "mpsum": "list, test and extract compressed files in a ZIP archive"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "unzip": {
+              "man1_unzip_35375": "extract compress file zip archiv extract zip file creat window contain file non-ascii chines filenam extract content file stdout alongsid extract file name extract zip file multipl file separ file path space extract zip file given path list content zip file without extract"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        },
+        "1": {
+          "script": "find . -name \"*.jar\" -print -exec jar -tf {} \\; | awk '{if($1~/jar$/)jar=$1;else if($1~/message_track/)arr[jar]=$1;}END{for(i in arr){print i \" contains \" arr[i]}}'\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-print": "Quoting is handled in the same way as for -printf and -fprintf. If you are using\n find in a script or in a situation where the matched files might have arbitrary\n names, you should consider using -print0 instead of -print."
+            },
+            "awk": {
+              "mpsum": "pattern scanning and processing language"
+            },
+            "print": {
+              "mpsum": "execute programs via entries in the mailcap file"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "awk": {
+              "man1_awk_1998": "versatil program languag work file print valu start third column print differ valu base condit print everi third line start first line print fifth column k\nfield space-separ file print last column line file use comma instead space field separ print second column line contain someth space-separ file sum valu first column pretty-print valu total sum valu first column file print total"
+            },
+            "print": {
+              "man1_print_27217": "alia run-mailcap action print\norigin run-mailcap use process mime-typ file print action use print file default run-mailcap tool run-mailcap"
+            }
+          }
+        },
+        "2": {
+          "script": "find . -name \"*.jar\" -print -exec jar -tf {} \\;|egrep  \"jar$|message_track.properties\"\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-print": "Quoting is handled in the same way as for -printf and -fprintf. If you are using\n find in a script or in a situation where the matched files might have arbitrary\n names, you should consider using -print0 instead of -print."
+            },
+            "egrep": {
+              "mpsum": "print lines that match patterns"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "egrep": {
+              "man1_egrep_13356": "",
+              "man1_egrep_29281": "",
+              "man1_egrep_8522": "",
+              "man1_egrep_9973": ""
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_7030: find all jar files in current folder and search for a file in all these jar's and display the jar names along with searched file"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_7030: find . -name \"*.jar\" -print -exec jar -tf {} \\; | awk '{if($1~/jar$/)jar=$1;else if($1~/message_track/)arr[jar]=$1;}END{for(i in arr){print i \" contains \" arr[i]}}'"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "grep",
+      "MP Summary": "print lines that match patterns",
+      "Most Similar TLDR Task": "Invert match for excluding specific strings",
+      "Most Similar TLDR Script": "grep -v {{search_pattern}}",
+      "Most Similar NL2Bash Task": "find all jar files in current folder and search for a file in all these jar's and display the jar names along with searched file",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -name \"*.jar\" -exec unzip -l {} \\;|grep -E \"Archive:|message_track.properties\"\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "unzip": {
+              "mpsum": "list, test and extract compressed files in a ZIP archive"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "unzip": {
+              "man1_unzip_35375": "extract compress file zip archiv extract zip file creat window contain file non-ascii chines filenam extract content file stdout alongsid extract file name extract zip file multipl file separ file path space extract zip file given path list content zip file without extract"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        },
+        "1": {
+          "script": "find . -name \"*.jar\" -print -exec jar -tf {} \\; | awk '{if($1~/jar$/)jar=$1;else if($1~/message_track/)arr[jar]=$1;}END{for(i in arr){print i \" contains \" arr[i]}}'\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-print": "Quoting is handled in the same way as for -printf and -fprintf. If you are using\n find in a script or in a situation where the matched files might have arbitrary\n names, you should consider using -print0 instead of -print."
+            },
+            "awk": {
+              "mpsum": "pattern scanning and processing language"
+            },
+            "print": {
+              "mpsum": "execute programs via entries in the mailcap file"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "awk": {
+              "man1_awk_1998": "versatil program languag work file print valu start third column print differ valu base condit print everi third line start first line print fifth column k\nfield space-separ file print last column line file use comma instead space field separ print second column line contain someth space-separ file sum valu first column pretty-print valu total sum valu first column file print total"
+            },
+            "print": {
+              "man1_print_27217": "alia run-mailcap action print\norigin run-mailcap use process mime-typ file print action use print file default run-mailcap tool run-mailcap"
+            }
+          }
+        },
+        "2": {
+          "script": "find . -name \"*.jar\" -print -exec jar -tf {} \\;|egrep  \"jar$|message_track.properties\"\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-print": "Quoting is handled in the same way as for -printf and -fprintf. If you are using\n find in a script or in a situation where the matched files might have arbitrary\n names, you should consider using -print0 instead of -print."
+            },
+            "egrep": {
+              "mpsum": "print lines that match patterns"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "egrep": {
+              "man1_egrep_13356": "",
+              "man1_egrep_29281": "",
+              "man1_egrep_8522": "",
+              "man1_egrep_9973": ""
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_7030: find all jar files in current folder and search for a file in all these jar's and display the jar names along with searched file"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_7030: find . -name \"*.jar\" -exec unzip -l {} \\;|grep -E \"Archive:|message_track.properties\""
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "chown",
+      "MP Summary": "change file owner and group",
+      "Most Similar TLDR Task": "Recursively change the owner of a directory and its contents",
+      "Most Similar TLDR Script": "chown -R {{user}} {{path/to/directory}}",
+      "Most Similar NL2Bash Task": "find all jar files in current folder and search for a file in all these jar's and display the jar names along with searched file",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -name \"*.jar\" -exec unzip -l {} \\;|grep -E \"Archive:|message_track.properties\"\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "unzip": {
+              "mpsum": "list, test and extract compressed files in a ZIP archive"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "unzip": {
+              "man1_unzip_35375": "extract compress file zip archiv extract zip file creat window contain file non-ascii chines filenam extract content file stdout alongsid extract file name extract zip file multipl file separ file path space extract zip file given path list content zip file without extract"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        },
+        "1": {
+          "script": "find . -name \"*.jar\" -print -exec jar -tf {} \\; | awk '{if($1~/jar$/)jar=$1;else if($1~/message_track/)arr[jar]=$1;}END{for(i in arr){print i \" contains \" arr[i]}}'\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-print": "Quoting is handled in the same way as for -printf and -fprintf. If you are using\n find in a script or in a situation where the matched files might have arbitrary\n names, you should consider using -print0 instead of -print."
+            },
+            "awk": {
+              "mpsum": "pattern scanning and processing language"
+            },
+            "print": {
+              "mpsum": "execute programs via entries in the mailcap file"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "awk": {
+              "man1_awk_1998": "versatil program languag work file print valu start third column print differ valu base condit print everi third line start first line print fifth column k\nfield space-separ file print last column line file use comma instead space field separ print second column line contain someth space-separ file sum valu first column pretty-print valu total sum valu first column file print total"
+            },
+            "print": {
+              "man1_print_27217": "alia run-mailcap action print\norigin run-mailcap use process mime-typ file print action use print file default run-mailcap tool run-mailcap"
+            }
+          }
+        },
+        "2": {
+          "script": "find . -name \"*.jar\" -print -exec jar -tf {} \\;|egrep  \"jar$|message_track.properties\"\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-print": "Quoting is handled in the same way as for -printf and -fprintf. If you are using\n find in a script or in a situation where the matched files might have arbitrary\n names, you should consider using -print0 instead of -print."
+            },
+            "egrep": {
+              "mpsum": "print lines that match patterns"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "egrep": {
+              "man1_egrep_13356": "",
+              "man1_egrep_29281": "",
+              "man1_egrep_8522": "",
+              "man1_egrep_9973": ""
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_12185: Change the owner and group of \"uid_demo\" to \"root\""
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_12185: sudo chown root:root uid_demo"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "sudo",
+      "MP Summary": "execute a command as another user",
+      "Most Similar TLDR Task": "Run a command as another user and/or group",
+      "Most Similar TLDR Script": "sudo -u {{user}} -g {{group}} {{id -a}}",
+      "Most Similar NL2Bash Task": "find all jar files in current folder and search for a file in all these jar's and display the jar names along with searched file",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -name \"*.jar\" -exec unzip -l {} \\;|grep -E \"Archive:|message_track.properties\"\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "unzip": {
+              "mpsum": "list, test and extract compressed files in a ZIP archive"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "unzip": {
+              "man1_unzip_35375": "extract compress file zip archiv extract zip file creat window contain file non-ascii chines filenam extract content file stdout alongsid extract file name extract zip file multipl file separ file path space extract zip file given path list content zip file without extract"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        },
+        "1": {
+          "script": "find . -name \"*.jar\" -print -exec jar -tf {} \\; | awk '{if($1~/jar$/)jar=$1;else if($1~/message_track/)arr[jar]=$1;}END{for(i in arr){print i \" contains \" arr[i]}}'\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-print": "Quoting is handled in the same way as for -printf and -fprintf. If you are using\n find in a script or in a situation where the matched files might have arbitrary\n names, you should consider using -print0 instead of -print."
+            },
+            "awk": {
+              "mpsum": "pattern scanning and processing language"
+            },
+            "print": {
+              "mpsum": "execute programs via entries in the mailcap file"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "awk": {
+              "man1_awk_1998": "versatil program languag work file print valu start third column print differ valu base condit print everi third line start first line print fifth column k\nfield space-separ file print last column line file use comma instead space field separ print second column line contain someth space-separ file sum valu first column pretty-print valu total sum valu first column file print total"
+            },
+            "print": {
+              "man1_print_27217": "alia run-mailcap action print\norigin run-mailcap use process mime-typ file print action use print file default run-mailcap tool run-mailcap"
+            }
+          }
+        },
+        "2": {
+          "script": "find . -name \"*.jar\" -print -exec jar -tf {} \\;|egrep  \"jar$|message_track.properties\"\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-print": "Quoting is handled in the same way as for -printf and -fprintf. If you are using\n find in a script or in a situation where the matched files might have arbitrary\n names, you should consider using -print0 instead of -print."
+            },
+            "egrep": {
+              "mpsum": "print lines that match patterns"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "egrep": {
+              "man1_egrep_13356": "",
+              "man1_egrep_29281": "",
+              "man1_egrep_8522": "",
+              "man1_egrep_9973": ""
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_12185: Change the owner and group of \"uid_demo\" to \"root\""
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_12185: sudo chown root:root uid_demo"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "unzip",
+      "MP Summary": "list, test and extract compressed files in a ZIP archive",
+      "Most Similar TLDR Task": "Extract zip file(s) (for multiple files, separate file paths by spaces)",
+      "Most Similar TLDR Script": "unzip {{file(s)}}",
+      "Most Similar NL2Bash Task": "find all jar files in current folder and search for a file in all these jar's and display the jar names along with searched file",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -name \"*.jar\" -exec unzip -l {} \\;|grep -E \"Archive:|message_track.properties\"\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "unzip": {
+              "mpsum": "list, test and extract compressed files in a ZIP archive"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "unzip": {
+              "man1_unzip_35375": "extract compress file zip archiv extract zip file creat window contain file non-ascii chines filenam extract content file stdout alongsid extract file name extract zip file multipl file separ file path space extract zip file given path list content zip file without extract"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        },
+        "1": {
+          "script": "find . -name \"*.jar\" -print -exec jar -tf {} \\; | awk '{if($1~/jar$/)jar=$1;else if($1~/message_track/)arr[jar]=$1;}END{for(i in arr){print i \" contains \" arr[i]}}'\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-print": "Quoting is handled in the same way as for -printf and -fprintf. If you are using\n find in a script or in a situation where the matched files might have arbitrary\n names, you should consider using -print0 instead of -print."
+            },
+            "awk": {
+              "mpsum": "pattern scanning and processing language"
+            },
+            "print": {
+              "mpsum": "execute programs via entries in the mailcap file"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "awk": {
+              "man1_awk_1998": "versatil program languag work file print valu start third column print differ valu base condit print everi third line start first line print fifth column k\nfield space-separ file print last column line file use comma instead space field separ print second column line contain someth space-separ file sum valu first column pretty-print valu total sum valu first column file print total"
+            },
+            "print": {
+              "man1_print_27217": "alia run-mailcap action print\norigin run-mailcap use process mime-typ file print action use print file default run-mailcap tool run-mailcap"
+            }
+          }
+        },
+        "2": {
+          "script": "find . -name \"*.jar\" -print -exec jar -tf {} \\;|egrep  \"jar$|message_track.properties\"\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-print": "Quoting is handled in the same way as for -printf and -fprintf. If you are using\n find in a script or in a situation where the matched files might have arbitrary\n names, you should consider using -print0 instead of -print."
+            },
+            "egrep": {
+              "mpsum": "print lines that match patterns"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "egrep": {
+              "man1_egrep_13356": "",
+              "man1_egrep_29281": "",
+              "man1_egrep_8522": "",
+              "man1_egrep_9973": ""
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_7030: find all jar files in current folder and search for a file in all these jar's and display the jar names along with searched file"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_7030: find . -name \"*.jar\" -exec unzip -l {} \\;|grep -E \"Archive:|message_track.properties\""
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "print",
+      "MP Summary": "execute programs via entries in the mailcap file",
+      "Most Similar TLDR Task": "Print action can be used to print any file on default run-mailcap tool",
+      "Most Similar TLDR Script": "print {{filename}}",
+      "Most Similar NL2Bash Task": "find all jar files in current folder and search for a file in all these jar's and display the jar names along with searched file",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -name \"*.jar\" -exec unzip -l {} \\;|grep -E \"Archive:|message_track.properties\"\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "unzip": {
+              "mpsum": "list, test and extract compressed files in a ZIP archive"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "unzip": {
+              "man1_unzip_35375": "extract compress file zip archiv extract zip file creat window contain file non-ascii chines filenam extract content file stdout alongsid extract file name extract zip file multipl file separ file path space extract zip file given path list content zip file without extract"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        },
+        "1": {
+          "script": "find . -name \"*.jar\" -print -exec jar -tf {} \\; | awk '{if($1~/jar$/)jar=$1;else if($1~/message_track/)arr[jar]=$1;}END{for(i in arr){print i \" contains \" arr[i]}}'\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-print": "Quoting is handled in the same way as for -printf and -fprintf. If you are using\n find in a script or in a situation where the matched files might have arbitrary\n names, you should consider using -print0 instead of -print."
+            },
+            "awk": {
+              "mpsum": "pattern scanning and processing language"
+            },
+            "print": {
+              "mpsum": "execute programs via entries in the mailcap file"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "awk": {
+              "man1_awk_1998": "versatil program languag work file print valu start third column print differ valu base condit print everi third line start first line print fifth column k\nfield space-separ file print last column line file use comma instead space field separ print second column line contain someth space-separ file sum valu first column pretty-print valu total sum valu first column file print total"
+            },
+            "print": {
+              "man1_print_27217": "alia run-mailcap action print\norigin run-mailcap use process mime-typ file print action use print file default run-mailcap tool run-mailcap"
+            }
+          }
+        },
+        "2": {
+          "script": "find . -name \"*.jar\" -print -exec jar -tf {} \\;|egrep  \"jar$|message_track.properties\"\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-print": "Quoting is handled in the same way as for -printf and -fprintf. If you are using\n find in a script or in a situation where the matched files might have arbitrary\n names, you should consider using -print0 instead of -print."
+            },
+            "egrep": {
+              "mpsum": "print lines that match patterns"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "egrep": {
+              "man1_egrep_13356": "",
+              "man1_egrep_29281": "",
+              "man1_egrep_8522": "",
+              "man1_egrep_9973": ""
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_7030: find all jar files in current folder and search for a file in all these jar's and display the jar names along with searched file"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_7030: find . -name \"*.jar\" -print -exec jar -tf {} \\; | awk '{if($1~/jar$/)jar=$1;else if($1~/message_track/)arr[jar]=$1;}END{for(i in arr){print i \" contains \" arr[i]}}'"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "admin",
+      "MP Summary": "create and administer SCCS files (DEVELOPMENT)",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "find all jar files in current folder and search for a file in all these jar's and display the jar names along with searched file",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -name \"*.jar\" -exec unzip -l {} \\;|grep -E \"Archive:|message_track.properties\"\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "unzip": {
+              "mpsum": "list, test and extract compressed files in a ZIP archive"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "unzip": {
+              "man1_unzip_35375": "extract compress file zip archiv extract zip file creat window contain file non-ascii chines filenam extract content file stdout alongsid extract file name extract zip file multipl file separ file path space extract zip file given path list content zip file without extract"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        },
+        "1": {
+          "script": "find . -name \"*.jar\" -print -exec jar -tf {} \\; | awk '{if($1~/jar$/)jar=$1;else if($1~/message_track/)arr[jar]=$1;}END{for(i in arr){print i \" contains \" arr[i]}}'\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-print": "Quoting is handled in the same way as for -printf and -fprintf. If you are using\n find in a script or in a situation where the matched files might have arbitrary\n names, you should consider using -print0 instead of -print."
+            },
+            "awk": {
+              "mpsum": "pattern scanning and processing language"
+            },
+            "print": {
+              "mpsum": "execute programs via entries in the mailcap file"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "awk": {
+              "man1_awk_1998": "versatil program languag work file print valu start third column print differ valu base condit print everi third line start first line print fifth column k\nfield space-separ file print last column line file use comma instead space field separ print second column line contain someth space-separ file sum valu first column pretty-print valu total sum valu first column file print total"
+            },
+            "print": {
+              "man1_print_27217": "alia run-mailcap action print\norigin run-mailcap use process mime-typ file print action use print file default run-mailcap tool run-mailcap"
+            }
+          }
+        },
+        "2": {
+          "script": "find . -name \"*.jar\" -print -exec jar -tf {} \\;|egrep  \"jar$|message_track.properties\"\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-print": "Quoting is handled in the same way as for -printf and -fprintf. If you are using\n find in a script or in a situation where the matched files might have arbitrary\n names, you should consider using -print0 instead of -print."
+            },
+            "egrep": {
+              "mpsum": "print lines that match patterns"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "egrep": {
+              "man1_egrep_13356": "",
+              "man1_egrep_29281": "",
+              "man1_egrep_8522": "",
+              "man1_egrep_9973": ""
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_4367: Find all regular files under and below /home/admin/public_html/, and change their permissions to 644",
+        "nl2bash_4366: Find all regular files under and below /home/admin/public_html/, and change their permissions to 644"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_4367: find . /home/admin/public_html/ -type f -exec chmod 644 {} \\;",
+        "nl2bash_4366: find . /home/admin/public_html/ -type f -exec chmod 644 {} \\;"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "egrep",
+      "MP Summary": "print lines that match patterns",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "find all jar files in current folder and search for a file in all these jar's and display the jar names along with searched file",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find . -name \"*.jar\" -exec unzip -l {} \\;|grep -E \"Archive:|message_track.properties\"\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+            },
+            "unzip": {
+              "mpsum": "list, test and extract compressed files in a ZIP archive"
+            },
+            "grep": {
+              "mpsum": "print lines that match patterns"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "unzip": {
+              "man1_unzip_35375": "extract compress file zip archiv extract zip file creat window contain file non-ascii chines filenam extract content file stdout alongsid extract file name extract zip file multipl file separ file path space extract zip file given path list content zip file without extract"
+            },
+            "grep": {
+              "man1_grep_9973": "match pattern input text\nsupport simpl pattern regular express invert match exclud specif string print 3 line c ontext around b efor fter match print file name correspond line number match search pattern r ecurs current directori show match line n umber gnore non-text file search pattern within file search exact string use extend regular express support\n+ case-insensit mode use standard input instead file"
+            }
+          }
+        },
+        "1": {
+          "script": "find . -name \"*.jar\" -print -exec jar -tf {} \\; | awk '{if($1~/jar$/)jar=$1;else if($1~/message_track/)arr[jar]=$1;}END{for(i in arr){print i \" contains \" arr[i]}}'\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-print": "Quoting is handled in the same way as for -printf and -fprintf. If you are using\n find in a script or in a situation where the matched files might have arbitrary\n names, you should consider using -print0 instead of -print."
+            },
+            "awk": {
+              "mpsum": "pattern scanning and processing language"
+            },
+            "print": {
+              "mpsum": "execute programs via entries in the mailcap file"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "awk": {
+              "man1_awk_1998": "versatil program languag work file print valu start third column print differ valu base condit print everi third line start first line print fifth column k\nfield space-separ file print last column line file use comma instead space field separ print second column line contain someth space-separ file sum valu first column pretty-print valu total sum valu first column file print total"
+            },
+            "print": {
+              "man1_print_27217": "alia run-mailcap action print\norigin run-mailcap use process mime-typ file print action use print file default run-mailcap tool run-mailcap"
+            }
+          }
+        },
+        "2": {
+          "script": "find . -name \"*.jar\" -print -exec jar -tf {} \\;|egrep  \"jar$|message_track.properties\"\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+              "-print": "Quoting is handled in the same way as for -printf and -fprintf. If you are using\n find in a script or in a situation where the matched files might have arbitrary\n names, you should consider using -print0 instead of -print."
+            },
+            "egrep": {
+              "mpsum": "print lines that match patterns"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "egrep": {
+              "man1_egrep_13356": "",
+              "man1_egrep_29281": "",
+              "man1_egrep_8522": "",
+              "man1_egrep_9973": ""
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_7030: find all jar files in current folder and search for a file in all these jar's and display the jar names along with searched file"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_7030: find . -name \"*.jar\" -print -exec jar -tf {} \\;|egrep  \"jar$|message_track.properties\""
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

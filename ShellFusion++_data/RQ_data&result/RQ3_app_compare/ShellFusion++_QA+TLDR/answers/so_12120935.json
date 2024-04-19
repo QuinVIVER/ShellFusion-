@@ -1,0 +1,102 @@
+{
+  "Query": "Wget output document and headers to STDOUT",
+  "Answers": [
+    {
+      "Command": "script",
+      "MP Summary": "make typescript of terminal session",
+      "Most Similar TLDR Task": "Record timing information (data is outputted to the standard error)",
+      "Most Similar TLDR Script": "script -t 2> {{path/to/timingfile}}",
+      "Top-3 Similar Questions": [
+        "so_10409539: Wget file and send it to Bash",
+        "ul_253101: Output is in console but not part of stdout or stderr",
+        "so_46842920: Shell redirection: Command doesn't appear to output to stdout or stderr"
+      ],
+      "Top-3 Scripts": [
+        "so_10409539: $ tr -d '\\r' < raw.php\\?i\\=VURksJnn > script\n$ cat script | bash\nTest script\nYou're not root\nEnd test\n$",
+        "ul_253101: script -q -f -c \"pocketsphinx_continuous -samprate 48000 -nfft 2048 -hmm /usr/local/share/pocketsphinx/model/en-us/en-us -lm 9745.lm -dict 9745.dic -inmic yes -logfn /dev/null\" words.txt &",
+        "so_46842920: "
+      ],
+      "Explanations about Options": {
+        "-e": "Return the exit code of the child process. Uses the same format as bash\n termination on signal termination exit code is 128+n. The exit code of the child\n process is always stored in type script file too.",
+        "-a": "Append the output to file or to typescript, retaining the prior contents.",
+        "-f": "Flush output after each write. This is nice for telecooperation: one person does\n `mkfifo foo; script -f foo', and another can supervise real-time what is being done\n using `cat foo'.",
+        "-t": "Output timing data to standard error, or to file when given. This data contains\n two fields, separated by a space. The first field indicates how much time elapsed\n since the previous output. The second field indicates how many characters were\n output this time. This information can be used to replay typescripts with\n realistic typing and output delays.",
+        "-q": "Be quiet (do not write start and done messages to standard output).",
+        "-h": "Display help text and exit.",
+        "-c": "Run the command rather than an interactive shell. This makes it easy for a script\n to capture the output of a program that behaves differently when its stdout is not\n a tty."
+      }
+    },
+    {
+      "Command": "curl",
+      "MP Summary": "transfer a URL",
+      "Most Similar TLDR Task": "Download the contents of an URL to a file",
+      "Most Similar TLDR Script": "curl {{http://example.com}} -o {{filename}}",
+      "Top-3 Similar Questions": [
+        "so_55670033: Bash variable not iterated in output redirection after curl or wget",
+        "ul_231006: curl and wget cut off url",
+        "ul_438056: wget only parent pages using {..}"
+      ],
+      "Top-3 Scripts": [
+        "so_55670033: ",
+        "ul_231006: curl 'http://172.16.0.47/index.php?ACT=47&id=6'",
+        "ul_438056: curl --cookie-jar cookies.txt \"https://example.com/pages/?p=\"{1..450}\n\ncurl --cookie-jar cookies.txt -Ooutfile{1..450}.html \"https://example.com/pages/?p=\"{1..450}"
+      ],
+      "Explanations about Options": {
+        "-f": "(HTTP) Fail silently (no output at all) on server errors. This is mostly done to\n better enable scripts etc to better deal with failed attempts. In normal cases when\n an HTTP server fails to deliver a document, it returns an HTML document stating so\n (which often also describes why and more). This flag will prevent curl from\n outputting that and return error 22.",
+        "-o": "Write output to <file> instead of stdout. If you are using {} or [] to fetch\n multiple documents, you can use '#' followed by a number in the <file> specifier.\n That variable will be replaced with the current string for the URL being fetched.\n Like in:",
+        "-e": "(HTTP) Sends the \"Referrer Page\" information to the HTTP server. This can also be\n set with the -H, --header flag of course. When used with -L, --location you can\n append \";auto\" to the -e, --referer URL to make curl automatically set the previous\n URL when it follows a Location: header. The \";auto\" string can be used alone, even\n if you don't set an initial -e, --referer.",
+        "-O": "Write output to a local file named like the remote file we get. (Only the file part\n of the remote file is used, the path is cut off.)",
+        "--cookie-jar": "(HTTP) Specify to which file you want curl to write all cookies after a completed\n operation. Curl writes all cookies from its in-memory cookie storage to the given\n file at the end of operations. If no cookies are known, no data will be written.\n The file will be written using the Netscape cookie file format. If you set the file\n name to a single dash, \"-\", the cookies will be written to stdout.",
+        "-t": "Pass options to the telnet protocol. Supported options are:",
+        "-u": "Specify the user name and password to use for server authentication. Overrides -n,\n --netrc and --netrc-optional.",
+        "-l": "(FTP POP3) (FTP) When listing an FTP directory, this switch forces a name-only\n view. This is especially useful if the user wants to machine-parse the contents of\n an FTP directory since the normal directory view doesn't use a standard look or\n format. When used like this, the option causes a NLST command to be sent to the\n server instead of LIST.",
+        "-i": "Include the HTTP response headers in the output. The HTTP response headers can\n include things like server name, cookies, date of the document, HTTP version and\n more..."
+      }
+    },
+    {
+      "Command": "tee",
+      "MP Summary": "read from standard input and write to standard output and files",
+      "Most Similar TLDR Task": "Copy standard input to each FILE, and also to standard output",
+      "Most Similar TLDR Script": "echo \"example\" | tee {{FILE}}",
+      "Top-3 Similar Questions": [
+        "ul_386116: How do I both output stdout and stderr and write them into a file?",
+        "ul_71492: Output to stdout and at the same time grep into a file",
+        "so_48939517: How to redirect output to file and STDOUT and exit on error"
+      ],
+      "Top-3 Scripts": [
+        "ul_386116: ping address 2>&1 | awk '{ print strftime(\"[%d.%m.%Y %H:%M:%S]\"), $0}' | tee textfile",
+        "ul_71492: myscript | tee /dev/stderr | grep -P 'A|C' > out.file",
+        "so_48939517: # Make a pipeline successful only if **all** components are successful\nset -o pipefail\nls /fake/folder | tee foo.txt || exit 1\n\nset -o pipefail\n{ ls /fake/folder | tee foo.txt; } || exit 1  # same thing, but maybe more clear\n\nls /fake/folder | tee foo.txt\n(( ${PIPESTATUS[0]} == 0 )) || exit\n\nls /fake/folder > >(tee foo.txt) || exit 1"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "line",
+      "MP Summary": "cache line size",
+      "Most Similar TLDR Task": "Read input",
+      "Most Similar TLDR Script": "line",
+      "Top-3 Similar Questions": [
+        "so_9820839: Linux wget file output"
+      ],
+      "Top-3 Scripts": [
+        "so_9820839: > echo line | sed -e 's/$/ foobar/'\nline foobar\n> echo line | sed -e 's/^/foobar /'\nfoobar line"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "stdbuf",
+      "MP Summary": "Run COMMAND, with modified buffering operations for its standard streams.",
+      "Most Similar TLDR Task": "Change the standard output buffer to line-buffered",
+      "Most Similar TLDR Script": "stdbuf --output={{L}} {{command}}",
+      "Top-3 Similar Questions": [
+        "ul_386116: How do I both output stdout and stderr and write them into a file?"
+      ],
+      "Top-3 Scripts": [
+        "ul_386116: stdbuf -oL awk '{ print strftime(\"[%d.%m.%Y %H:%M:%S]\"), $0}'"
+      ],
+      "Explanations about Options": {
+        "-o": "adjust standard output stream buffering"
+      }
+    }
+  ]
+}

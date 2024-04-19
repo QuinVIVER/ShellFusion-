@@ -1,0 +1,92 @@
+{
+  "Query": "How to extract the first two characters of a string in shell scripting?",
+  "Answers": [
+    {
+      "Command": "tr",
+      "MP Summary": "translate or delete characters",
+      "Most Similar TLDR Task": "Replace all occurrences of a character in a file, and print the result",
+      "Most Similar TLDR Script": "tr {{find_character}} {{replace_character}} < {{filename}}",
+      "Top-3 Similar Questions": [
+        "ul_246900: Get the number of spaces characters in a string?"
+      ],
+      "Top-3 Scripts": [
+        "ul_246900: head -n 1 | tr -cd ' \\t' | wc -c"
+      ],
+      "Explanations about Options": {
+        "-d": "delete characters in SET1, do not translate",
+        "-c": "use the complement of SET1"
+      }
+    },
+    {
+      "Command": "sed",
+      "MP Summary": "stream editor for filtering and transforming text",
+      "Most Similar TLDR Task": "Replace the first occurrence of a regular expression in each line of a file, and print the result",
+      "Most Similar TLDR Script": "sed 's/{{regex}}/{{replace}}/' {{filename}}",
+      "Top-3 Similar Questions": [
+        "so_44161285: Get string between two sets of characters in shell",
+        "so_48188175: How to extract first sentence of a file in bash?",
+        "ul_182563: How to extract a part of file name in unix/linux shell script"
+      ],
+      "Top-3 Scripts": [
+        "so_44161285: s='\"version\": \"1.0.0\",'\n\nsed 's/.*: \"\\([^\"]*\\)\",.*/\\1/' <<< \"$s\"    \n1.0.0\n\nsed 's/.*: \"\\(.*\\)\",.*/\\1/' <<< \"$s\"\n1.0.0",
+        "so_48188175: sed -r 's/([.*\\?]|[.*\\.]|[.*!]).*/\\1/' file\n              ^       ^     ^   ^  ^\n              |_______|_____|___|__|_> Any symbols before first `?` **OR**\n                      |_____|___|__|_> Any symbols before first `.` **OR**\n                            |___|__|_> Any symbols before first `!`\n                                |__|_> Any symbols\n                                   |_> Print all found symbols in first pair of brackets",
+        "ul_182563: $ echo Oracle.2347263_testing_152607.csv | sed -e 's/Oracle.\\([[:digit:]]*\\)_.*/\\1/'\n2347263"
+      ],
+      "Explanations about Options": {
+        "-e": "add the script to the commands to be executed",
+        "-r": "use extended regular expressions in the script (for portability use POSIX -E)."
+      }
+    },
+    {
+      "Command": "cut",
+      "MP Summary": "remove sections from each line of files",
+      "Most Similar TLDR Task": "Cut out everything from the 3rd character to the end of each line",
+      "Most Similar TLDR Script": "cut -c {{3-}}",
+      "Top-3 Similar Questions": [
+        "so_20970975: get the first 5 characters from each line in shell script",
+        "so_68648599: How to extract n character from string in BOURNE SHELL?"
+      ],
+      "Top-3 Scripts": [
+        "so_20970975: var=$(cut -c-5 <<< \"$line\")\n\nid= cut -c-5 $line\n\n#!/bin/bash\n\nfilename='sample.txt'\nwhile read -r line\ndo\n  id=$(cut -c-5 <<< \"$line\")\n  echo $id\n  #code for passing id to other script file as parameter\ndone < \"$filename\"",
+        "so_68648599: mac_substr=$(printf \"%s\\n\" \"$mac\" | cut -b 1-9)"
+      ],
+      "Explanations about Options": {
+        "-b": "select only these bytes"
+      }
+    },
+    {
+      "Command": "awk",
+      "MP Summary": "pattern scanning and processing language",
+      "Most Similar TLDR Task": "Print every third line starting from the first line",
+      "Most Similar TLDR Script": "awk 'NR%3==1' {{filename}}",
+      "Top-3 Similar Questions": [
+        "so_63072851: How to extract only the first instance of a number of lines between two strings in bash?",
+        "so_29857548: how to extract part of a string in shell script?",
+        "so_45545735: How to extract first character from a string in Shell?"
+      ],
+      "Top-3 Scripts": [
+        "so_63072851: awk '/abc/{found=1} found; /xyz/ && found{exit}'  Input_file\n\nawk '/abc/{found=1} found{print; if (/xyz/) exit}'  Input_file\n\nawk '               ##Starting awk program from here.\n/abc/{              ##checking condition if a line has abc in it then do following.\n  found=1           ##Setting found here.\n}\nfound;              ##Checking condition if found is SET then print that line.\n/xyz/ && found{     ##Checking if xyz found in line and found is SET then do following.\n  exit              ##exit program from here.\n}\n'  Input_file       ##Mentioning Input_file name here.",
+        "so_29857548: last | grep pts/ | awk '{print $1 \" \"$4 \" \"$5 \" \"$6 \" \"$7}' >> sampletest.txt",
+        "so_45545735: echo 'A - one,B - two,C - three' | awk -F ',' '{OFS = \",\"} {for(i=1;i<=NF; i++) {$i=substr($i,1,1) }; print $0}'"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "read",
+      "MP Summary": "read a line from standard input",
+      "Most Similar TLDR Task": "Store each of the next lines you enter as values of an array",
+      "Most Similar TLDR Script": "read -a {{array}}",
+      "Top-3 Similar Questions": [
+        "so_21599316: How to extract a part of the string between two characters in bash?",
+        "so_30844696: How to extract first letters of dashed separated words in a bash variable?",
+        "so_31745759: How to extract a portion of a file in shell script"
+      ],
+      "Top-3 Scripts": [
+        "so_21599316: ",
+        "so_30844696: IFS=- read -a words <<< $MY_TEXT\nfor word in \"${words[@]}\"; do MY_INITIALS+=${word:0:1}; done",
+        "so_31745759: "
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

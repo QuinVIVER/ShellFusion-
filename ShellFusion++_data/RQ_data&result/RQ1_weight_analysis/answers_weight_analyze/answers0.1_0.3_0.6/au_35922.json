@@ -1,0 +1,88 @@
+{
+  "Query": "How do I change extension of multiple files recursively from the command line?",
+  "Answers": [
+    {
+      "Command": "echo",
+      "MP Summary": "display a line of text",
+      "Most Similar TLDR Task": "Print a message with environment variables",
+      "Most Similar TLDR Script": "echo \"{{My path is $PATH}}\"",
+      "Top-3 Similar Questions": [
+        "so_15510716: Changing a line in a file on UNIX",
+        "so_774481: Changing lines in a file",
+        "so_43503733: Change basename of multiple files in a single directory"
+      ],
+      "Top-3 Scripts": [
+        "so_15510716: echo \"Here is my new first line\" && sed '1d' asd.txt",
+        "so_774481: echo '6,15wq foo-part' | ed foo\nfor i in bar baz bam; do\n    echo -e '5,15d\\n4r foo-part\\nwq' | ed $i\ndone\nrm -f foo-part",
+        "so_43503733: # Looping for all the text files in the current \n# directory\nfor file in *.txt; do\n    # Stripping off '_R1' from the file-name\n    temp1=\"${file//_R1/}\"\n    # Replacing '_' with '.' and renaming the file to the name generated\n    temp2=\"${temp1//_/.}\"\n    echo \"$temp2\" \"$file\"\n    #mv -v \"$file\" \"$temp2\"\ndone"
+      ],
+      "Explanations about Options": {
+        "-e": "enable interpretation of backslash escapes"
+      }
+    },
+    {
+      "Command": "xargs",
+      "MP Summary": "build and execute command lines from standard input",
+      "Most Similar TLDR Task": "Execute the command once for each input line, replacing any occurrences of the placeholder (here marked as `_`) with the input line",
+      "Most Similar TLDR Script": "{{arguments_source}} | xargs -I _ {{command}} _ {{optional_extra_arguments}}",
+      "Top-3 Similar Questions": [
+        "so_16665157: Replacing a line from multiple files, limiting to a line number range",
+        "so_29102717: How to Recursively Change all FILE Permissions without Changing DIRECTORY (and subdirectoruy) Permissions?",
+        "ul_583230: How to copy files with a file extension from multiple folders?"
+      ],
+      "Top-3 Scripts": [
+        "so_16665157: find . -exec grep -il -E 'Programmer.*Bob' {} \\; \\\n    | xargs sed -i '1,10 s/.*Programmer.*Bob.*/LINE REPLACED/'",
+        "so_29102717: find /path/to/dir/ -type f | xargs chmod 755",
+        "ul_583230: find . -iname \"*.tmt\" | xargs dirname | uniq | xargs -I{} sh -c \"cp -u {}*.tmt /destination/path && java command.jar\"\n\nxargs dirname\n\nxargs -I{} sh -c \"cp -u {}*.tmt /destination/path && java command.jar\"\n\nfind . -iname \"*.tmt\" | xargs -I{} sh -c \"cp -u {} /destination/path && java command.jar\""
+      ],
+      "Explanations about Options": {
+        "-I": "Replace occurrences of replace-str in the initial-arguments with names read from\n standard input. Also, unquoted blanks do not terminate input items; instead the\n separator is the newline character. Implies -x and -L 1."
+      }
+    },
+    {
+      "Command": "sed",
+      "MP Summary": "stream editor for filtering and transforming text",
+      "Most Similar TLDR Task": "Delete lines matching the line pattern",
+      "Most Similar TLDR Script": "sed '/{{line_pattern}}/d' {{filename}}",
+      "Top-3 Similar Questions": [
+        "so_11392478: How to replace a string in multiple files in linux command line",
+        "so_15510716: Changing a line in a file on UNIX",
+        "so_774481: Changing lines in a file"
+      ],
+      "Top-3 Scripts": [
+        "so_11392478: cd /path/to/your/folder\nsed -i 's/foo/bar/g' *\n\ncd /path/to/your/folder\nsed -i '.bak' 's/foo/bar/g' *",
+        "so_15510716: sed '1 s/search/replace/' asd.txt\n\necho \"Here is my new first line\" && sed '1d' asd.txt",
+        "so_774481: for file in bar baz bam; do\n    newfile=$(mktemp)\n    (sed '5q' $file; sed -n '6,15p' foo; sed '1,15d' $file) > $newfile\n    mv -f $newfile $file\ndone"
+      ],
+      "Explanations about Options": {
+        "-i": "edit files in place (makes backup if SUFFIX supplied)"
+      }
+    },
+    {
+      "Command": "dirname",
+      "MP Summary": "strip last component from file name",
+      "Most Similar TLDR Task": "Calculate the parent directory of multiple paths",
+      "Most Similar TLDR Script": "dirname {{path/to/file_a}} {{path/to/directory_b}}",
+      "Top-3 Similar Questions": [
+        "ul_583230: How to copy files with a file extension from multiple folders?"
+      ],
+      "Top-3 Scripts": [
+        "ul_583230: find . -iname \"*.tmt\" | xargs dirname | uniq | xargs -I{} sh -c \"cp -u {}*.tmt /destination/path && java command.jar\"\n\nxargs dirname"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "line",
+      "MP Summary": "cache line size",
+      "Most Similar TLDR Task": "Read input",
+      "Most Similar TLDR Script": "line",
+      "Top-3 Similar Questions": [
+        "so_54112128: Bash script to change file names of different extension"
+      ],
+      "Top-3 Scripts": [
+        "so_54112128: find ./src -type f \\( -name \\*.js -o -name \\*.css -o -name \\*.woff \\) -print0 | \nwhile IFS= read -r -d $'\\0' line; do\n    dest=\"./dst/$(echo $(basename $line) | sed -E 's/(\\..{20}\\.)(js|css|woff)/\\.\\2/g')\"\n    echo Copying $line to $dest \n    cp $line $dest\ndone"
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

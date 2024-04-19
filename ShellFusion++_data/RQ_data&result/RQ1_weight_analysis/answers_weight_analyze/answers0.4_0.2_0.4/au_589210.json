@@ -1,0 +1,95 @@
+{
+  "Query": "Removing files older than 7 days",
+  "Answers": [
+    {
+      "Command": "find",
+      "MP Summary": "search for files in a directory hierarchy",
+      "Most Similar TLDR Task": "Find files modified in the last 7 days, and delete them",
+      "Most Similar TLDR Script": "find {{root_path}} -mtime {{-7}} -delete",
+      "Top-3 Similar Questions": [
+        "au_963563: Removing folders older than 5 days",
+        "so_249578: How to delete files older than X hours",
+        "ul_225803: delete folders older than 1 day"
+      ],
+      "Top-3 Scripts": [
+        "au_963563: $ mkdir -p foo/2017/{October/{28..31},November/{1..3}}\n$ touch -d 'now - 6 days' foo/2017/October/{28,29} foo/2017\n$ find foo/* -mindepth 1 -mtime +5\nfoo/2017/October/28\nfoo/2017/October/29\n$ find foo/* -mtime +5\nfoo/2017\nfoo/2017/October/28\nfoo/2017/October/29\n\n$ find foo/ -mindepth 2 -mtime +5\nfoo/2017/October/28\nfoo/2017/October/29",
+        "so_249578: find $LOCATION -name $REQUIRED_FILES -type f -mmin +360 -delete",
+        "ul_225803: find /test/* -type d -mmin +1440 | xargs rm -rf"
+      ],
+      "Explanations about Options": {
+        "-mmin": "File's data was last modified n minutes ago.",
+        "-d": "A synonym for -depth, for compatibility with FreeBSD, NetBSD, MacOS X and OpenBSD.",
+        "-mindepth": "Do not apply any tests or actions at levels less than levels (a non-negative\n integer). -mindepth 1 means process all files except the starting-points.",
+        "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+        "-mtime": "File's data was last modified n*24 hours ago. See the comments for -atime to\n understand how rounding affects the interpretation of file modification times.",
+        "-type": "File is of type c:"
+      }
+    },
+    {
+      "Command": "touch",
+      "MP Summary": "change file timestamps",
+      "Most Similar TLDR Task": "Create a new empty file(s) or change the times for existing file(s) to current time",
+      "Most Similar TLDR Script": "touch {{filename}}",
+      "Top-3 Similar Questions": [
+        "au_963563: Removing folders older than 5 days"
+      ],
+      "Top-3 Scripts": [
+        "au_963563: $ mkdir -p foo/2017/{October/{28..31},November/{1..3}}\n$ touch -d 'now - 6 days' foo/2017/October/{28,29} foo/2017\n$ find foo/* -mindepth 1 -mtime +5\nfoo/2017/October/28\nfoo/2017/October/29\n$ find foo/* -mtime +5\nfoo/2017\nfoo/2017/October/28\nfoo/2017/October/29"
+      ],
+      "Explanations about Options": {
+        "-d": "parse STRING and use it instead of current time"
+      }
+    },
+    {
+      "Command": "zip",
+      "MP Summary": "package and compress (archive) files",
+      "Most Similar TLDR Task": "Archive a directory and its contents with the highest level [9] of compression",
+      "Most Similar TLDR Script": "zip -r -{{9}} {{compressed.zip}} {{/path/to/dir}}",
+      "Top-3 Similar Questions": [
+        "so_58419556: Delete *.ZIP files older than 15 days"
+      ],
+      "Top-3 Scripts": [
+        "so_58419556: find /home/root/BACKUPS/backup.sql   | xargs zip -czvPf /home/root/BACKUPS/$(date +%F)_backup.sql.zip\nfind /home/root/BACKUPS -name \"*.zip\" -type f -mtime +15 -exec rm -f {} \\;"
+      ],
+      "Explanations about Options": {
+        "-z": "Prompt for a multi-line comment for the entire zip archive. The comment is ended\n by a line containing just a period, or an end of file condition (^D on Unix, ^Z on\n MSDOS, OS/2, and VMS). The comment can be taken from a file:",
+        "-f": "Replace (freshen) an existing entry in the zip archive only if it has been modified\n more recently than the version already in the zip archive; unlike the update option\n (-u) this will not add files that are not already in the zip archive. For example:",
+        "-v": "Verbose mode or print diagnostic version info.",
+        "-c": "Add one-line comments for each file. File operations (adding, updating) are done\n first, and the user is then prompted for a one-line comment for each file. Enter\n the comment followed by return, or just return for no comment."
+      }
+    },
+    {
+      "Command": "rm",
+      "MP Summary": "remove files or directories",
+      "Most Similar TLDR Task": "Remove files from arbitrary locations",
+      "Most Similar TLDR Script": "rm {{path/to/file}} {{path/to/another/file}}",
+      "Top-3 Similar Questions": [
+        "ul_645245: Delete files with filename date older than 7 days",
+        "ul_225803: delete folders older than 1 day",
+        "so_58419556: Delete *.ZIP files older than 15 days"
+      ],
+      "Top-3 Scripts": [
+        "ul_645245: #! /bin/zsh -\nzmodload zsh/datetime || exit\n\ncd /path/to/backups || exit\n\nstrftime -s oldest_to_keep archive-%F.zip $(( EPOCHSECONDS - 7 * 24*60*60 ))\n\nrm -f archive-<->-<1-12>-<1-31>.zip(Ne['[[ $REPLY < $oldest_to_keep ]]'])",
+        "ul_225803: find /test/* -type d -mmin +1440 | xargs rm -rf",
+        "so_58419556: find /home/root/BACKUPS/backup.sql   | xargs zip -czvPf /home/root/BACKUPS/$(date +%F)_backup.sql.zip\nfind /home/root/BACKUPS -name \"*.zip\" -type f -mtime +15 -exec rm -f {} \\;"
+      ],
+      "Explanations about Options": {
+        "-r": "remove directories and their contents recursively",
+        "-f": "ignore nonexistent files and arguments, never prompt"
+      }
+    },
+    {
+      "Command": "crontab",
+      "MP Summary": "maintain crontab files for individual users (Vixie Cron)",
+      "Most Similar TLDR Task": "Sample job which runs at 10:00 every day (* means any value)",
+      "Most Similar TLDR Script": "0 10 * * * {{command_to_execute}}",
+      "Top-3 Similar Questions": [
+        "nl2bash_1813: Erase user's cron jobs and add one cron job to run \"script\" every minute."
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_1813: echo \"* * * * * script\" | crontab -"
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

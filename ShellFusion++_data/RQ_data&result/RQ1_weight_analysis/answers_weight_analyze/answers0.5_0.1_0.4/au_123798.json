@@ -1,0 +1,94 @@
+{
+  "Query": "How to hear my voice in speakers with a mic?",
+  "Answers": [
+    {
+      "Command": "pactl",
+      "MP Summary": "Control a running PulseAudio sound server",
+      "Most Similar TLDR Task": "Move sink-input 627 to sink 1",
+      "Most Similar TLDR Script": "pactl move-sink-input {{627}} {{1}}",
+      "Top-3 Similar Questions": [
+        "au_211136: Get the audio from Line-in to output to the speaker",
+        "so_37688300: Pulseaudio - combined mic streams to play output on combined speaker sink",
+        "ul_340766: Change volume on bluetooth speaker with amixer"
+      ],
+      "Top-3 Scripts": [
+        "au_211136: # Manually start the module-loopback.\npactl load-module module-loopback\n\n# Configure your system to load module-loopback on startup.\n# This places load-module module-loopback at the end of\n# the /etc/pulse/default.pa pulseaudio configuration file.\nsudo sh -c ' echo \"load-module module-loopback\" >>  /etc/pulse/default.pa '",
+        "so_37688300: pactl load-module module-loopback latency_msec=1 source=alsa_input.pci-0000_00_1b.0.analog-stereo sink=bluez_sink.00_02_5B_00_FF_03\n\npactl load-module module-loopback latency_msec=1 source=bluez_source.00_02_5B_00_FF_03 sink=alsa_output.pci-0000_00_1b.0.analog-stereo",
+        "ul_340766: pactl set-sink-volume name_of_bluetooth_speaker +3%"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "amixer",
+      "MP Summary": "command-line mixer for ALSA soundcard driver",
+      "Most Similar TLDR Task": "Turn down the master volume by 10%",
+      "Most Similar TLDR Script": "amixer -D pulse sset Master {{10%-}}",
+      "Top-3 Similar Questions": [
+        "ul_340766: Change volume on bluetooth speaker with amixer",
+        "au_56486: \"amixer set master mute\" not working with external USB speakers",
+        "su_724973: Turning speaker beep off by alsamixer permanently"
+      ],
+      "Top-3 Scripts": [
+        "ul_340766: ",
+        "au_56486: amixer -c 0 set Master 0DB\n\namixer --help\n\namixer -c 0 set Front 50DB \namixer -c 0 set Front 64DB\n\namixer -c X",
+        "su_724973: amixer set 'Speaker' 0% mute"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "aplay",
+      "MP Summary": "command-line sound recorder and player for ALSA soundcard driver",
+      "Most Similar TLDR Task": "Play a specific file (sampling rate, bit depth, etc. will be automatically determined for the file format)",
+      "Most Similar TLDR Script": "aplay {{path/to/file}}",
+      "Top-3 Similar Questions": [
+        "au_162160: How do you test multiple speakers in Ubuntu distributions?",
+        "so_43319199: How to loop back the microphone entry directly to speakers on linux?",
+        "so_40196534: How can I record that sound going out of my speakers (not what's coming into the mic)?"
+      ],
+      "Top-3 Scripts": [
+        "au_162160: aplay -L",
+        "so_43319199: arecord | aplay\n\naplay -l\n\narecord -Dhw:<card_num>,<device_num> -c <channel_number> \u2013f <format> -r <sample_rate> | aplay -Dhw:<card_num>,<device_num>",
+        "so_40196534: "
+      ],
+      "Explanations about Options": {
+        "-L": "List all PCMs defined"
+      }
+    },
+    {
+      "Command": "beep",
+      "MP Summary": "beep the pc speaker any number of ways",
+      "Most Similar TLDR Task": "Play a beep at a specified frequency (Hz) and duration (milliseconds)",
+      "Most Similar TLDR Script": "beep -f {{frequency}} -l {{duration}}",
+      "Top-3 Similar Questions": [
+        "au_96511: Getting the PC speaker to beep",
+        "ul_585229: How do I make my pc speaker beep in WSL?"
+      ],
+      "Top-3 Scripts": [
+        "au_96511: ",
+        "ul_585229: _beep () {\n  powershell.exe \"[console]::beep($1,$2)\"\n}\n\nalias bleep=\"_beep 1000 800\"  # A strong bleep (for profanity)\nalias  beep=\"_beep 2000 300\"  # Quick yet noticeable beep\nalias  blip=\"_beep 4000  80\"  # A less distracting blip"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "arecord",
+      "MP Summary": "command-line sound recorder and player for ALSA soundcard driver",
+      "Most Similar TLDR Task": "List all sound cards and digital audio devices",
+      "Most Similar TLDR Script": "arecord --list-devices",
+      "Top-3 Similar Questions": [
+        "au_686427: Script that runs when voice detected on the mic",
+        "so_43319199: How to loop back the microphone entry directly to speakers on linux?"
+      ],
+      "Top-3 Scripts": [
+        "au_686427: arecord -D pulse -c 2 -d 0 -f S16_LE -vvv /dev/null",
+        "so_43319199: arecord | aplay\n\narecord -l\n\narecord -Dhw:<card_num>,<device_num> -c <channel_number> \u2013f <format> -r <sample_rate> | aplay -Dhw:<card_num>,<device_num>"
+      ],
+      "Explanations about Options": {
+        "-v": "Show PCM structure and setup. This option is accumulative. The VU meter is\n displayed when this is given twice or three times.",
+        "-d": " Interrupt after # seconds. A value of zero means infinity. The default is zero,\n so if this option is omitted then the record/playback process will run until it is\n killed. Either '-d' or '-s' option is available exclusively.",
+        "-c": " The number of channels. The default is one channel. Valid values are 1 through\n 32.",
+        "-D": " Select PCM by name",
+        "-r": "Sampling rate in Hertz. The default rate is 8000 Hertz. If the value specified is\n less than 300, it is taken as the rate in kilohertz. Valid values are 2000 through\n 192000 Hertz."
+      }
+    }
+  ]
+}

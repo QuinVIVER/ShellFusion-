@@ -1,0 +1,83 @@
+{
+  "Query": "How do I set up xrdp session that reuses an existing session?",
+  "Answers": [
+    {
+      "Command": "screen",
+      "MP Summary": "screen manager with VT100/ANSI terminal emulation",
+      "Most Similar TLDR Task": "Show open screen sessions",
+      "Most Similar TLDR Script": "screen -ls",
+      "Top-3 Similar Questions": [
+        "au_368004: Setting Screen session name in the middle of the session",
+        "so_13279016: How do I control a screen session inside a screen session?",
+        "ul_539092: Setting up a screen session on system startup"
+      ],
+      "Top-3 Scripts": [
+        "au_368004: screen -list",
+        "so_13279016: ",
+        "ul_539092: screen -c /path/to/screen/config\n\nscreen -t monitor1   0 sudo /path/to/monitor1.sh args \nscreen -t monitor1   1 sudo /path/to/monitor2.sh args \nscreen -t server     2 /path/to/service/script.sh\n\nman screen\n\nscreen -d -m -c /path/to/config\n\nscreen -t monitor1   0 /path/to/monitor1.sh args \nscreen -t monitor2   1 /path/to/monitor2.sh args \nscreen -t server     2 sudo -u username /path/to/service/script.sh"
+      ],
+      "Explanations about Options": {
+        "-t": "sets the title (a.k.a.) for the default shell or specified program. See also the\n \"shelltitle\" .screenrc command.",
+        "-l": "turns login mode on or off (for /run/utmp updating). This can also be defined\n through the \"deflogin\" .screenrc command.",
+        "-i": "will cause the interrupt key (usually C-c) to interrupt the display immediately when\n flow-control is on. See the \"defflow\" .screenrc command for details. The use of\n this option is discouraged.",
+        "-s": "sets the default shell to the program specified, instead of the value in the\n environment variable $SHELL (or \"/bin/sh\" if not defined). This can also be defined\n through the \"shell\" .screenrc command. See also there."
+      }
+    },
+    {
+      "Command": "tmux",
+      "MP Summary": "terminal multiplexer",
+      "Most Similar TLDR Task": "List existing sessions",
+      "Most Similar TLDR Script": "tmux ls",
+      "Top-3 Similar Questions": [
+        "ul_229503: Run an existent tmux session at SSH login or create if not exist",
+        "ul_82153: How can I set up byobu to use a second screen session on login?",
+        "ul_488043: How can I leave the tmux server running after the last session exists?"
+      ],
+      "Top-3 Scripts": [
+        "ul_229503: tmux attach\n\ntmux attach || tmux\n\nif shopt -q login_shell && [ -n \"$SSH_CLIENT\" ]; then\n    tmux attach || tmux\nfi",
+        "ul_82153: ",
+        "ul_488043: ExecStop=-/usr/bin/tmux kill-session -t %u"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "login",
+      "MP Summary": "begin session on the system",
+      "Most Similar TLDR Task": "Login as a user on a remote host",
+      "Most Similar TLDR Script": "login -h {{host}} {{user}}",
+      "Top-3 Similar Questions": [
+        "ul_71194: Grant ssh access for single session"
+      ],
+      "Top-3 Scripts": [
+        "ul_71194: #!/bin/bash\n\nuntil=\"$1\"\n\nif (( $(date --date=\"$until\" +%s) < $(date +%s) )); then\n    echo \"Your login has expired\"\n    exit\nfi\n\nexec ${SSH_ORIGINAL_COMMAND:--a -${SHELL##*/} $SHELL}\n\nPROMPT # ssh localhost\nYour login has expired\nConnection to localhost closed.\nPROMPT #"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "script",
+      "MP Summary": "make typescript of terminal session",
+      "Most Similar TLDR Task": "Record a new session, appending to an existing file",
+      "Most Similar TLDR Script": "script -a {{path/to/session.out}}",
+      "Top-3 Similar Questions": [
+        "so_45697800: $global: is set in a PowerShell session but not in the System.Management.Automation.PowerShell instance"
+      ],
+      "Top-3 Scripts": [
+        "so_45697800: using (PowerShell PowerShellInstance = PowerShell.Create())\n{\n    // use \"AddScript\" to add the contents of a script file to the end of the execution pipeline.\n    // use \"AddCommand\" to add individual commands/cmdlets to the end of the execution pipeline.\n    PowerShellInstance.AddScript(\"param($param1) $d = get-date; $s = 'test string value'; \" +\n            \"$d; $s; $param1; get-service\");\n\n    // use \"AddParameter\" to add a single parameter to the last command/script on the pipeline.\n    PowerShellInstance.AddParameter(\"param1\", \"parameter 1 value!\");\n}"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "chsh",
+      "MP Summary": "change login shell",
+      "Most Similar TLDR Task": "Change shell",
+      "Most Similar TLDR Script": "chsh -s {{path/to/shell_binary}} {{username}}",
+      "Top-3 Similar Questions": [
+        "ul_290072: specify shell for ssh session"
+      ],
+      "Top-3 Scripts": [
+        "ul_290072: "
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

@@ -1,0 +1,80 @@
+{
+  "Query": "Samba share read only for guests, read write for authenticated users",
+  "Answers": [
+    {
+      "Command": "sudo",
+      "MP Summary": "execute a command as another user",
+      "Most Similar TLDR Task": "Run a command as another user and/or group",
+      "Most Similar TLDR Script": "sudo -u {{user}} -g {{group}} {{id -a}}",
+      "Top-3 Similar Questions": [
+        "su_1082450: Mount a Samba share using Kerberos ticket",
+        "au_388155: The USB drive is read only even write protection is off",
+        "au_195579: Mount my own samba share?"
+      ],
+      "Top-3 Scripts": [
+        "su_1082450: sudo mount -t cifs -o user=$USER,cruid=$USER,sec=krb5 //domain/path /home/path\n\nsudo mount -t cifs -o user=$USER,cruid=$USER,sec=krb5,gid=$GID,uid=$UID //domain/path /home/path",
+        "au_388155: sudo chmod 777 /media/usbpartition-name",
+        "au_195579: sudo mount -t cifs -o guest //LOCALHOST/SHARE_NAME //DIRECTORY/MOUNT_POINT"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "write",
+      "MP Summary": "send a message to another user",
+      "Most Similar TLDR Task": "Send a message to a given user on a given terminal id",
+      "Most Similar TLDR Script": "write {{username}} {{terminal_id}}",
+      "Top-3 Similar Questions": [
+        "ul_453541: Create samba share with only write and no read permissions"
+      ],
+      "Top-3 Scripts": [
+        "ul_453541: //172.17.10.1/write-only      /mnt/write      cifs    user=smbwrite,pass=s3kr1t,uid=foo,vers=3.0 0 0"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "chown",
+      "MP Summary": "change file owner and group",
+      "Most Similar TLDR Task": "Change the owner user of a file/directory",
+      "Most Similar TLDR Script": "chown {{user}} {{path/to/file_or_directory}}",
+      "Top-3 Similar Questions": [
+        "ul_453541: Create samba share with only write and no read permissions",
+        "so_24434304: Samba - mount - user permission",
+        "au_1002832: change permissions of folder to group sudo read/write and all users only read"
+      ],
+      "Top-3 Scripts": [
+        "ul_453541: chmod -R 350 /smbshare\nchown -R smbwrite:smbread /smbshare",
+        "so_24434304: group add smbusers\ngroupmod -A david smbusers\ngroupmod -A filip smbusers\nchown filip:smbusers /path/to/Documents",
+        "au_1002832: sudo chown root:sudo public\nsudo chmod 0750 public\n\n# result:\ndrwxrwxr-x 2 root sudo 4096 Feb 28 11:32 public\n\nsudo chown pduck:sudo public\nsudo chmod 0050 public\n\n# gives\nd---r-x--- 2 pduck sudo 4096 Feb 28 11:32 public"
+      ],
+      "Explanations about Options": {
+        "-R": "operate on files and directories recursively"
+      }
+    },
+    {
+      "Command": "users",
+      "MP Summary": "print the user names of users currently logged in to the current host",
+      "Most Similar TLDR Task": "Display a list of logged in users according to a specific file",
+      "Most Similar TLDR Script": "users {{/var/log/wmtp}}",
+      "Top-3 Similar Questions": [
+        "so_24434304: Samba - mount - user permission"
+      ],
+      "Top-3 Scripts": [
+        "so_24434304: valid users\n\n[Documents]\n        comment = Documents Share\n        path = /full/path/to/Documents\n        valid users = smbusers # the group you created holding david & filip\n        browseable = Yes\n        writeable = Yes"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "setfacl",
+      "MP Summary": "set file access control lists",
+      "Most Similar TLDR Task": "Modify ACL of a file for user with read and write access",
+      "Most Similar TLDR Script": "setfacl -m u:{{username}}:rw {{file}}",
+      "Top-3 Similar Questions": [
+        "su_1069880: Linux: Group permission user have read and write but can't delete each other files"
+      ],
+      "Top-3 Scripts": [
+        "su_1069880: setfacl -dm u::rwX,g::rwX,o::rX /shared/directory\n\nsetfacl -m d:u:admin:rw,g::rwX,o::rX /shared/directory"
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

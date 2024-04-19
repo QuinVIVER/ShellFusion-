@@ -1,0 +1,2137 @@
+{
+  "Query": "Read the contents of a zipped file without extraction?",
+  "Answers": [
+    {
+      "Command": "find",
+      "MP Summary": "search for files in a directory hierarchy",
+      "Most Similar TLDR Task": "Find files matching a path pattern",
+      "Most Similar TLDR Script": "find {{root_path}} -path '{{**/lib/**/*.ext}}'",
+      "Most Similar NL2Bash Task": "Recursively removes all empty folders under current path, printing info message on each operation, and suppressing error messages if folder is not empty.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find -type d -empty -exec rmdir -vp --ignore-fail-on-non-empty {} +\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-empty": "File is empty and is either a regular file or a directory.",
+              "-type": "File is of type c:"
+            },
+            "rmdir": {
+              "mpsum": "remove empty directories",
+              "-v": "output a diagnostic for every directory processed",
+              "--ignore-fail-on-non-empty": "remove DIRECTORY and its ancestors; e.g., 'rmdir -p a/b/c' is similar to 'rmdir\n a/b/c a/b a'",
+              "-p": "remove DIRECTORY and its ancestors; e.g., 'rmdir -p a/b/c' is similar to 'rmdir\n a/b/c a/b a'"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "rmdir": {
+              "man1_rmdir_29545": "remov directori remov directori provid empti\nuse rm -r remov non-empti directori remov target parent directori use nest dir"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_9799: Print the first line of every file matching pattern 'file?B' in the xargstest/ directory tree",
+        "nl2bash_7834: find all the symbolic links in the current folder",
+        "nl2bash_12878: Create a tar archive of files from directory tree \"data\""
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_9799: find xargstest/ -name 'file?B' | sort | xargs head -n1",
+        "nl2bash_7834: find /etc -type l -print",
+        "nl2bash_12878: find data/ -print0 | tar --null -T - --create -f archive.tar\n\n\nfind data/ -print0 | tar -T - --null --create -f archive.tar"
+      ],
+      "Explanations about Options": {
+        "-print0": "Always print the exact filename, unchanged, even if the output is going to a\n terminal.",
+        "-print": "Quoting is handled in the same way as for -printf and -fprintf. If you are using\n find in a script or in a situation where the matched files might have arbitrary\n names, you should consider using -print0 instead of -print.",
+        "-type": "File is of type c:",
+        "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+      }
+    },
+    {
+      "Command": "grep",
+      "MP Summary": "print lines that match patterns",
+      "Most Similar TLDR Task": "Print file name with the corresponding line number for each match",
+      "Most Similar TLDR Script": "grep -Hn {{search_pattern}} {{path/to/file}}",
+      "Most Similar NL2Bash Task": "Recursively removes all empty folders under current path, printing info message on each operation, and suppressing error messages if folder is not empty.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find -type d -empty -exec rmdir -vp --ignore-fail-on-non-empty {} +\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-empty": "File is empty and is either a regular file or a directory.",
+              "-type": "File is of type c:"
+            },
+            "rmdir": {
+              "mpsum": "remove empty directories",
+              "-v": "output a diagnostic for every directory processed",
+              "--ignore-fail-on-non-empty": "remove DIRECTORY and its ancestors; e.g., 'rmdir -p a/b/c' is similar to 'rmdir\n a/b/c a/b a'",
+              "-p": "remove DIRECTORY and its ancestors; e.g., 'rmdir -p a/b/c' is similar to 'rmdir\n a/b/c a/b a'"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "rmdir": {
+              "man1_rmdir_29545": "remov directori remov directori provid empti\nuse rm -r remov non-empti directori remov target parent directori use nest dir"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_13705: Calculate the md5 sum of all files in \"/your/dir\" including content and filenames and following symbolic links",
+        "nl2bash_6420: Search the current directory tree for .log files containing the string \"The SAS System\", and save their names to sas_log_list.txt",
+        "nl2bash_9959: Print the paths of all files in the current directory tree that contain \"abc\" replacing \"abc\" with \"xyz\""
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_13705: grep -aR -e . /your/dir | md5sum | cut -c-32",
+        "nl2bash_6420: find . -name \"*.log\" -exec grep -l \"The SAS System\" {} \\; > sas_log_list.txt",
+        "nl2bash_9959: find . |xargs grep abc | sed 's/abc/xyz/g'"
+      ],
+      "Explanations about Options": {
+        "-R": "Read all files under each directory, recursively. Follow all symbolic links,\n unlike -r.",
+        "-l": "Suppress normal output; instead print the name of each input file from which output\n would normally have been printed. The scanning will stop on the first match."
+      }
+    },
+    {
+      "Command": "xargs",
+      "MP Summary": "build and execute command lines from standard input",
+      "Most Similar TLDR Task": "Run a command using the input data as arguments",
+      "Most Similar TLDR Script": "{{arguments_source}} | xargs {{command}}",
+      "Most Similar NL2Bash Task": "Recursively removes all empty folders under current path, printing info message on each operation, and suppressing error messages if folder is not empty.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find -type d -empty -exec rmdir -vp --ignore-fail-on-non-empty {} +\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-empty": "File is empty and is either a regular file or a directory.",
+              "-type": "File is of type c:"
+            },
+            "rmdir": {
+              "mpsum": "remove empty directories",
+              "-v": "output a diagnostic for every directory processed",
+              "--ignore-fail-on-non-empty": "remove DIRECTORY and its ancestors; e.g., 'rmdir -p a/b/c' is similar to 'rmdir\n a/b/c a/b a'",
+              "-p": "remove DIRECTORY and its ancestors; e.g., 'rmdir -p a/b/c' is similar to 'rmdir\n a/b/c a/b a'"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "rmdir": {
+              "man1_rmdir_29545": "remov directori remov directori provid empti\nuse rm -r remov non-empti directori remov target parent directori use nest dir"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_9799: Print the first line of every file matching pattern 'file?B' in the xargstest/ directory tree",
+        "nl2bash_13738: Calculate the sum of all the numbers from 1 to 10",
+        "nl2bash_13737: Calculate the sum of all the numbers from -5 to 10"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_9799: find xargstest/ -name 'file?B' | sort | xargs head -n1",
+        "nl2bash_13738: seq 10 | tr '[\\n]' '+' | sed -e 's/+/ + /g' -e's/ + $/\\n/' | xargs expr",
+        "nl2bash_13737: seq -5 10 | xargs printf \"- - %s\" | xargs  | bc"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "head",
+      "MP Summary": "output the first part of files",
+      "Most Similar TLDR Task": "Output the first few lines of a file",
+      "Most Similar TLDR Script": "head -n {{count_of_lines}} {{filename}}",
+      "Most Similar NL2Bash Task": "Recursively removes all empty folders under current path, printing info message on each operation, and suppressing error messages if folder is not empty.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find -type d -empty -exec rmdir -vp --ignore-fail-on-non-empty {} +\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-empty": "File is empty and is either a regular file or a directory.",
+              "-type": "File is of type c:"
+            },
+            "rmdir": {
+              "mpsum": "remove empty directories",
+              "-v": "output a diagnostic for every directory processed",
+              "--ignore-fail-on-non-empty": "remove DIRECTORY and its ancestors; e.g., 'rmdir -p a/b/c' is similar to 'rmdir\n a/b/c a/b a'",
+              "-p": "remove DIRECTORY and its ancestors; e.g., 'rmdir -p a/b/c' is similar to 'rmdir\n a/b/c a/b a'"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "rmdir": {
+              "man1_rmdir_29545": "remov directori remov directori provid empti\nuse rm -r remov non-empti directori remov target parent directori use nest dir"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_9799: Print the first line of every file matching pattern 'file?B' in the xargstest/ directory tree",
+        "nl2bash_5352: Find the oldest *.sql file under current directory",
+        "nl2bash_10384: print top 10 largest files and directories"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_9799: find xargstest/ -name 'file?B' | sort | xargs head -n1",
+        "nl2bash_5352: find . -name \\*.sql | xargs \\ls -1rc | tail -7 | head -1",
+        "nl2bash_10384: du -a . | sort -nr | head"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "ln",
+      "MP Summary": "make links between files",
+      "Most Similar TLDR Task": "Create a symbolic link to a file or directory",
+      "Most Similar TLDR Script": "ln -s {{path/to/file_or_directory}} {{path/to/symlink}}",
+      "Most Similar NL2Bash Task": "Recursively removes all empty folders under current path, printing info message on each operation, and suppressing error messages if folder is not empty.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find -type d -empty -exec rmdir -vp --ignore-fail-on-non-empty {} +\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-empty": "File is empty and is either a regular file or a directory.",
+              "-type": "File is of type c:"
+            },
+            "rmdir": {
+              "mpsum": "remove empty directories",
+              "-v": "output a diagnostic for every directory processed",
+              "--ignore-fail-on-non-empty": "remove DIRECTORY and its ancestors; e.g., 'rmdir -p a/b/c' is similar to 'rmdir\n a/b/c a/b a'",
+              "-p": "remove DIRECTORY and its ancestors; e.g., 'rmdir -p a/b/c' is similar to 'rmdir\n a/b/c a/b a'"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "rmdir": {
+              "man1_rmdir_29545": "remov directori remov directori provid empti\nuse rm -r remov non-empti directori remov target parent directori use nest dir"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_12852: Create a symbolic link named \"$tmpdir/bam\" to the full path of command \"bam2\" found in \"$PATH\"",
+        "nl2bash_13065: Force create a hard link in \"/usr/local/bin\" to \"findpdftext\"",
+        "nl2bash_12866: Create a symbolic link relative to link location named \"$dest_dir/$orig_name\" to \"$orig_dest\""
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_12852: ln -s \"$(which bam2)\" \"$tmpdir\"/bam",
+        "nl2bash_13065: sudo ln -f \"findpdftext\" /usr/local/bin",
+        "nl2bash_12866: ln -r -s \"$orig_dest\" \"$dest_dir/$orig_name\""
+      ],
+      "Explanations about Options": {
+        "-s": "make symbolic links instead of hard links",
+        "-r": "create symbolic links relative to link location",
+        "-f": "remove existing destination files"
+      }
+    },
+    {
+      "Command": "cat",
+      "MP Summary": "concatenate files and print on the standard output",
+      "Most Similar TLDR Task": "Print the contents of a file to the standard output",
+      "Most Similar TLDR Script": "cat {{file}}",
+      "Most Similar NL2Bash Task": "Recursively removes all empty folders under current path, printing info message on each operation, and suppressing error messages if folder is not empty.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find -type d -empty -exec rmdir -vp --ignore-fail-on-non-empty {} +\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-empty": "File is empty and is either a regular file or a directory.",
+              "-type": "File is of type c:"
+            },
+            "rmdir": {
+              "mpsum": "remove empty directories",
+              "-v": "output a diagnostic for every directory processed",
+              "--ignore-fail-on-non-empty": "remove DIRECTORY and its ancestors; e.g., 'rmdir -p a/b/c' is similar to 'rmdir\n a/b/c a/b a'",
+              "-p": "remove DIRECTORY and its ancestors; e.g., 'rmdir -p a/b/c' is similar to 'rmdir\n a/b/c a/b a'"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "rmdir": {
+              "man1_rmdir_29545": "remov directori remov directori provid empti\nuse rm -r remov non-empti directori remov target parent directori use nest dir"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_3463: Find all files under /usr/tom that matches the extended regex '*.pl| *.pm'   in their names and also matches the regex <PATTERN> in their contents",
+        "nl2bash_3464: Find all files under /usr/tom that matches the extended regex '*.pl| *.pm'   in their names and also matches the regex <PATTERN> in their contents"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_3463: find /usr/tom | egrep '*.pl| *.pm' | xargs cat | grep <PATTERN>",
+        "nl2bash_3464: find /usr/tom | egrep '*.pl| *.pm' | xargs cat | grep <PATTERN>"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "tar",
+      "MP Summary": "an archiving utility",
+      "Most Similar TLDR Task": "List the contents of a tar file",
+      "Most Similar TLDR Script": "tar tvf {{source.tar}}",
+      "Most Similar NL2Bash Task": "Recursively removes all empty folders under current path, printing info message on each operation, and suppressing error messages if folder is not empty.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find -type d -empty -exec rmdir -vp --ignore-fail-on-non-empty {} +\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-empty": "File is empty and is either a regular file or a directory.",
+              "-type": "File is of type c:"
+            },
+            "rmdir": {
+              "mpsum": "remove empty directories",
+              "-v": "output a diagnostic for every directory processed",
+              "--ignore-fail-on-non-empty": "remove DIRECTORY and its ancestors; e.g., 'rmdir -p a/b/c' is similar to 'rmdir\n a/b/c a/b a'",
+              "-p": "remove DIRECTORY and its ancestors; e.g., 'rmdir -p a/b/c' is similar to 'rmdir\n a/b/c a/b a'"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "rmdir": {
+              "man1_rmdir_29545": "remov directori remov directori provid empti\nuse rm -r remov non-empti directori remov target parent directori use nest dir"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_12878: Create a tar archive of files from directory tree \"data\"",
+        "nl2bash_12877: Create a tar archive of all regular files modified in the last 24 hours"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_12878: find data/ -print0 | tar --null -T - --create -f archive.tar\n\n\nfind data/ -print0 | tar -T - --null --create -f archive.tar",
+        "nl2bash_12877: tar cvf - `find . -mtime -1 -type f -print` > $archive.tar"
+      ],
+      "Explanations about Options": {
+        "--null": "Instruct subsequent -T options to read null-terminated names verbatim (disables\n special handling of names that start with a dash).",
+        "-i": "Ignore zeroed blocks in archive. Normally two consecutive 512-blocks filled with\n zeroes mean EOF and tar stops reading after encountering them. This option\n instructs it to read further and is useful when reading archives created with the\n -A option.",
+        "--create": "Create a new archive. Arguments supply the names of the files to be archived.\n Directories are archived recursively, unless the --no-recursion option is given.",
+        "-T": "Get names to extract or create from FILE.",
+        "-t": "List the contents of an archive. Arguments are optional. When given, they specify\n the names of the members to list.",
+        "-p": "extract information about file permissions (default for superuser)",
+        "-m": "Don't extract file modified time."
+      }
+    },
+    {
+      "Command": "echo",
+      "MP Summary": "display a line of text",
+      "Most Similar TLDR Task": "Append a message to the file",
+      "Most Similar TLDR Script": "echo \"{{Hello World}}\" >> {{file.txt}}",
+      "Most Similar NL2Bash Task": "Recursively removes all empty folders under current path, printing info message on each operation, and suppressing error messages if folder is not empty.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find -type d -empty -exec rmdir -vp --ignore-fail-on-non-empty {} +\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-empty": "File is empty and is either a regular file or a directory.",
+              "-type": "File is of type c:"
+            },
+            "rmdir": {
+              "mpsum": "remove empty directories",
+              "-v": "output a diagnostic for every directory processed",
+              "--ignore-fail-on-non-empty": "remove DIRECTORY and its ancestors; e.g., 'rmdir -p a/b/c' is similar to 'rmdir\n a/b/c a/b a'",
+              "-p": "remove DIRECTORY and its ancestors; e.g., 'rmdir -p a/b/c' is similar to 'rmdir\n a/b/c a/b a'"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "rmdir": {
+              "man1_rmdir_29545": "remov directori remov directori provid empti\nuse rm -r remov non-empti directori remov target parent directori use nest dir"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_1553: Run \"command\" on server \"host\" as user \"user\"",
+        "nl2bash_12876: Create a table from '111 22 3\\n4 555 66\\n' with columns separated by a single space",
+        "so_21927586: Parsing in bash - extract content from brackets"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_1553: echo \"command\" | ssh user@host",
+        "nl2bash_12876: echo -en '111 22 3\\n4 555 66\\n' | column -t | sed 's/ \\([0-9]\\)/\\1/g'",
+        "so_21927586: "
+      ],
+      "Explanations about Options": {
+        "-n": "do not output the trailing newline",
+        "-e": "enable interpretation of backslash escapes"
+      }
+    },
+    {
+      "Command": "paste",
+      "MP Summary": "merge lines of files",
+      "Most Similar TLDR Task": "Join all the lines into a single line, using TAB as delimiter",
+      "Most Similar TLDR Script": "paste -s {{file}}",
+      "Most Similar NL2Bash Task": "Recursively removes all empty folders under current path, printing info message on each operation, and suppressing error messages if folder is not empty.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find -type d -empty -exec rmdir -vp --ignore-fail-on-non-empty {} +\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-empty": "File is empty and is either a regular file or a directory.",
+              "-type": "File is of type c:"
+            },
+            "rmdir": {
+              "mpsum": "remove empty directories",
+              "-v": "output a diagnostic for every directory processed",
+              "--ignore-fail-on-non-empty": "remove DIRECTORY and its ancestors; e.g., 'rmdir -p a/b/c' is similar to 'rmdir\n a/b/c a/b a'",
+              "-p": "remove DIRECTORY and its ancestors; e.g., 'rmdir -p a/b/c' is similar to 'rmdir\n a/b/c a/b a'"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "rmdir": {
+              "man1_rmdir_29545": "remov directori remov directori provid empti\nuse rm -r remov non-empti directori remov target parent directori use nest dir"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_13739: Calculate the sum of all the numbers from 1 to 100000",
+        "nl2bash_9467: Print each line in \"f1\" and \"f2\" separated by a space and \"f3\" separated by a tab",
+        "nl2bash_9466: Print each line in \"f1\" and \"f2\" separated by a space and \"f3\" separated by a tab"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_13739: seq 100000 | paste -sd+ | bc -l",
+        "nl2bash_9467: paste <(paste -d\" \" f1 f2) f3",
+        "nl2bash_9466: paste <(paste -d\" \" f1 f2) f3"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "sed",
+      "MP Summary": "stream editor for filtering and transforming text",
+      "Most Similar TLDR Task": "Print the first 11 lines of a file",
+      "Most Similar TLDR Script": "sed 11q {{filename}}",
+      "Most Similar NL2Bash Task": "Recursively removes all empty folders under current path, printing info message on each operation, and suppressing error messages if folder is not empty.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find -type d -empty -exec rmdir -vp --ignore-fail-on-non-empty {} +\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-empty": "File is empty and is either a regular file or a directory.",
+              "-type": "File is of type c:"
+            },
+            "rmdir": {
+              "mpsum": "remove empty directories",
+              "-v": "output a diagnostic for every directory processed",
+              "--ignore-fail-on-non-empty": "remove DIRECTORY and its ancestors; e.g., 'rmdir -p a/b/c' is similar to 'rmdir\n a/b/c a/b a'",
+              "-p": "remove DIRECTORY and its ancestors; e.g., 'rmdir -p a/b/c' is similar to 'rmdir\n a/b/c a/b a'"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "rmdir": {
+              "man1_rmdir_29545": "remov directori remov directori provid empti\nuse rm -r remov non-empti directori remov target parent directori use nest dir"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_13738: Calculate the sum of all the numbers from 1 to 10",
+        "nl2bash_12876: Create a table from '111 22 3\\n4 555 66\\n' with columns separated by a single space",
+        "nl2bash_9959: Print the paths of all files in the current directory tree that contain \"abc\" replacing \"abc\" with \"xyz\""
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_13738: seq 10 | tr '[\\n]' '+' | sed -e 's/+/ + /g' -e's/ + $/\\n/' | xargs expr",
+        "nl2bash_12876: echo -en '111 22 3\\n4 555 66\\n' | column -t | sed 's/ \\([0-9]\\)/\\1/g'",
+        "nl2bash_9959: find . |xargs grep abc | sed 's/abc/xyz/g'"
+      ],
+      "Explanations about Options": {
+        "-e": "add the script to the commands to be executed"
+      }
+    },
+    {
+      "Command": "sort",
+      "MP Summary": "sort lines of text files",
+      "Most Similar TLDR Task": "Sort a file in descending order",
+      "Most Similar TLDR Script": "sort -r {{path/to/file}}",
+      "Most Similar NL2Bash Task": "Recursively removes all empty folders under current path, printing info message on each operation, and suppressing error messages if folder is not empty.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find -type d -empty -exec rmdir -vp --ignore-fail-on-non-empty {} +\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-empty": "File is empty and is either a regular file or a directory.",
+              "-type": "File is of type c:"
+            },
+            "rmdir": {
+              "mpsum": "remove empty directories",
+              "-v": "output a diagnostic for every directory processed",
+              "--ignore-fail-on-non-empty": "remove DIRECTORY and its ancestors; e.g., 'rmdir -p a/b/c' is similar to 'rmdir\n a/b/c a/b a'",
+              "-p": "remove DIRECTORY and its ancestors; e.g., 'rmdir -p a/b/c' is similar to 'rmdir\n a/b/c a/b a'"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "rmdir": {
+              "man1_rmdir_29545": "remov directori remov directori provid empti\nuse rm -r remov non-empti directori remov target parent directori use nest dir"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_9799: Print the first line of every file matching pattern 'file?B' in the xargstest/ directory tree",
+        "nl2bash_10384: print top 10 largest files and directories"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_9799: find xargstest/ -name 'file?B' | sort | xargs head -n1",
+        "nl2bash_10384: du -a . | sort -nr | head"
+      ],
+      "Explanations about Options": {
+        "-r": "reverse the result of comparisons",
+        "-n": "compare according to string numerical value"
+      }
+    },
+    {
+      "Command": "printf",
+      "MP Summary": "format and print data",
+      "Most Similar TLDR Task": "Print a text message",
+      "Most Similar TLDR Script": "printf \"{{%s\\n}}\" \"{{Hello world}}\"",
+      "Most Similar NL2Bash Task": "Recursively removes all empty folders under current path, printing info message on each operation, and suppressing error messages if folder is not empty.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find -type d -empty -exec rmdir -vp --ignore-fail-on-non-empty {} +\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-empty": "File is empty and is either a regular file or a directory.",
+              "-type": "File is of type c:"
+            },
+            "rmdir": {
+              "mpsum": "remove empty directories",
+              "-v": "output a diagnostic for every directory processed",
+              "--ignore-fail-on-non-empty": "remove DIRECTORY and its ancestors; e.g., 'rmdir -p a/b/c' is similar to 'rmdir\n a/b/c a/b a'",
+              "-p": "remove DIRECTORY and its ancestors; e.g., 'rmdir -p a/b/c' is similar to 'rmdir\n a/b/c a/b a'"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "rmdir": {
+              "man1_rmdir_29545": "remov directori remov directori provid empti\nuse rm -r remov non-empti directori remov target parent directori use nest dir"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_13737: Calculate the sum of all the numbers from -5 to 10",
+        "so_21927586: Parsing in bash - extract content from brackets"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_13737: seq -5 10 | xargs printf \"- - %s\" | xargs  | bc",
+        "so_21927586: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "which",
+      "MP Summary": "locate a command",
+      "Most Similar TLDR Task": "Search the PATH environment variable and display the location of any matching executables",
+      "Most Similar TLDR Script": "which {{executable}}",
+      "Most Similar NL2Bash Task": "Recursively removes all empty folders under current path, printing info message on each operation, and suppressing error messages if folder is not empty.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find -type d -empty -exec rmdir -vp --ignore-fail-on-non-empty {} +\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-empty": "File is empty and is either a regular file or a directory.",
+              "-type": "File is of type c:"
+            },
+            "rmdir": {
+              "mpsum": "remove empty directories",
+              "-v": "output a diagnostic for every directory processed",
+              "--ignore-fail-on-non-empty": "remove DIRECTORY and its ancestors; e.g., 'rmdir -p a/b/c' is similar to 'rmdir\n a/b/c a/b a'",
+              "-p": "remove DIRECTORY and its ancestors; e.g., 'rmdir -p a/b/c' is similar to 'rmdir\n a/b/c a/b a'"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "rmdir": {
+              "man1_rmdir_29545": "remov directori remov directori provid empti\nuse rm -r remov non-empti directori remov target parent directori use nest dir"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_1552: Run \"./configure\" with a new environment variable CC set to the full path of the command 'gcc'",
+        "nl2bash_12852: Create a symbolic link named \"$tmpdir/bam\" to the full path of command \"bam2\" found in \"$PATH\""
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_1552: CC=$(which gcc) ./configure",
+        "nl2bash_12852: ln -s \"$(which bam2)\" \"$tmpdir\"/bam"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "seq",
+      "MP Summary": "print a sequence of numbers",
+      "Most Similar TLDR Task": "Format output width to a minimum of 4 digits padding with zeros as necessary",
+      "Most Similar TLDR Script": "seq -f \"%04g\" 5 3 20",
+      "Most Similar NL2Bash Task": "Recursively removes all empty folders under current path, printing info message on each operation, and suppressing error messages if folder is not empty.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find -type d -empty -exec rmdir -vp --ignore-fail-on-non-empty {} +\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-empty": "File is empty and is either a regular file or a directory.",
+              "-type": "File is of type c:"
+            },
+            "rmdir": {
+              "mpsum": "remove empty directories",
+              "-v": "output a diagnostic for every directory processed",
+              "--ignore-fail-on-non-empty": "remove DIRECTORY and its ancestors; e.g., 'rmdir -p a/b/c' is similar to 'rmdir\n a/b/c a/b a'",
+              "-p": "remove DIRECTORY and its ancestors; e.g., 'rmdir -p a/b/c' is similar to 'rmdir\n a/b/c a/b a'"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "rmdir": {
+              "man1_rmdir_29545": "remov directori remov directori provid empti\nuse rm -r remov non-empti directori remov target parent directori use nest dir"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_13739: Calculate the sum of all the numbers from 1 to 100000",
+        "nl2bash_13738: Calculate the sum of all the numbers from 1 to 10",
+        "nl2bash_13737: Calculate the sum of all the numbers from -5 to 10"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_13739: seq 100000 | paste -sd+ | bc -l",
+        "nl2bash_13738: seq 10 | jq -s 'add'\n\n\nseq 10 | tr '[\\n]' '+' | sed -e 's/+/ + /g' -e's/ + $/\\n/' | xargs expr\n\n\nseq 10|jq -s add",
+        "nl2bash_13737: seq -5 10 | xargs printf \"- - %s\" | xargs  | bc\n\n\nseq -s+ -5 10 | bc"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "chown",
+      "MP Summary": "change file owner and group",
+      "Most Similar TLDR Task": "Change the owner of a file/directory to match a reference file",
+      "Most Similar TLDR Script": "chown --reference={{path/to/reference_file}} {{path/to/file_or_directory}}",
+      "Most Similar NL2Bash Task": "Recursively removes all empty folders under current path, printing info message on each operation, and suppressing error messages if folder is not empty.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find -type d -empty -exec rmdir -vp --ignore-fail-on-non-empty {} +\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-empty": "File is empty and is either a regular file or a directory.",
+              "-type": "File is of type c:"
+            },
+            "rmdir": {
+              "mpsum": "remove empty directories",
+              "-v": "output a diagnostic for every directory processed",
+              "--ignore-fail-on-non-empty": "remove DIRECTORY and its ancestors; e.g., 'rmdir -p a/b/c' is similar to 'rmdir\n a/b/c a/b a'",
+              "-p": "remove DIRECTORY and its ancestors; e.g., 'rmdir -p a/b/c' is similar to 'rmdir\n a/b/c a/b a'"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "rmdir": {
+              "man1_rmdir_29545": "remov directori remov directori provid empti\nuse rm -r remov non-empti directori remov target parent directori use nest dir"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_5120: Find files/directories that is under group 'root' or have no group and set their group to 'apache'",
+        "nl2bash_12754: recursively change user of the direct /home/test/ and all files into it to user test"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_5120: find /var/www -group root -o -nogroup -print0 | xargs -0 chown :apache",
+        "nl2bash_12754: sudo chown -R test /home/test"
+      ],
+      "Explanations about Options": {
+        "-R": "operate on files and directories recursively"
+      }
+    },
+    {
+      "Command": "cut",
+      "MP Summary": "remove sections from each line of files",
+      "Most Similar TLDR Task": "Cut out the fields 3 through to the end of each line, using a space as a delimiter",
+      "Most Similar TLDR Script": "cut -d'{{ }}' -f{{3-}}",
+      "Most Similar NL2Bash Task": "Recursively removes all empty folders under current path, printing info message on each operation, and suppressing error messages if folder is not empty.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find -type d -empty -exec rmdir -vp --ignore-fail-on-non-empty {} +\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-empty": "File is empty and is either a regular file or a directory.",
+              "-type": "File is of type c:"
+            },
+            "rmdir": {
+              "mpsum": "remove empty directories",
+              "-v": "output a diagnostic for every directory processed",
+              "--ignore-fail-on-non-empty": "remove DIRECTORY and its ancestors; e.g., 'rmdir -p a/b/c' is similar to 'rmdir\n a/b/c a/b a'",
+              "-p": "remove DIRECTORY and its ancestors; e.g., 'rmdir -p a/b/c' is similar to 'rmdir\n a/b/c a/b a'"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "rmdir": {
+              "man1_rmdir_29545": "remov directori remov directori provid empti\nuse rm -r remov non-empti directori remov target parent directori use nest dir"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_13705: Calculate the md5 sum of all files in \"/your/dir\" including content and filenames and following symbolic links",
+        "nl2bash_13704: Calculate the md5 sum of all files in \"/your/dir\" including content and filenames"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_13705: grep -aR -e . /your/dir | md5sum | cut -c-32",
+        "nl2bash_13704: grep -ar -e . /your/dir | md5sum | cut -c-32"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "md5sum",
+      "MP Summary": "compute and check MD5 message digest",
+      "Most Similar TLDR Task": "Read a file of MD5SUMs and verify all files have matching checksums",
+      "Most Similar TLDR Script": "md5sum -c {{filename.md5}}",
+      "Most Similar NL2Bash Task": "Recursively removes all empty folders under current path, printing info message on each operation, and suppressing error messages if folder is not empty.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find -type d -empty -exec rmdir -vp --ignore-fail-on-non-empty {} +\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-empty": "File is empty and is either a regular file or a directory.",
+              "-type": "File is of type c:"
+            },
+            "rmdir": {
+              "mpsum": "remove empty directories",
+              "-v": "output a diagnostic for every directory processed",
+              "--ignore-fail-on-non-empty": "remove DIRECTORY and its ancestors; e.g., 'rmdir -p a/b/c' is similar to 'rmdir\n a/b/c a/b a'",
+              "-p": "remove DIRECTORY and its ancestors; e.g., 'rmdir -p a/b/c' is similar to 'rmdir\n a/b/c a/b a'"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "rmdir": {
+              "man1_rmdir_29545": "remov directori remov directori provid empti\nuse rm -r remov non-empti directori remov target parent directori use nest dir"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_13705: Calculate the md5 sum of all files in \"/your/dir\" including content and filenames and following symbolic links",
+        "nl2bash_13704: Calculate the md5 sum of all files in \"/your/dir\" including content and filenames"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_13705: grep -aR -e . /your/dir | md5sum | cut -c-32",
+        "nl2bash_13704: grep -ar -e . /your/dir | md5sum | cut -c-32"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "kill",
+      "MP Summary": "send a signal to a process",
+      "Most Similar TLDR Task": "List available signal names (to be used without the `SIG` prefix)",
+      "Most Similar TLDR Script": "kill -l",
+      "Most Similar NL2Bash Task": "Recursively removes all empty folders under current path, printing info message on each operation, and suppressing error messages if folder is not empty.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find -type d -empty -exec rmdir -vp --ignore-fail-on-non-empty {} +\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-empty": "File is empty and is either a regular file or a directory.",
+              "-type": "File is of type c:"
+            },
+            "rmdir": {
+              "mpsum": "remove empty directories",
+              "-v": "output a diagnostic for every directory processed",
+              "--ignore-fail-on-non-empty": "remove DIRECTORY and its ancestors; e.g., 'rmdir -p a/b/c' is similar to 'rmdir\n a/b/c a/b a'",
+              "-p": "remove DIRECTORY and its ancestors; e.g., 'rmdir -p a/b/c' is similar to 'rmdir\n a/b/c a/b a'"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "rmdir": {
+              "man1_rmdir_29545": "remov directori remov directori provid empti\nuse rm -r remov non-empti directori remov target parent directori use nest dir"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_10460: Send SIGTERM signal to first process sent to background by the current shell.",
+        "nl2bash_10461: Send SIGTERM signal to last process sent to background by the current shell."
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_10460: kill %1",
+        "nl2bash_10461: kill $!"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "cp",
+      "MP Summary": "copy files and directories",
+      "Most Similar TLDR Task": "Copy a file into another directory, keeping the filename",
+      "Most Similar TLDR Script": "cp {{path/to/source_file.ext}} {{path/to/target_parent_directory}}",
+      "Most Similar NL2Bash Task": "Recursively removes all empty folders under current path, printing info message on each operation, and suppressing error messages if folder is not empty.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find -type d -empty -exec rmdir -vp --ignore-fail-on-non-empty {} +\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-empty": "File is empty and is either a regular file or a directory.",
+              "-type": "File is of type c:"
+            },
+            "rmdir": {
+              "mpsum": "remove empty directories",
+              "-v": "output a diagnostic for every directory processed",
+              "--ignore-fail-on-non-empty": "remove DIRECTORY and its ancestors; e.g., 'rmdir -p a/b/c' is similar to 'rmdir\n a/b/c a/b a'",
+              "-p": "remove DIRECTORY and its ancestors; e.g., 'rmdir -p a/b/c' is similar to 'rmdir\n a/b/c a/b a'"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "rmdir": {
+              "man1_rmdir_29545": "remov directori remov directori provid empti\nuse rm -r remov non-empti directori remov target parent directori use nest dir"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_10690: Recursively copies everything from '/source/path/*' to the '/destination/path/', preserving from overwriting existing files, and printing info message on each operation."
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_10690: cp -Rvn /source/path/* /destination/path/"
+      ],
+      "Explanations about Options": {
+        "-v": "explain what is being done",
+        "-R": "copy directories recursively",
+        "-n": "do not overwrite an existing file (overrides a previous -i option)"
+      }
+    },
+    {
+      "Command": "ls",
+      "MP Summary": "list directory contents",
+      "Most Similar TLDR Task": "List files one per line",
+      "Most Similar TLDR Script": "ls -1",
+      "Most Similar NL2Bash Task": "Recursively removes all empty folders under current path, printing info message on each operation, and suppressing error messages if folder is not empty.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find -type d -empty -exec rmdir -vp --ignore-fail-on-non-empty {} +\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-empty": "File is empty and is either a regular file or a directory.",
+              "-type": "File is of type c:"
+            },
+            "rmdir": {
+              "mpsum": "remove empty directories",
+              "-v": "output a diagnostic for every directory processed",
+              "--ignore-fail-on-non-empty": "remove DIRECTORY and its ancestors; e.g., 'rmdir -p a/b/c' is similar to 'rmdir\n a/b/c a/b a'",
+              "-p": "remove DIRECTORY and its ancestors; e.g., 'rmdir -p a/b/c' is similar to 'rmdir\n a/b/c a/b a'"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "rmdir": {
+              "man1_rmdir_29545": "remov directori remov directori provid empti\nuse rm -r remov non-empti directori remov target parent directori use nest dir"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_1427: Execute \"ls -l\" every 2 seconds and highlight the differences in runs"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_1427: watch -d ls -l"
+      ],
+      "Explanations about Options": {
+        "-l": "use a long listing format"
+      }
+    },
+    {
+      "Command": "tr",
+      "MP Summary": "translate or delete characters",
+      "Most Similar TLDR Task": "Strip out non-printable characters from a file",
+      "Most Similar TLDR Script": "tr -cd \"[:print:]\" < {{filename}}",
+      "Most Similar NL2Bash Task": "Recursively removes all empty folders under current path, printing info message on each operation, and suppressing error messages if folder is not empty.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find -type d -empty -exec rmdir -vp --ignore-fail-on-non-empty {} +\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-empty": "File is empty and is either a regular file or a directory.",
+              "-type": "File is of type c:"
+            },
+            "rmdir": {
+              "mpsum": "remove empty directories",
+              "-v": "output a diagnostic for every directory processed",
+              "--ignore-fail-on-non-empty": "remove DIRECTORY and its ancestors; e.g., 'rmdir -p a/b/c' is similar to 'rmdir\n a/b/c a/b a'",
+              "-p": "remove DIRECTORY and its ancestors; e.g., 'rmdir -p a/b/c' is similar to 'rmdir\n a/b/c a/b a'"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "rmdir": {
+              "man1_rmdir_29545": "remov directori remov directori provid empti\nuse rm -r remov non-empti directori remov target parent directori use nest dir"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_13738: Calculate the sum of all the numbers from 1 to 10"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_13738: seq 10 | tr '[\\n]' '+' | sed -e 's/+/ + /g' -e's/ + $/\\n/' | xargs expr"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "sudo",
+      "MP Summary": "execute a command as another user",
+      "Most Similar TLDR Task": "Edit a file as the superuser with your default editor",
+      "Most Similar TLDR Script": "sudo -e {{/etc/fstab}}",
+      "Most Similar NL2Bash Task": "Recursively removes all empty folders under current path, printing info message on each operation, and suppressing error messages if folder is not empty.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find -type d -empty -exec rmdir -vp --ignore-fail-on-non-empty {} +\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-empty": "File is empty and is either a regular file or a directory.",
+              "-type": "File is of type c:"
+            },
+            "rmdir": {
+              "mpsum": "remove empty directories",
+              "-v": "output a diagnostic for every directory processed",
+              "--ignore-fail-on-non-empty": "remove DIRECTORY and its ancestors; e.g., 'rmdir -p a/b/c' is similar to 'rmdir\n a/b/c a/b a'",
+              "-p": "remove DIRECTORY and its ancestors; e.g., 'rmdir -p a/b/c' is similar to 'rmdir\n a/b/c a/b a'"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "rmdir": {
+              "man1_rmdir_29545": "remov directori remov directori provid empti\nuse rm -r remov non-empti directori remov target parent directori use nest dir"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_13065: Force create a hard link in \"/usr/local/bin\" to \"findpdftext\"",
+        "nl2bash_12859: Create a symbolic link named \"/usr/local/bin/subl\" to \"/Applications/Sublime Text 2.app/Contents/SharedSupport/bin/subl\"",
+        "nl2bash_12754: recursively change user of the direct /home/test/ and all files into it to user test"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_13065: sudo ln -f \"findpdftext\" /usr/local/bin",
+        "nl2bash_12859: sudo ln -s \"/Applications/Sublime Text 2.app/Contents/SharedSupport/bin/subl\" /usr/local/bin/subl",
+        "nl2bash_12754: sudo chown -R test /home/test"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "tail",
+      "MP Summary": "output the last part of files",
+      "Most Similar TLDR Task": "Keep reading file until `Ctrl + C`",
+      "Most Similar TLDR Script": "tail -f {{file}}",
+      "Most Similar NL2Bash Task": "Recursively removes all empty folders under current path, printing info message on each operation, and suppressing error messages if folder is not empty.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find -type d -empty -exec rmdir -vp --ignore-fail-on-non-empty {} +\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-empty": "File is empty and is either a regular file or a directory.",
+              "-type": "File is of type c:"
+            },
+            "rmdir": {
+              "mpsum": "remove empty directories",
+              "-v": "output a diagnostic for every directory processed",
+              "--ignore-fail-on-non-empty": "remove DIRECTORY and its ancestors; e.g., 'rmdir -p a/b/c' is similar to 'rmdir\n a/b/c a/b a'",
+              "-p": "remove DIRECTORY and its ancestors; e.g., 'rmdir -p a/b/c' is similar to 'rmdir\n a/b/c a/b a'"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "rmdir": {
+              "man1_rmdir_29545": "remov directori remov directori provid empti\nuse rm -r remov non-empti directori remov target parent directori use nest dir"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_5352: Find the oldest *.sql file under current directory"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_5352: find . -name \\*.sql | xargs \\ls -1rc | tail -7 | head -1"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "rm",
+      "MP Summary": "remove files or directories",
+      "Most Similar TLDR Task": "Remove files in verbose mode, printing a message for each removed file",
+      "Most Similar TLDR Script": "rm -v {{path/to/directory/*}}",
+      "Most Similar NL2Bash Task": "Recursively removes all empty folders under current path, printing info message on each operation, and suppressing error messages if folder is not empty.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find -type d -empty -exec rmdir -vp --ignore-fail-on-non-empty {} +\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-empty": "File is empty and is either a regular file or a directory.",
+              "-type": "File is of type c:"
+            },
+            "rmdir": {
+              "mpsum": "remove empty directories",
+              "-v": "output a diagnostic for every directory processed",
+              "--ignore-fail-on-non-empty": "remove DIRECTORY and its ancestors; e.g., 'rmdir -p a/b/c' is similar to 'rmdir\n a/b/c a/b a'",
+              "-p": "remove DIRECTORY and its ancestors; e.g., 'rmdir -p a/b/c' is similar to 'rmdir\n a/b/c a/b a'"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "rmdir": {
+              "man1_rmdir_29545": "remov directori remov directori provid empti\nuse rm -r remov non-empti directori remov target parent directori use nest dir"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_5669: Recursively finds all '*.pdf' files in a current folder and removes them without prompting."
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_5669: find . -name '*.pdf' -exec rm -f {} \\;"
+      ],
+      "Explanations about Options": {
+        "-f": "ignore nonexistent files and arguments, never prompt"
+      }
+    },
+    {
+      "Command": "expr",
+      "MP Summary": "evaluate arguments as an expression",
+      "Most Similar TLDR Task": "Extract part of the string",
+      "Most Similar TLDR Script": "echo $(expr substr {{string}} {{position_to_start}} {{number_of_characters}}",
+      "Most Similar NL2Bash Task": "Recursively removes all empty folders under current path, printing info message on each operation, and suppressing error messages if folder is not empty.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find -type d -empty -exec rmdir -vp --ignore-fail-on-non-empty {} +\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-empty": "File is empty and is either a regular file or a directory.",
+              "-type": "File is of type c:"
+            },
+            "rmdir": {
+              "mpsum": "remove empty directories",
+              "-v": "output a diagnostic for every directory processed",
+              "--ignore-fail-on-non-empty": "remove DIRECTORY and its ancestors; e.g., 'rmdir -p a/b/c' is similar to 'rmdir\n a/b/c a/b a'",
+              "-p": "remove DIRECTORY and its ancestors; e.g., 'rmdir -p a/b/c' is similar to 'rmdir\n a/b/c a/b a'"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "rmdir": {
+              "man1_rmdir_29545": "remov directori remov directori provid empti\nuse rm -r remov non-empti directori remov target parent directori use nest dir"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_13738: Calculate the sum of all the numbers from 1 to 10"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_13738: seq 10 | tr '[\\n]' '+' | sed -e 's/+/ + /g' -e's/ + $/\\n/' | xargs expr"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "jq",
+      "MP Summary": "Command-line JSON processor",
+      "Most Similar TLDR Task": "Read JSON objects from a file into an array, and output it (inverse of `jq .[]`)",
+      "Most Similar TLDR Script": "jq --slurp . {{file.json}}",
+      "Most Similar NL2Bash Task": "Recursively removes all empty folders under current path, printing info message on each operation, and suppressing error messages if folder is not empty.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find -type d -empty -exec rmdir -vp --ignore-fail-on-non-empty {} +\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-empty": "File is empty and is either a regular file or a directory.",
+              "-type": "File is of type c:"
+            },
+            "rmdir": {
+              "mpsum": "remove empty directories",
+              "-v": "output a diagnostic for every directory processed",
+              "--ignore-fail-on-non-empty": "remove DIRECTORY and its ancestors; e.g., 'rmdir -p a/b/c' is similar to 'rmdir\n a/b/c a/b a'",
+              "-p": "remove DIRECTORY and its ancestors; e.g., 'rmdir -p a/b/c' is similar to 'rmdir\n a/b/c a/b a'"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "rmdir": {
+              "man1_rmdir_29545": "remov directori remov directori provid empti\nuse rm -r remov non-empti directori remov target parent directori use nest dir"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_13738: Calculate the sum of all the numbers from 1 to 10"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_13738: seq 10 | jq -s 'add'\n\n\nseq 10|jq -s add"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "touch",
+      "MP Summary": "change file timestamps",
+      "Most Similar TLDR Task": "Use the times from a file to set the times on a second file",
+      "Most Similar TLDR Script": "touch -r {{filename}} {{filename2}}",
+      "Most Similar NL2Bash Task": "Recursively removes all empty folders under current path, printing info message on each operation, and suppressing error messages if folder is not empty.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find -type d -empty -exec rmdir -vp --ignore-fail-on-non-empty {} +\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-empty": "File is empty and is either a regular file or a directory.",
+              "-type": "File is of type c:"
+            },
+            "rmdir": {
+              "mpsum": "remove empty directories",
+              "-v": "output a diagnostic for every directory processed",
+              "--ignore-fail-on-non-empty": "remove DIRECTORY and its ancestors; e.g., 'rmdir -p a/b/c' is similar to 'rmdir\n a/b/c a/b a'",
+              "-p": "remove DIRECTORY and its ancestors; e.g., 'rmdir -p a/b/c' is similar to 'rmdir\n a/b/c a/b a'"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "rmdir": {
+              "man1_rmdir_29545": "remov directori remov directori provid empti\nuse rm -r remov non-empti directori remov target parent directori use nest dir"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_13064: For each .def file under the current directory, create an empty .def.out file with current timestamp."
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_13064: find . -name '*.def' | sed 's/\\(.*\\)/\\1.out/' | xargs touch"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "test",
+      "MP Summary": "check file types and compare values",
+      "Most Similar TLDR Task": "Test if file exists",
+      "Most Similar TLDR Script": "test -e {{filename}}",
+      "Most Similar NL2Bash Task": "Recursively removes all empty folders under current path, printing info message on each operation, and suppressing error messages if folder is not empty.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find -type d -empty -exec rmdir -vp --ignore-fail-on-non-empty {} +\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-empty": "File is empty and is either a regular file or a directory.",
+              "-type": "File is of type c:"
+            },
+            "rmdir": {
+              "mpsum": "remove empty directories",
+              "-v": "output a diagnostic for every directory processed",
+              "--ignore-fail-on-non-empty": "remove DIRECTORY and its ancestors; e.g., 'rmdir -p a/b/c' is similar to 'rmdir\n a/b/c a/b a'",
+              "-p": "remove DIRECTORY and its ancestors; e.g., 'rmdir -p a/b/c' is similar to 'rmdir\n a/b/c a/b a'"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "rmdir": {
+              "man1_rmdir_29545": "remov directori remov directori provid empti\nuse rm -r remov non-empti directori remov target parent directori use nest dir"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_13515: Reattach a session and if necessary detach or  even  create first",
+        "nl2bash_12754: recursively change user of the direct /home/test/ and all files into it to user test"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_13515: screen -d -R -S test",
+        "nl2bash_12754: sudo chown -R test /home/test"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "file",
+      "MP Summary": "determine file type",
+      "Most Similar TLDR Task": "Look inside a zipped file and determine the file type(s) inside",
+      "Most Similar TLDR Script": "file -z {{foo.zip}}",
+      "Most Similar NL2Bash Task": "Recursively removes all empty folders under current path, printing info message on each operation, and suppressing error messages if folder is not empty.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find -type d -empty -exec rmdir -vp --ignore-fail-on-non-empty {} +\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-empty": "File is empty and is either a regular file or a directory.",
+              "-type": "File is of type c:"
+            },
+            "rmdir": {
+              "mpsum": "remove empty directories",
+              "-v": "output a diagnostic for every directory processed",
+              "--ignore-fail-on-non-empty": "remove DIRECTORY and its ancestors; e.g., 'rmdir -p a/b/c' is similar to 'rmdir\n a/b/c a/b a'",
+              "-p": "remove DIRECTORY and its ancestors; e.g., 'rmdir -p a/b/c' is similar to 'rmdir\n a/b/c a/b a'"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "rmdir": {
+              "man1_rmdir_29545": "remov directori remov directori provid empti\nuse rm -r remov non-empti directori remov target parent directori use nest dir"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_12867: Create a symbolic link to \"$file\" named \"/tmp/allfiles\""
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_12867: ln $file /tmp/allfiles"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "print",
+      "MP Summary": "execute programs via entries in the mailcap file",
+      "Most Similar TLDR Task": "Print action can be used to print any file on default run-mailcap tool",
+      "Most Similar TLDR Script": "print {{filename}}",
+      "Most Similar NL2Bash Task": "Recursively removes all empty folders under current path, printing info message on each operation, and suppressing error messages if folder is not empty.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find -type d -empty -exec rmdir -vp --ignore-fail-on-non-empty {} +\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-empty": "File is empty and is either a regular file or a directory.",
+              "-type": "File is of type c:"
+            },
+            "rmdir": {
+              "mpsum": "remove empty directories",
+              "-v": "output a diagnostic for every directory processed",
+              "--ignore-fail-on-non-empty": "remove DIRECTORY and its ancestors; e.g., 'rmdir -p a/b/c' is similar to 'rmdir\n a/b/c a/b a'",
+              "-p": "remove DIRECTORY and its ancestors; e.g., 'rmdir -p a/b/c' is similar to 'rmdir\n a/b/c a/b a'"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "rmdir": {
+              "man1_rmdir_29545": "remov directori remov directori provid empti\nuse rm -r remov non-empti directori remov target parent directori use nest dir"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_21927586: Parsing in bash - extract content from brackets"
+      ],
+      "Top-3 Scripts": [
+        "so_21927586: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "rmdir",
+      "MP Summary": "remove empty directories",
+      "Most Similar TLDR Task": "Remove the target and its parent directories (useful for nested dirs)",
+      "Most Similar TLDR Script": "rmdir -p {{path/to/directory}}",
+      "Most Similar NL2Bash Task": "Recursively removes all empty folders under current path, printing info message on each operation, and suppressing error messages if folder is not empty.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find -type d -empty -exec rmdir -vp --ignore-fail-on-non-empty {} +\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-empty": "File is empty and is either a regular file or a directory.",
+              "-type": "File is of type c:"
+            },
+            "rmdir": {
+              "mpsum": "remove empty directories",
+              "-v": "output a diagnostic for every directory processed",
+              "--ignore-fail-on-non-empty": "remove DIRECTORY and its ancestors; e.g., 'rmdir -p a/b/c' is similar to 'rmdir\n a/b/c a/b a'",
+              "-p": "remove DIRECTORY and its ancestors; e.g., 'rmdir -p a/b/c' is similar to 'rmdir\n a/b/c a/b a'"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "rmdir": {
+              "man1_rmdir_29545": "remov directori remov directori provid empti\nuse rm -r remov non-empti directori remov target parent directori use nest dir"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_11295: Recursively removes all empty folders under current path, printing info message on each operation, and suppressing error messages if folder is not empty."
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_11295: find -type d -empty -exec rmdir -vp --ignore-fail-on-non-empty {} +"
+      ],
+      "Explanations about Options": {
+        "-v": "output a diagnostic for every directory processed",
+        "--ignore-fail-on-non-empty": "remove DIRECTORY and its ancestors; e.g., 'rmdir -p a/b/c' is similar to 'rmdir\n a/b/c a/b a'",
+        "-p": "remove DIRECTORY and its ancestors; e.g., 'rmdir -p a/b/c' is similar to 'rmdir\n a/b/c a/b a'"
+      }
+    },
+    {
+      "Command": "awk",
+      "MP Summary": "pattern scanning and processing language",
+      "Most Similar TLDR Task": "Print the last column of each line in a file, using a comma (instead of space) as a field separator",
+      "Most Similar TLDR Script": "awk -F ',' '{print $NF}' {{filename}}",
+      "Most Similar NL2Bash Task": "Recursively removes all empty folders under current path, printing info message on each operation, and suppressing error messages if folder is not empty.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find -type d -empty -exec rmdir -vp --ignore-fail-on-non-empty {} +\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-empty": "File is empty and is either a regular file or a directory.",
+              "-type": "File is of type c:"
+            },
+            "rmdir": {
+              "mpsum": "remove empty directories",
+              "-v": "output a diagnostic for every directory processed",
+              "--ignore-fail-on-non-empty": "remove DIRECTORY and its ancestors; e.g., 'rmdir -p a/b/c' is similar to 'rmdir\n a/b/c a/b a'",
+              "-p": "remove DIRECTORY and its ancestors; e.g., 'rmdir -p a/b/c' is similar to 'rmdir\n a/b/c a/b a'"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "rmdir": {
+              "man1_rmdir_29545": "remov directori remov directori provid empti\nuse rm -r remov non-empti directori remov target parent directori use nest dir"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_21927586: Parsing in bash - extract content from brackets"
+      ],
+      "Top-3 Scripts": [
+        "so_21927586: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "watch",
+      "MP Summary": "execute a program periodically, showing output fullscreen",
+      "Most Similar TLDR Task": "Monitor files in the current directory",
+      "Most Similar TLDR Script": "watch {{ls}}",
+      "Most Similar NL2Bash Task": "Recursively removes all empty folders under current path, printing info message on each operation, and suppressing error messages if folder is not empty.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find -type d -empty -exec rmdir -vp --ignore-fail-on-non-empty {} +\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-empty": "File is empty and is either a regular file or a directory.",
+              "-type": "File is of type c:"
+            },
+            "rmdir": {
+              "mpsum": "remove empty directories",
+              "-v": "output a diagnostic for every directory processed",
+              "--ignore-fail-on-non-empty": "remove DIRECTORY and its ancestors; e.g., 'rmdir -p a/b/c' is similar to 'rmdir\n a/b/c a/b a'",
+              "-p": "remove DIRECTORY and its ancestors; e.g., 'rmdir -p a/b/c' is similar to 'rmdir\n a/b/c a/b a'"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "rmdir": {
+              "man1_rmdir_29545": "remov directori remov directori provid empti\nuse rm -r remov non-empti directori remov target parent directori use nest dir"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_1427: Execute \"ls -l\" every 2 seconds and highlight the differences in runs"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_1427: watch -d ls -l"
+      ],
+      "Explanations about Options": {
+        "-d": "Highlight the differences between successive updates. Option will read optional\n argument that changes highlight to be permanent, allowing to see what has changed\n at least once since first iteration."
+      }
+    },
+    {
+      "Command": "join",
+      "MP Summary": "join lines of two files on a common field",
+      "Most Similar TLDR Task": "Join two files on the first (default) field",
+      "Most Similar TLDR Script": "join {{file1}} {{file2}}",
+      "Most Similar NL2Bash Task": "Recursively removes all empty folders under current path, printing info message on each operation, and suppressing error messages if folder is not empty.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find -type d -empty -exec rmdir -vp --ignore-fail-on-non-empty {} +\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-empty": "File is empty and is either a regular file or a directory.",
+              "-type": "File is of type c:"
+            },
+            "rmdir": {
+              "mpsum": "remove empty directories",
+              "-v": "output a diagnostic for every directory processed",
+              "--ignore-fail-on-non-empty": "remove DIRECTORY and its ancestors; e.g., 'rmdir -p a/b/c' is similar to 'rmdir\n a/b/c a/b a'",
+              "-p": "remove DIRECTORY and its ancestors; e.g., 'rmdir -p a/b/c' is similar to 'rmdir\n a/b/c a/b a'"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "rmdir": {
+              "man1_rmdir_29545": "remov directori remov directori provid empti\nuse rm -r remov non-empti directori remov target parent directori use nest dir"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_12875: Create a table containing all information from S43.txt and S44.txt, merging lines where the first field of both files matches, and keeping the line that starts with \"Gene\" at the start of the file."
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_12875: join -a1 -a2 <(sed s/^Gene/00ne/ S43.txt | sort) <(sed s/^Gene/00ne/ S44.txt | sort) | column -t | sed s/^00ne/Gene/"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "perl",
+      "MP Summary": "The Perl 5 language interpreter",
+      "Most Similar TLDR Task": "Run a find/replace expression on a file, saving the original file with a given extension",
+      "Most Similar TLDR Script": "perl -p -i'.old' -e 's/{{find}}/{{replace}}/g' {{filename}}",
+      "Most Similar NL2Bash Task": "Recursively removes all empty folders under current path, printing info message on each operation, and suppressing error messages if folder is not empty.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find -type d -empty -exec rmdir -vp --ignore-fail-on-non-empty {} +\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-empty": "File is empty and is either a regular file or a directory.",
+              "-type": "File is of type c:"
+            },
+            "rmdir": {
+              "mpsum": "remove empty directories",
+              "-v": "output a diagnostic for every directory processed",
+              "--ignore-fail-on-non-empty": "remove DIRECTORY and its ancestors; e.g., 'rmdir -p a/b/c' is similar to 'rmdir\n a/b/c a/b a'",
+              "-p": "remove DIRECTORY and its ancestors; e.g., 'rmdir -p a/b/c' is similar to 'rmdir\n a/b/c a/b a'"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "rmdir": {
+              "man1_rmdir_29545": "remov directori remov directori provid empti\nuse rm -r remov non-empti directori remov target parent directori use nest dir"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_3553: Find all files under current directory that match the case insensitive regex .\\|./.git and replace all occurrences of the regex $1 (literal) with $upper2 (literal) in these files"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_3553: find . -type f \\! -iregex '.\\|./.git' -exec perl -i -pe 's/$1/$upper2/gi' {} \\;"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "column",
+      "MP Summary": "columnate lists",
+      "Most Similar TLDR Task": "Fill columns before filling rows",
+      "Most Similar TLDR Script": "printf \"header1\\nbar\\nfoobar\\n\" | column -c {{30}} -x",
+      "Most Similar NL2Bash Task": "Recursively removes all empty folders under current path, printing info message on each operation, and suppressing error messages if folder is not empty.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find -type d -empty -exec rmdir -vp --ignore-fail-on-non-empty {} +\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-empty": "File is empty and is either a regular file or a directory.",
+              "-type": "File is of type c:"
+            },
+            "rmdir": {
+              "mpsum": "remove empty directories",
+              "-v": "output a diagnostic for every directory processed",
+              "--ignore-fail-on-non-empty": "remove DIRECTORY and its ancestors; e.g., 'rmdir -p a/b/c' is similar to 'rmdir\n a/b/c a/b a'",
+              "-p": "remove DIRECTORY and its ancestors; e.g., 'rmdir -p a/b/c' is similar to 'rmdir\n a/b/c a/b a'"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "rmdir": {
+              "man1_rmdir_29545": "remov directori remov directori provid empti\nuse rm -r remov non-empti directori remov target parent directori use nest dir"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_12876: Create a table from '111 22 3\\n4 555 66\\n' with columns separated by a single space",
+        "nl2bash_12875: Create a table containing all information from S43.txt and S44.txt, merging lines where the first field of both files matches, and keeping the line that starts with \"Gene\" at the start of the file."
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_12876: echo -en '111 22 3\\n4 555 66\\n' | column -t | sed 's/ \\([0-9]\\)/\\1/g'",
+        "nl2bash_12875: join -a1 -a2 <(sed s/^Gene/00ne/ S43.txt | sort) <(sed s/^Gene/00ne/ S44.txt | sort) | column -t | sed s/^00ne/Gene/"
+      ],
+      "Explanations about Options": {
+        "-t": "Determine the number of columns the input contains and create a table. Columns are\n delimited with whitespace, by default, or with the characters supplied using the -s\n option. Useful for pretty-printing displays."
+      }
+    },
+    {
+      "Command": "du",
+      "MP Summary": "estimate file space usage",
+      "Most Similar TLDR Task": "List the human-readable size of all .jpg files in subdirectories of the current directory, and show a cumulative total at the end",
+      "Most Similar TLDR Script": "du -ch */*.jpg",
+      "Most Similar NL2Bash Task": "Recursively removes all empty folders under current path, printing info message on each operation, and suppressing error messages if folder is not empty.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find -type d -empty -exec rmdir -vp --ignore-fail-on-non-empty {} +\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-empty": "File is empty and is either a regular file or a directory.",
+              "-type": "File is of type c:"
+            },
+            "rmdir": {
+              "mpsum": "remove empty directories",
+              "-v": "output a diagnostic for every directory processed",
+              "--ignore-fail-on-non-empty": "remove DIRECTORY and its ancestors; e.g., 'rmdir -p a/b/c' is similar to 'rmdir\n a/b/c a/b a'",
+              "-p": "remove DIRECTORY and its ancestors; e.g., 'rmdir -p a/b/c' is similar to 'rmdir\n a/b/c a/b a'"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "rmdir": {
+              "man1_rmdir_29545": "remov directori remov directori provid empti\nuse rm -r remov non-empti directori remov target parent directori use nest dir"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_10384: print top 10 largest files and directories"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_10384: du -a . | sort -nr | head"
+      ],
+      "Explanations about Options": {
+        "-a": "write counts for all files, not just directories"
+      }
+    },
+    {
+      "Command": "bc",
+      "MP Summary": "An arbitrary precision calculator language",
+      "Most Similar TLDR Task": "Calculate the result of an expression",
+      "Most Similar TLDR Script": "bc <<< \"(1 + 2) * 2 ^ 2\"",
+      "Most Similar NL2Bash Task": "Recursively removes all empty folders under current path, printing info message on each operation, and suppressing error messages if folder is not empty.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find -type d -empty -exec rmdir -vp --ignore-fail-on-non-empty {} +\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-empty": "File is empty and is either a regular file or a directory.",
+              "-type": "File is of type c:"
+            },
+            "rmdir": {
+              "mpsum": "remove empty directories",
+              "-v": "output a diagnostic for every directory processed",
+              "--ignore-fail-on-non-empty": "remove DIRECTORY and its ancestors; e.g., 'rmdir -p a/b/c' is similar to 'rmdir\n a/b/c a/b a'",
+              "-p": "remove DIRECTORY and its ancestors; e.g., 'rmdir -p a/b/c' is similar to 'rmdir\n a/b/c a/b a'"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "rmdir": {
+              "man1_rmdir_29545": "remov directori remov directori provid empti\nuse rm -r remov non-empti directori remov target parent directori use nest dir"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_13739: Calculate the sum of all the numbers from 1 to 100000",
+        "nl2bash_13737: Calculate the sum of all the numbers from -5 to 10"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_13739: seq 100000 | paste -sd+ | bc -l",
+        "nl2bash_13737: seq -5 10 | xargs printf \"- - %s\" | xargs  | bc\n\n\nseq -s+ -5 10 | bc"
+      ],
+      "Explanations about Options": {
+        "-l": "Define the standard math library."
+      }
+    },
+    {
+      "Command": "exit",
+      "MP Summary": "cause the shell to exit",
+      "Most Similar TLDR Task": "Exit the shell with the exit code of the last command executed",
+      "Most Similar TLDR Script": "exit",
+      "Most Similar NL2Bash Task": "Recursively removes all empty folders under current path, printing info message on each operation, and suppressing error messages if folder is not empty.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find -type d -empty -exec rmdir -vp --ignore-fail-on-non-empty {} +\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-empty": "File is empty and is either a regular file or a directory.",
+              "-type": "File is of type c:"
+            },
+            "rmdir": {
+              "mpsum": "remove empty directories",
+              "-v": "output a diagnostic for every directory processed",
+              "--ignore-fail-on-non-empty": "remove DIRECTORY and its ancestors; e.g., 'rmdir -p a/b/c' is similar to 'rmdir\n a/b/c a/b a'",
+              "-p": "remove DIRECTORY and its ancestors; e.g., 'rmdir -p a/b/c' is similar to 'rmdir\n a/b/c a/b a'"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "rmdir": {
+              "man1_rmdir_29545": "remov directori remov directori provid empti\nuse rm -r remov non-empti directori remov target parent directori use nest dir"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_21927586: Parsing in bash - extract content from brackets"
+      ],
+      "Top-3 Scripts": [
+        "so_21927586: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "ssh",
+      "MP Summary": "OpenSSH SSH client (remote login program)",
+      "Most Similar TLDR Task": "Run a command on a remote server",
+      "Most Similar TLDR Script": "ssh {{remote_host}} {{command -with -flags}}",
+      "Most Similar NL2Bash Task": "Recursively removes all empty folders under current path, printing info message on each operation, and suppressing error messages if folder is not empty.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find -type d -empty -exec rmdir -vp --ignore-fail-on-non-empty {} +\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-empty": "File is empty and is either a regular file or a directory.",
+              "-type": "File is of type c:"
+            },
+            "rmdir": {
+              "mpsum": "remove empty directories",
+              "-v": "output a diagnostic for every directory processed",
+              "--ignore-fail-on-non-empty": "remove DIRECTORY and its ancestors; e.g., 'rmdir -p a/b/c' is similar to 'rmdir\n a/b/c a/b a'",
+              "-p": "remove DIRECTORY and its ancestors; e.g., 'rmdir -p a/b/c' is similar to 'rmdir\n a/b/c a/b a'"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "rmdir": {
+              "man1_rmdir_29545": "remov directori remov directori provid empti\nuse rm -r remov non-empti directori remov target parent directori use nest dir"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_1553: Run \"command\" on server \"host\" as user \"user\"",
+        "nl2bash_13567: Forward all connections to client localhost 3309 via the SSH tunnel to \"mysql_access_server\" and then connect to host \"sqlmaster.example.com\" on port 3306"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_1553: echo \"command\" | ssh user@host",
+        "nl2bash_13567: ssh -f mysql_access_server -L 3309:sqlmaster.example.com:3306 -N"
+      ],
+      "Explanations about Options": {
+        "-f": "Requests ssh to go to background just before command execution. This is useful if\n ssh is going to ask for passwords or passphrases, but the user wants it in the\n background. This implies -n. The recommended way to start X11 programs at a remote\n site is with something like ssh -f host xterm.",
+        "-N": "Do not execute a remote command. This is useful for just forwarding ports."
+      }
+    },
+    {
+      "Command": "screen",
+      "MP Summary": "screen manager with VT100/ANSI terminal emulation",
+      "Most Similar TLDR Task": "Start a new named screen session",
+      "Most Similar TLDR Script": "screen -S {{session_name}}",
+      "Most Similar NL2Bash Task": "Recursively removes all empty folders under current path, printing info message on each operation, and suppressing error messages if folder is not empty.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find -type d -empty -exec rmdir -vp --ignore-fail-on-non-empty {} +\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-empty": "File is empty and is either a regular file or a directory.",
+              "-type": "File is of type c:"
+            },
+            "rmdir": {
+              "mpsum": "remove empty directories",
+              "-v": "output a diagnostic for every directory processed",
+              "--ignore-fail-on-non-empty": "remove DIRECTORY and its ancestors; e.g., 'rmdir -p a/b/c' is similar to 'rmdir\n a/b/c a/b a'",
+              "-p": "remove DIRECTORY and its ancestors; e.g., 'rmdir -p a/b/c' is similar to 'rmdir\n a/b/c a/b a'"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "rmdir": {
+              "man1_rmdir_29545": "remov directori remov directori provid empti\nuse rm -r remov non-empti directori remov target parent directori use nest dir"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_13515: Reattach a session and if necessary detach or  even  create first"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_13515: screen -d -R -S test"
+      ],
+      "Explanations about Options": {
+        "-d": "does not start screen, but detaches the elsewhere running screen session. It has the\n same effect as typing \"C-a d\" from screen's controlling terminal. -D is the\n equivalent to the power detach key. If no session can be detached, this option is\n ignored. In combination with the -r/-R option more powerful effects can be achieved:",
+        "-S": "When creating a new session, this option can be used to specify a meaningful name for\n the session. This name identifies the session for \"screen -list\" and \"screen -r\"\n actions. It substitutes the default [tty.host] suffix."
+      }
+    },
+    {
+      "Command": "apt",
+      "MP Summary": "command-line interface",
+      "Most Similar TLDR Task": "Search for a given package",
+      "Most Similar TLDR Script": "apt search {{package}}",
+      "Most Similar NL2Bash Task": "Recursively removes all empty folders under current path, printing info message on each operation, and suppressing error messages if folder is not empty.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find -type d -empty -exec rmdir -vp --ignore-fail-on-non-empty {} +\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-empty": "File is empty and is either a regular file or a directory.",
+              "-type": "File is of type c:"
+            },
+            "rmdir": {
+              "mpsum": "remove empty directories",
+              "-v": "output a diagnostic for every directory processed",
+              "--ignore-fail-on-non-empty": "remove DIRECTORY and its ancestors; e.g., 'rmdir -p a/b/c' is similar to 'rmdir\n a/b/c a/b a'",
+              "-p": "remove DIRECTORY and its ancestors; e.g., 'rmdir -p a/b/c' is similar to 'rmdir\n a/b/c a/b a'"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "rmdir": {
+              "man1_rmdir_29545": "remov directori remov directori provid empti\nuse rm -r remov non-empti directori remov target parent directori use nest dir"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_12860: Create a symbolic link named \"foo\" to \"/var/cache/apt/archives/bash_4.3-14ubuntu1_amd64.deb\""
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_12860: ln -s   /var/cache/apt/archives/bash_4.3-14ubuntu1_amd64.deb foo"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "bam",
+      "MP Summary": "fast and flexible build system",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "Recursively removes all empty folders under current path, printing info message on each operation, and suppressing error messages if folder is not empty.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find -type d -empty -exec rmdir -vp --ignore-fail-on-non-empty {} +\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-empty": "File is empty and is either a regular file or a directory.",
+              "-type": "File is of type c:"
+            },
+            "rmdir": {
+              "mpsum": "remove empty directories",
+              "-v": "output a diagnostic for every directory processed",
+              "--ignore-fail-on-non-empty": "remove DIRECTORY and its ancestors; e.g., 'rmdir -p a/b/c' is similar to 'rmdir\n a/b/c a/b a'",
+              "-p": "remove DIRECTORY and its ancestors; e.g., 'rmdir -p a/b/c' is similar to 'rmdir\n a/b/c a/b a'"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "rmdir": {
+              "man1_rmdir_29545": "remov directori remov directori provid empti\nuse rm -r remov non-empti directori remov target parent directori use nest dir"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_12852: Create a symbolic link named \"$tmpdir/bam\" to the full path of command \"bam2\" found in \"$PATH\""
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_12852: ln -s \"$(which bam2)\" \"$tmpdir\"/bam"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "dir",
+      "MP Summary": "list directory contents",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "Recursively removes all empty folders under current path, printing info message on each operation, and suppressing error messages if folder is not empty.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find -type d -empty -exec rmdir -vp --ignore-fail-on-non-empty {} +\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-empty": "File is empty and is either a regular file or a directory.",
+              "-type": "File is of type c:"
+            },
+            "rmdir": {
+              "mpsum": "remove empty directories",
+              "-v": "output a diagnostic for every directory processed",
+              "--ignore-fail-on-non-empty": "remove DIRECTORY and its ancestors; e.g., 'rmdir -p a/b/c' is similar to 'rmdir\n a/b/c a/b a'",
+              "-p": "remove DIRECTORY and its ancestors; e.g., 'rmdir -p a/b/c' is similar to 'rmdir\n a/b/c a/b a'"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "rmdir": {
+              "man1_rmdir_29545": "remov directori remov directori provid empti\nuse rm -r remov non-empti directori remov target parent directori use nest dir"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_13705: Calculate the md5 sum of all files in \"/your/dir\" including content and filenames and following symbolic links",
+        "nl2bash_13704: Calculate the md5 sum of all files in \"/your/dir\" including content and filenames"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_13705: grep -aR -e . /your/dir | md5sum | cut -c-32",
+        "nl2bash_13704: grep -ar -e . /your/dir | md5sum | cut -c-32"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "egrep",
+      "MP Summary": "print lines that match patterns",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "Recursively removes all empty folders under current path, printing info message on each operation, and suppressing error messages if folder is not empty.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find -type d -empty -exec rmdir -vp --ignore-fail-on-non-empty {} +\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-empty": "File is empty and is either a regular file or a directory.",
+              "-type": "File is of type c:"
+            },
+            "rmdir": {
+              "mpsum": "remove empty directories",
+              "-v": "output a diagnostic for every directory processed",
+              "--ignore-fail-on-non-empty": "remove DIRECTORY and its ancestors; e.g., 'rmdir -p a/b/c' is similar to 'rmdir\n a/b/c a/b a'",
+              "-p": "remove DIRECTORY and its ancestors; e.g., 'rmdir -p a/b/c' is similar to 'rmdir\n a/b/c a/b a'"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "rmdir": {
+              "man1_rmdir_29545": "remov directori remov directori provid empti\nuse rm -r remov non-empti directori remov target parent directori use nest dir"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_3463: Find all files under /usr/tom that matches the extended regex '*.pl| *.pm'   in their names and also matches the regex <PATTERN> in their contents",
+        "nl2bash_3464: Find all files under /usr/tom that matches the extended regex '*.pl| *.pm'   in their names and also matches the regex <PATTERN> in their contents"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_3463: find /usr/tom | egrep '*.pl| *.pm' | xargs cat | grep <PATTERN>",
+        "nl2bash_3464: find /usr/tom | egrep '*.pl| *.pm' | xargs cat | grep <PATTERN>"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "local",
+      "MP Summary": "Postfix local mail delivery",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "Recursively removes all empty folders under current path, printing info message on each operation, and suppressing error messages if folder is not empty.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find -type d -empty -exec rmdir -vp --ignore-fail-on-non-empty {} +\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-empty": "File is empty and is either a regular file or a directory.",
+              "-type": "File is of type c:"
+            },
+            "rmdir": {
+              "mpsum": "remove empty directories",
+              "-v": "output a diagnostic for every directory processed",
+              "--ignore-fail-on-non-empty": "remove DIRECTORY and its ancestors; e.g., 'rmdir -p a/b/c' is similar to 'rmdir\n a/b/c a/b a'",
+              "-p": "remove DIRECTORY and its ancestors; e.g., 'rmdir -p a/b/c' is similar to 'rmdir\n a/b/c a/b a'"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "rmdir": {
+              "man1_rmdir_29545": "remov directori remov directori provid empti\nuse rm -r remov non-empti directori remov target parent directori use nest dir"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_13065: Force create a hard link in \"/usr/local/bin\" to \"findpdftext\"",
+        "nl2bash_12859: Create a symbolic link named \"/usr/local/bin/subl\" to \"/Applications/Sublime Text 2.app/Contents/SharedSupport/bin/subl\""
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_13065: sudo ln -f \"findpdftext\" /usr/local/bin",
+        "nl2bash_12859: sudo ln -s \"/Applications/Sublime Text 2.app/Contents/SharedSupport/bin/subl\" /usr/local/bin/subl"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "bin",
+      "MP Summary": "presumably creating or updating package.json and running any other initialization-related operations. The init command is transformed to a corresponding npx operation as follows: \u00b7 npm init foo -> npx create-foo \u00b7 npm init @usr/foo -> npx @usr/create-foo \u00b7 npm init @usr -> npx @usr/create Any  additional  options  will  be passed directly to the command, so npm init foo --hello will map to npx create-foo --hello. If the initializer is omitted (by just calling npm init), init will fall  back  to  legacy init  behavior.  It  will  ask you a bunch of questions, and then write a package.json for you. It will attempt to make reasonable guesses based on  existing  fields,  dependencies, and  options selected. It is strictly additive, so it will keep any fields and values that were already set. You can also use -y/--yes to skip the questionnaire altogether.  If  you pass --scope, it will create a scoped package. See Also \u00b7 https://github.com/isaacs/init-package-json \u00b7 npm help package.json \u00b7 npm help version \u00b7 npm help scope April 2020                                NPM-INIT(1)",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "Recursively removes all empty folders under current path, printing info message on each operation, and suppressing error messages if folder is not empty.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find -type d -empty -exec rmdir -vp --ignore-fail-on-non-empty {} +\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-empty": "File is empty and is either a regular file or a directory.",
+              "-type": "File is of type c:"
+            },
+            "rmdir": {
+              "mpsum": "remove empty directories",
+              "-v": "output a diagnostic for every directory processed",
+              "--ignore-fail-on-non-empty": "remove DIRECTORY and its ancestors; e.g., 'rmdir -p a/b/c' is similar to 'rmdir\n a/b/c a/b a'",
+              "-p": "remove DIRECTORY and its ancestors; e.g., 'rmdir -p a/b/c' is similar to 'rmdir\n a/b/c a/b a'"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "rmdir": {
+              "man1_rmdir_29545": "remov directori remov directori provid empti\nuse rm -r remov non-empti directori remov target parent directori use nest dir"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_13065: Force create a hard link in \"/usr/local/bin\" to \"findpdftext\"",
+        "nl2bash_12859: Create a symbolic link named \"/usr/local/bin/subl\" to \"/Applications/Sublime Text 2.app/Contents/SharedSupport/bin/subl\"",
+        "nl2bash_12858: Create a symbolic link named \"/usr/bin/my-editor\" to \"/usr/share/my-editor/my-editor-executable\" and attemp to hard link directories"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_13065: sudo ln -f \"findpdftext\" /usr/local/bin",
+        "nl2bash_12859: sudo ln -s \"/Applications/Sublime Text 2.app/Contents/SharedSupport/bin/subl\" /usr/local/bin/subl",
+        "nl2bash_12858: ln -sF /usr/share/my-editor/my-editor-executable   /usr/bin/my-editor"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "cache",
+      "MP Summary": "cache parameters",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "Recursively removes all empty folders under current path, printing info message on each operation, and suppressing error messages if folder is not empty.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find -type d -empty -exec rmdir -vp --ignore-fail-on-non-empty {} +\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-empty": "File is empty and is either a regular file or a directory.",
+              "-type": "File is of type c:"
+            },
+            "rmdir": {
+              "mpsum": "remove empty directories",
+              "-v": "output a diagnostic for every directory processed",
+              "--ignore-fail-on-non-empty": "remove DIRECTORY and its ancestors; e.g., 'rmdir -p a/b/c' is similar to 'rmdir\n a/b/c a/b a'",
+              "-p": "remove DIRECTORY and its ancestors; e.g., 'rmdir -p a/b/c' is similar to 'rmdir\n a/b/c a/b a'"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "rmdir": {
+              "man1_rmdir_29545": "remov directori remov directori provid empti\nuse rm -r remov non-empti directori remov target parent directori use nest dir"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_12860: Create a symbolic link named \"foo\" to \"/var/cache/apt/archives/bash_4.3-14ubuntu1_amd64.deb\""
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_12860: ln -s   /var/cache/apt/archives/bash_4.3-14ubuntu1_amd64.deb foo"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "then",
+      "MP Summary": "presumably creating or updating package.json and running any other initialization-related operations. The init command is transformed to a corresponding npx operation as follows: \u00b7 npm init foo -> npx create-foo \u00b7 npm init @usr/foo -> npx @usr/create-foo \u00b7 npm init @usr -> npx @usr/create Any  additional  options  will  be passed directly to the command, so npm init foo --hello will map to npx create-foo --hello. If the initializer is omitted (by just calling npm init), init will fall  back  to  legacy init  behavior.  It  will  ask you a bunch of questions, and then write a package.json for you. It will attempt to make reasonable guesses based on  existing  fields,  dependencies, and  options selected. It is strictly additive, so it will keep any fields and values that were already set. You can also use -y/--yes to skip the questionnaire altogether.  If  you pass --scope, it will create a scoped package. See Also \u00b7 https://github.com/isaacs/init-package-json \u00b7 npm help package.json \u00b7 npm help version \u00b7 npm help scope April 2020                                NPM-INIT(1)",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "Recursively removes all empty folders under current path, printing info message on each operation, and suppressing error messages if folder is not empty.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find -type d -empty -exec rmdir -vp --ignore-fail-on-non-empty {} +\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-empty": "File is empty and is either a regular file or a directory.",
+              "-type": "File is of type c:"
+            },
+            "rmdir": {
+              "mpsum": "remove empty directories",
+              "-v": "output a diagnostic for every directory processed",
+              "--ignore-fail-on-non-empty": "remove DIRECTORY and its ancestors; e.g., 'rmdir -p a/b/c' is similar to 'rmdir\n a/b/c a/b a'",
+              "-p": "remove DIRECTORY and its ancestors; e.g., 'rmdir -p a/b/c' is similar to 'rmdir\n a/b/c a/b a'"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "rmdir": {
+              "man1_rmdir_29545": "remov directori remov directori provid empti\nuse rm -r remov non-empti directori remov target parent directori use nest dir"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_21927586: Parsing in bash - extract content from brackets"
+      ],
+      "Top-3 Scripts": [
+        "so_21927586: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "and",
+      "MP Summary": "auto nice daemon",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "Recursively removes all empty folders under current path, printing info message on each operation, and suppressing error messages if folder is not empty.",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find -type d -empty -exec rmdir -vp --ignore-fail-on-non-empty {} +\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-empty": "File is empty and is either a regular file or a directory.",
+              "-type": "File is of type c:"
+            },
+            "rmdir": {
+              "mpsum": "remove empty directories",
+              "-v": "output a diagnostic for every directory processed",
+              "--ignore-fail-on-non-empty": "remove DIRECTORY and its ancestors; e.g., 'rmdir -p a/b/c' is similar to 'rmdir\n a/b/c a/b a'",
+              "-p": "remove DIRECTORY and its ancestors; e.g., 'rmdir -p a/b/c' is similar to 'rmdir\n a/b/c a/b a'"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "rmdir": {
+              "man1_rmdir_29545": "remov directori remov directori provid empti\nuse rm -r remov non-empti directori remov target parent directori use nest dir"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_21927586: Parsing in bash - extract content from brackets"
+      ],
+      "Top-3 Scripts": [
+        "so_21927586: "
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

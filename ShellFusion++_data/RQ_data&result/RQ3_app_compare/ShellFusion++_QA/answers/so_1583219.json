@@ -1,0 +1,70 @@
+{
+  "Query": "How to do a recursive find/replace of a string with awk or sed?",
+  "Answers": [
+    {
+      "Command": "sed",
+      "Top-3 Similar Questions": [
+        "so_15920276: Find and Replace string in all files recursive using grep and sed",
+        "so_38229462: Grep/Sed: How to do a recursive find/replace of a string?",
+        "so_33455069: Awk/Sed: How to do a recursive find/replace of a string in files with a certain file extension?"
+      ],
+      "Top-3 Scripts": [
+        "so_15920276: grep -rl $oldstring /path/to/folder | xargs sed -i s@$oldstring@$newstring@g",
+        "so_38229462: sed -i.bak 's/httpaccess/httpaccesabc/g' access.html\n\nsed -i.bak 's/httpaccess/&abc/g' access.html",
+        "so_33455069: sed -i 's/previousword/newword/g' /myprojects/file1.cpp /myprojects/file2.cpp ...\n\nfind /myprojects -type f -name '*.cpp' -print0 | \n  xargs -0 echo sed -i 's/previousword/newword/g'\n\nfind /myprojects -type f -name '*.cpp' -print0 | \n   xargs -0 -n 1 sed -i 's/previousword/newword/g'\n\nfind /myprojects -type f -name '*.cpp' -exec sed -i 's/previousword/newword/g' '{}' +"
+      ]
+    },
+    {
+      "Command": "file",
+      "Top-3 Similar Questions": [
+        "so_31562966: Replacing a string having double slash using sed or awk in linux",
+        "ul_74787: Use sed to find whole word and replace",
+        "so_30061664: recursive grep and sed"
+      ],
+      "Top-3 Scripts": [
+        "so_31562966: sed 's~\\(<property *name=\"sourceUrl\" *value=\"\\)[^?]*~\\1file:///tmp/ETL-Files~g' file",
+        "ul_74787: $ sed 's/\\(^\\| \\)test3\\( \\|$\\)/\\1/g' file\ntest3.legacy test4.legacy test3.kami\n\n$ sed 's/test3\\.\\?[^ ]* *//g' file\ntest4.legacy",
+        "so_24830016: sed -r 's|(style=\"position:absolute;top:[0-9]+)(px)?(;left:[0-9]+)(px)?(\">)|\\1px\\3px\\5|g' file\n\nsed -r -e 's@((top|left):[0-9]+)(px)?@\\1px@g' file"
+      ]
+    },
+    {
+      "Command": "awk",
+      "Top-3 Similar Questions": [
+        "so_40502864: Replacing a pattern with awk or sed",
+        "ul_432698: Find and Replace Duplicates",
+        "so_61023717: Find and replace each instance of a single string with another from a list or file"
+      ],
+      "Top-3 Scripts": [
+        "so_40502864: $ awk '{gsub(/,[^|]*/,\"\")} 1' ip.txt \n12345343|559|-2|20161108000000|FL|62|0|S\n3434344|-100000|20161108000000|GL|135|0|S\n45454545|214|-2000|20161108000001||21|77440|S\n\n$ awk 'gsub(/,[^|]*/,\"\")+1' ip.txt \n12345343|559|-2|20161108000000|FL|62|0|S\n3434344|-100000|20161108000000|GL|135|0|S\n45454545|214|-2000|20161108000001||21|77440|S",
+        "ul_432698: awk -F, '{ COMMA=\"\";i=0; while (++i<=NF) {\n           $1=$i; printf (!seen[$1]++)?COMMA$i:\"\"; COMMA=\",\"}; print \"\"\n}' infile.csv\n\nawk  'NR==1; NR>1{id=$1\"\\t\"; COMMA=$1=\"\";split($0, ar, /,| /); \n    for(i in ar){if(ar[i]!=\"\"){printf(!seen[ar[i]]++)?id\"\"COMMA\"\"ar[i]:\"\"; COMMA=\",\";id=\"\"}\n} print \"\"}' infile",
+        "so_61023717: awk 'NR==FNR{a[NR]=$0; next} /REPLACEME/{sub(/REPLACEME/,a[++c])} 1' file2.txt file1.xml"
+      ]
+    },
+    {
+      "Command": "echo",
+      "Top-3 Similar Questions": [
+        "so_33455069: Awk/Sed: How to do a recursive find/replace of a string in files with a certain file extension?",
+        "so_4793892: Recursively rename files using find and sed",
+        "so_43130251: How to replace string in files recursively via sed or awk?"
+      ],
+      "Top-3 Scripts": [
+        "so_33455069: find /myprojects -type f -name '*.cpp' -print0 | \n  xargs -0 echo sed -i 's/previousword/newword/g'",
+        "so_4793892: find . -exec echo `echo \"{}\" | sed 's/./foo/g'` \\;\n\n#!/bin/sh\necho \"$1\" | sed 's/_test.rb$/_spec.rb/'",
+        "so_43130251: echo \"${filesList}\" | xargs sed -i ..."
+      ]
+    },
+    {
+      "Command": "print",
+      "Top-3 Similar Questions": [
+        "ul_432698: Find and Replace Duplicates",
+        "so_66658520: Replace/Remove only the first occurrence found in a string",
+        "so_11266898: How can I change file content with find and awk?"
+      ],
+      "Top-3 Scripts": [
+        "ul_432698: awk -F, '{ COMMA=\"\";i=0; while (++i<=NF) {\n           $1=$i; printf (!seen[$1]++)?COMMA$i:\"\"; COMMA=\",\"}; print \"\"\n}' infile.csv\n\nawk  'NR==1; NR>1{id=$1\"\\t\"; COMMA=$1=\"\";split($0, ar, /,| /); \n    for(i in ar){if(ar[i]!=\"\"){printf(!seen[ar[i]]++)?id\"\"COMMA\"\"ar[i]:\"\"; COMMA=\",\";id=\"\"}\n} print \"\"}' infile",
+        "so_11266898: find . -iregex .+\\.xml -print \\\n-exec bash -c \"awk '{print gensub(/(.*?)=\\\\\"(@(\\+|)id)\\/(.+)\\\\\"/, \\\"\\\\1=\\\"\\\\2/prefix_\\\\4\\\\\"\\\", \\\"g\\\", \\$1);}' {} > {}.NEW\" \\;\n\nfind . -name '111.xml' -exec bash -c \"awk '\\$0 ~ /\\\"/ { print \\$0 }' {} > {}.NEW\" \\;",
+        "ul_652528: $ iwconfig wlan0 | awk -F'[=/]' 'tolower($0) ~ /quality/{print $2, $4, $6}' file\n37 57 0"
+      ]
+    }
+  ]
+}

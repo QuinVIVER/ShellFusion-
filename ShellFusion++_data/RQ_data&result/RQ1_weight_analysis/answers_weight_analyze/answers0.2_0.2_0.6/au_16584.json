@@ -1,0 +1,85 @@
+{
+  "Query": "How to connect and disconnect to a network manually in terminal?",
+  "Answers": [
+    {
+      "Command": "ifconfig",
+      "MP Summary": "configure network interfaces",
+      "Most Similar TLDR Task": "Display details of all interfaces, including disabled interfaces",
+      "Most Similar TLDR Script": "ifconfig -a",
+      "Top-3 Similar Questions": [
+        "au_587342: How to connect to a laptop running Ubuntu on the same home wireless network?",
+        "au_142336: How do I connect to available networks from the command-line?",
+        "au_44021: How to connect to homepage after creating it with a python webframework (hyde) from an other machine in the same network?"
+      ],
+      "Top-3 Scripts": [
+        "au_587342: ",
+        "au_142336: ifconfig -a\n\nifconfig -a | grep --only-matching -i \"^\\w\\+\" | xargs -l1 sudo dhclient",
+        "au_44021: ifconfig | grep \"inet addr\"\n\negil@mutter:~$ ifconfig | grep \"inet addr\"\n          inet addr:192.168.10.10  Bcast:192.168.10.255  Mask:255.255.255.0\n          inet addr:127.0.0.1  Mask:255.0.0.0"
+      ],
+      "Explanations about Options": {
+        "-a": "Display all available interfaces."
+      }
+    },
+    {
+      "Command": "ssh",
+      "MP Summary": "OpenSSH SSH client (remote login program)",
+      "Most Similar TLDR Task": "Connect to a remote server",
+      "Most Similar TLDR Script": "ssh {{username}}@{{remote_host}}",
+      "Top-3 Similar Questions": [
+        "au_587342: How to connect to a laptop running Ubuntu on the same home wireless network?",
+        "au_876046: Connect via ssh to one of the multiple clients on same network",
+        "au_1107987: Connect two computers with SSH in a home LAN"
+      ],
+      "Top-3 Scripts": [
+        "au_587342: ssh username@192.168.1.4 ##From B to A\nssh username@192.168.1.4 ##From A to B\n\nssh -Y username@192.168.1.4\nssh -Y username@192.168.1.5",
+        "au_876046: ssh username@77.60.52.10 -p 1110\n\nssh username@77.60.52.10 -p 1115",
+        "au_1107987: ssh comp2.local\n\nssh 127.0.0.1\n\nssh user2@127.0.0.1\n\nssh user2@comp2.local\n\nssh user2@192.168.x.y\n\n/etc/ssh/sshd_config\n\nsudo systemctl restart ssh"
+      ],
+      "Explanations about Options": {
+        "-p": "Port to connect to on the remote host. This can be specified on a per-host basis in\n the configuration file.",
+        "-Y": "Enables trusted X11 forwarding. Trusted X11 forwardings are not subjected to the\n X11 SECURITY extension controls."
+      }
+    },
+    {
+      "Command": "ping",
+      "MP Summary": "send ICMP ECHO_REQUEST to network hosts",
+      "Most Similar TLDR Task": "Ping host and ring the bell when a packet is received (if your terminal supports it)",
+      "Most Similar TLDR Script": "ping -a {{host}}",
+      "Top-3 Similar Questions": [
+        "ul_295238: How to connect to device via SSH over direct ethernet connection"
+      ],
+      "Top-3 Scripts": [
+        "ul_295238: ping 192.168.9.2"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "tcpdump",
+      "MP Summary": "dump traffic on a network",
+      "Most Similar TLDR Task": "Capture the traffic of a network",
+      "Most Similar TLDR Script": "tcpdump net {{192.168.1.0/24}}",
+      "Top-3 Similar Questions": [
+        "ul_295238: How to connect to device via SSH over direct ethernet connection"
+      ],
+      "Top-3 Scripts": [
+        "ul_295238: sudo tcpdump -i eth2"
+      ],
+      "Explanations about Options": {
+        "-i": " Listen on interface. If unspecified, tcpdump searches the system interface list\n for the lowest numbered, configured up interface (excluding loopback), which may\n turn out to be, for example, ``eth0''."
+      }
+    },
+    {
+      "Command": "ncat",
+      "MP Summary": "Concatenate and redirect sockets",
+      "Most Similar TLDR Task": "Accept multiple connections and keep ncat open after they have been closed",
+      "Most Similar TLDR Script": "ncat -lk {{port}}",
+      "Top-3 Similar Questions": [
+        "ul_509999: How to connect to a IPv6 service using IPv4 connection on CentOS 7?"
+      ],
+      "Top-3 Scripts": [
+        "ul_509999: # strace -e trace=setsockopt nc -lvn6p 80\nNcat: Version 7.50 ( https://nmap.org/ncat )\nsetsockopt(3, SOL_SOCKET, SO_REUSEADDR, [1], 4) = 0\nsetsockopt(3, SOL_IPV6, IPV6_V6ONLY, [1], 4) = 0\nNcat: Listening on :::80\n\n# strace -e trace=bind,setsockopt nc -lvnp 80\nNcat: Version 7.50 ( https://nmap.org/ncat )\nsetsockopt(3, SOL_SOCKET, SO_REUSEADDR, [1], 4) = 0\nsetsockopt(3, SOL_IPV6, IPV6_V6ONLY, [1], 4) = 0\nbind(3, {sa_family=AF_INET6, sin6_port=htons(80), inet_pton(AF_INET6, \"::\", &sin6_addr), sin6_flowinfo=0, sin6_scope_id=0}, 28) = 0\nNcat: Listening on :::80\nsetsockopt(4, SOL_SOCKET, SO_REUSEADDR, [1], 4) = 0\nbind(4, {sa_family=AF_INET, sin_port=htons(80), sin_addr=inet_addr(\"0.0.0.0\")}, 16) = 0\nNcat: Listening on 0.0.0.0:80"
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

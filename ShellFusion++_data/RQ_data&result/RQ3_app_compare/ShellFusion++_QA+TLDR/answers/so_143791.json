@@ -1,0 +1,93 @@
+{
+  "Query": "how do i find which process is leaking memory",
+  "Answers": [
+    {
+      "Command": "fuser",
+      "MP Summary": "identify processes using files or sockets",
+      "Most Similar TLDR Task": "Find which processes are accessing a file or directory",
+      "Most Similar TLDR Script": "fuser {{path/to/file_or_directory}}",
+      "Top-3 Similar Questions": [
+        "so_64420766: How to find which process periodicitly write to a file?",
+        "so_24554614: How find out which process is using a file in Linux?",
+        "au_227161: How can we find which process is using a particular port?"
+      ],
+      "Top-3 Scripts": [
+        "so_64420766: ",
+        "so_24554614: fuser file_name",
+        "au_227161: fuser 43796/tcp\n\n$ fuser 1723/tcp\n1723/tcp:             2870"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "ps",
+      "MP Summary": "report a snapshot of the current processes.",
+      "Most Similar TLDR Task": "Sort processes by memory consumption",
+      "Most Similar TLDR Script": "ps --sort size",
+      "Top-3 Similar Questions": [
+        "ul_4999: How to find which processes are taking all the memory?",
+        "so_13850254: Way to find which process is spawining another process in linux?",
+        "au_867927: How can I find out which service started a process so I can disable that service?"
+      ],
+      "Top-3 Scripts": [
+        "ul_4999: $ ps -eo pmem,pcpu,vsize,pid,cmd | sort -k 1 -nr | head -5",
+        "so_13850254: $ ps -o pid,ppid 4708\n  PID  PPID\n 4708  4580\n\n$ ps -o ppid= 4708\n 4580",
+        "au_867927: ps -o unit -p <PID>\n\n$ ps -o pid,unit -p $(pgrep chrome -n) 561 \n  PID UNIT\n  320 session-c2.scope\n  561 sshd.service"
+      ],
+      "Explanations about Options": {
+        "-e": "Select all processes. Identical to -A.",
+        "-p": "Select by PID. This selects the processes whose process ID numbers appear in\n pidlist. Identical to p and --pid."
+      }
+    },
+    {
+      "Command": "pgrep",
+      "MP Summary": "look up or signal processes based on name and other attributes",
+      "Most Similar TLDR Task": "Search for process run by a specific user",
+      "Most Similar TLDR Script": "pgrep -u root {{process_name}}",
+      "Top-3 Similar Questions": [
+        "au_867927: How can I find out which service started a process so I can disable that service?",
+        "ul_480040: ps -a fails to find a process which is running"
+      ],
+      "Top-3 Scripts": [
+        "au_867927: $ systemctl status $(pgrep chrome -n)\n\u25cf session-c2.scope - Session c2 of user muru\n   Loaded: loaded (/run/systemd/transient/session-c2.scope; transient; vendor preset: disabled)\nTransient: yes\n   Active: active (running) since Wed 2017-01-04 15:46:30 JST; 7h ago\n    Tasks: 422\n   CGroup: /user.slice/user-1000.slice/session-c2.scope\n\n$ ps -o pid,unit -p $(pgrep chrome -n) 561 \n  PID UNIT\n  320 session-c2.scope\n  561 sshd.service",
+        "ul_480040: pgrep Typora\n\npgrep -i"
+      ],
+      "Explanations about Options": {
+        "-i": "Match processes case-insensitively."
+      }
+    },
+    {
+      "Command": "kill",
+      "MP Summary": "send a signal to a process",
+      "Most Similar TLDR Task": "Signal the operating system to immediately terminate a program (which gets no chance to capture the signal)",
+      "Most Similar TLDR Script": "kill -{{9|KILL}} {{process_id}}",
+      "Top-3 Similar Questions": [
+        "au_11713: How do I find out which process is preventing a umount?",
+        "so_11785936: How to find if a process is running in C?"
+      ],
+      "Top-3 Scripts": [
+        "au_11713: sudo kill -9 3106 11086\nsudo umount /media/KINGSTON",
+        "so_11785936: kill(2)\n\n#include <sys/types.h>\n #include <signal.h>\n\n int kill(pid_t pid, int sig);\n\nkill(pid, 0)"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "top",
+      "MP Summary": "display Linux processes",
+      "Most Similar TLDR Task": "Show the individual threads of a given process",
+      "Most Similar TLDR Script": "top -Hp {{process_id}}",
+      "Top-3 Similar Questions": [
+        "ul_4999: How to find which processes are taking all the memory?",
+        "ul_20483: How to find which Process is causing High CPU usage",
+        "au_53264: How do you find out which program is using too much memory?"
+      ],
+      "Top-3 Scripts": [
+        "ul_4999: ",
+        "ul_20483: ",
+        "au_53264: top -c"
+      ],
+      "Explanations about Options": {
+        "-c": "Starts top with the last remembered `c' state reversed. Thus, if top was displaying\n command lines, now that field will show program names, and vice versa. See the `c'\n interactive command for additional information."
+      }
+    }
+  ]
+}

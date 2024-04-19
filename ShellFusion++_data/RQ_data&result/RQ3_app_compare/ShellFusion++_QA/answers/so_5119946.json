@@ -1,0 +1,70 @@
+{
+  "Query": "find -exec with multiple commands",
+  "Answers": [
+    {
+      "Command": "find",
+      "Top-3 Similar Questions": [
+        "ul_212957: find: multiple `-exec`s with conditions",
+        "nl2bash_7944: find file end with  '.txt' in current directory.",
+        "ul_663444: find command with multiple directories"
+      ],
+      "Top-3 Scripts": [
+        "ul_212957: find . -type f -exec grep -qF <i>SOME_STRING</i> {} \\; -exec sed '<i>COMMAND</i>' {} \\;\n\nfind . -type f -exec grep -qF <i>SOME_STRING</i> {} \\; -print\n\nfind . -type f -exec grep -qF <i>THIS</i> {} \\; ! -exec grep -qF <i>THAT</i> {} \\; -print\n\nfind . -type f -exec grep -lFZ <i>SOME_STRING</i> {} + | xargs -0 gsed -s -i '<i>COMMAND</i>'",
+        "nl2bash_7944: find . -name \"*.txt\"",
+        "ul_663444: find dir1 dir2 dir3 -type f\n\ndirs=( dir1 dir2 dir3 )\n\nfind \"${dirs[@]}\" -type f"
+      ]
+    },
+    {
+      "Command": "sh",
+      "Top-3 Similar Questions": [
+        "so_8296585: Find subdirectories with find command",
+        "ul_371932: find command with multiple pattern not returning any output",
+        "ul_84265: linux shell: find -exec in find -exec"
+      ],
+      "Top-3 Scripts": [
+        "so_8296585: find <directory_name> -type d -exec sh -c \"cd {} && [ -d live ] && [ -d test ] && echo \\\"Deleting test from {}\\\" && rm -rvi test \" {} \\;\n\nfind <directory_name> -type d -exec sh -c \"cd {} && [ -d live ] && [ -d test ] && cd ../ && echo \\\"Deleting {}\\\" && rm -rvi {} \" {} \\;",
+        "ul_84265: find ~/.config/google-chrome -type d -name test -exec sh -c '\n  for i do\n    find \"$i\" -exec chmod 555 {\\} +\n  done' sh {} +\n\nxargs -r0a <(\n    find ~/.config/google-chrome -type d -name test -print0\n  ) sh -c 'exec find \"$@\" -exec chmod 555 {} +' sh",
+        "so_63264155: command = \"find \\\"\"+to_directory+'''\\\"* -type f -exec sh -c \\\"stat -c \\'%y:%n\\' \\'{}\\'\\\" \\;'''\n\nscp_process_ = subprocess.run(\n    [\"ssh\", to_user+\"@\"+to_host, command],\n    capture_output=False, text=True)\n\nsh -c '...'\n\nsh -c ''"
+      ]
+    },
+    {
+      "Command": "echo",
+      "Top-3 Similar Questions": [
+        "ul_312935: Find with multiple extension does not work with -exec",
+        "so_8296585: Find subdirectories with find command",
+        "so_55343812: find: combining multiple \"-exec\" statements not working with toybox / Android?"
+      ],
+      "Top-3 Scripts": [
+        "ul_312935: find ./my_path \\( -name \"*.ext1\" -o -name \"*.ext2\" \\) -exec echo {} \\;",
+        "so_8296585: find <directory_name> -type d -exec sh -c \"cd {} && [ -d live ] && [ -d test ] && echo \\\"Deleting test from {}\\\" && rm -rvi test \" {} \\;\n\nfind <directory_name> -type d -exec sh -c \"cd {} && [ -d live ] && [ -d test ] && cd ../ && echo \\\"Deleting {}\\\" && rm -rvi {} \" {} \\;",
+        "so_55343812: find . -type f -exec stat -c \"$(echo -e \"%n\\n%y\")\" {} \\;\n\n# or just insert the newline verbatim in single quotes:\nfind . -type f -exec stat -c '%n\n%y' {} \\;"
+      ]
+    },
+    {
+      "Command": "xargs",
+      "Top-3 Similar Questions": [
+        "ul_212957: find: multiple `-exec`s with conditions",
+        "ul_296875: How do I find files with multiple empty lines?",
+        "ul_84265: linux shell: find -exec in find -exec"
+      ],
+      "Top-3 Scripts": [
+        "ul_212957: find . -type f -exec grep -lFZ <i>SOME_STRING</i> {} + | xargs -0 gsed -s -i '<i>COMMAND</i>'\n\ngfind /tmp/ -type f \\( -name \"*.h\" -o -name \"*.cpp\" \\) \\\n-exec ggrep -lFZ LARGE_INTEGER {} + | \\\nxargs -0 gsed -s -i '1s/^/#include <stdint.h>\\n/'",
+        "ul_296875: # easy to type version\ngit find | xargs pcregrep -l -M $'\\n\\n\\n' >/tmp/x\n# more secure version\ngit find -print0 | xargs -0r pcregrep -l -M $'\\n\\n\\n' >/tmp/x\n\n# easy to type version\n$EDITOR $(git find \\*.java | xargs pcregrep -l -M $'\\n\\n\\n')\n# somewhat more secure version\ngit find -print0 | xargs -0r pcregrep -l -M $'\\n\\n\\n' | xargs $EDITOR --",
+        "ul_84265: xargs -r0a <(\n    find ~/.config/google-chrome -type d -name test -print0\n  ) sh -c 'exec find \"$@\" -exec chmod 555 {} +' sh"
+      ]
+    },
+    {
+      "Command": "cp",
+      "Top-3 Similar Questions": [
+        "so_47339376: Find Command with multiple file extensions",
+        "ul_243095: How does 'find -exec' pass file names with spaces?",
+        "au_1059150: Explain find command with options"
+      ],
+      "Top-3 Scripts": [
+        "so_47339376: find /root/TEST/Images \\( -name  '*.png' -o  -name '*.jpg' -o -name '*.JPG' \\) -exec cp -t /root/TEST/CopiedImages {} +\n\nfind /root/TEST/Images \\( -name  '*.png' -o  -iname '*.jpg' \\) -exec cp -t /root/TEST/CopiedImages {} +",
+        "au_1059150: -exec cp {} /work-disk/postgresql-scripts/wal_backup_script_dir/ \\;",
+        "ul_30677: find \"$sourcedir\" -type f -name \"*.type\" | xargs cp -t targetdir\n\nfind \"$sourcedir\" -type f -name \"*.type\" -print0 | xargs -0 cp -t \"$targetdir\""
+      ]
+    }
+  ]
+}

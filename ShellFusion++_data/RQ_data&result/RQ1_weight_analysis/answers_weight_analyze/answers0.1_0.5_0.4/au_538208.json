@@ -1,0 +1,84 @@
+{
+  "Query": "How to check opened/closed ports on my computer?",
+  "Answers": [
+    {
+      "Command": "netstat",
+      "MP Summary": "Print  network  connections,  routing tables, interface statistics, masquerade connections, and multicast memberships",
+      "Most Similar TLDR Task": "List listening TCP ports",
+      "Most Similar TLDR Script": "netstat -t",
+      "Top-3 Similar Questions": [
+        "so_59571862: Bash script to close open TCP connections on a specific port",
+        "ul_433991: A way to find open ports on a host machine",
+        "ul_286907: Getting all open ports on all network interfaces"
+      ],
+      "Top-3 Scripts": [
+        "so_59571862: netstat -ano | awk '$1 == \"TCP\" && $2 ~ /:8080/ { print $5 }'",
+        "ul_433991: netstat -ltu",
+        "ul_286907: netstat -plnt"
+      ],
+      "Explanations about Options": {
+        "-a": "Show both listening and non-listening sockets. With the --interfaces option, show\n interfaces that are not up",
+        "-p": "Show the PID and name of the program to which each socket belongs.",
+        "-o": "Include information related to networking timers.",
+        "-l": "Show only listening sockets. (These are omitted by default.)",
+        "-n": "Show numerical addresses instead of trying to determine symbolic host, port or user names."
+      }
+    },
+    {
+      "Command": "firewall-cmd",
+      "MP Summary": "firewalld command line client",
+      "Most Similar TLDR Task": "Permanently close the port for a service in the specified zone (like port `80` when in the `public` zone)",
+      "Most Similar TLDR Script": "firewall-cmd --permanent --zone={{public}} --remove-service={{http}}",
+      "Top-3 Similar Questions": [
+        "ul_599157: how to close a port on CentOS 7 server?"
+      ],
+      "Top-3 Scripts": [
+        "ul_599157: firewall-cmd --zone=public --remove-port=3000/tcp --permanent\n\nman firewall-cmd"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "telnet",
+      "MP Summary": "user interface to the TELNET protocol",
+      "Most Similar TLDR Task": "Telnet to a specific port of a host",
+      "Most Similar TLDR Script": "telnet {{ip_address}} {{port}}",
+      "Top-3 Similar Questions": [
+        "ul_599688: what are the options to close manual the port correctly or release the port on rhel machines?"
+      ],
+      "Top-3 Scripts": [
+        "ul_599688: telnet localhost 50070"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "tcpdump",
+      "MP Summary": "dump traffic on a network",
+      "Most Similar TLDR Task": "Capture the traffic from a specific interface, source, destination and destination port",
+      "Most Similar TLDR Script": "tcpdump -i {{eth0}} src {{192.168.1.1}} and dst {{192.168.1.2}} and dst port {{80}}",
+      "Top-3 Similar Questions": [
+        "su_501257: Not sure what app is serving HTTP Port 80 on my linux machine?"
+      ],
+      "Top-3 Scripts": [
+        "su_501257: tcpdump -i any port 80 or port 8001"
+      ],
+      "Explanations about Options": {
+        "-i": " Listen on interface. If unspecified, tcpdump searches the system interface list\n for the lowest numbered, configured up interface (excluding loopback), which may\n turn out to be, for example, ``eth0''."
+      }
+    },
+    {
+      "Command": "nc",
+      "MP Summary": "arbitrary TCP and UDP connections and listens",
+      "Most Similar TLDR Task": "Scan the open ports of a specified host",
+      "Most Similar TLDR Script": "nc -v -z {{ip_address}} {{port}}",
+      "Top-3 Similar Questions": [
+        "ul_611063: How to use netcat to check ports on more than one remote server?"
+      ],
+      "Top-3 Scripts": [
+        "ul_611063: #!/bin/sh\nwhile [ 1 ]; do\n    if [ $(nc -z server1 1521) ] || [ $(nc -z server2 1521) ]; then\n        break\n    fi\n    sleep 1 # if desired\ndone\nstart_apps.sh"
+      ],
+      "Explanations about Options": {
+        "-z": "Only scan for listening daemons, without sending any data to them. Cannot be used\n together with -l."
+      }
+    }
+  ]
+}

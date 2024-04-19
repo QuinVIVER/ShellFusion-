@@ -1,0 +1,87 @@
+{
+  "Query": "How do I find out if I am sudoer?",
+  "Answers": [
+    {
+      "Command": "sudo",
+      "MP Summary": "execute a command as another user",
+      "Most Similar TLDR Task": "Run a command as the superuser",
+      "Most Similar TLDR Script": "sudo {{less /var/log/syslog}}",
+      "Top-3 Similar Questions": [
+        "ul_330690: How do I find out if my sudoer privilege timed out?",
+        "su_350694: \"no valid sudoers sources found, quitting\" error while chmodding /var/www",
+        "au_839544: Why does the find command blow up in /run/?"
+      ],
+      "Top-3 Scripts": [
+        "ul_330690: man sudo\n\nsudo -n true 2>/dev/null && echo Privileges active || echo Privileges inactive\n\nsudo -n command...",
+        "su_350694: sudo chmod 077 /var/www/\n\nsudo addgroup www-users\nsudo adduser <your-username> www-users\n\nsudo adduser www-data www-users\n\nsudo chgrp www-users /var/www\nsudo chmod \u2013R 775 /var/www\nsudo chmod g+s /var/www",
+        "au_839544: "
+      ],
+      "Explanations about Options": {
+        "-n": "Avoid prompting the user for input of any kind. If a password is required for\n the command to run, sudo will display an error message and exit."
+      }
+    },
+    {
+      "Command": "chgrp",
+      "MP Summary": "change group ownership",
+      "Most Similar TLDR Task": "Change the owner group of a file/directory to match a reference file",
+      "Most Similar TLDR Script": "chgrp --reference={{path/to/reference_file}} {{path/to/file_or_directory}}",
+      "Top-3 Similar Questions": [
+        "su_350694: \"no valid sudoers sources found, quitting\" error while chmodding /var/www"
+      ],
+      "Top-3 Scripts": [
+        "su_350694: sudo chgrp www-users /var/www\nsudo chmod \u2013R 775 /var/www\nsudo chmod g+s /var/www"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "find",
+      "MP Summary": "search for files in a directory hierarchy",
+      "Most Similar TLDR Task": "Find files by extension",
+      "Most Similar TLDR Script": "find {{root_path}} -name '{{*.ext}}'",
+      "Top-3 Similar Questions": [
+        "ul_334908: Why doesn't find command find the directory when run from ~?",
+        "au_440702: How to find executables",
+        "ul_468674: Find directory, if match then don't recurse"
+      ],
+      "Top-3 Scripts": [
+        "ul_334908: find -H /tmp -name test_copy\nfind /tmp/ -name test_copy",
+        "au_440702: find . -perm -u+x -type f",
+        "ul_468674: find . -type d -iname '*android*' -a \\( -prune  \\)\n\nfind . -type d -iname '*android*' -prune\n\nfind . -iname '*android*' -a \\( -prune  \\)"
+      ],
+      "Explanations about Options": {
+        "-H": "This option is supported.",
+        "-prune": "True; if the file is a directory, do not descend into it. If -depth is given, then\n -prune has no effect. Because -delete implies -depth, you cannot usefully use\n -prune and -delete together.\n For example, to skip the directory `src/emacs' and all files and directories\n under it, and print the names of the other files found, do something like this:\n find . -path ./src/emacs -prune -o -print",
+        "-type": "File is of type c:",
+        "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+        "-iname": "Like -name, but the match is case insensitive. For example, the patterns `fo*' and\n `F??' match the file names `Foo', `FOO', `foo', `fOo', etc. The pattern `*foo*`\n will also match a file called '.foobar'.",
+        "-perm": "Any of the permission bits mode are set for the file. Symbolic modes are accepted\n in this form. You must specify `u', `g' or `o' if you use a symbolic mode. See\n the EXAMPLES section for some illustrative examples. If no permission bits in mode\n are set, this test matches any file (the idea here is to be consistent with the\n behaviour of -perm -000)."
+      }
+    },
+    {
+      "Command": "adduser",
+      "MP Summary": "add a user or group to the system",
+      "Most Similar TLDR Task": "Add an existing user to the specified group",
+      "Most Similar TLDR Script": "adduser {{username}} {{group}}",
+      "Top-3 Similar Questions": [
+        "su_350694: \"no valid sudoers sources found, quitting\" error while chmodding /var/www"
+      ],
+      "Top-3 Scripts": [
+        "su_350694: sudo addgroup www-users\nsudo adduser <your-username> www-users\n\nsudo adduser www-data www-users"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "mv",
+      "MP Summary": "move (rename) files",
+      "Most Similar TLDR Task": "Prompt for confirmation before overwriting existing files, regardless of file permissions",
+      "Most Similar TLDR Script": "mv -i {{source}} {{target}}",
+      "Top-3 Similar Questions": [
+        "so_18615283: Linux Find and execute"
+      ],
+      "Top-3 Scripts": [
+        "so_18615283: while : ; do\n  for file in $(find /directory -type f -name \"*.[ew]ar\"); do\n    some_command \"${file}\"           # Execute some command for the file\n    mv \"${file}\" /target/directory/  # Move the file to some directory\n  done\n  sleep 60s                          # Maybe sleep for a while before searching again!\ndone"
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

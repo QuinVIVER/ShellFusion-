@@ -1,0 +1,87 @@
+{
+  "Query": "Get file created/creation time?",
+  "Answers": [
+    {
+      "Command": "touch",
+      "MP Summary": "change file timestamps",
+      "Most Similar TLDR Task": "Create a new empty file(s) or change the times for existing file(s) to current time",
+      "Most Similar TLDR Script": "touch {{filename}}",
+      "Top-3 Similar Questions": [
+        "so_34123076: OSX - How to get the creation & modification time of a file from the command line",
+        "au_486123: Is there a way to get the real modified time of a file?",
+        "su_289897: Get the last change time of directory recursively"
+      ],
+      "Top-3 Scripts": [
+        "so_34123076: ",
+        "au_486123: ",
+        "su_289897: $ date -u; mkdir -p a/{b,c,d}/{e,f,g}\nSat May 28 17:37:52 UTC 2011\n\n$ date -u; touch a/{b,c,d}/{e,f,g}/{foo,bar,baz}; sleep 1; date -u; touch a/c/f/bar\nSat May 28 17:38:17 UTC 2011\nSat May 28 17:38:18 UTC 2011"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "stat",
+      "MP Summary": "display file or file system status",
+      "Most Similar TLDR Task": "Show file properties such as size, permissions, creation and access dates among others",
+      "Most Similar TLDR Script": "stat {{file}}",
+      "Top-3 Similar Questions": [
+        "so_5929419: How to get file creation date in Linux?",
+        "so_34123076: OSX - How to get the creation & modification time of a file from the command line",
+        "so_25781784: Recursive file list of all files, list containing path+name, type, size, creation data, modification date"
+      ],
+      "Top-3 Scripts": [
+        "so_5929419: ",
+        "so_34123076: ",
+        "so_25781784: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "sleep",
+      "MP Summary": "delay for a specified amount of time",
+      "Most Similar TLDR Task": "Delay in minutes",
+      "Most Similar TLDR Script": "sleep {{minutes}}m",
+      "Top-3 Similar Questions": [
+        "su_289897: Get the last change time of directory recursively",
+        "so_3795470: How do I get just real time value from 'time' command?"
+      ],
+      "Top-3 Scripts": [
+        "su_289897: $ date -u; mkdir -p a/{b,c,d}/{e,f,g}\nSat May 28 17:37:52 UTC 2011\n\n$ date -u; touch a/{b,c,d}/{e,f,g}/{foo,bar,baz}; sleep 1; date -u; touch a/c/f/bar\nSat May 28 17:38:17 UTC 2011\nSat May 28 17:38:18 UTC 2011",
+        "so_3795470: $ TIMEFORMAT=%R\n$ time sleep 1\n1.022"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "date",
+      "MP Summary": "print or set the system date and time",
+      "Most Similar TLDR Task": "Convert a specific date to the Unix timestamp format",
+      "Most Similar TLDR Script": "date -d \"{{2018-09-01 00:00}}\" +%s --utc",
+      "Top-3 Similar Questions": [
+        "so_68173465: how to extract date only from the creation/modified date of a file?",
+        "su_289897: Get the last change time of directory recursively",
+        "so_32885545: How to get formatted date twice, ensuring it's the same time?"
+      ],
+      "Top-3 Scripts": [
+        "so_68173465: date -r filename\n\ndate +%d -r filename\n\ndate +%-d -r filename",
+        "su_289897: $ date -u; mkdir -p a/{b,c,d}/{e,f,g}\nSat May 28 17:37:52 UTC 2011\n\n$ date -u; touch a/{b,c,d}/{e,f,g}/{foo,bar,baz}; sleep 1; date -u; touch a/c/f/bar\nSat May 28 17:38:17 UTC 2011\nSat May 28 17:38:18 UTC 2011\n\n$ date -ud @$(find a -type f -printf '%T@\\t%p\\n' | sort -r -k1 | head -n1 | cut -f1)\nSat May 28 17:38:18 UTC 2011\n\n#!/bin/sh\nif test ! -d \"${1:-.}\"\nthen\n    echo not a directory: ${1:-.} >&2\n    exit 1\nfi\ndate -d @$(find \"${1:-.}\" -type f -printf '%T@\\t%p\\n' | sort -r -k1 | head -n1 | cut -f1)",
+        "so_32885545: date=\"$(date +%s)\"\nthe_date=\"$(date +'%Y-%m-%d-%H%M%S' -d \"@${date}\")\"\nreport_date=\"$(date +'%Y-%m-%d %H:%M:%S' -d \"@${date}\")\""
+      ],
+      "Explanations about Options": {
+        "-r": "display the last modification time of FILE",
+        "-d": "display time described by STRING, not 'now'"
+      }
+    },
+    {
+      "Command": "chown",
+      "MP Summary": "change file owner and group",
+      "Most Similar TLDR Task": "Change the owner of a file/directory to match a reference file",
+      "Most Similar TLDR Script": "chown --reference={{path/to/reference_file}} {{path/to/file_or_directory}}",
+      "Top-3 Similar Questions": [
+        "so_1408272: Get file creation time with Python on linux"
+      ],
+      "Top-3 Scripts": [
+        "so_1408272: 3.1)  How do I find the creation time of a file?\n\n      You can't - it isn't stored anywhere.  Files have a last-modified\n      time (shown by \"ls -l\"), a last-accessed time (shown by \"ls -lu\")\n      and an inode change time (shown by \"ls -lc\"). The latter is often\n      referred to as the \"creation time\" - even in some man pages -\n      but that's wrong; it's also set by such operations as mv, ln,\n      chmod, chown and chgrp.\n\n      The man page for \"stat(2)\" discusses this."
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

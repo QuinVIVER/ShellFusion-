@@ -1,0 +1,81 @@
+{
+  "Query": "How to generate random number in Bash?",
+  "Answers": [
+    {
+      "Command": "jot",
+      "MP Summary": "print sequential or random data",
+      "Top-3 Similar Questions": [
+        "ul_424715: Bash: How to generate random float number using $RANDOM"
+      ],
+      "Top-3 Scripts": [
+        "ul_424715: jot -p 4 -r 10 0 1"
+      ],
+      "Explanations about Options": {
+        "-r": "Generate random data instead of sequential data, the default.",
+        "-p": "Print only as many digits or characters of the data as indicated by the integer\n precision. In the absence of -p, the precision is the greater of the precisions of\n begin and end. The -p option is overridden by whatever appears in a printf(3)\n conversion following -w."
+      }
+    },
+    {
+      "Command": "shuf",
+      "MP Summary": "generate random permutations",
+      "Top-3 Similar Questions": [
+        "so_54554364: Generate random number except values in bash",
+        "so_43462892: How do I generate random numbers in 3 lines - Linux Shell Script",
+        "ul_430056: Generate random number after value in bash"
+      ],
+      "Top-3 Scripts": [
+        "so_54554364: shuf -n 1 <(seq 9 | grep -Fxv -e{3,8})\n\nshuf -n 1 <(printf %s\\\\n 1 2 4 5 6 7 9)\n\nshuf -n 1 <(printf %s\\\\n 1 2 {4..7} 9)\n\nshuf -n 1 <(seq 2; seq 4 7; echo 9)",
+        "so_43462892: ",
+        "ul_430056: shuf file | xargs wget\n\nman 1 shuf\n\nshuf file | while read url; do\n    wget --user-agent=\"$(shuf -n1 uas)\" \"$url\"\ndone"
+      ],
+      "Explanations about Options": {
+        "-n": "output at most COUNT lines"
+      }
+    },
+    {
+      "Command": "rand",
+      "MP Summary": "generate pseudo-random bytes",
+      "Top-3 Similar Questions": [
+        "ul_157250: How to efficiently generate large, uniformly distributed, random integers in bash?",
+        "so_29253591: generate large csv with random content in bash",
+        "ul_424715: Bash: How to generate random float number using $RANDOM"
+      ],
+      "Top-3 Scripts": [
+        "ul_157250: diff=$((max-min)) && diff=${diff#-}\n\necho $(( $(rand $diff) + min ))\n\n~/bin/rand",
+        "so_29253591: awk -v OFS='\\t' '\n    NR == 1 { print \"foo\", \"bar\", \"baz\" }\n    { print substr($0, 1, 8), substr($0, 9, 2), int(NR * 32768 * rand()) }'",
+        "ul_424715: awk -v n=10 -v seed=\"$RANDOM\" 'BEGIN { srand(seed); for (i=0; i<n; ++i) printf(\"%.4f\\n\", rand()) }'\n\nrand()"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "seq",
+      "MP Summary": "print a sequence of numbers",
+      "Top-3 Similar Questions": [
+        "so_54554364: Generate random number except values in bash",
+        "so_58894982: How to generate a random string in a specific range (bash)",
+        "ul_430056: Generate random number after value in bash"
+      ],
+      "Top-3 Scripts": [
+        "so_54554364: shuf -n 1 <(seq 9 | grep -Fxv -e{3,8})\n\nshuf -n 1 <(seq 2; seq 4 7; echo 9)",
+        "so_58894982: #! /bin/bash\n\nsymbols='0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIGKLMNOPQRSTUVYXWZ~#$&_+-=/\\'  # Stupid SO: '\ncount_symbols=${#symbols}\n(( length = RANDOM % 6 + 10 ))\npassword=\"\"\nfor i in $(seq 1 $length) ; do\n    password+=${symbols:RANDOM % count_symbols:1}\ndone\necho \"$password\"",
+        "ul_430056: for i in $(seq 0 $((${#data_link[@]} -1)) | shuf); do\n    wget -U \"${user_agent[RANDOM % ${#user_agent[@]}]}\" \"${data_link[i]}\"\ndone"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "wc",
+      "MP Summary": "print newline, word, and byte counts for each file",
+      "Top-3 Similar Questions": [
+        "so_25613429: Generate ID number from a name in bash",
+        "so_43384770: In bash, how to generate all possible word combination, but in original order?"
+      ],
+      "Top-3 Scripts": [
+        "so_25613429: wc -l",
+        "so_43384770: "
+      ],
+      "Explanations about Options": {
+        "-l": "print the newline counts"
+      }
+    }
+  ]
+}

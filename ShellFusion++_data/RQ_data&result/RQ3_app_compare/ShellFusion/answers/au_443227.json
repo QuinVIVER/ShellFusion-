@@ -1,0 +1,90 @@
+{
+    "Answers": [
+        {
+            "Command": "nc",
+            "Explanations about Options": {
+                "-l(M)": "Listen for an incoming connection rather than initiating a connection to a remote\n host. The destination and port to listen on can be specified either as non-optional\n arguments, or with options -s and -p respectively. Cannot be used together with -x\n or -z. Additionally, any timeouts specified with the -w option are ignored.",
+                "-n(M)": "Do not do any DNS or service lookups on any specified addresses, hostnames or ports.",
+                "-p(M)": "Specify the source port nc should use, subject to privilege restrictions and\n availability.",
+                "-v(M)": "Produce more verbose output."
+            },
+            "MP Summary": "arbitrary TCP and UDP connections and listens",
+            "Most Similar TLDR Script": "nc -l {{local_port}} | nc {{hostname}} {{remote_port}}",
+            "Most Similar TLDR Task": "Act as proxy and forward data from a local TCP port to the given remote host",
+            "Top-3 Scripts": [
+                "so_44952722: # Prepare to receive traffic\n# Running this process in the background so that the sending TCP traffic\n# happens\n\nnc -vv -l -p 5000 > receiveData.txt &\n\n#Send traffic\nnc -nvv localhost 5000 < sendData.txt",
+                "so_21130757: nc 192.168.1.186 9760 < commands.txt\n\nnc 192.168.1.186 9760 <<END\ncommand1\ncommand2\nEND\n\necho command1^\n\ncommand2 > commands.txt\n\nnc 192.168.1.186 9760 < commands.txt\n\necho command1 & echo.command2 | nc 192.168.1.186 9760",
+                "su_1533731: $ </dev/null nc <Server.ip> 5403 > /dev/stdout"
+            ],
+            "Top-3 Similar Questions": [
+                "so_44952722: How can I automate sending and receiving TCP traffic using netcat in Bash?",
+                "so_21130757: Send Commands to socket using netcat",
+                "su_1533731: Use netcat to listen on a port and send output from a command when a client connects"
+            ]
+        },
+        {
+            "Command": "ncat",
+            "Explanations about Options": {
+                "-l(C)": "I start my \"server\" \"ncat -l -p 1337\".",
+                "-l(M)": "(Listen for connections)\n Listen for connections rather than connecting to a remote machine"
+            },
+            "MP Summary": "Concatenate and redirect sockets",
+            "Most Similar TLDR Script": "ncat -l {{port}} > {{path/to/file}}",
+            "Most Similar TLDR Task": "Listen for input on the specified port and write it to the specified file",
+            "Top-3 Scripts": [
+                "su_1533731: $ ncat -l 1234 -c '/usr/bin/data' --keep-open\n\n$ ncat Server 1234 | tee ServerData.txt",
+                "so_45701364: ncat -l -p 1337\n\nncat localhost 1337 -e ./interact.sh",
+                "so_12267905: cat MY_FILE - | ncat ..."
+            ],
+            "Top-3 Similar Questions": [
+                "su_1533731: Use netcat to listen on a port and send output from a command when a client connects",
+                "so_48013441: Can I send a message to multiple hosts in one command using nc (netcat)?",
+                "so_45701364: How to send a file over netcat after receiving a response?"
+            ]
+        },
+        {
+            "Command": "write",
+            "Explanations about Options": {},
+            "MP Summary": "send a message to another user",
+            "Most Similar TLDR Script": "write {{username}} {{terminal_id}}",
+            "Most Similar TLDR Task": "Send a message to a given user on a given terminal id",
+            "Top-3 Scripts": [
+                "so_59682559: fp = popen(\"nc 192.168.4.1 555\", \"w\");\nif (fp == NULL) {\n   /* Handle error */\n   printf(\"Couldn't spawn nc\\n\");\n   exit(1);\n}\nfprintf(fp, \"key\"); // write to netcat's STDIN\npclose(fp);"
+            ],
+            "Top-3 Similar Questions": [
+                "so_59682559: Send a message to my microcontroller using Netcat - C language"
+            ]
+        },
+        {
+            "Command": "tcpdump",
+            "Explanations about Options": {
+                "-A(M)": "Print each packet (minus its link level header) in ASCII. Handy for capturing web\n pages.",
+                "-i(M)": " Listen on interface. If unspecified, tcpdump searches the system interface list\n for the lowest numbered, configured up interface (excluding loopback), which may\n turn out to be, for example, ``eth0''.",
+                "-n(M)": "Don't convert addresses (i.e., host addresses, port numbers, etc.) to names."
+            },
+            "MP Summary": "dump traffic on a network",
+            "Most Similar TLDR Script": "tcpdump -A tcp",
+            "Most Similar TLDR Task": "Capture all TCP traffic showing contents (ASCII) in console",
+            "Top-3 Scripts": [
+                "ul_440516: tcpdump -ni eth0"
+            ],
+            "Top-3 Similar Questions": [
+                "ul_440516: Netcat message passing in the same LAN doesn't seem to work"
+            ]
+        },
+        {
+            "Command": "ping",
+            "Explanations about Options": {
+                "-O(M)": "Report outstanding ICMP ECHO reply before sending next packet. This is useful together\n with the timestamp -D to log output to a diagnostic file and search for missing\n answers."
+            },
+            "MP Summary": "send ICMP ECHO_REQUEST to network hosts",
+            "Most Similar TLDR Script": "ping -O {{host}}",
+            "Most Similar TLDR Task": "Also display a message if no response was received",
+            "Top-3 Scripts": [],
+            "Top-3 Similar Questions": [
+                "ul_440516: Netcat message passing in the same LAN doesn't seem to work"
+            ]
+        }
+    ],
+    "Query": "Sending a simple TCP message using Netcat"
+}

@@ -1,0 +1,68 @@
+{
+  "Query": "How do you run a SQL Server query from PowerShell?",
+  "Answers": [
+    {
+      "Command": "from",
+      "Top-3 Similar Questions": [
+        "so_26127751: Running SQL Server commands from Powershell?",
+        "so_1602904: How do you run a single query through mysql from the command line?",
+        "so_33300352: Automated robocopy using variables from a SQL table?"
+      ],
+      "Top-3 Scripts": [
+        "so_26127751: create login [MYDOMAIN\\myusername] from windows\ngo\n\nsp_addsrvrolemember [MYDOMAIN\\myusername], 'sysadmin'\ngo\n\nInvoke-Sqlcmd -Query \"create login [MYDOMAIN\\myusername] from windows;\"",
+        "so_1602904: mysql -u <user> -p -e 'select * from schema.table'",
+        "so_33300352: Import-Module SQLPS\n$dbServer = 'SQLServerName'\n$database = 'DBName'\n\n$sourceQuery = \"SELECT source from Table\" \n$source = Invoke-Sqlcmd -serverinstance $dbServer -Database $database -Query $sourceQuery"
+      ]
+    },
+    {
+      "Command": "mysql",
+      "Top-3 Similar Questions": [
+        "so_1602904: How do you run a single query through mysql from the command line?",
+        "so_47846879: How do I run Mysql queries from the bash shell?",
+        "so_55682304: How to run multiple SQL query \"load local infile\" in PowerShell?"
+      ],
+      "Top-3 Scripts": [
+        "so_1602904: mysql -u <user> -p -e 'select * from schema.table'",
+        "so_55682304: mysql -h $dbhost -u $dbusername -p $dbpassword -D $dbname  -e \" ` \nLOAD DATA LOCAL INFILE 'C:/Users/My_PC/Downloads/file_1.csv' `\nIGNORE INTO TABLE my_table FIELDS TERMINATED BY ',' IGNORE 1 LINES; `\nLOAD DATA LOCAL INFILE 'C:/Users/My_PC/Downloads/file_2.csv' `\nIGNORE INTO TABLE my_table FIELDS TERMINATED BY ',' IGNORE 1 LINES; `\nLOAD DATA LOCAL INFILE 'C:/Users/My_PC/Downloads/file_3.csv' `\nIGNORE INTO TABLE my_table FIELDS TERMINATED BY ',' IGNORE 1 LINES; \"",
+        "su_136494: cat *.sql | mysql -u root -p db_name"
+      ]
+    },
+    {
+      "Command": "psql",
+      "Top-3 Similar Questions": [
+        "so_65419090: Using mulitple sql query through psql connecting from a remote client",
+        "so_60648446: Execute sql queries from shell script",
+        "so_10649794: how to execute sql queries from a shell script"
+      ],
+      "Top-3 Scripts": [
+        "so_65419090: psql <<EOF\nBEGIN;\n...\nCOMMIT;\nEOF",
+        "so_60648446: psql $dbopts < \"$path_to_sql_script\"\n\nquery=\"\nSELECT 1;\n...\n\"\npsql $dbopts <<< \"$query\"",
+        "so_10649794: psql -h $host $dbname $username << EOF\n        select * from students where sid = $x;\nEOF"
+      ]
+    },
+    {
+      "Command": "and",
+      "Top-3 Similar Questions": [
+        "so_51870375: How to run .sql file using sqlplus from powershell",
+        "so_60529929: Execute command from query",
+        "so_44130530: Using PowerShell to Run a SQL query then insert the results into a table"
+      ],
+      "Top-3 Scripts": [
+        "so_44130530: $ht=@{} # Create empty hashtable\nforeach ( $i in $SvrNameList ){\n   $r = invoke-sqlcmd -ServerInstance $i -Query \"SELECT s=@@ServerName, v=@@Version\" # Query server names and versions \n   $ht.Add($r.s, $r.v) # Add name and version into hashtable\n}\n\n# Enumerate the hashtable and generate insert commands\n$ht.GetEnumerator() | % {\n    invoke-sqlcmd -ServerInstance foo -query \"insert into t(s, v) values ('\" + $_.value + \"', '\"+  $_.name +\"');\" \n}",
+        "so_69287739: -- this turns on advanced options and is needed to configure xp_cmdshell\nsp_configure 'show advanced options', '1'\nRECONFIGURE\n-- this enables xp_cmdshell\nsp_configure 'xp_cmdshell', '1' \nRECONFIGURE",
+        "so_14559874: SQL> select billcycle from bc_run\n  2  where billcycle not in (50,16)\n  3  and control_group_ind is null\n  4  and billseqno=6043\n  5\nSQL>\n\nv_bc=`sqlplus -s /@bscsprod <<EOF\nset pagesize 0\nselect billcycle from bc_run\nwhere billcycle not in (50,16)\nand control_group_ind is null\nand billseqno=6043;\nEOF`"
+      ]
+    },
+    {
+      "Command": "echo",
+      "Top-3 Similar Questions": [
+        "so_60648446: Execute sql queries from shell script",
+        "so_36787840: MongoDB run query from terminal",
+        "so_67545561: Run sql query from If else block in shell script"
+      ],
+      "Top-3 Scripts": [
+        "so_60648446: echo \"$dbhost:$dbport:$dbname:$dbname:$dbpass\" > ~/.pgpass\nchmod 600 ~/.pgpass"
+      ]
+    }
+  ]
+}

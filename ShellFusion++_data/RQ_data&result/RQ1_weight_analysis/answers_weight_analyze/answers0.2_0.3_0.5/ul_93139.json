@@ -1,0 +1,95 @@
+{
+  "Query": "Can I zip an entire folder using gzip?",
+  "Answers": [
+    {
+      "Command": "unzip",
+      "MP Summary": "list, test and extract compressed files in a ZIP archive",
+      "Most Similar TLDR Task": "Extract zip file(s) (for multiple files, separate file paths by spaces)",
+      "Most Similar TLDR Script": "unzip {{file(s)}}",
+      "Top-3 Similar Questions": [
+        "ul_198492: Unzip specific files from multiple zip files",
+        "ul_400277: Unzip content of specific folder on Solaris",
+        "ul_489445: Unzip to a folder with the same name as the file (without the .zip extension)"
+      ],
+      "Top-3 Scripts": [
+        "ul_198492: find . -type f -name '*.zip' -exec unzip {}  '*CTL*' -d \"$target_dir\" \\;",
+        "ul_400277: TMPDIR=`mktemp -d` || exit 1\nunzip -d ${TMPDIR}/ results.zip 'folder1/*'\nmv ${TMPDIR}/folder1/* path_to_unzip/\nrm -r ${TMPDIR}",
+        "ul_489445: unzd() {\n    if [[ $# != 1 ]]; then echo I need a single argument, the name of the archive to extract; return 1; fi\n    target=\"${1%.zip}\"\n    unzip \"$1\" -d \"${target##*/}\"\n}\n\nunzip $1 -d \"${target}\""
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "zip",
+      "MP Summary": "package and compress (archive) files",
+      "Most Similar TLDR Task": "Delete files from an existing zip file",
+      "Most Similar TLDR Script": "zip -d {{compressed.zip}} \"{{foo/*.tmp}}\"",
+      "Top-3 Similar Questions": [
+        "au_829492: zip multiple folders into a zip file using terminal",
+        "so_46231441: How to zip all txt files recursively in linux using zip?",
+        "so_66588884: Zip linux directory using absolute path"
+      ],
+      "Top-3 Scripts": [
+        "au_829492: zip -r wordcount.zip META-INF org",
+        "so_46231441: zip -r /home/folder/zipName /home/folder2/subfolder1 -i \\*.txt",
+        "so_66588884: $> tree test\ntest\n\u251c\u2500\u2500 a\n\u251c\u2500\u2500 b\n\u2514\u2500\u2500 c\n\n$> zip -rj test.zip test\nupdating: a (stored 0%)\nupdating: c (stored 0%)\nupdating: b (stored 0%)\n\ncd /var/lib/work_directories && zip -r test.zip test"
+      ],
+      "Explanations about Options": {
+        "-r": "Travel the directory structure recursively; for example:"
+      }
+    },
+    {
+      "Command": "tar",
+      "MP Summary": "an archiving utility",
+      "Most Similar TLDR Task": "Create a gzipped archive from a directory using relative paths",
+      "Most Similar TLDR Script": "tar czf {{target.tar.gz}} -C {{path/to/directory}} .",
+      "Top-3 Similar Questions": [
+        "ul_145342: How do I use gunzip and tar to extract my tar.gz file to the specific directory I want?",
+        "so_35580327: Archiving multiple files in Unix using tar and gzip",
+        "ul_49511: tar: exclude gzip file, and don't try to gunzip it"
+      ],
+      "Top-3 Scripts": [
+        "ul_145342: tar -zxvf path_to_file -C output_directory\n\ngunzip -dc path_to_file | tar xf - -C path_to_extract",
+        "so_35580327: tar czf archive.tar.gz *.doc *.xls\n\ntar xzf achive.tar.gz\n\nman tar",
+        "ul_49511: tar -tvf my.tar --exclude=\"huge_mysql_file.gz\""
+      ],
+      "Explanations about Options": {
+        "--exclude": "Exclude files matching PATTERN, a glob(3)-style wildcard pattern.",
+        "-t": "List the contents of an archive. Arguments are optional. When given, they specify\n the names of the members to list.",
+        "-C": "Change to DIR before performing any operations. This option is order-sensitive,\n i.e. it affects all options that follow.",
+        "-v": "Verbosely list files processed."
+      }
+    },
+    {
+      "Command": "file",
+      "MP Summary": "determine file type",
+      "Most Similar TLDR Task": "Look inside a zipped file and determine the file type(s) inside",
+      "Most Similar TLDR Script": "file -z {{foo.zip}}",
+      "Top-3 Similar Questions": [
+        "so_23389118: Zip a folder using apple script",
+        "so_30831965: Zip all subdirectories using python",
+        "so_65800759: How do I zip files individually older than x days using bash? (with user input)"
+      ],
+      "Top-3 Scripts": [
+        "so_23389118: tell current application\n do shell script \"zip -r \" & qpp & \".zip \" & qpp -- zips the file (or not...)\nend tell",
+        "so_30831965: import shutil\nimport os\nloc = \"testfolder\"\npath = os.getcwd() + '/' +  loc + \"/\"\ndirs = os.listdir( path )\nfor file in dirs:\n   name =  file\n   shutil.make_archive(name, 'zip', path)",
+        "so_65800759: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "unar",
+      "MP Summary": "extract archive file contents",
+      "Most Similar TLDR Task": "Force rename if files to be unpacked already exist",
+      "Most Similar TLDR Script": "unar -r {{archive}}",
+      "Top-3 Similar Questions": [
+        "ul_489445: Unzip to a folder with the same name as the file (without the .zip extension)"
+      ],
+      "Top-3 Scripts": [
+        "ul_489445: unar foo.zip\n\nunar -d foo.zip"
+      ],
+      "Explanations about Options": {
+        "-d": "Always create a containing directory for the contents of the unpacked archive. By\n default, a directory is created if there is more than one top-level file or folder."
+      }
+    }
+  ]
+}

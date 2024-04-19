@@ -1,0 +1,91 @@
+{
+  "Query": "How do I change extension of multiple files recursively from the command line?",
+  "Answers": [
+    {
+      "Command": "chown",
+      "MP Summary": "change file owner and group",
+      "Most Similar TLDR Task": "Recursively change the owner of a directory and its contents",
+      "Most Similar TLDR Script": "chown -R {{user}} {{path/to/directory}}",
+      "Top-3 Similar Questions": [
+        "nl2bash_12472: Recursively change the owner of all files in \"/usr/local/lib/node_modules\" to the current user",
+        "nl2bash_12642: change the ownership of all regular/normal files in the current directory after users confirmation",
+        "nl2bash_12635: change the owner of all the files in the current directory"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_12472: sudo chown -R $USER /usr/local/lib/node_modules",
+        "nl2bash_12642: find . -type f -ok chown username {} \\;",
+        "nl2bash_12635: find . -exec chown myuser:a-common-group-name {} +"
+      ],
+      "Explanations about Options": {
+        "-R": "operate on files and directories recursively"
+      }
+    },
+    {
+      "Command": "find",
+      "MP Summary": "search for files in a directory hierarchy",
+      "Most Similar TLDR Task": "Find files by extension",
+      "Most Similar TLDR Script": "find {{root_path}} -name '{{*.ext}}'",
+      "Top-3 Similar Questions": [
+        "au_333026: Changing extension of multiple files in Ubuntu 12.04",
+        "au_1086839: How can I recursively change the permissions of specific files into a list of directories?",
+        "so_16665157: Replacing a line from multiple files, limiting to a line number range"
+      ],
+      "Top-3 Scripts": [
+        "au_333026: find -L . -type f -name \"*.oldextension\" -print0 | while IFS= read -r -d '' FNAME; do\n    mv -- \"$FNAME\" \"${FNAME%.oldextension}.newextension\"\ndone\n\nfind -L . -type f -print0 | while IFS= read -r -d '' FNAME; do\n    mv -- \"$FNAME\" \"${FNAME%}.newextension\"\ndone",
+        "au_1086839: find _dir_ -name '*.fastq' -exec chmod a-wx {} \\;",
+        "so_16665157: find . -exec grep -il -E 'Programmer.*Bob' {} \\; \\\n    | xargs sed -i '1,10 s/.*Programmer.*Bob.*/LINE REPLACED/'"
+      ],
+      "Explanations about Options": {
+        "-L": "This option is supported.",
+        "-type": "File is of type c:",
+        "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+        "-print0": "Always print the exact filename, unchanged, even if the output is going to a\n terminal."
+      }
+    },
+    {
+      "Command": "mkdir",
+      "MP Summary": "make directories",
+      "Most Similar TLDR Task": "Create directories recursively (useful for creating nested dirs)",
+      "Most Similar TLDR Script": "mkdir -p {{path/to/directory}}",
+      "Top-3 Similar Questions": [
+        "so_46578496: How to add and change the extension of files in a directory?"
+      ],
+      "Top-3 Scripts": [
+        "so_46578496: $ touch foo bar baz.baz \n$ mkdir dir ; ls -F\nbar  baz.baz  dir/  foo\n$ for f in * ; do if [ -f \"$f\" ] ; then t=\"${f%.*}\" ; mv -i \"$f\" \"$t\".ext ; fi ; done\n$ ls\nbar.ext  baz.ext  dir/  foo.ext"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "sed",
+      "MP Summary": "stream editor for filtering and transforming text",
+      "Most Similar TLDR Task": "Delete lines matching the line pattern",
+      "Most Similar TLDR Script": "sed '/{{line_pattern}}/d' {{filename}}",
+      "Top-3 Similar Questions": [
+        "so_16665157: Replacing a line from multiple files, limiting to a line number range",
+        "so_11392478: How to replace a string in multiple files in linux command line",
+        "so_15510716: Changing a line in a file on UNIX"
+      ],
+      "Top-3 Scripts": [
+        "so_16665157: find . -exec grep -il -E 'Programmer.*Bob' {} \\; \\\n    | xargs sed -i '1,10 s/.*Programmer.*Bob.*/LINE REPLACED/'",
+        "so_11392478: cd /path/to/your/folder\nsed -i 's/foo/bar/g' *\n\ncd /path/to/your/folder\nsed -i '.bak' 's/foo/bar/g' *",
+        "so_15510716: sed '1 s/search/replace/' asd.txt\n\necho \"Here is my new first line\" && sed '1d' asd.txt"
+      ],
+      "Explanations about Options": {
+        "-i": "edit files in place (makes backup if SUFFIX supplied)"
+      }
+    },
+    {
+      "Command": "cp",
+      "MP Summary": "copy files and directories",
+      "Most Similar TLDR Task": "Copy a file to another location",
+      "Most Similar TLDR Script": "cp {{path/to/source_file.ext}} {{path/to/target_file.ext}}",
+      "Top-3 Similar Questions": [
+        "so_54112128: Bash script to change file names of different extension"
+      ],
+      "Top-3 Scripts": [
+        "so_54112128: find ./src -type f \\( -name \\*.js -o -name \\*.css -o -name \\*.woff \\) -print0 | \nwhile IFS= read -r -d $'\\0' line; do\n    dest=\"./dst/$(echo $(basename $line) | sed -E 's/(\\..{20}\\.)(js|css|woff)/\\.\\2/g')\"\n    echo Copying $line to $dest \n    cp $line $dest\ndone"
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

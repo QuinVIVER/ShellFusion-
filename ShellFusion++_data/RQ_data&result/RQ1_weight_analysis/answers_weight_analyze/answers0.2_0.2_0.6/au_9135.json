@@ -1,0 +1,81 @@
+{
+  "Query": "How to backup settings and list of installed packages",
+  "Answers": [
+    {
+      "Command": "install",
+      "MP Summary": "copy files and set attributes",
+      "Most Similar TLDR Task": "Copy files to destination, setting their ownership",
+      "Most Similar TLDR Script": "install -o {{user}} {{path/to/source}} {{path/to/destination}}",
+      "Top-3 Similar Questions": [
+        "ul_654369: Where does Debian store the list of installed packages?",
+        "au_158052: Is there a way to backup your package configuration?",
+        "au_576306: Backup of Flashdrive"
+      ],
+      "Top-3 Scripts": [
+        "ul_654369: Status: install ok installed\n\nawk '/^Package:/ { package = $2 }\n     /^Status: install ok installed/ { print package }' /path/to/status\n\nawk '/^Package:/ { p = $2; i = 0 }\n     /^Status: install ok installed/ { i = 1 }\n     i && /^Architecture: all/ { print p; next }\n     i && /^Architecture/ { printf \"%s:%s\\n\", p, $2 }' /path/to/status\n\nawk 'FNR == NR && /^Package:/ { p = $2 }\n     /^Status: install ok installed/ { i = 1 }\n     FNR == NR && i && /^Architecture: all/ { ps[p] = 1; next }\n     FNR == NR && i && /^Architecture/ { ps[p \":\" $2] = 1}\n     FNR != NR && /^Package:/ { p = $2 }\n     FNR != NR && /^Architecture:/ { a = $2 }\n     /^Auto-Installed: 1/ { delete ps[p \":\" a] }\n     END { for (p in ps) print p }' /path/to/status /path/to/extended_states",
+        "au_158052: dpkg --set-selections < /path/to/backup/file && sudo apt-get install",
+        "au_576306: sudo apt-get install gnome-disks"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "dpkg",
+      "MP Summary": "package manager for Debian",
+      "Most Similar TLDR Task": "List installed packages",
+      "Most Similar TLDR Script": "dpkg -l {{pattern}}",
+      "Top-3 Similar Questions": [
+        "ul_654369: Where does Debian store the list of installed packages?",
+        "ul_838: Weekly cron job to save list of installed packages",
+        "au_9882: What directories do I need to save to backup my user settings?"
+      ],
+      "Top-3 Scripts": [
+        "ul_654369: /var/lib/dpkg/status\n\nman dpkg",
+        "ul_838: #!/bin/bash\n\ndpkg -l > ~/Dropbox/installed_packages",
+        "au_9882: dpkg --get-selections > ~/my-packages.txt\n\nsudo dpkg --set-selections < ~/my-packages.txt"
+      ],
+      "Explanations about Options": {
+        "-l": "List packages matching given pattern.\n -s, --status package-name...\n Report status of specified package.\n -L, --listfiles package-name...\n List files installed to your system from package-name.\n -S, --search filename-search-pattern...\n Search for a filename from installed packages.\n -p, --print-avail package-name...\n Display details about package-name, as found in\n /var/lib/dpkg/available. Users of APT-based frontends\n should use apt-cache show package-name instead.",
+        "--set-selections": "Set package selections using file read from stdin. This file should be in the\n format \u201cpackage state\u201d, where state is one of install, hold, deinstall or purge.\n Blank lines and comment lines beginning with \u2018#\u2019 are also permitted."
+      }
+    },
+    {
+      "Command": "apt-mark",
+      "MP Summary": "show, set and unset various settings for a package",
+      "Most Similar TLDR Task": "Mark a package as automatically installed",
+      "Most Similar TLDR Script": "sudo apt-mark auto {{package_name}}",
+      "Top-3 Similar Questions": [
+        "ul_654369: Where does Debian store the list of installed packages?"
+      ],
+      "Top-3 Scripts": [
+        "ul_654369: awk '/^Package:/ { p = $2 }\n     /^Architecture/ { a = $2 }\n     /^Auto-Installed: 1/ { printf \"%s:%s\\n\", p, a }' /path/to/extended_states |\nxargs sudo apt-mark auto"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "duplicity",
+      "MP Summary": "Encrypted incremental backup to local or remote storage.",
+      "Most Similar TLDR Task": "List the available backups",
+      "Most Similar TLDR Script": "duplicity collection-status \"file://{{absolute/path/to/backup/directory}}\"",
+      "Top-3 Similar Questions": [
+        "au_1213752: Is a Ubuntu backup accessible from Win 10?"
+      ],
+      "Top-3 Scripts": [
+        "au_1213752: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "restic",
+      "MP Summary": "Backup and restore files",
+      "Most Similar TLDR Task": "Backup a directory to the repository",
+      "Most Similar TLDR Script": "restic -r {{path/to/repository}} backup {{path/to/directory}}",
+      "Top-3 Similar Questions": [
+        "ul_482588: CLI backup tool"
+      ],
+      "Top-3 Scripts": [
+        "ul_482588: "
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "Query": "find -exec with multiple commands",
+  "Answers": [
+    {
+      "Command": "xargs",
+      "MP Summary": "build and execute command lines from standard input",
+      "Most Similar TLDR Task": "Parallel runs of up to `max-procs` processes at a time; the default is 1. If `max-procs` is 0, xargs will run as many processes as possible at a time",
+      "Most Similar TLDR Script": "{{arguments_source}} | xargs -P {{max-procs}} {{command}}",
+      "Top-3 Similar Questions": [
+        "ul_212957: find: multiple `-exec`s with conditions",
+        "ul_84265: linux shell: find -exec in find -exec",
+        "ul_507023: pipe commands inside find -exec?"
+      ],
+      "Top-3 Scripts": [
+        "ul_212957: find . -type f -exec grep -lFZ <i>SOME_STRING</i> {} + | xargs -0 gsed -s -i '<i>COMMAND</i>'\n\ngfind /tmp/ -type f \\( -name \"*.h\" -o -name \"*.cpp\" \\) \\\n-exec ggrep -lFZ LARGE_INTEGER {} + | \\\nxargs -0 gsed -s -i '1s/^/#include <stdint.h>\\n/'",
+        "ul_84265: xargs -r0a <(\n    find ~/.config/google-chrome -type d -name test -print0\n  ) sh -c 'exec find \"$@\" -exec chmod 555 {} +' sh",
+        "ul_507023: find ./ -type f -name \"*.txt\" | \n    xargs -I{} grep -EiH something {} | \n        grep -EiH somethingelse | \n            grep -EiH other\n\nfind ./ -type f -name \"*.txt\" -print0 | \n    xargs -0 grep -EiH something {} | \n        grep -Ei somethingelse | \n            grep -Ei other"
+      ],
+      "Explanations about Options": {
+        "-i": "This option is a synonym for -Ireplace-str if replace-str is specified. If the\n replace-str argument is missing, the effect is the same as -I{}. This option is\n deprecated; use -I instead.",
+        "-0": "Input items are terminated by a null character instead of by whitespace, and the\n quotes and backslash are not special (every character is taken literally).\n Disables the end of file string, which is treated like any other argument. Useful\n when input items might contain white space, quote marks, or backslashes. The GNU\n find -print0 option produces input suitable for this mode."
+      }
+    },
+    {
+      "Command": "command",
+      "MP Summary": "execute a simple command",
+      "Most Similar TLDR Task": "Display the path to the executable or the alias definition of a specific command",
+      "Most Similar TLDR Script": "command -v {{command_name}}",
+      "Top-3 Similar Questions": [
+        "so_21689583: questions on Linux command \"find -exec {}\""
+      ],
+      "Top-3 Scripts": [
+        "so_21689583: -exec command ;\n          Execute  command;  true  if  0 status is returned.  All following \n          arguments to find are taken to be arguments to the command until an \n          argument consisting of \u2018;\u2019 is encountered."
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "exec",
+      "MP Summary": "execute commands and open, close, or copy file descriptors",
+      "Most Similar TLDR Task": "Replace with the specified command using the current environment variables",
+      "Most Similar TLDR Script": "exec {{command -with -flags}}",
+      "Top-3 Similar Questions": [
+        "au_523815: What the -exec in `find ... -exec ...` do?",
+        "su_1071011: find -exec where filename is not the last parameter"
+      ],
+      "Top-3 Scripts": [
+        "au_523815: ",
+        "su_1071011: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "dirname",
+      "MP Summary": "strip last component from file name",
+      "Most Similar TLDR Task": "Delimit output with a NUL character instead of a newline (useful when combining with `xargs`)",
+      "Most Similar TLDR Script": "dirname --zero {{path/to/directory_a}} {{path/to/file_b}}",
+      "Top-3 Similar Questions": [
+        "so_8106405: Bash find: changing matched name for use in -exec"
+      ],
+      "Top-3 Scripts": [
+        "so_8106405: find . -name \"*.less\" -exec sh -c \"plessc \\$0 \\$(dirname \\$0)/\\$(basename \\$0 less)css\" {} \\;"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "sudo",
+      "MP Summary": "execute a command as another user",
+      "Most Similar TLDR Task": "Run a command as another user and/or group",
+      "Most Similar TLDR Script": "sudo -u {{user}} -g {{group}} {{id -a}}",
+      "Top-3 Similar Questions": [
+        "su_1215782: `find` command returns no results when adding -exec"
+      ],
+      "Top-3 Scripts": [
+        "su_1215782: sudo find . \\( -not -user steven -or -not -group users \\) -exec echo {} \\;"
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

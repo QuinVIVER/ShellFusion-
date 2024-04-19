@@ -1,0 +1,87 @@
+{
+  "Query": "How to play mp3 files from the command line?",
+  "Answers": [
+    {
+      "Command": "eyeD3",
+      "MP Summary": "displays and manipulates id3-tags on mp3 files",
+      "Most Similar TLDR Task": "Set the title of an MP3 file",
+      "Most Similar TLDR Script": "eyeD3 --title \"{{A Title}}\" {{filename.mp3}}",
+      "Top-3 Similar Questions": [
+        "ul_41287: How to Extract Album Cover Image from MP3 file?"
+      ],
+      "Top-3 Scripts": [
+        "ul_41287: eyeD3 --write-images=DIR mp3_file"
+      ],
+      "Explanations about Options": {
+        "--write-images": "Causes all attached images (APIC frames) to be written to the specified directory."
+      }
+    },
+    {
+      "Command": "vlc",
+      "MP Summary": "the VLC media player",
+      "Most Similar TLDR Task": "Play a file",
+      "Most Similar TLDR Script": "vlc {{path/to/file}}",
+      "Top-3 Similar Questions": [
+        "so_38171169: How to play mp3 from URL",
+        "au_953631: Read .mp3 files from an USB stick, is it possible?",
+        "au_997691: How to play first n seconds of each file from a playlist"
+      ],
+      "Top-3 Scripts": [
+        "so_38171169: import vlc\np = vlc.MediaPlayer(\"http://your_mp3_url\")\np.play()",
+        "au_953631: sudo apt-get update\nsudo apt-get install vlc\n\nsudo add-apt-repository universe  # and press Enter\nsudo apt-get update\nsudo apt-get install vlc\nsudo apt-get install pulseaudio pavucontrol",
+        "au_997691: vlc --playlist-autostart <path/to/playlist.xspf> --run-time=10\n\nexport DISPLAY=:0; vlc --playlist-autostart <path/to/playlist.xspf> --run-time=10\n\nexport DISPLAY=:0; vlc --playlist-autostart <path/to/playlist.xspf> --run-time=10 vlc://quit"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "ffmpeg",
+      "MP Summary": "ffmpeg video converter",
+      "Most Similar TLDR Task": "Extract the sound from a video and save it as MP3",
+      "Most Similar TLDR Script": "ffmpeg -i {{video.mp4}} -vn {{sound}}.mp3",
+      "Top-3 Similar Questions": [
+        "au_928583: extract a segment from some mp3 file",
+        "so_16463276: Trim the first 11 seconds from an mp3 file",
+        "su_655729: Combining multiple MP3 files from a specific day"
+      ],
+      "Top-3 Scripts": [
+        "au_928583: ffmpeg -ss 00:01:20 -t 00:01:20 -acodec copy -i /path/to/input.mp3 /path/to/output.mp3",
+        "so_16463276: ffmpeg -i infile.mp3 -ss 11 outfile.mp3\n\nffmpeg -i infile.mp3 -ss 11 /tmp/outfile.wav\nlame /tmp/outfile.wav outfile.mp3",
+        "su_655729: #!/bin/bash\nconcat=$(echo -n \"concat:\" && find path/to/files -name '*.mp3' -mtime -1 -exec echo -n \"{}|\" \\;)\nffmpeg -i \"${concat%|}\" -acodec copy output.mp3\n\nIFS=$'\\n'\nfor i in $(echo $concat | sed -e 's/^concat://' -e 's/|$//' -e 's/|/\\n/g');\n    do rm -i $i\ndone"
+      ],
+      "Explanations about Options": {
+        "-ss": "When used as an input option (before \"-i\"), seeks in this input file to position. Note\n that in most formats it is not possible to seek exactly, so ffmpeg will seek to the\n closest seek point before position. When transcoding and -accurate_seek is enabled\n (the default), this extra segment between the seek point and position will be decoded\n and discarded. When doing stream copy or when -noaccurate_seek is used, it will be\n preserved.",
+        "-t": "When used as an input option (before \"-i\"), limit the duration of data read from the\n input file.",
+        "-acodec": "Set the audio codec. This is an alias for \"-codec:a\".",
+        "-i": "input file url"
+      }
+    },
+    {
+      "Command": "xargs",
+      "MP Summary": "build and execute command lines from standard input",
+      "Most Similar TLDR Task": "Run a command using the input data as arguments",
+      "Most Similar TLDR Script": "{{arguments_source}} | xargs {{command}}",
+      "Top-3 Similar Questions": [
+        "so_44425795: Command to copy a line from text and create a new text file"
+      ],
+      "Top-3 Scripts": [
+        "so_44425795: find . -name \\*.txt -type f | xargs -r cat > /tmp/output_file.txt\n\nxargs -r cat"
+      ],
+      "Explanations about Options": {
+        "-r": "If the standard input does not contain any nonblanks, do not run the command.\n Normally, the command is run once even if there is no input. This option is a GNU\n extension."
+      }
+    },
+    {
+      "Command": "paste",
+      "MP Summary": "merge lines of files",
+      "Most Similar TLDR Task": "Join all the lines into a single line, using TAB as delimiter",
+      "Most Similar TLDR Script": "paste -s {{file}}",
+      "Top-3 Similar Questions": [
+        "so_26521301: Linux - Get a line from one file and corresponding line from a second file and pass into cp command"
+      ],
+      "Top-3 Scripts": [
+        "so_26521301: paste target.txt destination.txt | sed -e 's/^/cp /' > cp.cmds"
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

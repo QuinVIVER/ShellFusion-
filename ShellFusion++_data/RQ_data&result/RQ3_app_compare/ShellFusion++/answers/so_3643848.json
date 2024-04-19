@@ -1,0 +1,96 @@
+{
+  "Query": "Copy files from one directory into an existing directory",
+  "Answers": [
+    {
+      "Command": "cp",
+      "MP Summary": "copy files and directories",
+      "Most Similar TLDR Task": "Dereference symbolic links before copying",
+      "Most Similar TLDR Script": "cp -L {{link}} {{path/to/target_directory}}",
+      "Top-3 Similar Questions": [
+        "so_35138936: bash - copy existing file to existing directory : no such file or directory",
+        "so_36818653: How to write a linux script that copies all the files and directories under one directory to another directory?",
+        "so_63393883: Copy files and one directory up"
+      ],
+      "Top-3 Scripts": [
+        "so_35138936: if $verbose; then\n    echo -e \"cp $p ${src} ${backupdir}\"\nfi\ncp $p \"${src}\" \"${backupdir}\"",
+        "so_36818653: cp -r $1/* $2/",
+        "so_63393883: while read ;\ndo \nrep=s( echo $REPLY | sed 's/.\\/dir3//' ) #bad method but more readable\nmkdir -p new/$rep && cp $REPLY new/$rep/\ndone < filesource"
+      ],
+      "Explanations about Options": {
+        "-r": "copy directories recursively"
+      }
+    },
+    {
+      "Command": "mv",
+      "MP Summary": "move (rename) files",
+      "Most Similar TLDR Task": "Do not overwrite existing files at the target",
+      "Most Similar TLDR Script": "mv -n {{source}} {{target}}",
+      "Top-3 Similar Questions": [
+        "ul_199727: Shell Scripting: Deleting or moving files from one directory that match filenames from another directory",
+        "so_47154327: move or copy a file if that file exists?",
+        "so_69886236: mv: can't rename: No such file or directory. But directory exists"
+      ],
+      "Top-3 Scripts": [
+        "ul_199727: for f in /path/to/PDFs/*.pdf; do\n    base=$( basename \"$f\" .pdf )\n    if [ ! -f /path/to/PNGs/\"$base\".png ]; then\n        mv \"$f\" /path/to/garbage/\n    fi  \ndone",
+        "so_47154327: [ -f \"/var/www/my_folder/reports.html\" ] && mv \"/var/www/my_folder/reports.html\" /tmp/",
+        "so_69886236: if [ -d some/path ]; then\n    mkdir -p other/path\n    mv some/path/* other/path\nfi"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "find",
+      "MP Summary": "search for files in a directory hierarchy",
+      "Most Similar TLDR Task": "Find files matching a given pattern, excluding specific paths",
+      "Most Similar TLDR Script": "find {{root_path}} -name '{{*.py}}' -not -path '{{*/site-packages/*}}'",
+      "Top-3 Similar Questions": [
+        "so_34555420: Linux command that Create and Copy Files and Folder in Multiple directories",
+        "so_60016712: find and copy files and directories",
+        "nl2bash_9582: Print mv commands to rename all files under current directory by formatting the filenames with the sed scripts '\\''s/^([^-]*)-\\s*([^\\.]*)/\\L\\1\\E-\\2/'\\'', '\\''s/ /_/g'\\'' and '\\''s/_-/-/g'\\''"
+      ],
+      "Top-3 Scripts": [
+        "so_34555420: find /home -type d -name public_html -exec cp /root/robots.txt /root/favicon.ico {} \\;",
+        "so_60016712: find test -type f -mtime -1 -exec bash -c '\n    src=(\"$@\")\n    dst=(\"${@/#test/backup}\")\n    mkdir -p \"${dst[@]%/*}\"\n    for i in \"${!src[@]}\"; do\n        cp \"${src[i]}\" \"${dst[i]}\"\n    done\n' _ {} +",
+        "nl2bash_9582: find ./ -type f -exec bash -c 'echo \"mv \\\"$1\\\" \\\"$(echo \"$1\" | sed -re '\\''s/^([^-]*)-\\s*([^\\.]*)/\\L\\1\\E-\\2/'\\'' -e '\\''s/ /_/g'\\'' -e '\\''s/_-/-/g'\\'')\\\"\"' - {} \\;"
+      ],
+      "Explanations about Options": {
+        "-type": "File is of type c:",
+        "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+      }
+    },
+    {
+      "Command": "mkdir",
+      "MP Summary": "make directories",
+      "Most Similar TLDR Task": "Create a directory in current directory or given path",
+      "Most Similar TLDR Script": "mkdir {{directory}}",
+      "Top-3 Similar Questions": [
+        "so_36818653: How to write a linux script that copies all the files and directories under one directory to another directory?",
+        "so_63393883: Copy files and one directory up",
+        "ul_674474: Copy directory recursively only if on target the file exists and only if newer than target"
+      ],
+      "Top-3 Scripts": [
+        "so_36818653: mkdir -p $2",
+        "so_63393883: while read ;\ndo \nrep=s( echo $REPLY | sed 's/.\\/dir3//' ) #bad method but more readable\nmkdir -p new/$rep && cp $REPLY new/$rep/\ndone < filesource",
+        "ul_674474: mkdir src\ntouch src/file{1..3}\ntouch src/thefile\n# Destination:\nmkdir dst\ntouch dst/file{1..3}\ntouch -d 20201023 dst/thefile\n# List all\nfree -D src dst"
+      ],
+      "Explanations about Options": {
+        "-p": "no error if existing, make parent directories as needed"
+      }
+    },
+    {
+      "Command": "pax",
+      "MP Summary": "read and write file archives and copy directory hierarchies",
+      "Most Similar TLDR Task": "Create an archive from files",
+      "Most Similar TLDR Script": "pax -wf {{target.tar}} {{path/to/file1}} {{path/to/file2}} {{path/to/file3}}",
+      "Top-3 Similar Questions": [
+        "ul_326285: How to copy files and directories without copying directory contents?"
+      ],
+      "Top-3 Scripts": [
+        "ul_326285: find somewhere -type d | pax -wd  > archive.tar\ntar vtf archive.tar\n( cd somewhere_else && tar xpf - ) < archive.tar"
+      ],
+      "Explanations about Options": {
+        "-d": "Cause files of type directory being copied or archived, or archive members of type\n directory being extracted, to match only the directory file or archive member and\n not the file hierarchy rooted at the directory.",
+        "-w": "Write files to the standard output in the specified archive format. When no file\n operands are specified, standard input is read for a list of pathnames with one per\n line without any leading or trailing <blanks>."
+      }
+    }
+  ]
+}

@@ -1,0 +1,91 @@
+{
+  "Query": "How can I sort the output of 'ls' by last modified date?",
+  "Answers": [
+    {
+      "Command": "sort",
+      "MP Summary": "sort lines of text files",
+      "Most Similar TLDR Task": "Sort human-readable numbers (in this case the 5th field of `ls -lh`)",
+      "Most Similar TLDR Script": "ls -lh | sort -h -k 5",
+      "Top-3 Similar Questions": [
+        "au_713045: How do I sort the output of \"ls\" by last modified - including the date?",
+        "ul_14728: ls: how do I list directories sorted by timestamps of the files it contains",
+        "so_34474016: Find and sort files by date modified"
+      ],
+      "Top-3 Scripts": [
+        "au_713045: stat -c '%y - %n' * | sort -t'-' -k1,1\n\nstat -c '%y - %n' * | sort -r -t'-' -k1,1",
+        "ul_14728: ls -ltcr         # sort by and show change time, most recent last\nls -ltur         # sort by and show access time, most recent last\nls -ltr          # sort by date, most recent last",
+        "so_34474016: find . -type f -print0 | xargs -0 stat -f\"%m %Sm %N\" | sort -rn"
+      ],
+      "Explanations about Options": {
+        "-r": "reverse the result of comparisons",
+        "-n": "compare according to string numerical value"
+      }
+    },
+    {
+      "Command": "head",
+      "MP Summary": "output the first part of files",
+      "Most Similar TLDR Task": "Output everything but the last few lines of a file",
+      "Most Similar TLDR Script": "head -n -{{count_of_lines}} {{filename}}",
+      "Top-3 Similar Questions": [
+        "so_3302900: How to Sort Output from several Log Files by date",
+        "su_416308: How to list files recursively and sort them by modification time?",
+        "su_1557906: Sort files by date added not modified"
+      ],
+      "Top-3 Scripts": [
+        "so_3302900: ",
+        "su_416308: find . -type f -exec stat -f \"%m%t%Sm %N\" '{}' \\; | sort -rn | head -20 | cut -f2-",
+        "su_1557906: mdls -n kMDItemFSName -n kMDItemDateAdded /Applications/*.app |\n        cut -d= -f 2- | paste -d' ' - - | sort -rn | head -n1 | cut -d\\\" -f 2\n\nmdls -n kMDItemFSName -n kMDItemDateAdded -raw /Applications/*.app | xargs -0 -n2 | sort -rn | head -n1 | cut -d' ' -f4-"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "date",
+      "MP Summary": "print or set the system date and time",
+      "Most Similar TLDR Task": "Display the current date as a Unix timestamp (seconds since the Unix epoch)",
+      "Most Similar TLDR Script": "date +%s",
+      "Top-3 Similar Questions": [
+        "so_3302900: How to Sort Output from several Log Files by date",
+        "so_37368188: Sorting by date with variable number of columns",
+        "so_61893412: It is possible to sort the proccesses by a given date in bash?"
+      ],
+      "Top-3 Scripts": [
+        "so_3302900: ",
+        "so_37368188: ",
+        "so_61893412: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "tail",
+      "MP Summary": "output the last part of files",
+      "Most Similar TLDR Task": "Show last 'num' lines in 'file' and refresh every 'n' seconds",
+      "Most Similar TLDR Script": "tail -n {{num}} -s {{n}} -f {{file}}",
+      "Top-3 Similar Questions": [
+        "so_41826902: How to sort list of names by date and get last in bash",
+        "ul_532529: In bash: Filter, sort by date in name, and return the most recently dated name"
+      ],
+      "Top-3 Scripts": [
+        "so_41826902: sort -t- -nk5 list.txt | tail -1",
+        "ul_532529: curl -l \"ftp.fakeurl.com.au/In Stock Daily CSV/\"  --user username:password |\n  grep '\\.csv$' |\n  sort -t. -k3,3 -k2,2 -k1,1 |\n  tail -n 1\n\ntail -n 1"
+      ],
+      "Explanations about Options": {
+        "-n": "output the last NUM lines, instead of the last 10; or use -n +NUM to output\n starting with line NUM"
+      }
+    },
+    {
+      "Command": "touch",
+      "MP Summary": "change file timestamps",
+      "Most Similar TLDR Task": "Set the times on a file to a specific date and time",
+      "Most Similar TLDR Script": "touch -t {{YYYYMMDDHHMM.SS}} {{filename}}",
+      "Top-3 Similar Questions": [
+        "so_29737420: How to filter the output of ls command to display only files created in February?"
+      ],
+      "Top-3 Scripts": [
+        "so_29737420: touch --date \"yyyy-mm-dd\" /tmp/start\ntouch --date \"yyyy-mm-dd\" /tmp/end\nfind /my/path -type f -newer /tmp/start -not -newer /tmp/end"
+      ],
+      "Explanations about Options": {
+        "--date": "parse STRING and use it instead of current time"
+      }
+    }
+  ]
+}

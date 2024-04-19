@@ -1,0 +1,86 @@
+{
+  "Query": "How to connect to wifi in CentOS 7(CLI)(no GUI)?",
+  "Answers": [
+    {
+      "Command": "iwconfig",
+      "MP Summary": "configure a wireless network interface",
+      "Most Similar TLDR Task": "Set the operating mode of the specified interface",
+      "Most Similar TLDR Script": "iwconfig {{interface}} mode {{ad hoc|Managed|Master|Repeater|Secondary|Monitor|Auto}}",
+      "Top-3 Similar Questions": [
+        "au_1032804: Connecting to Wifi on terminal of Kubuntu 17.10",
+        "au_1177169: Ubuntu 18.04, cannot connect to wifi with Qualcomm Atheros AR93xx drivers"
+      ],
+      "Top-3 Scripts": [
+        "au_1032804: sudo iwconfig wlp7s0 essid \"ABCD1234\" key s:abcd1",
+        "au_1177169: iwconfig wlp4s0\n\nsudo ip link set wlp4s0 down\nsudo iwconfig wlp4s0 channel 7\nsudo ip link set wlp4s0 up\nnmcli connection up [network name]"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "wpa_supplicant",
+      "MP Summary": "Wi-Fi Protected Access client and IEEE 802.1X supplicant",
+      "Most Similar TLDR Task": "Join a protected wireless network and run it in a daemon",
+      "Most Similar TLDR Script": "wpa_supplicant -B -i {{interface}} -c {{path/to/wpa_supplicant_conf.conf}}",
+      "Top-3 Similar Questions": [
+        "so_24310265: How to connect to using wpa_supplicant on ubuntu 10.04",
+        "au_564556: Can't connect to WiFi after suspend",
+        "ul_595161: can't connect to wifi after Arch Linux installation"
+      ],
+      "Top-3 Scripts": [
+        "so_24310265: ctrl_interface=/var/run/wpa_supplicant\n\nnetwork={\n    ssid=\"367307-Maxis Fibre Internet\"\n    key_mgmt=WPA-PSK\n    psk=\"429140AEFF\"\n}\n\nwpa_supplicant -B -i ra0 -c /etc/wpa_supplicant.conf -D wext\n\nwpa_supplicant -dd -i ra0 -c /etc/wpa_supplicant.conf -D wext",
+        "au_564556: #!/bin/bash\ncase \"$1\" in\nthaw|resume)\nsudo nmcli nm sleep false\nsudo pkill -f wpa_supplicant\n;;\n*)\n;;\nesac\nexit $?",
+        "ul_595161: "
+      ],
+      "Explanations about Options": {
+        "-D": "Driver to use (can be multiple drivers: nl80211,wext). (Per interface, see the\n available options below.)",
+        "-i": "Interface to listen on. Multiple instances of this option can be present, one per\n interface, separated by -N option (see below).",
+        "-d": "Increase debugging verbosity (-dd even more).",
+        "-c": "Path to configuration file. (Per interface)"
+      }
+    },
+    {
+      "Command": "iw",
+      "MP Summary": "show / manipulate wireless devices and their configuration",
+      "Most Similar TLDR Task": "Scan for available wireless networks",
+      "Most Similar TLDR Script": "iw dev {{wlp}} scan",
+      "Top-3 Similar Questions": [
+        "au_926415: Can't connect to wifi on 16.04 LTS"
+      ],
+      "Top-3 Scripts": [
+        "au_926415: sudo iw reg get\n\nsudo iw reg set IS"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "ifconfig",
+      "MP Summary": "configure network interfaces",
+      "Most Similar TLDR Task": "Disable eth0 interface",
+      "Most Similar TLDR Script": "ifconfig eth0 down",
+      "Top-3 Similar Questions": [
+        "ul_48384: How to permanently connect to WPA2AES wifi with OpenBSD (through cli)"
+      ],
+      "Top-3 Scripts": [
+        "ul_48384: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "ssh",
+      "MP Summary": "OpenSSH SSH client (remote login program)",
+      "Most Similar TLDR Task": "Connect to a remote server",
+      "Most Similar TLDR Script": "ssh {{username}}@{{remote_host}}",
+      "Top-3 Similar Questions": [
+        "su_1630062: Vnc viewer error: unable connect to socket: Connection refused (111) in CentOS 8",
+        "ul_427037: Authentication mechanism to connect to Windows AD in Linux?"
+      ],
+      "Top-3 Scripts": [
+        "su_1630062: ssh -L 5901:localhost:5901 user@server\n\nssh -N -f -L 5901:localhost:5901 user@server",
+        "ul_427037: /etc/ssh/sshd_config"
+      ],
+      "Explanations about Options": {
+        "-N": "Do not execute a remote command. This is useful for just forwarding ports.",
+        "-f": "Requests ssh to go to background just before command execution. This is useful if\n ssh is going to ask for passwords or passphrases, but the user wants it in the\n background. This implies -n. The recommended way to start X11 programs at a remote\n site is with something like ssh -f host xterm."
+      }
+    }
+  ]
+}

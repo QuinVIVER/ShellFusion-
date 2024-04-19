@@ -1,0 +1,95 @@
+{
+  "Query": "Efficiently delete large directory containing thousands of files",
+  "Answers": [
+    {
+      "Command": "mv",
+      "MP Summary": "move (rename) files",
+      "Most Similar TLDR Task": "Move files in arbitrary locations",
+      "Most Similar TLDR Script": "mv {{source}} {{target}}",
+      "Top-3 Similar Questions": [
+        "au_574667: How can I delete all folders of a specific name without deleting Contents in it?",
+        "au_711603: how to delete one directory of a path?",
+        "so_53461725: How to delete a line in a file that contains only one specific character by using a bash script?"
+      ],
+      "Top-3 Scripts": [
+        "au_574667: #!/bin/bash\n\nwhile IFS= read -r -d '' n; \ndo   \n   dir=$(dirname \"$n\") ; \n   mv \"${n}\"/* \"${dir}\"\n   rmdir \"${n}\"\ndone < <(find -type d -name \"128Kbps_Songs\" -print0)",
+        "au_711603: mv Leonardo/data/approach/tennis Leonardo/data && rmdir Leonardo/data/approach",
+        "so_53461725: #! /bin/bash\ngrep -v '^;$' \"$1\" > \"$1\".tmp\nmv \"$1\".tmp \"$1\""
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "dirname",
+      "MP Summary": "strip last component from file name",
+      "Most Similar TLDR Task": "Calculate the parent directory of multiple paths",
+      "Most Similar TLDR Script": "dirname {{path/to/file_a}} {{path/to/directory_b}}",
+      "Top-3 Similar Questions": [
+        "au_574667: How can I delete all folders of a specific name without deleting Contents in it?",
+        "su_547409: Debian - deleting thousands of files"
+      ],
+      "Top-3 Scripts": [
+        "au_574667: #!/bin/bash\n\nwhile IFS= read -r -d '' n; \ndo   \n   dir=$(dirname \"$n\") ; \n   mv \"${n}\"/* \"${dir}\"\n   rmdir \"${n}\"\ndone < <(find -type d -name \"128Kbps_Songs\" -print0)",
+        "su_547409: rm -rf dirname/*\n\nnohup rm -rf dirname"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "rm",
+      "MP Summary": "remove files or directories",
+      "Most Similar TLDR Task": "Recursively remove a directory and all its subdirectories",
+      "Most Similar TLDR Script": "rm -r {{path/to/directory}}",
+      "Top-3 Similar Questions": [
+        "su_393677: Script to keep specific directories that contains a .txt file and deletes the files from the other directories without the specific .txt file",
+        "so_27449149: How can I recursively delete a set of directories across a large array of different folders using bash?",
+        "so_35615581: How to delete X number of files in a directory"
+      ],
+      "Top-3 Scripts": [
+        "su_393677: ",
+        "so_27449149: find [a-z][a-z]* -type d \\( -name .gnome -o -name .mozilla \\) -exec rm -r {} \\;",
+        "so_35615581: ls -U | head -40000 | xargs rm -rf\n\nfind . -maxdepth 1 -print0 | xargs -0 rm -rf"
+      ],
+      "Explanations about Options": {
+        "-r": "remove directories and their contents recursively",
+        "-f": "ignore nonexistent files and arguments, never prompt"
+      }
+    },
+    {
+      "Command": "find",
+      "MP Summary": "search for files in a directory hierarchy",
+      "Most Similar TLDR Task": "Find files matching a given pattern, excluding specific paths",
+      "Most Similar TLDR Script": "find {{root_path}} -name '{{*.py}}' -not -path '{{*/site-packages/*}}'",
+      "Top-3 Similar Questions": [
+        "ul_556906: Delete Hundreds of thousands of files by date",
+        "su_393677: Script to keep specific directories that contains a .txt file and deletes the files from the other directories without the specific .txt file",
+        "ul_270071: how to delete all files with specific extension in specific named folders in large tree?"
+      ],
+      "Top-3 Scripts": [
+        "ul_556906: find ... -delete\n\nfind dir1 dir2 dir3 -type f -mtime  +7 -delete\n\nfind dir4 dir5 dir6 -type f -mtime +30 -delete",
+        "su_393677: ",
+        "ul_270071: $ find /path/to/source -type d -name 'rules' -exec find '{}' -mindepth 1 -maxdepth 1 -type f -iname '*.pdf' -print ';'\n\n$ find /path/to/source -type d -name 'rules' -exec find '{}' -mindepth 1 -maxdepth 1 -type f -iname '*.pdf' -print -delete ';'"
+      ],
+      "Explanations about Options": {
+        "-iname": "Like -name, but the match is case insensitive. For example, the patterns `fo*' and\n `F??' match the file names `Foo', `FOO', `foo', `fOo', etc. The pattern `*foo*`\n will also match a file called '.foobar'.",
+        "-d": "A synonym for -depth, for compatibility with FreeBSD, NetBSD, MacOS X and OpenBSD.",
+        "-type": "File is of type c:",
+        "-print": "Quoting is handled in the same way as for -printf and -fprintf. If you are using\n find in a script or in a situation where the matched files might have arbitrary\n names, you should consider using -print0 instead of -print.",
+        "-mindepth": "Do not apply any tests or actions at levels less than levels (a non-negative\n integer). -mindepth 1 means process all files except the starting-points.",
+        "-mtime": "File's data was last modified n*24 hours ago. See the comments for -atime to\n understand how rounding affects the interpretation of file modification times.",
+        "-maxdepth": "Descend at most levels (a non-negative integer) levels of directories below the\n starting-points. -maxdepth 0 means only apply the tests and actions to the\n starting-points themselves."
+      }
+    },
+    {
+      "Command": "comm",
+      "MP Summary": "select or reject lines common to two files",
+      "Most Similar TLDR Task": "Produce three tab-separated columns: lines only in first file, lines only in second file and common lines",
+      "Most Similar TLDR Script": "comm {{file1}} {{file2}}",
+      "Top-3 Similar Questions": [
+        "nl2bash_10015: Print unique lines of sorted file \"a\" and \"b\" and remove leading tabs"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_10015: comm -3 a b | sed 's/^\\t//'"
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

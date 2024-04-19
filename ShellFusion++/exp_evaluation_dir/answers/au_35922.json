@@ -1,0 +1,2320 @@
+{
+  "Query": "How do I change extension of multiple files recursively from the command line?",
+  "Answers": [
+    {
+      "Command": "xargs",
+      "MP Summary": "build and execute command lines from standard input",
+      "Most Similar TLDR Task": "Execute the command once for each input line, replacing any occurrences of the placeholder (here marked as `_`) with the input line",
+      "Most Similar TLDR Script": "{{arguments_source}} | xargs -I _ {{command}} _ {{optional_extra_arguments}}",
+      "Most Similar NL2Bash Task": "Archive all directories in /path/to/directory/* (only command line arguments, no sub-directories) to files with .tar.gz extension transforming the full paths to relative paths",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find /path/* -maxdepth 0 -type d -exec sudo tar -zcpvf {}.tar.gz {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-maxdepth": "Descend at most levels (a non-negative integer) levels of directories below the\n starting-points. -maxdepth 0 means only apply the tests and actions to the\n starting-points themselves.",
+              "-type": "File is of type c:"
+            },
+            "sudo": {
+              "mpsum": "execute a command as another user"
+            },
+            "tar": {
+              "mpsum": "an archiving utility",
+              "-z": "Filter the archive through gzip(1).",
+              "-c": "Create a new archive. Arguments supply the names of the files to be archived.\n Directories are archived recursively, unless the --no-recursion option is given.",
+              "-v": "Verbosely list files processed.",
+              "-p": "extract information about file permissions (default for superuser)"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "sudo": {
+              "man8_sudo_4867": "execut singl command superus anoth user edit file superus default editor launch default shell superus privileg repeat last command prefix sudo bash zsh etc\nrun command anoth user group run command superus"
+            },
+            "tar": {
+              "man1_tar_33340": "archiv util\noften combin compress method gzip bzip creat compress archiv use archiv suffix determin compress program creat gzip archiv creat gzip archiv directori use rel path creat archiv file extract compress archiv current directori extract compress archiv target directori extract specif file without preserv folder structur extract file match pattern list content tar file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_7912: find all the zip files in the current folder and create a tar ball of these zip files",
+        "nl2bash_8125: find the type & description of all the regular/normal files in the home folder",
+        "nl2bash_13942: Counts the number of lines in each file in a git repository."
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_7912: find . -type f -name '*.zip' -print0 | xargs -0 tar -xzf",
+        "nl2bash_8125: find /home -type f -print0 | xargs -0 file",
+        "nl2bash_13942: git ls-files | xargs -d '\\n' wc -l\n\n\ngit ls-files | xargs wc -l"
+      ],
+      "Explanations about Options": {
+        "-0": "Input items are terminated by a null character instead of by whitespace, and the\n quotes and backslash are not special (every character is taken literally).\n Disables the end of file string, which is treated like any other argument. Useful\n when input items might contain white space, quote marks, or backslashes. The GNU\n find -print0 option produces input suitable for this mode."
+      }
+    },
+    {
+      "Command": "sed",
+      "MP Summary": "stream editor for filtering and transforming text",
+      "Most Similar TLDR Task": "Delete lines matching the line pattern",
+      "Most Similar TLDR Script": "sed '/{{line_pattern}}/d' {{filename}}",
+      "Most Similar NL2Bash Task": "Archive all directories in /path/to/directory/* (only command line arguments, no sub-directories) to files with .tar.gz extension transforming the full paths to relative paths",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find /path/* -maxdepth 0 -type d -exec sudo tar -zcpvf {}.tar.gz {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-maxdepth": "Descend at most levels (a non-negative integer) levels of directories below the\n starting-points. -maxdepth 0 means only apply the tests and actions to the\n starting-points themselves.",
+              "-type": "File is of type c:"
+            },
+            "sudo": {
+              "mpsum": "execute a command as another user"
+            },
+            "tar": {
+              "mpsum": "an archiving utility",
+              "-z": "Filter the archive through gzip(1).",
+              "-c": "Create a new archive. Arguments supply the names of the files to be archived.\n Directories are archived recursively, unless the --no-recursion option is given.",
+              "-v": "Verbosely list files processed.",
+              "-p": "extract information about file permissions (default for superuser)"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "sudo": {
+              "man8_sudo_4867": "execut singl command superus anoth user edit file superus default editor launch default shell superus privileg repeat last command prefix sudo bash zsh etc\nrun command anoth user group run command superus"
+            },
+            "tar": {
+              "man1_tar_33340": "archiv util\noften combin compress method gzip bzip creat compress archiv use archiv suffix determin compress program creat gzip archiv creat gzip archiv directori use rel path creat archiv file extract compress archiv current directori extract compress archiv target directori extract specif file without preserv folder structur extract file match pattern list content tar file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_12046: Change all cron jobs running \"anm.sh\" to be run every 10 minutes instead of 5 minutes.",
+        "nl2bash_226: Unzip and extract \"userAgent=[^=]*'\" from \"input.gz\"",
+        "nl2bash_2759: Find all directories that do not contain \"main.cpp\""
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_12046: crontab -l | sed '/anm\\.sh/s#\\/5#\\/10#' | crontab -\n\n\ncrontab -l | sed '/anm\\.sh/s,^\\*/5,*/10,' | crontab -",
+        "nl2bash_226: zcat input.gz | grep -o 'userAgent=[^=]*' | sed 's/ [^ ]*$//'",
+        "nl2bash_2759: diff <(find . -exec readlink -f {} \\; | sed 's/\\(.*\\)\\/.*$/\\1/' | sort | uniq) <(find . -name main.cpp  -exec readlink -f {} \\; | sed 's/\\(.*\\)\\/.*$/\\1/' | sort | uniq) | sed -n 's/< \\(.*\\)/\\1/p'"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "find",
+      "MP Summary": "search for files in a directory hierarchy",
+      "Most Similar TLDR Task": "Find files by extension",
+      "Most Similar TLDR Script": "find {{root_path}} -name '{{*.ext}}'",
+      "Most Similar NL2Bash Task": "Archive all directories in /path/to/directory/* (only command line arguments, no sub-directories) to files with .tar.gz extension transforming the full paths to relative paths",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find /path/* -maxdepth 0 -type d -exec sudo tar -zcpvf {}.tar.gz {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-maxdepth": "Descend at most levels (a non-negative integer) levels of directories below the\n starting-points. -maxdepth 0 means only apply the tests and actions to the\n starting-points themselves.",
+              "-type": "File is of type c:"
+            },
+            "sudo": {
+              "mpsum": "execute a command as another user"
+            },
+            "tar": {
+              "mpsum": "an archiving utility",
+              "-z": "Filter the archive through gzip(1).",
+              "-c": "Create a new archive. Arguments supply the names of the files to be archived.\n Directories are archived recursively, unless the --no-recursion option is given.",
+              "-v": "Verbosely list files processed.",
+              "-p": "extract information about file permissions (default for superuser)"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "sudo": {
+              "man8_sudo_4867": "execut singl command superus anoth user edit file superus default editor launch default shell superus privileg repeat last command prefix sudo bash zsh etc\nrun command anoth user group run command superus"
+            },
+            "tar": {
+              "man1_tar_33340": "archiv util\noften combin compress method gzip bzip creat compress archiv use archiv suffix determin compress program creat gzip archiv creat gzip archiv directori use rel path creat archiv file extract compress archiv current directori extract compress archiv target directori extract specif file without preserv folder structur extract file match pattern list content tar file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_12505: Recursively changes group ownership of everything within a current folder and having group 'X_GNAME' to 'Y_GNAME'.",
+        "nl2bash_2758: Find all directories starting from the current directory",
+        "nl2bash_12044: Archive any files changed in the last day from \"remote_host\" to \"local_dir\""
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_12505: find . -group X_GNAME -exec chgrp Y_GNAME {} +",
+        "nl2bash_2758: find . -type d",
+        "nl2bash_12044: rsync -av remote_host:'$(find logs -type f -ctime -1)' local_dir"
+      ],
+      "Explanations about Options": {
+        "-ctime": "File's status was last changed n*24 hours ago. See the comments for -atime to\n understand how rounding affects the interpretation of file status change times.",
+        "-group": "File belongs to group gname (numeric group ID allowed).",
+        "-type": "File is of type c:"
+      }
+    },
+    {
+      "Command": "rm",
+      "MP Summary": "remove files or directories",
+      "Most Similar TLDR Task": "Recursively remove a directory and all its subdirectories",
+      "Most Similar TLDR Script": "rm -r {{path/to/directory}}",
+      "Most Similar NL2Bash Task": "Archive all directories in /path/to/directory/* (only command line arguments, no sub-directories) to files with .tar.gz extension transforming the full paths to relative paths",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find /path/* -maxdepth 0 -type d -exec sudo tar -zcpvf {}.tar.gz {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-maxdepth": "Descend at most levels (a non-negative integer) levels of directories below the\n starting-points. -maxdepth 0 means only apply the tests and actions to the\n starting-points themselves.",
+              "-type": "File is of type c:"
+            },
+            "sudo": {
+              "mpsum": "execute a command as another user"
+            },
+            "tar": {
+              "mpsum": "an archiving utility",
+              "-z": "Filter the archive through gzip(1).",
+              "-c": "Create a new archive. Arguments supply the names of the files to be archived.\n Directories are archived recursively, unless the --no-recursion option is given.",
+              "-v": "Verbosely list files processed.",
+              "-p": "extract information about file permissions (default for superuser)"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "sudo": {
+              "man8_sudo_4867": "execut singl command superus anoth user edit file superus default editor launch default shell superus privileg repeat last command prefix sudo bash zsh etc\nrun command anoth user group run command superus"
+            },
+            "tar": {
+              "man1_tar_33340": "archiv util\noften combin compress method gzip bzip creat compress archiv use archiv suffix determin compress program creat gzip archiv creat gzip archiv directori use rel path creat archiv file extract compress archiv current directori extract compress archiv target directori extract specif file without preserv folder structur extract file match pattern list content tar file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_8134: locate large files (> 100 MB) in /home/ for 'cleaning'",
+        "nl2bash_8105: find the file with inode $inum under the current directory and delete it",
+        "nl2bash_2744: Find all directories named CVS, and deletes them and their contents."
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_8134: find /home -type f -size +100M -print0 |xargs -0 rm",
+        "nl2bash_8105: find . -inum $inum -exec rm {} \\;",
+        "nl2bash_2744: find . -type d -name CVS -exec rm -r {} \\;"
+      ],
+      "Explanations about Options": {
+        "-r": "remove directories and their contents recursively"
+      }
+    },
+    {
+      "Command": "grep",
+      "MP Summary": "print lines that match patterns",
+      "Most Similar TLDR Task": "Invert match for excluding specific strings",
+      "Most Similar TLDR Script": "grep -v {{search_pattern}}",
+      "Most Similar NL2Bash Task": "Archive all directories in /path/to/directory/* (only command line arguments, no sub-directories) to files with .tar.gz extension transforming the full paths to relative paths",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find /path/* -maxdepth 0 -type d -exec sudo tar -zcpvf {}.tar.gz {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-maxdepth": "Descend at most levels (a non-negative integer) levels of directories below the\n starting-points. -maxdepth 0 means only apply the tests and actions to the\n starting-points themselves.",
+              "-type": "File is of type c:"
+            },
+            "sudo": {
+              "mpsum": "execute a command as another user"
+            },
+            "tar": {
+              "mpsum": "an archiving utility",
+              "-z": "Filter the archive through gzip(1).",
+              "-c": "Create a new archive. Arguments supply the names of the files to be archived.\n Directories are archived recursively, unless the --no-recursion option is given.",
+              "-v": "Verbosely list files processed.",
+              "-p": "extract information about file permissions (default for superuser)"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "sudo": {
+              "man8_sudo_4867": "execut singl command superus anoth user edit file superus default editor launch default shell superus privileg repeat last command prefix sudo bash zsh etc\nrun command anoth user group run command superus"
+            },
+            "tar": {
+              "man1_tar_33340": "archiv util\noften combin compress method gzip bzip creat compress archiv use archiv suffix determin compress program creat gzip archiv creat gzip archiv directori use rel path creat archiv file extract compress archiv current directori extract compress archiv target directori extract specif file without preserv folder structur extract file match pattern list content tar file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_13863: Count used space on device \"/dev/sda\" in megabytes",
+        "nl2bash_8107: find the file with the name \"esxcfg-firewall\" in the current folder",
+        "nl2bash_8233: search for a word in all the files in the current directory and display the list of matched files."
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_13863: df -h -B 1M | grep dev/sda | tr -s ' '| cut -d' ' -f3 |python -c \"import sys; print sum([int(num) for num in sys.stdin.readlines()])\"",
+        "nl2bash_8107: find -print | grep esxcfg-firewall",
+        "nl2bash_8233: find . -type f -exec grep -l 'needle' {} \\;"
+      ],
+      "Explanations about Options": {
+        "-l": "Suppress normal output; instead print the name of each input file from which output\n would normally have been printed. The scanning will stop on the first match."
+      }
+    },
+    {
+      "Command": "wc",
+      "MP Summary": "print newline, word, and byte counts for each file",
+      "Most Similar TLDR Task": "Count characters (bytes) in file",
+      "Most Similar TLDR Script": "wc -c {{file}}",
+      "Most Similar NL2Bash Task": "Archive all directories in /path/to/directory/* (only command line arguments, no sub-directories) to files with .tar.gz extension transforming the full paths to relative paths",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find /path/* -maxdepth 0 -type d -exec sudo tar -zcpvf {}.tar.gz {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-maxdepth": "Descend at most levels (a non-negative integer) levels of directories below the\n starting-points. -maxdepth 0 means only apply the tests and actions to the\n starting-points themselves.",
+              "-type": "File is of type c:"
+            },
+            "sudo": {
+              "mpsum": "execute a command as another user"
+            },
+            "tar": {
+              "mpsum": "an archiving utility",
+              "-z": "Filter the archive through gzip(1).",
+              "-c": "Create a new archive. Arguments supply the names of the files to be archived.\n Directories are archived recursively, unless the --no-recursion option is given.",
+              "-v": "Verbosely list files processed.",
+              "-p": "extract information about file permissions (default for superuser)"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "sudo": {
+              "man8_sudo_4867": "execut singl command superus anoth user edit file superus default editor launch default shell superus privileg repeat last command prefix sudo bash zsh etc\nrun command anoth user group run command superus"
+            },
+            "tar": {
+              "man1_tar_33340": "archiv util\noften combin compress method gzip bzip creat compress archiv use archiv suffix determin compress program creat gzip archiv creat gzip archiv directori use rel path creat archiv file extract compress archiv current directori extract compress archiv target directori extract specif file without preserv folder structur extract file match pattern list content tar file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_13942: Counts the number of lines in each file in a git repository.",
+        "nl2bash_8085: find the count of all the charcters of the list of regular files present in the current folder"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_13942: git ls-files | xargs -d '\\n' wc -l\n\n\ngit ls-files | xargs wc -l\n\n\nwc -l $(git ls-files)\n\n\nwc -l --files0-from=<(git ls-files -z)",
+        "nl2bash_8085: find . -type f | xargs | wc -c"
+      ],
+      "Explanations about Options": {
+        "-l": "print the newline counts",
+        "-c": "print the byte counts",
+        "--files0-from": "read input from the files specified by NUL-terminated names in file F; If F is -\n then read names from standard input"
+      }
+    },
+    {
+      "Command": "echo",
+      "MP Summary": "display a line of text",
+      "Most Similar TLDR Task": "Print a message with environment variables",
+      "Most Similar TLDR Script": "echo \"{{My path is $PATH}}\"",
+      "Most Similar NL2Bash Task": "Archive all directories in /path/to/directory/* (only command line arguments, no sub-directories) to files with .tar.gz extension transforming the full paths to relative paths",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find /path/* -maxdepth 0 -type d -exec sudo tar -zcpvf {}.tar.gz {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-maxdepth": "Descend at most levels (a non-negative integer) levels of directories below the\n starting-points. -maxdepth 0 means only apply the tests and actions to the\n starting-points themselves.",
+              "-type": "File is of type c:"
+            },
+            "sudo": {
+              "mpsum": "execute a command as another user"
+            },
+            "tar": {
+              "mpsum": "an archiving utility",
+              "-z": "Filter the archive through gzip(1).",
+              "-c": "Create a new archive. Arguments supply the names of the files to be archived.\n Directories are archived recursively, unless the --no-recursion option is given.",
+              "-v": "Verbosely list files processed.",
+              "-p": "extract information about file permissions (default for superuser)"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "sudo": {
+              "man8_sudo_4867": "execut singl command superus anoth user edit file superus default editor launch default shell superus privileg repeat last command prefix sudo bash zsh etc\nrun command anoth user group run command superus"
+            },
+            "tar": {
+              "man1_tar_33340": "archiv util\noften combin compress method gzip bzip creat compress archiv use archiv suffix determin compress program creat gzip archiv creat gzip archiv directori use rel path creat archiv file extract compress archiv current directori extract compress archiv target directori extract specif file without preserv folder structur extract file match pattern list content tar file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_13713: Calculate the md5 sum of hex byte 61",
+        "nl2bash_3591: Find all files under current directory, calculate their md5sum and print each of the hash and file name to filename-hash.md5 files"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_13713: echo -n -e '\\x61' | md5sum",
+        "nl2bash_3591: find . -type f | while read f; do g=`md5sum $f | awk '{print $1}'`; echo \"$g $f\"> $f-$g.md5; done"
+      ],
+      "Explanations about Options": {
+        "-n": "do not output the trailing newline",
+        "-e": "enable interpretation of backslash escapes"
+      }
+    },
+    {
+      "Command": "sort",
+      "MP Summary": "sort lines of text files",
+      "Most Similar TLDR Task": "Sort a file preserving only unique lines",
+      "Most Similar TLDR Script": "sort -u {{path/to/file}}",
+      "Most Similar NL2Bash Task": "Archive all directories in /path/to/directory/* (only command line arguments, no sub-directories) to files with .tar.gz extension transforming the full paths to relative paths",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find /path/* -maxdepth 0 -type d -exec sudo tar -zcpvf {}.tar.gz {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-maxdepth": "Descend at most levels (a non-negative integer) levels of directories below the\n starting-points. -maxdepth 0 means only apply the tests and actions to the\n starting-points themselves.",
+              "-type": "File is of type c:"
+            },
+            "sudo": {
+              "mpsum": "execute a command as another user"
+            },
+            "tar": {
+              "mpsum": "an archiving utility",
+              "-z": "Filter the archive through gzip(1).",
+              "-c": "Create a new archive. Arguments supply the names of the files to be archived.\n Directories are archived recursively, unless the --no-recursion option is given.",
+              "-v": "Verbosely list files processed.",
+              "-p": "extract information about file permissions (default for superuser)"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "sudo": {
+              "man8_sudo_4867": "execut singl command superus anoth user edit file superus default editor launch default shell superus privileg repeat last command prefix sudo bash zsh etc\nrun command anoth user group run command superus"
+            },
+            "tar": {
+              "man1_tar_33340": "archiv util\noften combin compress method gzip bzip creat compress archiv use archiv suffix determin compress program creat gzip archiv creat gzip archiv directori use rel path creat archiv file extract compress archiv current directori extract compress archiv target directori extract specif file without preserv folder structur extract file match pattern list content tar file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_8115: find the oldest normal file in the current directory and display with its timestamp",
+        "nl2bash_8123: find the top 25 files in the current directory and its subdirectories",
+        "nl2bash_2759: Find all directories that do not contain \"main.cpp\""
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_8115: find ! -type d -printf \"%T@ %p\\n\" | sort -n | head -n1",
+        "nl2bash_8123: find . -type f -exec ls -al {} \\; | sort -nr -k5 | head -n 25",
+        "nl2bash_2759: diff <(find . -exec readlink -f {} \\; | sed 's/\\(.*\\)\\/.*$/\\1/' | sort | uniq) <(find . -name main.cpp  -exec readlink -f {} \\; | sed 's/\\(.*\\)\\/.*$/\\1/' | sort | uniq) | sed -n 's/< \\(.*\\)/\\1/p'"
+      ],
+      "Explanations about Options": {
+        "-r": "reverse the result of comparisons",
+        "-n": "compare according to string numerical value"
+      }
+    },
+    {
+      "Command": "file",
+      "MP Summary": "determine file type",
+      "Most Similar TLDR Task": "Look inside a zipped file and determine the file type(s) inside",
+      "Most Similar TLDR Script": "file -z {{foo.zip}}",
+      "Most Similar NL2Bash Task": "Archive all directories in /path/to/directory/* (only command line arguments, no sub-directories) to files with .tar.gz extension transforming the full paths to relative paths",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find /path/* -maxdepth 0 -type d -exec sudo tar -zcpvf {}.tar.gz {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-maxdepth": "Descend at most levels (a non-negative integer) levels of directories below the\n starting-points. -maxdepth 0 means only apply the tests and actions to the\n starting-points themselves.",
+              "-type": "File is of type c:"
+            },
+            "sudo": {
+              "mpsum": "execute a command as another user"
+            },
+            "tar": {
+              "mpsum": "an archiving utility",
+              "-z": "Filter the archive through gzip(1).",
+              "-c": "Create a new archive. Arguments supply the names of the files to be archived.\n Directories are archived recursively, unless the --no-recursion option is given.",
+              "-v": "Verbosely list files processed.",
+              "-p": "extract information about file permissions (default for superuser)"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "sudo": {
+              "man8_sudo_4867": "execut singl command superus anoth user edit file superus default editor launch default shell superus privileg repeat last command prefix sudo bash zsh etc\nrun command anoth user group run command superus"
+            },
+            "tar": {
+              "man1_tar_33340": "archiv util\noften combin compress method gzip bzip creat compress archiv use archiv suffix determin compress program creat gzip archiv creat gzip archiv directori use rel path creat archiv file extract compress archiv current directori extract compress archiv target directori extract specif file without preserv folder structur extract file match pattern list content tar file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_8125: find the type & description of all the regular/normal files in the home folder",
+        "nl2bash_8108: find the file with the name \"file\" in the entire file system"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_8125: find /home -type f -print0 | xargs -0 file",
+        "nl2bash_8108: find / -name file"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "chgrp",
+      "MP Summary": "change group ownership",
+      "Most Similar TLDR Task": "Recursively change the owner group of a directory and its contents",
+      "Most Similar TLDR Script": "chgrp -R {{group}} {{path/to/directory}}",
+      "Most Similar NL2Bash Task": "Archive all directories in /path/to/directory/* (only command line arguments, no sub-directories) to files with .tar.gz extension transforming the full paths to relative paths",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find /path/* -maxdepth 0 -type d -exec sudo tar -zcpvf {}.tar.gz {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-maxdepth": "Descend at most levels (a non-negative integer) levels of directories below the\n starting-points. -maxdepth 0 means only apply the tests and actions to the\n starting-points themselves.",
+              "-type": "File is of type c:"
+            },
+            "sudo": {
+              "mpsum": "execute a command as another user"
+            },
+            "tar": {
+              "mpsum": "an archiving utility",
+              "-z": "Filter the archive through gzip(1).",
+              "-c": "Create a new archive. Arguments supply the names of the files to be archived.\n Directories are archived recursively, unless the --no-recursion option is given.",
+              "-v": "Verbosely list files processed.",
+              "-p": "extract information about file permissions (default for superuser)"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "sudo": {
+              "man8_sudo_4867": "execut singl command superus anoth user edit file superus default editor launch default shell superus privileg repeat last command prefix sudo bash zsh etc\nrun command anoth user group run command superus"
+            },
+            "tar": {
+              "man1_tar_33340": "archiv util\noften combin compress method gzip bzip creat compress archiv use archiv suffix determin compress program creat gzip archiv creat gzip archiv directori use rel path creat archiv file extract compress archiv current directori extract compress archiv target directori extract specif file without preserv folder structur extract file match pattern list content tar file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_12505: Recursively changes group ownership of everything within a current folder and having group 'X_GNAME' to 'Y_GNAME'.",
+        "nl2bash_12084: Change group ownership to `foo' for files with GID=2000"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_12505: find . -group X_GNAME -exec chgrp Y_GNAME {} +",
+        "nl2bash_12084: find / -group 2000 -exec chgrp -h foo {} \\;"
+      ],
+      "Explanations about Options": {
+        "-h": "affect symbolic links instead of any referenced file (useful only on systems that\n can change the ownership of a symlink)"
+      }
+    },
+    {
+      "Command": "mv",
+      "MP Summary": "move (rename) files",
+      "Most Similar TLDR Task": "Move files in arbitrary locations",
+      "Most Similar TLDR Script": "mv {{source}} {{target}}",
+      "Most Similar NL2Bash Task": "Archive all directories in /path/to/directory/* (only command line arguments, no sub-directories) to files with .tar.gz extension transforming the full paths to relative paths",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find /path/* -maxdepth 0 -type d -exec sudo tar -zcpvf {}.tar.gz {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-maxdepth": "Descend at most levels (a non-negative integer) levels of directories below the\n starting-points. -maxdepth 0 means only apply the tests and actions to the\n starting-points themselves.",
+              "-type": "File is of type c:"
+            },
+            "sudo": {
+              "mpsum": "execute a command as another user"
+            },
+            "tar": {
+              "mpsum": "an archiving utility",
+              "-z": "Filter the archive through gzip(1).",
+              "-c": "Create a new archive. Arguments supply the names of the files to be archived.\n Directories are archived recursively, unless the --no-recursion option is given.",
+              "-v": "Verbosely list files processed.",
+              "-p": "extract information about file permissions (default for superuser)"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "sudo": {
+              "man8_sudo_4867": "execut singl command superus anoth user edit file superus default editor launch default shell superus privileg repeat last command prefix sudo bash zsh etc\nrun command anoth user group run command superus"
+            },
+            "tar": {
+              "man1_tar_33340": "archiv util\noften combin compress method gzip bzip creat compress archiv use archiv suffix determin compress program creat gzip archiv creat gzip archiv directori use rel path creat archiv file extract compress archiv current directori extract compress archiv target directori extract specif file without preserv folder structur extract file match pattern list content tar file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_8069: find regular files under the current directory, whose name ends in .mbox, piping the output to the GNU Parallel command that will rename each file to not have a file extension.",
+        "nl2bash_4413: Find all regular files with '.what_to_find' extension in the entire filesystem and move them to directory '/new_directory'"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_8069: find . -type f -wholename \\*.mbox -print0 | parallel -0 mv {} {.}\n\n\nfind . -type f -wholename \\*.mbox | parallel mv {} {.}",
+        "nl2bash_4413: find / -iname \"*.what_to_find\" -type f -exec mv {} /new_directory \\;"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "perl",
+      "MP Summary": "The Perl 5 language interpreter",
+      "Most Similar TLDR Task": "Parse and execute a Perl script",
+      "Most Similar TLDR Script": "perl {{script.pl}}",
+      "Most Similar NL2Bash Task": "Archive all directories in /path/to/directory/* (only command line arguments, no sub-directories) to files with .tar.gz extension transforming the full paths to relative paths",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find /path/* -maxdepth 0 -type d -exec sudo tar -zcpvf {}.tar.gz {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-maxdepth": "Descend at most levels (a non-negative integer) levels of directories below the\n starting-points. -maxdepth 0 means only apply the tests and actions to the\n starting-points themselves.",
+              "-type": "File is of type c:"
+            },
+            "sudo": {
+              "mpsum": "execute a command as another user"
+            },
+            "tar": {
+              "mpsum": "an archiving utility",
+              "-z": "Filter the archive through gzip(1).",
+              "-c": "Create a new archive. Arguments supply the names of the files to be archived.\n Directories are archived recursively, unless the --no-recursion option is given.",
+              "-v": "Verbosely list files processed.",
+              "-p": "extract information about file permissions (default for superuser)"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "sudo": {
+              "man8_sudo_4867": "execut singl command superus anoth user edit file superus default editor launch default shell superus privileg repeat last command prefix sudo bash zsh etc\nrun command anoth user group run command superus"
+            },
+            "tar": {
+              "man1_tar_33340": "archiv util\noften combin compress method gzip bzip creat compress archiv use archiv suffix determin compress program creat gzip archiv creat gzip archiv directori use rel path creat archiv file extract compress archiv current directori extract compress archiv target directori extract specif file without preserv folder structur extract file match pattern list content tar file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_259: get the job number from the stored PID",
+        "nl2bash_11630: Remove trailing tabs in .java files from the current directory tree"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_259: jobs -l | fgrep $! | perl -ne 'print \"$1\\n\" if /\\[(\\d+)\\]/'",
+        "nl2bash_11630: find . -type f -name \"*.java\" -exec perl -p -i -e \"s/[ \\t]$//g\" {} \\;"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "head",
+      "MP Summary": "output the first part of files",
+      "Most Similar TLDR Task": "Output everything but the last few lines of a file",
+      "Most Similar TLDR Script": "head -n -{{count_of_lines}} {{filename}}",
+      "Most Similar NL2Bash Task": "Archive all directories in /path/to/directory/* (only command line arguments, no sub-directories) to files with .tar.gz extension transforming the full paths to relative paths",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find /path/* -maxdepth 0 -type d -exec sudo tar -zcpvf {}.tar.gz {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-maxdepth": "Descend at most levels (a non-negative integer) levels of directories below the\n starting-points. -maxdepth 0 means only apply the tests and actions to the\n starting-points themselves.",
+              "-type": "File is of type c:"
+            },
+            "sudo": {
+              "mpsum": "execute a command as another user"
+            },
+            "tar": {
+              "mpsum": "an archiving utility",
+              "-z": "Filter the archive through gzip(1).",
+              "-c": "Create a new archive. Arguments supply the names of the files to be archived.\n Directories are archived recursively, unless the --no-recursion option is given.",
+              "-v": "Verbosely list files processed.",
+              "-p": "extract information about file permissions (default for superuser)"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "sudo": {
+              "man8_sudo_4867": "execut singl command superus anoth user edit file superus default editor launch default shell superus privileg repeat last command prefix sudo bash zsh etc\nrun command anoth user group run command superus"
+            },
+            "tar": {
+              "man1_tar_33340": "archiv util\noften combin compress method gzip bzip creat compress archiv use archiv suffix determin compress program creat gzip archiv creat gzip archiv directori use rel path creat archiv file extract compress archiv current directori extract compress archiv target directori extract specif file without preserv folder structur extract file match pattern list content tar file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_8115: find the oldest normal file in the current directory and display with its timestamp",
+        "nl2bash_8123: find the top 25 files in the current directory and its subdirectories"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_8115: find ! -type d -printf \"%T@ %p\\n\" | sort -n | head -n1",
+        "nl2bash_8123: find . -type f -exec ls -al {} \\; | sort -nr -k5 | head -n 25"
+      ],
+      "Explanations about Options": {
+        "-n": "print the first NUM lines instead of the first 10; with the leading '-', print all\n but the last NUM lines of each file"
+      }
+    },
+    {
+      "Command": "tar",
+      "MP Summary": "an archiving utility",
+      "Most Similar TLDR Task": "Create an archive from files",
+      "Most Similar TLDR Script": "tar cf {{target.tar}} {{file1}} {{file2}} {{file3}}",
+      "Most Similar NL2Bash Task": "Archive all directories in /path/to/directory/* (only command line arguments, no sub-directories) to files with .tar.gz extension transforming the full paths to relative paths",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find /path/* -maxdepth 0 -type d -exec sudo tar -zcpvf {}.tar.gz {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-maxdepth": "Descend at most levels (a non-negative integer) levels of directories below the\n starting-points. -maxdepth 0 means only apply the tests and actions to the\n starting-points themselves.",
+              "-type": "File is of type c:"
+            },
+            "sudo": {
+              "mpsum": "execute a command as another user"
+            },
+            "tar": {
+              "mpsum": "an archiving utility",
+              "-z": "Filter the archive through gzip(1).",
+              "-c": "Create a new archive. Arguments supply the names of the files to be archived.\n Directories are archived recursively, unless the --no-recursion option is given.",
+              "-v": "Verbosely list files processed.",
+              "-p": "extract information about file permissions (default for superuser)"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "sudo": {
+              "man8_sudo_4867": "execut singl command superus anoth user edit file superus default editor launch default shell superus privileg repeat last command prefix sudo bash zsh etc\nrun command anoth user group run command superus"
+            },
+            "tar": {
+              "man1_tar_33340": "archiv util\noften combin compress method gzip bzip creat compress archiv use archiv suffix determin compress program creat gzip archiv creat gzip archiv directori use rel path creat archiv file extract compress archiv current directori extract compress archiv target directori extract specif file without preserv folder structur extract file match pattern list content tar file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_7912: find all the zip files in the current folder and create a tar ball of these zip files",
+        "nl2bash_12043: Archive all directories in /path/to/directory/* (only command line arguments, no sub-directories) to files with .tar.gz extension transforming the full paths to relative paths"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_7912: find . -type f -name '*.zip' -print0 | xargs -0 tar -xzf",
+        "nl2bash_12043: find /path/* -maxdepth 0 -type d -exec sudo tar -zcpvf {}.tar.gz {} \\;"
+      ],
+      "Explanations about Options": {
+        "-v": "Verbosely list files processed.",
+        "-z": "Filter the archive through gzip(1).",
+        "-c": "Create a new archive. Arguments supply the names of the files to be archived.\n Directories are archived recursively, unless the --no-recursion option is given.",
+        "-x": "Extract files from an archive. Arguments are optional. When given, they specify\n names of the archive members to be extracted.",
+        "-p": "extract information about file permissions (default for superuser)"
+      }
+    },
+    {
+      "Command": "chmod",
+      "MP Summary": "change file mode bits",
+      "Most Similar TLDR Task": "Change permissions recursively giving [g]roup and [o]thers the ability to [w]rite",
+      "Most Similar TLDR Script": "chmod -R g+w,o+w {{directory}}",
+      "Most Similar NL2Bash Task": "Archive all directories in /path/to/directory/* (only command line arguments, no sub-directories) to files with .tar.gz extension transforming the full paths to relative paths",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find /path/* -maxdepth 0 -type d -exec sudo tar -zcpvf {}.tar.gz {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-maxdepth": "Descend at most levels (a non-negative integer) levels of directories below the\n starting-points. -maxdepth 0 means only apply the tests and actions to the\n starting-points themselves.",
+              "-type": "File is of type c:"
+            },
+            "sudo": {
+              "mpsum": "execute a command as another user"
+            },
+            "tar": {
+              "mpsum": "an archiving utility",
+              "-z": "Filter the archive through gzip(1).",
+              "-c": "Create a new archive. Arguments supply the names of the files to be archived.\n Directories are archived recursively, unless the --no-recursion option is given.",
+              "-v": "Verbosely list files processed.",
+              "-p": "extract information about file permissions (default for superuser)"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "sudo": {
+              "man8_sudo_4867": "execut singl command superus anoth user edit file superus default editor launch default shell superus privileg repeat last command prefix sudo bash zsh etc\nrun command anoth user group run command superus"
+            },
+            "tar": {
+              "man1_tar_33340": "archiv util\noften combin compress method gzip bzip creat compress archiv use archiv suffix determin compress program creat gzip archiv creat gzip archiv directori use rel path creat archiv file extract compress archiv current directori extract compress archiv target directori extract specif file without preserv folder structur extract file match pattern list content tar file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_12156: Change permissions to 644 recursively for PHP files.",
+        "nl2bash_12151: Change permissions to 644 for all regular files under the /path/to/dir/ tree"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_12156: find . -type f -name '*.php' -exec chmod 644 {} \\;",
+        "nl2bash_12151: find /path/to/dir/ -type f -print0 | xargs -0 chmod 644"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "tee",
+      "MP Summary": "read from standard input and write to standard output and files",
+      "Most Similar TLDR Task": "Create a directory called \"example\", count the number of characters in \"example\" and write \"example\" to the terminal",
+      "Most Similar TLDR Script": "echo \"example\" | tee >(xargs mkdir) >(wc -c)",
+      "Most Similar NL2Bash Task": "Archive all directories in /path/to/directory/* (only command line arguments, no sub-directories) to files with .tar.gz extension transforming the full paths to relative paths",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find /path/* -maxdepth 0 -type d -exec sudo tar -zcpvf {}.tar.gz {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-maxdepth": "Descend at most levels (a non-negative integer) levels of directories below the\n starting-points. -maxdepth 0 means only apply the tests and actions to the\n starting-points themselves.",
+              "-type": "File is of type c:"
+            },
+            "sudo": {
+              "mpsum": "execute a command as another user"
+            },
+            "tar": {
+              "mpsum": "an archiving utility",
+              "-z": "Filter the archive through gzip(1).",
+              "-c": "Create a new archive. Arguments supply the names of the files to be archived.\n Directories are archived recursively, unless the --no-recursion option is given.",
+              "-v": "Verbosely list files processed.",
+              "-p": "extract information about file permissions (default for superuser)"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "sudo": {
+              "man8_sudo_4867": "execut singl command superus anoth user edit file superus default editor launch default shell superus privileg repeat last command prefix sudo bash zsh etc\nrun command anoth user group run command superus"
+            },
+            "tar": {
+              "man1_tar_33340": "archiv util\noften combin compress method gzip bzip creat compress archiv use archiv suffix determin compress program creat gzip archiv creat gzip archiv directori use rel path creat archiv file extract compress archiv current directori extract compress archiv target directori extract specif file without preserv folder structur extract file match pattern list content tar file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_13746: Calculate the values of the interval from 0 to pi/2 with a step of 1, add a line number, and write the output to standard output and \"x.txt\""
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_13746: octave -q --eval 'printf (\"%f\\n\", [0:0.1:pi/2])'|nl|tee x.txt"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "nl",
+      "MP Summary": "number lines of files",
+      "Most Similar TLDR Task": "Number all lines including blank lines",
+      "Most Similar TLDR Script": "nl -b a {{file}}",
+      "Most Similar NL2Bash Task": "Archive all directories in /path/to/directory/* (only command line arguments, no sub-directories) to files with .tar.gz extension transforming the full paths to relative paths",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find /path/* -maxdepth 0 -type d -exec sudo tar -zcpvf {}.tar.gz {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-maxdepth": "Descend at most levels (a non-negative integer) levels of directories below the\n starting-points. -maxdepth 0 means only apply the tests and actions to the\n starting-points themselves.",
+              "-type": "File is of type c:"
+            },
+            "sudo": {
+              "mpsum": "execute a command as another user"
+            },
+            "tar": {
+              "mpsum": "an archiving utility",
+              "-z": "Filter the archive through gzip(1).",
+              "-c": "Create a new archive. Arguments supply the names of the files to be archived.\n Directories are archived recursively, unless the --no-recursion option is given.",
+              "-v": "Verbosely list files processed.",
+              "-p": "extract information about file permissions (default for superuser)"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "sudo": {
+              "man8_sudo_4867": "execut singl command superus anoth user edit file superus default editor launch default shell superus privileg repeat last command prefix sudo bash zsh etc\nrun command anoth user group run command superus"
+            },
+            "tar": {
+              "man1_tar_33340": "archiv util\noften combin compress method gzip bzip creat compress archiv use archiv suffix determin compress program creat gzip archiv creat gzip archiv directori use rel path creat archiv file extract compress archiv current directori extract compress archiv target directori extract specif file without preserv folder structur extract file match pattern list content tar file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_13746: Calculate the values of the interval from 0 to pi/2 with a step of 1, add a line number, and write the output to standard output and \"x.txt\""
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_13746: octave -q --eval 'printf (\"%f\\n\", [0:0.1:pi/2])'|nl|tee x.txt"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "print",
+      "MP Summary": "execute programs via entries in the mailcap file",
+      "Most Similar TLDR Task": "Print action can be used to print any file on default run-mailcap tool",
+      "Most Similar TLDR Script": "print {{filename}}",
+      "Most Similar NL2Bash Task": "Archive all directories in /path/to/directory/* (only command line arguments, no sub-directories) to files with .tar.gz extension transforming the full paths to relative paths",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find /path/* -maxdepth 0 -type d -exec sudo tar -zcpvf {}.tar.gz {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-maxdepth": "Descend at most levels (a non-negative integer) levels of directories below the\n starting-points. -maxdepth 0 means only apply the tests and actions to the\n starting-points themselves.",
+              "-type": "File is of type c:"
+            },
+            "sudo": {
+              "mpsum": "execute a command as another user"
+            },
+            "tar": {
+              "mpsum": "an archiving utility",
+              "-z": "Filter the archive through gzip(1).",
+              "-c": "Create a new archive. Arguments supply the names of the files to be archived.\n Directories are archived recursively, unless the --no-recursion option is given.",
+              "-v": "Verbosely list files processed.",
+              "-p": "extract information about file permissions (default for superuser)"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "sudo": {
+              "man8_sudo_4867": "execut singl command superus anoth user edit file superus default editor launch default shell superus privileg repeat last command prefix sudo bash zsh etc\nrun command anoth user group run command superus"
+            },
+            "tar": {
+              "man1_tar_33340": "archiv util\noften combin compress method gzip bzip creat compress archiv use archiv suffix determin compress program creat gzip archiv creat gzip archiv directori use rel path creat archiv file extract compress archiv current directori extract compress archiv target directori extract specif file without preserv folder structur extract file match pattern list content tar file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_13863: Count used space on device \"/dev/sda\" in megabytes",
+        "nl2bash_3591: Find all files under current directory, calculate their md5sum and print each of the hash and file name to filename-hash.md5 files"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_13863: df -h -B 1M | grep dev/sda | tr -s ' '| cut -d' ' -f3 |python -c \"import sys; print sum([int(num) for num in sys.stdin.readlines()])\"",
+        "nl2bash_3591: find . -type f | while read f; do g=`md5sum $f | awk '{print $1}'`; echo \"$g $f\"> $f-$g.md5; done"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "cut",
+      "MP Summary": "remove sections from each line of files",
+      "Most Similar TLDR Task": "Cut out everything from the 3rd character to the end of each line",
+      "Most Similar TLDR Script": "cut -c {{3-}}",
+      "Most Similar NL2Bash Task": "Archive all directories in /path/to/directory/* (only command line arguments, no sub-directories) to files with .tar.gz extension transforming the full paths to relative paths",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find /path/* -maxdepth 0 -type d -exec sudo tar -zcpvf {}.tar.gz {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-maxdepth": "Descend at most levels (a non-negative integer) levels of directories below the\n starting-points. -maxdepth 0 means only apply the tests and actions to the\n starting-points themselves.",
+              "-type": "File is of type c:"
+            },
+            "sudo": {
+              "mpsum": "execute a command as another user"
+            },
+            "tar": {
+              "mpsum": "an archiving utility",
+              "-z": "Filter the archive through gzip(1).",
+              "-c": "Create a new archive. Arguments supply the names of the files to be archived.\n Directories are archived recursively, unless the --no-recursion option is given.",
+              "-v": "Verbosely list files processed.",
+              "-p": "extract information about file permissions (default for superuser)"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "sudo": {
+              "man8_sudo_4867": "execut singl command superus anoth user edit file superus default editor launch default shell superus privileg repeat last command prefix sudo bash zsh etc\nrun command anoth user group run command superus"
+            },
+            "tar": {
+              "man1_tar_33340": "archiv util\noften combin compress method gzip bzip creat compress archiv use archiv suffix determin compress program creat gzip archiv creat gzip archiv directori use rel path creat archiv file extract compress archiv current directori extract compress archiv target directori extract specif file without preserv folder structur extract file match pattern list content tar file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_13863: Count used space on device \"/dev/sda\" in megabytes"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_13863: df -h -B 1M | grep dev/sda | tr -s ' '| cut -d' ' -f3 |python -c \"import sys; print sum([int(num) for num in sys.stdin.readlines()])\""
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "tr",
+      "MP Summary": "translate or delete characters",
+      "Most Similar TLDR Task": "Replace all occurrences of a character from another command's output",
+      "Most Similar TLDR Script": "echo {{text}} | tr {{find_character}} {{replace_character}}",
+      "Most Similar NL2Bash Task": "Archive all directories in /path/to/directory/* (only command line arguments, no sub-directories) to files with .tar.gz extension transforming the full paths to relative paths",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find /path/* -maxdepth 0 -type d -exec sudo tar -zcpvf {}.tar.gz {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-maxdepth": "Descend at most levels (a non-negative integer) levels of directories below the\n starting-points. -maxdepth 0 means only apply the tests and actions to the\n starting-points themselves.",
+              "-type": "File is of type c:"
+            },
+            "sudo": {
+              "mpsum": "execute a command as another user"
+            },
+            "tar": {
+              "mpsum": "an archiving utility",
+              "-z": "Filter the archive through gzip(1).",
+              "-c": "Create a new archive. Arguments supply the names of the files to be archived.\n Directories are archived recursively, unless the --no-recursion option is given.",
+              "-v": "Verbosely list files processed.",
+              "-p": "extract information about file permissions (default for superuser)"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "sudo": {
+              "man8_sudo_4867": "execut singl command superus anoth user edit file superus default editor launch default shell superus privileg repeat last command prefix sudo bash zsh etc\nrun command anoth user group run command superus"
+            },
+            "tar": {
+              "man1_tar_33340": "archiv util\noften combin compress method gzip bzip creat compress archiv use archiv suffix determin compress program creat gzip archiv creat gzip archiv directori use rel path creat archiv file extract compress archiv current directori extract compress archiv target directori extract specif file without preserv folder structur extract file match pattern list content tar file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_13863: Count used space on device \"/dev/sda\" in megabytes"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_13863: df -h -B 1M | grep dev/sda | tr -s ' '| cut -d' ' -f3 |python -c \"import sys; print sum([int(num) for num in sys.stdin.readlines()])\""
+      ],
+      "Explanations about Options": {
+        "-s": "replace each sequence of a repeated character that is listed in the last specified\n SET, with a single occurrence of that character"
+      }
+    },
+    {
+      "Command": "df",
+      "MP Summary": "report file system disk space usage",
+      "Most Similar TLDR Task": "Display filesystems but exclude the specified type",
+      "Most Similar TLDR Script": "df -x {{squashfs}} -x {{tmpfs}}",
+      "Most Similar NL2Bash Task": "Archive all directories in /path/to/directory/* (only command line arguments, no sub-directories) to files with .tar.gz extension transforming the full paths to relative paths",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find /path/* -maxdepth 0 -type d -exec sudo tar -zcpvf {}.tar.gz {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-maxdepth": "Descend at most levels (a non-negative integer) levels of directories below the\n starting-points. -maxdepth 0 means only apply the tests and actions to the\n starting-points themselves.",
+              "-type": "File is of type c:"
+            },
+            "sudo": {
+              "mpsum": "execute a command as another user"
+            },
+            "tar": {
+              "mpsum": "an archiving utility",
+              "-z": "Filter the archive through gzip(1).",
+              "-c": "Create a new archive. Arguments supply the names of the files to be archived.\n Directories are archived recursively, unless the --no-recursion option is given.",
+              "-v": "Verbosely list files processed.",
+              "-p": "extract information about file permissions (default for superuser)"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "sudo": {
+              "man8_sudo_4867": "execut singl command superus anoth user edit file superus default editor launch default shell superus privileg repeat last command prefix sudo bash zsh etc\nrun command anoth user group run command superus"
+            },
+            "tar": {
+              "man1_tar_33340": "archiv util\noften combin compress method gzip bzip creat compress archiv use archiv suffix determin compress program creat gzip archiv creat gzip archiv directori use rel path creat archiv file extract compress archiv current directori extract compress archiv target directori extract specif file without preserv folder structur extract file match pattern list content tar file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_13863: Count used space on device \"/dev/sda\" in megabytes"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_13863: df -h -B 1M | grep dev/sda | tr -s ' '| cut -d' ' -f3 |python -c \"import sys; print sum([int(num) for num in sys.stdin.readlines()])\""
+      ],
+      "Explanations about Options": {
+        "-h": "print sizes in powers of 1024 (e.g., 1023M)",
+        "-B": "scale sizes by SIZE before printing them; e.g., '-BM' prints sizes in units of\n 1,048,576 bytes; see SIZE format below"
+      }
+    },
+    {
+      "Command": "crontab",
+      "MP Summary": "maintain crontab files for individual users (Vixie Cron)",
+      "Most Similar TLDR Task": "Edit the crontab file for a specific user",
+      "Most Similar TLDR Script": "sudo crontab -e -u {{user}}",
+      "Most Similar NL2Bash Task": "Archive all directories in /path/to/directory/* (only command line arguments, no sub-directories) to files with .tar.gz extension transforming the full paths to relative paths",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find /path/* -maxdepth 0 -type d -exec sudo tar -zcpvf {}.tar.gz {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-maxdepth": "Descend at most levels (a non-negative integer) levels of directories below the\n starting-points. -maxdepth 0 means only apply the tests and actions to the\n starting-points themselves.",
+              "-type": "File is of type c:"
+            },
+            "sudo": {
+              "mpsum": "execute a command as another user"
+            },
+            "tar": {
+              "mpsum": "an archiving utility",
+              "-z": "Filter the archive through gzip(1).",
+              "-c": "Create a new archive. Arguments supply the names of the files to be archived.\n Directories are archived recursively, unless the --no-recursion option is given.",
+              "-v": "Verbosely list files processed.",
+              "-p": "extract information about file permissions (default for superuser)"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "sudo": {
+              "man8_sudo_4867": "execut singl command superus anoth user edit file superus default editor launch default shell superus privileg repeat last command prefix sudo bash zsh etc\nrun command anoth user group run command superus"
+            },
+            "tar": {
+              "man1_tar_33340": "archiv util\noften combin compress method gzip bzip creat compress archiv use archiv suffix determin compress program creat gzip archiv creat gzip archiv directori use rel path creat archiv file extract compress archiv current directori extract compress archiv target directori extract specif file without preserv folder structur extract file match pattern list content tar file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_12046: Change all cron jobs running \"anm.sh\" to be run every 10 minutes instead of 5 minutes."
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_12046: crontab -l | sed '/anm\\.sh/s#\\/5#\\/10#' | crontab -\n\n\ncrontab -l | sed '/anm\\.sh/s,^\\*/5,*/10,' | crontab -"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "ls",
+      "MP Summary": "list directory contents",
+      "Most Similar TLDR Task": "List all files, with trailing `/` added to directory names",
+      "Most Similar TLDR Script": "ls -F",
+      "Most Similar NL2Bash Task": "Archive all directories in /path/to/directory/* (only command line arguments, no sub-directories) to files with .tar.gz extension transforming the full paths to relative paths",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find /path/* -maxdepth 0 -type d -exec sudo tar -zcpvf {}.tar.gz {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-maxdepth": "Descend at most levels (a non-negative integer) levels of directories below the\n starting-points. -maxdepth 0 means only apply the tests and actions to the\n starting-points themselves.",
+              "-type": "File is of type c:"
+            },
+            "sudo": {
+              "mpsum": "execute a command as another user"
+            },
+            "tar": {
+              "mpsum": "an archiving utility",
+              "-z": "Filter the archive through gzip(1).",
+              "-c": "Create a new archive. Arguments supply the names of the files to be archived.\n Directories are archived recursively, unless the --no-recursion option is given.",
+              "-v": "Verbosely list files processed.",
+              "-p": "extract information about file permissions (default for superuser)"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "sudo": {
+              "man8_sudo_4867": "execut singl command superus anoth user edit file superus default editor launch default shell superus privileg repeat last command prefix sudo bash zsh etc\nrun command anoth user group run command superus"
+            },
+            "tar": {
+              "man1_tar_33340": "archiv util\noften combin compress method gzip bzip creat compress archiv use archiv suffix determin compress program creat gzip archiv creat gzip archiv directori use rel path creat archiv file extract compress archiv current directori extract compress archiv target directori extract specif file without preserv folder structur extract file match pattern list content tar file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_8123: find the top 25 files in the current directory and its subdirectories",
+        "nl2bash_8470: search for files cart1 or cart2 or cart3 or ...cart6 in the folder junk which is in home folder and display all its details. Discard all the errors and do not display them."
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_8123: find . -type f -exec ls -al {} \\; | sort -nr -k5 | head -n 25",
+        "nl2bash_8470: find ~/junk  -name 'cart[1-6]' -exec ls -l {} \\; 2> /dev/null"
+      ],
+      "Explanations about Options": {
+        "-l": "use a long listing format",
+        "-a": "do not ignore entries starting with ."
+      }
+    },
+    {
+      "Command": "fgrep",
+      "MP Summary": "print lines that match patterns",
+      "Most Similar TLDR Task": "Search only lines that match entirely in files",
+      "Most Similar TLDR Script": "fgrep -x {{path/to/file1}} {{path/to/file2}}",
+      "Most Similar NL2Bash Task": "Archive all directories in /path/to/directory/* (only command line arguments, no sub-directories) to files with .tar.gz extension transforming the full paths to relative paths",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find /path/* -maxdepth 0 -type d -exec sudo tar -zcpvf {}.tar.gz {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-maxdepth": "Descend at most levels (a non-negative integer) levels of directories below the\n starting-points. -maxdepth 0 means only apply the tests and actions to the\n starting-points themselves.",
+              "-type": "File is of type c:"
+            },
+            "sudo": {
+              "mpsum": "execute a command as another user"
+            },
+            "tar": {
+              "mpsum": "an archiving utility",
+              "-z": "Filter the archive through gzip(1).",
+              "-c": "Create a new archive. Arguments supply the names of the files to be archived.\n Directories are archived recursively, unless the --no-recursion option is given.",
+              "-v": "Verbosely list files processed.",
+              "-p": "extract information about file permissions (default for superuser)"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "sudo": {
+              "man8_sudo_4867": "execut singl command superus anoth user edit file superus default editor launch default shell superus privileg repeat last command prefix sudo bash zsh etc\nrun command anoth user group run command superus"
+            },
+            "tar": {
+              "man1_tar_33340": "archiv util\noften combin compress method gzip bzip creat compress archiv use archiv suffix determin compress program creat gzip archiv creat gzip archiv directori use rel path creat archiv file extract compress archiv current directori extract compress archiv target directori extract specif file without preserv folder structur extract file match pattern list content tar file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_259: get the job number from the stored PID"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_259: jobs -l | fgrep $! | perl -ne 'print \"$1\\n\" if /\\[(\\d+)\\]/'"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "sum",
+      "MP Summary": "checksum and count the blocks in a file",
+      "Most Similar TLDR Task": "Compute a checksum with BSD-compatible algorithm and 1024-byte blocks",
+      "Most Similar TLDR Script": "sum {{file}}",
+      "Most Similar NL2Bash Task": "Archive all directories in /path/to/directory/* (only command line arguments, no sub-directories) to files with .tar.gz extension transforming the full paths to relative paths",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find /path/* -maxdepth 0 -type d -exec sudo tar -zcpvf {}.tar.gz {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-maxdepth": "Descend at most levels (a non-negative integer) levels of directories below the\n starting-points. -maxdepth 0 means only apply the tests and actions to the\n starting-points themselves.",
+              "-type": "File is of type c:"
+            },
+            "sudo": {
+              "mpsum": "execute a command as another user"
+            },
+            "tar": {
+              "mpsum": "an archiving utility",
+              "-z": "Filter the archive through gzip(1).",
+              "-c": "Create a new archive. Arguments supply the names of the files to be archived.\n Directories are archived recursively, unless the --no-recursion option is given.",
+              "-v": "Verbosely list files processed.",
+              "-p": "extract information about file permissions (default for superuser)"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "sudo": {
+              "man8_sudo_4867": "execut singl command superus anoth user edit file superus default editor launch default shell superus privileg repeat last command prefix sudo bash zsh etc\nrun command anoth user group run command superus"
+            },
+            "tar": {
+              "man1_tar_33340": "archiv util\noften combin compress method gzip bzip creat compress archiv use archiv suffix determin compress program creat gzip archiv creat gzip archiv directori use rel path creat archiv file extract compress archiv current directori extract compress archiv target directori extract specif file without preserv folder structur extract file match pattern list content tar file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_13863: Count used space on device \"/dev/sda\" in megabytes"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_13863: df -h -B 1M | grep dev/sda | tr -s ' '| cut -d' ' -f3 |python -c \"import sys; print sum([int(num) for num in sys.stdin.readlines()])\""
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "diff",
+      "MP Summary": "compare two files",
+      "Most Similar TLDR Task": "Compare directories recursively (shows names for differing files/directories as well as changes made to files)",
+      "Most Similar TLDR Script": "diff -r {{old_directory}} {{new_directory}}",
+      "Most Similar NL2Bash Task": "Archive all directories in /path/to/directory/* (only command line arguments, no sub-directories) to files with .tar.gz extension transforming the full paths to relative paths",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find /path/* -maxdepth 0 -type d -exec sudo tar -zcpvf {}.tar.gz {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-maxdepth": "Descend at most levels (a non-negative integer) levels of directories below the\n starting-points. -maxdepth 0 means only apply the tests and actions to the\n starting-points themselves.",
+              "-type": "File is of type c:"
+            },
+            "sudo": {
+              "mpsum": "execute a command as another user"
+            },
+            "tar": {
+              "mpsum": "an archiving utility",
+              "-z": "Filter the archive through gzip(1).",
+              "-c": "Create a new archive. Arguments supply the names of the files to be archived.\n Directories are archived recursively, unless the --no-recursion option is given.",
+              "-v": "Verbosely list files processed.",
+              "-p": "extract information about file permissions (default for superuser)"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "sudo": {
+              "man8_sudo_4867": "execut singl command superus anoth user edit file superus default editor launch default shell superus privileg repeat last command prefix sudo bash zsh etc\nrun command anoth user group run command superus"
+            },
+            "tar": {
+              "man1_tar_33340": "archiv util\noften combin compress method gzip bzip creat compress archiv use archiv suffix determin compress program creat gzip archiv creat gzip archiv directori use rel path creat archiv file extract compress archiv current directori extract compress archiv target directori extract specif file without preserv folder structur extract file match pattern list content tar file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_2759: Find all directories that do not contain \"main.cpp\""
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_2759: diff <(find . -exec readlink -f {} \\; | sed 's/\\(.*\\)\\/.*$/\\1/' | sort | uniq) <(find . -name main.cpp  -exec readlink -f {} \\; | sed 's/\\(.*\\)\\/.*$/\\1/' | sort | uniq) | sed -n 's/< \\(.*\\)/\\1/p'"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "sudo",
+      "MP Summary": "execute a command as another user",
+      "Most Similar TLDR Task": "Run a command as another user and/or group",
+      "Most Similar TLDR Script": "sudo -u {{user}} -g {{group}} {{id -a}}",
+      "Most Similar NL2Bash Task": "Archive all directories in /path/to/directory/* (only command line arguments, no sub-directories) to files with .tar.gz extension transforming the full paths to relative paths",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find /path/* -maxdepth 0 -type d -exec sudo tar -zcpvf {}.tar.gz {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-maxdepth": "Descend at most levels (a non-negative integer) levels of directories below the\n starting-points. -maxdepth 0 means only apply the tests and actions to the\n starting-points themselves.",
+              "-type": "File is of type c:"
+            },
+            "sudo": {
+              "mpsum": "execute a command as another user"
+            },
+            "tar": {
+              "mpsum": "an archiving utility",
+              "-z": "Filter the archive through gzip(1).",
+              "-c": "Create a new archive. Arguments supply the names of the files to be archived.\n Directories are archived recursively, unless the --no-recursion option is given.",
+              "-v": "Verbosely list files processed.",
+              "-p": "extract information about file permissions (default for superuser)"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "sudo": {
+              "man8_sudo_4867": "execut singl command superus anoth user edit file superus default editor launch default shell superus privileg repeat last command prefix sudo bash zsh etc\nrun command anoth user group run command superus"
+            },
+            "tar": {
+              "man1_tar_33340": "archiv util\noften combin compress method gzip bzip creat compress archiv use archiv suffix determin compress program creat gzip archiv creat gzip archiv directori use rel path creat archiv file extract compress archiv current directori extract compress archiv target directori extract specif file without preserv folder structur extract file match pattern list content tar file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_12043: Archive all directories in /path/to/directory/* (only command line arguments, no sub-directories) to files with .tar.gz extension transforming the full paths to relative paths"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_12043: find /path/* -maxdepth 0 -type d -exec sudo tar -zcpvf {}.tar.gz {} \\;"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "md5sum",
+      "MP Summary": "compute and check MD5 message digest",
+      "Most Similar TLDR Task": "Calculate MD5 checksums for multiple files",
+      "Most Similar TLDR Script": "md5sum {{filename1}} {{filename2}}",
+      "Most Similar NL2Bash Task": "Archive all directories in /path/to/directory/* (only command line arguments, no sub-directories) to files with .tar.gz extension transforming the full paths to relative paths",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find /path/* -maxdepth 0 -type d -exec sudo tar -zcpvf {}.tar.gz {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-maxdepth": "Descend at most levels (a non-negative integer) levels of directories below the\n starting-points. -maxdepth 0 means only apply the tests and actions to the\n starting-points themselves.",
+              "-type": "File is of type c:"
+            },
+            "sudo": {
+              "mpsum": "execute a command as another user"
+            },
+            "tar": {
+              "mpsum": "an archiving utility",
+              "-z": "Filter the archive through gzip(1).",
+              "-c": "Create a new archive. Arguments supply the names of the files to be archived.\n Directories are archived recursively, unless the --no-recursion option is given.",
+              "-v": "Verbosely list files processed.",
+              "-p": "extract information about file permissions (default for superuser)"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "sudo": {
+              "man8_sudo_4867": "execut singl command superus anoth user edit file superus default editor launch default shell superus privileg repeat last command prefix sudo bash zsh etc\nrun command anoth user group run command superus"
+            },
+            "tar": {
+              "man1_tar_33340": "archiv util\noften combin compress method gzip bzip creat compress archiv use archiv suffix determin compress program creat gzip archiv creat gzip archiv directori use rel path creat archiv file extract compress archiv current directori extract compress archiv target directori extract specif file without preserv folder structur extract file match pattern list content tar file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_13713: Calculate the md5 sum of hex byte 61"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_13713: echo -n -e '\\x61' | md5sum"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "rsync",
+      "MP Summary": "a fast, versatile, remote (and local) file-copying tool",
+      "Most Similar TLDR Task": "Transfer directory contents (but not the directory itself) from a remote to local",
+      "Most Similar TLDR Script": "rsync -r {{remote_host}}:{{path/to/remote_directory}}/ {{path/to/local_directory}}",
+      "Most Similar NL2Bash Task": "Archive all directories in /path/to/directory/* (only command line arguments, no sub-directories) to files with .tar.gz extension transforming the full paths to relative paths",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find /path/* -maxdepth 0 -type d -exec sudo tar -zcpvf {}.tar.gz {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-maxdepth": "Descend at most levels (a non-negative integer) levels of directories below the\n starting-points. -maxdepth 0 means only apply the tests and actions to the\n starting-points themselves.",
+              "-type": "File is of type c:"
+            },
+            "sudo": {
+              "mpsum": "execute a command as another user"
+            },
+            "tar": {
+              "mpsum": "an archiving utility",
+              "-z": "Filter the archive through gzip(1).",
+              "-c": "Create a new archive. Arguments supply the names of the files to be archived.\n Directories are archived recursively, unless the --no-recursion option is given.",
+              "-v": "Verbosely list files processed.",
+              "-p": "extract information about file permissions (default for superuser)"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "sudo": {
+              "man8_sudo_4867": "execut singl command superus anoth user edit file superus default editor launch default shell superus privileg repeat last command prefix sudo bash zsh etc\nrun command anoth user group run command superus"
+            },
+            "tar": {
+              "man1_tar_33340": "archiv util\noften combin compress method gzip bzip creat compress archiv use archiv suffix determin compress program creat gzip archiv creat gzip archiv directori use rel path creat archiv file extract compress archiv current directori extract compress archiv target directori extract specif file without preserv folder structur extract file match pattern list content tar file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_12044: Archive any files changed in the last day from \"remote_host\" to \"local_dir\""
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_12044: rsync -av remote_host:'$(find logs -type f -ctime -1)' local_dir"
+      ],
+      "Explanations about Options": {
+        "-v": "This option increases the amount of information you are given during the transfer.\n By default, rsync works silently. A single -v will give you information about what\n files are being transferred and a brief summary at the end. Two -v options will\n give you information on what files are being skipped and slightly more information\n at the end. More than two -v options should only be used if you are debugging\n rsync.",
+        "-a": "This is equivalent to -rlptgoD. It is a quick way of saying you want recursion and\n want to preserve almost everything (with -H being a notable omission). The only\n exception to the above equivalence is when --files-from is specified, in which case\n -r is not implied."
+      }
+    },
+    {
+      "Command": "awk",
+      "MP Summary": "pattern scanning and processing language",
+      "Most Similar TLDR Task": "Print the last column of each line in a file, using a comma (instead of space) as a field separator",
+      "Most Similar TLDR Script": "awk -F ',' '{print $NF}' {{filename}}",
+      "Most Similar NL2Bash Task": "Archive all directories in /path/to/directory/* (only command line arguments, no sub-directories) to files with .tar.gz extension transforming the full paths to relative paths",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find /path/* -maxdepth 0 -type d -exec sudo tar -zcpvf {}.tar.gz {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-maxdepth": "Descend at most levels (a non-negative integer) levels of directories below the\n starting-points. -maxdepth 0 means only apply the tests and actions to the\n starting-points themselves.",
+              "-type": "File is of type c:"
+            },
+            "sudo": {
+              "mpsum": "execute a command as another user"
+            },
+            "tar": {
+              "mpsum": "an archiving utility",
+              "-z": "Filter the archive through gzip(1).",
+              "-c": "Create a new archive. Arguments supply the names of the files to be archived.\n Directories are archived recursively, unless the --no-recursion option is given.",
+              "-v": "Verbosely list files processed.",
+              "-p": "extract information about file permissions (default for superuser)"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "sudo": {
+              "man8_sudo_4867": "execut singl command superus anoth user edit file superus default editor launch default shell superus privileg repeat last command prefix sudo bash zsh etc\nrun command anoth user group run command superus"
+            },
+            "tar": {
+              "man1_tar_33340": "archiv util\noften combin compress method gzip bzip creat compress archiv use archiv suffix determin compress program creat gzip archiv creat gzip archiv directori use rel path creat archiv file extract compress archiv current directori extract compress archiv target directori extract specif file without preserv folder structur extract file match pattern list content tar file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_3591: Find all files under current directory, calculate their md5sum and print each of the hash and file name to filename-hash.md5 files"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_3591: find . -type f | while read f; do g=`md5sum $f | awk '{print $1}'`; echo \"$g $f\"> $f-$g.md5; done"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "rename",
+      "MP Summary": "rename files",
+      "Most Similar TLDR Task": "Change file extensions",
+      "Most Similar TLDR Script": "rename {{.ext}} {{.bak}} {{*.ext}}",
+      "Most Similar NL2Bash Task": "Archive all directories in /path/to/directory/* (only command line arguments, no sub-directories) to files with .tar.gz extension transforming the full paths to relative paths",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find /path/* -maxdepth 0 -type d -exec sudo tar -zcpvf {}.tar.gz {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-maxdepth": "Descend at most levels (a non-negative integer) levels of directories below the\n starting-points. -maxdepth 0 means only apply the tests and actions to the\n starting-points themselves.",
+              "-type": "File is of type c:"
+            },
+            "sudo": {
+              "mpsum": "execute a command as another user"
+            },
+            "tar": {
+              "mpsum": "an archiving utility",
+              "-z": "Filter the archive through gzip(1).",
+              "-c": "Create a new archive. Arguments supply the names of the files to be archived.\n Directories are archived recursively, unless the --no-recursion option is given.",
+              "-v": "Verbosely list files processed.",
+              "-p": "extract information about file permissions (default for superuser)"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "sudo": {
+              "man8_sudo_4867": "execut singl command superus anoth user edit file superus default editor launch default shell superus privileg repeat last command prefix sudo bash zsh etc\nrun command anoth user group run command superus"
+            },
+            "tar": {
+              "man1_tar_33340": "archiv util\noften combin compress method gzip bzip creat compress archiv use archiv suffix determin compress program creat gzip archiv creat gzip archiv directori use rel path creat archiv file extract compress archiv current directori extract compress archiv target directori extract specif file without preserv folder structur extract file match pattern list content tar file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_12045: Change all \"JPG\" filename suffixes in current directory to \"jpeg\"."
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_12045: rename -v 's/\\.JPG/\\.jpeg/' *.JPG"
+      ],
+      "Explanations about Options": {
+        "-v": "Show which files were renamed, if any."
+      }
+    },
+    {
+      "Command": "git",
+      "MP Summary": "the stupid content tracker",
+      "Most Similar TLDR Task": "Execute a Git subcommand",
+      "Most Similar TLDR Script": "git {{subcommand}}",
+      "Most Similar NL2Bash Task": "Archive all directories in /path/to/directory/* (only command line arguments, no sub-directories) to files with .tar.gz extension transforming the full paths to relative paths",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find /path/* -maxdepth 0 -type d -exec sudo tar -zcpvf {}.tar.gz {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-maxdepth": "Descend at most levels (a non-negative integer) levels of directories below the\n starting-points. -maxdepth 0 means only apply the tests and actions to the\n starting-points themselves.",
+              "-type": "File is of type c:"
+            },
+            "sudo": {
+              "mpsum": "execute a command as another user"
+            },
+            "tar": {
+              "mpsum": "an archiving utility",
+              "-z": "Filter the archive through gzip(1).",
+              "-c": "Create a new archive. Arguments supply the names of the files to be archived.\n Directories are archived recursively, unless the --no-recursion option is given.",
+              "-v": "Verbosely list files processed.",
+              "-p": "extract information about file permissions (default for superuser)"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "sudo": {
+              "man8_sudo_4867": "execut singl command superus anoth user edit file superus default editor launch default shell superus privileg repeat last command prefix sudo bash zsh etc\nrun command anoth user group run command superus"
+            },
+            "tar": {
+              "man1_tar_33340": "archiv util\noften combin compress method gzip bzip creat compress archiv use archiv suffix determin compress program creat gzip archiv creat gzip archiv directori use rel path creat archiv file extract compress archiv current directori extract compress archiv target directori extract specif file without preserv folder structur extract file match pattern list content tar file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_13942: Counts the number of lines in each file in a git repository."
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_13942: git ls-files | xargs -d '\\n' wc -l\n\n\ngit ls-files | xargs wc -l\n\n\nwc -l $(git ls-files)\n\n\nwc -l --files0-from=<(git ls-files -z)"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "read",
+      "MP Summary": "read a line from standard input",
+      "Most Similar TLDR Task": "Use a specific character as a delimiter instead of a new line",
+      "Most Similar TLDR Script": "read -d {{new_delimiter}} {{variable}}",
+      "Most Similar NL2Bash Task": "Archive all directories in /path/to/directory/* (only command line arguments, no sub-directories) to files with .tar.gz extension transforming the full paths to relative paths",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find /path/* -maxdepth 0 -type d -exec sudo tar -zcpvf {}.tar.gz {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-maxdepth": "Descend at most levels (a non-negative integer) levels of directories below the\n starting-points. -maxdepth 0 means only apply the tests and actions to the\n starting-points themselves.",
+              "-type": "File is of type c:"
+            },
+            "sudo": {
+              "mpsum": "execute a command as another user"
+            },
+            "tar": {
+              "mpsum": "an archiving utility",
+              "-z": "Filter the archive through gzip(1).",
+              "-c": "Create a new archive. Arguments supply the names of the files to be archived.\n Directories are archived recursively, unless the --no-recursion option is given.",
+              "-v": "Verbosely list files processed.",
+              "-p": "extract information about file permissions (default for superuser)"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "sudo": {
+              "man8_sudo_4867": "execut singl command superus anoth user edit file superus default editor launch default shell superus privileg repeat last command prefix sudo bash zsh etc\nrun command anoth user group run command superus"
+            },
+            "tar": {
+              "man1_tar_33340": "archiv util\noften combin compress method gzip bzip creat compress archiv use archiv suffix determin compress program creat gzip archiv creat gzip archiv directori use rel path creat archiv file extract compress archiv current directori extract compress archiv target directori extract specif file without preserv folder structur extract file match pattern list content tar file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_3591: Find all files under current directory, calculate their md5sum and print each of the hash and file name to filename-hash.md5 files"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_3591: find . -type f | while read f; do g=`md5sum $f | awk '{print $1}'`; echo \"$g $f\"> $f-$g.md5; done"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "parallel",
+      "MP Summary": "run programs in parallel",
+      "Most Similar TLDR Task": "Run on multiple machines via SSH",
+      "Most Similar TLDR Script": "parallel -S {{machine1}},{{machine2}} {{command}} ::: {{arg1}} {{arg2}}",
+      "Most Similar NL2Bash Task": "Archive all directories in /path/to/directory/* (only command line arguments, no sub-directories) to files with .tar.gz extension transforming the full paths to relative paths",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find /path/* -maxdepth 0 -type d -exec sudo tar -zcpvf {}.tar.gz {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-maxdepth": "Descend at most levels (a non-negative integer) levels of directories below the\n starting-points. -maxdepth 0 means only apply the tests and actions to the\n starting-points themselves.",
+              "-type": "File is of type c:"
+            },
+            "sudo": {
+              "mpsum": "execute a command as another user"
+            },
+            "tar": {
+              "mpsum": "an archiving utility",
+              "-z": "Filter the archive through gzip(1).",
+              "-c": "Create a new archive. Arguments supply the names of the files to be archived.\n Directories are archived recursively, unless the --no-recursion option is given.",
+              "-v": "Verbosely list files processed.",
+              "-p": "extract information about file permissions (default for superuser)"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "sudo": {
+              "man8_sudo_4867": "execut singl command superus anoth user edit file superus default editor launch default shell superus privileg repeat last command prefix sudo bash zsh etc\nrun command anoth user group run command superus"
+            },
+            "tar": {
+              "man1_tar_33340": "archiv util\noften combin compress method gzip bzip creat compress archiv use archiv suffix determin compress program creat gzip archiv creat gzip archiv directori use rel path creat archiv file extract compress archiv current directori extract compress archiv target directori extract specif file without preserv folder structur extract file match pattern list content tar file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_8069: find regular files under the current directory, whose name ends in .mbox, piping the output to the GNU Parallel command that will rename each file to not have a file extension."
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_8069: find . -type f -wholename \\*.mbox -print0 | parallel -0 mv {} {.}\n\n\nfind . -type f -wholename \\*.mbox | parallel mv {} {.}"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "python",
+      "MP Summary": "an interpreted, interactive, object-oriented programming language",
+      "Most Similar TLDR Task": "Run library module as a script (terminates option list)",
+      "Most Similar TLDR Script": "python -m {{module}} {{arguments}}",
+      "Most Similar NL2Bash Task": "Archive all directories in /path/to/directory/* (only command line arguments, no sub-directories) to files with .tar.gz extension transforming the full paths to relative paths",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find /path/* -maxdepth 0 -type d -exec sudo tar -zcpvf {}.tar.gz {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-maxdepth": "Descend at most levels (a non-negative integer) levels of directories below the\n starting-points. -maxdepth 0 means only apply the tests and actions to the\n starting-points themselves.",
+              "-type": "File is of type c:"
+            },
+            "sudo": {
+              "mpsum": "execute a command as another user"
+            },
+            "tar": {
+              "mpsum": "an archiving utility",
+              "-z": "Filter the archive through gzip(1).",
+              "-c": "Create a new archive. Arguments supply the names of the files to be archived.\n Directories are archived recursively, unless the --no-recursion option is given.",
+              "-v": "Verbosely list files processed.",
+              "-p": "extract information about file permissions (default for superuser)"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "sudo": {
+              "man8_sudo_4867": "execut singl command superus anoth user edit file superus default editor launch default shell superus privileg repeat last command prefix sudo bash zsh etc\nrun command anoth user group run command superus"
+            },
+            "tar": {
+              "man1_tar_33340": "archiv util\noften combin compress method gzip bzip creat compress archiv use archiv suffix determin compress program creat gzip archiv creat gzip archiv directori use rel path creat archiv file extract compress archiv current directori extract compress archiv target directori extract specif file without preserv folder structur extract file match pattern list content tar file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_13863: Count used space on device \"/dev/sda\" in megabytes"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_13863: df -h -B 1M | grep dev/sda | tr -s ' '| cut -d' ' -f3 |python -c \"import sys; print sum([int(num) for num in sys.stdin.readlines()])\""
+      ],
+      "Explanations about Options": {
+        "-c": "Specify the command to execute (see next section). This terminates the option list\n (following options are passed as arguments to the command)."
+      }
+    },
+    {
+      "Command": "jobs",
+      "MP Summary": "display status of jobs in the current session",
+      "Most Similar TLDR Task": "Display information about jobs with changed status",
+      "Most Similar TLDR Script": "jobs -n",
+      "Most Similar NL2Bash Task": "Archive all directories in /path/to/directory/* (only command line arguments, no sub-directories) to files with .tar.gz extension transforming the full paths to relative paths",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find /path/* -maxdepth 0 -type d -exec sudo tar -zcpvf {}.tar.gz {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-maxdepth": "Descend at most levels (a non-negative integer) levels of directories below the\n starting-points. -maxdepth 0 means only apply the tests and actions to the\n starting-points themselves.",
+              "-type": "File is of type c:"
+            },
+            "sudo": {
+              "mpsum": "execute a command as another user"
+            },
+            "tar": {
+              "mpsum": "an archiving utility",
+              "-z": "Filter the archive through gzip(1).",
+              "-c": "Create a new archive. Arguments supply the names of the files to be archived.\n Directories are archived recursively, unless the --no-recursion option is given.",
+              "-v": "Verbosely list files processed.",
+              "-p": "extract information about file permissions (default for superuser)"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "sudo": {
+              "man8_sudo_4867": "execut singl command superus anoth user edit file superus default editor launch default shell superus privileg repeat last command prefix sudo bash zsh etc\nrun command anoth user group run command superus"
+            },
+            "tar": {
+              "man1_tar_33340": "archiv util\noften combin compress method gzip bzip creat compress archiv use archiv suffix determin compress program creat gzip archiv creat gzip archiv directori use rel path creat archiv file extract compress archiv current directori extract compress archiv target directori extract specif file without preserv folder structur extract file match pattern list content tar file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_259: get the job number from the stored PID"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_259: jobs -l | fgrep $! | perl -ne 'print \"$1\\n\" if /\\[(\\d+)\\]/'"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "readlink",
+      "MP Summary": "print resolved symbolic links or canonical file names",
+      "Most Similar TLDR Task": "Get the absolute path to a file",
+      "Most Similar TLDR Script": "readlink -f {{filename}}",
+      "Most Similar NL2Bash Task": "Archive all directories in /path/to/directory/* (only command line arguments, no sub-directories) to files with .tar.gz extension transforming the full paths to relative paths",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find /path/* -maxdepth 0 -type d -exec sudo tar -zcpvf {}.tar.gz {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-maxdepth": "Descend at most levels (a non-negative integer) levels of directories below the\n starting-points. -maxdepth 0 means only apply the tests and actions to the\n starting-points themselves.",
+              "-type": "File is of type c:"
+            },
+            "sudo": {
+              "mpsum": "execute a command as another user"
+            },
+            "tar": {
+              "mpsum": "an archiving utility",
+              "-z": "Filter the archive through gzip(1).",
+              "-c": "Create a new archive. Arguments supply the names of the files to be archived.\n Directories are archived recursively, unless the --no-recursion option is given.",
+              "-v": "Verbosely list files processed.",
+              "-p": "extract information about file permissions (default for superuser)"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "sudo": {
+              "man8_sudo_4867": "execut singl command superus anoth user edit file superus default editor launch default shell superus privileg repeat last command prefix sudo bash zsh etc\nrun command anoth user group run command superus"
+            },
+            "tar": {
+              "man1_tar_33340": "archiv util\noften combin compress method gzip bzip creat compress archiv use archiv suffix determin compress program creat gzip archiv creat gzip archiv directori use rel path creat archiv file extract compress archiv current directori extract compress archiv target directori extract specif file without preserv folder structur extract file match pattern list content tar file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_2759: Find all directories that do not contain \"main.cpp\""
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_2759: diff <(find . -exec readlink -f {} \\; | sed 's/\\(.*\\)\\/.*$/\\1/' | sort | uniq) <(find . -name main.cpp  -exec readlink -f {} \\; | sed 's/\\(.*\\)\\/.*$/\\1/' | sort | uniq) | sed -n 's/< \\(.*\\)/\\1/p'"
+      ],
+      "Explanations about Options": {
+        "-f": "canonicalize by following every symlink in every component of the given name\n recursively; all but the last component must exist"
+      }
+    },
+    {
+      "Command": "zcat",
+      "MP Summary": "decompress and concatenate files to standard output",
+      "Most Similar TLDR Task": "Print compression details of a gzipped file to the standard output",
+      "Most Similar TLDR Script": "zcat -l {{file.txt.gz}}",
+      "Most Similar NL2Bash Task": "Archive all directories in /path/to/directory/* (only command line arguments, no sub-directories) to files with .tar.gz extension transforming the full paths to relative paths",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find /path/* -maxdepth 0 -type d -exec sudo tar -zcpvf {}.tar.gz {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-maxdepth": "Descend at most levels (a non-negative integer) levels of directories below the\n starting-points. -maxdepth 0 means only apply the tests and actions to the\n starting-points themselves.",
+              "-type": "File is of type c:"
+            },
+            "sudo": {
+              "mpsum": "execute a command as another user"
+            },
+            "tar": {
+              "mpsum": "an archiving utility",
+              "-z": "Filter the archive through gzip(1).",
+              "-c": "Create a new archive. Arguments supply the names of the files to be archived.\n Directories are archived recursively, unless the --no-recursion option is given.",
+              "-v": "Verbosely list files processed.",
+              "-p": "extract information about file permissions (default for superuser)"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "sudo": {
+              "man8_sudo_4867": "execut singl command superus anoth user edit file superus default editor launch default shell superus privileg repeat last command prefix sudo bash zsh etc\nrun command anoth user group run command superus"
+            },
+            "tar": {
+              "man1_tar_33340": "archiv util\noften combin compress method gzip bzip creat compress archiv use archiv suffix determin compress program creat gzip archiv creat gzip archiv directori use rel path creat archiv file extract compress archiv current directori extract compress archiv target directori extract specif file without preserv folder structur extract file match pattern list content tar file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_226: Unzip and extract \"userAgent=[^=]*'\" from \"input.gz\""
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_226: zcat input.gz | grep -o 'userAgent=[^=]*' | sed 's/ [^ ]*$//'"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "dig",
+      "MP Summary": "DNS lookup utility",
+      "Most Similar TLDR Task": "Specify an alternate DNS server to query",
+      "Most Similar TLDR Script": "dig @{{8.8.8.8}} {{example.com}}",
+      "Most Similar NL2Bash Task": "Archive all directories in /path/to/directory/* (only command line arguments, no sub-directories) to files with .tar.gz extension transforming the full paths to relative paths",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find /path/* -maxdepth 0 -type d -exec sudo tar -zcpvf {}.tar.gz {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-maxdepth": "Descend at most levels (a non-negative integer) levels of directories below the\n starting-points. -maxdepth 0 means only apply the tests and actions to the\n starting-points themselves.",
+              "-type": "File is of type c:"
+            },
+            "sudo": {
+              "mpsum": "execute a command as another user"
+            },
+            "tar": {
+              "mpsum": "an archiving utility",
+              "-z": "Filter the archive through gzip(1).",
+              "-c": "Create a new archive. Arguments supply the names of the files to be archived.\n Directories are archived recursively, unless the --no-recursion option is given.",
+              "-v": "Verbosely list files processed.",
+              "-p": "extract information about file permissions (default for superuser)"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "sudo": {
+              "man8_sudo_4867": "execut singl command superus anoth user edit file superus default editor launch default shell superus privileg repeat last command prefix sudo bash zsh etc\nrun command anoth user group run command superus"
+            },
+            "tar": {
+              "man1_tar_33340": "archiv util\noften combin compress method gzip bzip creat compress archiv use archiv suffix determin compress program creat gzip archiv creat gzip archiv directori use rel path creat archiv file extract compress archiv current directori extract compress archiv target directori extract specif file without preserv folder structur extract file match pattern list content tar file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_13466: Saves hostname that matches ${ip_address} in 'host' variable, without trailing dot."
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_13466: host=$(dig +short -x \"${ip_address}\" | sed 's/\\.$//g')"
+      ],
+      "Explanations about Options": {
+        "-x": "Simplified reverse lookups, for mapping addresses to names. The addr is an IPv4\n address in dotted-decimal notation, or a colon-delimited IPv6 address. When the -x is\n used, there is no need to provide the name, class and type arguments. dig\n automatically performs a lookup for a name like 94.2.0.192.in-addr.arpa and sets the\n query type and class to PTR and IN respectively. IPv6 addresses are looked up using\n nibble format under the IP6.ARPA domain."
+      }
+    },
+    {
+      "Command": "host",
+      "MP Summary": "DNS lookup utility",
+      "Most Similar TLDR Task": "Specify an alternate DNS server to query",
+      "Most Similar TLDR Script": "host {{domain}} {{8.8.8.8}}",
+      "Most Similar NL2Bash Task": "Archive all directories in /path/to/directory/* (only command line arguments, no sub-directories) to files with .tar.gz extension transforming the full paths to relative paths",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find /path/* -maxdepth 0 -type d -exec sudo tar -zcpvf {}.tar.gz {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-maxdepth": "Descend at most levels (a non-negative integer) levels of directories below the\n starting-points. -maxdepth 0 means only apply the tests and actions to the\n starting-points themselves.",
+              "-type": "File is of type c:"
+            },
+            "sudo": {
+              "mpsum": "execute a command as another user"
+            },
+            "tar": {
+              "mpsum": "an archiving utility",
+              "-z": "Filter the archive through gzip(1).",
+              "-c": "Create a new archive. Arguments supply the names of the files to be archived.\n Directories are archived recursively, unless the --no-recursion option is given.",
+              "-v": "Verbosely list files processed.",
+              "-p": "extract information about file permissions (default for superuser)"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "sudo": {
+              "man8_sudo_4867": "execut singl command superus anoth user edit file superus default editor launch default shell superus privileg repeat last command prefix sudo bash zsh etc\nrun command anoth user group run command superus"
+            },
+            "tar": {
+              "man1_tar_33340": "archiv util\noften combin compress method gzip bzip creat compress archiv use archiv suffix determin compress program creat gzip archiv creat gzip archiv directori use rel path creat archiv file extract compress archiv current directori extract compress archiv target directori extract specif file without preserv folder structur extract file match pattern list content tar file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_13466: Saves hostname that matches ${ip_address} in 'host' variable, without trailing dot."
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_13466: host=$(dig +short -x \"${ip_address}\" | sed 's/\\.$//g')"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "octave",
+      "MP Summary": "A high-level interactive language for numerical computations.",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "Archive all directories in /path/to/directory/* (only command line arguments, no sub-directories) to files with .tar.gz extension transforming the full paths to relative paths",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find /path/* -maxdepth 0 -type d -exec sudo tar -zcpvf {}.tar.gz {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-maxdepth": "Descend at most levels (a non-negative integer) levels of directories below the\n starting-points. -maxdepth 0 means only apply the tests and actions to the\n starting-points themselves.",
+              "-type": "File is of type c:"
+            },
+            "sudo": {
+              "mpsum": "execute a command as another user"
+            },
+            "tar": {
+              "mpsum": "an archiving utility",
+              "-z": "Filter the archive through gzip(1).",
+              "-c": "Create a new archive. Arguments supply the names of the files to be archived.\n Directories are archived recursively, unless the --no-recursion option is given.",
+              "-v": "Verbosely list files processed.",
+              "-p": "extract information about file permissions (default for superuser)"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "sudo": {
+              "man8_sudo_4867": "execut singl command superus anoth user edit file superus default editor launch default shell superus privileg repeat last command prefix sudo bash zsh etc\nrun command anoth user group run command superus"
+            },
+            "tar": {
+              "man1_tar_33340": "archiv util\noften combin compress method gzip bzip creat compress archiv use archiv suffix determin compress program creat gzip archiv creat gzip archiv directori use rel path creat archiv file extract compress archiv current directori extract compress archiv target directori extract specif file without preserv folder structur extract file match pattern list content tar file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_13746: Calculate the values of the interval from 0 to pi/2 with a step of 1, add a line number, and write the output to standard output and \"x.txt\""
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_13746: octave -q --eval 'printf (\"%f\\n\", [0:0.1:pi/2])'|nl|tee x.txt"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "dev",
+      "MP Summary": "release candidate LaTeX testing",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "Archive all directories in /path/to/directory/* (only command line arguments, no sub-directories) to files with .tar.gz extension transforming the full paths to relative paths",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find /path/* -maxdepth 0 -type d -exec sudo tar -zcpvf {}.tar.gz {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-maxdepth": "Descend at most levels (a non-negative integer) levels of directories below the\n starting-points. -maxdepth 0 means only apply the tests and actions to the\n starting-points themselves.",
+              "-type": "File is of type c:"
+            },
+            "sudo": {
+              "mpsum": "execute a command as another user"
+            },
+            "tar": {
+              "mpsum": "an archiving utility",
+              "-z": "Filter the archive through gzip(1).",
+              "-c": "Create a new archive. Arguments supply the names of the files to be archived.\n Directories are archived recursively, unless the --no-recursion option is given.",
+              "-v": "Verbosely list files processed.",
+              "-p": "extract information about file permissions (default for superuser)"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "sudo": {
+              "man8_sudo_4867": "execut singl command superus anoth user edit file superus default editor launch default shell superus privileg repeat last command prefix sudo bash zsh etc\nrun command anoth user group run command superus"
+            },
+            "tar": {
+              "man1_tar_33340": "archiv util\noften combin compress method gzip bzip creat compress archiv use archiv suffix determin compress program creat gzip archiv creat gzip archiv directori use rel path creat archiv file extract compress archiv current directori extract compress archiv target directori extract specif file without preserv folder structur extract file match pattern list content tar file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_13863: Count used space on device \"/dev/sda\" in megabytes",
+        "nl2bash_2533: Find all .txt files under the current directory and below suppressing error messages",
+        "nl2bash_8470: search for files cart1 or cart2 or cart3 or ...cart6 in the folder junk which is in home folder and display all its details. Discard all the errors and do not display them."
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_13863: df -h -B 1M | grep dev/sda | tr -s ' '| cut -d' ' -f3 |python -c \"import sys; print sum([int(num) for num in sys.stdin.readlines()])\"",
+        "nl2bash_2533: find . -name \"*.txt\" -print 2>/dev/null",
+        "nl2bash_8470: find ~/junk  -name 'cart[1-6]' -exec ls -l {} \\; 2> /dev/null"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "num",
+      "MP Summary": "number utilities for mathematics",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "Archive all directories in /path/to/directory/* (only command line arguments, no sub-directories) to files with .tar.gz extension transforming the full paths to relative paths",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find /path/* -maxdepth 0 -type d -exec sudo tar -zcpvf {}.tar.gz {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-maxdepth": "Descend at most levels (a non-negative integer) levels of directories below the\n starting-points. -maxdepth 0 means only apply the tests and actions to the\n starting-points themselves.",
+              "-type": "File is of type c:"
+            },
+            "sudo": {
+              "mpsum": "execute a command as another user"
+            },
+            "tar": {
+              "mpsum": "an archiving utility",
+              "-z": "Filter the archive through gzip(1).",
+              "-c": "Create a new archive. Arguments supply the names of the files to be archived.\n Directories are archived recursively, unless the --no-recursion option is given.",
+              "-v": "Verbosely list files processed.",
+              "-p": "extract information about file permissions (default for superuser)"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "sudo": {
+              "man8_sudo_4867": "execut singl command superus anoth user edit file superus default editor launch default shell superus privileg repeat last command prefix sudo bash zsh etc\nrun command anoth user group run command superus"
+            },
+            "tar": {
+              "man1_tar_33340": "archiv util\noften combin compress method gzip bzip creat compress archiv use archiv suffix determin compress program creat gzip archiv creat gzip archiv directori use rel path creat archiv file extract compress archiv current directori extract compress archiv target directori extract specif file without preserv folder structur extract file match pattern list content tar file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_13863: Count used space on device \"/dev/sda\" in megabytes"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_13863: df -h -B 1M | grep dev/sda | tr -s ' '| cut -d' ' -f3 |python -c \"import sys; print sum([int(num) for num in sys.stdin.readlines()])\""
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "to",
+      "MP Summary": "as the filename. --logdir <name> Writes each synchronization log output in a new file in the specified directory. --logexpire <hours> Removes logs older than the value specified (in hours). This command is  used  with --logdir. --logflush Clears (flushes) the log file after each write action. --logdebug Also  output  debug-level  messages  in  the log (equivalent to setting the env var QT_LOGGING_RULES=\"qt.*=true;*.debug=true\"). ) --confdir <dirname> Uses the specified configuration directory. The ownCloud Client reads a configuration file.  You can locate this configuration file as follows: On Linux distributions: $HOME/.config/ownCloud/owncloud.cfg On Microsoft Windows systems: %APPDATA%\\ownCloud\\owncloud.cfg On MAC OS X systems: $HOME/Library/Preferences/ownCloud/owncloud.cfg The configuration file contains settings using the Microsoft Windows .ini file format. You can overwrite changes using the ownCloud configuration dialog. NOTE: Use caution when making changes to the ownCloud Client configuration  file.   Incorrect settings can produce unintended results. Some interesting values that can be set on the configuration file are: \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510 \u2502[ownCloud] section          \u2502         \u2502                          \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502Variable                    \u2502 Default \u2502 Meaning                  \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502remotePollInterval          \u2502 30000   \u2502 Specifies  the poll time \u2502 \u2502                            \u2502         \u2502 for      the      remote \u2502 \u2502                            \u2502         \u2502 repository            in \u2502 \u2502                            \u2502         \u2502 milliseconds.            \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502forceSyncInterval           \u2502 7200000 \u2502 The   duration   of   no \u2502 \u2502                            \u2502         \u2502 activity  after  which a \u2502 \u2502                            \u2502         \u2502 synchronization      run \u2502 \u2502                            \u2502         \u2502 shall    be    triggered \u2502 \u2502                            \u2502         \u2502 automatically.           \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502fullLocalDiscoveryInterval  \u2502 3600000 \u2502 The interval after which \u2502 \u2502                            \u2502         \u2502 the next synchronization \u2502 \u2502                            \u2502         \u2502 will   perform   a  full \u2502 \u2502                            \u2502         \u2502 local discovery.         \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502notificationRefreshInterval \u2502 300000  \u2502 Specifies   the  default \u2502 \u2502                            \u2502         \u2502 interval of checking for \u2502 \u2502                            \u2502         \u2502 new server notifications \u2502 \u2502                            \u2502         \u2502 in milliseconds.         \u2502 \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518 \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510 \u2502[General] section       \u2502         \u2502                          \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502Variable                \u2502 Default \u2502 Meaning                  \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502chunkSize               \u2502 5242880 \u2502 Specifies the chunk size \u2502 \u2502                        \u2502         \u2502 of   uploaded  files  in \u2502 \u2502                        \u2502         \u2502 bytes.                   \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502promptDeleteAllFiles    \u2502 true    \u2502 If a  UI  prompt  should \u2502 \u2502                        \u2502         \u2502 ask  for confirmation if \u2502 \u2502                        \u2502         \u2502 it was detected that all \u2502 \u2502                        \u2502         \u2502 files  and  folders were \u2502 \u2502                        \u2502         \u2502 deleted.                 \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502maxLogLines             \u2502 20000   \u2502 Specifies  the   maximum \u2502 \u2502                        \u2502         \u2502 number   of   log  lines \u2502 \u2502                        \u2502         \u2502 displayed  in  the   log \u2502 \u2502                        \u2502         \u2502 window.                  \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502timeout                 \u2502 300     \u2502 The  timeout for network \u2502 \u2502                        \u2502         \u2502 connections in seconds.  \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502moveToTrash             \u2502 false   \u2502 If  non-locally  deleted \u2502 \u2502                        \u2502         \u2502 files should be moved to \u2502 \u2502                        \u2502         \u2502 trash     instead     of \u2502 \u2502                        \u2502         \u2502 deleting            them \u2502 \u2502                        \u2502         \u2502 completely.  This option \u2502 \u2502                        \u2502         \u2502 only works on linux      \u2502 \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518 \u2502showExperimentalOptions \u2502 false   \u2502 Whether      to     show \u2502 \u2502                        \u2502         \u2502 experimental     options \u2502 \u2502                        \u2502         \u2502 that      are      still \u2502 \u2502                        \u2502         \u2502 undergoing  testing   in \u2502 \u2502                        \u2502         \u2502 the    user   interface. \u2502 \u2502                        \u2502         \u2502 Turning this on does not \u2502 \u2502                        \u2502         \u2502 enable      experimental \u2502 \u2502                        \u2502         \u2502 behavior on its own.  It \u2502 \u2502                        \u2502         \u2502 does     enable     user \u2502 \u2502                        \u2502         \u2502 inferface  options  that \u2502 \u2502                        \u2502         \u2502 can be used to opt in to \u2502 \u2502                        \u2502         \u2502 experimental features.   \u2502 \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518 \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510 \u2502[Proxy] section      \u2502           \u2502                          \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502Variable             \u2502 Default   \u2502 Meaning                  \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502host                 \u2502 127.0.0.1 \u2502 The address of the proxy \u2502 \u2502                     \u2502           \u2502 server.                  \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502port                 \u2502 8080      \u2502 The  port were the proxy \u2502 \u2502                     \u2502           \u2502 is listening.            \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502type                 \u2502 2         \u2502 0 for System Proxy.      \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u25021 for SOCKS5 Proxy.  \u2502           \u2502                          \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u25022 for No Proxy.      \u2502           \u2502                          \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u25023 for HTTP(S) Proxy. \u2502           \u2502                          \u2502 \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518 Please report bugs at https://github.com/owncloud/client/issues. owncloudcmd(1)",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "Archive all directories in /path/to/directory/* (only command line arguments, no sub-directories) to files with .tar.gz extension transforming the full paths to relative paths",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find /path/* -maxdepth 0 -type d -exec sudo tar -zcpvf {}.tar.gz {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-maxdepth": "Descend at most levels (a non-negative integer) levels of directories below the\n starting-points. -maxdepth 0 means only apply the tests and actions to the\n starting-points themselves.",
+              "-type": "File is of type c:"
+            },
+            "sudo": {
+              "mpsum": "execute a command as another user"
+            },
+            "tar": {
+              "mpsum": "an archiving utility",
+              "-z": "Filter the archive through gzip(1).",
+              "-c": "Create a new archive. Arguments supply the names of the files to be archived.\n Directories are archived recursively, unless the --no-recursion option is given.",
+              "-v": "Verbosely list files processed.",
+              "-p": "extract information about file permissions (default for superuser)"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "sudo": {
+              "man8_sudo_4867": "execut singl command superus anoth user edit file superus default editor launch default shell superus privileg repeat last command prefix sudo bash zsh etc\nrun command anoth user group run command superus"
+            },
+            "tar": {
+              "man1_tar_33340": "archiv util\noften combin compress method gzip bzip creat compress archiv use archiv suffix determin compress program creat gzip archiv creat gzip archiv directori use rel path creat archiv file extract compress archiv current directori extract compress archiv target directori extract specif file without preserv folder structur extract file match pattern list content tar file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_12151: Change permissions to 644 for all regular files under the /path/to/dir/ tree",
+        "nl2bash_266: take all files in the directory \" /path/to/files\" and provide them as input to the script file truncate.sh"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_12151: find /path/to/dir/ -type f -print0 | xargs -0 chmod 644",
+        "nl2bash_266: find /path/to/files -exec truncate.sh {} \\;"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "dir",
+      "MP Summary": "list directory contents",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "Archive all directories in /path/to/directory/* (only command line arguments, no sub-directories) to files with .tar.gz extension transforming the full paths to relative paths",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find /path/* -maxdepth 0 -type d -exec sudo tar -zcpvf {}.tar.gz {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-maxdepth": "Descend at most levels (a non-negative integer) levels of directories below the\n starting-points. -maxdepth 0 means only apply the tests and actions to the\n starting-points themselves.",
+              "-type": "File is of type c:"
+            },
+            "sudo": {
+              "mpsum": "execute a command as another user"
+            },
+            "tar": {
+              "mpsum": "an archiving utility",
+              "-z": "Filter the archive through gzip(1).",
+              "-c": "Create a new archive. Arguments supply the names of the files to be archived.\n Directories are archived recursively, unless the --no-recursion option is given.",
+              "-v": "Verbosely list files processed.",
+              "-p": "extract information about file permissions (default for superuser)"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "sudo": {
+              "man8_sudo_4867": "execut singl command superus anoth user edit file superus default editor launch default shell superus privileg repeat last command prefix sudo bash zsh etc\nrun command anoth user group run command superus"
+            },
+            "tar": {
+              "man1_tar_33340": "archiv util\noften combin compress method gzip bzip creat compress archiv use archiv suffix determin compress program creat gzip archiv creat gzip archiv directori use rel path creat archiv file extract compress archiv current directori extract compress archiv target directori extract specif file without preserv folder structur extract file match pattern list content tar file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_12151: Change permissions to 644 for all regular files under the /path/to/dir/ tree"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_12151: find /path/to/dir/ -type f -print0 | xargs -0 chmod 644"
+      ],
+      "Explanations about Options": {
+        "-t": "sort by modification time , newest first",
+        "-p": "append / indicator to directories"
+      }
+    },
+    {
+      "Command": "metaflac",
+      "MP Summary": "program to list, add, remove, or edit metadata in one or more FLAC files.",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "Archive all directories in /path/to/directory/* (only command line arguments, no sub-directories) to files with .tar.gz extension transforming the full paths to relative paths",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find /path/* -maxdepth 0 -type d -exec sudo tar -zcpvf {}.tar.gz {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-maxdepth": "Descend at most levels (a non-negative integer) levels of directories below the\n starting-points. -maxdepth 0 means only apply the tests and actions to the\n starting-points themselves.",
+              "-type": "File is of type c:"
+            },
+            "sudo": {
+              "mpsum": "execute a command as another user"
+            },
+            "tar": {
+              "mpsum": "an archiving utility",
+              "-z": "Filter the archive through gzip(1).",
+              "-c": "Create a new archive. Arguments supply the names of the files to be archived.\n Directories are archived recursively, unless the --no-recursion option is given.",
+              "-v": "Verbosely list files processed.",
+              "-p": "extract information about file permissions (default for superuser)"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "sudo": {
+              "man8_sudo_4867": "execut singl command superus anoth user edit file superus default editor launch default shell superus privileg repeat last command prefix sudo bash zsh etc\nrun command anoth user group run command superus"
+            },
+            "tar": {
+              "man1_tar_33340": "archiv util\noften combin compress method gzip bzip creat compress archiv use archiv suffix determin compress program creat gzip archiv creat gzip archiv directori use rel path creat archiv file extract compress archiv current directori extract compress archiv target directori extract specif file without preserv folder structur extract file match pattern list content tar file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_227: Use metaflac to extract the artist field from myfile.flac, and set the variable ARTIST to the value of that field."
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_227: source <(metaflac --show-tag ARTIST myfile.flac)"
+      ],
+      "Explanations about Options": {
+        "--show-tag": "Show all tags where the field name matches 'name'."
+      }
+    },
+    {
+      "Command": "egrep",
+      "MP Summary": "print lines that match patterns",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "Archive all directories in /path/to/directory/* (only command line arguments, no sub-directories) to files with .tar.gz extension transforming the full paths to relative paths",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "find /path/* -maxdepth 0 -type d -exec sudo tar -zcpvf {}.tar.gz {} \\;\n",
+          "command-options": {
+            "find": {
+              "mpsum": "search for files in a directory hierarchy",
+              "-maxdepth": "Descend at most levels (a non-negative integer) levels of directories below the\n starting-points. -maxdepth 0 means only apply the tests and actions to the\n starting-points themselves.",
+              "-type": "File is of type c:"
+            },
+            "sudo": {
+              "mpsum": "execute a command as another user"
+            },
+            "tar": {
+              "mpsum": "an archiving utility",
+              "-z": "Filter the archive through gzip(1).",
+              "-c": "Create a new archive. Arguments supply the names of the files to be archived.\n Directories are archived recursively, unless the --no-recursion option is given.",
+              "-v": "Verbosely list files processed.",
+              "-p": "extract information about file permissions (default for superuser)"
+            }
+          },
+          "TLDR_inform": {
+            "find": {
+              "man1_find_10075": "find file directori given directori tree recurs find directori match given name case-insensit mode find file extens find file match multipl pattern find file match given pattern exclud specif path find file match given size rang find file match path pattern find file modifi last 7 day delet run command file use within command access filenam"
+            },
+            "sudo": {
+              "man8_sudo_4867": "execut singl command superus anoth user edit file superus default editor launch default shell superus privileg repeat last command prefix sudo bash zsh etc\nrun command anoth user group run command superus"
+            },
+            "tar": {
+              "man1_tar_33340": "archiv util\noften combin compress method gzip bzip creat compress archiv use archiv suffix determin compress program creat gzip archiv creat gzip archiv directori use rel path creat archiv file extract compress archiv current directori extract compress archiv target directori extract specif file without preserv folder structur extract file match pattern list content tar file"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_8324: search for all the files excluding directories ending with old or sccs or core or orig in the project folder and append the output to the file exclude"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_8324: find . -type f -print | \\ egrep  '/,|%$|~$|\\.old$|SCCS|/core$|\\.o$|\\.orig$' >>Exclude"
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

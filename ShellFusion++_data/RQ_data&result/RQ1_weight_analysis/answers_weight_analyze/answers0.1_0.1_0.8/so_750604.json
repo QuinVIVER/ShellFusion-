@@ -1,0 +1,86 @@
+{
+  "Query": "Freeing up a TCP/IP port?",
+  "Answers": [
+    {
+      "Command": "netstat",
+      "MP Summary": "Print  network  connections,  routing tables, interface statistics, masquerade connections, and multicast memberships",
+      "Most Similar TLDR Task": "List listening TCP ports",
+      "Most Similar TLDR Script": "netstat -t",
+      "Top-3 Similar Questions": [
+        "so_28989069: How to find a free TCP port",
+        "ul_140021: How to close ports in Linux?",
+        "su_370965: How can I check which ports are busy and which ports are free on my Linux machine?"
+      ],
+      "Top-3 Scripts": [
+        "so_28989069: netstat -lntu",
+        "ul_140021: me@myhost:~$ sudo netstat -tlnp\nActive Internet connections (only servers)\nProto Recv-Q Send-Q Local Address   Foreign Address   State    PID/Program name\ntcp        0      0 127.0.0.1:53    0.0.0.0:*         LISTEN   1004/dnsmasq    \ntcp        0      0 0.0.0.0:22      0.0.0.0:*         LISTEN   380/sshd        \ntcp        0      0 127.0.0.1:631   0.0.0.0:*         LISTEN   822/cupsd       \ntcp6       0      0 :::22           :::*              LISTEN   380/sshd        \ntcp6       0      0 ::1:631         :::*              LISTEN   822/cupsd\n\nnetstat -anb",
+        "su_370965: netstat -antu\n\n$ sudo netstat -antup\nActive Internet connections (servers and established)\nProto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name\ntcp        0      0 0.0.0.0:59753           0.0.0.0:*               LISTEN      860/rpc.statd"
+      ],
+      "Explanations about Options": {
+        "-a": "Show both listening and non-listening sockets. With the --interfaces option, show\n interfaces that are not up",
+        "-p": "Show the PID and name of the program to which each socket belongs.",
+        "-l": "Show only listening sockets. (These are omitted by default.)",
+        "-n": "Show numerical addresses instead of trying to determine symbolic host, port or user names."
+      }
+    },
+    {
+      "Command": "nmap",
+      "MP Summary": "Network exploration tool and security / port scanner",
+      "Most Similar TLDR Task": "Perform TCP and UDP scanning (use -sU for UDP only, -sZ for SCTP, -sO for IP)",
+      "Most Similar TLDR Script": "nmap -sSU {{address_or_addresses}}",
+      "Top-3 Similar Questions": [
+        "au_957429: How to find the ports of multiple ip's",
+        "ul_252517: Can nmap display only hosts with specific ports open?"
+      ],
+      "Top-3 Scripts": [
+        "au_957429: script nmap.log\nIP1=\"\"\nIP2=\"\"\nIP3=\"\"\nIP4=\"\"\nIP5=\"\"\nsudo nmap -P0 -PS -n -sS -p1-65535 -r -T4 $IP1 $IP2 $IP3 $IP4 $IP5\nexit",
+        "ul_252517: nmap 192.168.1.1-254 -p22,80 --open -oG - | awk '/22\\/open.*80\\/open/{print $2}'"
+      ],
+      "Explanations about Options": {
+        "-oG": "This output format is covered last because it is deprecated. The XML output format is\n far more powerful, and is nearly as convenient for experienced users. XML is a\n standard for which dozens of excellent parsers are available, while grepable output is\n my own simple hack. XML is extensible to support new Nmap features as they are\n released, while I often must omit those features from grepable output for lack of a\n place to put them.",
+        "-r": "(Don't randomize ports)\n By default, Nmap randomizes the scanned port order (except that certain commonly\n accessible ports are moved near the beginning for efficiency reasons). This\n randomization is normally desirable, but you can specify -r for sequential (sorted\n from lowest to highest) port scanning instead.",
+        "-S": "IP_Address (Spoof source address)\n In some circumstances, Nmap may not be able to determine your source address (Nmap\n will tell you if this is the case). In this situation, use -S with the IP address of\n the interface you wish to send packets through.",
+        "-n": "Tells Nmap to never do reverse DNS"
+      }
+    },
+    {
+      "Command": "nc",
+      "MP Summary": "arbitrary TCP and UDP connections and listens",
+      "Most Similar TLDR Task": "Connect to a certain port (you can then write to this port)",
+      "Most Similar TLDR Script": "nc {{ip_address}} {{port}}",
+      "Top-3 Similar Questions": [
+        "ul_180492: Is it possible to connect to TCP port 0?"
+      ],
+      "Top-3 Scripts": [
+        "ul_180492: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "telnet",
+      "MP Summary": "user interface to the TELNET protocol",
+      "Most Similar TLDR Task": "Telnet to a specific port of a host",
+      "Most Similar TLDR Script": "telnet {{ip_address}} {{port}}",
+      "Top-3 Similar Questions": [
+        "ul_140021: How to close ports in Linux?"
+      ],
+      "Top-3 Scripts": [
+        "ul_140021: telnet 127.0.0.1"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "tcpdump",
+      "MP Summary": "dump traffic on a network",
+      "Most Similar TLDR Task": "Capture all TCP traffic showing contents (ASCII) in console",
+      "Most Similar TLDR Script": "tcpdump -A tcp",
+      "Top-3 Similar Questions": [
+        "su_604998: Monitor TCP Traffic on specific port"
+      ],
+      "Top-3 Scripts": [
+        "su_604998: tcpdump port 443 and '(tcp-syn|tcp-ack)!=0'"
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

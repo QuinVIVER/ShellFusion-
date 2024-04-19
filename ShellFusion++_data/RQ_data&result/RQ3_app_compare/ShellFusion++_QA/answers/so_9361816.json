@@ -1,0 +1,70 @@
+{
+  "Query": "Maximum number of processes in linux",
+  "Answers": [
+    {
+      "Command": "awk",
+      "Top-3 Similar Questions": [
+        "ul_330302: sort by the maximum of the first two columns",
+        "so_43330848: Filter a very large, numerically sorted CSV file based on a minimum/maximum value using Linux?",
+        "so_21386966: Grep lines with a maximum number of characters"
+      ],
+      "Top-3 Scripts": [
+        "ul_330302: $ awk '{ sorton=$1; if ($2>$1) { sorton=$2 }; print $1, $2, $3, $4, $5, sorton }' < test.txt | sort -k 6 | cut -d \" \" -f 1-5\n2 1 0.5 0.7 text3\n1 3 1 1 text1\n5 4 1 2 text4\n7 9 4 2 text2\n\n$ awk '{ k= $1>$2 ? $1: $2 ; print k, $0 }' test.txt | sort -g | cut -d ' ' -f 2-\n2 1 0.5 0.7 text3\n1 3 1 1 text1\n5 4 1 2 text4\n7 9 4 2 text2",
+        "so_43330848: awk -F, -v from=1000 -v to=1400 '$1 < from { next } $1 > to { exit } 1' ./csv",
+        "so_21386966: awk '/string/ && length($0) <=100' filename"
+      ]
+    },
+    {
+      "Command": "ps",
+      "Top-3 Similar Questions": [
+        "su_530291: Sort top 10 processes by the number of threads each created in Linux",
+        "so_8043246: Enumerate the number of running processes with a given name - assign to variable",
+        "ul_192384: List running processes without procfs"
+      ],
+      "Top-3 Scripts": [
+        "su_530291: $ ps axo nlwp,pid,cmd | sort -rn | head -10\n\nps ax  - see every process\n    o  - format\n         nlwp: number of lightweight processes (threads) in the process",
+        "so_8043246: pids=($(\n    ps -eo pid,command |\n    sed -n '/[t]omcat/{s/^ *\\([0-9]\\+\\).*/\\1/;p}'\n))\nnumber=${#pids[@]}",
+        "su_1590161: ps -AL\n\nps -o lwp= -Lp 6330\n\nps -o lwp= -Lp 6330 | grep -v '^ *6330$'"
+      ]
+    },
+    {
+      "Command": "echo",
+      "Top-3 Similar Questions": [
+        "so_344203: Maximum number of threads per process in Linux?",
+        "so_56555115: compare date number and input number in shell",
+        "au_699805: Listing all human users and number of their processes"
+      ],
+      "Top-3 Scripts": [
+        "so_344203: echo 100000 > /proc/sys/kernel/threads-max",
+        "so_56555115: if [ \"$diff\" -eq \"$2\" ];\n  then\n    echo \"equal\"\n  else\n    echo \"not equal\"\nfi",
+        "au_699805: (echo root; awk -F: '{if($3>=1000)print $1}' /etc/passwd) | xargs -i sh -c 'echo \"{} $(pgrep -cu {})\"'"
+      ]
+    },
+    {
+      "Command": "dev",
+      "Top-3 Similar Questions": [
+        "so_5281047: Unix maximum number of dirs in a dir",
+        "so_8238860: Maximum number of files/directories on Linux?",
+        "so_4621948: What is the significance of the numbers in the name of the flush processes for newer linux kernels?"
+      ],
+      "Top-3 Scripts": [
+        "so_5281047: tune2fs -l /dev/block_device",
+        "so_8238860: Filesystem           Inodes  IUsed   IFree IUse% Mounted on\n/dev/xvda           1933312 134815 1798497    7% /",
+        "so_62159538: /dev/zero"
+      ]
+    },
+    {
+      "Command": "print",
+      "Top-3 Similar Questions": [
+        "so_31280210: How to sort files in linux by number?",
+        "ul_330302: sort by the maximum of the first two columns",
+        "so_24388414: How do I grep a number and all numbers above that number?"
+      ],
+      "Top-3 Scripts": [
+        "so_31280210: >>> def sort_nicely(l):\n...     \"\"\"\n...     Sort the given list in the way that humans expect. Returns a new list.\n...     \"\"\"\n...     convert = lambda text: int(text) if text.isdigit() else text\n...     alphanum_key = lambda key: [convert(c) for c in re.split('([0-9]+)', key)]\n...     return sorted(l, key=alphanum_key)\n...\n>>> newlist = sort_nicely(mylist)\n>>> print(*newlist, sep='\\n')",
+        "ul_330302: $ awk '{ sorton=$1; if ($2>$1) { sorton=$2 }; print $1, $2, $3, $4, $5, sorton }' < test.txt | sort -k 6 | cut -d \" \" -f 1-5\n2 1 0.5 0.7 text3\n1 3 1 1 text1\n5 4 1 2 text4\n7 9 4 2 text2\n\n$ awk '{ k= $1>$2 ? $1: $2 ; print k, $0 }' test.txt | sort -g | cut -d ' ' -f 2-\n2 1 0.5 0.7 text3\n1 3 1 1 text1\n5 4 1 2 text4\n7 9 4 2 text2",
+        "so_24388414: awk -F' ' '($4 >= 1300) { print $0 }' input_file\n\nprint $0"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,1155 @@
+{
+  "Query": "Can I zip an entire folder using gzip?",
+  "Answers": [
+    {
+      "Command": "unzip",
+      "MP Summary": "list, test and extract compressed files in a ZIP archive",
+      "Most Similar TLDR Task": "Extract zip file(s) (for multiple files, separate file paths by spaces)",
+      "Most Similar TLDR Script": "unzip {{file(s)}}",
+      "Most Similar NL2Bash Task": "Compress $file file using gzip",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "gzip \"$file\"\n",
+          "command-options": {},
+          "TLDR_inform": {}
+        }
+      },
+      "Top-3 Similar Questions": [
+        "su_550837: How to \"unextract\" a zip file?",
+        "ul_287087: Print archive file list instantly (without decompressing entire archive)",
+        "so_8107886: Create a dedicated folder for every zip files in a directory and extract zip files"
+      ],
+      "Top-3 Scripts": [
+        "su_550837: unzip -lqq file.zip | gawk -F\"  \" '{print $NF;}' |\n  while IFS= read -r n; do rm \"$n\"; done\n\nunzip -lqq file.zip | gawk -F\"  \" '{print $NF;}' |\n  while IFS= read -r n; do rm \"$n\"; done; rmdir *\n\nunzip -lqq file.zip | gawk -F\"  \" '{print $NF;}' |\n  while IFS= read -r n; do rm -ri \"$n\"; done; rmdir *\n\nunzip -lqq file.zip | gawk -F\"  \" '{print $NF;}' |\n  while IFS= read -r n; do rm -rf \"$n\"; done",
+        "ul_287087: curl -s https://github.com/dwp-forge/columns/archive/v.2016-02-27.zip | unzip -l /dev/stdin\n\n$ echo 3 | sudo tee /proc/sys/vm/drop_caches\n3\n$ time tar tvf linux-4.6.tar > /dev/null\ntar tvf linux-4.6.tar > /dev/null  0.56s user 0.47s system 13% cpu 7.428 total\n$ time tar tvf linux-4.6.tar.xz > /dev/null\ntar tvf linux-4.6.tar.xz > /dev/null  8.10s user 0.52s system 118% cpu 7.297 total\n$ time unzip -v linux-4.6.zip > /dev/null\nunzip -v linux-4.6.zip > /dev/null  0.16s user 0.08s system 86% cpu 0.282 total\n$ time 7z l linux-4.6.7z > /dev/null\n7z l linux-4.6.7z > /dev/null  0.51s user 0.15s system 89% cpu 0.739 total\n\n$ time unzip -p linux-4.6.zip linux-4.6/virt/lib/irqbypass.c | wc\n    257     638    5976\nunzip -p linux-4.6.zip linux-4.6/virt/lib/irqbypass.c  0.02s user 0.01s system 19% cpu 0.119 total\nwc  0.00s user 0.00s system 1% cpu 0.119 total",
+        "so_8107886: for f in *.zip; do unzip -d \"${f%*.zip}\" \"$f\"; done"
+      ],
+      "Explanations about Options": {
+        "-q": "perform operations quietly (-qq = even quieter). Ordinarily unzip prints the names\n of the files it's extracting or testing, the extraction methods, any file or\n zipfile comments that may be stored in the archive, and possibly a summary when\n finished with each archive. The -q[q] options suppress the printing of some or all\n of these messages.",
+        "-p": "extract files to pipe (stdout). Nothing but the file data is sent to stdout , and\n the files are always extracted in binary format, just as they are stored (no\n conversions)."
+      }
+    },
+    {
+      "Command": "zip",
+      "MP Summary": "package and compress (archive) files",
+      "Most Similar TLDR Task": "Delete files from an existing zip file",
+      "Most Similar TLDR Script": "zip -d {{compressed.zip}} \"{{foo/*.tmp}}\"",
+      "Most Similar NL2Bash Task": "Compress $file file using gzip",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "gzip \"$file\"\n",
+          "command-options": {},
+          "TLDR_inform": {}
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_1328625: How to zip specific named folders?",
+        "au_829492: zip multiple folders into a zip file using terminal",
+        "au_27349: How do I compress a directory?"
+      ],
+      "Top-3 Scripts": [
+        "au_1328625: zip -r data/*/*/point_clouds",
+        "au_829492: zip -r wordcount.zip META-INF org",
+        "au_27349: sudo apt-get install zip\n\nzip -r compressed_filename.zip foldername"
+      ],
+      "Explanations about Options": {
+        "-r": "Travel the directory structure recursively; for example:"
+      }
+    },
+    {
+      "Command": "tar",
+      "MP Summary": "an archiving utility",
+      "Most Similar TLDR Task": "Create a gzipped archive from a directory using relative paths",
+      "Most Similar TLDR Script": "tar czf {{target.tar.gz}} -C {{path/to/directory}} .",
+      "Most Similar NL2Bash Task": "Compress $file file using gzip",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "gzip \"$file\"\n",
+          "command-options": {},
+          "TLDR_inform": {}
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_145342: How do I use gunzip and tar to extract my tar.gz file to the specific directory I want?",
+        "so_46763700: Linux zip selected folder and create a download link for zipped file",
+        "so_17998490: tar/gzip excluding certain files"
+      ],
+      "Top-3 Scripts": [
+        "ul_145342: tar -zxvf path_to_file -C output_directory\n\ngunzip -dc path_to_file | tar xf - -C path_to_extract",
+        "so_46763700: tar -zcvf <target>.tar <dir1> <dir2> ...\n\ntar -zcvf mybackup.zip /home/projects/web /home/projects/api\n\ntar -zxvf mybackup.zip",
+        "so_17998490: tar -zc -f test.tar.gz --exclude='*.xdr' *"
+      ],
+      "Explanations about Options": {
+        "-z": "Filter the archive through gzip(1).",
+        "--exclude": "Exclude files matching PATTERN, a glob(3)-style wildcard pattern.",
+        "-c": "Create a new archive. Arguments supply the names of the files to be archived.\n Directories are archived recursively, unless the --no-recursion option is given.",
+        "-C": "Change to DIR before performing any operations. This option is order-sensitive,\n i.e. it affects all options that follow.",
+        "-x": "Extract files from an archive. Arguments are optional. When given, they specify\n names of the archive members to be extracted.",
+        "-v": "Verbosely list files processed."
+      }
+    },
+    {
+      "Command": "file",
+      "MP Summary": "determine file type",
+      "Most Similar TLDR Task": "Look inside a zipped file and determine the file type(s) inside",
+      "Most Similar TLDR Script": "file -z {{foo.zip}}",
+      "Most Similar NL2Bash Task": "Compress $file file using gzip",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "gzip \"$file\"\n",
+          "command-options": {},
+          "TLDR_inform": {}
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_18442062: Linux zip a directory excluding some internal directories",
+        "so_62272488: Make Individual Folders From .txt Files In A Folder With Powershell",
+        "so_9710141: Create zip file and ignore directory structure"
+      ],
+      "Top-3 Scripts": [
+        "so_18442062: -P, --absolute-names\n       don't strip leading `/'s from file names",
+        "so_62272488: ",
+        "so_9710141: -j\n--junk-paths\n          Store just the name of a saved file (junk the path), and do  not\n          store  directory names. By default, zip will store the full path\n          (relative to the current directory)."
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "rm",
+      "MP Summary": "remove files or directories",
+      "Most Similar TLDR Task": "Remove files from arbitrary locations",
+      "Most Similar TLDR Script": "rm {{path/to/file}} {{path/to/another/file}}",
+      "Most Similar NL2Bash Task": "Compress $file file using gzip",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "gzip \"$file\"\n",
+          "command-options": {},
+          "TLDR_inform": {}
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_481996: gzip multiple files and rename them",
+        "su_550837: How to \"unextract\" a zip file?",
+        "so_67459734: change unzipped folder name"
+      ],
+      "Top-3 Scripts": [
+        "ul_481996: prefix=ABCDEFG_DWH_\nfor f in ABCDEPG*; do\n    gzip < \"$f\" > \"$prefix$f.gz\" && rm -- \"$f\"\ndone",
+        "su_550837: unzip -lqq file.zip | gawk -F\"  \" '{print $NF;}' |\n  while IFS= read -r n; do rm \"$n\"; done\n\nunzip -lqq file.zip | gawk -F\"  \" '{print $NF;}' |\n  while IFS= read -r n; do rm \"$n\"; done; rmdir *\n\nunzip -lqq file.zip | gawk -F\"  \" '{print $NF;}' |\n  while IFS= read -r n; do rm -ri \"$n\"; done; rmdir *\n\nunzip -lqq file.zip | gawk -F\"  \" '{print $NF;}' |\n  while IFS= read -r n; do rm -rf \"$n\"; done",
+        "so_67459734: "
+      ],
+      "Explanations about Options": {
+        "-r": "remove directories and their contents recursively",
+        "-f": "ignore nonexistent files and arguments, never prompt"
+      }
+    },
+    {
+      "Command": "find",
+      "MP Summary": "search for files in a directory hierarchy",
+      "Most Similar TLDR Task": "Find files by extension",
+      "Most Similar TLDR Script": "find {{root_path}} -name '{{*.ext}}'",
+      "Most Similar NL2Bash Task": "Compress $file file using gzip",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "gzip \"$file\"\n",
+          "command-options": {},
+          "TLDR_inform": {}
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_869373: undo a gzip recursively",
+        "ul_453511: find and zip multiple file extensions while keeping the folder structure",
+        "su_482787: gzip all files without deleting them"
+      ],
+      "Top-3 Scripts": [
+        "au_869373: ",
+        "ul_453511: find suan \\( -name \\*.cfg -o -name \\*.txt -o -name \\*.ini \\) \\\n    -exec zip -r \"$backupfilename\" {} +",
+        "su_482787: find . -type f | \\\nwhile read -r x\ndo\n  gzip -c \"$x\" > \"$x.gz\"\ndone\n\nfind(1)"
+      ],
+      "Explanations about Options": {
+        "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+      }
+    },
+    {
+      "Command": "7z",
+      "MP Summary": "A file archiver with high compression ratio format",
+      "Most Similar TLDR Task": "Extract an existing 7z file with original directory structure",
+      "Most Similar TLDR Script": "7z x {{archived.7z}}",
+      "Most Similar NL2Bash Task": "Compress $file file using gzip",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "gzip \"$file\"\n",
+          "command-options": {},
+          "TLDR_inform": {}
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_453511: find and zip multiple file extensions while keeping the folder structure",
+        "ul_287087: Print archive file list instantly (without decompressing entire archive)"
+      ],
+      "Top-3 Scripts": [
+        "ul_453511: 7z a -r \"$backupfilename\" \\*.ini \\*.cfg \\*.txt",
+        "ul_287087: $ echo 3 | sudo tee /proc/sys/vm/drop_caches\n3\n$ time tar tvf linux-4.6.tar > /dev/null\ntar tvf linux-4.6.tar > /dev/null  0.56s user 0.47s system 13% cpu 7.428 total\n$ time tar tvf linux-4.6.tar.xz > /dev/null\ntar tvf linux-4.6.tar.xz > /dev/null  8.10s user 0.52s system 118% cpu 7.297 total\n$ time unzip -v linux-4.6.zip > /dev/null\nunzip -v linux-4.6.zip > /dev/null  0.16s user 0.08s system 86% cpu 0.282 total\n$ time 7z l linux-4.6.7z > /dev/null\n7z l linux-4.6.7z > /dev/null  0.51s user 0.15s system 89% cpu 0.739 total\n\n$ time 7z e -so linux-4.6.7z linux-4.6/virt/lib/irqbypass.c 2> /dev/null | wc\n    257     638    5976\n7z e -so linux-4.6.7z linux-4.6/virt/lib/irqbypass.c 2> /dev/null  7.28s user 0.12s system 89% cpu 8.300 total\nwc  0.00s user 0.00s system 0% cpu 8.299 total"
+      ],
+      "Explanations about Options": {
+        "-so": "Write data to stdout (e.g. 7z x -so directory.tar.7z | tar xf -)",
+        "-r": "Recurse subdirectories (CAUTION: this flag does not do what you think, avoid using\n it)"
+      }
+    },
+    {
+      "Command": "mkdir",
+      "MP Summary": "make directories",
+      "Most Similar TLDR Task": "Create directories recursively (useful for creating nested dirs)",
+      "Most Similar TLDR Script": "mkdir -p {{path/to/directory}}",
+      "Most Similar NL2Bash Task": "Compress $file file using gzip",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "gzip \"$file\"\n",
+          "command-options": {},
+          "TLDR_inform": {}
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_67459734: change unzipped folder name",
+        "so_61557694: need to updating ZIP sub folder"
+      ],
+      "Top-3 Scripts": [
+        "so_67459734: ",
+        "so_61557694: mkdir zzz\nmv b.txt zzz\nzip -u 2020-05-01.zip zzz/b.txt"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "basename",
+      "MP Summary": "strip directory and suffix from filenames",
+      "Most Similar TLDR Task": "Show only the file name from a path, with a suffix removed",
+      "Most Similar TLDR Script": "basename {{path/to/file}} {{suffix}}",
+      "Most Similar NL2Bash Task": "Compress $file file using gzip",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "gzip \"$file\"\n",
+          "command-options": {},
+          "TLDR_inform": {}
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_67459734: change unzipped folder name",
+        "so_66588884: Zip linux directory using absolute path",
+        "ul_104208: How to zip recursively all subdirectories that only contain text files"
+      ],
+      "Top-3 Scripts": [
+        "so_67459734: ",
+        "so_66588884: ",
+        "ul_104208: find . -depth -type d -exec sh -c '\ncd \"$1\" || exit\n[ \"$(ls ./*.txt 2>/dev/null)\" ] &&\n[ -z \"$(ls -ad ./* | grep -v '\\.txt$')\" ] &&\n(\n  b=$(basename \"$1\")\n  cd ..\n  zip -r \"$b.zip\" \"$b\" && rm -rf \"$b\"\n)' sh {} \\;"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "cd",
+      "MP Summary": "change the working directory",
+      "Most Similar TLDR Task": "Go to home directory of current user",
+      "Most Similar TLDR Script": "cd",
+      "Most Similar NL2Bash Task": "Compress $file file using gzip",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "gzip \"$file\"\n",
+          "command-options": {},
+          "TLDR_inform": {}
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_66588884: Zip linux directory using absolute path",
+        "au_1246561: zip command keeps including the entire parent directory structure",
+        "ul_104208: How to zip recursively all subdirectories that only contain text files"
+      ],
+      "Top-3 Scripts": [
+        "so_66588884: cd /var/lib/work_directories && zip -r test.zip test",
+        "au_1246561: cd /mnt/c/data/db/\nzip -r /home/chansen/db-backup/backup.zip ./*",
+        "ul_104208: find . -depth -type d -exec sh -c '\ncd \"$1\" || exit\n[ \"$(ls ./*.txt 2>/dev/null)\" ] &&\n[ -z \"$(ls -ad ./* | grep -v '\\.txt$')\" ] &&\n(\n  b=$(basename \"$1\")\n  cd ..\n  zip -r \"$b.zip\" \"$b\" && rm -rf \"$b\"\n)' sh {} \\;"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "xz",
+      "MP Summary": "Compress or decompress .xz and .lzma files",
+      "Most Similar TLDR Task": "Compress a file, but don't delete the original",
+      "Most Similar TLDR Script": "xz -k {{file}}",
+      "Most Similar NL2Bash Task": "Compress $file file using gzip",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "gzip \"$file\"\n",
+          "command-options": {},
+          "TLDR_inform": {}
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_287087: Print archive file list instantly (without decompressing entire archive)"
+      ],
+      "Top-3 Scripts": [
+        "ul_287087: tar cvvf - dir 2> file.tar.xz.list | xz > file.tar.xz\n\n<strike>unxz file.tar.xz\ntar tvf file.tar\nxz file.tar</strike>\n\n$ tar tvf linux-4.6.tar.xz | xz > linux-4.6.tar.xz.list.xz\n$ ls --block-size=1 -sS1 linux-4.6.tar.xz.list.xz\n434176 linux-4.6.tar.xz.list.xz\n$ time xzcat linux-4.6.tar.xz.list.xz > /dev/null\nxzcat linux-4.6.tar.xz.list.xz > /dev/null  0.05s user 0.00s system 99% cpu 0.051 total"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "ls",
+      "MP Summary": "list directory contents",
+      "Most Similar TLDR Task": "List all files, including hidden files",
+      "Most Similar TLDR Script": "ls -a",
+      "Most Similar NL2Bash Task": "Compress $file file using gzip",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "gzip \"$file\"\n",
+          "command-options": {},
+          "TLDR_inform": {}
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_287087: Print archive file list instantly (without decompressing entire archive)",
+        "ul_104208: How to zip recursively all subdirectories that only contain text files"
+      ],
+      "Top-3 Scripts": [
+        "ul_287087: $ ls --block-size=1 -sS1\n666210304 linux-4.6.tar\n173592576 linux-4.6.zip\n 97038336 linux-4.6.7z\n 89468928 linux-4.6.tar.xz\n\n$ tar tvf linux-4.6.tar.xz | xz > linux-4.6.tar.xz.list.xz\n$ ls --block-size=1 -sS1 linux-4.6.tar.xz.list.xz\n434176 linux-4.6.tar.xz.list.xz\n$ time xzcat linux-4.6.tar.xz.list.xz > /dev/null\nxzcat linux-4.6.tar.xz.list.xz > /dev/null  0.05s user 0.00s system 99% cpu 0.051 total\n\n$ xzcat linux-4.6.tar.xz | pixz -9  > linux-4.6.tar.pixz\n$ ls --block-size=1 -sS1 linux-4.6.tar.pixz\n89841664 linux-4.6.tar.pixz\n$ echo 3 | sudo tee /proc/sys/vm/drop_caches\n3\n$ time pixz -l linux-4.6.tar.pixz > /dev/null\npixz -l linux-4.6.tar.pixz > /dev/null  0.04s user 0.01s system 57% cpu 0.087 total\n\n$ pixz -f0.25 -9 < linux-4.6.tar > linux-4.6.tar.pixz2\n$ ls --block-size=1 -sS1 linux-4.6.tar.pixz2\n93745152 linux-4.6.tar.pixz2\n$ time pixz < linux-4.6.tar.pixz2 -x linux-4.6/virt/lib/irqbypass.c  | tar xOf - | wc\n    257     638    5976\npixz -x linux-4.6/virt/lib/irqbypass.c < linux-4.6.tar.pixz2  0.17s user 0.02s system 98% cpu 0.189 total\ntar xOf -  0.00s user 0.00s system 1% cpu 0.188 total\nwc  0.00s user 0.00s system 0% cpu 0.187 total",
+        "ul_104208: folders=$(find . -type d -exec sh -c 'cd \"$1\";[ \"$(ls *.txt 2>/dev/null)\" ] \\\n          && [ -z \"$(ls -ad * | grep -v '\\.txt$')\" ] && echo \"$1\"' sh {} \\;)\n\necho \"$folders\" | zip -r@ archive && echo \"$folders\" | while read folder; do\n  echo \"will remove $folder\"\n  # Uncomment next line for the folder to be removed\n  # rm -rf \"$folder\"\ndone\n\nfind . -depth -type d -exec sh -c '\ncd \"$1\" || exit\n[ \"$(ls ./*.txt 2>/dev/null)\" ] &&\n[ -z \"$(ls -ad ./* | grep -v '\\.txt$')\" ] &&\n(\n  b=$(basename \"$1\")\n  cd ..\n  zip -r \"$b.zip\" \"$b\" && rm -rf \"$b\"\n)' sh {} \\;"
+      ],
+      "Explanations about Options": {
+        "-d": "list directories themselves, not their contents",
+        "--block-size": "with -l, scale sizes by SIZE when printing them; e.g., '--block-size=M'; see SIZE\n format below",
+        "-a": "do not ignore entries starting with ."
+      }
+    },
+    {
+      "Command": "zcat",
+      "MP Summary": "decompress and concatenate files to standard output",
+      "Most Similar TLDR Task": "Print the uncompressed contents of a gzipped file to the standard output",
+      "Most Similar TLDR Script": "zcat {{file.txt.gz}}",
+      "Most Similar NL2Bash Task": "Compress $file file using gzip",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "gzip \"$file\"\n",
+          "command-options": {},
+          "TLDR_inform": {}
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_30770092: Grep a gzipped file?"
+      ],
+      "Top-3 Scripts": [
+        "so_30770092: curl http://www.imdb.com/sitemap_US_02002.xml.gz | zcat | grep 'imdb.com/title/tt'"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "unar",
+      "MP Summary": "extract archive file contents",
+      "Most Similar TLDR Task": "Force rename if files to be unpacked already exist",
+      "Most Similar TLDR Script": "unar -r {{archive}}",
+      "Most Similar NL2Bash Task": "Compress $file file using gzip",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "gzip \"$file\"\n",
+          "command-options": {},
+          "TLDR_inform": {}
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_67459734: change unzipped folder name"
+      ],
+      "Top-3 Scripts": [
+        "so_67459734: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "apt-get",
+      "MP Summary": "APT package handling utility - command-line interface",
+      "Most Similar TLDR Task": "Remove a package and its configuration files",
+      "Most Similar TLDR Script": "apt-get purge {{package}}",
+      "Most Similar NL2Bash Task": "Compress $file file using gzip",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "gzip \"$file\"\n",
+          "command-options": {},
+          "TLDR_inform": {}
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_27349: How do I compress a directory?",
+        "ul_14705: The zip format's external file attribute"
+      ],
+      "Top-3 Scripts": [
+        "au_27349: sudo apt-get install zip",
+        "ul_14705: apt-get source [zip or unzip]"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "echo",
+      "MP Summary": "display a line of text",
+      "Most Similar TLDR Task": "Append a message to the file",
+      "Most Similar TLDR Script": "echo \"{{Hello World}}\" >> {{file.txt}}",
+      "Most Similar NL2Bash Task": "Compress $file file using gzip",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "gzip \"$file\"\n",
+          "command-options": {},
+          "TLDR_inform": {}
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_287087: Print archive file list instantly (without decompressing entire archive)",
+        "so_8107886: Create a dedicated folder for every zip files in a directory and extract zip files",
+        "ul_104208: How to zip recursively all subdirectories that only contain text files"
+      ],
+      "Top-3 Scripts": [
+        "ul_287087: $ echo 3 | sudo tee /proc/sys/vm/drop_caches\n3\n$ time tar tvf linux-4.6.tar > /dev/null\ntar tvf linux-4.6.tar > /dev/null  0.56s user 0.47s system 13% cpu 7.428 total\n$ time tar tvf linux-4.6.tar.xz > /dev/null\ntar tvf linux-4.6.tar.xz > /dev/null  8.10s user 0.52s system 118% cpu 7.297 total\n$ time unzip -v linux-4.6.zip > /dev/null\nunzip -v linux-4.6.zip > /dev/null  0.16s user 0.08s system 86% cpu 0.282 total\n$ time 7z l linux-4.6.7z > /dev/null\n7z l linux-4.6.7z > /dev/null  0.51s user 0.15s system 89% cpu 0.739 total\n\n$ xzcat linux-4.6.tar.xz | pixz -9  > linux-4.6.tar.pixz\n$ ls --block-size=1 -sS1 linux-4.6.tar.pixz\n89841664 linux-4.6.tar.pixz\n$ echo 3 | sudo tee /proc/sys/vm/drop_caches\n3\n$ time pixz -l linux-4.6.tar.pixz > /dev/null\npixz -l linux-4.6.tar.pixz > /dev/null  0.04s user 0.01s system 57% cpu 0.087 total",
+        "so_8107886: ",
+        "ul_104208: folders=$(find . -type d -exec sh -c 'cd \"$1\";[ \"$(ls *.txt 2>/dev/null)\" ] \\\n          && [ -z \"$(ls -ad * | grep -v '\\.txt$')\" ] && echo \"$1\"' sh {} \\;)\n\necho \"$folders\" | zip -r@ archive && echo \"$folders\" | while read folder; do\n  echo \"will remove $folder\"\n  # Uncomment next line for the folder to be removed\n  # rm -rf \"$folder\"\ndone"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "test",
+      "MP Summary": "check file types and compare values",
+      "Most Similar TLDR Task": "Test if given variable is empty",
+      "Most Similar TLDR Script": "test -z $GIT_BRANCH",
+      "Most Similar NL2Bash Task": "Compress $file file using gzip",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "gzip \"$file\"\n",
+          "command-options": {},
+          "TLDR_inform": {}
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_66588884: Zip linux directory using absolute path",
+        "ul_528513: Find and zip the individual files and remove the original"
+      ],
+      "Top-3 Scripts": [
+        "so_66588884: /var/lib/work_directories/test\n\ntest/\n\n$> tree test\ntest\n\u251c\u2500\u2500 a\n\u251c\u2500\u2500 b\n\u2514\u2500\u2500 c\n\n$> zip -rj test.zip test\nupdating: a (stored 0%)\nupdating: c (stored 0%)\nupdating: b (stored 0%)\n\ncd /var/lib/work_directories && zip -r test.zip test\n\nupdating: test/ (stored 0%)\n  adding: test/a (stored 0%)\n  adding: test/c (stored 0%)\n  adding: test/b (stored 0%)",
+        "ul_528513: -m\n   --move\n          Move  the  specified  files  into the zip archive; actually, this deletes the target directories/files after making the specified zip archive. If a directory\n          becomes empty after removal of the files, the directory is also removed. No deletions are done until zip has created the archive without error.  This is use-\n          ful  for  conserving  disk  space, but is potentially dangerous so it is recommended to use it in combination with -T to test the archive before removing all\n          input files."
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "curl",
+      "MP Summary": "transfer a URL",
+      "Most Similar TLDR Task": "Download a file, saving the output under the filename indicated by the URL",
+      "Most Similar TLDR Script": "curl -O {{http://example.com/filename}}",
+      "Most Similar NL2Bash Task": "Compress $file file using gzip",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "gzip \"$file\"\n",
+          "command-options": {},
+          "TLDR_inform": {}
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_30770092: Grep a gzipped file?",
+        "ul_287087: Print archive file list instantly (without decompressing entire archive)"
+      ],
+      "Top-3 Scripts": [
+        "so_30770092: curl http://www.imdb.com/sitemap_US_02002.xml.gz | zcat | grep 'imdb.com/title/tt'",
+        "ul_287087: curl -s https://github.com/dwp-forge/columns/archive/v.2016-02-27.zip | unzip -l /dev/stdin"
+      ],
+      "Explanations about Options": {
+        "-s": "Silent or quiet mode. Don't show progress meter or error messages. Makes Curl\n mute. It will still output the data you ask for, potentially even to the\n terminal/stdout unless you redirect it."
+      }
+    },
+    {
+      "Command": "tree",
+      "MP Summary": "list contents of directories in a tree-like format.",
+      "Most Similar TLDR Task": "Print the size of each file and the cumulative size of each directory, in human-readable format",
+      "Most Similar TLDR Script": "tree -s -h --du",
+      "Most Similar NL2Bash Task": "Compress $file file using gzip",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "gzip \"$file\"\n",
+          "command-options": {},
+          "TLDR_inform": {}
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_66588884: Zip linux directory using absolute path",
+        "so_34874107: linux zip command not contains parent folder"
+      ],
+      "Top-3 Scripts": [
+        "so_66588884: $> tree test\ntest\n\u251c\u2500\u2500 a\n\u251c\u2500\u2500 b\n\u2514\u2500\u2500 c\n\n$> zip -rj test.zip test\nupdating: a (stored 0%)\nupdating: c (stored 0%)\nupdating: b (stored 0%)",
+        "so_34874107: tree foldername"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "rmdir",
+      "MP Summary": "remove empty directories",
+      "Most Similar TLDR Task": "Remove the target and its parent directories (useful for nested dirs)",
+      "Most Similar TLDR Script": "rmdir -p {{path/to/directory}}",
+      "Most Similar NL2Bash Task": "Compress $file file using gzip",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "gzip \"$file\"\n",
+          "command-options": {},
+          "TLDR_inform": {}
+        }
+      },
+      "Top-3 Similar Questions": [
+        "su_550837: How to \"unextract\" a zip file?"
+      ],
+      "Top-3 Scripts": [
+        "su_550837: unzip -lqq file.zip | gawk -F\"  \" '{print $NF;}' |\n  while IFS= read -r n; do rm \"$n\"; done; rmdir *\n\nunzip -lqq file.zip | gawk -F\"  \" '{print $NF;}' |\n  while IFS= read -r n; do rm -ri \"$n\"; done; rmdir *"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "sudo",
+      "MP Summary": "execute a command as another user",
+      "Most Similar TLDR Task": "Run a command as another user and/or group",
+      "Most Similar TLDR Script": "sudo -u {{user}} -g {{group}} {{id -a}}",
+      "Most Similar NL2Bash Task": "Compress $file file using gzip",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "gzip \"$file\"\n",
+          "command-options": {},
+          "TLDR_inform": {}
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_27349: How do I compress a directory?",
+        "ul_287087: Print archive file list instantly (without decompressing entire archive)"
+      ],
+      "Top-3 Scripts": [
+        "au_27349: sudo apt-get install zip",
+        "ul_287087: $ echo 3 | sudo tee /proc/sys/vm/drop_caches\n3\n$ time tar tvf linux-4.6.tar > /dev/null\ntar tvf linux-4.6.tar > /dev/null  0.56s user 0.47s system 13% cpu 7.428 total\n$ time tar tvf linux-4.6.tar.xz > /dev/null\ntar tvf linux-4.6.tar.xz > /dev/null  8.10s user 0.52s system 118% cpu 7.297 total\n$ time unzip -v linux-4.6.zip > /dev/null\nunzip -v linux-4.6.zip > /dev/null  0.16s user 0.08s system 86% cpu 0.282 total\n$ time 7z l linux-4.6.7z > /dev/null\n7z l linux-4.6.7z > /dev/null  0.51s user 0.15s system 89% cpu 0.739 total\n\n$ xzcat linux-4.6.tar.xz | pixz -9  > linux-4.6.tar.pixz\n$ ls --block-size=1 -sS1 linux-4.6.tar.pixz\n89841664 linux-4.6.tar.pixz\n$ echo 3 | sudo tee /proc/sys/vm/drop_caches\n3\n$ time pixz -l linux-4.6.tar.pixz > /dev/null\npixz -l linux-4.6.tar.pixz > /dev/null  0.04s user 0.01s system 57% cpu 0.087 total"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "print",
+      "MP Summary": "execute programs via entries in the mailcap file",
+      "Most Similar TLDR Task": "Print action can be used to print any file on default run-mailcap tool",
+      "Most Similar TLDR Script": "print {{filename}}",
+      "Most Similar NL2Bash Task": "Compress $file file using gzip",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "gzip \"$file\"\n",
+          "command-options": {},
+          "TLDR_inform": {}
+        }
+      },
+      "Top-3 Similar Questions": [
+        "su_550837: How to \"unextract\" a zip file?",
+        "au_1186367: I have a zip file. I extracted it and modified some files. How do I list them?"
+      ],
+      "Top-3 Scripts": [
+        "su_550837: unzip -lqq file.zip | gawk -F\"  \" '{print $NF;}' |\n  while IFS= read -r n; do rm \"$n\"; done\n\nunzip -lqq file.zip | gawk -F\"  \" '{print $NF;}' |\n  while IFS= read -r n; do rm \"$n\"; done; rmdir *\n\nunzip -lqq file.zip | gawk -F\"  \" '{print $NF;}' |\n  while IFS= read -r n; do rm -ri \"$n\"; done; rmdir *\n\nunzip -lqq file.zip | gawk -F\"  \" '{print $NF;}' |\n  while IFS= read -r n; do rm -rf \"$n\"; done",
+        "au_1186367: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "install",
+      "MP Summary": "copy files and set attributes",
+      "Most Similar TLDR Task": "Copy files and apply access/modification times of source to destination",
+      "Most Similar TLDR Script": "install -p {{path/to/source}} {{path/to/destination}}",
+      "Most Similar NL2Bash Task": "Compress $file file using gzip",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "gzip \"$file\"\n",
+          "command-options": {},
+          "TLDR_inform": {}
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_27349: How do I compress a directory?"
+      ],
+      "Top-3 Scripts": [
+        "au_27349: sudo apt-get install zip"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "read",
+      "MP Summary": "read a line from standard input",
+      "Most Similar TLDR Task": "Use a specific character as a delimiter instead of a new line",
+      "Most Similar TLDR Script": "read -d {{new_delimiter}} {{variable}}",
+      "Most Similar NL2Bash Task": "Compress $file file using gzip",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "gzip \"$file\"\n",
+          "command-options": {},
+          "TLDR_inform": {}
+        }
+      },
+      "Top-3 Similar Questions": [
+        "su_550837: How to \"unextract\" a zip file?",
+        "su_482787: gzip all files without deleting them",
+        "ul_104208: How to zip recursively all subdirectories that only contain text files"
+      ],
+      "Top-3 Scripts": [
+        "su_550837: unzip -lqq file.zip | gawk -F\"  \" '{print $NF;}' |\n  while IFS= read -r n; do rm \"$n\"; done\n\nunzip -lqq file.zip | gawk -F\"  \" '{print $NF;}' |\n  while IFS= read -r n; do rm \"$n\"; done; rmdir *\n\nunzip -lqq file.zip | gawk -F\"  \" '{print $NF;}' |\n  while IFS= read -r n; do rm -ri \"$n\"; done; rmdir *\n\nunzip -lqq file.zip | gawk -F\"  \" '{print $NF;}' |\n  while IFS= read -r n; do rm -rf \"$n\"; done",
+        "su_482787: find . -type f | \\\nwhile read -r x\ndo\n  gzip -c \"$x\" > \"$x.gz\"\ndone",
+        "ul_104208: folders=$(find . -type d -exec sh -c 'cd \"$1\";[ \"$(ls *.txt 2>/dev/null)\" ] \\\n          && [ -z \"$(ls -ad * | grep -v '\\.txt$')\" ] && echo \"$1\"' sh {} \\;)\n\necho \"$folders\" | zip -r@ archive && echo \"$folders\" | while read folder; do\n  echo \"will remove $folder\"\n  # Uncomment next line for the folder to be removed\n  # rm -rf \"$folder\"\ndone"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "bash",
+      "MP Summary": "GNU Bourne-Again SHell",
+      "Most Similar TLDR Task": "Run commands from a file, logging all commands executed to the terminal",
+      "Most Similar TLDR Script": "bash -x {{file.sh}}",
+      "Most Similar NL2Bash Task": "Compress $file file using gzip",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "gzip \"$file\"\n",
+          "command-options": {},
+          "TLDR_inform": {}
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_862350: Naming zipped folders"
+      ],
+      "Top-3 Scripts": [
+        "au_862350: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "wc",
+      "MP Summary": "print newline, word, and byte counts for each file",
+      "Most Similar TLDR Task": "Count characters in file (taking multi-byte character sets into account)",
+      "Most Similar TLDR Script": "wc -m {{file}}",
+      "Most Similar NL2Bash Task": "Compress $file file using gzip",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "gzip \"$file\"\n",
+          "command-options": {},
+          "TLDR_inform": {}
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_287087: Print archive file list instantly (without decompressing entire archive)",
+        "so_34208857: How do I recursively unzip nested ZIP files?"
+      ],
+      "Top-3 Scripts": [
+        "ul_287087: $ xzcat linux-4.6.tar.xz.list.xz|tail -1\n-rw-rw-r-- root/root      5976 2016-05-15 23:43 linux-4.6/virt/lib/irqbypass.c\n$ time tar xOf linux-4.6.tar.xz linux-4.6/virt/lib/irqbypass.c | wc\n    257     638    5976\ntar xOf linux-4.6.tar.xz linux-4.6/virt/lib/irqbypass.c  7.27s user 1.13s system 115% cpu 7.279 total\nwc  0.00s user 0.00s system 0% cpu 7.279 total\n\n$ time unzip -p linux-4.6.zip linux-4.6/virt/lib/irqbypass.c | wc\n    257     638    5976\nunzip -p linux-4.6.zip linux-4.6/virt/lib/irqbypass.c  0.02s user 0.01s system 19% cpu 0.119 total\nwc  0.00s user 0.00s system 1% cpu 0.119 total\n\n$ time 7z e -so linux-4.6.7z linux-4.6/virt/lib/irqbypass.c 2> /dev/null | wc\n    257     638    5976\n7z e -so linux-4.6.7z linux-4.6/virt/lib/irqbypass.c 2> /dev/null  7.28s user 0.12s system 89% cpu 8.300 total\nwc  0.00s user 0.00s system 0% cpu 8.299 total\n\n$ time pixz < linux-4.6.tar.pixz -x linux-4.6/virt/lib/irqbypass.c  | tar xOf - | wc\n    257     638    5976\npixz -x linux-4.6/virt/lib/irqbypass.c < linux-4.6.tar.pixz  1.37s user 0.06s system 84% cpu 1.687 total\ntar xOf -  0.00s user 0.01s system 0% cpu 1.693 total\nwc  0.00s user 0.00s system 0% cpu 1.688 total\n\n$ pixz -f0.25 -9 < linux-4.6.tar > linux-4.6.tar.pixz2\n$ ls --block-size=1 -sS1 linux-4.6.tar.pixz2\n93745152 linux-4.6.tar.pixz2\n$ time pixz < linux-4.6.tar.pixz2 -x linux-4.6/virt/lib/irqbypass.c  | tar xOf - | wc\n    257     638    5976\npixz -x linux-4.6/virt/lib/irqbypass.c < linux-4.6.tar.pixz2  0.17s user 0.02s system 98% cpu 0.189 total\ntar xOf -  0.00s user 0.00s system 1% cpu 0.188 total\nwc  0.00s user 0.00s system 0% cpu 0.187 total",
+        "so_34208857: while [ \"`find . -type f -name '*.zip' | wc -l`\" -gt 0 ]; do find -type f -name \"*.zip\" -exec unzip -- '{}' \\; -exec rm -- '{}' \\;; done"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "dirname",
+      "MP Summary": "strip last component from file name",
+      "Most Similar TLDR Task": "Calculate the parent directory of multiple paths",
+      "Most Similar TLDR Script": "dirname {{path/to/file_a}} {{path/to/directory_b}}",
+      "Most Similar NL2Bash Task": "Compress $file file using gzip",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "gzip \"$file\"\n",
+          "command-options": {},
+          "TLDR_inform": {}
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_66588884: Zip linux directory using absolute path"
+      ],
+      "Top-3 Scripts": [
+        "so_66588884: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "bzip2",
+      "MP Summary": "a block-sorting file compressor, v1.0.8",
+      "Most Similar TLDR Task": "Compress a file",
+      "Most Similar TLDR Script": "bzip2 {{path/to/file_to_compress}}",
+      "Most Similar NL2Bash Task": "Compress $file file using gzip",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "gzip \"$file\"\n",
+          "command-options": {},
+          "TLDR_inform": {}
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_287087: Print archive file list instantly (without decompressing entire archive)"
+      ],
+      "Top-3 Scripts": [
+        "ul_287087: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "tee",
+      "MP Summary": "read from standard input and write to standard output and files",
+      "Most Similar TLDR Task": "Append to the given FILEs, do not overwrite",
+      "Most Similar TLDR Script": "echo \"example\" | tee -a {{FILE}}",
+      "Most Similar NL2Bash Task": "Compress $file file using gzip",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "gzip \"$file\"\n",
+          "command-options": {},
+          "TLDR_inform": {}
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_287087: Print archive file list instantly (without decompressing entire archive)"
+      ],
+      "Top-3 Scripts": [
+        "ul_287087: $ echo 3 | sudo tee /proc/sys/vm/drop_caches\n3\n$ time tar tvf linux-4.6.tar > /dev/null\ntar tvf linux-4.6.tar > /dev/null  0.56s user 0.47s system 13% cpu 7.428 total\n$ time tar tvf linux-4.6.tar.xz > /dev/null\ntar tvf linux-4.6.tar.xz > /dev/null  8.10s user 0.52s system 118% cpu 7.297 total\n$ time unzip -v linux-4.6.zip > /dev/null\nunzip -v linux-4.6.zip > /dev/null  0.16s user 0.08s system 86% cpu 0.282 total\n$ time 7z l linux-4.6.7z > /dev/null\n7z l linux-4.6.7z > /dev/null  0.51s user 0.15s system 89% cpu 0.739 total\n\n$ xzcat linux-4.6.tar.xz | pixz -9  > linux-4.6.tar.pixz\n$ ls --block-size=1 -sS1 linux-4.6.tar.pixz\n89841664 linux-4.6.tar.pixz\n$ echo 3 | sudo tee /proc/sys/vm/drop_caches\n3\n$ time pixz -l linux-4.6.tar.pixz > /dev/null\npixz -l linux-4.6.tar.pixz > /dev/null  0.04s user 0.01s system 57% cpu 0.087 total"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "mv",
+      "MP Summary": "move (rename) files",
+      "Most Similar TLDR Task": "Move files in arbitrary locations",
+      "Most Similar TLDR Script": "mv {{source}} {{target}}",
+      "Most Similar NL2Bash Task": "Compress $file file using gzip",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "gzip \"$file\"\n",
+          "command-options": {},
+          "TLDR_inform": {}
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_61557694: need to updating ZIP sub folder"
+      ],
+      "Top-3 Scripts": [
+        "so_61557694: mkdir zzz\nmv b.txt zzz\nzip -u 2020-05-01.zip zzz/b.txt"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "php",
+      "MP Summary": "PHP Command Line Interface 'CLI'",
+      "Most Similar TLDR Task": "Parse and execute a php script",
+      "Most Similar TLDR Script": "php {{file}}",
+      "Most Similar NL2Bash Task": "Compress $file file using gzip",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "gzip \"$file\"\n",
+          "command-options": {},
+          "TLDR_inform": {}
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_1186367: I have a zip file. I extracted it and modified some files. How do I list them?"
+      ],
+      "Top-3 Scripts": [
+        "au_1186367: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "cmp",
+      "MP Summary": "compare two files",
+      "Most Similar TLDR Task": "Find the byte number and differing bytes of every difference",
+      "Most Similar TLDR Script": "cmp -l {{file1}} {{file2}}",
+      "Most Similar NL2Bash Task": "Compress $file file using gzip",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "gzip \"$file\"\n",
+          "command-options": {},
+          "TLDR_inform": {}
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_587739: Why does gzip on tar output always produce different results?"
+      ],
+      "Top-3 Scripts": [
+        "au_587739: ~/temp$ tar c file | gzip -n > file1.tar.gz\n~/temp$ tar c file | gzip -n > file.tar.gz\n~/temp$ cmp file.tar.gz file1.tar.gz"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "parallel",
+      "MP Summary": "run programs in parallel",
+      "Most Similar TLDR Task": "Gzip several files at once, using all cores",
+      "Most Similar TLDR Script": "parallel gzip ::: {{file1}} {{file2}} {{file3}}",
+      "Most Similar NL2Bash Task": "Compress $file file using gzip",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "gzip \"$file\"\n",
+          "command-options": {},
+          "TLDR_inform": {}
+        }
+      },
+      "Top-3 Similar Questions": [
+        "tldr_8495: Gzip several files at once, using all cores"
+      ],
+      "Top-3 Scripts": [
+        "tldr_8495: parallel gzip ::: {{file1}} {{file2}} {{file3}}"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "awk",
+      "MP Summary": "pattern scanning and processing language",
+      "Most Similar TLDR Task": "Print the second column of the lines containing \"something\" in a space-separated file",
+      "Most Similar TLDR Script": "awk '/{{something}}/ {print $2}' {{filename}}",
+      "Most Similar NL2Bash Task": "Compress $file file using gzip",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "gzip \"$file\"\n",
+          "command-options": {},
+          "TLDR_inform": {}
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_8107886: Create a dedicated folder for every zip files in a directory and extract zip files",
+        "au_1186367: I have a zip file. I extracted it and modified some files. How do I list them?"
+      ],
+      "Top-3 Scripts": [
+        "so_8107886: ",
+        "au_1186367: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "as",
+      "MP Summary": "or  any situation  where  you want to make sure you're doing a clean install of your dependencies. It  can  be  significantly  faster  than  a  regular  npm  install  by  skipping   certain user-oriented  features.  It  is  also  more strict than a regular install, which can help catch errors or inconsistencies caused by the incrementally-installed  local  environments of most npm users. In short, the main differences between using npm install and npm ci are: \u00b7 The project must have an existing package-lock.json or npm-shrinkwrap.json. \u00b7 If dependencies in the package lock do not match those in package.json, npm ci will exit with an error, instead of updating the package lock. \u00b7 npm ci can only install entire projects at a time:  individual  dependencies  cannot  be added with this command. \u00b7 If  a  node_modules  is  already present, it will be automatically removed before npm ci begins its install. \u00b7 It will  never  write  to  package.json  or  any  of  the  package-locks:  installs  are essentially frozen. See Also \u00b7 npm help install \u00b7 npm help package-locks April 2020                                  NPM-CI(1)",
+      "Most Similar TLDR Task": "Assemble a file, writing the output to a.out",
+      "Most Similar TLDR Script": "as {{file.s}}",
+      "Most Similar NL2Bash Task": "Compress $file file using gzip",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "gzip \"$file\"\n",
+          "command-options": {},
+          "TLDR_inform": {}
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_14705: The zip format's external file attribute"
+      ],
+      "Top-3 Scripts": [
+        "ul_14705: TTTTsstrwxrwxrwx0000000000ADVSHR\n^^^^____________________________ file type as explained above\n    ^^^_________________________ setuid, setgid, sticky\n       ^^^^^^^^^________________ permissions\n                ^^^^^^^^________ This is the \"lower-middle byte\" your post mentions\n                        ^^^^^^^^ DOS attribute bits"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "sed",
+      "MP Summary": "stream editor for filtering and transforming text",
+      "Most Similar TLDR Task": "Apply multiple find-replace expressions to a file",
+      "Most Similar TLDR Script": "sed -e 's/{{find}}/{{replace}}/' -e 's/{{find}}/{{replace}}/' {{filename}}",
+      "Most Similar NL2Bash Task": "Compress $file file using gzip",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "gzip \"$file\"\n",
+          "command-options": {},
+          "TLDR_inform": {}
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_8107886: Create a dedicated folder for every zip files in a directory and extract zip files"
+      ],
+      "Top-3 Scripts": [
+        "so_8107886: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "grep",
+      "MP Summary": "print lines that match patterns",
+      "Most Similar TLDR Task": "Invert match for excluding specific strings",
+      "Most Similar TLDR Script": "grep -v {{search_pattern}}",
+      "Most Similar NL2Bash Task": "Compress $file file using gzip",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "gzip \"$file\"\n",
+          "command-options": {},
+          "TLDR_inform": {}
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_30770092: Grep a gzipped file?",
+        "ul_104208: How to zip recursively all subdirectories that only contain text files"
+      ],
+      "Top-3 Scripts": [
+        "so_30770092: curl http://www.imdb.com/sitemap_US_02002.xml.gz | zcat | grep 'imdb.com/title/tt'",
+        "ul_104208: folders=$(find . -type d -exec sh -c 'cd \"$1\";[ \"$(ls *.txt 2>/dev/null)\" ] \\\n          && [ -z \"$(ls -ad * | grep -v '\\.txt$')\" ] && echo \"$1\"' sh {} \\;)\n\necho \"$folders\" | zip -r@ archive && echo \"$folders\" | while read folder; do\n  echo \"will remove $folder\"\n  # Uncomment next line for the folder to be removed\n  # rm -rf \"$folder\"\ndone\n\nfind . -depth -type d -exec sh -c '\ncd \"$1\" || exit\n[ \"$(ls ./*.txt 2>/dev/null)\" ] &&\n[ -z \"$(ls -ad ./* | grep -v '\\.txt$')\" ] &&\n(\n  b=$(basename \"$1\")\n  cd ..\n  zip -r \"$b.zip\" \"$b\" && rm -rf \"$b\"\n)' sh {} \\;"
+      ],
+      "Explanations about Options": {
+        "-v": "Invert the sense of matching, to select non-matching lines."
+      }
+    },
+    {
+      "Command": "tail",
+      "MP Summary": "output the last part of files",
+      "Most Similar TLDR Task": "Keep reading file until `Ctrl + C`, even if the file is rotated",
+      "Most Similar TLDR Script": "tail -F {{file}}",
+      "Most Similar NL2Bash Task": "Compress $file file using gzip",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "gzip \"$file\"\n",
+          "command-options": {},
+          "TLDR_inform": {}
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_287087: Print archive file list instantly (without decompressing entire archive)"
+      ],
+      "Top-3 Scripts": [
+        "ul_287087: $ xzcat linux-4.6.tar.xz.list.xz|tail -1\n-rw-rw-r-- root/root      5976 2016-05-15 23:43 linux-4.6/virt/lib/irqbypass.c\n$ time tar xOf linux-4.6.tar.xz linux-4.6/virt/lib/irqbypass.c | wc\n    257     638    5976\ntar xOf linux-4.6.tar.xz linux-4.6/virt/lib/irqbypass.c  7.27s user 1.13s system 115% cpu 7.279 total\nwc  0.00s user 0.00s system 0% cpu 7.279 total"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "passwd",
+      "MP Summary": "change user password",
+      "Most Similar TLDR Task": "Change the password of the specified user",
+      "Most Similar TLDR Script": "passwd {{username}} {{new_password}}",
+      "Most Similar NL2Bash Task": "Compress $file file using gzip",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "gzip \"$file\"\n",
+          "command-options": {},
+          "TLDR_inform": {}
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_18442062: Linux zip a directory excluding some internal directories"
+      ],
+      "Top-3 Scripts": [
+        "so_18442062: /etc/passwd"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "type",
+      "MP Summary": "write a description of command type",
+      "Most Similar TLDR Task": "Display the name of the disk file that would be executed",
+      "Most Similar TLDR Script": "type -p {{command}}",
+      "Most Similar NL2Bash Task": "Compress $file file using gzip",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "gzip \"$file\"\n",
+          "command-options": {},
+          "TLDR_inform": {}
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_14705: The zip format's external file attribute"
+      ],
+      "Top-3 Scripts": [
+        "ul_14705: TTTTsstrwxrwxrwx0000000000ADVSHR\n^^^^____________________________ file type as explained above\n    ^^^_________________________ setuid, setgid, sticky\n       ^^^^^^^^^________________ permissions\n                ^^^^^^^^________ This is the \"lower-middle byte\" your post mentions\n                        ^^^^^^^^ DOS attribute bits"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "ssh",
+      "MP Summary": "OpenSSH SSH client (remote login program)",
+      "Most Similar TLDR Task": "Connect to a remote server with a specific identity (private key)",
+      "Most Similar TLDR Script": "ssh -i {{path/to/key_file}} {{username}}@{{remote_host}}",
+      "Most Similar NL2Bash Task": "Compress $file file using gzip",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "gzip \"$file\"\n",
+          "command-options": {},
+          "TLDR_inform": {}
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_287087: Print archive file list instantly (without decompressing entire archive)"
+      ],
+      "Top-3 Scripts": [
+        "ul_287087: tar cf - files | gzip | ssh host 'cd dest && gunzip | tar xf -'"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "sh",
+      "MP Summary": "MirBSD Korn shell",
+      "Most Similar TLDR Task": "Execute a command",
+      "Most Similar TLDR Script": "sh -c {{command}}",
+      "Most Similar NL2Bash Task": "Compress $file file using gzip",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "gzip \"$file\"\n",
+          "command-options": {},
+          "TLDR_inform": {}
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_104208: How to zip recursively all subdirectories that only contain text files"
+      ],
+      "Top-3 Scripts": [
+        "ul_104208: folders=$(find . -type d -exec sh -c 'cd \"$1\";[ \"$(ls *.txt 2>/dev/null)\" ] \\\n          && [ -z \"$(ls -ad * | grep -v '\\.txt$')\" ] && echo \"$1\"' sh {} \\;)\n\necho \"$folders\" | zip -r@ archive && echo \"$folders\" | while read folder; do\n  echo \"will remove $folder\"\n  # Uncomment next line for the folder to be removed\n  # rm -rf \"$folder\"\ndone\n\nfind . -depth -type d -exec sh -c '\ncd \"$1\" || exit\n[ \"$(ls ./*.txt 2>/dev/null)\" ] &&\n[ -z \"$(ls -ad ./* | grep -v '\\.txt$')\" ] &&\n(\n  b=$(basename \"$1\")\n  cd ..\n  zip -r \"$b.zip\" \"$b\" && rm -rf \"$b\"\n)' sh {} \\;"
+      ],
+      "Explanations about Options": {
+        "-c": "Impose a size limit of n blocks on the size of core dumps."
+      }
+    },
+    {
+      "Command": "man",
+      "MP Summary": "an interface to the system reference manuals",
+      "Most Similar TLDR Task": "Display the path searched for manpages",
+      "Most Similar TLDR Script": "man --path",
+      "Most Similar NL2Bash Task": "Compress $file file using gzip",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "gzip \"$file\"\n",
+          "command-options": {},
+          "TLDR_inform": {}
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_587739: Why does gzip on tar output always produce different results?"
+      ],
+      "Top-3 Scripts": [
+        "au_587739: man gzip"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "host",
+      "MP Summary": "DNS lookup utility",
+      "Most Similar TLDR Task": "Specify an alternate DNS server to query",
+      "Most Similar TLDR Script": "host {{domain}} {{8.8.8.8}}",
+      "Most Similar NL2Bash Task": "Compress $file file using gzip",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "gzip \"$file\"\n",
+          "command-options": {},
+          "TLDR_inform": {}
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_287087: Print archive file list instantly (without decompressing entire archive)"
+      ],
+      "Top-3 Scripts": [
+        "ul_287087: tar cf - files | gzip | ssh host 'cd dest && gunzip | tar xf -'"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "time",
+      "MP Summary": "time a simple command",
+      "Most Similar TLDR Task": "Time \"ls\"",
+      "Most Similar TLDR Script": "time ls",
+      "Most Similar NL2Bash Task": "Compress $file file using gzip",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "gzip \"$file\"\n",
+          "command-options": {},
+          "TLDR_inform": {}
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_287087: Print archive file list instantly (without decompressing entire archive)",
+        "au_587739: Why does gzip on tar output always produce different results?"
+      ],
+      "Top-3 Scripts": [
+        "ul_287087: $ echo 3 | sudo tee /proc/sys/vm/drop_caches\n3\n$ time tar tvf linux-4.6.tar > /dev/null\ntar tvf linux-4.6.tar > /dev/null  0.56s user 0.47s system 13% cpu 7.428 total\n$ time tar tvf linux-4.6.tar.xz > /dev/null\ntar tvf linux-4.6.tar.xz > /dev/null  8.10s user 0.52s system 118% cpu 7.297 total\n$ time unzip -v linux-4.6.zip > /dev/null\nunzip -v linux-4.6.zip > /dev/null  0.16s user 0.08s system 86% cpu 0.282 total\n$ time 7z l linux-4.6.7z > /dev/null\n7z l linux-4.6.7z > /dev/null  0.51s user 0.15s system 89% cpu 0.739 total\n\n$ tar tvf linux-4.6.tar.xz | xz > linux-4.6.tar.xz.list.xz\n$ ls --block-size=1 -sS1 linux-4.6.tar.xz.list.xz\n434176 linux-4.6.tar.xz.list.xz\n$ time xzcat linux-4.6.tar.xz.list.xz > /dev/null\nxzcat linux-4.6.tar.xz.list.xz > /dev/null  0.05s user 0.00s system 99% cpu 0.051 total\n\n$ xzcat linux-4.6.tar.xz | pixz -9  > linux-4.6.tar.pixz\n$ ls --block-size=1 -sS1 linux-4.6.tar.pixz\n89841664 linux-4.6.tar.pixz\n$ echo 3 | sudo tee /proc/sys/vm/drop_caches\n3\n$ time pixz -l linux-4.6.tar.pixz > /dev/null\npixz -l linux-4.6.tar.pixz > /dev/null  0.04s user 0.01s system 57% cpu 0.087 total\n\n$ xzcat linux-4.6.tar.xz.list.xz|tail -1\n-rw-rw-r-- root/root      5976 2016-05-15 23:43 linux-4.6/virt/lib/irqbypass.c\n$ time tar xOf linux-4.6.tar.xz linux-4.6/virt/lib/irqbypass.c | wc\n    257     638    5976\ntar xOf linux-4.6.tar.xz linux-4.6/virt/lib/irqbypass.c  7.27s user 1.13s system 115% cpu 7.279 total\nwc  0.00s user 0.00s system 0% cpu 7.279 total\n\n$ time unzip -p linux-4.6.zip linux-4.6/virt/lib/irqbypass.c | wc\n    257     638    5976\nunzip -p linux-4.6.zip linux-4.6/virt/lib/irqbypass.c  0.02s user 0.01s system 19% cpu 0.119 total\nwc  0.00s user 0.00s system 1% cpu 0.119 total\n\n$ time 7z e -so linux-4.6.7z linux-4.6/virt/lib/irqbypass.c 2> /dev/null | wc\n    257     638    5976\n7z e -so linux-4.6.7z linux-4.6/virt/lib/irqbypass.c 2> /dev/null  7.28s user 0.12s system 89% cpu 8.300 total\nwc  0.00s user 0.00s system 0% cpu 8.299 total\n\n$ time pixz < linux-4.6.tar.pixz -x linux-4.6/virt/lib/irqbypass.c  | tar xOf - | wc\n    257     638    5976\npixz -x linux-4.6/virt/lib/irqbypass.c < linux-4.6.tar.pixz  1.37s user 0.06s system 84% cpu 1.687 total\ntar xOf -  0.00s user 0.01s system 0% cpu 1.693 total\nwc  0.00s user 0.00s system 0% cpu 1.688 total\n\n$ pixz -f0.25 -9 < linux-4.6.tar > linux-4.6.tar.pixz2\n$ ls --block-size=1 -sS1 linux-4.6.tar.pixz2\n93745152 linux-4.6.tar.pixz2\n$ time pixz < linux-4.6.tar.pixz2 -x linux-4.6/virt/lib/irqbypass.c  | tar xOf - | wc\n    257     638    5976\npixz -x linux-4.6/virt/lib/irqbypass.c < linux-4.6.tar.pixz2  0.17s user 0.02s system 98% cpu 0.189 total\ntar xOf -  0.00s user 0.00s system 1% cpu 0.188 total\nwc  0.00s user 0.00s system 0% cpu 0.187 total",
+        "au_587739: -n --no-name\n          When  compressing,  do  not save the original file name and time\n          stamp by default. (The original name is always saved if the name\n          had  to  be  truncated.)  When decompressing, do not restore the\n          original file name if present (remove only the gzip suffix  from\n          the  compressed  file name) and do not restore the original time\n          stamp if present (copy it from the compressed file). This option\n          is the default when decompressing."
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "exit",
+      "MP Summary": "cause the shell to exit",
+      "Most Similar TLDR Task": "Exit the shell with the specified exit code",
+      "Most Similar TLDR Script": "exit {{exit_code}}",
+      "Most Similar NL2Bash Task": "Compress $file file using gzip",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "gzip \"$file\"\n",
+          "command-options": {},
+          "TLDR_inform": {}
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_104208: How to zip recursively all subdirectories that only contain text files"
+      ],
+      "Top-3 Scripts": [
+        "ul_104208: find . -depth -type d -exec sh -c '\ncd \"$1\" || exit\n[ \"$(ls ./*.txt 2>/dev/null)\" ] &&\n[ -z \"$(ls -ad ./* | grep -v '\\.txt$')\" ] &&\n(\n  b=$(basename \"$1\")\n  cd ..\n  zip -r \"$b.zip\" \"$b\" && rm -rf \"$b\"\n)' sh {} \\;"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "false",
+      "MP Summary": "return false value",
+      "Most Similar TLDR Task": "Return an exit code of 1",
+      "Most Similar TLDR Script": "false",
+      "Most Similar NL2Bash Task": "Compress $file file using gzip",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "gzip \"$file\"\n",
+          "command-options": {},
+          "TLDR_inform": {}
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_40371849: Create zip of folder and then delete the contents"
+      ],
+      "Top-3 Scripts": [
+        "so_40371849: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "prefix",
+      "MP Summary": "Script  that  allows  you  to  reconfigure  environment  variables for multiple installations of a set of software installed on the same machine",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "Compress $file file using gzip",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "gzip \"$file\"\n",
+          "command-options": {},
+          "TLDR_inform": {}
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_481996: gzip multiple files and rename them"
+      ],
+      "Top-3 Scripts": [
+        "ul_481996: prefix=ABCDEFG_DWH_\nfor f in ABCDEPG*; do\n    gzip < \"$f\" > \"$prefix$f.gz\" && rm -- \"$f\"\ndone"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "strip",
+      "MP Summary": "discard symbols and other data from object files",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "Compress $file file using gzip",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "gzip \"$file\"\n",
+          "command-options": {},
+          "TLDR_inform": {}
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_18442062: Linux zip a directory excluding some internal directories"
+      ],
+      "Top-3 Scripts": [
+        "so_18442062: -P, --absolute-names\n       don't strip leading `/'s from file names"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "from",
+      "MP Summary": "print names of those who have sent mail",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Most Similar NL2Bash Task": "Compress $file file using gzip",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "gzip \"$file\"\n",
+          "command-options": {},
+          "TLDR_inform": {}
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_18442062: Linux zip a directory excluding some internal directories",
+        "so_46763700: Linux zip selected folder and create a download link for zipped file",
+        "au_587739: Why does gzip on tar output always produce different results?"
+      ],
+      "Top-3 Scripts": [
+        "so_18442062: -P, --absolute-names\n       don't strip leading `/'s from file names",
+        "so_46763700: zip -r <target> <dir1> # Add files from dir1 to archive\nzip -r <target> <dir2> # Add files from dir2 to archive",
+        "au_587739: -n --no-name\n          When  compressing,  do  not save the original file name and time\n          stamp by default. (The original name is always saved if the name\n          had  to  be  truncated.)  When decompressing, do not restore the\n          original file name if present (remove only the gzip suffix  from\n          the  compressed  file name) and do not restore the original time\n          stamp if present (copy it from the compressed file). This option\n          is the default when decompressing."
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

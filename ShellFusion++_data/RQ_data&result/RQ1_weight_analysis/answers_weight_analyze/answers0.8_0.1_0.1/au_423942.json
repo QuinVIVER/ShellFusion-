@@ -1,0 +1,100 @@
+{
+  "Query": "Change password on root user and user account",
+  "Answers": [
+    {
+      "Command": "passwd",
+      "MP Summary": "change user password",
+      "Most Similar TLDR Task": "Change the password of the specified user",
+      "Most Similar TLDR Script": "passwd {{username}} {{new_password}}",
+      "Top-3 Similar Questions": [
+        "au_1058610: root can change the password of a user, but the user herself cannot",
+        "ul_411788: change root password back to user password",
+        "ul_101193: change regular user's password with root access"
+      ],
+      "Top-3 Scripts": [
+        "au_1058610: /usr/bin/passwd\n\nls -al $(which passwd)\n-rwxr-xr-x 1 root root 54256 May 17 2017 /usr/bin/passwd\n\nsudo chmod u+s /usr/bin/passwd\n# or sudo chmod 4755 /usr/bin/passwd\n\nls -al $(which passwd)\n-rwsr-xr-x 1 root root 54256 May 17 2017 /usr/bin/passwd",
+        "ul_411788: sudo passwd -dl root",
+        "ul_101193: passwd username\n\npasswd pi"
+      ],
+      "Explanations about Options": {
+        "-l": "Lock the password of the named account. This option disables a password by changing it\n to a value which matches no possible encrypted value (it adds a \u00b4!\u00b4 at the beginning\n of the password).",
+        "-d": "Delete a user's password (make it empty). This is a quick way to disable a password\n for an account. It will set the named account passwordless."
+      }
+    },
+    {
+      "Command": "usermod",
+      "MP Summary": "modify a user account",
+      "Most Similar TLDR Task": "Change a user's name",
+      "Most Similar TLDR Script": "usermod -l {{newname}} {{user}}",
+      "Top-3 Similar Questions": [
+        "so_7462701: How to change the login of a linux user?",
+        "au_92589: Changing groups as nonadmin"
+      ],
+      "Top-3 Scripts": [
+        "so_7462701: usermod -l login-name old-name",
+        "au_92589: usermod -a -G admin USER"
+      ],
+      "Explanations about Options": {
+        "-a": "Add the user to the supplementary group(s). Use only with the -G option.",
+        "-l": "The name of the user will be changed from LOGIN to NEW_LOGIN. Nothing else is changed.\n In particular, the user's home directory or mail spool should probably be renamed\n manually to reflect the new login name.",
+        "-G": "GROUP1[,GROUP2,...[,GROUPN]]]\n A list of supplementary groups which the user is also a member of. Each group is\n separated from the next by a comma, with no intervening whitespace. The groups are\n subject to the same restrictions as the group given with the -g option."
+      }
+    },
+    {
+      "Command": "chage",
+      "MP Summary": "change user password expiry information",
+      "Most Similar TLDR Task": "Force user to change password on next log in",
+      "Most Similar TLDR Script": "sudo chage -d 0",
+      "Top-3 Similar Questions": [
+        "au_30114: Force the user to change their password at first login",
+        "ul_620740: Changing the user password in first login",
+        "au_105040: How do I force a user to change the password periodically?"
+      ],
+      "Top-3 Scripts": [
+        "au_30114: sudo chage -d 0 foo",
+        "ul_620740: chage -d0 [username]",
+        "au_105040: sudo chage -l username\n\nsudo chage username\n\nsudo chage -E 01/31/2012 -m 5 -M 90 -I 30 -W 14 username"
+      ],
+      "Explanations about Options": {
+        "-M": "Set the maximum number of days during which a password is valid. When MAX_DAYS plus\n LAST_DAY is less than the current day, the user will be required to change their\n password before being able to use their account. This occurrence can be planned for in\n advance by use of the -W option, which provides the user with advance warning.",
+        "-I": "Set the number of days of inactivity after a password has expired before the account\n is locked. The INACTIVE option is the number of days of inactivity. A user whose\n account is locked must contact the system administrator before being able to use the\n system again.",
+        "-d": "Set the number of days since January 1st, 1970 when the password was last changed. The\n date may also be expressed in the format YYYY-MM-DD (or the format more commonly used\n in your area).",
+        "-W": "Set the number of days of warning before a password change is required. The WARN_DAYS\n option is the number of days prior to the password expiring that a user will be warned\n their password is about to expire.",
+        "-E": "Set the date or number of days since January 1, 1970 on which the user's account will\n no longer be accessible. The date may also be expressed in the format YYYY-MM-DD (or\n the format more commonly used in your area). A user whose account is locked must\n contact the system administrator before being able to use the system again.",
+        "-m": "Set the minimum number of days between password changes to MIN_DAYS. A value of zero\n for this field indicates that the user may change their password at any time."
+      }
+    },
+    {
+      "Command": "adduser",
+      "MP Summary": "add a user or group to the system",
+      "Most Similar TLDR Task": "Create a new user with a default home directory and prompt the user to set a password",
+      "Most Similar TLDR Script": "adduser {{username}}",
+      "Top-3 Similar Questions": [
+        "su_769749: Creating user with password or changing password doesn't work in PostgresQL"
+      ],
+      "Top-3 Scripts": [
+        "su_769749: adduser test"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "su",
+      "MP Summary": "run a command with substitute user and group ID",
+      "Most Similar TLDR Task": "Execute a command as another user",
+      "Most Similar TLDR Script": "su - {{username}} -c \"{{command}}\"",
+      "Top-3 Similar Questions": [
+        "su_192275: Cannot change Ubuntu root password",
+        "su_295000: To change $USER in OS X's terminal",
+        "au_784186: What's the difference between login as user and changing users using su through root?"
+      ],
+      "Top-3 Scripts": [
+        "su_192275: su -",
+        "su_295000: su - otherusername",
+        "au_784186: /etc/pam.d/su\n\nsu - <username>\nsudo -iu <username>\n\nsudo su"
+      ],
+      "Explanations about Options": {
+        "-": "Start the shell as a login shell with an environment similar to a real login:"
+      }
+    }
+  ]
+}

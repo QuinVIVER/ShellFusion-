@@ -1,0 +1,85 @@
+{
+  "Query": "How to access shared folders in Ubuntu VM(Oracle Virtualbox) and link them to the home folder",
+  "Answers": [
+    {
+      "Command": "adduser",
+      "MP Summary": "add a user or group to the system",
+      "Most Similar TLDR Task": "Create a new user with a home directory at the specified path",
+      "Most Similar TLDR Script": "adduser --home {{path/to/home}} {{username}}",
+      "Top-3 Similar Questions": [
+        "su_257743: Not able to access shared folders in Virtualbox",
+        "ul_187253: unable to access USB in virtualbox"
+      ],
+      "Top-3 Scripts": [
+        "su_257743: sudo adduser <username> vboxsf",
+        "ul_187253: sudo adduser <youruser> vboxusers"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "chown",
+      "MP Summary": "change file owner and group",
+      "Most Similar TLDR Task": "Change the owner of a symbolic link",
+      "Most Similar TLDR Script": "chown -h {{user}} {{path/to/symlink}}",
+      "Top-3 Similar Questions": [
+        "au_784533: How do I access my home folder in a separate partition that has been mounted on a new version of Ubuntu",
+        "so_18251538: Creating a private folder in home directory of each user",
+        "ul_463086: Reading home folder of old computer in a new computer"
+      ],
+      "Top-3 Scripts": [
+        "au_784533: # this makes only the home directory in the old drive owned by you\nsudo chown -R mickey:mickey /media/f806aa57-553c-43bc-8338-37851dc128ad/home",
+        "so_18251538: for i in {1..100}\n do\n    useradd -m -g student $i\n    mkdir /home/$i/private               //Creating a private folder\n    chmod -R 700 /home/$i/private        //\n    chown $i:student /home/$i/private            <------------------ new line\n\n    echo \"$i:123\" | sudo chpasswd\n    setquota -u $i 9 18 0 0  /\n done\n\nchown $i:student",
+        "ul_463086: cd \"/media/linkan/Bubba root/home\"\nsudo chown -R linkan: old_linkan"
+      ],
+      "Explanations about Options": {
+        "-R": "operate on files and directories recursively"
+      }
+    },
+    {
+      "Command": "mount",
+      "MP Summary": "mount a filesystem",
+      "Most Similar TLDR Task": "Mount a directory to another directory",
+      "Most Similar TLDR Script": "mount --bind {{path/to/old_dir}} {{path/to/new_dir}}",
+      "Top-3 Similar Questions": [
+        "au_161759: How to access a shared folder in VirtualBox?",
+        "ul_637916: Permissions of files shared via VirtualBox Shared Folders are not shown correctly in VM",
+        "su_527963: How to allow Nginx in guest VM access shared folders in host os?"
+      ],
+      "Top-3 Scripts": [
+        "au_161759: mkdir /home/<user>/vboxshare\nsudo mount -t vboxsf -o uid=1000,gid=1000 sharename /home/<user>/vboxshare",
+        "ul_637916: sudo mount -t vboxsf -o uid=1000,gid=1000 vbox_share_name /mnt/share_mount_point",
+        "su_527963: mount -t vboxsf SHARE_NAME -o rw,dmode=777,gid=GROUP_ID,uid=USER_ID /path/on/guest\n\nmount -t vboxsf WebApps -o rw,dmode=777,gid=GROUP_ID,uid=USER_ID /var/virtual/some_folder_name\n\ndescription     \"SOME DESCRIPTION\"\n\nstart on starting\n\ntask\nexec mount -t vboxsf WebApps -o rw,dmode=777,gid=GROUP_ID,uid=USER_ID /var/virtual/some_folder_name\n\nsudo apt-get install linux-headers-$(uname -r) build-essential\nsudo apt-get install dkms -y\n\nsudo mount /dev/cdrom /media/cdrom\nsudo sh /media/cdrom/VBoxLinuxAdditions.run"
+      ],
+      "Explanations about Options": {
+        "-t": "The argument following the -t is used to indicate the filesystem type. The\n filesystem types which are currently supported depend on the running kernel. See\n /proc/filesystems and /lib/modules/$(uname -r)/kernel/fs for a complete list of the\n filesystems. The most common are ext2, ext3, ext4, xfs, btrfs, vfat, sysfs, proc,\n nfs and cifs.",
+        "-o": "Use the specified mount options. The opts argument is a comma-separated list. For\n example:"
+      }
+    },
+    {
+      "Command": "cp",
+      "MP Summary": "copy files and directories",
+      "Most Similar TLDR Task": "Copy a file into another directory, keeping the filename",
+      "Most Similar TLDR Script": "cp {{path/to/source_file.ext}} {{path/to/target_parent_directory}}",
+      "Top-3 Similar Questions": [
+        "au_784533: How do I access my home folder in a separate partition that has been mounted on a new version of Ubuntu"
+      ],
+      "Top-3 Scripts": [
+        "au_784533: cp /media/f806aa57-553c-43bc-8338-37851dc128ad/home/mickey/* ~/backup-old-home"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "scp",
+      "MP Summary": "secure copy (remote file copy program)",
+      "Most Similar TLDR Task": "Copy a local file to a remote host",
+      "Most Similar TLDR Script": "scp {{path/to/local_file}} {{remote_host}}:{{path/to/remote_file}}",
+      "Top-3 Similar Questions": [
+        "su_353565: How do I copy a file/folder from another user's home directory in Linux?"
+      ],
+      "Top-3 Scripts": [
+        "su_353565: scp other_user@localhost:file ."
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

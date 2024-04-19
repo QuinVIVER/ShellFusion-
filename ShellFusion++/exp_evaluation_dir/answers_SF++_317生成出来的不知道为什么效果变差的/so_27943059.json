@@ -1,0 +1,1540 @@
+{
+  "Query": "How to get ip address of a server on Centos 7 in bash",
+  "Answers": [
+    {
+      "Command": "ifconfig",
+      "MP Summary": "configure network interfaces",
+      "Most Similar TLDR Task": "Assign IP address to eth0 interface",
+      "Most Similar TLDR Script": "ifconfig eth0 {{ip_address}}",
+      "Most Similar NL2Bash Task": "Request IP address of 'myip.opendns.com' from name server 'resolver1.opendns.com'",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "dig +short myip.opendns.com @resolver1.opendns.com\n",
+          "command-options": {
+            "dig": {
+              "mpsum": "DNS lookup utility"
+            }
+          },
+          "TLDR_inform": {
+            "dig": {
+              "man1_dig_6795": "dn lookup util find authorit name server zone display soa record get type record given domain name lookup ip associ hostnam record lookup mail server associ given domain name mx record perform revers dn lookup ip address ptr record perform iter queri display entir trace path resolv domain name specifi altern dn server queri"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_142: Gets IP addresses of all active network interfaces on host.",
+        "nl2bash_137: Gets IP address of first listed network interface in system.",
+        "nl2bash_136: Gets IP address of first listed active network interface in system."
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_142: ifconfig | awk -F':' '/inet addr/&&!/127.0.0.1/{split($2,_,\" \");print _[1]}'\n\n\nifconfig | grep 'inet' | grep -v '127.0.0.1' | awk '{print $2}' | sed 's/addr://'",
+        "nl2bash_137: ifconfig | grep 'inet addr:' | grep -v 127.0.0.1 | head -n1 | cut -f2 -d: | cut -f1 -d ' '\n\n\nifconfig | grep -E \"([0-9]{1,3}\\.){3}[0-9]{1,3}\" | grep -v 127.0.0.1 | awk '{ print $2 }' | cut -f2 -d:",
+        "nl2bash_136: ifconfig  | grep 'inet addr:' | grep -v '127.0.0.1' | awk -F: '{print $2}' | awk '{print $1}' | head -1"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "ip",
+      "MP Summary": "show / manipulate routing, network devices, interfaces and tunnels",
+      "Most Similar TLDR Task": "Add/Delete an ip address to an interface",
+      "Most Similar TLDR Script": "ip addr add/del {{ip}}/{{mask}} dev {{interface}}",
+      "Most Similar NL2Bash Task": "Request IP address of 'myip.opendns.com' from name server 'resolver1.opendns.com'",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "dig +short myip.opendns.com @resolver1.opendns.com\n",
+          "command-options": {
+            "dig": {
+              "mpsum": "DNS lookup utility"
+            }
+          },
+          "TLDR_inform": {
+            "dig": {
+              "man1_dig_6795": "dn lookup util find authorit name server zone display soa record get type record given domain name lookup ip associ hostnam record lookup mail server associ given domain name mx record perform revers dn lookup ip address ptr record perform iter queri display entir trace path resolv domain name specifi altern dn server queri"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_13296: Save IP addresses of the host name in variable \"ip\"",
+        "ul_579263: How in Linux can I get traffic of every ip address on a single interface, with multiple IP addresses?",
+        "so_21197744: How to find a list of ip addresses in another file"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_13296: ip=$(hostname -I | awk '{print $1}')\n\n\nip=$(hostname -I)",
+        "ul_579263: % ip -s link show br1000\n10: br1000: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP mode DEFAULT group default qlen 1000\nlink/ether 00:10:18:aa:a8:20 brd ff:ff:ff:ff:ff:ff\nRX: bytes  packets  errors  dropped overrun mcast\n15661372003 108647365 0       0       0       0\nTX: bytes  packets  errors  dropped carrier collsns\n278081828962 149463091 0       0       0       0\n\n# iptables example - probably incorrect, I don't have a dev machine to test this.\niptables -A INPUT -i br1000 -d 10.100.0.1/24 -j LOG\niptables -A OUTPUT -i br1000 -s 10.100.0.1/24 -j LOG\n\n# nftables example - probably incorrect, I don't have a dev machine to test this.\nnft add rule ip filter INPUT iifname \"br1000\" ip daddr 10.100.0.1 counter log\nnft add rule ip filter OUTPUT iiname \"br1000\" ip saddr 10.100.0.1 counter log",
+        "so_21197744: while read ip  \ndo  \n    grep \"$ip\"  \"$ips\" > /dev/null 2>&1 && echo \"$ip\" >> ip.found || echo \"$ip\" >> ip.notfound  \ndone"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "nslookup",
+      "MP Summary": "query Internet name servers interactively",
+      "Most Similar TLDR Task": "Query your system's default name server for an IP address (A record) of the domain",
+      "Most Similar TLDR Script": "nslookup {{example.com}}",
+      "Most Similar NL2Bash Task": "Request IP address of 'myip.opendns.com' from name server 'resolver1.opendns.com'",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "dig +short myip.opendns.com @resolver1.opendns.com\n",
+          "command-options": {
+            "dig": {
+              "mpsum": "DNS lookup utility"
+            }
+          },
+          "TLDR_inform": {
+            "dig": {
+              "man1_dig_6795": "dn lookup util find authorit name server zone display soa record get type record given domain name lookup ip associ hostnam record lookup mail server associ given domain name mx record perform revers dn lookup ip address ptr record perform iter queri display entir trace path resolv domain name specifi altern dn server queri"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_5063343: How to get the ip address of the server in linux?",
+        "su_407345: How do I get the computer name from an IP Address in Unix",
+        "ul_20784: How can I resolve a hostname to an IP address in a Bash script?"
+      ],
+      "Top-3 Scripts": [
+        "so_5063343: [michaelsafyan@codemage ~]$ nslookup redmine.org\nServer:     8.8.8.8\nAddress:    8.8.8.8#53\n\nNon-authoritative answer:\nName:   redmine.org\nAddress: 46.4.36.71",
+        "su_407345: ",
+        "ul_20784: host unix.stackexchange.com | awk '/has address/ { print $4 }'\nnslookup unix.stackexchange.com | awk '/^Address: / { print $2 }'\ndig unix.stackexchange.com | awk '/^;; ANSWER SECTION:$/ { getline ; print $5 }'\n\ndig +short unix.stackexchange.com | awk '{ print ; exit }'\ngetent hosts unix.stackexchange.com | awk '{ print $1 ; exit }'\nhost unix.stackexchange.com | awk '/has address/ { print $4 ; exit }'\nnslookup unix.stackexchange.com | awk '/^Address: / { print $2 ; exit }'\ndig unix.stackexchange.com | awk '/^;; ANSWER SECTION:$/ { getline ; print $5 ; exit }'"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "dig",
+      "MP Summary": "DNS lookup utility",
+      "Most Similar TLDR Task": "Perform a reverse DNS lookup on an IP address (PTR record)",
+      "Most Similar TLDR Script": "dig -x {{8.8.8.8}}",
+      "Most Similar NL2Bash Task": "Request IP address of 'myip.opendns.com' from name server 'resolver1.opendns.com'",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "dig +short myip.opendns.com @resolver1.opendns.com\n",
+          "command-options": {
+            "dig": {
+              "mpsum": "DNS lookup utility"
+            }
+          },
+          "TLDR_inform": {
+            "dig": {
+              "man1_dig_6795": "dn lookup util find authorit name server zone display soa record get type record given domain name lookup ip associ hostnam record lookup mail server associ given domain name mx record perform revers dn lookup ip address ptr record perform iter queri display entir trace path resolv domain name specifi altern dn server queri"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_54830716: How to get all of the IP addresses in a string into a bash array",
+        "nl2bash_13324: Save first IP address of domain 'google.com' in 'address' variable",
+        "au_205063: Command to get the hostname of remote server using IP address"
+      ],
+      "Top-3 Scripts": [
+        "so_54830716: IPAddresses=($(dig redis A | grep redis | grep -E '[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}' | awk '{print $5}'))",
+        "nl2bash_13324: address=$(dig +short google.com | grep -E '^[0-9.]+$' | head -n 1)",
+        "au_205063: dig -x <ip>\nhost <ip>"
+      ],
+      "Explanations about Options": {
+        "-x": "Simplified reverse lookups, for mapping addresses to names. The addr is an IPv4\n address in dotted-decimal notation, or a colon-delimited IPv6 address. When the -x is\n used, there is no need to provide the name, class and type arguments. dig\n automatically performs a lookup for a name like 94.2.0.192.in-addr.arpa and sets the\n query type and class to PTR and IN respectively. IPv6 addresses are looked up using\n nibble format under the IP6.ARPA domain."
+      }
+    },
+    {
+      "Command": "host",
+      "MP Summary": "DNS lookup utility",
+      "Most Similar TLDR Task": "Specify an alternate DNS server to query",
+      "Most Similar TLDR Script": "host {{domain}} {{8.8.8.8}}",
+      "Most Similar NL2Bash Task": "Request IP address of 'myip.opendns.com' from name server 'resolver1.opendns.com'",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "dig +short myip.opendns.com @resolver1.opendns.com\n",
+          "command-options": {
+            "dig": {
+              "mpsum": "DNS lookup utility"
+            }
+          },
+          "TLDR_inform": {
+            "dig": {
+              "man1_dig_6795": "dn lookup util find authorit name server zone display soa record get type record given domain name lookup ip associ hostnam record lookup mail server associ given domain name mx record perform revers dn lookup ip address ptr record perform iter queri display entir trace path resolv domain name specifi altern dn server queri"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_22921338: get remote ip of address in a value for use in shell script",
+        "au_422188: How to set hostnames to specific range of IP addresses on DHCP Server?",
+        "au_205063: Command to get the hostname of remote server using IP address"
+      ],
+      "Top-3 Scripts": [
+        "so_22921338: $ host -t A stackoverflow.com\nstackoverflow.com has address 198.252.206.140",
+        "au_422188: ",
+        "au_205063: dig -x <ip>\nhost <ip>"
+      ],
+      "Explanations about Options": {
+        "-t": "Query type: The type argument can be any recognized query type: CNAME, NS, SOA, TXT,\n DNSKEY, AXFR, etc."
+      }
+    },
+    {
+      "Command": "ssh",
+      "MP Summary": "OpenSSH SSH client (remote login program)",
+      "Most Similar TLDR Task": "Connect to a remote server using a specific port",
+      "Most Similar TLDR Script": "ssh {{username}}@{{remote_host}} -p {{2222}}",
+      "Most Similar NL2Bash Task": "Request IP address of 'myip.opendns.com' from name server 'resolver1.opendns.com'",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "dig +short myip.opendns.com @resolver1.opendns.com\n",
+          "command-options": {
+            "dig": {
+              "mpsum": "DNS lookup utility"
+            }
+          },
+          "TLDR_inform": {
+            "dig": {
+              "man1_dig_6795": "dn lookup util find authorit name server zone display soa record get type record given domain name lookup ip associ hostnam record lookup mail server associ given domain name mx record perform revers dn lookup ip address ptr record perform iter queri display entir trace path resolv domain name specifi altern dn server queri"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_33245813: Append a variable in the last digits of an IP Address on bash script",
+        "ul_252388: How do I get a service on a remote CentOS 7 server to persist after I log out?"
+      ],
+      "Top-3 Scripts": [
+        "so_33245813: #!/bin/bash\n\nfor a in $(seq 255)\ndo\n    ssh user@172.18.10.$a true\n    echo \"Connected to 172.18.10.$a\"\ndone",
+        "ul_252388: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "sudo",
+      "MP Summary": "execute a command as another user",
+      "Most Similar TLDR Task": "Launch the default shell with superuser privileges",
+      "Most Similar TLDR Script": "sudo -i",
+      "Most Similar NL2Bash Task": "Request IP address of 'myip.opendns.com' from name server 'resolver1.opendns.com'",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "dig +short myip.opendns.com @resolver1.opendns.com\n",
+          "command-options": {
+            "dig": {
+              "mpsum": "DNS lookup utility"
+            }
+          },
+          "TLDR_inform": {
+            "dig": {
+              "man1_dig_6795": "dn lookup util find authorit name server zone display soa record get type record given domain name lookup ip associ hostnam record lookup mail server associ given domain name mx record perform revers dn lookup ip address ptr record perform iter queri display entir trace path resolv domain name specifi altern dn server queri"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_205063: Command to get the hostname of remote server using IP address",
+        "ul_267478: Getting Public IP address of EC2 instance from outside using AWS-cli",
+        "so_8271921: change ip address of server using PHP"
+      ],
+      "Top-3 Scripts": [
+        "au_205063: sudo apt-get install nbtscan",
+        "ul_267478: ",
+        "so_8271921: sudo -n <command>"
+      ],
+      "Explanations about Options": {
+        "-n": "Avoid prompting the user for input of any kind. If a password is required for\n the command to run, sudo will display an error message and exit."
+      }
+    },
+    {
+      "Command": "import",
+      "MP Summary": "saves any visible window on an X server and outputs it as an image file. You can capture a single window, the entire screen, or any rectangular portion of the screen.",
+      "Most Similar TLDR Task": "Capture contents of a remote X server screen in the PNG image format",
+      "Most Similar TLDR Script": "import -window root -display {{remote_host}}:{screen}.{display} {{output.png}}",
+      "Most Similar NL2Bash Task": "Request IP address of 'myip.opendns.com' from name server 'resolver1.opendns.com'",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "dig +short myip.opendns.com @resolver1.opendns.com\n",
+          "command-options": {
+            "dig": {
+              "mpsum": "DNS lookup utility"
+            }
+          },
+          "TLDR_inform": {
+            "dig": {
+              "man1_dig_6795": "dn lookup util find authorit name server zone display soa record get type record given domain name lookup ip associ hostnam record lookup mail server associ given domain name mx record perform revers dn lookup ip address ptr record perform iter queri display entir trace path resolv domain name specifi altern dn server queri"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_153106: Finding groups of IP addresses in a file",
+        "so_20420937: How to assign IP address to interface in python?"
+      ],
+      "Top-3 Scripts": [
+        "ul_153106: ",
+        "so_20420937: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "printf",
+      "MP Summary": "format and print data",
+      "Most Similar TLDR Task": "Print a text message composed with environment variables",
+      "Most Similar TLDR Script": "printf \"{{var1: %s\\tvar2: %s\\n}}\" \"{{$VAR1}}\" \"{{$VAR2}}\"",
+      "Most Similar NL2Bash Task": "Request IP address of 'myip.opendns.com' from name server 'resolver1.opendns.com'",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "dig +short myip.opendns.com @resolver1.opendns.com\n",
+          "command-options": {
+            "dig": {
+              "mpsum": "DNS lookup utility"
+            }
+          },
+          "TLDR_inform": {
+            "dig": {
+              "man1_dig_6795": "dn lookup util find authorit name server zone display soa record get type record given domain name lookup ip associ hostnam record lookup mail server associ given domain name mx record perform revers dn lookup ip address ptr record perform iter queri display entir trace path resolv domain name specifi altern dn server queri"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_56480363: How to extract part of IP address from string in Bash",
+        "so_2283494: Get IP address of an interface on Linux",
+        "so_20800319: How do I get my IP address in C on Linux?"
+      ],
+      "Top-3 Scripts": [
+        "so_56480363: string=\"ABCD_192.192.111.123\"\nIFS=_. read -r prefix octet1 octet2 octet3 octet4 <<< \"$string\"\nprintf '%s_%s.%s\\n' \"$prefix\" \"$octet3\" \"$octet4\"\n\nstring=\"ABCD_EFG_192.192.111.123\"\nIFS=. read -r prefix_octet1 octet2 octet3 octet4 <<< \"$string\"\nprefix=${prefix_octet1%_*}\nprintf '%s_%s.%s\\n' \"$prefix\" \"$octet3\" \"$octet4\"",
+        "so_2283494: ",
+        "so_20800319: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "echo",
+      "MP Summary": "display a line of text",
+      "Most Similar TLDR Task": "Print a message with environment variables",
+      "Most Similar TLDR Script": "echo \"{{My path is $PATH}}\"",
+      "Most Similar NL2Bash Task": "Request IP address of 'myip.opendns.com' from name server 'resolver1.opendns.com'",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "dig +short myip.opendns.com @resolver1.opendns.com\n",
+          "command-options": {
+            "dig": {
+              "mpsum": "DNS lookup utility"
+            }
+          },
+          "TLDR_inform": {
+            "dig": {
+              "man1_dig_6795": "dn lookup util find authorit name server zone display soa record get type record given domain name lookup ip associ hostnam record lookup mail server associ given domain name mx record perform revers dn lookup ip address ptr record perform iter queri display entir trace path resolv domain name specifi altern dn server queri"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_33245813: Append a variable in the last digits of an IP Address on bash script",
+        "so_21197744: How to find a list of ip addresses in another file",
+        "so_54830716: How to get all of the IP addresses in a string into a bash array"
+      ],
+      "Top-3 Scripts": [
+        "so_33245813: #!/bin/bash\n\nfor a in $(seq 255)\ndo\n    ssh user@172.18.10.$a true\n    echo \"Connected to 172.18.10.$a\"\ndone",
+        "so_21197744: while read ip  \ndo  \n    grep \"$ip\"  \"$ips\" > /dev/null 2>&1 && echo \"$ip\" >> ip.found || echo \"$ip\" >> ip.notfound  \ndone",
+        "so_54830716: echo \"${IPAddresses[@]}\""
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "curl",
+      "MP Summary": "transfer a URL",
+      "Most Similar TLDR Task": "Pass a user name and password for server authentication",
+      "Most Similar TLDR Script": "curl -u myusername:mypassword {{http://example.com}}",
+      "Most Similar NL2Bash Task": "Request IP address of 'myip.opendns.com' from name server 'resolver1.opendns.com'",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "dig +short myip.opendns.com @resolver1.opendns.com\n",
+          "command-options": {
+            "dig": {
+              "mpsum": "DNS lookup utility"
+            }
+          },
+          "TLDR_inform": {
+            "dig": {
+              "man1_dig_6795": "dn lookup util find authorit name server zone display soa record get type record given domain name lookup ip associ hostnam record lookup mail server associ given domain name mx record perform revers dn lookup ip address ptr record perform iter queri display entir trace path resolv domain name specifi altern dn server queri"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_26903520: How to send HTTP request using virtual IP address in Linux?",
+        "ul_254328: Get the external IP address in shell without dig in 2016?"
+      ],
+      "Top-3 Scripts": [
+        "so_26903520: curl --i 10.91.56.4 http://10.91.55.3/filex.txt",
+        "ul_254328: $ i=5; curl -m10 -L \"http://${urls[i]}\"\n116.132.27.203"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "hostname",
+      "MP Summary": "show or set the system's host name",
+      "Most Similar TLDR Task": "Show all network addresses of the host",
+      "Most Similar TLDR Script": "hostname -I",
+      "Most Similar NL2Bash Task": "Request IP address of 'myip.opendns.com' from name server 'resolver1.opendns.com'",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "dig +short myip.opendns.com @resolver1.opendns.com\n",
+          "command-options": {
+            "dig": {
+              "mpsum": "DNS lookup utility"
+            }
+          },
+          "TLDR_inform": {
+            "dig": {
+              "man1_dig_6795": "dn lookup util find authorit name server zone display soa record get type record given domain name lookup ip associ hostnam record lookup mail server associ given domain name mx record perform revers dn lookup ip address ptr record perform iter queri display entir trace path resolv domain name specifi altern dn server queri"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_13296: Save IP addresses of the host name in variable \"ip\""
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_13296: ip=$(hostname -I | awk '{print $1}')\n\n\nip=$(hostname -I)"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "apt-get",
+      "MP Summary": "APT package handling utility - command-line interface",
+      "Most Similar TLDR Task": "Remove a package and its configuration files",
+      "Most Similar TLDR Script": "apt-get purge {{package}}",
+      "Most Similar NL2Bash Task": "Request IP address of 'myip.opendns.com' from name server 'resolver1.opendns.com'",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "dig +short myip.opendns.com @resolver1.opendns.com\n",
+          "command-options": {
+            "dig": {
+              "mpsum": "DNS lookup utility"
+            }
+          },
+          "TLDR_inform": {
+            "dig": {
+              "man1_dig_6795": "dn lookup util find authorit name server zone display soa record get type record given domain name lookup ip associ hostnam record lookup mail server associ given domain name mx record perform revers dn lookup ip address ptr record perform iter queri display entir trace path resolv domain name specifi altern dn server queri"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_205063: Command to get the hostname of remote server using IP address",
+        "ul_267478: Getting Public IP address of EC2 instance from outside using AWS-cli"
+      ],
+      "Top-3 Scripts": [
+        "au_205063: sudo apt-get install nbtscan",
+        "ul_267478: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "sed",
+      "MP Summary": "stream editor for filtering and transforming text",
+      "Most Similar TLDR Task": "Print the first 11 lines of a file",
+      "Most Similar TLDR Script": "sed 11q {{filename}}",
+      "Most Similar NL2Bash Task": "Request IP address of 'myip.opendns.com' from name server 'resolver1.opendns.com'",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "dig +short myip.opendns.com @resolver1.opendns.com\n",
+          "command-options": {
+            "dig": {
+              "mpsum": "DNS lookup utility"
+            }
+          },
+          "TLDR_inform": {
+            "dig": {
+              "man1_dig_6795": "dn lookup util find authorit name server zone display soa record get type record given domain name lookup ip associ hostnam record lookup mail server associ given domain name mx record perform revers dn lookup ip address ptr record perform iter queri display entir trace path resolv domain name specifi altern dn server queri"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_142: Gets IP addresses of all active network interfaces on host.",
+        "nl2bash_13295: Save IP address of your SSH session in variable \"WORKSTATION\"",
+        "ul_267478: Getting Public IP address of EC2 instance from outside using AWS-cli"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_142: ifconfig | grep 'inet' | grep -v '127.0.0.1' | awk '{print $2}' | sed 's/addr://'",
+        "nl2bash_13295: WORKSTATION=`who -m|awk '{print $5}'|sed 's/[()]//g'`",
+        "ul_267478: aws ec2 describe-instances --instance-ids i-b78a096f | grep PublicIpAddress | awk -F \":\" '{print $2}' | sed 's/[\",]//g'\n\naws ec2 describe-instances --instance-ids i-b78a096f | grep PrivateIpAddress  | head -1 | awk -F \":\" '{print $2}' | sed 's/[\",]//g'"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "read",
+      "MP Summary": "read a line from standard input",
+      "Most Similar TLDR Task": "Specify the number of maximum characters to be read",
+      "Most Similar TLDR Script": "read -n {{character_count}} {{variable}}",
+      "Most Similar NL2Bash Task": "Request IP address of 'myip.opendns.com' from name server 'resolver1.opendns.com'",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "dig +short myip.opendns.com @resolver1.opendns.com\n",
+          "command-options": {
+            "dig": {
+              "mpsum": "DNS lookup utility"
+            }
+          },
+          "TLDR_inform": {
+            "dig": {
+              "man1_dig_6795": "dn lookup util find authorit name server zone display soa record get type record given domain name lookup ip associ hostnam record lookup mail server associ given domain name mx record perform revers dn lookup ip address ptr record perform iter queri display entir trace path resolv domain name specifi altern dn server queri"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_56480363: How to extract part of IP address from string in Bash",
+        "so_21197744: How to find a list of ip addresses in another file",
+        "ul_444332: How to restrict user based on ip address in openldap"
+      ],
+      "Top-3 Scripts": [
+        "so_56480363: string=\"ABCD_192.192.111.123\"\nIFS=_. read -r prefix octet1 octet2 octet3 octet4 <<< \"$string\"\nprintf '%s_%s.%s\\n' \"$prefix\" \"$octet3\" \"$octet4\"\n\nstring=\"ABCD_EFG_192.192.111.123\"\nIFS=. read -r prefix_octet1 octet2 octet3 octet4 <<< \"$string\"\nprefix=${prefix_octet1%_*}\nprintf '%s_%s.%s\\n' \"$prefix\" \"$octet3\" \"$octet4\"",
+        "so_21197744: while read ip  \ndo  \n    grep \"$ip\"  \"$ips\" > /dev/null 2>&1 && echo \"$ip\" >> ip.found || echo \"$ip\" >> ip.notfound  \ndone",
+        "ul_444332: access to *\n       by peername.ip=10.10.0.0 read\n       by * none"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "install",
+      "MP Summary": "copy files and set attributes",
+      "Most Similar TLDR Task": "Copy files and apply access/modification times of source to destination",
+      "Most Similar TLDR Script": "install -p {{path/to/source}} {{path/to/destination}}",
+      "Most Similar NL2Bash Task": "Request IP address of 'myip.opendns.com' from name server 'resolver1.opendns.com'",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "dig +short myip.opendns.com @resolver1.opendns.com\n",
+          "command-options": {
+            "dig": {
+              "mpsum": "DNS lookup utility"
+            }
+          },
+          "TLDR_inform": {
+            "dig": {
+              "man1_dig_6795": "dn lookup util find authorit name server zone display soa record get type record given domain name lookup ip associ hostnam record lookup mail server associ given domain name mx record perform revers dn lookup ip address ptr record perform iter queri display entir trace path resolv domain name specifi altern dn server queri"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "au_205063: Command to get the hostname of remote server using IP address",
+        "ul_267478: Getting Public IP address of EC2 instance from outside using AWS-cli",
+        "au_623116: How do I get the IP address of joined unit in install hook?"
+      ],
+      "Top-3 Scripts": [
+        "au_205063: sudo apt-get install nbtscan",
+        "ul_267478: ",
+        "au_623116: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "yum",
+      "MP Summary": "Yellowdog Updater Modified",
+      "Most Similar TLDR Task": "Display available updates for installed packages",
+      "Most Similar TLDR Script": "yum check-update",
+      "Most Similar NL2Bash Task": "Request IP address of 'myip.opendns.com' from name server 'resolver1.opendns.com'",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "dig +short myip.opendns.com @resolver1.opendns.com\n",
+          "command-options": {
+            "dig": {
+              "mpsum": "DNS lookup utility"
+            }
+          },
+          "TLDR_inform": {
+            "dig": {
+              "man1_dig_6795": "dn lookup util find authorit name server zone display soa record get type record given domain name lookup ip associ hostnam record lookup mail server associ given domain name mx record perform revers dn lookup ip address ptr record perform iter queri display entir trace path resolv domain name specifi altern dn server queri"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_127540: simply change IP after installation on server minimal"
+      ],
+      "Top-3 Scripts": [
+        "ul_127540: $ sudo yum install setuptool system-config-network-tui"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "fd",
+      "MP Summary": "find entries in the filesystem",
+      "Most Similar TLDR Task": "Find files in a specific directory",
+      "Most Similar TLDR Script": "fd {{pattern}} {{path/to/dir}}",
+      "Most Similar NL2Bash Task": "Request IP address of 'myip.opendns.com' from name server 'resolver1.opendns.com'",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "dig +short myip.opendns.com @resolver1.opendns.com\n",
+          "command-options": {
+            "dig": {
+              "mpsum": "DNS lookup utility"
+            }
+          },
+          "TLDR_inform": {
+            "dig": {
+              "man1_dig_6795": "dn lookup util find authorit name server zone display soa record get type record given domain name lookup ip associ hostnam record lookup mail server associ given domain name mx record perform revers dn lookup ip address ptr record perform iter queri display entir trace path resolv domain name specifi altern dn server queri"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_2283494: Get IP address of an interface on Linux",
+        "so_29846090: how to get Ethernet adapter name from IP in c in centos"
+      ],
+      "Top-3 Scripts": [
+        "so_2283494: ",
+        "so_29846090: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "ipcalc",
+      "MP Summary": "An IPv4 Netmask/broadcast/etc calculator",
+      "Most Similar TLDR Task": "Show the network address of provided IP address and netmask",
+      "Most Similar TLDR Script": "ipcalc -n {{1.2.3.4}}/{{24}}",
+      "Most Similar NL2Bash Task": "Request IP address of 'myip.opendns.com' from name server 'resolver1.opendns.com'",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "dig +short myip.opendns.com @resolver1.opendns.com\n",
+          "command-options": {
+            "dig": {
+              "mpsum": "DNS lookup utility"
+            }
+          },
+          "TLDR_inform": {
+            "dig": {
+              "man1_dig_6795": "dn lookup util find authorit name server zone display soa record get type record given domain name lookup ip associ hostnam record lookup mail server associ given domain name mx record perform revers dn lookup ip address ptr record perform iter queri display entir trace path resolv domain name specifi altern dn server queri"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_671747: How can I write a range of /16 IP addresses in a single expression?"
+      ],
+      "Top-3 Scripts": [
+        "ul_671747: $ ipcalc -r 223.64.0.0 - 223.117.255.255\ndeaggregate 223.64.0.0 - 223.117.255.255\n223.64.0.0/11\n223.96.0.0/12\n223.112.0.0/14\n223.116.0.0/15"
+      ],
+      "Explanations about Options": {
+        "-r": "Deaggregate address range"
+      }
+    },
+    {
+      "Command": "cut",
+      "MP Summary": "remove sections from each line of files",
+      "Most Similar TLDR Task": "Cut out everything from the 3rd character to the end of each line",
+      "Most Similar TLDR Script": "cut -c {{3-}}",
+      "Most Similar NL2Bash Task": "Request IP address of 'myip.opendns.com' from name server 'resolver1.opendns.com'",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "dig +short myip.opendns.com @resolver1.opendns.com\n",
+          "command-options": {
+            "dig": {
+              "mpsum": "DNS lookup utility"
+            }
+          },
+          "TLDR_inform": {
+            "dig": {
+              "man1_dig_6795": "dn lookup util find authorit name server zone display soa record get type record given domain name lookup ip associ hostnam record lookup mail server associ given domain name mx record perform revers dn lookup ip address ptr record perform iter queri display entir trace path resolv domain name specifi altern dn server queri"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "nl2bash_137: Gets IP address of first listed network interface in system.",
+        "so_12788607: How to get the IP address of a server using bash",
+        "ul_8518: How to get my own IP address and save it to a variable in a shell script?"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_137: ifconfig | grep 'inet addr:' | grep -v 127.0.0.1 | head -n1 | cut -f2 -d: | cut -f1 -d ' '\n\n\nifconfig | grep -E \"([0-9]{1,3}\\.){3}[0-9]{1,3}\" | grep -v 127.0.0.1 | awk '{ print $2 }' | cut -f2 -d:",
+        "so_12788607: ",
+        "ul_8518: ip=\"$(ifconfig | grep -A 1 'eth0' | tail -1 | cut -d ':' -f 2 | cut -d ' ' -f 1)\""
+      ],
+      "Explanations about Options": {
+        "-d": "use DELIM instead of TAB for field delimiter",
+        "-f": "select only these fields; also print any line that contains no delimiter\n character, unless the -s option is specified"
+      }
+    },
+    {
+      "Command": "arp",
+      "MP Summary": "manipulate the system ARP cache",
+      "Most Similar TLDR Task": "Show current arp table",
+      "Most Similar TLDR Script": "arp -a",
+      "Most Similar NL2Bash Task": "Request IP address of 'myip.opendns.com' from name server 'resolver1.opendns.com'",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "dig +short myip.opendns.com @resolver1.opendns.com\n",
+          "command-options": {
+            "dig": {
+              "mpsum": "DNS lookup utility"
+            }
+          },
+          "TLDR_inform": {
+            "dig": {
+              "man1_dig_6795": "dn lookup util find authorit name server zone display soa record get type record given domain name lookup ip associ hostnam record lookup mail server associ given domain name mx record perform revers dn lookup ip address ptr record perform iter queri display entir trace path resolv domain name specifi altern dn server queri"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_45777705: Get Ip address of a local device from its Mac address"
+      ],
+      "Top-3 Scripts": [
+        "so_45777705: /proc/net/arp"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "cat",
+      "MP Summary": "concatenate files and print on the standard output",
+      "Most Similar TLDR Task": "Display non-printable and whitespace characters (with `M-` prefix if non-ASCII)",
+      "Most Similar TLDR Script": "cat -v -t -e {{file}}",
+      "Most Similar NL2Bash Task": "Request IP address of 'myip.opendns.com' from name server 'resolver1.opendns.com'",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "dig +short myip.opendns.com @resolver1.opendns.com\n",
+          "command-options": {
+            "dig": {
+              "mpsum": "DNS lookup utility"
+            }
+          },
+          "TLDR_inform": {
+            "dig": {
+              "man1_dig_6795": "dn lookup util find authorit name server zone display soa record get type record given domain name lookup ip associ hostnam record lookup mail server associ given domain name mx record perform revers dn lookup ip address ptr record perform iter queri display entir trace path resolv domain name specifi altern dn server queri"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_21197744: How to find a list of ip addresses in another file",
+        "so_42926437: how to Replace IP Address from in specified file"
+      ],
+      "Top-3 Scripts": [
+        "so_21197744: ips=ips\ncat iplist | sh searchip.sh",
+        "so_42926437: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "bash",
+      "MP Summary": "GNU Bourne-Again SHell",
+      "Most Similar TLDR Task": "Run commands from a file, logging all commands executed to the terminal",
+      "Most Similar TLDR Script": "bash -x {{file.sh}}",
+      "Most Similar NL2Bash Task": "Request IP address of 'myip.opendns.com' from name server 'resolver1.opendns.com'",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "dig +short myip.opendns.com @resolver1.opendns.com\n",
+          "command-options": {
+            "dig": {
+              "mpsum": "DNS lookup utility"
+            }
+          },
+          "TLDR_inform": {
+            "dig": {
+              "man1_dig_6795": "dn lookup util find authorit name server zone display soa record get type record given domain name lookup ip associ hostnam record lookup mail server associ given domain name mx record perform revers dn lookup ip address ptr record perform iter queri display entir trace path resolv domain name specifi altern dn server queri"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_252388: How do I get a service on a remote CentOS 7 server to persist after I log out?"
+      ],
+      "Top-3 Scripts": [
+        "ul_252388: $ java -jar mywebservice.jar > /path/to/webservice/logs/mylogfile.txt &\n  [1] 10685\n  $ disown 10685\n $ ps\n    PID TTY          TIME CMD\n    10685 pts/0    00:00:00 wget\n    10687 pts/0    00:00:00 bash\n    10708 pts/0    00:00:00 ps\n $ logout"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "nft",
+      "MP Summary": "Administration tool of the nftables framework for packet filtering and classification",
+      "Most Similar TLDR Task": "Add a new rule to accept several TCP ports",
+      "Most Similar TLDR Script": "sudo nft add rule {{inet}} {{filter}} {{input}} {{tcp}} {{dport \\{ telnet, ssh, http, https \\} accept}}",
+      "Most Similar NL2Bash Task": "Request IP address of 'myip.opendns.com' from name server 'resolver1.opendns.com'",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "dig +short myip.opendns.com @resolver1.opendns.com\n",
+          "command-options": {
+            "dig": {
+              "mpsum": "DNS lookup utility"
+            }
+          },
+          "TLDR_inform": {
+            "dig": {
+              "man1_dig_6795": "dn lookup util find authorit name server zone display soa record get type record given domain name lookup ip associ hostnam record lookup mail server associ given domain name mx record perform revers dn lookup ip address ptr record perform iter queri display entir trace path resolv domain name specifi altern dn server queri"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_579263: How in Linux can I get traffic of every ip address on a single interface, with multiple IP addresses?"
+      ],
+      "Top-3 Scripts": [
+        "ul_579263: # iptables example - probably incorrect, I don't have a dev machine to test this.\niptables -A INPUT -i br1000 -d 10.100.0.1/24 -j LOG\niptables -A OUTPUT -i br1000 -s 10.100.0.1/24 -j LOG\n\n# nftables example - probably incorrect, I don't have a dev machine to test this.\nnft add rule ip filter INPUT iifname \"br1000\" ip daddr 10.100.0.1 counter log\nnft add rule ip filter OUTPUT iiname \"br1000\" ip saddr 10.100.0.1 counter log"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "jq",
+      "MP Summary": "Command-line JSON processor",
+      "Most Similar TLDR Task": "Output the value of a given key to a string (and disable JSON output)",
+      "Most Similar TLDR Script": "cat {{file.json}} | jq --raw-output '\"some text: \\(.{{key_name}})\"'",
+      "Most Similar NL2Bash Task": "Request IP address of 'myip.opendns.com' from name server 'resolver1.opendns.com'",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "dig +short myip.opendns.com @resolver1.opendns.com\n",
+          "command-options": {
+            "dig": {
+              "mpsum": "DNS lookup utility"
+            }
+          },
+          "TLDR_inform": {
+            "dig": {
+              "man1_dig_6795": "dn lookup util find authorit name server zone display soa record get type record given domain name lookup ip associ hostnam record lookup mail server associ given domain name mx record perform revers dn lookup ip address ptr record perform iter queri display entir trace path resolv domain name specifi altern dn server queri"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_671747: How can I write a range of /16 IP addresses in a single expression?",
+        "so_60105228: Docker get a list of created networks' IP addresses (IP range of subnets)"
+      ],
+      "Top-3 Scripts": [
+        "ul_671747: $ ipcalc-ng -j -d '223.64.0.0 - 223.117.255.255' |\n    jq -r '.DEAGGREGATEDNETWORK[]|\"deny \" + . + \";\"'\ndeny 223.64.0.0/11;\ndeny 223.96.0.0/12;\ndeny 223.112.0.0/14;\ndeny 223.116.0.0/15;\n\n$ ipcalc-ng -j -d '223.64.0.0 - 223.117.255.255' |\n   jq -r '\"deny \" + (.DEAGGREGATEDNETWORK|join(\" \")) + \";\"'\ndeny 223.64.0.0/11 223.96.0.0/12 223.112.0.0/14 223.116.0.0/15;",
+        "so_60105228: docker network inspect $(docker network ls | awk '$3 == \"bridge\" { print $1}') | jq -r '.[] | .Name + \" \" + .IPAM.Config[0].Subnet' -"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "exit",
+      "MP Summary": "cause the shell to exit",
+      "Most Similar TLDR Task": "Exit the shell with the specified exit code",
+      "Most Similar TLDR Script": "exit {{exit_code}}",
+      "Most Similar NL2Bash Task": "Request IP address of 'myip.opendns.com' from name server 'resolver1.opendns.com'",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "dig +short myip.opendns.com @resolver1.opendns.com\n",
+          "command-options": {
+            "dig": {
+              "mpsum": "DNS lookup utility"
+            }
+          },
+          "TLDR_inform": {
+            "dig": {
+              "man1_dig_6795": "dn lookup util find authorit name server zone display soa record get type record given domain name lookup ip associ hostnam record lookup mail server associ given domain name mx record perform revers dn lookup ip address ptr record perform iter queri display entir trace path resolv domain name specifi altern dn server queri"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_252388: How do I get a service on a remote CentOS 7 server to persist after I log out?",
+        "ul_20784: How can I resolve a hostname to an IP address in a Bash script?"
+      ],
+      "Top-3 Scripts": [
+        "ul_252388: $ nohup java -jar mywebservice.jar > /path/to/webservice/logs/mylogfile.txt &\n\n  ## exit from shell or close the terminal ##\n  $ exit",
+        "ul_20784: dig +short unix.stackexchange.com | awk '{ print ; exit }'\ngetent hosts unix.stackexchange.com | awk '{ print $1 ; exit }'\nhost unix.stackexchange.com | awk '/has address/ { print $4 ; exit }'\nnslookup unix.stackexchange.com | awk '/^Address: / { print $2 ; exit }'\ndig unix.stackexchange.com | awk '/^;; ANSWER SECTION:$/ { getline ; print $5 ; exit }'"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "cd",
+      "MP Summary": "change the working directory",
+      "Most Similar TLDR Task": "Go to home directory of current user",
+      "Most Similar TLDR Script": "cd",
+      "Most Similar NL2Bash Task": "Request IP address of 'myip.opendns.com' from name server 'resolver1.opendns.com'",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "dig +short myip.opendns.com @resolver1.opendns.com\n",
+          "command-options": {
+            "dig": {
+              "mpsum": "DNS lookup utility"
+            }
+          },
+          "TLDR_inform": {
+            "dig": {
+              "man1_dig_6795": "dn lookup util find authorit name server zone display soa record get type record given domain name lookup ip associ hostnam record lookup mail server associ given domain name mx record perform revers dn lookup ip address ptr record perform iter queri display entir trace path resolv domain name specifi altern dn server queri"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_267478: Getting Public IP address of EC2 instance from outside using AWS-cli",
+        "so_42926437: how to Replace IP Address from in specified file"
+      ],
+      "Top-3 Scripts": [
+        "ul_267478: ",
+        "so_42926437: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "ftp",
+      "MP Summary": "Internet file transfer program",
+      "Most Similar TLDR Task": "Delete multiple files on the remote server",
+      "Most Similar TLDR Script": "mdelete {{*.txt}}",
+      "Most Similar NL2Bash Task": "Request IP address of 'myip.opendns.com' from name server 'resolver1.opendns.com'",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "dig +short myip.opendns.com @resolver1.opendns.com\n",
+          "command-options": {
+            "dig": {
+              "mpsum": "DNS lookup utility"
+            }
+          },
+          "TLDR_inform": {
+            "dig": {
+              "man1_dig_6795": "dn lookup util find authorit name server zone display soa record get type record given domain name lookup ip associ hostnam record lookup mail server associ given domain name mx record perform revers dn lookup ip address ptr record perform iter queri display entir trace path resolv domain name specifi altern dn server queri"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_267478: Getting Public IP address of EC2 instance from outside using AWS-cli"
+      ],
+      "Top-3 Scripts": [
+        "ul_267478: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "getent",
+      "MP Summary": "get entries from Name Service Switch libraries",
+      "Most Similar TLDR Task": "Get list of all services",
+      "Most Similar TLDR Script": "getent services",
+      "Most Similar NL2Bash Task": "Request IP address of 'myip.opendns.com' from name server 'resolver1.opendns.com'",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "dig +short myip.opendns.com @resolver1.opendns.com\n",
+          "command-options": {
+            "dig": {
+              "mpsum": "DNS lookup utility"
+            }
+          },
+          "TLDR_inform": {
+            "dig": {
+              "man1_dig_6795": "dn lookup util find authorit name server zone display soa record get type record given domain name lookup ip associ hostnam record lookup mail server associ given domain name mx record perform revers dn lookup ip address ptr record perform iter queri display entir trace path resolv domain name specifi altern dn server queri"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_20784: How can I resolve a hostname to an IP address in a Bash script?"
+      ],
+      "Top-3 Scripts": [
+        "ul_20784: getent hosts unix.stackexchange.com | awk '{ print $1 }'\n\ndig +short unix.stackexchange.com | awk '{ print ; exit }'\ngetent hosts unix.stackexchange.com | awk '{ print $1 ; exit }'\nhost unix.stackexchange.com | awk '/has address/ { print $4 ; exit }'\nnslookup unix.stackexchange.com | awk '/^Address: / { print $2 ; exit }'\ndig unix.stackexchange.com | awk '/^;; ANSWER SECTION:$/ { getline ; print $5 ; exit }'"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "docker",
+      "MP Summary": "Docker image and container command line interface",
+      "Most Similar TLDR Task": "Pull an image from a docker registry",
+      "Most Similar TLDR Script": "docker pull {{image}}",
+      "Most Similar NL2Bash Task": "Request IP address of 'myip.opendns.com' from name server 'resolver1.opendns.com'",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "dig +short myip.opendns.com @resolver1.opendns.com\n",
+          "command-options": {
+            "dig": {
+              "mpsum": "DNS lookup utility"
+            }
+          },
+          "TLDR_inform": {
+            "dig": {
+              "man1_dig_6795": "dn lookup util find authorit name server zone display soa record get type record given domain name lookup ip associ hostnam record lookup mail server associ given domain name mx record perform revers dn lookup ip address ptr record perform iter queri display entir trace path resolv domain name specifi altern dn server queri"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_60105228: Docker get a list of created networks' IP addresses (IP range of subnets)"
+      ],
+      "Top-3 Scripts": [
+        "so_60105228: docker network inspect $(docker network ls | awk '$3 == \"bridge\" { print $1}') | jq -r '.[] | .Name + \" \" + .IPAM.Config[0].Subnet' -"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "usermod",
+      "MP Summary": "modify a user account",
+      "Most Similar TLDR Task": "Change a user's name",
+      "Most Similar TLDR Script": "usermod -l {{newname}} {{user}}",
+      "Most Similar NL2Bash Task": "Request IP address of 'myip.opendns.com' from name server 'resolver1.opendns.com'",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "dig +short myip.opendns.com @resolver1.opendns.com\n",
+          "command-options": {
+            "dig": {
+              "mpsum": "DNS lookup utility"
+            }
+          },
+          "TLDR_inform": {
+            "dig": {
+              "man1_dig_6795": "dn lookup util find authorit name server zone display soa record get type record given domain name lookup ip associ hostnam record lookup mail server associ given domain name mx record perform revers dn lookup ip address ptr record perform iter queri display entir trace path resolv domain name specifi altern dn server queri"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_8271921: change ip address of server using PHP"
+      ],
+      "Top-3 Scripts": [
+        "so_8271921: usermod -a -G admin www-data"
+      ],
+      "Explanations about Options": {
+        "-a": "Add the user to the supplementary group(s). Use only with the -G option.",
+        "-G": "GROUP1[,GROUP2,...[,GROUPN]]]\n A list of supplementary groups which the user is also a member of. Each group is\n separated from the next by a comma, with no intervening whitespace. The groups are\n subject to the same restrictions as the group given with the -g option."
+      }
+    },
+    {
+      "Command": "free",
+      "MP Summary": "Display amount of free and used memory in the system",
+      "Most Similar TLDR Task": "Display system memory",
+      "Most Similar TLDR Script": "free",
+      "Most Similar NL2Bash Task": "Request IP address of 'myip.opendns.com' from name server 'resolver1.opendns.com'",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "dig +short myip.opendns.com @resolver1.opendns.com\n",
+          "command-options": {
+            "dig": {
+              "mpsum": "DNS lookup utility"
+            }
+          },
+          "TLDR_inform": {
+            "dig": {
+              "man1_dig_6795": "dn lookup util find authorit name server zone display soa record get type record given domain name lookup ip associ hostnam record lookup mail server associ given domain name mx record perform revers dn lookup ip address ptr record perform iter queri display entir trace path resolv domain name specifi altern dn server queri"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_29846090: how to get Ethernet adapter name from IP in c in centos"
+      ],
+      "Top-3 Scripts": [
+        "so_29846090: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "man",
+      "MP Summary": "an interface to the system reference manuals",
+      "Most Similar TLDR Task": "Display the man page for a command from section 7",
+      "Most Similar TLDR Script": "man {{command}}.{{7}}",
+      "Most Similar NL2Bash Task": "Request IP address of 'myip.opendns.com' from name server 'resolver1.opendns.com'",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "dig +short myip.opendns.com @resolver1.opendns.com\n",
+          "command-options": {
+            "dig": {
+              "mpsum": "DNS lookup utility"
+            }
+          },
+          "TLDR_inform": {
+            "dig": {
+              "man1_dig_6795": "dn lookup util find authorit name server zone display soa record get type record given domain name lookup ip associ hostnam record lookup mail server associ given domain name mx record perform revers dn lookup ip address ptr record perform iter queri display entir trace path resolv domain name specifi altern dn server queri"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "su_407345: How do I get the computer name from an IP Address in Unix"
+      ],
+      "Top-3 Scripts": [
+        "su_407345: man host"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "pwd",
+      "MP Summary": "print name of current/working directory",
+      "Most Similar TLDR Task": "Print the current directory, and resolve all symlinks (i.e. show the \"physical\" path)",
+      "Most Similar TLDR Script": "pwd -P",
+      "Most Similar NL2Bash Task": "Request IP address of 'myip.opendns.com' from name server 'resolver1.opendns.com'",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "dig +short myip.opendns.com @resolver1.opendns.com\n",
+          "command-options": {
+            "dig": {
+              "mpsum": "DNS lookup utility"
+            }
+          },
+          "TLDR_inform": {
+            "dig": {
+              "man1_dig_6795": "dn lookup util find authorit name server zone display soa record get type record given domain name lookup ip associ hostnam record lookup mail server associ given domain name mx record perform revers dn lookup ip address ptr record perform iter queri display entir trace path resolv domain name specifi altern dn server queri"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_42926437: how to Replace IP Address from in specified file"
+      ],
+      "Top-3 Scripts": [
+        "so_42926437: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "service",
+      "MP Summary": "run a System V init script",
+      "Most Similar TLDR Task": "List the name and status of all services",
+      "Most Similar TLDR Script": "service --status-all",
+      "Most Similar NL2Bash Task": "Request IP address of 'myip.opendns.com' from name server 'resolver1.opendns.com'",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "dig +short myip.opendns.com @resolver1.opendns.com\n",
+          "command-options": {
+            "dig": {
+              "mpsum": "DNS lookup utility"
+            }
+          },
+          "TLDR_inform": {
+            "dig": {
+              "man1_dig_6795": "dn lookup util find authorit name server zone display soa record get type record given domain name lookup ip associ hostnam record lookup mail server associ given domain name mx record perform revers dn lookup ip address ptr record perform iter queri display entir trace path resolv domain name specifi altern dn server queri"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_33652829: how get address ip of socket in C"
+      ],
+      "Top-3 Scripts": [
+        "so_33652829: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "make",
+      "MP Summary": "GNU make utility to maintain groups of programs",
+      "Most Similar TLDR Task": "Call a specific target, executing 4 jobs at a time in parallel",
+      "Most Similar TLDR Script": "make -j{{4}} {{target}}",
+      "Most Similar NL2Bash Task": "Request IP address of 'myip.opendns.com' from name server 'resolver1.opendns.com'",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "dig +short myip.opendns.com @resolver1.opendns.com\n",
+          "command-options": {
+            "dig": {
+              "mpsum": "DNS lookup utility"
+            }
+          },
+          "TLDR_inform": {
+            "dig": {
+              "man1_dig_6795": "dn lookup util find authorit name server zone display soa record get type record given domain name lookup ip associ hostnam record lookup mail server associ given domain name mx record perform revers dn lookup ip address ptr record perform iter queri display entir trace path resolv domain name specifi altern dn server queri"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_267478: Getting Public IP address of EC2 instance from outside using AWS-cli"
+      ],
+      "Top-3 Scripts": [
+        "ul_267478: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "screen",
+      "MP Summary": "screen manager with VT100/ANSI terminal emulation",
+      "Most Similar TLDR Task": "Start a new daemon and log the output to screenlog.x",
+      "Most Similar TLDR Script": "screen -dmLS {{session_name}} {{command}}",
+      "Most Similar NL2Bash Task": "Request IP address of 'myip.opendns.com' from name server 'resolver1.opendns.com'",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "dig +short myip.opendns.com @resolver1.opendns.com\n",
+          "command-options": {
+            "dig": {
+              "mpsum": "DNS lookup utility"
+            }
+          },
+          "TLDR_inform": {
+            "dig": {
+              "man1_dig_6795": "dn lookup util find authorit name server zone display soa record get type record given domain name lookup ip associ hostnam record lookup mail server associ given domain name mx record perform revers dn lookup ip address ptr record perform iter queri display entir trace path resolv domain name specifi altern dn server queri"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_252388: How do I get a service on a remote CentOS 7 server to persist after I log out?"
+      ],
+      "Top-3 Scripts": [
+        "ul_252388: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "seq",
+      "MP Summary": "print a sequence of numbers",
+      "Most Similar TLDR Task": "Every 3rd number from 5 to 20",
+      "Most Similar TLDR Script": "seq 5 3 20",
+      "Most Similar NL2Bash Task": "Request IP address of 'myip.opendns.com' from name server 'resolver1.opendns.com'",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "dig +short myip.opendns.com @resolver1.opendns.com\n",
+          "command-options": {
+            "dig": {
+              "mpsum": "DNS lookup utility"
+            }
+          },
+          "TLDR_inform": {
+            "dig": {
+              "man1_dig_6795": "dn lookup util find authorit name server zone display soa record get type record given domain name lookup ip associ hostnam record lookup mail server associ given domain name mx record perform revers dn lookup ip address ptr record perform iter queri display entir trace path resolv domain name specifi altern dn server queri"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_33245813: Append a variable in the last digits of an IP Address on bash script"
+      ],
+      "Top-3 Scripts": [
+        "so_33245813: #!/bin/bash\n\nfor a in $(seq 255)\ndo\n    ssh user@172.18.10.$a true\n    echo \"Connected to 172.18.10.$a\"\ndone\n\nseq 255"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "openssl",
+      "MP Summary": "OpenSSL command line tool",
+      "Most Similar TLDR Task": "Display the complete certificate chain of an HTTPS server",
+      "Most Similar TLDR Script": "openssl s_client -connect {{host}}:443 -showcerts </dev/null",
+      "Most Similar NL2Bash Task": "Request IP address of 'myip.opendns.com' from name server 'resolver1.opendns.com'",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "dig +short myip.opendns.com @resolver1.opendns.com\n",
+          "command-options": {
+            "dig": {
+              "mpsum": "DNS lookup utility"
+            }
+          },
+          "TLDR_inform": {
+            "dig": {
+              "man1_dig_6795": "dn lookup util find authorit name server zone display soa record get type record given domain name lookup ip associ hostnam record lookup mail server associ given domain name mx record perform revers dn lookup ip address ptr record perform iter queri display entir trace path resolv domain name specifi altern dn server queri"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_267478: Getting Public IP address of EC2 instance from outside using AWS-cli"
+      ],
+      "Top-3 Scripts": [
+        "ul_267478: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "set",
+      "MP Summary": "set or unset options and positional parameters",
+      "Most Similar TLDR Task": "Display the names and values of shell variables",
+      "Most Similar TLDR Script": "set",
+      "Most Similar NL2Bash Task": "Request IP address of 'myip.opendns.com' from name server 'resolver1.opendns.com'",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "dig +short myip.opendns.com @resolver1.opendns.com\n",
+          "command-options": {
+            "dig": {
+              "mpsum": "DNS lookup utility"
+            }
+          },
+          "TLDR_inform": {
+            "dig": {
+              "man1_dig_6795": "dn lookup util find authorit name server zone display soa record get type record given domain name lookup ip associ hostnam record lookup mail server associ given domain name mx record perform revers dn lookup ip address ptr record perform iter queri display entir trace path resolv domain name specifi altern dn server queri"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_267478: Getting Public IP address of EC2 instance from outside using AWS-cli"
+      ],
+      "Top-3 Scripts": [
+        "ul_267478: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "dirname",
+      "MP Summary": "strip last component from file name",
+      "Most Similar TLDR Task": "Calculate the parent directory of multiple paths",
+      "Most Similar TLDR Script": "dirname {{path/to/file_a}} {{path/to/directory_b}}",
+      "Most Similar NL2Bash Task": "Request IP address of 'myip.opendns.com' from name server 'resolver1.opendns.com'",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "dig +short myip.opendns.com @resolver1.opendns.com\n",
+          "command-options": {
+            "dig": {
+              "mpsum": "DNS lookup utility"
+            }
+          },
+          "TLDR_inform": {
+            "dig": {
+              "man1_dig_6795": "dn lookup util find authorit name server zone display soa record get type record given domain name lookup ip associ hostnam record lookup mail server associ given domain name mx record perform revers dn lookup ip address ptr record perform iter queri display entir trace path resolv domain name specifi altern dn server queri"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_42926437: how to Replace IP Address from in specified file"
+      ],
+      "Top-3 Scripts": [
+        "so_42926437: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "exec",
+      "MP Summary": "execute commands and open, close, or copy file descriptors",
+      "Most Similar TLDR Task": "Replace with the specified command and login using the default shell",
+      "Most Similar TLDR Script": "exec -l {{command -with -flags}}",
+      "Most Similar NL2Bash Task": "Request IP address of 'myip.opendns.com' from name server 'resolver1.opendns.com'",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "dig +short myip.opendns.com @resolver1.opendns.com\n",
+          "command-options": {
+            "dig": {
+              "mpsum": "DNS lookup utility"
+            }
+          },
+          "TLDR_inform": {
+            "dig": {
+              "man1_dig_6795": "dn lookup util find authorit name server zone display soa record get type record given domain name lookup ip associ hostnam record lookup mail server associ given domain name mx record perform revers dn lookup ip address ptr record perform iter queri display entir trace path resolv domain name specifi altern dn server queri"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_8271921: change ip address of server using PHP"
+      ],
+      "Top-3 Scripts": [
+        "so_8271921: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "virtualenv",
+      "MP Summary": "Python virtual environment creator",
+      "Most Similar TLDR Task": "Create a new environment",
+      "Most Similar TLDR Script": "virtualenv {{path/to/venv}}",
+      "Most Similar NL2Bash Task": "Request IP address of 'myip.opendns.com' from name server 'resolver1.opendns.com'",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "dig +short myip.opendns.com @resolver1.opendns.com\n",
+          "command-options": {
+            "dig": {
+              "mpsum": "DNS lookup utility"
+            }
+          },
+          "TLDR_inform": {
+            "dig": {
+              "man1_dig_6795": "dn lookup util find authorit name server zone display soa record get type record given domain name lookup ip associ hostnam record lookup mail server associ given domain name mx record perform revers dn lookup ip address ptr record perform iter queri display entir trace path resolv domain name specifi altern dn server queri"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_267478: Getting Public IP address of EC2 instance from outside using AWS-cli"
+      ],
+      "Top-3 Scripts": [
+        "ul_267478: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "chmod",
+      "MP Summary": "change file mode bits",
+      "Most Similar TLDR Task": "Give [a]ll users rights to [r]ead and e[x]ecute",
+      "Most Similar TLDR Script": "chmod a+rx {{file}}",
+      "Most Similar NL2Bash Task": "Request IP address of 'myip.opendns.com' from name server 'resolver1.opendns.com'",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "dig +short myip.opendns.com @resolver1.opendns.com\n",
+          "command-options": {
+            "dig": {
+              "mpsum": "DNS lookup utility"
+            }
+          },
+          "TLDR_inform": {
+            "dig": {
+              "man1_dig_6795": "dn lookup util find authorit name server zone display soa record get type record given domain name lookup ip associ hostnam record lookup mail server associ given domain name mx record perform revers dn lookup ip address ptr record perform iter queri display entir trace path resolv domain name specifi altern dn server queri"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "su_1129554: CentOS 7 minimal doesn\u2019t get an IP address from DHCP on startup"
+      ],
+      "Top-3 Scripts": [
+        "su_1129554: chmod +x /etc/rc.d/rc.local"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "pip",
+      "MP Summary": "A tool for installing and managing Python packages",
+      "Most Similar TLDR Task": "Save installed packages to file",
+      "Most Similar TLDR Script": "pip freeze > {{requirements.txt}}",
+      "Most Similar NL2Bash Task": "Request IP address of 'myip.opendns.com' from name server 'resolver1.opendns.com'",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "dig +short myip.opendns.com @resolver1.opendns.com\n",
+          "command-options": {
+            "dig": {
+              "mpsum": "DNS lookup utility"
+            }
+          },
+          "TLDR_inform": {
+            "dig": {
+              "man1_dig_6795": "dn lookup util find authorit name server zone display soa record get type record given domain name lookup ip associ hostnam record lookup mail server associ given domain name mx record perform revers dn lookup ip address ptr record perform iter queri display entir trace path resolv domain name specifi altern dn server queri"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_267478: Getting Public IP address of EC2 instance from outside using AWS-cli"
+      ],
+      "Top-3 Scripts": [
+        "ul_267478: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "ps",
+      "MP Summary": "report a snapshot of the current processes.",
+      "Most Similar TLDR Task": "Sort processes by memory consumption",
+      "Most Similar TLDR Script": "ps --sort size",
+      "Most Similar NL2Bash Task": "Request IP address of 'myip.opendns.com' from name server 'resolver1.opendns.com'",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "dig +short myip.opendns.com @resolver1.opendns.com\n",
+          "command-options": {
+            "dig": {
+              "mpsum": "DNS lookup utility"
+            }
+          },
+          "TLDR_inform": {
+            "dig": {
+              "man1_dig_6795": "dn lookup util find authorit name server zone display soa record get type record given domain name lookup ip associ hostnam record lookup mail server associ given domain name mx record perform revers dn lookup ip address ptr record perform iter queri display entir trace path resolv domain name specifi altern dn server queri"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_252388: How do I get a service on a remote CentOS 7 server to persist after I log out?"
+      ],
+      "Top-3 Scripts": [
+        "ul_252388: $ java -jar mywebservice.jar > /path/to/webservice/logs/mylogfile.txt &\n  [1] 10685\n  $ disown 10685\n $ ps\n    PID TTY          TIME CMD\n    10685 pts/0    00:00:00 wget\n    10687 pts/0    00:00:00 bash\n    10708 pts/0    00:00:00 ps\n $ logout"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "command",
+      "MP Summary": "execute a simple command",
+      "Most Similar TLDR Task": "Display the path to the executable or the alias definition of a specific command",
+      "Most Similar TLDR Script": "command -v {{command_name}}",
+      "Most Similar NL2Bash Task": "Request IP address of 'myip.opendns.com' from name server 'resolver1.opendns.com'",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "dig +short myip.opendns.com @resolver1.opendns.com\n",
+          "command-options": {
+            "dig": {
+              "mpsum": "DNS lookup utility"
+            }
+          },
+          "TLDR_inform": {
+            "dig": {
+              "man1_dig_6795": "dn lookup util find authorit name server zone display soa record get type record given domain name lookup ip associ hostnam record lookup mail server associ given domain name mx record perform revers dn lookup ip address ptr record perform iter queri display entir trace path resolv domain name specifi altern dn server queri"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_8271921: change ip address of server using PHP"
+      ],
+      "Top-3 Scripts": [
+        "so_8271921: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "line",
+      "MP Summary": "cache line size",
+      "Most Similar TLDR Task": "Read input",
+      "Most Similar TLDR Script": "line",
+      "Most Similar NL2Bash Task": "Request IP address of 'myip.opendns.com' from name server 'resolver1.opendns.com'",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "dig +short myip.opendns.com @resolver1.opendns.com\n",
+          "command-options": {
+            "dig": {
+              "mpsum": "DNS lookup utility"
+            }
+          },
+          "TLDR_inform": {
+            "dig": {
+              "man1_dig_6795": "dn lookup util find authorit name server zone display soa record get type record given domain name lookup ip associ hostnam record lookup mail server associ given domain name mx record perform revers dn lookup ip address ptr record perform iter queri display entir trace path resolv domain name specifi altern dn server queri"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_153106: Finding groups of IP addresses in a file"
+      ],
+      "Top-3 Scripts": [
+        "ul_153106: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "gcc",
+      "MP Summary": "GNU project C and C++ compiler",
+      "Most Similar TLDR Task": "Compile multiple source files into executable",
+      "Most Similar TLDR Script": "gcc {{source1.c}} {{source2.c}} -o {{executable}}",
+      "Most Similar NL2Bash Task": "Request IP address of 'myip.opendns.com' from name server 'resolver1.opendns.com'",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "dig +short myip.opendns.com @resolver1.opendns.com\n",
+          "command-options": {
+            "dig": {
+              "mpsum": "DNS lookup utility"
+            }
+          },
+          "TLDR_inform": {
+            "dig": {
+              "man1_dig_6795": "dn lookup util find authorit name server zone display soa record get type record given domain name lookup ip associ hostnam record lookup mail server associ given domain name mx record perform revers dn lookup ip address ptr record perform iter queri display entir trace path resolv domain name specifi altern dn server queri"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "so_29846090: how to get Ethernet adapter name from IP in c in centos"
+      ],
+      "Top-3 Scripts": [
+        "so_29846090: $ gcc getifname.c -lpci -o ./getifname"
+      ],
+      "Explanations about Options": {
+        "-l": "Search the library named library when linking. (The second alternative with the\n library as a separate argument is only for POSIX compliance and is not recommended.)",
+        "-p": "Generate extra code to write profile information suitable for the analysis program\n prof (for -p) or gprof (for -pg). You must use this option when compiling the source\n files you want data about, and you must also use it when linking.",
+        "-c": "If any of these options is used, then the linker is not run, and object file names\n should not be used as arguments.",
+        "-o": "Place output in file file. This applies to whatever sort of output is being produced,\n whether it be an executable file, an object file, an assembler file or preprocessed C\n code."
+      }
+    },
+    {
+      "Command": "file",
+      "MP Summary": "determine file type",
+      "Most Similar TLDR Task": "Give a description of the type of the specified file. Works fine for files with no file extension",
+      "Most Similar TLDR Script": "file {{filename}}",
+      "Most Similar NL2Bash Task": "Request IP address of 'myip.opendns.com' from name server 'resolver1.opendns.com'",
+      "Most Similar NL2Bash Script": {
+        "0": {
+          "script": "dig +short myip.opendns.com @resolver1.opendns.com\n",
+          "command-options": {
+            "dig": {
+              "mpsum": "DNS lookup utility"
+            }
+          },
+          "TLDR_inform": {
+            "dig": {
+              "man1_dig_6795": "dn lookup util find authorit name server zone display soa record get type record given domain name lookup ip associ hostnam record lookup mail server associ given domain name mx record perform revers dn lookup ip address ptr record perform iter queri display entir trace path resolv domain name specifi altern dn server queri"
+            }
+          }
+        }
+      },
+      "Top-3 Similar Questions": [
+        "ul_410032: Can't connect to Centos 6.9 after update to OpenSSH 7.6 on this server"
+      ],
+      "Top-3 Scripts": [
+        "ul_410032: openssh PAM unable to dlopen(/lib64/security/pam_stack.so): /lib64/security/pam_stack.so: cannot open shared object file: No such file or directory"
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

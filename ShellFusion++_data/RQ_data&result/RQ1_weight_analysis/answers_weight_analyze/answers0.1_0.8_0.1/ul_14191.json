@@ -1,0 +1,86 @@
+{
+  "Query": "scp without replacing existing files in the destination",
+  "Answers": [
+    {
+      "Command": "cp",
+      "MP Summary": "copy files and directories",
+      "Most Similar TLDR Task": "Recursively copy a directory's contents to another location (if the destination exists, the directory is copied inside it)",
+      "Most Similar TLDR Script": "cp -r {{path/to/source_directory}} {{path/to/target_directory}}",
+      "Top-3 Similar Questions": [
+        "ul_617808: How to copy a file and change destination file permission in one step?",
+        "au_744074: How does one properly copy a file into multiple folders and subfolders without overwriting the file contents in the destination folders?",
+        "so_48350769: Check file exists in source before copying"
+      ],
+      "Top-3 Scripts": [
+        "ul_617808: ...|  xargs sh -c 'for file; do \n                      cp -- \"$file\" /my/destination/path/ && \n                        chmod 700 /my/destination/path/\"$file\"; \n                    done' sh\n\n...|  xargs sh -c 'for file; do \n                  cp -- \"$file\" /my/destination/path/ && \n                    chmod 700 /my/destination/path/\"${file##*/}\"; \n                done' sh",
+        "au_744074: find folder -type d -exec cp file.txt {} \\;\n\nfind folder -type d -exec cp -t {} file.txt \\;\n\nman cp",
+        "so_48350769: $files = @(\"abc.ps1\", \"def.ps1\")\n$files | ?{ Test-Path $_ } | %{ $file = gi $_; cp $file.FullName \"destinationlocation\\$_\" -Force; }"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "mv",
+      "MP Summary": "move (rename) files",
+      "Most Similar TLDR Task": "Do not overwrite existing files at the target",
+      "Most Similar TLDR Script": "mv -n {{source}} {{target}}",
+      "Top-3 Similar Questions": [
+        "so_36074541: Replace existing file in bash scripting",
+        "so_8656525: Way to move files in bash and rename copied file automatically without overwriting an existing file",
+        "ul_410608: backup original in scp"
+      ],
+      "Top-3 Scripts": [
+        "so_36074541: ... inputfile > /tmp/tmp$$ && mv /tmp/tmp$$ inputfile\n\ngrep \"ERROR\" error | grep -v \"Login errors\" > /tmp/tmp$$ && mv /tmp/tmp$$ error",
+        "so_8656525: # strip path, if any\nfname=\"${JPEGFILE##*/}\"\n[ -f \"$DIRNAME/$fname\" ] && {\n    n=1\n    while [ -f \"$DIRNAME/${fname%.*}_COPY${n}.${fname##*.}\" ] ; do\n        let n+=1\n    done\n    mv \"$JPEGFILE\" \"$DIRNAME/${fname%.*}_COPY${n}.${fname##*.}\"\n} || mv \"$JPEGFILE\" \"$DIRNAME\"",
+        "ul_410608: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "install",
+      "MP Summary": "copy files and set attributes",
+      "Most Similar TLDR Task": "Copy files to destination",
+      "Most Similar TLDR Script": "install {{path/to/source}} {{path/to/destination}}",
+      "Top-3 Similar Questions": [
+        "so_52695200: Find string in each file. If it exists don't append. If it doesn't exist, append",
+        "au_536613: can I use scp in same network(wifi) to send file"
+      ],
+      "Top-3 Scripts": [
+        "so_52695200: ",
+        "au_536613: sudo apt-get install openssh-server"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "sftp",
+      "MP Summary": "OpenSSH secure file transfer",
+      "Most Similar TLDR Task": "Transfer remote directory to the local system recursively (works with `put` too)",
+      "Most Similar TLDR Script": "get -R {{/path/remote_directory}}",
+      "Top-3 Similar Questions": [
+        "au_774919: Escape username spaces in SCP"
+      ],
+      "Top-3 Scripts": [
+        "au_774919: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "scp",
+      "MP Summary": "secure copy (remote file copy program)",
+      "Most Similar TLDR Task": "Copy a file from a remote host to a local directory",
+      "Most Similar TLDR Script": "scp {{remote_host}}:{{path/to/remote_file}} {{path/to/local_directory}}",
+      "Top-3 Similar Questions": [
+        "so_17717778: How to transfer a file in an \"indirect\" ssh connection?",
+        "au_624023: scp - files getting different sizes in destination folder",
+        "su_1347233: SCP off the most recently modified file in a remote directory"
+      ],
+      "Top-3 Scripts": [
+        "so_17717778: scp -P 8022 /path/locale/file 127.0.0.1:/path/on/remote2",
+        "au_624023: ",
+        "su_1347233: ssh usr@remote\n# now on the remote system\ncd \"/source/dir/\" &&\nfind . ! -name . -prune -type f -exec sh -c '\n   [ \"$(find . ! -name . -prune -type f -newer \"$1\" -exec printf a \\; |\n   wc -c)\" -eq 0 ]' sh {} \\; -exec scp {} usr@local:\"/target/dir/\" \\;\n\nssh -R 12322:127.0.0.1:22 usr@remote\n# now on the remote system the same cd + find as above\n# only the scp part is different \n\u2026 -exec scp -P 12322 {} usr@127.0.0.1:\"/target/dir/\" \\;\n\nssh usr@remote '\n   cd \"/source/dir/\" &&\n   find . ! -name . -prune -type f -exec sh -c '\"'\"'\n      [ \"$(find . ! -name . -prune -type f -newer \"$1\" -exec printf a \\; |\n      wc -c)\" -eq 0 ]'\"'\"' sh {} \\; -exec scp {} usr@local:\"/target/dir/\" \\;\n   '"
+      ],
+      "Explanations about Options": {
+        "-P": "Specifies the port to connect to on the remote host. Note that this option is\n written with a capital \u2018P\u2019, because -p is already reserved for preserving the times\n and modes of the file."
+      }
+    }
+  ]
+}

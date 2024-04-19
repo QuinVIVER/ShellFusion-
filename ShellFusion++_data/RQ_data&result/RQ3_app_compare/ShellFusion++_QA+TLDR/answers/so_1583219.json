@@ -1,0 +1,91 @@
+{
+  "Query": "How to do a recursive find/replace of a string with awk or sed?",
+  "Answers": [
+    {
+      "Command": "sed",
+      "MP Summary": "stream editor for filtering and transforming text",
+      "Most Similar TLDR Task": "Replace separator / by any other character not used in the find or replace patterns, e.g., #",
+      "Most Similar TLDR Script": "sed 's#{{find}}#{{replace}}#' {{filename}}",
+      "Top-3 Similar Questions": [
+        "so_15920276: Find and Replace string in all files recursive using grep and sed",
+        "so_38229462: Grep/Sed: How to do a recursive find/replace of a string?",
+        "so_33455069: Awk/Sed: How to do a recursive find/replace of a string in files with a certain file extension?"
+      ],
+      "Top-3 Scripts": [
+        "so_15920276: grep -rl $oldstring /path/to/folder | xargs sed -i s@$oldstring@$newstring@g",
+        "so_38229462: sed -i.bak 's/httpaccess/httpaccesabc/g' access.html\n\nsed -i.bak 's/httpaccess/&abc/g' access.html",
+        "so_33455069: sed -i 's/previousword/newword/g' /myprojects/file1.cpp /myprojects/file2.cpp ...\n\nfind /myprojects -type f -name '*.cpp' -print0 | \n  xargs -0 echo sed -i 's/previousword/newword/g'\n\nfind /myprojects -type f -name '*.cpp' -print0 | \n   xargs -0 -n 1 sed -i 's/previousword/newword/g'\n\nfind /myprojects -type f -name '*.cpp' -exec sed -i 's/previousword/newword/g' '{}' +"
+      ],
+      "Explanations about Options": {
+        "-i": "edit files in place (makes backup if SUFFIX supplied)"
+      }
+    },
+    {
+      "Command": "find",
+      "MP Summary": "search for files in a directory hierarchy",
+      "Most Similar TLDR Task": "Find files by matching multiple patterns",
+      "Most Similar TLDR Script": "find {{root_path}} -name '{{*pattern_1*}}' -or -name '{{*pattern_2*}}'",
+      "Top-3 Similar Questions": [
+        "so_33455069: Awk/Sed: How to do a recursive find/replace of a string in files with a certain file extension?",
+        "so_4793892: Recursively rename files using find and sed",
+        "so_9577204: Find/sed: How can I recursively search/replace a string in files but only for lines that match a particular regexp"
+      ],
+      "Top-3 Scripts": [
+        "so_33455069: find ... -exec ... {} \\;\n\nfind ... -print0 | xargs -0 -n 1 ...\n\nfind ... -exec ... {} +\n\nfind ... -print0 | xargs -0 ...\n\nfind /myprojects -type f -name '*.cpp' -print0 | \n  xargs -0 echo sed -i 's/previousword/newword/g'\n\nfind /myprojects -type f -name '*.cpp' -print0 | \n   xargs -0 -n 1 sed -i 's/previousword/newword/g'\n\nfind /myprojects -type f -name '*.cpp' -exec sed -i 's/previousword/newword/g' '{}' +",
+        "so_4793892: find . -exec echo `echo \"{}\" | sed 's/./foo/g'` \\;",
+        "so_9577204: find /path/to/files -type f -print0 | \\\n  xargs -0 sed -i '/^matchstr/{s/oldstring/newstring/g}'"
+      ],
+      "Explanations about Options": {
+        "-type": "File is of type c:",
+        "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+      }
+    },
+    {
+      "Command": "perl",
+      "MP Summary": "The Perl 5 language interpreter",
+      "Most Similar TLDR Task": "Run a multi-line find/replace expression on a file, and save the result in another file",
+      "Most Similar TLDR Script": "perl -p0e 's/{{foo\\nbar}}/{{foobar}}/g' {{input_file}} > {{output_file}}",
+      "Top-3 Similar Questions": [
+        "ul_324118: Replace string in multiple files using find and sed",
+        "so_40502864: Replacing a pattern with awk or sed",
+        "ul_477836: Find and replace a pattern using sed or awk"
+      ],
+      "Top-3 Scripts": [
+        "ul_324118: perl -pi -e 's!original!result!g' *java",
+        "so_40502864: $ perl -pe 's/,[^|]*//g' ip.txt \n12345343|559|-2|20161108000000|FL|62|0|S\n3434344|-100000|20161108000000|GL|135|0|S\n45454545|214|-2000|20161108000001||21|77440|S",
+        "ul_477836: sed -e 's/REF\\*SY\\*[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]/REF*SY*111111111/g'\nperl -pe 's/REF\\*SY\\*[0-9]{9}REF*SY*111111111/g'"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "line",
+      "MP Summary": "cache line size",
+      "Most Similar TLDR Task": "Read input",
+      "Most Similar TLDR Script": "line",
+      "Top-3 Similar Questions": [
+        "so_61023717: Find and replace each instance of a single string with another from a list or file",
+        "ul_74787: Use sed to find whole word and replace",
+        "so_65706721: Unix: Replace line with string in another file"
+      ],
+      "Top-3 Scripts": [
+        "so_61023717: sed '0,/REPLACEME/s//$line/'\n\n$line",
+        "ul_74787: substitute\n   (^ start of line OR space)\n   test3\n   (space OR end of line)\nwith match 1 (AKA space or start of line)",
+        "so_65706721: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "tr",
+      "MP Summary": "translate or delete characters",
+      "Most Similar TLDR Task": "Replace all occurrences of a character in a file, and print the result",
+      "Most Similar TLDR Script": "tr {{find_character}} {{replace_character}} < {{filename}}",
+      "Top-3 Similar Questions": [
+        "so_29498696: BASH find and replace in all files in directory using FIND and SED"
+      ],
+      "Top-3 Scripts": [
+        "so_29498696: "
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

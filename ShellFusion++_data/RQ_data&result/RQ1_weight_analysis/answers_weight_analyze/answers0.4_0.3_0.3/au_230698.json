@@ -1,0 +1,82 @@
+{
+  "Query": "How to restart the networking service?",
+  "Answers": [
+    {
+      "Command": "iwconfig",
+      "MP Summary": "configure a wireless network interface",
+      "Most Similar TLDR Task": "Set the ESSID (network name) of the specified interface (e.g., eth0 or wlp2s0)",
+      "Most Similar TLDR Script": "iwconfig {{interface}} {{new_network_name}}",
+      "Top-3 Similar Questions": [
+        "au_842911: After network restart, device not ready Xubuntu 16.04, Intel 3945ABG Wireless card"
+      ],
+      "Top-3 Scripts": [
+        "au_842911: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "systemctl",
+      "MP Summary": "Control the systemd system and service manager",
+      "Most Similar TLDR Task": "Start/Stop/Restart/Reload a service",
+      "Most Similar TLDR Script": "systemctl start/stop/restart/reload {{unit}}",
+      "Top-3 Similar Questions": [
+        "su_1423959: Ubuntu Server: Fail to restart networking.service: Unit network.service not found",
+        "au_528000: How to restart the network manager applet",
+        "ul_388083: Grouping services so that failure in one restarts them all"
+      ],
+      "Top-3 Scripts": [
+        "su_1423959: systemctl list-unit-files | grep -i network\n\nsystemctl restart NetworkManager",
+        "au_528000: sudo systemctl restart network-manager",
+        "ul_388083: systemctl start all-services.target\n\nsystemctl stop all-services.target"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "ping",
+      "MP Summary": "send ICMP ECHO_REQUEST to network hosts",
+      "Most Similar TLDR Task": "Ping a host only a specific number of times",
+      "Most Similar TLDR Script": "ping -c {{count}} {{host}}",
+      "Top-3 Similar Questions": [
+        "ul_133931: Automatically restarting network connection"
+      ],
+      "Top-3 Scripts": [
+        "ul_133931: if ! ping -Q 1 -c 1 -t 1 google.com; then\n    ifdown eth0\n    sleep 3\n    ifup eth0\nfi"
+      ],
+      "Explanations about Options": {
+        "-t": "ping only. Set the IP Time to Live.",
+        "-c": "Stop after sending count ECHO_REQUEST packets. With deadline option, ping waits for\n count ECHO_REPLY packets, until the timeout expires.",
+        "-Q": "Set Quality of Service -related bits in ICMP datagrams. tos can be decimal (ping\n only) or hex number."
+      }
+    },
+    {
+      "Command": "service",
+      "MP Summary": "run a System V init script",
+      "Most Similar TLDR Task": "Start/Stop/Restart/Reload service (start/stop should always be available)",
+      "Most Similar TLDR Script": "service {{service_name}} {{start|stop|restart|reload}}",
+      "Top-3 Similar Questions": [
+        "so_21695246: Cannot restart network service",
+        "au_6358: How do you restart Apache?",
+        "au_813261: Service restart every 2 minute"
+      ],
+      "Top-3 Scripts": [
+        "so_21695246: service networking restart\n\nservice networking stop\n\nservice networking start",
+        "au_6358: sudo service apache2 restart",
+        "au_813261: type=forking: systemd considers the service started up once the process forks and the parent has exited. For classic daemons use this type unless you know that it is not necessary. You should specify PIDFile= as well so systemd can keep track of the main process."
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "shutdown",
+      "MP Summary": "Halt, power-off or reboot the machine",
+      "Most Similar TLDR Task": "Reboot immediately",
+      "Most Similar TLDR Script": "shutdown -r now",
+      "Top-3 Similar Questions": [
+        "so_52972025: how to restart (planned) a computer?"
+      ],
+      "Top-3 Scripts": [
+        "so_52972025: "
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

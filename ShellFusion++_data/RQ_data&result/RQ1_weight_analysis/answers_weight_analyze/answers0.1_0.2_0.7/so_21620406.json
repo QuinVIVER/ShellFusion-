@@ -1,0 +1,78 @@
+{
+  "Query": "How do I pause my shell script for a second before continuing?",
+  "Answers": [
+    {
+      "Command": "exit",
+      "MP Summary": "cause the shell to exit",
+      "Most Similar TLDR Task": "Exit the shell with the exit code of the last command executed",
+      "Most Similar TLDR Script": "exit",
+      "Top-3 Similar Questions": [
+        "au_601270: Script is not pausing until I type soff",
+        "so_59662645: batch-file pauses after execution of powershell command",
+        "au_466373: How do I pause for the specific time between two commands in a script?"
+      ],
+      "Top-3 Scripts": [
+        "au_601270: #!/bin/bash\n\nif [[ -f .running ]]; then\n    echo \"I'm already running (on pid $(<.running))\"\n    exit\nfi\n\n# put the current pid in the running file\necho $$ > .running",
+        "so_59662645: ",
+        "au_466373: #!/bin/bash\ncommand1\nsleep 30\ncommand2\nexit"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "exec",
+      "MP Summary": "execute commands and open, close, or copy file descriptors",
+      "Most Similar TLDR Task": "Replace with the specified command and change the process name",
+      "Most Similar TLDR Script": "exec -a {{process_name}} {{command -with -flags}}",
+      "Top-3 Similar Questions": [
+        "so_35493539: Need to pause bash script for user examination",
+        "ul_630788: What is the canonical way to pause WinCMD-Style in Linux Bash?",
+        "so_24202237: bash continue execution on command failure"
+      ],
+      "Top-3 Scripts": [
+        "so_35493539: #!/usr/bin/env bash\n\nexec 3< /path/to/inputfile.txt\n\nwhile read -u 3 newline; do\n  processed=$(tr '[a-z]' '[A-Z]' <<<\"$newline\")\n  printf '%s\\n' \"$processed\"\n  read go_ahead\ndone",
+        "ul_630788: ",
+        "so_24202237: for (( ;; )); do\n    while IFS= read -r FILE; do\n        cat \"$FILE\"\n    done < <(exec ls -rt1 *.log  | tail -n 2) >> jive_log.txt\n    sleep 1\ndone\n\nwhile IFS= read -r FILE; do\n    cat \"$FILE\"\ndone < <(exec ls -rt1 *.log  | tail -n 2) >> jive_log.txt\n\nreadarray -t FILES < <(exec ls -rt1 *.log)\ncat \"${FILES[@]:(-2)}\" > jive_log.txt  ## Or perhaps you mean to append it? (>>)"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "sh",
+      "MP Summary": "MirBSD Korn shell",
+      "Most Similar TLDR Task": "Execute a command",
+      "Most Similar TLDR Script": "sh -c {{command}}",
+      "Top-3 Similar Questions": [
+        "so_10038408: How do I prevent a continuous loop from ending"
+      ],
+      "Top-3 Scripts": [
+        "so_10038408: /bin/sh"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "zsh",
+      "MP Summary": "the Z shell",
+      "Most Similar TLDR Task": "Execute command passed as parameter",
+      "Most Similar TLDR Script": "zsh -c {{command}}",
+      "Top-3 Similar Questions": [
+        "so_5215343: How can I pause in zsh?"
+      ],
+      "Top-3 Scripts": [
+        "so_5215343: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "kill",
+      "MP Summary": "send a signal to a process",
+      "Most Similar TLDR Task": "Signal the operating system to pause a program until a SIGCONT (\"continue\") signal is received",
+      "Most Similar TLDR Script": "kill -{{17|STOP}} {{process_id}}",
+      "Top-3 Similar Questions": [
+        "so_49647715: Pause script by keyboard input"
+      ],
+      "Top-3 Scripts": [
+        "so_49647715: "
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

@@ -1,0 +1,80 @@
+{
+  "Query": "How do I change extension of multiple files recursively from the command line?",
+  "Answers": [
+    {
+      "Command": "echo",
+      "MP Summary": "display a line of text",
+      "Most Similar TLDR Task": "Print a message with environment variables",
+      "Most Similar TLDR Script": "echo \"{{My path is $PATH}}\"",
+      "Top-3 Similar Questions": [
+        "au_1034267: How do I change file headers from the command line?",
+        "so_29930588: Copy multiple files with bash script from command line arguments?",
+        "so_38850834: Counting number of files in multiple subdirectories from command line"
+      ],
+      "Top-3 Scripts": [
+        "au_1034267: xxd -r -p -o OFFSET <(echo NEW HEX SIGNATURE) FILE  # or\necho NEW HEX SIGNATURE | xxd -r -p -o OFFSET - FILE\n\n$ file 01.png \n01.png: PNG image data, 1280 x 1024, 8-bit/color RGB, non-interlaced\n$ xxd 01.png | head -1\n00000000: 8950 4e47 0d0a 1a0a 0000 000d 4948 4452  .PNG........IHDR\n$ xxd -r -p -o 0 <(echo 5261 7221 1A07 0000) 01.png\n$ file 01.png \n01.png: RAR archive data, vdb, os: MS-DOS\n$ xxd 01.png | head -1\n00000000: 5261 7221 1a07 0000 0000 000d 4948 4452  Rar!........IHDR\n\ndd conv=notrunc obs=1 if=<(xxd -r -p -o 0 <(echo 5261 7221 1A07 0000)) of=01.png",
+        "so_29930588: for FILE in \"$@\"; do\n    if [ -e \"$DIRECTORY/$FILE\" ]; then\n        echo \"$FILE already exists\"\n    else\n        cp \"$FILE\" $DIRECTORY\n    fi\ndone",
+        "so_38850834: for i in treedir_*; do echo $i: $(ls \"$i\" | wc -l); done\n\nfor i in treedir_*; do echo $i; ls \"$i\" | wc -l; done"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "xargs",
+      "MP Summary": "build and execute command lines from standard input",
+      "Most Similar TLDR Task": "Execute the command once for each input line, replacing any occurrences of the placeholder (here marked as `_`) with the input line",
+      "Most Similar TLDR Script": "{{arguments_source}} | xargs -I _ {{command}} _ {{optional_extra_arguments}}",
+      "Top-3 Similar Questions": [
+        "so_16665157: Replacing a line from multiple files, limiting to a line number range",
+        "ul_583230: How to copy files with a file extension from multiple folders?",
+        "au_453067: Remove lines of code from multiple files"
+      ],
+      "Top-3 Scripts": [
+        "so_16665157: find . -exec grep -il -E 'Programmer.*Bob' {} \\; \\\n    | xargs sed -i '1,10 s/.*Programmer.*Bob.*/LINE REPLACED/'",
+        "ul_583230: find . -iname \"*.tmt\" | xargs dirname | uniq | xargs -I{} sh -c \"cp -u {}*.tmt /destination/path && java command.jar\"\n\nxargs dirname\n\nxargs -I{} sh -c \"cp -u {}*.tmt /destination/path && java command.jar\"\n\nfind . -iname \"*.tmt\" | xargs -I{} sh -c \"cp -u {} /destination/path && java command.jar\"",
+        "au_453067: find dir -name '*.html' | xargs -d \\\\n sed -i \"COMMANDS\""
+      ],
+      "Explanations about Options": {
+        "-I": "Replace occurrences of replace-str in the initial-arguments with names read from\n standard input. Also, unquoted blanks do not terminate input items; instead the\n separator is the newline character. Implies -x and -L 1."
+      }
+    },
+    {
+      "Command": "svn",
+      "MP Summary": "Subversion command line client tool",
+      "Most Similar TLDR Task": "Display changes from the last 10 revisions, showing modified files for each revision",
+      "Most Similar TLDR Script": "svn log -vl {{10}}",
+      "Top-3 Similar Questions": [
+        "so_25180700: Get changed files from svn command line between two timestamps"
+      ],
+      "Top-3 Scripts": [
+        "so_25180700: svn diff -r{\"2014-01-06 13:56\"}:{\"2014-08-06 22:40\"} --summarize svn-path"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "apt-get",
+      "MP Summary": "APT package handling utility - command-line interface",
+      "Most Similar TLDR Task": "Remove a package and its configuration files",
+      "Most Similar TLDR Script": "apt-get purge {{package}}",
+      "Top-3 Similar Questions": [
+        "so_45900235: Change mysql bind-address from command line in Vagrant"
+      ],
+      "Top-3 Scripts": [
+        "so_45900235: apt-get install -y mysql-server\nsed -i \"s/.*bind-address.*/bind-address = 0.0.0.0/\" /etc/mysql/my.cnf\n..."
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "dirname",
+      "MP Summary": "strip last component from file name",
+      "Most Similar TLDR Task": "Calculate the parent directory of multiple paths",
+      "Most Similar TLDR Script": "dirname {{path/to/file_a}} {{path/to/directory_b}}",
+      "Top-3 Similar Questions": [
+        "ul_583230: How to copy files with a file extension from multiple folders?"
+      ],
+      "Top-3 Scripts": [
+        "ul_583230: find . -iname \"*.tmt\" | xargs dirname | uniq | xargs -I{} sh -c \"cp -u {}*.tmt /destination/path && java command.jar\"\n\nxargs dirname"
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

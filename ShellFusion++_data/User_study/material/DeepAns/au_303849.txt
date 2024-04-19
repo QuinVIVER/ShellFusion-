@@ -1,0 +1,268 @@
+
+
+Query:                Create a single pdf from multiple text, images or pdf files
+
+
+########################################################################################################################
+
+
+Question Title:       Compile pdf file from multiple images scanned in by scanimage --batch
+Question Link:        https://unix.stackexchange.com/questions/136620
+
+Accepted Answer:      Using ImageMagick is probably the easiest way:
+                      
+                      convert document-p*.tiff output.pdf
+                      
+
+
+########################################################################################################################
+
+
+Question Title:       Concatenate single common PDF to directory of PDF files
+Question Link:        https://askubuntu.com/questions/507289
+
+Accepted Answer:      I would just run it in a loop, once for every pdf in the directory:
+                      
+                      for f in *pdf; do 
+                          pdftk A=../coversheet.pdf B="$f" cat A1 B output "$f"_out.pdf;  
+                      done
+                      
+                      
+                      That will create a new file for each pdf with the cover page added. For a file called foo.pdf, it will create a new file called foo.pdf_out.pdf. 
+                      
+                      You can make this a bit more sophisticated. To create a file called foo_out.pdf use this instead:
+                      
+                      for f in *pdf; do 
+                          name=$(basename "$f" .pdf); 
+                          pdftk A=../coversheet.pdf B="$name".pdf cat A1 B output "$name"_out.pdf; 
+                      done
+                      
+                      
+                      And, to overwrite the files with the new versions, use
+                      
+                      for f in *pdf; do 
+                          pdftk A=../coversheet.pdf B="$f" cat A1 B output /tmp/tmp.pdf; 
+                          mv /tmp/tmp.pdf "$f"
+                      done
+                      
+
+
+########################################################################################################################
+
+
+Question Title:       Merge multiple pdf pages into specific pdf page using pdftk
+Question Link:        https://stackoverflow.com/questions/44222178
+
+Accepted Answer:      Only a little correction of your original proposal is needed:
+                      
+                      pdftk A=source.pdf B=merged.pdf cat A1-45 B A46-end output final.pdf
+                      
+                      You don't have to write "B1-18" to refer to the whole document. You can just use "B" to indicate an entire PDF. BTW, you can also use "end" if you want to refer to the last page, e.g. "B1-end"
+                      
+                      "A64" in your example means "catenate page 64 of source document" but - if I understand it correctly - you want to put those 18 pages inside larger document and you don't want to lose any page of any of those two documents, right? 
+                      
+                      Then you need to catenate first 45 pages of the source document (which translates to "A1-45"), then 18 pages of the merged document ("B"), and finally all the pages from page 46 to the end of the source document ("A46-end").
+
+
+########################################################################################################################
+
+
+Question Title:       Compile PDF book from multiple Markdown files
+Question Link:        https://superuser.com/questions/1383730
+
+Accepted Answer:      I assume your recipeX.md files already have headlines by themselves? And they are all at level 2?
+                      
+                      Then a small series of (Linux or macOS) shell command (or a little script) like the following should work (use the most recent version of Pandoc!):
+                      
+                       
+                      cd Recipes ;
+                      for i in */ ; do
+                         echo "# ${i%/}" ;
+                         echo " " ;
+                         for j in $i/*.md ; do
+                            cat $i/$j ;
+                            echo ; 
+                         done ;
+                      done ; \
+                      |      \
+                      pandoc                        \
+                        --toc                       \
+                        --number-sections           \
+                        --top-level-division=part   \
+                        --output=my-recipe-book.pdf \
+                        -
+                      
+                      
+                      Warning: do not miss the last '-' in the code above!
+                      If your recipeX.md files do NOT have headlines, try this variation:
+                      
+                       
+                      cd Recipes ;
+                      for i in */ ; do
+                         echo "# ${i%/}" ;
+                         echo " " ;
+                         for j in $i/*.md ; do
+                            echo "## $(basename ${j%.md})" ;
+                            echo ;
+                            cat $i/$j ;
+                            echo ; 
+                         done ;
+                      done ; \
+                      |      \
+                      pandoc                        \
+                        --toc                       \
+                        --number-sections           \
+                        --top-level-division=part   \
+                        --output=my-recipe-book.pdf \
+                        -
+                      
+
+
+########################################################################################################################
+
+
+Question Title:       Create one pdf out of multiple (selected) images
+Question Link:        https://unix.stackexchange.com/questions/263661
+
+Accepted Answer:      Source here, to Generate PDF file from any set of documents, not only images.
+                      
+                      From the above source:
+                      
+                      
+                        Main principle
+                        
+                        When you want to generate a multi-pages PDF file from multiple
+                        documents, you need to follow few steps :
+                      
+                      Sort of all input documents in alphabetical order
+                      Convert them to some temporary PDF files
+                      Assemble all temporary PDF documents to a final multi-pages PDF document.
+                      
+                        
+                        Conversion of input documents to temporary PDF format should be done
+                        according to their mimetype :
+                      
+                      Image files (jpg, png, tiff, …)
+                      Plain text files (txt)
+                      Libre Office &amp; Open Office documents (odt, ods, …)
+                      Microsoft Office files (doc, docx, xls, xlsx, ppt, pptx, …)
+                      
+                        
+                        Depending on input document types, conversion to PDF should be done
+                        using specific tools :
+                      
+                      convert (from ImageMagick) for image files
+                      unoconv for Libre Office, Microsoft Office and plain text files
+                      
+                        
+                        Once all input documents are converted to some temporary PDF files,
+                        final document assembly is done using GhostScript. This powerful tool
+                        allows to :
+                      
+                      merge multiple PDF documents
+                      optimize final file size
+                      
+                      
+                      
+                      For Nautilus and Gnome see more details at the above link, which includes more scripts to automate the processes needed. I have used a more limited approach, as the solution is streamlined for Gnome ad Nautilus and I use mainly KDE and Dolphin.
+                      
+                      This solution gives the results requested in the question but is intended to also be applied to text documents and pdfs (beside images) and to merge them all into the final pdf. 
+                      
+                      The files are integrated into the output pdf in alphabetical order.
+                      
+                      The final context-menu command can be also applied to the folder containing all the files to be merged.
+                      
+                      The solution also includes some GUI features.
+                      
+                      So:
+                      
+                      sudo apt-get install imagemagick unoconv ghostscript zenity libfile-mimeinfo-perl
+                      
+                      
+                      Using gedit or other text editor:
+                      
+                      gedit ~/.config/pdf-generate.conf
+                      
+                      
+                      And paste this:
+                      
+                      [general]
+                      compression=95
+                      density=200
+                      
+                      
+                      So if you want to modify any default parameter, just edit this file before running the tool.
+                      
+                      Main script in charge of the PDF generation k=job should be placed under /usr/local/bin/pdf-generate. See source link for the content of the main script. (Also here.)
+                      
+                      You can install main script and its configuration file from command line :
+                      
+                      # mkdir --parents $HOME/.config
+                      # wget --header='Accept-Encoding:none' -O $HOME/.config/pdf-generate.conf https://raw.githubusercontent.com/NicolasBernaerts/ubuntu-scripts/master/pdf/pdf-generate.conf
+                      # sudo wget --header='Accept-Encoding:none' -O /usr/local/bin/pdf-generate https://raw.githubusercontent.com/NicolasBernaerts/ubuntu-scripts/master/pdf/pdf-generate
+                      # sudo chmod +x /usr/local/bin/pdf-generate
+                      
+                      
+                      To fully integrate this PDF generation tool in your desktop environment:
+                      
+                      gedit /usr/share/applications/pdf-generate.desktop.
+                      
+                      
+                      See link for Gnome/Nautilus integration and automated download and installation. A slightly simplified and adjusted version for my KDE needs:
+                      
+                          [Desktop Entry]
+                      Type=Application
+                      Exec=pdf-generate
+                      Hidden=false
+                      NoDisplay=false
+                      Icon=pdf
+                      Keywords=pdf;generate;image;office;document;merge
+                      StartupNotify=true
+                      Name[en_US]=Generate PDF document
+                      Name[en]=Generate PDF document
+                      Name[C]=Generate PDF document
+                      Name[fr_FR]=Génération d'un PDF
+                      Comment=Tool to merge a set of documents to a PDF file.
+                      Comment[en_US]=Tool to merge a set of documents to a PDF file.
+                      Comment[fr_FR]=Outil de concaténation de documents en un fichier PDF.
+                      MimeType=image/bmp;image/gif;image/jpeg;image/jpg;image/png;image/tiff;application/pdf;application/x-pdf;application/x-bzpdf;application/x-gzpdf;application/msword;application/vnd.ms-word;application/vnd.oasis.opendocument.text;application/vnd.openxmlformats-officedocument.wordprocessingml.document;application/vnd.ms-excel;application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;application/vnd.openxmlformats-officedocument.spreadsheetml.template;application/vnd.ms-powerpoint;application/vnd.openxmlformats-officedocument.presentationml.presentation;application/vnd.openxmlformats-officedocument.presentationml.template;application/vnd.openxmlformats-officedocument.presentationml.slideshow;text/plain;
+                      Categories=GNOME;GTK;Graphics;Conversion;Utility;
+                      
+                      
+                      To get a full desktop integration, this PDF generation tool should be available from a custom action in the file manager context menu.
+                      
+                      For Nautilus you  need to declare the new custom action in a .desktop file placed under ~/.local/share/file-manager/actions (see link for content). For Dolphin/KDE it is in ~/.kde/share/kde4/services/ServiceMenus/. Therefore, I did:
+                      
+                      gedit ~/.kde/share/kde4/services/ServiceMenus/pdf-generate.desktop
+                      
+                      
+                      with the content:
+                      
+                      [Desktop Entry]
+                      Actions=pdf-generate
+                      Encoding=UTF8
+                      Icon=pdf
+                      MimeType=MimeTypes=image/bmp;image/gif;image/jpeg;image/jpg;image/png;image/tiff;application/pdf;application/x-pdf;application/x-bzpdf;application/x-gzpdf;application/msword;application/vnd.ms-word;application/vnd.oasis.opendocument.text;application/vnd.openxmlformats-officedocument.wordprocessingml.document;application/vnd.ms-excel;application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;application/vnd.openxmlformats-officedocument.spreadsheetml.template;application/vnd.ms-powerpoint;application/vnd.openxmlformats-officedocument.presentationml.presentation;application/vnd.openxmlformats-officedocument.presentationml.template;application/vnd.openxmlformats-officedocument.presentationml.slideshow;text/plain;inode/directory;application/pdf
+                      ServiceTypes=KonqPopupMenu/Plugin
+                      Type=Service
+                      
+                      
+                      [Desktop Action pdf-generate]
+                      Exec=pdf-generate %F
+                      Icon=pdf
+                      Name=Create pdf file
+                      
+                      
+                      After re-login, a context menu option appears when selecting files, as indicated in the source link. For my KDE/Dolphin configuration, this works for selected files if they have the same extension. Otherwise, the best way it just to put all needed files in one folder and then execute the command from the right-click context menu of that folder.
+                      
+                      
+                      
+                      Testing on a folder containing a png, a jpeg, a pdf and an odt file:
+                      
+                      
+                      
+                      
+                      
+                      The output file is in the source folder, with the name first_in_alphabetical_order-merged.pdf.
+                      
+                      

@@ -1,0 +1,96 @@
+{
+  "Query": "How can I sort the output of 'ls' by last modified date?",
+  "Answers": [
+    {
+      "Command": "sort",
+      "MP Summary": "sort lines of text files",
+      "Most Similar TLDR Task": "Sort human-readable numbers (in this case the 5th field of `ls -lh`)",
+      "Most Similar TLDR Script": "ls -lh | sort -h -k 5",
+      "Top-3 Similar Questions": [
+        "au_713045: How do I sort the output of \"ls\" by last modified - including the date?",
+        "ul_530467: How to sort the content of text file .txt by files size",
+        "ul_404060: How to sort results of Find statement by date?"
+      ],
+      "Top-3 Scripts": [
+        "au_713045: stat -c '%y - %n' * | sort -t'-' -k1,1\n\nstat -c '%y - %n' * | sort -r -t'-' -k1,1",
+        "ul_530467: sort -k 5 -h /home/root/all_files.txt\n\ngrep '^-' /home/root/all_files.txt | sort -k 5 -h",
+        "ul_404060: find . -regex \".*/[0-9.]+\" -printf \"%T@ %f\\n\" | sort | cut -d' ' -f2\n\nfind . -regex \".*/[0-9.]+\" -printf \"%T@ %f\\n\" | sort -k1,1r | cut -d' ' -f2"
+      ],
+      "Explanations about Options": {
+        "-h": "compare human readable numbers (e.g., 2K 1G)",
+        "-k": "sort via a key; KEYDEF gives location and type",
+        "-r": "reverse the result of comparisons"
+      }
+    },
+    {
+      "Command": "head",
+      "MP Summary": "output the first part of files",
+      "Most Similar TLDR Task": "Output everything but the last few lines of a file",
+      "Most Similar TLDR Script": "head -n -{{count_of_lines}} {{filename}}",
+      "Top-3 Similar Questions": [
+        "so_3302900: How to Sort Output from several Log Files by date",
+        "au_23688: Best way to list 100 first files in a directory sorted by time",
+        "nl2bash_603: Sort and display the file name and creation month of top 11 files in the entire file system (Sort in the order of month )"
+      ],
+      "Top-3 Scripts": [
+        "so_3302900: ",
+        "au_23688: ls -cr | head -n 100\n\nfind . -mindepth 1 -maxdepth 1 -exec stat -c $'%Z\\t%n' '{}' \\; |\n    sort -k 1n |\n    cut -f 2 -d $'\\t' |\n    head -n 10 |\n    sed -e 's/^\\.\\///'\n\nfind . -mindepth 1 -maxdepth 1 -exec stat -c $'%W\\t%n' '{}' \\; |\n    sort -k 1n |\n    cut -f 2 -d $'\\t' |\n    head -n 10 |\n    sed -e 's/^\\.\\///'",
+        "nl2bash_603: find / -type f -printf \"\\n%Ab %p\" | head -n 11 | sort -k1M"
+      ],
+      "Explanations about Options": {
+        "-n": "print the first NUM lines instead of the first 10; with the leading '-', print all\n but the last NUM lines of each file"
+      }
+    },
+    {
+      "Command": "date",
+      "MP Summary": "print or set the system date and time",
+      "Most Similar TLDR Task": "Display the current date as a Unix timestamp (seconds since the Unix epoch)",
+      "Most Similar TLDR Script": "date +%s",
+      "Top-3 Similar Questions": [
+        "so_3302900: How to Sort Output from several Log Files by date",
+        "so_37368188: Sorting by date with variable number of columns",
+        "so_61893412: It is possible to sort the proccesses by a given date in bash?"
+      ],
+      "Top-3 Scripts": [
+        "so_3302900: ",
+        "so_37368188: ",
+        "so_61893412: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "tail",
+      "MP Summary": "output the last part of files",
+      "Most Similar TLDR Task": "Show last 'num' lines in 'file' and refresh every 'n' seconds",
+      "Most Similar TLDR Script": "tail -n {{num}} -s {{n}} -f {{file}}",
+      "Top-3 Similar Questions": [
+        "so_41826902: How to sort list of names by date and get last in bash",
+        "ul_532529: In bash: Filter, sort by date in name, and return the most recently dated name",
+        "au_443571: Sort files in directory by creation date (Birth)"
+      ],
+      "Top-3 Scripts": [
+        "so_41826902: sort -t- -nk5 list.txt | tail -1",
+        "ul_532529: curl -l \"ftp.fakeurl.com.au/In Stock Daily CSV/\"  --user username:password |\n  grep '\\.csv$' |\n  sort -t. -k3,3 -k2,2 -k1,1 |\n  tail -n 1\n\ntail -n 1",
+        "au_443571: get_crtime() {\n\n    for target in \"${@}\"; do\n        inode=$(ls -di \"${target}\" | cut -d ' ' -f 1)\n        fs=$(df  --output=source \"${target}\"  | tail -1)\n        crtime=$(sudo debugfs -R 'stat <'\"${inode}\"'>' \"${fs}\" 2>/dev/null | \n        grep -oP 'crtime.*--\\s*\\K.*')\n        printf \"%s\\t%s\\n\" \"${target}\" \"${crtime}\"\n    done\n}"
+      ],
+      "Explanations about Options": {
+        "-n": "output the last NUM lines, instead of the last 10; or use -n +NUM to output\n starting with line NUM"
+      }
+    },
+    {
+      "Command": "touch",
+      "MP Summary": "change file timestamps",
+      "Most Similar TLDR Task": "Set the times on a file to a specific date and time",
+      "Most Similar TLDR Script": "touch -t {{YYYYMMDDHHMM.SS}} {{filename}}",
+      "Top-3 Similar Questions": [
+        "so_29737420: How to filter the output of ls command to display only files created in February?"
+      ],
+      "Top-3 Scripts": [
+        "so_29737420: touch --date \"yyyy-mm-dd\" /tmp/start\ntouch --date \"yyyy-mm-dd\" /tmp/end\nfind /my/path -type f -newer /tmp/start -not -newer /tmp/end"
+      ],
+      "Explanations about Options": {
+        "--date": "parse STRING and use it instead of current time"
+      }
+    }
+  ]
+}

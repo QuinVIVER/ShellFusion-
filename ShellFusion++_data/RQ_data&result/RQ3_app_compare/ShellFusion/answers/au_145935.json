@@ -1,0 +1,86 @@
+{
+    "Answers": [
+        {
+            "Command": "pactl",
+            "Explanations about Options": {},
+            "MP Summary": "Control a running PulseAudio sound server",
+            "Most Similar TLDR Script": "pactl list {{sinks}} short",
+            "Most Similar TLDR Task": "List all sinks (or other types - sinks are outputs and sink-inputs are active audio streams)",
+            "Top-3 Scripts": [
+                "au_2573: sudo apt-get install pulseaudio-module-bluetooth\n pactl load-module module-bluetooth-discover\n\npactl load-module module-loopback\n\npactl load-module module-loopback source_dont_move=yes source=$BTSOURCE sink=$SINK\n\npactl list sinks\n\npactl list sources\n\npactl load-module module-loopback source_dont_move=yes source=bluez_source.14_DA_E9_2A_D7_57 sink=alsa_output.pci-0000_00_14.2.analog-stereo\n\npactl unload-module $(pactl list short modules | grep \"loopback.*$BTSOURCE\" | cut -f1)\n\n$ pactl load-module module-loopback source_dont_move=yes source=bluez_source.14_DA_E9_2A_D7_57 sink=alsa_output.pci-0000_00_14.2.analog-stereo\n15\n$ pactl unload-module 15",
+                "au_775523: /usr/bin/pactl load-module module-bluetooth-discover\n\nif [ x\"$SESSION_MANAGER\" != x ] ; then\n    /usr/bin/pactl load-module module-x11-xsmp \"display=$DISPLAY session_manager=$SESSION_MANAGER\" > /dev/null\n    # add this line here:\n    /usr/bin/pactl load-module module-bluetooth-discover\nfi",
+                "au_145733: pactl load-module module-alsa-sink device=bluetooth\n\npactl list sinks short"
+            ],
+            "Top-3 Similar Questions": [
+                "au_2573: Can I use my computer as an A2DP receiver / bluetooth speaker?",
+                "au_775523: After updating to 16.04, bluetooth audio A2DP mode stopped working",
+                "au_145733: A2DP connection not shown in PulseAudio"
+            ]
+        },
+        {
+            "Command": "rfkill",
+            "Explanations about Options": {},
+            "MP Summary": "tool for enabling and disabling wireless devices",
+            "Most Similar TLDR Script": "rfkill block {{bluetooth}}",
+            "Most Similar TLDR Task": "Block devices by type (e.g. bluetooth, wlan)",
+            "Top-3 Scripts": [
+                "ul_381342: pacman --needed -S pulseaudio-bluetooth bluez-utils bluez-tools rfkill\nsystemctl enable bluetooth\nsystemctl start bluetooth\nrfkill unblock bluetooth\ngpasswd -a `logname` lp",
+                "au_180437: sudo rfkill block bluetooth && sudo rfkill unblock bluetooth",
+                "au_661545: rfkill list"
+            ],
+            "Top-3 Similar Questions": [
+                "au_1004712: How to keep the audio profile at A2DP while using a mic with Bluetooth headset? (Push-to-talk)",
+                "ul_381342: Bluetooth A2DP pulseaudio source to play sound from phone to linux with bluez 5.45",
+                "au_180437: Bluetooth headset A2DP works, HSP/HFP not (no sound/no mic)"
+            ]
+        },
+        {
+            "Command": "pulseaudio",
+            "Explanations about Options": {
+                "--check(M)": "Return 0 as return code when the PulseAudio daemon is already running for the\n calling user, or non-zero otherwise. Produces no output on the console except for\n errors to stderr.",
+                "--start(M)": "Start PulseAudio if it is not running yet. This is different from starting\n PulseAudio without --start which would fail if PA is already running. PulseAudio is\n guaranteed to be fully initialized when this call returns. Implies --daemonize.",
+                "-k(M)": "Kill an already running PulseAudio daemon of the calling user (Equivalent to\n sending a SIGTERM)."
+            },
+            "MP Summary": "The PulseAudio Sound System",
+            "Most Similar TLDR Script": "pulseaudio --check",
+            "Most Similar TLDR Task": "Check if pulseaudio is running (a non-zero exit code means it is not running)",
+            "Top-3 Scripts": [
+                "ul_381342: pulseaudio -k",
+                "au_236188: pulseaudio --kill\npulseaudio --start"
+            ],
+            "Top-3 Similar Questions": [
+                "ul_381342: Bluetooth A2DP pulseaudio source to play sound from phone to linux with bluez 5.45",
+                "au_236188: Why do I only hear sound from the speakers with A2DP headset connected?",
+                "au_1267910: Ubuntu 20.04 bluetooth headphones play through internal speakers"
+            ]
+        },
+        {
+            "Command": "arecord",
+            "Explanations about Options": {
+                "--list-devices(M)": "List all soundcards and digital audio devices",
+                "-f(C)": "First, enable audio forwarding to speakers with \"pactl load-module module-loopback latency_msec=1\" Then I record all I want using \"arecord -f cd -t raw | oggenc - -r -o out.ogg\" (using mp3 format didn't works) To finish, I stop audio forwarding using \"pactl unload-module module-loopback\"  If you find a way to correctly record as mp3 (using lame) from microphone, don't hesitate to answer this question and tell me."
+            },
+            "MP Summary": "command-line sound recorder and player for ALSA soundcard driver",
+            "Most Similar TLDR Script": "arecord --list-devices",
+            "Most Similar TLDR Task": "List all sound cards and digital audio devices",
+            "Top-3 Scripts": [
+                "ul_349552: arecord -f cd -t raw | oggenc - -r -o out.ogg"
+            ],
+            "Top-3 Similar Questions": [
+                "ul_349552: Record & Play what comes from the microphone at the same time"
+            ]
+        },
+        {
+            "Command": "sleep",
+            "Explanations about Options": {},
+            "MP Summary": "delay for a specified amount of time",
+            "Most Similar TLDR Script": "sleep {{seconds}}",
+            "Most Similar TLDR Task": "Delay in seconds",
+            "Top-3 Scripts": [],
+            "Top-3 Similar Questions": [
+                "au_1004712: How to keep the audio profile at A2DP while using a mic with Bluetooth headset? (Push-to-talk)"
+            ]
+        }
+    ],
+    "Query": "Get rid of 0.5s latency when playing audio over Bluetooth with A2DP"
+}

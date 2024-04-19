@@ -1,0 +1,82 @@
+{
+  "Query": "Read the contents of a zipped file without extraction?",
+  "Answers": [
+    {
+      "Command": "unzip",
+      "MP Summary": "list, test and extract compressed files in a ZIP archive",
+      "Most Similar TLDR Task": "Extract zip files(s) to given path",
+      "Most Similar TLDR Script": "unzip {{compressed_file(s)}} -d {{/path/to/put/extracted_file(s)}}",
+      "Top-3 Similar Questions": [
+        "ul_329752: Parallel read the contents of a zipped file without extraction",
+        "so_45863093: read the files one by one in a zip file using bash"
+      ],
+      "Top-3 Scripts": [
+        "ul_329752: ",
+        "so_45863093: unzip -l sample.zip |sed '\n  /^ *[0-9][0-9]* *2[0-9-]*  *[0-9][0-9]:[0-9][0-9]  */!d; s///\n' |while IFS= read file\n  unzip -p sample.zip \"$file\" |gunzip -c |while IFS= read line\n    # do stuff to \"$line\" here\n  done\ndone\n\nunzip -p\n\nunzip -l archive.zip\n\nunzip -p sample.zip |gunzip -c |while read line\n  # do stuff to \"$line\"\ndone\n\nunzip -p archive"
+      ],
+      "Explanations about Options": {
+        "-p": "extract files to pipe (stdout). Nothing but the file data is sent to stdout , and\n the files are always extracted in binary format, just as they are stored (no\n conversions)."
+      }
+    },
+    {
+      "Command": "zcat",
+      "MP Summary": "decompress and concatenate files to standard output",
+      "Most Similar TLDR Task": "Print the uncompressed contents of a gzipped file to the standard output",
+      "Most Similar TLDR Script": "zcat {{file.txt.gz}}",
+      "Top-3 Similar Questions": [
+        "ul_452011: read first line from .gz compressed file without decompressing entire file"
+      ],
+      "Top-3 Scripts": [
+        "ul_452011: zcat logfile.gz | head -n 1\n\n(zcat logfile.gz; echo $? >&2) | head -n 1\n\nzcat logfile.gz | awk '{ print $1; exit }'"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "zip",
+      "MP Summary": "package and compress (archive) files",
+      "Most Similar TLDR Task": "Add files to an existing zip file",
+      "Most Similar TLDR Script": "zip {{compressed.zip}} {{path/to/file}}",
+      "Top-3 Similar Questions": [
+        "so_22954161: Read a filename inside a zip file without extracting it in powershell",
+        "au_1173597: Let zip read source file list from a file"
+      ],
+      "Top-3 Scripts": [
+        "so_22954161: $zip = 'C:\\path\\to\\file.zip'\n\n$app = New-Object -COM 'Shell.Application'\n$app.NameSpace($zip).Items() | ? { $_.Name -like '*.txt' } | select -Expand Name",
+        "au_1173597: zip output.zip -@ < files.list"
+      ],
+      "Explanations about Options": {
+        "-@": "file lists. If a file list is specified as -@ [Not on MacOS] , zip takes the list of\n input files from standard input instead of from the command line. For example,"
+      }
+    },
+    {
+      "Command": "cat",
+      "MP Summary": "concatenate files and print on the standard output",
+      "Most Similar TLDR Task": "Print the contents of a file to the standard output",
+      "Most Similar TLDR Script": "cat {{file}}",
+      "Top-3 Similar Questions": [
+        "ul_515725: How I can read content of the ssh key file using a path read from a file?",
+        "au_554434: How does one read the contents of a text file located on the desktop using the terminal?",
+        "so_54405821: \"Index out of range\" while reading contents from a file through cat PYTHON"
+      ],
+      "Top-3 Scripts": [
+        "ul_515725: eval cat $(cat path_to_key.txt)",
+        "au_554434: cat ~/Desktop/FILENAMEHERE\n\ncat /home/*/Desktop/FILENAMEHERE",
+        "so_54405821: cat ts.csv | python cptest.py"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "tee",
+      "MP Summary": "read from standard input and write to standard output and files",
+      "Most Similar TLDR Task": "Append to the given FILEs, do not overwrite",
+      "Most Similar TLDR Script": "echo \"example\" | tee -a {{FILE}}",
+      "Top-3 Similar Questions": [
+        "so_25535036: is there a way other than read/echo to read one line from a file descriptor to stdout without closing the fd?"
+      ],
+      "Top-3 Scripts": [
+        "so_25535036: debugum=1\neval \"\n    outputStuff |\n    tee debugFile.$((debugNum++)) |\n    filterStuff |\n    transformStuff |\n    doMoreStuff |\n    tee debugFile.$((debugNum++)) |\n    endStuff > endFile\n\""
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

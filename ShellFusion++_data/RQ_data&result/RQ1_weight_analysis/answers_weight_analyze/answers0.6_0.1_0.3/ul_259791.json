@@ -1,0 +1,91 @@
+{
+  "Query": "How to change the Home directory of the currently logged In user",
+  "Answers": [
+    {
+      "Command": "usermod",
+      "MP Summary": "modify a user account",
+      "Most Similar TLDR Task": "Create a new home directory for a user and move their files to it",
+      "Most Similar TLDR Script": "usermod -m -d {{/path/to/home}} {{user}}",
+      "Top-3 Similar Questions": [
+        "ul_267904: What is a good way to change a group of users UIDs without usermod executing a time consuming chown on the user home directory?",
+        "au_18103: How can I change the default location of content directories (eg Pictures, Templates, Music)  in my home folder?",
+        "su_40450: How does one change user's home directory in Ubuntu 9.04?"
+      ],
+      "Top-3 Scripts": [
+        "ul_267904: # mkdir -p /tmp/home/jsmith  ## uncomment if required.\nusermod -d /tmp/home/jsmith jsmith\nusermod -u fixedUID jsmith -o\nusermod -d /home/jsmith jsmith\n\n# mkdir -p /tmp/home/jsmith  ## uncomment if required.\nhomedir=$(getent passwd jsmith | awk -F: '{print $6}')\nusermod -d /tmp/home/jsmith jsmith\nusermod -u fixedUID jsmith -o\nusermod -d \"$homedir\" jsmith",
+        "au_18103: chown nobody:users /home/common\nchmod 2775 /home/common\nusermod -a -G users user1",
+        "su_40450: sudo usermod\u00a0 -d <i>new_home_dir</i>\u00a0 <i>username</i>\n\nsudo usermod  -d <i>new_home_dir</i>  -m\u00a0 <i>username</i>"
+      ],
+      "Explanations about Options": {
+        "-a": "Add the user to the supplementary group(s). Use only with the -G option.",
+        "-d": "The user's new login directory.",
+        "-o": "When used with the -u option, this option allows to change the user ID to a non-unique\n value.",
+        "-u": "The new numerical value of the user's ID.",
+        "-G": "GROUP1[,GROUP2,...[,GROUPN]]]\n A list of supplementary groups which the user is also a member of. Each group is\n separated from the next by a comma, with no intervening whitespace. The groups are\n subject to the same restrictions as the group given with the -g option.",
+        "-m": "Move the content of the user's home directory to the new location."
+      }
+    },
+    {
+      "Command": "users",
+      "MP Summary": "print the user names of users currently logged in to the current host",
+      "Most Similar TLDR Task": "Display a list of logged in users according to a specific file",
+      "Most Similar TLDR Script": "users {{/var/log/wmtp}}",
+      "Top-3 Similar Questions": [
+        "au_18103: How can I change the default location of content directories (eg Pictures, Templates, Music)  in my home folder?"
+      ],
+      "Top-3 Scripts": [
+        "au_18103: chown nobody:users /home/common\nchmod 2775 /home/common\nusermod -a -G users user1"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "passwd",
+      "MP Summary": "change user password",
+      "Most Similar TLDR Task": "Change the password of the current user",
+      "Most Similar TLDR Script": "passwd {{new_password}}",
+      "Top-3 Similar Questions": [
+        "au_209858: Change root user's home directory in Ubuntu?",
+        "su_1132626: Changing home directory of user on Windows Subsystem for Linux",
+        "ul_74961: Changing username but not home directory"
+      ],
+      "Top-3 Scripts": [
+        "au_209858: /etc/passwd",
+        "su_1132626: sudo vim /etc/passwd",
+        "ul_74961: /etc/passwd"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "cd",
+      "MP Summary": "change the working directory",
+      "Most Similar TLDR Task": "Go to home directory of current user",
+      "Most Similar TLDR Script": "cd",
+      "Top-3 Similar Questions": [
+        "su_1132626: Changing home directory of user on Windows Subsystem for Linux",
+        "au_1333471: Change directory in current terminal with terminal file manager",
+        "ul_147154: Change to the last modified subdirectory of the current directory"
+      ],
+      "Top-3 Scripts": [
+        "su_1132626: cd ~",
+        "au_1333471: ",
+        "ul_147154: file=$( ls -1tq /dir/*/readme.txt | head -n 1 )\ncd $( dirname \"$file\" )"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "useradd",
+      "MP Summary": "create a new user or update default new user information",
+      "Most Similar TLDR Task": "Create new user with a default home directory",
+      "Most Similar TLDR Script": "useradd --create-home {{name}}",
+      "Top-3 Similar Questions": [
+        "ul_118079: /home/user: change directory failed error"
+      ],
+      "Top-3 Scripts": [
+        "ul_118079: useradd -m fox"
+      ],
+      "Explanations about Options": {
+        "-m": "Create the user's home directory if it does not exist. The files and directories\n contained in the skeleton directory (which can be defined with the -k option) will be\n copied to the home directory."
+      }
+    }
+  ]
+}

@@ -1,0 +1,90 @@
+{
+  "Query": "How do I change directories in the terminal, and know which directory I'm in?",
+  "Answers": [
+    {
+      "Command": "mkdir",
+      "MP Summary": "make directories",
+      "Most Similar TLDR Task": "Create directories recursively (useful for creating nested dirs)",
+      "Most Similar TLDR Script": "mkdir -p {{path/to/directory}}",
+      "Top-3 Similar Questions": [
+        "so_46578496: How to add and change the extension of files in a directory?",
+        "au_249314: How can I create a directory and change my working directory to the new directory?",
+        "so_43471183: How to change directory in Bash"
+      ],
+      "Top-3 Scripts": [
+        "so_46578496: $ touch foo bar baz.baz \n$ mkdir dir ; ls -F\nbar  baz.baz  dir/  foo\n$ for f in * ; do if [ -f \"$f\" ] ; then t=\"${f%.*}\" ; mv -i \"$f\" \"$t\".ext ; fi ; done\n$ ls\nbar.ext  baz.ext  dir/  foo.ext",
+        "au_249314: md () { mkdir -p \"$@\" && cd \"$1\"; }",
+        "so_43471183: mkdir c"
+      ],
+      "Explanations about Options": {
+        "-p": "no error if existing, make parent directories as needed"
+      }
+    },
+    {
+      "Command": "mv",
+      "MP Summary": "move (rename) files",
+      "Most Similar TLDR Task": "Move files in arbitrary locations",
+      "Most Similar TLDR Script": "mv {{source}} {{target}}",
+      "Top-3 Similar Questions": [
+        "so_46578496: How to add and change the extension of files in a directory?",
+        "ul_68912: How to change extension of all files in a directory?"
+      ],
+      "Top-3 Scripts": [
+        "so_46578496: $ for f in * ; do if [ -f \"$f\" ] ; then t=\"${f%.*}\" ; mv -i \"$f\" \"$t\".ext ; fi ; done\n\nfor f in *               # loop all items in the current dir\ndo \n  if [ -f \"$f\" ]         # test that $f is a file\n  then\n    t=\"${f%.*}\"          # strip extension off ie. everything after last .\n    mv -i \"$f\" \"$t\".ext  # rename file with the new extension\n  fi\ndone\n\n$ touch foo bar baz.baz \n$ mkdir dir ; ls -F\nbar  baz.baz  dir/  foo\n$ for f in * ; do if [ -f \"$f\" ] ; then t=\"${f%.*}\" ; mv -i \"$f\" \"$t\".ext ; fi ; done\n$ ls\nbar.ext  baz.ext  dir/  foo.ext",
+        "ul_68912: for x in !(*.*); do\n  mv -- \"$x\" \"$x.md\"\ndone\n\nfor x in *; do\n  case \"$x\" in\n    *.*) ;;         # skip this file\n    *) mv -- \"$x\" \"$x.md\";;\n  esac\ndone"
+      ],
+      "Explanations about Options": {
+        "-i": "prompt before overwrite"
+      }
+    },
+    {
+      "Command": "file",
+      "MP Summary": "determine file type",
+      "Most Similar TLDR Task": "Look inside a zipped file and determine the file type(s) inside",
+      "Most Similar TLDR Script": "file -z {{foo.zip}}",
+      "Top-3 Similar Questions": [
+        "au_1320065: trying to change to a file directory in the terminal but I am having trouble",
+        "so_47200789: PowerShell change something you don't know",
+        "ul_650196: Change to directory where a file is"
+      ],
+      "Top-3 Scripts": [
+        "au_1320065: No such file or directory",
+        "so_47200789: ...\n$file =  $Datei.Fullname\n(Get-Content $file) -replace \"max.tree.children.threshold=\\d+\",\"max.tree.children.threshold=300\" | Set-Content $file\n...",
+        "ul_650196: file=\"/path/to/file\"\ncd \"$(dirname \"$file\")\"\n\nfile=\"/path/to/file\"\ncd \"${file%/*}\""
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "chown",
+      "MP Summary": "change file owner and group",
+      "Most Similar TLDR Task": "Recursively change the owner of a directory and its contents",
+      "Most Similar TLDR Script": "chown -R {{user}} {{path/to/directory}}",
+      "Top-3 Similar Questions": [
+        "au_997102: Recursively change owner of a directory by that directory's name",
+        "ul_358224: Who can change the permissions of a file/directory?",
+        "ul_529143: How to change permissions of all the files in my directory?"
+      ],
+      "Top-3 Scripts": [
+        "au_997102: #!/bin/bash\n\nfor directory in `find /var/www/html/ -mindepth 1 -maxdepth 1 -type d`\ndo\n    \n    user=$(basename $directory)\n    chown -R $user:www-data $directory\ndone",
+        "ul_358224: ",
+        "ul_529143: sudo chown -R miki /opt/hadoop-3.2.0"
+      ],
+      "Explanations about Options": {
+        "-R": "operate on files and directories recursively"
+      }
+    },
+    {
+      "Command": "exec",
+      "MP Summary": "execute commands and open, close, or copy file descriptors",
+      "Most Similar TLDR Task": "Replace with the specified command, clearing environment variables",
+      "Most Similar TLDR Script": "exec -c {{command -with -flags}}",
+      "Top-3 Similar Questions": [
+        "so_5542607: Unable to change directory with remote shell"
+      ],
+      "Top-3 Scripts": [
+        "so_5542607: "
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

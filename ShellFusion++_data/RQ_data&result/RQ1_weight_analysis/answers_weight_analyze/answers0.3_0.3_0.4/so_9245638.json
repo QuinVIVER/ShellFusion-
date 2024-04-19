@@ -1,0 +1,86 @@
+{
+  "Query": "Select random lines from a file",
+  "Answers": [
+    {
+      "Command": "shuf",
+      "MP Summary": "generate random permutations",
+      "Most Similar TLDR Task": "Randomize the order of lines in a file and output the result",
+      "Most Similar TLDR Script": "shuf {{filename}}",
+      "Top-3 Similar Questions": [
+        "so_61290199: How do I select a random file from a directory?",
+        "so_52951684: selecting random line from text file after deleting empty lines",
+        "ul_206727: Selecting a random sample from a directory tree"
+      ],
+      "Top-3 Scripts": [
+        "so_61290199: ls -1 *.png |  shuf | head -1\n\nls -1 *.png | shuf -n 1",
+        "so_52951684: sed '/^\\s*$/d' input.txt | shuf -n 1 >output.txt",
+        "ul_206727: for subsubdir in \"$directory\"/*/*/\ndo\n    find \"$subsubdir\" -type f | shuf -n 2\ndone | shuf\n\n| shuf"
+      ],
+      "Explanations about Options": {
+        "-n": "output at most COUNT lines"
+      }
+    },
+    {
+      "Command": "comm",
+      "MP Summary": "select or reject lines common to two files",
+      "Most Similar TLDR Task": "Print only lines common to both files",
+      "Most Similar TLDR Script": "comm -12 {{file1}} {{file2}}",
+      "Top-3 Similar Questions": [
+        "ul_185291: Select added lines from file"
+      ],
+      "Top-3 Scripts": [
+        "ul_185291: comm(1)\n\ncomm -13 file1 file2\n\ncomm -3 file1 file2"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "cut",
+      "MP Summary": "remove sections from each line of files",
+      "Most Similar TLDR Task": "Cut out the fields 3 through to the end of each line, using a space as a delimiter",
+      "Most Similar TLDR Script": "cut -d'{{ }}' -f{{3-}}",
+      "Top-3 Similar Questions": [
+        "ul_560989: I need to fecth selected data from a file",
+        "so_43008032: Searching and selecting strings from a file",
+        "so_14935165: selecting a particular word from a file in shell scripts"
+      ],
+      "Top-3 Scripts": [
+        "ul_560989: grep XYZ file | cut -d'|' -f2",
+        "so_43008032: cut -d':' -f1 file1.txt > file2.txt",
+        "so_14935165: while IFS= read -r line; do\n    id=\"F\"\n    if [[ \"$line\" =~ /Recordings/ ]]; then\n\n        segment=$(echo $line | grep -o \"$id.*\" | cut -d '.' -f1-2)\n        echo \"$segment\"\n    fi\ndone < file.txt"
+      ],
+      "Explanations about Options": {
+        "-d": "use DELIM instead of TAB for field delimiter"
+      }
+    },
+    {
+      "Command": "wc",
+      "MP Summary": "print newline, word, and byte counts for each file",
+      "Most Similar TLDR Task": "Count lines in file",
+      "Most Similar TLDR Script": "wc -l {{file}}",
+      "Top-3 Similar Questions": [
+        "so_37478287: Select n random line from a text file cut from the original and paste into new file",
+        "so_62569435: Choosing random lines with replacement from an XY file"
+      ],
+      "Top-3 Scripts": [
+        "so_37478287: ",
+        "so_62569435: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "join",
+      "MP Summary": "join lines of two files on a common field",
+      "Most Similar TLDR Task": "Join two files on the first (default) field",
+      "Most Similar TLDR Script": "join {{file1}} {{file2}}",
+      "Top-3 Similar Questions": [
+        "ul_364180: awk: How to select multiple substrings from fixed length file?",
+        "au_1051220: Select the remaining text in a line from a log file"
+      ],
+      "Top-3 Scripts": [
+        "ul_364180: perl -lpe '$_ = join \", \", unpack \"A2x17A7\"' test.dat",
+        "au_1051220: perl -a -n -l -e \\\n    'unshift @F, splice(@F, 5, 1); \n     print join(\";\", @F[0..2]), \";@F[3..$#F]\";' \\\n    < input.txt > output.csv\n\nprint join(\";\", @F[0..2]), \";@F[3..$#F]\";'\n\n#!/usr/bin/env perl\n\nuse strict;\nuse warnings;\n\nwhile(<>) {\n    my @F = split;\n    unshift @F, splice(@F, 5, 1); \n    print join(\";\", @F[0..2]), \";@F[3..$#F]\\n\";\n}"
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

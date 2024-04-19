@@ -1,0 +1,86 @@
+{
+  "Query": "How to download portion of video with youtube-dl command?",
+  "Answers": [
+    {
+      "Command": "youtube-dl",
+      "MP Summary": "download videos from youtube.com or other video platforms",
+      "Top-3 Similar Questions": [
+        "au_1074697: How can I download part of a playlist from YouTube with 'youtube-dl'?",
+        "au_948516: How do I download with youtube-dl to get video title as filename?",
+        "su_1661048: How to download a portion of a YouTube video"
+      ],
+      "Top-3 Scripts": [
+        "au_1074697: youtube-dl -c -f '...' --playlist-start 2 --playlist-end 8 https://youtube.com/watch/foo\n\nyoutube-dl -c -f '...' --playlist-end 5 https://youtube.com/watch/foo\n\nyoutube-dl -c -f '...' --playlist-start 7 https://youtube.com/watch/foo\n\nyoutube-dl -c -f '...' --playlist-items 2,4,6 https://youtube.com/watch/bar\n\nyoutube-dl -c --playlist-items 2-3,5,8-10,18 https://youtube.com/watch/bar\n\nyoutube-dl -c -f '...' --playlist-end 6 --playlist-reverse",
+        "au_948516: man youtube-dl\n\nyoutube-dl -o '%(title)s.%(ext)s' <URL-of-video>",
+        "su_1661048: # As scary as it looks, perfectly safe to run in a terminal \n{   \n   read -r video_url  \n   read -r audio_url\n} < <(\n   youtube-dl --get-url --youtube-skip-dash-manifest https://www.youtube.com/watch?v=MfnzBYV5fxs\n)\n\nyoutube-dl --get-url --youtube-skip-dash-manifest \"https://www.youtube.com/watch?v=MfnzBYV5fxs\""
+      ],
+      "Explanations about Options": {
+        "--playlist-reverse": "Download playlist videos in reverse order",
+        "--playlist-end": "Playlist video to end at (default is last)",
+        "-o": "Output filename template, see the \"OUTPUT TEMPLATE\" for all the info",
+        "--youtube-skip-dash-manifest": "Do not download the DASH manifests and related data on YouTube videos",
+        "--get-url": "Simulate, quiet but print URL",
+        "-c": "Force resume of partially downloaded files. By default, youtube-dl will resume\n downloads if possible."
+      }
+    },
+    {
+      "Command": "ffmpeg",
+      "MP Summary": "ffmpeg video converter",
+      "Top-3 Similar Questions": [
+        "au_59383: Extract part of a video with a one-line command",
+        "su_1661048: How to download a portion of a YouTube video",
+        "so_51121333: ffmpeg extract subclips from video at 10s; 30%; 60%; last 30s of a video"
+      ],
+      "Top-3 Scripts": [
+        "au_59383: ffmpeg -formats -E\n\nffmpeg -ss 00:00:30 -i orginalfile -t 00:00:05 -vcodec copy -acodec copy newfile",
+        "su_1661048: # Download 2 minutes of the video between 5 mins in to 7 mins, using timestamps:\nffmpeg -ss 00:05:00.00 -to 00:07:00.00 -i \"$video_url\" -ss 00:05:00.00 -to 00:07:00.00 -i \"$audio_url\" output.mkv\n\n# Download 2 minutes of the video between 5 mins in to 7 mins, using duration:  \nffmpeg -ss 00:05:00.00 -i \"$video_url\" -ss 00:05:00.00 -i \"$audio_url\" -t 2:00 output.mkv\n\n# Download 2 minutes of the video between 5 mins in to 7 mins, using timestamps:\nffmpeg -ss 00:05:00.00 -to 00:07:00.00 -i <video_url> -ss 00:05:00.00 -to 00:07:00.00 -i <audio_url> output.mkv\n\n# Download 2 minutes of the video between 5 mins in to 7 mins, using duration:  \nffmpeg -ss 00:05:00.00 -i <video_url> -ss 00:05:00.00 -i <audio_url> -t 2:00 output.mkv",
+        "so_51121333: DURATION=$(ffmpeg -i $file 2>&1 | grep \"Duration\" | awk '{print $2}' | sed 's/\\..*//g' | awk '{split($1, a, \":\"); print 3600*a[1] + 60*a[2] + a[3]}')"
+      ],
+      "Explanations about Options": {
+        "-ss": "When used as an input option (before \"-i\"), seeks in this input file to position. Note\n that in most formats it is not possible to seek exactly, so ffmpeg will seek to the\n closest seek point before position. When transcoding and -accurate_seek is enabled\n (the default), this extra segment between the seek point and position will be decoded\n and discarded. When doing stream copy or when -noaccurate_seek is used, it will be\n preserved.",
+        "-vcodec": "Set the video codec. This is an alias for \"-codec:v\".",
+        "-acodec": "Set the audio codec. This is an alias for \"-codec:a\".",
+        "-i": "input file url",
+        "-t": "When used as an input option (before \"-i\"), limit the duration of data read from the\n input file."
+      }
+    },
+    {
+      "Command": "import",
+      "MP Summary": "saves any visible window on an X server and outputs it as an image file. You can capture a single window, the entire screen, or any rectangular portion of the screen.",
+      "Top-3 Similar Questions": [
+        "so_9081506: How to take pictures from a video with mouse"
+      ],
+      "Top-3 Scripts": [
+        "so_9081506: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "mplayer",
+      "MP Summary": "movie player",
+      "Top-3 Similar Questions": [
+        "su_55780: How can I obtain the bitrate of a video from a command line in Linux?"
+      ],
+      "Top-3 Scripts": [
+        "su_55780: $ mplayer -vo null -ao null -identify -frames 0 foo.avi\n\n$ mplayer -vo null -ao null -identify -frames 0 foo.avi | grep kbps\nVIDEO:  [XVID]  512x384  24bpp  29.970 fps  990.9 kbps (121.0 kbyte/s)"
+      ],
+      "Explanations about Options": {
+        "-v": "Increment verbosity level, one level for each -v found on the command line.",
+        "-o": "Outputs to the given filename.\n If you want a default output filename, you can put this option in the MEncoder\n config file.",
+        "-y": "Scale image to height <y> (if software/hardware scaling is available). Disables\n aspect calculations.",
+        "-frames": "Play/convert only first <number> frames, then quit."
+      }
+    },
+    {
+      "Command": "head",
+      "MP Summary": "output the first part of files",
+      "Top-3 Similar Questions": [
+        "so_27909521: download images from google with command line"
+      ],
+      "Top-3 Scripts": [
+        "so_27909521: $ count=10\n$ imagelink=$(wget --user-agent 'Mozilla/5.0' -qO - \"www.google.be/search?q=something\\&tbm=isch\" | sed 's/</\\n</g' | grep '<img' | head -n\"$count\" | tail -n1 | sed 's/.*src=\"\\([^\"]*\\)\".*/\\1/')\n$ wget $imagelink\n\n#! /bin/bash\ncount=${1}\nshift\nquery=\"$@\"\n[ -z $query ] && exit 1  # insufficient arguments\nimagelink=$(wget --user-agent 'Mozilla/5.0' -qO - | \"www.google.be/search?q=${query}\\&tbm=isch\" | sed 's/</\\n</g' | grep '<img' | head -n\"$count\" | tail -n1 | sed 's/.*src=\"\\([^\"]*\\)\".*/\\1/')\nwget -qO google_image $imagelink"
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

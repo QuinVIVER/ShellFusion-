@@ -1,0 +1,86 @@
+{
+  "Query": "How can I resize an ext root partition at runtime?",
+  "Answers": [
+    {
+      "Command": "resize2fs",
+      "MP Summary": "ext2/ext3/ext4 file system resizer",
+      "Most Similar TLDR Task": "Automatically resize a filesystem",
+      "Most Similar TLDR Script": "resize2fs {{/dev/sdXN}}",
+      "Top-3 Similar Questions": [
+        "ul_137482: How to to resize an ext4 partition from the command line?",
+        "au_1163708: Optimal way to resize root partition of a running ubuntu VM?",
+        "ul_83196: Resize partitions with gparted"
+      ],
+      "Top-3 Scripts": [
+        "ul_137482: ",
+        "au_1163708: sudo resize2fs /dev/mapper/ubuntu--vg-ubuntu--lv",
+        "ul_83196: resize2fs /dev/sda1"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "fdisk",
+      "MP Summary": "manipulate disk partition table",
+      "Most Similar TLDR Task": "Start the partition manipulator",
+      "Most Similar TLDR Script": "fdisk {{/dev/sda}}",
+      "Top-3 Similar Questions": [
+        "ul_137482: How to to resize an ext4 partition from the command line?",
+        "so_69266613: Extend rootfs partition at runtime",
+        "ul_643026: How to resize a disk without partition?"
+      ],
+      "Top-3 Scripts": [
+        "ul_137482: ",
+        "so_69266613: ",
+        "ul_643026: fdisk -l /dev/<device>"
+      ],
+      "Explanations about Options": {
+        "-l": "List the partition tables for the specified devices and then exit. If no devices\n are given, those mentioned in /proc/partitions (if that file exists) are used."
+      }
+    },
+    {
+      "Command": "mount",
+      "MP Summary": "mount a filesystem",
+      "Most Similar TLDR Task": "Mount a device to a directory",
+      "Most Similar TLDR Script": "mount -t {{filesystem_type}} {{path/to/device_file}} {{path/to/target_directory}}",
+      "Top-3 Similar Questions": [
+        "ul_208468: Resize an LVM partition on a GPT drive",
+        "au_262211: How do I resize an encrypted LVM to install another copy of Ubuntu?"
+      ],
+      "Top-3 Scripts": [
+        "ul_208468: pvs         Shows physical volume\nlvs         Shows logical volume\nvgs         Shows volume groups\nvgdisplay   Shows volume groups including mount points\nlsblk       Shows block hierarchy (plate, partition, LVM)",
+        "au_262211: sudo mount /dev/hardy/root /mnt"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "pvcreate",
+      "MP Summary": "Initialize physical volume(s) for use by LVM",
+      "Most Similar TLDR Task": "Initialize the `/dev/sda1` volume for use by LVM",
+      "Most Similar TLDR Script": "pvcreate {{/dev/sda1}}",
+      "Top-3 Similar Questions": [
+        "au_1163708: Optimal way to resize root partition of a running ubuntu VM?",
+        "ul_83196: Resize partitions with gparted",
+        "su_1037916: CentOS 7 Linux resize filesystem after partition resize"
+      ],
+      "Top-3 Scripts": [
+        "au_1163708: sudo pvcreate /dev/sdb1",
+        "ul_83196: pvcreate /dev/sda6\nvgextend mygroup /dev/sda6\n\npvcreate /dev/sda5\nvgextend mygroup /dev/sda5",
+        "su_1037916: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "cryptsetup",
+      "MP Summary": "manage plain dm-crypt and LUKS encrypted volumes",
+      "Most Similar TLDR Task": "Initialize a LUKS volume (overwrites all data on the partition)",
+      "Most Similar TLDR Script": "cryptsetup luksFormat {{/dev/sda1}}",
+      "Top-3 Similar Questions": [
+        "au_262211: How do I resize an encrypted LVM to install another copy of Ubuntu?"
+      ],
+      "Top-3 Scripts": [
+        "au_262211: sudo apt-get update && sudo apt-get install lvm2 cryptsetup\n\nsudo cryptsetup luksOpen /dev/sda5 crypt1\n\nsudo cryptsetup status crypt1\n\nsudo cryptsetup -o 2056 -b 11800000 resize crypt1\n\n-o = offset (get this from the status command) -b = size in sectors.\n\nsudo vgchange -an\nsudo cryptsetup luksClose crypt1"
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

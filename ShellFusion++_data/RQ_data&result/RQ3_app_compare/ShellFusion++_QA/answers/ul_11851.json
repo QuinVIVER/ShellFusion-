@@ -1,0 +1,69 @@
+{
+  "Query": "iptables  allow certain ips and block all other connection",
+  "Answers": [
+    {
+      "Command": "sudo",
+      "Top-3 Similar Questions": [
+        "au_625638: How to allow this connection on the Firewall?",
+        "au_1368071: Iptables that only allow incoming traffic to OpenSSH and block all other traffic",
+        "so_15936069: allow redirects with iptables"
+      ],
+      "Top-3 Scripts": [
+        "au_625638: sudo ufw allow from 192.168.1.0/24 to any port 111",
+        "so_15936069: sudo iptables -A INPUT -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT",
+        "au_932534: sudo iptables --flush\nsudo iptables --delete-chain\n\nsudo iptables -A INPUT -i lo -j ACCEPT\nsudo iptables -A OUTPUT -o lo -j ACCEPT\n\nsudo iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT\n\nsudo iptables -A INPUT -m state --state NEW -m tcp -p tcp --dport 22 -j ACCEPT\n\nsudo iptables -A INPUT -m state --state NEW -p udp --dport 22 -j ACCEPT\n\nsudo iptables -P INPUT DROP\nsudo iptables -P OUTPUT ACCEPT\n\nsudo iptables-save"
+      ]
+    },
+    {
+      "Command": "ufw",
+      "Top-3 Similar Questions": [
+        "au_625638: How to allow this connection on the Firewall?",
+        "au_615343: Allow Ubuntu Server Access only from specific IP's",
+        "au_998279: How do I allow multiple ports simultaneously in UFW?"
+      ],
+      "Top-3 Scripts": [
+        "au_625638: sudo ufw allow from 192.168.1.0/24 to any port 111",
+        "au_998279: ufw allow 22,25,80,443,9000 proto tcp\n\nufw allow 11200:11299 proto tcp\n\nman ufw\n\n$ cat /etc/ufw/applications.d/my-custom-profiles\n\n[MyCustomProfile]\ntitle=Some title\ndesctiption=Some description\nports=22,25,80,443/tcp|9000,9005:9007/tcp\n\nufw allow MyCustomProfile",
+        "au_135619: sudo ufw allow 22/tcp\nsudo ufw allow 5901/tcp from 12.34.56.78\nsudo ufw default reject incoming\nsudo ufw enable"
+      ]
+    },
+    {
+      "Command": "from",
+      "Top-3 Similar Questions": [
+        "au_625638: How to allow this connection on the Firewall?",
+        "ul_12085: Only allow certain outbound traffic on certain interfaces",
+        "so_714332: Allow request coming from specific IP only"
+      ],
+      "Top-3 Scripts": [
+        "au_625638: sudo ufw allow from 192.168.1.0/24 to any port 111",
+        "ul_12085: ip rule add from all fwmark 1 table known",
+        "so_714332: <Directory /APP>\n\n    Order Allow,Deny\n\n    Allow from 160.120.25.65\n    Allow from 127.0.0.0/8\n\n</Directory>"
+      ]
+    },
+    {
+      "Command": "ssh",
+      "Top-3 Similar Questions": [
+        "au_101670: How can I allow SSH password authentication from only certain IP addresses?",
+        "au_1368071: Iptables that only allow incoming traffic to OpenSSH and block all other traffic",
+        "ul_396336: Debian 9 - Allow ONLY certain IP to MongoDB"
+      ],
+      "Top-3 Scripts": [
+        "au_101670: /etc/ssh/sshd_config\n\nservice ssh reload",
+        "ul_486760: /etc/ssh/ssh_known_hosts"
+      ]
+    },
+    {
+      "Command": "host",
+      "Top-3 Similar Questions": [
+        "ul_396336: Debian 9 - Allow ONLY certain IP to MongoDB",
+        "ul_436677: OpenVPN & iptables - allow traffic to certain specific hosts on server side",
+        "au_146163: How do I allow all possible IPs for Gmail servers through my ufw firewall?"
+      ],
+      "Top-3 Scripts": [
+        "ul_396336: iptables -P INPUT ACCEPT\niptables -P OUTPUT ACCEPT\n\nsome rule...\nsome rule...\nsome rule...\n\niptables -A INPUT --destination $host --jump DROP\niptables -A OUTPUT --source $host --jump DROP\n\n$host\n\niptables -A INPUT --source 192.168.2.111,192.168.2.1,192.168.56.0/24 --destination $host --protocol tcp --dport 27016 --jump ACCEPT",
+        "ul_436677: #Set default policy of chain \niptables -P FORWARD DROP\n\n#allow traffic to route from VPN subnet to specific host in subnet\niptables -A FORWARD -i tun0 -s {VPN subnet} -d {host in server subnet} -j ACCEPT\n#allow traffic from host in server subnet back to VPN subnet\niptables -A FORWARD -o tun0 -s {host in server subnet} -d {VPN subnet}",
+        "au_146163: host domain.tld\n\n$ host smtp.gmail.com\nsmtp.gmail.com is an alias for gmail-smtp-msa.l.google.com.\ngmail-smtp-msa.l.google.com has address 74.125.127.108\ngmail-smtp-msa.l.google.com has address 74.125.127.109"
+      ]
+    }
+  ]
+}

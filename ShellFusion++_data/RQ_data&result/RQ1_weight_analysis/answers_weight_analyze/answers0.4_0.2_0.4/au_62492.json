@@ -1,0 +1,93 @@
+{
+  "Query": "How can I change the date modified/created of a file?",
+  "Answers": [
+    {
+      "Command": "touch",
+      "MP Summary": "change file timestamps",
+      "Most Similar TLDR Task": "Set the times on a file to a specific date and time",
+      "Most Similar TLDR Script": "touch -t {{YYYYMMDDHHMM.SS}} {{filename}}",
+      "Top-3 Similar Questions": [
+        "so_56841053: How to change the date format of a file?",
+        "au_1227043: Change all dates of all files in directory",
+        "au_858150: How (if possible) to change modification date of folder to past?"
+      ],
+      "Top-3 Scripts": [
+        "so_56841053: $ touch foo\n$ ls -l --time-style=+\"%m %d %H:%M\" foo\n-rw-r--r-- 1 james james 0 07 01 23:50 foo",
+        "au_1227043: touch --no-create *",
+        "au_858150: touch -t\n\ntouch -d\n\nman touch\n\ntouch -t 201612051230 Downloads"
+      ],
+      "Explanations about Options": {
+        "-t": "STAMP\n use [[CC]YY]MMDDhhmm[.ss] instead of current time",
+        "--no-create": "do not create any files"
+      }
+    },
+    {
+      "Command": "date",
+      "MP Summary": "print or set the system date and time",
+      "Most Similar TLDR Task": "Convert a specific date to the Unix timestamp format",
+      "Most Similar TLDR Script": "date -d \"{{2018-09-01 00:00}}\" +%s --utc",
+      "Top-3 Similar Questions": [
+        "ul_311186: Changing the date format of the file",
+        "so_35148479: How can I replace date modified with date last saved?",
+        "so_57598316: Change date from bash script"
+      ],
+      "Top-3 Scripts": [
+        "ul_311186: ",
+        "so_35148479: Creation date",
+        "so_57598316: DatePlus1Hour=\"$(date --utc --iso=ns --date=\"now 1 hour\")\"\n\n/usr/bin/date --set=$DatePlus1Hour\n\nsudo /usr/bin/date --utc --set=\"$DatePlus1Hour\"\n\nsudo date --set=\"now +1 hour\""
+      ],
+      "Explanations about Options": {
+        "--set": "set time described by STRING"
+      }
+    },
+    {
+      "Command": "exec",
+      "MP Summary": "execute commands and open, close, or copy file descriptors",
+      "Most Similar TLDR Task": "Replace with the specified command and change the process name",
+      "Most Similar TLDR Script": "exec -a {{process_name}} {{command -with -flags}}",
+      "Top-3 Similar Questions": [
+        "ul_635562: change last modification date for many files using references",
+        "su_666920: How to change umask for a files created by application"
+      ],
+      "Top-3 Scripts": [
+        "ul_635562: ",
+        "su_666920: sh -c \"umask $YOUR_NEW_UMASK; exec fatrat\""
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "stat",
+      "MP Summary": "display file or file system status",
+      "Most Similar TLDR Task": "Show file properties such as size, permissions, creation and access dates among others",
+      "Most Similar TLDR Script": "stat {{file}}",
+      "Top-3 Similar Questions": [
+        "au_1227043: Change all dates of all files in directory",
+        "ul_635562: change last modification date for many files using references",
+        "so_12169710: formatted modified date/time of file on mac bash?"
+      ],
+      "Top-3 Scripts": [
+        "au_1227043: stat %y file",
+        "ul_635562: find  *  -type f  -mtime +244   -exec sh -c  'echo \"\\n\" && echo File = \"{}\"; lastmod=$(stat -c %y \"{}\" |cut -c-16); echo \"LastMod TimeStamp = \\\"\"$lastmod\"\\\"\" ; dt=$(echo \"$lastmod\" | cut -c-10) && [ \"$dt\" = \"2020-07-10\" ] && ( echo \"old file detected\" ; timestamp=$(fgrep \"{}\" /tmp/contents_backup-20200401/backup-musik.tar.gz.txt  | head -n1 | awk -F\" \" '\"'\"'{ print $4 \" \" $5 }'\"'\"' ); echo \"Backup TimeStamp  = \\\"\"${timestamp}\"\\\"\" . ; test -n \"$timestamp\" && echo \"do the touch\" && touch -d \"$timestamp\" \"{}\"; echo \"ret=$?\" && echo okok ) ; echo end' \\;\n\nstat -c %y . && touch -r \"$(find -mindepth 1 -maxdepth 1 -printf '%T+=%p\\n' | sort |tail -n 1 | cut -d= -f2-)\" . && stat -c %y .\n\nfind  *  -type f  -mtime +244   -exec sh -c  'echo \"\\n\" && echo File = \"{}\"; lastmod=$(stat -c %y \"{}\" |cut -c-16); echo \"LastMod TimeStamp = \\\"\"$lastmod\"\\\"\" ; dt=$(echo \"$lastmod\" | cut -c-10) && [ \"$dt\" = \"2020-07-10\" ] && ( echo \"old file detected\" ; filelist=$(fgrep \"{}\" /tmp/contents_backup-20200401/backup-dokumente.tar.gz.txt); filecount=$(echo \"$filelist\"|wc -l); echo \"file count = $filecount\"; [ \"$filecount\" -gt \"1\" ] && echo \"multiple files found\" ; timestamp=$(echo \"$filelist\" | head -n1 | awk -F\" \" '\"'\"'{ print $4 \" \" $5 }'\"'\"' ); echo \"Backup TimeStamp  = \\\"\"${timestamp}\"\\\"\" . ; [ $(echo -n \"$timestamp\" | wc -m) = 16 ] && echo \"do the touch\" && touch -d \"$timestamp\" \"{}\"; echo \"ret=$?\" && echo okok ) ; echo end' \\;",
+        "so_12169710: stat -f \"%Sm\" -t \"%Y%m%dT%H%M%S\" FILE"
+      ],
+      "Explanations about Options": {
+        "-f": "display file system status instead of file status",
+        "-t": "print the information in terse form",
+        "-c": "use the specified FORMAT instead of the default; output a newline after each use of\n FORMAT"
+      }
+    },
+    {
+      "Command": "dirname",
+      "MP Summary": "strip last component from file name",
+      "Most Similar TLDR Task": "Calculate the parent directory of multiple paths",
+      "Most Similar TLDR Script": "dirname {{path/to/file_a}} {{path/to/directory_b}}",
+      "Top-3 Similar Questions": [
+        "ul_147154: Change to the last modified subdirectory of the current directory"
+      ],
+      "Top-3 Scripts": [
+        "ul_147154: file=$( ls -1tq /dir/*/readme.txt | head -n 1 )\ncd $( dirname \"$file\" )"
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

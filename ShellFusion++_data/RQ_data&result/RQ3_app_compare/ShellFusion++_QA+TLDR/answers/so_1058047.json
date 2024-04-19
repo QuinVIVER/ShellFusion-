@@ -1,0 +1,84 @@
+{
+  "Query": "Wait for a process to finish",
+  "Answers": [
+    {
+      "Command": "wait",
+      "MP Summary": "await process completion",
+      "Most Similar TLDR Task": "Wait for all processes known to the invoking shell to finish",
+      "Most Similar TLDR Script": "wait",
+      "Top-3 Similar Questions": [
+        "so_23906392: How to wait for any job to finished using shell script?",
+        "ul_656103: Waiting for any process to finish in bash script",
+        "so_29256233: Bash function is waiting for its subprocess to finish"
+      ],
+      "Top-3 Scripts": [
+        "so_23906392: # Assuming that 100,000 seconds is long enough \n# for at least one bg job to complete\nsleep 100000 & sleep_pid=$!\n\n{ MyScript1.sh; kill $sleep_pid 2>/dev/null; } &\n{ MyScript2.sh; kill $sleep_pid 2>/dev/null; } &\n{ MyScript3.sh; kill $sleep_pid 2>/dev/null; } &\nwait $sleep_pid\nMyScript4.sh",
+        "ul_656103: ",
+        "so_29256233: test_fn() {\n    sleep 10 >&- &  # close stdout for sleep, or redirect if desired\n    echo $!\n}\n\npid=$(test_fn)\necho \"waiting\"\nwait"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "jobs",
+      "MP Summary": "display status of jobs in the current session",
+      "Most Similar TLDR Task": "Display stopped processes",
+      "Most Similar TLDR Script": "jobs -s",
+      "Top-3 Similar Questions": [
+        "ul_656103: Waiting for any process to finish in bash script",
+        "so_62937344: Shell script: Wait for any process in a group to finish",
+        "so_14254118: Waiting for background processes to finish before exiting script"
+      ],
+      "Top-3 Scripts": [
+        "ul_656103: ",
+        "so_62937344: for i in {1..9}; do\n  ( for p in 32 16 8; do\n      srun ... & jobs+=($!)\n    done\n    wait -n  \"${jobs[@]}\" # Wait for one of the preceding 3 jobs to complete\n    kill \"${jobs[@]}\"     # Kill the other two\n  ) &\ndone\n\nwait  # Wait for each of the 9 groups to complete",
+        "so_14254118: #!/bin/sh\n{ sleep 5; echo waking up after 5 seconds; } &\n{ sleep 1; echo waking up after 1 second; } &\nwait\necho all jobs are done!"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "pgrep",
+      "MP Summary": "look up or signal processes based on name and other attributes",
+      "Most Similar TLDR Task": "Return PIDs of any running processes with a matching command string",
+      "Most Similar TLDR Script": "pgrep {{process_name}}",
+      "Top-3 Similar Questions": [
+        "so_8038723: Wait for all processes with a certain name to finish (in bash)"
+      ],
+      "Top-3 Scripts": [
+        "so_8038723: wait $(pgrep programName)"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "ps",
+      "MP Summary": "report a snapshot of the current processes.",
+      "Most Similar TLDR Task": "List all running processes",
+      "Most Similar TLDR Script": "ps aux",
+      "Top-3 Similar Questions": [
+        "ul_89890: Wait for background processes to finish with inverse match process ID",
+        "so_60183544: Wait for a program (non-child) to finish and execute a command"
+      ],
+      "Top-3 Scripts": [
+        "ul_89890: $ ps -eaf|grep sleep\nsaml     24664     1  0 22:28 pts/9    00:00:00 sleep 30\nsaml     24666     1  0 22:28 pts/9    00:00:00 sleep 31\nsaml     24667     1  0 22:28 pts/9    00:00:00 sleep 32\nsaml     24668     1  0 22:28 pts/9    00:00:00 sleep 32\n\n$ ps -eaf|grep sleep\n$",
+        "so_60183544: "
+      ],
+      "Explanations about Options": {
+        "-e": "Select all processes. Identical to -A.",
+        "-a": "Select all processes except both session leaders (see getsid(2)) and processes not\n associated with a terminal.",
+        "-f": "Do full-format listing. This option can be combined with many other UNIX-style\n options to add additional columns. It also causes the command arguments to be\n printed. When used with -L, the NLWP (number of threads) and LWP (thread ID)\n columns will be added. See the c option, the format keyword args, and the format\n keyword comm."
+      }
+    },
+    {
+      "Command": "strace",
+      "MP Summary": "trace system calls and signals",
+      "Most Similar TLDR Task": "Start tracing a specific process by its PID",
+      "Most Similar TLDR Script": "strace -p {{pid}}",
+      "Top-3 Similar Questions": [
+        "so_30580487: Who waits for a shell background process?"
+      ],
+      "Top-3 Scripts": [
+        "so_30580487: strace bash"
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

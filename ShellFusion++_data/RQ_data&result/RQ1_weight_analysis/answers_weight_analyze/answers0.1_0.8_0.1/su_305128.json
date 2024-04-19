@@ -1,0 +1,79 @@
+{
+  "Query": "How to specify level of compression when using tar -zcvf?",
+  "Answers": [
+    {
+      "Command": "tar",
+      "MP Summary": "an archiving utility",
+      "Most Similar TLDR Task": "Create a compressed archive, using archive suffix to determine the compression program",
+      "Most Similar TLDR Script": "tar caf {{target.tar.xz}} {{file1}} {{file2}} {{file3}}",
+      "Top-3 Similar Questions": [
+        "so_1748916: Unix command to create a tar of a specified number of files",
+        "ul_309115: Exclude subdirectory of included directory with tar",
+        "au_1293788: extract, from tar file, specific version of updated file"
+      ],
+      "Top-3 Scripts": [
+        "so_1748916: tar cf path_of_tar.tar $(ls | head -10)",
+        "ul_309115: ",
+        "au_1293788: $ tar tvf archive.tar\n-rw-r--r-- steeldriver/steeldriver 15 2020-11-16 18:25 file\n-rw-r--r-- steeldriver/steeldriver 15 2020-11-18 18:25 file\n-rw-r--r-- steeldriver/steeldriver 15 2020-11-19 18:25 file\n\n$ tar xvf archive.tar file --occurrence=2\nfile\n$ ls -l file\n-rw-r--r-- 1 steeldriver steeldriver 15 Nov 18 18:25 file"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "unrar",
+      "MP Summary": "extract files from rar archives",
+      "Most Similar TLDR Task": "List files inside the archive file without decompressing it",
+      "Most Similar TLDR Script": "unrar l {{compressed.rar}}",
+      "Top-3 Similar Questions": [
+        "so_3511896: Split big compressed log files into compressed chunks of X lines while doing inline compression"
+      ],
+      "Top-3 Scripts": [
+        "so_3511896: $ unrar p $file | ( while :; do i=$[$i+1]; head -n 10000 | gzip > split.$i.gz; done )\n\n$ unrar p $file |\n       ( while :; do\n           i=$[$i+1];\n           head -n 10000 | gzip > split.$i.gz;\n           if [ `stat -c %s split.$i.gz` -lt 30 ]; then rm split.$i.gz; break; fi;\n       done )"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "pax",
+      "MP Summary": "read and write file archives and copy directory hierarchies",
+      "Most Similar TLDR Task": "List the contents of a gzipped archive",
+      "Most Similar TLDR Script": "pax -zf {{archive.tar.gz}}",
+      "Top-3 Similar Questions": [
+        "ul_9665: Create tar archive of a directory, except for hidden files?"
+      ],
+      "Top-3 Scripts": [
+        "ul_9665: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "7z",
+      "MP Summary": "A file archiver with high compression ratio format",
+      "Most Similar TLDR Task": "Archive using a specific archive type",
+      "Most Similar TLDR Script": "7z a -t{{zip|gzip|bzip2|tar}} {{archived.7z}} {{path/to/file_or_directory}}",
+      "Top-3 Similar Questions": [
+        "au_930469: Does anyone know when Tar will Compress to .7z in the future? (It does xz compression, but when will it do 7zip -mx=9 compression?)"
+      ],
+      "Top-3 Scripts": [
+        "au_930469: tar cf - directory | 7z a -si directory.tar.7z"
+      ],
+      "Explanations about Options": {
+        "-si": "Read data from stdin (e.g. tar cf - directory | 7z a -si directory.tar.7z)"
+      }
+    },
+    {
+      "Command": "7za",
+      "MP Summary": "A file archiver with high compression ratio format",
+      "Most Similar TLDR Task": "Archive using a specific archive type",
+      "Most Similar TLDR Script": "7za a -t{{zip|gzip|bzip2|tar}} {{archived}} {{path/to/file_or_directory}}",
+      "Top-3 Similar Questions": [
+        "au_930469: Does anyone know when Tar will Compress to .7z in the future? (It does xz compression, but when will it do 7zip -mx=9 compression?)"
+      ],
+      "Top-3 Scripts": [
+        "au_930469: On Linux/Unix, in order to backup directories you must use tar :\n    - to backup a directory  : tar cf - directory | 7za a -si directory.tar.7z\n    - to restore your backup : 7za x -so directory.tar.7z | tar xf -"
+      ],
+      "Explanations about Options": {
+        "-si": "Read data from stdin (e.g. tar cf - directory | 7za a -si directory.tar.7z)",
+        "-so": "Write data to stdout (e.g. 7za x -so directory.tar.7z | tar xf -)"
+      }
+    }
+  ]
+}

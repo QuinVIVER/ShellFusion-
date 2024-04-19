@@ -1,0 +1,97 @@
+{
+  "Query": "Move all files with a certain extension from multiple subdirectories into one directory",
+  "Answers": [
+    {
+      "Command": "mv",
+      "MP Summary": "move (rename) files",
+      "Most Similar TLDR Task": "Move files in arbitrary locations",
+      "Most Similar TLDR Script": "mv {{source}} {{target}}",
+      "Top-3 Similar Questions": [
+        "so_35090266: Move certain files from specific subdirectories into a new directory",
+        "ul_74911: How to move all files with a certain file extension from subdirectories to a single directory",
+        "so_19880246: Move only files recursively from multiple directories into one directory with mv"
+      ],
+      "Top-3 Scripts": [
+        "so_35090266: $ cut -d, -f2 < x.csv | xargs -I '{}'  mv '{}' /home/me/new-directory",
+        "ul_74911: mkdir ~/epubs\nmv -- **/*.epub ~/epubs/\n\nfind . -name '*.epub' -exec mv {} ~/epubs \\;",
+        "so_19880246: find /path/to/photos \\( -iname '*.jpg' -o -iname '*.png' \\) -type f -exec mv -nv -t '/path/to/master' -- {} +\n\nfind /path/to/photos -type f -exec mv -nv -t '/path/to/master' -- {} +\n\nfind /path/to/photos \\( -iname '*.jpg' -o -iname '*.png' \\) -type f -exec mv -nv -- {} '/path/to/master' \\;"
+      ],
+      "Explanations about Options": {
+        "-v": "explain what is being done",
+        "-n": "do not overwrite an existing file"
+      }
+    },
+    {
+      "Command": "dirname",
+      "MP Summary": "strip last component from file name",
+      "Most Similar TLDR Task": "Calculate the parent directory of multiple paths",
+      "Most Similar TLDR Script": "dirname {{path/to/file_a}} {{path/to/directory_b}}",
+      "Top-3 Similar Questions": [
+        "so_64690030: How to move certain files from one directory to another, while maintaining directory structure",
+        "so_44240683: Unable to rename and move files from one location to another",
+        "ul_559844: Move all files from subdirectories to parent directory"
+      ],
+      "Top-3 Scripts": [
+        "so_64690030: #!/bin/bash\n\nSOURCE_DIR=source\nDEST_DIR=destination\n\nfor txt_file in $(find \"${SOURCE_DIR}\" -type f -name \"*.txt\"); do\n        new_path=$(dirname \"$txt_file\" | sed \"s~${SOURCE_DIR}~${DEST_DIR}~\")\n        mkdir -p \"${new_path}\"\n        mv \"${txt_file}\" \"${new_path}\"\ndone",
+        "so_44240683: for tmpfile in /home/asmita/tmp\ndo\n    DIRPATH=$(dirname \"${tmpfile}\")\n    FILENAME=$(basename \"${tmpfile}\")\n    mv \"$tmpfile\" \"${DIRPATH}C_${FILENAME}\"\n    mv \"${DIRPATH}C_${FILENAME}\" /home/tgasmita\ndone",
+        "ul_559844: find -type f | while read; do mv \"$REPLY\" \"$(dirname $REPLY)/../../\"; done"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "find",
+      "MP Summary": "search for files in a directory hierarchy",
+      "Most Similar TLDR Task": "Find files by extension",
+      "Most Similar TLDR Script": "find {{root_path}} -name '{{*.ext}}'",
+      "Top-3 Similar Questions": [
+        "ul_74911: How to move all files with a certain file extension from subdirectories to a single directory",
+        "so_19880246: Move only files recursively from multiple directories into one directory with mv",
+        "ul_383112: Move files from various subfolders into sub-subfolders"
+      ],
+      "Top-3 Scripts": [
+        "ul_74911: find . -name '*.epub' -exec mv {} ~/epubs \\;",
+        "so_19880246: find /path/to/photos \\( -iname '*.jpg' -o -iname '*.png' \\) -type f -exec mv -nv -t '/path/to/master' -- {} +\n\nfind /path/to/photos -type f -exec mv -nv -t '/path/to/master' -- {} +\n\nfind /path/to/photos \\( -iname '*.jpg' -o -iname '*.png' \\) -type f -exec mv -nv -- {} '/path/to/master' \\;",
+        "ul_383112: find . -mindepth 2 -maxdepth 2 -type f -execdir mv -vt ./folder/. {} +"
+      ],
+      "Explanations about Options": {
+        "-d": "A synonym for -depth, for compatibility with FreeBSD, NetBSD, MacOS X and OpenBSD.",
+        "-mindepth": "Do not apply any tests or actions at levels less than levels (a non-negative\n integer). -mindepth 1 means process all files except the starting-points.",
+        "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+        "-type": "File is of type c:",
+        "-maxdepth": "Descend at most levels (a non-negative integer) levels of directories below the\n starting-points. -maxdepth 0 means only apply the tests and actions to the\n starting-points themselves."
+      }
+    },
+    {
+      "Command": "mkdir",
+      "MP Summary": "make directories",
+      "Most Similar TLDR Task": "Create directories recursively (useful for creating nested dirs)",
+      "Most Similar TLDR Script": "mkdir -p {{path/to/directory}}",
+      "Top-3 Similar Questions": [
+        "ul_74911: How to move all files with a certain file extension from subdirectories to a single directory",
+        "so_64690030: How to move certain files from one directory to another, while maintaining directory structure",
+        "so_50331003: C++ move all files from one directory to another"
+      ],
+      "Top-3 Scripts": [
+        "ul_74911: mkdir ~/epubs\nmv -- **/*.epub ~/epubs/",
+        "so_64690030: mkdir -p\n\n#!/bin/bash\n\nSOURCE_DIR=source\nDEST_DIR=destination\n\nfor txt_file in $(find \"${SOURCE_DIR}\" -type f -name \"*.txt\"); do\n        new_path=$(dirname \"$txt_file\" | sed \"s~${SOURCE_DIR}~${DEST_DIR}~\")\n        mkdir -p \"${new_path}\"\n        mv \"${txt_file}\" \"${new_path}\"\ndone",
+        "so_50331003: $ mkdir dir1; cd dir1; touch file.a; touch file.b; cd ..; ls dir1/\n\n$ mkdir dir2;"
+      ],
+      "Explanations about Options": {
+        "-p": "no error if existing, make parent directories as needed"
+      }
+    },
+    {
+      "Command": "cp",
+      "MP Summary": "copy files and directories",
+      "Most Similar TLDR Task": "Copy a file into another directory, keeping the filename",
+      "Most Similar TLDR Script": "cp {{path/to/source_file.ext}} {{path/to/target_parent_directory}}",
+      "Top-3 Similar Questions": [
+        "so_59408504: move files with extension from a subdirectory of directory to another subdirectory with the same name of another directory"
+      ],
+      "Top-3 Scripts": [
+        "so_59408504: find /dir1 -name '*.json' -exec cp --parents -t /dir2/ {} +\n\nman cp"
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

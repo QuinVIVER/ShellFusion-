@@ -1,0 +1,90 @@
+{
+  "Query": "How to convert a m4a sound file to mp3?",
+  "Answers": [
+    {
+      "Command": "opusenc",
+      "MP Summary": "encode audio into the Opus format",
+      "Most Similar TLDR Task": "Convert 5.1 surround sound audio at the highest quality level",
+      "Most Similar TLDR Script": "opusenc --bitrate {{1536}} {{path/to/input.flac}} {{path/to/output}}.opus",
+      "Top-3 Similar Questions": [
+        "au_211054: How to convert a sound file to Opus"
+      ],
+      "Top-3 Scripts": [
+        "au_211054: opusenc input.wav output.opus\n\nffmpeg -i input.mp3 -f wav - | opusenc --bitrate 256 - output.opus"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "ffmpeg",
+      "MP Summary": "ffmpeg video converter",
+      "Most Similar TLDR Task": "Extract the sound from a video and save it as MP3",
+      "Most Similar TLDR Script": "ffmpeg -i {{video.mp4}} -vn {{sound}}.mp3",
+      "Top-3 Similar Questions": [
+        "au_95753: Convert lossless m4a to flac",
+        "ul_438927: Convert all found m4a to mp3",
+        "su_668766: Unable to convert m4a to mp3"
+      ],
+      "Top-3 Scripts": [
+        "au_95753: sudo apt-get install ffmpeg\n\nffmpeg -i filein.m4a -f flac fileout.flac",
+        "ul_438927: find . -name '*.m4a' -print0 | while read -d '' -r file; do\n  ffmpeg -i \"$file\" -n -acodec libmp3lame -ab 128k \"${file%.m4a}.mp3\" < /dev/null\ndone",
+        "su_668766: ffmpeg -i file.m4a -aq 2 file.mp3"
+      ],
+      "Explanations about Options": {
+        "-acodec": "Set the audio codec. This is an alias for \"-codec:a\".",
+        "-i": "input file url",
+        "-aq": "Set the audio quality (codec-specific, VBR). This is an alias for -q:a.",
+        "-n": "Do not overwrite output files, and exit immediately if a specified output file already\n exists."
+      }
+    },
+    {
+      "Command": "eyeD3",
+      "MP Summary": "displays and manipulates id3-tags on mp3 files",
+      "Most Similar TLDR Task": "Set the title of an MP3 file",
+      "Most Similar TLDR Script": "eyeD3 --title \"{{A Title}}\" {{filename.mp3}}",
+      "Top-3 Similar Questions": [
+        "su_341993: Is there a command-line tool that converts tags to id3v2.3?"
+      ],
+      "Top-3 Scripts": [
+        "su_341993: eyeD3 --set-encoding=utf8 --to-v2.3 *.mp3"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "lame",
+      "MP Summary": "create mp3 audio files",
+      "Most Similar TLDR Task": "",
+      "Most Similar TLDR Script": "",
+      "Top-3 Similar Questions": [
+        "au_59520: How to convert wav to ogg and mp3 using VBR",
+        "au_710378: Script: Recursively convert wma files to MP3, then remove WMA files",
+        "su_15327: How to convert .ogg to .mp3?"
+      ],
+      "Top-3 Scripts": [
+        "au_59520: sudo apt-get install lame\n\nlame -V 5 file.wav file.mp3\n\nlame -V 5 --add-id3v2 --pad-id3v2 --ignore-tag-errors --ta artist --tl album --tt title --tn track --ty year --tg genre --tc comment file.wav file.mp3",
+        "au_710378: ",
+        "su_15327: $ sudo apt-get install mp32ogg lame\n$ wget ftp://ftp.pbone.net/mirror/plf.zarb.org/plf/mandrake/10.1/noarch/ogg2mp3-0.3-3plf.noarch.rpm\n$ sudo alien ogg2mp3-0.3-3plf.noarch.rpm\n$ sudo dpkg -i ogg2mp3_0.3-4_all.deb"
+      ],
+      "Explanations about Options": {
+        "--tl": "audio/song album (max 30 chars for version 1 tag)",
+        "--add-id3v2": "force addition of version 2 tag",
+        "--pad-id3v2": "same as --pad-id3v2-size 128",
+        "--ignore-tag-errors": "ignore errors in values passed for tags, use defaults in case an error occurs",
+        "-V": "Enable VBR (Variable BitRate) and specifies the value of VBR quality (default = 4).\n Decimal values can be specified, like 4.51.\n 0 = highest quality.",
+        "--ta": "audio/song artist (max 30 chars for version 1 tag)"
+      }
+    },
+    {
+      "Command": "dd",
+      "MP Summary": "convert and copy a file",
+      "Most Similar TLDR Task": "Generate a file of 100 random bytes by using kernel random driver",
+      "Most Similar TLDR Script": "dd if=/dev/urandom of={{random_file}} bs=100 count=1",
+      "Top-3 Similar Questions": [
+        "au_626634: Converting a file to directory"
+      ],
+      "Top-3 Scripts": [
+        "au_626634: dd if=/dev/zero of=~/test bs=10M count=1"
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

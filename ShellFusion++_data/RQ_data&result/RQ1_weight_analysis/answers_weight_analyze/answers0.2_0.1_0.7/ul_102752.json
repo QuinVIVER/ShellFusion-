@@ -1,0 +1,92 @@
+{
+  "Query": "Remove all files created before a certain date",
+  "Answers": [
+    {
+      "Command": "date",
+      "MP Summary": "print or set the system date and time",
+      "Most Similar TLDR Task": "Convert a specific date to the Unix timestamp format",
+      "Most Similar TLDR Script": "date -d \"{{2018-09-01 00:00}}\" +%s --utc",
+      "Top-3 Similar Questions": [
+        "so_8399493: Is there a way to delete all log entries in a file older than a certain date? (BASH)",
+        "so_45151400: Remove date from filename UNIX",
+        "au_396869: How delete files - based on date in filename"
+      ],
+      "Top-3 Scripts": [
+        "so_8399493: #!/bin/bash\n\n# requirements for script script\n\nCOUNTER=$((7+1))\nDATE=$(date -d \"-${COUNTER} days\" +%s)\nDATE=$(date -d -@${DATE} \"+%Y-%m-%d\")\n\nsed -i \"1,/$DATE/d\" test.txt",
+        "so_45151400: $ mv ONSITE_EXTR_ONSITE_EXTR_$(date +%Y%m%d) ONSITE_EXTR_ONSITE_EXTR\n\nONSITE_EXTR_ONSITE_EXTR_$(date +%Y%m%d)",
+        "au_396869: "
+      ],
+      "Explanations about Options": {
+        "-d": "display time described by STRING, not 'now'"
+      }
+    },
+    {
+      "Command": "mmv",
+      "MP Summary": "move/copy/append/link multiple files by wildcard patterns",
+      "Most Similar TLDR Task": "Rename all files with a certain extension to a different extension",
+      "Most Similar TLDR Script": "mmv \"*{{.old_extension}}\" \"#1{{.new_extension}}\"",
+      "Top-3 Similar Questions": [
+        "so_53658124: shell script to delete certain files and rename others",
+        "au_1346304: Remove today's date string from all filenames in folder"
+      ],
+      "Top-3 Scripts": [
+        "so_53658124: mmv -d '*.mp4.mp4' '#1.mp4'",
+        "au_1346304: mmv -n '*_*_*.jpg' '#1_#3.jpg'"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "touch",
+      "MP Summary": "change file timestamps",
+      "Most Similar TLDR Task": "Set the times on a file to a specific date and time",
+      "Most Similar TLDR Script": "touch -t {{YYYYMMDDHHMM.SS}} {{filename}}",
+      "Top-3 Similar Questions": [
+        "su_47356: How do I delete files greater than a certain date on linux",
+        "ul_468510: How to delete files created between two times?"
+      ],
+      "Top-3 Scripts": [
+        "su_47356: $ tar xzf whoops.tar.gz\n$ touch -t 200909261925.30 whoops-timestamp\n$ find . -newer whoops-timestamp",
+        "ul_468510: $ touch -d 'Wed Sep 12 11:00:01 EDT 2018' 11am\n$ touch -d 'Wed Sep 12 12:00:02 EDT 2018' 12pm\n$ touch -d 'Wed Sep 12 15:00:03 EDT 2018' 303pm\n$ find . -type f -exec sh -c 'h=$(date -d @$(stat -c %Y \"$1\") +%-H); [ \"$h\" -ge 11 ] && [ \"$h\" -lt 15 ]' sh {} \\; -ls\n1705096    0 -rw-r--r--   1 user group 0 Sep 12  2018 ./11am\n1705097    0 -rw-r--r--   1 user group 0 Sep 12  2018 ./12pm"
+      ],
+      "Explanations about Options": {
+        "-t": "STAMP\n use [[CC]YY]MMDDhhmm[.ss] instead of current time",
+        "-d": "parse STRING and use it instead of current time"
+      }
+    },
+    {
+      "Command": "rm",
+      "MP Summary": "remove files or directories",
+      "Most Similar TLDR Task": "Remove files from arbitrary locations",
+      "Most Similar TLDR Script": "rm {{path/to/file}} {{path/to/another/file}}",
+      "Top-3 Similar Questions": [
+        "su_47356: How do I delete files greater than a certain date on linux",
+        "au_396869: How delete files - based on date in filename",
+        "au_1372315: remove certain files except others"
+      ],
+      "Top-3 Scripts": [
+        "su_47356: $ find . -newer whoops-timestamp -print0 | xargs -0 rm -v\n\n$ tar tfz whoops.tar.gz | xargs rm -v",
+        "au_396869: ",
+        "au_1372315: find . -type f -name \"*.mp4\" ! -name \"*_notouch.mp4\" -exec rm -v {} \\;\n\nfind . -type f -name \"*.mp4\" ! -name \"*_notouch.mp4\" -exec echo rm -v {} \\;\n\n-exec echo rm -v {} \\;"
+      ],
+      "Explanations about Options": {
+        "-v": "explain what is being done"
+      }
+    },
+    {
+      "Command": "stat",
+      "MP Summary": "display file or file system status",
+      "Most Similar TLDR Task": "Show file properties such as size, permissions, creation and access dates among others",
+      "Most Similar TLDR Script": "stat {{file}}",
+      "Top-3 Similar Questions": [
+        "ul_468510: How to delete files created between two times?"
+      ],
+      "Top-3 Scripts": [
+        "ul_468510: find . -type f -exec sh -c '\n  h=$(date -d @$(stat -c %Y \"$1\") +%-H); [ \"$h\" -ge 11 ] && [ \"$h\" -lt 15 ]' \\\n  sh {} \\; -ls\n\n$(stat -c %Y \"$1\")\n\nfind . -type f -exec sh -c '\n  h=$(date -d @$(stat -c %Y \"$1\") +%-H); [ \"$h\" -ge 11 ] && [ \"$h\" -lt 15 ]' \\\n  sh {} \\; -delete\n\n$ touch -d 'Wed Sep 12 11:00:01 EDT 2018' 11am\n$ touch -d 'Wed Sep 12 12:00:02 EDT 2018' 12pm\n$ touch -d 'Wed Sep 12 15:00:03 EDT 2018' 303pm\n$ find . -type f -exec sh -c 'h=$(date -d @$(stat -c %Y \"$1\") +%-H); [ \"$h\" -ge 11 ] && [ \"$h\" -lt 15 ]' sh {} \\; -ls\n1705096    0 -rw-r--r--   1 user group 0 Sep 12  2018 ./11am\n1705097    0 -rw-r--r--   1 user group 0 Sep 12  2018 ./12pm"
+      ],
+      "Explanations about Options": {
+        "-t": "print the information in terse form",
+        "-c": "use the specified FORMAT instead of the default; output a newline after each use of\n FORMAT"
+      }
+    }
+  ]
+}

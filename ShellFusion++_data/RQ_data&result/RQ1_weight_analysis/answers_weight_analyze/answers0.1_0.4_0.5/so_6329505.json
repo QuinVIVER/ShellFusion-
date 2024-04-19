@@ -1,0 +1,86 @@
+{
+  "Query": "Rename all files in a folder with a prefix in a single unix command",
+  "Answers": [
+    {
+      "Command": "basename",
+      "MP Summary": "strip directory and suffix from filenames",
+      "Most Similar TLDR Task": "Show only the file name from a path, with a suffix removed",
+      "Most Similar TLDR Script": "basename {{path/to/file}} {{suffix}}",
+      "Top-3 Similar Questions": [
+        "so_13583583: command line bulk rename",
+        "so_55691719: copy files in local folder to gcs with renaming"
+      ],
+      "Top-3 Scripts": [
+        "so_13583583: ",
+        "so_55691719: filename=$(basename $dictionary)    # e.g. factories.json\nfile_prefix=${filename%%.*}         # e.g. factories (remove everything after first period)\nTARGET=\"gs://fixed_path/${file_prefix}/${file_prefix}_${DATE}.json\" # change this as per your need"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "find",
+      "MP Summary": "search for files in a directory hierarchy",
+      "Most Similar TLDR Task": "Find files by matching multiple patterns",
+      "Most Similar TLDR Script": "find {{root_path}} -name '{{*pattern_1*}}' -or -name '{{*pattern_2*}}'",
+      "Top-3 Similar Questions": [
+        "ul_604480: Rename all files with specific format which are in folder with specific name",
+        "so_69539388: Linux:Renaming files in a folder to sequential numbers",
+        "ul_537163: Copying files from specific subsubdirectories based on subdirectory name into single directory then renaming"
+      ],
+      "Top-3 Scripts": [
+        "ul_604480: find . -type f -path '*__tests__*.ts' -exec sh -c '\n  for f; do\n    mv -- \"$f\" \"${f%ts}test.ts\"\n  done\n' findsh {} +",
+        "so_69539388: find directory -maxdepth 1 -type f | wc -l\n\nfind . | sort -n\n\nfind .  | grep 'file'\n\nfind -type f",
+        "ul_537163: find . -type f -path \"./*.a/processed/*\" -exec sh -c '\nfor path; do\n  prefix=${path%%.a/processed*}\n  cp \"$path\" \"test/${prefix##*/}_${path##*processed/}\"\ndone\n' sh {} +"
+      ],
+      "Explanations about Options": {
+        "-type": "File is of type c:"
+      }
+    },
+    {
+      "Command": "cp",
+      "MP Summary": "copy files and directories",
+      "Most Similar TLDR Task": "Copy a file to another location",
+      "Most Similar TLDR Script": "cp {{path/to/source_file.ext}} {{path/to/target_file.ext}}",
+      "Top-3 Similar Questions": [
+        "so_8618853: Rename all the files in the folder with increasing numbers",
+        "ul_537163: Copying files from specific subsubdirectories based on subdirectory name into single directory then renaming",
+        "so_20457139: Bash batch file rename"
+      ],
+      "Top-3 Scripts": [
+        "so_8618853: index=0;\nfor name in *.txt\ndo\n    cp \"${name}\" \"${index}.txt\"\n    index=$((index+1))\ndone",
+        "ul_537163: find . -type f -path \"./*.a/processed/*\" -exec sh -c '\nfor path; do\n  prefix=${path%%.a/processed*}\n  cp \"$path\" \"test/${prefix##*/}_${path##*processed/}\"\ndone\n' sh {} +",
+        "so_20457139: cp \"${file}\" \"../rename/SV${num}${side}.png\""
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "mkdir",
+      "MP Summary": "make directories",
+      "Most Similar TLDR Task": "Create directories recursively (useful for creating nested dirs)",
+      "Most Similar TLDR Script": "mkdir -p {{path/to/directory}}",
+      "Top-3 Similar Questions": [
+        "so_34470002: Unix: C-shell:Rename the duplicate files",
+        "so_36393927: Rename all files found by extension in for loop",
+        "so_29920839: Shell script to copy and prepend folder name to files from multiple subdirectories"
+      ],
+      "Top-3 Scripts": [
+        "so_34470002: ",
+        "so_36393927: mkdir so\ncd so\ntouch f1 f2.old f3 f4.old\nfind . -mindepth 1 ! -name '*.old' -exec mv {} {}.old \\;\nls",
+        "so_29920839: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "cat",
+      "MP Summary": "concatenate files and print on the standard output",
+      "Most Similar TLDR Task": "Concatenate several files into the target file",
+      "Most Similar TLDR Script": "cat {{file1}} {{file2}} > {{target_file}}",
+      "Top-3 Similar Questions": [
+        "so_7595457: Shell script to rename multiple files and folders"
+      ],
+      "Top-3 Scripts": [
+        "so_7595457: [me@home]$ find . -type f -exec sed -i \"s/1\\.2\\.3\\.4/5.6.7.8/g\" {} \\;\n\n[me@home]$ cat ./1.2.3.4/1.2.3.4/1.2.3.4/1.2.3.4.file\nIP: 5.6.7.8\n\n[me@home]$ cat ./1.2.3.4/1.2.3.4/1.2.3.4/1.2.3.4-2.file\nIP: 5.6.7.8 (also)\n\n[me@home]$ cat somefile.txt \nhello old1 old2 old3 world\n\n[me@home]$ sed -i -f filter.sed somefile.txt \n\n[me@home]$ cat somefile.txt \nhello new1 new2 new3 world\n\nrename \"$(cat filter.sed)\" *"
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

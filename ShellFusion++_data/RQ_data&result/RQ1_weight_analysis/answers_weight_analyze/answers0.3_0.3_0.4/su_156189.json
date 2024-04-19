@@ -1,0 +1,87 @@
+{
+  "Query": "How to convert Word (doc) to PDF in linux?",
+  "Answers": [
+    {
+      "Command": "enscript",
+      "MP Summary": "convert text files to PostScript, HTML, RTF, ANSI, and overstrikes",
+      "Most Similar TLDR Task": "Generate a PostScript file with a landscape layout, splitting the page into columns (maximum 9)",
+      "Most Similar TLDR Script": "enscript {{path/to/input_file}} --columns={{num}} --landscape --output={{path/to/output_file}}",
+      "Top-3 Similar Questions": [
+        "so_20129029: a light solution to convert text to pdf in Linux",
+        "ul_287744: Convert output of script(1) to pdf"
+      ],
+      "Top-3 Scripts": [
+        "so_20129029: enscript -p file.ps file.txt\nps2pdf file.ps file.pdf",
+        "ul_287744: "
+      ],
+      "Explanations about Options": {
+        "-p": "Leave the output to file file. If the file is `-', enscript sends the output to\n the standard output stdout."
+      }
+    },
+    {
+      "Command": "pdftotext",
+      "MP Summary": "Portable Document Format (PDF) to text converter (version 3.03)",
+      "Most Similar TLDR Task": "Convert input.pdf to plain text and save it as output.txt",
+      "Most Similar TLDR Script": "pdftotext {{input.pdf}} {{output.txt}}",
+      "Top-3 Similar Questions": [
+        "so_21209212: Convert PDF files to Text in PHP using pdftotext does not produce clean output",
+        "au_211870: How to convert all pdf files to text (within a folder) with one command?"
+      ],
+      "Top-3 Scripts": [
+        "so_21209212: $command = \"/<my location>/pdftotext -layout  $file_pdf $file_text\";\nexec($command);",
+        "au_211870: for file in *.pdf; do pdftotext \"$file\" \"$file.txt\"; done"
+      ],
+      "Explanations about Options": {
+        "-layout": "Maintain (as best as possible) the original physical layout of the text. The\n default is to \u00b4undo' physical layout (columns, hyphenation, etc.) and output the\n text in reading order."
+      }
+    },
+    {
+      "Command": "gs",
+      "MP Summary": "Ghostscript (PostScript and PDF language interpreter and previewer)",
+      "Most Similar TLDR Task": "Convert from PostScript file to PDF file",
+      "Most Similar TLDR Script": "gs -dQUIET -dBATCH -dNOPAUSE -sDEVICE=pdfwrite -sOutputFile={{output.pdf}} {{input.ps}}",
+      "Top-3 Similar Questions": [
+        "so_12388348: Convert PDF to image in PHP without ImageMagick",
+        "ul_476997: Convert PDF to images in 1920x1080",
+        "su_200378: Converting a PDF to black & white with ghostscript"
+      ],
+      "Top-3 Scripts": [
+        "so_12388348: gs              \\\n  -o out.jpg    \\\n  -sDEVICE=jpeg \\\n  -r144         \\\n   in.pdf",
+        "ul_476997: gs -r92.38 -sDEVICE=png48 -sOutputFile=ghostscript.png file.pdf",
+        "su_200378: gs -o <output-file.pdf> -sDEVICE=pdfwrite \\\n-c \"/osetcolor {/setcolor} bind def /setcolor {pop [0 0 0] osetcolor} def\" \\\n-f <input-file.ps>"
+      ],
+      "Explanations about Options": {
+        "-sDEVICE": "Selects an alternate initial output device, as described above.",
+        "-sOutputFile": "Selects an alternate output file (or pipe) for the initial output device, as\n described above."
+      }
+    },
+    {
+      "Command": "ebook-convert",
+      "MP Summary": "ebook-convert ebook-convert input_file output_file [options] Convert an e-book from one format to another. input_file is the input and output_file is the output. Both must be specified as the first two arguments to the command. The output e-book format is guessed from the file extension  of  output_file.  output_file can  also  be  of  the special format .EXT where EXT is the output file extension. In this case, the name of the output file is derived from the name of the input  file.  Note  that the filenames must not start with a hyphen. Finally, if output_file has no extension, then it is treated as a directory and an \"open  e-book\"  (OEB)  consisting  of  HTML  files  is written  to that directory. These files are the files that would normally have been passed to the output plugin. After specifying the input and output file you can customize the conversion by  specifying various  options.  The available options depend on the input and output file types. To get help on them specify the input and output file and then use the -h option. For full documentation of the conversion system see conversion Whenever you pass arguments to  ebook-convert  that  have  spaces  in  them,  enclose  the arguments in quotation marks. For example: \"/some path/with spaces\" The  options  and  default  values  for the options change depending on both the input and output formats, so you should always check with: ebook-convert myfile.input_format myfile.output_format -h Below are the options that are common to all conversion, followed by the options  specific to every input and output format. \u00b7 EINGABE EINSTELLUNGEN \u00b7 AUSGABE EINSTELLUNGEN \u00b7 LOOK AND FEEL \u00b7 HEURISTIC PROCESSING \u00b7 SEARCH AND REPLACE \u00b7 STRUCTURE DETECTION \u00b7 TABLE OF CONTENTS \u00b7 METADATA \u00b7 DEBUG --help, -h show this help message and exit --input-profile Geben Sie das Eingabe Profil an. Das Eingabe Profil schreibt der Konvertierung vor, wie die verschiedenen Informationen aus  dem  Eingabe  Dokument  zu  interpretieren sind.  Zum  Beispiel  aufl\u00f6sungsabh\u00e4ngige  L\u00e4ngen  (z.B.  L\u00e4ngen in Punkt). W\u00e4hlbar ist:cybookg3,  cybook_opus,  default,  hanlinv3,  hanlinv5,   illiad,   irexdr1000, irexdr800, kindle, msreader, mobipocket, nook, sony, sony300, sony900 --list-recipes List  builtin  recipe  names.  You  can create an e-book from a builtin recipe like this: ebook-convert \"Recipe Name.recipe\" output.epub --output-profile Specify the output profile. The output profile tells the conversion system  how  to optimize  the created document for the specified device (such as by resizing images for the device screen size). In some cases,  an  output  profile  can  be  used  to optimize  the output for a particular device, but this is rarely necessary. Choices are:cybookg3,     cybook_opus,     default,     generic_eink,      generic_eink_hd, generic_eink_large, hanlinv3, hanlinv5, illiad, ipad, ipad3, irexdr1000, irexdr800, jetbook5, kindle,  kindle_dx,  kindle_fire,  kindle_oasis,  kindle_pw,  kindle_pw3, kindle_voyage,   kobo,   msreader,   mobipocket,  nook,  nook_color,  nook_hd_plus, pocketbook_900, pocketbook_pro_912, galaxy, sony, sony300, sony900, sony-landscape, sonyt3, tablet --version show program's version number and exit",
+      "Most Similar TLDR Task": "Convert an ebook into another format",
+      "Most Similar TLDR Script": "ebook-convert {{source}} {{destination}}",
+      "Top-3 Similar Questions": [
+        "au_169618: Is there a way to convert a PDF file to ePUB format WITHOUT using Calibre"
+      ],
+      "Top-3 Scripts": [
+        "au_169618: ebook-convert file.pdf file.epub\n\nebook-convert file.pdf file.epub --enable-heuristics"
+      ],
+      "Explanations about Options": {
+        "--enable-heuristics": "Enable heuristic processing. This option must be set for any heuristic processing\n to take place."
+      }
+    },
+    {
+      "Command": "pandoc",
+      "MP Summary": "general markup converter",
+      "Most Similar TLDR Task": "Convert file to pdf (the output format is determined by file extension)",
+      "Most Similar TLDR Script": "pandoc {{input.md}} -o {{output.pdf}}",
+      "Top-3 Similar Questions": [
+        "so_8382366: Converting HTML to odt, doc, docx"
+      ],
+      "Top-3 Scripts": [
+        "so_8382366: "
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

@@ -1,0 +1,103 @@
+{
+    "Answers": [
+        {
+            "Command": "scp",
+            "Explanations about Options": {
+                "-3(C)": "As described there -3 option instructs scp to route traffic through the PC on which the command is issued.",
+                "-3(M)": "Copies between two remote hosts are transferred through the local host. Without\n this option the data is copied directly between the two remote hosts. Note that\n this option disables the progress meter."
+            },
+            "MP Summary": "secure copy (remote file copy program)",
+            "Most Similar TLDR Script": "scp -3 {{host1}}:{{path/to/remote_file}} {{host2}}:{{path/to/remote_directory}}",
+            "Most Similar TLDR Task": "Copy a file between two remote hosts transferring through the local host",
+            "Top-3 Scripts": [
+                "so_28831329: scp -3 user1@remote1:/home/user1/file1.txt user2@remote2:/home/user2/file1.txt",
+                "ul_518877: scp username@B:/path_of_file_on_server_B/file.txt username@C:/path_of_file_on_server_C",
+                "ul_554630: scp 'user@172.100.100.100:/home/aerokube/selenoid/{browsers.json,run.sh}' ."
+            ],
+            "Top-3 Similar Questions": [
+                "so_28831329: How to transfer a file between two remote servers using scp from a third, local machine?",
+                "su_1307177: SCP a file between two servers",
+                "ul_518877: Copy file from one remote server to another remote server"
+            ]
+        },
+        {
+            "Command": "rsync",
+            "Explanations about Options": {
+                "-a(M)": "This is equivalent to -rlptgoD. It is a quick way of saying you want recursion and\n want to preserve almost everything (with -H being a notable omission). The only\n exception to the above equivalence is when --files-from is specified, in which case\n -r is not implied.",
+                "-e(M)": "This option allows you to choose an alternative remote shell program to use for\n communication between the local and remote copies of rsync. Typically, rsync is\n configured to use ssh by default, but you may prefer to use rsh on a local network.",
+                "-r(C)": " You could use \"rsync\" instead. \"rsync -r -z -c\" will return better error codes.",
+                "-r(M)": "This tells rsync to copy directories recursively. See also --dirs (-d).",
+                "-v(M)": "This option increases the amount of information you are given during the transfer.\n By default, rsync works silently. A single -v will give you information about what\n files are being transferred and a brief summary at the end. Two -v options will\n give you information on what files are being skipped and slightly more information\n at the end. More than two -v options should only be used if you are debugging\n rsync.",
+                "-z(M)": "With this option, rsync compresses the file data as it is sent to the destination\n machine, which reduces the amount of data being transmitted - something that is\n useful over a slow connection."
+            },
+            "MP Summary": "a fast, versatile, remote (and local) file-copying tool",
+            "Most Similar TLDR Script": "rsync {{remote_host}}:{{path/to/remote_file}} {{path/to/local_directory}}",
+            "Most Similar TLDR Task": "Transfer file from remote host to local",
+            "Top-3 Scripts": [
+                "so_62157851: rsync -r -z -c\n\nif sshpass PA55WORD rsync -r -z -c \"username@host1:/tmp/$1*\" ~/$1;\nthen echo \"done\";\nelse sshpass PASSWORD rsync -r -z -c \"username@host2:/tmp/$1*\" ~/$1;\nfi\n\nHOSTS=( \"host1\" \"host2\" \"host3\" )\n\nfor H in ${HOSTS[@]}\ndo\n  sshpass -p PASSWORD rsync -r -z -c \"username@${H}:/tmp/$1*\" ~/$1 && break\ndone\n\nHOSTS=( \"host1\" \"host2\" \"host3\" )\nUSERS=( \"user1\" \"user2\" \"user3\" )\nPASSS=( \"pass1\" \"pass2\" \"pass3\" )\n\nfor i in ${!HOSTS[@]}\ndo\n  sshpass -p ${PASSS[$i]} rsync -r -z -c \"${USERS[$i]}@${HOSTS[$i]}:/tmp/$1*\" ~/$1 && break\ndone",
+                "ul_184965: scp/rsync",
+                "so_32450665: rsync -avz -e ssh remoteuser@remotehost:/remote/dir /this/dir/"
+            ],
+            "Top-3 Similar Questions": [
+                "ul_85292: scp from one remote server to another remote server",
+                "so_62157851: SCP copy from another host if file not found in one host",
+                "ul_184965: Open file from remote computer on host computer"
+            ]
+        },
+        {
+            "Command": "ssh",
+            "Explanations about Options": {
+                "-t(M)": "Force pseudo-terminal allocation. This can be used to execute arbitrary screen-\n based programs on a remote machine, which can be very useful, e.g. when implementing\n menu services. Multiple -t options force tty allocation, even if ssh has no local\n tty.",
+                "-w(M)": "Requests tunnel device forwarding with the specified tun(4) devices between the\n client (local_tun) and the server (remote_tun)."
+            },
+            "MP Summary": "OpenSSH SSH client (remote login program)",
+            "Most Similar TLDR Script": "ssh {{remote_host}} {{command -with -flags}}",
+            "Most Similar TLDR Task": "Run a command on a remote server",
+            "Top-3 Scripts": [
+                "ul_85292: ssh one 'cat file' | ssh two 'cat > file'\n\nssh -R 5001:127.0.0.1:5002 one\nssh -L 5002:127.0.0.1:22 two",
+                "so_26006604: ssh userA@A 'cat /source/file' | ssh userC@C 'cat > /dest/file'\n\nssh userA@A 'cd /source/dir && tar cf - file1 file2...' |\n    ssh userC@C 'cd /dest/dir && tar xvf -'\n\ntar cf - file... | ssh userB@B 'ssh userC@C \"cd /dest/dir && tar xvf -\" '",
+                "ul_630666: man ssh\n\nssh serverB"
+            ],
+            "Top-3 Similar Questions": [
+                "ul_85292: scp from one remote server to another remote server",
+                "so_26006604: SCP from remote server to another remote server",
+                "ul_630666: scp to local from a remote server that ssh's to another remote server"
+            ]
+        },
+        {
+            "Command": "nc",
+            "Explanations about Options": {
+                "-l(M)": "Listen for an incoming connection rather than initiating a connection to a remote\n host. The destination and port to listen on can be specified either as non-optional\n arguments, or with options -s and -p respectively. Cannot be used together with -x\n or -z. Additionally, any timeouts specified with the -w option are ignored."
+            },
+            "MP Summary": "arbitrary TCP and UDP connections and listens",
+            "Most Similar TLDR Script": "nc -l {{local_port}} | nc {{hostname}} {{remote_port}}",
+            "Most Similar TLDR Task": "Act as proxy and forward data from a local TCP port to the given remote host",
+            "Top-3 Scripts": [
+                "su_798903: scp -P SERVERPORT -o 'ProxyCommand ssh -p WORKPORT WORKUSER@WORK nc %h %p 2>/dev/null' localfile SERVERUSER@SERVER:remotefile",
+                "ul_537319: ssh bastion-machine nc %h %p",
+                "su_792338: Host target\n   ProxyCommand nohup ssh middle nc -w1 %h %p\n   User target_user"
+            ],
+            "Top-3 Similar Questions": [
+                "ul_85292: scp from one remote server to another remote server",
+                "su_798903: How to scp across two ssh",
+                "ul_537319: How can I download a file from a host I can only SSH to through another host?"
+            ]
+        },
+        {
+            "Command": "sshpass",
+            "Explanations about Options": {
+                "-f(C)": "You could use \"sshpass -f FILE_PATH\" or some other clever encryption method of getting the password in, but \"sshpass\" is your friend here."
+            },
+            "MP Summary": "noninteractive ssh password provider",
+            "Most Similar TLDR Script": "sshpass -f {{file}} ssh -o StrictHostKeyChecking=no {{user}}@{{hostname}} \"{{command}}\"",
+            "Most Similar TLDR Task": "Connect to a remote server using the first line of a file as the password, automatically accept unknown ssh keys, and launch a command",
+            "Top-3 Scripts": [
+                "so_62157851: if sshpass PA55WORD rsync -r -z -c \"username@host1:/tmp/$1*\" ~/$1;\nthen echo \"done\";\nelse sshpass PASSWORD rsync -r -z -c \"username@host2:/tmp/$1*\" ~/$1;\nfi\n\nsshpass -f FILE_PATH\n\nHOSTS=( \"host1\" \"host2\" \"host3\" )\n\nfor H in ${HOSTS[@]}\ndo\n  sshpass -p PASSWORD rsync -r -z -c \"username@${H}:/tmp/$1*\" ~/$1 && break\ndone\n\nHOSTS=( \"host1\" \"host2\" \"host3\" )\nUSERS=( \"user1\" \"user2\" \"user3\" )\nPASSS=( \"pass1\" \"pass2\" \"pass3\" )\n\nfor i in ${!HOSTS[@]}\ndo\n  sshpass -p ${PASSS[$i]} rsync -r -z -c \"${USERS[$i]}@${HOSTS[$i]}:/tmp/$1*\" ~/$1 && break\ndone"
+            ],
+            "Top-3 Similar Questions": [
+                "so_62157851: SCP copy from another host if file not found in one host"
+            ]
+        }
+    ],
+    "Query": "scp between two remote hosts from my (third) pc"
+}

@@ -1,0 +1,97 @@
+{
+  "Query": "How to split a line into words separated by one or more spaces in bash?",
+  "Answers": [
+    {
+      "Command": "fold",
+      "MP Summary": "wrap each input line to fit in specified width",
+      "Most Similar TLDR Task": "Wrap each line to width \"5\" and break the line at spaces (puts each space separated word in a new line, words with length > 5 are wrapped)",
+      "Most Similar TLDR Script": "fold -w5 -s {{file}}",
+      "Top-3 Similar Questions": [
+        "so_17904381: How to split given string in line by line in unix",
+        "au_603739: How can I split a line in 2 by words/characters? (Bash) (Regex)",
+        "so_29378720: How can I split a line in 2 by words/characters?"
+      ],
+      "Top-3 Scripts": [
+        "so_17904381: echo \"google\" | fold -w1",
+        "au_603739: echo $YOUR_STRING | fold -sw $CHARS\n\nman fold",
+        "so_29378720: $ s=\"Hello Hello Hi Hello Hello Hi Hi Hi Hi Hello\"\n$ fold -w $(( ${#s} / 2 + 1)) -s <<< \"$s\"\nHello Hello Hi Hello\nHello Hi Hi Hi Hi Hello\n\nman fold\n\nfold - wrap each input line to fit in specified width\n\n   -s, --spaces\n          break at spaces\n\n   -w, --width=WIDTH\n          use WIDTH columns instead of 80"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "awk",
+      "MP Summary": "pattern scanning and processing language",
+      "Most Similar TLDR Task": "Print the last column of each line in a file, using a comma (instead of space) as a field separator",
+      "Most Similar TLDR Script": "awk -F ',' '{print $NF}' {{filename}}",
+      "Top-3 Similar Questions": [
+        "so_62026693: Bash split command to split line in comma separated values",
+        "so_57045502: Bash: Split a single line of output with spaces into multiple lines of one word each",
+        "so_62657224: Split a string on a word in Bash"
+      ],
+      "Top-3 Scripts": [
+        "so_62026693: $ cat file00 | awk '{ printf \"%s%s\", sep, $0 ; sep=\",\" } END { print \"\" }'\nhost1,host2,host3...,host25",
+        "so_57045502: echo 'foo bar baz are your words' | awk '{NF-=3; OFS=\"\\n\"; $1=$1}1' | sort",
+        "so_62657224: echo test-server-domain-name.com | awk -F 'domain' '{print $1}'"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "split",
+      "MP Summary": "split a file into pieces",
+      "Most Similar TLDR Task": "Split a file, each split having 10 lines (except the last split)",
+      "Most Similar TLDR Script": "split -l {{10}} {{filename}}",
+      "Top-3 Similar Questions": [
+        "so_62026693: Bash split command to split line in comma separated values",
+        "ul_378547: Split a string by some separator in bash?",
+        "so_35904868: Split a file by a variable range of lines"
+      ],
+      "Top-3 Scripts": [
+        "so_62026693: split -d -l 25 large.txt file\n\n$ split -d -l 25 --filter=\"awk '{ printf \\\"%s%s\\\", sep, \\$0 ; sep=\\\",\\\" } END { print \\\"\\\" }' > \\$FILE\" large.txt file\n$ cat file00\nhost1,host2,host3...,host25",
+        "ul_378547: perl -E 'say for split quotemeta shift, shift' -- \"$separator\" \"$string\"",
+        "so_35904868: "
+      ],
+      "Explanations about Options": {
+        "--filter": "write to shell COMMAND; file name is $FILE",
+        "-d": "use numeric suffixes starting at 0 , not alphabetic",
+        "-l": "put NUMBER lines/records per output file"
+      }
+    },
+    {
+      "Command": "sed",
+      "MP Summary": "stream editor for filtering and transforming text",
+      "Most Similar TLDR Task": "Replace only on lines matching the line pattern",
+      "Most Similar TLDR Script": "sed '/{{line_pattern}}/s/{{find}}/{{replace}}/' {{filename}}",
+      "Top-3 Similar Questions": [
+        "so_35904868: Split a file by a variable range of lines",
+        "so_25112438: Split a text into multiple sentences in bash",
+        "so_34471616: Split line with multiple delimiters in Unix"
+      ],
+      "Top-3 Scripts": [
+        "so_35904868: $sed -e 's/[$]//g' < test.txt > test_new.txt",
+        "so_25112438: tr '\\n' ' ' <  input | sed -e 's/[.] \\s*/. \\n/g'",
+        "so_34471616: FILE=yourfile.txt\n\n# first line (header)\ncat \"$FILE\" | head -n 1 | sed -r \"s/=[^,]+//g\"\n\n# other lines (data)\ncat \"$FILE\" | sed -r \"s/[^,]+=//g\""
+      ],
+      "Explanations about Options": {
+        "-e": "add the script to the commands to be executed",
+        "-r": "use extended regular expressions in the script (for portability use POSIX -E)."
+      }
+    },
+    {
+      "Command": "line",
+      "MP Summary": "cache line size",
+      "Most Similar TLDR Task": "Read input",
+      "Most Similar TLDR Script": "line",
+      "Top-3 Similar Questions": [
+        "so_29378720: How can I split a line in 2 by words/characters?",
+        "so_45389128: how to split a string using space delimiter in C unix?",
+        "ul_233089: how to split a file into separate files based on the column headers in original file?"
+      ],
+      "Top-3 Scripts": [
+        "so_29378720: fold - wrap each input line to fit in specified width\n\n   -s, --spaces\n          break at spaces\n\n   -w, --width=WIDTH\n          use WIDTH columns instead of 80",
+        "so_45389128: ",
+        "ul_233089: "
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

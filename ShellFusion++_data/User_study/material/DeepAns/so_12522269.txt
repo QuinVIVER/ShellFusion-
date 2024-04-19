@@ -1,0 +1,112 @@
+
+
+Query:                Bash How to find the largest file in a directory and its subdirectories?
+
+
+########################################################################################################################
+
+
+Question Title:       Bash counting directories, subdirectories and files
+Question Link:        https://stackoverflow.com/questions/29554455
+
+Accepted Answer:      Further to my comment:
+                      
+                      declare -i direnum
+                      direnum=$(find . -type d|wc -l)
+                      (( direnum-- ))
+                      echo "$direnum"
+                      
+                      
+                      By the way, notice that I am using $( ... ) rather than back-ticks,  Back-ticks are considered bad practice and obsolete.
+
+
+########################################################################################################################
+
+
+Question Title:       Bash finding files in subdirectories and move them into a new folder
+Question Link:        https://stackoverflow.com/questions/18649386
+
+Accepted Answer:      Try this command:
+                      
+                      #!/bin/bash
+                      find Dir1 -mindepth 1 -type f -name '*.RAW' | while read -r FILE; do
+                          DIRNAME=${FILE%/*}
+                          mkdir -p "$DIRNAME/RAW" &amp;&amp; mv "$FILE" "$DIRNAME/RAW/"
+                      done
+                      
+
+
+########################################################################################################################
+
+
+Question Title:       Searching and counting files in directories and subdirectories [BASH]
+Question Link:        https://stackoverflow.com/questions/9839111
+
+Accepted Answer:      The find command will find all files/dirs recursively, so the for...loop is not needed:
+                      
+                      FILES=$(find $TEST_DIR -type f | wc -l)
+                      DIRS=$(find $TEST_DIR -type d | wc -l)
+                      
+                      
+                      If your filename may contains newline, try this:
+                      
+                      FILES=$(find $TEST_DIR -type f -printf x | wc -c)
+                      
+
+
+########################################################################################################################
+
+
+Question Title:       Finding a filetype in current directory and subdirectory, including hidden files. (Homework)
+Question Link:        https://stackoverflow.com/questions/48235113
+
+Accepted Answer:      It's not very clear what you are trying to achieve.
+                      
+                      As lurker said in the comments cut -d. -f1 will make any line starting with a . be a blank line.
+                      
+                      From your code, the closest I could think of is
+                      
+                      find $directory -type f -iname '*.gif' | rev | cut -d/ -f1 | cut -d. -f2,3 | rev | sort -f
+                      
+                      
+                      Giving you all gifs, hidden or not, without path or extension.
+                      
+                      Example
+                      
+                      user@host /tmp % ls -aR
+                      .:
+                      .  ..  subdirectory  .test.gif  test.gif
+                      
+                      ./subdirectory:
+                      .  ..  .sub.gif  sub.gif
+                      user@host /tmp % find . -type f -iname '*.gif' | rev | cut -d/ -f1 | cut -d. -f2,3 | rev | sort -f
+                      sub
+                      .sub 
+                      test
+                      .test
+                      
+
+
+########################################################################################################################
+
+
+Question Title:       Replacing bad file, directory and subdirectory names using a regex pattern
+Question Link:        https://unix.stackexchange.com/questions/496514
+
+Accepted Answer:      Assuming \357\200\242 are octal numbers. Try:
+                      
+                      rename -n 's/\o{357}\o{200}\o{242}/:/g' 2018-*
+                      
+                      
+                      The command rename works with a Perl regular expression replace. Here it replaces three characters given as octal byte values with a colon.
+                      
+                      Because of -n this just prints what it would do. So you are able to test without destroying something.
+                      
+                      When you are sure that this does what you want, execute without -n.
+                      
+                      If you need to traverse a entire directory tree, combine it with find:
+                      
+                      find . -depth -exec rename -n 's/\o{357}\o{200}\o{242}/:/g' {} \;
+                      
+                      
+                      Don't worry if the directory tree contains files that don't need to be renamed. If the regex replace does doesn't change the file name, the file is not renamed.

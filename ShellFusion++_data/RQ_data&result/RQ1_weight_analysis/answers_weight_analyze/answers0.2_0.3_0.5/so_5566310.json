@@ -1,0 +1,86 @@
+{
+  "Query": "How to recursively find and list the latest modified files in a directory with subdirectories and times?",
+  "Answers": [
+    {
+      "Command": "find",
+      "MP Summary": "search for files in a directory hierarchy",
+      "Most Similar TLDR Task": "Find files by extension",
+      "Most Similar TLDR Script": "find {{root_path}} -name '{{*.ext}}'",
+      "Top-3 Similar Questions": [
+        "nl2bash_5159: Find grub.conf files in entire file system discarding errors in csh or tcsh shell",
+        "so_30959872: How to find the timestamp of the latest modified file in a directory (recursively)?",
+        "ul_371885: Find all files in all subdirectories with name ExampleDir"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_5159: find / -name grub.conf >& /dev/null",
+        "so_30959872: find . -type f -printf '%T@,' | cksum",
+        "ul_371885: find . -type f -path \"*/ExampleDir/*\""
+      ],
+      "Explanations about Options": {
+        "-printf": "True; print format on the standard output, interpreting `\\' escapes and `%'\n directives. Field widths and precisions can be specified as with the `printf' C\n function. Please note that many of the fields are printed as %s rather than %d,\n and this may mean that flags don't work as you might expect. This also means that\n the `-' flag does work (it forces fields to be left-aligned). Unlike -print,\n -printf does not add a newline at the end of the string. The escapes and\n directives are:",
+        "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+        "-type": "File is of type c:"
+      }
+    },
+    {
+      "Command": "ls",
+      "MP Summary": "list directory contents",
+      "Most Similar TLDR Task": "List all files, with trailing `/` added to directory names",
+      "Most Similar TLDR Script": "ls -F",
+      "Top-3 Similar Questions": [
+        "so_58643334: Finding the oldest folder in a directory in linux even when files inside are modified",
+        "so_38895490: bash finding files in directories recursively"
+      ],
+      "Top-3 Scripts": [
+        "so_58643334: ls -i",
+        "so_38895490: "
+      ],
+      "Explanations about Options": {
+        "-i": "print the index number of each file"
+      }
+    },
+    {
+      "Command": "cp",
+      "MP Summary": "copy files and directories",
+      "Most Similar TLDR Task": "Recursively copy a directory's contents to another location (if the destination exists, the directory is copied inside it)",
+      "Most Similar TLDR Script": "cp -r {{path/to/source_directory}} {{path/to/target_directory}}",
+      "Top-3 Similar Questions": [
+        "nl2bash_4331: Find all regular files under $DIR/tmp/daily/, sort them in reverse numerical order and copy the first two files to $DIR/tmp/weekly/"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_4331: find $DIR/tmp/daily/ -type f -printf \"%p\\n\" | sort -rn | head -n 2 | xargs -I{} cp {} $DIR/tmp/weekly/"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "rm",
+      "MP Summary": "remove files or directories",
+      "Most Similar TLDR Task": "Recursively remove a directory and all its subdirectories",
+      "Most Similar TLDR Script": "rm -r {{path/to/directory}}",
+      "Top-3 Similar Questions": [
+        "so_23562236: find in list of directories saved to a file"
+      ],
+      "Top-3 Scripts": [
+        "so_23562236: FILE_LIST=`mktemp --suffix=.list`\nfind ~/udit65_backup/ -maxdepth 1 -iname \"$PREFIX-*\" -type d -mtime +$NDAYS -print0 > $FILE_LIST\n# Make unwritable files... writable\nxargs -I {} -0r -a $FILE_LIST find {} ! -perm -u+w -print0 | xargs -0r chmod -R 700 -v\nxargs -0r -a $FILE_LIST rm -rf -v\nrm -f $FILE_LIST"
+      ],
+      "Explanations about Options": {
+        "-v": "explain what is being done",
+        "-r": "remove directories and their contents recursively",
+        "-f": "ignore nonexistent files and arguments, never prompt"
+      }
+    },
+    {
+      "Command": "mv",
+      "MP Summary": "move (rename) files",
+      "Most Similar TLDR Task": "Move files in arbitrary locations",
+      "Most Similar TLDR Script": "mv {{source}} {{target}}",
+      "Top-3 Similar Questions": [
+        "nl2bash_4412: Find all regular files with '.what_to_find' extension in the entire filesystem and move them to directory '/new_directory'"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_4412: find / -iname \"*.what_to_find\" -type f -exec mv {} /new_directory \\;"
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

@@ -1,0 +1,85 @@
+{
+  "Query": "Can I zip an entire folder using gzip?",
+  "Answers": [
+    {
+      "Command": "unzip",
+      "MP Summary": "list, test and extract compressed files in a ZIP archive",
+      "Most Similar TLDR Task": "Extract zip file(s) (for multiple files, separate file paths by spaces)",
+      "Most Similar TLDR Script": "unzip {{file(s)}}",
+      "Top-3 Similar Questions": [
+        "ul_198492: Unzip specific files from multiple zip files",
+        "ul_400277: Unzip content of specific folder on Solaris",
+        "ul_489445: Unzip to a folder with the same name as the file (without the .zip extension)"
+      ],
+      "Top-3 Scripts": [
+        "ul_198492: find . -type f -name '*.zip' -exec unzip {}  '*CTL*' -d \"$target_dir\" \\;",
+        "ul_400277: TMPDIR=`mktemp -d` || exit 1\nunzip -d ${TMPDIR}/ results.zip 'folder1/*'\nmv ${TMPDIR}/folder1/* path_to_unzip/\nrm -r ${TMPDIR}",
+        "ul_489445: unzd() {\n    if [[ $# != 1 ]]; then echo I need a single argument, the name of the archive to extract; return 1; fi\n    target=\"${1%.zip}\"\n    unzip \"$1\" -d \"${target##*/}\"\n}\n\nunzip $1 -d \"${target}\""
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "zip",
+      "MP Summary": "package and compress (archive) files",
+      "Most Similar TLDR Task": "Delete files from an existing zip file",
+      "Most Similar TLDR Script": "zip -d {{compressed.zip}} \"{{foo/*.tmp}}\"",
+      "Top-3 Similar Questions": [
+        "ul_626672: find: \u2018zip\u2019: No such file or directory",
+        "au_516912: Excludes specific files from all subdirectories when creating a zip file",
+        "so_60930401: Unzip archive zip file into folder with same name as archive zip file"
+      ],
+      "Top-3 Scripts": [
+        "ul_626672: command -v zip\n\nsudo apt install zip\n\nfind . -mindepth 1 -maxdepth 1 -type d -execdir zip -jr '{}.zip' '{}' \\;\n\nfind . ! -name . -prune -type d -execdir zip -jr '{}.zip' '{}' \\;\n\nfor thing in ./*; do\n    [[ -d \"${thing}\" ]] && zip -jr \"${thing}.zip\" \"${thing}\";\ndone",
+        "au_516912: $ zip -r /tmp/out.zip *          \n  adding: 1.bar (stored 0%)\n  adding: 1.foo (stored 0%)\n  adding: sub1/ (stored 0%)\n  adding: sub1/sub2/ (stored 0%)\n  adding: sub1/sub2/1.bar (stored 0%)\n  adding: sub1/sub2/1.foo (stored 0%)\n  adding: sub1/1.foo (stored 0%)\n  adding: sub1/1.bar (stored 0%)\n\n$ rm /tmp/out.zip\n$ zip -r /tmp/out.zip * -x '*.foo'\n  adding: 1.bar (stored 0%)\n  adding: sub1/ (stored 0%)\n  adding: sub1/sub2/ (stored 0%)\n  adding: sub1/sub2/1.bar (stored 0%)\n  adding: sub1/1.bar (stored 0%)\n\n$ rm /tmp/out.zip\n$ zip -r /tmp/out.zip * -x \\*.foo \n  adding: 1.bar (stored 0%)\n  adding: sub1/ (stored 0%)\n  adding: sub1/sub2/ (stored 0%)\n  adding: sub1/sub2/1.bar (stored 0%)\n  adding: sub1/1.bar (stored 0%)\n\nman zip\n\nCommand format.  The basic command format is\n\n               zip options archive inpath inpath ...\n\n        where archive is a new or existing zip archive and inpath is a directory or\n        file path optionally including wildcards.  When given the name of an exist\u2010\n        ing zip archive, zip will replace identically named entries in the zip  ar\u2010\n        chive (matching the relative names as stored in the archive) or add entries\n        for new names.",
+        "so_60930401: $filePath = \"s:\\Download Data Feed\\\"\n$zip = Get-ChildItem -File -Recurse -Path $filePath | Where-Object { $_.Extension -eq \".zip\" }\n\nforeach ($file in $zip) { \n    $target = Join-Path $filePath $file.BaseName\n    if (!(Test-Path $target -PathType Container)) {\n        $null = New-Item -ItemType Directory -Path $target\n    }\n    Expand-7Zip -ArchiveFileName $file -Password \"Password\" -TargetPath $target\n}\n\n$zip"
+      ],
+      "Explanations about Options": {
+        "-j": "Store just the name of a saved file (junk the path), and do not store directory\n names. By default, zip will store the full path (relative to the current\n directory).",
+        "-r": "Travel the directory structure recursively; for example:"
+      }
+    },
+    {
+      "Command": "xz",
+      "MP Summary": "Compress or decompress .xz and .lzma files",
+      "Most Similar TLDR Task": "Compress a file, but don't delete the original",
+      "Most Similar TLDR Script": "xz -k {{file}}",
+      "Top-3 Similar Questions": [
+        "ul_108100: Why are tar archive formats switching to xz compression to replace bzip2 and what about gzip?"
+      ],
+      "Top-3 Scripts": [
+        "ul_108100: xz -3\n\nxz -9\n\nxz -0"
+      ],
+      "Explanations about Options": {
+        "-0": "Select a compression preset level. The default is -6. If multiple preset levels\n are specified, the last one takes effect. If a custom filter chain was already\n specified, setting a compression preset level clears the custom filter chain."
+      }
+    },
+    {
+      "Command": "zcat",
+      "MP Summary": "decompress and concatenate files to standard output",
+      "Most Similar TLDR Task": "Print the uncompressed contents of a gzipped file to the standard output",
+      "Most Similar TLDR Script": "zcat {{file.txt.gz}}",
+      "Top-3 Similar Questions": [
+        "ul_399369: Merge possibly truncated gzipped log files"
+      ],
+      "Top-3 Scripts": [
+        "ul_399369: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "unar",
+      "MP Summary": "extract archive file contents",
+      "Most Similar TLDR Task": "Force rename if files to be unpacked already exist",
+      "Most Similar TLDR Script": "unar -r {{archive}}",
+      "Top-3 Similar Questions": [
+        "ul_489445: Unzip to a folder with the same name as the file (without the .zip extension)"
+      ],
+      "Top-3 Scripts": [
+        "ul_489445: unar foo.zip\n\nunar -d foo.zip"
+      ],
+      "Explanations about Options": {
+        "-d": "Always create a containing directory for the contents of the unpacked archive. By\n default, a directory is created if there is more than one top-level file or folder."
+      }
+    }
+  ]
+}

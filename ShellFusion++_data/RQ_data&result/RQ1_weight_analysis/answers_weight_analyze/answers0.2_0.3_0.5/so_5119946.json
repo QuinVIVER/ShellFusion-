@@ -1,0 +1,87 @@
+{
+  "Query": "find -exec with multiple commands",
+  "Answers": [
+    {
+      "Command": "xargs",
+      "MP Summary": "build and execute command lines from standard input",
+      "Most Similar TLDR Task": "Parallel runs of up to `max-procs` processes at a time; the default is 1. If `max-procs` is 0, xargs will run as many processes as possible at a time",
+      "Most Similar TLDR Script": "{{arguments_source}} | xargs -P {{max-procs}} {{command}}",
+      "Top-3 Similar Questions": [
+        "ul_212957: find: multiple `-exec`s with conditions",
+        "ul_84265: linux shell: find -exec in find -exec",
+        "ul_18100: Is it possible to nest a 'find -exec' within another 'find -exec'?"
+      ],
+      "Top-3 Scripts": [
+        "ul_212957: find . -type f -exec grep -lFZ <i>SOME_STRING</i> {} + | xargs -0 gsed -s -i '<i>COMMAND</i>'\n\ngfind /tmp/ -type f \\( -name \"*.h\" -o -name \"*.cpp\" \\) \\\n-exec ggrep -lFZ LARGE_INTEGER {} + | \\\nxargs -0 gsed -s -i '1s/^/#include <stdint.h>\\n/'",
+        "ul_84265: xargs -r0a <(\n    find ~/.config/google-chrome -type d -name test -print0\n  ) sh -c 'exec find \"$@\" -exec chmod 555 {} +' sh",
+        "ul_18100: find <paths> <args> -print0 | xargs -0 -I{.} find {.} <args for second find> [etc.]"
+      ],
+      "Explanations about Options": {
+        "-I": "Replace occurrences of replace-str in the initial-arguments with names read from\n standard input. Also, unquoted blanks do not terminate input items; instead the\n separator is the newline character. Implies -x and -L 1.",
+        "-i": "This option is a synonym for -Ireplace-str if replace-str is specified. If the\n replace-str argument is missing, the effect is the same as -I{}. This option is\n deprecated; use -I instead.",
+        "-0": "Input items are terminated by a null character instead of by whitespace, and the\n quotes and backslash are not special (every character is taken literally).\n Disables the end of file string, which is treated like any other argument. Useful\n when input items might contain white space, quote marks, or backslashes. The GNU\n find -print0 option produces input suitable for this mode."
+      }
+    },
+    {
+      "Command": "exec",
+      "MP Summary": "execute commands and open, close, or copy file descriptors",
+      "Most Similar TLDR Task": "Replace with the specified command using the current environment variables",
+      "Most Similar TLDR Script": "exec {{command -with -flags}}",
+      "Top-3 Similar Questions": [
+        "so_49083961: Find with multiple rename",
+        "au_523815: What the -exec in `find ... -exec ...` do?"
+      ],
+      "Top-3 Scripts": [
+        "so_49083961: ",
+        "au_523815: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "find",
+      "MP Summary": "search for files in a directory hierarchy",
+      "Most Similar TLDR Task": "Find files by matching multiple patterns",
+      "Most Similar TLDR Script": "find {{root_path}} -name '{{*pattern_1*}}' -or -name '{{*pattern_2*}}'",
+      "Top-3 Similar Questions": [
+        "nl2bash_7944: find file end with  '.txt' in current directory.",
+        "ul_102191: `find` with multiple `-name` and `-exec` executes only the last matches of `-name`",
+        "ul_212957: find: multiple `-exec`s with conditions"
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_7944: find . -name \"*.txt\"",
+        "ul_102191: find . -type f '(' -name \"*.htm*\" -o -name \"*.js*\" -o -name \"*.txt\" ')' \\\n  -exec sh -c 'echo \"$0\"' {} \\;\n\nfind . -type f '(' -name \"*.htm*\" -o -name \"*.js*\" -o -name \"*.txt\" ')' -exec sh -c '\n   for i do\n     echo \"$i\"\n   done' sh {} +",
+        "ul_212957: find . -type f -exec grep -qF <i>SOME_STRING</i> {} \\; -exec sed '<i>COMMAND</i>' {} \\;\n\nfind . -type f -exec grep -qF <i>SOME_STRING</i> {} \\; -print\n\nfind . -type f -exec grep -qF <i>THIS</i> {} \\; ! -exec grep -qF <i>THAT</i> {} \\; -print\n\nfind . -type f -exec grep -lFZ <i>SOME_STRING</i> {} + | xargs -0 gsed -s -i '<i>COMMAND</i>'"
+      ],
+      "Explanations about Options": {
+        "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+        "-type": "File is of type c:"
+      }
+    },
+    {
+      "Command": "command",
+      "MP Summary": "execute a simple command",
+      "Most Similar TLDR Task": "Display the path to the executable or the alias definition of a specific command",
+      "Most Similar TLDR Script": "command -v {{command_name}}",
+      "Top-3 Similar Questions": [
+        "so_21689583: questions on Linux command \"find -exec {}\""
+      ],
+      "Top-3 Scripts": [
+        "so_21689583: -exec command ;\n          Execute  command;  true  if  0 status is returned.  All following \n          arguments to find are taken to be arguments to the command until an \n          argument consisting of \u2018;\u2019 is encountered."
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "dirname",
+      "MP Summary": "strip last component from file name",
+      "Most Similar TLDR Task": "Delimit output with a NUL character instead of a newline (useful when combining with `xargs`)",
+      "Most Similar TLDR Script": "dirname --zero {{path/to/directory_a}} {{path/to/file_b}}",
+      "Top-3 Similar Questions": [
+        "so_8106405: Bash find: changing matched name for use in -exec"
+      ],
+      "Top-3 Scripts": [
+        "so_8106405: find . -name \"*.less\" -exec sh -c \"plessc \\$0 \\$(dirname \\$0)/\\$(basename \\$0 less)css\" {} \\;"
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

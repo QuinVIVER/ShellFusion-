@@ -1,0 +1,98 @@
+{
+  "Query": "Check if file exists and whether it contains a specific string",
+  "Answers": [
+    {
+      "Command": "test",
+      "MP Summary": "check file types and compare values",
+      "Most Similar TLDR Task": "Test if directory not exists",
+      "Most Similar TLDR Script": "test ! -d {{path/to/directory}}",
+      "Top-3 Similar Questions": [
+        "so_57971302: Globbing to check whether files with different file extension exist",
+        "ul_231622: Identify sub-directories that do not contain a specific string in a specific file",
+        "so_16367592: Powershell: how to check if string contains any significant characters?"
+      ],
+      "Top-3 Scripts": [
+        "so_57971302: test -f",
+        "ul_231622: find . -type d \\( ! -exec test -f '{}/stdout' \\; -o ! -exec grep -q str1 '{}/stdout' \\; \\) -print",
+        "so_16367592: if ($test -match 'regex_here') { 'It matched' }"
+      ],
+      "Explanations about Options": {
+        "-x": "FILE\n FILE exists and execute (or search) permission is granted",
+        "-t": "FD file descriptor FD is opened on a terminal",
+        "-c": "FILE\n FILE exists and is character special",
+        "-e": "FILE\n FILE exists",
+        "-h": "FILE\n FILE exists and is a symbolic link (same as -L)",
+        "-f": "FILE\n FILE exists and is a regular file"
+      }
+    },
+    {
+      "Command": "grep",
+      "MP Summary": "print lines that match patterns",
+      "Most Similar TLDR Task": "Invert match for excluding specific strings",
+      "Most Similar TLDR Script": "grep -v {{search_pattern}}",
+      "Top-3 Similar Questions": [
+        "ul_528364: Iptables command to check whether rule exists at specific line number",
+        "so_11287861: How to check if a file contains a specific string using Bash",
+        "so_13762813: Checking if a variable which contains a string can be found in a file shell"
+      ],
+      "Top-3 Scripts": [
+        "ul_528364: iptables -S INPUT 1 | grep -ce '-j ACCEPT'\n\ngrep -c",
+        "so_11287861: if grep -q SomeString \"$File\"; then\n  Some Actions # SomeString was found\nfi\n\n$ echo hello | grep hi ; echo $?\n1\n$ echo hello | grep he ; echo $?\nhello\n0\n$ echo hello | grep -q he ; echo $?\n0",
+        "so_13762813: grep -Fxq $name1 test.txt  \nif [ $? -eq 0 ]; then\n    ... test.txt contains $name1 ...\nelse\n    ... test.txt does not contain $name1 ...\nfi"
+      ],
+      "Explanations about Options": {
+        "-x": "Select only those matches that exactly match the whole line. For a regular\n expression pattern, this is like parenthesizing the pattern and then surrounding it\n with ^ and $.",
+        "-q": "Quiet; do not write anything to standard output. Exit immediately with zero status\n if any match is found, even if an error was detected. Also see the -s or\n --no-messages option.",
+        "-F": "Interpret PATTERNS as fixed strings, not regular expressions."
+      }
+    },
+    {
+      "Command": "find",
+      "MP Summary": "search for files in a directory hierarchy",
+      "Most Similar TLDR Task": "Find files by matching multiple patterns",
+      "Most Similar TLDR Script": "find {{root_path}} -name '{{*pattern_1*}}' -or -name '{{*pattern_2*}}'",
+      "Top-3 Similar Questions": [
+        "ul_231622: Identify sub-directories that do not contain a specific string in a specific file",
+        "so_37967164: Check if file exists in a directory specified by regex Linux"
+      ],
+      "Top-3 Scripts": [
+        "ul_231622: find . -type d \\( ! -exec test -f '{}/stdout' \\; -o ! -exec grep -q str1 '{}/stdout' \\; \\) -print\n\nfind . -type d \\! -exec grep -q 'str1' {}/stdout 2>/dev/null \\; -print",
+        "so_37967164: if find . -regex '/agent/[0-9 \\.]*/bin/run.sh'"
+      ],
+      "Explanations about Options": {
+        "-regex": "File name matches regular expression pattern. This is a match on the whole path,\n not a search. For example, to match a file named `./fubar3', you can use the\n regular expression `.*bar.' or `.*b.*3', but not `f.*r3'. The regular expressions\n understood by find are by default Emacs Regular Expressions (except that `.'\n matches newline), but this can be changed with the -regextype option.",
+        "-type": "File is of type c:"
+      }
+    },
+    {
+      "Command": "file",
+      "MP Summary": "determine file type",
+      "Most Similar TLDR Task": "Give a description of the type of the specified file. Works fine for files with no file extension",
+      "Most Similar TLDR Script": "file {{filename}}",
+      "Top-3 Similar Questions": [
+        "so_14598338: how to check if a specific file extension exists in a folder using powershell?",
+        "so_48350769: Check file exists in source before copying",
+        "so_17767119: How to test if a string exists in a file and if so, check the remaining lines in the file for another string with bash shell"
+      ],
+      "Top-3 Scripts": [
+        "so_14598338: ",
+        "so_48350769: $files = @(\"abc.ps1\", \"def.ps1\")\n$files | Where { Test-Path $_ } | ForEach { $file = Get-Item $_; Copy-Item \"destinationlocation\\$_\" -Force; }\n\n$files = @(\"abc.ps1\", \"def.ps1\")\n$files | ?{ Test-Path $_ } | %{ $file = gi $_; cp $file.FullName \"destinationlocation\\$_\" -Force; }",
+        "so_17767119: awk '/July/{f=1} f&&/foobar/{print \"Found foobar after July!\";exit}' file"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "cp",
+      "MP Summary": "copy files and directories",
+      "Most Similar TLDR Task": "Recursively copy a directory's contents to another location (if the destination exists, the directory is copied inside it)",
+      "Most Similar TLDR Script": "cp -r {{path/to/source_directory}} {{path/to/target_directory}}",
+      "Top-3 Similar Questions": [
+        "so_48350769: Check file exists in source before copying"
+      ],
+      "Top-3 Scripts": [
+        "so_48350769: $files = @(\"abc.ps1\", \"def.ps1\")\n$files | ?{ Test-Path $_ } | %{ $file = gi $_; cp $file.FullName \"destinationlocation\\$_\" -Force; }"
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

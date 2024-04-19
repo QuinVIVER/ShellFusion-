@@ -1,0 +1,82 @@
+{
+    "Answers": [
+        {
+            "Command": "pdfunite",
+            "Explanations about Options": {},
+            "MP Summary": "Portable Document Format (PDF) page merger",
+            "Most Similar TLDR Script": "pdfunite {{path/to/directory/*.pdf}} {{path/to/merged_output.pdf}}",
+            "Most Similar TLDR Task": "Merge a directory of PDFs into a single PDF",
+            "Top-3 Scripts": [
+                "au_1042329: # create a directory in /tmp\nmkdir /tmp/output\n# find all the images and convert them to single standing PDF files\n# then move them to the output directory\nfind path/ -type f -name '[xy]\\.jpg' -exec convert {} {}\\.pdf \\; -exec mv {}\\.pdf /tmp/output/ \\;\n# now join them all together to a single file\npdfunite /tmp/output/* ~/output.pdf\n# normally the system clean up /tmp on restart, but we clean up ourselves\nrm -r /tmp/output\n\n#!/bin/bash\n# create a directory in /tmp\ntmpdir=\"$(mktemp -d)\"\n# find all the images and convert them to single standing PDF files\n# then move them to the output directory\nfind \"$1\" -type f -name \"$2\" -exec convert {} {}\\.pdf \\; -exec mv {}\\.pdf \"$tmpdir\" \\;\n# now join them all together to a single file\npdfunite \"$tmpdir\"/* \"$3\"\n# normally the system clean up /tmp on restart, but we clean up ourselves\nrm -r \"$tmpdir\"\n\n#!/bin/bash\n# create a directory in /tmp\ntmpdir=\"$(mktemp -d)\"\n# find all the images and convert them to single standing PDF files\n# then move them to the output directory\nfind \"$1\" -type f -name \"$2\" -exec sh -c 'convert \"$1\" \"$0/${1##*/}.pdf\"' $tempdir \"{}\" \\;\n# now join them all together to a single file\npdfunite \"$tmpdir\"/* \"$3\"\n# normally the system clean up /tmp on restart, but we clean up ourselves\nrm -r \"$tmpdir\"",
+                "au_1100290: pdfunite input1.pdf input2.pdf input3.pdf output.pdf",
+                "au_886934: pdfunite *.pdf all.pdf"
+            ],
+            "Top-3 Similar Questions": [
+                "au_1042329: Find two images and convert them to .pdf",
+                "au_1100290: Save each PDF file of a directory as another PDF (operation similar to print a PDF as a PDF)",
+                "au_886934: Merge all pdf files from one folder"
+            ]
+        },
+        {
+            "Command": "pdftotext",
+            "Explanations about Options": {},
+            "MP Summary": "Portable Document Format (PDF) to text converter (version 3.03)",
+            "Most Similar TLDR Script": "pdftotext {{filename.pdf}}",
+            "Most Similar TLDR Task": "Convert filename.pdf to plain text and save it as filename.txt",
+            "Top-3 Scripts": [
+                "au_211870: for file in *.pdf; do pdftotext \"$file\" \"$file.txt\"; done",
+                "ul_228818: for file in *pdf; do pdftotext \"$file\" - | grep keyword; done\n\nfor file in *pdf; do \n    echo \"-----------$file----------\"\n    pdftotext \"$file\" - | grep keyword\ndone",
+                "so_38315334: pdftotext /link/to/input.pdf /link/to/output.txt"
+            ],
+            "Top-3 Similar Questions": [
+                "au_211870: How to convert all pdf files to text (within a folder) with one command?",
+                "ul_228818: Searching a keyword in multiple pdf files",
+                "ul_448212: Splitting a single large PDF file into n PDF files based on content and rename each splitted file (in Bash)"
+            ]
+        },
+        {
+            "Command": "montage",
+            "Explanations about Options": {},
+            "MP Summary": "create  a composite image by combining several separate images. The images are tiled on the composite image optionally adorned with a  border,  frame,  image  name,  and more.",
+            "Most Similar TLDR Script": "montage {{image1.png}} {{image2.jpg}} {{imageN.png}} -geometry +0+0 -tile 2x3 montage_%d.jpg",
+            "Most Similar TLDR Task": "Limit the number of rows and columns in the grid, causing input images to overflow into multiple output montages",
+            "Top-3 Scripts": [
+                "au_433236: montage -geometry 300x400 -tile 3x5 foo.png foo.png foo.png foo.png foo.png foo.png foo.png foo.png \\\n foo.png foo.png foo.png foo.png foo.png foo.png foo.png  montage.ps",
+                "au_510219: montage -geometry 250x250+0+0 image1.png image2.png out.png"
+            ],
+            "Top-3 Similar Questions": [
+                "au_433236: How to print multiple copies of an image on a single page",
+                "au_510219: How to merge images in a single PDF or image file"
+            ]
+        },
+        {
+            "Command": "gedit",
+            "Explanations about Options": {},
+            "MP Summary": "text editor for the GNOME Desktop",
+            "Most Similar TLDR Script": "gedit {{file1 file2 ...}}",
+            "Most Similar TLDR Task": "Open multiple text files",
+            "Top-3 Scripts": [
+                "ul_263630: gedit ~/.config/pdf-generate.conf\n\ngedit /usr/share/applications/pdf-generate.desktop.\n\ngedit ~/.kde/share/kde4/services/ServiceMenus/pdf-generate.desktop"
+            ],
+            "Top-3 Similar Questions": [
+                "ul_263630: Create one pdf out of multiple (selected) images"
+            ]
+        },
+        {
+            "Command": "pandoc",
+            "Explanations about Options": {
+                "-o(M)": "Write output to FILE instead of stdout. If FILE is -, output will go to stdout,\n even if a non-textual format (docx, odt, epub2, epub3) is specified."
+            },
+            "MP Summary": "general markup converter",
+            "Most Similar TLDR Script": "pandoc {{input.md}} -o {{output.pdf}}",
+            "Most Similar TLDR Task": "Convert file to pdf (the output format is determined by file extension)",
+            "Top-3 Scripts": [
+                "so_6989792: $pandoc -o output.pdf input.py"
+            ],
+            "Top-3 Similar Questions": [
+                "so_6989792: How to print text file to PDF file in Linux command line"
+            ]
+        }
+    ],
+    "Query": "Create a single pdf from multiple text, images or pdf files"
+}

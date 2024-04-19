@@ -1,0 +1,85 @@
+{
+  "Query": "How can I extract a page range / a part of a PDF?",
+  "Answers": [
+    {
+      "Command": "pdftotext",
+      "MP Summary": "Portable Document Format (PDF) to text converter (version 3.03)",
+      "Most Similar TLDR Task": "Convert filename.pdf to plain text and save it as filename.txt",
+      "Most Similar TLDR Script": "pdftotext {{filename.pdf}}",
+      "Top-3 Similar Questions": [
+        "so_34625953: Is there any way to get the page numbers in a PDF of a search pattern?",
+        "au_1195340: Extract a specific pdf from a zip file with lots of pdfs"
+      ],
+      "Top-3 Scripts": [
+        "so_34625953: pdftotext test.pdf - |\nawk -vRS=$'\\f' -vNAME=\"My name\" \\\n    'index($0,NAME){printf \"%d: %s\\n\", NR, NAME;}'\n\npdftotext test.pdf - |\ngrep -F -o -e $'\\f' -e 'My name' |\nawk 'BEGIN{page=1} /\\f/{++page;next} 1{printf \"%d: %s\\n\", page, $0;}'\n\npdftotext test.pdf - |\nawk -vRS=$'\\f' \\\n    '/My[[:space:]]+Name/{printf \"%d: %s\\n\", NR, \"My Name\";}'",
+        "au_1195340: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "pdftk",
+      "MP Summary": "A handy tool for manipulating PDF",
+      "Most Similar TLDR Task": "Split each page of a PDF file into a separate file, with a given filename output pattern",
+      "Most Similar TLDR Script": "pdftk {{input.pdf}} burst output {{out_%d.pdf}}",
+      "Top-3 Similar Questions": [
+        "su_625565: How to extract and/or remove the last page of a bunch of PDFs?",
+        "su_372061: How to extract all pages of one big pdf file?"
+      ],
+      "Top-3 Scripts": [
+        "su_625565: pdftk input.pdf cat end-1 output temp.pdf\npdftk temp.pdf  cat end-2 output output.pdf\nrm temp.pdf\n\npdftk input.pdf cat 1-$((last-1)) output output.pdf",
+        "su_372061: $ sudo apt-get install pdftk\n\n$ pdftk file.pdf burst"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "unzip",
+      "MP Summary": "list, test and extract compressed files in a ZIP archive",
+      "Most Similar TLDR Task": "Extract zip file(s) (for multiple files, separate file paths by spaces)",
+      "Most Similar TLDR Script": "unzip {{file(s)}}",
+      "Top-3 Similar Questions": [
+        "au_1195340: Extract a specific pdf from a zip file with lots of pdfs",
+        "so_51449715: Extract range of lines using sed"
+      ],
+      "Top-3 Scripts": [
+        "au_1195340: unzip -j \"myarchive.zip\" \"in/archive/file.pdf\" -d \"/destination/path/\"",
+        "so_51449715: unzip -c ./*.zip | sed -n \"$var1,$var2 p\""
+      ],
+      "Explanations about Options": {
+        "-j": "junk paths. The archive's directory structure is not recreated; all files are\n deposited in the extraction directory (by default, the current one).",
+        "-c": "extract files to stdout/screen (``CRT''). This option is similar to the -p option\n except that the name of each file is printed as it is extracted, the -a option is\n allowed, and ASCII-EBCDIC conversion is automatically performed if appropriate.\n This option is not listed in the unzip usage screen."
+      }
+    },
+    {
+      "Command": "pdfinfo",
+      "MP Summary": "Portable Document Format (PDF) document information extractor (version 3.03)",
+      "Most Similar TLDR Task": "Print PDF file information",
+      "Most Similar TLDR Script": "pdfinfo {{path/to/file.pdf}}",
+      "Top-3 Similar Questions": [
+        "au_112192: Getting the \"Created\" timestamp of a PDF file in the CLI"
+      ],
+      "Top-3 Scripts": [
+        "au_112192: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "ffmpeg",
+      "MP Summary": "ffmpeg video converter",
+      "Most Similar TLDR Task": "Convert frames from a video or GIF into individual numbered images",
+      "Most Similar TLDR Script": "ffmpeg -i {{video.mpg|video.gif}} {{frame_%d.png}}",
+      "Top-3 Similar Questions": [
+        "au_59383: Extract part of a video with a one-line command"
+      ],
+      "Top-3 Scripts": [
+        "au_59383: ffmpeg -formats -E\n\nffmpeg -ss 00:00:30 -i orginalfile -t 00:00:05 -vcodec copy -acodec copy newfile"
+      ],
+      "Explanations about Options": {
+        "-acodec": "Set the audio codec. This is an alias for \"-codec:a\".",
+        "-t": "When used as an input option (before \"-i\"), limit the duration of data read from the\n input file.",
+        "-ss": "When used as an input option (before \"-i\"), seeks in this input file to position. Note\n that in most formats it is not possible to seek exactly, so ffmpeg will seek to the\n closest seek point before position. When transcoding and -accurate_seek is enabled\n (the default), this extra segment between the seek point and position will be decoded\n and discarded. When doing stream copy or when -noaccurate_seek is used, it will be\n preserved.",
+        "-vcodec": "Set the video codec. This is an alias for \"-codec:v\".",
+        "-i": "input file url"
+      }
+    }
+  ]
+}

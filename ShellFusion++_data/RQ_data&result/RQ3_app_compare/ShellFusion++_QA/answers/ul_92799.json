@@ -1,0 +1,70 @@
+{
+  "Query": "Connecting to wifi network through command line",
+  "Answers": [
+    {
+      "Command": "sudo",
+      "Top-3 Similar Questions": [
+        "ul_250562: Auto Connect to any Open WiFi network via CLI Command Line",
+        "ul_283722: How to connect to wifi from command line?",
+        "au_461825: How to connect to WiFi from the command line?"
+      ],
+      "Top-3 Scripts": [
+        "ul_250562: sudo ifconfig wlan0 down && sudo ifconfig wlan0 up && sudo wpa_cli -i wlan0 status",
+        "ul_283722: sudo ip link set wlan0 down\nsudo ip link set wlan0 up\nsudo wpa_supplicant -B -iwlan0 -c /etc/wpa_supplicant.conf -Dnl80211,wext\nsudo dhclient wlan0",
+        "au_461825: sudo iwlist <WifiInterface> scanning"
+      ]
+    },
+    {
+      "Command": "up",
+      "Top-3 Similar Questions": [
+        "ul_250562: Auto Connect to any Open WiFi network via CLI Command Line",
+        "ul_283722: How to connect to wifi from command line?",
+        "au_461825: How to connect to WiFi from the command line?"
+      ],
+      "Top-3 Scripts": [
+        "ul_250562: sudo ifconfig wlan0 down && sudo ifconfig wlan0 up && sudo wpa_cli -i wlan0 status",
+        "ul_283722: sudo ip link set wlan0 down\nsudo ip link set wlan0 up\nsudo wpa_supplicant -B -iwlan0 -c /etc/wpa_supplicant.conf -Dnl80211,wext\nsudo dhclient wlan0",
+        "au_461825: ##disconnect\nnmcli c down <SavedWiFiConn>\n\n##connect\nnmcli c up <SavedWiFiConn>\n\n##disconnect:\nnmcli c down id <SavedWiFiConn>\n\n##connect:\nnmcli c up id <SavedWiFiConn>\n\nnmcli -a c up <SavedWiFiConn>"
+      ]
+    },
+    {
+      "Command": "nmcli",
+      "Top-3 Similar Questions": [
+        "ul_283722: How to connect to wifi from command line?",
+        "au_461825: How to connect to WiFi from the command line?",
+        "au_362370: How to connect to a network from terminal"
+      ],
+      "Top-3 Scripts": [
+        "ul_283722: nmcli d wifi connect Your_SSID password Your_Psswd_here ifname Your_interface\n\nnmcli d wifi connect MYSSID password 12345678 ifname wlan0",
+        "au_461825: nmcli c\n\nnmcli d wifi list\n\n##disconnect\nnmcli d disconnect <WifiInterface>\n\n##connect\nnmcli d connect <WifiInterface>\n\n##disconnect\nnmcli c down <SavedWiFiConn>\n\n##connect\nnmcli c up <SavedWiFiConn>\n\n##disconnect\nnmcli d disconnect iface <WifiInterface>\n\n##connect\nnmcli d wifi connect <WiFiSSID> password <WiFiPassword> iface <WifiInterface>\n\n##disconnect:\nnmcli c down id <SavedWiFiConn>\n\n##connect:\nnmcli c up id <SavedWiFiConn>\n\nnmcli -a c up <SavedWiFiConn>\n\nman nmcli",
+        "au_362370: nmcli connection\n\nyjwong@yjwong-laptop:~/Documents/searchagram/build$ nmcli connection\nNAME       UUID                                   TYPE              TIMESTAMP-REAL                    \nWong       6944f99a-21d2-4dd9-8ac4-a140e1024970   802-11-wireless   Fri 27 Sep 2013 04:26:04 PM\nrpi        8084e8bd-c52c-4954-8721-0dac198604b7   802-11-wireless   Wed 01 May 2013 04:33:58 AM\nAndroidAP  bb3e5a13-98e5-46eb-bfb4-c294f8757070   802-11-wireless   Mon 04 Nov 2013 05:01:11 PM\n...\n\nnmcli connection up Wong\n\nnmcli connection up \"EVDO Connection\""
+      ]
+    },
+    {
+      "Command": "dev",
+      "Top-3 Similar Questions": [
+        "ul_283722: How to connect to wifi from command line?",
+        "au_461384: How to connect to WiFi from Lubuntu?",
+        "ul_400901: Connect to WEP/WPA without nmcli?"
+      ],
+      "Top-3 Scripts": [
+        "ul_283722: ip addr add IP-ADDRESSE/24 dev wlan0\nip route add default via ROUTE",
+        "au_461384: nmcli dev wifi connect <(B)SSID> [password <password>] [wep-key-type key|phrase] [iface <iface>] [bssid <BSSID>] [name <name>] [--private] [--nowait] [--timeout <timeout>]\n\nnmcli dev wifi connect mynetwork password my-password",
+        "ul_400901: touch /etc/wpa_supplicant/wpa_supplicant.conf\necho ctrl_interface=/run/wpa_supplicant > /etc/wpa_supplicant/wpa_supplicant.conf\necho update_config=1 >> /etc/wpa_supplicant/wpa_supplicant.conf\nwpa_passphrase \"Your_SSID\" Your_PASSWORD >> /etc/wpa_supplicant/wpa_supplicant.conf\ni=$(iw dev | grep Interface | awk '{ print $2}')\nkillall wpa_supplicant\nwpa_supplicant -i $i -c/etc/wpa_supplicant/wpa_supplicant.conf -B\ndhclient $i\n\ni=$(iw dev | grep Interface | awk '{ print $2}')\nkillall wpa_supplicant\nwpa_supplicant -i $i -c/etc/wpa_supplicant/wpa_supplicant.conf -B\ndhclient $i\n\niw dev <interface> connect \"Your_SSID\" key 0:WEP_KEY"
+      ]
+    },
+    {
+      "Command": "wpa_supplicant",
+      "Top-3 Similar Questions": [
+        "ul_250562: Auto Connect to any Open WiFi network via CLI Command Line",
+        "ul_283722: How to connect to wifi from command line?",
+        "ul_263826: Is that possible for debian users to connect to network through systemd-networkd?"
+      ],
+      "Top-3 Scripts": [
+        "ul_250562: ##Wireless NIC\nallow-hotplug wlan0\niface wlan0 inet manual\nwpa-roam /etc/wpa_supplicant/wpa_supplicant.conf\niface open_wifi inet dhcp\n\nctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev\nupdate_config=1\n\n##Open_Wifi\nnetwork={\n    ssid=\"\"\n    key_mgmt=NONE\n    id_str=\"open_wifi\"\n}\n\nwpa_supplicant -d -i wlan0 -c /etc/wpa_supplicant/wpa_supplicant.conf -D wext",
+        "ul_283722: sudo ip link set wlan0 down\nsudo ip link set wlan0 up\nsudo wpa_supplicant -B -iwlan0 -c /etc/wpa_supplicant.conf -Dnl80211,wext\nsudo dhclient wlan0\n\nwpa_supplicant -B -i wlan0 -c <(wpa_passphrase \"Your_SSID\" Your_passphrase) && dhclient wlan0",
+        "ul_263826: sudo -i\necho \"ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=sudo\" > /etc/wpa_supplicant/wpa_supplicant-wlan0.conf\nwpa_passphrase SSID password >> /etc/wpa_supplicant/wpa_supplicant-wlan0.conf"
+      ]
+    }
+  ]
+}

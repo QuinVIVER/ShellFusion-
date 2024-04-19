@@ -1,0 +1,82 @@
+{
+  "Query": "How can I increase open files limit for all processes?",
+  "Answers": [
+    {
+      "Command": "ulimit",
+      "MP Summary": "set or report file size limit",
+      "Most Similar TLDR Task": "Get hard limit for the number of simultaneously opened files",
+      "Most Similar TLDR Script": "ulimit -H -n",
+      "Top-3 Similar Questions": [
+        "au_162229: How do I increase the open files limit for a non-root user?",
+        "so_17755433: How can I increase OpenFabrics memory limit for Torque jobs?",
+        "so_41272726: Really solve \"Too many open files\" at a process level not on global ubuntu level"
+      ],
+      "Top-3 Scripts": [
+        "au_162229: ulimit -S\n\nalias ulimit='ulimit -S'",
+        "so_17755433: ulimit -l\n\nulimit -c unlimited",
+        "so_41272726: ulimit -Hn 10000\nulimit -Sn 10000"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "file",
+      "MP Summary": "determine file type",
+      "Most Similar TLDR Task": "Look inside a zipped file and determine the file type(s) inside",
+      "Most Similar TLDR Script": "file -z {{foo.zip}}",
+      "Top-3 Similar Questions": [
+        "so_31866686: How to rename numbered files to begin and increase sequentially from one?",
+        "so_34656233: Increasing value in text file"
+      ],
+      "Top-3 Scripts": [
+        "so_31866686: # set counter to zero\ni=0\nfor file in *png; do \n    # move file\n    echo mv \"$file\" \"$(printf \"%05d.png\" ${i})\"\n    # increase counter\n    ((i++))\ndone",
+        "so_34656233: awk 'script' file > tmp && mv tmp file"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "exec",
+      "MP Summary": "execute commands and open, close, or copy file descriptors",
+      "Most Similar TLDR Task": "Replace with the specified command and change the process name",
+      "Most Similar TLDR Script": "exec -a {{process_name}} {{command -with -flags}}",
+      "Top-3 Similar Questions": [
+        "so_15896673: Increase FD limitation then SSH not working?"
+      ],
+      "Top-3 Scripts": [
+        "so_15896673: "
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "pgrep",
+      "MP Summary": "look up or signal processes based on name and other attributes",
+      "Most Similar TLDR Task": "Search for process run by a specific user",
+      "Most Similar TLDR Script": "pgrep -u root {{process_name}}",
+      "Top-3 Similar Questions": [
+        "ul_325084: Count the number of processes and send a email to multiple people if it exceeds certain limit"
+      ],
+      "Top-3 Scripts": [
+        "ul_325084: [ \"$(pgrep -c nagios.cfg)\" -gt 2 ] && echo \"More parent processes are running on the server\" | mail -s \"subject\" user@example.org user2@example.org"
+      ],
+      "Explanations about Options": {
+        "-t": "Only match processes whose controlling terminal is listed. The terminal name\n should be specified without the \"/dev/\" prefix.",
+        "-g": "Only match processes in the process group IDs listed. Process group 0 is\n translated into pgrep's or pkill's own process group.",
+        "-c": "Suppress normal output; instead print a count of matching processes. When count\n does not match anything, e.g. returns zero, the command will return non-zero value."
+      }
+    },
+    {
+      "Command": "sysctl",
+      "MP Summary": "configure kernel parameters at runtime",
+      "Most Similar TLDR Task": "Get limit for simultaneous open files",
+      "Most Similar TLDR Script": "sysctl fs.file-max",
+      "Top-3 Similar Questions": [
+        "ul_127777: How to configure the process open file limit of a user?"
+      ],
+      "Top-3 Scripts": [
+        "ul_127777: $ sysctl -n fs.nr_open\n1048576"
+      ],
+      "Explanations about Options": {
+        "-n": "Use this option to disable printing of the key name when printing values."
+      }
+    }
+  ]
+}

@@ -1,0 +1,86 @@
+{
+  "Query": "How to Extend primary partition(/dev/sda1) in linux?",
+  "Answers": [
+    {
+      "Command": "fdisk",
+      "MP Summary": "manipulate disk partition table",
+      "Most Similar TLDR Task": "Start the partition manipulator",
+      "Most Similar TLDR Script": "fdisk {{/dev/sda}}",
+      "Top-3 Similar Questions": [
+        "ul_672857: Extend 100GB of unallocated space on /dev/sda1 device in command line",
+        "so_16515739: extending logical volume in ubuntu",
+        "su_795699: How to extend the primary partition for Ubuntu Server running in VMWare Player"
+      ],
+      "Top-3 Scripts": [
+        "ul_672857: ",
+        "so_16515739: fdisk -l",
+        "su_795699: ~# fdisk /dev/sda\nWelcome to fdisk (util-linux 2.23.2).\n\nCommand (m for help): p\n\nDevice Boot         Start         End      Blocks   Id  System\n/dev/sda1            2048    39845887    19921920   83  Linux\n/dev/sda2       207607995   209712509     1052257+   5  Extended\n/dev/sda5       207611904   209712509     1050303   82  Linux swap / Solaris"
+      ],
+      "Explanations about Options": {
+        "-l": "List the partition tables for the specified devices and then exit. If no devices\n are given, those mentioned in /proc/partitions (if that file exists) are used."
+      }
+    },
+    {
+      "Command": "pvcreate",
+      "MP Summary": "Initialize physical volume(s) for use by LVM",
+      "Most Similar TLDR Task": "Initialize the `/dev/sda1` volume for use by LVM",
+      "Most Similar TLDR Script": "pvcreate {{/dev/sda1}}",
+      "Top-3 Similar Questions": [
+        "ul_359251: LVM: is it possible to extend an in use partition?",
+        "so_16515739: extending logical volume in ubuntu",
+        "au_884684: How can I extend a hard disk in Ubuntu logical volume"
+      ],
+      "Top-3 Scripts": [
+        "ul_359251: pvcreate /dev/sdb1",
+        "so_16515739: pvcreate /dev/sda6",
+        "au_884684: sudo pvcreate /dev/sda4  # to make the partition available for LVM"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "mount",
+      "MP Summary": "mount a filesystem",
+      "Most Similar TLDR Task": "Mount a specific filesystem described in /etc/fstab (e.g. \"/dev/sda1 /my_drive ext2 defaults 0 2\")",
+      "Most Similar TLDR Script": "mount {{/my_drive}}",
+      "Top-3 Similar Questions": [
+        "su_639077: Extending Filesystem in Linux",
+        "ul_359251: LVM: is it possible to extend an in use partition?",
+        "au_1178069: How to extend the root partition in Ubuntu 18.04"
+      ],
+      "Top-3 Scripts": [
+        "su_639077: ",
+        "ul_359251: service mysql stop\nmount /dev/mapper/alex_os-db /mnt\nmv /var/lib/mysql/* /mnt\nmount --move /mnt /var/lib/mysql\nservice mysql start\n\nmkdir /media/data\nmount /media/data\n\nmkfs.ext4 /dev/mapper/alex_os-root\nmount /dev/mapper/alex_os-root /media/alex_os-root\ncp -a /media/sda1 /media/alex_os-root",
+        "au_1178069: sudo mount /dev/nvme0n1p1 /mydata\n\nsudo umount /mydata\nsudo mount -a"
+      ],
+      "Explanations about Options": {
+        "-a": "Mount all filesystems (of the given types) mentioned in fstab (except for those\n whose line contains the noauto keyword). The filesystems are mounted following\n their order in fstab. The mount command compares filesystem source, target (and fs\n root for bind mount or btrfs) to detect already mounted filesystems. The kernel\n table with already mounted filesystems is cached during mount --all. It means that\n all duplicated fstab entries will be mounted."
+      }
+    },
+    {
+      "Command": "vgcreate",
+      "MP Summary": "Create a volume group",
+      "Most Similar TLDR Task": "Create a new volume group called vg1 using the `/dev/sda1` device",
+      "Most Similar TLDR Script": "vgcreate {{vg1}} {{/dev/sda1}}",
+      "Top-3 Similar Questions": [
+        "ul_359251: LVM: is it possible to extend an in use partition?"
+      ],
+      "Top-3 Scripts": [
+        "ul_359251: vgcreate alex_os /dev/sdb1"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "mke2fs",
+      "MP Summary": "create an ext2/ext3/ext4 filesystem",
+      "Most Similar TLDR Task": "Create an ext3 filesystem in partition 1 of device b (`sdb1`)",
+      "Most Similar TLDR Script": "mkfs.ext3 {{/dev/sdb1}}",
+      "Top-3 Similar Questions": [
+        "su_1306317: `ext4lazyinit` after extending partition with `gparted`"
+      ],
+      "Top-3 Scripts": [
+        "su_1306317: "
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

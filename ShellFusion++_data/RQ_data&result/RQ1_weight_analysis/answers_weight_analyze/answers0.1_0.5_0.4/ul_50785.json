@@ -1,0 +1,82 @@
+{
+  "Query": "How do I find out if I am sudoer?",
+  "Answers": [
+    {
+      "Command": "sudo",
+      "MP Summary": "execute a command as another user",
+      "Most Similar TLDR Task": "Run a command as the superuser",
+      "Most Similar TLDR Script": "sudo {{less /var/log/syslog}}",
+      "Top-3 Similar Questions": [
+        "su_553932: How to check if I have sudo access?",
+        "ul_330690: How do I find out if my sudoer privilege timed out?",
+        "au_977756: File '/etc/sudoers': Why do I need to use the sudo command if I am in the sudo group?"
+      ],
+      "Top-3 Scripts": [
+        "su_553932: sudo -v\n\n$ sudo -v\nSorry, user [username] may not run sudo on [hostname].\n\n$ sudo ls\n[sudo] password for [username]: \nSorry, user [username] is not allowed to execute '/bin/ls' as root on [hostname].\n\nsudo -l",
+        "ul_330690: man sudo\n\nsudo -n true 2>/dev/null && echo Privileges active || echo Privileges inactive\n\nsudo -n command...",
+        "au_977756: man sudo"
+      ],
+      "Explanations about Options": {
+        "-l": "If no command is specified, list the allowed (and forbidden) commands for the\n invoking user (or the user specified by the -U option) on the current host. A\n longer list format is used if this option is specified multiple times and the\n security policy supports a verbose output format.",
+        "-n": "Avoid prompting the user for input of any kind. If a password is required for\n the command to run, sudo will display an error message and exit."
+      }
+    },
+    {
+      "Command": "usermod",
+      "MP Summary": "modify a user account",
+      "Most Similar TLDR Task": "Create a new home directory for a user and move their files to it",
+      "Most Similar TLDR Script": "usermod -m -d {{/path/to/home}} {{user}}",
+      "Top-3 Similar Questions": [
+        "so_68654423: Toggle for adding a user to and removing the user from sudo group?"
+      ],
+      "Top-3 Scripts": [
+        "so_68654423: if [[ \" $(id -Gn \"$1\") \" == *\" wheel \"* ]]; then\n    sudo gpasswd -d \"$1\" wheel\nelse\n    sudo usermod -aG wheel \"$1 \"\nfi"
+      ],
+      "Explanations about Options": {
+        "-a": "Add the user to the supplementary group(s). Use only with the -G option.",
+        "-G": "GROUP1[,GROUP2,...[,GROUPN]]]\n A list of supplementary groups which the user is also a member of. Each group is\n separated from the next by a comma, with no intervening whitespace. The groups are\n subject to the same restrictions as the group given with the -g option."
+      }
+    },
+    {
+      "Command": "su",
+      "MP Summary": "run a command with substitute user and group ID",
+      "Most Similar TLDR Task": "Switch to superuser (requires the root password)",
+      "Most Similar TLDR Script": "su",
+      "Top-3 Similar Questions": [
+        "so_26623008: Bash Script in Sudoers File, But Want Said Script to Ask for Root Password Under Certain Conditions"
+      ],
+      "Top-3 Scripts": [
+        "so_26623008: if [ -z \"$SUDO_USER\" ]; then\n    gksudo aptitude\nelse\n    su -c 'gksudo aptitude' \"$SUDO_USER\"\nfi"
+      ],
+      "Explanations about Options": {
+        "-c": "Pass command to the shell with the -c option."
+      }
+    },
+    {
+      "Command": "chgrp",
+      "MP Summary": "change group ownership",
+      "Most Similar TLDR Task": "Change the owner group of a file/directory to match a reference file",
+      "Most Similar TLDR Script": "chgrp --reference={{path/to/reference_file}} {{path/to/file_or_directory}}",
+      "Top-3 Similar Questions": [
+        "su_350694: \"no valid sudoers sources found, quitting\" error while chmodding /var/www"
+      ],
+      "Top-3 Scripts": [
+        "su_350694: sudo chgrp www-users /var/www\nsudo chmod \u2013R 775 /var/www\nsudo chmod g+s /var/www"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "adduser",
+      "MP Summary": "add a user or group to the system",
+      "Most Similar TLDR Task": "Add an existing user to the specified group",
+      "Most Similar TLDR Script": "adduser {{username}} {{group}}",
+      "Top-3 Similar Questions": [
+        "su_350694: \"no valid sudoers sources found, quitting\" error while chmodding /var/www"
+      ],
+      "Top-3 Scripts": [
+        "su_350694: sudo addgroup www-users\nsudo adduser <your-username> www-users\n\nsudo adduser www-data www-users"
+      ],
+      "Explanations about Options": {}
+    }
+  ]
+}

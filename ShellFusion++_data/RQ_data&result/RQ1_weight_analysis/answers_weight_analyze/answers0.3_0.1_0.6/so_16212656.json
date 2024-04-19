@@ -1,0 +1,101 @@
+{
+  "Query": "grep exclude multiple strings",
+  "Answers": [
+    {
+      "Command": "sed",
+      "MP Summary": "stream editor for filtering and transforming text",
+      "Most Similar TLDR Task": "Delete lines matching the line pattern",
+      "Most Similar TLDR Script": "sed '/{{line_pattern}}/d' {{filename}}",
+      "Top-3 Similar Questions": [
+        "so_28647088: grep for a line in a file then remove the line",
+        "so_51743995: grep to exclude pattern and exclude 2 preceding lines",
+        "ul_602453: How to remove all filename extensions from a string?"
+      ],
+      "Top-3 Scripts": [
+        "so_28647088: sed -i",
+        "so_51743995: GNU sed\n\nsed -E 'N;N; /[acgt]{3}cc[acgt][acgt]{3}/d' ip.txt",
+        "ul_602453: $ find . -name '*.MP4' -not -name '*_special.MP4' | sed -e 's/\\.MP4$//'\n./1\n./2"
+      ],
+      "Explanations about Options": {
+        "-E": "use extended regular expressions in the script (for portability use POSIX -E).",
+        "-i": "edit files in place (makes backup if SUFFIX supplied)",
+        "-e": "add the script to the commands to be executed"
+      }
+    },
+    {
+      "Command": "grep",
+      "MP Summary": "print lines that match patterns",
+      "Most Similar TLDR Task": "Invert match for excluding specific strings",
+      "Most Similar TLDR Script": "grep -v {{search_pattern}}",
+      "Top-3 Similar Questions": [
+        "so_32993085: How do I grep for a string excluding some other string",
+        "su_509601: grep multiple exclude extension",
+        "ul_240470: Excluding multiple patterns with one grep command"
+      ],
+      "Top-3 Scripts": [
+        "so_32993085: grep -v 'anotherString' | grep -A 10 'myString'",
+        "su_509601: grep -r --exclude=\\*.{html,htm,js} \"li\" *",
+        "ul_240470: grep -v -e 90.192.142.138 -e PIX -e Intrusion cisco.log-20151103.log\n\ngrep -vF '90.192.142.138\nPIX\nIntrusion\n' cisco.log-20151103.log"
+      ],
+      "Explanations about Options": {
+        "-v": "Invert the sense of matching, to select non-matching lines.",
+        "-F": "Interpret PATTERNS as fixed strings, not regular expressions.",
+        "--exclude": "Skip any command-line file with a name suffix that matches the pattern GLOB, using\n wildcard matching; a name suffix is either the whole name, or a trailing part that\n starts with a non-slash character immediately after a slash (/) in the name. When\n searching recursively, skip any subfile whose base name matches GLOB; the base name\n is the part after the last slash. A pattern can use *, ?, and [...] as wildcards,\n and \\ to quote a wildcard or backslash character literally.",
+        "-r": "Read all files under each directory, recursively, following symbolic links only if\n they are on the command line. Note that if no file operand is given, grep searches\n the working directory. This is equivalent to the -d recurse option."
+      }
+    },
+    {
+      "Command": "awk",
+      "MP Summary": "pattern scanning and processing language",
+      "Most Similar TLDR Task": "Print the last column of each line in a file, using a comma (instead of space) as a field separator",
+      "Most Similar TLDR Script": "awk -F ',' '{print $NF}' {{filename}}",
+      "Top-3 Similar Questions": [
+        "so_28647088: grep for a line in a file then remove the line",
+        "so_33649695: GREP: exclude file extensions in specific directory",
+        "so_39463714: Need grep statement to exclude lines"
+      ],
+      "Top-3 Scripts": [
+        "so_28647088: awk -i inplace -v rmv=\"test\" '!index($0,rmv)' example.txt",
+        "so_33649695: grep | awk\n\nawk | grep\n\ngit status -s |\ngrep -E \"^M|^D|^A|^R|^C\" |\nawk '{if ($1~/M+/ || $1~/D+/ || $1~/A+/ || $1~/R+/ || $1~/C+/)\n\ngit status -s | awk 'NR==FNR { files[$0] = 1; next }\n    /^[MDARC]/ { gsub(/^[MDARC]+ /, \"\"); \n        if ($0 ~ /SVCS\\/bus\\/projects\\/Resources\\/.*\\.jar$/)\n            next;\n        if ($0 in files) print }' \"$list_of_files\" -",
+        "so_39463714: awk '/IN=eth0/ && !/SRC=0\\.0\\.0\\.0/ && !/SRC=10\\.0\\.1\\.15/' uwf.log"
+      ],
+      "Explanations about Options": {
+        "-v": "FS=sepstring"
+      }
+    },
+    {
+      "Command": "echo",
+      "MP Summary": "display a line of text",
+      "Most Similar TLDR Task": "Print a message with environment variables",
+      "Most Similar TLDR Script": "echo \"{{My path is $PATH}}\"",
+      "Top-3 Similar Questions": [
+        "ul_443504: Excluding specific keyword from a file"
+      ],
+      "Top-3 Scripts": [
+        "ul_443504: if ! grep -Evq 'accepting|idle' /tmp/lpstat-Final.log; then\n    status=0\n    statustxt=OK\nelse\n    echo 'Something found'\nfi"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "find",
+      "MP Summary": "search for files in a directory hierarchy",
+      "Most Similar TLDR Task": "Find files matching a given pattern, excluding specific paths",
+      "Most Similar TLDR Script": "find {{root_path}} -name '{{*.py}}' -not -path '{{*/site-packages/*}}'",
+      "Top-3 Similar Questions": [
+        "so_31309531: Exclude a pattern from grep result",
+        "ul_602453: How to remove all filename extensions from a string?",
+        "so_8753528: Removing a line from multiple files using grep & sed"
+      ],
+      "Top-3 Scripts": [
+        "so_31309531: find . -exec grep -i -n -w 'search text' /dev/null {} \\; | grep -v '/\\*'",
+        "ul_602453: $ find . -name '*.MP4' -not -name '*_special.MP4'\n./1.MP4\n./2.MP4\n\n$ find . -name '*.MP4' -not -name '*_special.MP4' | sed -e 's/\\.MP4$//'\n./1\n./2\n\n$ find . -name '*.MP4' -not -name '*_special.MP4' | xargs -I -name- basename -name- .MP4\n1\n2",
+        "so_8753528: find /some/path -type f -name \"*.c\" -exec sed -i '/extern \"C\" void myPrintf(char \\*fmt, \\.\\.\\.);/d' {} \\;"
+      ],
+      "Explanations about Options": {
+        "-not": "Same as ! expr, but not POSIX compliant.",
+        "-type": "File is of type c:",
+        "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils."
+      }
+    }
+  ]
+}

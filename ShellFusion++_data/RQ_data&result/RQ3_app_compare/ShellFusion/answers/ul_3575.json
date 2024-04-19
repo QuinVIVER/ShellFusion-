@@ -1,0 +1,98 @@
+{
+    "Answers": [
+        {
+            "Command": "pv",
+            "Explanations about Options": {
+                "-L(M)": "Limit the transfer to a maximum of RATE bytes per second. A suffix of \"K\", \"M\",\n \"G\", or \"T\" can be added to denote kibibytes (*1024), mebibytes, and so on.",
+                "-q(M)": "No output. Useful if the -L option is being used on its own to just limit the\n transfer rate of a pipe.",
+                "-s(M)": "SIZE, --size SIZE\n Assume the total amount of data to be transferred is SIZE bytes when calculating\n percentages and ETAs. The same suffixes of \"k\", \"m\" etc can be used as with -L."
+            },
+            "MP Summary": "monitor the progress of data through a pipe",
+            "Most Similar TLDR Script": "command1 | pv -s {{expected_amount_of_data_for_eta}} | command2",
+            "Most Similar TLDR Task": "Measure the speed and amount of data flow between pipes (`-s` is optional)",
+            "Top-3 Scripts": [
+                "au_17275: pv my_big_file > backup/my_big_file\n\nstefano@ubuntu:~/Data$ pv my_big_file > backup/my_big_file\n 138MB 0:00:01 [73.3MB/s] [=================================>] 100%\n\nsudo apt-get install pv\n\nman pv",
+                "so_242697: <fast input> | pv -qL <rate>[k|m|g|t] | <rate-limited output>"
+            ],
+            "Top-3 Similar Questions": [
+                "au_17275: How to show the transfer progress and speed when copying files with cp?",
+                "so_242697: do stdout output with specific speed"
+            ]
+        },
+        {
+            "Command": "rsync",
+            "Explanations about Options": {
+                "--progress(M)": "This option tells rsync to print information showing the progress of the transfer.\n This gives a bored user something to watch. With a modern rsync this is the same\n as specifying --info=flist2,name,progress, but any user-supplied settings for those\n info flags takes precedence (e.g. \"--info=flist0 --progress\").",
+                "--size-only(M)": "This modifies rsync’s \"quick check\" algorithm for finding files that need to be\n transferred, changing it from the default of transferring files with either a\n changed size or a changed last-modified time to just looking for files that have\n changed in size. This is useful when starting to use rsync after using another\n mirroring system which may not preserve timestamps exactly.",
+                "-a(M)": "This is equivalent to -rlptgoD. It is a quick way of saying you want recursion and\n want to preserve almost everything (with -H being a notable omission). The only\n exception to the above equivalence is when --files-from is specified, in which case\n -r is not implied.",
+                "-h(M)": "Output numbers in a more human-readable format. There are 3 possible levels: (1)\n output numbers with a separator between each set of 3 digits (either a comma or a\n period, depending on if the decimal point is represented by a period or a comma);\n (2) output numbers in units of 1000 (with a character suffix for larger units --\n see below); (3) output numbers in units of 1024.",
+                "-r(M)": "This tells rsync to copy directories recursively. See also --dirs (-d).",
+                "-v(M)": "This option increases the amount of information you are given during the transfer.\n By default, rsync works silently. A single -v will give you information about what\n files are being transferred and a brief summary at the end. Two -v options will\n give you information on what files are being skipped and slightly more information\n at the end. More than two -v options should only be used if you are debugging\n rsync."
+            },
+            "MP Summary": "a fast, versatile, remote (and local) file-copying tool",
+            "Most Similar TLDR Script": "rsync -r {{remote_host}}:{{path/to/remote_directory}}/ {{path/to/local_directory}}",
+            "Most Similar TLDR Task": "Transfer directory contents (but not the directory itself) from a remote to local",
+            "Top-3 Scripts": [
+                "au_17275: $ rsync -ah --progress source-file destination-file\nsending incremental file list\nsource-file\n        621.22M  57%  283.86MB/s    0:00:01",
+                "ul_65077: rsync --info=progress2 source dest\n\nrsync --progress source dest",
+                "au_627817: rsync -av --size-only  source/  destination/"
+            ],
+            "Top-3 Similar Questions": [
+                "au_17275: How to show the transfer progress and speed when copying files with cp?",
+                "ul_65077: Is it possible to see cp speed and percent copied?",
+                "su_345889: How can I speed up a selective deep copy command in unix?"
+            ]
+        },
+        {
+            "Command": "xargs",
+            "Explanations about Options": {
+                "-0(M)": "Input items are terminated by a null character instead of by whitespace, and the\n quotes and backslash are not special (every character is taken literally).\n Disables the end of file string, which is treated like any other argument. Useful\n when input items might contain white space, quote marks, or backslashes. The GNU\n find -print0 option produces input suitable for this mode.",
+                "-n(C)": "Use a larger -n if you know that you have a lot of files to reduce the overhead by respawning your shell script.",
+                "-n(M)": "Use at most max-args arguments per command line. Fewer than max-args arguments\n will be used if the size (see the -s option) is exceeded, unless the -x option is\n given, in which case xargs will exit."
+            },
+            "MP Summary": "build and execute command lines from standard input",
+            "Most Similar TLDR Script": "{{arguments_source}} | xargs {{command}}",
+            "Most Similar TLDR Task": "Run a command using the input data as arguments",
+            "Top-3 Scripts": [
+                "ul_63772: find . -type f -name \"*.txt\" -print0 | xargs -0 -P 4 -n 8 ./rm10lines.sh",
+                "su_345889: xargs -0",
+                "so_13317386: xargs -0"
+            ],
+            "Top-3 Similar Questions": [
+                "ul_63772: Speeding a find rm command with test through parallelization",
+                "su_345889: How can I speed up a selective deep copy command in unix?",
+                "so_13317386: Speed up bash script that uses several find commands"
+            ]
+        },
+        {
+            "Command": "progress",
+            "Explanations about Options": {
+                "-m(M)": "loop while monitored processes are still running",
+                "-p(M)": "monitor only this numeric process ID (ex: `pidof firefox`). This option can be used\n multiple times on the command line."
+            },
+            "MP Summary": "Coreutils Progress Viewer",
+            "Most Similar TLDR Script": "{{command}} & progress -mp $!",
+            "Most Similar TLDR Task": "Launch and monitor a single long-running command",
+            "Top-3 Scripts": [
+                "ul_165858: -a : enables archive mode, which preserves symbolic links and works recursively\n-z : compress the data transfer to minimise network usage\n-P : to display a progress bar and enables you to resume partial transfers"
+            ],
+            "Top-3 Similar Questions": [
+                "ul_165858: Transferring millions of files from one server to another"
+            ]
+        },
+        {
+            "Command": "free",
+            "Explanations about Options": {},
+            "MP Summary": "Display amount of free and used memory in the system",
+            "Most Similar TLDR Script": "free",
+            "Most Similar TLDR Task": "Display system memory",
+            "Top-3 Scripts": [
+                "so_63055610: echo \"$(date ...) $(hostname) $(free | awk ...)\"\n\n{ date ...; hostname; free | awk ...; } | paste -sd ' '"
+            ],
+            "Top-3 Similar Questions": [
+                "so_63055610: Get performance data (RAM / CPU) on a single line"
+            ]
+        }
+    ],
+    "Query": "Display transfer speed when performing \"cp\" from the command line?"
+}

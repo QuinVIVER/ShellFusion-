@@ -1,0 +1,90 @@
+{
+  "Query": "Removing files older than 7 days",
+  "Answers": [
+    {
+      "Command": "find",
+      "MP Summary": "search for files in a directory hierarchy",
+      "Most Similar TLDR Task": "Find files modified in the last 7 days, and delete them",
+      "Most Similar TLDR Script": "find {{root_path}} -mtime {{-7}} -delete",
+      "Top-3 Similar Questions": [
+        "au_963563: Removing folders older than 5 days",
+        "so_249578: How to delete files older than X hours",
+        "ul_225803: delete folders older than 1 day"
+      ],
+      "Top-3 Scripts": [
+        "au_963563: $ mkdir -p foo/2017/{October/{28..31},November/{1..3}}\n$ touch -d 'now - 6 days' foo/2017/October/{28,29} foo/2017\n$ find foo/* -mindepth 1 -mtime +5\nfoo/2017/October/28\nfoo/2017/October/29\n$ find foo/* -mtime +5\nfoo/2017\nfoo/2017/October/28\nfoo/2017/October/29\n\n$ find foo/ -mindepth 2 -mtime +5\nfoo/2017/October/28\nfoo/2017/October/29",
+        "so_249578: find $LOCATION -name $REQUIRED_FILES -type f -mmin +360 -delete",
+        "ul_225803: find /test/* -type d -mmin +1440 | xargs rm -rf"
+      ],
+      "Explanations about Options": {
+        "-d": "A synonym for -depth, for compatibility with FreeBSD, NetBSD, MacOS X and OpenBSD.",
+        "-type": "File is of type c:",
+        "-name": "This option is supported, but POSIX conformance depends on the POSIX conformance of\n the system's fnmatch(3) library function. As of findutils-4.2.2, shell\n metacharacters (`*', `?' or `[]' for example) will match a leading `.', because\n IEEE PASC interpretation 126 requires this. This is a change from previous\n versions of findutils.",
+        "-mindepth": "Do not apply any tests or actions at levels less than levels (a non-negative\n integer). -mindepth 1 means process all files except the starting-points.",
+        "-mtime": "File's data was last modified n*24 hours ago. See the comments for -atime to\n understand how rounding affects the interpretation of file modification times.",
+        "-mmin": "File's data was last modified n minutes ago."
+      }
+    },
+    {
+      "Command": "sed",
+      "MP Summary": "stream editor for filtering and transforming text",
+      "Most Similar TLDR Task": "Replace all occurrences of a string in a file, overwriting the file (i.e. in-place)",
+      "Most Similar TLDR Script": "sed -i 's/{{find}}/{{replace}}/g' {{filename}}",
+      "Top-3 Similar Questions": [
+        "so_35037580: Delete files older than 365 days",
+        "so_52970287: Identifying the files older than x-months by the filename only and deleting them",
+        "so_17840779: Keep x files in a directory and remove any older files"
+      ],
+      "Top-3 Scripts": [
+        "so_35037580: (echo \"dummy_2015_01_27\"; find /path/to/files -type f) \\\n    | sort --field-separator='_' --key 2 \\\n    | sed '/^dummy_/,$d'",
+        "so_52970287: filedate=$(\n      date +%s -d $(\n         echo $f | sed -E 's/.*([0-9]{4}-[0-9]{2}-[0-9]{2}).*/\\1/'\n      ) # this returns the date substring\n   )    # this converts it to an epoch integer of seconds since 1/1/70\n\nsed -E 's/.*([0-9]{4}-[0-9]{2}-[0-9]{2}).*/\\1/'",
+        "so_17840779: find /path/to/dir ! -newer $(ls -t | sed 'x!d') -exec rm {} \\;"
+      ],
+      "Explanations about Options": {
+        "-e": "add the script to the commands to be executed",
+        "-E": "use extended regular expressions in the script (for portability use POSIX -E)."
+      }
+    },
+    {
+      "Command": "apt-get",
+      "MP Summary": "APT package handling utility - command-line interface",
+      "Most Similar TLDR Task": "Remove a package and its configuration files",
+      "Most Similar TLDR Script": "apt-get purge {{package}}",
+      "Top-3 Similar Questions": [
+        "au_550726: I have two versions of LibreOffice installed: how to remove the older one?"
+      ],
+      "Top-3 Scripts": [
+        "au_550726: sudo apt-get remove --purge libreoffice4.2*\n\nsudo add-apt-repository ppa:libreoffice/ppa\n sudo apt-get update\n sudo apt-get install libreoffice"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "crontab",
+      "MP Summary": "maintain crontab files for individual users (Vixie Cron)",
+      "Most Similar TLDR Task": "Sample job which runs at 10:00 every day (* means any value)",
+      "Most Similar TLDR Script": "0 10 * * * {{command_to_execute}}",
+      "Top-3 Similar Questions": [
+        "nl2bash_1813: Erase user's cron jobs and add one cron job to run \"script\" every minute."
+      ],
+      "Top-3 Scripts": [
+        "nl2bash_1813: echo \"* * * * * script\" | crontab -"
+      ],
+      "Explanations about Options": {}
+    },
+    {
+      "Command": "touch",
+      "MP Summary": "change file timestamps",
+      "Most Similar TLDR Task": "Create a new empty file(s) or change the times for existing file(s) to current time",
+      "Most Similar TLDR Script": "touch {{filename}}",
+      "Top-3 Similar Questions": [
+        "au_963563: Removing folders older than 5 days"
+      ],
+      "Top-3 Scripts": [
+        "au_963563: $ mkdir -p foo/2017/{October/{28..31},November/{1..3}}\n$ touch -d 'now - 6 days' foo/2017/October/{28,29} foo/2017\n$ find foo/* -mindepth 1 -mtime +5\nfoo/2017/October/28\nfoo/2017/October/29\n$ find foo/* -mtime +5\nfoo/2017\nfoo/2017/October/28\nfoo/2017/October/29"
+      ],
+      "Explanations about Options": {
+        "-d": "parse STRING and use it instead of current time"
+      }
+    }
+  ]
+}
